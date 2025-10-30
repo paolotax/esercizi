@@ -26,6 +26,12 @@ class ExercisesController < ApplicationController
   def pag167
   end
 
+  def sussi_pag_5
+  end
+
   def sussi_pag_14
+  end
+
+  def pag08
   end
 end

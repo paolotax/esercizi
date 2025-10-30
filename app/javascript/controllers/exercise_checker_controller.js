@@ -16,11 +16,31 @@ export default class extends Controller {
     const cardGroups = this.element.querySelectorAll("[data-controller=\"card-selector\"]")
     const allGroups = [...exerciseGroups, ...cardGroups]
 
+    // Get flower matcher controller if present
+    const flowerMatcher = this.element.querySelector("[data-controller=\"flower-matcher\"]")
+
     // Get all input fields with correct answers within this controller's element
     const inputFields = this.element.querySelectorAll("input[data-correct-answer]")
 
     let allCorrect = true
     let feedback = []
+
+    // Check flower matching exercise first
+    if (flowerMatcher) {
+      const flowerController = this.application.getControllerForElementAndIdentifier(flowerMatcher, "flower-matcher")
+      if (flowerController) {
+        const result = flowerController.checkAnswers()
+        if (!result.complete) {
+          allCorrect = false
+          feedback.push(`Fiori: ${result.message}`)
+        } else if (result.allCorrect) {
+          feedback.push(`Fiori: ✅ Tutti corretti! (${result.correct}/${result.total})`)
+        } else {
+          allCorrect = false
+          feedback.push(`Fiori: ⚠️ ${result.message}`)
+        }
+      }
+    }
 
     // Check input fields first
     if (inputFields.length > 0) {
@@ -29,8 +49,8 @@ export default class extends Controller {
       let inputsEmpty = 0
 
       inputFields.forEach(input => {
-        const correctAnswer = input.dataset.correctAnswer.trim()
-        const userAnswer = input.value.trim()
+        const correctAnswer = input.dataset.correctAnswer.trim().replace(/\s+/g, '')
+        const userAnswer = input.value.trim().replace(/\s+/g, '')
 
         // Remove all previous styling
         input.classList.remove("border-yellow-500", "border-green-500", "border-red-500",

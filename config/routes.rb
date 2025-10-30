@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   get 'exercises/pag50', to: 'exercises#pag50', as: 'pag50'
   get 'exercises/pag51', to: 'exercises#pag51', as: 'pag51'
   get 'exercises/pag167', to: 'exercises#pag167', as: 'pag167'
+  get 'exercises/sussi_pag_5', to: 'exercises#sussi_pag_5', as: 'sussi_pag_5'
   get 'exercises/sussi_pag_14', to: 'exercises#sussi_pag_14', as: 'sussi_pag_14'
+  get 'exercises/pag08', to: 'exercises#pag08', as: 'pag08'
 
   # Defines the root path route ("/")
   root "exercises#phonetic_exercise"
