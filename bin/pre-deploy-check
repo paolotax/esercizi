@@ -1,0 +1,113 @@
+#!/bin/bash
+# Script di verifica pre-deploy per Kamal
+
+echo "🔍 Verifica Prerequisiti per Deploy con Kamal"
+echo "=============================================="
+echo ""
+
+# Colori per output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+ERRORS=0
+WARNINGS=0
+
+# 1. Verifica Docker
+echo -n "1. Docker installato localmente... "
+if command -v docker &> /dev/null; then
+    echo -e "${GREEN}✓${NC}"
+else
+    echo -e "${RED}✗${NC} Docker non trovato"
+    ((ERRORS++))
+fi
+
+# 2. Verifica SSH
+echo -n "2. Accesso SSH al server... "
+if ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no root@46.224.19.243 "exit" 2>/dev/null; then
+    echo -e "${GREEN}✓${NC}"
+else
+    echo -e "${RED}✗${NC} Impossibile connettersi via SSH a 46.224.19.243"
+    ((ERRORS++))
+fi
+
+# 3. Verifica ESERCIZI_REGISTRY_PASSWORD
+echo -n "3. ESERCIZI_REGISTRY_PASSWORD configurato... "
+if [ -n "$ESERCIZI_REGISTRY_PASSWORD" ]; then
+    echo -e "${GREEN}✓${NC}"
+else
+    echo -e "${RED}✗${NC} Variabile ESERCIZI_REGISTRY_PASSWORD non configurata"
+    echo "   Esegui: export ESERCIZI_REGISTRY_PASSWORD=\"ghp_your_token\""
+    ((ERRORS++))
+fi
+
+# 4. Verifica RAILS_MASTER_KEY
+echo -n "4. RAILS_MASTER_KEY presente... "
+if [ -f "config/master.key" ]; then
+    echo -e "${GREEN}✓${NC}"
+else
+    echo -e "${RED}✗${NC} File config/master.key non trovato"
+    ((ERRORS++))
+fi
+
+# 5. Verifica DNS
+echo -n "5. DNS paolotax.it... "
+DNS_IP=$(getent hosts paolotax.it 2>/dev/null | awk '{print $1}' | head -1)
+if [ "$DNS_IP" == "46.224.19.243" ]; then
+    echo -e "${GREEN}✓${NC} punta a 46.224.19.243"
+elif [ -z "$DNS_IP" ]; then
+    echo -e "${YELLOW}⚠${NC}  Non risolve (configurare DNS su Aruba)"
+    echo "   SSL (Let's Encrypt) non funzionerà finché il DNS non punta al server"
+    ((WARNINGS++))
+else
+    echo -e "${YELLOW}⚠${NC}  punta a $DNS_IP invece di 46.224.19.243"
+    echo "   Aggiorna il record A su Aruba per puntare a 46.224.19.243"
+    ((WARNINGS++))
+fi
+
+# 6. Verifica Kamal
+echo -n "6. Kamal disponibile... "
+if bundle exec kamal version &> /dev/null || bin/kamal version &> /dev/null; then
+    echo -e "${GREEN}✓${NC}"
+else
+    echo -e "${YELLOW}⚠${NC}  Kamal non trovato, ma dovrebbe essere nel bundle"
+    ((WARNINGS++))
+fi
+
+# 7. Verifica file deploy.yml
+echo -n "7. config/deploy.yml configurato... "
+if grep -q "ghcr.io/paolotax/esercizi" config/deploy.yml && \
+   grep -q "46.224.19.243" config/deploy.yml && \
+   grep -q "paolotax.it" config/deploy.yml; then
+    echo -e "${GREEN}✓${NC}"
+else
+    echo -e "${RED}✗${NC} config/deploy.yml non configurato correttamente"
+    ((ERRORS++))
+fi
+
+# Riepilogo
+echo ""
+echo "=============================================="
+if [ $ERRORS -eq 0 ] && [ $WARNINGS -eq 0 ]; then
+    echo -e "${GREEN}✓ Tutto pronto per il deploy!${NC}"
+    echo ""
+    echo "Prossimi passi:"
+    echo "  1. bin/kamal setup    # Prima volta (installa Docker sul server)"
+    echo "  2. bin/kamal deploy   # Deploy dell'applicazione"
+elif [ $ERRORS -eq 0 ]; then
+    echo -e "${YELLOW}⚠ Ci sono $WARNINGS avvisi, ma puoi procedere${NC}"
+    echo ""
+    echo "Note:"
+    echo "  - Se il DNS non è configurato, l'app sarà accessibile solo via IP"
+    echo "  - SSL (HTTPS) funzionerà solo dopo che il DNS sarà propagato"
+    echo ""
+    echo "Prossimi passi:"
+    echo "  1. bin/kamal setup"
+    echo "  2. bin/kamal deploy"
+else
+    echo -e "${RED}✗ Trovati $ERRORS errori e $WARNINGS avvisi${NC}"
+    echo "Risolvi gli errori prima di procedere con il deploy"
+    exit 1
+fi
+

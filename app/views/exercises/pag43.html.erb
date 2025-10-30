@@ -1,0 +1,292 @@
+<div class="bg-gradient-to-br from-yellow-50 to-green-50 py-8 px-4" data-controller="exercise-checker">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg shadow-lg p-6 mb-8">
+      <div class="flex items-center justify-center gap-4">
+        <div class="bg-white rounded-lg px-8 py-4">
+          <span class="text-4xl font-bold text-green-600">SCOPRO IL SUONO</span>
+        </div>
+        <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center border-4 border-green-400">
+          <span class="text-5xl font-bold text-green-600">U</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Cards Section -->
+    <div class="grid grid-cols-3 gap-6 mb-8">
+      <!-- Osserva il disegno -->
+      <div class="bg-white rounded-lg shadow-md p-6 border-4 border-green-400">
+        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+          <span class="text-xl">🔵</span>
+          <span>OSSERVA IL DISEGNO.</span>
+        </h3>
+        <div class="flex justify-center">
+          <%= image_tag "upupa.png", alt: "Upupa", class: "w-32 h-32 object-contain" %>
+        </div>
+      </div>
+
+      <!-- Pronuncia il nome -->
+      <div class="bg-white rounded-lg shadow-md p-6 border-4 border-green-400">
+        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+          <span class="text-xl">🔵</span>
+          <span>PRONUNCIA IL NOME.</span>
+        </h3>
+        <div class="flex justify-center items-center h-32">
+          <div class="text-6xl font-bold">
+            <span class="text-green-600">U</span><span class="text-gray-700">PU</span><span class="text-green-600">P</span><span class="text-gray-700">A</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pronuncia solo U -->
+      <div class="bg-white rounded-lg shadow-md p-6 border-4 border-green-400">
+        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+          <span class="text-xl">🔵</span>
+          <span>PRONUNCIA SOLO <span class="text-green-600">U</span>.</span>
+        </h3>
+        <div class="flex justify-center items-center h-32">
+          <div class="bg-yellow-100 rounded-full w-32 h-32 flex items-center justify-center">
+            <span class="text-7xl font-bold text-green-600">U</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise 1: Inizia con U -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+        <span class="text-2xl">🔵</span>
+        <span>PRONUNCIA IL NOME E CERCHIA IL DISEGNO SE INIZIA CON <span class="text-green-600">U</span>.</span>
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6" data-controller="exercise-group">
+        <!-- UVA (correct) -->
+        <div class="cursor-pointer transition-transform hover:scale-105"
+             data-action="click->exercise-group#toggleCheck"
+             data-exercise-group-target="option"
+             data-correct="true"
+             data-word="UVA">
+          <div class="relative bg-gray-50 p-8 rounded-lg border-4 border-gray-300 hover:border-green-300 transition">
+            <div class="text-8xl text-center mb-2">🍇</div>
+            <div class="text-center font-bold text-gray-700">UVA</div>
+            <div class="absolute top-2 right-2 w-8 h-8 bg-green-500 rounded-full hidden items-center justify-center"
+                 data-exercise-group-target="checkmark">
+              <span class="text-white text-xl">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ALBERO (wrong) -->
+        <div class="cursor-pointer transition-transform hover:scale-105"
+             data-action="click->exercise-group#toggleCheck"
+             data-exercise-group-target="option"
+             data-correct="false"
+             data-word="ALBERO">
+          <div class="relative bg-gray-50 p-8 rounded-lg border-4 border-gray-300 hover:border-green-300 transition">
+            <div class="text-8xl text-center mb-2">🌲</div>
+            <div class="text-center font-bold text-gray-700">ALBERO</div>
+            <div class="absolute top-2 right-2 w-8 h-8 bg-green-500 rounded-full hidden items-center justify-center"
+                 data-exercise-group-target="checkmark">
+              <span class="text-white text-xl">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- UCCELLO (correct) -->
+        <div class="cursor-pointer transition-transform hover:scale-105"
+             data-action="click->exercise-group#toggleCheck"
+             data-exercise-group-target="option"
+             data-correct="true"
+             data-word="UCCELLO">
+          <div class="relative bg-gray-50 p-8 rounded-lg border-4 border-gray-300 hover:border-green-300 transition">
+            <div class="text-8xl text-center mb-2">🐦</div>
+            <div class="text-center font-bold text-gray-700">UCCELLO</div>
+            <div class="absolute top-2 right-2 w-8 h-8 bg-green-500 rounded-full hidden items-center justify-center"
+                 data-exercise-group-target="checkmark">
+              <span class="text-white text-xl">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CULLA (wrong) -->
+        <div class="cursor-pointer transition-transform hover:scale-105"
+             data-action="click->exercise-group#toggleCheck"
+             data-exercise-group-target="option"
+             data-correct="false"
+             data-word="CULLA">
+          <div class="relative bg-gray-50 p-8 rounded-lg border-4 border-gray-300 hover:border-green-300 transition">
+            <div class="text-8xl text-center mb-2">🛏️</div>
+            <div class="text-center font-bold text-gray-700">CULLA</div>
+            <div class="absolute top-2 right-2 w-8 h-8 bg-green-500 rounded-full hidden items-center justify-center"
+                 data-exercise-group-target="checkmark">
+              <span class="text-white text-xl">✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise 2: Finisce con U -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+        <span class="text-2xl">🔵</span>
+        <span>PRONUNCIA IL NOME E CERCHIA IL DISEGNO SE FINISCE CON <span class="text-green-600">U</span>.</span>
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6" data-controller="exercise-group">
+        <!-- GRU (correct) -->
+        <div class="cursor-pointer transition-transform hover:scale-105"
+             data-action="click->exercise-group#toggleCheck"
+             data-exercise-group-target="option"
+             data-correct="true"
+             data-word="GRU">
+          <div class="relative bg-gray-50 p-8 rounded-lg border-4 border-gray-300 hover:border-green-300 transition">
+            <div class="text-8xl text-center mb-2">🏗️</div>
+            <div class="text-center font-bold text-gray-700">GRU</div>
+            <div class="absolute top-2 right-2 w-8 h-8 bg-green-500 rounded-full hidden items-center justify-center"
+                 data-exercise-group-target="checkmark">
+              <span class="text-white text-xl">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CAMMELLO (wrong) -->
+        <div class="cursor-pointer transition-transform hover:scale-105"
+             data-action="click->exercise-group#toggleCheck"
+             data-exercise-group-target="option"
+             data-correct="false"
+             data-word="CAMMELLO">
+          <div class="relative bg-gray-50 p-8 rounded-lg border-4 border-gray-300 hover:border-green-300 transition">
+            <div class="text-8xl text-center mb-2">🐫</div>
+            <div class="text-center font-bold text-gray-700">CAMMELLO</div>
+            <div class="absolute top-2 right-2 w-8 h-8 bg-green-500 rounded-full hidden items-center justify-center"
+                 data-exercise-group-target="checkmark">
+              <span class="text-white text-xl">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RUBINETTO (wrong) -->
+        <div class="cursor-pointer transition-transform hover:scale-105"
+             data-action="click->exercise-group#toggleCheck"
+             data-exercise-group-target="option"
+             data-correct="false"
+             data-word="RUBINETTO">
+          <div class="relative bg-gray-50 p-8 rounded-lg border-4 border-gray-300 hover:border-green-300 transition">
+            <div class="text-8xl text-center mb-2">🚰</div>
+            <div class="text-center font-bold text-gray-700">RUBINETTO</div>
+            <div class="absolute top-2 right-2 w-8 h-8 bg-green-500 rounded-full hidden items-center justify-center"
+                 data-exercise-group-target="checkmark">
+              <span class="text-white text-xl">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CUCÙ (correct) -->
+        <div class="cursor-pointer transition-transform hover:scale-105"
+             data-action="click->exercise-group#toggleCheck"
+             data-exercise-group-target="option"
+             data-correct="true"
+             data-word="CUCÙ">
+          <div class="relative bg-gray-50 p-8 rounded-lg border-4 border-gray-300 hover:border-green-300 transition">
+            <div class="text-8xl text-center mb-2">🕰️</div>
+            <div class="text-center font-bold text-gray-700">CUCÙ</div>
+            <div class="absolute top-2 right-2 w-8 h-8 bg-green-500 rounded-full hidden items-center justify-center"
+                 data-exercise-group-target="checkmark">
+              <span class="text-white text-xl">✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise 3: Contiene U -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+        <span class="text-2xl">🔵</span>
+        <span>PRONUNCIA IL NOME E CERCHIA IL DISEGNO SE CONTIENE <span class="text-green-600">U</span>.</span>
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6" data-controller="exercise-group">
+        <!-- FUNGO (correct) -->
+        <div class="cursor-pointer transition-transform hover:scale-105"
+             data-action="click->exercise-group#toggleCheck"
+             data-exercise-group-target="option"
+             data-correct="true"
+             data-word="FUNGO">
+          <div class="relative bg-gray-50 p-8 rounded-lg border-4 border-gray-300 hover:border-green-300 transition">
+            <div class="text-8xl text-center mb-2">🍄</div>
+            <div class="text-center font-bold text-gray-700">FUNGO</div>
+            <div class="absolute top-2 right-2 w-8 h-8 bg-green-500 rounded-full hidden items-center justify-center"
+                 data-exercise-group-target="checkmark">
+              <span class="text-white text-xl">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- POMODORO (wrong) -->
+        <div class="cursor-pointer transition-transform hover:scale-105"
+             data-action="click->exercise-group#toggleCheck"
+             data-exercise-group-target="option"
+             data-correct="false"
+             data-word="POMODORO">
+          <div class="relative bg-gray-50 p-8 rounded-lg border-4 border-gray-300 hover:border-green-300 transition">
+            <div class="text-8xl text-center mb-2">🍅</div>
+            <div class="text-center font-bold text-gray-700">POMODORO</div>
+            <div class="absolute top-2 right-2 w-8 h-8 bg-green-500 rounded-full hidden items-center justify-center"
+                 data-exercise-group-target="checkmark">
+              <span class="text-white text-xl">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MUCCA (correct) -->
+        <div class="cursor-pointer transition-transform hover:scale-105"
+             data-action="click->exercise-group#toggleCheck"
+             data-exercise-group-target="option"
+             data-correct="true"
+             data-word="MUCCA">
+          <div class="relative bg-gray-50 p-8 rounded-lg border-4 border-gray-300 hover:border-green-300 transition">
+            <div class="text-8xl text-center mb-2">🐄</div>
+            <div class="text-center font-bold text-gray-700">MUCCA</div>
+            <div class="absolute top-2 right-2 w-8 h-8 bg-green-500 rounded-full hidden items-center justify-center"
+                 data-exercise-group-target="checkmark">
+              <span class="text-white text-xl">✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHELLO (wrong) -->
+        <div class="cursor-pointer transition-transform hover:scale-105"
+             data-action="click->exercise-group#toggleCheck"
+             data-exercise-group-target="option"
+             data-correct="false"
+             data-word="RIGHELLO">
+          <div class="relative bg-gray-50 p-8 rounded-lg border-4 border-gray-300 hover:border-green-300 transition">
+            <div class="text-8xl text-center mb-2">📏</div>
+            <div class="text-center font-bold text-gray-700">RIGHELLO</div>
+            <div class="absolute top-2 right-2 w-8 h-8 bg-green-500 rounded-full hidden items-center justify-center"
+                 data-exercise-group-target="checkmark">
+              <span class="text-white text-xl">✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page number -->
+    <div class="flex justify-end mb-6">
+      <div class="bg-green-500 text-white font-bold text-3xl px-6 py-3 rounded-l-full">
+        43
+      </div>
+    </div>
+
+    <!-- Check button -->
+    <div class="mt-8 text-center" data-exercise-checker-target="buttonContainer">
+      <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transition transform hover:scale-105"
+              data-action="click->exercise-checker#checkAnswers">
+        🎯 Controlla le Risposte
+      </button>
+    </div>
+  </div>
+</div>

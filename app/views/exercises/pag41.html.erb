@@ -1,0 +1,128 @@
+<div class="bg-gradient-to-br from-purple-50 to-blue-50 py-8 px-4" data-controller="exercise-checker">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg shadow-lg p-6 mb-8">
+      <div class="flex items-center justify-center gap-4">
+        <div class="bg-white rounded-lg px-8 py-4">
+          <span class="text-4xl font-bold text-purple-600">LEGGO</span>
+        </div>
+        <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center border-4 border-purple-400">
+          <span class="text-5xl font-bold text-purple-600">O</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Observation Exercise -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+        <span class="text-2xl">🔵</span>
+        <span>OSSERVA IL DISEGNO E PRONUNCIA I NOMI.</span>
+      </h2>
+
+      <!-- Original illustration -->
+      <div class="rounded-lg overflow-hidden">
+        <%= image_tag "pag41_illustration.png",
+            alt: "Illustrazione con orso, olive e oca",
+            class: "w-full h-auto" %>
+      </div>
+    </div>
+
+    <!-- Exercise 1: Select ORSO -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-8 flex items-center gap-2">
+        <span class="text-2xl">🔵</span>
+        <span>COLORA IL CARTELLINO CON LA PAROLA <span class="text-purple-600">ORSO</span>.</span>
+      </h2>
+
+      <div class="flex justify-center gap-8" data-controller="card-selector">
+        <!-- ROSO (wrong) -->
+        <div class="border-4 border-gray-300 rounded-xl px-8 py-6 bg-white hover:bg-purple-50 transition cursor-pointer hover:scale-105"
+             data-card-selector-target="card"
+             data-action="click->card-selector#select"
+             data-correct="false"
+             data-word="ROSO">
+          <span class="text-5xl font-bold text-gray-700">
+            R<span class="text-purple-600">O</span>S<span class="text-purple-600">O</span>
+          </span>
+        </div>
+
+        <!-- OSOR (wrong) -->
+        <div class="border-4 border-gray-300 rounded-xl px-8 py-6 bg-white hover:bg-purple-50 transition cursor-pointer hover:scale-105"
+             data-card-selector-target="card"
+             data-action="click->card-selector#select"
+             data-correct="false"
+             data-word="OSOR">
+          <span class="text-5xl font-bold text-gray-700">
+            <span class="text-purple-600">O</span>S<span class="text-purple-600">O</span>R
+          </span>
+        </div>
+
+        <!-- ORSO (correct) -->
+        <div class="border-4 border-gray-300 rounded-xl px-8 py-6 bg-white hover:bg-purple-50 transition cursor-pointer hover:scale-105"
+             data-card-selector-target="card"
+             data-action="click->card-selector#select"
+             data-correct="true"
+             data-word="ORSO">
+          <span class="text-5xl font-bold text-gray-700">
+            <span class="text-purple-600">O</span>RS<span class="text-purple-600">O</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise 2: Select word matching image -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-8 flex items-center gap-2">
+        <span class="text-2xl">🔵</span>
+        <span>OSSERVA IL DISEGNO E RIPASSA IL CARTELLINO CON LA PAROLA GIUSTA.</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        <!-- Image -->
+        <div class="flex justify-center">
+          <div class="text-9xl">🌊</div>
+        </div>
+
+        <!-- Word options -->
+        <div class="md:col-span-2 flex justify-center gap-8" data-controller="card-selector">
+          <!-- ONDA (correct) -->
+          <div class="border-4 border-gray-300 rounded-xl px-8 py-6 bg-white hover:bg-purple-50 transition cursor-pointer hover:scale-105"
+               data-card-selector-target="card"
+               data-action="click->card-selector#select"
+               data-correct="true"
+               data-word="ONDA">
+            <span class="text-5xl font-bold text-gray-700">
+              <span class="text-purple-600">O</span>NDA
+            </span>
+          </div>
+
+          <!-- IRIS (wrong) -->
+          <div class="border-4 border-gray-300 rounded-xl px-8 py-6 bg-white hover:bg-purple-50 transition cursor-pointer hover:scale-105"
+               data-card-selector-target="card"
+               data-action="click->card-selector#select"
+               data-correct="false"
+               data-word="IRIS">
+            <span class="text-5xl font-bold text-gray-700">
+              IRIS
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page number -->
+    <div class="flex justify-end mb-6">
+      <div class="bg-purple-600 text-white font-bold text-3xl px-6 py-3 rounded-l-full">
+        41
+      </div>
+    </div>
+
+    <!-- Check button -->
+    <div class="mt-8 text-center" data-exercise-checker-target="buttonContainer">
+      <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transition transform hover:scale-105"
+              data-action="click->exercise-checker#checkAnswers">
+        🎯 Controlla le Risposte
+      </button>
+    </div>
+  </div>
+</div>

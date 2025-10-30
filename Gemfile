@@ -63,4 +63,6 @@ gem "importmap-rails", "~> 2.2"
 gem "stimulus-rails", "~> 1.3"
 gem "turbo-rails", "~> 2.0"
 
-gem "tailwindcss-rails", "~> 4.3"
+group :development do
+  gem "claude-on-rails"
+end

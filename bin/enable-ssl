@@ -1,0 +1,39 @@
+#!/bin/bash
+# Script per abilitare SSL dopo la propagazione DNS
+
+echo "🔍 Verifico propagazione DNS..."
+
+DNS_IP=$(getent hosts paolotax.it 2>/dev/null | awk '{print $1}')
+
+if [ "$DNS_IP" = "46.224.19.243" ]; then
+    echo "✅ DNS propagato correttamente!"
+    echo ""
+    echo "Ora abilito SSL e cambio host nel config/deploy.yml..."
+    
+    # Riabilita SSL e cambia host da IP a dominio
+    sed -i 's/ssl: false/ssl: true/' config/deploy.yml
+    sed -i 's/host: 46.224.19.243/host: paolotax.it/' config/deploy.yml
+    sed -i '/# SSL temporaneamente disabilitato/d' config/deploy.yml
+    sed -i '/# Quando il DNS sarà pronto/d' config/deploy.yml
+    
+    echo "✅ SSL abilitato nel config!"
+    echo ""
+    echo "Ora eseguo il deploy per applicare le modifiche..."
+    echo ""
+    
+    bin/kamal deploy
+    
+    echo ""
+    echo "🎉 Fatto! L'app ora è accessibile via HTTPS su:"
+    echo "   https://paolotax.it"
+else
+    echo "❌ DNS non ancora propagato."
+    echo "   Attuale IP: ${DNS_IP:-non risolve}"
+    echo "   IP atteso: 46.224.19.243"
+    echo ""
+    echo "Controlla la propagazione su: https://www.whatsmydns.net/#A/paolotax.it"
+    echo ""
+    echo "Riprova tra qualche minuto/ora quando il DNS sarà propagato."
+    exit 1
+fi
+
