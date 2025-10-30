@@ -124,9 +124,15 @@ export default class extends Controller {
           const correctHint = option.querySelector(".correct-hint")
           if (!correctHint) {
             const hint = document.createElement("span")
-            hint.className = "correct-hint text-sm text-yellow-700 ml-2"
+            hint.className = "correct-hint text-sm text-yellow-700 ml-2 block mt-1"
             hint.textContent = "(Risposta corretta)"
-            option.querySelector("div").appendChild(hint)
+            // Try to find a container element (div or span), otherwise append to option
+            const container = option.querySelector("div") || option.querySelector("span") || option
+            if (container === option) {
+              option.appendChild(hint)
+            } else {
+              container.parentElement.appendChild(hint)
+            }
           }
         }
       })
