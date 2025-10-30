@@ -10,19 +10,19 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Exercise routes
-  get 'exercises/phonetic', to: 'exercises#phonetic_exercise', as: 'phonetic_exercise'
-  get 'exercises/phonetic2', to: 'exercises#phonetic_exercise2', as: 'phonetic_exercise2'
-  get 'exercises/pag22', to: 'exercises#pag22', as: 'pag22'
-  get 'exercises/pag23', to: 'exercises#pag23', as: 'pag23'
-  get 'exercises/pag41', to: 'exercises#pag41', as: 'pag41'
-  get 'exercises/pag43', to: 'exercises#pag43', as: 'pag43'
-  get 'exercises/pag50', to: 'exercises#pag50', as: 'pag50'
-  get 'exercises/pag51', to: 'exercises#pag51', as: 'pag51'
-  get 'exercises/pag167', to: 'exercises#pag167', as: 'pag167'
-  get 'exercises/sussi_pag_5', to: 'exercises#sussi_pag_5', as: 'sussi_pag_5'
-  get 'exercises/sussi_pag_14', to: 'exercises#sussi_pag_14', as: 'sussi_pag_14'
-  get 'exercises/pag08', to: 'exercises#pag08', as: 'pag08'
+  get "exercises/pag008", to: "exercises#pag008", as: "pag008"
+  get "exercises/pag010", to: "exercises#pag010", as: "pag010"
+  get "exercises/pag010gen", to: "exercises#pag010gen", as: "pag010gen"
+  get "exercises/pag022", to: "exercises#pag022", as: "pag022"
+  get "exercises/pag023", to: "exercises#pag023", as: "pag023"
+  get "exercises/pag041", to: "exercises#pag041", as: "pag041"
+  get "exercises/pag043", to: "exercises#pag043", as: "pag043"
+  get "exercises/pag050", to: "exercises#pag050", as: "pag050"
+  get "exercises/pag051", to: "exercises#pag051", as: "pag051"
+  get "exercises/pag167", to: "exercises#pag167", as: "pag167"
+  get "exercises/sussi_pag_5", to: "exercises#sussi_pag_5", as: "sussi_pag_5"
+  get "exercises/sussi_pag_14", to: "exercises#sussi_pag_14", as: "sussi_pag_14"
 
   # Defines the root path route ("/")
-  root "exercises#phonetic_exercise"
+  root "exercises#pag010"
 end

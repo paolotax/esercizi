@@ -65,8 +65,8 @@ export default class extends Controller {
           const correctHint = option.querySelector(".correct-hint")
           if (!correctHint) {
             const hint = document.createElement("span")
-            hint.className = "correct-hint text-sm text-yellow-700 ml-2"
-            hint.textContent = "(Risposta corretta)"
+            hint.className = "correct-hint text-sm text-yellow-700 ml-2 block mt-1"
+            // hint.textContent = "(Risposta corretta)"
             option.querySelector("div").appendChild(hint)
           }
         }

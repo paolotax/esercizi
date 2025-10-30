@@ -1,0 +1,121 @@
+<%
+  # Parameters:
+  # - color: Theme color (default: 'orange')
+  # - current_page: Current page identifier (required)
+  
+  color = local_assigns[:color] || 'orange'
+  current_page = local_assigns[:current_page]
+  
+  # Define page order for navigation
+  pages = [
+    { name: 'pag008', path: pag008_path, title: 'Pagina 8' },
+    { name: 'pag010', path: pag010_path, title: 'Pagina 10 - Come Inizia?' },
+    { name: 'pag010gen', path: pag010gen_path, title: 'Pagina 10 Gen - Come Inizia?' },
+    { name: 'pag022', path: pag022_path, title: 'Pagina 22' },
+    { name: 'pag023', path: pag023_path, title: 'Pagina 23' },
+    { name: 'pag041', path: pag041_path, title: 'Pagina 41' },
+    { name: 'pag043', path: pag043_path, title: 'Pagina 43' },
+    { name: 'pag050', path: pag050_path, title: 'Pagina 50' },
+    { name: 'pag051', path: pag051_path, title: 'Pagina 51' },
+    { name: 'pag167', path: pag167_path, title: 'Pagina 167' },
+    { name: 'sussi_pag_5', path: sussi_pag_5_path, title: 'Sussi Pag 5' },
+    { name: 'sussi_pag_14', path: sussi_pag_14_path, title: 'Sussi Pag 14' }
+  ]
+  
+  # Find current page index
+  current_index = pages.find_index { |p| p[:name] == current_page }
+  
+  # Get previous and next pages
+  prev_page = current_index && current_index > 0 ? pages[current_index - 1] : nil
+  next_page = current_index && current_index < pages.length - 1 ? pages[current_index + 1] : nil
+  
+  # Color variants for different buttons
+  button_colors = {
+    'orange' => {
+      primary: 'bg-orange-500 hover:bg-orange-600',
+      secondary: 'bg-orange-400 hover:bg-orange-500',
+      outline: 'border-orange-500 text-orange-600 hover:bg-orange-50'
+    },
+    'blue' => {
+      primary: 'bg-blue-500 hover:bg-blue-600',
+      secondary: 'bg-blue-400 hover:bg-blue-500',
+      outline: 'border-blue-500 text-blue-600 hover:bg-blue-50'
+    },
+    'purple' => {
+      primary: 'bg-purple-500 hover:bg-purple-600',
+      secondary: 'bg-purple-400 hover:bg-purple-500',
+      outline: 'border-purple-500 text-purple-600 hover:bg-purple-50'
+    },
+    'green' => {
+      primary: 'bg-green-500 hover:bg-green-600',
+      secondary: 'bg-green-400 hover:bg-green-500',
+      outline: 'border-green-500 text-green-600 hover:bg-green-50'
+    },
+    'pink' => {
+      primary: 'bg-pink-500 hover:bg-pink-600',
+      secondary: 'bg-pink-400 hover:bg-pink-500',
+      outline: 'border-pink-500 text-pink-600 hover:bg-pink-50'
+    },
+    'red' => {
+      primary: 'bg-red-500 hover:bg-red-600',
+      secondary: 'bg-red-400 hover:bg-red-500',
+      outline: 'border-red-500 text-red-600 hover:bg-red-50'
+    }
+  }
+  
+  colors = button_colors[color] || button_colors['orange']
+%>
+
+<div class="mt-8 space-y-4" data-exercise-checker-target="buttonContainer">
+  <!-- Main action buttons -->
+  <div class="flex flex-wrap gap-4 justify-center">
+    <!-- Check Answers Button -->
+    <button class="<%= colors[:primary] %> text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transition transform hover:scale-105"
+            data-action="click->exercise-checker#checkAnswers">
+      🎯 Controlla le Risposte
+    </button>
+    
+    <!-- Solve Button -->
+    <button class="<%= colors[:secondary] %> text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transition transform hover:scale-105"
+            data-action="click->exercise-checker#showSolutions">
+      💡 Mostra Soluzioni
+    </button>
+    
+    <!-- Reset Button -->
+    <button class="border-2 <%= colors[:outline] %> bg-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transition transform hover:scale-105"
+            data-action="click->exercise-checker#resetExercise">
+      🔄 Ricomincia
+    </button>
+  </div>
+  
+  <!-- Navigation buttons -->
+  <div class="flex justify-between items-center pt-4">
+    <% if prev_page %>
+      <%= link_to prev_page[:path], 
+          class: "flex items-center gap-2 #{colors[:outline]} border-2 bg-white font-bold py-3 px-6 rounded-full shadow-md transition transform hover:scale-105" do %>
+        <span class="text-xl">←</span>
+
+      <% end %>
+    <% else %>
+      <div class="flex items-center gap-2 border-2 border-gray-300 text-gray-400 bg-gray-100 font-bold py-3 px-6 rounded-full cursor-not-allowed opacity-50">
+        <span class="text-xl">←</span>
+
+      </div>
+    <% end %>
+    
+    <% if next_page %>
+      <%= link_to next_page[:path], 
+          class: "flex items-center gap-2 #{colors[:outline]} border-2 bg-white font-bold py-3 px-6 rounded-full shadow-md transition transform hover:scale-105" do %>
+
+        <span class="text-xl">→</span>
+      <% end %>
+    <% else %>
+      <div class="flex items-center gap-2 border-2 border-gray-300 text-gray-400 bg-gray-100 font-bold py-3 px-6 rounded-full cursor-not-allowed opacity-50">
+
+        <span class="text-xl">→</span>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+

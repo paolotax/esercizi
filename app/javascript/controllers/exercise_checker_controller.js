@@ -145,7 +145,7 @@ export default class extends Controller {
           if (!correctHint) {
             const hint = document.createElement("span")
             hint.className = "correct-hint text-sm text-yellow-700 ml-2 block mt-1"
-            hint.textContent = "(Risposta corretta)"
+            // hint.textContent = "(Risposta corretta)"
             // Try to find a container element (div or span), otherwise append to option
             const container = option.querySelector("div") || option.querySelector("span") || option
             if (container === option) {
@@ -217,6 +217,99 @@ export default class extends Controller {
     feedbackDiv.scrollIntoView({ behavior: "smooth", block: "center" })
   }
 
+  showSolutions(event) {
+    event.preventDefault()
+
+    // First reset the exercise
+    this.resetExercise()
+
+    // Get all groups (both exercise-group and card-selector)
+    const exerciseGroups = this.element.querySelectorAll("[data-controller=\"exercise-group\"]")
+    const cardGroups = this.element.querySelectorAll("[data-controller=\"card-selector\"]")
+    const allGroups = [...exerciseGroups, ...cardGroups]
+
+    // Show correct answers for all groups
+    allGroups.forEach(group => {
+      const isCardGroup = group.hasAttribute("data-controller") &&
+                          group.getAttribute("data-controller").includes("card-selector")
+
+      let options
+      if (isCardGroup) {
+        options = group.querySelectorAll("[data-card-selector-target=\"card\"]")
+      } else {
+        options = group.querySelectorAll("[data-exercise-group-target=\"option\"]")
+      }
+
+      options.forEach(option => {
+        const isCorrect = option.dataset.correct === "true"
+        
+        if (isCorrect) {
+          // Highlight correct answers in green
+          option.classList.add("bg-green-100", "border-2", "border-green-500", "rounded-lg")
+          
+          // For exercise-group, show the checkmark
+          if (!isCardGroup) {
+            const checkmark = option.querySelector("[data-exercise-group-target=\"checkmark\"]")
+            if (checkmark) {
+              checkmark.classList.remove("hidden")
+            }
+          } else {
+            // For card-selector, add the selection class
+            option.classList.add("bg-orange-100")
+          }
+        }
+      })
+    })
+
+    // Fill in correct answers for input fields
+    const inputFields = this.element.querySelectorAll("input[data-correct-answer]")
+    inputFields.forEach(input => {
+      const correctAnswer = input.dataset.correctAnswer.trim()
+      input.value = correctAnswer
+      input.classList.add("border-green-500", "border-4", "bg-green-50")
+    })
+
+    // Show flower matcher solutions if present
+    const flowerMatcher = this.element.querySelector("[data-controller=\"flower-matcher\"]")
+    if (flowerMatcher) {
+      const flowerController = this.application.getControllerForElementAndIdentifier(flowerMatcher, "flower-matcher")
+      if (flowerController && flowerController.showSolutions) {
+        flowerController.showSolutions()
+      }
+    }
+
+    // Show feedback message
+    this.showSolutionFeedback()
+  }
+
+  showSolutionFeedback() {
+    // Remove existing feedback if any
+    const existingFeedback = document.querySelector(".exercise-feedback")
+    if (existingFeedback) {
+      existingFeedback.remove()
+    }
+
+    const feedbackDiv = document.createElement("div")
+    feedbackDiv.className = "exercise-feedback mt-6 p-6 rounded-lg shadow-lg bg-blue-100 border-4 border-blue-500"
+    
+    const title = document.createElement("h2")
+    title.className = "text-2xl font-bold mb-4 text-blue-800"
+    title.textContent = "💡 Soluzioni mostrate!"
+    
+    const message = document.createElement("p")
+    message.className = "text-lg text-blue-700"
+    message.textContent = "Tutte le risposte corrette sono evidenziate in verde."
+    
+    feedbackDiv.appendChild(title)
+    feedbackDiv.appendChild(message)
+
+    // Insert feedback before the buttons
+    this.buttonContainerTarget.insertBefore(feedbackDiv, this.buttonContainerTarget.firstChild)
+
+    // Scroll to feedback
+    feedbackDiv.scrollIntoView({ behavior: "smooth", block: "center" })
+  }
+
   resetExercise() {
     // Remove all highlights and feedback from options
     const options = this.element.querySelectorAll("[data-exercise-group-target=\"option\"]")
@@ -226,6 +319,12 @@ export default class extends Controller {
                               "border-yellow-500", "rounded-lg")
       const hint = option.querySelector(".correct-hint")
       if (hint) hint.remove()
+      
+      // Hide checkmarks
+      const checkmark = option.querySelector("[data-exercise-group-target=\"checkmark\"]")
+      if (checkmark) {
+        checkmark.classList.add("hidden")
+      }
     })
 
     // Remove highlights from card-selector options
@@ -233,7 +332,7 @@ export default class extends Controller {
     cards.forEach(card => {
       card.classList.remove("bg-red-100", "bg-green-100", "bg-yellow-100",
                             "border-2", "border-red-500", "border-green-500",
-                            "border-yellow-500")
+                            "border-yellow-500", "bg-orange-100")
     })
 
     // Remove highlights from input fields and restore original styling
@@ -242,6 +341,7 @@ export default class extends Controller {
       input.classList.remove("border-yellow-500", "border-green-500", "border-red-500",
                              "border-4", "bg-yellow-50", "bg-green-50", "bg-red-50")
       input.classList.add("border-gray-300", "border-2")
+      input.value = ""
     })
 
     const feedback = this.element.querySelector(".exercise-feedback")

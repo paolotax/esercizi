@@ -1,41 +1,68 @@
-<div class="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 py-8 px-4" data-controller="exercise-checker">
+<div class="min-h-screen bg-gradient-to-br from-pink-50 to-orange-50 py-8 px-4" data-controller="exercise-checker">
   <div class="max-w-4xl mx-auto">
-    <!-- Title -->
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg shadow-lg p-6 mb-8">
+      <div class="flex items-center gap-4">
+        <div class="bg-white rounded-lg p-3">
+          <span class="text-3xl">🔤</span>
+        </div>
+        <h1 class="text-3xl font-bold text-white">COME INIZIA?</h1>
+      </div>
+    </div>
+
+    <!-- Instructions -->
     <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-      <h1 class="text-2xl font-bold text-gray-800 flex items-center gap-3">
-        <span class="text-3xl">🔤</span>
+      <h2 class="text-xl font-bold text-gray-800 flex items-center gap-3">
+        <span class="text-2xl">🔵</span>
         <span>OSSERVA I DISEGNI E PRONUNCIA I NOMI. IN OGNI GRUPPO SEGNA CON UNA <span class="text-red-600 font-bold">X</span> IL DISEGNO CHE INIZIA COME IL PRIMO.</span>
-      </h1>
+      </h2>
     </div>
 
     <!-- Exercise Groups -->
     <div class="space-y-6">
-      <!-- Group 1 -->
-      <div class="bg-white rounded-3xl shadow-lg border-4 border-green-400 p-8" data-controller="exercise-group">
-        <div class="grid grid-cols-[1fr_1fr] gap-8 divide-x-4 divide-orange-300">
+      <!-- Group 1: Mela -->
+      <div class="bg-white rounded-3xl shadow-lg border-4 border-purple-400 p-8" data-controller="exercise-group">
+        <div class="grid grid-cols-[1fr_1fr] gap-8 divide-x-4 divide-blue-300">
           <!-- Left side - Reference item -->
           <div class="flex items-center justify-center">
             <div class="text-center cursor-pointer hover:scale-110 transition"
                  data-controller="audio-player"
-                 data-audio-player-src-value="/audios/exercises/luna.mp3"
+                 data-audio-player-src-value="/audios/exercises/mela.mp3"
                  data-action="click->audio-player#play">
-              <div class="text-8xl">🌙</div>
+              <div class="text-8xl">🍎</div>
             </div>
           </div>
 
           <!-- Right side - Options to check -->
           <div class="flex items-center justify-center">
             <div class="space-y-6 w-full max-w-xs">
-              <!-- Option 1: Snail (Lumaca) -->
+              <!-- Option 1: Gatto (Cat) -->
+              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+                   data-exercise-group-target="option"
+                   data-correct="false"
+                   data-word="Gatto">
+                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                      data-controller="audio-player"
+                      data-audio-player-src-value="/audios/exercises/gatto.mp3"
+                      data-action="click->audio-player#play"
+                      onclick="event.stopPropagation()">🐱</span>
+                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                     data-exercise-group-target="checkbox"
+                     data-action="click->exercise-group#toggleCheck">
+                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                </div>
+              </div>
+
+              <!-- Option 2: Mare (Sea) -->
               <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="true"
-                   data-word="Lumaca">
+                   data-word="Mare">
                 <span class="text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="audio-player"
-                      data-audio-player-src-value="/audios/exercises/lumaca.mp3"
+                      data-audio-player-src-value="/audios/exercises/mare.mp3"
                       data-action="click->audio-player#play"
-                      onclick="event.stopPropagation()">🐌</span>
+                      onclick="event.stopPropagation()">🌊</span>
                 <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
@@ -43,33 +70,16 @@
                 </div>
               </div>
 
-              <!-- Option 2: Bee (Ape) -->
+              <!-- Option 3: Tigre (Tiger) -->
               <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="false"
-                   data-word="Ape">
+                   data-word="Tigre">
                 <span class="text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="audio-player"
-                      data-audio-player-src-value="/audios/exercises/ape.mp3"
+                      data-audio-player-src-value="/audios/exercises/tigre.mp3"
                       data-action="click->audio-player#play"
-                      onclick="event.stopPropagation()">🐝</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
-                     data-exercise-group-target="checkbox"
-                     data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
-                </div>
-              </div>
-
-              <!-- Option 3: Pencil (Matita) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Matita">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
-                      data-controller="audio-player"
-                      data-audio-player-src-value="/audios/exercises/matita.mp3"
-                      data-action="click->audio-player#play"
-                      onclick="event.stopPropagation()">✏️</span>
+                      onclick="event.stopPropagation()">🐯</span>
                 <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
@@ -81,32 +91,32 @@
         </div>
       </div>
 
-      <!-- Group 2 -->
-      <div class="bg-white rounded-3xl shadow-lg border-4 border-green-400 p-8" data-controller="exercise-group">
-        <div class="grid grid-cols-[1fr_1fr] gap-8 divide-x-4 divide-orange-300">
+      <!-- Group 2: Sole -->
+      <div class="bg-white rounded-3xl shadow-lg border-4 border-purple-400 p-8" data-controller="exercise-group">
+        <div class="grid grid-cols-[1fr_1fr] gap-8 divide-x-4 divide-blue-300">
           <!-- Left side - Reference item -->
           <div class="flex items-center justify-center">
             <div class="text-center cursor-pointer hover:scale-110 transition"
                  data-controller="audio-player"
-                 data-audio-player-src-value="/audios/exercises/balena.mp3"
+                 data-audio-player-src-value="/audios/exercises/sole.mp3"
                  data-action="click->audio-player#play">
-              <div class="text-8xl">🐋</div>
+              <div class="text-8xl">☀️</div>
             </div>
           </div>
 
           <!-- Right side - Options to check -->
           <div class="flex items-center justify-center">
             <div class="space-y-6 w-full max-w-xs">
-              <!-- Option 1: Sun (Sole) -->
+              <!-- Option 1: Fiore (Flower) -->
               <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="false"
-                   data-word="Sole">
+                   data-word="Fiore">
                 <span class="text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="audio-player"
-                      data-audio-player-src-value="/audios/exercises/sole.mp3"
+                      data-audio-player-src-value="/audios/exercises/fiore.mp3"
                       data-action="click->audio-player#play"
-                      onclick="event.stopPropagation()">☀️</span>
+                      onclick="event.stopPropagation()">🌸</span>
                 <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
@@ -114,33 +124,33 @@
                 </div>
               </div>
 
-              <!-- Option 2: Cloud (Nuvola) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Nuvola">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
-                      data-controller="audio-player"
-                      data-audio-player-src-value="/audios/exercises/nuvola.mp3"
-                      data-action="click->audio-player#play"
-                      onclick="event.stopPropagation()">☁️</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
-                     data-exercise-group-target="checkbox"
-                     data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
-                </div>
-              </div>
-
-              <!-- Option 3: Banana (Banana) -->
+              <!-- Option 2: Stella (Star) -->
               <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="true"
-                   data-word="Banana">
+                   data-word="Stella">
                 <span class="text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="audio-player"
-                      data-audio-player-src-value="/audios/exercises/banana.mp3"
+                      data-audio-player-src-value="/audios/exercises/stella.mp3"
                       data-action="click->audio-player#play"
-                      onclick="event.stopPropagation()">🍌</span>
+                      onclick="event.stopPropagation()">⭐</span>
+                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                     data-exercise-group-target="checkbox"
+                     data-action="click->exercise-group#toggleCheck">
+                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                </div>
+              </div>
+
+              <!-- Option 3: Casa (House) -->
+              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+                   data-exercise-group-target="option"
+                   data-correct="false"
+                   data-word="Casa">
+                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                      data-controller="audio-player"
+                      data-audio-player-src-value="/audios/exercises/casa.mp3"
+                      data-action="click->audio-player#play"
+                      onclick="event.stopPropagation()">🏠</span>
                 <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
@@ -152,49 +162,32 @@
         </div>
       </div>
 
-      <!-- Group 3: Albero -->
-      <div class="bg-white rounded-3xl shadow-lg border-4 border-green-400 p-8" data-controller="exercise-group">
-        <div class="grid grid-cols-[1fr_1fr] gap-8 divide-x-4 divide-orange-300">
+      <!-- Group 3: Pane -->
+      <div class="bg-white rounded-3xl shadow-lg border-4 border-purple-400 p-8" data-controller="exercise-group">
+        <div class="grid grid-cols-[1fr_1fr] gap-8 divide-x-4 divide-blue-300">
           <!-- Left side - Reference item -->
           <div class="flex items-center justify-center">
             <div class="text-center cursor-pointer hover:scale-110 transition"
                  data-controller="audio-player"
-                 data-audio-player-src-value="/audios/exercises/albero.mp3"
+                 data-audio-player-src-value="/audios/exercises/pane.mp3"
                  data-action="click->audio-player#play">
-              <div class="text-8xl">🌳</div>
+              <div class="text-8xl">🍞</div>
             </div>
           </div>
 
           <!-- Right side - Options to check -->
           <div class="flex items-center justify-center">
             <div class="space-y-6 w-full max-w-xs">
-              <!-- Option 1: Mostro (Monster) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Mostro">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
-                      data-controller="audio-player"
-                      data-audio-player-src-value="/audios/exercises/mostro.mp3"
-                      data-action="click->audio-player#play"
-                      onclick="event.stopPropagation()">👹</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
-                     data-exercise-group-target="checkbox"
-                     data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
-                </div>
-              </div>
-
-              <!-- Option 2: Arco (Bow/Arch) -->
+              <!-- Option 1: Palla (Ball) -->
               <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="true"
-                   data-word="Arco">
+                   data-word="Palla">
                 <span class="text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="audio-player"
-                      data-audio-player-src-value="/audios/exercises/arco.mp3"
+                      data-audio-player-src-value="/audios/exercises/palla.mp3"
                       data-action="click->audio-player#play"
-                      onclick="event.stopPropagation()">🏹</span>
+                      onclick="event.stopPropagation()">⚽</span>
                 <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
@@ -202,16 +195,33 @@
                 </div>
               </div>
 
-              <!-- Option 3: Lingua (Tongue) -->
+              <!-- Option 2: Treno (Train) -->
               <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="false"
-                   data-word="Lingua">
+                   data-word="Treno">
                 <span class="text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="audio-player"
-                      data-audio-player-src-value="/audios/exercises/lingua.mp3"
+                      data-audio-player-src-value="/audios/exercises/treno.mp3"
                       data-action="click->audio-player#play"
-                      onclick="event.stopPropagation()">👅</span>
+                      onclick="event.stopPropagation()">🚂</span>
+                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                     data-exercise-group-target="checkbox"
+                     data-action="click->exercise-group#toggleCheck">
+                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                </div>
+              </div>
+
+              <!-- Option 3: Leone (Lion) -->
+              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+                   data-exercise-group-target="option"
+                   data-correct="false"
+                   data-word="Leone">
+                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                      data-controller="audio-player"
+                      data-audio-player-src-value="/audios/exercises/leone.mp3"
+                      data-action="click->audio-player#play"
+                      onclick="event.stopPropagation()">🦁</span>
                 <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
@@ -223,32 +233,49 @@
         </div>
       </div>
 
-      <!-- Group 4: Telefono -->
-      <div class="bg-white rounded-3xl shadow-lg border-4 border-green-400 p-8" data-controller="exercise-group">
-        <div class="grid grid-cols-[1fr_1fr] gap-8 divide-x-4 divide-orange-300">
+      <!-- Group 4: Rosa -->
+      <div class="bg-white rounded-3xl shadow-lg border-4 border-purple-400 p-8" data-controller="exercise-group">
+        <div class="grid grid-cols-[1fr_1fr] gap-8 divide-x-4 divide-blue-300">
           <!-- Left side - Reference item -->
           <div class="flex items-center justify-center">
             <div class="text-center cursor-pointer hover:scale-110 transition"
                  data-controller="audio-player"
-                 data-audio-player-src-value="/audios/exercises/telefono.mp3"
+                 data-audio-player-src-value="/audios/exercises/rosa.mp3"
                  data-action="click->audio-player#play">
-              <div class="text-8xl">📱</div>
+              <div class="text-8xl">🌹</div>
             </div>
           </div>
 
           <!-- Right side - Options to check -->
           <div class="flex items-center justify-center">
             <div class="space-y-6 w-full max-w-xs">
-              <!-- Option 1: Topo (Mouse) -->
+              <!-- Option 1: Drago (Dragon) -->
+              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+                   data-exercise-group-target="option"
+                   data-correct="false"
+                   data-word="Drago">
+                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                      data-controller="audio-player"
+                      data-audio-player-src-value="/audios/exercises/drago.mp3"
+                      data-action="click->audio-player#play"
+                      onclick="event.stopPropagation()">🐉</span>
+                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                     data-exercise-group-target="checkbox"
+                     data-action="click->exercise-group#toggleCheck">
+                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                </div>
+              </div>
+
+              <!-- Option 2: Radio (Radio) -->
               <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="true"
-                   data-word="Topo">
+                   data-word="Radio">
                 <span class="text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="audio-player"
-                      data-audio-player-src-value="/audios/exercises/topo.mp3"
+                      data-audio-player-src-value="/audios/exercises/radio.mp3"
                       data-action="click->audio-player#play"
-                      onclick="event.stopPropagation()">🐭</span>
+                      onclick="event.stopPropagation()">📻</span>
                 <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
@@ -256,33 +283,16 @@
                 </div>
               </div>
 
-              <!-- Option 2: Occhiali (Glasses) -->
+              <!-- Option 3: Gelato (Ice cream) -->
               <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="false"
-                   data-word="Occhiali">
+                   data-word="Gelato">
                 <span class="text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="audio-player"
-                      data-audio-player-src-value="/audios/exercises/occhiali.mp3"
+                      data-audio-player-src-value="/audios/exercises/gelato.mp3"
                       data-action="click->audio-player#play"
-                      onclick="event.stopPropagation()">👓</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
-                     data-exercise-group-target="checkbox"
-                     data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
-                </div>
-              </div>
-
-              <!-- Option 3: Cane (Dog) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Cane">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
-                      data-controller="audio-player"
-                      data-audio-player-src-value="/audios/exercises/cane.mp3"
-                      data-action="click->audio-player#play"
-                      onclick="event.stopPropagation()">🐕</span>
+                      onclick="event.stopPropagation()">🍦</span>
                 <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
@@ -295,19 +305,15 @@
       </div>
     </div>
 
-    <!-- Check button -->
-    <div class="mt-8 text-center" data-exercise-checker-target="buttonContainer">
-      <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transition transform hover:scale-105"
-              data-action="click->exercise-checker#checkAnswers">
-        🎯 Controlla le Risposte
-      </button>
+    <!-- Page number -->
+    <div class="flex justify-end mb-6 mt-8">
+      <div class="bg-purple-500 text-white font-bold text-3xl px-6 py-3 rounded-l-full">
+        10
+      </div>
     </div>
+
+    <!-- Exercise Controls -->
+    <%= render 'shared/exercise_controls', color: 'purple', current_page: 'pag010gen' %>
+
   </div>
 </div>
-
-    <!-- Navigation -->
-    <div class="mt-6 text-center">
-      <a href="/exercises/phonetic2" class="text-green-600 hover:text-green-800 underline">
-        Vai al secondo esercizio →
-      </a>
-    </div>

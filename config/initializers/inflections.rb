@@ -14,3 +14,19 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym "RESTful"
 # end
+
+# Inflections for Italian words
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.irregular "esercizio", "esercizi"
+  inflect.irregular "libro", "libri"
+  inflect.irregular "bambino", "bambini"
+  inflect.irregular "pagina", "pagine"
+  inflect.irregular "parola", "parole"
+  inflect.irregular "studente", "studenti"
+  inflect.irregular "immagine", "immagini"
+  inflect.irregular "audio", "audio"
+  inflect.irregular "scuola", "scuole"
+  inflect.irregular "dirigente", "dirigenti"
+  inflect.irregular "maestro", "maestri"
+  inflect.irregular "maestra", "maestre"
+end

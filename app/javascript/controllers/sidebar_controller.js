@@ -20,4 +20,16 @@ export default class extends Controller {
       console.error("Sidebar target not found")
     }
   }
+
+  close(event) {
+    if (event) event.preventDefault()
+    console.log("Closing sidebar...")
+
+    if (this.hasSidebarTarget) {
+      this.sidebarTarget.classList.add("hidden")
+      console.log("Sidebar closed")
+    } else {
+      console.error("Sidebar target not found")
+    }
+  }
 }

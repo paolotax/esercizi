@@ -1,26 +1,29 @@
 class ExercisesController < ApplicationController
-  def phonetic_exercise
+  def pag008
   end
 
-  def phonetic_exercise2
+  def pag010
   end
 
-  def pag22
+  def pag010gen
   end
 
-  def pag23
+  def pag022
   end
 
-  def pag41
+  def pag023
   end
 
-  def pag43
+  def pag041
   end
 
-  def pag50
+  def pag043
   end
 
-  def pag51
+  def pag050
+  end
+
+  def pag051
   end
 
   def pag167
@@ -30,8 +33,5 @@ class ExercisesController < ApplicationController
   end
 
   def sussi_pag_14
-  end
-
-  def pag08
   end
 end
