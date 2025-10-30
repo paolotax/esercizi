@@ -11,6 +11,11 @@ gem "puma", ">= 5.0"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem "importmap-rails"
+gem "stimulus-rails"
+gem "turbo-rails"
+gem "tailwindcss-rails"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
@@ -59,9 +64,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "importmap-rails", "~> 2.2"
-gem "stimulus-rails", "~> 1.3"
-gem "turbo-rails", "~> 2.0"
+
 
 group :development do
   gem "claude-on-rails"
