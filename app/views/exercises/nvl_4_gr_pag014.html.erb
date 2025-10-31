@@ -1,0 +1,207 @@
+<div class="max-w-6xl mx-auto p-6 bg-gradient-to-br from-pink-50 to-red-50 rounded-lg shadow-lg" data-controller="exercise-checker">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-8 border-b-4 border-pink-500 pb-4">
+    <div class="flex items-center gap-4">
+      <div class="bg-pink-500 text-white rounded-full w-16 h-16 flex items-center justify-center">
+        <span class="text-3xl">💡</span>
+      </div>
+      <div>
+        <div class="text-sm text-pink-600 font-semibold uppercase">ORTOGRAFIA</div>
+        <h1 class="text-4xl font-bold text-pink-700">Il gruppo GL</h1>
+      </div>
+    </div>
+    <div class="bg-pink-500 text-white font-bold text-4xl px-8 py-4 rounded-full">
+      14
+    </div>
+  </div>
+
+  <!-- Explanation Box -->
+  <div class="bg-yellow-50 border-4 border-yellow-400 rounded-lg p-6 mb-8">
+    <div class="flex items-start gap-6">
+      <div class="text-8xl">🌷</div>
+      <div class="flex-1">
+        <h2 class="text-2xl font-bold text-pink-600 mb-4">Gruppo GL</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="border-4 border-red-400 rounded-lg p-4 bg-red-50">
+            <h3 class="text-xl font-bold text-red-600 mb-2">Suono dolce</h3>
+            <p class="text-lg">• davanti a <span class="font-bold">I</span></p>
+            <p class="text-lg">→ <span class="font-bold text-red-600">tovaglia</span></p>
+          </div>
+          <div class="border-4 border-blue-400 rounded-lg p-4 bg-blue-50">
+            <h3 class="text-xl font-bold text-blue-600 mb-2">Suono duro</h3>
+            <p class="text-lg">• davanti a <span class="font-bold">A, E, O, U</span></p>
+            <p class="text-lg">→ <span class="font-bold text-blue-600">gladiolo</span></p>
+            <p class="text-lg">• a volte anche davanti alla vocale <span class="font-bold">I</span></p>
+            <p class="text-lg">→ <span class="font-bold text-blue-600">glicine</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 1: Classify GL words -->
+  <div class="mb-12 bg-white rounded-lg p-6 shadow-md">
+    <h2 class="text-2xl font-bold text-pink-600 mb-6">
+      <span class="bg-pink-600 text-white rounded-full w-10 h-10 inline-flex items-center justify-center mr-2">1</span>
+      IMPARARE TUTTI Scrivi le seguenti parole nella scatola giusta.
+    </h2>
+
+    <!-- Words to classify -->
+    <div class="bg-gray-50 border-2 border-gray-300 rounded-lg p-4 mb-6">
+      <div class="flex flex-wrap gap-3 justify-center">
+        <% words_list = ['maniglia', 'aglio', 'inglese', 'sogliola', 'coniglio', 'glutine', 'maglione', 'globo', 'ciglio', 'migliaia', 'biglietto', 'glaciale'] %>
+        <% words_list.each do |word| %>
+          <span class="bg-white border-2 border-pink-300 px-4 py-2 rounded-lg font-bold text-lg">• <%= word %></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6" data-controller="word-sorter">
+      <!-- GL - Suono Dolce -->
+      <div class="border-4 border-red-400 rounded-lg p-6 bg-yellow-50">
+        <h3 class="text-2xl font-bold text-red-600 mb-4 text-center">GL - SUONO DOLCE</h3>
+        <div class="space-y-2">
+          <% dolce_words = ['maniglia', 'aglio', 'sogliola', 'coniglio', 'maglione', 'ciglio', 'migliaia', 'biglietto'] %>
+          <% 8.times do |i| %>
+            <input type="text"
+                   class="w-full border-b-2 border-gray-400 bg-transparent text-lg font-bold focus:outline-none focus:border-red-500 py-2"
+                   data-word-sorter-target="input"
+                   data-correct-answer="<%= dolce_words[i] %>"
+                   placeholder="..........................................">
+          <% end %>
+        </div>
+      </div>
+
+      <!-- GL - Suono Duro -->
+      <div class="border-4 border-blue-400 rounded-lg p-6 bg-purple-50">
+        <h3 class="text-2xl font-bold text-blue-600 mb-4 text-center">GL - SUONO DURO</h3>
+        <div class="space-y-2">
+          <% duro_words = ['inglese', 'glutine', 'globo', 'glaciale'] %>
+          <% 4.times do |i| %>
+            <input type="text"
+                   class="w-full border-b-2 border-gray-400 bg-transparent text-lg font-bold focus:outline-none focus:border-blue-500 py-2"
+                   data-word-sorter-target="input"
+                   data-correct-answer="<%= duro_words[i] %>"
+                   placeholder="..........................................">
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <button class="mt-6 bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full transition"
+            data-action="click->word-sorter#checkAnswers">
+      Controlla
+    </button>
+  </div>
+
+  <!-- Exercise 2: GLI o LI? -->
+  <div class="mb-12 bg-white rounded-lg p-6 shadow-md">
+    <div class="flex items-start gap-4 mb-6">
+      <div class="flex-1">
+        <h2 class="text-2xl font-bold text-pink-600 mb-4">
+          <span class="bg-pink-600 text-white rounded-full w-10 h-10 inline-flex items-center justify-center mr-2">2</span>
+          GLI o LI? Completa.
+        </h2>
+      </div>
+      <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4 max-w-md">
+        <p class="text-sm font-bold text-gray-800 mb-2">Si usa <span class="text-pink-600">LI</span> al posto di <span class="text-pink-600">GLI</span>:</p>
+        <ul class="text-sm space-y-1">
+          <li>• nella sillaba iniziale di parola → <span class="font-bold">lieve, lieta</span>...</li>
+          <li>• quando la <span class="font-bold">L</span> raddoppia in <span class="font-bold">LL</span> → <span class="font-bold">allieva, cancelliere</span>...</li>
+          <li>• in alcune parole → <span class="font-bold">olio, Italia</span>...</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-6" data-controller="fill-blanks">
+      <% completions = [
+        {prefix: 'gioco', suffix: 'ere', answer: 'li'},
+        {prefix: 'ci', suffix: 'egia', answer: 'li'},
+        {prefix: 'petro', suffix: 'o', answer: 'li'},
+        {prefix: 'botti', suffix: 'a', answer: 'gli'},
+        {prefix: 'meda', suffix: 'a', answer: 'gli'},
+        {prefix: 'sbadi', suffix: 'o', answer: 'gli'},
+        {prefix: 'o', suffix: 'era', answer: 'gli'},
+        {prefix: 'sol', suffix: 'evo', answer: 'li'},
+        {prefix: 'sa', suffix: 'era', answer: 'li'}
+      ] %>
+
+      <% completions.each do |item| %>
+        <div class="flex items-center gap-1 text-xl font-bold">
+          <span>• <%= item[:prefix] %></span>
+          <input type="text"
+                 class="border-b-4 border-pink-500 bg-transparent w-16 text-center focus:outline-none focus:border-pink-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:answer] %>"
+                 data-correct-answer="<%= item[:answer] %>"
+                 maxlength="3">
+          <span><%= item[:suffix] %></span>
+        </div>
+      <% end %>
+    </div>
+
+    <button class="mt-6 bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full transition"
+            data-action="click->fill-blanks#checkAnswers">
+      Controlla
+    </button>
+  </div>
+
+  <!-- GIOCO: Find the error -->
+  <div class="mb-12 bg-gradient-to-r from-yellow-100 via-orange-100 to-red-100 rounded-lg p-6 shadow-lg border-4 border-yellow-400">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-4xl">🎮</span>
+      <h2 class="text-3xl font-bold" style="color: #ff6b35;">GIOCO</h2>
+    </div>
+
+    <h3 class="text-xl font-bold text-gray-800 mb-6">In ogni riquadro c'è un errore: lavora con un compagno e una compagna e trovatelo!</h3>
+
+    <div class="grid md:grid-cols-3 gap-4">
+      <!-- Box 1 -->
+      <div class="bg-cyan-100 border-4 border-cyan-300 rounded-lg p-6">
+        <div class="space-y-3 text-center">
+          <div class="text-2xl font-bold">Australia</div>
+          <div class="text-2xl font-bold">Italia</div>
+          <div class="text-2xl font-bold text-red-600">Puglia</div>
+          <div class="text-2xl font-bold">Sicilia</div>
+        </div>
+        <div class="mt-4 text-sm text-gray-600 italic">
+          (Errore: Puglia non ha GL/LI)
+        </div>
+      </div>
+
+      <!-- Box 2 -->
+      <div class="bg-pink-100 border-4 border-pink-300 rounded-lg p-6">
+        <div class="space-y-3 text-center">
+          <div class="text-2xl font-bold">coniglio</div>
+          <div class="text-2xl font-bold">trifoglio</div>
+          <div class="text-2xl font-bold text-red-600">paglia</div>
+          <div class="text-2xl font-bold">cespuglio</div>
+        </div>
+        <div class="mt-4 text-sm text-gray-600 italic">
+          (Errore: paglia dovrebbe essere paglio se seguisse il pattern)
+        </div>
+      </div>
+
+      <!-- Box 3 -->
+      <div class="bg-green-100 border-4 border-green-300 rounded-lg p-6">
+        <div class="space-y-3 text-center">
+          <div class="text-2xl font-bold">lavastoviglie</div>
+          <div class="text-2xl font-bold text-red-600">bottiglia</div>
+          <div class="text-2xl font-bold">tovalia</div>
+          <div class="text-2xl font-bold">tovagliolo</div>
+        </div>
+        <div class="mt-4 text-sm text-gray-600 italic">
+          (Errore: tovalia dovrebbe essere tovaglia)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page reference -->
+  <div class="text-center text-gray-500 mb-6">
+    <p class="font-semibold">Esercizi p. 138</p>
+  </div>
+
+  <!-- Exercise Controls -->
+  <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl_4_gr_pag014' %>
+</div>

@@ -1,0 +1,215 @@
+<div class="max-w-6xl mx-auto p-6 bg-gradient-to-br from-pink-50 to-red-50 rounded-lg shadow-lg" data-controller="exercise-checker">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-8 border-b-4 border-pink-500 pb-4">
+    <div class="flex items-center gap-4">
+      <div class="bg-pink-500 text-white rounded-full w-16 h-16 flex items-center justify-center">
+        <span class="text-3xl">💡</span>
+      </div>
+      <div>
+        <div class="text-sm text-pink-600 font-semibold uppercase">ORTOGRAFIA</div>
+        <h1 class="text-4xl font-bold text-pink-700">La lettera C</h1>
+      </div>
+    </div>
+    <div class="bg-pink-500 text-white font-bold text-4xl px-8 py-4 rounded-full">
+      9
+    </div>
+  </div>
+
+  <!-- Explanation Box: Sillaba CE -->
+  <div class="bg-yellow-50 border-4 border-yellow-400 rounded-lg p-6 mb-8">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">La sillaba <span class="text-pink-600">CE</span> di solito non vuole la <span class="text-pink-600">I</span>. Fanno eccezione:</h2>
+    <ul class="space-y-2 text-lg ml-6">
+      <li>• il plurale delle parole che terminano in <span class="font-bold text-pink-600">CIA</span> se la sillaba è preceduta da <span class="font-bold">vocale</span> → farma<span class="text-pink-600">cia</span> / farma<span class="text-pink-600">cie</span></li>
+      <li>• alcune parole → pasti<span class="text-pink-600">cciere</span>, socie<span class="text-pink-600">tà</span>, suffi<span class="text-pink-600">ciente</span>, <span class="text-pink-600">cielo</span>, gratta<span class="text-pink-600">cielo</span>, <span class="text-pink-600">cieco</span>...</li>
+    </ul>
+    <div class="mt-4 flex justify-end">
+      <div class="text-8xl">👨‍🍳</div>
+    </div>
+  </div>
+
+  <!-- Exercise 4: Complete with CE or CIE -->
+  <div class="mb-12 bg-white rounded-lg p-6 shadow-md">
+    <h2 class="text-2xl font-bold text-pink-600 mb-6">
+      <span class="bg-pink-600 text-white rounded-full w-10 h-10 inline-flex items-center justify-center mr-2">4</span>
+      Completa con <span class="font-bold">CE</span> o <span class="font-bold">CIE</span>.
+    </h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6" data-controller="fill-blanks">
+      <% completions = [
+        {prefix: 'gratta', suffix: 'lo', answer: 'cie'},
+        {prefix: '', suffix: 'lo', answer: 'cie'},
+        {prefix: 'can', suffix: 'llo', answer: 'ce'},
+        {prefix: 'vin', suffix: 're', answer: 'ce'},
+        {prefix: 'insuffi', suffix: 'nte', answer: 'cie'},
+        {prefix: 'no', suffix: '', answer: 'ce'},
+        {prefix: 'a', suffix: 'to', answer: 'cie'},
+        {prefix: 'dol', suffix: 'zza', answer: 'ce'},
+        {prefix: 'pastic', suffix: 're', answer: 'cie'},
+        {prefix: '', suffix: 'rvello', answer: 'ce'},
+        {prefix: '', suffix: 'mento', answer: 'ci'},
+        {prefix: 'dol', suffix: '', answer: 'ce'},
+        {prefix: '', suffix: 'rtificato', answer: 'ce'},
+        {prefix: 'so', suffix: 'età', answer: 'ci'},
+        {prefix: '', suffix: 'triolo', answer: 'ce'},
+        {prefix: 'corni', suffix: '', answer: 'ce'}
+      ] %>
+
+      <% completions.each_with_index do |item, idx| %>
+        <div class="flex items-center gap-1 text-xl font-bold">
+          <span>• <%= item[:prefix] %></span>
+          <input type="text"
+                 class="border-b-4 border-pink-500 bg-transparent w-16 text-center focus:outline-none focus:border-pink-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:answer] %>"
+                 data-correct-answer="<%= item[:answer] %>"
+                 maxlength="3">
+          <span><%= item[:suffix] %></span>
+        </div>
+      <% end %>
+    </div>
+
+    <button class="mt-6 bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full transition"
+            data-action="click->fill-blanks#checkAnswers">
+      Controlla
+    </button>
+  </div>
+
+  <!-- Exercise 5: Volgi al plurale (single words) -->
+  <div class="mb-12 bg-white rounded-lg p-6 shadow-md">
+    <h2 class="text-2xl font-bold text-pink-600 mb-6">
+      <span class="bg-pink-600 text-white rounded-full w-10 h-10 inline-flex items-center justify-center mr-2">5</span>
+      Volgi al <span class="text-blue-600 font-bold">plurale</span>.
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-6" data-controller="plurals">
+      <% plurals = [
+        {singular: 'treccia', plural: 'trecce'},
+        {singular: 'lancia', plural: 'lance'},
+        {singular: 'farmacia', plural: 'farmacie'},
+        {singular: 'goccia', plural: 'gocce'},
+        {singular: 'bilancia', plural: 'bilance'},
+        {singular: 'fradicia', plural: 'fradice'}
+      ] %>
+
+      <% plurals.each do |item| %>
+        <div class="flex items-center gap-3">
+          <span class="text-xl font-bold">• <%= item[:singular] %></span>
+          <span class="text-2xl text-pink-500">→</span>
+          <input type="text"
+                 class="border-b-4 border-pink-500 bg-transparent flex-1 text-xl font-bold focus:outline-none focus:border-pink-700"
+                 data-plurals-target="input"
+                 data-answer="<%= item[:plural] %>"
+                 data-correct-answer="<%= item[:plural] %>"
+                 placeholder="...">
+        </div>
+      <% end %>
+    </div>
+
+    <button class="mt-6 bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full transition"
+            data-action="click->plurals#checkAnswers">
+      Controlla
+    </button>
+  </div>
+
+  <!-- Exercise 6: Volgi al plurale (phrases) -->
+  <div class="mb-12 bg-white rounded-lg p-6 shadow-md">
+    <h2 class="text-2xl font-bold text-pink-600 mb-6">
+      <span class="bg-pink-600 text-white rounded-full w-10 h-10 inline-flex items-center justify-center mr-2">6</span>
+      Volgi al <span class="text-blue-600 font-bold">plurale</span> le seguenti espressioni.
+    </h2>
+
+    <div class="space-y-4">
+      <% phrases = [
+        {singular: 'La camicia sudicia', plural: 'Le camicie sudicie'},
+        {singular: "L'arancia succosa", plural: 'Le arance succose'},
+        {singular: 'La micia bianca', plural: 'Le micie bianche'},
+        {singular: 'La focaccia salata', plural: 'Le focacce salate'},
+        {singular: 'La freccia appuntita', plural: 'Le frecce appuntite'},
+        {singular: 'La doccia calda', plural: 'Le docce calde'}
+      ] %>
+
+      <% phrases.each do |item| %>
+        <div class="border-l-4 border-pink-500 pl-4">
+          <div class="text-lg font-semibold text-gray-600 mb-2">• <%= item[:singular] %></div>
+          <input type="text"
+                 class="w-full border-b-2 border-gray-300 focus:border-pink-500 bg-transparent text-lg font-bold focus:outline-none py-2"
+                 data-plurals-target="input"
+                 data-answer="<%= item[:plural] %>"
+                 data-correct-answer="<%= item[:plural] %>"
+                 placeholder="Scrivi il plurale...">
+        </div>
+      <% end %>
+    </div>
+
+    <button class="mt-6 bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full transition"
+            data-action="click->plurals#checkAnswers">
+      Controlla
+    </button>
+  </div>
+
+  <!-- Exercise 7: Write sentences -->
+  <div class="mb-12 bg-white rounded-lg p-6 shadow-md">
+    <h2 class="text-2xl font-bold text-pink-600 mb-6">
+      <span class="bg-pink-600 text-white rounded-full w-10 h-10 inline-flex items-center justify-center mr-2">7</span>
+      Scrivi sul quaderno una frase con ciascuna parola.
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-4 mb-6">
+      <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4 text-center">
+        <span class="text-2xl font-bold">pasticciere</span>
+      </div>
+      <div class="bg-blue-50 border-2 border-blue-400 rounded-lg p-4 text-center">
+        <span class="text-2xl font-bold">cervo</span>
+      </div>
+      <div class="bg-purple-50 border-2 border-purple-400 rounded-lg p-4 text-center">
+        <span class="text-2xl font-bold">crociera</span>
+      </div>
+      <div class="bg-green-50 border-2 border-green-400 rounded-lg p-4 text-center">
+        <span class="text-2xl font-bold">voce</span>
+      </div>
+    </div>
+
+    <div class="bg-gradient-to-r from-green-100 to-green-200 rounded-lg p-6">
+      <div class="flex items-start gap-4">
+        <div class="text-8xl">🦌</div>
+        <div class="flex-1">
+          <div class="text-sm font-bold text-gray-600 mb-2">Esempio:</div>
+          <textarea class="w-full border-2 border-green-400 rounded-lg p-4 text-lg focus:outline-none focus:border-green-600"
+                    rows="3"
+                    placeholder="Scrivi le tue frasi qui..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GIOCO: Riddle -->
+  <div class="mb-12 bg-gradient-to-r from-yellow-100 via-orange-100 to-red-100 rounded-lg p-6 shadow-lg border-4 border-yellow-400">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-4xl">🎮</span>
+      <h2 class="text-3xl font-bold" style="color: #ff6b35;">GIOCO</h2>
+    </div>
+
+    <h3 class="text-xl font-bold text-gray-800 mb-4">Rispondi all'indovinello.</h3>
+
+    <div class="bg-white rounded-lg p-6 mb-4">
+      <p class="text-lg font-semibold text-gray-700">
+        • È azzurro, grande ed è il lenzuolo su cui dormono le nuvole. Che cos'è?
+      </p>
+
+      <div class="mt-6">
+        <input type="text"
+               class="w-full border-b-4 border-yellow-500 bg-transparent text-2xl font-bold focus:outline-none focus:border-yellow-700 py-3"
+               placeholder="Scrivi la tua risposta..."
+               data-answer="cielo">
+      </div>
+    </div>
+
+    <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-full transition"
+            onclick="this.previousElementSibling.querySelector('input').value.toLowerCase() === 'cielo' || this.previousElementSibling.querySelector('input').value.toLowerCase() === 'il cielo' ? alert('✅ Corretto! È il CIELO!') : alert('❌ Riprova!')">
+      Controlla risposta
+    </button>
+  </div>
+
+  <!-- Exercise Controls -->
+  <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl_4_gr_pag009' %>
+</div>

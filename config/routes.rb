@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   get "exercises/pag167", to: "exercises#pag167", as: "pag167"
   get "exercises/sussi_pag_5", to: "exercises#sussi_pag_5", as: "sussi_pag_5"
   get "exercises/sussi_pag_14", to: "exercises#sussi_pag_14", as: "sussi_pag_14"
+  get "exercises/nvl_4_gr_pag008", to: "exercises#nvl_4_gr_pag008", as: "nvl_4_gr_pag008"
+  get "exercises/nvl_4_gr_pag009", to: "exercises#nvl_4_gr_pag009", as: "nvl_4_gr_pag009"
+  get "exercises/nvl_4_gr_pag014", to: "exercises#nvl_4_gr_pag014", as: "nvl_4_gr_pag014"
+  get "exercises/nvl_4_gr_pag015", to: "exercises#nvl_4_gr_pag015", as: "nvl_4_gr_pag015"
 
   # Defines the root path route ("/")
   root "exercises#pag010"

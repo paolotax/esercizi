@@ -34,4 +34,16 @@ class ExercisesController < ApplicationController
 
   def sussi_pag_14
   end
+
+  def nvl_4_gr_pag008
+  end
+
+  def nvl_4_gr_pag009
+  end
+
+  def nvl_4_gr_pag014
+  end
+
+  def nvl_4_gr_pag015
+  end
 end

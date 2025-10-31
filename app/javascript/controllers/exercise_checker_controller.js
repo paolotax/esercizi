@@ -339,8 +339,8 @@ export default class extends Controller {
     const inputFields = this.element.querySelectorAll("input[data-correct-answer]")
     inputFields.forEach(input => {
       input.classList.remove("border-yellow-500", "border-green-500", "border-red-500",
-                             "border-4", "bg-yellow-50", "bg-green-50", "bg-red-50")
-      input.classList.add("border-gray-300", "border-2")
+                             "border-4", "bg-yellow-50", "bg-green-50", "bg-red-50",
+                             "border-gray-300", "border-2")
       input.value = ""
     })
 
