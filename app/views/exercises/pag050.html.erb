@@ -3,9 +3,6 @@
     <!-- Header -->
     <div class="bg-gradient-to-r from-sky-500 to-blue-500 rounded-lg shadow-lg p-6 mb-8">
       <div class="flex items-center gap-4">
-        <div class="bg-white rounded-lg p-3">
-          <span class="text-3xl">📚</span>
-        </div>
         <h1 class="text-3xl font-bold text-white">HO IMPARATO</h1>
       </div>
       <div class="mt-4 flex gap-3 flex-wrap">
@@ -18,60 +15,124 @@
     </div>
 
     <!-- Exercise 1: Match initial vowel -->
-    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+    <div class="bg-white rounded-lg shadow-sm p-6 mb-6 relative" 
+          data-controller="flower-matcher">
+      
       <h2 class="text-xl font-bold text-gray-800 mb-4">
         🔵 COME INIZIA? PRONUNCIA I NOMI E COLLEGA OGNI DISEGNO ALL'INIZIALE GIUSTA.
       </h2>
 
-      <div class="grid grid-cols-5 gap-4 mb-8">
-        <div class="text-center">
-          <div class="bg-gray-50 p-4 rounded-lg h-32 flex items-center justify-center">
-            <span class="text-7xl">✈️</span>
+      <!-- SVG Canvas for drawing lines -->
+      <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
+           data-flower-matcher-target="canvas">
+      </svg>
+
+      <div class="space-y-12 relative">
+        <!-- Top row - 5 images -->
+        <div class="grid grid-cols-5 gap-4">
+          <div class="text-center">
+            <div class="p-4 rounded-lg h-32 flex items-center justify-center cursor-pointer hover:bg-orange-50 transition relative"
+                
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="aereo"
+                 data-pair="A">
+              <span class="text-7xl">✈️</span>
+            </div>
           </div>
-          <p class="text-sm font-medium text-gray-600 mt-2">Aereo → A</p>
+          <div class="text-center">
+            <div class="p-4 rounded-lg h-32 flex items-center justify-center cursor-pointer hover:bg-orange-50 transition relative"
+                
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="orso"
+                 data-pair="O">
+              <span class="text-7xl">🐻</span>
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="p-4 rounded-lg h-32 flex items-center justify-center cursor-pointer hover:bg-orange-50 transition relative"
+                
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="erba"
+                 data-pair="E">
+              <span class="text-7xl">🌱</span>
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="p-4 rounded-lg h-32 flex items-center justify-center cursor-pointer hover:bg-orange-50 transition relative"
+                
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="uccello"
+                 data-pair="U">
+              <span class="text-7xl">🐦</span>
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="p-4 rounded-lg h-32 flex items-center justify-center cursor-pointer hover:bg-orange-50 transition relative"
+                
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="isola"
+                 data-pair="I">
+              <span class="text-7xl">🏝️</span>
+            </div>
+          </div>
         </div>
-        <div class="text-center">
-          <div class="bg-gray-50 p-4 rounded-lg h-32 flex items-center justify-center">
-            <span class="text-7xl">🐻</span>
+
+        <!-- Bottom row - 5 vowels -->
+        <div class="grid grid-cols-5 gap-4">
+          <div class="flex justify-center cursor-pointer hover:bg-orange-50 transition rounded-2xl relative"
+              
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="letter-A"
+               data-pair="A">
+            <div class="bg-orange-200 text-orange-800 font-bold text-4xl px-8 py-6 rounded-2xl shadow-md">A</div>
           </div>
-          <p class="text-sm font-medium text-gray-600 mt-2">Orso → O</p>
-        </div>
-        <div class="text-center">
-          <div class="bg-gray-50 p-4 rounded-lg h-32 flex items-center justify-center">
-            <span class="text-7xl">🌱</span>
+          <div class="flex justify-center cursor-pointer hover:bg-orange-50 transition rounded-2xl relative"
+              
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="letter-E"
+               data-pair="E">
+            <div class="bg-pink-200 text-pink-800 font-bold text-4xl px-8 py-6 rounded-2xl shadow-md">E</div>
           </div>
-          <p class="text-sm font-medium text-gray-600 mt-2">Erba → E</p>
-        </div>
-        <div class="text-center">
-          <div class="bg-gray-50 p-4 rounded-lg h-32 flex items-center justify-center">
-            <span class="text-7xl">🐦</span>
+          <div class="flex justify-center cursor-pointer hover:bg-orange-50 transition rounded-2xl relative"
+              
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="letter-I"
+               data-pair="I">
+            <div class="bg-sky-200 text-sky-800 font-bold text-4xl px-8 py-6 rounded-2xl shadow-md">I</div>
           </div>
-          <p class="text-sm font-medium text-gray-600 mt-2">Uccello → U</p>
-        </div>
-        <div class="text-center">
-          <div class="bg-gray-50 p-4 rounded-lg h-32 flex items-center justify-center">
-            <span class="text-7xl">🪿</span>
+          <div class="flex justify-center cursor-pointer hover:bg-orange-50 transition rounded-2xl relative"
+              
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="letter-O"
+               data-pair="O">
+            <div class="bg-purple-200 text-purple-800 font-bold text-4xl px-8 py-6 rounded-2xl shadow-md">O</div>
           </div>
-          <p class="text-sm font-medium text-gray-600 mt-2">Imbuto → I</p>
+          <div class="flex justify-center cursor-pointer hover:bg-orange-50 transition rounded-2xl relative"
+              
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="letter-U"
+               data-pair="U">
+            <div class="bg-green-200 text-green-800 font-bold text-4xl px-8 py-6 rounded-2xl shadow-md">U</div>
+          </div>
         </div>
       </div>
 
-      <div class="grid grid-cols-5 gap-4">
-        <div class="flex justify-center">
-          <div class="bg-orange-200 text-orange-800 font-bold text-4xl px-8 py-6 rounded-2xl shadow-md">A</div>
-        </div>
-        <div class="flex justify-center">
-          <div class="bg-pink-200 text-pink-800 font-bold text-4xl px-8 py-6 rounded-2xl shadow-md">E</div>
-        </div>
-        <div class="flex justify-center">
-          <div class="bg-sky-200 text-sky-800 font-bold text-4xl px-8 py-6 rounded-2xl shadow-md">I</div>
-        </div>
-        <div class="flex justify-center">
-          <div class="bg-purple-200 text-purple-800 font-bold text-4xl px-8 py-6 rounded-2xl shadow-md">O</div>
-        </div>
-        <div class="flex justify-center">
-          <div class="bg-green-200 text-green-800 font-bold text-4xl px-8 py-6 rounded-2xl shadow-md">U</div>
-        </div>
+      <!-- Reset button -->
+      <div class="mt-12 relative z-20">
+        <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-full transition"
+                data-action="click->flower-matcher#reset">
+          🔄 Ricomincia
+        </button>
       </div>
     </div>
 
@@ -81,284 +142,240 @@
         🔵 COME FINISCE? PRONUNCIA IL NOME E COLORA LA VOCALE GIUSTA.
       </h2>
 
-      <div class="space-y-6">
+      <!-- Row 1 -->
+      <div class="grid grid-cols-3 gap-8 mb-12">
         <!-- Casa -->
-        <div class="border-b pb-6" data-controller="exercise-group">
-          <div class="grid grid-cols-2 gap-8 items-center">
-            <div class="flex items-center gap-4">
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <span class="text-6xl">🏠</span>
+        <div class="text-center" data-controller="exercise-group">
+          <div class="bg-gray-50 p-4 rounded-lg mb-4">
+            <span class="text-7xl">🏠</span>
+          </div>
+          <div class="flex gap-0.5 justify-center">
+            <div class="cursor-pointer hover:bg-gray-50 transition p-0.5 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="Casa">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">A</span>
               </div>
-              <span class="text-2xl font-bold text-gray-700">Casa</span>
             </div>
-            <div class="flex gap-3 justify-center">
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="Casa">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">A</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
+            <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="false"
+                 data-word="Casa">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">E</span>
               </div>
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Casa">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">E</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
-              </div>
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Casa">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">O</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
+            </div>
+            <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="false"
+                 data-word="Casa">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">O</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Treno -->
-        <div class="border-b pb-6" data-controller="exercise-group">
-          <div class="grid grid-cols-2 gap-8 items-center">
-            <div class="flex items-center gap-4">
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <span class="text-6xl">🚂</span>
+        <div class="text-center" data-controller="exercise-group">
+          <div class="bg-gray-50 p-4 rounded-lg mb-4">
+            <span class="text-7xl">🚂</span>
+          </div>
+          <div class="flex gap-0.5 justify-center">
+            <div class="cursor-pointer hover:bg-gray-50 transition p-0.5 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="false"
+                 data-word="Treno">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">U</span>
               </div>
-              <span class="text-2xl font-bold text-gray-700">Treno</span>
             </div>
-            <div class="flex gap-3 justify-center">
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Treno">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">U</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
+            <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="false"
+                 data-word="Treno">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">I</span>
               </div>
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Treno">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">I</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
-              </div>
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="Treno">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">O</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
+            </div>
+            <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="Treno">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">O</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Noci -->
-        <div class="border-b pb-6" data-controller="exercise-group">
-          <div class="grid grid-cols-2 gap-8 items-center">
-            <div class="flex items-center gap-4">
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <span class="text-6xl">🥜</span>
+        <div class="text-center" data-controller="exercise-group">
+          <div class="bg-gray-50 p-4 rounded-lg mb-4">
+            <span class="text-7xl">🥜</span>
+          </div>
+          <div class="flex gap-0.5 justify-center">
+            <div class="cursor-pointer hover:bg-gray-50 transition p-0.5 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="false"
+                 data-word="Noci">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">A</span>
               </div>
-              <span class="text-2xl font-bold text-gray-700">Noci</span>
             </div>
-            <div class="flex gap-3 justify-center">
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Noci">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">A</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
+            <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="false"
+                 data-word="Noci">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">E</span>
               </div>
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Noci">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">E</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
-              </div>
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="Noci">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">I</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
+            </div>
+            <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="Noci">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">I</span>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
+      <!-- Row 2 -->
+      <div class="grid grid-cols-3 gap-8">
         <!-- Mani -->
-        <div class="border-b pb-6" data-controller="exercise-group">
-          <div class="grid grid-cols-2 gap-8 items-center">
-            <div class="flex items-center gap-4">
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <span class="text-6xl">🙌</span>
+        <div class="text-center" data-controller="exercise-group">
+          <div class="bg-gray-50 p-4 rounded-lg mb-4">
+            <span class="text-7xl">🙌</span>
+          </div>
+          <div class="flex gap-0.5 justify-center">
+            <div class="cursor-pointer hover:bg-gray-50 transition p-0.5 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="false"
+                 data-word="Mani">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">A</span>
               </div>
-              <span class="text-2xl font-bold text-gray-700">Mani</span>
             </div>
-            <div class="flex gap-3 justify-center">
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Mani">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">A</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
+            <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="Mani">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">I</span>
               </div>
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="Mani">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">I</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
-              </div>
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Mani">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">O</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
+            </div>
+            <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="false"
+                 data-word="Mani">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">O</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Pesce -->
-        <div class="border-b pb-6" data-controller="exercise-group">
-          <div class="grid grid-cols-2 gap-8 items-center">
-            <div class="flex items-center gap-4">
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <span class="text-6xl">🐟</span>
+        <div class="text-center" data-controller="exercise-group">
+          <div class="bg-gray-50 p-4 rounded-lg mb-4">
+            <span class="text-7xl">🐟</span>
+          </div>
+          <div class="flex gap-0.5 justify-center">
+            <div class="cursor-pointer hover:bg-gray-50 transition p-0.5 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="false"
+                 data-word="Pesce">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">U</span>
               </div>
-              <span class="text-2xl font-bold text-gray-700">Pesce</span>
             </div>
-            <div class="flex gap-3 justify-center">
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Pesce">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">U</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
+            <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="false"
+                 data-word="Pesce">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">I</span>
               </div>
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Pesce">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">I</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
-              </div>
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="Pesce">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">E</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
+            </div>
+            <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="Pesce">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">E</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Banana -->
-        <div data-controller="exercise-group">
-          <div class="grid grid-cols-2 gap-8 items-center">
-            <div class="flex items-center gap-4">
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <span class="text-6xl">🍌</span>
+        <div class="text-center" data-controller="exercise-group">
+          <div class="bg-gray-50 p-4 rounded-lg mb-4">
+            <span class="text-7xl">🍌</span>
+          </div>
+          <div class="flex gap-0.5 justify-center">
+            <div class="cursor-pointer hover:bg-gray-50 transition p-0.5 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="false"
+                 data-word="Banana">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">U</span>
               </div>
-              <span class="text-2xl font-bold text-gray-700">Banana</span>
             </div>
-            <div class="flex gap-3 justify-center">
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Banana">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">U</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
+            <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="false"
+                 data-word="Banana">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">I</span>
               </div>
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="false"
-                   data-word="Banana">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">I</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
-              </div>
-              <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="Banana">
-                <div class="w-16 h-16 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold">A</span>
-                </div>
-                <span class="text-2xl font-bold text-red-600 hidden absolute" data-exercise-group-target="checkmark">✓</span>
+            </div>
+            <div class="cursor-pointer hover:bg-gray-50 transition p-2 rounded-lg"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="Banana">
+              <div class="w-14 h-14 border-4 border-gray-300 rounded-xl flex items-center justify-center bg-white"
+                   data-exercise-group-target="checkbox">
+                <span class="text-2xl font-bold">A</span>
               </div>
             </div>
           </div>

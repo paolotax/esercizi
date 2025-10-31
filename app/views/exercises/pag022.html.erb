@@ -1,115 +1,226 @@
-<div class="bg-gradient-to-br from-orange-100 to-yellow-100 py-8 px-4 min-h-[calc(100vh-80px)]" data-controller="exercise-checker">
+<style>
+  /* Grid background pattern - 1cm = approximately 37.8px at 96 DPI */
+  .grid-background {
+    background-color: white;
+    background-image:
+      linear-gradient(to right, #e3f2fd 1px, transparent 1px),
+      linear-gradient(to bottom, #e3f2fd 1px, transparent 1px);
+    background-size: 37.8px 37.8px;
+  }
+
+  /* Beige writing area */
+  .writing-strip {
+    background-color: #fef3e3;
+  }
+
+  /* Letter cell - exactly 1cm (37.8px) */
+  .letter-cell {
+    display: inline-block;
+    width: 37.8px;
+    height: 37.8px;
+    position: relative;
+    text-align: center;
+    line-height: 37.8px;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Comic Sans MS', cursive;
+  }
+
+  /* Dashed letter A with red dots */
+  .dashed-letter-a-cell {
+    display: inline-block;
+    width: 37.8px;
+    height: 37.8px;
+    position: relative;
+  }
+
+  .dashed-letter-a-cell svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .dashed-letter-a-cell path {
+    fill: none;
+    stroke: #ef4444;
+    stroke-width: 2;
+    stroke-dasharray: 1, 5;
+    stroke-linecap: round;
+  }
+</style>
+
+<div class="grid-background min-h-screen py-8 px-4" data-controller="exercise-checker">
   <div class="max-w-6xl mx-auto">
+
     <!-- Header -->
-    <div class="bg-gradient-to-r from-orange-500 to-yellow-500 rounded-lg shadow-lg p-6 mb-8">
-      <div class="flex items-center gap-4">
-        <div class="bg-white rounded-lg p-3">
-          <span class="text-3xl">✏️</span>
-        </div>
-        <h1 class="text-3xl font-bold text-white">SCRIVO A</h1>
+    <div class="flex justify-center items-center gap-4 mb-12">
+      <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-lg px-8 py-4 shadow-lg">
+        <span class="text-4xl font-bold text-white">SCRIVO</span>
       </div>
-      <div class="mt-4">
-        <div class="bg-white rounded-lg px-8 py-4 inline-block">
-          <span class="text-6xl font-bold text-orange-600">A</span>
-        </div>
+      <div class="bg-white rounded-lg px-6 py-4 border-4 border-orange-500 shadow-lg">
+        <span class="text-5xl font-bold text-orange-500">A</span>
       </div>
     </div>
 
     <!-- Exercise 1: Trace and write letter A -->
-    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-      <h2 class="text-xl font-bold text-gray-800 mb-6">
-        🔵 RIPASSA E POI SCRIVI LA LETTERA A.
+    <div class="mb-12 border-l-4 border-gray-800 pl-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+        <span class="inline-block w-6 h-6 bg-yellow-400 rounded-full"></span>
+        RIPASSA E POI SCRIVI LA LETTERA <span class="text-orange-500">A</span>.
       </h2>
 
-      <div class="bg-orange-50 border-2 border-orange-200 rounded-lg p-8">
-        <div class="flex items-center gap-4 mb-4">
-          <div class="text-8xl font-bold text-orange-300">A</div>
-          <div class="flex gap-2">
-            <div class="text-6xl font-bold text-orange-400">A</div>
-            <div class="text-6xl font-bold text-orange-400">A</div>
-          </div>
-        </div>
+      <div class="writing-strip p-8 border-t-2 border-b-2 border-gray-300">
+        <div class="flex items-start">
+          <!-- Solid example A - larger -->
+          <div class="text-6xl font-bold text-gray-400 mr-4" style="font-family: 'Comic Sans MS', cursive;">A</div>
 
-        <!-- Grid lines for writing practice -->
-        <div class="grid grid-cols-8 gap-2 mt-6">
-          <div class="h-24 border-2 border-dashed border-orange-200 rounded flex items-center justify-center">
-            <span class="text-5xl font-bold text-orange-200">A</span>
+          <!-- Grid-aligned letters -->
+          <div class="flex">
+            <!-- Three dashed A letters -->
+            <div class="dashed-letter-a-cell">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 20 90 L 50 15" />
+                <path d="M 50 15 L 80 90" />
+                <path d="M 30 60 L 70 60" />
+              </svg>
+            </div>
+            <div class="dashed-letter-a-cell">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 20 90 L 50 15" />
+                <path d="M 50 15 L 80 90" />
+                <path d="M 30 60 L 70 60" />
+              </svg>
+            </div>
+            <div class="dashed-letter-a-cell">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 20 90 L 50 15" />
+                <path d="M 50 15 L 80 90" />
+                <path d="M 30 60 L 70 60" />
+              </svg>
+            </div>
+
+            <!-- Empty cells with guide dots -->
+            <div class="dashed-letter-a-cell">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="50" cy="15" r="2" fill="#ef4444"/>
+                <circle cx="80" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="30" cy="60" r="2" fill="#ef4444"/>
+                <circle cx="70" cy="60" r="2" fill="#ef4444"/>
+              </svg>
+            </div>
+            <div class="dashed-letter-a-cell">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="50" cy="15" r="2" fill="#ef4444"/>
+                <circle cx="80" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="30" cy="60" r="2" fill="#ef4444"/>
+                <circle cx="70" cy="60" r="2" fill="#ef4444"/>
+              </svg>
+            </div>
+            <div class="dashed-letter-a-cell">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="50" cy="15" r="2" fill="#ef4444"/>
+                <circle cx="80" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="30" cy="60" r="2" fill="#ef4444"/>
+                <circle cx="70" cy="60" r="2" fill="#ef4444"/>
+              </svg>
+            </div>
+            <div class="dashed-letter-a-cell">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="50" cy="15" r="2" fill="#ef4444"/>
+                <circle cx="80" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="30" cy="60" r="2" fill="#ef4444"/>
+                <circle cx="70" cy="60" r="2" fill="#ef4444"/>
+              </svg>
+            </div>
+            <div class="dashed-letter-a-cell">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="50" cy="15" r="2" fill="#ef4444"/>
+                <circle cx="80" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="30" cy="60" r="2" fill="#ef4444"/>
+                <circle cx="70" cy="60" r="2" fill="#ef4444"/>
+              </svg>
+            </div>
+            <div class="dashed-letter-a-cell">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="50" cy="15" r="2" fill="#ef4444"/>
+                <circle cx="80" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="30" cy="60" r="2" fill="#ef4444"/>
+                <circle cx="70" cy="60" r="2" fill="#ef4444"/>
+              </svg>
+            </div>
+            <div class="dashed-letter-a-cell">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="50" cy="15" r="2" fill="#ef4444"/>
+                <circle cx="80" cy="90" r="2" fill="#ef4444"/>
+                <circle cx="30" cy="60" r="2" fill="#ef4444"/>
+                <circle cx="70" cy="60" r="2" fill="#ef4444"/>
+              </svg>
+            </div>
           </div>
-          <div class="h-24 border-2 border-dashed border-orange-200 rounded flex items-center justify-center">
-            <span class="text-5xl font-bold text-orange-200">A</span>
-          </div>
-          <div class="h-24 border-2 border-dashed border-orange-200 rounded flex items-center justify-center">
-            <span class="text-5xl font-bold text-orange-200">A</span>
-          </div>
-          <div class="h-24 border-2 border-dashed border-orange-200 rounded flex items-center justify-center">
-            <span class="text-5xl font-bold text-orange-200">A</span>
-          </div>
-          <div class="h-24 border-2 border-dashed border-orange-200 rounded"></div>
-          <div class="h-24 border-2 border-dashed border-orange-200 rounded"></div>
-          <div class="h-24 border-2 border-dashed border-orange-200 rounded"></div>
-          <div class="h-24 border-2 border-dashed border-orange-200 rounded"></div>
         </div>
       </div>
     </div>
 
     <!-- Exercise 2: Find A in words -->
-    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-      <h2 class="text-xl font-bold text-gray-800 mb-6">
-        🔵 RIPASSA A NELLE PAROLE.
+    <div class="mb-12 border-l-4 border-gray-800 pl-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+        <span class="inline-block w-6 h-6 bg-yellow-400 rounded-full"></span>
+        RIPASSA <span class="text-orange-500">A</span> NELLE PAROLE.
       </h2>
 
-      <div class="grid grid-cols-3 gap-8">
+      <div class="grid grid-cols-3 gap-12 mt-8">
         <!-- AUTO -->
         <div class="text-center" data-controller="exercise-group">
-          <div class="bg-gray-50 p-6 rounded-lg mb-4">
-            <span class="text-7xl">🚗</span>
+          <div class="mb-4">
+            <span class="text-8xl">🚗</span>
           </div>
-          <div class="flex justify-center gap-1">
-            <div class="cursor-pointer hover:bg-orange-100 transition p-2 rounded-lg"
+          <div class="flex justify-center">
+            <div class="cursor-pointer hover:opacity-70 transition"
                  data-action="click->exercise-group#toggleCheck"
                  data-exercise-group-target="option"
                  data-correct="true"
                  data-word="AUTO">
-              <div class="w-16 h-20 border-4 border-orange-300 rounded-lg flex items-center justify-center bg-orange-50"
-                   data-exercise-group-target="checkbox">
-                <span class="text-4xl font-bold text-orange-400">A</span>
+              <div class="dashed-letter-a-cell">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 20 90 L 50 15" />
+                  <path d="M 50 15 L 80 90" />
+                  <path d="M 30 60 L 70 60" />
+                </svg>
               </div>
             </div>
-            <div class="w-16 h-20 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white">
-              <span class="text-4xl font-bold text-gray-700">U</span>
-            </div>
-            <div class="w-16 h-20 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white">
-              <span class="text-4xl font-bold text-gray-700">T</span>
-            </div>
-            <div class="w-16 h-20 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white">
-              <span class="text-4xl font-bold text-gray-700">O</span>
-            </div>
+            <span class="letter-cell text-gray-700">U</span>
+            <span class="letter-cell text-gray-700">T</span>
+            <span class="letter-cell text-gray-700">O</span>
           </div>
         </div>
 
         <!-- MORA -->
         <div class="text-center" data-controller="exercise-group">
-          <div class="bg-gray-50 p-6 rounded-lg mb-4">
-            <span class="text-7xl">🫐</span>
+          <div class="mb-4">
+            <span class="text-8xl">🫐</span>
           </div>
-          <div class="flex justify-center gap-1">
-            <div class="w-16 h-20 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white">
-              <span class="text-4xl font-bold text-gray-700">M</span>
-            </div>
-            <div class="w-16 h-20 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white">
-              <span class="text-4xl font-bold text-gray-700">O</span>
-            </div>
-            <div class="w-16 h-20 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white">
-              <span class="text-4xl font-bold text-gray-700">R</span>
-            </div>
-            <div class="cursor-pointer hover:bg-orange-100 transition p-2 rounded-lg"
+          <div class="flex justify-center">
+            <span class="letter-cell text-gray-700">M</span>
+            <span class="letter-cell text-gray-700">O</span>
+            <span class="letter-cell text-gray-700">R</span>
+            <div class="cursor-pointer hover:opacity-70 transition"
                  data-action="click->exercise-group#toggleCheck"
                  data-exercise-group-target="option"
                  data-correct="true"
                  data-word="MORA">
-              <div class="w-16 h-20 border-4 border-orange-300 rounded-lg flex items-center justify-center bg-orange-50"
-                   data-exercise-group-target="checkbox">
-                <span class="text-4xl font-bold text-orange-400">A</span>
+              <div class="dashed-letter-a-cell">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 20 90 L 50 15" />
+                  <path d="M 50 15 L 80 90" />
+                  <path d="M 30 60 L 70 60" />
+                </svg>
               </div>
             </div>
           </div>
@@ -117,196 +228,168 @@
 
         <!-- VASO -->
         <div class="text-center" data-controller="exercise-group">
-          <div class="bg-gray-50 p-6 rounded-lg mb-4">
-            <span class="text-7xl">🏺</span>
+          <div class="mb-4">
+            <span class="text-8xl">🏺</span>
           </div>
-          <div class="flex justify-center gap-1">
-            <div class="w-16 h-20 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white">
-              <span class="text-4xl font-bold text-gray-700">V</span>
-            </div>
-            <div class="cursor-pointer hover:bg-orange-100 transition p-2 rounded-lg"
+          <div class="flex justify-center">
+            <span class="letter-cell text-gray-700">V</span>
+            <div class="cursor-pointer hover:opacity-70 transition"
                  data-action="click->exercise-group#toggleCheck"
                  data-exercise-group-target="option"
                  data-correct="true"
                  data-word="VASO">
-              <div class="w-16 h-20 border-4 border-orange-300 rounded-lg flex items-center justify-center bg-orange-50"
-                   data-exercise-group-target="checkbox">
-                <span class="text-4xl font-bold text-orange-400">A</span>
+              <div class="dashed-letter-a-cell">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 20 90 L 50 15" />
+                  <path d="M 50 15 L 80 90" />
+                  <path d="M 30 60 L 70 60" />
+                </svg>
               </div>
             </div>
-            <div class="w-16 h-20 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white">
-              <span class="text-4xl font-bold text-gray-700">S</span>
-            </div>
-            <div class="w-16 h-20 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white">
-              <span class="text-4xl font-bold text-gray-700">O</span>
-            </div>
+            <span class="letter-cell text-gray-700">S</span>
+            <span class="letter-cell text-gray-700">O</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Exercise 3: Write A and complete words -->
-    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-      <h2 class="text-xl font-bold text-gray-800 mb-6">
-        🔵 SCRIVI A E COMPLETA LE PAROLE.
+    <div class="mb-12 border-l-4 border-gray-800 pl-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+        <span class="inline-block w-6 h-6 bg-yellow-400 rounded-full"></span>
+        SCRIVI <span class="text-orange-500">A</span> E COMPLETA LE PAROLE.
       </h2>
 
-      <div class="grid grid-cols-2 gap-8">
+      <div class="grid grid-cols-2 gap-x-16 gap-y-8 mt-8">
         <!-- ALI -->
-        <div class="border-b pb-6" data-controller="exercise-group">
-          <div class="flex items-center gap-6">
-            <div class="bg-gray-50 p-4 rounded-lg">
-              <span class="text-6xl">🦋</span>
+        <div class="flex items-center gap-6" data-controller="exercise-group">
+          <div>
+            <span class="text-7xl">🦋</span>
+          </div>
+          <div class="flex items-center gap-1 text-5xl font-bold" style="font-family: 'Comic Sans MS', cursive;">
+            <div class="cursor-pointer hover:bg-orange-100 transition rounded"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="ALI">
+              <span class="inline-block w-16 text-center border-b-4 border-orange-400 text-gray-300">_</span>
             </div>
-            <div class="flex items-center gap-2">
-              <div class="cursor-pointer hover:bg-orange-100 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="ALI">
-                <div class="w-16 h-16 border-4 border-orange-300 rounded-xl flex items-center justify-center bg-orange-50"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold text-orange-200">A</span>
-                </div>
-              </div>
-              <span class="text-3xl font-bold text-gray-700">LI</span>
-            </div>
+            <span class="text-gray-700">LI</span>
           </div>
         </div>
 
         <!-- ROSA -->
-        <div class="border-b pb-6" data-controller="exercise-group">
-          <div class="flex items-center gap-6">
-            <div class="bg-gray-50 p-4 rounded-lg">
-              <span class="text-6xl">🌹</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="text-3xl font-bold text-gray-700">ROS</span>
-              <div class="cursor-pointer hover:bg-orange-100 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="ROSA">
-                <div class="w-16 h-16 border-4 border-orange-300 rounded-xl flex items-center justify-center bg-orange-50"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold text-orange-200">A</span>
-                </div>
-              </div>
+        <div class="flex items-center gap-6" data-controller="exercise-group">
+          <div>
+            <span class="text-7xl">🌹</span>
+          </div>
+          <div class="flex items-center gap-1 text-5xl font-bold" style="font-family: 'Comic Sans MS', cursive;">
+            <span class="text-gray-700">ROS</span>
+            <div class="cursor-pointer hover:bg-orange-100 transition rounded"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="ROSA">
+              <span class="inline-block w-16 text-center border-b-4 border-orange-400 text-gray-300">_</span>
             </div>
           </div>
         </div>
 
         <!-- NAVE -->
-        <div class="border-b pb-6" data-controller="exercise-group">
-          <div class="flex items-center gap-6">
-            <div class="bg-gray-50 p-4 rounded-lg">
-              <span class="text-6xl">🚢</span>
+        <div class="flex items-center gap-6" data-controller="exercise-group">
+          <div>
+            <span class="text-7xl">🚢</span>
+          </div>
+          <div class="flex items-center gap-1 text-5xl font-bold" style="font-family: 'Comic Sans MS', cursive;">
+            <span class="text-gray-700">N</span>
+            <div class="cursor-pointer hover:bg-orange-100 transition rounded"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="NAVE">
+              <span class="inline-block w-16 text-center border-b-4 border-orange-400 text-gray-300">_</span>
             </div>
-            <div class="flex items-center gap-2">
-              <span class="text-3xl font-bold text-gray-700">N</span>
-              <div class="cursor-pointer hover:bg-orange-100 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="NAVE">
-                <div class="w-16 h-16 border-4 border-orange-300 rounded-xl flex items-center justify-center bg-orange-50"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold text-orange-200">A</span>
-                </div>
-              </div>
-              <span class="text-3xl font-bold text-gray-700">VE</span>
-            </div>
+            <span class="text-gray-700">VE</span>
           </div>
         </div>
 
         <!-- MANO -->
-        <div class="border-b pb-6" data-controller="exercise-group">
-          <div class="flex items-center gap-6">
-            <div class="bg-gray-50 p-4 rounded-lg">
-              <span class="text-6xl">✋</span>
+        <div class="flex items-center gap-6" data-controller="exercise-group">
+          <div>
+            <span class="text-7xl">✋</span>
+          </div>
+          <div class="flex items-center gap-1 text-5xl font-bold" style="font-family: 'Comic Sans MS', cursive;">
+            <span class="text-gray-700">M</span>
+            <div class="cursor-pointer hover:bg-orange-100 transition rounded"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="MANO">
+              <span class="inline-block w-16 text-center border-b-4 border-orange-400 text-gray-300">_</span>
             </div>
-            <div class="flex items-center gap-2">
-              <span class="text-3xl font-bold text-gray-700">M</span>
-              <div class="cursor-pointer hover:bg-orange-100 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="MANO">
-                <div class="w-16 h-16 border-4 border-orange-300 rounded-xl flex items-center justify-center bg-orange-50"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold text-orange-200">A</span>
-                </div>
-              </div>
-              <span class="text-3xl font-bold text-gray-700">NO</span>
-            </div>
+            <span class="text-gray-700">NO</span>
           </div>
         </div>
 
         <!-- FATA -->
-        <div data-controller="exercise-group">
-          <div class="flex items-center gap-6">
-            <div class="bg-gray-50 p-4 rounded-lg">
-              <span class="text-6xl">🧚</span>
+        <div class="flex items-center gap-6" data-controller="exercise-group">
+          <div>
+            <span class="text-7xl">🧚</span>
+          </div>
+          <div class="flex items-center gap-1 text-5xl font-bold" style="font-family: 'Comic Sans MS', cursive;">
+            <span class="text-gray-700">F</span>
+            <div class="cursor-pointer hover:bg-orange-100 transition rounded"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="FATA">
+              <span class="inline-block w-16 text-center border-b-4 border-orange-400 text-gray-300">_</span>
             </div>
-            <div class="flex items-center gap-2">
-              <span class="text-3xl font-bold text-gray-700">F</span>
-              <div class="cursor-pointer hover:bg-orange-100 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="FATA">
-                <div class="w-16 h-16 border-4 border-orange-300 rounded-xl flex items-center justify-center bg-orange-50"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold text-orange-200">A</span>
-                </div>
-              </div>
-              <span class="text-3xl font-bold text-gray-700">T</span>
-              <div class="cursor-pointer hover:bg-orange-100 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="FATA">
-                <div class="w-16 h-16 border-4 border-orange-300 rounded-xl flex items-center justify-center bg-orange-50"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold text-orange-200">A</span>
-                </div>
-              </div>
+            <span class="text-gray-700">T</span>
+            <div class="cursor-pointer hover:bg-orange-100 transition rounded"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="FATA">
+              <span class="inline-block w-16 text-center border-b-4 border-orange-400 text-gray-300">_</span>
             </div>
           </div>
         </div>
 
         <!-- LAMA -->
-        <div data-controller="exercise-group">
-          <div class="flex items-center gap-6">
-            <div class="bg-gray-50 p-4 rounded-lg">
-              <span class="text-6xl">🦙</span>
+        <div class="flex items-center gap-6" data-controller="exercise-group">
+          <div>
+            <span class="text-7xl">🦙</span>
+          </div>
+          <div class="flex items-center gap-1 text-5xl font-bold" style="font-family: 'Comic Sans MS', cursive;">
+            <span class="text-gray-700">L</span>
+            <div class="cursor-pointer hover:bg-orange-100 transition rounded"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="LAMA">
+              <span class="inline-block w-16 text-center border-b-4 border-orange-400 text-gray-300">_</span>
             </div>
-            <div class="flex items-center gap-2">
-              <span class="text-3xl font-bold text-gray-700">L</span>
-              <div class="cursor-pointer hover:bg-orange-100 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="LAMA">
-                <div class="w-16 h-16 border-4 border-orange-300 rounded-xl flex items-center justify-center bg-orange-50"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold text-orange-200">A</span>
-                </div>
-              </div>
-              <span class="text-3xl font-bold text-gray-700">M</span>
-              <div class="cursor-pointer hover:bg-orange-100 transition p-2 rounded-lg"
-                   data-action="click->exercise-group#toggleCheck"
-                   data-exercise-group-target="option"
-                   data-correct="true"
-                   data-word="LAMA">
-                <div class="w-16 h-16 border-4 border-orange-300 rounded-xl flex items-center justify-center bg-orange-50"
-                     data-exercise-group-target="checkbox">
-                  <span class="text-3xl font-bold text-orange-200">A</span>
-                </div>
-              </div>
+            <span class="text-gray-700">M</span>
+            <div class="cursor-pointer hover:bg-orange-100 transition rounded"
+                 data-action="click->exercise-group#toggleCheck"
+                 data-exercise-group-target="option"
+                 data-correct="true"
+                 data-word="LAMA">
+              <span class="inline-block w-16 text-center border-b-4 border-orange-400 text-gray-300">_</span>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex justify-between items-center mt-12 pt-8 border-t-2 border-gray-300">
+      <div class="bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold shadow-lg">
+        22
+      </div>
+      <div class="text-red-500 font-bold text-lg">
+        Quaderno del corsivo p. 10
       </div>
     </div>
 
