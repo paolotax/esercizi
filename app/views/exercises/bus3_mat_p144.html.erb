@@ -1,0 +1,209 @@
+<style>
+  input[type="text"]::placeholder {
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+</style>
+
+<div class="bg-gradient-to-br from-cyan-50 to-blue-50 py-8 px-4" data-controller="exercise-checker">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <div class="flex items-center justify-between">
+        <h1 class="text-4xl font-bold text-cyan-600">PROPRIETÀ DELL'ADDIZIONE</h1>
+        <div class="flex items-center gap-3">
+          <div class="bg-cyan-600 text-white px-4 py-2 rounded-lg font-bold">PROPRIETÀ</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise 1: Proprietà associativa -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <div class="flex items-start gap-3 mb-6">
+        <div class="bg-cyan-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          1
+        </div>
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="bg-yellow-300 text-black px-3 py-1 rounded font-bold">IMPARARE TUTTI</span>
+          </div>
+          <h2 class="text-xl font-bold text-gray-800">Applica la <span class="text-cyan-600">proprietà associativa</span> e calcola. Segui l'esempio.</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-8">
+        <div class="space-y-4">
+          <!-- Esempio -->
+          <div class="bg-cyan-50 p-4 rounded-lg border-2 border-cyan-200">
+            <div class="flex items-center gap-2 text-xl">
+              <span>36 + 4 + 17 =</span>
+              <span class="text-cyan-600 font-bold">(40 + 17)</span>
+              <span>=</span>
+              <span class="text-cyan-600 font-bold">57</span>
+            </div>
+          </div>
+          
+          <!-- Esercizio -->
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="flex items-center gap-2 text-xl flex-wrap">
+              <span>6 + 8 + 12 =</span>
+              <input type="text" class="w-32 px-3 py-2 border-2 border-gray-300 rounded text-center" placeholder="...">
+              <span>=</span>
+              <input type="text" class="w-20 px-3 py-2 border-2 border-gray-300 rounded text-center" placeholder="...">
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Esercizio -->
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="flex items-center gap-2 text-xl flex-wrap">
+              <span>20 + 13 + 17 =</span>
+              <input type="text" class="w-32 px-3 py-2 border-2 border-gray-300 rounded text-center" placeholder="...">
+              <span>=</span>
+              <input type="text" class="w-20 px-3 py-2 border-2 border-gray-300 rounded text-center" placeholder="...">
+            </div>
+          </div>
+
+          <!-- Esercizio -->
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="flex items-center gap-2 text-xl flex-wrap">
+              <span>31 + 9 + 46 =</span>
+              <input type="text" class="w-32 px-3 py-2 border-2 border-gray-300 rounded text-center" placeholder="...">
+              <span>=</span>
+              <input type="text" class="w-20 px-3 py-2 border-2 border-gray-300 rounded text-center" placeholder="...">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise 2: Proprietà commutativa -->
+    <div class="bg-cyan-50 rounded-lg shadow-lg p-6 mb-6">
+      <div class="flex items-start gap-3 mb-6">
+        <div class="bg-cyan-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          2
+        </div>
+        <h2 class="text-xl font-bold text-gray-800">Calcola in colonna, poi fai la prova applicando la <span class="text-cyan-600">proprietà commutativa</span>.</h2>
+      </div>
+
+      <div class="grid grid-cols-4 gap-4">
+        <!-- Riga 1 -->
+        <%= render 'shared/column_addition', 
+          addend1: ['5', '4', '2'],
+          addend2: ['1', '0', '7'],
+          result: ['6', '4', '9']
+        %>
+
+        <%= render 'shared/column_addition' %>
+
+        <%= render 'shared/column_addition', 
+          addend1: ['3', '6', '4'],
+          addend2: ['2', '1', '4'],
+          result: ['5', '7', '8']
+        %>
+
+        <%= render 'shared/column_addition' %>
+      </div>
+
+      <div class="grid grid-cols-4 gap-4 mt-6">
+        <!-- Riga 2 -->
+        <%= render 'shared/column_addition', 
+          addend1: ['2', '0', '8'],
+          addend2: ['4', '3', '5'],
+          result: ['6', '4', '3']
+        %>
+
+        <%= render 'shared/column_addition' %>
+
+        <%= render 'shared/column_addition', 
+          addend1: ['1', '3', '5'],
+          addend2: ['', '9', '7'],
+          result: ['2', '3', '2']
+        %>
+
+        <%= render 'shared/column_addition' %>
+      </div>
+    </div>
+
+    <!-- Exercise 3: Identificare proprietà -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <div class="flex items-start gap-3 mb-6">
+        <div class="bg-cyan-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          3
+        </div>
+        <h2 class="text-xl font-bold text-gray-800">
+          Quali proprietà sono state applicate? Scrivi 
+          <span class="text-cyan-600 font-bold">A</span> (associativa), 
+          <span class="text-orange-600 font-bold">C</span> (commutativa) o 
+          <span class="text-purple-600 font-bold">E</span> (entrambe).
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Example 1 -->
+        <div class="flex items-center gap-4 bg-gray-50 p-4 rounded-lg">
+          <div class="flex-1 text-lg">
+            26 + 12 + 14 = (26 + 14) + 12 = 40 + 12 = 52
+          </div>
+          <input type="text" class="w-16 h-16 text-3xl text-center border-4 border-cyan-400 rounded-lg font-bold" maxlength="1" placeholder="...">
+        </div>
+
+        <!-- Example 2 -->
+        <div class="flex items-center gap-4 bg-gray-50 p-4 rounded-lg">
+          <div class="flex-1 text-lg">
+            107 + 3 + 17 = 110 + 17 = 127
+          </div>
+          <input type="text" class="w-16 h-16 text-3xl text-center border-4 border-cyan-400 rounded-lg font-bold" maxlength="1" placeholder="...">
+        </div>
+
+        <!-- Example 3 -->
+        <div class="flex items-center gap-4 bg-gray-50 p-4 rounded-lg">
+          <div class="flex-1 text-lg">
+            32 + 128 + 2 = 32 + 130 = 162
+          </div>
+          <input type="text" class="w-16 h-16 text-3xl text-center border-4 border-cyan-400 rounded-lg font-bold" maxlength="1" placeholder="...">
+        </div>
+
+        <!-- Example 4 -->
+        <div class="flex items-center gap-4 bg-gray-50 p-4 rounded-lg">
+          <div class="flex-1 text-lg">
+            115 + 5 + 45 = 45 + 5 + 115 = 165
+          </div>
+          <input type="text" class="w-16 h-16 text-3xl text-center border-4 border-cyan-400 rounded-lg font-bold" maxlength="1" placeholder="...">
+        </div>
+
+        <!-- Example 5 -->
+        <div class="flex items-center gap-4 bg-gray-50 p-4 rounded-lg">
+          <div class="flex-1 text-lg">
+            135 + 19 + 5 = (135 + 5) + 19 = 140 + 19 = 159
+          </div>
+          <input type="text" class="w-16 h-16 text-3xl text-center border-4 border-cyan-400 rounded-lg font-bold" maxlength="1" placeholder="...">
+        </div>
+      </div>
+
+      <!-- Farfalle decorative -->
+      <div class="flex justify-end gap-8 mt-6">
+        <svg class="w-20 h-20 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+        </svg>
+        <svg class="w-20 h-20 text-purple-500" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Exercise Controls -->
+    <%= render 'shared/exercise_controls', color: 'cyan', current_page: 'bus3_mat_p144' %>
+
+    <!-- Page numbers -->
+    <div class="flex justify-end mb-6 mt-6">
+      <!-- Current page (144) -->
+      <div class="bg-cyan-600 text-white font-bold text-3xl px-6 py-3 rounded-l-full flex items-center gap-2">
+        <div class="bg-white text-cyan-600 rounded-full p-2 flex items-center justify-center ml-2">
+          144
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

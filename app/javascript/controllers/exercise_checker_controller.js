@@ -340,7 +340,7 @@ export default class extends Controller {
     inputFields.forEach(input => {
       input.classList.remove("border-yellow-500", "border-green-500", "border-red-500",
                              "border-4", "bg-yellow-50", "bg-green-50", "bg-red-50",
-                             "border-gray-300", "border-2")
+                             "border-gray-300", "border-gray-500", "border-2")
       input.value = ""
     })
 
