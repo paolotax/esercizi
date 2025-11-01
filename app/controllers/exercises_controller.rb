@@ -46,4 +46,7 @@ class ExercisesController < ApplicationController
 
   def nvl_4_gr_pag015
   end
+
+  def bus3_mat_p025
+  end
 end
