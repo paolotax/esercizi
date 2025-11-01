@@ -1,0 +1,150 @@
+@media print {
+  /* Reset body e html per la stampa */
+  html, body {
+    height: auto !important;
+    overflow: visible !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Permetti il page break naturale */
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    display: block !important;
+  }
+
+  /* Rimuovi flex e altre proprietà che impediscono il page break */
+  body.flex,
+  body.flex-col,
+  body.h-screen {
+    display: block !important;
+    height: auto !important;
+    flex-direction: unset !important;
+  }
+
+  /* Nascondi elementi di navigazione */
+  nav,
+  aside,
+  header[data-controller="sidebar"],
+  [data-sidebar-target="sidebar"],
+  [data-slide-menu-target="menu"],
+  .no-print,
+  .fixed,
+  [class*="fixed"] {
+    display: none !important;
+  }
+
+  /* Nascondi solo i bottoni di controllo specifici */
+  button[data-action*="column-modal#close"],
+  button[data-action*="column-modal#save"],
+  button[data-action*="exercise-checker#checkAnswers"],
+  button[data-action*="exercise-checker#reset"] {
+    display: none !important;
+  }
+
+  /* Mostra esplicitamente i bottoni delle operazioni */
+  button[data-action="click->column-modal#open"] {
+    display: block !important;
+    background: white !important;
+    border: 1px solid #ccc !important;
+    padding: 0.25rem 0.5rem !important;
+    margin: 0.25rem 0 !important;
+    cursor: default !important;
+    text-align: left !important;
+    width: 100% !important;
+    font-size: 1.125rem !important;
+    color: #000 !important;
+  }
+  
+  /* Rimuovi hover effects per la stampa */
+  button[data-action="click->column-modal#open"]:hover {
+    background: white !important;
+  }
+
+  /* Rimuovi altezze fisse che impediscono il page break solo per i container principali */
+  body > div.flex,
+  main.overflow-y-auto {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Permetti scroll sul main content */
+  main {
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  /* Gestione page break */
+  .bg-white.rounded-lg.shadow-lg,
+  .exercise-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Permetti il page break tra gli esercizi */
+  .bg-white.rounded-lg.shadow-lg + .bg-white.rounded-lg.shadow-lg,
+  .mb-6 {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  /* Evita page break all'interno di elementi critici */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Rimuovi transizioni e animazioni */
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Assicura che i contenuti principali siano visibili */
+  main,
+  .max-w-6xl {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+
+  /* Gestione colori di sfondo */
+  .bg-gradient-to-br {
+    background: white !important;
+  }
+
+  /* Mantieni i colori importanti */
+  .bg-cyan-600,
+  .bg-blue-600,
+  .bg-red-500,
+  .text-cyan-600,
+  .text-blue-600,
+  .text-red-500 {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  /* Evita page break nei modal */
+  [data-column-modal-target="modal"] {
+    display: none !important;
+  }
+
+  .print,
+  .print * {
+    visibility: visible;
+  }
+
+  body *,
+  .print-hidden,
+  .print-hidden * {
+    visibility: hidden;
+  }
+
+  .print-hidden {
+    display: none;
+  }
+}
