@@ -40,7 +40,9 @@ export default class extends Controller {
 
   handleKeydown(event, currentIndex) {
     const input = event.target
-    const columnsPerRow = 3
+    // Calcola dinamicamente il numero di colonne in base al numero totale di input
+    const totalInputs = this.inputTargets.length
+    const columnsPerRow = totalInputs === 6 ? 3 : 4  // 6 input = 2 righe x 3 colonne, altrimenti 4 colonne
 
     // Backspace: vai all'input precedente se vuoto
     if (event.key === 'Backspace' && input.value === '' && currentIndex > 0) {
@@ -108,7 +110,8 @@ export default class extends Controller {
 
   handleResultKeydown(event, currentIndex) {
     const input = event.target
-    const columnsPerRow = 3
+    // Calcola dinamicamente il numero di colonne
+    const columnsPerRow = this.resultTargets.length
 
     // Backspace: vai all'input successivo (destra) se vuoto
     if (event.key === 'Backspace' && input.value === '' && currentIndex < this.resultTargets.length - 1) {
