@@ -1,15 +1,137 @@
 <%
   # Parametri:
-  # - addend1: array di 3 cifre [h, da, u] per il primo addendo
-  # - addend2: array di 3 cifre [h, da, u] per il secondo addendo
-  # - result: array di 3 cifre [h, da, u] per il risultato
+  # - operation: stringa con l'operazione (es: "234 + 1234 + 45")
+  # - addends: array di numeri interi (alternativo a operation)
   # - title: titolo dell'operazione (opzionale)
+  # - operator: operatore da usare (default: '+', può essere '-', ecc.)
+  # - show_exercise: se true, mostra la griglia come esercizio vuoto (default: true)
+  # - show_addends: se true, mostra gli addendi pre-compilati (default: false)
+  # - show_solution: se true, mostra la soluzione completa (riporti + risultato) (default: false)
+  # - show_toolbar: se true, mostra la toolbar con i pulsanti (default: true)
   
-  addend1 ||= ["", "", ""]
-  addend2 ||= ["", "", ""]
-  result ||= ["", "", ""]
   title ||= nil
+  operator ||= '+'
+  show_exercise ||= true
+  show_addends ||= false
+  show_solution ||= false
+  show_toolbar ||= false
+  
+  # Parse operation string se fornita
+  if defined?(operation) && operation.present?
+    addends = operation.gsub(/\s+/, '').split(/[+\-=]/).map(&:to_i).reject(&:zero?)
+  end
+  
+  # Fallback a valori di default
+  addends ||= [0, 0]
+  
+  # Calcola il risultato
+  if operator == '+'
+    result = addends.sum
+  elsif operator == '-'
+    result = addends[0] - addends[1..-1].sum
+  end
+  
+  # Determina il numero massimo di cifre
+  max_digits = [addends.max, result].compact.max.to_s.length
+  
+  # Converti ogni numero in array di cifre (da sinistra a destra)
+  # Gli zeri non significativi vengono sostituiti con stringhe vuote
+  addends_digits = addends.map do |num|
+    num_str = num.to_s
+    padding = max_digits - num_str.length
+    # Crea array con celle vuote per gli zeri non significativi
+    ([''] * padding) + num_str.chars
+  end
+  
+  # Per il risultato, gestiamo gli zeri non significativi
+  result_str = result.to_s
+  result_padding = max_digits - result_str.length
+  result_digits = ([''] * result_padding) + result_str.chars
+  
+  # Calcola i riporti per ogni colonna (da destra a sinistra)
+  carries = Array.new(max_digits, '')
+  carry = 0
+  
+  (max_digits - 1).downto(0) do |col_idx|
+    # Somma tutti i digit di questa colonna
+    column_sum = carry
+    addends_digits.each do |digits|
+      digit_val = digits[col_idx].to_i
+      column_sum += digit_val
+    end
+    
+    # Se la somma è >= 10, c'è un riporto
+    if column_sum >= 10
+      carry = column_sum / 10
+      # Il riporto va nella colonna precedente (a sinistra)
+      carries[col_idx - 1] = carry.to_s if col_idx > 0
+    else
+      carry = 0
+    end
+  end
+  
+  # Etichette delle colonne (da sinistra a destra: più significativo a meno significativo)
+  labels = []
+  labels_colors = []
+  
+  if max_digits >= 7
+    labels << 'M'
+    labels_colors << 'text-purple-600'
+  end
+  if max_digits >= 6
+    labels << 'hk'
+    labels_colors << 'text-orange-600'
+  end
+  if max_digits >= 5
+    labels << 'dak'
+    labels_colors << 'text-yellow-600'
+  end
+  if max_digits >= 4
+    labels << 'uk'
+    labels_colors << 'text-pink-600'
+  end
+  if max_digits >= 3
+    labels << 'h'
+    labels_colors << 'text-green-600'
+  end
+  if max_digits >= 2
+    labels << 'da'
+    labels_colors << 'text-red-500'
+  end
+  labels << 'u'
+  labels_colors << 'text-blue-600'
+  
+  # Padding per avere sempre max_digits etichette
+  while labels.length < max_digits
+    labels.unshift('')
+    labels_colors.unshift('text-gray-400')
+  end
+  
+  # Usa CSS grid-template-columns invece di classi Tailwind dinamiche
+  grid_style = "display: grid; grid-template-columns: repeat(#{max_digits}, 4rem); gap: 0;"
 %>
+
+<style>
+  /* Rendi le celle quadrate */
+  [data-column-input-target="input"],
+  [data-column-input-target="result"] {
+    width: 4rem;
+    height: 4rem;
+  }
+  
+  /* Celle per i riporti (cambi) - più piccole */
+  [data-column-input-target="carry"] {
+    width: 4rem;
+    height: 2rem;
+  }
+  
+  /* Placeholder più piccolo */
+  [data-column-input-target="input"]::placeholder,
+  [data-column-input-target="result"]::placeholder {
+    font-size: 0.75rem;
+    opacity: 0.3;
+  }
+</style>
 
 <div class="text-center">
   <% if title.present? %>
@@ -19,37 +141,204 @@
   <div class="flex items-start justify-center gap-2">
     <div class="inline-block border-4 border-blue-400 rounded-lg" data-controller="column-input">
       
-      <div class="grid grid-cols-3 gap-0 border-b-2 border-gray-300">
-        <div class="text-center text-green-600 font-bold border-r-2 border-gray-300 p-2">h</div>
-        <div class="text-center text-red-500 font-bold border-r-2 border-gray-300 p-2">da</div>
-        <div class="text-center text-blue-600 font-bold p-2">u</div>
+      <!-- Header con le etichette delle colonne -->
+      <div class="border-b-2 border-gray-300" style="<%= grid_style %>">
+        <% labels.each_with_index do |label, idx| %>
+          <div class="text-center <%= labels_colors[idx] %> font-bold <%= 'border-r-2 border-gray-300' unless idx == labels.length - 1 %> py-2 text-sm">
+            <%= label %>
+          </div>
+        <% end %>
       </div>
       
-      <div class="grid grid-cols-3 gap-0">
-        <input type="text" class="p-2 text-center text-2xl font-bold border-r-2 border-gray-300" data-column-input-target="input" data-correct-answer="<%= addend1[0] %>" maxlength="1" placeholder=".......">
-        <input type="text" class="p-2 text-center text-2xl font-bold border-r-2 border-gray-300" data-column-input-target="input" data-correct-answer="<%= addend1[1] %>" maxlength="1" placeholder=".......">
-        <input type="text" class="p-2 text-center text-2xl font-bold" data-column-input-target="input" data-correct-answer="<%= addend1[2] %>" maxlength="1" placeholder=".......">
+      <!-- Riga dei riporti (cambi) -->
+      <div class="bg-blue-50 border-b border-gray-200" style="<%= grid_style %>">
+        <% carries.each_with_index do |carry, idx| %>
+          <input type="text" 
+                 class="text-center text-sm font-bold <%= labels_colors[idx] %> bg-blue-50 <%= 'border-r-2 border-gray-300' unless idx == max_digits - 1 %>" 
+                 data-column-input-target="carry" 
+                 data-correct-answer="<%= carry %>" 
+                 maxlength="1" 
+                 placeholder=""
+                 <% if show_solution && carry.present? %>value="<%= carry %>"<% end %>
+                 style="height: 2rem;">
+        <% end %>
       </div>
       
-      <div class="grid grid-cols-3 gap-0">
-        <input type="text" class="p-2 text-center text-2xl font-bold border-r-2 border-gray-300" data-column-input-target="input" data-correct-answer="<%= addend2[0] %>" maxlength="1" placeholder=".......">
-        <input type="text" class="p-2 text-center text-2xl font-bold border-r-2 border-gray-300" data-column-input-target="input" data-correct-answer="<%= addend2[1] %>" maxlength="1" placeholder=".......">
-        <input type="text" class="p-2 text-center text-2xl font-bold" data-column-input-target="input" data-correct-answer="<%= addend2[2] %>" maxlength="1" placeholder=".......">
-      </div>
+      <!-- Righe degli addendi -->
+      <% addends_digits.each do |digits| %>
+        <div class="border-b border-gray-200" style="<%= grid_style %>">
+          <% digits.each_with_index do |digit, idx| %>
+            <input type="text" 
+                   class="text-center text-2xl font-bold <%= 'border-r-2 border-gray-300' unless idx == digits.length - 1 %>" 
+                   data-column-input-target="input" 
+                   data-correct-answer="<%= digit %>" 
+                   maxlength="1" 
+                   placeholder="."
+                   <% if (show_addends || show_solution) && digit.present? %>value="<%= digit %>"<% end %>>
+          <% end %>
+        </div>
+      <% end %>
       
+      <!-- Riga del risultato -->
       <div class="border-t-4 border-gray-500">
-        <div class="grid grid-cols-3 gap-0">
-          <input type="text" class="p-2 text-center text-2xl font-bold border-r-2 border-gray-300" data-column-input-target="result" data-correct-answer="<%= result[0] %>" maxlength="1" placeholder=".......">
-          <input type="text" class="p-2 text-center text-2xl font-bold border-r-2 border-gray-300" data-column-input-target="result" data-correct-answer="<%= result[1] %>" maxlength="1" placeholder=".......">
-          <input type="text" class="p-2 text-center text-2xl font-bold" data-column-input-target="result" data-correct-answer="<%= result[2] %>" maxlength="1" placeholder=".......">
+        <div style="<%= grid_style %>">
+          <% result_digits.each_with_index do |digit, idx| %>
+            <input type="text" 
+                   class="text-center text-2xl font-bold <%= 'border-r-2 border-gray-300' unless idx == result_digits.length - 1 %>" 
+                   data-column-input-target="result" 
+                   data-correct-answer="<%= digit %>" 
+                   maxlength="1" 
+                   placeholder="."
+                   <% if show_solution && digit.present? %>value="<%= digit %>"<% end %>>
+          <% end %>
         </div>
       </div>
     
     </div>
-    <div class="flex flex-col" style="padding-top: 42px">
-      <div class="text-2xl font-bold text-blue-600 h-[52px] flex items-center">+</div>
-      <div class="text-2xl font-bold text-blue-600 h-[50px] flex items-center">=</div>
+    
+    <!-- Colonna degli operatori -->
+    <div class="flex flex-col" style="padding-top: 74px">
+      <% addends.each_with_index do |_, idx| %>
+        <div class="text-2xl font-bold text-blue-600 flex items-center justify-center" style="height: 4rem;">
+          <%= idx < addends.length - 1 ? operator : '=' %>
+        </div>
+      <% end %>
+      <div class="flex items-center justify-center border-t-4 border-transparent" style="height: 4rem;">
+        <!-- spazio vuoto per la riga del risultato -->
+      </div>
     </div>
   </div>
+  
+  <!-- Toolbar con pulsanti -->
+  <% if show_toolbar %>
+  <div class="flex justify-center gap-4 mt-6">
+    <!-- Cancella -->
+    <button type="button" 
+            class="w-14 h-14 rounded-full bg-gray-500 hover:bg-gray-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+            onclick="clearGrid(this)"
+            title="Cancella">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+      </svg>
+    </button>
+    
+    <!-- Mostra Addendi -->
+    <button type="button" 
+            class="w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+            onclick="showAddends(this)"
+            title="Mostra Addendi">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    </button>
+    
+    <!-- Mostra Risultato -->
+    <button type="button" 
+            class="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+            onclick="showResult(this)"
+            title="Mostra Risultato">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </button>
+    
+    <!-- Verifica -->
+    <button type="button" 
+            class="w-14 h-14 rounded-full bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+            onclick="verifyAnswers(this)"
+            title="Verifica">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+      </svg>
+    </button>
+  </div>
+  <% end %>
 </div>
+
+<script>
+function clearGrid(button) {
+  const grid = button.closest('.text-center').querySelector('[data-controller="column-input"]');
+  const inputs = grid.querySelectorAll('input');
+  inputs.forEach(input => {
+    input.value = '';
+    input.classList.remove('bg-green-100', 'bg-red-100');
+  });
+}
+
+function showAddends(button) {
+  const grid = button.closest('.text-center').querySelector('[data-controller="column-input"]');
+  const inputs = grid.querySelectorAll('[data-column-input-target="input"]');
+  inputs.forEach(input => {
+    const correctAnswer = input.getAttribute('data-correct-answer');
+    if (correctAnswer) {
+      input.value = correctAnswer;
+    }
+  });
+}
+
+function showResult(button) {
+  const grid = button.closest('.text-center').querySelector('[data-controller="column-input"]');
+  
+  // Mostra i riporti
+  const carries = grid.querySelectorAll('[data-column-input-target="carry"]');
+  carries.forEach(input => {
+    const correctAnswer = input.getAttribute('data-correct-answer');
+    if (correctAnswer) {
+      input.value = correctAnswer;
+    }
+  });
+  
+  // Mostra i risultati
+  const results = grid.querySelectorAll('[data-column-input-target="result"]');
+  results.forEach(input => {
+    const correctAnswer = input.getAttribute('data-correct-answer');
+    if (correctAnswer) {
+      input.value = correctAnswer;
+    }
+  });
+}
+
+function verifyAnswers(button) {
+  const grid = button.closest('.text-center').querySelector('[data-controller="column-input"]');
+  
+  // Raccogli tutti gli input: riporti, addendi e risultati
+  const carries = Array.from(grid.querySelectorAll('[data-column-input-target="carry"]'));
+  const inputs = Array.from(grid.querySelectorAll('[data-column-input-target="input"]'));
+  const results = Array.from(grid.querySelectorAll('[data-column-input-target="result"]'));
+  
+  const allInputs = [...carries, ...inputs, ...results];
+  
+  let correct = 0;
+  let total = 0;
+  
+  allInputs.forEach(input => {
+    const correctAnswer = input.getAttribute('data-correct-answer');
+    const userAnswer = input.value.trim();
+    
+    // Salta le celle vuote che devono rimanere vuote
+    if (correctAnswer === '' && userAnswer === '') {
+      return;
+    }
+    
+    total++;
+    
+    // Rimuovi colori precedenti
+    input.classList.remove('bg-green-100', 'bg-red-100');
+    
+    if (userAnswer === correctAnswer) {
+      input.classList.add('bg-green-100');
+      correct++;
+    } else if (userAnswer !== '') {
+      input.classList.add('bg-red-100');
+    }
+  });
+  
+  // Mostra messaggio dettagliato
+  const message = correct === total 
+    ? `🎉 Perfetto! ${correct}/${total} risposte corrette!` 
+    : `📊 ${correct}/${total} risposte corrette. Continua così!`;
+  
+  alert(message);
+}
+</script>
 

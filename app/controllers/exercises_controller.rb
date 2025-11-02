@@ -58,4 +58,16 @@ class ExercisesController < ApplicationController
 
   def nvi4_sto_p155
   end
+
+  def column_addition_grid
+    operation = params[:operation]
+
+    render partial: "shared/column_addition",
+           locals: {
+             operation: operation,
+             show_toolbar: false,
+             show_exercise: true
+           },
+           layout: false
+  end
 end

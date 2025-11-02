@@ -166,6 +166,7 @@
 
     <!-- Exercise 2: Practice problems -->
     <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      
       <div class="flex items-start gap-3 mb-6">
         <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
           2
@@ -173,27 +174,67 @@
         <h2 class="text-xl font-bold text-gray-800">Metti in colonna e calcola.</h2>
       </div>
 
-      <div class="grid grid-cols-3 gap-8">
-        <!-- Problem 1: 341 + 253 -->
-        <%= render 'shared/column_addition', 
-          title: '341 + 253 =',
-          addend1: ['3', '4', '1'],
-          addend2: ['2', '5', '3'],
-          result: ['5', '9', '4']
-        %>
+      <div class="flex flex-wrap gap-8 justify-center items-start">
+        
+        <!-- Esempio 1: Esercizio vuoto - 2 addendi semplici -->
+        <%= render partial: 'shared/column_addition', locals: { 
+             operation: "345 + 278",
+             title: "a) 345 + 278 ="
+        } %>
 
-        <!-- Problem 2: 382 + 216 -->
-        <%= render 'shared/column_addition', 
-          title: '382 + 216 ='
-        %>
+        <!-- Esempio 2: Solo addendi mostrati - 3 addendi -->
+        <%= render partial: 'shared/column_addition', locals: { 
+             operation: "1234 + 567 + 89",
+             title: "b) 1234 + 567 + 89 =",
+             show_addends: true
+        } %>
 
-        <!-- Problem 3: 617 + 370 -->
-        <%= render 'shared/column_addition', 
-          title: '617 + 370 =',
-          addend1: ['6', '1', '7'],
-          addend2: ['3', '7', '0'],
-          result: ['9', '8', '7']
-        %>
+        <!-- Esempio 3: Soluzione completa - 2 addendi grandi -->
+        <%= render partial: 'shared/column_addition', locals: { 
+             operation: "9876 + 5432",
+             title: "c) 9876 + 5432 =",
+             show_solution: true
+        } %>
+
+        <!-- Esempio 4: Esercizio vuoto - 4 addendi -->
+        <%= render partial: 'shared/column_addition', locals: { 
+             operation: "234 + 567 + 890 + 123",
+             title: "d) 234 + 567 + 890 + 123 ="
+        } %>
+
+        <!-- Esempio 5: Solo addendi - 3 addendi con riporti -->
+        <%= render partial: 'shared/column_addition', locals: { 
+             operation: "789 + 654 + 987",
+             title: "e) 789 + 654 + 987 =",
+             show_addends: true
+        } %>
+
+        <!-- Esempio 6: Esercizio vuoto - 5 addendi misti -->
+        <%= render partial: 'shared/column_addition', locals: { 
+             operation: "12 + 345 + 6789 + 10 + 234",
+             title: "f) 12 + 345 + 6789 + 10 + 234 ="
+        } %>
+
+        <!-- Esempio 7: Soluzione completa senza toolbar - 2 addendi -->
+        <%= render partial: 'shared/column_addition', locals: { 
+             operation: "456 + 789",
+             title: "g) 456 + 789 = (soluzione)",
+             show_solution: true,
+             show_toolbar: true
+        } %>
+
+      </div>
+      
+      <div class="mt-6 p-4 bg-blue-50 rounded-lg border-2 border-blue-300">
+        <p class="text-sm text-gray-700 mb-2">
+          <strong>💡 Istruzioni:</strong> Sono presenti 7 esercizi diversi:
+        </p>
+        <ul class="text-sm text-gray-700 list-disc list-inside space-y-1">
+          <li><strong>a), d), f)</strong> - Esercizi vuoti da completare</li>
+          <li><strong>b), e)</strong> - Gli addendi sono già mostrati, completa riporti e risultato</li>
+          <li><strong>c)</strong> - Esempio con soluzione completa (usa i pulsanti per esercitarti)</li>
+          <li><strong>g)</strong> - Soluzione di riferimento</li>
+        </ul>
       </div>
     </div>
 
@@ -258,23 +299,20 @@
 
       <!-- Modal -->
       <div data-column-modal-target="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" data-action="click->column-modal#closeOnBackdrop">
-        <div class="bg-white rounded-lg p-8 max-w-lg w-full mx-4">
+        <div class="bg-white rounded-lg p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
           <div class="flex justify-between items-center mb-6">
             <h3 class="text-2xl font-bold text-blue-600" data-column-modal-target="title">Addizione in colonna</h3>
             <button class="text-gray-500 hover:text-gray-700 text-3xl" data-action="click->column-modal#close">&times;</button>
           </div>
           
-          <div class="flex items-start justify-center gap-2" data-column-modal-target="grid">
-            <%= render 'shared/column_addition_4digits' %>
-            <div class="flex flex-col" style="padding-top: 56px">
-              <div class="text-2xl font-bold text-blue-600 h-[52px] flex items-center">+</div>
-              <div class="text-2xl font-bold text-blue-600 h-[50px] flex items-center">=</div>
-            </div>
+          <!-- Contenitore dinamico per la griglia -->
+          <div data-column-modal-target="grid">
+            <!-- Il contenuto verrà caricato dinamicamente -->
           </div>
 
           <div class="mt-6 flex gap-4">
-            <button class="flex-1 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition" data-action="click->column-modal#save">💾 Salva</button>
-            <button class="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition" data-action="click->column-modal#close">Chiudi</button>
+            <button class="flex-1 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition font-bold" data-action="click->column-modal#save">Salva</button>
+            <button class="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition font-bold" data-action="click->column-modal#close">Chiudi</button>
           </div>
         </div>
       </div>

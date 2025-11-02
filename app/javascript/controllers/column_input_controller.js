@@ -1,9 +1,17 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["input", "result"]
+  static targets = ["input", "result", "carry"]
 
   connect() {
+    // Aggiungi gli event listener per i riporti (carry)
+    if (this.hasCarryTarget) {
+      this.carryTargets.forEach((input, index) => {
+        input.addEventListener('input', (e) => this.handleCarryInput(e, index))
+        input.addEventListener('keydown', (e) => this.handleCarryKeydown(e, index))
+      })
+    }
+
     // Aggiungi gli event listener a tutti gli input
     this.inputTargets.forEach((input, index) => {
       input.addEventListener('input', (e) => this.handleInput(e, index))
@@ -76,6 +84,10 @@ export default class extends Controller {
       if (targetIndex >= 0) {
         this.inputTargets[targetIndex].focus()
         this.inputTargets[targetIndex].select()
+      } else if (this.hasCarryTarget && currentIndex < this.carryTargets.length) {
+        // Se siamo nella prima riga di input, vai ai carry nella stessa colonna
+        this.carryTargets[currentIndex].focus()
+        this.carryTargets[currentIndex].select()
       }
     }
 
@@ -151,6 +163,69 @@ export default class extends Controller {
 
     // Freccia giù: non fa nulla (siamo già nell'ultima riga)
     if (event.key === 'ArrowDown') {
+      event.preventDefault()
+    }
+  }
+
+  // Gestione per i riporti (carry) - navigazione da sinistra a destra
+  handleCarryInput(event, currentIndex) {
+    const input = event.target
+    const value = input.value
+
+    // Se l'utente ha digitato un carattere
+    if (value.length === 1) {
+      // Se non è l'ultimo carry, passa al successivo
+      if (currentIndex < this.carryTargets.length - 1) {
+        this.carryTargets[currentIndex + 1].focus()
+        this.carryTargets[currentIndex + 1].select()
+      }
+      // Se è l'ultimo carry, passa al primo input
+      else if (this.hasInputTarget) {
+        this.inputTargets[0].focus()
+        this.inputTargets[0].select()
+      }
+    }
+  }
+
+  handleCarryKeydown(event, currentIndex) {
+    const input = event.target
+
+    // Backspace: vai al carry precedente se vuoto
+    if (event.key === 'Backspace' && input.value === '' && currentIndex > 0) {
+      event.preventDefault()
+      this.carryTargets[currentIndex - 1].focus()
+      this.carryTargets[currentIndex - 1].select()
+    }
+
+    // Freccia sinistra: vai a sinistra
+    if (event.key === 'ArrowLeft' && input.selectionStart === 0) {
+      event.preventDefault()
+      if (currentIndex > 0) {
+        this.carryTargets[currentIndex - 1].focus()
+        this.carryTargets[currentIndex - 1].select()
+      }
+    }
+
+    // Freccia destra: vai a destra
+    if (event.key === 'ArrowRight' && input.selectionStart === input.value.length) {
+      event.preventDefault()
+      if (currentIndex < this.carryTargets.length - 1) {
+        this.carryTargets[currentIndex + 1].focus()
+        this.carryTargets[currentIndex + 1].select()
+      }
+    }
+
+    // Freccia giù: vai alla riga degli input nella stessa colonna
+    if (event.key === 'ArrowDown') {
+      event.preventDefault()
+      if (this.hasInputTarget && currentIndex < this.inputTargets.length) {
+        this.inputTargets[currentIndex].focus()
+        this.inputTargets[currentIndex].select()
+      }
+    }
+
+    // Freccia su: non fa nulla (siamo già nella prima riga)
+    if (event.key === 'ArrowUp') {
       event.preventDefault()
     }
   }
