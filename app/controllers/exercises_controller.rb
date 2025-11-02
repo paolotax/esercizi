@@ -52,4 +52,10 @@ class ExercisesController < ApplicationController
 
   def bus3_mat_p144
   end
+
+  def nvi4_sto_p154
+  end
+
+  def nvi4_sto_p155
+  end
 end

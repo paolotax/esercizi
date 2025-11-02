@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   get "exercises/nvl_4_gr_pag015", to: "exercises#nvl_4_gr_pag015", as: "nvl_4_gr_pag015"
   get "exercises/bus3_mat_p025", to: "exercises#bus3_mat_p025", as: "bus3_mat_p025"
   get "exercises/bus3_mat_p144", to: "exercises#bus3_mat_p144", as: "bus3_mat_p144"
+  get "exercises/nvi4_sto_p154", to: "exercises#nvi4_sto_p154", as: "nvi4_sto_p154"
+  get "exercises/nvi4_sto_p155", to: "exercises#nvi4_sto_p155", as: "nvi4_sto_p155"
 
   # Defines the root path route ("/")
   root "exercises#pag010"
