@@ -167,22 +167,18 @@ export default class extends Controller {
     }
   }
 
-  // Gestione per i riporti (carry) - navigazione da sinistra a destra
+  // Gestione per i riporti (carry) - vai alla stessa colonna nel risultato
   handleCarryInput(event, currentIndex) {
     const input = event.target
     const value = input.value
 
-    // Se l'utente ha digitato un carattere
-    if (value.length === 1) {
-      // Se non è l'ultimo carry, passa al successivo
-      if (currentIndex < this.carryTargets.length - 1) {
-        this.carryTargets[currentIndex + 1].focus()
-        this.carryTargets[currentIndex + 1].select()
-      }
-      // Se è l'ultimo carry, passa al primo input
-      else if (this.hasInputTarget) {
-        this.inputTargets[0].focus()
-        this.inputTargets[0].select()
+    // Se l'utente ha digitato un carattere, vai alla stessa colonna nel risultato
+    if (value.length === 1 && this.hasResultTarget) {
+      // currentIndex rappresenta la colonna del carry (0 = più a sinistra)
+      // Vai alla stessa colonna nel risultato
+      if (currentIndex < this.resultTargets.length) {
+        this.resultTargets[currentIndex].focus()
+        this.resultTargets[currentIndex].select()
       }
     }
   }

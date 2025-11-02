@@ -7,14 +7,16 @@
   # - show_exercise: se true, mostra la griglia come esercizio vuoto (default: true)
   # - show_addends: se true, mostra gli addendi pre-compilati (default: false)
   # - show_solution: se true, mostra la soluzione completa (riporti + risultato) (default: false)
-  # - show_toolbar: se true, mostra la toolbar con i pulsanti (default: true)
+  # - show_toolbar: se true, mostra la toolbar con i pulsanti (default: false)
+  # - show_carry: se true, mostra la riga dei riporti (default: true)
   
-  title ||= nil
-  operator ||= '+'
-  show_exercise ||= true
-  show_addends ||= false
-  show_solution ||= false
-  show_toolbar ||= false
+  title = local_assigns.fetch(:title, nil)
+  operator = local_assigns.fetch(:operator, '+')
+  show_exercise = local_assigns.fetch(:show_exercise, true)
+  show_addends = local_assigns.fetch(:show_addends, false)
+  show_solution = local_assigns.fetch(:show_solution, false)
+  show_toolbar = local_assigns.fetch(:show_toolbar, false)
+  show_carry = local_assigns.fetch(:show_carry, true)
   
   # Parse operation string se fornita
   if defined?(operation) && operation.present?
@@ -151,18 +153,21 @@
       </div>
       
       <!-- Riga dei riporti (cambi) -->
+      <% if show_carry %>
       <div class="bg-blue-50 border-b border-gray-200" style="<%= grid_style %>">
         <% carries.each_with_index do |carry, idx| %>
           <input type="text" 
-                 class="text-center text-sm font-bold <%= labels_colors[idx] %> bg-blue-50 <%= 'border-r-2 border-gray-300' unless idx == max_digits - 1 %>" 
+                 class="text-center text-sm font-bold <%= labels_colors[idx] %> <%= idx == max_digits - 1 ? 'bg-white' : 'bg-blue-50' %> <%= 'border-r-2 border-gray-300' unless idx == max_digits - 1 %>" 
                  data-column-input-target="carry" 
                  data-correct-answer="<%= carry %>" 
                  maxlength="1" 
                  placeholder=""
                  <% if show_solution && carry.present? %>value="<%= carry %>"<% end %>
+                 <% if idx == max_digits - 1 %>disabled<% end %>
                  style="height: 2rem;">
         <% end %>
       </div>
+      <% end %>
       
       <!-- Righe degli addendi -->
       <% addends_digits.each do |digits| %>
@@ -197,7 +202,7 @@
     </div>
     
     <!-- Colonna degli operatori -->
-    <div class="flex flex-col" style="padding-top: 74px">
+    <div class="flex flex-col" style="padding-top: <%= show_carry ? '74px' : '42px' %>">
       <% addends.each_with_index do |_, idx| %>
         <div class="text-2xl font-bold text-blue-600 flex items-center justify-center" style="height: 4rem;">
           <%= idx < addends.length - 1 ? operator : '=' %>
