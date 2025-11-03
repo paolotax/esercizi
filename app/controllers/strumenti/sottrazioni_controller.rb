@@ -1,7 +1,7 @@
-class Strumenti::AddizioniController < ApplicationController
+class Strumenti::SottrazioniController < ApplicationController
   def show
     @operations = params[:operations] || ""
-    @show_addends = params[:show_addends] == "true"
+    @show_minuend_subtrahend = params[:show_minuend_subtrahend] == "true"
     @operations_array = parse_operations(@operations) if @operations.present?
   end
 
@@ -9,9 +9,9 @@ class Strumenti::AddizioniController < ApplicationController
 
   def parse_operations(operations_string)
     # Supporta più formati:
-    # - Una operazione per riga: "234 + 1234\n45 + 67"
-    # - Operazioni separate da virgola: "234 + 1234, 45 + 67"
-    # - Operazioni separate da punto e virgola: "234 + 1234; 45 + 67"
+    # - Una operazione per riga: "487 - 258\n234 - 156"
+    # - Operazioni separate da virgola: "487 - 258, 234 - 156"
+    # - Operazioni separate da punto e virgola: "487 - 258; 234 - 156"
 
     operations_string
       .split(/[,;\n]/)

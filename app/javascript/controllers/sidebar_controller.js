@@ -5,9 +5,6 @@ export default class extends Controller {
   static targets = ["sidebar", "overlay"]
 
   connect() {
-    // Controlla se siamo nella home (root route)
-    const isHome = this.isHomePage()
-    
     // Su mobile, nascondi sempre di default
     if (this.isMobile()) {
       if (this.hasSidebarTarget) {
@@ -16,55 +13,14 @@ export default class extends Controller {
       if (this.hasOverlayTarget) {
         this.overlayTarget.classList.add("hidden")
       }
-    } else if (isHome) {
-      // Nella home, nascondi sempre la sidebar
-      if (this.hasSidebarTarget) {
-        this.sidebarTarget.classList.add("hidden")
-        this.saveSidebarVisibility(false)
-      }
     } else {
-      // Altrimenti, ripristina lo stato salvato
+      // Su desktop, ripristina lo stato salvato
       this.restoreSidebarVisibility()
     }
-
-    // Listener per aggiornare lo stato dopo ogni navigazione Turbo
-    this.turboLoadHandler = () => {
-      // Su mobile, nascondi sempre
-      if (this.isMobile()) {
-        if (this.hasSidebarTarget) {
-          this.sidebarTarget.classList.add("hidden")
-        }
-        if (this.hasOverlayTarget) {
-          this.overlayTarget.classList.add("hidden")
-        }
-        document.body.style.overflow = ''
-        return
-      }
-      
-      const isHomeNow = this.isHomePage()
-      
-      if (isHomeNow) {
-        // Nella home, nascondi sempre
-        if (this.hasSidebarTarget) {
-          this.sidebarTarget.classList.add("hidden")
-          this.saveSidebarVisibility(false)
-        }
-      } else {
-        // Altrimenti, ripristina lo stato
-        this.restoreSidebarVisibility()
-      }
-    }
-
-    document.addEventListener('turbo:load', this.turboLoadHandler)
-    document.addEventListener('turbo:frame-load', this.turboLoadHandler)
   }
 
   disconnect() {
-    // Rimuove i listener quando il controller viene disconnesso
-    if (this.turboLoadHandler) {
-      document.removeEventListener('turbo:load', this.turboLoadHandler)
-      document.removeEventListener('turbo:frame-load', this.turboLoadHandler)
-    }
+    // Nessun listener da rimuovere con data-turbo-permanent
   }
 
   isHomePage() {
