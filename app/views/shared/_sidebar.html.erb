@@ -1,265 +1,82 @@
-<aside class="print-hidden w-80 bg-white border-r border-gray-200 overflow-y-auto transition-all duration-300 hidden"
-       data-sidebar-target="sidebar">
+<aside id="sidebar-nav"
+       class="print-hidden w-80 bg-white border-r border-gray-200 overflow-y-auto transition-all duration-300"
+       data-sidebar-target="sidebar"
+       data-controller="sidebar-nav"
+       data-turbo-permanent>
+
+  <!-- Header -->
+  <div class="p-4 border-b border-gray-200">
+    <h2 class="text-lg font-bold text-gray-800">Libri di Testo</h2>
+  </div>
 
   <!-- Menu Content -->
   <nav class="p-4">
-    <div class="space-y-2">
-      <!-- Exercises List -->
-      <div class="px-4 py-2 text-sm font-semibold text-gray-500 uppercase">
-        CANTA E IMPARA 1
-      </div>
+    <div class="space-y-1">
+      <% Volume.all.includes(:corso, discipline: :pagine).each do |volume| %>
+        <div class="volume-item">
+          <!-- Volume -->
+          <button class="w-full flex items-center gap-2 p-3 rounded-lg hover:bg-purple-50 transition text-left group"
+                  data-action="click->sidebar-nav#toggle">
+            <svg class="toggle-icon w-4 h-4 text-gray-500 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+            <div class="flex-1">
+              <div class="text-xs text-gray-500"><%= volume.corso.nome %></div>
+              <div class="font-semibold text-gray-900"><%= volume.nome %></div>
+              <% if volume.classe %>
+                <div class="text-xs text-gray-500">Classe <%= volume.classe %></div>
+              <% end %>
+            </div>
+          </button>
 
-      <a href="<%= pag008_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-orange-50 transition group">
-        <div class="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          8
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Uguali o Diversi?</div>
-          <div class="text-sm text-gray-500">metodo - Pagina 8</div>
-        </div>
-      </a>
+          <!-- Discipline (collassabile) -->
+          <div class="sidebar-children ml-4 hidden" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+            <% volume.discipline.each do |disciplina| %>
+              <div class="disciplina-item mt-1">
+                <!-- Disciplina -->
+                <button class="w-full flex items-center gap-2 p-2 rounded-lg hover:bg-indigo-50 transition text-left group"
+                        data-action="click->sidebar-nav#toggle">
+                  <svg class="toggle-icon w-3 h-3 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                  <div class="flex-1">
+                    <div class="text-sm font-medium text-gray-700"
+                         style="<%= "color: #{disciplina.colore};" if disciplina.colore.present? %>">
+                      <%= disciplina.nome %>
+                    </div>
+                    <div class="text-xs text-gray-500"><%= pluralize(disciplina.pagine.count, "pagina", "pagine") %></div>
+                  </div>
+                </button>
 
-      <a href="<%= pag010_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-green-50 transition group">
-        <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          10
+                <!-- Pagine (collassabile) -->
+                <div class="sidebar-children ml-4 hidden" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+                  <% disciplina.pagine.each do |pagina| %>
+                    <%= link_to pagina_path(pagina.slug),
+                                data: { turbo_frame: "_top" },
+                                class: "flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 transition group mt-1" do %>
+                      <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold"
+                           style="background-color: <%= disciplina.colore || '#6B7280' %>">
+                        <%= pagina.numero %>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <div class="text-sm text-gray-800 truncate"><%= pagina.titolo %></div>
+                        <div class="text-xs text-gray-500">Pag. <%= pagina.numero %></div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
         </div>
-        <div>
-          <div class="font-semibold text-gray-800">Come Inizia?</div>
-          <div class="text-sm text-gray-500">metodo - Pagina 10</div>
-        </div>
-      </a>
-
-      <a href="<%= pag010gen_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-purple-50 transition group">
-        <div class="w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          10G
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Come Inizia?</div>
-          <div class="text-sm text-gray-500">metodo - Pagina 10 bis</div>
-        </div>
-      </a>
-
-      <a href="<%= pag022_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-orange-50 transition group">
-        <div class="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          22
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Lettera A - Scrivo</div>
-          <div class="text-sm text-gray-500">metodo - Pagina 22</div>
-        </div>
-      </a>
-
-      <a href="<%= pag023_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-red-50 transition group">
-        <div class="w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          23
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Lettera A - Leggo</div>
-          <div class="text-sm text-gray-500">metodo - Pagina 23</div>
-        </div>
-      </a>
-
-      <a href="<%= pag041_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-purple-50 transition group">
-        <div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          41
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Lettera O - Leggo</div>
-          <div class="text-sm text-gray-500">metodo - Pagina 41</div>
-        </div>
-      </a>
-
-      <a href="<%= pag043_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-green-50 transition group">
-        <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          43
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Lettera U - Scopro il suono</div>
-          <div class="text-sm text-gray-500">metodo - Pagina 43</div>
-        </div>
-      </a>
-
-      <a href="<%= pag050_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-blue-50 transition group">
-        <div class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          50
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Esercizio pagina 50</div>
-          <div class="text-sm text-gray-500">metodo - Pagina 50</div>
-        </div>
-      </a>
-
-      <a href="<%= pag051_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-green-50 transition group">
-        <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          51
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Esercizio pagina 51</div>
-          <div class="text-sm text-gray-500">metodo - Pagina 51</div>
-        </div>
-      </a>
-
-      <a href="<%= pag167_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-indigo-50 transition group">
-        <div class="w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          167
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Esercizio pagina 167</div>
-          <div class="text-sm text-gray-500">metodo - Pagina 167</div>
-        </div>
-      </a>
-
-      <div class="border-t border-gray-200 my-4"></div>
-
-      <div class="px-4 py-2 text-sm font-semibold text-gray-500 uppercase">
-        NUOVO VIVA LEGGERE 4
-      </div>
-
-      <a href="<%= nvl_4_gr_pag008_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-pink-50 transition group">
-        <div class="w-10 h-10 bg-pink-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          8
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">La lettera C</div>
-          <div class="text-sm text-gray-500">Grammatica - Pagina 8</div>
-        </div>
-      </a>
-
-      <a href="<%= nvl_4_gr_pag009_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-pink-50 transition group">
-        <div class="w-10 h-10 bg-pink-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          9
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">La lettera C - CE/CIE</div>
-          <div class="text-sm text-gray-500">Grammatica - Pagina 9</div>
-        </div>
-      </a>
-
-      <a href="<%= nvl_4_gr_pag014_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-pink-50 transition group">
-        <div class="w-10 h-10 bg-pink-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          14
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Il gruppo GL</div>
-          <div class="text-sm text-gray-500">Grammatica - Pagina 14</div>
-        </div>
-      </a>
-
-      <a href="<%= nvl_4_gr_pag015_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-pink-50 transition group">
-        <div class="w-10 h-10 bg-pink-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          15
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">GN o NI?</div>
-          <div class="text-sm text-gray-500">Grammatica - Pagina 15</div>
-        </div>
-      </a>
-
-      <div class="border-t border-gray-200 my-4"></div>
-
-
-      <div class="border-t border-gray-200 my-4"></div>
-
-      <div class="px-4 py-2 text-sm font-semibold text-gray-500 uppercase">
-        BANDA DEL BUS 3
-      </div>
-
-      <a href="<%= bus3_mat_p025_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-blue-50 transition group">
-        <div class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          25
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Addizioni in colonna</div>
-          <div class="text-sm text-gray-500">mate - Pagina 25</div>
-        </div>
-      </a>
-
-      <a href="<%= bus3_mat_p026_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-blue-50 transition group">
-        <div class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          26
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Addizioni con il cambio</div>
-          <div class="text-sm text-gray-500">mate - Pagina 26</div>
-        </div>
-      </a>
-
-      <a href="<%= bus3_mat_p144_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-cyan-50 transition group">
-        <div class="w-10 h-10 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          144
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Proprietà dell'Addizione</div>
-          <div class="text-sm text-gray-500">mate - Pagina 144</div>
-        </div>
-      </a>
-
-      <div class="border-t border-gray-200 my-4"></div>
-
-      <div class="px-4 py-2 text-sm font-semibold text-gray-500 uppercase">
-        NUOVO VIVA IMPARARE 4
-      </div>
-
-            <a href="<%= sussi_pag_5_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-purple-50 transition group">
-        <div class="w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          5
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">La Linea dei Numeri</div>
-          <div class="text-sm text-gray-500">Matematica - Pagina 5</div>
-        </div>
-      </a>
-
-      <a href="<%= sussi_pag_14_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-pink-50 transition group">
-        <div class="w-10 h-10 bg-pink-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          14
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Sistema di Numerazione</div>
-          <div class="text-sm text-gray-500">Matematica - Pagina 14</div>
-        </div>
-      </a>
-
-      <a href="<%= nvi4_sto_p154_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-cyan-50 transition group">
-        <div class="w-10 h-10 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          154
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Le Conoscenze dei Babilonesi</div>
-          <div class="text-sm text-gray-500">Storia - Pagina 154</div>
-        </div>
-      </a>
-
-      <a href="<%= nvi4_sto_p155_path %>"
-         class="flex items-center gap-3 p-4 rounded-lg hover:bg-yellow-50 transition group">
-        <div class="w-10 h-10 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold group-hover:scale-110 transition">
-          155
-        </div>
-        <div>
-          <div class="font-semibold text-gray-800">Gli Ittiti</div>
-          <div class="text-sm text-gray-500">Storia - Pagina 155</div>
-        </div>
-      </a>
+      <% end %>
     </div>
   </nav>
+
+  <style>
+    .sidebar-children.open {
+      display: block !important;
+      max-height: 2000px !important;
+    }
+  </style>
 </aside>

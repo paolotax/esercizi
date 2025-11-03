@@ -29,4 +29,9 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular "dirigente", "dirigenti"
   inflect.irregular "maestro", "maestri"
   inflect.irregular "maestra", "maestre"
+
+  # Book hierarchy models
+  inflect.irregular "corso", "corsi"
+  inflect.irregular "volume", "volumi"
+  inflect.irregular "disciplina", "discipline"
 end

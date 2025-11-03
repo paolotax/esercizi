@@ -9,7 +9,15 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  # Exercise routes
+  # Navigation routes for books hierarchy
+  resources :corsi, only: [:index, :show]
+  resources :volumi, only: [:index, :show]
+  resources :discipline, only: [:show]
+
+  # Dynamic page routing by slug
+  get "pagine/:slug", to: "pagine#show", as: "pagina"
+
+  # Exercise routes (legacy - keep for backward compatibility)
   get "exercises/pag008", to: "exercises#pag008", as: "pag008"
   get "exercises/pag010", to: "exercises#pag010", as: "pag010"
   get "exercises/pag010gen", to: "exercises#pag010gen", as: "pag010gen"
@@ -36,5 +44,5 @@ Rails.application.routes.draw do
   get "exercises/column_addition_grid", to: "exercises#column_addition_grid", as: "column_addition_grid"
 
   # Defines the root path route ("/")
-  root "exercises#pag010"
+  root "volumi#index"
 end

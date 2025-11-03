@@ -1,0 +1,31 @@
+<% content_for :titolo, @disciplina.nome %>
+
+<div class="max-w-7xl mx-auto p-6">
+  <div class="mb-6">
+    <%= link_to "← #{@disciplina.volume.nome}", volume_path(@disciplina.volume), class: "text-blue-500 hover:text-blue-700" %>
+  </div>
+
+  <h1 class="text-4xl font-bold mb-2" style="<%= "color: #{@disciplina.colore};" if @disciplina.colore.present? %>"><%= @disciplina.nome %></h1>
+  <p class="text-xl text-gray-600 mb-8"><%= @disciplina.volume.nome %> - <%= @disciplina.volume.corso.nome %></p>
+
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">Pagine</h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    <% @pagine.each do |pagina| %>
+      <div class="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition text-center">
+        <%= link_to pagina_path(pagina.slug), class: "block" do %>
+          <div class="text-3xl font-bold mb-2" style="<%= "color: #{@disciplina.colore};" if @disciplina.colore.present? %>"><%= pagina.numero %></div>
+          <% if pagina.titolo.present? %>
+            <div class="text-sm text-gray-600"><%= truncate(pagina.titolo, length: 30) %></div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @pagine.empty? %>
+    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
+      <p class="text-gray-600">Nessuna pagina disponibile per questa disciplina.</p>
+    </div>
+  <% end %>
+</div>
