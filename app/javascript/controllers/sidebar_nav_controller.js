@@ -7,23 +7,97 @@ export default class extends Controller {
   connect() {
     // Ripristina lo stato salvato in localStorage
     this.restoreState()
-    // Evidenzia la pagina corrente
-    this.highlightCurrentPage()
-
-    // Listener per aggiornare l'evidenziazione dopo ogni navigazione Turbo
-    document.addEventListener('turbo:load', () => {
+    // Evidenzia la pagina corrente e apre i livelli necessari
+    // Usa un piccolo delay per assicurarsi che il DOM sia pronto
+    setTimeout(() => {
       this.highlightCurrentPage()
+    }, 0)
+
+    // Listener per aggiornare l'evidenziazione e lo stato dopo ogni navigazione Turbo
+    this.turboLoadHandler = () => {
+      // Piccolo delay per assicurarsi che il DOM sia aggiornato
+      setTimeout(() => {
+        this.restoreState()
+        this.highlightCurrentPage()
+      }, 0)
+    }
+    
+    this.turboFrameLoadHandler = () => {
+      setTimeout(() => {
+        this.restoreState()
+        this.highlightCurrentPage()
+      }, 0)
+    }
+
+    // Listener per turbo:before-visit per salvare lo stato prima della navigazione
+    this.turboBeforeVisitHandler = () => {
+      // Salva lo stato corrente prima della navigazione
+      this.saveCurrentState()
+    }
+
+    document.addEventListener('turbo:load', this.turboLoadHandler)
+    document.addEventListener('turbo:frame-load', this.turboFrameLoadHandler)
+    document.addEventListener('turbo:before-visit', this.turboBeforeVisitHandler)
+    
+    // Listener anche per turbo:render per gestire elementi permanenti aggiornati
+    document.addEventListener('turbo:render', this.turboLoadHandler)
+  }
+
+  disconnect() {
+    // Rimuove i listener quando il controller viene disconnesso
+    if (this.turboLoadHandler) {
+      document.removeEventListener('turbo:load', this.turboLoadHandler)
+      document.removeEventListener('turbo:render', this.turboLoadHandler)
+    }
+    if (this.turboFrameLoadHandler) {
+      document.removeEventListener('turbo:frame-load', this.turboFrameLoadHandler)
+    }
+    if (this.turboBeforeVisitHandler) {
+      document.removeEventListener('turbo:before-visit', this.turboBeforeVisitHandler)
+    }
+  }
+
+  saveCurrentState() {
+    // Salva lo stato corrente degli elementi aperti
+    // Questo metodo viene chiamato prima della navigazione per preservare lo stato
+    const openItems = []
+    const buttons = this.element.querySelectorAll('button[data-sidebar-item-id]')
+    
+    buttons.forEach(button => {
+      const itemId = button.getAttribute('data-sidebar-item-id')
+      if (itemId) {
+        let childrenContainer = button.nextElementSibling
+        
+        if (!childrenContainer || !childrenContainer.classList.contains('sidebar-children')) {
+          childrenContainer = this.element.querySelector(`[data-sidebar-children-id="${itemId}"]`)
+        }
+        
+        if (childrenContainer && childrenContainer.classList.contains('open')) {
+          openItems.push(itemId)
+        }
+      }
     })
+    
+    localStorage.setItem('sidebar-open-items', JSON.stringify(openItems))
   }
 
   toggle(event) {
     event.preventDefault()
     const item = event.currentTarget
-    const childrenContainer = item.nextElementSibling
+    const itemId = item.getAttribute('data-sidebar-item-id')
+    
+    if (!itemId) return
+
+    // Cerca il contenitore children associato (può essere nextElementSibling o trovato tramite data attribute)
+    let childrenContainer = item.nextElementSibling
+    
+    // Se non è il next sibling, cerca tramite data attribute
+    if (!childrenContainer || !childrenContainer.classList.contains('sidebar-children')) {
+      childrenContainer = this.element.querySelector(`[data-sidebar-children-id="${itemId}"]`)
+    }
 
     if (childrenContainer && childrenContainer.classList.contains('sidebar-children')) {
       const isOpen = childrenContainer.classList.contains('open')
-      const itemId = this.generateItemId(item)
 
       if (isOpen) {
         // Chiudi
@@ -39,8 +113,13 @@ export default class extends Controller {
     }
   }
 
+  getItemId(item) {
+    // Usa l'attributo data-sidebar-item-id se presente, altrimenti fallback al metodo precedente
+    return item.getAttribute('data-sidebar-item-id') || this.generateItemId(item)
+  }
+
   generateItemId(item) {
-    // Genera un ID univoco basato sul testo del bottone
+    // Fallback: genera un ID univoco basato sul testo del bottone
     const text = item.querySelector('.font-semibold, .font-medium')?.textContent.trim()
     return text ? text.replace(/\s+/g, '-').toLowerCase() : ''
   }
@@ -71,29 +150,51 @@ export default class extends Controller {
 
   restoreState() {
     const openItems = this.getOpenItems()
+    
+    if (openItems.length === 0) return
 
     // Per ogni item salvato come aperto, trova il bottone e apri il suo contenuto
     openItems.forEach(itemId => {
-      const buttons = this.element.querySelectorAll('button')
-      buttons.forEach(button => {
-        const currentId = this.generateItemId(button)
-        if (currentId === itemId) {
-          const childrenContainer = button.nextElementSibling
-          if (childrenContainer && childrenContainer.classList.contains('sidebar-children')) {
-            childrenContainer.classList.add('open')
-            button.querySelector('.toggle-icon')?.classList.add('rotate-90')
-          }
+      const button = this.element.querySelector(`[data-sidebar-item-id="${itemId}"]`)
+      
+      if (button) {
+        let childrenContainer = button.nextElementSibling
+        
+        // Se non è il next sibling, cerca tramite data attribute
+        if (!childrenContainer || !childrenContainer.classList.contains('sidebar-children')) {
+          childrenContainer = this.element.querySelector(`[data-sidebar-children-id="${itemId}"]`)
         }
-      })
+
+        if (childrenContainer && childrenContainer.classList.contains('sidebar-children')) {
+          childrenContainer.classList.add('open')
+          button.querySelector('.toggle-icon')?.classList.add('rotate-90')
+        }
+      }
     })
   }
 
   highlightCurrentPage() {
     const currentPath = window.location.pathname
+    
+    // Normalizza il path (rimuove trailing slash se presente, tranne root)
+    const normalizedPath = currentPath === '/' ? '/' : currentPath.replace(/\/$/, '')
+    
     const links = this.element.querySelectorAll('a')
 
+    // Prima rimuovi tutti gli highlight
     links.forEach(link => {
-      if (link.getAttribute('href') === currentPath) {
+      link.classList.remove('bg-blue-100', 'border-l-4', 'border-blue-500')
+    })
+
+    // Poi evidenzia il link corrente
+    links.forEach(link => {
+      const linkHref = link.getAttribute('href')
+      
+      // Normalizza anche l'href del link
+      const normalizedHref = linkHref === '/' ? '/' : linkHref.replace(/\/$/, '')
+      
+      // Confronta i path normalizzati
+      if (normalizedHref === normalizedPath) {
         link.classList.add('bg-blue-100', 'border-l-4', 'border-blue-500')
 
         // Apri tutti i livelli superiori per mostrare la pagina corrente
@@ -102,16 +203,17 @@ export default class extends Controller {
           if (parent.classList.contains('sidebar-children')) {
             parent.classList.add('open')
             const button = parent.previousElementSibling
+            
             if (button && button.tagName === 'BUTTON') {
               button.querySelector('.toggle-icon')?.classList.add('rotate-90')
-              const itemId = this.generateItemId(button)
-              this.saveOpenState(itemId)
+              const itemId = this.getItemId(button)
+              if (itemId) {
+                this.saveOpenState(itemId)
+              }
             }
           }
           parent = parent.parentElement
         }
-      } else {
-        link.classList.remove('bg-blue-100', 'border-l-4', 'border-blue-500')
       }
     })
   }
