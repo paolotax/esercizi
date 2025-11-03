@@ -50,6 +50,9 @@ class ExercisesController < ApplicationController
   def bus3_mat_p025
   end
 
+  def bus3_mat_p026
+  end
+
   def bus3_mat_p144
   end
 
