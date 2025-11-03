@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Navigation routes for books hierarchy
-  resources :corsi, only: [:index, :show]
-  resources :volumi, only: [:index, :show]
-  resources :discipline, only: [:show]
+  resources :corsi, only: [ :index, :show ]
+  resources :volumi, only: [ :index, :show ]
+  resources :discipline, only: [ :show ]
 
   # Dynamic page routing by slug
   get "pagine/:slug", to: "pagine#show", as: "pagina"
@@ -42,6 +42,11 @@ Rails.application.routes.draw do
 
   # API endpoint for dynamic column addition grid
   get "exercises/column_addition_grid", to: "exercises#column_addition_grid", as: "column_addition_grid"
+
+  # Strumenti
+  namespace :strumenti do
+    get "addizioni", to: "addizioni#show", as: "addizioni"
+  end
 
   # Defines the root path route ("/")
   root "volumi#index"
