@@ -1,39 +1,35 @@
 <%
   # Parameters:
   # - color: Theme color (default: 'orange')
-  # - current_page: Current page identifier (required)
+  # - current_page: Current page identifier (view_template) (optional if @pagina is available)
+  # - pagina: Pagina object (optional, will use @pagina if not provided)
   
   color = local_assigns[:color] || 'orange'
   current_page = local_assigns[:current_page]
+  pagina_obj = local_assigns[:pagina] || @pagina
   
-  # Define page order for navigation
-  pages = [
-    { name: 'pag008', path: pag008_path, title: 'Pagina 8' },
-    { name: 'pag010', path: pag010_path, title: 'Pagina 10 - Come Inizia?' },
-    { name: 'pag010gen', path: pag010gen_path, title: 'Pagina 10 Gen - Come Inizia?' },
-    { name: 'pag022', path: pag022_path, title: 'Pagina 22' },
-    { name: 'pag023', path: pag023_path, title: 'Pagina 23' },
-    { name: 'pag041', path: pag041_path, title: 'Pagina 41' },
-    { name: 'pag043', path: pag043_path, title: 'Pagina 43' },
-    { name: 'pag050', path: pag050_path, title: 'Pagina 50' },
-    { name: 'pag051', path: pag051_path, title: 'Pagina 51' },
-    { name: 'pag167', path: pag167_path, title: 'Pagina 167' },
-    { name: 'sussi_pag_5', path: sussi_pag_5_path, title: 'Sussi Pag 5' },
-    { name: 'sussi_pag_14', path: sussi_pag_14_path, title: 'Sussi Pag 14' },
-    { name: 'nvl_4_gr_pag008', path: nvl_4_gr_pag008_path, title: 'Grammatica 4 - Pag 8 - La lettera C' },
-    { name: 'nvl_4_gr_pag009', path: nvl_4_gr_pag009_path, title: 'Grammatica 4 - Pag 9 - La lettera C' },
-    { name: 'nvl_4_gr_pag014', path: nvl_4_gr_pag014_path, title: 'Grammatica 4 - Pag 14 - Il gruppo GL' },
-    { name: 'nvl_4_gr_pag015', path: nvl_4_gr_pag015_path, title: 'Grammatica 4 - Pag 15 - GN o NI?' },
-    { name: 'bus3_mat_p025', path: bus3_mat_p025_path, title: 'Matematica 3 - Pag 25 - Addizioni in colonna' },
-    { name: 'bus3_mat_p026', path: bus3_mat_p026_path, title: 'Matematica 3 - Pag 26 - Addizioni con il cambio' }
-  ]
+  # Trova la pagina corrente nel database
+  if pagina_obj
+    current_pagina = pagina_obj
+  elsif current_page
+    # Cerca per view_template
+    current_pagina = Pagina.find_by(view_template: current_page)
+  end
   
-  # Find current page index
-  current_index = pages.find_index { |p| p[:name] == current_page }
+  prev_page = nil
+  next_page = nil
   
-  # Get previous and next pages
-  prev_page = current_index && current_index > 0 ? pages[current_index - 1] : nil
-  next_page = current_index && current_index < pages.length - 1 ? pages[current_index + 1] : nil
+  if current_pagina
+    # Trova la pagina precedente e successiva nella stessa disciplina
+    # Le pagine sono ordinate per posizione e numero (default_scope)
+    all_pages = current_pagina.disciplina.pagine.to_a
+    current_index = all_pages.find_index { |p| p.id == current_pagina.id }
+    
+    if current_index
+      prev_page = current_index > 0 ? all_pages[current_index - 1] : nil
+      next_page = current_index < all_pages.length - 1 ? all_pages[current_index + 1] : nil
+    end
+  end
   
   # Color variants for different buttons
   button_colors = {
@@ -72,57 +68,72 @@
   colors = button_colors[color] || button_colors['orange']
 %>
 
-<div class="print-hidden mt-8 space-y-4" data-exercise-checker-target="buttonContainer">
-  <!-- Main action buttons -->
-  <div class="flex flex-wrap gap-4 justify-center">
-    <!-- Check Answers Button -->
-    <button class="<%= colors[:primary] %> text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transition transform hover:scale-105"
-            data-action="click->exercise-checker#checkAnswers">
-      🎯 Controlla le Risposte
-    </button>
-    
-    <!-- Solve Button -->
-    <button class="<%= colors[:secondary] %> text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transition transform hover:scale-105"
-            data-action="click->exercise-checker#showSolutions">
-      💡 Mostra Soluzioni
-    </button>
-    
-    <!-- Reset Button -->
-    <button class="border-2 <%= colors[:outline] %> bg-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transition transform hover:scale-105"
-            data-action="click->exercise-checker#resetExercise">
-      🔄 Ricomincia
-    </button>
-  </div>
-  
-  <!-- Navigation buttons -->
-  <div class="flex justify-between items-center pt-4">
-    <% if prev_page %>
-      <%= link_to prev_page[:path], 
-          data: { turbo_frame: "_top" },
-          class: "flex items-center gap-2 #{colors[:outline]} border-2 bg-white font-bold py-3 px-6 rounded-full shadow-md transition transform hover:scale-105" do %>
-        <span class="text-xl">←</span>
-
+<div class="print-hidden mt-8" data-exercise-checker-target="buttonContainer">
+  <!-- All buttons on same line -->
+  <div class="flex flex-wrap gap-4 justify-between items-center">
+    <!-- Previous Page Button -->
+    <div class="flex-shrink-0">
+      <% if prev_page %>
+        <%= link_to pagina_path(prev_page.slug), 
+            data: { turbo_frame: "_top" },
+            class: "flex items-center justify-center #{colors[:primary]} text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 w-14 h-14 md:w-auto md:h-auto" do %>
+          <span class="text-xl md:text-2xl font-bold text-white">←</span>
+        <% end %>
+      <% else %>
+        <div class="flex items-center justify-center bg-gray-300 text-gray-500 font-bold rounded-full cursor-not-allowed opacity-50 w-14 h-14 md:w-auto md:h-auto md:py-4 md:px-8">
+          <span class="text-xl md:text-2xl font-bold text-white">←</span>
+        </div>
       <% end %>
-    <% else %>
-      <div class="flex items-center gap-2 border-2 border-gray-300 text-gray-400 bg-gray-100 font-bold py-3 px-6 rounded-full cursor-not-allowed opacity-50">
-        <span class="text-xl">←</span>
-
-      </div>
-    <% end %>
+    </div>
     
-    <% if next_page %>
-      <%= link_to next_page[:path], 
-          data: { turbo_frame: "_top" },
-          class: "flex items-center gap-2 #{colors[:outline]} border-2 bg-white font-bold py-3 px-6 rounded-full shadow-md transition transform hover:scale-105" do %>
-
-        <span class="text-xl">→</span>
+    <!-- Center control buttons -->
+    <div class="flex flex-wrap gap-2 md:gap-4 justify-center items-center flex-1">
+      <!-- Check Answers Button -->
+      <button class="<%= colors[:primary] %> text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-14 h-14 md:w-auto md:h-auto"
+              data-action="click->exercise-checker#checkAnswers"
+              title="Controlla">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="hidden md:inline text-xl">Controlla</span>
+      </button>
+      
+      <!-- Solve Button -->
+      <button class="<%= colors[:secondary] %> text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-14 h-14 md:w-auto md:h-auto"
+              data-action="click->exercise-checker#showSolutions"
+              title="Soluzioni">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+        <span class="hidden md:inline text-xl">Soluzioni</span>
+      </button>
+      
+      <!-- Reset Button -->
+      <button class="border-2 <%= colors[:outline] %> bg-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-14 h-14 md:w-auto md:h-auto"
+              data-action="click->exercise-checker#resetExercise"
+              title="Ricomincia">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        <span class="hidden md:inline text-xl">Ricomincia</span>
+      </button>
+    </div>
+    
+    <!-- Next Page Button -->
+    <div class="flex-shrink-0">
+      <% if next_page %>
+        <%= link_to pagina_path(next_page.slug), 
+            data: { turbo_frame: "_top" },
+            class: "flex items-center justify-center #{colors[:primary]} text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 w-14 h-14 md:w-auto md:h-auto" do %>
+          <span class="text-xl md:text-2xl font-bold text-white">→</span>
+        <% end %>
+      <% else %>
+        <div class="flex items-center justify-center bg-gray-300 text-gray-500 font-bold rounded-full cursor-not-allowed opacity-50 w-14 h-14 md:w-auto md:h-auto md:py-4 md:px-8">
+          <span class="text-xl md:text-2xl font-bold text-white">→</span>
+        </div>
       <% end %>
-    <% else %>
-      <div class="flex items-center gap-2 border-2 border-gray-300 text-gray-400 bg-gray-100 font-bold py-3 px-6 rounded-full cursor-not-allowed opacity-50">
-
-        <span class="text-xl">→</span>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>
 

@@ -39,13 +39,13 @@
   </div>
 
   <!-- Exercise 1: Completa con GNI, GN o NI -->
-  <div class="mb-12 bg-white rounded-lg p-6 shadow-md">
-    <h2 class="text-2xl font-bold text-pink-600 mb-6">
-      <span class="bg-pink-600 text-white rounded-full w-10 h-10 inline-flex items-center justify-center mr-2">1</span>
+  <div class="mb-12 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-xl md:text-2xl font-bold text-pink-600 mb-4 md:mb-6">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2 text-sm md:text-base">1</span>
       IMPARARE TUTTI Completa con <span class="font-bold">GNI, GN</span> o <span class="font-bold">NI</span>.
     </h2>
 
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-6" data-controller="fill-blanks">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6" data-controller="fill-blanks">
       <% completions = [
         {prefix: 'mi', suffix: 'era', answer: 'ni'},
         {prefix: 'inse', suffix: 'amo', answer: 'gni'},
@@ -60,15 +60,15 @@
       ] %>
 
       <% completions.each do |item| %>
-        <div class="flex items-center gap-1 text-xl font-bold">
-          <span>• <%= item[:prefix] %></span>
+        <div class="flex flex-wrap items-center gap-1 md:gap-2 text-base md:text-xl font-bold">
+          <span class="whitespace-nowrap">• <%= item[:prefix] %></span>
           <input type="text"
-                 class="border-b-4 border-pink-500 bg-transparent w-16 text-center focus:outline-none focus:border-pink-700"
+                 class="border-b-4 border-pink-500 bg-transparent w-12 md:w-16 text-center focus:outline-none focus:border-pink-700 flex-shrink-0"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:answer] %>"
                  data-correct-answer="<%= item[:answer] %>"
                  maxlength="3">
-          <span><%= item[:suffix] %></span>
+          <span class="whitespace-nowrap"><%= item[:suffix] %></span>
         </div>
       <% end %>
     </div>
@@ -80,13 +80,13 @@
   </div>
 
   <!-- Exercise 2: Completa con compagna o compagnia -->
-  <div class="mb-12 bg-white rounded-lg p-6 shadow-md">
-    <h2 class="text-2xl font-bold text-pink-600 mb-6">
-      <span class="bg-pink-600 text-white rounded-full w-10 h-10 inline-flex items-center justify-center mr-2">2</span>
+  <div class="mb-12 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-xl md:text-2xl font-bold text-pink-600 mb-4 md:mb-6">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2 text-sm md:text-base">2</span>
       Completa con <span class="text-blue-600 font-bold">compagna</span> o <span class="text-blue-600 font-bold">compagnia</span>.
     </h2>
 
-    <div class="space-y-4">
+    <div class="space-y-3 md:space-y-4">
       <% sentences = [
         {text: 'Giulia è una nuova', answer: 'compagna'},
         {text: 'Ti facciamo', answer: 'compagnia'},
@@ -95,34 +95,34 @@
       ] %>
 
       <% sentences.each do |item| %>
-        <div class="flex items-center gap-3">
-          <span class="text-xl">•</span>
-          <span class="text-xl font-semibold"><%= item[:text] %></span>
+        <div class="flex flex-wrap items-center gap-2 md:gap-3">
+          <span class="text-lg md:text-xl flex-shrink-0">•</span>
+          <span class="text-base md:text-xl font-semibold"><%= item[:text] %></span>
           <input type="text"
-                 class="border-b-2 border-pink-500 bg-transparent flex-1 max-w-xs text-xl font-bold focus:outline-none focus:border-pink-700 px-2"
+                 class="border-b-2 border-pink-500 bg-transparent flex-1 min-w-[120px] md:max-w-xs text-base md:text-xl font-bold focus:outline-none focus:border-pink-700 px-2"
                  data-answer="<%= item[:answer] %>"
                  data-correct-answer="<%= item[:answer] %>"
-                 placeholder="..................">
-          <span class="text-xl font-semibold">.</span>
+                 >
+          <span class="text-lg md:text-xl font-semibold flex-shrink-0">.</span>
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- GIOCO: Crossword -->
-  <div class="mb-12 bg-gradient-to-r from-yellow-100 via-orange-100 to-red-100 rounded-lg p-6 shadow-lg border-4 border-yellow-400">
+  <div class="mb-12 bg-gradient-to-r from-yellow-100 via-orange-100 to-red-100 rounded-lg p-4 md:p-6 shadow-lg border-4 border-yellow-400">
     <div class="flex items-center gap-3 mb-4">
-      <span class="text-4xl">🎮</span>
-      <h2 class="text-3xl font-bold" style="color: #ff6b35;">GIOCO</h2>
+      <span class="text-3xl md:text-4xl">🎮</span>
+      <h2 class="text-2xl md:text-3xl font-bold" style="color: #ff6b35;">GIOCO</h2>
     </div>
 
-    <h3 class="text-xl font-bold text-gray-800 mb-6">Completa lo schema.</h3>
+    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4 md:mb-6">Completa lo schema.</h3>
 
-    <div class="grid md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-8">
       <!-- Clues -->
-      <div class="bg-white rounded-lg p-6">
-        <h4 class="font-bold text-lg mb-4">Definizioni:</h4>
-        <ol class="space-y-3 text-lg">
+      <div class="bg-white rounded-lg p-4 md:p-6 md:max-w-xs">
+        <h4 class="font-bold text-base md:text-lg mb-3 md:mb-4">Definizioni:</h4>
+        <ol class="space-y-2 md:space-y-3 text-sm md:text-base">
           <li><span class="font-bold text-pink-600">1.</span> Si stende sul tavolo per apparecchiare.</li>
           <li><span class="font-bold text-pink-600">2.</span> Ci fa ridere al circo.</li>
           <li><span class="font-bold text-pink-600">3.</span> Se l'appoggi all'orecchio, senti il mare.</li>
@@ -132,62 +132,54 @@
       </div>
 
       <!-- Crossword grid -->
-      <div class="bg-white rounded-lg p-6">
-        <h4 class="font-bold text-lg mb-4">Schema:</h4>
-        <div class="space-y-2" data-controller="crossword">
+      <div class="bg-white rounded-lg p-4 md:p-6 md:overflow-x-auto">
+        <h4 class="font-bold text-base md:text-lg mb-3 md:mb-4">Schema:</h4>
+        <div class="space-y-4 md:space-y-6" data-controller="crossword">
           <!-- Row 1: TOVAGLIA -->
-          <div class="flex gap-1 items-center">
-            <span class="font-bold text-pink-600 w-6">1</span>
-            <input type="text" maxlength="1" class="w-10 h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none" data-answer="T" data-correct-answer="T">
+          <div class="flex flex-wrap md:flex-nowrap gap-1 items-center">
+            <span class="font-bold text-pink-600 w-6 flex-shrink-0">1</span>
+            <input type="text" maxlength="1" class="w-8 h-8 md:w-10 md:h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none text-sm md:text-base flex-shrink-0" data-answer="T" data-correct-answer="T">
             <% 'OVAGLIA'.chars.each do |char| %>
-              <input type="text" maxlength="1" class="w-10 h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none" data-answer="<%= char %>" data-correct-answer="<%= char %>">
+              <input type="text" maxlength="1" class="w-8 h-8 md:w-10 md:h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none text-sm md:text-base flex-shrink-0" data-answer="<%= char %>" data-correct-answer="<%= char %>">
             <% end %>
           </div>
 
           <!-- Row 2: PAGLIACCIO -->
-          <div class="flex gap-1 items-center">
-            <span class="font-bold text-pink-600 w-6">2</span>
-            <input type="text" maxlength="1" class="w-10 h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none" data-answer="P" data-correct-answer="P">
+          <div class="flex flex-wrap md:flex-nowrap gap-1 items-center">
+            <span class="font-bold text-pink-600 w-6 flex-shrink-0">2</span>
+            <input type="text" maxlength="1" class="w-8 h-8 md:w-10 md:h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none text-sm md:text-base flex-shrink-0" data-answer="P" data-correct-answer="P">
             <% 'AGLIACCIO'.chars.each do |char| %>
-              <input type="text" maxlength="1" class="w-10 h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none" data-answer="<%= char %>" data-correct-answer="<%= char %>">
+              <input type="text" maxlength="1" class="w-8 h-8 md:w-10 md:h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none text-sm md:text-base flex-shrink-0" data-answer="<%= char %>" data-correct-answer="<%= char %>">
             <% end %>
           </div>
 
           <!-- Row 3: CONCHIGLIA -->
-          <div class="flex gap-1 items-center">
-            <span class="font-bold text-pink-600 w-6">3</span>
-            <input type="text" maxlength="1" class="w-10 h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none" data-answer="C" data-correct-answer="C">
+          <div class="flex flex-wrap md:flex-nowrap gap-1 items-center">
+            <span class="font-bold text-pink-600 w-6 flex-shrink-0">3</span>
+            <input type="text" maxlength="1" class="w-8 h-8 md:w-10 md:h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none text-sm md:text-base flex-shrink-0" data-answer="C" data-correct-answer="C">
             <% 'ONCHIGLIA'.chars.each do |char| %>
-              <input type="text" maxlength="1" class="w-10 h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none" data-answer="<%= char %>" data-correct-answer="<%= char %>">
+              <input type="text" maxlength="1" class="w-8 h-8 md:w-10 md:h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none text-sm md:text-base flex-shrink-0" data-answer="<%= char %>" data-correct-answer="<%= char %>">
             <% end %>
           </div>
 
           <!-- Row 4: IGLÙ -->
-          <div class="flex gap-1 items-center">
-            <span class="font-bold text-pink-600 w-6">4</span>
-            <div class="w-10"></div>
-            <div class="w-10"></div>
-            <div class="w-10"></div>
-            <input type="text" maxlength="1" class="w-10 h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none" data-answer="I" data-correct-answer="I">
+          <div class="flex flex-wrap md:flex-nowrap gap-1 items-center">
+            <span class="font-bold text-pink-600 w-6 flex-shrink-0">4</span>
+            <input type="text" maxlength="1" class="w-8 h-8 md:w-10 md:h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none text-sm md:text-base flex-shrink-0" data-answer="I" data-correct-answer="I">
             <% 'GLÙ'.chars.each do |char| %>
-              <input type="text" maxlength="1" class="w-10 h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none" data-answer="<%= char %>" data-correct-answer="<%= char %>">
+              <input type="text" maxlength="1" class="w-8 h-8 md:w-10 md:h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none text-sm md:text-base flex-shrink-0" data-answer="<%= char %>" data-correct-answer="<%= char %>">
             <% end %>
           </div>
 
           <!-- Row 5: GIOIELLIERE -->
-          <div class="flex gap-1 items-center">
-            <span class="font-bold text-pink-600 w-6">5</span>
-            <input type="text" maxlength="1" class="w-10 h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none" data-answer="G" data-correct-answer="G">
+          <div class="flex flex-wrap md:flex-nowrap gap-1 items-center">
+            <span class="font-bold text-pink-600 w-6 flex-shrink-0">5</span>
+            <input type="text" maxlength="1" class="w-8 h-8 md:w-10 md:h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none text-sm md:text-base flex-shrink-0" data-answer="G" data-correct-answer="G">
             <% 'IOIELLIERE'.chars.each do |char| %>
-              <input type="text" maxlength="1" class="w-10 h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none" data-answer="<%= char %>" data-correct-answer="<%= char %>">
+              <input type="text" maxlength="1" class="w-8 h-8 md:w-10 md:h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none text-sm md:text-base flex-shrink-0" data-answer="<%= char %>" data-correct-answer="<%= char %>">
             <% end %>
           </div>
         </div>
-
-        <button class="mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full transition"
-                data-action="click->crossword#checkAnswers">
-          Controlla Cruciverba
-        </button>
       </div>
     </div>
   </div>

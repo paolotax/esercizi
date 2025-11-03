@@ -40,7 +40,7 @@
   </div>
 
   <!-- Exercise 1: Classify GL words -->
-  <div class="mb-12 bg-white rounded-lg p-6 shadow-md">
+  <div class="mb-12 bg-white rounded-lg p-6 shadow-md" data-controller="word-sorter">
     <h2 class="text-2xl font-bold text-pink-600 mb-6">
       <span class="bg-pink-600 text-white rounded-full w-10 h-10 inline-flex items-center justify-center mr-2">1</span>
       IMPARARE TUTTI Scrivi le seguenti parole nella scatola giusta.
@@ -51,12 +51,12 @@
       <div class="flex flex-wrap gap-3 justify-center">
         <% words_list = ['maniglia', 'aglio', 'inglese', 'sogliola', 'coniglio', 'glutine', 'maglione', 'globo', 'ciglio', 'migliaia', 'biglietto', 'glaciale'] %>
         <% words_list.each do |word| %>
-          <span class="bg-white border-2 border-pink-300 px-4 py-2 rounded-lg font-bold text-lg">• <%= word %></span>
+          <span class="bg-white border-2 border-pink-300 px-4 py-2 rounded-lg font-bold text-lg select-none transition hover:bg-pink-50 hover:shadow-md" data-word-sorter-target="word">• <%= word %></span>
         <% end %>
       </div>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-6" data-controller="word-sorter">
+    <div class="grid md:grid-cols-2 gap-6">
       <!-- GL - Suono Dolce -->
       <div class="border-4 border-red-400 rounded-lg p-6 bg-yellow-50">
         <h3 class="text-2xl font-bold text-red-600 mb-4 text-center">GL - SUONO DOLCE</h3>
@@ -66,8 +66,7 @@
             <input type="text"
                    class="w-full border-b-2 border-gray-400 bg-transparent text-lg font-bold focus:outline-none focus:border-red-500 py-2"
                    data-word-sorter-target="input"
-                   data-correct-answer="<%= dolce_words[i] %>"
-                   placeholder="..........................................">
+                   data-correct-answer="<%= dolce_words[i] %>">
           <% end %>
         </div>
       </div>
@@ -77,12 +76,11 @@
         <h3 class="text-2xl font-bold text-blue-600 mb-4 text-center">GL - SUONO DURO</h3>
         <div class="space-y-2">
           <% duro_words = ['inglese', 'glutine', 'globo', 'glaciale'] %>
-          <% 4.times do |i| %>
+          <% 8.times do |i| %>
             <input type="text"
                    class="w-full border-b-2 border-gray-400 bg-transparent text-lg font-bold focus:outline-none focus:border-blue-500 py-2"
                    data-word-sorter-target="input"
-                   data-correct-answer="<%= duro_words[i] %>"
-                   placeholder="..........................................">
+                   data-correct-answer="<%= duro_words[i] || '' %>">
           <% end %>
         </div>
       </div>
@@ -95,17 +93,17 @@
   </div>
 
   <!-- Exercise 2: GLI o LI? -->
-  <div class="mb-12 bg-white rounded-lg p-6 shadow-md">
-    <div class="flex items-start gap-4 mb-6">
+  <div class="mb-12 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <div class="flex flex-col md:flex-row md:items-start gap-4 mb-6">
       <div class="flex-1">
-        <h2 class="text-2xl font-bold text-pink-600 mb-4">
-          <span class="bg-pink-600 text-white rounded-full w-10 h-10 inline-flex items-center justify-center mr-2">2</span>
+        <h2 class="text-xl md:text-2xl font-bold text-pink-600 mb-4">
+          <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2 text-sm md:text-base">2</span>
           GLI o LI? Completa.
         </h2>
       </div>
-      <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4 max-w-md">
-        <p class="text-sm font-bold text-gray-800 mb-2">Si usa <span class="text-pink-600">LI</span> al posto di <span class="text-pink-600">GLI</span>:</p>
-        <ul class="text-sm space-y-1">
+      <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-3 md:p-4 w-full md:max-w-md">
+        <p class="text-xs md:text-sm font-bold text-gray-800 mb-2">Si usa <span class="text-pink-600">LI</span> al posto di <span class="text-pink-600">GLI</span>:</p>
+        <ul class="text-xs md:text-sm space-y-1">
           <li>• nella sillaba iniziale di parola → <span class="font-bold">lieve, lieta</span>...</li>
           <li>• quando la <span class="font-bold">L</span> raddoppia in <span class="font-bold">LL</span> → <span class="font-bold">allieva, cancelliere</span>...</li>
           <li>• in alcune parole → <span class="font-bold">olio, Italia</span>...</li>
@@ -113,7 +111,7 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-6" data-controller="fill-blanks">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" data-controller="fill-blanks">
       <% completions = [
         {prefix: 'gioco', suffix: 'ere', answer: 'li'},
         {prefix: 'ci', suffix: 'egia', answer: 'li'},
@@ -127,15 +125,15 @@
       ] %>
 
       <% completions.each do |item| %>
-        <div class="flex items-center gap-1 text-xl font-bold">
-          <span>• <%= item[:prefix] %></span>
+        <div class="flex flex-wrap items-center gap-1 md:gap-2 text-base md:text-xl font-bold">
+          <span class="whitespace-nowrap">• <%= item[:prefix] %></span>
           <input type="text"
-                 class="border-b-4 border-pink-500 bg-transparent w-16 text-center focus:outline-none focus:border-pink-700"
+                 class="border-b-4 border-pink-500 bg-transparent w-12 md:w-16 text-center focus:outline-none focus:border-pink-700 flex-shrink-0"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:answer] %>"
                  data-correct-answer="<%= item[:answer] %>"
                  maxlength="3">
-          <span><%= item[:suffix] %></span>
+          <span class="whitespace-nowrap"><%= item[:suffix] %></span>
         </div>
       <% end %>
     </div>
@@ -147,7 +145,7 @@
   </div>
 
   <!-- GIOCO: Find the error -->
-  <div class="mb-12 bg-gradient-to-r from-yellow-100 via-orange-100 to-red-100 rounded-lg p-6 shadow-lg border-4 border-yellow-400">
+  <div class="mb-12 bg-gradient-to-r from-yellow-100 via-orange-100 to-red-100 rounded-lg p-6 shadow-lg border-4 border-yellow-400" data-controller="error-finder">
     <div class="flex items-center gap-3 mb-4">
       <span class="text-4xl">🎮</span>
       <h2 class="text-3xl font-bold" style="color: #ff6b35;">GIOCO</h2>
@@ -157,40 +155,40 @@
 
     <div class="grid md:grid-cols-3 gap-4">
       <!-- Box 1 -->
-      <div class="bg-cyan-100 border-4 border-cyan-300 rounded-lg p-6">
+      <div class="bg-cyan-100 border-4 border-cyan-300 rounded-lg p-6 error-group">
         <div class="space-y-3 text-center">
-          <div class="text-2xl font-bold">Australia</div>
-          <div class="text-2xl font-bold">Italia</div>
-          <div class="text-2xl font-bold text-red-600">Puglia</div>
-          <div class="text-2xl font-bold">Sicilia</div>
+          <div class="text-2xl font-bold px-2 py-1 rounded" data-error-finder-target="word" data-error="false" data-action="click->error-finder#selectWord">Australia</div>
+          <div class="text-2xl font-bold px-2 py-1 rounded" data-error-finder-target="word" data-error="false" data-action="click->error-finder#selectWord">Italia</div>
+          <div class="text-2xl font-bold px-2 py-1 rounded" data-error-finder-target="word" data-error="true" data-action="click->error-finder#selectWord">Puglia</div>
+          <div class="text-2xl font-bold px-2 py-1 rounded" data-error-finder-target="word" data-error="false" data-action="click->error-finder#selectWord">Sicilia</div>
         </div>
-        <div class="mt-4 text-sm text-gray-600 italic">
+        <div class="mt-4 text-sm text-gray-600 italic hidden" data-error-finder-target="hint">
           (Errore: Puglia non ha GL/LI)
         </div>
       </div>
 
       <!-- Box 2 -->
-      <div class="bg-pink-100 border-4 border-pink-300 rounded-lg p-6">
+      <div class="bg-pink-100 border-4 border-pink-300 rounded-lg p-6 error-group">
         <div class="space-y-3 text-center">
-          <div class="text-2xl font-bold">coniglio</div>
-          <div class="text-2xl font-bold">trifoglio</div>
-          <div class="text-2xl font-bold text-red-600">paglia</div>
-          <div class="text-2xl font-bold">cespuglio</div>
+          <div class="text-2xl font-bold px-2 py-1 rounded" data-error-finder-target="word" data-error="false" data-action="click->error-finder#selectWord">coniglio</div>
+          <div class="text-2xl font-bold px-2 py-1 rounded" data-error-finder-target="word" data-error="false" data-action="click->error-finder#selectWord">trifoglio</div>
+          <div class="text-2xl font-bold px-2 py-1 rounded" data-error-finder-target="word" data-error="true" data-action="click->error-finder#selectWord">paglia</div>
+          <div class="text-2xl font-bold px-2 py-1 rounded" data-error-finder-target="word" data-error="false" data-action="click->error-finder#selectWord">cespuglio</div>
         </div>
-        <div class="mt-4 text-sm text-gray-600 italic">
+        <div class="mt-4 text-sm text-gray-600 italic hidden" data-error-finder-target="hint">
           (Errore: paglia dovrebbe essere paglio se seguisse il pattern)
         </div>
       </div>
 
       <!-- Box 3 -->
-      <div class="bg-green-100 border-4 border-green-300 rounded-lg p-6">
+      <div class="bg-green-100 border-4 border-green-300 rounded-lg p-6 error-group">
         <div class="space-y-3 text-center">
-          <div class="text-2xl font-bold">lavastoviglie</div>
-          <div class="text-2xl font-bold text-red-600">bottiglia</div>
-          <div class="text-2xl font-bold">tovalia</div>
-          <div class="text-2xl font-bold">tovagliolo</div>
+          <div class="text-2xl font-bold px-2 py-1 rounded" data-error-finder-target="word" data-error="false" data-action="click->error-finder#selectWord">lavastoviglie</div>
+          <div class="text-2xl font-bold px-2 py-1 rounded" data-error-finder-target="word" data-error="false" data-action="click->error-finder#selectWord">bottiglia</div>
+          <div class="text-2xl font-bold px-2 py-1 rounded" data-error-finder-target="word" data-error="true" data-action="click->error-finder#selectWord">tovalia</div>
+          <div class="text-2xl font-bold px-2 py-1 rounded" data-error-finder-target="word" data-error="false" data-action="click->error-finder#selectWord">tovagliolo</div>
         </div>
-        <div class="mt-4 text-sm text-gray-600 italic">
+        <div class="mt-4 text-sm text-gray-600 italic hidden" data-error-finder-target="hint">
           (Errore: tovalia dovrebbe essere tovaglia)
         </div>
       </div>

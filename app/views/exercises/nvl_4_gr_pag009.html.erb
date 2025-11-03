@@ -34,7 +34,7 @@
       Completa con <span class="font-bold">CE</span> o <span class="font-bold">CIE</span>.
     </h2>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6" data-controller="fill-blanks">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" data-controller="fill-blanks">
       <% completions = [
         {prefix: 'gratta', suffix: 'lo', answer: 'cie'},
         {prefix: '', suffix: 'lo', answer: 'cie'},
@@ -42,28 +42,28 @@
         {prefix: 'vin', suffix: 're', answer: 'ce'},
         {prefix: 'insuffi', suffix: 'nte', answer: 'cie'},
         {prefix: 'no', suffix: '', answer: 'ce'},
-        {prefix: 'a', suffix: 'to', answer: 'cie'},
+        {prefix: 'a', suffix: 'to', answer: 'ce'},
         {prefix: 'dol', suffix: 'zza', answer: 'ce'},
         {prefix: 'pastic', suffix: 're', answer: 'cie'},
         {prefix: '', suffix: 'rvello', answer: 'ce'},
         {prefix: '', suffix: 'mento', answer: 'ci'},
         {prefix: 'dol', suffix: '', answer: 'ce'},
         {prefix: '', suffix: 'rtificato', answer: 'ce'},
-        {prefix: 'so', suffix: 'età', answer: 'ci'},
+        {prefix: 'so', suffix: 'età', answer: 'ce'},
         {prefix: '', suffix: 'triolo', answer: 'ce'},
         {prefix: 'corni', suffix: '', answer: 'ce'}
       ] %>
 
       <% completions.each_with_index do |item, idx| %>
-        <div class="flex items-center gap-1 text-xl font-bold">
-          <span>• <%= item[:prefix] %></span>
+        <div class="flex flex-wrap items-center gap-1 md:gap-2 text-base md:text-xl font-bold">
+          <span class="whitespace-nowrap">• <%= item[:prefix] %></span>
           <input type="text"
-                 class="border-b-4 border-pink-500 bg-transparent w-16 text-center focus:outline-none focus:border-pink-700"
+                 class="border-b-4 border-pink-500 bg-transparent w-12 md:w-16 text-center focus:outline-none focus:border-pink-700 flex-shrink-0"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:answer] %>"
                  data-correct-answer="<%= item[:answer] %>"
                  maxlength="3">
-          <span><%= item[:suffix] %></span>
+          <span class="whitespace-nowrap"><%= item[:suffix] %></span>
         </div>
       <% end %>
     </div>
@@ -92,11 +92,11 @@
       ] %>
 
       <% plurals.each do |item| %>
-        <div class="flex items-center gap-3">
-          <span class="text-xl font-bold">• <%= item[:singular] %></span>
-          <span class="text-2xl text-pink-500">→</span>
+        <div class="flex flex-wrap items-center gap-2 md:gap-3">
+          <span class="text-base md:text-xl font-bold whitespace-nowrap">• <%= item[:singular] %></span>
+          <span class="text-xl md:text-2xl text-pink-500 flex-shrink-0">→</span>
           <input type="text"
-                 class="border-b-4 border-pink-500 bg-transparent flex-1 text-xl font-bold focus:outline-none focus:border-pink-700"
+                 class="border-b-4 border-pink-500 bg-transparent flex-1 min-w-[120px] text-base md:text-xl font-bold focus:outline-none focus:border-pink-700"
                  data-plurals-target="input"
                  data-answer="<%= item[:plural] %>"
                  data-correct-answer="<%= item[:plural] %>"
@@ -129,10 +129,11 @@
       ] %>
 
       <% phrases.each do |item| %>
-        <div class="border-l-4 border-pink-500 pl-4">
-          <div class="text-lg font-semibold text-gray-600 mb-2">• <%= item[:singular] %></div>
+        <div class="flex flex-wrap items-center gap-2 md:gap-3 border-l-4 border-pink-500 pl-3 md:pl-4">
+          <span class="text-base md:text-lg font-semibold text-gray-600 whitespace-nowrap">• <%= item[:singular] %></span>
+          <span class="text-xl md:text-2xl text-pink-500 flex-shrink-0">→</span>
           <input type="text"
-                 class="w-full border-b-2 border-gray-300 focus:border-pink-500 bg-transparent text-lg font-bold focus:outline-none py-2"
+                 class="flex-1 min-w-[150px] border-b-2 border-gray-300 focus:border-pink-500 bg-transparent text-base md:text-lg font-bold focus:outline-none py-2"
                  data-plurals-target="input"
                  data-answer="<%= item[:plural] %>"
                  data-correct-answer="<%= item[:plural] %>"

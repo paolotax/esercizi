@@ -2,9 +2,8 @@ class PagineController < ApplicationController
   def show
     @pagina = Pagina.find_by!(slug: params[:slug])
 
-    # Set the page title for the header with full path: Corso - Volume - Disciplina
+    # Set the page title for the header: Volume - Disciplina
     parts = []
-    parts << @pagina.corso.nome if @pagina.corso
     parts << @pagina.volume.nome if @pagina.volume
     parts << @pagina.disciplina.nome if @pagina.disciplina
     @page_title = parts.join(" - ")
