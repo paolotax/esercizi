@@ -1,12 +1,26 @@
+<!-- Overlay per mobile -->
+<div id="sidebar-overlay" 
+     class="print-hidden fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"
+     data-sidebar-target="overlay"
+     data-action="click->sidebar#close"></div>
+
 <aside id="sidebar-nav"
-       class="print-hidden w-80 bg-white border-r border-gray-200 overflow-y-auto transition-all duration-300"
+       class="print-hidden w-80 bg-white border-r border-gray-200 overflow-y-auto transition-all duration-300 fixed md:static inset-y-0 left-0 z-50 md:z-auto"
        data-sidebar-target="sidebar"
        data-controller="sidebar-nav"
        data-turbo-permanent>
 
   <!-- Header -->
   <div class="p-4 border-b border-gray-200">
-    <h2 class="text-lg font-bold text-gray-800">Libri di Testo</h2>
+    <div class="flex items-center justify-center mb-4">
+      <!-- Home button -->
+      <%= link_to root_path,
+          data: { turbo_frame: "_top" },
+          class: "flex items-center justify-center hover:opacity-80 transition" do %>
+        <%= image_tag "giunti_scuola.svg", alt: "Giunti Scuola", class: "h-12 w-auto" %>
+      <% end %>
+    </div>
+    <h2 class="text-lg font-bold text-gray-800 text-center">Libri di Testo</h2>
   </div>
 
   <!-- Menu Content -->

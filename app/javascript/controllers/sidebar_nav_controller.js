@@ -176,6 +176,15 @@ export default class extends Controller {
   highlightCurrentPage() {
     const currentPath = window.location.pathname
     
+    // Se siamo sulla home, non evidenziare nulla
+    if (currentPath === '/' || currentPath === '') {
+      const links = this.element.querySelectorAll('a')
+      links.forEach(link => {
+        link.classList.remove('bg-blue-100', 'border-l-4', 'border-blue-500')
+      })
+      return
+    }
+    
     // Normalizza il path (rimuove trailing slash se presente, tranne root)
     const normalizedPath = currentPath === '/' ? '/' : currentPath.replace(/\/$/, '')
     
@@ -186,9 +195,14 @@ export default class extends Controller {
       link.classList.remove('bg-blue-100', 'border-l-4', 'border-blue-500')
     })
 
-    // Poi evidenzia il link corrente
+    // Poi evidenzia il link corrente (escludendo il link home)
     links.forEach(link => {
       const linkHref = link.getAttribute('href')
+      
+      // Salta il link home (root path)
+      if (linkHref === '/' || linkHref === '') {
+        return
+      }
       
       // Normalizza anche l'href del link
       const normalizedHref = linkHref === '/' ? '/' : linkHref.replace(/\/$/, '')
