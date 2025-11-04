@@ -16,6 +16,12 @@ export default class extends Controller {
     if (element.classList.contains('bg-pink-300')) return 'pink'
     if (element.classList.contains('bg-blue-300')) return 'blue'
     if (element.classList.contains('bg-green-300')) return 'green'
+    if (element.classList.contains('bg-orange-300')) return 'orange'
+    if (element.classList.contains('bg-purple-300')) return 'purple'
+    if (element.classList.contains('bg-cyan-300')) return 'cyan'
+    if (element.classList.contains('bg-teal-300')) return 'teal'
+    if (element.classList.contains('bg-indigo-300')) return 'indigo'
+    if (element.classList.contains('bg-red-300')) return 'red'
     return null
   }
 
@@ -56,7 +62,11 @@ export default class extends Controller {
     wordElement.classList.remove(
       'bg-yellow-200', 'bg-pink-200', 'bg-blue-200', 'bg-green-200',
       'bg-yellow-300', 'bg-pink-300', 'bg-blue-300', 'bg-green-300',
+      'bg-orange-300', 'bg-purple-300', 'bg-cyan-300', 'bg-teal-300',
+      'bg-indigo-300', 'bg-red-300',
       'text-yellow-900', 'text-pink-900', 'text-blue-900', 'text-green-900',
+      'text-orange-900', 'text-purple-900', 'text-cyan-900', 'text-teal-900',
+      'text-indigo-900', 'text-red-900',
       'font-bold', 'px-1', 'rounded', 'underline', 'animate-pulse'
     )
     
@@ -78,7 +88,13 @@ export default class extends Controller {
       'yellow': ['bg-yellow-300', 'text-yellow-900', 'font-bold', 'px-1', 'rounded'],
       'pink': ['bg-pink-300', 'text-pink-900', 'font-bold', 'px-1', 'rounded'],
       'blue': ['bg-blue-300', 'text-blue-900', 'font-bold', 'px-1', 'rounded'],
-      'green': ['bg-green-300', 'text-green-900', 'font-bold', 'px-1', 'rounded']
+      'green': ['bg-green-300', 'text-green-900', 'font-bold', 'px-1', 'rounded'],
+      'orange': ['bg-orange-300', 'text-orange-900', 'font-bold', 'px-1', 'rounded'],
+      'purple': ['bg-purple-300', 'text-purple-900', 'font-bold', 'px-1', 'rounded'],
+      'cyan': ['bg-cyan-300', 'text-cyan-900', 'font-bold', 'px-1', 'rounded'],
+      'teal': ['bg-teal-300', 'text-teal-900', 'font-bold', 'px-1', 'rounded'],
+      'indigo': ['bg-indigo-300', 'text-indigo-900', 'font-bold', 'px-1', 'rounded'],
+      'red': ['bg-red-300', 'text-red-900', 'font-bold', 'px-1', 'rounded']
     }
     
     return colorMap[color] || []
@@ -91,7 +107,11 @@ export default class extends Controller {
       word.classList.remove(
         'bg-yellow-200', 'bg-pink-200', 'bg-blue-200', 'bg-green-200',
         'bg-yellow-300', 'bg-pink-300', 'bg-blue-300', 'bg-green-300',
+        'bg-orange-300', 'bg-purple-300', 'bg-cyan-300', 'bg-teal-300',
+        'bg-indigo-300', 'bg-red-300',
         'text-yellow-900', 'text-pink-900', 'text-blue-900', 'text-green-900',
+        'text-orange-900', 'text-purple-900', 'text-cyan-900', 'text-teal-900',
+        'text-indigo-900', 'text-red-900',
         'font-bold', 'px-1', 'rounded', 'underline', 'animate-pulse'
       )
     })

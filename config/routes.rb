@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   namespace :strumenti do
     get "addizioni", to: "addizioni#show", as: "addizioni"
     get "sottrazioni", to: "sottrazioni#show", as: "sottrazioni"
+    get "le_rime", to: "le_rime#show", as: "le_rime"
   end
 
   # Defines the root path route ("/")

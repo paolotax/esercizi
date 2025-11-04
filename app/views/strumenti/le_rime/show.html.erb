@@ -1,0 +1,157 @@
+<% content_for :titolo, "Le Rime - Strumenti" %>
+
+<div class="max-w-6xl mx-auto px-6 py-8" data-controller="rhyme-highlighter exercise-checker">
+  <!-- Form section -->
+  <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Generatore di Esercizi sulle Rime</h1>
+
+    <p class="text-gray-600 mb-4">
+      Incolla una poesia (una riga per volta) e lo strumento rileverà automaticamente le rime.
+      Le parole in rima saranno evidenziabili con colori diversi.
+    </p>
+
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+      <p class="text-blue-900 text-sm">
+        <strong>Esempio:</strong><br>
+        Oggi il mio bambino è di cattivo umore,<br>
+        allora gli preparo la torta con le more.<br>
+        Se il suo viso rimane imbronciato,<br>
+        corro subito a comprare il gelato.
+      </p>
+    </div>
+
+    <%= form_with url: strumenti_le_rime_path, method: :get, local: true,
+                  data: { turbo: false },
+                  class: "mb-8" do |f| %>
+      <div class="mb-4">
+        <%= f.label :poesia, "Incolla la poesia (una riga per volta):", class: "block text-gray-700 font-semibold mb-2" %>
+        <%= f.text_area :poesia,
+                        value: @poesia,
+                        placeholder: "Oggi il mio bambino è di cattivo umore,\nallora gli preparo la torta con le more.\nSe il suo viso rimane imbronciato,\ncorro subito a comprare il gelato.",
+                        rows: 10,
+                        class: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-sm font-serif" %>
+      </div>
+
+      <div class="flex gap-4">
+        <%= f.submit "Genera Esercizio",
+                    class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+
+        <% if @poesia.present? %>
+          <%= link_to "Cancella", strumenti_le_rime_path,
+                      class: "bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @poesia.present? && @rhyme_groups.blank? %>
+      <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4">
+        <p class="text-yellow-900">
+          <strong>Attenzione:</strong> Non sono state rilevate rime nella poesia.
+          Assicurati che le parole finali delle righe facciano rima.
+        </p>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Exercise section -->
+  <% if @rhyme_groups && @rhyme_groups.any? %>
+    <div class="bg-white rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Esercizio: Colora le Rime</h2>
+
+      <!-- Color selection boxes -->
+      <div class="flex items-center gap-3 mb-6 flex-wrap">
+        <span class="text-gray-700 text-sm font-semibold">Sottolinea con colori diversi le rime:</span>
+        <div class="flex gap-2 items-center flex-wrap">
+          <% 
+            # Available colors - expand if needed
+            available_colors = [
+              { name: 'yellow', label: 'Giallo', bg: 'bg-yellow-400' },
+              { name: 'pink', label: 'Rosa', bg: 'bg-pink-400' },
+              { name: 'blue', label: 'Blu', bg: 'bg-blue-400' },
+              { name: 'green', label: 'Verde', bg: 'bg-green-400' },
+              { name: 'orange', label: 'Arancione', bg: 'bg-orange-400' },
+              { name: 'purple', label: 'Viola', bg: 'bg-purple-400' },
+              { name: 'cyan', label: 'Ciano', bg: 'bg-cyan-400' },
+              { name: 'teal', label: 'Turchese', bg: 'bg-teal-400' },
+              { name: 'indigo', label: 'Indaco', bg: 'bg-indigo-400' },
+              { name: 'red', label: 'Rosso', bg: 'bg-red-400' }
+            ]
+            # Show only as many colors as rhyme groups
+            colors_to_show = available_colors.first(@rhyme_groups.length)
+          %>
+          <% colors_to_show.each do |color| %>
+            <button class="w-6 h-6 <%= color[:bg] %> rounded border-2 border-gray-300 hover:scale-110 transition cursor-pointer shadow-md"
+                    data-rhyme-highlighter-target="colorBox"
+                    data-color="<%= color[:name] %>"
+                    data-action="click->rhyme-highlighter#selectColor"
+                    title="<%= color[:label] %>">
+            </button>
+          <% end %>
+        </div>
+        <button class="text-xs text-gray-600 hover:text-gray-800 underline"
+                data-action="click->rhyme-highlighter#clearHighlights">
+          Cancella
+        </button>
+        <button class="text-xs bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-semibold"
+                data-action="click->rhyme-highlighter#checkAnswers">
+          Controlla
+        </button>
+      </div>
+
+      <p class="text-gray-600 text-xs italic mb-6">Seleziona un colore e clicca sulle parole che pensi facciano rima. Poi clicca "Controlla" per verificare.</p>
+
+      <!-- Poem lines -->
+      <div class="space-y-2">
+        <% 
+          lines = @poesia.split("\n").map(&:strip).reject(&:blank?)
+          # Create a map of line index to rhyme group
+          line_to_group = {}
+          @rhyme_groups.each do |group|
+            group[:words].each do |word_data|
+              line_to_group[word_data[:index]] = group[:group_id]
+            end
+          end
+        %>
+        <% lines.each_with_index do |line, line_index| %>
+          <div class="flex gap-3 items-center">
+            <span class="text-gray-400 font-bold text-xs w-8 flex-shrink-0 text-right"><%= line_index + 1 %></span>
+            <p class="text-gray-800 italic">
+              <% 
+                group_id = line_to_group[line_index]
+                if group_id
+                  # Split by spaces and find last word
+                  words = line.split(/\s+/)
+                  if words.any?
+                    last_word_full = words.last
+                    # Separate word and punctuation (support Italian characters)
+                    last_word_match = last_word_full.match(/^([a-zA-ZàáâãäåèéêëìíîïòóôõöùúûüÀÁÂÃÄÅÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜ]+)(.*)$/)
+                    if last_word_match
+                      last_word_clean = last_word_match[1]
+                      last_word_punct = last_word_match[2] || ''
+                      before_last = words[0...-1].join(' ')
+                    else
+                      last_word_clean = last_word_full
+                      last_word_punct = ''
+                      before_last = words[0...-1].join(' ')
+                    end
+                  end
+                end
+              %>
+              <% if group_id && last_word_clean %>
+                <% if before_last.present? %><%= before_last %> <% end %><span class="cursor-pointer hover:underline" 
+                        data-rhyme-highlighter-target="rhymeWord" 
+                        data-rhyme-group="<%= group_id %>" 
+                        data-action="click->rhyme-highlighter#highlightRhyme">
+                    <%= last_word_clean %><%= last_word_punct %>
+                  </span>
+              <% else %>
+                <%= line %>
+              <% end %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
