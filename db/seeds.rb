@@ -103,6 +103,8 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 25, titolo: "Addizioni in colonna", slug: "bus3_mat_p025", view_template: "bus3_mat_p025" },
   { numero: 26, titolo: "Addizioni con il cambio", slug: "bus3_mat_p026", view_template: "bus3_mat_p026" },
   { numero: 32, titolo: "Sottrazioni con il cambio", slug: "bus3_mat_p032", view_template: "bus3_mat_p032" },
+  { numero: 34, titolo: "Calcoli veloci - Esercizi", slug: "bus3_mat_p034", view_template: "bus3_mat_p034" },
+  { numero: 35, titolo: "Calcoli veloci - Scomposizione", slug: "bus3_mat_p035", view_template: "bus3_mat_p035" },
   { numero: 144, titolo: "Proprietà dell'Addizione", slug: "bus3_mat_p144", view_template: "bus3_mat_p144" }
 ].each do |pagina_data|
   bus_matematica.pagine.create!(pagina_data)
