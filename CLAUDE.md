@@ -14,10 +14,10 @@ This project uses ClaudeOnRails to create an intelligent swarm of AI agents spec
 
 Simply describe what you want to build or fix, and the swarm will automatically coordinate the implementation:
 
-Sto costruendo il prototipo di un applicazione per presentare in html interattivo le pagine di diversi libri di testo per la scuola italiana.
-Per ora ho aggiunto pagine di diversi libri e materie con esercizi di tipo diverso aggiungendole man mano.
+<!-- Sto costruendo il prototipo di un applicazione per presentare in html interattivo le pagine di diversi libri di testo per la scuola italiana.
+Per ora ho aggiunto pagine di diversi libri e materie con esercizi di tipo diverso aggiungendole man mano. -->
 
-I libri sono così organizzati:
+<!-- I libri sono così organizzati:
 
 Corso: Banda del BUS
   volume classe: Banda del BUS 1
@@ -25,7 +25,7 @@ Corso: Banda del BUS
 
 ....
 
-Fammi un piano per i modelli e i controller opportuni per poter navigare le pagine dei libri. Le che per ora ho pagine fatto sono nel controller exercices_controller. 
+Fammi un piano per i modelli e i controller opportuni per poter navigare le pagine dei libri. Le che per ora ho pagine fatto sono nel controller exercices_controller.  -->
 
 ```bash
 # Start the swarm

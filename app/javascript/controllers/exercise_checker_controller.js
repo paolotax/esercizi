@@ -42,13 +42,100 @@ export default class extends Controller {
       }
     }
 
-    // Check input fields first
-    if (inputFields.length > 0) {
+    // Check radio buttons
+    const radioButtons = this.element.querySelectorAll('input[type="radio"][data-correct-answer]')
+    if (radioButtons.length > 0) {
+      // Get unique radio button groups by name
+      const radioGroups = new Map()
+      radioButtons.forEach(radio => {
+        const groupName = radio.name
+        if (!radioGroups.has(groupName)) {
+          radioGroups.set(groupName, [])
+        }
+        radioGroups.get(groupName).push(radio)
+      })
+
+      let radioCorrect = 0
+      let radioIncorrect = 0
+      let radioEmpty = 0
+
+      radioGroups.forEach((radios, groupName) => {
+        // Find the checked radio in this group
+        const checkedRadio = Array.from(radios).find(r => r.checked)
+        
+        // Remove all previous styling from all radios in this group
+        radios.forEach(radio => {
+          const label = radio.closest('label')
+          if (label) {
+            label.classList.remove("bg-yellow-50", "bg-green-50", "bg-red-50", 
+                                 "border-2", "border-yellow-500", "border-green-500", "border-red-500",
+                                 "rounded-lg", "px-2", "py-1")
+          }
+        })
+
+        if (!checkedRadio) {
+          // No selection made
+          radioEmpty++
+          allCorrect = false
+          radios.forEach(radio => {
+            const label = radio.closest('label')
+            if (label) {
+              label.classList.add("bg-yellow-50", "border-2", "border-yellow-500", "rounded-lg", "px-2", "py-1")
+            }
+          })
+        } else {
+          const isCorrect = checkedRadio.dataset.correctAnswer === "true"
+          const label = checkedRadio.closest('label')
+          
+          if (isCorrect) {
+            radioCorrect++
+            if (label) {
+              label.classList.add("bg-green-50", "border-2", "border-green-500", "rounded-lg", "px-2", "py-1")
+            }
+          } else {
+            radioIncorrect++
+            allCorrect = false
+            if (label) {
+              label.classList.add("bg-red-50", "border-2", "border-red-500", "rounded-lg", "px-2", "py-1")
+              // Show shake animation
+              label.classList.add("animate-shake")
+              setTimeout(() => {
+                label.classList.remove("animate-shake")
+              }, 500)
+            }
+            
+            // Highlight the correct answer in yellow
+            radios.forEach(radio => {
+              if (radio.dataset.correctAnswer === "true") {
+                const correctLabel = radio.closest('label')
+                if (correctLabel) {
+                  correctLabel.classList.add("bg-yellow-50", "border-2", "border-yellow-500", "rounded-lg", "px-2", "py-1")
+                }
+              }
+            })
+          }
+        }
+      })
+
+      if (radioEmpty > 0) {
+        feedback.push(`Risposte da selezionare: ${radioEmpty} ⚠️`)
+      }
+      if (radioCorrect > 0) {
+        feedback.push(`Risposte corrette: ${radioCorrect} ✅`)
+      }
+      if (radioIncorrect > 0) {
+        feedback.push(`Risposte errate: ${radioIncorrect} ❌`)
+      }
+    }
+
+    // Check text input fields
+    const textInputFields = this.element.querySelectorAll("input[type='text'][data-correct-answer], textarea[data-correct-answer]")
+    if (textInputFields.length > 0) {
       let inputsCorrect = 0
       let inputsIncorrect = 0
       let inputsEmpty = 0
 
-      inputFields.forEach(input => {
+      textInputFields.forEach(input => {
         const correctAnswer = input.dataset.correctAnswer.trim().replace(/\s+/g, '')
         const userAnswer = input.value.trim().replace(/\s+/g, '')
 
@@ -181,7 +268,7 @@ export default class extends Controller {
     }
 
     const feedbackDiv = document.createElement("div")
-    feedbackDiv.className = "exercise-feedback mt-6 p-6 rounded-lg shadow-lg " + 
+    feedbackDiv.className = "exercise-feedback my-6 p-6 rounded-lg shadow-lg " + 
                             (allCorrect ? "bg-green-100 border-4 border-green-500" : "bg-orange-100 border-4 border-orange-500")
     
     const title = document.createElement("h2")
@@ -261,9 +348,37 @@ export default class extends Controller {
       })
     })
 
-    // Fill in correct answers for input fields
-    const inputFields = this.element.querySelectorAll("input[data-correct-answer]")
-    inputFields.forEach(input => {
+    // Show correct answers for radio buttons
+    const radioButtons = this.element.querySelectorAll('input[type="radio"][data-correct-answer]')
+    if (radioButtons.length > 0) {
+      // Get unique radio button groups by name
+      const radioGroups = new Map()
+      radioButtons.forEach(radio => {
+        const groupName = radio.name
+        if (!radioGroups.has(groupName)) {
+          radioGroups.set(groupName, [])
+        }
+        radioGroups.get(groupName).push(radio)
+      })
+
+      radioGroups.forEach((radios) => {
+        radios.forEach(radio => {
+          const isCorrect = radio.dataset.correctAnswer === "true"
+          const label = radio.closest('label')
+          
+          if (isCorrect) {
+            radio.checked = true
+            if (label) {
+              label.classList.add("bg-green-50", "border-2", "border-green-500", "rounded-lg", "px-2", "py-1")
+            }
+          }
+        })
+      })
+    }
+
+    // Fill in correct answers for text input fields
+    const textInputFields = this.element.querySelectorAll("input[type='text'][data-correct-answer], textarea[data-correct-answer]")
+    textInputFields.forEach(input => {
       const correctAnswer = input.dataset.correctAnswer.trim()
       input.value = correctAnswer
       input.classList.add("border-green-500", "border-4", "bg-green-50")
@@ -290,7 +405,7 @@ export default class extends Controller {
     }
 
     const feedbackDiv = document.createElement("div")
-    feedbackDiv.className = "exercise-feedback mt-6 p-6 rounded-lg shadow-lg bg-blue-100 border-4 border-blue-500"
+    feedbackDiv.className = "exercise-feedback my-6 p-6 rounded-lg shadow-lg bg-blue-100 border-4 border-blue-500"
     
     const title = document.createElement("h2")
     title.className = "text-2xl font-bold mb-4 text-blue-800"
@@ -335,9 +450,21 @@ export default class extends Controller {
                             "border-yellow-500", "bg-orange-100")
     })
 
-    // Remove highlights from input fields and restore original styling
-    const inputFields = this.element.querySelectorAll("input[data-correct-answer]")
-    inputFields.forEach(input => {
+    // Remove highlights from radio buttons and uncheck them
+    const radioButtons = this.element.querySelectorAll('input[type="radio"][data-correct-answer]')
+    radioButtons.forEach(radio => {
+      radio.checked = false
+      const label = radio.closest('label')
+      if (label) {
+        label.classList.remove("bg-yellow-50", "bg-green-50", "bg-red-50",
+                              "border-2", "border-yellow-500", "border-green-500", "border-red-500",
+                              "rounded-lg", "px-2", "py-1")
+      }
+    })
+
+    // Remove highlights from text input fields and restore original styling
+    const textInputFields = this.element.querySelectorAll("input[type='text'][data-correct-answer], textarea[data-correct-answer]")
+    textInputFields.forEach(input => {
       input.classList.remove("border-yellow-500", "border-green-500", "border-red-500",
                              "border-4", "bg-yellow-50", "bg-green-50", "bg-red-50",
                              "border-gray-300", "border-gray-500", "border-2")

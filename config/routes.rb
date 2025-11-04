@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   get "exercises/bus3_mat_p144", to: "exercises#bus3_mat_p144", as: "bus3_mat_p144"
   get "exercises/nvi4_sto_p154", to: "exercises#nvi4_sto_p154", as: "nvi4_sto_p154"
   get "exercises/nvi4_sto_p155", to: "exercises#nvi4_sto_p155", as: "nvi4_sto_p155"
+  get "exercises/bus2_lettgr_p096", to: "exercises#bus2_lettgr_p096", as: "bus2_lettgr_p096"
 
   # API endpoint for dynamic column addition grid
   get "exercises/column_addition_grid", to: "exercises#column_addition_grid", as: "column_addition_grid"

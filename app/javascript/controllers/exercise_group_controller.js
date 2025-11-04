@@ -166,7 +166,7 @@ export default class extends Controller {
     }
 
     const feedbackDiv = document.createElement("div")
-    feedbackDiv.className = "exercise-feedback mt-6 p-6 rounded-lg shadow-lg " + 
+    feedbackDiv.className = "exercise-feedback my-6 p-6 rounded-lg shadow-lg " + 
                             (allCorrect ? "bg-green-100 border-4 border-green-500" : "bg-orange-100 border-4 border-orange-500")
     
     const title = document.createElement("h2")

@@ -112,6 +112,27 @@ end
 
 puts "  ✓ Creato volume '#{bus_volume3.nome}' con #{bus_matematica.pagine.count} pagine"
 
+# 3b. BANDA DEL BUS 2
+bus_volume2 = bus.volumi.create!(
+  nome: "BUS 2",
+  classe: 2,
+  posizione: 2
+)
+
+bus2_lettura_grammatica = bus_volume2.discipline.create!(
+  nome: "Lettura e Grammatica",
+  codice: "lettgr",
+  colore: "#F59E0B"
+)
+
+[
+  { numero: 96, titolo: "Il Rimedio Più Bello (pag. 96-97)", slug: "bus2_lettgr_p096", view_template: "bus2_lettgr_p096" }
+].each do |pagina_data|
+  bus2_lettura_grammatica.pagine.create!(pagina_data)
+end
+
+puts "  ✓ Creato volume '#{bus_volume2.nome}' con #{bus2_lettura_grammatica.pagine.count} pagine"
+
 # 4. NUOVO VIVA IMPARARE 4
 puts "\n📚 Creazione corso: Nuovo Viva Imparare"
 nvi = Corso.create!(
