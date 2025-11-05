@@ -105,6 +105,7 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 32, titolo: "Sottrazioni con il cambio", slug: "bus3_mat_p032", view_template: "bus3_mat_p032" },
   { numero: 34, titolo: "Calcoli veloci - Esercizi", slug: "bus3_mat_p034", view_template: "bus3_mat_p034" },
   { numero: 35, titolo: "Calcoli veloci - Scomposizione", slug: "bus3_mat_p035", view_template: "bus3_mat_p035" },
+  { numero: 76, titolo: "Frazioni - L'unità frazionaria", slug: "bus3_mat_p076", view_template: "bus3_mat_p076" },
   { numero: 144, titolo: "Proprietà dell'Addizione", slug: "bus3_mat_p144", view_template: "bus3_mat_p144" }
 ].each do |pagina_data|
   bus_matematica.pagine.create!(pagina_data)
