@@ -108,6 +108,7 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 74, titolo: "Le Frazioni", slug: "bus3_mat_p074", view_template: "bus3_mat_p074" },
   { numero: 75, titolo: "Leggere e scrivere le frazioni", slug: "bus3_mat_p075", view_template: "bus3_mat_p075" },
   { numero: 76, titolo: "Frazioni - L'unità frazionaria", slug: "bus3_mat_p076", view_template: "bus3_mat_p076" },
+  { numero: 77, titolo: "Esercizi sulle frazioni", slug: "bus3_mat_p077", view_template: "bus3_mat_p077" },
   { numero: 144, titolo: "Proprietà dell'Addizione", slug: "bus3_mat_p144", view_template: "bus3_mat_p144" }
 ].each do |pagina_data|
   bus_matematica.pagine.create!(pagina_data)

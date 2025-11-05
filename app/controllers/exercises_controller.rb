@@ -71,6 +71,9 @@ class ExercisesController < ApplicationController
   def bus3_mat_p035
   end
 
+  def bus3_mat_p077
+  end
+
   def bus2_lettgr_p096
   end
 

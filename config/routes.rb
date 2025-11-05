@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get "exercises/bus3_mat_p032", to: "exercises#bus3_mat_p032", as: "bus3_mat_p032"
   get "exercises/bus3_mat_p034", to: "exercises#bus3_mat_p034", as: "bus3_mat_p034"
   get "exercises/bus3_mat_p035", to: "exercises#bus3_mat_p035", as: "bus3_mat_p035"
+  get "exercises/bus3_mat_p077", to: "exercises#bus3_mat_p077", as: "bus3_mat_p077"
   get "exercises/bus3_mat_p144", to: "exercises#bus3_mat_p144", as: "bus3_mat_p144"
   get "exercises/nvi4_sto_p154", to: "exercises#nvi4_sto_p154", as: "nvi4_sto_p154"
   get "exercises/nvi4_sto_p155", to: "exercises#nvi4_sto_p155", as: "nvi4_sto_p155"
