@@ -5,8 +5,13 @@ export default class extends Controller {
   static targets = ["item", "children"]
 
   connect() {
+    // Ottieni il contenitore scrollabile della sidebar
+    this.sidebarElement = document.getElementById('sidebar-nav')
+
     // Ripristina lo stato salvato in localStorage
     this.restoreState()
+    this.restoreScrollPosition()
+
     // Evidenzia la pagina corrente e apre i livelli necessari
     // Usa un piccolo delay per assicurarsi che il DOM sia pronto
     setTimeout(() => {
@@ -18,13 +23,15 @@ export default class extends Controller {
       // Piccolo delay per assicurarsi che il DOM sia aggiornato
       setTimeout(() => {
         this.restoreState()
+        this.restoreScrollPosition()
         this.highlightCurrentPage()
       }, 0)
     }
-    
+
     this.turboFrameLoadHandler = () => {
       setTimeout(() => {
         this.restoreState()
+        this.restoreScrollPosition()
         this.highlightCurrentPage()
       }, 0)
     }
@@ -33,12 +40,19 @@ export default class extends Controller {
     this.turboBeforeVisitHandler = () => {
       // Salva lo stato corrente prima della navigazione
       this.saveCurrentState()
+      this.saveScrollPosition()
+    }
+
+    // Salva scroll anche prima del render
+    this.turboBeforeRenderHandler = () => {
+      this.saveScrollPosition()
     }
 
     document.addEventListener('turbo:load', this.turboLoadHandler)
     document.addEventListener('turbo:frame-load', this.turboFrameLoadHandler)
     document.addEventListener('turbo:before-visit', this.turboBeforeVisitHandler)
-    
+    document.addEventListener('turbo:before-render', this.turboBeforeRenderHandler)
+
     // Listener anche per turbo:render per gestire elementi permanenti aggiornati
     document.addEventListener('turbo:render', this.turboLoadHandler)
   }
@@ -54,6 +68,25 @@ export default class extends Controller {
     }
     if (this.turboBeforeVisitHandler) {
       document.removeEventListener('turbo:before-visit', this.turboBeforeVisitHandler)
+    }
+    if (this.turboBeforeRenderHandler) {
+      document.removeEventListener('turbo:before-render', this.turboBeforeRenderHandler)
+    }
+  }
+
+  saveScrollPosition() {
+    if (this.sidebarElement) {
+      const scrollTop = this.sidebarElement.scrollTop
+      localStorage.setItem('sidebar-scroll-position', scrollTop.toString())
+    }
+  }
+
+  restoreScrollPosition() {
+    if (this.sidebarElement) {
+      const savedScroll = localStorage.getItem('sidebar-scroll-position')
+      if (savedScroll) {
+        this.sidebarElement.scrollTop = parseInt(savedScroll, 10)
+      }
     }
   }
 
@@ -85,12 +118,15 @@ export default class extends Controller {
     event.preventDefault()
     const item = event.currentTarget
     const itemId = item.getAttribute('data-sidebar-item-id')
-    
+
     if (!itemId) return
+
+    // Salva la posizione di scroll corrente
+    const currentScroll = this.sidebarElement ? this.sidebarElement.scrollTop : 0
 
     // Cerca il contenitore children associato (può essere nextElementSibling o trovato tramite data attribute)
     let childrenContainer = item.nextElementSibling
-    
+
     // Se non è il next sibling, cerca tramite data attribute
     if (!childrenContainer || !childrenContainer.classList.contains('sidebar-children')) {
       childrenContainer = this.element.querySelector(`[data-sidebar-children-id="${itemId}"]`)
@@ -110,6 +146,15 @@ export default class extends Controller {
         item.querySelector('.toggle-icon')?.classList.add('rotate-90')
         this.saveOpenState(itemId)
       }
+
+      // Mantieni la posizione di scroll fissa dopo l'animazione
+      requestAnimationFrame(() => {
+        if (this.sidebarElement) {
+          this.sidebarElement.scrollTop = currentScroll
+          // Salva anche in localStorage per la navigazione
+          this.saveScrollPosition()
+        }
+      })
     }
   }
 
