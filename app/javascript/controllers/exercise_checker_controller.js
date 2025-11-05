@@ -8,6 +8,24 @@ export default class extends Controller {
     console.log("Exercise checker controller connected")
   }
 
+  selectAnswer(event) {
+    const clickedButton = event.currentTarget
+    const question = clickedButton.dataset.question
+
+    // Find all buttons in the same question group
+    const allButtons = this.element.querySelectorAll(`button[data-question="${question}"]`)
+
+    // Deselect all buttons in this group
+    allButtons.forEach(button => {
+      button.classList.remove('bg-blue-500', 'border-blue-500', 'text-white')
+      button.classList.add('bg-transparent', 'border-gray-300')
+    })
+
+    // Select the clicked button
+    clickedButton.classList.remove('bg-transparent', 'border-gray-300')
+    clickedButton.classList.add('bg-blue-500', 'border-blue-500', 'text-white')
+  }
+
   checkAnswers(event) {
     event.preventDefault()
 
@@ -42,74 +60,117 @@ export default class extends Controller {
       }
     }
 
-    // Check radio buttons
+    // Check radio buttons and button-style answers
     const radioButtons = this.element.querySelectorAll('input[type="radio"][data-correct-answer]')
-    if (radioButtons.length > 0) {
-      // Get unique radio button groups by name
-      const radioGroups = new Map()
+    const buttonAnswers = this.element.querySelectorAll('button[data-question][data-correct-answer]')
+
+    if (radioButtons.length > 0 || buttonAnswers.length > 0) {
+      let answerGroups = new Map()
+
+      // Process radio buttons
       radioButtons.forEach(radio => {
         const groupName = radio.name
-        if (!radioGroups.has(groupName)) {
-          radioGroups.set(groupName, [])
+        if (!answerGroups.has(groupName)) {
+          answerGroups.set(groupName, { type: 'radio', items: [] })
         }
-        radioGroups.get(groupName).push(radio)
+        answerGroups.get(groupName).items.push(radio)
+      })
+
+      // Process button answers
+      buttonAnswers.forEach(button => {
+        const groupName = button.dataset.question
+        if (!answerGroups.has(groupName)) {
+          answerGroups.set(groupName, { type: 'button', items: [] })
+        }
+        answerGroups.get(groupName).items.push(button)
       })
 
       let radioCorrect = 0
       let radioIncorrect = 0
       let radioEmpty = 0
 
-      radioGroups.forEach((radios, groupName) => {
-        // Find the checked radio in this group
-        const checkedRadio = Array.from(radios).find(r => r.checked)
-        
-        // Remove all previous styling from all radios in this group
-        radios.forEach(radio => {
-          const label = radio.closest('label')
-          if (label) {
-            label.classList.remove("bg-yellow-50", "bg-green-50", "bg-red-50", 
-                                 "border-2", "border-yellow-500", "border-green-500", "border-red-500",
-                                 "rounded-lg", "px-2", "py-1")
+      answerGroups.forEach((group, groupName) => {
+        let selectedItem = null
+
+        // Find the selected item based on type
+        if (group.type === 'radio') {
+          selectedItem = group.items.find(r => r.checked)
+        } else if (group.type === 'button') {
+          selectedItem = group.items.find(b => b.classList.contains('bg-blue-500'))
+        }
+
+        // Remove all previous styling
+        group.items.forEach(item => {
+          if (group.type === 'radio') {
+            const label = item.closest('label')
+            if (label) {
+              label.classList.remove("bg-yellow-50", "bg-green-50", "bg-red-50",
+                                   "border-2", "border-yellow-500", "border-green-500", "border-red-500",
+                                   "rounded-lg", "px-2", "py-1")
+            }
+          } else if (group.type === 'button') {
+            item.classList.remove("bg-yellow-50", "bg-green-50", "bg-red-50",
+                                 "border-yellow-500", "border-green-500", "border-red-500",
+                                 "bg-blue-500", "border-blue-500", "text-white")
           }
         })
 
-        if (!checkedRadio) {
+        if (!selectedItem) {
           // No selection made
           radioEmpty++
           allCorrect = false
-          radios.forEach(radio => {
-            const label = radio.closest('label')
-            if (label) {
-              label.classList.add("bg-yellow-50", "border-2", "border-yellow-500", "rounded-lg", "px-2", "py-1")
+          group.items.forEach(item => {
+            if (group.type === 'radio') {
+              const label = item.closest('label')
+              if (label) {
+                label.classList.add("bg-yellow-50", "border-2", "border-yellow-500", "rounded-lg", "px-2", "py-1")
+              }
+            } else if (group.type === 'button') {
+              item.classList.add("bg-yellow-50", "border-yellow-500")
             }
           })
         } else {
-          const isCorrect = checkedRadio.dataset.correctAnswer === "true"
-          const label = checkedRadio.closest('label')
-          
+          const isCorrect = selectedItem.dataset.correctAnswer === "true"
+
           if (isCorrect) {
             radioCorrect++
-            if (label) {
-              label.classList.add("bg-green-50", "border-2", "border-green-500", "rounded-lg", "px-2", "py-1")
+            if (group.type === 'radio') {
+              const label = selectedItem.closest('label')
+              if (label) {
+                label.classList.add("bg-green-50", "border-2", "border-green-500", "rounded-lg", "px-2", "py-1")
+              }
+            } else if (group.type === 'button') {
+              selectedItem.classList.remove('bg-blue-500', 'border-blue-500', 'text-white')
+              selectedItem.classList.add("bg-green-50", "border-green-500")
             }
           } else {
             radioIncorrect++
             allCorrect = false
-            if (label) {
-              label.classList.add("bg-red-50", "border-2", "border-red-500", "rounded-lg", "px-2", "py-1")
-              // Show shake animation
-              label.classList.add("animate-shake")
-              setTimeout(() => {
-                label.classList.remove("animate-shake")
-              }, 500)
+
+            if (group.type === 'radio') {
+              const label = selectedItem.closest('label')
+              if (label) {
+                label.classList.add("bg-red-50", "border-2", "border-red-500", "rounded-lg", "px-2", "py-1")
+                label.classList.add("animate-shake")
+                setTimeout(() => label.classList.remove("animate-shake"), 500)
+              }
+            } else if (group.type === 'button') {
+              selectedItem.classList.remove('bg-blue-500', 'border-blue-500', 'text-white')
+              selectedItem.classList.add("bg-red-50", "border-red-500")
+              selectedItem.classList.add("animate-shake")
+              setTimeout(() => selectedItem.classList.remove("animate-shake"), 500)
             }
-            
+
             // Highlight the correct answer in yellow
-            radios.forEach(radio => {
-              if (radio.dataset.correctAnswer === "true") {
-                const correctLabel = radio.closest('label')
-                if (correctLabel) {
-                  correctLabel.classList.add("bg-yellow-50", "border-2", "border-yellow-500", "rounded-lg", "px-2", "py-1")
+            group.items.forEach(item => {
+              if (item.dataset.correctAnswer === "true") {
+                if (group.type === 'radio') {
+                  const correctLabel = item.closest('label')
+                  if (correctLabel) {
+                    correctLabel.classList.add("bg-yellow-50", "border-2", "border-yellow-500", "rounded-lg", "px-2", "py-1")
+                  }
+                } else if (group.type === 'button') {
+                  item.classList.add("bg-yellow-50", "border-yellow-500")
                 }
               }
             })
@@ -348,10 +409,11 @@ export default class extends Controller {
       })
     })
 
-    // Show correct answers for radio buttons
+    // Show correct answers for radio buttons and button-style answers
     const radioButtons = this.element.querySelectorAll('input[type="radio"][data-correct-answer]')
+    const buttonAnswers = this.element.querySelectorAll('button[data-question][data-correct-answer]')
+
     if (radioButtons.length > 0) {
-      // Get unique radio button groups by name
       const radioGroups = new Map()
       radioButtons.forEach(radio => {
         const groupName = radio.name
@@ -365,12 +427,34 @@ export default class extends Controller {
         radios.forEach(radio => {
           const isCorrect = radio.dataset.correctAnswer === "true"
           const label = radio.closest('label')
-          
+
           if (isCorrect) {
             radio.checked = true
             if (label) {
               label.classList.add("bg-green-50", "border-2", "border-green-500", "rounded-lg", "px-2", "py-1")
             }
+          }
+        })
+      })
+    }
+
+    if (buttonAnswers.length > 0) {
+      const buttonGroups = new Map()
+      buttonAnswers.forEach(button => {
+        const groupName = button.dataset.question
+        if (!buttonGroups.has(groupName)) {
+          buttonGroups.set(groupName, [])
+        }
+        buttonGroups.get(groupName).push(button)
+      })
+
+      buttonGroups.forEach((buttons) => {
+        buttons.forEach(button => {
+          const isCorrect = button.dataset.correctAnswer === "true"
+
+          if (isCorrect) {
+            button.classList.remove('bg-transparent', 'border-gray-300', 'bg-blue-500', 'border-blue-500', 'text-white')
+            button.classList.add("bg-green-50", "border-green-500")
           }
         })
       })
@@ -460,6 +544,14 @@ export default class extends Controller {
                               "border-2", "border-yellow-500", "border-green-500", "border-red-500",
                               "rounded-lg", "px-2", "py-1")
       }
+    })
+
+    // Remove highlights from button-style answers
+    const buttonAnswers = this.element.querySelectorAll('button[data-question][data-correct-answer]')
+    buttonAnswers.forEach(button => {
+      button.classList.remove("bg-blue-500", "bg-yellow-50", "bg-green-50", "bg-red-50",
+                             "border-blue-500", "border-yellow-500", "border-green-500", "border-red-500", "text-white")
+      button.classList.add("bg-transparent", "border-gray-300")
     })
 
     // Remove highlights from text input fields and restore original styling

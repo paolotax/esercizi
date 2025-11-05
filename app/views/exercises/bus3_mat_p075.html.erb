@@ -118,10 +118,12 @@
     <!-- Box informativo -->
     <div class="bg-gradient-to-r from-pink-100 to-pink-50 rounded-lg p-6 border-l-4 border-pink-500">
       <div class="flex items-start gap-4">
-        <div class="flex-shrink-0 text-5xl">🔍</div>
+        <div class="hidden md:block flex-shrink-0 text-5xl">🔍</div>
         <div class="flex-1">
           <p class="text-lg font-semibold text-gray-800 mb-4">Una frazione è composta da:</p>
-          <div class="grid grid-cols-[auto_auto_auto_1fr] gap-x-4 gap-y-3 items-center text-base">
+
+          <!-- Grid Desktop (nascosta su mobile) -->
+          <div class="hidden md:grid grid-cols-[auto_auto_auto_1fr] gap-x-4 gap-y-3 items-center text-base">
             <!-- Numeratore -->
             <span class="text-blue-600 font-bold text-xl">numeratore</span>
             <span class="text-3xl font-bold text-blue-600 text-center">2</span>
@@ -140,8 +142,33 @@
             <span class="text-2xl">→</span>
             <span class="text-gray-700">indica in quante parti è stato diviso l'intero</span>
           </div>
+
+          <!-- Layout Mobile (nascosto su desktop) -->
+          <div class="md:hidden">
+            <!-- Frazione allineata -->
+            <div class="grid grid-cols-[auto_auto] gap-x-4 gap-y-3 items-center mb-4">
+              <!-- Numeratore -->
+              <span class="text-blue-600 font-bold text-lg">numeratore</span>
+              <span class="text-3xl font-bold text-blue-600 text-center">2</span>
+
+              <!-- Linea di frazione -->
+              <span class="text-gray-600 font-bold text-sm">linea di frazione</span>
+              <div class="w-8 h-1 bg-gray-600 mx-auto"></div>
+
+              <!-- Denominatore -->
+              <span class="text-pink-600 font-bold text-lg">denominatore</span>
+              <span class="text-3xl font-bold text-pink-600 text-center">5</span>
+            </div>
+
+            <!-- Spiegazioni sotto -->
+            <div class="space-y-2 text-sm">
+              <p class="text-gray-700">→ <strong>numeratore:</strong> indica quante parti consideri</p>
+              <p class="text-gray-700">→ <strong>linea:</strong> divide l'intero in parti uguali</p>
+              <p class="text-gray-700">→ <strong>denominatore:</strong> indica in quante parti è diviso l'intero</p>
+            </div>
+          </div>
         </div>
-        <div class="flex-shrink-0">
+        <div class="hidden md:block flex-shrink-0">
           <%= image_tag "bus3_mat_p075_img04.png",
               alt: "Esempio 2/5",
               class: "w-24 h-auto" %>
@@ -165,7 +192,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-6">
       <!-- Cerchio 1: 4/7 -->
       <div class="flex flex-col items-center">
-        <svg viewBox="0 0 120 120" class="w-40 h-40">
+        <svg viewBox="0 0 120 120" class="w-40 h-40" data-fraction-circles-target="circle" data-target="4">
           <% 7.times do |i| %>
             <% angle = 360.0 / 7 %>
             <% start_angle = i * angle - 90 %>
@@ -192,7 +219,7 @@
 
       <!-- Cerchio 2: 5/6 -->
       <div class="flex flex-col items-center">
-        <svg viewBox="0 0 120 120" class="w-40 h-40">
+        <svg viewBox="0 0 120 120" class="w-40 h-40" data-fraction-circles-target="circle" data-target="5">
           <% 6.times do |i| %>
             <% angle = 360.0 / 6 %>
             <% start_angle = i * angle - 90 %>
@@ -219,7 +246,7 @@
 
       <!-- Cerchio 3: 3/8 -->
       <div class="flex flex-col items-center">
-        <svg viewBox="0 0 120 120" class="w-40 h-40">
+        <svg viewBox="0 0 120 120" class="w-40 h-40" data-fraction-circles-target="circle" data-target="3">
           <% 8.times do |i| %>
             <% angle = 360.0 / 8 %>
             <% start_angle = i * angle - 90 %>
@@ -246,7 +273,7 @@
 
       <!-- Cerchio 4: 3/5 -->
       <div class="flex flex-col items-center">
-        <svg viewBox="0 0 120 120" class="w-40 h-40">
+        <svg viewBox="0 0 120 120" class="w-40 h-40" data-fraction-circles-target="circle" data-target="3">
           <% 5.times do |i| %>
             <% angle = 360.0 / 5 %>
             <% start_angle = i * angle - 90 %>
@@ -272,7 +299,26 @@
       </div>
     </div>
 
-    <div class="bg-cyan-50 rounded-lg p-4 border-l-4 border-cyan-400">
+    <!-- Feedback -->
+    <div data-fraction-circles-target="feedback"></div>
+
+    <!-- Pulsanti controllo -->
+    <div class="flex flex-wrap gap-4 justify-center mt-6">
+      <button data-action="click->fraction-circles#checkAnswers"
+              class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-colors">
+        Controlla Esercizio 2
+      </button>
+      <button data-action="click->fraction-circles#showSolutions"
+              class="bg-cyan-400 hover:bg-cyan-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-colors">
+        Mostra Soluzioni
+      </button>
+      <button data-action="click->fraction-circles#reset"
+              class="border-2 border-cyan-500 text-cyan-600 hover:bg-cyan-50 bg-white font-bold py-3 px-8 rounded-full shadow-lg transition-colors">
+        Ricomincia
+      </button>
+    </div>
+
+    <div class="bg-cyan-50 rounded-lg p-4 border-l-4 border-cyan-400 mt-6">
       <p class="text-gray-700">
         💡 <span class="font-semibold">Suggerimento:</span> Clicca sugli spicchi per colorarli. Per colorare <span class="font-bold">4/7</span>, clicca su 4 spicchi dei 7 disponibili.
       </p>
