@@ -182,6 +182,30 @@ end
 
 puts "  ✓ Creato volume '#{nvi_volume4.nome}' con #{nvi_matematica.pagine.count} pagine di matematica e #{nvi_storia.pagine.count} pagine di storia"
 
+# 5. NUOVO VIVA IMPARARE 5
+nvi_volume5 = nvi.volumi.create!(
+  nome: "Nuovo Viva Imparare 5",
+  classe: 5,
+  posizione: 5
+)
+
+nvi5_matematica = nvi_volume5.discipline.create!(
+  nome: "Matematica",
+  codice: "mat",
+  colore: "#A855F7"
+)
+
+[
+  { numero: 12, titolo: "I Numeri Romani", slug: "nvi5_mat_p012", view_template: "nvi5_mat_p012" },
+  { numero: 13, titolo: "I Numeri Grandi", slug: "nvi5_mat_p013", view_template: "nvi5_mat_p013" },
+  { numero: 14, titolo: "I Numeri Decimali", slug: "nvi5_mat_p014", view_template: "nvi5_mat_p014" },
+  { numero: 15, titolo: "Arrotondamento o Approssimazione", slug: "nvi5_mat_p015", view_template: "nvi5_mat_p015" }
+].each do |pagina_data|
+  nvi5_matematica.pagine.create!(pagina_data)
+end
+
+puts "  ✓ Creato volume '#{nvi_volume5.nome}' con #{nvi5_matematica.pagine.count} pagine"
+
 # Riepilogo finale
 puts "\n✅ Seed completato!"
 puts "\n📊 Riepilogo:"
