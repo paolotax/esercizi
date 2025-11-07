@@ -60,6 +60,65 @@ export default class extends Controller {
       }
     }
 
+    // Check checkboxes (for exercises like "cerchia i numeri decimali")
+    const checkboxes = this.element.querySelectorAll('input[type="checkbox"][data-correct-answer]')
+    if (checkboxes.length > 0) {
+      let checkboxCorrect = 0
+      let checkboxIncorrect = 0
+
+      checkboxes.forEach(checkbox => {
+        const shouldBeChecked = checkbox.dataset.correctAnswer === "true"
+        const isChecked = checkbox.checked
+        const label = checkbox.closest('label')
+
+        // Remove previous styling
+        if (label) {
+          const span = label.querySelector('span')
+          if (span) {
+            span.classList.remove("border-red-500", "border-green-500", "border-yellow-500",
+                                  "bg-red-100", "bg-green-100", "bg-yellow-50")
+          }
+        }
+
+        // Check correctness
+        if ((shouldBeChecked && isChecked) || (!shouldBeChecked && !isChecked)) {
+          // Correct
+          checkboxCorrect++
+          if (isChecked && label) {
+            const span = label.querySelector('span')
+            if (span) {
+              span.classList.add("border-green-500", "bg-green-100")
+            }
+          }
+        } else {
+          // Incorrect
+          checkboxIncorrect++
+          allCorrect = false
+          if (label) {
+            const span = label.querySelector('span')
+            if (span) {
+              if (isChecked) {
+                // Checked but shouldn't be
+                span.classList.add("border-red-500", "bg-red-100")
+                span.classList.add("animate-shake")
+                setTimeout(() => span.classList.remove("animate-shake"), 500)
+              } else if (shouldBeChecked) {
+                // Should be checked but isn't
+                span.classList.add("border-yellow-500", "bg-yellow-50")
+              }
+            }
+          }
+        }
+      })
+
+      if (checkboxCorrect > 0) {
+        feedback.push(`Selezioni corrette: ${checkboxCorrect} ✅`)
+      }
+      if (checkboxIncorrect > 0) {
+        feedback.push(`Selezioni errate: ${checkboxIncorrect} ❌`)
+      }
+    }
+
     // Check radio buttons and button-style answers
     const radioButtons = this.element.querySelectorAll('input[type="radio"][data-correct-answer]')
     const buttonAnswers = this.element.querySelectorAll('button[data-question][data-correct-answer]')
@@ -409,6 +468,25 @@ export default class extends Controller {
       })
     })
 
+    // Show correct answers for checkboxes
+    const checkboxes = this.element.querySelectorAll('input[type="checkbox"][data-correct-answer]')
+    checkboxes.forEach(checkbox => {
+      const shouldBeChecked = checkbox.dataset.correctAnswer === "true"
+      const label = checkbox.closest('label')
+
+      if (shouldBeChecked) {
+        checkbox.checked = true
+        if (label) {
+          const span = label.querySelector('span')
+          if (span) {
+            span.classList.add("border-green-500", "bg-green-100")
+          }
+        }
+      } else {
+        checkbox.checked = false
+      }
+    })
+
     // Show correct answers for radio buttons and button-style answers
     const radioButtons = this.element.querySelectorAll('input[type="radio"][data-correct-answer]')
     const buttonAnswers = this.element.querySelectorAll('button[data-question][data-correct-answer]')
@@ -532,6 +610,20 @@ export default class extends Controller {
       card.classList.remove("bg-red-100", "bg-green-100", "bg-yellow-100",
                             "border-2", "border-red-500", "border-green-500",
                             "border-yellow-500", "bg-orange-100")
+    })
+
+    // Remove highlights from checkboxes and uncheck them
+    const checkboxes = this.element.querySelectorAll('input[type="checkbox"][data-correct-answer]')
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = false
+      const label = checkbox.closest('label')
+      if (label) {
+        const span = label.querySelector('span')
+        if (span) {
+          span.classList.remove("border-red-500", "border-green-500", "border-yellow-500",
+                                "bg-red-100", "bg-green-100", "bg-yellow-50")
+        }
+      }
     })
 
     // Remove highlights from radio buttons and uncheck them
