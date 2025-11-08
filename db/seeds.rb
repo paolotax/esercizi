@@ -211,7 +211,9 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 24, titolo: "I Numeri Decimali e I Numeri Relativi", slug: "nvi5_mat_p024", view_template: "nvi5_mat_p024" },
   { numero: 25, titolo: "Mappa - Il Nostro Sistema di Numerazione", slug: "nvi5_mat_p025", view_template: "nvi5_mat_p025" },
   { numero: 26, titolo: "Verifica - I Numeri", slug: "nvi5_mat_p026", view_template: "nvi5_mat_p026" },
-  { numero: 27, titolo: "Modello INVALSI - I Numeri", slug: "nvi5_mat_p027", view_template: "nvi5_mat_p027" }
+  { numero: 27, titolo: "Modello INVALSI - I Numeri", slug: "nvi5_mat_p027", view_template: "nvi5_mat_p027" },
+  { numero: 28, titolo: "I Numeri - Verifica Avanzata", slug: "nvi5_mat_p028", view_template: "nvi5_mat_p028" },
+  { numero: 29, titolo: "I Numeri - Esercizi Guidati", slug: "nvi5_mat_p029", view_template: "nvi5_mat_p029" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end

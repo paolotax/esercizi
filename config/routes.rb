@@ -60,6 +60,8 @@ Rails.application.routes.draw do
   get "exercises/nvi5_mat_p025", to: "exercises#nvi5_mat_p025", as: "nvi5_mat_p025"
   get "exercises/nvi5_mat_p026", to: "exercises#nvi5_mat_p026", as: "nvi5_mat_p026"
   get "exercises/nvi5_mat_p027", to: "exercises#nvi5_mat_p027", as: "nvi5_mat_p027"
+  get "exercises/nvi5_mat_p028", to: "exercises#nvi5_mat_p028", as: "nvi5_mat_p028"
+  get "exercises/nvi5_mat_p029", to: "exercises#nvi5_mat_p029", as: "nvi5_mat_p029"
 
   # API endpoint for dynamic column addition grid
   get "exercises/column_addition_grid", to: "exercises#column_addition_grid", as: "column_addition_grid"

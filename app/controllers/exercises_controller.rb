@@ -86,6 +86,12 @@ class ExercisesController < ApplicationController
   def nvi5_mat_p019
   end
 
+  def nvi5_mat_p028
+  end
+
+  def nvi5_mat_p029
+  end
+
   def column_addition_grid
     operation = params[:operation]
 

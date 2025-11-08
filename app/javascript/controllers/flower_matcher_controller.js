@@ -124,6 +124,10 @@ export default class extends Controller {
     })
   }
 
+  reveal() {
+    this.showSolutions()
+  }
+
   drawLineBetween(flower1, flower2, isCorrect) {
     const rect1 = flower1.getBoundingClientRect()
     const rect2 = flower2.getBoundingClientRect()
