@@ -248,6 +248,53 @@ export default class extends Controller {
       }
     }
 
+    // Check select elements
+    const selectElements = this.element.querySelectorAll("select[data-correct-answer]")
+    if (selectElements.length > 0) {
+      let selectCorrect = 0
+      let selectIncorrect = 0
+      let selectEmpty = 0
+
+      selectElements.forEach(select => {
+        const correctAnswer = select.dataset.correctAnswer.trim()
+        const userAnswer = select.value.trim()
+
+        // Remove all previous styling
+        select.classList.remove("border-yellow-500", "border-green-500", "border-red-500",
+                               "border-2", "border-4",
+                               "bg-yellow-50", "bg-green-50", "bg-red-50")
+
+        if (userAnswer === "" || userAnswer === "?") {
+          selectEmpty++
+          select.classList.add("border-yellow-500", "border-4", "bg-yellow-50")
+        } else if (userAnswer === correctAnswer) {
+          selectCorrect++
+          select.classList.add("border-green-500", "border-4", "bg-green-50")
+        } else {
+          selectIncorrect++
+          allCorrect = false
+          select.classList.add("border-red-500", "border-4", "bg-red-50")
+
+          // Show shake animation
+          select.classList.add("animate-shake")
+          setTimeout(() => {
+            select.classList.remove("animate-shake")
+          }, 500)
+        }
+      })
+
+      if (selectEmpty > 0) {
+        allCorrect = false
+        feedback.push(`Selezioni da completare: ${selectEmpty} ⚠️`)
+      }
+      if (selectCorrect > 0) {
+        feedback.push(`Selezioni corrette: ${selectCorrect} ✅`)
+      }
+      if (selectIncorrect > 0) {
+        feedback.push(`Selezioni errate: ${selectIncorrect} ❌`)
+      }
+    }
+
     // Check text input fields
     const textInputFields = this.element.querySelectorAll("input[type='text'][data-correct-answer], textarea[data-correct-answer]")
     if (textInputFields.length > 0) {
@@ -538,6 +585,14 @@ export default class extends Controller {
       })
     }
 
+    // Fill in correct answers for select elements
+    const selectElements = this.element.querySelectorAll("select[data-correct-answer]")
+    selectElements.forEach(select => {
+      const correctAnswer = select.dataset.correctAnswer.trim()
+      select.value = correctAnswer
+      select.classList.add("border-green-500", "border-4", "bg-green-50")
+    })
+
     // Fill in correct answers for text input fields
     const textInputFields = this.element.querySelectorAll("input[type='text'][data-correct-answer], textarea[data-correct-answer]")
     textInputFields.forEach(input => {
@@ -644,6 +699,15 @@ export default class extends Controller {
       button.classList.remove("bg-blue-500", "bg-yellow-50", "bg-green-50", "bg-red-50",
                              "border-blue-500", "border-yellow-500", "border-green-500", "border-red-500", "text-white")
       button.classList.add("bg-transparent", "border-gray-300")
+    })
+
+    // Remove highlights from select elements and reset to default
+    const selectElements = this.element.querySelectorAll("select[data-correct-answer]")
+    selectElements.forEach(select => {
+      select.classList.remove("border-yellow-500", "border-green-500", "border-red-500",
+                             "border-4", "bg-yellow-50", "bg-green-50", "bg-red-50",
+                             "border-2")
+      select.value = ""
     })
 
     // Remove highlights from text input fields and restore original styling

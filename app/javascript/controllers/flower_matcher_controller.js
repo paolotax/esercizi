@@ -97,29 +97,37 @@ export default class extends Controller {
     // Reset first
     this.reset()
 
-    // Group flowers by pair, separating powers from results
+    // Group flowers by pair
     const pairs = {}
     this.flowerTargets.forEach(flower => {
       const pair = flower.dataset.pair
       if (!pairs[pair]) {
-        pairs[pair] = { powers: [], results: [] }
+        pairs[pair] = []
       }
-
-      // Check if it's a power (starts with "pow-") or result (starts with "res-")
-      if (flower.dataset.flowerId.startsWith('pow-')) {
-        pairs[pair].powers.push(flower)
-      } else if (flower.dataset.flowerId.startsWith('res-')) {
-        pairs[pair].results.push(flower)
-      }
+      pairs[pair].push(flower)
     })
 
-    // Draw lines: connect each power to its corresponding result
-    Object.values(pairs).forEach(({ powers, results }) => {
-      if (results.length === 1) {
-        // Connect all powers with this pair to the single result
-        powers.forEach(power => {
-          this.drawLineBetween(power, results[0], true)
-        })
+    // Draw lines for each pair
+    Object.values(pairs).forEach(flowers => {
+      if (flowers.length === 2) {
+        // Simple case: just connect the two elements
+        this.drawLineBetween(flowers[0], flowers[1], true)
+      } else if (flowers.length > 2) {
+        // Complex case: separate powers from results
+        const powers = flowers.filter(f => f.dataset.flowerId.startsWith('pow-'))
+        const results = flowers.filter(f => f.dataset.flowerId.startsWith('res-'))
+
+        if (powers.length > 0 && results.length === 1) {
+          // Connect all powers to the single result
+          powers.forEach(power => {
+            this.drawLineBetween(power, results[0], true)
+          })
+        } else {
+          // Fallback: connect first element to all others
+          for (let i = 1; i < flowers.length; i++) {
+            this.drawLineBetween(flowers[0], flowers[i], true)
+          }
+        }
       }
     })
   }
