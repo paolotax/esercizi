@@ -98,6 +98,7 @@ l'unità frazionaria è un quindicesimo.
 - 💾 Copio le immagini
 - 💾 Aggiorno il seed
 - 💾 Creo la view completa
+- Aggiungi sempre in fondo alla pagina il partial exercise_controls
 - 💾 Rigenero il database
 
 ### Tipologie di esercizi che riconosco automaticamente:
@@ -147,6 +148,86 @@ Crea la pagina del libro dall'immagine bus1_mat_p010.jpg in ~/Downloads/bus1_mat
 
 Nota: Questo è un nuovo volume (BUS 1) che va aggiunto al corso "Banda del BUS".
 ```
+
+---
+
+## LINEE GUIDA LAYOUT RESPONSIVE
+
+### Padding e Spaziature Mobile-First
+```html
+<!-- Container principale -->
+<div class="p-3 md:p-8">                          <!-- Ridotto su mobile -->
+  <div class="p-4 md:p-8">                        <!-- Contenuto interno -->
+    <div class="exercise-block p-4 md:p-6">      <!-- Blocchi esercizi -->
+```
+
+### Header su Una Riga
+```html
+<!-- Badge + Titolo + Spacer/Info sulla stessa riga -->
+<div class="flex items-center justify-between">
+  <div class="bg-gradient-to-r px-3 md:px-6 py-2 text-xs md:text-sm">BADGE</div>
+  <h1 class="text-xl md:text-3xl">TITOLO</h1>
+  <p class="text-xs md:text-sm">Info</p>           <!-- o spacer se non c'è testo -->
+</div>
+```
+
+### Grid Responsive con Gap Ridotto su Mobile
+```html
+<!-- 1 colonna mobile, 2 da small breakpoint -->
+<div class="ml-0 md:ml-11 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
+  <!-- Gap ridotto (0.75rem) su mobile, normale (1.5rem) da sm in su -->
+</div>
+
+<!-- Per griglie a 2 colonne fisse -->
+<div class="ml-0 md:ml-11 grid grid-cols-2 gap-x-3 gap-y-2 sm:gap-x-4">
+  <!-- Gap orizzontale ridotto su mobile -->
+</div>
+```
+
+### Allineamento Risposte
+```html
+<!-- Allineate sotto il pallino su mobile, indentate su desktop -->
+<div class="ml-0 md:ml-11">
+  <!-- ml-0 = sotto il pallino (mobile) -->
+  <!-- md:ml-11 = allineate al testo (desktop) -->
+</div>
+```
+
+### Numeri e Testo che Non Si Deve Spezzare
+```html
+<!-- Proteggere numeri lunghi dallo split -->
+<p class="flex flex-wrap gap-2">
+  <span class="whitespace-nowrap">2 834 657</span>
+  <span>•</span>
+  <span class="whitespace-nowrap">82 372 630</span>
+</p>
+```
+
+### Dimensioni Font Responsive
+```html
+<!-- Badge -->
+<div class="text-xs md:text-sm">VERIFICA</div>
+
+<!-- Titoli principali -->
+<h1 class="text-xl md:text-3xl">TITOLO</h1>
+<h2 class="text-xl md:text-2xl">SOTTOTITOLO</h2>
+
+<!-- Testo informativo -->
+<p class="text-xs md:text-sm">Info volume</p>
+```
+
+### Elementi Interattivi (Radio/Checkbox)
+```html
+<label class="flex items-center gap-3 bg-white p-2 md:p-3 rounded">
+  <input type="radio" class="w-5 h-5">
+  <span class="text-gray-700">Testo risposta</span>
+</label>
+```
+
+### Riepilogo Breakpoints Tailwind
+- **mobile**: < 640px (default, no prefix)
+- **sm**: ≥ 640px (tablet piccoli)
+- **md**: ≥ 768px (tablet/desktop)
 
 ---
 
