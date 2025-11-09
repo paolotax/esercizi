@@ -1,0 +1,287 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 to-red-50 rounded-lg shadow-lg" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-pink-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          ORTOGRAFIA
+        </div>
+      </div>
+      <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        11
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 4: Circle correct alternative -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">4</span>
+      Cerchia l'alternativa corretta.
+    </h2>
+
+    <div class="space-y-4" data-controller="word-choice">
+      <%
+        sentences = [
+          {
+            parts: ['Serve il sale? ', ['Lo', 'L\'ho'], ' prendo subito.'],
+            correct: ['Lo']
+          },
+          {
+            parts: ['Il libro sui fantasmi? ', ['Lo', 'L\'ho'], ' restituito stamattina in biblioteca.'],
+            correct: ['L\'ho']
+          },
+          {
+            parts: ['La mamma ', ['la', 'l\'ha'], ' detto mille volte a Ginevra che non vuole animali in casa.'],
+            correct: ['l\'ha']
+          },
+          {
+            parts: ['Sai se verrà anche Elisa? Io non ', ['lo', 'l\'ho'], ' so.'],
+            correct: ['lo']
+          }
+        ]
+
+        group_counter = 0
+      %>
+
+      <% sentences.each_with_index do |sentence, sentence_idx| %>
+        <div class="p-3 bg-pink-50 rounded-lg">
+          <p class="text-base md:text-lg leading-relaxed inline">•
+            <% sentence[:parts].each_with_index do |part, part_idx| %>
+              <% if part.is_a?(Array) %>
+                <%
+                  current_group = "s#{sentence_idx}_g#{group_counter}"
+                  correct_word = sentence[:correct][group_counter % sentence[:correct].length]
+                  group_counter += 1
+                %>
+                <% part.each_with_index do |word, word_idx| %>
+                  <span class="px-1 py-0.5 rounded cursor-pointer hover:bg-pink-100 transition"
+                        data-word-choice-target="word"
+                        data-group="<%= current_group %>"
+                        data-correct="<%= word == correct_word %>"
+                        data-action="click->word-choice#select"><%= word %></span><% if word_idx < part.length - 1 %><span class="text-pink-400">/</span><% end %>
+                <% end %>
+              <% else %>
+                <%= part %>
+              <% end %>
+            <% end %>
+          </p>
+        </div>
+        <% group_counter = 0 %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 5: Complete sentences -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">5</span>
+      Completa le frasi con LO / L'HO, L'HAI, LA / L'HA, L'ANNO / L'HANNO.
+    </h2>
+
+    <div class="space-y-4" data-controller="fill-blanks">
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span>• Ormai <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="l'hanno"
+               data-correct-answer="l'hanno"
+               maxlength="7"> visto tutti!</span>
+      </div>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span>• Non trovo il libro: <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="l'hai"
+               data-correct-answer="l'hai"
+               maxlength="5"> preso tu o <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="l'ha"
+               data-correct-answer="l'ha"
+               maxlength="4"> spostato la tua compagna di banco?</span>
+      </div>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span>• Te <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="l'ha"
+               data-correct-answer="l'ha"
+               maxlength="4"> detto <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="la"
+               data-correct-answer="la"
+               maxlength="2"> mamma che <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="l'anno"
+               data-correct-answer="l'anno"
+               maxlength="6"> prossimo ci trasferiremo?</span>
+      </div>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span>• Gli zii verranno a Roma: ce <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="l'hanno"
+               data-correct-answer="l'hanno"
+               maxlength="7"> scritto!</span>
+      </div>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span>• <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="Lo"
+               data-correct-answer="Lo"
+               maxlength="2"> sai che non <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="l'ho"
+               data-correct-answer="l'ho"
+               maxlength="4"> fatto apposta, è inutile che te <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="la"
+               data-correct-answer="la"
+               maxlength="2"> prendi.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 6: Write sentences with word pairs -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">6</span>
+      Scrivi una frase utilizzando la coppia di parole indicata, come nell'esempio.
+    </h2>
+
+    <div class="space-y-4">
+      <% word_pairs = [
+        {words: 'LO • L\'HO', color: 'yellow', example: 'Ho preparato lo zaino e l\'ho messo in macchina.'},
+        {words: 'LA • L\'HA', color: 'purple', example: nil},
+        {words: 'L\'HA • LÀ', color: 'orange', example: nil},
+        {words: 'L\'HA • LA', color: 'green', example: nil}
+      ] %>
+
+      <% word_pairs.each do |pair| %>
+        <div class="border-3 rounded-lg p-4"
+             style="border-color: <%= case pair[:color]
+               when 'yellow' then '#eab308'
+               when 'purple' then '#a855f7'
+               when 'orange' then '#f97316'
+               when 'green' then '#22c55e'
+               end %>;
+               background-color: <%= case pair[:color]
+               when 'yellow' then '#fef9c3'
+               when 'purple' then '#f3e8ff'
+               when 'orange' then '#ffedd5'
+               when 'green' then '#d1fae5'
+               end %>;">
+          <div class="font-bold text-lg mb-2" style="color: <%= case pair[:color]
+               when 'yellow' then '#854d0e'
+               when 'purple' then '#6b21a8'
+               when 'orange' then '#9a3412'
+               when 'green' then '#065f46'
+               end %>;">
+            <%= pair[:words] %>
+          </div>
+          <% if pair[:example] %>
+            <div class="text-base md:text-lg italic text-gray-700"><%= pair[:example] %></div>
+          <% else %>
+            <textarea class="w-full border-2 border-gray-300 rounded-lg p-3 focus:outline-none focus:border-pink-500 text-base md:text-lg"
+                      rows="2"
+                      placeholder="Scrivi una frase..."></textarea>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 7: Complete with GLIELO/GLIEL'HO etc -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">7</span>
+      Completa le frasi con GLIELO / GLIEL'HO, GLIELA / GLIEL'HA, GLIEL'HAI, GLIEL'HANNO.
+    </h2>
+
+    <div class="space-y-4" data-controller="fill-blanks">
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span>• Questo ombrello è di Davide, <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="glielo"
+               data-correct-answer="glielo"
+               maxlength="7"> restituirò domani.</span>
+      </div>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span>• Vuoi che <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="gliela"
+               data-correct-answer="gliela"
+               maxlength="7"> porti io la frutta?</span>
+      </div>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span>• Mario ha saputo del disguido, <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-24 md:w-28 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="gliel'ha"
+               data-correct-answer="gliel'ha"
+               maxlength="8"> detto Luca.</span>
+      </div>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span>• Questo pallone è nuovo: <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-28 md:w-32 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="gliel'hanno"
+               data-correct-answer="gliel'hanno"
+               maxlength="11"> comperato i suoi genitori.</span>
+      </div>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span>• – <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-24 md:w-28 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="Gliel'hai"
+               data-correct-answer="Gliel'hai"
+               maxlength="9"> precisato che non ci sarò alla festa?</span>
+      </div>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span>• – No, non <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-24 md:w-28 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="gliel'ho"
+               data-correct-answer="gliel'ho"
+               maxlength="8"> ancora comunicato.</span>
+      </div>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span>• Mio fratello è capriccioso e qualche volta <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-24 md:w-28 text-center focus:outline-none focus:border-pink-700 inline"
+               data-fill-blanks-target="input"
+               data-answer="glielo"
+               data-correct-answer="glielo"
+               maxlength="7"> faccio notare.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reference note -->
+  <div class="mb-6 bg-blue-100 border-l-4 border-blue-500 p-4 rounded">
+    <p class="text-sm md:text-base text-blue-800">
+      <strong>📚 Esercizi pp. 136-137</strong> - Per ulteriori esercizi, consulta le pagine 136-137 del libro.
+    </p>
+  </div>
+
+  <!-- Exercise Controls -->
+  <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl5_gr_p011' %>
+</div>

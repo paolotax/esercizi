@@ -95,7 +95,10 @@ nvl5_grammatica = nvl_volume5.discipline.create!(
 [
   { numero: 8, titolo: "Viva il ripasso!", slug: "nvl5_gr_p008", view_template: "nvl5_gr_p008" },
   { numero: 9, titolo: "Ricordi il plurale di -CIA e -GIA?", slug: "nvl5_gr_p009", view_template: "nvl5_gr_p009" },
-  { numero: 10, titolo: "La lettera H", slug: "nvl5_gr_p010", view_template: "nvl5_gr_p010" }
+  { numero: 10, titolo: "La lettera H", slug: "nvl5_gr_p010", view_template: "nvl5_gr_p010" },
+  { numero: 11, titolo: "LO/L'HO, LA/L'HA e altre forme", slug: "nvl5_gr_p011", view_template: "nvl5_gr_p011" },
+  { numero: 12, titolo: "La divisione in sillabe", slug: "nvl5_gr_p012", view_template: "nvl5_gr_p012" },
+  { numero: 13, titolo: "La lettera maiuscola", slug: "nvl5_gr_p013", view_template: "nvl5_gr_p013" }
 ].each do |pagina_data|
   nvl5_grammatica.pagine.create!(pagina_data)
 end
