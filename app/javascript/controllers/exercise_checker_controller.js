@@ -295,6 +295,165 @@ export default class extends Controller {
       }
     }
 
+    // Check word-highlighter (SCE/SCIE exercise)
+    const wordHighlighters = this.element.querySelectorAll("[data-controller=\"word-highlighter\"]")
+    if (wordHighlighters.length > 0) {
+      let highlighterCorrect = 0
+      let highlighterIncorrect = 0
+      let highlighterEmpty = 0
+
+      wordHighlighters.forEach(highlighter => {
+        const words = highlighter.querySelectorAll("[data-word-highlighter-target=\"word\"]")
+
+        console.log(`Found ${words.length} words to check`)
+
+        words.forEach(word => {
+          const correctColor = word.dataset.correctColor
+          const hasRed = word.classList.contains('bg-red-200')
+          const hasBlue = word.classList.contains('bg-blue-200')
+          const hasGreen = word.classList.contains('bg-green-200')
+          const hasYellow = word.classList.contains('bg-yellow-200')
+
+          console.log(`Word: "${word.textContent.trim()}", correctColor: ${correctColor}, hasRed: ${hasRed}, hasBlue: ${hasBlue}, hasGreen: ${hasGreen}, hasYellow: ${hasYellow}`)
+
+          // Remove previous styling
+          word.classList.remove('ring-2', 'ring-green-500', 'ring-red-500', 'ring-yellow-500')
+
+          if (!hasRed && !hasBlue && !hasGreen && !hasYellow) {
+            highlighterEmpty++
+            allCorrect = false
+            word.classList.add('ring-2', 'ring-yellow-500')
+          } else if ((correctColor === 'red' && hasRed) ||
+                     (correctColor === 'blue' && hasBlue) ||
+                     (correctColor === 'green' && hasGreen) ||
+                     (correctColor === 'yellow' && hasYellow)) {
+            highlighterCorrect++
+            word.classList.add('ring-2', 'ring-green-500')
+            console.log(`  ✓ Correct!`)
+          } else {
+            highlighterIncorrect++
+            allCorrect = false
+            word.classList.add('ring-2', 'ring-red-500')
+            word.classList.add('animate-shake')
+            setTimeout(() => word.classList.remove('animate-shake'), 500)
+            console.log(`  ✗ Incorrect!`)
+          }
+        })
+      })
+
+      console.log(`Highlighter results: correct=${highlighterCorrect}, incorrect=${highlighterIncorrect}, empty=${highlighterEmpty}`)
+
+      if (highlighterEmpty > 0) {
+        allCorrect = false
+        const msg = `Parole da colorare: ${highlighterEmpty} ⚠️`
+        feedback.push(msg)
+        console.log(`Added feedback: ${msg}`)
+      }
+      if (highlighterCorrect > 0) {
+        const msg = `Parole colorate correttamente: ${highlighterCorrect} ✅`
+        feedback.push(msg)
+        console.log(`Added feedback: ${msg}`)
+      }
+      if (highlighterIncorrect > 0) {
+        const msg = `Parole colorate in modo errato: ${highlighterIncorrect} ❌`
+        feedback.push(msg)
+        console.log(`Added feedback: ${msg}`)
+      }
+      console.log(`Current feedback array:`, feedback)
+      console.log(`allCorrect status: ${allCorrect}`)
+    }
+
+    // Check word-choice selections
+    const wordChoiceGroups = this.element.querySelectorAll("[data-controller=\"word-choice\"]")
+    if (wordChoiceGroups.length > 0) {
+      let wordChoiceCorrect = 0
+      let wordChoiceIncorrect = 0
+      let wordChoiceEmpty = 0
+
+      console.log(`Found ${wordChoiceGroups.length} word-choice groups`)
+
+      wordChoiceGroups.forEach(wordChoiceGroup => {
+        const words = wordChoiceGroup.querySelectorAll("[data-word-choice-target=\"word\"]")
+        const groups = new Map()
+
+        console.log(`  Found ${words.length} total words in this word-choice group`)
+
+        // Group words by their group attribute
+        words.forEach(word => {
+          const groupName = word.dataset.group
+          if (!groups.has(groupName)) {
+            groups.set(groupName, [])
+          }
+          groups.get(groupName).push(word)
+        })
+
+        console.log(`  Organized into ${groups.size} choice groups`)
+
+        // Check each group
+        groups.forEach((groupWords, groupName) => {
+          const selectedWord = groupWords.find(w => w.classList.contains('bg-pink-200'))
+
+          console.log(`  Group ${groupName}: ${groupWords.length} words, selected word: ${selectedWord ? selectedWord.textContent.trim() : 'NONE'}`)
+
+          // Remove previous styling (keep line-through from user selection)
+          groupWords.forEach(w => {
+            w.classList.remove('bg-green-100', 'bg-red-100', 'bg-yellow-100',
+                              'border-2', 'border-green-500', 'border-red-500', 'border-yellow-500')
+            // Don't remove line-through here - it's part of the user's selection state
+          })
+
+          if (!selectedWord) {
+            wordChoiceEmpty++
+            allCorrect = false
+            // Highlight all words in group to show selection needed
+            groupWords.forEach(w => {
+              w.classList.add('bg-yellow-100', 'border-2', 'border-yellow-500')
+            })
+          } else {
+            const isCorrect = selectedWord.dataset.correct === "true"
+
+            if (isCorrect) {
+              wordChoiceCorrect++
+              selectedWord.classList.remove('bg-pink-200')
+              selectedWord.classList.add('bg-green-100', 'border-2', 'border-green-500')
+
+              // Remove line-through from non-selected words in correct answer groups
+              groupWords.forEach(w => {
+                if (w !== selectedWord) {
+                  w.classList.remove('line-through', 'opacity-40', 'text-gray-500', 'cursor-not-allowed')
+                }
+              })
+            } else {
+              wordChoiceIncorrect++
+              allCorrect = false
+              selectedWord.classList.remove('bg-pink-200')
+              selectedWord.classList.add('bg-red-100', 'border-2', 'border-red-500')
+              selectedWord.classList.add('animate-shake')
+              setTimeout(() => selectedWord.classList.remove('animate-shake'), 500)
+
+              // Show correct answer
+              const correctWord = groupWords.find(w => w.dataset.correct === "true")
+              if (correctWord) {
+                correctWord.classList.remove('line-through', 'opacity-40', 'text-gray-500', 'cursor-not-allowed')
+                correctWord.classList.add('bg-yellow-100', 'border-2', 'border-yellow-500')
+              }
+            }
+          }
+        })
+      })
+
+      if (wordChoiceEmpty > 0) {
+        allCorrect = false
+        feedback.push(`Parole da selezionare: ${wordChoiceEmpty} ⚠️`)
+      }
+      if (wordChoiceCorrect > 0) {
+        feedback.push(`Parole corrette: ${wordChoiceCorrect} ✅`)
+      }
+      if (wordChoiceIncorrect > 0) {
+        feedback.push(`Parole errate: ${wordChoiceIncorrect} ❌`)
+      }
+    }
+
     // Check text input fields
     const textInputFields = this.element.querySelectorAll("input[type='text'][data-correct-answer], textarea[data-correct-answer]")
     if (textInputFields.length > 0) {
@@ -424,6 +583,8 @@ export default class extends Controller {
     })
 
     // Show feedback
+    console.log(`Final feedback array before showing:`, feedback)
+    console.log(`Final allCorrect status: ${allCorrect}`)
     this.showFeedback(feedback, allCorrect)
   }
 
@@ -601,6 +762,51 @@ export default class extends Controller {
       input.classList.add("border-green-500", "border-4", "bg-green-50")
     })
 
+    // Show correct answers for word-highlighter
+    const wordHighlighters = this.element.querySelectorAll("[data-controller=\"word-highlighter\"]")
+    wordHighlighters.forEach(highlighter => {
+      const words = highlighter.querySelectorAll("[data-word-highlighter-target=\"word\"]")
+
+      words.forEach(word => {
+        const correctColor = word.dataset.correctColor
+
+        // Remove all colors first
+        word.classList.remove('bg-red-200', 'bg-blue-200', 'bg-green-200', 'bg-yellow-200',
+                              'text-red-900', 'text-blue-900', 'text-green-900', 'text-yellow-900')
+
+        // Add correct color
+        if (correctColor === 'red') {
+          word.classList.add('bg-red-200', 'text-red-900', 'font-bold', 'px-1', 'rounded')
+        } else if (correctColor === 'blue') {
+          word.classList.add('bg-blue-200', 'text-blue-900', 'font-bold', 'px-1', 'rounded')
+        } else if (correctColor === 'green') {
+          word.classList.add('bg-green-200', 'text-green-900', 'font-bold', 'px-1', 'rounded')
+        } else if (correctColor === 'yellow') {
+          word.classList.add('bg-yellow-200', 'text-yellow-900', 'font-bold', 'px-1', 'rounded')
+        }
+      })
+    })
+
+    // Show correct answers for word-choice
+    const wordChoiceGroups = this.element.querySelectorAll("[data-controller=\"word-choice\"]")
+    wordChoiceGroups.forEach(wordChoiceGroup => {
+      const words = wordChoiceGroup.querySelectorAll("[data-word-choice-target=\"word\"]")
+
+      words.forEach(word => {
+        const isCorrect = word.dataset.correct === "true"
+
+        if (isCorrect) {
+          word.classList.remove('hover:bg-pink-100', 'line-through', 'opacity-40', 'text-gray-500', 'cursor-not-allowed')
+          // Add both bg-pink-200 (for selection detection) and green styling (for visual feedback)
+          word.classList.add('bg-pink-200', 'bg-green-100', 'border-2', 'border-green-500', 'font-bold', 'underline')
+        } else {
+          // Strike through incorrect words
+          word.classList.remove('hover:bg-pink-100', 'bg-pink-200')
+          word.classList.add('line-through', 'opacity-40', 'text-gray-500', 'cursor-not-allowed')
+        }
+      })
+    })
+
     // Show flower matcher solutions if present
     const flowerMatcher = this.element.querySelector("[data-controller=\"flower-matcher\"]")
     if (flowerMatcher) {
@@ -717,6 +923,24 @@ export default class extends Controller {
                              "border-4", "bg-yellow-50", "bg-green-50", "bg-red-50",
                              "border-gray-300", "border-gray-500", "border-2")
       input.value = ""
+    })
+
+    // Remove highlights from word-highlighter
+    const wordHighlighterWords = this.element.querySelectorAll("[data-word-highlighter-target=\"word\"]")
+    wordHighlighterWords.forEach(word => {
+      word.classList.remove('bg-red-200', 'bg-blue-200', 'bg-green-200', 'bg-yellow-200',
+                            'text-red-900', 'text-blue-900', 'text-green-900', 'text-yellow-900',
+                            'font-bold', 'px-1', 'rounded', 'ring-2', 'ring-green-500',
+                            'ring-red-500', 'ring-yellow-500')
+    })
+
+    // Remove highlights from word-choice selections
+    const wordChoiceWords = this.element.querySelectorAll("[data-word-choice-target=\"word\"]")
+    wordChoiceWords.forEach(word => {
+      word.classList.remove('bg-pink-200', 'bg-green-100', 'bg-red-100', 'bg-yellow-100',
+                            'border-2', 'border-green-500', 'border-red-500', 'border-yellow-500',
+                            'font-bold', 'underline', 'line-through', 'opacity-40', 'text-gray-500', 'cursor-not-allowed')
+      word.classList.add('cursor-pointer', 'hover:bg-pink-100')
     })
 
     const feedback = this.element.querySelector(".exercise-feedback")

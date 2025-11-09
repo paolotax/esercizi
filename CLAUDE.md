@@ -14,19 +14,6 @@ This project uses ClaudeOnRails to create an intelligent swarm of AI agents spec
 
 Simply describe what you want to build or fix, and the swarm will automatically coordinate the implementation:
 
-<!-- Sto costruendo il prototipo di un applicazione per presentare in html interattivo le pagine di diversi libri di testo per la scuola italiana.
-Per ora ho aggiunto pagine di diversi libri e materie con esercizi di tipo diverso aggiungendole man mano. -->
-
-<!-- I libri sono così organizzati:
-
-Corso: Banda del BUS
-  volume classe: Banda del BUS 1
-    discipina: Banda del BUS 1 MATEMATICA
-
-....
-
-Fammi un piano per i modelli e i controller opportuni per poter navigare le pagine dei libri. Le che per ora ho pagine fatto sono nel controller exercices_controller.  -->
-
 ```bash
 # Start the swarm
 claude-swarm orchestrate
@@ -73,7 +60,10 @@ The following specialized agents work together to implement your requests:
 
 ## Custom Patterns
 
-Add your project-specific patterns and conventions here:
+- crea nuove pagine usa il prompt PROMPT_NUOVA_PAGINA.md
+- per gli header di pagina usa il template in TODO_HEADER_PAGES.md 
+
+
 
 ```yaml
 # Example: Custom service object pattern
