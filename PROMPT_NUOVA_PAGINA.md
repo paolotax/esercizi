@@ -151,6 +151,41 @@ Nota: Questo è un nuovo volume (BUS 1) che va aggiunto al corso "Banda del BUS"
 
 ---
 
+## TEMPLATE HEADER STANDARDIZZATO
+
+Usa questo header per tutte le nuove pagine:
+
+```html
+<!-- Header -->
+<div class="mb-8">
+  <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+    <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+      <div class="bg-blue-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+        SOTTOTITOLO
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-bold text-blue-600">TITOLO PRINCIPALE</h1>
+    </div>
+    <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+      26
+    </div>
+  </div>
+</div>
+```
+
+### Varianti Colori Badge Sottotitolo:
+- **ADDIZIONE**: `bg-blue-500` + titolo `text-blue-600`
+- **SOTTRAZIONE**: `bg-cyan-500` + titolo `text-cyan-600`
+- **FRAZIONI**: `bg-blue-500` + titolo `text-blue-600`
+- **ESERCIZI GENERICI**: `bg-blue-500` + titolo `text-blue-600`
+
+### Note:
+- Badge sottotitolo: responsive `text-md sm:text-xl` con padding `px-2 sm:px-4 py-1.5 sm:py-2`
+- Titolo principale: responsive `text-2xl sm:text-3xl`
+- Badge numero pagina: dimensione fissa `w-10 h-10 sm:w-12 sm:h-12`
+- Gap tra elementi: `gap-2 sm:gap-4` per migliore spaziatura mobile
+
+---
+
 ## LINEE GUIDA LAYOUT RESPONSIVE
 
 ### Padding e Spaziature Mobile-First
