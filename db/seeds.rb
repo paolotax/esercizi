@@ -79,6 +79,29 @@ end
 
 puts "  ✓ Creato volume '#{nvl_volume4.nome}' con #{nvl_grammatica.pagine.count} pagine"
 
+# 2b. NUOVO VIVA LEGGERE 5
+nvl_volume5 = nvl.volumi.create!(
+  nome: "Nuovo Viva Leggere 5",
+  classe: 5,
+  posizione: 5
+)
+
+nvl5_grammatica = nvl_volume5.discipline.create!(
+  nome: "Grammatica",
+  codice: "gr",
+  colore: "#EC4899"
+)
+
+[
+  { numero: 8, titolo: "Viva il ripasso!", slug: "nvl5_gr_p008", view_template: "nvl5_gr_p008" },
+  { numero: 9, titolo: "Ricordi il plurale di -CIA e -GIA?", slug: "nvl5_gr_p009", view_template: "nvl5_gr_p009" },
+  { numero: 10, titolo: "La lettera H", slug: "nvl5_gr_p010", view_template: "nvl5_gr_p010" }
+].each do |pagina_data|
+  nvl5_grammatica.pagine.create!(pagina_data)
+end
+
+puts "  ✓ Creato volume '#{nvl_volume5.nome}' con #{nvl5_grammatica.pagine.count} pagine"
+
 # 3. BANDA DEL BUS 3
 puts "\n📚 Creazione corso: Banda del BUS"
 bus = Corso.create!(

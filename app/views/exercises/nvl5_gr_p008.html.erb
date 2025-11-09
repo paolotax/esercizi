@@ -1,0 +1,230 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 to-red-50 rounded-lg shadow-lg" 
+     data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-pink-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          ORTOGRAFIA
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-pink-600">Viva il ripasso!</h1>
+      </div>
+      <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        8
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 1: CU, QU, CQU, CCU, QQU -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
+      <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold">IMPARARE TUTTI</span>
+      Ripassa CU, QU, CQU, CCU, QQU. Completa le parole.
+    </h2>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4" data-controller="fill-blanks">
+      <% completions = [
+        {prefix: 'cir', suffix: 'ito', answer: 'cu'},
+        {prefix: '', suffix: 'ore', answer: 'cu'},
+        {prefix: 'li', suffix: 'ore', answer: 'qu'},
+        {prefix: 'a', suffix: 'azzone', answer: 'cqu'},
+        {prefix: 'ta', suffix: 'ino', answer: 'cqu'},
+        {prefix: 'a', suffix: 'ilone', answer: 'qu'},
+        {prefix: '', suffix: 'cire', answer: 'cu'},
+        {prefix: 'a', suffix: 'isti', answer: 'cqu'},
+        {prefix: '', suffix: 'attro', answer: 'qu'},
+        {prefix: 'a', suffix: 'olina', answer: 'cqu'},
+        {prefix: '', suffix: 'rva', answer: 'cu'},
+        {prefix: 's', suffix: 'adra', answer: 'qu'},
+        {prefix: '', suffix: 'ltura', answer: 'cu'},
+        {prefix: 'so', suffix: 'adro', answer: 'qqu'},
+        {prefix: 'in', suffix: 'inato', answer: 'cqu'}
+      ] %>
+
+      <% completions.each do |item| %>
+        <div class="flex items-center gap-1 text-base md:text-lg font-bold">
+          <span class="text-pink-700">•</span>
+          <span><%= item[:prefix] %></span>
+          <input type="text"
+                 class="border-b-3 border-pink-500 bg-transparent w-10 md:w-12 text-center focus:outline-none focus:border-pink-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:answer] %>"
+                 data-correct-answer="<%= item[:answer] %>"
+                 maxlength="4">
+          <span><%= item[:suffix] %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: GN and GNI -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+      Ripassa GN e GNI. Clicca la parola scritta in modo corretto.
+    </h2>
+
+    <div class="space-y-4" data-controller="word-choice">
+      <%
+        sentences = [
+          {
+            parts: ['Oggi ', ['disegnamo', 'disegniamo'], ' una vignetta colorata e divertente.'],
+            correct: ['disegniamo']
+          },
+          {
+            parts: ['Lukas chiede che gli ', ['insegniate', 'insegnate'], ' a fare le ', ['lasagne', 'lasagnie'], '.'],
+            correct: ['insegniate', 'lasagne']
+          },
+          {
+            parts: ['La nonna dice che se ci ', ['bagniamo', 'bagnamo'], ' non avrà vestiti di ricambio da darci.'],
+            correct: ['bagniamo']
+          },
+          {
+            parts: ['La ', ['compagnia', 'compagna'], ' di assicurazioni "Tutti al sicuro" ha realizzato una ', ['campagna', 'campagnia'], ' pubblicitaria per la televisione.'],
+            correct: ['compagnia', 'campagna']
+          }
+        ]
+
+        group_counter = 0
+      %>
+
+      <% sentences.each_with_index do |sentence, sentence_idx| %>
+        <div class="p-3 bg-pink-50 rounded-lg">
+          <p class="text-base md:text-lg leading-relaxed inline">•
+            <% sentence[:parts].each_with_index do |part, part_idx| %>
+              <% if part.is_a?(Array) %>
+                <%
+                  current_group = "s#{sentence_idx}_g#{group_counter}"
+                  correct_word = sentence[:correct][group_counter % sentence[:correct].length]
+                  group_counter += 1
+                %>
+                <% part.each_with_index do |word, word_idx| %>
+                  <span class="px-1 py-0.5 rounded cursor-pointer hover:bg-pink-100 transition"
+                        data-word-choice-target="word"
+                        data-group="<%= current_group %>"
+                        data-correct="<%= word == correct_word %>"
+                        data-action="click->word-choice#select"><%= word %></span><% if word_idx < part.length - 1 %><span class="text-pink-400">/</span><% end %>
+                <% end %>
+              <% else %>
+                <%= part %>
+              <% end %>
+            <% end %>
+          </p>
+        </div>
+        <% group_counter = 0 %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 3: SCE and SCIE -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md" data-controller="word-highlighter">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">3</span>
+      Ripassa SCE e SCIE. Clicca un colore, poi clicca le parole che contengono SCE o SCIE.
+    </h2>
+
+    <div class="bg-gradient-to-br from-blue-50 to-purple-50 p-4 md:p-6 rounded-lg border-2 border-pink-300">
+      <div class="space-y-2 text-base md:text-lg leading-relaxed text-gray-800">
+        <p>Lungo la scia di un'astronave</p>
+        <p>scivola a razzo</p>
+        <p>uno <span class="cursor-pointer hover:underline transition" data-word-highlighter-target="word" data-correct-color="blue" data-action="click->word-highlighter#highlightWord">scienziato</span> pazzo.</p>
+        <p>Con la sua <span class="cursor-pointer hover:underline transition" data-word-highlighter-target="word" data-correct-color="blue" data-action="click->word-highlighter#highlightWord">scienza</span> quell'<span class="cursor-pointer hover:underline transition" data-word-highlighter-target="word" data-correct-color="blue" data-action="click->word-highlighter#highlightWord">incosciente</span></p>
+        <p>vuole stupire tutta la gente.</p>
+        <p>Dalla base gli dicono di <span class="cursor-pointer hover:underline transition" data-word-highlighter-target="word" data-correct-color="red" data-action="click->word-highlighter#highlightWord">scendere</span>,</p>
+        <p>ma la corsa lui non vuole sospendere.</p>
+        <p>"Se <span class="cursor-pointer hover:underline transition" data-word-highlighter-target="word" data-correct-color="red" data-action="click->word-highlighter#highlightWord">scegli</span> il rientro in questo momento,</p>
+        <p>sarai famoso e pure contento!"</p>
+        <p>Lo sciocco <span class="cursor-pointer hover:underline transition" data-word-highlighter-target="word" data-correct-color="blue" data-action="click->word-highlighter#highlightWord">scienziato</span> ancora non sa</p>
+        <p>che per sempre in orbita lui resterà.</p>
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-4 items-center justify-between">
+        <div class="flex flex-wrap gap-4 text-sm md:text-base">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-red-600 rounded cursor-pointer transition transform hover:scale-110 ring-2 ring-gray-300"
+                 data-word-highlighter-target="colorBox"
+                 data-color="red"
+                 data-action="click->word-highlighter#selectColor"
+                 title="Clicca per selezionare">
+            </div>
+            <span>SCE</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-blue-600 rounded cursor-pointer transition transform hover:scale-110 ring-2 ring-gray-300"
+                 data-word-highlighter-target="colorBox"
+                 data-color="blue"
+                 data-action="click->word-highlighter#selectColor"
+                 title="Clicca per selezionare">
+            </div>
+            <span>SCIE</span>
+          </div>
+        </div>
+        <button class="text-sm bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg transition font-semibold"
+                data-action="click->word-highlighter#clearHighlights">
+          🔄 Cancella
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 4: GLI and LI -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">4</span>
+      Ripassa GLI e LI. Completa le parole.
+    </h2>
+
+    <div class="space-y-4" data-controller="fill-blanks">
+      <% gli_completions = [
+        {text: 'Quel film mi piace così tanto che lo avrò visto un mi', answer: 'li', suffix: 'one di volte!'},
+        {text: 'Ho messo la tova', answer: 'gli', suffix: 'a sul tavolo e ho portato l\'o', answer2: 'li', suffix2: 'era per condire l\'insalata.'},
+        {text: 'La mareggiata di questa notte ha lasciato molte conchi', answer: 'gli', suffix: 'e sul bagnasciuga.'}
+      ] %>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-2 text-base md:text-lg">
+        <span>• Quel film mi piace così tanto che lo avrò visto un mi</span>
+        <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700"
+               data-fill-blanks-target="input"
+               data-answer="li"
+               data-correct-answer="li"
+               maxlength="3">
+        <span>one di volte!</span>
+      </div>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-2 text-base md:text-lg">
+        <span>• Ho messo la tova</span>
+        <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700"
+               data-fill-blanks-target="input"
+               data-answer="gli"
+               data-correct-answer="gli"
+               maxlength="3">
+        <span>a sul tavolo e ho portato l'o</span>
+        <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700"
+               data-fill-blanks-target="input"
+               data-answer="li"
+               data-correct-answer="li"
+               maxlength="3">
+        <span>era per condire l'insalata.</span>
+      </div>
+
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-2 text-base md:text-lg">
+        <span>• La mareggiata di questa notte ha lasciato molte conchi</span>
+        <input type="text"
+               class="border-b-3 border-pink-500 bg-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700"
+               data-fill-blanks-target="input"
+               data-answer="gli"
+               data-correct-answer="gli"
+               maxlength="3">
+        <span>e sul bagnasciuga.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise Controls -->
+  <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl5_gr_p008' %>
+</div>

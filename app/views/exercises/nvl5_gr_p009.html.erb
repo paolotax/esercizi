@@ -1,0 +1,212 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 to-red-50 rounded-lg shadow-lg" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-pink-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          ORTOGRAFIA
+        </div>
+        <%# <h1 class="text-2xl sm:text-3xl font-bold text-pink-600">Ricordi il plurale di -CIA e -GIA?</h1> %>
+      </div>
+      <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        9
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Box -->
+  <div class="mb-6 md:mb-8 bg-yellow-50 border-4 border-yellow-400 rounded-lg p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-3">Ricordi il plurale di -CIA e -GIA?</h2>
+    <div class="space-y-2 text-base md:text-lg">
+      <div class="flex items-center gap-4">
+        <span class="font-bold">buccia → bucce</span>
+        <span class="font-bold">spiaggia → spiagge</span>
+        <span class="font-bold">camicia → camicie</span>
+      </div>
+      <p class="text-pink-700 font-bold mt-3">La i rimane al plurale se prima c'è una vocale!</p>
+    </div>
+  </div>
+
+  <!-- Exercise 5: Complete tables -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">5</span>
+      Ripassa il plurale di -CIA e -GIA. Completa le tabelle.
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-controller="fill-blanks">
+      <!-- Singolare to Plurale -->
+      <div class="border-3 border-blue-400 rounded-lg p-4 bg-blue-50">
+        <h3 class="text-lg font-bold text-blue-700 mb-3">Dal singolare al plurale</h3>
+        <div class="space-y-3">
+          <% singolare_plurale = [
+            {sing: 'bilancia', plur: 'bilance'},
+            {sing: 'traccia', plur: 'tracce'},
+            {sing: 'camicia', plur: 'camicie'},
+            {sing: 'regia', plur: 'regie'},
+            {sing: 'antologia', plur: 'antologie'}
+          ] %>
+
+          <% singolare_plurale.each do |item| %>
+            <div class="flex items-center gap-3 text-base md:text-lg">
+              <span class="font-bold w-32"><%= item[:sing] %></span>
+              <span class="text-gray-400">→</span>
+              <input type="text"
+                     class="border-b-3 border-pink-500 bg-white w-28 md:w-32 px-2 py-1 text-right focus:outline-none focus:border-pink-700"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= item[:plur] %>"
+                     data-correct-answer="<%= item[:plur] %>">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Plurale to Singolare -->
+      <div class="border-3 border-green-400 rounded-lg p-4 bg-green-50">
+        <h3 class="text-lg font-bold text-green-700 mb-3">Dal plurale al singolare</h3>
+        <div class="space-y-3">
+          <% plurale_singolare = [
+            {plur: 'rocce', sing: 'roccia'},
+            {plur: 'frecce', sing: 'freccia'},
+            {plur: 'querce', sing: 'quercia'},
+            {plur: 'piogge', sing: 'pioggia'},
+            {plur: 'bugie', sing: 'bugia'}
+          ] %>
+
+          <% plurale_singolare.each do |item| %>
+            <div class="flex items-center gap-3 text-base md:text-lg">
+              <span class="font-bold w-32"><%= item[:plur] %></span>
+              <span class="text-gray-400">→</span>
+              <input type="text"
+                     class="border-b-3 border-pink-500 bg-white w-28 md:w-32 px-2 py-1 text-right focus:outline-none focus:border-pink-700"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= item[:sing] %>"
+                     data-correct-answer="<%= item[:sing] %>">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 6: Write sentences -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">6</span>
+      Scrivi una frase per ciascuna parola.
+    </h2>
+
+    <div class="space-y-4">
+      <div>
+        <div class="inline-block bg-green-500 text-white px-4 py-2 rounded-lg font-bold mb-2">CAMICIE</div>
+        <textarea class="w-full border-2 border-pink-300 rounded-lg p-3 focus:outline-none focus:border-pink-500 text-base md:text-lg"
+                  rows="2"
+                  placeholder="Scrivi una frase con la parola CAMICIE..."></textarea>
+      </div>
+
+      <div>
+        <div class="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg font-bold mb-2">CAMICE</div>
+        <textarea class="w-full border-2 border-pink-300 rounded-lg p-3 focus:outline-none focus:border-pink-500 text-base md:text-lg"
+                  rows="2"
+                  placeholder="Scrivi una frase con la parola CAMICE..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 7: Z and ZZ -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">7</span>
+      Ripassa Z e ZZ. Colora la parola corretta.
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <% word_pairs = [
+        {words: ['COLAZIONE', 'COLAZZIONE'], correct: 'COLAZIONE', color: 'purple'},
+        {words: ['CARROZIERE', 'CARROZZIERE'], correct: 'CARROZZIERE', color: 'orange'},
+        {words: ['CARROZA', 'CARROZZA'], correct: 'CARROZZA', color: 'yellow'},
+        {words: ['LEZIONE', 'LEZZIONE'], correct: 'LEZIONE', color: 'cyan'},
+        {words: ['OPERAZZIONE', 'OPERAZIONE'], correct: 'OPERAZIONE', color: 'orange'},
+        {words: ['PULIZIA', 'PULIZZIA'], correct: 'PULIZIA', color: 'cyan'}
+      ] %>
+
+      <% word_pairs.each do |pair| %>
+        <div class="border-4 rounded-full overflow-hidden flex"
+             data-controller="card-selector"
+             style="border-color: <%= case pair[:color]
+               when 'purple' then '#a855f7'
+               when 'orange' then '#f97316'
+               when 'yellow' then '#eab308'
+               when 'cyan' then '#06b6d4'
+               end %>;">
+          <% pair[:words].each_with_index do |word, idx| %>
+            <div class="flex-1 px-3 py-3 text-center font-bold text-sm md:text-base cursor-pointer transition hover:bg-gray-100 <%= 'border-r-2' if idx == 0 %>"
+                 style="<%= 'border-color: ' + (case pair[:color]
+                   when 'purple' then '#a855f7'
+                   when 'orange' then '#f97316'
+                   when 'yellow' then '#eab308'
+                   when 'cyan' then '#06b6d4'
+                   end) if idx == 0 %>;"
+                 data-action="click->card-selector#select"
+                 data-card-selector-target="card"
+                 data-correct="<%= word == pair[:correct] %>">
+              <%= word %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- GIOCO: Crossword with DOPPIE -->
+  <div class="mb-6 md:mb-8 bg-gradient-to-br from-yellow-100 to-orange-100 rounded-lg p-4 md:p-6 shadow-md border-4 border-yellow-400">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-lg font-bold text-lg">GIOCO</span>
+      <h2 class="text-lg md:text-xl font-bold text-orange-700">
+        Gioca con le DOPPIE. Leggi le definizioni e completa lo schema.
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Definitions -->
+      <div class="bg-white rounded-lg p-4 space-y-2 text-base md:text-lg">
+        <p><strong>1.</strong> Legumi piccoli, tondi e verdi.</p>
+        <p><strong>2.</strong> È bianco e si usa per rendere dolce il tè o il caffè.</p>
+        <p><strong>3.</strong> Il suono del telefono.</p>
+        <p><strong>4.</strong> Galoppa, trotta e nitrisce.</p>
+        <p><strong>5.</strong> Lo usi per bere.</p>
+      </div>
+
+      <!-- Crossword Grid -->
+      <div class="bg-white rounded-lg p-4">
+        <h4 class="font-bold text-base md:text-lg mb-3">Schema:</h4>
+        <div class="space-y-3" data-controller="crossword">
+          <% answers = [
+            {num: 1, answer: 'PISELLI'},
+            {num: 2, answer: 'ZUCCHERO'},
+            {num: 3, answer: 'SQUILLO'},
+            {num: 4, answer: 'CAVALLO'},
+            {num: 5, answer: 'BICCHIERE'}
+          ] %>
+
+          <% answers.each do |item| %>
+            <div class="flex flex-wrap md:flex-nowrap gap-1 items-center">
+              <span class="font-bold text-pink-600 w-6 flex-shrink-0"><%= item[:num] %></span>
+              <% item[:answer].chars.each do |char| %>
+                <input type="text"
+                       maxlength="1"
+                       class="w-8 h-8 md:w-10 md:h-10 border-2 border-gray-400 text-center font-bold uppercase focus:border-pink-500 focus:outline-none text-sm md:text-base flex-shrink-0"
+                       data-answer="<%= char %>"
+                       data-correct-answer="<%= char %>">
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise Controls -->
+  <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl5_gr_p009' %>
+</div>
