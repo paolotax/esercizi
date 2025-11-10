@@ -1,90 +1,93 @@
-<div class="min-h-screen bg-gradient-to-br from-pink-50 to-orange-50 py-8 px-4" data-controller="exercise-checker">
-  <div class="max-w-4xl mx-auto">
-    <!-- Header -->
-    <div class="flex items-center gap-4 mb-12">
-      <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg px-8 py-4 shadow-lg">
-        <span class="text-4xl font-bold text-white">SUONI</span>
-      </div>
-      <h1 class="text-3xl font-bold text-purple-600">COME INIZIA?</h1>
-      <div class="ml-auto bg-purple-600 text-white rounded-full w-16 h-16 flex items-center justify-center font-bold text-2xl shadow-lg">
-        10
+<div class="min-h-screen bg-gradient-to-br from-pink-50 to-orange-50 p-1 md:p-8">
+  <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4 md:p-8" data-controller="exercise-checker">
+    <div class="mb-8">
+      <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+        <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+          <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+            SUONI
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-bold text-purple-600">COME INIZIA?</h1>
+        </div>
+        <div class="flex-shrink-0 bg-purple-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+          10
+        </div>
       </div>
     </div>
 
     <!-- Instructions -->
-    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-      <h2 class="text-xl font-bold text-gray-800 flex items-center gap-3">
-        <span class="text-2xl">🔵</span>
+    <div class="bg-gray-50 rounded-lg shadow-sm p-3 sm:p-6 mb-4 sm:mb-6">
+      <h2 class="text-sm sm:text-xl font-bold text-gray-800 flex items-start sm:items-center gap-2 sm:gap-3">
+        <span class="text-xl sm:text-2xl flex-shrink-0">🔵</span>
         <span>OSSERVA I DISEGNI E PRONUNCIA I NOMI. IN OGNI GRUPPO SEGNA CON UNA <span class="text-red-600 font-bold">X</span> IL DISEGNO CHE INIZIA COME IL PRIMO.</span>
       </h2>
     </div>
 
     <!-- Exercise Groups -->
-    <div class="space-y-6">
+    <div class="space-y-4 sm:space-y-6">
       <!-- Group 1: Mela -->
-      <div class="bg-white rounded-3xl shadow-lg border-4 border-purple-400 p-8" data-controller="exercise-group">
-        <div class="grid grid-cols-[1fr_1fr] gap-8 divide-x-4 divide-blue-300">
+      <div class="bg-white rounded-2xl sm:rounded-3xl shadow-lg border-2 sm:border-4 border-purple-400 p-3 sm:p-8" data-controller="exercise-group">
+        <div class="flex flex-col md:grid md:grid-cols-[1fr_1fr] gap-4 sm:gap-8 md:divide-x-4 md:divide-blue-300">
           <!-- Left side - Reference item -->
-          <div class="flex items-center justify-center">
+          <div class="flex items-center justify-center py-4 md:py-0">
             <div class="text-center cursor-pointer hover:scale-110 transition"
                  data-controller="image-speech"
                  data-image-speech-word-value="mela"
                  data-action="click->image-speech#speak">
-              <div class="text-8xl">🍎</div>
+              <div class="text-5xl sm:text-6xl md:text-8xl">🍎</div>
             </div>
           </div>
 
           <!-- Right side - Options to check -->
-          <div class="flex items-center justify-center">
-            <div class="space-y-6 w-full max-w-xs">
+          <div class="flex items-center justify-center md:pl-4 w-full">
+            <div class="flex md:flex-col gap-3 md:gap-6 w-full md:max-w-xs justify-center">
               <!-- Option 1: Gatto (Cat) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 p-2 md:p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="false"
                    data-word="Gatto">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                <span class="text-4xl md:text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="image-speech"
                       data-image-speech-word-value="gatto"
                       data-action="click->image-speech#speak"
                       onclick="event.stopPropagation()">🐱</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                <div class="w-8 h-8 md:w-12 md:h-12 border-2 md:border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                  <span class="text-xl md:text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
                 </div>
               </div>
 
               <!-- Option 2: Mare (Sea) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 p-2 md:p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="true"
                    data-word="Mare">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                <span class="text-4xl md:text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="image-speech"
                       data-image-speech-word-value="mare"
                       data-action="click->image-speech#speak"
                       onclick="event.stopPropagation()">🌊</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                <div class="w-8 h-8 md:w-12 md:h-12 border-2 md:border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                  <span class="text-xl md:text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
                 </div>
               </div>
 
               <!-- Option 3: Tigre (Tiger) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 p-2 md:p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="false"
                    data-word="Tigre">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                <span class="text-4xl md:text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="image-speech"
                       data-image-speech-word-value="tigre"
                       data-action="click->image-speech#speak"
                       onclick="event.stopPropagation()">🐯</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                <div class="w-8 h-8 md:w-12 md:h-12 border-2 md:border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                  <span class="text-xl md:text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
                 </div>
               </div>
             </div>
@@ -93,69 +96,69 @@
       </div>
 
       <!-- Group 2: Sole -->
-      <div class="bg-white rounded-3xl shadow-lg border-4 border-purple-400 p-8" data-controller="exercise-group">
-        <div class="grid grid-cols-[1fr_1fr] gap-8 divide-x-4 divide-blue-300">
+      <div class="bg-white rounded-2xl sm:rounded-3xl shadow-lg border-2 sm:border-4 border-purple-400 p-3 sm:p-8" data-controller="exercise-group">
+        <div class="flex flex-col md:grid md:grid-cols-[1fr_1fr] gap-4 sm:gap-8 md:divide-x-4 md:divide-blue-300">
           <!-- Left side - Reference item -->
-          <div class="flex items-center justify-center">
+          <div class="flex items-center justify-center py-4 md:py-0">
             <div class="text-center cursor-pointer hover:scale-110 transition"
                  data-controller="image-speech"
                  data-image-speech-word-value="sole"
                  data-action="click->image-speech#speak">
-              <div class="text-8xl">☀️</div>
+              <div class="text-5xl sm:text-6xl md:text-8xl">☀️</div>
             </div>
           </div>
 
           <!-- Right side - Options to check -->
-          <div class="flex items-center justify-center">
-            <div class="space-y-6 w-full max-w-xs">
+          <div class="flex items-center justify-center md:pl-4 w-full">
+            <div class="flex md:flex-col gap-3 md:gap-6 w-full md:max-w-xs justify-center">
               <!-- Option 1: Fiore (Flower) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 p-2 md:p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="false"
                    data-word="Fiore">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                <span class="text-4xl md:text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="image-speech"
                       data-image-speech-word-value="fiore"
                       data-action="click->image-speech#speak"
                       onclick="event.stopPropagation()">🌸</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                <div class="w-8 h-8 md:w-12 md:h-12 border-2 md:border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                  <span class="text-xl md:text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
                 </div>
               </div>
 
               <!-- Option 2: Stella (Star) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 p-2 md:p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="true"
                    data-word="Stella">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                <span class="text-4xl md:text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="image-speech"
                       data-image-speech-word-value="stella"
                       data-action="click->image-speech#speak"
                       onclick="event.stopPropagation()">⭐</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                <div class="w-8 h-8 md:w-12 md:h-12 border-2 md:border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                  <span class="text-xl md:text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
                 </div>
               </div>
 
               <!-- Option 3: Casa (House) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 p-2 md:p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="false"
                    data-word="Casa">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                <span class="text-4xl md:text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="image-speech"
                       data-image-speech-word-value="casa"
                       data-action="click->image-speech#speak"
                       onclick="event.stopPropagation()">🏠</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                <div class="w-8 h-8 md:w-12 md:h-12 border-2 md:border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                  <span class="text-xl md:text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
                 </div>
               </div>
             </div>
@@ -164,69 +167,69 @@
       </div>
 
       <!-- Group 3: Pane -->
-      <div class="bg-white rounded-3xl shadow-lg border-4 border-purple-400 p-8" data-controller="exercise-group">
-        <div class="grid grid-cols-[1fr_1fr] gap-8 divide-x-4 divide-blue-300">
+      <div class="bg-white rounded-2xl sm:rounded-3xl shadow-lg border-2 sm:border-4 border-purple-400 p-3 sm:p-8" data-controller="exercise-group">
+        <div class="flex flex-col md:grid md:grid-cols-[1fr_1fr] gap-4 sm:gap-8 md:divide-x-4 md:divide-blue-300">
           <!-- Left side - Reference item -->
-          <div class="flex items-center justify-center">
+          <div class="flex items-center justify-center py-4 md:py-0">
             <div class="text-center cursor-pointer hover:scale-110 transition"
                  data-controller="image-speech"
                  data-image-speech-word-value="pane"
                  data-action="click->image-speech#speak">
-              <div class="text-8xl">🍞</div>
+              <div class="text-5xl sm:text-6xl md:text-8xl">🍞</div>
             </div>
           </div>
 
           <!-- Right side - Options to check -->
-          <div class="flex items-center justify-center">
-            <div class="space-y-6 w-full max-w-xs">
+          <div class="flex items-center justify-center md:pl-4 w-full">
+            <div class="flex md:flex-col gap-3 md:gap-6 w-full md:max-w-xs justify-center">
               <!-- Option 1: Palla (Ball) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 p-2 md:p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="true"
                    data-word="Palla">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                <span class="text-4xl md:text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="image-speech"
                       data-image-speech-word-value="palla"
                       data-action="click->image-speech#speak"
                       onclick="event.stopPropagation()">⚽</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                <div class="w-8 h-8 md:w-12 md:h-12 border-2 md:border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                  <span class="text-xl md:text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
                 </div>
               </div>
 
               <!-- Option 2: Treno (Train) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 p-2 md:p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="false"
                    data-word="Treno">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                <span class="text-4xl md:text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="image-speech"
                       data-image-speech-word-value="treno"
                       data-action="click->image-speech#speak"
                       onclick="event.stopPropagation()">🚂</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                <div class="w-8 h-8 md:w-12 md:h-12 border-2 md:border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                  <span class="text-xl md:text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
                 </div>
               </div>
 
               <!-- Option 3: Leone (Lion) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 p-2 md:p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="false"
                    data-word="Leone">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                <span class="text-4xl md:text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="image-speech"
                       data-image-speech-word-value="leone"
                       data-action="click->image-speech#speak"
                       onclick="event.stopPropagation()">🦁</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                <div class="w-8 h-8 md:w-12 md:h-12 border-2 md:border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                  <span class="text-xl md:text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
                 </div>
               </div>
             </div>
@@ -235,81 +238,74 @@
       </div>
 
       <!-- Group 4: Rosa -->
-      <div class="bg-white rounded-3xl shadow-lg border-4 border-purple-400 p-8" data-controller="exercise-group">
-        <div class="grid grid-cols-[1fr_1fr] gap-8 divide-x-4 divide-blue-300">
+      <div class="bg-white rounded-2xl sm:rounded-3xl shadow-lg border-2 sm:border-4 border-purple-400 p-3 sm:p-8" data-controller="exercise-group">
+        <div class="flex flex-col md:grid md:grid-cols-[1fr_1fr] gap-4 sm:gap-8 md:divide-x-4 md:divide-blue-300">
           <!-- Left side - Reference item -->
-          <div class="flex items-center justify-center">
+          <div class="flex items-center justify-center py-4 md:py-0">
             <div class="text-center cursor-pointer hover:scale-110 transition"
                  data-controller="image-speech"
                  data-image-speech-word-value="rosa"
                  data-action="click->image-speech#speak">
-              <div class="text-8xl">🌹</div>
+              <div class="text-5xl sm:text-6xl md:text-8xl">🌹</div>
             </div>
           </div>
 
           <!-- Right side - Options to check -->
-          <div class="flex items-center justify-center">
-            <div class="space-y-6 w-full max-w-xs">
+          <div class="flex items-center justify-center md:pl-4 w-full">
+            <div class="flex md:flex-col gap-3 md:gap-6 w-full md:max-w-xs justify-center">
               <!-- Option 1: Drago (Dragon) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 p-2 md:p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="false"
                    data-word="Drago">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                <span class="text-4xl md:text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="image-speech"
                       data-image-speech-word-value="drago"
                       data-action="click->image-speech#speak"
                       onclick="event.stopPropagation()">🐉</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                <div class="w-8 h-8 md:w-12 md:h-12 border-2 md:border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                  <span class="text-xl md:text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
                 </div>
               </div>
 
               <!-- Option 2: Radio (Radio) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 p-2 md:p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="true"
                    data-word="Radio">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                <span class="text-4xl md:text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="image-speech"
                       data-image-speech-word-value="radio"
                       data-action="click->image-speech#speak"
                       onclick="event.stopPropagation()">📻</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                <div class="w-8 h-8 md:w-12 md:h-12 border-2 md:border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                  <span class="text-xl md:text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
                 </div>
               </div>
 
               <!-- Option 3: Gelato (Ice cream) -->
-              <div class="flex items-center justify-center gap-8 p-4 rounded-lg hover:bg-gray-50 transition"
+              <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 p-2 md:p-4 rounded-lg hover:bg-gray-50 transition"
                    data-exercise-group-target="option"
                    data-correct="false"
                    data-word="Gelato">
-                <span class="text-6xl cursor-pointer hover:scale-110 transition"
+                <span class="text-4xl md:text-6xl cursor-pointer hover:scale-110 transition"
                       data-controller="image-speech"
                       data-image-speech-word-value="gelato"
                       data-action="click->image-speech#speak"
                       onclick="event.stopPropagation()">🍦</span>
-                <div class="w-12 h-12 border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
+                <div class="w-8 h-8 md:w-12 md:h-12 border-2 md:border-4 border-gray-300 rounded-lg flex items-center justify-center bg-white cursor-pointer"
                      data-exercise-group-target="checkbox"
                      data-action="click->exercise-group#toggleCheck">
-                  <span class="text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
+                  <span class="text-xl md:text-3xl font-bold text-red-600 hidden" data-exercise-group-target="checkmark">✗</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Page number -->
-    <div class="flex justify-end mb-6 mt-8">
-      <div class="bg-purple-500 text-white font-bold text-3xl px-6 py-3 rounded-l-full">
-        10
       </div>
     </div>
 

@@ -1,255 +1,266 @@
-<div class="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-lg" data-controller="exercise-checker">
-  <!-- Header -->
-  <div class="flex items-center gap-4 mb-12">
-    <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-lg px-8 py-4 shadow-lg">
-      <span class="text-4xl font-bold text-white">OSSERVAZIONE</span>
-    </div>
-    <h1 class="text-3xl font-bold text-orange-600">UGUALI O DIVERSI?</h1>
-    <div class="ml-auto bg-orange-500 text-white rounded-full w-16 h-16 flex items-center justify-center font-bold text-2xl shadow-lg">
-      8
-    </div>
-  </div>
-
-  <!-- Exercise 1: UNISCI CON UNA LINEA I FIORI UGUALI -->
-  <div class="mb-12 relative" data-controller="flower-matcher">
-    <h2 class="text-2xl font-bold text-orange-600 mb-6">● UNISCI CON UNA LINEA I FIORI UGUALI</h2>
-
-    <!-- SVG Canvas for drawing lines -->
-    <svg class="z-10 absolute top-0 left-0 w-full h-full pointer-events-none"
-         data-flower-matcher-target="canvas">
-    </svg>
-
-    <div class="space-y-12 relative">
-      <!-- Top row - 3 flowers -->
-      <div class="flex justify-center gap-16">
-        <!-- Flower 1 (pink) -->
-        <div class="rounded-lg p-2 bg-transparent hover:bg-orange-50 transition cursor-pointer text-center"
-             data-action="click->flower-matcher#selectFlower"
-             data-flower-matcher-target="flower"
-             data-flower-id="pink-top"
-             data-pair="pink">
-          <div class="text-6xl">🌸</div>
-        </div>
-
-        <!-- Flower 2 (red rose) -->
-        <div class="rounded-lg p-2 bg-transparent hover:bg-orange-50 transition cursor-pointer text-center"
-             data-action="click->flower-matcher#selectFlower"
-             data-flower-matcher-target="flower"
-             data-flower-id="red-top"
-             data-pair="red">
-          <div class="text-6xl">🌹</div>
-        </div>
-
-        <!-- Flower 3 (yellow sunflower) -->
-        <div class="rounded-lg p-2 bg-transparent hover:bg-orange-50 transition cursor-pointer text-center"
-             data-action="click->flower-matcher#selectFlower"
-             data-flower-matcher-target="flower"
-             data-flower-id="yellow-top"
-             data-pair="yellow">
-          <div class="text-6xl">🌻</div>
-        </div>
-      </div>
-
-      <!-- Bottom row - 3 flowers -->
-      <div class="flex justify-center gap-16">
-        <!-- Flower 4 (yellow sunflower - match) -->
-        <div class="rounded-lg p-2 bg-transparent hover:bg-orange-50 transition cursor-pointer text-center"
-             data-action="click->flower-matcher#selectFlower"
-             data-flower-matcher-target="flower"
-             data-flower-id="yellow-bottom"
-             data-pair="yellow">
-          <div class="text-6xl">🌻</div>
-        </div>
-
-        <!-- Flower 5 (pink - match) -->
-        <div class="rounded-lg p-2 bg-transparent hover:bg-orange-50 transition cursor-pointer text-center"
-             data-action="click->flower-matcher#selectFlower"
-             data-flower-matcher-target="flower"
-             data-flower-id="pink-bottom"
-             data-pair="pink">
-          <div class="text-6xl">🌸</div>
-        </div>
-
-        <!-- Flower 6 (red rose - match) -->
-        <div class="rounded-lg p-2 bg-transparent hover:bg-orange-50 transition cursor-pointer text-center"
-             data-action="click->flower-matcher#selectFlower"
-             data-flower-matcher-target="flower"
-             data-flower-id="red-bottom"
-             data-pair="red">
-          <div class="text-6xl">🌹</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Control buttons -->
-    <div class="mt-4 flex gap-3 items-center">
-      <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-12 h-12"
-              data-action="click->flower-matcher#reset"
-              title="Ricomincia collegamenti">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-        </svg>
-      </button>
-      <button class="bg-green-500 hover:bg-green-600 text-white font-bold rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-12 h-12"
-              data-action="click->flower-matcher#showSolutions"
-              title="Mostra soluzioni">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- Exercise 2: OSSERVA IL FRUTTO NEL RIQUADRO, POI CERCHIA QUELLO UGUALE -->
-  <div class="mb-12">
-    <h2 class="text-2xl font-bold text-orange-600 mb-6">● OSSERVA IL FRUTTO NEL RIQUADRO, POI CERCHIA QUELLO UGUALE</h2>
-
-    <!-- Row 1: Bananas -->
+<div class="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 p-1 md:p-8">
+  <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4 md:p-8" data-controller="exercise-checker">
     <div class="mb-8">
-      <div class="flex items-center justify-center gap-6">
-        <!-- Reference fruit (in box) -->
-        <div class="border-4 border-orange-500 bg-orange-50 rounded-lg p-6 flex-shrink-0">
-          <div class="text-6xl">🍌</div>
+      <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+        <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+          <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+            OSSERVAZIONE
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-bold text-orange-600">UGUALI O DIVERSI?</h1>
+        </div>
+        <div class="flex-shrink-0 bg-orange-500 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+          8
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise 1: UNISCI CON UNA LINEA I FIORI UGUALI -->
+    <div class="mb-12" data-controller="flower-matcher">
+      <h2 class="text-2xl font-bold text-orange-600 mb-6">● UNISCI CON UNA LINEA I FIORI UGUALI</h2>
+
+      <!-- SVG Canvas for drawing lines -->
+      <svg class="z-10 absolute top-0 left-0 w-full h-full pointer-events-none"
+          data-flower-matcher-target="canvas">
+      </svg>
+
+      <div class="space-y-8 md:space-y-12 relative">
+        <!-- Top row - 3 flowers -->
+        <div class="flex justify-center gap-6 sm:gap-12 md:gap-16">
+          <!-- Flower 1 (pink) -->
+          <div class="rounded-lg p-2 bg-transparent hover:bg-orange-50 transition cursor-pointer text-center"
+              data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="pink-top"
+              data-pair="pink">
+            <div class="text-4xl sm:text-5xl md:text-6xl">🌸</div>
+          </div>
+
+          <!-- Flower 2 (red rose) -->
+          <div class="rounded-lg p-2 bg-transparent hover:bg-orange-50 transition cursor-pointer text-center"
+              data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="red-top"
+              data-pair="red">
+            <div class="text-4xl sm:text-5xl md:text-6xl">🌹</div>
+          </div>
+
+          <!-- Flower 3 (yellow sunflower) -->
+          <div class="rounded-lg p-2 bg-transparent hover:bg-orange-50 transition cursor-pointer text-center"
+              data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="yellow-top"
+              data-pair="yellow">
+            <div class="text-4xl sm:text-5xl md:text-6xl">🌻</div>
+          </div>
         </div>
 
-        <!-- Options -->
-        <div class="flex gap-4" data-controller="card-selector">
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="true">
-            <div class="text-5xl">🍌</div>
+        <!-- Bottom row - 3 flowers -->
+        <div class="flex justify-center gap-6 sm:gap-12 md:gap-16">
+          <!-- Flower 4 (yellow sunflower - match) -->
+          <div class="rounded-lg p-2 bg-transparent hover:bg-orange-50 transition cursor-pointer text-center"
+              data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="yellow-bottom"
+              data-pair="yellow">
+            <div class="text-4xl sm:text-5xl md:text-6xl">🌻</div>
           </div>
 
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="false">
-            <div class="text-5xl" style="transform: rotate(45deg)">🍌</div>
+          <!-- Flower 5 (pink - match) -->
+          <div class="rounded-lg p-2 bg-transparent hover:bg-orange-50 transition cursor-pointer text-center"
+              data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="pink-bottom"
+              data-pair="pink">
+            <div class="text-4xl sm:text-5xl md:text-6xl">🌸</div>
           </div>
 
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="false">
-            <div class="text-5xl" style="transform: rotate(-30deg)">🍌</div>
+          <!-- Flower 6 (red rose - match) -->
+          <div class="rounded-lg p-2 bg-transparent hover:bg-orange-50 transition cursor-pointer text-center"
+              data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="red-bottom"
+              data-pair="red">
+            <div class="text-4xl sm:text-5xl md:text-6xl">🌹</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Control buttons -->
+      <div class="mt-4 flex gap-3 items-center">
+        <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-12 h-12"
+                data-action="click->flower-matcher#reset"
+                title="Ricomincia collegamenti">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+        </button>
+        <button class="bg-green-500 hover:bg-green-600 text-white font-bold rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-12 h-12"
+                data-action="click->flower-matcher#showSolutions"
+                title="Mostra soluzioni">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Exercise 2: OSSERVA IL FRUTTO NEL RIQUADRO, POI CERCHIA QUELLO UGUALE -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold text-orange-600 mb-6">● OSSERVA IL FRUTTO NEL RIQUADRO, POI CERCHIA QUELLO UGUALE</h2>
+
+      <!-- Row 1: Bananas -->
+      <div class="mb-8">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+          <!-- Reference fruit (in box) -->
+          <div class="border-4 border-orange-500 bg-orange-50 rounded-lg p-4 sm:p-6 flex-shrink-0">
+            <div class="text-4xl sm:text-6xl">🍌</div>
           </div>
 
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="false">
-            <div class="text-5xl" style="transform: rotate(90deg)">🍌</div>
+          <!-- Options - with horizontal scroll on mobile -->
+          <div class="w-full sm:w-auto overflow-x-auto">
+            <div class="flex gap-1 sm:gap-4 px-2 sm:px-0" data-controller="card-selector">
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="true">
+                <div class="text-3xl sm:text-5xl">🍌</div>
+              </div>
+
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="false">
+                <div class="text-3xl sm:text-5xl" style="transform: rotate(45deg)">🍌</div>
+              </div>
+
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="false">
+                <div class="text-3xl sm:text-5xl" style="transform: rotate(-30deg)">🍌</div>
+              </div>
+
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="false">
+                <div class="text-3xl sm:text-5xl" style="transform: rotate(90deg)">🍌</div>
+              </div>
+
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="false">
+                <div class="text-3xl sm:text-5xl" style="transform: rotate(-60deg)">🍌</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Grapes -->
+      <div class="mb-8">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+          <!-- Reference fruit (in box) -->
+          <div class="border-4 border-orange-500 bg-orange-50 rounded-lg p-4 sm:p-6 flex-shrink-0">
+            <div class="text-4xl sm:text-6xl">🍇</div>
           </div>
 
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="false">
-            <div class="text-5xl" style="transform: rotate(-60deg)">🍌</div>
+          <!-- Options - with horizontal scroll on mobile -->
+          <div class="w-full sm:w-auto overflow-x-auto">
+            <div class="flex gap-1 sm:gap-4 px-2 sm:px-0" data-controller="card-selector">
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="false">
+                <div class="text-3xl sm:text-5xl" style="transform: rotate(60deg)">🍇</div>
+              </div>
+
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="true">
+                <div class="text-3xl sm:text-5xl">🍇</div>
+              </div>
+
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="false">
+                <div class="text-3xl sm:text-5xl" style="transform: rotate(-45deg)">🍇</div>
+              </div>
+
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="false">
+                <div class="text-3xl sm:text-5xl" style="transform: rotate(120deg)">🍇</div>
+              </div>
+
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="false">
+                <div class="text-3xl sm:text-5xl" style="transform: rotate(-90deg)">🍇</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: Pineapples -->
+      <div class="mb-8">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+          <!-- Reference fruit (in box) -->
+          <div class="border-4 border-orange-500 bg-orange-50 rounded-lg p-4 sm:p-6 flex-shrink-0">
+            <div class="text-4xl sm:text-6xl">🍍</div>
+          </div>
+
+          <!-- Options - with horizontal scroll on mobile -->
+          <div class="w-full sm:w-auto overflow-x-auto">
+            <div class="flex gap-1 sm:gap-4 px-2 sm:px-0" data-controller="card-selector">
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="false">
+                <div class="text-3xl sm:text-5xl" style="transform: rotate(-40deg)">🍍</div>
+              </div>
+
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="false">
+                <div class="text-3xl sm:text-5xl" style="transform: rotate(75deg)">🍍</div>
+              </div>
+
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="false">
+                <div class="text-3xl sm:text-5xl" style="transform: rotate(-90deg)">🍍</div>
+              </div>
+
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="true">
+                <div class="text-3xl sm:text-5xl">🍍</div>
+              </div>
+
+              <div class="border-4 border-gray-300 rounded-lg p-2 sm:p-4 bg-white hover:bg-orange-50 transition cursor-pointer flex-shrink-0"
+                  data-action="click->card-selector#select"
+                  data-card-selector-target="card"
+                  data-correct="false">
+                <div class="text-3xl sm:text-5xl" style="transform: rotate(50deg)">🍍</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Row 2: Grapes -->
-    <div class="mb-8">
-      <div class="flex items-center justify-center gap-6">
-        <!-- Reference fruit (in box) -->
-        <div class="border-4 border-orange-500 bg-orange-50 rounded-lg p-6 flex-shrink-0">
-          <div class="text-6xl">🍇</div>
-        </div>
-
-        <!-- Options -->
-        <div class="flex gap-4" data-controller="card-selector">
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="false">
-            <div class="text-5xl" style="transform: rotate(60deg)">🍇</div>
-          </div>
-
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="true">
-            <div class="text-5xl">🍇</div>
-          </div>
-
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="false">
-            <div class="text-5xl" style="transform: rotate(-45deg)">🍇</div>
-          </div>
-
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="false">
-            <div class="text-5xl" style="transform: rotate(120deg)">🍇</div>
-          </div>
-
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="false">
-            <div class="text-5xl" style="transform: rotate(-90deg)">🍇</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Row 3: Pineapples -->
-    <div class="mb-8">
-      <div class="flex items-center justify-center gap-6">
-        <!-- Reference fruit (in box) -->
-        <div class="border-4 border-orange-500 bg-orange-50 rounded-lg p-6 flex-shrink-0">
-          <div class="text-6xl">🍍</div>
-        </div>
-
-        <!-- Options -->
-        <div class="flex gap-4" data-controller="card-selector">
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="false">
-            <div class="text-5xl" style="transform: rotate(-40deg)">🍍</div>
-          </div>
-
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="false">
-            <div class="text-5xl" style="transform: rotate(75deg)">🍍</div>
-          </div>
-
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="false">
-            <div class="text-5xl" style="transform: rotate(-90deg)">🍍</div>
-          </div>
-
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="true">
-            <div class="text-5xl">🍍</div>
-          </div>
-
-          <div class="border-4 border-gray-300 rounded-lg p-4 bg-white hover:bg-orange-50 transition cursor-pointer"
-               data-action="click->card-selector#select"
-               data-card-selector-target="card"
-               data-correct="false">
-            <div class="text-5xl" style="transform: rotate(50deg)">🍍</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- Exercise Controls -->
+    <%= render 'shared/exercise_controls', color: 'orange' %>
   </div>
-
-  <!-- Exercise Controls -->
-  <%= render 'shared/exercise_controls', color: 'orange', current_page: 'pag008' %>
 </div>
