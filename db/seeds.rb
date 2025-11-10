@@ -98,7 +98,17 @@ nvl5_grammatica = nvl_volume5.discipline.create!(
   { numero: 10, titolo: "La lettera H", slug: "nvl5_gr_p010", view_template: "nvl5_gr_p010" },
   { numero: 11, titolo: "LO/L'HO, LA/L'HA e altre forme", slug: "nvl5_gr_p011", view_template: "nvl5_gr_p011" },
   { numero: 12, titolo: "La divisione in sillabe", slug: "nvl5_gr_p012", view_template: "nvl5_gr_p012" },
-  { numero: 13, titolo: "La lettera maiuscola", slug: "nvl5_gr_p013", view_template: "nvl5_gr_p013" }
+  { numero: 13, titolo: "La lettera maiuscola", slug: "nvl5_gr_p013", view_template: "nvl5_gr_p013" },
+  { numero: 14, titolo: "Monosillabi e accento", slug: "nvl5_gram_p014", view_template: "nvl5_gram_p014" },
+  { numero: 15, titolo: "Monosillabi con e senza accento", slug: "nvl5_gram_p015", view_template: "nvl5_gram_p015" },
+  { numero: 16, titolo: "L'elisione", slug: "nvl5_gram_p016", view_template: "nvl5_gram_p016" },
+  { numero: 17, titolo: "Il troncamento", slug: "nvl5_gram_p017", view_template: "nvl5_gram_p017" },
+  { numero: 18, titolo: "La punteggiatura", slug: "nvl5_gram_p018", view_template: "nvl5_gram_p018" },
+  { numero: 19, titolo: "Discorso diretto e indiretto", slug: "nvl5_gram_p019", view_template: "nvl5_gram_p019" },
+  { numero: 20, titolo: "Verifica - L'ortografia", slug: "nvl5_gram_p020", view_template: "nvl5_gram_p020" },
+  { numero: 21, titolo: "Verifica - Ortografia e accenti", slug: "nvl5_gram_p021", view_template: "nvl5_gram_p021" },
+  { numero: 22, titolo: "Parole al centro - Lessico", slug: "nvl5_gram_p022", view_template: "nvl5_gram_p022" },
+  { numero: 23, titolo: "Parole al centro - Lessico e parole composte", slug: "nvl5_gram_p023", view_template: "nvl5_gram_p023" }
 ].each do |pagina_data|
   nvl5_grammatica.pagine.create!(pagina_data)
 end

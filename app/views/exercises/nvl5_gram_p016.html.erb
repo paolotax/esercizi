@@ -1,0 +1,154 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 to-red-50 rounded-lg shadow-lg" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-pink-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          ORTOGRAFIA
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-pink-600">L’elisione</h1>
+      </div>
+      <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        16
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Box -->
+  <div class="mb-6 md:mb-8 bg-yellow-50 border-4 border-yellow-400 rounded-lg p-4 md:p-6 text-base md:text-lg leading-relaxed">
+    <p class="mb-3">
+      L’elisione è l’eliminazione della vocale finale di una parola davanti a un’altra che inizia per vocale.
+      Al posto della vocale eliminata si scrive l’apostrofo:
+      <span class="font-semibold">una idea → un’idea</span>.
+    </p>
+    <p class="font-bold text-pink-700 mb-3">Si usa l’apostrofo:</p>
+    <ul class="list-disc list-inside space-y-2">
+      <li>con gli articoli <strong>lo, la, una</strong> → <em>l’albero, l’entrata, un’amica</em>;</li>
+      <li>con alcuni aggettivi → <em>quest’anno, quell’idea, bell’amico</em>;</li>
+      <li>con <strong>mi, ti, ci, si, vi</strong> + verbo essere → <em>m’è sembrato, c’era</em>;</li>
+      <li>con <strong>come, dove</strong> + verbo essere → <em>com’è, dov’era</em>;</li>
+      <li>in espressioni come <em>senz’altro, mezz’ora, d’accordo, tutt’altro…</em></li>
+    </ul>
+  </div>
+
+  <!-- Exercise 1 -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4 flex flex-wrap items-center gap-2">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+      <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold">IMPARARE TUTTI</span>
+      <span>Scrivi inserendo l’elisione, come nell’esempio.</span>
+    </h2>
+
+    <div class="space-y-4 text-base md:text-lg leading-relaxed">
+      <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-2">
+        <span class="font-semibold text-pink-600">Esempio:</span>
+        <span>mezza ora → <span class="font-bold text-pink-700">mezz’ora</span></span>
+      </div>
+
+      <% exercise_1_pairs = [
+        { prompt: 'di accordo', answer: 'd\'accordo' },
+        { prompt: 'lo altro ieri', answer: 'l\'altro ieri' },
+        { prompt: 'allo interno', answer: 'all\'interno' },
+        { prompt: 'bravo uomo', answer: 'brav\'uomo' },
+        { prompt: 'cento anni', answer: 'cent\'anni' }
+      ] %>
+
+      <% exercise_1_pairs.each do |item| %>
+        <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">• <%= item[:prompt] %> →</span>
+          <input type="text"
+                 class="border-b-2 border-pink-500 bg-white w-40 md:w-56 text-center focus:outline-none focus:border-pink-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:answer] %>"
+                 data-correct-answer="<%= item[:answer] %>"
+                 maxlength="20">
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2 -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+      Sottolinea l’espressione cui può essere applicata l’elisione e scrivila con l’apostrofo.
+    </h2>
+
+    <% exercise_2_sentences = [
+      [
+        '• Perché il film non ',
+        { answer: 't\'è' },
+        ' piaciuto? È stato divertente.'
+      ],
+      [
+        '• Raya ',
+        { answer: 's\'era' },
+        ' presentata puntualmente agli allenamenti, come ogni sera.'
+      ],
+      [
+        '• Allora ci vediamo alle cinque. Verrò ',
+        { answer: 'senz\'altro' },
+        '!'
+      ],
+      [
+        '• Meglio parlarne a quattro occhi, ',
+        { answer: 'd\'accordo' },
+        '. È un argomento importante.'
+      ],
+      [
+        '• ',
+        { answer: 'quell\'albero' },
+        ' è il primo a fiorire, ',
+        { answer: 'all\'inizio' },
+        ' di marzo.'
+      ]
+    ] %>
+
+    <div class="space-y-4 text-base md:text-lg leading-relaxed">
+      <% exercise_2_sentences.each do |sentence| %>
+        <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1">
+          <% sentence.each do |part| %>
+            <% if part.is_a?(Hash) %>
+              <input type="text"
+                     class="border-b-2 border-pink-500 bg-white w-40 md:w-56 text-center focus:outline-none focus:border-pink-700"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= part[:answer] %>"
+                     data-correct-answer="<%= part[:answer] %>"
+                     maxlength="20">
+            <% else %>
+              <span><%= part %></span>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 3 -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">3</span>
+      Scrivi sul quaderno una frase con ciascuna espressione.
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <% [
+        { label: 'mezz’ora', color: 'from-pink-100 to-pink-50' },
+        { label: 'd’ora in poi', color: 'from-blue-100 to-blue-50' },
+        { label: 'd’altronde', color: 'from-purple-100 to-purple-50' }
+      ].each do |item| %>
+        <div class="bg-gradient-to-br <%= item[:color] %> border-2 border-pink-200 rounded-lg p-4">
+          <div class="text-sm font-bold text-pink-700 uppercase tracking-wide mb-2"><%= item[:label] %></div>
+          <textarea class="w-full border-2 border-pink-300 rounded-lg p-3 focus:outline-none focus:border-pink-600 text-base md:text-lg"
+                    rows="3"
+                    placeholder="Scrivi qui la tua frase..."></textarea>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise Controls -->
+  <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl5_gram_p016' %>
+</div>
+

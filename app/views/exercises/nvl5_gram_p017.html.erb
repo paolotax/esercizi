@@ -1,0 +1,165 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 to-red-50 rounded-lg shadow-lg" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-pink-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          ORTOGRAFIA
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-pink-600">Il troncamento</h1>
+      </div>
+      <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        17
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Box -->
+  <div class="mb-6 md:mb-8 bg-yellow-50 border-4 border-yellow-400 rounded-lg p-4 md:p-6 text-base md:text-lg leading-relaxed">
+    <p class="mb-3">
+      Il troncamento è la caduta della vocale o della sillaba finale di una parola davanti a un’altra che inizia per vocale.
+      In caso di troncamento <span class="font-semibold text-pink-700">non si mette l’apostrofo</span>.
+    </p>
+    <p class="font-bold text-pink-700 mb-3">Si usa il troncamento:</p>
+    <ul class="list-disc list-inside space-y-2">
+      <li>con l’articolo <strong>uno</strong> → <em>un albero</em>;</li>
+      <li>con <strong>quale</strong> → <em>qual è</em>;</li>
+      <li>con <strong>nessuno, alcuno, ciascuno</strong> → <em>nessun dubbio</em>, <em>alcun problema</em>;</li>
+      <li>con <strong>quello, bello, buono</strong> → <em>quel foglio</em>, <em>bel pensiero</em>, <em>buon Capodanno</em>;</li>
+      <li>con <strong>signore, professore, dottore, santo</strong> → <em>signor</em> Morelli, <em>professor</em> Longhi, <em>san</em> Francesco.</li>
+    </ul>
+  </div>
+
+  <!-- Exercise 1 -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
+      <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold">IMPARARE TUTTI</span>
+      Cerchia (seleziona) le parole troncate, come nell’esempio.
+    </h2>
+
+    <div class="space-y-5">
+      <% exercise_1_items = [
+        {
+          sentence: "Tommy soggiornerà in un albergo.",
+          options: [
+            { word: "Tommy", correct: false },
+            { word: "un", correct: true },
+            { word: "albergo", correct: false }
+          ]
+        },
+        {
+          sentence: "La porta non s’apre, in nessun modo.",
+          options: [
+            { word: "s’apre", correct: false },
+            { word: "nessun", correct: true },
+            { word: "modo", correct: false }
+          ]
+        },
+        {
+          sentence: "Tanti auguri di buon compleanno!",
+          options: [
+            { word: "Tanti", correct: false },
+            { word: "buon", correct: true },
+            { word: "compleanno", correct: false }
+          ]
+        },
+        {
+          sentence: "Qual è il tuo gioco di squadra preferito?",
+          options: [
+            { word: "Qual", correct: true },
+            { word: "gioco", correct: false },
+            { word: "squadra", correct: false }
+          ]
+        }
+      ] %>
+
+      <% exercise_1_items.each_with_index do |item, index| %>
+        <div class="bg-pink-50 rounded-lg p-4">
+          <p class="text-base md:text-lg text-gray-800 mb-3">• <%= item[:sentence] %></p>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <% item[:options].each do |option| %>
+              <label class="flex items-center gap-2 bg-white border-2 border-pink-200 rounded-lg px-3 py-2 shadow-sm hover:border-pink-400 transition">
+                <input type="checkbox"
+                       class="w-5 h-5 text-pink-600 focus:ring-pink-500"
+                       data-correct-answer="<%= option[:correct] %>">
+                <span class="text-gray-700 font-medium"><%= option[:word] %></span>
+              </label>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2 -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+      Scrivi inserendo l’elisione o il troncamento.
+    </h2>
+
+    <div class="space-y-4 text-base md:text-lg">
+      <% exercise_2_pairs = [
+        { prompt: "buono amico", answer: "buon amico" },
+        { prompt: "buona amica", answer: "buon'amica" },
+        { prompt: "nessuna atleta", answer: "nessun'atleta" },
+        { prompt: "nessuno atleta", answer: "nessun atleta" }
+      ] %>
+
+      <% exercise_2_pairs.each do |item| %>
+        <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">• <%= item[:prompt] %> →</span>
+          <input type="text"
+                 class="border-b-2 border-pink-500 bg-white w-48 md:w-64 text-center focus:outline-none focus:border-pink-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:answer] %>"
+                 data-correct-answer="<%= item[:answer] %>"
+                 maxlength="20">
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 3 -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">3</span>
+      Tronca le parole tra parentesi, come nell’esempio.
+    </h2>
+
+    <div class="space-y-4 text-base md:text-lg leading-relaxed">
+      <p>• (Vai) <span class="font-semibold text-pink-700">Va’</span> dove ti porta il cuore, ma (fai)
+        <input type="text"
+               class="border-b-2 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700"
+               data-fill-blanks-target="input"
+               data-answer="fa'"
+               data-correct-answer="fa'"
+               maxlength="3">
+        attenzione a tutto.
+      </p>
+
+      <p>• (Dai)
+        <input type="text"
+               class="border-b-2 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700"
+               data-fill-blanks-target="input"
+               data-answer="da'"
+               data-correct-answer="da'"
+               maxlength="3">
+        ciò che hai con generosità, ma tieni per te un (poco)
+        <input type="text"
+               class="border-b-2 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700"
+               data-fill-blanks-target="input"
+               data-answer="po'"
+               data-correct-answer="po'"
+               maxlength="3">
+        di denaro.
+      </p>
+    </div>
+  </div>
+
+  <!-- Exercise Controls -->
+  <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl5_gram_p017' %>
+</div>
+

@@ -1,0 +1,63 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-blue-50 via-white to-orange-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-6">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-blue-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          LESSICO
+        </div>
+        <h1 class="text-2xl sm:3xl font-bold text-blue-600">Parole al centro</h1>
+      </div>
+      <div class="flex-shrink-0 bg-orange-500 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        22
+      </div>
+    </div>
+    <p class="text-sm md:text-base text-blue-700">
+      Osserva l’immagine del supermercato e tocca i cartellini per ascoltare la parola corretta.
+    </p>
+  </div>
+
+  <!-- Interactive Image -->
+  <div class="relative rounded-2xl overflow-hidden border-4 border-blue-200 shadow-2xl">
+    <%= image_tag "nvl5_gramm_p022_immagine.png",
+        alt: "Supermercato con cartellini: frigorifero, cartello del reparto, scaffale, flaconi, caporeparto, scatole, cliente, cestino, bilancia, cassetta, banco e corsia",
+        class: "w-full h-full object-cover select-none pointer-events-none" %>
+
+    <div class="absolute inset-0">
+      <% hotspots = [
+        { label: "Frigorifero", top: "17.6%", left: "7.2%", width: "13.9%", height: "4.0%" },
+        { label: "Cartello del reparto", top: "13.5%", left: "63.8%", width: "27.5%", height: "5.8%" },
+        { label: "Scaffale", top: "22.5%", left: "57.2%", width: "12.7%", height: "3.2%" },
+        { label: "Flaconi", top: "30.9%", left: "74.8%", width: "10.6%", height: "3.8%" },
+        { label: "Caporeparto", top: "35.0%", left: "76.2%", width: "11.3%", height: "4.1%" },
+        { label: "Scatole", top: "40.9%", left: "82.6%", width: "8.5%", height: "4.1%" },
+        { label: "Cliente", top: "34.4%", left: "37.4%", width: "12.7%", height: "3.5%" },
+        { label: "Cestino", top: "42.4%", left: "22.1%", width: "6.9%", height: "2.4%" },
+        { label: "Bilancia", top: "26.6%", left: "36.0%", width: "9.9%", height: "4.1%" },
+        { label: "Cassetta", top: "26.9%", left: "13.4%", width: "10.6%", height: "4.1%" },
+        { label: "Banco", top: "42.0%", left: "9.0%", width: "12.4%", height: "2.6%" },
+        { label: "Corsia", top: "43.2%", left: "4.1%", width: "4.9%", height: "2.7%" }
+      ] %>
+
+      <% hotspots.each do |hotspot| %>
+        <button type="button"
+                class="absolute rounded-xl bg-blue-500/10 hover:bg-blue-500/25 border-2 border-transparent hover:border-blue-500 focus:border-blue-600 focus:outline-none transition shadow-sm"
+                style="top: <%= hotspot[:top] %>; left: <%= hotspot[:left] %>; width: <%= hotspot[:width] %>; height: <%= hotspot[:height] %>;"
+                aria-label="Leggi: <%= hotspot[:label] %>"
+                data-controller="text-to-speech"
+                data-text-to-speech-lang-value="it-IT"
+                data-action="click->text-to-speech#read"
+                data-text-to-speech-target="button">
+          <span class="sr-only" data-text-to-speech-target="textContent"><%= hotspot[:label] %></span>
+        </button>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'blue', current_page: 'nvl5_gram_p022' %>
+  </div>
+</div>
+

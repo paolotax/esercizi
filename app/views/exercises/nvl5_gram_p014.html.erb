@@ -1,0 +1,236 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 to-red-50 rounded-lg shadow-lg" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-pink-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          ORTOGRAFIA
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-pink-600">Monosillabi e accento</h1>
+      </div>
+      <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        14
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Box -->
+  <div class="mb-6 md:mb-8 bg-yellow-50 border-4 border-yellow-400 rounded-lg p-4 md:p-6 text-base md:text-lg leading-relaxed">
+    <p class="mb-4">
+      I monosillabi sono brevi parole composte da una sola sillaba. In genere sui monosillabi con una sola vocale
+      <span class="font-bold text-pink-700">non si scrive l'accento</span> →
+      <span class="italic">blu, fu, re, su, va, so, sa, fa, sto, sta, ma…</span>
+    </p>
+    <p class="mb-4">
+      Sui monosillabi che terminano con due vocali si scrive sempre l'accento →
+      <span class="italic">più, giù, ciò…</span>.
+      Attenzione! Fanno eccezione: <span class="font-bold">qui</span>, <span class="font-bold">qua</span>.
+    </p>
+    <p class="mb-4">
+      Alcuni monosillabi cambiano significato a seconda che vengano scritti con l'accento o senza accento:
+    </p>
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white rounded-lg overflow-hidden shadow border-2 border-pink-200">
+        <thead class="bg-pink-100 text-pink-700 uppercase tracking-wide text-sm">
+          <tr>
+            <th class="px-4 py-2 text-left">Con l'accento</th>
+            <th class="px-4 py-2 text-left">Senza accento</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-800">
+          <tr class="border-t border-pink-200">
+            <td class="px-4 py-2">è, sì, dì, dà, lì, là, tè, né, sé</td>
+            <td class="px-4 py-2">e, si, di, da, li, la, te, ne, se</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Exercise 1: Complete with e / è -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4 flex items-center gap-2">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+      <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold">IMPARARE TUTTI</span>
+      <span>Completa con <span class="font-semibold">e</span> o <span class="font-semibold">è</span>.</span>
+    </h2>
+
+    <% exercise_1_sentences = [
+      {
+        parts: [
+          '• Silvia ',
+          { answer: 'è' },
+          ' molto brava a suonare ',
+          { answer: 'e' },
+          ' ama anche cantare.'
+        ]
+      },
+      {
+        parts: [
+          '• Chi ',
+          { answer: 'è' },
+          ' venuto a trovarti? ',
+          { answer: 'è' },
+          ' forse stato qui Enrico?'
+        ]
+      },
+      {
+        parts: [
+          '• Emanuele ',
+          { answer: 'e' },
+          ' Giada sono fratello ',
+          { answer: 'e' },
+          ' sorella. Emanuele ',
+          { answer: 'è' },
+          ' più giovane di Giada.'
+        ]
+      },
+      {
+        parts: [
+          '• Quando il sole ',
+          { answer: 'è' },
+          ' alto ',
+          { answer: 'e' },
+          ' caldo ',
+          { answer: 'è' },
+          ' più difficile lavorare nei campi.'
+        ]
+      },
+      {
+        parts: [
+          '• Se il pacco non ',
+          { answer: 'è' },
+          ' arrivato oggi, arriverà domani. Aspetta ',
+          { answer: 'e' },
+          ' non preoccuparti.'
+        ]
+      },
+      {
+        parts: [
+          '• ',
+          { answer: 'è', capitalized: true },
+          ' semplice: chi non ',
+          { answer: 'è' },
+          ' con me ',
+          { answer: 'è' },
+          ' contro di me.'
+        ]
+      }
+    ] %>
+
+    <div class="space-y-4 text-base md:text-lg">
+      <% exercise_1_sentences.each do |sentence| %>
+        <div class="p-3 bg-pink-50 rounded-lg flex flex-wrap items-center gap-1 leading-relaxed">
+          <% sentence[:parts].each do |part| %>
+            <% if part.is_a?(Hash) %>
+              <input type="text"
+                     class="border-b-2 border-pink-500 bg-white w-10 md:w-12 text-center focus:outline-none focus:border-pink-700"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= part[:answer] %>"
+                     data-correct-answer="<%= part[:answer] %>"
+                     maxlength="2">
+            <% else %>
+              <span><%= part %></span>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Cerchia l'alternativa corretta -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+      Cerchia l'alternativa corretta.
+    </h2>
+
+    <% exercise_2_sentences = [
+      {
+        parts: [
+          '• Non trovo ',
+          ['la', 'là'],
+          ' borsa. ',
+          ['La', 'Là'],
+          ' vedi?'
+        ],
+        correct: ['la', 'La']
+      },
+      {
+        parts: [
+          '• Guarda ',
+          ['la', 'là'],
+          ': vedi anche tu ',
+          ['la', 'là'],
+          ' nuvoletta rosa?'
+        ],
+        correct: ['là', 'la']
+      },
+      {
+        parts: [
+          '• Ho cucinato ',
+          ['la', 'là'],
+          ' pasta. Porta piatti e posate di ',
+          ['la', 'là'],
+          ', in sala da pranzo.'
+        ],
+        correct: ['la', 'là']
+      },
+      {
+        parts: [
+          '• Ho trovato tantissimi libri: chi ',
+          ['li', 'lì'],
+          ' vuole leggere?'
+        ],
+        correct: ['li']
+      },
+      {
+        parts: [
+          '• Prendi i guanti: sono ',
+          ['li', 'lì'],
+          '. ',
+          ['Li', 'Lì'],
+          ' vedi?'
+        ],
+        correct: ['lì', 'Li']
+      },
+      {
+        parts: [
+          '• I bambini sono diventati dei ragazzi: ',
+          ['li', 'lì'],
+          ' ho visti crescere in questi anni.'
+        ],
+        correct: ['li']
+      }
+    ] %>
+
+    <div class="space-y-4" data-controller="word-choice">
+      <% exercise_2_sentences.each_with_index do |sentence, sentence_idx| %>
+        <div class="p-3 bg-pink-50 rounded-lg text-base md:text-lg leading-relaxed">
+          <% group_index = 0 %>
+          <% sentence[:parts].each do |part| %>
+            <% if part.is_a?(Array) %>
+              <% group_id = "s#{sentence_idx}_g#{group_index}" %>
+              <% correct_option = sentence[:correct][group_index] %>
+              <% part.each_with_index do |option, option_idx| %>
+                <span class="px-1 py-0.5 rounded cursor-pointer hover:bg-pink-100 transition"
+                      data-word-choice-target="word"
+                      data-group="<%= group_id %>"
+                      data-correct="<%= option == correct_option %>"
+                      data-action="click->word-choice#select"><%= option %></span><% if option_idx < part.length - 1 %><span class="text-pink-400"> / </span><% end %>
+              <% end %>
+              <% group_index += 1 %>
+            <% else %>
+              <%= part %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise Controls -->
+  <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl5_gram_p014' %>
+</div>
+

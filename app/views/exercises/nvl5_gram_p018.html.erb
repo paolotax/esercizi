@@ -1,0 +1,159 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 to-red-50 rounded-lg shadow-lg" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-pink-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          ORTOGRAFIA
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-pink-600">La punteggiatura</h1>
+      </div>
+      <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        18
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Box -->
+  <div class="mb-6 md:mb-8 bg-white border-4 border-blue-200 rounded-lg p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-6 text-base md:text-lg leading-relaxed">
+    <div class="space-y-3">
+      <h2 class="text-pink-600 font-bold text-lg md:text-xl">I segni principali</h2>
+      <ul class="list-disc list-inside space-y-2 text-gray-800">
+        <li>Il punto (.) conclude una frase ed è seguito dalla lettera maiuscola.</li>
+        <li>Il punto interrogativo (?) conclude una domanda.</li>
+        <li>Il punto esclamativo (!) conclude un’esclamazione.</li>
+        <li>La virgola (,) separa parole o frasi in un elenco o in un inciso.</li>
+      </ul>
+    </div>
+    <div class="space-y-3">
+      <h2 class="text-pink-600 font-bold text-lg md:text-xl">Altri segni utili</h2>
+      <ul class="list-disc list-inside space-y-2 text-gray-800">
+        <li>Il punto e virgola (;) separa frasi legate nello stesso periodo.</li>
+        <li>I due punti (:) introducono un elenco, una spiegazione o un discorso diretto.</li>
+        <li>I puntini di sospensione (...) lasciano il discorso in sospeso.</li>
+        <li>Le virgolette (“ ”) e la lineetta (–) si usano nel discorso diretto.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Exercise 1 -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
+      <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold">IMPARARE TUTTI</span>
+      Scrivi le frasi cambiando il posto del punto per modificare il significato.
+    </h2>
+
+    <div class="space-y-4 text-base md:text-lg">
+      <div class="bg-pink-50 rounded-lg p-4">
+        <p class="text-gray-700 mb-3">
+          • <strong>Originale:</strong> Sono andato a giocare al parco. Ho incontrato mio cugino Iacopo.
+        </p>
+        <textarea class="w-full border-2 border-pink-300 rounded-lg p-3 focus:outline-none focus:border-pink-600 text-base md:text-lg"
+                  rows="2"
+                  placeholder="Riorganizza la frase cambiando il posto del punto..."></textarea>
+      </div>
+
+      <div class="bg-pink-50 rounded-lg p-4">
+        <p class="text-gray-700 mb-3">
+          • <strong>Originale:</strong> Mattia ascolta la musica. In salotto la mamma lavora al computer.
+        </p>
+        <textarea class="w-full border-2 border-pink-300 rounded-lg p-3 focus:outline-none focus:border-pink-600 text-base md:text-lg"
+                  rows="2"
+                  placeholder="Scrivi la nuova frase con il punto in un’altra posizione..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 2 -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+      Inserisci il punto, la virgola o il punto e virgola.
+    </h2>
+
+    <% options = [
+      { label: "— Scegli —", value: "" },
+      { label: "Punto (.)", value: ".", symbol: "." },
+      { label: "Virgola (,)", value: ",", symbol: "," },
+      { label: "Punto e virgola (;)", value: ";", symbol: ";" }
+    ] %>
+
+    <div class="space-y-4 text-base md:text-lg text-gray-800">
+      <div class="bg-pink-50 rounded-lg p-4">
+        <p class="mb-3 font-semibold text-pink-700">• Frase 1</p>
+        <p class="leading-relaxed">
+          Stamattina ha piovuto molto forte
+          <select class="mx-1 border-2 border-pink-300 rounded px-2 py-1 focus:outline-none focus:border-pink-600"
+                  data-correct-answer=",">
+            <% options.each do |opt| %>
+              <option value="<%= opt[:value] %>"><%= opt[:label] %></option>
+            <% end %>
+          </select>
+          così abbiamo dovuto giocare in casa
+          <select class="mx-1 border-2 border-pink-300 rounded px-2 py-1 focus:outline-none focus:border-pink-600"
+                  data-correct-answer=";">
+            <% options.each do |opt| %>
+              <option value="<%= opt[:value] %>"><%= opt[:label] %></option>
+            <% end %>
+          </select>
+          fortunatamente nel pomeriggio è uscito il sole
+          <select class="mx-1 border-2 border-pink-300 rounded px-2 py-1 focus:outline-none focus:border-pink-600"
+                  data-correct-answer=".">
+            <% options.each do |opt| %>
+              <option value="<%= opt[:value] %>"><%= opt[:label] %></option>
+            <% end %>
+          </select>
+        </p>
+      </div>
+
+      <div class="bg-pink-50 rounded-lg p-4">
+        <p class="mb-3 font-semibold text-pink-700">• Frase 2</p>
+        <p class="leading-relaxed">
+          Io e Silvia abbiamo trascorso un bel pomeriggio in piscina
+          <select class="mx-1 border-2 border-pink-300 rounded px-2 py-1 focus:outline-none focus:border-pink-600"
+                  data-correct-answer=";">
+            <% options.each do |opt| %>
+              <option value="<%= opt[:value] %>"><%= opt[:label] %></option>
+            <% end %>
+          </select>
+          di sera abbiamo ordinato una pizza e ci siamo guardate un film dell’orrore
+          <select class="mx-1 border-2 border-pink-300 rounded px-2 py-1 focus:outline-none focus:border-pink-600"
+                  data-correct-answer=",">
+            <% options.each do |opt| %>
+              <option value="<%= opt[:value] %>"><%= opt[:label] %></option>
+            <% end %>
+          </select>
+          anche se ci faceva paura
+          <select class="mx-1 border-2 border-pink-300 rounded px-2 py-1 focus:outline-none focus:border-pink-600"
+                  data-correct-answer=".">
+            <% options.each do |opt| %>
+              <option value="<%= opt[:value] %>"><%= opt[:label] %></option>
+            <% end %>
+          </select>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 3 -->
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">3</span>
+      Riscrivi il testo inserendo punteggiatura e maiuscole.
+    </h2>
+
+    <p class="text-gray-700 mb-3">
+      Emilia è una bambina simpatica ha un pupazzo di nome Willy che la accompagna dappertutto...
+      Aggiungi la punteggiatura corretta e le lettere maiuscole dove servono.
+    </p>
+    <textarea class="w-full border-2 border-pink-300 rounded-lg p-3 focus:outline-none focus:border-pink-600 text-base md:text-lg"
+              rows="6"
+              placeholder="Riscrivi qui il testo con la punteggiatura corretta..."></textarea>
+  </div>
+
+  <!-- Exercise Controls -->
+  <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl5_gram_p018' %>
+</div>
+
