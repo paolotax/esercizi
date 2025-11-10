@@ -1,0 +1,288 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-lime-50 via-white to-green-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-lime-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          MORFOLOGIA
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-lime-600">Aggettivi e pronomi interrogativi ed esclamativi</h1>
+      </div>
+      <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        60
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Box -->
+  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6">
+    <p class="text-base md:text-lg text-gray-700 mb-3">
+      Gli <strong>interrogativi/esclamativi</strong> si usano in domande ed esclamazioni.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base md:text-lg">
+      <div>
+        <p class="font-bold text-red-600 mb-2">Aggettivi:</p>
+        <p class="text-gray-700">quale?, quanto?, che? / quale!, quanto!, che!</p>
+      </div>
+      <div>
+        <p class="font-bold text-blue-600 mb-2">Pronomi:</p>
+        <p class="text-gray-700">chi?, che (che cosa)?, quale?, quanto? / chi!, che!, quale!, quanto!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 1: IMPARARE TUTTI -->
+  <div class="mb-6 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-2xl border-4 border-blue-300 shadow-2xl p-4 md:p-6" data-controller="multiple-choice">
+    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-4">
+      <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
+      <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold mr-2">IMPARARE TUTTI</span>
+      Indica se l'aggettivo evidenziato è interrogativo (I) o esclamativo (E).
+    </h2>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% ie_sentences = [
+        { text: "<strong>Quale</strong> film ti piace di più?", correct: "I" },
+        { text: "<strong>Che</strong> bell'idea!", correct: "E" },
+        { text: "<strong>Quanta</strong> gente c'è in spiaggia!", correct: "E" },
+        { text: "<strong>Quanti</strong> anni hai?", correct: "I" }
+      ] %>
+
+      <% ie_sentences.each_with_index do |item, index| %>
+        <div class="bg-white border-2 border-blue-200 rounded-xl px-4 py-3">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <p class="text-gray-700"><%= raw item[:text] %></p>
+            <div class="flex gap-2">
+              <label class="inline-flex items-center gap-1 cursor-pointer">
+                <input type="radio"
+                       name="ie_<%= index %>"
+                       value="I"
+                       class="w-4 h-4"
+                       data-multiple-choice-target="input"
+                       data-answer="<%= item[:correct] %>">
+                <span class="bg-blue-200 text-blue-700 font-bold px-3 py-1 rounded">I</span>
+              </label>
+              <label class="inline-flex items-center gap-1 cursor-pointer">
+                <input type="radio"
+                       name="ie_<%= index %>"
+                       value="E"
+                       class="w-4 h-4"
+                       data-multiple-choice-target="input"
+                       data-answer="<%= item[:correct] %>">
+                <span class="bg-orange-200 text-orange-700 font-bold px-3 py-1 rounded">E</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Complete sentences -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-4">
+      <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+      Completa le frasi con interrogativi o esclamativi adatti.
+    </h2>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
+        <p class="text-gray-700">
+          •
+          <input type="text" class="border-b-2 border-green-500 bg-transparent px-2 py-1 w-24 focus:outline-none"
+                 data-fill-blanks-target="input" data-answer="Che" placeholder="......." data-correct-answer="Che">
+          cosa stai guardando?
+        </p>
+      </div>
+      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
+        <p class="text-gray-700">
+          •
+          <input type="text" class="border-b-2 border-green-500 bg-transparent px-2 py-1 w-24 focus:outline-none"
+                 data-fill-blanks-target="input" data-answer="Quale" placeholder="......." data-correct-answer="Quale">
+          macchina preferisci?
+        </p>
+      </div>
+      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
+        <p class="text-gray-700">
+          •
+          <input type="text" class="border-b-2 border-green-500 bg-transparent px-2 py-1 w-24 focus:outline-none"
+                 data-fill-blanks-target="input" data-answer="Quanto" placeholder="......." data-correct-answer="Quanto">
+          tempo ci vuole per arrivare?
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="my-8 border-t-4 border-lime-300"></div>
+
+  <!-- Second section: Numerali -->
+  <div class="mb-8">
+    <h1 class="text-2xl sm:text-3xl font-bold text-lime-600 mb-4">Aggettivi e pronomi numerali</h1>
+  </div>
+
+  <!-- Info Box Numerali -->
+  <div class="mb-6 bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl border-4 border-purple-300 shadow-2xl p-4 md:p-6">
+    <p class="text-base md:text-lg text-gray-700 mb-3">
+      I <strong>numerali</strong> esprimono quantità o posizione (cardinali, ordinali, moltiplicativi).
+    </p>
+    <ul class="space-y-2 text-base md:text-lg text-gray-700">
+      <li class="flex items-start gap-2">
+        <span class="text-red-600 font-bold">•</span>
+        <span>Gli <strong class="text-red-600">aggettivi numerali</strong> accompagnano il nome → due quaderni.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-blue-600 font-bold">•</span>
+        <span>I <strong class="text-blue-600">pronomi numerali</strong> lo sostituiscono → uno è a quadretti, il primo della fila...</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Illustration -->
+  <div class="mb-6">
+    <%= image_tag "nvl5_gram_p060_immagine01.jpg", alt: "Illustrazione numerali", class: "w-full max-w-md mx-auto rounded-lg shadow-lg" %>
+  </div>
+
+  <!-- Exercise 1 Numerali: Underline -->
+  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-4">
+      <span class="bg-purple-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
+      Sottolinea in rosso gli <span class="text-red-600">aggettivi numerali</span>, in blu i <span class="text-blue-600">pronomi numerali</span>.
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base md:text-lg">
+      <div class="bg-white rounded-lg p-4 space-y-3">
+        <p class="text-gray-700">• Il <mark class="bg-blue-200">primo</mark> e l'<mark class="bg-blue-200">ultimo</mark> della fila devono portare la bandiera.</p>
+        <p class="text-gray-700">• Ho <mark class="bg-red-200">venti</mark> figurine doppie, tu ne hai <mark class="bg-blue-200">diciotto</mark>.</p>
+      </div>
+      <div class="bg-white rounded-lg p-4 space-y-3">
+        <p class="text-gray-700">• Ho mangiato <mark class="bg-red-200">quattro</mark> biscotti, il <mark class="bg-red-200">doppio</mark> di te.</p>
+        <p class="text-gray-700">• Ci sono <mark class="bg-red-200">milioni</mark> di stelle nell'universo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 2 Numerali: Complete table -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-cyan-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-cyan-700 mb-4">
+      <span class="bg-cyan-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+      Completa con numerali e indica se sono cardinali (C), ordinali (O) o moltiplicativi (M).
+    </h2>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <div class="bg-cyan-50 border-2 border-cyan-200 rounded-xl px-4 py-3">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <p class="text-gray-700 flex-1">
+            • Ho pagato il
+            <input type="text" class="border-b-2 border-cyan-500 bg-transparent px-2 py-1 w-24 focus:outline-none"
+                   data-fill-blanks-target="input" data-answer="doppio" placeholder="......." data-correct-answer="doppio">
+            di te.
+          </p>
+          <div class="flex gap-2">
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="num1" value="C" class="w-4 h-4">
+              <span class="font-bold">C</span>
+            </label>
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="num1" value="O" class="w-4 h-4">
+              <span class="font-bold">O</span>
+            </label>
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="num1" value="M" class="w-4 h-4">
+              <span class="font-bold">M</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-cyan-50 border-2 border-cyan-200 rounded-xl px-4 py-3">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <p class="text-gray-700 flex-1">
+            • Il
+            <input type="text" class="border-b-2 border-cyan-500 bg-transparent px-2 py-1 w-24 focus:outline-none"
+                   data-fill-blanks-target="input" data-answer="primo" placeholder="......." data-correct-answer="primo">
+            giorno di scuola è sempre emozionante.
+          </p>
+          <div class="flex gap-2">
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="num2" value="C" class="w-4 h-4">
+              <span class="font-bold">C</span>
+            </label>
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="num2" value="O" class="w-4 h-4">
+              <span class="font-bold">O</span>
+            </label>
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="num2" value="M" class="w-4 h-4">
+              <span class="font-bold">M</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-cyan-50 border-2 border-cyan-200 rounded-xl px-4 py-3">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <p class="text-gray-700 flex-1">
+            • Abbiamo percorso
+            <input type="text" class="border-b-2 border-cyan-500 bg-transparent px-2 py-1 w-32 focus:outline-none"
+                   data-fill-blanks-target="input" data-answer="ventiquattro" placeholder="..........." data-correct-answer="ventiquattro">
+            chilometri.
+          </p>
+          <div class="flex gap-2">
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="num3" value="C" class="w-4 h-4">
+              <span class="font-bold">C</span>
+            </label>
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="num3" value="O" class="w-4 h-4">
+              <span class="font-bold">O</span>
+            </label>
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="num3" value="M" class="w-4 h-4">
+              <span class="font-bold">M</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 3: Write sentences -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-pink-200 shadow-2xl p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-pink-700 mb-4">
+      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">3</span>
+      Scrivi una frase con: doppio, primo, ventiquattro.
+    </h2>
+
+    <div class="space-y-4 text-base md:text-lg">
+      <div class="bg-pink-50 border-2 border-pink-200 rounded-xl px-4 py-3">
+        <p class="font-semibold text-gray-700 mb-2">doppio:</p>
+        <textarea class="w-full border-2 border-pink-300 rounded-lg px-3 py-2 focus:outline-none focus:border-pink-500"
+                  rows="2"
+                  placeholder="Scrivi qui la tua frase..."></textarea>
+      </div>
+
+      <div class="bg-pink-50 border-2 border-pink-200 rounded-xl px-4 py-3">
+        <p class="font-semibold text-gray-700 mb-2">primo:</p>
+        <textarea class="w-full border-2 border-pink-300 rounded-lg px-3 py-2 focus:outline-none focus:border-pink-500"
+                  rows="2"
+                  placeholder="Scrivi qui la tua frase..."></textarea>
+      </div>
+
+      <div class="bg-pink-50 border-2 border-pink-200 rounded-xl px-4 py-3">
+        <p class="font-semibold text-gray-700 mb-2">ventiquattro:</p>
+        <textarea class="w-full border-2 border-pink-300 rounded-lg px-3 py-2 focus:outline-none focus:border-pink-500"
+                  rows="2"
+                  placeholder="Scrivi qui la tua frase..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reference -->
+  <div class="mt-6 text-center">
+    <p class="text-red-600 font-bold text-base md:text-lg">Esercizi p. 160</p>
+  </div>
+
+  <%= render partial: "shared/exercise_controls" %>
+
+</div>

@@ -1,0 +1,157 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-lime-50 via-white to-green-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-lime-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          MORFOLOGIA
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-lime-600">I verbi</h1>
+      </div>
+      <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        66
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Box -->
+  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6">
+    <p class="text-base md:text-lg text-gray-700 mb-4">
+      I <strong>verbi</strong> indicano un'azione, un modo di essere o uno stato del soggetto. Variano in base:
+    </p>
+    <ul class="space-y-2 text-base md:text-lg text-gray-700 mb-4">
+      <li class="flex items-start gap-2">
+        <span class="text-blue-600 font-bold">•</span>
+        <span>al <strong>modo</strong> → i <strong class="text-blue-600">modi finiti</strong> (indicativo, congiuntivo, condizionale, imperativo) esprimono la persona, i <strong class="text-blue-600">modi indefiniti</strong> (infinito, gerundio, participio) non esprimono la persona;</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-green-600 font-bold">•</span>
+        <span>al <strong>tempo</strong> → <strong class="text-green-600">semplice</strong> o <strong class="text-green-600">composto</strong>;</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-red-600 font-bold">•</span>
+        <span>alla <strong>persona</strong> → <strong class="text-red-600">singolare</strong> o <strong class="text-red-600">plurale</strong>.</span>
+      </li>
+    </ul>
+
+    <p class="text-base md:text-lg text-gray-700 mb-3 font-semibold">
+      I verbi si classificano in <strong>tre coniugazioni</strong>, in base alla desinenza dell'infinito presente:
+    </p>
+    <ul class="space-y-2 text-base md:text-lg text-gray-700">
+      <li class="flex items-start gap-2">
+        <span class="text-orange-600 font-bold">•</span>
+        <span><strong>1ª coniugazione</strong> → <strong class="text-orange-600">-are</strong> (amare, cantare...)</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-purple-600 font-bold">•</span>
+        <span><strong>2ª coniugazione</strong> → <strong class="text-purple-600">-ere</strong> (credere, perdere...)</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-pink-600 font-bold">•</span>
+        <span><strong>3ª coniugazione</strong> → <strong class="text-pink-600">-ire</strong> (dormire, finire...)</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Exercise 1: IMPARARE TUTTI -->
+  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-4">
+      <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
+      <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold mr-2">IMPARARE TUTTI</span>
+      Per ogni verbo scrivi l'infinito presente e la corrispondente coniugazione, come nell'esempio.
+    </h2>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3">
+        <p class="text-gray-700">• rincorreva → <strong class="text-green-700">rincorrere, 2ª coniug.</strong></p>
+      </div>
+
+      <% verbs = [
+        { verb: "incontrerai", infinitive: "incontrare", coniug: "1ª coniug." },
+        { verb: "fosti partito", infinitive: "partire", coniug: "3ª coniug." },
+        { verb: "sarebbe cresciuto", infinitive: "crescere", coniug: "2ª coniug." }
+      ] %>
+
+      <% verbs.each do |item| %>
+        <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-gray-700">• <%= item[:verb] %> →</span>
+            <input type="text"
+                   class="border-b-2 border-blue-500 bg-transparent px-2 py-1 w-32 focus:outline-none"
+                   data-fill-blanks-target="input"
+                   data-answer="<%= item[:infinitive] %>"
+                   data-correct-answer="<%= item[:infinitive] %>"
+                   placeholder="infinito">,
+            <input type="text"
+                   class="border-b-2 border-blue-500 bg-transparent px-2 py-1 w-32 focus:outline-none"
+                   data-fill-blanks-target="input"
+                   data-answer="<%= item[:coniug] %>"
+                   data-correct-answer="<%= item[:coniug] %>"
+                   placeholder="coniug.">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Write person -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-4">
+      <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+      Per ogni verbo scrivi la persona, come nell'esempio.
+    </h2>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
+        <p class="text-gray-700">• sei andato → <strong class="text-green-700">tu, 2ª pers. sing.</strong></p>
+      </div>
+
+      <% persons = [
+        { verb: "finì", answer: "egli/ella, 3ª pers. sing." },
+        { verb: "guidai", answer: "io, 1ª pers. sing." },
+        { verb: "avranno perso", answer: "essi/esse, 3ª pers. plur." },
+        { verb: "tornate", answer: "voi, 2ª pers. plur." },
+        { verb: "pensavamo", answer: "noi, 1ª pers. plur." }
+      ] %>
+
+      <% persons.each do |item| %>
+        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-gray-700">• <%= item[:verb] %> →</span>
+            <input type="text"
+                   class="border-b-2 border-green-500 bg-transparent px-2 py-1 flex-1 min-w-[200px] focus:outline-none"
+                   data-fill-blanks-target="input"
+                   data-answer="<%= item[:answer] %>"
+                   data-correct-answer="<%= item[:answer] %>"
+                   placeholder="persona...">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 3: Underline and highlight -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-4">
+      <span class="bg-purple-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">3</span>
+      Sottolinea i verbi. Poi evidenzia di giallo i <span class="text-yellow-600">modi finiti</span>, di azzurro i <span class="text-cyan-600">modi indefiniti</span>.
+    </h2>
+
+    <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-4">
+      <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+        Quella mattina la sveglia non <mark class="bg-yellow-200">suonò</mark>. Per arrivare a scuola in orario, Giacomo
+        <mark class="bg-yellow-200">aveva</mark> solo un quarto d'ora. <mark class="bg-cyan-200">Mangiando</mark> qualche
+        biscotto, <mark class="bg-yellow-200">cercò</mark> di <mark class="bg-cyan-200">ricordare</mark> dove
+        <mark class="bg-yellow-200">aveva posato</mark> il diario con gli appunti per la lezione. Lo
+        <mark class="bg-yellow-200">trovò</mark>, <mark class="bg-yellow-200">si vestì</mark> in fretta e
+        <mark class="bg-yellow-200">corse</mark> a scuola. <mark class="bg-cyan-200">Sorridente</mark>,
+        <mark class="bg-yellow-200">entrò</mark> in classe e tutti lo <mark class="bg-yellow-200">salutarono</mark>:
+        "Buongiorno prof!".
+      </p>
+    </div>
+  </div>
+
+  <%= render partial: "shared/exercise_controls" %>
+
+</div>
