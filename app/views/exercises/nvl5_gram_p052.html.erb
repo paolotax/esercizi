@@ -1,0 +1,196 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-sky-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-sky-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          MORFOLOGIA
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-sky-600">Gli aggettivi qualificativi</h1>
+      </div>
+      <div class="flex-shrink-0 bg-sky-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        52
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-sky-200 shadow-2xl p-4 md:p-6">
+    <p class="text-base md:text-lg text-gray-700 mb-3">
+      Gli aggettivi qualificativi aggiungono una qualità al nome e possono essere:
+    </p>
+    <ul class="space-y-2 text-base md:text-lg text-gray-700">
+      <li class="flex items-start gap-2">
+        <span class="text-sky-600 font-bold">•</span>
+        <span><strong>grado positivo</strong> → Il libro è interessante.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-sky-600 font-bold">•</span>
+        <span><strong>comparativo</strong> → più/meno/quanto interessante.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-sky-600 font-bold">•</span>
+        <span><strong>superlativo</strong> → interessantissimo, molto interessante, il più interessante tra…</span>
+      </li>
+    </ul>
+    <p class="text-base md:text-lg text-gray-700 mt-3 italic">
+      Questo libro è interessante. Anzi, è interessantissimo.
+    </p>
+  </div>
+
+  <!-- Exercise 1: Identify adjective degrees -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <div class="mb-4 inline-block bg-gradient-to-r from-sky-500 to-blue-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
+      1 IMPARARE TUTTI
+    </div>
+    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
+      Sottolinea gli aggettivi qualificativi nelle frasi e indica il loro grado.
+    </h2>
+
+    <% adjective_sentences = [
+      { text: "Il tuo cane è più affettuoso del mio.", degree: "comparativo di maggioranza" },
+      { text: "Mi piace la chitarra: ha un suono molto dolce.", degree: "superlativo assoluto" },
+      { text: "Sara ha i capelli lisci come sua sorella.", degree: "comparativo di uguaglianza" },
+      { text: "Per il matrimonio di mia zia ho comprato un abito blu.", degree: "positivo" },
+      { text: "Il gelato è meno buono di quello che ho mangiato ieri.", degree: "comparativo di minoranza" },
+      { text: "Metti la sciarpa, oggi è una giornata freddissima.", degree: "superlativo assoluto" }
+    ] %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% adjective_sentences.each_with_index do |sentence, index| %>
+        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3">
+          <p class="text-gray-700 mb-2">- <%= sentence[:text] %></p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-600">(</span>
+            <% if index == 0 %>
+              <span class="font-semibold text-blue-700"><%= sentence[:degree] %></span>
+            <% else %>
+              <input type="text"
+                     class="flex-1 border-b-2 border-blue-500 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-700"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= sentence[:degree] %>"
+                     data-correct-answer="<%= sentence[:degree] %>"
+                     placeholder="..........................................."
+                     maxlength="40">
+            <% end %>
+            <span class="text-gray-600">)</span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Superlativo relativo vs assoluto -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
+      <span class="font-bold">2</span> Sottolinea gli aggettivi al superlativo relativo e cerchia quelli al superlativo assoluto.
+    </h2>
+
+    <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-4 text-base md:text-lg text-gray-700 leading-relaxed space-y-2">
+      <p>Questo è <span class="rounded-full border-2 border-purple-600 px-2 bg-purple-200 font-semibold">il film più divertente</span> che abbia mai visto.</p>
+      <p>Durante la passeggiata nel bosco abbiamo visto degli alberi <span class="rounded-full border-2 border-purple-600 px-2 bg-purple-200 font-semibold">altissimi</span>.</p>
+      <p>La torta della nonna è <span class="rounded-full border-2 border-purple-600 px-2 bg-purple-200 font-semibold">buonissima</span>.</p>
+      <p>Questo è stato <span class="underline font-semibold text-purple-700">il compito più difficile</span> dell'anno.</p>
+      <p>Ho comprato un maglione <span class="rounded-full border-2 border-purple-600 px-2 bg-purple-200 font-semibold">caldissimo</span>.</p>
+      <p>Oggi è stato <span class="underline font-semibold text-purple-700">il giorno meno luminoso</span> della settimana.</p>
+    </div>
+  </div>
+
+  <!-- Exercise 3: Write forms -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
+      <span class="font-bold">3</span> Scrivi le forme indicate.
+    </h2>
+
+    <% forms = [
+      { word: "tenero", form: "comparativo di maggioranza", answer: "più tenero" },
+      { word: "allegro", form: "comparativo di minoranza", answer: "meno allegro" },
+      { word: "alta", form: "comparativo di uguaglianza", answer: "alta come / tanto alta quanto" },
+      { word: "saporita", form: "superlativo relativo", answer: "la più saporita" },
+      { word: "leggera", form: "superlativo assoluto", answer: "leggerissima / molto leggera" }
+    ] %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% forms.each do |item| %>
+        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3 flex flex-wrap items-center gap-2">
+          <span class="font-semibold text-green-700"><%= item[:word] %></span>
+          <span class="text-gray-600">(<%= item[:form] %>)</span>
+          <span class="text-gray-500">→</span>
+          <input type="text"
+                 class="flex-1 min-w-[200px] border-b-2 border-green-500 bg-transparent px-2 py-1 focus:outline-none focus:border-green-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:answer] %>"
+                 data-correct-answer="<%= item[:answer] %>"
+                 placeholder="................................"
+                 maxlength="40">
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 4: Complete with adjectives -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-orange-200 shadow-2xl p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-orange-700 mb-3">
+      <span class="font-bold">4</span> Completa con aggettivi al grado richiesto.
+    </h2>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-3 py-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">Cristian è</span>
+          <input type="text" class="border-b-2 border-orange-500 bg-transparent px-2 py-1 focus:outline-none focus:border-orange-700 min-w-[150px]" placeholder=".....................">
+          <span class="text-gray-600 text-sm">(superlativo relativo)</span>
+          <span class="text-gray-700">tra i compagni di basket.</span>
+        </div>
+      </div>
+      <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-3 py-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">Ho comprato un</span>
+          <input type="text" class="border-b-2 border-orange-500 bg-transparent px-2 py-1 focus:outline-none focus:border-orange-700 min-w-[150px]" placeholder=".....................">
+          <span class="text-gray-600 text-sm">(superlativo assoluto)</span>
+          <span class="text-gray-700">libro di poesie.</span>
+        </div>
+      </div>
+      <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-3 py-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">Le scarpe da ginnastica di Alice sono</span>
+          <input type="text" class="border-b-2 border-orange-500 bg-transparent px-2 py-1 focus:outline-none focus:border-orange-700 min-w-[150px]" placeholder=".....................">
+          <span class="text-gray-600 text-sm">(positivo)</span>
+        </div>
+      </div>
+      <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-3 py-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">La campanella della scuola è</span>
+          <input type="text" class="border-b-2 border-orange-500 bg-transparent px-2 py-1 focus:outline-none focus:border-orange-700 min-w-[150px]" placeholder=".....................">
+          <span class="text-gray-600 text-sm">(superlativo assoluto)</span>
+        </div>
+      </div>
+      <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-3 py-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">Simonetta è</span>
+          <input type="text" class="border-b-2 border-orange-500 bg-transparent px-2 py-1 focus:outline-none focus:border-orange-700 min-w-[150px]" placeholder=".....................">
+          <span class="text-gray-600 text-sm">(comparativo di maggioranza)</span>
+          <span class="text-gray-700">di Paolo.</span>
+        </div>
+      </div>
+      <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-3 py-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">Il Po è</span>
+          <input type="text" class="border-b-2 border-orange-500 bg-transparent px-2 py-1 focus:outline-none focus:border-orange-700 min-w-[150px]" placeholder=".....................">
+          <span class="text-gray-600 text-sm">(superlativo relativo)</span>
+          <span class="text-gray-700">dei fiumi d'Italia.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Esercizi pp. 154-155 e 163
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'sky', current_page: 'nvl5_gram_p052' %>
+  </div>
+</div>

@@ -1,0 +1,184 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-cyan-50 via-white to-teal-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-cyan-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          LESSICO
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-cyan-600">Il linguaggio figurato – esercizi</h1>
+      </div>
+      <div class="flex-shrink-0 bg-cyan-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        37
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 3: Match figurative meanings -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
+      <span class="font-bold">3</span> Collega ogni significato figurato al corrispondente significato proprio.
+    </h2>
+
+    <% figurative_expressions = [
+      { expression: "Prendere per la gola.", meaning: "conquistare offrendo cibo buono" },
+      { expression: "Restare di stucco.", meaning: "rimanere immobile e senza parole" },
+      { expression: "Fare una lavata di capo.", meaning: "rimproverare con forza" },
+      { expression: "Sentirsi un pesce fuor d'acqua.", meaning: "sentirsi a disagio" }
+    ] %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% figurative_expressions.each do |item| %>
+        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3 flex flex-wrap items-center gap-2">
+          <span class="text-gray-700 font-semibold"><%= item[:expression] %></span>
+          <span class="text-gray-700">→</span>
+          <input type="text"
+                 class="flex-1 min-w-[250px] border-b-2 border-blue-500 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-700"
+                 placeholder="........................................."
+                 maxlength="60">
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 4: Write sentences -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
+      <span class="font-bold">4</span> Scrivi sul quaderno una frase per ciascuna espressione figurata dell'esercizio 3 (esempio: Marco voleva il mio pallone e mi ha preso per la gola offrendo un cioccolatino).
+    </h2>
+
+    <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-3">
+      <p class="text-base md:text-lg text-gray-700 italic">
+        Scrivi le tue frasi sul quaderno.
+      </p>
+    </div>
+  </div>
+
+  <!-- Exercise 5: Write comparisons and metaphors -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
+      <span class="font-bold">5</span> Scrivi una frase per ogni gruppo di parole: prima un paragone, poi la metafora.
+    </h2>
+
+    <% word_groups = [
+      {
+        words: "Mirko • alto • gigante",
+        comparison_example: "Mirko è alto come un gigante.",
+        metaphor_example: "Mirko è un gigante.",
+        is_example: true
+      },
+      {
+        words: "Lara • gira • trottola",
+        comparison_answer: "Lara gira come una trottola",
+        metaphor_answer: "Lara è una trottola"
+      },
+      {
+        words: "nonno • lento • lumaca",
+        comparison_answer: "Il nonno è lento come una lumaca",
+        metaphor_answer: "Il nonno è una lumaca"
+      },
+      {
+        words: "mani • forti • tenaglie",
+        comparison_answer: "Le mani sono forti come tenaglie",
+        metaphor_answer: "Le mani sono tenaglie"
+      }
+    ] %>
+
+    <div class="space-y-5">
+      <% word_groups.each_with_index do |group, index| %>
+        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-4">
+          <p class="text-base md:text-lg text-gray-700 font-semibold mb-3">- <%= group[:words] %></p>
+          <div class="space-y-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-gray-700">Paragone:</span>
+              <% if group[:is_example] %>
+                <span class="text-gray-700 italic"><%= group[:comparison_example] %></span>
+              <% else %>
+                <input type="text"
+                       class="flex-1 min-w-[300px] border-b-2 border-green-500 bg-white rounded px-2 py-1 focus:outline-none focus:border-green-700"
+                       data-fill-blanks-target="input"
+                       data-answer="<%= group[:comparison_answer] %>"
+                       data-correct-answer="<%= group[:comparison_answer] %>"
+                       placeholder="................................"
+                       maxlength="80">
+              <% end %>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-gray-700">Metafora:</span>
+              <% if group[:is_example] %>
+                <span class="text-gray-700 italic"><%= group[:metaphor_example] %></span>
+              <% else %>
+                <input type="text"
+                       class="flex-1 min-w-[300px] border-b-2 border-green-500 bg-white rounded px-2 py-1 focus:outline-none focus:border-green-700"
+                       data-fill-blanks-target="input"
+                       data-answer="<%= group[:metaphor_answer] %>"
+                       data-correct-answer="<%= group[:metaphor_answer] %>"
+                       placeholder="............................"
+                       maxlength="80">
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 6: Transform metaphors into comparisons -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-amber-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-amber-700 mb-3">
+      <span class="font-bold">6</span> Trasforma le metafore in paragoni.
+    </h2>
+
+    <% transformations = [
+      {
+        metaphor: "Aveva la barba lunga e gli occhi di ghiaccio.",
+        comparison: "Aveva la barba lunga e gli occhi freddi come il ghiaccio.",
+        is_example: true
+      },
+      {
+        metaphor: "In piscina Vanessa è un pesce.",
+        comparison: "In piscina Vanessa nuota come un pesce"
+      },
+      {
+        metaphor: "Mio fratello è un fulmine: vince tutte le gare.",
+        comparison: "Mio fratello è veloce come un fulmine: vince tutte le gare"
+      },
+      {
+        metaphor: "Ho preso troppo sole: sono un pomodoro!",
+        comparison: "Ho preso troppo sole: sono rosso come un pomodoro"
+      }
+    ] %>
+
+    <div class="space-y-4 text-base md:text-lg">
+      <% transformations.each_with_index do |item, index| %>
+        <div class="bg-amber-50 border-2 border-amber-200 rounded-xl px-4 py-4">
+          <p class="text-gray-700 mb-2">- <%= item[:metaphor] %></p>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-gray-700">→</span>
+            <% if item[:is_example] %>
+              <span class="text-gray-700 italic"><%= item[:comparison] %></span>
+            <% else %>
+              <input type="text"
+                     class="flex-1 min-w-[300px] border-b-2 border-amber-500 bg-white rounded px-2 py-1 focus:outline-none focus:border-amber-700"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= item[:comparison] %>"
+                     data-correct-answer="<%= item[:comparison] %>"
+                     placeholder="..............................................................."
+                     maxlength="100">
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Esercizi p. 143
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'cyan', current_page: 'nvl5_gram_p037' %>
+  </div>
+</div>

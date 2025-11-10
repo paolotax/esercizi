@@ -1,0 +1,132 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-teal-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-teal-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          LESSICO
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-teal-600">Le parole in prestito</h1>
+      </div>
+      <div class="flex-shrink-0 bg-teal-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        27
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-teal-200 shadow-2xl p-4 md:p-6">
+    <p class="text-base md:text-lg text-gray-700">
+      Nella lingua italiana sono presenti parole prese in prestito da varie lingue straniere e che sono diventate di uso comune.
+    </p>
+  </div>
+
+  <!-- Exercise 1: Match English words -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
+    <div class="mb-4 inline-block bg-gradient-to-r from-teal-500 to-blue-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
+      1 IMPARARE TUTTI
+    </div>
+    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
+      Collega ogni parola inglese alla parola italiana corrispondente.
+    </h2>
+
+    <% english_words = {
+      "basket" => "pallacanestro",
+      "videogame" => "videogioco",
+      "film" => "pellicola",
+      "roast beef" => "arrosto di vitello",
+      "e-mail" => "posta elettronica",
+      "clown" => "pagliaccio",
+      "party" => "festa",
+      "weekend" => "fine settimana",
+      "scooter" => "motorino"
+    } %>
+
+    <% italian_meanings = ["pallacanestro", "videogioco", "pellicola", "arrosto di vitello", "posta elettronica", "pagliaccio", "festa", "fine settimana", "motorino"] %>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base md:text-lg">
+      <% english_words.each do |english, italian| %>
+        <label class="flex flex-col bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3 shadow-sm">
+          <span class="font-semibold text-blue-700 mb-2">• <%= english %></span>
+          <select class="border-2 border-blue-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500"
+                  data-correct-answer="<%= italian %>">
+            <option value="">Scegli...</option>
+            <% italian_meanings.each do |meaning| %>
+              <option value="<%= meaning %>"><%= meaning %></option>
+            <% end %>
+          </select>
+        </label>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Write Italian equivalents -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
+      <span class="font-bold">2</span> Scrivi la parola italiana che corrisponde a ciascuna delle seguenti parole straniere.
+    </h2>
+    <p class="text-sm md:text-base text-gray-600 mb-4">
+      Se hai bisogno di aiuto, consulta il dizionario.
+    </p>
+
+    <% foreign_words = {
+      "boxe" => "pugilato",
+      "toilette" => "bagno",
+      "ticket" => "biglietto",
+      "team" => "squadra",
+      "foulard" => "fazzoletto",
+      "chips" => "patatine"
+    } %>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base md:text-lg">
+      <% foreign_words.each do |foreign, italian| %>
+        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3 flex items-center gap-2">
+          <span class="font-semibold text-green-700"><%= foreign %></span>
+          <span>→</span>
+          <input type="text"
+                 class="flex-1 border-b-2 border-green-500 bg-transparent text-center focus:outline-none focus:border-green-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= italian %>"
+                 data-correct-answer="<%= italian %>"
+                 placeholder="..."
+                 maxlength="20">
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 3: Group work -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-yellow-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-yellow-700 mb-3">
+      <span class="font-bold">3</span> Lavora in coppia con un compagno o una compagna e scrivete almeno un'altra parola che l'italiano ha preso in prestito da queste lingue straniere.
+    </h2>
+
+    <% language_examples = {
+      "dal francese" => "PELUCHE",
+      "dal tedesco" => "KRAPFEN",
+      "dal giapponese" => "KARATE",
+      "dall'inglese" => "HOBBY"
+    } %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% language_examples.each do |lang, example| %>
+        <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl px-3 py-3 flex flex-wrap items-center gap-2">
+          <span class="font-semibold text-yellow-700 w-full sm:w-auto"><%= lang %> →</span>
+          <span class="text-gray-700"><%= example %>,</span>
+          <input type="text"
+                 class="flex-1 min-w-[150px] border-b-2 border-yellow-500 bg-transparent focus:outline-none focus:border-yellow-700"
+                 data-fill-blanks-target="input"
+                 data-answer=""
+                 placeholder="..."
+                 maxlength="30">
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'teal', current_page: 'nvl5_gram_p027' %>
+  </div>
+</div>

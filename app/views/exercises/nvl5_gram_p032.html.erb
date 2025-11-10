@@ -1,0 +1,253 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-purple-50 via-white to-pink-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-purple-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          LESSICO
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-purple-600">Le parole polisemiche</h1>
+      </div>
+      <div class="flex-shrink-0 bg-purple-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        32
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6">
+    <p class="text-base md:text-lg text-gray-700 mb-3 font-semibold">
+      Le parole polisemiche hanno più significati.
+    </p>
+    <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-3">
+      <p class="text-base md:text-lg text-gray-700">
+        <strong>coda</strong> → 1 parte del corpo di un animale<br>
+        <span class="ml-16">2 fila di persone o di autoveicoli</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Exercise 1: Complete with polysemous words -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <div class="mb-4 inline-block bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
+      1 IMPARARE TUTTI
+    </div>
+    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
+      Completa con la parola polisemica adatta a ciascuna serie. Segui l'esempio.
+    </h2>
+
+    <% polysemous_groups = [
+      {
+        word: "Albero",
+        sentences: [
+          { text: "L'albero in fiore è un ciliegio.", answer: "albero", filled: true },
+          { text: "La vela è sostenuta da un alto", answer: "albero" },
+          { text: "Questo è l'", answer: "albero", suffix: "genealogico della mia famiglia." }
+        ],
+        definitions: "1 pianta con tronco 2 palo che sostiene la vela 3 schema con i legami di parentela"
+      },
+      {
+        word: "Voce",
+        sentences: [
+          { text: "Parlo da un telefono in viva", answer: "voce" },
+          { text: "Corre", answer: "voce", suffix: "che cambierai casa." },
+          { text: "\"Sorrido\" è", answer: "voce", suffix: "del verbo sorridere." }
+        ],
+        definitions: "1 suono emesso quando si parla 2 notizia non sicura 3 forma, espressione"
+      },
+      {
+        word: "Taglio",
+        sentences: [
+          { text: "Farah ha un bel", answer: "taglio", suffix: "di capelli." },
+          { text: "Metto un cerotto sul", answer: "taglio" },
+          { text: "Nel salvadanaio ci sono biglietti di piccolo", answer: "taglio" }
+        ],
+        definitions: "1 stile 2 ferita 3 valore di una banconota"
+      }
+    ] %>
+
+    <div class="space-y-6">
+      <% polysemous_groups.each_with_index do |group, group_index| %>
+        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
+          <div class="space-y-2 mb-3">
+            <% group[:sentences].each_with_index do |sentence, sent_index| %>
+              <div class="flex flex-wrap items-center gap-2 text-base md:text-lg">
+                <span class="font-bold text-blue-700"><%= sent_index + 1 %></span>
+                <span class="text-gray-700"><%= sentence[:text] %></span>
+                <% if sentence[:filled] %>
+                  <span class="font-semibold text-purple-700"><%= sentence[:answer] %></span>
+                <% else %>
+                  <input type="text"
+                         class="border-b-2 border-blue-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-blue-700 w-32"
+                         data-fill-blanks-target="input"
+                         data-answer="<%= sentence[:answer] %>"
+                         data-correct-answer="<%= sentence[:answer] %>"
+                         placeholder="................"
+                         maxlength="20">
+                <% end %>
+                <% if sentence[:suffix] %>
+                  <span class="text-gray-700"><%= sentence[:suffix] %></span>
+                <% else %>
+                  <span class="text-gray-700">.</span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <div class="bg-white border-2 border-purple-200 rounded-lg px-3 py-2">
+            <p class="text-sm md:text-base text-gray-700">
+              <strong class="text-purple-700"><%= group[:word] %></strong> <%= group[:definitions] %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Gli omonimi section (preview from next page) -->
+  <div class="mb-6 bg-gradient-to-r from-pink-100 to-purple-100 rounded-2xl border-4 border-pink-300 shadow-2xl p-4 md:p-6">
+    <h2 class="text-xl md:text-2xl font-bold text-pink-700 mb-3">
+      Gli omonimi
+    </h2>
+
+    <div class="bg-white rounded-xl p-4 mb-4">
+      <p class="text-base md:text-lg text-gray-700 mb-3 font-semibold">
+        Gli omonimi hanno più significati e valori grammaticali diversi.
+      </p>
+      <p class="text-base md:text-lg text-gray-700 mb-1">
+        Manca un'<strong>ora</strong> <span class="text-sm text-gray-500">(nome)</span> a mezzanotte.
+      </p>
+      <p class="text-base md:text-lg text-gray-700">
+        <strong>Ora</strong> <span class="text-sm text-gray-500">(avverbio)</span> facciamo merenda.
+      </p>
+    </div>
+  </div>
+
+  <!-- Exercise 1 (Omonimi): Complete with indicated word -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <div class="mb-4 inline-block bg-gradient-to-r from-pink-500 to-green-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
+      1 IMPARARE TUTTI
+    </div>
+    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
+      Completa le frasi con la parola indicata, poi scrivi il corrispondente valore grammaticale. Segui l'esempio.
+    </h2>
+
+    <% homonym_groups = [
+      {
+        word: "PIANO",
+        sentences: [
+          { text: "Prendi un piatto piano.", answer: "", filled: true },
+          { text: "Abitiamo allo stesso", answer: "piano" }
+        ],
+        values: ["aggettivo", "nome"],
+        example_values: ["aggettivo", "nome"]
+      },
+      {
+        word: "PORTA",
+        sentences: [
+          { text: "Non ho sbattuto io la", answer: "porta" },
+          { text: "", answer: "Porta", suffix: "questo pacco alla nonna, per favore." }
+        ],
+        values: ["nome", "verbo"]
+      },
+      {
+        word: "FIERA",
+        sentences: [
+          { text: "Sono una maestra", answer: "fiera", suffix: "dei propri alunni." },
+          { text: "Sabato inizierà la", answer: "fiera", suffix: "dell'artigianato." }
+        ],
+        values: ["aggettivo", "nome"]
+      }
+    ] %>
+
+    <div class="space-y-5">
+      <% homonym_groups.each_with_index do |group, group_index| %>
+        <div class="bg-green-50 border-2 border-green-200 rounded-xl p-4">
+          <p class="text-lg font-bold text-green-700 mb-3"><%= group[:word] %></p>
+          <div class="space-y-2 mb-3">
+            <% group[:sentences].each_with_index do |sentence, sent_index| %>
+              <div class="flex flex-wrap items-center gap-2 text-base md:text-lg">
+                <span class="text-gray-700">•</span>
+                <% if sentence[:text].present? %>
+                  <span class="text-gray-700"><%= sentence[:text] %></span>
+                <% end %>
+                <% if sentence[:filled] %>
+                  <span class="text-gray-700">.</span>
+                <% else %>
+                  <input type="text"
+                         class="border-b-2 border-green-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-green-700 w-32"
+                         data-fill-blanks-target="input"
+                         data-answer="<%= sentence[:answer] %>"
+                         data-correct-answer="<%= sentence[:answer] %>"
+                         placeholder="................."
+                         maxlength="20">
+                <% end %>
+                <% if sentence[:suffix] %>
+                  <span class="text-gray-700"><%= sentence[:suffix] %></span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 text-base md:text-lg">
+            <span class="text-gray-700">=</span>
+            <% if group[:example_values] %>
+              <span class="text-gray-700"><%= group[:example_values][0] %></span>
+              <span class="text-gray-700">/</span>
+              <input type="text"
+                     class="border-b-2 border-green-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-green-700 w-32"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= group[:example_values][1] %>"
+                     data-correct-answer="<%= group[:example_values][1] %>"
+                     placeholder="................."
+                     maxlength="20">
+            <% else %>
+              <input type="text"
+                     class="border-b-2 border-green-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-green-700 w-32"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= group[:values][0] %>"
+                     data-correct-answer="<%= group[:values][0] %>"
+                     placeholder="................."
+                     maxlength="20">
+              <span class="text-gray-700">/</span>
+              <input type="text"
+                     class="border-b-2 border-green-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-green-700 w-32"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= group[:values][1] %>"
+                     data-correct-answer="<%= group[:values][1] %>"
+                     placeholder="................."
+                     maxlength="20">
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Write sentences -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-amber-200 shadow-2xl p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-amber-700 mb-3">
+      <span class="font-bold">2</span> Per ogni parola scrivi una frase con ciascuno dei valori grammaticali indicati.
+    </h2>
+
+    <% sentence_exercises = [
+      { word: "piatto", values: "nome: ................................ / aggettivo: ................................" },
+      { word: "parte", values: "nome: ................................ / verbo: ................................" },
+      { word: "amare", values: "aggettivo: ................................ / verbo: ................................" }
+    ] %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% sentence_exercises.each do |exercise| %>
+        <div class="bg-amber-50 border-2 border-amber-200 rounded-xl px-3 py-3">
+          <p class="text-gray-700">
+            <strong class="text-amber-700"><%= exercise[:word] %></strong> → <%= exercise[:values] %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'purple', current_page: 'nvl5_gram_p032' %>
+  </div>
+</div>

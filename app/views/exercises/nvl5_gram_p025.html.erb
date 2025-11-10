@@ -1,0 +1,81 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-green-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-green-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          LESSICO
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-green-600">I dialetti</h1>
+      </div>
+      <div class="flex-shrink-0 bg-green-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        25
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6">
+    <p class="text-base md:text-lg text-gray-700">
+      In Italia ci sono molti <strong>dialetti</strong>, cioè lingue locali. Oggi sono meno usate che in passato,
+      anche se sono ancora parlate in famiglia e tra amici.
+    </p>
+  </div>
+
+  <!-- Curiosity Box -->
+  <div class="mb-6 bg-gradient-to-r from-blue-100 to-purple-100 rounded-2xl border-4 border-blue-300 shadow-2xl p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3 flex items-center gap-2">
+      <span class="text-2xl">💡</span>
+      Curiosità
+    </h2>
+    <p class="text-base md:text-lg text-gray-700 mb-2">
+      Dal Veneto viene la parola italiana più conosciuta al mondo: <strong class="text-blue-700 text-xl">CIAO!</strong>
+    </p>
+    <p class="text-base md:text-lg text-gray-700 mb-2">
+      La parola da cui deriva è <em>s'ciavo</em> (schiavo).
+    </p>
+    <p class="text-base md:text-lg text-gray-700">
+      <em>S'ciavo</em> era un saluto rispettoso usato a Venezia: significava, più o meno, "servo suo".
+    </p>
+  </div>
+
+  <!-- Exercise 1 -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <div class="mb-4 inline-block bg-gradient-to-r from-green-500 to-blue-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
+      1 IMPARARE TUTTI
+    </div>
+    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
+      Scrivi il significato di ogni parola e la regione italiana dalla quale proviene.
+    </h2>
+    <p class="text-sm md:text-base text-gray-600 mb-4">
+      Potete lavorare dividendovi in classe in piccoli gruppi e usando il dizionario.
+    </p>
+
+    <% dialect_words = {
+      "ciofeca" => "bevanda di cattiva qualità - Lombardia",
+      "fasullo" => "falso, contraffatto - Veneto",
+      "grissino" => "pane lungo e sottile - Piemonte",
+      "cassata" => "dolce tipico siciliano - Sicilia"
+    } %>
+
+    <div class="space-y-4 text-base md:text-lg">
+      <% dialect_words.each do |word, answer| %>
+        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
+          <div class="font-semibold text-green-700 mb-2"><%= word %></div>
+          <input type="text"
+                 class="w-full border-b-2 border-green-500 bg-transparent py-2 focus:outline-none focus:border-green-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= answer %>"
+                 data-correct-answer="<%= answer %>"
+                 placeholder="........................................................................">
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'green', current_page: 'nvl5_gram_p025' %>
+  </div>
+</div>

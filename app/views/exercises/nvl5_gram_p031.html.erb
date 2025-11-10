@@ -1,0 +1,171 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-teal-50 via-white to-green-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-teal-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          LESSICO
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-teal-600">Parole… in scala!</h1>
+      </div>
+      <div class="flex-shrink-0 bg-teal-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        31
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction Section -->
+  <div class="mb-6 bg-gradient-to-r from-teal-100 to-blue-100 rounded-2xl border-4 border-teal-300 shadow-2xl p-4 md:p-6">
+    <div class="bg-white rounded-xl p-4 mb-4">
+      <p class="text-base md:text-lg text-gray-700 mb-2">
+        Osserva il disegno, leggi e rispondi.
+      </p>
+      <p class="text-base md:text-lg text-gray-700 mb-3 italic">
+        Pic è <strong class="text-red-600">minuscolo</strong>.
+        Zic è <strong class="text-orange-600">piccolo</strong>.
+        Fop è <strong class="text-yellow-600">normale</strong>.
+        Dap è <strong class="text-green-600">grande</strong>.
+        Tuc è <strong class="text-blue-600">enorme</strong>.
+      </p>
+
+      <div class="space-y-3 text-base md:text-lg">
+        <label class="flex flex-wrap items-start gap-2">
+          <span class="text-gray-700">- Minuscolo, piccolo, normale, grande, enorme sono sinonimi?</span>
+          <div class="flex gap-3">
+            <label class="flex items-center gap-1 cursor-pointer">
+              <input type="radio" name="q1" value="Sì" class="w-4 h-4">
+              <span>Sì</span>
+            </label>
+            <label class="flex items-center gap-1 cursor-pointer">
+              <input type="radio" name="q1" value="No" data-correct-answer="No" class="w-4 h-4">
+              <span>No</span>
+            </label>
+          </div>
+        </label>
+
+        <label class="flex flex-wrap items-start gap-2">
+          <span class="text-gray-700">- Minuscolo, piccolo, normale, grande, enorme hanno un significato che si differenzia in scala, cioè cambia un po' per volta?</span>
+          <div class="flex gap-3">
+            <label class="flex items-center gap-1 cursor-pointer">
+              <input type="radio" name="q2" value="Sì" data-correct-answer="Sì" class="w-4 h-4">
+              <span>Sì</span>
+            </label>
+            <label class="flex items-center gap-1 cursor-pointer">
+              <input type="radio" name="q2" value="No" class="w-4 h-4">
+              <span>No</span>
+            </label>
+          </div>
+        </label>
+
+        <label class="flex flex-wrap items-start gap-2">
+          <span class="text-gray-700">- Enorme è il contrario di minuscolo?</span>
+          <div class="flex gap-3">
+            <label class="flex items-center gap-1 cursor-pointer">
+              <input type="radio" name="q3" value="Sì" data-correct-answer="Sì" class="w-4 h-4">
+              <span>Sì</span>
+            </label>
+            <label class="flex items-center gap-1 cursor-pointer">
+              <input type="radio" name="q3" value="No" class="w-4 h-4">
+              <span>No</span>
+            </label>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="bg-teal-50 border-2 border-teal-300 rounded-xl px-4 py-3">
+      <p class="text-base md:text-lg text-gray-700">
+        Alcune parole possono essere messe "in scala" perché il loro significato cambia un po' per volta fino a raggiungere il contrario della parola iniziale (minuscolo → enorme).
+      </p>
+    </div>
+  </div>
+
+  <!-- Exercise 1: Check if scales are correct -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
+    <div class="mb-4 inline-block bg-gradient-to-r from-teal-500 to-green-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
+      1 IMPARARE TUTTI
+    </div>
+    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
+      Indica con X se le seguenti serie di parole rispettano la "scala" di significato.
+    </h2>
+
+    <% scales = [
+      { text: "• Un film: brutto – bruttino – gradevole – bello – stupendo", correct: "Sì" },
+      { text: "• Un viso: allegro – sorridente – triste – serio – entusiasta", correct: "No" },
+      { text: "• Una finestra: sbarrata – chiusa – socchiusa – aperta – spalancata", correct: "Sì" },
+      { text: "• Un uomo: ossuto – magro – snello – paffuto – grasso", correct: "Sì" }
+    ] %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% scales.each_with_index do |scale, index| %>
+        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
+          <p class="text-gray-700 mb-2"><%= scale[:text] %></p>
+          <div class="flex gap-4">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="scale<%= index %>" value="Sì" data-correct-answer="<%= scale[:correct] %>" class="w-5 h-5">
+              <span>Sì</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="scale<%= index %>" value="No" data-correct-answer="<%= scale[:correct] %>" class="w-5 h-5">
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Write words in scale -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-orange-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-orange-700 mb-3">
+      <span class="font-bold">2</span> Leggi le parole, poi scrivile "in scala". Parti dalla parola sottolineata.
+    </h2>
+
+    <% word_scales = [
+      {
+        words: "pessimo - buono - ottimo - sufficiente - discreto",
+        scale: ["pessimo", "sufficiente", "discreto", "buono", "ottimo"]
+      },
+      {
+        words: "bollente - ghiacciato - caldo - freddo - tiepido",
+        scale: ["ghiacciato", "freddo", "tiepido", "caldo", "bollente"]
+      },
+      {
+        words: "secco - umido - asciutto - fradicio - bagnato",
+        scale: ["secco", "asciutto", "umido", "bagnato", "fradicio"]
+      }
+    ] %>
+
+    <div class="space-y-6 text-base md:text-lg">
+      <% word_scales.each_with_index do |item, set_index| %>
+        <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-3 py-4">
+          <p class="text-gray-700 font-semibold mb-3"><%= item[:words] %></p>
+          <div class="space-y-2">
+            <% item[:scale].each_with_index do |word, index| %>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-orange-700 w-6"><%= index + 1 %></span>
+                <input type="text"
+                       class="flex-1 border-b-2 border-orange-500 bg-white rounded px-3 py-1 focus:outline-none focus:border-orange-700"
+                       data-fill-blanks-target="input"
+                       data-answer="<%= word %>"
+                       data-correct-answer="<%= word %>"
+                       placeholder="........................"
+                       maxlength="20">
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Esercizi p. 141
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'teal', current_page: 'nvl5_gram_p031' %>
+  </div>
+</div>

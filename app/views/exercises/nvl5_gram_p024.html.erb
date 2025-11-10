@@ -1,0 +1,104 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-blue-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          LESSICO
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-blue-600">L'origine della lingua italiana</h1>
+      </div>
+      <div class="flex-shrink-0 bg-blue-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        24
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6">
+    <p class="text-base md:text-lg text-gray-700 mb-3">
+      Molte parole italiane derivano dal <strong>latino</strong>, la lingua parlata dagli antichi Romani.
+    </p>
+    <p class="text-base md:text-lg text-gray-700">
+      Dal latino hanno avuto origine anche altre lingue, tra cui il francese, lo spagnolo, il portoghese e il rumeno.
+      Queste lingue sono dette <strong>neolatine</strong>.
+    </p>
+  </div>
+
+  <!-- Exercise 1: Translate Latin words -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <div class="mb-4 inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
+      1 IMPARARE TUTTI
+    </div>
+    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
+      Leggi queste parole latine e prova a tradurle in italiano, come nell'esempio.
+    </h2>
+
+    <% translations = {
+      "lupus" => "lupo",
+      "filius" => "figlio",
+      "aqua" => "acqua",
+      "mater" => "madre",
+      "pater" => "padre",
+      "homo" => "uomo"
+    } %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% translations.each do |latin, italian| %>
+        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3 flex flex-wrap items-center gap-2">
+          <span class="font-semibold text-purple-700 w-20"><%= latin %></span>
+          <span>→</span>
+          <% if latin == "lupus" %>
+            <span class="text-gray-700"><%= italian %></span>
+          <% else %>
+            <input type="text"
+                   class="border-b-2 border-purple-500 bg-transparent flex-1 min-w-[120px] text-center focus:outline-none focus:border-purple-700"
+                   data-fill-blanks-target="input"
+                   data-answer="<%= italian %>"
+                   data-correct-answer="<%= italian %>"
+                   placeholder="..."
+                   maxlength="15">
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Latin expressions -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
+    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
+      <span class="font-bold">2</span> Alcune espressioni latine sono usate ogni giorno nella lingua italiana.
+    </h2>
+    <p class="text-sm md:text-base text-gray-600 mb-4">Collega ogni espressione al suo significato.</p>
+
+    <% expressions = {
+      "carpe diem" => "cogli l'attimo",
+      "errata corrige" => "elenco degli errori contenuti in un testo",
+      "in primis" => "per prima cosa",
+      "post scriptum" => "aggiunta al termine di una lettera"
+    } %>
+
+    <% meanings = ["cogli l'attimo", "elenco degli errori contenuti in un testo", "per prima cosa", "aggiunta al termine di una lettera"] %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% expressions.each do |expr, meaning| %>
+        <label class="flex flex-col bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3 shadow-sm">
+          <span class="font-semibold text-blue-700 italic mb-2"><%= expr %></span>
+          <select class="border-2 border-blue-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500"
+                  data-correct-answer="<%= meaning %>">
+            <option value="">Scegli il significato...</option>
+            <% meanings.each do |opt| %>
+              <option value="<%= opt %>"><%= opt %></option>
+            <% end %>
+          </select>
+        </label>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'blue', current_page: 'nvl5_gram_p024' %>
+  </div>
+</div>

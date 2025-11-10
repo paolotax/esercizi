@@ -1,0 +1,247 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-emerald-50 via-white to-teal-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-emerald-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          MORFOLOGIA
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-emerald-600">Gli articoli – esercizi</h1>
+      </div>
+      <div class="flex-shrink-0 bg-emerald-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        49
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 1: Articoli determinativi -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <div class="mb-4 inline-block bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
+      1 IMPARARE TUTTI
+    </div>
+    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
+      Completa con l'articolo determinativo corretto.
+    </h2>
+
+    <% determinativi = [
+      { article: "il", word: "computer" },
+      { article: "l'", word: "agenda" },
+      { article: "la", word: "penna" },
+      { article: "le", word: "borse" },
+      { article: "gli", word: "zaini" },
+      { article: "l'", word: "astuccio" },
+      { article: "le", word: "cuffie" },
+      { article: "lo", word: "scaffale" },
+      { article: "il", word: "filo" },
+      { article: "lo", word: "zucchero" },
+      { article: "le", word: "rondini" },
+      { article: "gli", word: "incendi" }
+    ] %>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-base md:text-lg">
+      <% determinativi.each do |item| %>
+        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3 flex items-center gap-2">
+          <input type="text"
+                 class="border-b-2 border-blue-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-blue-700 w-16"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:article] %>"
+                 data-correct-answer="<%= item[:article] %>"
+                 placeholder="..."
+                 maxlength="5">
+          <span class="text-gray-700 font-semibold"><%= item[:word] %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Articoli indeterminativi -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
+      <span class="font-bold">2</span> Completa con l'articolo indeterminativo corretto.
+    </h2>
+
+    <% indeterminativi = [
+      { article: "un", word: "esempio" },
+      { article: "un'", word: "antenna" },
+      { article: "un", word: "armadio" },
+      { article: "una", word: "pasticca" },
+      { article: "uno", word: "scienziato" },
+      { article: "un'", word: "occhiata" },
+      { article: "un", word: "ciondolo" },
+      { article: "un", word: "ciuffo" },
+      { article: "un", word: "portaoggetti" },
+      { article: "uno", word: "stecco" },
+      { article: "un'", word: "asticella" },
+      { article: "uno", word: "spiffero" }
+    ] %>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-base md:text-lg">
+      <% indeterminativi.each do |item| %>
+        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3 flex items-center gap-2">
+          <input type="text"
+                 class="border-b-2 border-purple-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-purple-700 w-16"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:article] %>"
+                 data-correct-answer="<%= item[:article] %>"
+                 placeholder="..."
+                 maxlength="5">
+          <span class="text-gray-700 font-semibold"><%= item[:word] %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 3: Identify article types in text -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
+      <span class="font-bold">3</span> Sottolinea in blu gli articoli determinativi, in rosso gli indeterminativi, in verde i partitivi.
+    </h2>
+
+    <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-4 text-base md:text-lg text-gray-700 leading-relaxed">
+      <p class="mb-2">
+        "Per <span class="text-blue-600 font-semibold underline">la</span> festa di Carnevale
+        <span class="text-blue-600 font-semibold underline">la</span> mamma comprò
+        <span class="text-green-600 font-semibold underline">delle</span> frittelle e
+        <span class="text-red-600 font-semibold underline">un</span> grosso vassoio di bomboloni al cioccolato.
+        Io addobbai <span class="text-blue-600 font-semibold underline">la</span> stanza con
+        <span class="text-green-600 font-semibold underline">delle</span> maschere che avevo disegnato e con
+        <span class="text-green-600 font-semibold underline">dei</span> festoni che mi erano rimasti dalla festa di compleanno.
+      </p>
+      <p class="mb-2">
+        Attaccate a ogni mobile e a ogni oggetto avevo messo
+        <span class="text-green-600 font-semibold underline">delle</span> stelle filanti. Per tutti
+        <span class="text-blue-600 font-semibold underline">gli</span> invitati avevo costruito
+        <span class="text-green-600 font-semibold underline">dei</span> simpaticissimi cappellini di carta colorata e
+        avevo comperato in super offerta <span class="text-green-600 font-semibold underline">delle</span> trombette.
+      </p>
+      <p>
+        Tutti <span class="text-blue-600 font-semibold underline">i</span> miei amici arrivarono mascherati con
+        <span class="text-green-600 font-semibold underline">dei</span> costumi che avevano inventato loro e con
+        <span class="text-green-600 font-semibold underline">dei</span> dolci. Fu
+        <span class="text-red-600 font-semibold underline">una</span> festa divertentissima!"
+      </p>
+    </div>
+  </div>
+
+  <!-- Exercise 4: Articoli partitivi -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-orange-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-orange-700 mb-3">
+      <span class="font-bold">4</span> Completa con gli articoli partitivi adatti.
+    </h2>
+
+    <% partitivi_sentences = [
+      { text: "Ho ordinato", answer: "dei", continuation: "panini e un'aranciata." },
+      { text: "Per fare questo esperimento mi serve", answer: "della", continuation: "sabbia e", answer2: "del", continuation2: "terriccio." },
+      { text: "Ho raccolto", answer: "dei", continuation: "fiori profumatissimi." },
+      { text: "Su questi monti sono stati avvistati", answer: "degli", continuation: "orsi." },
+      { text: "Dobbiamo costruire", answer: "dei", continuation: "dadi molto grandi per il nostro maxi gioco dell'oca." },
+      { text: "All'ingresso vedo", answer: "delle", continuation: "persone." },
+      { text: "In quella mostra sono esposti", answer: "dei", continuation: "quadri che ha dipinto un mio parente." }
+    ] %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% partitivi_sentences.each_with_index do |sentence, index| %>
+        <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-3 py-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-gray-700"><%= sentence[:text] %></span>
+            <input type="text"
+                   class="border-b-2 border-orange-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-orange-700 w-20"
+                   data-fill-blanks-target="input"
+                   data-answer="<%= sentence[:answer] %>"
+                   data-correct-answer="<%= sentence[:answer] %>"
+                   placeholder="....."
+                   maxlength="10">
+            <span class="text-gray-700"><%= sentence[:continuation] %></span>
+            <% if sentence[:answer2] %>
+              <input type="text"
+                     class="border-b-2 border-orange-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-orange-700 w-20"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= sentence[:answer2] %>"
+                     data-correct-answer="<%= sentence[:answer2] %>"
+                     placeholder="....."
+                     maxlength="10">
+              <span class="text-gray-700"><%= sentence[:continuation2] %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 5: Volgi al plurale -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-pink-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-pink-700 mb-3">
+      <span class="font-bold">5</span> Volgi al plurale.
+    </h2>
+
+    <% plural_articles = [
+      { singular: "un bambino", plural: "dei bambini" },
+      { singular: "la vigna", plural: "le vigne" },
+      { singular: "l'elmo", plural: "gli elmi" },
+      { singular: "una maglietta", plural: "delle magliette" },
+      { singular: "il berretto", plural: "i berretti" },
+      { singular: "un'artista", plural: "delle artiste" },
+      { singular: "un aliante", plural: "degli alianti" },
+      { singular: "l'amaca", plural: "le amache" },
+      { singular: "lo scoiattolo", plural: "gli scoiattoli" },
+      { singular: "una patata", plural: "delle patate" }
+    ] %>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base md:text-lg">
+      <% plural_articles.each do |item| %>
+        <div class="bg-pink-50 border-2 border-pink-200 rounded-xl px-3 py-3 flex items-center gap-2">
+          <span class="text-gray-700 font-semibold w-32"><%= item[:singular] %></span>
+          <span class="text-gray-500">→</span>
+          <input type="text"
+                 class="flex-1 border-b-2 border-pink-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-pink-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:plural] %>"
+                 data-correct-answer="<%= item[:plural] %>"
+                 placeholder="........................"
+                 maxlength="25">
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 6: Distinguish partitivi from preposizioni articolate -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-teal-200 shadow-2xl p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-teal-700 mb-3">
+      <span class="font-bold">6</span> Sottolinea in verde gli articoli partitivi, in giallo le preposizioni articolate.
+    </h2>
+
+    <div class="bg-teal-50 border-2 border-teal-200 rounded-xl px-4 py-4 text-base md:text-lg text-gray-700 leading-relaxed space-y-2">
+      <p>
+        Nell'orto <span class="bg-yellow-200 font-semibold">del</span> nonno di Luisa sono cresciuti
+        <span class="bg-green-200 font-semibold">dei</span> bellissimi carciofi.
+      </p>
+      <p>
+        Al mercato comprammo <span class="bg-green-200 font-semibold">della</span> frutta fresca.
+      </p>
+      <p>
+        Per completare la ricetta <span class="bg-yellow-200 font-semibold">del</span> dolce
+        <span class="bg-yellow-200 font-semibold">della</span> zia mi serve
+        <span class="bg-green-200 font-semibold">del</span> cioccolato fondente.
+      </p>
+      <p>
+        In quel negozio ho visto <span class="bg-green-200 font-semibold">degli</span> strani animali.
+      </p>
+      <p>
+        Nell'ufficio di papà ci sono <span class="bg-green-200 font-semibold">dei</span> mobili neri.
+      </p>
+      <p>
+        <span class="bg-green-200 font-semibold">Dei</span> passerotti hanno fatto il nido sui rami
+        <span class="bg-yellow-200 font-semibold">degli</span> alberi <span class="bg-yellow-200 font-semibold">del</span> giardino.
+      </p>
+      <p>
+        Ho raccolto <span class="bg-green-200 font-semibold">delle</span> rose profumate.
+      </p>
+    </div>
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'emerald', current_page: 'nvl5_gram_p049' %>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-emerald-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          LESSICO
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-emerald-600">Il linguaggio figurato</h1>
+      </div>
+      <div class="flex-shrink-0 bg-emerald-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        36
+      </div>
+    </div>
+  </div>
+
+  <!-- Introduction -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-emerald-200 shadow-2xl p-4 md:p-6">
+    <div class="space-y-3 text-base md:text-lg">
+      <p class="text-gray-700">
+        Vado in montagna con i miei cugini. → <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded font-semibold">significato proprio</span>
+      </p>
+      <p class="text-gray-700">
+        Ho una montagna di compiti. → <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded font-semibold">significato figurato</span>
+      </p>
+    </div>
+
+    <div class="mt-4 bg-emerald-50 border-2 border-emerald-200 rounded-xl px-4 py-3">
+      <p class="text-base md:text-lg text-gray-700 mb-2">
+        Possiamo usare le parole:
+      </p>
+      <p class="text-base text-gray-700">
+        • nel <strong class="text-blue-700">significato proprio</strong> o <strong class="text-blue-700">letterale</strong> (es. montagna = rilievo terrestre)
+      </p>
+      <p class="text-base text-gray-700">
+        • con <strong class="text-purple-700">significato figurato</strong>, legato a quello proprio ma in contesto diverso (montagna di compiti = molti compiti)
+      </p>
+    </div>
+  </div>
+
+  <!-- Exercise 1: Identify proper meaning of "cuore" -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
+    <div class="mb-4 inline-block bg-gradient-to-r from-emerald-500 to-cyan-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
+      1 IMPARARE TUTTI
+    </div>
+    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
+      Indica con una X la frase in cui la parola "cuore" è usata nel suo significato proprio.
+    </h2>
+
+    <% heart_sentences = [
+      { text: "Tu non hai capito il cuore del problema.", correct: false },
+      { text: "Il cuore ha un battito regolare.", correct: true },
+      { text: "Passami un cuore di lattuga.", correct: false },
+      { text: "È arrivato nel cuore della notte.", correct: false }
+    ] %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% heart_sentences.each_with_index do |sentence, index| %>
+        <label class="flex items-start gap-3 bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-blue-100 transition">
+          <input type="checkbox"
+                 name="heart_meaning"
+                 value="<%= index %>"
+                 data-correct-answer="<%= sentence[:correct] ? 'true' : 'false' %>"
+                 class="w-5 h-5 mt-0.5">
+          <span class="text-gray-700">- <%= sentence[:text] %></span>
+        </label>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Identify proper (P) or figurative (F) meaning -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
+    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
+      <span class="font-bold">2</span> Indica con una X se la parola evidenziata è usata nel significato proprio (P) o figurato (F).
+    </h2>
+
+    <% meaning_exercises = [
+      { text: "Ce la puoi fare, non sei un asino.", word: "asino", proper: false, figurative: true },
+      { text: "L'asino è il mio animale preferito.", word: "asino", proper: true, figurative: false },
+      { text: "Cosa avrà mai fatto quell'angelo di Alessandro per farti arrabbiare così.", word: "angelo", proper: false, figurative: true },
+      { text: "Nel quadro era raffigurato un angelo con le ali di tutti colori.", word: "angelo", proper: true, figurative: false },
+      { text: "Quando sono con te, il tempo vola.", word: "vola", proper: false, figurative: true },
+      { text: "Il falco vola alto per vedere le prede.", word: "vola", proper: true, figurative: false },
+      { text: "La vipera è un serpente molto comune in montagna.", word: "vipera", proper: true, figurative: false },
+      { text: "Giulia è buona e dolce, ma se si arrabbia diventa una vipera.", word: "vipera", proper: false, figurative: true }
+    ] %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% meaning_exercises.each_with_index do |exercise, index| %>
+        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3">
+          <p class="text-gray-700 mb-2">• <%= exercise[:text] %></p>
+          <div class="flex gap-6 ml-4">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <span class="text-sm font-semibold text-gray-600">P</span>
+              <input type="radio"
+                     name="meaning<%= index %>"
+                     value="P"
+                     data-correct-answer="<%= exercise[:proper] ? 'P' : 'F' %>"
+                     class="w-5 h-5">
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <span class="text-sm font-semibold text-gray-600">F</span>
+              <input type="radio"
+                     name="meaning<%= index %>"
+                     value="F"
+                     data-correct-answer="<%= exercise[:proper] ? 'P' : 'F' %>"
+                     class="w-5 h-5">
+            </label>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Esercizi p. 143
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'emerald', current_page: 'nvl5_gram_p036' %>
+  </div>
+</div>
