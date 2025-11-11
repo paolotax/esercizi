@@ -154,12 +154,28 @@ export default class extends Controller {
   showSolution() {
     // Highlight all words that should be highlighted according to data-correct attribute
     this.wordTargets.forEach(word => {
-      const correctColor = word.dataset.correct
+      const correctValue = word.dataset.correct
 
       this.removeAllColors(word)
 
-      if (correctColor) {
-        const colorClasses = this.getColorClasses(correctColor)
+      // Handle true/false values for monocolor mode
+      if (correctValue === "true") {
+        // Use the selected color or first available color
+        let targetColor = this.selectedColorValue || 'red'
+        if (this.hasColorBoxTarget && !this.multiColorValue) {
+          const firstColorBox = this.colorBoxTargets[0]
+          if (firstColorBox) {
+            targetColor = firstColorBox.dataset.color
+          }
+        }
+        const colorClasses = this.getColorClasses(targetColor)
+        word.classList.add(...colorClasses)
+      } else if (correctValue === "false") {
+        // Don't highlight - this is correct as not highlighted
+        // Do nothing
+      } else if (correctValue) {
+        // Legacy: correctValue is a color name
+        const colorClasses = this.getColorClasses(correctValue)
         word.classList.add(...colorClasses)
       }
     })
@@ -179,16 +195,39 @@ export default class extends Controller {
 
     // Check each word
     this.wordTargets.forEach(word => {
-      const correctColor = word.dataset.correct
+      const correctValue = word.dataset.correct
       const currentColor = this.getColorFromElement(word)
 
       // Remove previous feedback
       word.classList.remove('ring-2', 'ring-green-500', 'ring-red-500', 'ring-offset-1')
 
-      if (correctColor) {
-        // This word should be highlighted
-        if (currentColor === correctColor) {
-          // Correct!
+      // Handle true/false values for monocolor mode
+      if (correctValue === "true") {
+        // This word should be highlighted (any color is ok)
+        if (currentColor !== null) {
+          // Correct - it's highlighted
+          word.classList.add('ring-2', 'ring-green-500', 'ring-offset-1')
+          correctCount++
+        } else {
+          // Missed - should be highlighted but isn't
+          word.classList.add('ring-2', 'ring-red-500', 'ring-offset-1')
+          missedCount++
+        }
+      } else if (correctValue === "false") {
+        // This word should NOT be highlighted
+        if (currentColor === null) {
+          // Correct - it's not highlighted
+          correctCount++
+        } else {
+          // Incorrectly highlighted
+          word.classList.add('ring-2', 'ring-red-500', 'ring-offset-1')
+          extraCount++
+          incorrectCount++
+        }
+      } else if (correctValue) {
+        // Legacy: correctValue is a color name (multicolor mode)
+        if (currentColor === correctValue) {
+          // Correct color!
           word.classList.add('ring-2', 'ring-green-500', 'ring-offset-1')
           correctCount++
         } else if (currentColor === null) {
@@ -201,7 +240,7 @@ export default class extends Controller {
           incorrectCount++
         }
       } else {
-        // This word should NOT be highlighted
+        // No data-correct attribute - this word should NOT be highlighted
         if (currentColor !== null) {
           // Incorrectly highlighted
           word.classList.add('ring-2', 'ring-red-500', 'ring-offset-1')
@@ -215,7 +254,9 @@ export default class extends Controller {
     })
 
     // Calculate total words that should be highlighted
-    const totalToHighlight = this.wordTargets.filter(w => w.dataset.correct).length
+    const totalToHighlight = this.wordTargets.filter(w =>
+      w.dataset.correct === "true" || (w.dataset.correct && w.dataset.correct !== "false")
+    ).length
     const totalWords = this.wordTargets.length
 
     // Show feedback
