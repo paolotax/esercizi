@@ -1,0 +1,224 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-controller="exercise-checker">
+
+  <!-- Header con badge SINTASSI -->
+  <div class="mb-8">
+    <div class="flex items-start justify-between">
+      <!-- Badge e Titolo -->
+      <div class="flex items-start gap-4">
+        <!-- Badge SINTASSI con icona lampadina -->
+        <div class="bg-yellow-400 text-orange-700 px-6 py-3 rounded-lg font-bold text-lg flex items-center gap-2">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a6 6 0 00-6 6c0 1.887.875 3.517 2.084 4.485A.5.5 0 016 12.5V14a1 1 0 001 1h6a1 1 0 001-1v-1.5a.5.5 0 01-.084-.015C15.125 11.517 16 9.887 16 8a6 6 0 00-6-6z"/>
+          </svg>
+          SINTASSI
+        </div>
+      </div>
+      <!-- Numero pagina -->
+      <div class="bg-orange-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl">
+        110
+      </div>
+    </div>
+
+    <!-- Titolo principale -->
+    <h1 class="text-3xl font-bold text-orange-600 mt-6 text-center">
+      I complementi di luogo
+    </h1>
+  </div>
+
+  <!-- Box teoria con sfondo beige -->
+  <div class="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-6 mb-8">
+    <div class="flex flex-col lg:flex-row gap-6 items-start">
+      <!-- Teoria testuale -->
+      <div class="flex-1">
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex">
+            <span class="text-gray-500 mr-2">•</span>
+            <span>I <strong class="underline">complementi di luogo</strong> sono complementi indiretti;</span>
+          </li>
+          <li class="flex">
+            <span class="text-gray-500 mr-2">•</span>
+            <span>indicano il luogo in cui avviene l'azione espressa dal predicato;</span>
+          </li>
+          <li class="flex">
+            <span class="text-gray-500 mr-2">•</span>
+            <div>
+              <span>rispondono alle domande: </span>
+              <strong class="underline">dove?</strong> /
+              <strong class="underline">da dove?</strong> /
+              <strong class="underline">per dove?</strong> /
+              <strong class="underline">attraverso dove?</strong> /
+              <strong class="underline">verso dove?</strong>
+              <div class="mt-2 space-y-1">
+                <div>→ Veniamo (<em>da dove?</em>) <strong class="underline text-purple-600">dalla città</strong>.</div>
+                <div>→ Stiamo andando (<em>dove?</em>) <strong class="underline text-blue-600">nel bosco</strong>.</div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Illustrazione -->
+      <div class="flex-shrink-0">
+        <%= image_tag "nvl5_gram_p110_01.jpg", class: "w-full lg:w-64 rounded-lg", alt: "Bambini che camminano" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 1 - IMPARARE TUTTI con word-highlighter -->
+  <div class="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-6 mb-8" data-controller="word-highlighter">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl">
+        1
+      </div>
+      <div class="bg-blue-500 text-white px-4 py-2 rounded-lg font-bold">
+        IMPARARE TUTTI
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <p class="font-bold text-gray-700">
+        Dividi la frase in sintagmi, sottolinea <span class="underline">il complemento di luogo</span>
+        e scrivi a quale domanda risponde. Osserva l'esempio.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <!-- Esempio -->
+      <div class="bg-white p-4 rounded-lg border-2 border-green-400">
+        <div class="flex items-start gap-2">
+          <span class="text-gray-500">•</span>
+          <div class="flex-1">
+            <div class="mb-2">
+              Molte persone <strong>/</strong>
+              <span class="bg-blue-200 px-1 rounded">in America</span>
+              <strong>/</strong> amano <strong>/</strong> la pizza.
+            </div>
+            <div class="text-green-600 font-bold">Dove?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frasi da completare con word-highlighter e input per domanda -->
+      <% frases = [
+        { text: "Vado da Luca in auto con Enrico.", complement: "da Luca", answer: "dove?" },
+        { text: "Io e Sandro arriviamo da scuola alle tre.", complement: "da scuola", answer: "da dove?" },
+        { text: "Noi oggi passiamo per il quartiere.", complement: "per il quartiere", answer: "per dove?" },
+        { text: "Lavoro in un palazzo all'Eur, a Roma.", complement: ["in un palazzo", "all'Eur", "a Roma"], answer: "dove?" },
+        { text: "Andrò a piedi da Bologna a Firenze.", complement: ["da Bologna", "a Firenze"], answer: ["da dove?", "verso dove?"] }
+      ] %>
+
+      <% frases.each_with_index do |frase, index| %>
+        <div class="bg-white p-4 rounded-lg" data-controller="fill-blanks">
+          <div class="flex items-start gap-2">
+            <span class="text-gray-500">•</span>
+            <div class="flex-1">
+              <div class="mb-2">
+                <% parts = frase[:text].split(/\s+/) %>
+                <% parts.each_with_index do |word, i| %>
+                  <% if [frase[:complement]].flatten.any? { |c| frase[:text].include?(c) && c.include?(word) } %>
+                    <span class="transition cursor-pointer hover:bg-blue-100 px-1 rounded"
+                          data-word-highlighter-target="word"
+                          data-correct="true"
+                          data-action="click->word-highlighter#toggleHighlight"><%= word %></span>
+                  <% else %>
+                    <%= word %>
+                  <% end %>
+                  <%= " " unless i == parts.length - 1 %>
+                <% end %>
+              </div>
+              <input type="text"
+                     class="w-full md:w-64 px-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                     data-fill-blanks-target="input"
+                     data-correct-answer="<%= [frase[:answer]].flatten.first %>">
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="bg-white border-2 border-gray-300 rounded-lg p-6 mb-8" data-controller="fill-blanks">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl">
+        2
+      </div>
+    </div>
+
+    <p class="font-bold text-gray-700 mb-4">
+      Completa le frasi con un <span class="underline">complemento di luogo</span> adatto.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <% [
+        "Giacomo va",
+        "La nave è diretta",
+        "Andiamo spesso",
+        "I viaggiatori giunsero",
+        "Mia madre lavora",
+        "Zia Irene sta"
+      ].each_with_index do |inizio, index| %>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-500">•</span>
+          <span><%= inizio %></span>
+          <input type="text"
+                 class="flex-1 px-3 py-2 border-b-2 border-dotted border-gray-400 focus:border-blue-500 focus:outline-none"
+                 data-fill-blanks-target="input"
+                 data-correct-answer="libera">
+          <span>.</span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Esercizio 3 -->
+  <div class="bg-white border-2 border-gray-300 rounded-lg p-6 mb-8">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl">
+        3
+      </div>
+    </div>
+
+    <p class="font-bold text-gray-700 mb-6">
+      Scrivi sul quaderno una frase per ogni coppia di parole usando il verbo come
+      <em class="underline font-bold">predicato</em> e il sostantivo in un
+      <span class="underline">complemento di luogo</span>.
+    </p>
+
+    <div class="flex flex-wrap gap-8 justify-center">
+      <% [
+        ["passeggiare", "parco"],
+        ["raggiungere", "stazione"],
+        ["vivere", "Italia"]
+      ].each do |verbo, sostantivo| %>
+        <div class="bg-purple-100 border-2 border-purple-300 rounded-lg p-4 flex gap-3">
+          <div class="bg-white px-4 py-2 rounded font-semibold text-purple-700">
+            <%= verbo %>
+          </div>
+          <div class="bg-white px-4 py-2 rounded font-semibold text-purple-700">
+            <%= sostantivo %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="mt-6 p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
+      <p class="text-gray-600 italic">
+        💡 Suggerimento: Ricorda di usare le preposizioni corrette (in, a, da, per, verso, attraverso)
+        per formare il complemento di luogo.
+      </p>
+    </div>
+  </div>
+
+  <!-- Riferimento esercizi aggiuntivi -->
+  <div class="mt-8 text-center">
+    <div class="inline-block bg-orange-100 border-2 border-orange-300 rounded-lg px-6 py-3">
+      <p class="font-bold text-orange-700">
+        Esercizi p. 185 e 187
+      </p>
+    </div>
+  </div>
+
+  <!-- Exercise controls -->
+  <%= render 'shared/exercise_controls', color: 'orange' %>
+</div>

@@ -193,7 +193,11 @@ nvl5_grammatica = nvl_volume5.discipline.create!(
   { numero: 106, titolo: "Il complemento oggetto", slug: "nvl5_gram_p106", view_template: "nvl5_gram_p106" },
   { numero: 107, titolo: "Il complemento di termine", slug: "nvl5_gram_p107", view_template: "nvl5_gram_p107" },
   { numero: 108, titolo: "Il complemento di specificazione", slug: "nvl5_gram_p108", view_template: "nvl5_gram_p108" },
-  { numero: 109, titolo: "Il complemento di specificazione", slug: "nvl5_gram_p109", view_template: "nvl5_gram_p109" }
+  { numero: 109, titolo: "Il complemento di specificazione", slug: "nvl5_gram_p109", view_template: "nvl5_gram_p109" },
+  { numero: 110, titolo: "I complementi di luogo", slug: "nvl5_gram_p110", view_template: "nvl5_gram_p110" },
+  { numero: 111, titolo: "I complementi di tempo", slug: "nvl5_gram_p111", view_template: "nvl5_gram_p111" },
+  { numero: 112, titolo: "Il complemento di mezzo", slug: "nvl5_gram_p112", view_template: "nvl5_gram_p112" },
+  { numero: 113, titolo: "Altri complementi indiretti", slug: "nvl5_gram_p113", view_template: "nvl5_gram_p113" }
 ].each do |pagina_data|
   nvl5_grammatica.pagine.create!(pagina_data)
 end
