@@ -54,20 +54,21 @@ export default class extends Controller {
       }
     })
 
-    // Show feedback
+    // Show feedback only if called directly (not from exercise_checker)
+    // Check if this was called with an event (direct call) or without (from exercise_checker)
     const percentage = Math.round((correct / total) * 100)
     let message = `Hai indovinato ${correct} su ${total} divisioni (${percentage}%)`
 
     if (percentage === 100) {
       message += " 🎉 Perfetto!"
-      this.showNotification(message, 'success')
     } else if (percentage >= 70) {
       message += " 👍 Bravo!"
-      this.showNotification(message, 'warning')
     } else {
       message += " 💪 Riprova!"
-      this.showNotification(message, 'error')
     }
+
+    // Return results for exercise_checker integration
+    return { correct, total, percentage }
   }
 
   clearAll() {
@@ -78,6 +79,34 @@ export default class extends Controller {
       }
       divider.classList.remove('has-divider', 'bg-green-100', 'bg-red-100', 'border-green-300', 'border-red-300')
     })
+  }
+
+  showSolution() {
+    // Show all correct dividers
+    this.dividerTargets.forEach(divider => {
+      const shouldHaveSlash = divider.dataset.correct === 'true'
+      const slashElement = divider.querySelector('.slash')
+
+      // Remove existing slash if any
+      if (slashElement) {
+        slashElement.remove()
+        divider.classList.remove('has-divider')
+      }
+
+      // Add slash if should have one
+      if (shouldHaveSlash) {
+        const slash = document.createElement('span')
+        slash.className = 'slash text-blue-600 font-bold mx-1'
+        slash.textContent = '/'
+        divider.appendChild(slash)
+        divider.classList.add('has-divider')
+      }
+
+      // Clear any previous feedback colors
+      divider.classList.remove('bg-green-100', 'bg-red-100', 'border-green-300', 'border-red-300')
+    })
+
+    console.log("Soluzioni sintagmi mostrate")
   }
 
   showNotification(message, type) {

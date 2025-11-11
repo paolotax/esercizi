@@ -295,72 +295,49 @@ export default class extends Controller {
       }
     }
 
-    // Check word-highlighter (SCE/SCIE exercise)
-    const wordHighlighters = this.element.querySelectorAll("[data-controller=\"word-highlighter\"]")
+    // Check word-highlighter exercises
+    const wordHighlighters = this.element.querySelectorAll("[data-controller*=\"word-highlighter\"]")
     if (wordHighlighters.length > 0) {
-      let highlighterCorrect = 0
-      let highlighterIncorrect = 0
-      let highlighterEmpty = 0
-
       wordHighlighters.forEach(highlighter => {
-        const words = highlighter.querySelectorAll("[data-word-highlighter-target=\"word\"]")
+        const highlighterController = this.application.getControllerForElementAndIdentifier(highlighter, "word-highlighter")
+        if (highlighterController && highlighterController.checkAnswers) {
+          const result = highlighterController.checkAnswers()
 
-        console.log(`Found ${words.length} words to check`)
+          const totalToHighlight = result.totalToHighlight
 
-        words.forEach(word => {
-          const correctColor = word.dataset.correctColor
-          const hasRed = word.classList.contains('bg-red-200')
-          const hasBlue = word.classList.contains('bg-blue-200')
-          const hasGreen = word.classList.contains('bg-green-200')
-          const hasYellow = word.classList.contains('bg-yellow-200')
-
-          console.log(`Word: "${word.textContent.trim()}", correctColor: ${correctColor}, hasRed: ${hasRed}, hasBlue: ${hasBlue}, hasGreen: ${hasGreen}, hasYellow: ${hasYellow}`)
-
-          // Remove previous styling
-          word.classList.remove('ring-2', 'ring-green-500', 'ring-red-500', 'ring-yellow-500')
-
-          if (!hasRed && !hasBlue && !hasGreen && !hasYellow) {
-            highlighterEmpty++
+          if (result.missedCount > 0) {
             allCorrect = false
-            word.classList.add('ring-2', 'ring-yellow-500')
-          } else if ((correctColor === 'red' && hasRed) ||
-                     (correctColor === 'blue' && hasBlue) ||
-                     (correctColor === 'green' && hasGreen) ||
-                     (correctColor === 'yellow' && hasYellow)) {
-            highlighterCorrect++
-            word.classList.add('ring-2', 'ring-green-500')
-            console.log(`  ✓ Correct!`)
-          } else {
-            highlighterIncorrect++
-            allCorrect = false
-            word.classList.add('ring-2', 'ring-red-500')
-            word.classList.add('animate-shake')
-            setTimeout(() => word.classList.remove('animate-shake'), 500)
-            console.log(`  ✗ Incorrect!`)
+            feedback.push(`Parole da evidenziare: ${result.missedCount} ⚠️`)
           }
-        })
+          if (result.correctCount > 0 && totalToHighlight > 0) {
+            feedback.push(`Parole evidenziate correttamente: ${result.correctCount - (result.totalWords - totalToHighlight)} ✅`)
+          }
+          if (result.incorrectCount > 0) {
+            allCorrect = false
+            feedback.push(`Parole evidenziate in modo errato: ${result.incorrectCount} ❌`)
+          }
+        }
       })
+    }
 
-      console.log(`Highlighter results: correct=${highlighterCorrect}, incorrect=${highlighterIncorrect}, empty=${highlighterEmpty}`)
+    // Check syntagm-divider exercises
+    const syntagmDividers = this.element.querySelectorAll("[data-controller*=\"syntagm-divider\"]")
+    if (syntagmDividers.length > 0) {
+      syntagmDividers.forEach(divider => {
+        const dividerController = this.application.getControllerForElementAndIdentifier(divider, "syntagm-divider")
+        if (dividerController && dividerController.checkAnswers) {
+          const result = dividerController.checkAnswers()
 
-      if (highlighterEmpty > 0) {
-        allCorrect = false
-        const msg = `Parole da colorare: ${highlighterEmpty} ⚠️`
-        feedback.push(msg)
-        console.log(`Added feedback: ${msg}`)
-      }
-      if (highlighterCorrect > 0) {
-        const msg = `Parole colorate correttamente: ${highlighterCorrect} ✅`
-        feedback.push(msg)
-        console.log(`Added feedback: ${msg}`)
-      }
-      if (highlighterIncorrect > 0) {
-        const msg = `Parole colorate in modo errato: ${highlighterIncorrect} ❌`
-        feedback.push(msg)
-        console.log(`Added feedback: ${msg}`)
-      }
-      console.log(`Current feedback array:`, feedback)
-      console.log(`allCorrect status: ${allCorrect}`)
+          if (result) {
+            if (result.correct < result.total) {
+              allCorrect = false
+              feedback.push(`Divisioni sintagmi: ${result.correct}/${result.total} corrette ${result.correct === result.total ? '✅' : '❌'}`)
+            } else {
+              feedback.push(`Divisioni sintagmi: ${result.correct}/${result.total} corrette ✅`)
+            }
+          }
+        }
+      })
     }
 
     // Check word-choice selections
@@ -763,28 +740,21 @@ export default class extends Controller {
     })
 
     // Show correct answers for word-highlighter
-    const wordHighlighters = this.element.querySelectorAll("[data-controller=\"word-highlighter\"]")
+    const wordHighlighters = this.element.querySelectorAll("[data-controller*=\"word-highlighter\"]")
     wordHighlighters.forEach(highlighter => {
-      const words = highlighter.querySelectorAll("[data-word-highlighter-target=\"word\"]")
+      const highlighterController = this.application.getControllerForElementAndIdentifier(highlighter, "word-highlighter")
+      if (highlighterController && highlighterController.showSolution) {
+        highlighterController.showSolution()
+      }
+    })
 
-      words.forEach(word => {
-        const correctColor = word.dataset.correctColor
-
-        // Remove all colors first
-        word.classList.remove('bg-red-200', 'bg-blue-200', 'bg-green-200', 'bg-yellow-200',
-                              'text-red-900', 'text-blue-900', 'text-green-900', 'text-yellow-900')
-
-        // Add correct color
-        if (correctColor === 'red') {
-          word.classList.add('bg-red-200', 'text-red-900', 'font-bold', 'px-1', 'rounded')
-        } else if (correctColor === 'blue') {
-          word.classList.add('bg-blue-200', 'text-blue-900', 'font-bold', 'px-1', 'rounded')
-        } else if (correctColor === 'green') {
-          word.classList.add('bg-green-200', 'text-green-900', 'font-bold', 'px-1', 'rounded')
-        } else if (correctColor === 'yellow') {
-          word.classList.add('bg-yellow-200', 'text-yellow-900', 'font-bold', 'px-1', 'rounded')
-        }
-      })
+    // Show correct answers for syntagm-divider
+    const syntagmDividers = this.element.querySelectorAll("[data-controller*=\"syntagm-divider\"]")
+    syntagmDividers.forEach(divider => {
+      const dividerController = this.application.getControllerForElementAndIdentifier(divider, "syntagm-divider")
+      if (dividerController && dividerController.showSolution) {
+        dividerController.showSolution()
+      }
     })
 
     // Show correct answers for word-choice
@@ -926,12 +896,21 @@ export default class extends Controller {
     })
 
     // Remove highlights from word-highlighter
-    const wordHighlighterWords = this.element.querySelectorAll("[data-word-highlighter-target=\"word\"]")
-    wordHighlighterWords.forEach(word => {
-      word.classList.remove('bg-red-200', 'bg-blue-200', 'bg-green-200', 'bg-yellow-200',
-                            'text-red-900', 'text-blue-900', 'text-green-900', 'text-yellow-900',
-                            'font-bold', 'px-1', 'rounded', 'ring-2', 'ring-green-500',
-                            'ring-red-500', 'ring-yellow-500')
+    const wordHighlighters = this.element.querySelectorAll("[data-controller*=\"word-highlighter\"]")
+    wordHighlighters.forEach(highlighter => {
+      const highlighterController = this.application.getControllerForElementAndIdentifier(highlighter, "word-highlighter")
+      if (highlighterController && highlighterController.clearHighlights) {
+        highlighterController.clearHighlights()
+      }
+    })
+
+    // Clear syntagm-divider
+    const syntagmDividers = this.element.querySelectorAll("[data-controller*=\"syntagm-divider\"]")
+    syntagmDividers.forEach(divider => {
+      const dividerController = this.application.getControllerForElementAndIdentifier(divider, "syntagm-divider")
+      if (dividerController && dividerController.clearAll) {
+        dividerController.clearAll()
+      }
     })
 
     // Remove highlights from word-choice selections

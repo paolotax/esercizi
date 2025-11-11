@@ -16,15 +16,28 @@
   </div>
 
   <!-- Exercise 2 -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6">
+  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
     <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-4">
       <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
-      Sottolinea i verbi di forma attiva e cerchia i verbi di forma passiva.
+      Sottolinea<span class="inline-block w-4 h-4 bg-yellow-300 rounded ml-1"></span> i verbi di forma attiva e cerchia<span class="inline-block w-4 h-4 bg-green-300 rounded ml-1 border-2 border-green-600"></span> i verbi di forma passiva.
     </h2>
 
-    <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-4 py-4">
+    <!-- Color Selector -->
+    <div class="mb-4 flex items-center gap-3 bg-white rounded-lg p-3 border-2 border-blue-300">
+      <span class="font-semibold text-gray-700">Seleziona colore:</span>
+      <button type="button"
+              class="w-8 h-8 rounded border-2 border-gray-300 bg-yellow-300 hover:border-yellow-500 transition-colors"
+              data-action="click->word-highlighter#selectColor"
+              data-color="yellow"></button>
+      <button type="button"
+              class="w-8 h-8 rounded border-2 border-gray-300 bg-green-300 hover:border-green-500 transition-colors"
+              data-action="click->word-highlighter#selectColor"
+              data-color="green"></button>
+    </div>
+
+    <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-4 py-4 cursor-pointer">
       <p class="text-base md:text-lg text-gray-700 leading-relaxed">
-        Ieri in classe <mark class="bg-yellow-200">abbiamo festeggiato</mark> l'arrivo di una nuova compagna: Lorena. Per l'occasione <mark class="bg-yellow-200">abbiamo organizzato</mark> anche una caccia al tesoro. Gli indizi <mark class="bg-green-200 rounded-full px-1">sono stati scritti</mark> da Cristina e Emanuel, mentre il tesoro <mark class="bg-green-200 rounded-full px-1">è stato preparato</mark> da Ryan e Giusy, gli "artisti" della classe. Lorena <mark class="bg-yellow-200">ha indovinato</mark> tutte le risposte e alla fine il tesoro <mark class="bg-green-200 rounded-full px-1">è stato trovato</mark> dalla sua squadra.
+        Ieri in classe <span data-action="click->word-highlighter#toggleHighlight" data-correct="yellow">abbiamo festeggiato</span> l'arrivo di una nuova compagna: Lorena. Per l'occasione <span data-action="click->word-highlighter#toggleHighlight" data-correct="yellow">abbiamo organizzato</span> anche una caccia al tesoro. Gli indizi <span data-action="click->word-highlighter#toggleHighlight" data-correct="green">sono stati scritti</span> da Cristina e Emanuel, mentre il tesoro <span data-action="click->word-highlighter#toggleHighlight" data-correct="green">è stato preparato</span> da Ryan e Giusy, gli "artisti" della classe. Lorena <span data-action="click->word-highlighter#toggleHighlight" data-correct="yellow">ha indovinato</span> tutte le risposte e alla fine il tesoro <span data-action="click->word-highlighter#toggleHighlight" data-correct="green">è stato trovato</span> dalla sua squadra.
       </p>
     </div>
   </div>
@@ -44,24 +57,37 @@
   </div>
 
   <!-- Exercise 3 -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6">
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
     <h2 class="text-lg md:text-xl font-bold text-green-700 mb-4">
       <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">3</span>
-      In queste frasi di forma passiva sottolinea una volta i complementi d'agente, due volte i complementi di causa efficiente.
+      In queste frasi di forma passiva sottolinea<span class="inline-block w-4 h-4 bg-blue-300 rounded ml-1"></span> i complementi d'agente, sottolinea<span class="inline-block w-4 h-4 bg-orange-300 rounded ml-1"></span> i complementi di causa efficiente.
     </h2>
 
+    <!-- Color Selector -->
+    <div class="mb-4 flex items-center gap-3 bg-white rounded-lg p-3 border-2 border-green-300">
+      <span class="font-semibold text-gray-700">Seleziona colore:</span>
+      <button type="button"
+              class="w-8 h-8 rounded border-2 border-gray-300 bg-blue-300 hover:border-blue-500 transition-colors"
+              data-action="click->word-highlighter#selectColor"
+              data-color="blue"></button>
+      <button type="button"
+              class="w-8 h-8 rounded border-2 border-gray-300 bg-orange-300 hover:border-orange-500 transition-colors"
+              data-action="click->word-highlighter#selectColor"
+              data-color="orange"></button>
+    </div>
+
     <div class="space-y-3 text-base md:text-lg">
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700">• Il pacco viene consegnato <mark class="bg-blue-200">dal corriere</mark>.</p>
+      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3 cursor-pointer">
+        <p class="text-gray-700">• Il pacco viene consegnato <span data-action="click->word-highlighter#toggleHighlight" data-correct="blue">dal corriere</span>.</p>
       </div>
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700">• La scritta fu cancellata <mark class="bg-orange-200 border-b-4 border-orange-400">dalla pioggia</mark>.</p>
+      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3 cursor-pointer">
+        <p class="text-gray-700">• La scritta fu cancellata <span data-action="click->word-highlighter#toggleHighlight" data-correct="orange">dalla pioggia</span>.</p>
       </div>
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700">• Il messaggio viene diffuso <mark class="bg-orange-200 border-b-4 border-orange-400">dalla radio</mark>.</p>
+      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3 cursor-pointer">
+        <p class="text-gray-700">• Il messaggio viene diffuso <span data-action="click->word-highlighter#toggleHighlight" data-correct="orange">dalla radio</span>.</p>
       </div>
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700">• Il cartellone fu colorato <mark class="bg-blue-200">dagli allievi</mark>.</p>
+      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3 cursor-pointer">
+        <p class="text-gray-700">• Il cartellone fu colorato <span data-action="click->word-highlighter#toggleHighlight" data-correct="blue">dagli allievi</span>.</p>
       </div>
     </div>
   </div>
