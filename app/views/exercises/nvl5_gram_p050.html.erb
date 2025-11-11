@@ -16,18 +16,18 @@
   </div>
 
   <!-- Exercise 1: Analyze nouns in text -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-red-200 shadow-2xl p-4 md:p-6">
+  <div class="mb-6 bg-white rounded-2xl border-4 border-red-200 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
     <h2 class="text-lg md:text-xl font-bold text-red-700 mb-3">
-      <span class="font-bold">1</span> Sottolinea i nomi, poi riportali nella tabella e analizzali mettendo le X.
+      <span class="font-bold">1</span> Sottolinea i <span class="text-red-600 font-bold">nomi<span class="inline-block w-6 h-6 bg-red-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span>, poi riportali nella tabella e analizzali mettendo le X.
     </h2>
 
-    <div class="bg-red-50 border-2 border-red-200 rounded-xl px-4 py-4 mb-4 text-base md:text-lg text-gray-700 leading-relaxed">
+    <div class="bg-red-50 border-2 border-red-200 rounded-xl px-4 py-4 mb-4 text-base md:text-lg text-gray-700 leading-relaxed cursor-pointer">
       <p>
-        "Il <span class="underline font-semibold">cuoco</span> <span class="underline font-semibold">Pizzetta</span> ha molta
-        <span class="underline font-semibold">fantasia</span> e spesso inventa nuove <span class="underline font-semibold">ricette</span>,
-        rimanendo chiuso in <span class="underline font-semibold">cucina</span> per <span class="underline font-semibold">ore</span>.
-        Non permette neppure a sua <span class="underline font-semibold">moglie</span> <span class="underline font-semibold">Margherita</span>
-        di entrare. Oggi prepara una <span class="underline font-semibold">torta</span> con <span class="underline font-semibold">ingredienti</span> segreti."
+        "Il <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">cuoco</span> <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Pizzetta</span> ha molta
+        <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">fantasia</span> e spesso inventa nuove <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">ricette</span>,
+        rimanendo chiuso in <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">cucina</span> per <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">ore</span>.
+        Non permette neppure a sua <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">moglie</span> <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Margherita</span>
+        di entrare. Oggi prepara una <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">torta</span> con <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">ingredienti</span> segreti."
       </p>
     </div>
 
@@ -65,12 +65,13 @@
   </div>
 
   <!-- Exercise 2: Collective nouns -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-orange-200 shadow-2xl p-4 md:p-6">
+  <div class="mb-6 bg-white rounded-2xl border-4 border-orange-200 shadow-2xl p-4 md:p-6" data-controller="word-highlighter fill-blanks" data-word-highlighter-multi-color-value="false">
     <h2 class="text-lg md:text-xl font-bold text-orange-700 mb-3">
-      <span class="font-bold">2</span> Sottolinea in ciascuna frase il nome collettivo e scrivi da quali elementi è composto il gruppo.
+      <span class="font-bold">2</span> Sottolinea in <span class="text-orange-600 font-bold">arancione<span class="inline-block w-6 h-6 bg-orange-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="orange" data-action="click->word-highlighter#selectColor"></span></span> in ciascuna frase il nome collettivo e scrivi da quali elementi è composto il gruppo.
     </h2>
 
     <% collective_sentences = [
+      { text: "Sabato Giovanni suonerà con la banda.", collective: "banda", answer: "gruppo di suonatori" },
       { text: "Nel frutteto ci sono molti meli.", collective: "frutteto", answer: "alberi da frutto" },
       { text: "Uno sciame di api ha fatto il nido sul balcone.", collective: "sciame", answer: "api" },
       { text: "Purtroppo ieri la mia squadra preferita ha perso.", collective: "squadra", answer: "giocatori" },
@@ -81,191 +82,19 @@
     <div class="space-y-3 text-base md:text-lg">
       <% collective_sentences.each do |sentence| %>
         <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-3 py-3">
-          <p class="text-gray-700 mb-2">
-            - <%= sentence[:text].gsub(sentence[:collective], "<span class='underline font-semibold text-orange-700'>#{sentence[:collective]}</span>").html_safe %>
+          <p class="text-gray-700 mb-2 cursor-pointer">
+            - <%= sentence[:text].gsub(sentence[:collective], "<span data-word-highlighter-target='word' data-correct='true' data-action='click->word-highlighter#toggleHighlight' class='px-1 rounded'>#{sentence[:collective]}</span>").html_safe %>
           </p>
           <div class="flex items-center gap-2">
             <span class="text-gray-600">→</span>
             <input type="text"
                    class="flex-1 border-b-2 border-orange-500 bg-transparent px-2 py-1 focus:outline-none focus:border-orange-700"
-                   placeholder="..................................................">
+                   data-fill-blanks-target="input"
+                   data-answer="<%= sentence[:answer] %>"
+                   data-correct-answer="<%= sentence[:answer] %>">
           </div>
         </div>
       <% end %>
-    </div>
-  </div>
-
-  <!-- Exercise 3: Classify noun structure -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
-      <span class="font-bold">3</span> Classifica i nomi scrivendo D (derivato), A (alterato) o C (composto).
-    </h2>
-
-    <% noun_classification = [
-      { word: "scarpiera", type: "D" },
-      { word: "manona", type: "A" },
-      { word: "dentista", type: "D" },
-      { word: "biancospino", type: "C" },
-      { word: "difettuccio", type: "A" },
-      { word: "schiaccianoci", type: "C" },
-      { word: "funivia", type: "D" },
-      { word: "quadernino", type: "A" },
-      { word: "schienale", type: "D" },
-      { word: "gelateria", type: "D" },
-      { word: "giornataccia", type: "A" },
-      { word: "bambolotto", type: "A" },
-      { word: "marinaio", type: "D" },
-      { word: "problemino", type: "A" },
-      { word: "pomodoro", type: "C" },
-      { word: "vetrata", type: "D" },
-      { word: "guastafeste", type: "C" },
-      { word: "cantastorie", type: "C" },
-      { word: "topastro", type: "A" },
-      { word: "regalone", type: "A" }
-    ] %>
-
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 text-base md:text-lg">
-      <% noun_classification.each_with_index do |noun, index| %>
-        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3">
-          <div class="flex items-center justify-between mb-2">
-            <span class="font-semibold text-gray-700"><%= noun[:word] %></span>
-          </div>
-          <div class="flex gap-2">
-            <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="classification<%= index %>" value="D" data-correct-answer="<%= noun[:type] %>" class="w-4 h-4">
-              <span class="text-xs">D</span>
-            </label>
-            <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="classification<%= index %>" value="A" data-correct-answer="<%= noun[:type] %>" class="w-4 h-4">
-              <span class="text-xs">A</span>
-            </label>
-            <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="classification<%= index %>" value="C" data-correct-answer="<%= noun[:type] %>" class="w-4 h-4">
-              <span class="text-xs">C</span>
-            </label>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <!-- Exercise 4: Identify articles in text -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
-      <span class="font-bold">4</span> Sottolinea in blu gli articoli determinativi, in rosso gli indeterminativi; cerchia gli articoli partitivi.
-    </h2>
-
-    <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-4 text-base md:text-lg text-gray-700 leading-relaxed">
-      <p class="mb-2">
-        <strong>Testo:</strong> Fai <span class="text-blue-600 font-semibold underline">le</span> spese con
-        <span class="text-blue-600 font-semibold underline">la</span> nonna, porta a casa
-        <span class="text-blue-600 font-semibold underline">il</span> gatto e
-        <span class="text-red-600 font-semibold underline">un</span> uccellino.
-        Per <span class="text-blue-600 font-semibold underline">la</span> festa di compleanno compra
-        <span class="rounded-full border-2 border-green-600 px-1 bg-green-200 font-semibold">delle</span> candeline.
-        Al negozio sportivo prendi <span class="rounded-full border-2 border-green-600 px-1 bg-green-200 font-semibold">dei</span> guanti e
-        <span class="rounded-full border-2 border-green-600 px-1 bg-green-200 font-semibold">delle</span> scarpe.
-        Nel giardino <span class="text-blue-600 font-semibold underline">degli</span> zii raccogli
-        <span class="rounded-full border-2 border-green-600 px-1 bg-green-200 font-semibold">dei</span> fiori.
-      </p>
-    </div>
-  </div>
-
-  <!-- Le mie competenze section -->
-  <div class="mb-6 bg-gradient-to-r from-blue-100 to-purple-100 rounded-2xl border-4 border-blue-300 shadow-2xl p-4 md:p-6">
-    <div class="mb-3 inline-block bg-blue-500 text-white px-4 py-2 rounded-full text-sm md:text-base font-bold shadow-lg">
-      Le mie competenze
-    </div>
-
-    <!-- Exercise 5: Count nouns -->
-    <div class="mb-6">
-      <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
-        <span class="font-bold">5</span> Sottolinea tutti i nomi, poi cerchia i nomi collettivi. Infine rispondi alle domande.
-      </h2>
-
-      <div class="bg-white border-2 border-blue-200 rounded-xl px-4 py-4 mb-4 text-base md:text-lg text-gray-700 leading-relaxed">
-        <p>
-          "La <span class="underline">folla</span> di <span class="underline">formiche</span> ascoltava attenta.
-          L'<span class="underline">ape</span> disse che avrebbe parlato anche agli <span class="underline">uccelli</span>,
-          che già volavano in <span class="rounded-full border-2 border-blue-600 px-1 bg-blue-100 font-semibold">stormi</span> sopra le loro
-          <span class="underline">teste</span>, e al <span class="rounded-full border-2 border-blue-600 px-1 bg-blue-100 font-semibold">branco</span> di
-          <span class="underline">lupi</span> che abitava sulla <span class="underline">collina</span>.
-          Disse anche che sarebbe stato necessario procurarsi una <span class="rounded-full border-2 border-blue-600 px-1 bg-blue-100 font-semibold">flotta</span> di
-          <span class="underline">navi</span> per attraversare l'<span class="underline">oceano</span>."
-        </p>
-      </div>
-
-      <div class="space-y-3">
-        <div class="bg-white border-2 border-blue-200 rounded-xl px-4 py-3">
-          <p class="text-base md:text-lg mb-2">Quanti nomi hai trovato?</p>
-          <div class="flex gap-3">
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="count_nouns" value="10" class="w-5 h-5">
-              <span>10</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="count_nouns" value="11" class="w-5 h-5">
-              <span>11</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="count_nouns" value="12" data-correct-answer="correct" class="w-5 h-5">
-              <span>12</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="count_nouns" value="13" class="w-5 h-5">
-              <span>13</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="bg-white border-2 border-blue-200 rounded-xl px-4 py-3">
-          <p class="text-base md:text-lg mb-2">Quanti nomi collettivi?</p>
-          <div class="flex gap-3">
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="count_collective" value="3" class="w-5 h-5">
-              <span>3</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="count_collective" value="4" data-correct-answer="correct" class="w-5 h-5">
-              <span>4</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="count_collective" value="5" class="w-5 h-5">
-              <span>5</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="count_collective" value="6" class="w-5 h-5">
-              <span>6</span>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Exercise 6: Identify partitive article -->
-    <div class="mb-4">
-      <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
-        <span class="font-bold">6</span> In quale frase c'è un articolo partitivo?
-      </h2>
-
-      <div class="space-y-3 text-base md:text-lg">
-        <label class="flex items-start gap-3 bg-white border-2 border-purple-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-purple-50 transition">
-          <input type="radio" name="partitive_sentence" value="1" class="w-5 h-5 mt-1">
-          <span class="text-gray-700">I petali si sono rovinati a causa del vento.</span>
-        </label>
-        <label class="flex items-start gap-3 bg-white border-2 border-purple-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-purple-50 transition">
-          <input type="radio" name="partitive_sentence" value="2" class="w-5 h-5 mt-1">
-          <span class="text-gray-700">Mi piace il profumo intenso del gelsomino.</span>
-        </label>
-        <label class="flex items-start gap-3 bg-white border-2 border-purple-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-purple-50 transition">
-          <input type="radio" name="partitive_sentence" value="3" class="w-5 h-5 mt-1">
-          <span class="text-gray-700">Federico ha molta cura delle piante dell'orto.</span>
-        </label>
-        <label class="flex items-start gap-3 bg-white border-2 border-purple-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-purple-50 transition">
-          <input type="radio" name="partitive_sentence" value="4" data-correct-answer="correct" class="w-5 h-5 mt-1">
-          <span class="text-gray-700">In giardino ci sono delle rose bellissime.</span>
-        </label>
-      </div>
     </div>
   </div>
 

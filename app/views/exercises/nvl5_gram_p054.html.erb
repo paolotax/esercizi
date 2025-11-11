@@ -77,7 +77,7 @@
   </div>
 
   <!-- Exercise 1: Identify subject or complement -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
+  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="multiple-choice">
     <div class="mb-4 inline-block bg-gradient-to-r from-lime-500 to-green-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
       1 IMPARARE TUTTI
     </div>
@@ -101,11 +101,11 @@
             <span class="text-gray-700"><%= sentence[:text] %></span>
             <div class="flex gap-3 ml-3">
               <label class="flex items-center gap-1 cursor-pointer">
-                <input type="radio" name="pronoun<%= index %>" value="S" data-correct-answer="<%= sentence[:type] %>" class="w-5 h-5">
+                <input type="radio" name="pronoun<%= index %>" value="S" data-multiple-choice-target="answer" data-correct-answer="<%= sentence[:type] == 'S' ? 'true' : 'false' %>" class="w-5 h-5">
                 <span class="text-sm font-semibold">S</span>
               </label>
               <label class="flex items-center gap-1 cursor-pointer">
-                <input type="radio" name="pronoun<%= index %>" value="C" data-correct-answer="<%= sentence[:type] %>" class="w-5 h-5">
+                <input type="radio" name="pronoun<%= index %>" value="C" data-multiple-choice-target="answer" data-correct-answer="<%= sentence[:type] == 'C' ? 'true' : 'false' %>" class="w-5 h-5">
                 <span class="text-sm font-semibold">C</span>
               </label>
             </div>
@@ -150,20 +150,38 @@
   </div>
 
   <!-- Exercise 3: Choose correct pronoun -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6">
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="word-selector">
     <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
       <span class="font-bold">3</span> Sottolinea il pronome personale corretto in ciascuna frase.
     </h2>
 
     <div class="space-y-3 text-base md:text-lg">
       <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
-        <p class="text-gray-700">Vieni con <span class="underline font-semibold text-green-700">te / me</span>?</p>
+        <p class="text-gray-700">Vieni con
+          <span data-word-selector-container>
+            <span data-word-selector-target="word" data-correct="false" data-action="click->word-selector#selectWord" class="px-2 py-1 rounded cursor-pointer hover:bg-gray-100 transition">te</span>
+            <span class="mx-1">/</span>
+            <span data-word-selector-target="word" data-correct="true" data-action="click->word-selector#selectWord" class="px-2 py-1 rounded cursor-pointer hover:bg-gray-100 transition">me</span>
+          </span>?
+        </p>
       </div>
       <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
-        <p class="text-gray-700">Ho parlato con <span class="underline font-semibold text-green-700">le / loro</span> stamattina.</p>
+        <p class="text-gray-700">Ho parlato con
+          <span data-word-selector-container>
+            <span data-word-selector-target="word" data-correct="false" data-action="click->word-selector#selectWord" class="px-2 py-1 rounded cursor-pointer hover:bg-gray-100 transition">le</span>
+            <span class="mx-1">/</span>
+            <span data-word-selector-target="word" data-correct="true" data-action="click->word-selector#selectWord" class="px-2 py-1 rounded cursor-pointer hover:bg-gray-100 transition">loro</span>
+          </span> stamattina.
+        </p>
       </div>
       <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
-        <p class="text-gray-700"><span class="underline font-semibold text-green-700">Gli / Le</span> ho detto di venire domani. (a Maria)</p>
+        <p class="text-gray-700">
+          <span data-word-selector-container>
+            <span data-word-selector-target="word" data-correct="false" data-action="click->word-selector#selectWord" class="px-2 py-1 rounded cursor-pointer hover:bg-gray-100 transition">Gli</span>
+            <span class="mx-1">/</span>
+            <span data-word-selector-target="word" data-correct="true" data-action="click->word-selector#selectWord" class="px-2 py-1 rounded cursor-pointer hover:bg-gray-100 transition">Le</span>
+          </span> ho detto di venire domani. (a Maria)
+        </p>
       </div>
     </div>
   </div>

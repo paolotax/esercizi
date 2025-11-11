@@ -7,7 +7,7 @@
         <div class="bg-red-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
           VERIFICA
         </div>
-        <h1 class="text-2xl sm:text-3xl font-bold text-red-600">Nomi e articoli (Tabella)</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-red-600">Nomi e articoli</h1>
       </div>
       <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
         51
@@ -15,90 +15,10 @@
     </div>
   </div>
 
-  <!-- Exercise 1: Analyze nouns in text with table -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-red-200 shadow-2xl p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-red-700 mb-3">
-      <span class="font-bold">1</span> Sottolinea i nomi nel testo, poi trascrivili nella tabella segnando con X se sono comuni/propri, maschili/femminili, singolari/plurali, concreti/astratti.
-    </h2>
-
-    <div class="bg-red-50 border-2 border-red-200 rounded-xl px-4 py-4 mb-4 text-base md:text-lg text-gray-700 leading-relaxed">
-      <p>
-        "Il <span class="underline font-semibold">cuoco</span> <span class="underline font-semibold">Pizzetta</span> ha molta
-        <span class="underline font-semibold">fantasia</span> e spesso inventa nuove <span class="underline font-semibold">ricette</span>,
-        rimanendo chiuso in <span class="underline font-semibold">cucina</span> per <span class="underline font-semibold">ore</span>.
-        Non permette neppure a sua <span class="underline font-semibold">moglie</span> <span class="underline font-semibold">Margherita</span>
-        di entrare. Oggi prepara una <span class="underline font-semibold">torta</span> con <span class="underline font-semibold">ingredienti</span> segreti."
-      </p>
-    </div>
-
-    <div class="overflow-x-auto">
-      <table class="w-full border-collapse text-sm md:text-base">
-        <thead>
-          <tr class="bg-red-100">
-            <th class="border-2 border-red-300 px-2 py-2 text-red-700 font-bold">nome</th>
-            <th class="border-2 border-red-300 px-2 py-2 text-red-700 font-bold text-xs sm:text-sm">comune</th>
-            <th class="border-2 border-red-300 px-2 py-2 text-red-700 font-bold text-xs sm:text-sm">proprio</th>
-            <th class="border-2 border-red-300 px-2 py-2 text-red-700 font-bold text-xs sm:text-sm">maschile</th>
-            <th class="border-2 border-red-300 px-2 py-2 text-red-700 font-bold text-xs sm:text-sm">femminile</th>
-            <th class="border-2 border-red-300 px-2 py-2 text-red-700 font-bold text-xs sm:text-sm">singolare</th>
-            <th class="border-2 border-red-300 px-2 py-2 text-red-700 font-bold text-xs sm:text-sm">plurale</th>
-            <th class="border-2 border-red-300 px-2 py-2 text-red-700 font-bold text-xs sm:text-sm">concreto</th>
-            <th class="border-2 border-red-300 px-2 py-2 text-red-700 font-bold text-xs sm:text-sm">astratto</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% 10.times do |i| %>
-            <tr class="<%= i.even? ? 'bg-red-50' : 'bg-white' %>">
-              <td class="border-2 border-red-200 px-2 py-2">
-                <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-red-500 text-center" placeholder="">
-              </td>
-              <% 8.times do %>
-                <td class="border-2 border-red-200 px-2 py-2 text-center">
-                  <input type="checkbox" class="w-4 h-4">
-                </td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Exercise 2: Collective nouns -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-orange-200 shadow-2xl p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-orange-700 mb-3">
-      <span class="font-bold">2</span> Sottolinea il nome collettivo in ciascuna frase e scrivi gli elementi del gruppo.
-    </h2>
-
-    <% collective_sentences = [
-      { text: "Nel frutteto ci sono molti meli.", collective: "frutteto" },
-      { text: "Uno sciame di api ha fatto il nido sul balcone.", collective: "sciame" },
-      { text: "Purtroppo ieri la mia squadra preferita ha perso.", collective: "squadra" },
-      { text: "L'orchestra sinfonica terrà un concerto in tv.", collective: "orchestra" },
-      { text: "Alcuni stormi di rondini attraversano il cielo.", collective: "stormi" }
-    ] %>
-
-    <div class="space-y-3 text-base md:text-lg">
-      <% collective_sentences.each do |sentence| %>
-        <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-3 py-3">
-          <p class="text-gray-700 mb-2">
-            - <%= sentence[:text].gsub(sentence[:collective], "<span class='underline font-semibold text-orange-700'>#{sentence[:collective]}</span>").html_safe %>
-          </p>
-          <div class="flex items-center gap-2">
-            <span class="text-gray-600">→</span>
-            <input type="text"
-                   class="flex-1 border-b-2 border-orange-500 bg-transparent px-2 py-1 focus:outline-none focus:border-orange-700"
-                   placeholder="..................................................">
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
   <!-- Exercise 3: Classify noun structure -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
+  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="multiple-choice">
     <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
-      <span class="font-bold">3</span> Classifica i nomi con D (derivato), A (alterato) o C (composto).
+      <span class="font-bold">3</span> Classifica i nomi scrivendo D (derivato), A (alterato) o C (composto).
     </h2>
 
     <% noun_classification = [
@@ -132,20 +52,164 @@
           </div>
           <div class="flex gap-2">
             <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="classification<%= index %>" value="D" data-correct-answer="<%= noun[:type] %>" class="w-4 h-4">
+              <input type="radio" name="classification<%= index %>" value="D" data-multiple-choice-target="answer" data-correct-answer="<%= noun[:type] == 'D' ? 'true' : 'false' %>" class="w-4 h-4">
               <span class="text-xs">D</span>
             </label>
             <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="classification<%= index %>" value="A" data-correct-answer="<%= noun[:type] %>" class="w-4 h-4">
+              <input type="radio" name="classification<%= index %>" value="A" data-multiple-choice-target="answer" data-correct-answer="<%= noun[:type] == 'A' ? 'true' : 'false' %>" class="w-4 h-4">
               <span class="text-xs">A</span>
             </label>
             <label class="flex items-center gap-1 cursor-pointer">
-              <input type="radio" name="classification<%= index %>" value="C" data-correct-answer="<%= noun[:type] %>" class="w-4 h-4">
+              <input type="radio" name="classification<%= index %>" value="C" data-multiple-choice-target="answer" data-correct-answer="<%= noun[:type] == 'C' ? 'true' : 'false' %>" class="w-4 h-4">
               <span class="text-xs">C</span>
             </label>
           </div>
         </div>
       <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 4: Identify articles in text -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
+      <span class="font-bold">4</span> Sottolinea in <span class="text-blue-600 font-bold">blu<span class="inline-block w-6 h-6 bg-blue-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span> gli articoli determinativi, in <span class="text-red-600 font-bold">rosso<span class="inline-block w-6 h-6 bg-red-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span> gli indeterminativi. Poi <span class="text-green-600 font-bold">cerchia<span class="inline-block w-6 h-6 bg-green-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span></span> gli articoli partitivi.
+    </h2>
+
+    <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-4 text-base md:text-lg text-gray-700 leading-relaxed">
+      <div class="mb-4 cursor-pointer">
+        <p class="mb-2">
+          Ieri pomeriggio ho accompagnato
+          <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">la</span> nonna a fare <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">delle</span> spese. Abbiamo
+          comprato <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">una</span> maglia per <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">il</span> compleanno
+          <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">del</span> nonno e <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">un</span> ombrello.
+        </p>
+      </div>
+      <div class="mb-4 cursor-pointer">
+        <p class="mb-2">
+          <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Un</span> gatto osserva <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">un</span> uccellino appollaiato
+          su <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">un</span> ramo. Poi <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">il</span> gatto fa <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">un</span> balzo per
+          prenderlo, ma <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">l'</span>uccellino si nasconde
+          dietro <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">le</span> foglie.
+        </p>
+      </div>
+      <div class="mb-4 cursor-pointer">
+        <p class="mb-2">
+          Per <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">la</span> festa <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">del</span> mio compleanno ho
+          invitato <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">i</span> miei compagni di classe e anche
+          <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">delle</span> mie amiche che abitano qui vicino.
+        </p>
+      </div>
+      <div class="cursor-pointer">
+        <p>
+          Sono andata in <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">un</span> negozio di articoli
+          sportivi e ho visto <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">delle</span> belle scarpe
+          da ginnastica.
+        </p>
+      </div>
+      <div class="cursor-pointer">
+        <p>
+          <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">I</span> miei zii hanno <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">un</span> giardino con <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">degli</span>
+          alberi da frutto e <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">dei</span> fiori bellissimi.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Le mie competenze section -->
+  <div class="mb-6 bg-gradient-to-r from-blue-100 to-purple-100 rounded-2xl border-4 border-blue-300 shadow-2xl p-4 md:p-6">
+    <div class="mb-3 inline-block bg-blue-500 text-white px-4 py-2 rounded-full text-sm md:text-base font-bold shadow-lg">
+      Le mie competenze
+    </div>
+
+    <!-- Exercise 5: Count nouns -->
+    <div class="mb-6" data-controller="word-highlighter multiple-choice" data-word-highlighter-multi-color-value="true">
+      <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
+        <span class="font-bold">5</span> <span class="text-blue-600 font-bold">Sottolinea<span class="inline-block w-6 h-6 bg-blue-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span> tutti i nomi, poi <span class="text-green-600 font-bold">cerchia<span class="inline-block w-6 h-6 bg-green-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span></span> i nomi collettivi. Infine rispondi.
+      </h2>
+
+      <div class="bg-white border-2 border-blue-200 rounded-xl px-4 py-4 mb-4 text-base md:text-lg text-gray-700 leading-relaxed cursor-pointer">
+        <p>
+          "La <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">folla</span> di <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">formiche</span> ascoltava attenta.
+          L'<span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">ape</span> disse che avrebbe parlato anche agli <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">uccelli</span>,
+          che già volavano in <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">stormi</span> sopra le loro
+          <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">teste</span>, e al <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">branco</span> di
+          <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">lupi</span> che abitava sulla <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">collina</span>.
+          Disse anche che sarebbe stato necessario procurarsi una <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">flotta</span> di
+          <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">navi</span> per attraversare l'<span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">oceano</span>."
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <div class="bg-white border-2 border-blue-200 rounded-xl px-4 py-3">
+          <p class="text-base md:text-lg mb-2">Quanti nomi hai trovato?</p>
+          <div class="flex gap-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="count_nouns" value="10" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
+              <span>10</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="count_nouns" value="11" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
+              <span>11</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="count_nouns" value="12" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5">
+              <span>12</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="count_nouns" value="13" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
+              <span>13</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="bg-white border-2 border-blue-200 rounded-xl px-4 py-3">
+          <p class="text-base md:text-lg mb-2">Quanti nomi collettivi hai trovato?</p>
+          <div class="flex gap-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="count_collective" value="3" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
+              <span>3</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="count_collective" value="4" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5">
+              <span>4</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="count_collective" value="5" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
+              <span>5</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="count_collective" value="6" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
+              <span>6</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exercise 6: Identify partitive article -->
+    <div class="mb-4" data-controller="multiple-choice">
+      <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
+        <span class="font-bold">6</span> In quale di queste frasi c'è un articolo partitivo?
+      </h2>
+
+      <div class="space-y-3 text-base md:text-lg">
+        <label class="flex items-start gap-3 bg-white border-2 border-purple-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-purple-50 transition">
+          <input type="radio" name="partitive_sentence" value="1" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5 mt-1">
+          <span class="text-gray-700">I petali si sono rovinati a causa del vento.</span>
+        </label>
+        <label class="flex items-start gap-3 bg-white border-2 border-purple-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-purple-50 transition">
+          <input type="radio" name="partitive_sentence" value="2" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5 mt-1">
+          <span class="text-gray-700">Mi piace il profumo intenso del gelsomino.</span>
+        </label>
+        <label class="flex items-start gap-3 bg-white border-2 border-purple-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-purple-50 transition">
+          <input type="radio" name="partitive_sentence" value="3" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5 mt-1">
+          <span class="text-gray-700">Federico ha molta cura delle piante dell'orto.</span>
+        </label>
+        <label class="flex items-start gap-3 bg-white border-2 border-purple-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-purple-50 transition">
+          <input type="radio" name="partitive_sentence" value="4" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5 mt-1">
+          <span class="text-gray-700">In giardino ci sono delle rose bellissime.</span>
+        </label>
+      </div>
     </div>
   </div>
 
