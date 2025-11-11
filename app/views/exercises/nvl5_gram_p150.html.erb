@@ -1,0 +1,162 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-cyan-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-cyan-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          MORFOLOGIA
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-cyan-600">Nomi primitivi, derivati e alterati</h1>
+      </div>
+      <div class="flex-shrink-0 bg-cyan-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        150
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 1: Primitive nouns from derived -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-yellow-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-yellow-700 mb-3">
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="flex items-center gap-2">
+          <span class="bg-yellow-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">1</span>
+          <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold whitespace-nowrap">IMPARARE TUTTI</span>
+        </div>
+        <span>Per ciascuno dei seguenti <span class="text-yellow-600 font-bold underline">nomi derivati</span>, scrivi il nome primitivo.</span>
+      </div>
+    </h2>
+
+    <% derived_nouns = [
+      { derived: "insalatiera", primitive: "insalata" },
+      { derived: "vetrata", primitive: "vetro" },
+      { derived: "occhiata", primitive: "occhio" },
+      { derived: "cicaleccio", primitive: "cicala" },
+      { derived: "osteria", primitive: "oste" },
+      { derived: "limonaia", primitive: "limone" },
+      { derived: "collana", primitive: "collo" },
+      { derived: "maniglia", primitive: "mano" },
+      { derived: "fratellanza", primitive: "fratello" },
+      { derived: "argenteria", primitive: "argento" }
+    ] %>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base md:text-lg">
+      <% derived_nouns.each do |item| %>
+        <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl px-3 py-3">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 font-semibold">• <%= item[:derived] %></span>
+            <span class="text-xl text-yellow-500">→</span>
+            <input type="text"
+                   class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 flex-1 min-w-[120px]"
+                   data-fill-blanks-target="input"
+                   data-answer="<%= item[:primitive] %>"
+                   data-correct-answer="<%= item[:primitive] %>"
+                   placeholder="">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Altered nouns -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3 flex items-start gap-2">
+      <span class="bg-purple-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">2</span>
+      <span>Scrivi il significato dei seguenti <span class="text-purple-600 font-bold underline">nomi alterati</span>, come nell'esempio. Poi inseriscili al posto giusto nella tabella.</span>
+    </h2>
+
+    <% altered_nouns = [
+      { noun: "stradaccia", meaning: "brutta strada", type: "dispregiativo", example: true },
+      { noun: "cameretta", meaning: "piccola camera", type: "diminutivo", example: false },
+      { noun: "vestitino", meaning: "piccolo vestito", type: "diminutivo", example: false },
+      { noun: "orticello", meaning: "piccolo orto", type: "diminutivo", example: false },
+      { noun: "mostriciattolo", meaning: "piccolo mostro", type: "diminutivo", example: false },
+      { noun: "anellino", meaning: "piccolo anello", type: "diminutivo", example: false },
+      { noun: "cagnaccio", meaning: "brutto cane", type: "dispregiativo", example: false },
+      { noun: "castelluzzo", meaning: "piccolo castello", type: "vezzeggiativo", example: false },
+      { noun: "nasone", meaning: "grande naso", type: "accrescitivo", example: false },
+      { noun: "finestrona", meaning: "grande finestra", type: "accrescitivo", example: false },
+      { noun: "porticciolo", meaning: "piccolo porto", type: "vezzeggiativo", example: false },
+      { noun: "zampaccia", meaning: "brutta zampa", type: "dispregiativo", example: false },
+      { noun: "vasetto", meaning: "piccolo vaso", type: "diminutivo", example: false },
+      { noun: "patatina", meaning: "piccola patata", type: "diminutivo", example: false },
+      { noun: "casuccia", meaning: "piccola casa", type: "vezzeggiativo", example: false },
+      { noun: "omone", meaning: "grande uomo", type: "accrescitivo", example: false },
+      { noun: "poetastro", meaning: "cattivo poeta", type: "dispregiativo", example: false },
+      { noun: "volpacchiotto", meaning: "piccola volpe", type: "vezzeggiativo", example: false }
+    ] %>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base md:text-lg mb-6">
+      <% altered_nouns.each do |item| %>
+        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-gray-700 font-semibold">• <%= item[:noun] %></span>
+            <span class="text-xl text-purple-500">→</span>
+            <% if item[:example] %>
+              <span class="font-bold text-purple-700"><%= item[:meaning] %></span>
+            <% else %>
+              <input type="text"
+                     class="border-b-2 border-purple-500 bg-transparent px-2 py-1 focus:outline-none focus:border-purple-700 flex-1 min-w-[180px]"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= item[:meaning] %>"
+                     data-correct-answer="<%= item[:meaning] %>"
+                     placeholder="">
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-sm md:text-base">
+        <thead>
+          <tr class="bg-cyan-100">
+            <th class="border-2 border-cyan-300 px-4 py-3 text-cyan-700 font-bold">Accrescitivo</th>
+            <th class="border-2 border-cyan-300 px-4 py-3 text-cyan-700 font-bold">Diminutivo</th>
+            <th class="border-2 border-cyan-300 px-4 py-3 text-cyan-700 font-bold">Vezzeggiativo</th>
+            <th class="border-2 border-cyan-300 px-4 py-3 text-cyan-700 font-bold">Dispregiativo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border-2 border-cyan-200 px-4 py-3 bg-cyan-50 align-top">
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="nasone" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="finestrona" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500" data-fill-blanks-target="input" data-answer="omone" placeholder="">
+            </td>
+            <td class="border-2 border-cyan-200 px-4 py-3 bg-white align-top">
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="cameretta" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="vestitino" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="orticello" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="mostriciattolo" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="anellino" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="vasetto" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500" data-fill-blanks-target="input" data-answer="patatina" placeholder="">
+            </td>
+            <td class="border-2 border-cyan-200 px-4 py-3 bg-cyan-50 align-top">
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="castelluzzo" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="porticciolo" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="casuccia" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500" data-fill-blanks-target="input" data-answer="volpacchiotto" placeholder="">
+            </td>
+            <td class="border-2 border-cyan-200 px-4 py-3 bg-white align-top">
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="stradaccia" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="cagnaccio" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="zampaccia" placeholder=""><br>
+              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500" data-fill-blanks-target="input" data-answer="poetastro" placeholder="">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Grammatica p. 47
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'cyan', current_page: 'nvl5_gram_p150' %>
+  </div>
+</div>

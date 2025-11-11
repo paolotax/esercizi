@@ -1,0 +1,156 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-cyan-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-cyan-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          MORFOLOGIA
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-cyan-600">Genere e numero</h1>
+      </div>
+      <div class="flex-shrink-0 bg-cyan-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        147
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 1: Plurals -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-yellow-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-yellow-700 mb-3">
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="flex items-center gap-2">
+          <span class="bg-yellow-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">1</span>
+          <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold whitespace-nowrap">IMPARARE TUTTI</span>
+        </div>
+        <span>Volgi al <span class="text-yellow-600 font-bold underline">plurale</span> i seguenti nomi. Se hai dubbi, aiutati con il dizionario.</span>
+      </div>
+    </h2>
+
+    <% plurals = [
+      { word: "medico", plural: "medici" },
+      { word: "fruscio", plural: "fruscii" },
+      { word: "addio", plural: "addii" },
+      { word: "bue", plural: "buoi" },
+      { word: "sindaco", plural: "sindaci" },
+      { word: "antologia", plural: "antologie" },
+      { word: "abaco", plural: "abachi" },
+      { word: "chirurgo", plural: "chirurghi" },
+      { word: "uomo", plural: "uomini" },
+      { word: "luccichio", plural: "luccichii" },
+      { word: "ottico", plural: "ottici" },
+      { word: "olio", plural: "oli" },
+      { word: "augurio", plural: "auguri" },
+      { word: "orologio", plural: "orologi" },
+      { word: "uovo", plural: "uova" },
+      { word: "traffico", plural: "traffici" },
+      { word: "paio", plural: "paia" },
+      { word: "dialogo", plural: "dialoghi" }
+    ] %>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base md:text-lg">
+      <% plurals.each do |item| %>
+        <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl px-3 py-3">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 font-semibold">• <%= item[:word] %></span>
+            <span class="text-xl text-yellow-500">→</span>
+            <input type="text"
+                   class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 flex-1 min-w-[120px]"
+                   data-fill-blanks-target="input"
+                   data-answer="<%= item[:plural] %>"
+                   data-correct-answer="<%= item[:plural] %>"
+                   placeholder="...............">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Singulars -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3 flex items-start gap-2">
+      <span class="bg-purple-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">2</span>
+      <span>Volgi al <span class="text-purple-600 font-bold underline">singolare</span> i seguenti nomi.</span>
+    </h2>
+
+    <% singulars = [
+      { plural: "camicie", singular: "camicia" },
+      { plural: "camici", singular: "camice" },
+      { plural: "magie", singular: "magia" },
+      { plural: "superfici", singular: "superficie" },
+      { plural: "dei", singular: "dio" },
+      { plural: "templi", singular: "tempio" },
+      { plural: "scie", singular: "scia" },
+      { plural: "princìpi", singular: "princìpio" },
+      { plural: "asparagi", singular: "asparago" },
+      { plural: "prìncipi", singular: "prìncipe" },
+      { plural: "effigi", singular: "effigie" },
+      { plural: "miglia", singular: "miglio" },
+      { plural: "miagolii", singular: "miagolio" },
+      { plural: "dee", singular: "dea" },
+      { plural: "ronzii", singular: "ronzio" }
+    ] %>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base md:text-lg">
+      <% singulars.each do |item| %>
+        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 font-semibold">• <%= item[:plural] %></span>
+            <span class="text-xl text-purple-500">→</span>
+            <input type="text"
+                   class="border-b-2 border-purple-500 bg-transparent px-2 py-1 focus:outline-none focus:border-purple-700 flex-1 min-w-[120px]"
+                   data-fill-blanks-target="input"
+                   data-answer="<%= item[:singular] %>"
+                   data-correct-answer="<%= item[:singular] %>"
+                   placeholder="...............">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 3: Promiscuous gender animals -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="card-selector">
+    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-4 flex items-start gap-2">
+      <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">3</span>
+      <span>Colora i nomi di animale di <span class="text-green-600 font-bold underline">genere promiscuo</span> ai quali è necessario aggiungere "maschio" o "femmina" per distinguere il genere.</span>
+    </h2>
+
+    <% animals = [
+      { name: "volpe", promiscuous: false },
+      { name: "coniglio", promiscuous: false },
+      { name: "leone", promiscuous: false },
+      { name: "giraffa", promiscuous: true },
+      { name: "cane", promiscuous: false },
+      { name: "pantera", promiscuous: true },
+      { name: "gatto", promiscuous: false },
+      { name: "gazzella", promiscuous: true },
+      { name: "piccione", promiscuous: true },
+      { name: "cavallo", promiscuous: false },
+      { name: "canguro", promiscuous: true },
+      { name: "orso", promiscuous: false }
+    ] %>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-base md:text-lg">
+      <% animals.each do |animal| %>
+        <div class="relative">
+          <div class="border-2 border-gray-300 rounded-xl px-4 py-3 text-center cursor-pointer transition-all hover:shadow-md"
+               data-card-selector-target="card"
+               data-correct="<%= animal[:promiscuous] %>"
+               data-action="click->card-selector#toggle">
+            <span class="font-semibold text-gray-700"><%= animal[:name] %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Grammatica pp. 42-45
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'cyan', current_page: 'nvl5_gram_p147' %>
+  </div>
+</div>

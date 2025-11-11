@@ -1,0 +1,224 @@
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-cyan-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div class="bg-cyan-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+          MORFOLOGIA
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-cyan-600">Nomi collettivi e nomi composti</h1>
+      </div>
+      <div class="flex-shrink-0 bg-cyan-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+        149
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise 1: Collective nouns -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-yellow-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-yellow-700 mb-3">
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="flex items-center gap-2">
+          <span class="bg-yellow-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">1</span>
+          <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold whitespace-nowrap">IMPARARE TUTTI</span>
+        </div>
+        <span>Scrivi per ciascuna espressione il <span class="text-yellow-600 font-bold underline">nome collettivo</span> corrispondente. Scegli fra:</span>
+      </div>
+    </h2>
+
+    <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl px-4 py-3 mb-4 text-base md:text-lg text-center">
+      <span class="font-bold text-yellow-700">flotta • nugolo • comitiva • nidiata • branco • costellazione • muta • ciurma</span>
+    </div>
+
+    <% collective_nouns = [
+      { expression: "un gruppo di pirati", answer: "ciurma" },
+      { expression: "un gruppo di navi", answer: "flotta" },
+      { expression: "un gruppo di insetti", answer: "nugolo" },
+      { expression: "un gruppo di cani", answer: "muta" },
+      { expression: "un insieme di stelle", answer: "costellazione" },
+      { expression: "un gruppo di turisti", answer: "comitiva" },
+      { expression: "un gruppo di pulcini", answer: "nidiata" },
+      { expression: "un gruppo di lupi", answer: "branco" }
+    ] %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% collective_nouns.each do |item| %>
+        <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl px-3 py-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-gray-700 font-semibold">• <%= item[:expression] %></span>
+            <span class="text-xl text-yellow-500">→</span>
+            <input type="text"
+                   class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 flex-1 min-w-[150px]"
+                   data-fill-blanks-target="input"
+                   data-answer="<%= item[:answer] %>"
+                   data-correct-answer="<%= item[:answer] %>"
+                   placeholder=".....................">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 2: Explain collective nouns -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3 flex items-start gap-2">
+      <span class="bg-purple-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">2</span>
+      <span>Spiega il significato dei seguenti <span class="text-purple-600 font-bold underline">nomi collettivi</span>, come nell'esempio.</span>
+    </h2>
+
+    <% explanations = [
+      { noun: "pinacoteca", explanation: "insieme di dipinti", example: true },
+      { noun: "clientela", explanation: "insieme di clienti", example: false },
+      { noun: "gregge", explanation: "insieme di pecore", example: false },
+      { noun: "equipaggio", explanation: "insieme di marinai", example: false },
+      { noun: "pineta", explanation: "insieme di pini", example: false },
+      { noun: "arcipelago", explanation: "insieme di isole", example: false },
+      { noun: "sciame", explanation: "insieme di api", example: false }
+    ] %>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <% explanations.each do |item| %>
+        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-gray-700 font-semibold">• <%= item[:noun] %></span>
+            <span class="text-xl text-purple-500">→</span>
+            <% if item[:example] %>
+              <span class="font-bold text-purple-700"><%= item[:explanation] %></span>
+            <% else %>
+              <input type="text"
+                     class="border-b-2 border-purple-500 bg-transparent px-2 py-1 focus:outline-none focus:border-purple-700 flex-1 min-w-[200px]"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= item[:explanation] %>"
+                     data-correct-answer="<%= item[:explanation] %>"
+                     placeholder="...................................................">
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise 3: Compound nouns -->
+  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-4 flex items-start gap-2">
+      <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">3</span>
+      <span>Scrivi due <span class="text-green-600 font-bold underline">nomi composti</span> a partire dalla parola nel riquadro.</span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-base md:text-lg">
+      <!-- dopo -->
+      <div class="bg-green-50 border-2 border-green-200 rounded-xl p-4">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="bg-green-500 text-white font-bold px-4 py-2 rounded-lg text-center min-w-[80px]">
+            dopo
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-green-500 text-xl">→</span>
+              <span class="font-bold text-green-700">dopolavoro</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-green-500 text-xl">→</span>
+              <input type="text"
+                     class="border-b-2 border-green-500 bg-transparent px-2 py-1 focus:outline-none focus:border-green-700 flex-1"
+                     data-fill-blanks-target="input"
+                     data-answer="dopobarba"
+                     placeholder=".....................">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- terra -->
+      <div class="bg-green-50 border-2 border-green-200 rounded-xl p-4">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="bg-green-500 text-white font-bold px-4 py-2 rounded-lg text-center min-w-[80px]">
+            terra
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-green-500 text-xl">→</span>
+              <input type="text"
+                     class="border-b-2 border-green-500 bg-transparent px-2 py-1 focus:outline-none focus:border-green-700 flex-1"
+                     data-fill-blanks-target="input"
+                     data-answer="terracotta"
+                     placeholder=".....................">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-green-500 text-xl">→</span>
+              <input type="text"
+                     class="border-b-2 border-green-500 bg-transparent px-2 py-1 focus:outline-none focus:border-green-700 flex-1"
+                     data-fill-blanks-target="input"
+                     data-answer="terremoto"
+                     placeholder=".....................">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- auto -->
+      <div class="bg-green-50 border-2 border-green-200 rounded-xl p-4">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="bg-green-500 text-white font-bold px-4 py-2 rounded-lg text-center min-w-[80px]">
+            auto
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-green-500 text-xl">→</span>
+              <input type="text"
+                     class="border-b-2 border-green-500 bg-transparent px-2 py-1 focus:outline-none focus:border-green-700 flex-1"
+                     data-fill-blanks-target="input"
+                     data-answer="autostrada"
+                     placeholder=".....................">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-green-500 text-xl">→</span>
+              <input type="text"
+                     class="border-b-2 border-green-500 bg-transparent px-2 py-1 focus:outline-none focus:border-green-700 flex-1"
+                     data-fill-blanks-target="input"
+                     data-answer="autobus"
+                     placeholder=".....................">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- capo -->
+      <div class="bg-green-50 border-2 border-green-200 rounded-xl p-4">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="bg-green-500 text-white font-bold px-4 py-2 rounded-lg text-center min-w-[80px]">
+            capo
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-green-500 text-xl">→</span>
+              <input type="text"
+                     class="border-b-2 border-green-500 bg-transparent px-2 py-1 focus:outline-none focus:border-green-700 flex-1"
+                     data-fill-blanks-target="input"
+                     data-answer="capoluogo"
+                     placeholder=".....................">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-green-500 text-xl">→</span>
+              <input type="text"
+                     class="border-b-2 border-green-500 bg-transparent px-2 py-1 focus:outline-none focus:border-green-700 flex-1"
+                     data-fill-blanks-target="input"
+                     data-answer="capostazione"
+                     placeholder=".....................">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Grammatica pp. 46-47
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'cyan', current_page: 'nvl5_gram_p149' %>
+  </div>
+</div>
