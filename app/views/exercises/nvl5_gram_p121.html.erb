@@ -1,0 +1,185 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-controller="exercise-checker">
+
+  <!-- Header con badge GRAMMATICA VALENZIALE -->
+  <div class="mb-8">
+    <div class="flex items-start justify-between">
+      <!-- Badge e Titolo -->
+      <div class="flex items-start gap-4">
+        <!-- Badge GRAMMATICA VALENZIALE con icona -->
+        <div class="bg-purple-500 text-white px-6 py-3 rounded-lg font-bold text-lg flex items-center gap-2">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a6 6 0 00-6 6c0 1.887.875 3.517 2.084 4.485A.5.5 0 016 12.5V14a1 1 0 001 1h6a1 1 0 001-1v-1.5a.5.5 0 01-.084-.015C15.125 11.517 16 9.887 16 8a6 6 0 00-6-6z"/>
+          </svg>
+          GRAMMATICA VALENZIALE
+        </div>
+      </div>
+      <!-- Numero pagina -->
+      <div class="bg-purple-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl">
+        121
+      </div>
+    </div>
+  </div>
+
+  <!-- Esempio iniziale -->
+  <div class="bg-purple-50 border-2 border-purple-300 rounded-lg p-6 mb-8">
+    <p class="text-gray-700 font-semibold mb-4">
+      • <em class="underline">Il vento</em> <span class="underline">ha fatto cadere</span> <em class="underline">le fioriere</em>
+      <span class="underline">dalla terrazza</span> <span class="underline">al marciapiede</span>.
+    </p>
+    <div class="flex items-center justify-center gap-2 mb-4 flex-wrap">
+      <div class="border-2 border-red-400 rounded-lg px-3 py-2 bg-red-50">
+        <span class="font-bold text-red-700 text-sm">Il vento</span>
+      </div>
+      <span>—</span>
+      <div class="border-2 border-blue-400 rounded-lg px-3 py-2 bg-blue-50 whitespace-nowrap">
+        <span class="font-bold text-blue-700 text-sm">ha fatto cadere</span>
+      </div>
+      <span>—</span>
+      <div class="border-2 border-pink-400 rounded-lg px-3 py-2 bg-pink-50">
+        <span class="font-bold text-pink-700 text-sm">le fioriere</span>
+      </div>
+      <span>—</span>
+      <div class="border-2 border-green-400 rounded-lg px-3 py-2 bg-green-50 whitespace-nowrap">
+        <span class="font-bold text-green-700 text-sm">dalla terrazza</span>
+      </div>
+      <span>—</span>
+      <div class="border-2 border-green-400 rounded-lg px-3 py-2 bg-green-50 whitespace-nowrap">
+        <span class="font-bold text-green-700 text-sm">al marciapiede</span>
+      </div>
+    </div>
+    <p class="text-gray-700">
+      Il nucleo della frase sono il <span class="underline font-bold text-blue-600">verbo</span>
+      + l'<em class="underline font-bold text-red-600">argomento soggetto</em>
+      + l'<em class="underline font-bold text-pink-600">argomento oggetto diretto</em>
+      + 2 <span class="underline font-bold text-green-600">argomenti oggetto indiretti</span>
+    </p>
+  </div>
+
+  <!-- Esercizio 1 - IMPARARE TUTTI -->
+  <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6 mb-8" data-controller="word-choice">
+    <div class="mb-4 inline-block bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
+      1 IMPARARE TUTTI
+    </div>
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4">
+      Leggi e colora il cartellino con l'argomento necessario al verbo per completare il significato.
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <% [
+        { frase: "È", blank: true, opzioni: [{testo: "buio", corretto: true}, {testo: "allora", corretto: false}] },
+        { frase: "", blank: true, opzioni: [{testo: "Anna", corretto: true}, {testo: "ora", corretto: false}], dopo: "dorme." },
+        { frase: "Il cane insegue", blank: true, opzioni: [{testo: "il gatto", corretto: true}, {testo: "in giardino", corretto: false}] },
+        { frase: "Franco pulisce", blank: true, opzioni: [{testo: "i vetri", corretto: true}, {testo: "con cura", corretto: false}], dopo: "della macchina." },
+        { frase: "Mark accompagna", blank: true, opzioni: [{testo: "il fratello", corretto: true}, {testo: "da scuola", corretto: false}], dopo: "a casa." },
+        { frase: "Leonardo litiga", blank: true, opzioni: [{testo: "con Anna", corretto: true}, {testo: "in cucina", corretto: false}] },
+        { frase: "Marin consegna", blank: true, opzioni: [{testo: "le chiavi", corretto: true}, {testo: "tutti i giorni", corretto: false}], dopo: "alla zia." }
+      ].each_with_index do |item, idx| %>
+        <div class="bg-white border-2 border-yellow-200 rounded-xl p-4">
+          <p class="text-gray-700 mb-3">
+            • <%= item[:frase] %>
+            <span class="inline-block min-w-[120px] border-b-2 border-dotted border-yellow-400 mx-2 align-bottom">
+              <% item[:opzioni].each do |opt| %>
+                <span class="inline-block px-3 py-1 border-2 border-yellow-400 rounded-lg cursor-pointer hover:bg-yellow-100 transition <%= opt[:corretto] ? 'bg-yellow-50' : 'bg-gray-50' %> mr-2 mb-1"
+                      data-word-choice-target="word"
+                      data-group="frase_<%= idx %>"
+                      data-correct="<%= opt[:corretto] %>"
+                      data-action="click->word-choice#selectWord">
+                  <%= opt[:testo] %>
+                </span>
+              <% end %>
+            </span>
+            <%= item[:dopo] %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 - Argomenti indispensabili -->
+  <div class="bg-blue-50 border-2 border-blue-300 rounded-lg p-6 mb-8">
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4">
+      <span class="bg-blue-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+      Osserva gli schemi e scrivi gli argomenti indispensabili per completare il significato dei verbi dati.
+    </h2>
+
+    <div class="space-y-4">
+      <div class="bg-white border-2 border-blue-200 rounded-xl p-4">
+        <p class="text-gray-700">
+          • <input type="text" class="border-b-2 border-dotted border-blue-400 px-2 py-1 min-w-[200px] focus:outline-none" data-correct-answer="" placeholder="..."> sbadiglia.
+        </p>
+        <p class="text-sm text-gray-500 mt-2 italic">Risposta libera - soggetto necessario</p>
+      </div>
+
+      <div class="bg-white border-2 border-blue-200 rounded-xl p-4">
+        <p class="text-gray-700">
+          • Lucien <input type="text" class="border-b-2 border-dotted border-blue-400 px-2 py-1 min-w-[200px] focus:outline-none" data-correct-answer="" placeholder="..."> a pallavolo.
+        </p>
+        <p class="text-sm text-gray-500 mt-2 italic">Risposta libera - verbo necessario</p>
+      </div>
+
+      <div class="bg-white border-2 border-blue-200 rounded-xl p-4">
+        <p class="text-gray-700">
+          • Brando <input type="text" class="border-b-2 border-dotted border-blue-400 px-2 py-1 min-w-[150px] focus:outline-none" data-correct-answer="" placeholder="..."> un consiglio <input type="text" class="border-b-2 border-dotted border-blue-400 px-2 py-1 min-w-[150px] focus:outline-none" data-correct-answer="" placeholder="...">.
+        </p>
+        <p class="text-sm text-gray-500 mt-2 italic">Risposta libera - verbo + argomento indiretto</p>
+      </div>
+
+      <div class="bg-white border-2 border-blue-200 rounded-xl p-4">
+        <p class="text-gray-700">
+          • <input type="text" class="border-b-2 border-dotted border-blue-400 px-2 py-1 min-w-[150px] focus:outline-none" data-correct-answer="" placeholder="..."> mangerà <input type="text" class="border-b-2 border-dotted border-blue-400 px-2 py-1 min-w-[150px] focus:outline-none" data-correct-answer="" placeholder="...">.
+        </p>
+        <p class="text-sm text-gray-500 mt-2 italic">Risposta libera - soggetto + oggetto diretto</p>
+      </div>
+
+      <div class="bg-white border-2 border-blue-200 rounded-xl p-4">
+        <p class="text-gray-700">
+          • Giorgio e Marco regaleranno <input type="text" class="border-b-2 border-dotted border-blue-400 px-2 py-1 min-w-[200px] focus:outline-none" data-correct-answer="" placeholder="...">.
+        </p>
+        <p class="text-sm text-gray-500 mt-2 italic">Risposta libera - argomento necessario</p>
+      </div>
+
+      <div class="bg-white border-2 border-blue-200 rounded-xl p-4">
+        <p class="text-gray-700">
+          • Vera offre <input type="text" class="border-b-2 border-dotted border-blue-400 px-2 py-1 min-w-[200px] focus:outline-none" data-correct-answer="" placeholder="...">.
+        </p>
+        <p class="text-sm text-gray-500 mt-2 italic">Risposta libera - argomento necessario</p>
+      </div>
+
+      <div class="bg-white border-2 border-blue-200 rounded-xl p-4">
+        <p class="text-gray-700">
+          • L'autobus 36 va <input type="text" class="border-b-2 border-dotted border-blue-400 px-2 py-1 min-w-[200px] focus:outline-none" data-correct-answer="" placeholder="...">.
+        </p>
+        <p class="text-sm text-gray-500 mt-2 italic">Risposta libera - argomento di luogo necessario</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Box PER L'INSEGNANTE -->
+  <div class="bg-amber-50 border-2 border-amber-400 rounded-lg p-6 mb-8">
+    <div class="flex items-start gap-4">
+      <div class="bg-amber-500 text-white px-4 py-2 rounded-lg font-bold">
+        PER L'INSEGNANTE
+      </div>
+      <div class="flex-1">
+        <p class="text-gray-700 mb-2">
+          Vuoi saperne di più sulla grammatica valenziale?<br>
+          Inquadra il qrcode e scopri i materiali <strong>Giunti Scuola</strong>.
+        </p>
+        <div class="mt-4">
+          <svg class="w-24 h-24 border-2 border-amber-400 rounded" viewBox="0 0 100 100" fill="none">
+            <rect width="100" height="100" fill="white"/>
+            <path d="M20,20 h15 v15 h-15 z M40,20 h5 v5 h-5 z M50,20 h5 v5 h-5 z M65,20 h15 v15 h-15 z" fill="black"/>
+            <path d="M20,30 h5 v5 h-5 z M30,30 h5 v5 h-5 z M40,30 h10 v5 h-10 z M65,30 h5 v5 h-5 z M75,30 h5 v5 h-5 z" fill="black"/>
+            <path d="M20,40 h5 v5 h-5 z M30,40 h5 v5 h-5 z M50,40 h5 v5 h-5 z M60,40 h10 v5 h-10 z M75,40 h5 v5 h-5 z" fill="black"/>
+            <rect x="22" y="22" width="11" height="11" fill="black"/>
+            <rect x="67" y="22" width="11" height="11" fill="black"/>
+            <rect x="22" y="67" width="11" height="11" fill="black"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exercise controls -->
+  <%= render 'shared/exercise_controls', color: 'purple' %>
+</div>
