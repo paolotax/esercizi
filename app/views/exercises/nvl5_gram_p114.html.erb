@@ -1,0 +1,299 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-controller="exercise-checker">
+
+  <!-- Header con badge SINTASSI -->
+  <div class="mb-8">
+    <div class="flex items-start justify-between">
+      <!-- Badge e Titolo -->
+      <div class="flex items-start gap-4">
+        <!-- Badge SINTASSI con icona lampadina -->
+        <div class="bg-yellow-400 text-orange-700 px-6 py-3 rounded-lg font-bold text-lg flex items-center gap-2">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a6 6 0 00-6 6c0 1.887.875 3.517 2.084 4.485A.5.5 0 016 12.5V14a1 1 0 001 1h6a1 1 0 001-1v-1.5a.5.5 0 01-.084-.015C15.125 11.517 16 9.887 16 8a6 6 0 00-6-6z"/>
+          </svg>
+          SINTASSI
+        </div>
+      </div>
+      <!-- Numero pagina -->
+      <div class="bg-orange-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl">
+        114
+      </div>
+    </div>
+
+    <!-- Titolo principale -->
+    <h1 class="text-3xl font-bold text-orange-600 mt-6 text-center">
+      L'attributo
+    </h1>
+  </div>
+
+  <!-- Box teoria con immagine -->
+  <div class="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-6 mb-8">
+    <div class="flex flex-col md:flex-row gap-6 items-center">
+      <div class="flex-1">
+        <p class="text-gray-700 mb-3">
+          L'<strong class="underline">attributo</strong> è un <strong>aggettivo</strong> (qualificativo, dimostrativo, indefinito…) che accompagna il soggetto o i complementi per precisarne e arricchirne il significato.
+        </p>
+        <p class="text-gray-700">
+          → Una luna <strong class="text-green-600 underline">enorme</strong> splendeva nel cielo <strong class="text-green-600 underline">stellato</strong>.
+        </p>
+      </div>
+      <div class="w-48 h-48 flex-shrink-0">
+        <svg viewBox="0 0 200 200" class="w-full h-full">
+          <!-- Cielo stellato -->
+          <ellipse cx="100" cy="100" rx="90" ry="90" fill="#2C3E7C"/>
+          <!-- Luna -->
+          <circle cx="100" cy="100" r="50" fill="#FFD700"/>
+          <circle cx="102" cy="80" r="3" fill="#333"/>
+          <circle cx="115" cy="85" r="3" fill="#333"/>
+          <path d="M 95 110 Q 100 115 105 110" stroke="#333" stroke-width="2" fill="none"/>
+          <circle cx="115" cy="95" r="8" fill="#FFB6C1" opacity="0.6"/>
+          <!-- Stelle -->
+          <% 8.times do |i| %>
+            <% angle = i * 45 %>
+            <% x = 100 + 75 * Math.cos(angle * Math::PI / 180) %>
+            <% y = 100 + 75 * Math.sin(angle * Math::PI / 180) %>
+            <polygon points="<%= x %>,<%= y-5 %> <%= x+2 %>,<%= y %> <%= x %>,<%= y+5 %> <%= x-2 %>,<%= y %>" fill="#FFD700"/>
+          <% end %>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 1 - IMPARARE TUTTI - Sottolinea attributo e indica S/C -->
+  <div class="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-6 mb-8">
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4">
+      <span class="bg-blue-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
+      <span class="bg-blue-500 text-white px-4 py-2 rounded-lg font-bold mr-2">IMPARARE TUTTI</span>
+      In ogni frase sottolinea l'<strong class="underline">attributo<span class="inline-block w-6 h-6 bg-yellow-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="yellow" data-action="click->word-highlighter#selectColor"></span></strong> e indica se accompagna il soggetto (S) o un complemento (C).
+    </h2>
+
+    <div class="flex justify-end mb-4">
+      <div class="w-64 h-40">
+        <svg viewBox="0 0 300 200" class="w-full h-full">
+          <!-- Casa -->
+          <rect x="100" y="100" width="80" height="60" fill="#FFE4B5"/>
+          <polygon points="100,100 140,70 180,100" fill="#CD853F"/>
+          <rect x="120" y="130" width="20" height="30" fill="#8B4513"/>
+          <rect x="150" y="120" width="15" height="15" fill="#87CEEB"/>
+          <!-- Orto -->
+          <rect x="30" y="140" width="60" height="40" fill="#8B4513" opacity="0.3"/>
+          <!-- Verdure -->
+          <% 6.times do |i| %>
+            <% x = 40 + (i % 3) * 20 %>
+            <% y = 150 + (i / 3) * 20 %>
+            <circle cx="<%= x %>" r="5" cy="<%= y %>" fill="#90EE90"/>
+            <circle cx="<%= x + 5 %>" r="5" cy="<%= y %>" fill="#90EE90"/>
+          <% end %>
+        </svg>
+      </div>
+    </div>
+
+    <div class="space-y-4" data-controller="word-highlighter fill-blanks" data-word-highlighter-multi-color-value="false">
+      <!-- Hidden color selector for monocolor mode -->
+      <div class="hidden">
+        <div class="w-6 h-6 bg-yellow-300"
+             data-word-highlighter-target="colorBox"
+             data-color="yellow">
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-lg flex items-center gap-3">
+        <span class="text-gray-500 flex-shrink-0">•</span>
+        <span class="flex-1">
+          Sto leggendo una storia
+          <span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-yellow-200 px-1 rounded transition">meravigliosa</span>.
+        </span>
+        <input type="text"
+               class="w-16 px-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-center font-bold"
+               data-fill-blanks-target="input"
+               data-correct-answer="C"
+               maxlength="1"
+               placeholder="S/C">
+      </div>
+
+      <div class="bg-white p-4 rounded-lg flex items-center gap-3">
+        <span class="text-gray-500 flex-shrink-0">•</span>
+        <span class="flex-1">
+          Gli alunni della classe
+          <span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-yellow-200 px-1 rounded transition">quinta</span>
+          sono partiti per la gita.
+        </span>
+        <input type="text"
+               class="w-16 px-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-center font-bold"
+               data-fill-blanks-target="input"
+               data-correct-answer="C"
+               maxlength="1"
+               placeholder="S/C">
+      </div>
+
+      <div class="bg-white p-4 rounded-lg flex items-center gap-3">
+        <span class="text-gray-500 flex-shrink-0">•</span>
+        <span class="flex-1">
+          Un gelato
+          <span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-yellow-200 px-1 rounded transition">buonissimo</span>
+          concluse la cena.
+        </span>
+        <input type="text"
+               class="w-16 px-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-center font-bold"
+               data-fill-blanks-target="input"
+               data-correct-answer="S"
+               maxlength="1"
+               placeholder="S/C">
+      </div>
+
+      <div class="bg-white p-4 rounded-lg flex items-center gap-3">
+        <span class="text-gray-500 flex-shrink-0">•</span>
+        <span class="flex-1">
+          Il limone ha un gusto
+          <span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-yellow-200 px-1 rounded transition">aspro</span>
+          e
+          <span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-yellow-200 px-1 rounded transition">frizzantino</span>.
+        </span>
+        <input type="text"
+               class="w-16 px-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-center font-bold"
+               data-fill-blanks-target="input"
+               data-correct-answer="C"
+               maxlength="1"
+               placeholder="S/C">
+      </div>
+
+      <div class="bg-white p-4 rounded-lg flex items-center gap-3">
+        <span class="text-gray-500 flex-shrink-0">•</span>
+        <span class="flex-1">
+          Mia nonna raccoglie le verdure nell'orto della
+          <span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-yellow-200 px-1 rounded transition">fattoria</span>.
+        </span>
+        <input type="text"
+               class="w-16 px-3 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-center font-bold"
+               data-fill-blanks-target="input"
+               data-correct-answer="C"
+               maxlength="1"
+               placeholder="S/C">
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 - Completa con attributi adatti -->
+  <div class="bg-white border-2 border-gray-300 rounded-lg p-6 mb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4">
+      <span class="bg-orange-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+      Completa con gli attributi adatti.
+    </h2>
+
+    <div class="space-y-4">
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <span class="text-gray-500">•</span>
+        Passeggiando nel bosco, sentii un rumore
+        <input type="text"
+               class="w-48 px-3 py-1 border-b-2 border-dotted border-gray-400 focus:border-blue-500 focus:outline-none text-center"
+               data-fill-blanks-target="input"
+               data-correct-answer="libera">.
+      </div>
+
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <span class="text-gray-500">•</span>
+        Le nuvole annunciavano un
+        <input type="text"
+               class="w-48 px-3 py-1 border-b-2 border-dotted border-gray-400 focus:border-blue-500 focus:outline-none text-center"
+               data-fill-blanks-target="input"
+               data-correct-answer="libera">
+        acquazzone.
+      </div>
+
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <span class="text-gray-500">•</span>
+        Ho trascorso un pomeriggio
+        <input type="text"
+               class="w-48 px-3 py-1 border-b-2 border-dotted border-gray-400 focus:border-blue-500 focus:outline-none text-center"
+               data-fill-blanks-target="input"
+               data-correct-answer="libera">
+        con le cugine.
+      </div>
+
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <span class="text-gray-500">•</span>
+        Mi piace il
+        <input type="text"
+               class="w-48 px-3 py-1 border-b-2 border-dotted border-gray-400 focus:border-blue-500 focus:outline-none text-center"
+               data-fill-blanks-target="input"
+               data-correct-answer="libera">
+        maglione.
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 3 - Sottolinea in viola/verde -->
+  <div class="bg-purple-50 border-2 border-purple-300 rounded-lg p-6 mb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4 flex items-center flex-wrap gap-2">
+      <span class="bg-orange-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">3</span>
+      Sottolinea di <span class="text-purple-600">viola gli aggettivi che formano il predicato nominale<span class="inline-block w-6 h-6 bg-purple-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="purple" data-action="click->word-highlighter#selectColor"></span></span>,
+      di <span class="text-green-600">verde gli aggettivi che sono attributi<span class="inline-block w-6 h-6 bg-green-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span></span> del soggetto o del complemento.
+    </h2>
+
+    <div class="bg-blue-100 border-2 border-blue-300 rounded-lg p-4 mb-4">
+      <p class="text-sm text-gray-700">
+        <strong>Fai attenzione</strong> a non confondere l'attributo con l'aggettivo che forma il predicato nominale:
+        La <span class="text-green-600 underline font-semibold">tua</span> compagna <span class="text-purple-600 underline font-semibold">è simpatica</span>.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <div class="bg-white p-4 rounded-lg">
+        <span class="text-gray-500">•</span>
+        Gemma è
+        <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-purple-200 px-1 rounded transition">contentissima</span>
+        della tuta
+        <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-green-200 px-1 rounded transition">rossa</span>
+        che le hai regalato.
+      </div>
+
+      <div class="bg-white p-4 rounded-lg">
+        <span class="text-gray-500">•</span>
+        Questo libro è
+        <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-purple-200 px-1 rounded transition">pieno</span>
+        di illustrazioni
+        <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-green-200 px-1 rounded transition">colorate</span>.
+      </div>
+
+      <div class="bg-white p-4 rounded-lg">
+        <span class="text-gray-500">•</span>
+        Il giorno della gara Marco era
+        <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-purple-200 px-1 rounded transition">concentrato</span>.
+      </div>
+
+      <div class="bg-white p-4 rounded-lg">
+        <span class="text-gray-500">•</span>
+        Il cane
+        <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-green-200 px-1 rounded transition">affettuoso</span>
+        fa le feste alla sua padroncina.
+      </div>
+
+      <div class="bg-white p-4 rounded-lg">
+        <span class="text-gray-500">•</span>
+        Sto preparando un'
+        <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-green-200 px-1 rounded transition">ottima</span>
+        crostata: sono una
+        <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-purple-200 px-1 rounded transition">brava</span>
+        pasticciera!
+      </div>
+
+      <div class="bg-white p-4 rounded-lg">
+        <span class="text-gray-500">•</span>
+        La mia
+        <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-green-200 px-1 rounded transition">vecchia</span>
+        casa è stata comprata da quei signori.
+      </div>
+    </div>
+  </div>
+
+  <!-- Riferimento esercizi aggiuntivi -->
+  <div class="mt-8 text-center">
+    <div class="inline-block bg-orange-100 border-2 border-orange-300 rounded-lg px-6 py-3">
+      <p class="font-bold text-orange-700">
+        Esercizi p. 188
+      </p>
+    </div>
+  </div>
+
+  <!-- Exercise controls -->
+  <%= render 'shared/exercise_controls', color: 'orange' %>
+</div>
