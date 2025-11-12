@@ -93,6 +93,13 @@ nvl5_grammatica = nvl_volume5.discipline.create!(
 )
 
 [
+  { numero: 1, titolo: "L'alfabeto", slug: "nvl5_gr_p001", view_template: "nvl5_gr_p001" },
+  { numero: 2, titolo: "Le vocali", slug: "nvl5_gr_p002", view_template: "nvl5_gr_p002" },
+  { numero: 3, titolo: "Le consonanti", slug: "nvl5_gr_p003", view_template: "nvl5_gr_p003" },
+  { numero: 4, titolo: "Le sillabe", slug: "nvl5_gr_p004", view_template: "nvl5_gr_p004" },
+  { numero: 5, titolo: "I digrammi e i trigrammi", slug: "nvl5_gr_p005", view_template: "nvl5_gr_p005" },
+  { numero: 6, titolo: "I suoni difficili", slug: "nvl5_gr_p006", view_template: "nvl5_gr_p006" },
+  { numero: 7, titolo: "Le doppie", slug: "nvl5_gr_p007", view_template: "nvl5_gr_p007" },
   { numero: 8, titolo: "Viva il ripasso!", slug: "nvl5_gr_p008", view_template: "nvl5_gr_p008" },
   { numero: 9, titolo: "Ricordi il plurale di -CIA e -GIA?", slug: "nvl5_gr_p009", view_template: "nvl5_gr_p009" },
   { numero: 10, titolo: "La lettera H", slug: "nvl5_gr_p010", view_template: "nvl5_gr_p010" },
