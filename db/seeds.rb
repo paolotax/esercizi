@@ -449,7 +449,10 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 52, titolo: "Le Frazioni", slug: "nvi5_mat_p052", view_template: "nvi5_mat_p052" },
   { numero: 53, titolo: "Frazioni Proprie, Improprie e Apparenti", slug: "nvi5_mat_p053", view_template: "nvi5_mat_p053" },
   { numero: 54, titolo: "Frazioni Equivalenti", slug: "nvi5_mat_p054", view_template: "nvi5_mat_p054" },
-  { numero: 55, titolo: "Confrontare e Ordinare le Frazioni", slug: "nvi5_mat_p055", view_template: "nvi5_mat_p055" }
+  { numero: 55, titolo: "Confrontare e Ordinare le Frazioni", slug: "nvi5_mat_p055", view_template: "nvi5_mat_p055" },
+  { numero: 56, titolo: "Esercizi sulle Frazioni", slug: "nvi5_mat_p056", view_template: "nvi5_mat_p056" },
+  { numero: 57, titolo: "Frazioni Proprie, Improprie e Apparenti", slug: "nvi5_mat_p057", view_template: "nvi5_mat_p057" },
+  { numero: 58, titolo: "Laboratorio - Ricostruiamo l'Intero", slug: "nvi5_mat_p058", view_template: "nvi5_mat_p058" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end
