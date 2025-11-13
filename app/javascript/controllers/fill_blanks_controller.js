@@ -9,7 +9,9 @@ export default class extends Controller {
   }
 
   checkAnswers(event) {
-    event.preventDefault()
+    if (event) {
+      event.preventDefault()
+    }
 
     let allCorrect = true
     let correctCount = 0
@@ -17,7 +19,8 @@ export default class extends Controller {
     let emptyCount = 0
 
     this.inputTargets.forEach(input => {
-      const correctAnswer = input.dataset.answer.trim().toLowerCase()
+      // Use both data-answer and data-correct-answer for compatibility
+      const correctAnswer = (input.dataset.answer || input.dataset.correctAnswer || '').trim().toLowerCase()
       const userAnswer = input.value.trim().toLowerCase()
 
       // Remove previous styling
@@ -43,6 +46,8 @@ export default class extends Controller {
     })
 
     this.showFeedback(allCorrect, correctCount, incorrectCount, emptyCount)
+
+    return { allCorrect, correctCount, incorrectCount, emptyCount, total: this.inputTargets.length }
   }
 
   showFeedback(allCorrect, correctCount, incorrectCount, emptyCount) {
@@ -78,6 +83,42 @@ export default class extends Controller {
       feedbackDiv.appendChild(retryButton)
     }
 
+    this.element.appendChild(feedbackDiv)
+    feedbackDiv.scrollIntoView({ behavior: "smooth", block: "center" })
+  }
+
+  showSolutions(event) {
+    if (event) {
+      event.preventDefault()
+    }
+
+    this.inputTargets.forEach(input => {
+      // Use both data-answer and data-correct-answer for compatibility
+      const correctAnswer = (input.dataset.answer || input.dataset.correctAnswer || '').trim()
+
+      // Remove previous styling
+      input.classList.remove("border-green-500", "border-red-500", "border-yellow-500",
+                            "bg-green-50", "bg-red-50", "bg-yellow-50")
+
+      // Show correct answer
+      input.value = correctAnswer
+      input.classList.add("border-green-500", "bg-green-50")
+    })
+
+    // Show feedback
+    const existingFeedback = this.element.querySelector(".fill-blanks-feedback")
+    if (existingFeedback) {
+      existingFeedback.remove()
+    }
+
+    const feedbackDiv = document.createElement("div")
+    feedbackDiv.className = "fill-blanks-feedback mt-6 p-6 rounded-lg shadow-lg bg-blue-100 border-4 border-blue-500"
+
+    const title = document.createElement("h2")
+    title.className = "text-2xl font-bold mb-4 text-blue-800"
+    title.textContent = "💡 Ecco tutte le soluzioni corrette!"
+
+    feedbackDiv.appendChild(title)
     this.element.appendChild(feedbackDiv)
     feedbackDiv.scrollIntoView({ behavior: "smooth", block: "center" })
   }

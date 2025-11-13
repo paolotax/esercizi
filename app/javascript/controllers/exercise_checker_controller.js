@@ -340,6 +340,25 @@ export default class extends Controller {
       })
     }
 
+    // Check equivalent-fractions exercises
+    const equivalentFractions = this.element.querySelectorAll("[data-controller*=\"equivalent-fractions\"]")
+    if (equivalentFractions.length > 0) {
+      equivalentFractions.forEach(fractionExercise => {
+        const fractionController = this.application.getControllerForElementAndIdentifier(fractionExercise, "equivalent-fractions")
+        if (fractionController && fractionController.checkAnswers) {
+          // Create a fake event to pass to checkAnswers
+          const fakeEvent = new Event('click')
+          fakeEvent.preventDefault = () => {}
+          fractionController.checkAnswers(fakeEvent)
+          // Note: The controller will show its own feedback, so we don't need to add to our feedback array
+          // We just let it run its validation
+        }
+      })
+      // Don't show the standard feedback if equivalent-fractions is present
+      // because it has its own feedback system
+      return
+    }
+
     // Check word-choice selections
     const wordChoiceGroups = this.element.querySelectorAll("[data-controller=\"word-choice\"]")
     if (wordChoiceGroups.length > 0) {
@@ -784,6 +803,21 @@ export default class extends Controller {
       if (flowerController && flowerController.showSolutions) {
         flowerController.showSolutions()
       }
+    }
+
+    // Show equivalent-fractions solutions if present
+    const equivalentFractions = this.element.querySelectorAll("[data-controller*=\"equivalent-fractions\"]")
+    if (equivalentFractions.length > 0) {
+      equivalentFractions.forEach(fractionExercise => {
+        const fractionController = this.application.getControllerForElementAndIdentifier(fractionExercise, "equivalent-fractions")
+        if (fractionController && fractionController.showSolutions) {
+          const fakeEvent = new Event('click')
+          fakeEvent.preventDefault = () => {}
+          fractionController.showSolutions(fakeEvent)
+        }
+      })
+      // Don't show standard feedback if equivalent-fractions has its own
+      return
     }
 
     // Show feedback message

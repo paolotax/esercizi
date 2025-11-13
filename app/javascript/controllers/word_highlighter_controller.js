@@ -180,6 +180,23 @@ export default class extends Controller {
       }
     })
 
+    // Show feedback
+    const existingFeedback = this.element.querySelector(".word-highlighter-feedback")
+    if (existingFeedback) {
+      existingFeedback.remove()
+    }
+
+    const feedbackDiv = document.createElement("div")
+    feedbackDiv.className = "word-highlighter-feedback mt-6 p-6 rounded-lg shadow-lg bg-blue-100 border-4 border-blue-500"
+
+    const title = document.createElement("h2")
+    title.className = "text-2xl font-bold mb-4 text-blue-800"
+    title.textContent = "💡 Ecco le frazioni corrette evidenziate!"
+
+    feedbackDiv.appendChild(title)
+    this.element.appendChild(feedbackDiv)
+    feedbackDiv.scrollIntoView({ behavior: "smooth", block: "center" })
+
     console.log("Soluzione mostrata")
   }
 
@@ -259,22 +276,52 @@ export default class extends Controller {
     ).length
     const totalWords = this.wordTargets.length
 
-    // Show feedback
-    let message = ""
-    if (correctCount === totalWords && missedCount === 0 && incorrectCount === 0) {
-      message = `✅ Perfetto! Tutte le risposte sono corrette! (${totalToHighlight}/${totalToHighlight})`
-    } else {
-      message = `Risultati:\n✅ Corrette: ${correctCount}/${totalWords}`
-      if (incorrectCount > 0) {
-        message += `\n❌ Errate: ${incorrectCount}`
-      }
-      if (missedCount > 0) {
-        message += `\n⚠️ Mancanti: ${missedCount}`
-      }
-    }
-
-    alert(message)
+    // Show feedback inline instead of alert
+    this.showFeedback(correctCount, incorrectCount, missedCount, totalWords, totalToHighlight)
 
     return { correctCount, incorrectCount, missedCount, extraCount, totalWords, totalToHighlight }
+  }
+
+  showFeedback(correctCount, incorrectCount, missedCount, totalWords, totalToHighlight) {
+    // Remove existing feedback if any
+    const existingFeedback = this.element.querySelector(".word-highlighter-feedback")
+    if (existingFeedback) {
+      existingFeedback.remove()
+    }
+
+    const allCorrect = correctCount === totalWords && missedCount === 0 && incorrectCount === 0
+
+    const feedbackDiv = document.createElement("div")
+    feedbackDiv.className = "word-highlighter-feedback mt-6 p-6 rounded-lg shadow-lg " +
+                            (allCorrect ? "bg-green-100 border-4 border-green-500" : "bg-orange-100 border-4 border-orange-500")
+
+    const title = document.createElement("h2")
+    title.className = "text-2xl font-bold mb-4 " + (allCorrect ? "text-green-800" : "text-orange-800")
+    title.textContent = allCorrect ? "🎉 Perfetto! Tutte le frazioni sono corrette!" : "📝 Controlla le frazioni evidenziate"
+
+    const stats = document.createElement("div")
+    stats.className = "text-lg space-y-2"
+    stats.innerHTML = `
+      <p class="text-green-700">✅ Corrette: ${correctCount}/${totalWords}</p>
+      ${incorrectCount > 0 ? `<p class="text-red-700">❌ Errate: ${incorrectCount}</p>` : ''}
+      ${missedCount > 0 ? `<p class="text-yellow-700">⚠️ Mancanti: ${missedCount}</p>` : ''}
+    `
+
+    feedbackDiv.appendChild(title)
+    feedbackDiv.appendChild(stats)
+
+    if (!allCorrect) {
+      const retryButton = document.createElement("button")
+      retryButton.className = "mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition"
+      retryButton.textContent = "🔄 Riprova"
+      retryButton.onclick = () => {
+        this.clearHighlights()
+        feedbackDiv.remove()
+      }
+      feedbackDiv.appendChild(retryButton)
+    }
+
+    this.element.appendChild(feedbackDiv)
+    feedbackDiv.scrollIntoView({ behavior: "smooth", block: "center" })
   }
 }
