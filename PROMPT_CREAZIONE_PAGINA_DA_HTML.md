@@ -214,7 +214,74 @@ Struttura standard:
 { numero: [num], titolo: "[titolo]", slug: "nvl5_gram_p[num]", view_template: "nvl5_gram_p[num]" }
 ```
 
-### 5. DEPLOY
+### 5. GESTIONE IMMAGINI E FILE
+
+**IMPORTANTE: Nuovo Sistema di Organizzazione File**
+
+A partire dal 13 novembre 2024, tutti i file (HTML, PNG, immagini) devono essere copiati in una cartella dedicata all'interno di `app/assets/images/`:
+
+```bash
+# Crea la cartella per la pagina
+mkdir -p app/assets/images/nvi5_mat/p0XX/
+
+# Copia TUTTI i file della pagina nella cartella dedicata
+cp ~/Windows/book_882/1715676002XXX.html app/assets/images/nvi5_mat/p0XX/
+cp ~/Windows/book_882/pages/1715676002XXX.png app/assets/images/nvi5_mat/p0XX/page.png
+cp ~/Windows/book_882/epub/images/p0XX*.jpg app/assets/images/nvi5_mat/p0XX/
+```
+
+**Struttura Cartelle:**
+```
+app/assets/images/
+├── nvi5_mat/
+│   ├── p046/
+│   │   ├── page.png          # PNG pagina originale (per click-to-view)
+│   │   ├── p046_01.jpg       # Immagini della pagina
+│   │   └── p046_02.jpg
+│   ├── p047/
+│   │   ├── page.png
+│   │   └── p047_01.jpg
+│   └── p051/
+│       ├── page.png
+│       ├── p051_01.jpg       # Esempio espressioni senza parentesi
+│       └── p051_02.jpg       # Esempio espressioni con parentesi
+└── nvl5_gram/
+    ├── p110/
+    │   ├── page.png
+    │   └── p110_01.jpg
+    └── p111/
+        └── page.png
+```
+
+**Riferimenti nelle View ERB:**
+```erb
+<!-- PNG per click-to-view -->
+<div data-controller="exercise-checker page-viewer"
+     data-page-viewer-image-url-value="<%= asset_path('nvi5_mat/p051/page.png') %>">
+
+  <!-- Numero pagina cliccabile -->
+  <div data-action="click->page-viewer#openOriginal">51</div>
+
+  <!-- Immagini della pagina -->
+  <%= image_tag "nvi5_mat/p051/p051_01.jpg", class: "..." %>
+</div>
+```
+
+**Vantaggi:**
+- ✅ Tutti i file della pagina sono organizzati insieme
+- ✅ Facile trovare e gestire le risorse per ogni pagina
+- ✅ Niente conflitti di naming tra pagine diverse
+- ✅ Sistema di backup più semplice (cartella per cartella)
+- ✅ Click sul numero pagina apre il PNG originale
+
+**VECCHIO Sistema (deprecato):**
+```bash
+# ❌ NON fare più così
+cp ~/Windows/book_882/epub/images/p051_01.jpg app/assets/images/
+cp ~/Windows/book_882/epub/images/p051_02.jpg app/assets/images/
+```
+
+### 6. DEPLOY
 ```bash
 rails db:seed
 ```

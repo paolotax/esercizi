@@ -1,188 +1,167 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-indigo-50 via-white to-indigo-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-yellow-100 via-yellow-50 to-yellow-100 rounded-3xl shadow-xl" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('nvi5_mat/p051/page.png') %>">
 
   <!-- Header -->
   <div class="mb-8">
     <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
       <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-        <div class="bg-indigo-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+        <div class="bg-blue-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
           MAPPA
         </div>
-        <h1 class="text-2xl sm:text-3xl font-bold text-indigo-600">ESPRESSIONI ARITMETICHE, MULTIPLI E DIVISORI</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-blue-600">ESPRESSIONI ARITMETICHE, MULTIPLI E DIVISORI</h1>
       </div>
-      <div class="flex-shrink-0 bg-indigo-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+      <div class="flex-shrink-0 bg-blue-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl cursor-pointer hover:bg-blue-700 transition-colors"
+           data-action="click->page-viewer#openOriginal"
+           title="Clicca per vedere la pagina originale">
         51
       </div>
     </div>
   </div>
 
-  <p class="text-center text-base md:text-lg text-gray-700 mb-6">
-    Sintesi dei concetti fondamentali
-  </p>
+  <!-- ESPRESSIONI ARITMETICHE -->
+  <div class="mb-8 bg-white rounded-2xl shadow-lg p-6 border-4 border-blue-300">
+    <h2 class="text-2xl font-bold text-white bg-blue-600 rounded-xl px-6 py-3 mb-6 text-center">
+      ESPRESSIONI ARITMETICHE
+    </h2>
 
-  <!-- Main Map Images -->
-  <div class="space-y-6 mb-8">
-    <%= image_tag "p051_01.jpg", class: "w-full rounded-2xl shadow-2xl border-4 border-indigo-300", alt: "Mappa espressioni aritmetiche" %>
+    <!-- SENZA PARENTESI -->
+    <div class="mb-6">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0">
+          <div class="bg-cyan-400 text-white font-bold rounded-full px-6 py-3 text-lg">
+            SENZA PARENTESI
+          </div>
+        </div>
+        <div class="flex-1">
+          <div class="flex gap-4 items-start">
+            <div class="flex-1 bg-cyan-50 border-2 border-cyan-200 rounded-xl p-4">
+              <h3 class="font-bold text-cyan-700 mb-3">Regola</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li>• prima si eseguono moltiplicazioni e divisioni</li>
+                <li>• poi addizioni e sottrazioni in ordine</li>
+              </ul>
+            </div>
+            <div class="flex-shrink-0 bg-white border-2 border-cyan-200 rounded-xl p-4">
+              <h3 class="font-bold text-cyan-700 mb-3">Esempio</h3>
+              <%= image_tag "nvi5_mat/p051/p051_01.jpg", class: "rounded-lg", alt: "Esempio espressioni senza parentesi", style: "width: calc(100% + 100px);" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <%= image_tag "p051_02.jpg", class: "w-full rounded-2xl shadow-2xl border-4 border-indigo-300", alt: "Mappa multipli e divisori" %>
+    <!-- CON LE PARENTESI -->
+    <div>
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0">
+          <div class="bg-cyan-400 text-white font-bold rounded-full px-6 py-3 text-lg">
+            CON LE PARENTESI
+          </div>
+        </div>
+        <div class="flex-1">
+          <div class="flex gap-4 items-start">
+            <div class="flex-1 bg-cyan-50 border-2 border-cyan-200 rounded-xl p-4">
+              <h3 class="font-bold text-cyan-700 mb-3">Regola</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li><span class="text-red-600">•</span> prima si eseguono le operazioni nelle parentesi tonde <strong class="text-red-600">(...)</strong></li>
+                <li><span class="text-blue-600">•</span> poi quelle nelle parentesi quadre <strong class="text-blue-600">[...]</strong></li>
+                <li><span class="text-green-600">•</span> infine quelle nelle parentesi graffe <strong class="text-green-600">{...}</strong></li>
+              </ul>
+            </div>
+            <div class="flex-shrink-0 bg-white border-2 border-cyan-200 rounded-xl p-4">
+              <h3 class="font-bold text-cyan-700 mb-3">Esempio</h3>
+              <%= image_tag "nvi5_mat/p051/p051_02.jpg", class: "rounded-lg", alt: "Esempio espressioni con parentesi", style: "width: calc(100% + 100px);" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Summary Cards Grid -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <!-- MULTIPLI E DIVISORI -->
+  <div class="bg-white rounded-2xl shadow-lg p-6 border-4 border-blue-300">
+    <h2 class="text-2xl font-bold text-white bg-blue-700 rounded-xl px-6 py-3 mb-6 text-center">
+      MULTIPLI E DIVISORI
+    </h2>
 
-    <!-- Espressioni Aritmetiche -->
-    <div class="bg-white rounded-2xl shadow-lg p-6 border-4 border-blue-200">
-      <h3 class="text-xl font-bold text-blue-600 mb-4 flex items-center gap-2">
-        <span class="text-2xl">📐</span>
-        Espressioni Aritmetiche
-      </h3>
-      <div class="space-y-3">
-        <div class="bg-blue-50 p-4 rounded-lg">
-          <h4 class="font-bold text-blue-700 mb-2">Senza Parentesi</h4>
-          <p class="text-sm text-gray-700">Prima le moltiplicazioni e divisioni, poi le addizioni e sottrazioni (da sinistra a destra)</p>
-          <p class="font-mono text-sm mt-2 bg-white p-2 rounded">5 + 3 × 2 = 5 + 6 = 11</p>
-        </div>
-
-        <div class="bg-blue-50 p-4 rounded-lg">
-          <h4 class="font-bold text-blue-700 mb-2">Con le Parentesi</h4>
-          <p class="text-sm text-gray-700 mb-2">Ordine di risoluzione:</p>
-          <ol class="text-sm space-y-1 ml-4">
-            <li>1️⃣ Parentesi tonde ( )</li>
-            <li>2️⃣ Parentesi quadre [ ]</li>
-            <li>3️⃣ Parentesi graffe { }</li>
-          </ol>
-          <p class="font-mono text-sm mt-2 bg-white p-2 rounded">6 × (5 - 3) = 6 × 2 = 12</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Multipli -->
-    <div class="bg-white rounded-2xl shadow-lg p-6 border-4 border-green-200">
-      <h3 class="text-xl font-bold text-green-600 mb-4 flex items-center gap-2">
-        <span class="text-2xl">✖️</span>
-        Multipli
-      </h3>
-      <div class="bg-green-50 p-4 rounded-lg mb-3">
-        <p class="text-gray-700 mb-2">
-          I <strong>multipli</strong> di un numero si ottengono moltiplicandolo per 0, 1, 2, 3, ...
-        </p>
-        <div class="bg-white p-3 rounded mt-2">
-          <p class="font-bold text-green-700">Esempio: Multipli di 4</p>
-          <div class="flex flex-wrap gap-2 mt-2">
-            <span class="bg-green-100 px-3 py-1 rounded font-mono">0</span>
-            <span class="bg-green-100 px-3 py-1 rounded font-mono">4</span>
-            <span class="bg-green-100 px-3 py-1 rounded font-mono">8</span>
-            <span class="bg-green-100 px-3 py-1 rounded font-mono">12</span>
-            <span class="bg-green-100 px-3 py-1 rounded font-mono">16</span>
-            <span class="bg-green-100 px-3 py-1 rounded font-mono">20</span>
-            <span class="bg-green-100 px-3 py-1 rounded font-mono">...</span>
+    <!-- MULTIPLI -->
+    <div class="mb-6">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0">
+          <div class="bg-cyan-400 text-white font-bold rounded-full px-6 py-3 text-lg">
+            MULTIPLI
           </div>
         </div>
-      </div>
-      <div class="bg-green-100 p-3 rounded-lg">
-        <p class="text-sm text-green-800">
-          💡 <strong>Ricorda:</strong> i multipli di un numero sono infiniti!
-        </p>
-      </div>
-    </div>
-
-    <!-- Divisori -->
-    <div class="bg-white rounded-2xl shadow-lg p-6 border-4 border-orange-200">
-      <h3 class="text-xl font-bold text-orange-600 mb-4 flex items-center gap-2">
-        <span class="text-2xl">➗</span>
-        Divisori
-      </h3>
-      <div class="bg-orange-50 p-4 rounded-lg mb-3">
-        <p class="text-gray-700 mb-2">
-          I <strong>divisori</strong> di un numero sono i numeri per cui è divisibile con resto zero.
-        </p>
-        <div class="bg-white p-3 rounded mt-2">
-          <p class="font-bold text-orange-700">Esempio: Divisori di 12</p>
-          <div class="flex flex-wrap gap-2 mt-2">
-            <span class="bg-orange-100 px-3 py-1 rounded font-mono">1</span>
-            <span class="bg-orange-100 px-3 py-1 rounded font-mono">2</span>
-            <span class="bg-orange-100 px-3 py-1 rounded font-mono">3</span>
-            <span class="bg-orange-100 px-3 py-1 rounded font-mono">4</span>
-            <span class="bg-orange-100 px-3 py-1 rounded font-mono">6</span>
-            <span class="bg-orange-100 px-3 py-1 rounded font-mono">12</span>
-          </div>
-          <p class="text-xs text-gray-600 mt-2">12 : 1 = 12, 12 : 2 = 6, 12 : 3 = 4, ...</p>
-        </div>
-      </div>
-      <div class="bg-orange-100 p-3 rounded-lg">
-        <p class="text-sm text-orange-800">
-          💡 <strong>Ricorda:</strong> i divisori sono sempre in numero finito!
-        </p>
-      </div>
-    </div>
-
-    <!-- Criteri di Divisibilità -->
-    <div class="bg-white rounded-2xl shadow-lg p-6 border-4 border-purple-200">
-      <h3 class="text-xl font-bold text-purple-600 mb-4 flex items-center gap-2">
-        <span class="text-2xl">🔍</span>
-        Criteri di Divisibilità
-      </h3>
-      <div class="space-y-2 text-sm">
-        <div class="bg-purple-50 p-3 rounded-lg">
-          <p><strong class="text-purple-700">Per 2:</strong> la cifra delle unità è pari (0, 2, 4, 6, 8)</p>
-        </div>
-        <div class="bg-purple-50 p-3 rounded-lg">
-          <p><strong class="text-purple-700">Per 3:</strong> la somma delle cifre è divisibile per 3</p>
-        </div>
-        <div class="bg-purple-50 p-3 rounded-lg">
-          <p><strong class="text-purple-700">Per 5:</strong> la cifra delle unità è 0 o 5</p>
-        </div>
-        <div class="bg-purple-50 p-3 rounded-lg">
-          <p><strong class="text-purple-700">Per 9:</strong> la somma delle cifre è divisibile per 9</p>
-        </div>
-        <div class="bg-purple-50 p-3 rounded-lg">
-          <p><strong class="text-purple-700">Per 10:</strong> la cifra delle unità è 0</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Numeri Primi -->
-    <div class="bg-white rounded-2xl shadow-lg p-6 border-4 border-red-200 lg:col-span-2">
-      <h3 class="text-xl font-bold text-red-600 mb-4 flex items-center gap-2">
-        <span class="text-2xl">⭐</span>
-        Numeri Primi e Scomposizione
-      </h3>
-      <div class="grid md:grid-cols-2 gap-4">
-        <div class="bg-red-50 p-4 rounded-lg">
-          <h4 class="font-bold text-red-700 mb-2">Numeri Primi</h4>
-          <p class="text-sm text-gray-700 mb-2">
-            Sono divisibili solo per 1 e per se stessi
-          </p>
-          <div class="bg-white p-2 rounded">
-            <p class="font-mono text-sm">2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, ...</p>
-          </div>
-          <p class="text-xs text-red-600 mt-2">💡 Il numero 1 non è primo!</p>
-        </div>
-        <div class="bg-red-50 p-4 rounded-lg">
-          <h4 class="font-bold text-red-700 mb-2">Scomposizione in Fattori Primi</h4>
-          <p class="text-sm text-gray-700 mb-2">
-            Ogni numero si può scrivere come prodotto di numeri primi
-          </p>
-          <div class="bg-white p-2 rounded">
-            <p class="font-mono text-sm">
-              24 = 2 × 2 × 2 × 3 = 2³ × 3<br/>
-              60 = 2 × 2 × 3 × 5 = 2² × 3 × 5
-            </p>
+        <div class="flex-1">
+          <div class="flex gap-4 items-start">
+            <div class="flex-1 bg-cyan-50 border-2 border-cyan-200 rounded-xl p-4">
+              <h3 class="font-bold text-cyan-700 mb-3">Regola</h3>
+              <p class="text-gray-700">
+                Un numero è <strong>multiplo</strong> di un altro quando lo contiene esattamente una o più volte.
+              </p>
+            </div>
+            <div class="flex-shrink-0 bg-white border-2 border-cyan-200 rounded-xl p-4">
+              <h3 class="font-bold text-cyan-700 mb-3">Esempio</h3>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                  <span class="text-2xl font-bold text-blue-600">•</span>
+                  <span class="text-lg"><strong>10</strong> è multiplo di <strong class="text-blue-600">5</strong></span>
+                  <span class="text-gray-600">→</span>
+                  <span class="font-mono text-blue-600 font-bold">5 × 2 = 10</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-2xl font-bold text-blue-600">•</span>
+                  <span class="text-lg"><strong>21</strong> è multiplo di <strong class="text-blue-600">7</strong></span>
+                  <span class="text-gray-600">→</span>
+                  <span class="font-mono text-blue-600 font-bold">7 × 3 = 21</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-  </div>
+    <!-- DIVISORI -->
+    <div>
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0">
+          <div class="bg-cyan-400 text-white font-bold rounded-full px-6 py-3 text-lg">
+            DIVISORI
+          </div>
+        </div>
+        <div class="flex-1">
+          <div class="flex gap-4 items-start">
+            <div class="flex-1 bg-cyan-50 border-2 border-cyan-200 rounded-xl p-4">
+              <h3 class="font-bold text-cyan-700 mb-3">Regola</h3>
+              <p class="text-gray-700">
+                Un numero è <strong>divisore</strong> di un altro se lo divide esattamente.
+              </p>
+            </div>
+            <div class="flex-shrink-0 bg-white border-2 border-cyan-200 rounded-xl p-4">
+              <h3 class="font-bold text-cyan-700 mb-3">Esempio</h3>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                  <span class="text-2xl font-bold text-red-600">•</span>
+                  <span class="text-lg"><strong class="text-red-600">5</strong> è divisore di <strong>10</strong></span>
+                  <span class="text-gray-600">→</span>
+                  <span class="font-mono text-red-600 font-bold">10 : 5 = 2</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-2xl font-bold text-red-600">•</span>
+                  <span class="text-lg"><strong class="text-red-600">7</strong> è divisore di <strong>21</strong></span>
+                  <span class="text-gray-600">→</span>
+                  <span class="font-mono text-red-600 font-bold">21 : 7 = 3</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <!-- Info Box -->
-  <div class="mt-8 bg-gradient-to-r from-indigo-100 to-indigo-200 rounded-2xl p-6 border-l-4 border-indigo-500">
-    <p class="text-lg text-gray-800">
-      <span class="font-bold text-indigo-700">📚 Usa questa mappa per ripassare!</span>
-      Questi concetti sono fondamentali per tutta la matematica. Torna a consultare questa pagina ogni volta che ne hai bisogno.
-    </p>
   </div>
 
   <!-- Exercise Controls -->
-  <%= render 'shared/exercise_controls', color: 'purple', current_page: 'nvi5_mat_p051' %>
+  <%= render 'shared/exercise_controls', color: 'blue', current_page: 'nvi5_mat_p051', show_exercise_buttons: false %>
 
 </div>

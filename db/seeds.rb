@@ -452,7 +452,23 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 55, titolo: "Confrontare e Ordinare le Frazioni", slug: "nvi5_mat_p055", view_template: "nvi5_mat_p055" },
   { numero: 56, titolo: "Esercizi sulle Frazioni", slug: "nvi5_mat_p056", view_template: "nvi5_mat_p056" },
   { numero: 57, titolo: "Frazioni Proprie, Improprie e Apparenti", slug: "nvi5_mat_p057", view_template: "nvi5_mat_p057" },
-  { numero: 58, titolo: "Laboratorio - Ricostruiamo l'Intero", slug: "nvi5_mat_p058", view_template: "nvi5_mat_p058" }
+  { numero: 58, titolo: "Laboratorio - Ricostruiamo l'Intero", slug: "nvi5_mat_p058", view_template: "nvi5_mat_p058" },
+  { numero: 59, titolo: "Laboratorio - Ricostruiamo l'Intero (Frazioni Qualsiasi)", slug: "nvi5_mat_p059", view_template: "nvi5_mat_p059" },
+  { numero: 60, titolo: "Confrontiamo le Frazioni", slug: "nvi5_mat_p060", view_template: "nvi5_mat_p060" },
+  { numero: 61, titolo: "Confrontare le Frazioni - Il Prodotto in Croce", slug: "nvi5_mat_p061", view_template: "nvi5_mat_p061" },
+  { numero: 62, titolo: "Addizioni e Sottrazioni con le Frazioni", slug: "nvi5_mat_p062", view_template: "nvi5_mat_p062" },
+  { numero: 63, titolo: "La Frazione come Operatore", slug: "nvi5_mat_p063", view_template: "nvi5_mat_p063" },
+  { numero: 64, titolo: "Dalla Frazione all'Intero", slug: "nvi5_mat_p064", view_template: "nvi5_mat_p064" },
+  { numero: 65, titolo: "Frazioni Decimali e Numeri Decimali", slug: "nvi5_mat_p065", view_template: "nvi5_mat_p065" },
+  { numero: 66, titolo: "Confronti e Operazioni con le Frazioni", slug: "nvi5_mat_p066", view_template: "nvi5_mat_p066" },
+  { numero: 67, titolo: "La Percentuale", slug: "nvi5_mat_p067", view_template: "nvi5_mat_p067" },
+  { numero: 68, titolo: "Lo Sconto e l'Interesse", slug: "nvi5_mat_p068", view_template: "nvi5_mat_p068" },
+  { numero: 69, titolo: "Esercizi sulla Percentuale", slug: "nvi5_mat_p069", view_template: "nvi5_mat_p069" },
+  { numero: 70, titolo: "Verifica - Frazioni e Percentuale", slug: "nvi5_mat_p070", view_template: "nvi5_mat_p070" },
+  { numero: 71, titolo: "Modello INVALSI - Frazioni e Percentuale", slug: "nvi5_mat_p071", view_template: "nvi5_mat_p071" },
+  { numero: 72, titolo: "Risolvere Problemi - Usare le Immagini", slug: "nvi5_mat_p072", view_template: "nvi5_mat_p072" },
+  { numero: 73, titolo: "Esercizi - Risolvere Problemi", slug: "nvi5_mat_p073", view_template: "nvi5_mat_p073" },
+  { numero: 74, titolo: "Riflettere sui Dati e sul Risultato", slug: "nvi5_mat_p074", view_template: "nvi5_mat_p074" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end
