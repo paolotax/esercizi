@@ -47,12 +47,10 @@
 
         <div>
           <p class="mb-2">Chi ha risposto correttamente?
-            <input type="text" class="w-48 px-3 py-2 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none ml-2">
+            <input type="text" class="w-48 px-3 py-2 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none ml-2" data-correct-answer="Laura">
           </p>
         </div>
       </div>
-
-      <%= image_tag "nvi5_mat/p074/p074_01.jpg", class: "w-full md:w-64 rounded-lg shadow-lg", alt: "Taxi" %>
     </div>
 
     <div class="bg-pink-50 border-2 border-pink-300 rounded-xl p-4">
@@ -66,28 +64,28 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <!-- Problema gelati -->
-      <div class="space-y-4">
+      <div class="space-y-4" data-controller="word-choice">
         <div class="flex gap-3">
-          <%= image_tag "nvi5_mat/p074/p074_02.jpg", class: "w-32 rounded-lg shadow-lg", alt: "Gelati" %>
-          <div class="flex-1 bg-cyan-50 border-2 border-cyan-300 rounded-xl p-3">
+          <%= image_tag "nvi5_mat/p074/p074_01.jpg", class: "w-full md:w-64 rounded-lg shadow-lg", alt: "Taxi" %>
+          <%# <div class="flex-1 bg-cyan-50 border-2 border-cyan-300 rounded-xl p-3">
             <p class="text-sm">1 CONFEZIONE 5 EURO<br>3 CONFEZIONI 18 EURO</p>
-          </div>
+          </div> %>
         </div>
 
         <div class="space-y-2">
           <div>
             <span>– Quanto paghi ogni confezione se ne acquisti tre?</span>
-            <input type="text" class="w-32 px-2 py-1 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none ml-2">
+            <input type="text" class="w-32 px-2 py-1 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none ml-2" data-correct-answer="6">
           </div>
           <div class="flex items-center gap-3">
             <span>– La proposta è conveniente?</span>
-            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100">Sì</button>
-            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100">No</button>
+            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100 cursor-pointer" data-word-choice-target="word" data-group="gelati-conveniente" data-action="click->word-choice#select">Sì</button>
+            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100 cursor-pointer" data-word-choice-target="word" data-group="gelati-conveniente" data-action="click->word-choice#select" data-correct="true">No</button>
           </div>
           <div class="flex items-center gap-3">
             <span>– Ci sono informazioni impossibili o non accettabili?</span>
-            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100">Sì</button>
-            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100">No</button>
+            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100 cursor-pointer" data-word-choice-target="word" data-group="gelati-impossibili" data-action="click->word-choice#select" data-correct="true">Sì</button>
+            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100 cursor-pointer" data-word-choice-target="word" data-group="gelati-impossibili" data-action="click->word-choice#select">No</button>
           </div>
         </div>
 
@@ -97,8 +95,32 @@
       </div>
 
       <!-- Problema treni -->
-      <div class="space-y-4">
-        <%= image_tag "nvi5_mat/p074/p074_03.jpg", class: "w-full rounded-lg shadow-lg", alt: "Orario treni" %>
+      <div class="space-y-4" data-controller="word-choice">
+        <table class="w-full border-2 border-blue-400 rounded-lg overflow-hidden mb-4">
+          <thead>
+            <tr class="bg-blue-200">
+              <th colspan="2" class="border border-blue-400 px-3 py-2 text-center font-bold text-sm">AI TRENI</th>
+            </tr>
+            <tr class="bg-blue-100">
+              <th class="border border-blue-400 px-3 py-2 text-center font-bold text-sm">Partenza ore</th>
+              <th class="border border-blue-400 px-3 py-2 text-center font-bold text-sm">Arrivo ore</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-blue-400 px-3 py-2 text-center text-sm">Firenze 10:05</td>
+              <td class="border border-blue-400 px-3 py-2 text-center text-sm">Palermo 10:35</td>
+            </tr>
+            <tr>
+              <td class="border border-blue-400 px-3 py-2 text-center text-sm">Firenze 10:20</td>
+              <td class="border border-blue-400 px-3 py-2 text-center text-sm">Torino 14:00</td>
+            </tr>
+            <tr>
+              <td class="border border-blue-400 px-3 py-2 text-center text-sm">Firenze 10:40</td>
+              <td class="border border-blue-400 px-3 py-2 text-center text-sm">Milano 13:25</td>
+            </tr>
+          </tbody>
+        </table>
 
         <div class="space-y-2">
           <div>
@@ -106,26 +128,26 @@
           </div>
           <div>
             <span class="ml-4">FI-PA</span>
-            <input type="text" class="w-32 px-2 py-1 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none ml-2">
+            <input type="text" class="w-32 px-2 py-1 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none ml-2" data-correct-answer="30 minuti">
           </div>
           <div>
             <span class="ml-4">FI-MI</span>
-            <input type="text" class="w-32 px-2 py-1 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none ml-2">
+            <input type="text" class="w-32 px-2 py-1 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none ml-2" data-correct-answer="2 ore e 45 minuti">
           </div>
           <div>
             <span class="ml-4">FI-TO</span>
-            <input type="text" class="w-32 px-2 py-1 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none ml-2">
+            <input type="text" class="w-32 px-2 py-1 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none ml-2" data-correct-answer="3 ore e 40 minuti">
           </div>
           <div class="flex items-center gap-3">
             <span>– Sono tutti tempi possibili?</span>
-            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100">Sì</button>
-            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100">No</button>
+            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100 cursor-pointer" data-word-choice-target="word" data-group="treni-possibili" data-action="click->word-choice#select">Sì</button>
+            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100 cursor-pointer" data-word-choice-target="word" data-group="treni-possibili" data-action="click->word-choice#select" data-correct="true">No</button>
             <span>Perché?</span>
           </div>
           <div class="flex items-center gap-3">
             <span>– Ci sono informazioni impossibili o non accettabili?</span>
-            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100">Sì</button>
-            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100">No</button>
+            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100 cursor-pointer" data-word-choice-target="word" data-group="treni-impossibili" data-action="click->word-choice#select" data-correct="true">Sì</button>
+            <button class="px-4 py-1 border-2 border-blue-300 rounded-lg hover:bg-blue-100 cursor-pointer" data-word-choice-target="word" data-group="treni-impossibili" data-action="click->word-choice#select">No</button>
           </div>
         </div>
 
