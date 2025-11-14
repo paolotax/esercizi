@@ -17,6 +17,9 @@ export default class extends Controller {
       disciplinaNome: null
     }
 
+    // Riferimento alla sidebar per salvare scroll
+    this.sidebar = document.getElementById('sidebar-nav')
+
     // Carica stato salvato o inizia dai corsi
     this.loadState()
     this.render()
@@ -176,6 +179,9 @@ export default class extends Controller {
   renderContent() {
     const { level, corsoId, volumeId, disciplinaId } = this.navigationState
 
+    // Salva la posizione di scroll corrente
+    const scrollPosition = this.sidebar ? this.sidebar.scrollTop : 0
+
     let html = ''
 
     if (level === 'corsi') {
@@ -193,6 +199,11 @@ export default class extends Controller {
     }
 
     this.contentTarget.innerHTML = html
+
+    // Ripristina la posizione di scroll
+    if (this.sidebar) {
+      this.sidebar.scrollTop = scrollPosition
+    }
   }
 
   renderCorsi() {
@@ -295,6 +306,7 @@ export default class extends Controller {
 
       return `
         <a href="/pagine/${paginaSlug}"
+           data-turbo-frame="_top"
            class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition group">
           <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
                style="background-color: ${disciplinaColore}">
