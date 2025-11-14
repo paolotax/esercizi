@@ -17,10 +17,36 @@ export default class extends Controller {
       // Su desktop, ripristina lo stato salvato
       this.restoreSidebarVisibility()
     }
+
+    // Aggiungi listener per resize
+    this.boundHandleResize = this.handleResize.bind(this)
+    window.addEventListener('resize', this.boundHandleResize)
   }
 
   disconnect() {
-    // Nessun listener da rimuovere con data-turbo-permanent
+    // Rimuovi listener per resize
+    if (this.boundHandleResize) {
+      window.removeEventListener('resize', this.boundHandleResize)
+    }
+  }
+
+  handleResize() {
+    const isMobile = this.isMobile()
+    const isSidebarVisible = this.hasSidebarTarget && !this.sidebarTarget.classList.contains("hidden")
+
+    if (isMobile && isSidebarVisible) {
+      // Passaggio a mobile con sidebar visibile: mostra overlay
+      if (this.hasOverlayTarget) {
+        this.overlayTarget.classList.remove("hidden")
+        document.body.style.overflow = 'hidden'
+      }
+    } else if (!isMobile) {
+      // Passaggio a desktop: nascondi overlay
+      if (this.hasOverlayTarget) {
+        this.overlayTarget.classList.add("hidden")
+        document.body.style.overflow = ''
+      }
+    }
   }
 
   isHomePage() {
