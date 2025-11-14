@@ -24,39 +24,20 @@ export default class extends Controller {
     this.loadState()
     this.render()
 
-    // Salva e ripristina scroll quando si naviga con Turbo
-    this.boundBeforeVisit = this.saveScrollPosition.bind(this)
-    this.boundAfterRender = this.restoreScrollPosition.bind(this)
-
-    document.addEventListener('turbo:before-visit', this.boundBeforeVisit)
-    document.addEventListener('turbo:render', this.boundAfterRender)
+    // Ripristina scroll se c'è un valore salvato
+    const savedScroll = sessionStorage.getItem('sidebar-scroll-temp')
+    if (savedScroll !== null && this.sidebar) {
+      // Usa requestAnimationFrame per assicurarsi che il rendering sia completo
+      requestAnimationFrame(() => {
+        this.sidebar.scrollTop = parseInt(savedScroll, 10)
+        // Rimuovi il valore dopo averlo usato
+        sessionStorage.removeItem('sidebar-scroll-temp')
+      })
+    }
   }
 
   disconnect() {
-    if (this.boundBeforeVisit) {
-      document.removeEventListener('turbo:before-visit', this.boundBeforeVisit)
-    }
-    if (this.boundAfterRender) {
-      document.removeEventListener('turbo:render', this.boundAfterRender)
-    }
-  }
-
-  saveScrollPosition() {
-    if (this.sidebar) {
-      localStorage.setItem('sidebar-scroll-position', this.sidebar.scrollTop)
-    }
-  }
-
-  restoreScrollPosition() {
-    if (this.sidebar) {
-      const scrollPos = localStorage.getItem('sidebar-scroll-position')
-      if (scrollPos !== null) {
-        // Usa setTimeout per assicurarsi che il DOM sia aggiornato
-        setTimeout(() => {
-          this.sidebar.scrollTop = parseInt(scrollPos, 10)
-        }, 0)
-      }
-    }
+    // Cleanup se necessario
   }
 
   goBack(event) {
@@ -318,6 +299,15 @@ export default class extends Controller {
     }).join('')
   }
 
+  handlePaginaClick(event) {
+    // Salva la posizione di scroll corrente
+    if (this.sidebar) {
+      const scrollTop = this.sidebar.scrollTop
+      // Salva temporaneamente la posizione
+      sessionStorage.setItem('sidebar-scroll-temp', scrollTop)
+    }
+  }
+
   renderPagine(disciplinaId) {
     const disciplinaData = this.dataTarget.querySelector(`[data-disciplina-id="${disciplinaId}"]`)
     if (!disciplinaData) return ''
@@ -333,6 +323,7 @@ export default class extends Controller {
       return `
         <a href="/pagine/${paginaSlug}"
            data-turbo-frame="_top"
+           data-action="click->sidebar-breadcrumb#handlePaginaClick"
            class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 transition group">
           <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
                style="background-color: ${disciplinaColore}">
