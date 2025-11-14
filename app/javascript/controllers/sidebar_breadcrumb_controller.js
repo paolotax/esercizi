@@ -23,6 +23,40 @@ export default class extends Controller {
     // Carica stato salvato o inizia dai corsi
     this.loadState()
     this.render()
+
+    // Salva e ripristina scroll quando si naviga con Turbo
+    this.boundBeforeVisit = this.saveScrollPosition.bind(this)
+    this.boundAfterRender = this.restoreScrollPosition.bind(this)
+
+    document.addEventListener('turbo:before-visit', this.boundBeforeVisit)
+    document.addEventListener('turbo:render', this.boundAfterRender)
+  }
+
+  disconnect() {
+    if (this.boundBeforeVisit) {
+      document.removeEventListener('turbo:before-visit', this.boundBeforeVisit)
+    }
+    if (this.boundAfterRender) {
+      document.removeEventListener('turbo:render', this.boundAfterRender)
+    }
+  }
+
+  saveScrollPosition() {
+    if (this.sidebar) {
+      localStorage.setItem('sidebar-scroll-position', this.sidebar.scrollTop)
+    }
+  }
+
+  restoreScrollPosition() {
+    if (this.sidebar) {
+      const scrollPos = localStorage.getItem('sidebar-scroll-position')
+      if (scrollPos !== null) {
+        // Usa setTimeout per assicurarsi che il DOM sia aggiornato
+        setTimeout(() => {
+          this.sidebar.scrollTop = parseInt(scrollPos, 10)
+        }, 0)
+      }
+    }
   }
 
   goBack(event) {
@@ -179,9 +213,6 @@ export default class extends Controller {
   renderContent() {
     const { level, corsoId, volumeId, disciplinaId } = this.navigationState
 
-    // Salva la posizione di scroll corrente
-    const scrollPosition = this.sidebar ? this.sidebar.scrollTop : 0
-
     let html = ''
 
     if (level === 'corsi') {
@@ -199,11 +230,6 @@ export default class extends Controller {
     }
 
     this.contentTarget.innerHTML = html
-
-    // Ripristina la posizione di scroll
-    if (this.sidebar) {
-      this.sidebar.scrollTop = scrollPosition
-    }
   }
 
   renderCorsi() {
