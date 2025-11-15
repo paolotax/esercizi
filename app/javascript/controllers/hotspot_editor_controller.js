@@ -19,15 +19,41 @@ export default class extends Controller {
     if (!this.hasInfoTarget) {
       const info = document.createElement('div')
       info.dataset.hotspotEditorTarget = "info"
-      info.className = "fixed top-4 right-4 bg-white border-4 border-blue-500 rounded-lg p-4 shadow-2xl z-50 max-w-md"
+      info.className = "fixed top-4 right-4 bg-white border-4 border-blue-500 rounded-lg shadow-2xl z-50 cursor-move"
+      info.style.width = "600px"
       info.innerHTML = `
-        <h3 class="font-bold text-lg mb-2 text-blue-700">Hotspot Editor</h3>
-        <div class="text-xs space-y-1">
-          <p class="text-gray-600">Trascina gli hotspot per posizionarli</p>
-          <div id="hotspot-values" class="mt-3 font-mono text-xs bg-gray-100 p-2 rounded max-h-96 overflow-y-auto"></div>
+        <div class="bg-blue-500 text-white px-3 py-2 font-bold text-sm" data-panel-header>
+          Hotspot Values (drag to move)
         </div>
+        <div id="hotspot-values" class="font-mono text-xs bg-gray-100 p-3 max-h-96 overflow-y-auto"></div>
       `
       document.body.appendChild(info)
+
+      // Make panel draggable
+      const header = info.querySelector('[data-panel-header]')
+      let isDragging = false
+      let currentX, currentY, initialX, initialY
+
+      header.addEventListener('mousedown', (e) => {
+        isDragging = true
+        initialX = e.clientX - info.offsetLeft
+        initialY = e.clientY - info.offsetTop
+      })
+
+      document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          e.preventDefault()
+          currentX = e.clientX - initialX
+          currentY = e.clientY - initialY
+          info.style.left = currentX + 'px'
+          info.style.top = currentY + 'px'
+          info.style.right = 'auto'
+        }
+      })
+
+      document.addEventListener('mouseup', () => {
+        isDragging = false
+      })
     }
   }
 
@@ -125,16 +151,11 @@ export default class extends Controller {
       }
     })
 
-    valuesDiv.innerHTML = hotspots.map(h =>
-      `<div class="mb-2 p-2 border border-gray-300 rounded ${this.dragging?.querySelector('.sr-only')?.textContent === h.label ? 'bg-yellow-200 font-bold' : ''}">
-        <div class="font-bold text-blue-700">${h.label}</div>
-        <div>top: "${h.top}", left: "${h.left}"</div>
-        <div>width: "${h.width}", height: "${h.height}"</div>
-        <div class="text-xs text-gray-500 mt-1">
-          { label: "${h.label}", top: "${h.top}", left: "${h.left}", width: "${h.width}", height: "${h.height}" }
-        </div>
-      </div>`
-    ).join('')
+    const code = hotspots.map(h =>
+      `        { label: "${h.label}", top: "${h.top}", left: "${h.left}", width: "${h.width}", height: "${h.height}" }`
+    ).join(',\n')
+
+    valuesDiv.innerHTML = `<pre class="text-xs leading-relaxed">${code}</pre>`
   }
 
   copyAll() {
