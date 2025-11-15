@@ -1,12 +1,57 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-lime-50 via-white to-green-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-orange-50 via-white to-orange-50 rounded-3xl shadow-xl">
 
+  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Image content -->
   <div class="mb-6">
-    <%= image_tag "nvl5_gram/p100/p100_01.jpg", class: "w-full h-auto rounded-2xl shadow-xl" %>
+    <p class="text-sm md:text-base text-orange-700">
+      Osserva l'immagine del negozio di abbigliamento e tocca i cartellini per ascoltare la parola corretta.
+    </p>
   </div>
 
-  <%= render partial: "shared/exercise_controls" %>
+  <!-- Interactive Image -->
+  <div class="relative rounded-2xl overflow-hidden border-4 border-orange-200 shadow-2xl">
+    <%= image_tag "nvl5_gram/p100/p100_01.jpg",
+        alt: "Negozio di abbigliamento con cartellini: specchio, borse, cassiera, portafogli, maglietta, camerini, tenda, camicia, cappelli, giacca, piumino, cappotto, scarpe da ginnastica, stivali, scarpe e pantaloni",
+        class: "w-full h-full object-cover select-none pointer-events-none" %>
 
+    <div class="absolute inset-0">
+      <% hotspots = [
+        { label: "Specchio", top: "18.0%", left: "6.0%", width: "9.5%", height: "3.5%" },
+        { label: "Borse", top: "12.5%", left: "30.0%", width: "7.5%", height: "3.5%" },
+        { label: "Cassiera", top: "22.5%", left: "26.0%", width: "10.0%", height: "3.5%" },
+        { label: "Portafogli", top: "37.0%", left: "22.0%", width: "12.0%", height: "3.5%" },
+        { label: "Maglietta", top: "37.0%", left: "34.0%", width: "11.5%", height: "3.5%" },
+        { label: "Camerini", top: "23.0%", left: "55.0%", width: "11.0%", height: "3.5%" },
+        { label: "Tenda", top: "17.5%", left: "83.0%", width: "7.5%", height: "3.5%" },
+        { label: "Camicia", top: "25.5%", left: "79.0%", width: "9.0%", height: "3.5%" },
+        { label: "Cappelli", top: "45.5%", left: "47.0%", width: "10.0%", height: "3.5%" },
+        { label: "Giacca", top: "49.5%", left: "73.0%", width: "8.0%", height: "3.5%" },
+        { label: "Piumino", top: "52.5%", left: "88.0%", width: "9.5%", height: "3.5%" },
+        { label: "Cappotto", top: "57.5%", left: "79.0%", width: "11.0%", height: "3.5%" },
+        { label: "Scarpe da ginnastica", top: "61.5%", left: "6.0%", width: "18.0%", height: "3.5%" },
+        { label: "Stivali", top: "57.5%", left: "26.0%", width: "9.0%", height: "3.5%" },
+        { label: "Scarpe", top: "71.5%", left: "23.0%", width: "8.5%", height: "3.5%" },
+        { label: "Pantaloni", top: "64.5%", left: "48.0%", width: "11.5%", height: "3.5%" }
+      ] %>
+
+      <% hotspots.each do |hotspot| %>
+        <button type="button"
+                class="absolute rounded-xl bg-orange-500/10 hover:bg-orange-500/25 border-2 border-transparent hover:border-orange-500 focus:border-orange-600 focus:outline-none transition shadow-sm"
+                style="top: <%= hotspot[:top] %>; left: <%= hotspot[:left] %>; width: <%= hotspot[:width] %>; height: <%= hotspot[:height] %>;"
+                aria-label="Leggi: <%= hotspot[:label] %>"
+                data-controller="image-speech"
+                data-image-speech-word-value="<%= hotspot[:label] %>"
+                data-image-speech-lang-value="it-IT"
+                data-action="click->image-speech#speak">
+          <span class="sr-only"><%= hotspot[:label] %></span>
+        </button>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'orange', show_exercise_buttons: false %>
+  </div>
 </div>
