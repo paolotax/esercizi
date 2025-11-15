@@ -10,38 +10,41 @@
   </div>
 
   <!-- Interactive Image -->
-  <div class="relative rounded-2xl overflow-hidden border-4 border-pink-200 shadow-2xl">
+  <div class="relative rounded-2xl overflow-hidden border-4 border-pink-200 shadow-2xl"
+       data-controller="hotspot-editor"
+       data-hotspot-editor-target="container">
     <%= image_tag "nvl5_gram/p004/p04_01.jpg",
         alt: "Biblioteca con cartellini: finestra, manifesto, scala, scaffale, lampada, quaderno, tavolo, libro, sedia, cuscino, tappeto, poltrona, schermo interattivo e bibliotecaria",
         class: "w-full h-full object-cover select-none pointer-events-none" %>
 
     <div class="absolute inset-0">
-      <% hotspots = [
-        { label: "Finestra", top: "8.5%", left: "8.0%", width: "10.0%", height: "3.5%" },
-        { label: "Manifesto", top: "8.5%", left: "31.0%", width: "10.5%", height: "3.5%" },
-        { label: "Scala", top: "28.5%", left: "11.5%", width: "7.0%", height: "3.5%" },
-        { label: "Scaffale", top: "40.5%", left: "12.0%", width: "9.5%", height: "3.5%" },
-        { label: "Lampada", top: "48.5%", left: "3.5%", width: "9.0%", height: "3.5%" },
-        { label: "Quaderno", top: "45.0%", left: "30.0%", width: "10.5%", height: "3.5%" },
-        { label: "Tavolo", top: "48.5%", left: "51.5%", width: "8.5%", height: "3.5%" },
-        { label: "Libro", top: "48.0%", left: "27.0%", width: "7.0%", height: "3.5%" },
-        { label: "Sedia", top: "58.0%", left: "35.0%", width: "6.5%", height: "3.5%" },
-        { label: "Cuscino", top: "58.0%", left: "15.0%", width: "8.5%", height: "3.5%" },
-        { label: "Tappeto", top: "68.0%", left: "12.5%", width: "9.5%", height: "3.5%" },
-        { label: "Poltrona", top: "68.0%", left: "35.5%", width: "10.0%", height: "3.5%" },
-        { label: "Schermo interattivo", top: "32.0%", left: "66.0%", width: "16.0%", height: "3.5%" },
-        { label: "Bibliotecaria", top: "68.0%", left: "79.0%", width: "14.5%", height: "3.5%" }
+      <% hotspots = [       
+        { label: "Finestra", top: "12.9943%", left: "8.29499%", width: "10%", height: "3.5%" },
+        { label: "Manifesto", top: "12.2655%", left: "34.1465%", width: "10.5%", height: "3.5%" },
+        { label: "Scala", top: "41.74%", left: "12.2866%", width: "7%", height: "3.5%" },
+        { label: "Scaffale", top: "56.4122%", left: "13.6716%", width: "9.5%", height: "3.5%" },
+        { label: "Lampada", top: "64.0478%", left: "2.91003%", width: "9%", height: "3.5%" },
+        { label: "Quaderno", top: "57.0253%", left: "37.473%", width: "10.5%", height: "3.5%" },
+        { label: "Tavolo", top: "59.675%", left: "53.9582%", width: "8.5%", height: "3.5%" },
+        { label: "Libro", top: "62.6976%", left: "35.2596%", width: "7%", height: "3.5%" },
+        { label: "Sedia", top: "71.4829%", left: "44.4395%", width: "6.5%", height: "3.5%" },
+        { label: "Cuscino", top: "74.5196%", left: "30.2409%", width: "8.5%", height: "3.5%" },
+        { label: "Tappeto", top: "90.4715%", left: "15.0565%", width: "9.5%", height: "3.5%" },
+        { label: "Poltrona", top: "88.528%", left: "39.5315%", width: "10%", height: "3.5%" },
+        { label: "Schermo interattivo", top: "43.7823%", left: "75.6362%", width: "12.4602%", height: "6.05082%" },
+        { label: "Bibliotecaria", top: "89.4997%", left: "85.5983%", width: "12.4351%", height: "3.98587%" }
       ] %>
 
       <% hotspots.each do |hotspot| %>
         <button type="button"
-                class="absolute rounded-xl bg-pink-500 hover:bg-pink-500/25 border-2 border-transparent hover:border-pink-500 focus:border-pink-600 focus:outline-none transition shadow-sm"
+                class="absolute rounded-xl bg-pink-500/10 hover:bg-pink-500/25 border-2 border-transparent hover:border-pink-500 focus:border-pink-600 focus:outline-none transition shadow-sm cursor-move"
                 style="top: <%= hotspot[:top] %>; left: <%= hotspot[:left] %>; width: <%= hotspot[:width] %>; height: <%= hotspot[:height] %>;"
                 aria-label="Leggi: <%= hotspot[:label] %>"
                 data-controller="image-speech"
+                data-hotspot-editor-target="hotspot"
                 data-image-speech-word-value="<%= hotspot[:label] %>"
                 data-image-speech-lang-value="it-IT"
-                data-action="click->image-speech#speak">
+                data-action="mousedown->hotspot-editor#startDrag click->image-speech#speak">
           <span class="sr-only"><%= hotspot[:label] %></span>
         </button>
       <% end %>

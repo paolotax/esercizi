@@ -30,7 +30,7 @@ export default class extends Controller {
       if (!hotspot.querySelector('[data-resize-handle]')) {
         const handle = document.createElement('div')
         handle.dataset.resizeHandle = ''
-        handle.className = 'absolute bottom-0 right-0 w-3 h-3 bg-white border-2 border-current rounded-full cursor-nwse-resize'
+        handle.className = 'absolute bottom-0 right-0 w-3 h-3 bg-white border-2 border-current rounded-full cursor-nwse-resize hidden'
         handle.addEventListener('mousedown', (e) => this.startResize(e, hotspot))
         hotspot.appendChild(handle)
       }
@@ -333,11 +333,11 @@ export default class extends Controller {
   }
 
   hotspotTargetConnected(element) {
-    // Aggiungi resize handle quando un nuovo hotspot viene aggiunto
+    // Aggiungi resize handle quando un nuovo hotspot viene aggiunto (nascosto di default)
     if (!element.querySelector('[data-resize-handle]')) {
       const handle = document.createElement('div')
       handle.dataset.resizeHandle = ''
-      handle.className = 'absolute bottom-0 right-0 w-3 h-3 bg-white border-2 border-current rounded-full cursor-nwse-resize'
+      handle.className = 'absolute bottom-0 right-0 w-3 h-3 bg-white border-2 border-current rounded-full cursor-nwse-resize hidden'
       handle.addEventListener('mousedown', (e) => this.startResize(e, element))
       element.appendChild(handle)
     }
@@ -354,11 +354,17 @@ export default class extends Controller {
       this.editButton.classList.remove('bg-yellow-500', 'hover:bg-yellow-600')
       this.editButton.classList.add('bg-green-500', 'hover:bg-green-600')
 
-      // Rendi hotspot completamente visibili
+      // Rendi hotspot completamente visibili e mostra resize handles
       this.hotspotTargets.forEach(hotspot => {
         const currentBg = hotspot.className
         // Rimuovi /10 dall'opacità
         hotspot.className = currentBg.replace(/bg-(\w+)-(\d+)\/10/, 'bg-$1-$2')
+
+        // Mostra resize handle
+        const handle = hotspot.querySelector('[data-resize-handle]')
+        if (handle) {
+          handle.classList.remove('hidden')
+        }
       })
 
       this.updateInfoPanel()
@@ -369,12 +375,18 @@ export default class extends Controller {
       this.editButton.classList.remove('bg-green-500', 'hover:bg-green-600')
       this.editButton.classList.add('bg-yellow-500', 'hover:bg-yellow-600')
 
-      // Rimetti hotspot semi-trasparenti
+      // Rimetti hotspot semi-trasparenti e nascondi resize handles
       this.hotspotTargets.forEach(hotspot => {
         const currentBg = hotspot.className
         // Aggiungi /10 all'opacità se non c'è già
         if (!currentBg.includes('/10')) {
           hotspot.className = currentBg.replace(/bg-(\w+)-(\d+)(?!\/)/, 'bg-$1-$2/10')
+        }
+
+        // Nascondi resize handle
+        const handle = hotspot.querySelector('[data-resize-handle]')
+        if (handle) {
+          handle.classList.add('hidden')
         }
       })
     }
