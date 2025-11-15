@@ -10,7 +10,9 @@
   </div>
 
   <!-- Interactive Image -->
-  <div class="relative rounded-2xl overflow-hidden border-4 border-orange-200 shadow-2xl">
+  <div class="relative rounded-2xl overflow-hidden border-4 border-orange-200 shadow-2xl"
+       data-controller="hotspot-editor"
+       data-hotspot-editor-target="container">
     <%= image_tag "nvl5_gram/p100/p100_01.jpg",
         alt: "Negozio di abbigliamento con cartellini: specchio, borse, cassiera, portafogli, maglietta, camerini, tenda, camicia, cappelli, giacca, piumino, cappotto, scarpe da ginnastica, stivali, scarpe e pantaloni",
         class: "w-full h-full object-cover select-none pointer-events-none" %>
@@ -37,13 +39,14 @@
 
       <% hotspots.each do |hotspot| %>
         <button type="button"
-                class="absolute rounded-xl bg-orange-500 hover:bg-orange-500/25 border-2 border-transparent hover:border-orange-500 focus:border-orange-600 focus:outline-none transition shadow-sm"
+                class="absolute rounded-xl bg-orange-500 hover:bg-orange-500/25 border-2 border-transparent hover:border-orange-500 focus:border-orange-600 focus:outline-none transition shadow-sm cursor-move"
                 style="top: <%= hotspot[:top] %>; left: <%= hotspot[:left] %>; width: <%= hotspot[:width] %>; height: <%= hotspot[:height] %>;"
                 aria-label="Leggi: <%= hotspot[:label] %>"
                 data-controller="image-speech"
+                data-hotspot-editor-target="hotspot"
                 data-image-speech-word-value="<%= hotspot[:label] %>"
                 data-image-speech-lang-value="it-IT"
-                data-action="click->image-speech#speak">
+                data-action="mousedown->hotspot-editor#startDrag click->image-speech#speak">
           <span class="sr-only"><%= hotspot[:label] %></span>
         </button>
       <% end %>
