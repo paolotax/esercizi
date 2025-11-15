@@ -6,13 +6,31 @@ export default class extends Controller {
   connect() {
     console.log("Hotspot editor connected")
     this.dragging = null
+    this.resizing = null
     this.startX = 0
     this.startY = 0
     this.startLeft = 0
     this.startTop = 0
+    this.startWidth = 0
+    this.startHeight = 0
 
     // Aggiungi info panel se non esiste
     this.createInfoPanel()
+
+    // Aggiungi resize handles a tutti gli hotspot
+    this.addResizeHandles()
+  }
+
+  addResizeHandles() {
+    this.hotspotTargets.forEach(hotspot => {
+      if (!hotspot.querySelector('[data-resize-handle]')) {
+        const handle = document.createElement('div')
+        handle.dataset.resizeHandle = ''
+        handle.className = 'absolute bottom-0 right-0 w-3 h-3 bg-white border-2 border-current rounded-full cursor-nwse-resize'
+        handle.addEventListener('mousedown', (e) => this.startResize(e, hotspot))
+        hotspot.appendChild(handle)
+      }
+    })
   }
 
   createInfoPanel() {
@@ -58,6 +76,11 @@ export default class extends Controller {
   }
 
   startDrag(event) {
+    // Non iniziare drag se stiamo cliccando sul resize handle
+    if (event.target.dataset.resizeHandle !== undefined) {
+      return
+    }
+
     event.preventDefault()
 
     this.dragging = event.currentTarget
@@ -80,6 +103,29 @@ export default class extends Controller {
     // Bind events
     this.boundMouseMove = this.drag.bind(this)
     this.boundMouseUp = this.stopDrag.bind(this)
+
+    document.addEventListener('mousemove', this.boundMouseMove)
+    document.addEventListener('mouseup', this.boundMouseUp)
+  }
+
+  startResize(event, hotspot) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    this.resizing = hotspot
+    this.startX = event.clientX
+    this.startY = event.clientY
+
+    // Dimensioni correnti in percentuale
+    this.startWidth = parseFloat(this.resizing.style.width)
+    this.startHeight = parseFloat(this.resizing.style.height)
+
+    // Aggiungi classe visual feedback
+    this.resizing.classList.add('ring-4', 'ring-blue-400', 'z-50')
+
+    // Bind events
+    this.boundMouseMove = this.resize.bind(this)
+    this.boundMouseUp = this.stopResize.bind(this)
 
     document.addEventListener('mousemove', this.boundMouseMove)
     document.addEventListener('mouseup', this.boundMouseUp)
@@ -114,6 +160,61 @@ export default class extends Controller {
 
     // Aggiorna info panel in tempo reale
     this.updateInfoPanel()
+  }
+
+  resize(event) {
+    if (!this.resizing) return
+
+    event.preventDefault()
+
+    const containerRect = this.containerTarget.getBoundingClientRect()
+    const deltaX = event.clientX - this.startX
+    const deltaY = event.clientY - this.startY
+
+    // Calcola percentuali
+    const deltaWidthPercent = (deltaX / containerRect.width) * 100
+    const deltaHeightPercent = (deltaY / containerRect.height) * 100
+
+    let newWidth = this.startWidth + deltaWidthPercent
+    let newHeight = this.startHeight + deltaHeightPercent
+
+    // Dimensioni minime
+    newWidth = Math.max(2, newWidth)
+    newHeight = Math.max(2, newHeight)
+
+    // Non superare i bordi del contenitore
+    const currentLeft = parseFloat(this.resizing.style.left)
+    const currentTop = parseFloat(this.resizing.style.top)
+
+    newWidth = Math.min(newWidth, 100 - currentLeft)
+    newHeight = Math.min(newHeight, 100 - currentTop)
+
+    // Applica nuove dimensioni
+    this.resizing.style.width = `${newWidth}%`
+    this.resizing.style.height = `${newHeight}%`
+
+    // Aggiorna info panel in tempo reale
+    this.updateInfoPanel()
+  }
+
+  stopResize(event) {
+    if (!this.resizing) return
+
+    // Rimuovi visual feedback
+    this.resizing.classList.remove('ring-4', 'ring-blue-400', 'z-50')
+
+    // Aggiorna info finale
+    this.updateInfoPanel()
+
+    // Log in console
+    const label = this.resizing.querySelector('.sr-only')?.textContent || 'Unknown'
+    console.log(`{ label: "${label}", top: "${this.resizing.style.top}", left: "${this.resizing.style.left}", width: "${this.resizing.style.width}", height: "${this.resizing.style.height}" },`)
+
+    // Cleanup
+    document.removeEventListener('mousemove', this.boundMouseMove)
+    document.removeEventListener('mouseup', this.boundMouseUp)
+
+    this.resizing = null
   }
 
   stopDrag(event) {
@@ -170,6 +271,17 @@ export default class extends Controller {
       alert('Codice copiato negli appunti!')
       console.log(code)
     })
+  }
+
+  hotspotTargetConnected(element) {
+    // Aggiungi resize handle quando un nuovo hotspot viene aggiunto
+    if (!element.querySelector('[data-resize-handle]')) {
+      const handle = document.createElement('div')
+      handle.dataset.resizeHandle = ''
+      handle.className = 'absolute bottom-0 right-0 w-3 h-3 bg-white border-2 border-current rounded-full cursor-nwse-resize'
+      handle.addEventListener('mousedown', (e) => this.startResize(e, element))
+      element.appendChild(handle)
+    }
   }
 
   disconnect() {
