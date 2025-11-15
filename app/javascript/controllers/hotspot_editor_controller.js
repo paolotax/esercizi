@@ -13,12 +13,16 @@ export default class extends Controller {
     this.startTop = 0
     this.startWidth = 0
     this.startHeight = 0
+    this.editMode = false
 
-    // Aggiungi info panel se non esiste
+    // Aggiungi info panel se non esiste (nascosto di default)
     this.createInfoPanel()
 
     // Aggiungi resize handles a tutti gli hotspot
     this.addResizeHandles()
+
+    // Aggiungi pulsante edit alla pagina
+    this.createEditButton()
   }
 
   addResizeHandles() {
@@ -33,18 +37,32 @@ export default class extends Controller {
     })
   }
 
+  createEditButton() {
+    const editBtn = document.createElement('button')
+    editBtn.className = "fixed bottom-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold px-4 py-2 rounded-lg shadow-2xl z-40 transition"
+    editBtn.textContent = "✏️ Edit Hotspots"
+    editBtn.addEventListener('click', () => this.toggleEditMode())
+    document.body.appendChild(editBtn)
+    this.editButton = editBtn
+  }
+
   createInfoPanel() {
     if (!this.hasInfoTarget) {
       const info = document.createElement('div')
       info.dataset.hotspotEditorTarget = "info"
-      info.className = "fixed top-4 right-4 bg-white border-4 border-blue-500 rounded-lg shadow-2xl z-50"
+      info.className = "fixed top-4 right-4 bg-white border-4 border-blue-500 rounded-lg shadow-2xl z-50 hidden"
       info.style.width = "600px"
       info.innerHTML = `
         <div class="bg-blue-500 text-white px-3 py-2 font-bold text-sm flex items-center justify-between cursor-move" data-panel-header>
           <span>Hotspot Values (drag to move)</span>
-          <button class="bg-white text-blue-600 px-3 py-1 rounded font-bold hover:bg-blue-50 transition cursor-pointer" data-copy-button>
-            Copy
-          </button>
+          <div class="flex gap-2">
+            <button class="bg-white text-blue-600 px-3 py-1 rounded font-bold hover:bg-blue-50 transition cursor-pointer" data-copy-button>
+              Copy
+            </button>
+            <button class="bg-red-500 text-white px-3 py-1 rounded font-bold hover:bg-red-600 transition cursor-pointer" data-close-button>
+              Close
+            </button>
+          </div>
         </div>
         <div id="hotspot-values" class="font-mono text-xs bg-gray-100 p-3 max-h-96 overflow-y-auto"></div>
       `
@@ -55,6 +73,13 @@ export default class extends Controller {
       copyButton.addEventListener('click', (e) => {
         e.stopPropagation()
         this.copyToClipboard()
+      })
+
+      // Add close button handler
+      const closeButton = info.querySelector('[data-close-button]')
+      closeButton.addEventListener('click', (e) => {
+        e.stopPropagation()
+        this.toggleEditMode()
       })
 
       // Make panel draggable
@@ -318,10 +343,50 @@ export default class extends Controller {
     }
   }
 
+  toggleEditMode() {
+    this.editMode = !this.editMode
+    const info = document.querySelector('[data-hotspot-editor-target="info"]')
+
+    if (this.editMode) {
+      // Attiva modalità edit
+      info.classList.remove('hidden')
+      this.editButton.textContent = "👁️ View Mode"
+      this.editButton.classList.remove('bg-yellow-500', 'hover:bg-yellow-600')
+      this.editButton.classList.add('bg-green-500', 'hover:bg-green-600')
+
+      // Rendi hotspot completamente visibili
+      this.hotspotTargets.forEach(hotspot => {
+        const currentBg = hotspot.className
+        // Rimuovi /10 dall'opacità
+        hotspot.className = currentBg.replace(/bg-(\w+)-(\d+)\/10/, 'bg-$1-$2')
+      })
+
+      this.updateInfoPanel()
+    } else {
+      // Disattiva modalità edit
+      info.classList.add('hidden')
+      this.editButton.textContent = "✏️ Edit Hotspots"
+      this.editButton.classList.remove('bg-green-500', 'hover:bg-green-600')
+      this.editButton.classList.add('bg-yellow-500', 'hover:bg-yellow-600')
+
+      // Rimetti hotspot semi-trasparenti
+      this.hotspotTargets.forEach(hotspot => {
+        const currentBg = hotspot.className
+        // Aggiungi /10 all'opacità se non c'è già
+        if (!currentBg.includes('/10')) {
+          hotspot.className = currentBg.replace(/bg-(\w+)-(\d+)(?!\/)/, 'bg-$1-$2/10')
+        }
+      })
+    }
+  }
+
   disconnect() {
-    // Cleanup info panel
+    // Cleanup
     if (this.hasInfoTarget) {
       this.infoTarget.remove()
+    }
+    if (this.editButton) {
+      this.editButton.remove()
     }
   }
 }
