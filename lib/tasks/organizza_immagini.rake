@@ -180,6 +180,15 @@ class ImageImporter
     source = html_path
     dest = "#{page_dir}/#{File.basename(html_path)}"
 
+    # Controlla se l'HTML contiene il messaggio di contenuto vuoto
+    if File.exist?(source)
+      content = File.read(source)
+      if content.include?("Questa pagina non ha contenuti ad alta leggibilità")
+        puts "  [SKIP] HTML vuoto: #{File.basename(source)} (non ha contenuti ad alta leggibilità)"
+        return
+      end
+    end
+
     copy_file(source, dest, "HTML originale")
   end
 
