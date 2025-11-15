@@ -1,0 +1,48 @@
+<%
+  # Estrae dati da oggetto Pagina o usa parametri manuali
+  if local_assigns[:pagina].is_a?(Pagina)
+    pagina_obj = local_assigns[:pagina]
+    numero = pagina_obj.numero
+    sottotitolo = pagina_obj.sottotitolo || pagina_obj.disciplina.nome.upcase
+    titolo = pagina_obj.titolo
+    colore = pagina_obj.base_color || "blue"
+    libro = pagina_obj.slug.split("_p").first
+    pagina_str = "p#{ pagina_obj.numero.to_s.rjust(3, "0") }"
+  else
+    # Usa parametri manuali
+    pagina_str = local_assigns[:pagina_str] || local_assigns[:pagina] || "p000"
+  end
+
+  # Mapping colori
+  colors = {
+    "purple" => { badge: "bg-purple-500", title: "text-purple-600", numero: "bg-purple-600", numero_hover: "hover:bg-purple-700" },
+    "blue" => { badge: "bg-blue-500", title: "text-blue-600", numero: "bg-blue-600", numero_hover: "hover:bg-blue-700" },
+    "cyan" => { badge: "bg-cyan-500", title: "text-cyan-600", numero: "bg-cyan-600", numero_hover: "hover:bg-cyan-700" },
+    "green" => { badge: "bg-green-500", title: "text-green-600", numero: "bg-green-600", numero_hover: "hover:bg-green-700" },
+    "orange" => { badge: "bg-orange-500", title: "text-orange-600", numero: "bg-orange-600", numero_hover: "hover:bg-orange-700" },
+    "red" => { badge: "bg-red-500", title: "text-red-600", numero: "bg-red-600", numero_hover: "hover:bg-red-700" },
+    "pink" => { badge: "bg-pink-500", title: "text-pink-600", numero: "bg-pink-600", numero_hover: "hover:bg-pink-700" }
+  }
+
+  badge_color = colors.dig(colore, :badge) || "bg-blue-500"
+  title_color = colors.dig(colore, :title) || "text-blue-600"
+  numero_bg = colors.dig(colore, :numero) || "bg-blue-600"
+  numero_hover = colors.dig(colore, :numero_hover) || "hover:bg-blue-700"
+  image_path = "#{ libro }/#{ pagina_str }/page.png"
+%>
+
+<div class="mb-8" data-controller="page-viewer" data-page-viewer-image-url-value="<%= asset_path(image_path) %>">
+  <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
+    <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+      <div class="<%= badge_color %> text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
+        <%= sottotitolo %>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-bold <%= title_color %>"><%= titolo %></h1>
+    </div>
+    <div class="flex-shrink-0 <%= numero_bg %> <%= numero_hover %> text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl cursor-pointer transition-colors"
+         data-action="click->page-viewer#openOriginal"
+         title="Clicca per vedere la pagina originale">
+      <%= numero %>
+    </div>
+  </div>
+</div>

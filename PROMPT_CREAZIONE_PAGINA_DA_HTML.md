@@ -1,14 +1,50 @@
 # Prompt per Creare Pagine da File HTML/PNG Esistenti
 
-## FORMATO SEMPLICE
+## 🚀 IMPORT AUTOMATICO (CONSIGLIATO)
+
+**Prima di creare pagine, importa il libro con il rake task:**
+
+```bash
+# Importa libro completo (crea struttura organizzata)
+rake images:import[book_844,nvl5_gram]
+
+# Per test senza copiare
+rake images:import[book_844,nvl5_gram,dry_run]
+```
+
+Questo crea automaticamente la struttura:
+```
+app/assets/images/nvl5_gram/
+  ├── p001/
+  │   ├── page.png              # PNG della pagina
+  │   ├── 1702926004001.html    # HTML originale
+  │   └── (eventuali immagini)
+  ├── p056/
+  │   ├── page.png
+  │   ├── 1702926004056.html
+  │   ├── 1715676002056.html    # Versioni multiple
+  │   └── p056_01.jpg
+  └── p192/...
+```
+
+---
+
+## FORMATO SEMPLICE (File già Importati)
+
+```
+Crea la pagina 56 usando i file in:
+app/assets/images/nvl5_gram/p056/
+
+Usa page.png per vedere la grafica degli esercizi.
+```
+
+**Oppure (metodo vecchio, sconsigliato):**
 
 ```
 Crea la pagina [numero] usando i file HTML e PNG che si trovano in:
 - HTML: /home/paolotax/Windows/book_844/epub/html/
 - PNG: /home/paolotax/Windows/book_844/pages/
 - Immagini: /home/paolotax/Windows/book_844/epub/images/
-
-Usa il PNG per vedere la grafica degli esercizi.
 ```
 
 ---
@@ -107,6 +143,13 @@ Per ogni esercizio nella pagina:
 
 ## ESEMPIO COMPLETO - Pagina 110
 
+**Metodo consigliato (file già importati):**
+```
+Crea pagina 110 usando i file in:
+app/assets/images/nvl5_gram/p110/
+```
+
+**Metodo alternativo (percorsi diretti):**
 ```
 Crea pagina 110 usando i file:
 - /home/paolotax/Windows/book_844/epub/html/1715676002110.html
@@ -176,7 +219,27 @@ Crea pagina 110 usando i file:
 
 ## PERCORSO COMPLETO PER NUOVA PAGINA
 
+### 0. IMPORT LIBRO (se non già fatto)
+```bash
+# Import completo con rake task
+rake images:import[book_844,nvl5_gram]
+```
+
 ### 1. IDENTIFICAZIONE FILE
+
+**Metodo consigliato (file già organizzati):**
+```bash
+# Lista tutti i file della pagina
+ls app/assets/images/nvl5_gram/p110/
+
+# Output tipico:
+# page.png
+# 1702926004110.html
+# 1715676002110.html
+# p110_01.jpg
+```
+
+**Metodo alternativo (file originali):**
 ```bash
 # Trova i file HTML per la pagina desiderata
 ls /home/paolotax/Windows/book_844/epub/html/*[numero]*.html
@@ -803,14 +866,35 @@ Esempio corretto:
 
 ---
 
-## ESEMPIO PROMPT MINIMO
+## ESEMPIO PROMPT MINIMO (File Già Importati)
+
+```
+Crea pagina 111 dai file in app/assets/images/nvl5_gram/p111/
+Usa page.png per la grafica, exercise-checker globale, no pulsanti individuali.
+```
+
+## ESEMPIO PROMPT MINIMO (File Originali)
 
 ```
 Crea pagina 111 dai file in /home/paolotax/Windows/book_844/
 Usa HTML e PNG per struttura, exercise-checker globale, no pulsanti individuali.
 ```
 
-## ESEMPIO PROMPT DETTAGLIATO
+## ESEMPIO PROMPT DETTAGLIATO (File Già Importati)
+
+```
+Crea pagina 111 da app/assets/images/nvl5_gram/p111/
+
+Implementa:
+1. Esercizio 1: sottolinea con word-highlighter
+2. Esercizio 2: completa con fill-blanks (risposte specifiche)
+3. Esercizio 3: cerchia con checkbox
+
+Usa exercise-checker globale, no pulsanti individuali.
+Aggiungi al seed e rigenera database.
+```
+
+## ESEMPIO PROMPT DETTAGLIATO (File Originali)
 
 ```
 Crea pagina 111:

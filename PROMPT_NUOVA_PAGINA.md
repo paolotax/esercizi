@@ -29,7 +29,7 @@ Ci sono anche le immagini scomposte.
 3. ✅ Identifico automaticamente le tipologie di esercizi (completa, collega, scegli, colora, etc.)
 4. ✅ Estrapolo il testo dall'immagine o uso quello che mi fornisci
 5. ✅ Deduco le soluzioni corrette analizzando le immagini
-6. ✅ Copio le immagini in app/assets/images/
+6. ✅ Copio le immagini in app/assets/images/{libro}/p{numero}/ (struttura organizzata)
 7. ✅ Aggiorno il seed con la nuova pagina
 8. ✅ Creo la view interattiva completa
 9. ✅ Rigenero il database
@@ -95,7 +95,7 @@ l'unità frazionaria è un quindicesimo.
 - 🔍 Identifico le tipologie di esercizi: input di testo, dropdown, radio button, checkbox, drag&drop
 - 🔍 Deduco le soluzioni corrette dalle immagini
 - 🔍 Identifico lo stile: colori, badge speciali (GIOCO, etc.), mascotte
-- 💾 Copio le immagini
+- 💾 Copio le immagini in app/assets/images/{libro}/p{numero}/ (struttura organizzata)
 - 💾 Aggiorno il seed
 - 💾 Creo la view completa
 - Aggiungi sempre in fondo alla pagina il partial exercise_controls
@@ -153,11 +153,62 @@ Nota: Questo è un nuovo volume (BUS 1) che va aggiunto al corso "Banda del BUS"
 
 ## TEMPLATE HEADER STANDARDIZZATO
 
-Usa questo header per tutte le nuove pagine:
+### ✅ METODO CONSIGLIATO: Partial Rails con Oggetto Pagina
+
+**Modo più semplice** (dati dal database):
+
+```erb
+<%= render 'shared/page_header', pagina: @pagina %>
+```
+
+Il partial estrae automaticamente tutti i dati da `@pagina`:
+- Numero, titolo, sottotitolo, colore dal database
+- Path immagine generato dal slug
+
+**Modo alternativo** (parametri manuali):
+
+```erb
+<%= render 'shared/page_header',
+  numero: 56,
+  sottotitolo: 'FRAZIONI',
+  titolo: 'L\'UNITÀ FRAZIONARIA',
+  colore: 'blue',
+  libro: 'bus3_mat',
+  pagina_str: 'p056' %>
+```
+
+### Campi Database Pagina
+
+Quando crei/aggiorni una pagina nel seed, includi:
+- `numero`: numero pagina (es. 56)
+- `titolo`: titolo completo (es. "L'UNITÀ FRAZIONARIA")
+- `sottotitolo`: categoria (es. "FRAZIONI", "NUMERI") - **NUOVO**
+- `base_color`: colore tema (es. "blue", "purple") - **NUOVO**
+- `slug`: generato automaticamente
+
+### Colori Disponibili
+
+- **blue**: ADDIZIONE, FRAZIONI, ESERCIZI GENERICI
+- **purple**: NUMERI
+- **cyan**: SOTTRAZIONE
+- **green**: GRAMMATICA
+- **orange**: STORIA
+- **red**: VERIFICA
+- **pink**: SPECIALI
+
+### Vantaggi
+- ✅ Single source of truth - tutto nel database
+- ✅ Include automaticamente page-viewer (numero cliccabile)
+- ✅ Facile aggiornamento - modifica solo il seed
+- ✅ Nessun hardcoding nelle view
+
+---
+
+### HTML Manuale (solo se necessario)
 
 ```html
-<!-- Header -->
-<div class="mb-8">
+<!-- Header con Page Viewer -->
+<div class="mb-8" data-controller="page-viewer" data-page-viewer-image-url-value="<%= asset_path('LIBRO/pXXX/page.png') %>">
   <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
     <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
       <div class="bg-blue-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
@@ -165,24 +216,14 @@ Usa questo header per tutte le nuove pagine:
       </div>
       <h1 class="text-2xl sm:text-3xl font-bold text-blue-600">TITOLO PRINCIPALE</h1>
     </div>
-    <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+    <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl cursor-pointer hover:bg-red-700 transition-colors"
+         data-action="click->page-viewer#openOriginal"
+         title="Clicca per vedere la pagina originale">
       26
     </div>
   </div>
 </div>
 ```
-
-### Varianti Colori Badge Sottotitolo:
-- **ADDIZIONE**: `bg-blue-500` + titolo `text-blue-600`
-- **SOTTRAZIONE**: `bg-cyan-500` + titolo `text-cyan-600`
-- **FRAZIONI**: `bg-blue-500` + titolo `text-blue-600`
-- **ESERCIZI GENERICI**: `bg-blue-500` + titolo `text-blue-600`
-
-### Note:
-- Badge sottotitolo: responsive `text-md sm:text-xl` con padding `px-2 sm:px-4 py-1.5 sm:py-2`
-- Titolo principale: responsive `text-2xl sm:text-3xl`
-- Badge numero pagina: dimensione fissa `w-10 h-10 sm:w-12 sm:h-12`
-- Gap tra elementi: `gap-2 sm:gap-4` per migliore spaziatura mobile
 
 ---
 

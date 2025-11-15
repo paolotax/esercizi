@@ -318,11 +318,30 @@ export default class extends Controller {
     // Ottieni l'URL corrente per evidenziare la pagina attiva
     const currentPath = window.location.pathname
 
+    // Mappa colori per Tailwind
+    const colorMap = {
+      'purple': '#9333EA',
+      'blue': '#2563EB',
+      'cyan': '#0891B2',
+      'green': '#16A34A',
+      'orange': '#EA580C',
+      'red': '#DC2626',
+      'pink': '#DB2777',
+      'amber': '#D97706',
+      'indigo': '#4F46E5',
+      'lime': '#65A30D'
+    }
+
     return pagine.map(pagina => {
       const paginaNumero = pagina.dataset.paginaNumero
       const paginaTitolo = pagina.dataset.paginaTitolo
       const paginaSlug = pagina.dataset.paginaSlug
+      const paginaSottotitolo = pagina.dataset.paginaSottotitolo
+      const paginaBaseColor = pagina.dataset.paginaBaseColor
       const paginaPath = `/pagine/${paginaSlug}`
+
+      // Usa base_color della pagina se disponibile, altrimenti colore disciplina
+      const badgeColor = paginaBaseColor ? (colorMap[paginaBaseColor] || disciplinaColore) : disciplinaColore
 
       // Verifica se questa è la pagina corrente
       const isActive = currentPath === paginaPath
@@ -335,14 +354,14 @@ export default class extends Controller {
            data-turbo-frame="_top"
            data-action="click->sidebar-breadcrumb#handlePaginaClick"
            class="flex items-center gap-3 p-3 rounded-lg transition group ${activeClasses}"
-           style="${isActive ? `--tw-ring-color: ${disciplinaColore};` : ''}">
+           style="${isActive ? `--tw-ring-color: ${badgeColor};` : ''}">
           <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
-               style="background-color: ${disciplinaColore}">
+               style="background-color: ${badgeColor}">
             ${paginaNumero}
           </div>
           <div class="flex-1 min-w-0">
             <div class="text-sm ${isActive ? 'font-bold' : 'font-medium'} text-gray-800 truncate">${paginaTitolo}</div>
-            <div class="text-xs text-gray-500">Pag. ${paginaNumero}</div>
+            <div class="text-xs text-gray-500">${paginaSottotitolo || 'Pag. ' + paginaNumero}</div>
           </div>
         </a>
       `

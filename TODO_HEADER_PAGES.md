@@ -4,9 +4,51 @@
 
 ## Template Header Standardizzato
 
+### ✅ MODO CONSIGLIATO: Usa il Partial Rails con Oggetto Pagina
+
+**Metodo 1: Con oggetto Pagina** (più Rails-way):
+
+```erb
+<%= render 'shared/page_header', pagina: @pagina %>
+```
+
+Il partial estrae automaticamente:
+- `numero` da `@pagina.numero`
+- `sottotitolo` da `@pagina.sottotitolo` (o fallback a nome disciplina)
+- `titolo` da `@pagina.titolo`
+- `colore` da `@pagina.base_color` (o fallback a colore disciplina)
+- `libro` dal `@pagina.slug` (es. "nvi5_mat_p014" → "nvi5_mat")
+
+**Metodo 2: Con parametri manuali** (per casi speciali):
+
+```erb
+<%= render 'shared/page_header',
+  numero: 14,
+  sottotitolo: 'NUMERI',
+  titolo: 'I NUMERI DECIMALI',
+  colore: 'purple',
+  libro: 'nvi5_mat',
+  pagina_str: 'p014' %>
+```
+
+**Vantaggi Metodo 1**:
+- ✅ DRY - tutti i dati dal modello
+- ✅ Single source of truth - dati nel database
+- ✅ Facile aggiornamento - modifica solo il record
+- ✅ Meno propenso a errori - niente hardcoding
+
+**Vantaggi Generali**:
+- ✅ Un solo file da mantenere
+- ✅ Consistenza automatica
+- ✅ Include page-viewer controller
+
+---
+
+### Codice HTML Completo (solo se non puoi usare il partial)
+
 ```html
 <!-- Header -->
-<div class="mb-8">
+<div class="mb-8" data-controller="page-viewer" data-page-viewer-image-url-value="<%= asset_path('LIBRO/pXXX/page.png') %>">
   <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
     <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
       <div class="bg-blue-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
@@ -14,12 +56,39 @@
       </div>
       <h1 class="text-2xl sm:text-3xl font-bold text-blue-600">TITOLO PRINCIPALE</h1>
     </div>
-    <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
+    <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl cursor-pointer hover:bg-red-700 transition-colors"
+         data-action="click->page-viewer#openOriginal"
+         title="Clicca per vedere la pagina originale">
       26
     </div>
   </div>
 </div>
 ```
+
+### Funzionalità Page Viewer
+
+Il numero pagina (badge rosso) è **cliccabile** e apre la pagina PNG originale in una nuova finestra.
+
+**Attributi richiesti sul div header**:
+- `data-controller="page-viewer"` - Attiva il controller
+- `data-page-viewer-image-url-value="<%= asset_path('LIBRO/pXXX/page.png') %>"` - URL del PNG
+
+**Esempio completo**:
+```html
+<div class="mb-8" data-controller="page-viewer" data-page-viewer-image-url-value="<%= asset_path('nvi5_mat/p014/page.png') %>">
+```
+
+**Attributi sul badge numero pagina**:
+- `cursor-pointer` - Mostra che è cliccabile
+- `hover:bg-red-700` - Effetto hover (scurisce il rosso)
+- `transition-colors` - Animazione fluida
+- `data-action="click->page-viewer#openOriginal"` - Gestisce il click
+- `title="Clicca per vedere la pagina originale"` - Tooltip
+
+**Note**:
+- Il controller `page-viewer` va sull'header, non sul div principale della pagina
+- Il controller `exercise-checker` rimane sul div principale (se necessario)
+- Il path dell'immagine deve seguire la struttura: `LIBRO/pXXX/page.png`
 
 ---
 
@@ -177,8 +246,16 @@
 - Badge sottotitolo: `text-md sm:text-xl` con `px-2 sm:px-4 py-1.5 sm:py-2`
 - Titolo principale: `text-2xl sm:text-3xl`
 - Badge numero pagina: `w-10 h-10 sm:w-12 sm:h-12` (SEMPRE rosso `bg-red-600`)
+- Badge numero pagina cliccabile: aggiungi `cursor-pointer hover:bg-red-700 transition-colors`
 - Gap tra elementi: `gap-2 sm:gap-4`
 - Layout: `flex-col-reverse sm:flex-row` (badge sotto su mobile, a sinistra su desktop)
+
+### Controller Stimulus:
+- **page-viewer**: Va sul div header (`class="mb-8"`)
+  - Attributo: `data-page-viewer-image-url-value="<%= asset_path('LIBRO/pXXX/page.png') %>"`
+  - Action sul badge numero: `data-action="click->page-viewer#openOriginal"`
+  - Apre il PNG originale in una nuova finestra al click
+- **exercise-checker**: Va sul div principale della pagina (se serve controllo risposte)
 
 ### Breakpoints Tailwind:
 - **mobile**: < 640px (default, no prefix)

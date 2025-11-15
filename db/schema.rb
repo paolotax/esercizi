@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_03_095137) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_15_112225) do
   create_table "corsi", force: :cascade do |t|
     t.string "codice", null: false
     t.datetime "created_at", null: false
@@ -31,11 +31,13 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_03_095137) do
   end
 
   create_table "pagine", force: :cascade do |t|
+    t.string "base_color"
     t.datetime "created_at", null: false
     t.integer "disciplina_id", null: false
     t.integer "numero", null: false
     t.integer "posizione", default: 0
     t.string "slug", null: false
+    t.string "sottotitolo"
     t.string "titolo"
     t.datetime "updated_at", null: false
     t.string "view_template"
