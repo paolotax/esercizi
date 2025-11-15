@@ -1,77 +1,39 @@
 <div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-purple-50 via-white to-purple-50 rounded-3xl shadow-xl" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('nvi5_mat/p008/page.png') %>">
-  <!-- Header -->
-  <div class="mb-8">
-    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
-      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-        <div class="bg-pink-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
-          NUMERI
-        </div>
-        <h1 class="text-2xl sm:text-3xl font-bold text-pink-600">POTENZE</h1>
-      </div>
-      <div class="cursor-pointer hover:bg-pink-700 transition-colors flex-shrink-0 bg-pink-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl"
-           data-action="click->page-viewer#openOriginal" title="Clicca per vedere la pagina originale">
-        8
-      </div>
-    </div>
-  </div>
+  <!-- Header --><div class="space-y-6">
+  <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
-    <!-- Mappa concettuale centrale POTENZE -->
-    <div class="bg-white rounded-3xl border-4 border-pink-300 shadow-2xl p-6 md:p-8">
-      <!-- Titolo POTENZE -->
-      <div class="flex justify-center mb-8">
-        <div class="bg-pink-500 text-white text-2xl font-bold px-8 py-3 rounded-full shadow-lg">
-          POTENZE
-        </div>
-      </div>
+    <!-- Interactive Image -->
+    <div class="relative rounded-2xl overflow-hidden border-4 border-blue-200 shadow-2xl"
+        data-controller="hotspot-editor"
+        data-hotspot-editor-target="container">
+      <%= image_tag "nvi5_mat/p008/p008_01.jpg",
+          alt: "Supermercato con cartellini: frigorifero, cartello del reparto, lampadario, scaffale, flaconi, espositore, caporeparto, cassa, scatole, cliente, cestino, bilancia, cassetta, borse, banco, carrello e corsia",
+          class: "w-full h-full object-cover select-none pointer-events-none" %>
 
-      <!-- Contenitore principale 6³ con frecce -->
-      <div class="bg-gradient-to-br from-pink-50 to-pink-100 border-4 border-pink-400 rounded-3xl p-8 mb-8 shadow-xl">
-        <div class="flex flex-col items-center gap-6">
-          <!-- ESPONENTE -->
-          <div class="flex items-center gap-4">
-            <div class="bg-pink-500 text-white text-lg font-bold px-6 py-2 rounded-full shadow-md">
-              ESPONENTE
-            </div>
-            <div class="text-5xl font-bold text-pink-500">→</div>
-            <div class="text-4xl font-bold text-blue-700">3</div>
-          </div>
+      <div class="absolute inset-0">
+        <% hotspots = [
+          { label: "POTENZE", top: "8.58117%", left: "34.5076%", width: "28.6737%", height: "6.06406%" },
+          { label: "ESPONENTE", top: "20.9246%", left: "47.6976%", width: "21.8701%", height: "5.83096%" },
+          { label: "BASE", top: "34.2737%", left: "47.2502%", width: "13.4169%", height: "5.59786%" },
+          { label: "6 per 6 per 6", top: "71.2637%", left: "8.78187%", width: "26.7737%", height: "12.1246%" },
+          { label: "SEI ALLA TERZA", top: "69.2306%", left: "61.6888%", width: "22.6483%", height: "6.29715%" },
+          { label: "SEI ELEVATO ALLA TERZA", top: "80.3487%", left: "56.9154%", width: "32.2523%", height: "5.13167%" }
+        ] %>
 
-          <!-- 6³ grande al centro -->
-          <div class="text-9xl font-bold text-blue-700 my-4">
-            6<sup class="text-6xl">3</sup>
-          </div>
-
-          <!-- BASE -->
-          <div class="flex items-center gap-4">
-            <div class="text-4xl font-bold text-blue-700">6</div>
-            <div class="text-5xl font-bold text-pink-500">←</div>
-            <div class="bg-pink-500 text-white text-lg font-bold px-6 py-2 rounded-full shadow-md">
-              BASE
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Box COSA SIGNIFICA e COME SI LEGGE -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- COSA SIGNIFICA -->
-        <div class="bg-white border-4 border-pink-300 rounded-2xl p-6 shadow-lg">
-          <h3 class="text-pink-500 text-xl font-bold mb-4 text-center">COSA SIGNIFICA</h3>
-          <div class="text-4xl font-bold text-blue-700 text-center">
-            6 × 6 × 6
-          </div>
-        </div>
-
-        <!-- COME SI LEGGE -->
-        <div class="bg-white border-4 border-pink-300 rounded-2xl p-6 shadow-lg">
-          <h3 class="text-pink-500 text-xl font-bold mb-4 text-center">COME SI LEGGE</h3>
-          <div class="text-center space-y-2">
-            <div class="text-2xl font-bold text-pink-600">SEI ALLA TERZA</div>
-            <div class="text-lg text-gray-600">oppure</div>
-            <div class="text-2xl font-bold text-pink-600">SEI ELEVATO ALLA TERZA</div>
-          </div>
-        </div>
+        <% hotspots.each do |hotspot| %>
+          <button type="button"
+                  class="absolute rounded-xl bg-blue-500/0 hover:bg-blue-500/25 border-2 border-transparent hover:border-blue-500 focus:border-blue-600 focus:outline-none transition shadow-sm cursor-move"
+                  style="top: <%= hotspot[:top] %>; left: <%= hotspot[:left] %>; width: <%= hotspot[:width] %>; height: <%= hotspot[:height] %>;"
+                  aria-label="Leggi: <%= hotspot[:label] %>"
+                  data-controller="image-speech"
+                  data-hotspot-editor-target="hotspot"
+                  data-image-speech-word-value="<%= hotspot[:label] %>"
+                  data-image-speech-lang-value="it-IT"
+                  data-action="mousedown->hotspot-editor#startDrag click->image-speech#speak">
+            <span class="sr-only"><%= hotspot[:label] %></span>
+          </button>
+        <% end %>
       </div>
     </div>
 
