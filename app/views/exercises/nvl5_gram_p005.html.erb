@@ -1,168 +1,234 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 to-red-50 rounded-lg shadow-lg"
-     data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 via-white to-red-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
 
+  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Main content: Identification of difficulties -->
-  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
-    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
-      <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold">IMPARARE TUTTI con Graf</span>
-      Rilfletti sui tuoi errori
+  <!-- Introduction: What is ORTOGRAFIA -->
+  <div class="mb-6 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <p class="text-base md:text-lg leading-relaxed text-gray-800 mb-3">
+      <span class="font-bold text-pink-600 underline">ORTOGRAFIA</span> è una parola greca che significa "scrittura corretta".
+    </p>
+    <p class="text-base md:text-lg leading-relaxed text-gray-800">
+      È quella parte della grammatica che definisce le regole per scrivere in modo corretto. Se scrivi in modo corretto riuscirai a farti capire bene dagli altri.
+    </p>
+  </div>
+
+  <!-- Exercise 1: Syllables -->
+  <div class="mb-6 bg-white rounded-lg p-4 md:p-6 shadow-md" data-controller="word-choice">
+    <h2 class="text-base md:text-lg font-bold text-pink-600 mb-4">
+      • Cerchia le parole che sono divise correttamente in sillabe.
     </h2>
 
-    <div class="p-4 bg-pink-50 rounded-lg text-base md:text-lg leading-relaxed text-gray-800 mb-4">
-      <p class="font-bold mb-2">
-        Riguarda i tuoi quaderni di classe quarta. In quali tipi di compiti ti è capitato di commetterli più spesso?
-      </p>
-    </div>
-
-    <div class="overflow-x-auto mb-4">
-      <table class="w-full border-collapse border-2 border-pink-300">
-        <thead>
-          <tr class="bg-pink-500 text-white">
-            <th class="border-2 border-pink-300 px-3 py-2 text-left font-bold">Tipo di compito</th>
-            <th class="border-2 border-pink-300 px-3 py-2 text-center font-bold">Mai</th>
-            <th class="border-2 border-pink-300 px-3 py-2 text-center font-bold">A volte</th>
-            <th class="border-2 border-pink-300 px-3 py-2 text-center font-bold">Spesso</th>
-            <th class="border-2 border-pink-300 px-3 py-2 text-center font-bold">Sempre</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-2 border-pink-300">
-            <td class="border-2 border-pink-300 px-3 py-2 font-semibold">Dettato / Copiatura</td>
-            <td class="border-2 border-pink-300 px-3 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-3 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-3 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-3 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300 bg-pink-50">
-            <td class="border-2 border-pink-300 px-3 py-2 font-semibold">Ricerca</td>
-            <td class="border-2 border-pink-300 px-3 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-3 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-3 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-3 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300">
-            <td class="border-2 border-pink-300 px-3 py-2 font-semibold">Tema / Scrittura di un testo</td>
-            <td class="border-2 border-pink-300 px-3 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-3 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-3 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-3 py-2 text-center">☐</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="p-4 bg-pink-50 rounded-lg text-base md:text-lg leading-relaxed text-gray-800">
-      <p class="font-bold mb-2">
-        E quali tipi di errori ti capita di commettere più spesso?
-      </p>
-    </div>
-
-    <div class="overflow-x-auto">
-      <table class="w-full border-collapse border-2 border-pink-300 text-sm md:text-base">
-        <thead>
-          <tr class="bg-pink-500 text-white">
-            <th class="border-2 border-pink-300 px-2 py-2 text-left font-bold">Tipo di errore</th>
-            <th class="border-2 border-pink-300 px-2 py-2 text-center font-bold">Mai</th>
-            <th class="border-2 border-pink-300 px-2 py-2 text-center font-bold">A volte</th>
-            <th class="border-2 border-pink-300 px-2 py-2 text-center font-bold">Spesso</th>
-            <th class="border-2 border-pink-300 px-2 py-2 text-center font-bold">Sempre</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-2 border-pink-300">
-            <td class="border-2 border-pink-300 px-2 py-2">Dimenticanza di lettere ("eroporto", invece di "aeroporto")</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300 bg-pink-50">
-            <td class="border-2 border-pink-300 px-2 py-2">Aggiunta di lettere ("bissonte" invece di "bisonte")</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300">
-            <td class="border-2 border-pink-300 px-2 py-2">Inversione di lettere ("matimateca" invece di "matematica")</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300 bg-pink-50">
-            <td colspan="5" class="border-2 border-pink-300 px-2 py-2 font-bold">Scrittura errata di suoni difficili</td>
-          </tr>
-          <tr class="border-2 border-pink-300">
-            <td class="border-2 border-pink-300 px-2 py-2 pl-6">gn/gl</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300 bg-pink-50">
-            <td class="border-2 border-pink-300 px-2 py-2 pl-6">sce/scie, sce/sche, sci/schi</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300">
-            <td class="border-2 border-pink-300 px-2 py-2 pl-6">ce/cie, ce/che, ci/chi</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300 bg-pink-50">
-            <td class="border-2 border-pink-300 px-2 py-2 pl-6">ge/gie, ge/ghe, gi/ghi</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300">
-            <td class="border-2 border-pink-300 px-2 py-2 pl-6">cu/qu, cqu/qq</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300 bg-pink-50">
-            <td class="border-2 border-pink-300 px-2 py-2">H nel verbo avere</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300">
-            <td class="border-2 border-pink-300 px-2 py-2">Unione o separazione delle parole</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300 bg-pink-50">
-            <td class="border-2 border-pink-300 px-2 py-2">Apostrofo / Accento</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-          </tr>
-          <tr class="border-2 border-pink-300">
-            <td class="border-2 border-pink-300 px-2 py-2">Doppie</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-            <td class="border-2 border-pink-300 px-2 py-2 text-center">☐</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="space-y-3 text-base md:text-lg">
+      <div>
+        <span class="font-bold text-pink-600">SCALA</span>
+        <span class="ml-4 px-3 py-1 rounded-lg border-2 border-pink-300 hover:bg-pink-100 transition cursor-pointer"
+              data-word-choice-target="word"
+              data-group="scala"
+              data-correct="true"
+              data-action="click->word-choice#select">sca/la</span>
+        <span class="ml-2 px-3 py-1 rounded-lg border-2 border-pink-300 hover:bg-pink-100 transition cursor-pointer"
+              data-word-choice-target="word"
+              data-group="scala"
+              data-correct="false"
+              data-action="click->word-choice#select">sc/ala</span>
+      </div>
+      <div>
+        <span class="font-bold text-pink-600">LIBRO</span>
+        <span class="ml-4 px-3 py-1 rounded-lg border-2 border-pink-300 hover:bg-pink-100 transition cursor-pointer"
+              data-word-choice-target="word"
+              data-group="libro"
+              data-correct="false"
+              data-action="click->word-choice#select">lib/ro</span>
+        <span class="ml-2 px-3 py-1 rounded-lg border-2 border-pink-300 hover:bg-pink-100 transition cursor-pointer"
+              data-word-choice-target="word"
+              data-group="libro"
+              data-correct="true"
+              data-action="click->word-choice#select">li/bro</span>
+      </div>
+      <div>
+        <span class="font-bold text-pink-600">TAVOLO</span>
+        <span class="ml-4 px-3 py-1 rounded-lg border-2 border-pink-300 hover:bg-pink-100 transition cursor-pointer"
+              data-word-choice-target="word"
+              data-group="tavolo"
+              data-correct="false"
+              data-action="click->word-choice#select">tav/o/lo</span>
+        <span class="ml-2 px-3 py-1 rounded-lg border-2 border-pink-300 hover:bg-pink-100 transition cursor-pointer"
+              data-word-choice-target="word"
+              data-group="tavolo"
+              data-correct="true"
+              data-action="click->word-choice#select">ta/vo/lo</span>
+      </div>
+      <div>
+        <span class="font-bold text-pink-600">CARRELLO</span>
+        <span class="ml-4 px-3 py-1 rounded-lg border-2 border-pink-300 hover:bg-pink-100 transition cursor-pointer"
+              data-word-choice-target="word"
+              data-group="carrello"
+              data-correct="true"
+              data-action="click->word-choice#select">car/rel/lo</span>
+        <span class="ml-2 px-3 py-1 rounded-lg border-2 border-pink-300 hover:bg-pink-100 transition cursor-pointer"
+              data-word-choice-target="word"
+              data-group="carrello"
+              data-correct="false"
+              data-action="click->word-choice#select">carr/el/lo</span>
+      </div>
+      <div>
+        <span class="font-bold text-pink-600">LAMPADA</span>
+        <span class="ml-4 px-3 py-1 rounded-lg border-2 border-pink-300 hover:bg-pink-100 transition cursor-pointer"
+              data-word-choice-target="word"
+              data-group="lampada"
+              data-correct="false"
+              data-action="click->word-choice#select">la/mpa/da</span>
+        <span class="ml-2 px-3 py-1 rounded-lg border-2 border-pink-300 hover:bg-pink-100 transition cursor-pointer"
+              data-word-choice-target="word"
+              data-group="lampada"
+              data-correct="true"
+              data-action="click->word-choice#select">lam/pa/da</span>
+      </div>
+      <div>
+        <span class="font-bold text-pink-600">FINESTRA</span>
+        <span class="ml-4 px-3 py-1 rounded-lg border-2 border-pink-300 hover:bg-pink-100 transition cursor-pointer"
+              data-word-choice-target="word"
+              data-group="finestra"
+              data-correct="false"
+              data-action="click->word-choice#select">fi/ne/stra</span>
+        <span class="ml-2 px-3 py-1 rounded-lg border-2 border-pink-300 hover:bg-pink-100 transition cursor-pointer"
+              data-word-choice-target="word"
+              data-group="finestra"
+              data-correct="true"
+              data-action="click->word-choice#select">fi/nes/tra</span>
+      </div>
     </div>
   </div>
 
+  <!-- Exercise 2: Alphabetical Order -->
+  <div class="mb-6 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-base md:text-lg font-bold text-pink-600 mb-4">
+      • Quali parole sono in ordine alfabetico? Indica con una <span class="underline">X</span>.
+    </h2>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <label class="flex items-center gap-4 cursor-pointer hover:bg-pink-50 p-3 rounded transition">
+        <input type="checkbox"
+               class="w-5 h-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500"
+               data-correct-answer="false">
+        <span class="border-2 border-transparent p-2 rounded">finestra-bibliotecaria-carrello-cuscino</span>
+      </label>
+      <label class="flex items-center gap-4 cursor-pointer hover:bg-pink-50 p-3 rounded transition">
+        <input type="checkbox"
+               class="w-5 h-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500"
+               data-correct-answer="true">
+        <span class="border-2 border-transparent p-2 rounded">bibliotecaria-carrello-cuscino-finestra</span>
+      </label>
+      <label class="flex items-center gap-4 cursor-pointer hover:bg-pink-50 p-3 rounded transition">
+        <input type="checkbox"
+               class="w-5 h-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500"
+               data-correct-answer="true">
+        <span class="border-2 border-transparent p-2 rounded">lampada-sedia-tavolo-tappeto</span>
+      </label>
+      <label class="flex items-center gap-4 cursor-pointer hover:bg-pink-50 p-3 rounded transition">
+        <input type="checkbox"
+               class="w-5 h-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500"
+               data-correct-answer="false">
+        <span class="border-2 border-transparent p-2 rounded">lampada-sedia-tappeto-tavolo</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Exercise 3: CU or QU -->
+  <div class="mb-6 bg-white rounded-lg p-4 md:p-6 shadow-md">
+    <h2 class="text-base md:text-lg font-bold text-pink-600 mb-4">
+      • Completa con <em><span class="underline font-bold">CU</span></em> o <span class="underline font-bold">QU</span>.
+    </h2>
+
+    <div class="space-y-3 text-base md:text-lg">
+      <div>
+        <em><span class="underline font-bold text-pink-600">CU</span></em>SCINO
+      </div>
+      <div>
+        <span class="underline font-bold text-pink-600">QU</span>ADERNO
+      </div>
+      <div class="flex items-center gap-2">
+        <input type="text"
+               class="w-16 px-2 py-1 text-center border-2 border-pink-300 rounded-lg focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none uppercase"
+               maxlength="2"
+               placeholder="__"
+               data-correct-answer="QU">
+        <span>ORE</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <input type="text"
+               class="w-16 px-2 py-1 text-center border-2 border-pink-300 rounded-lg focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none uppercase"
+               maxlength="2"
+               placeholder="__"
+               data-correct-answer="CU">
+        <span>LLA</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span>S</span>
+        <input type="text"
+               class="w-16 px-2 py-1 text-center border-2 border-pink-300 rounded-lg focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none uppercase"
+               maxlength="2"
+               placeholder="__"
+               data-correct-answer="CU">
+        <span>OLA</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span>A</span>
+        <input type="text"
+               class="w-16 px-2 py-1 text-center border-2 border-pink-300 rounded-lg focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none uppercase"
+               maxlength="2"
+               placeholder="__"
+               data-correct-answer="QU">
+        <span>ILONE</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLIL Section -->
+  <div class="mb-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-4 md:p-6 shadow-md border-2 border-pink-300">
+    <h2 class="text-base md:text-lg font-bold text-pink-600 mb-4">
+      🇬🇧 CLIL - Leggi e scopri.
+    </h2>
+
+    <ul class="space-y-3 text-base md:text-lg list-disc list-inside">
+      <li>
+        Biblioteca →
+        <span class="font-semibold text-blue-700 underline cursor-pointer hover:text-blue-900 transition"
+              data-controller="image-speech"
+              data-image-speech-word-value="Library"
+              data-image-speech-lang-value="en-GB"
+              data-action="click->image-speech#speak">Library</span>
+      </li>
+      <li>
+        Scaffale →
+        <span class="font-semibold text-blue-700 underline cursor-pointer hover:text-blue-900 transition"
+              data-controller="image-speech"
+              data-image-speech-word-value="Shelf"
+              data-image-speech-lang-value="en-GB"
+              data-action="click->image-speech#speak">Shelf</span>
+      </li>
+      <li>
+        Finestra →
+        <span class="font-semibold text-blue-700 underline cursor-pointer hover:text-blue-900 transition"
+              data-controller="image-speech"
+              data-image-speech-word-value="Window"
+              data-image-speech-lang-value="en-GB"
+              data-action="click->image-speech#speak">Window</span>
+      </li>
+      <li>
+        Sedia →
+        <span class="font-semibold text-blue-700 underline cursor-pointer hover:text-blue-900 transition"
+              data-controller="image-speech"
+              data-image-speech-word-value="Chair"
+              data-image-speech-lang-value="en-GB"
+              data-action="click->image-speech#speak">Chair</span>
+      </li>
+    </ul>
+  </div>
+
   <!-- Exercise Controls -->
-  <%= render 'shared/exercise_controls', color: 'pink' %>
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'pink' %>
+  </div>
 </div>

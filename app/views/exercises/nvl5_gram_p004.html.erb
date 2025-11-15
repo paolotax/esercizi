@@ -1,94 +1,55 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 to-red-50 rounded-lg shadow-lg"
-     data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 via-white to-red-50 rounded-3xl shadow-xl">
 
+  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Introduction -->
-  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
-    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
-      Errori di ortografia comuni
-    </h2>
-
-    <div class="p-4 bg-pink-50 rounded-lg text-base md:text-lg leading-relaxed text-gray-800">
-      <p class="mb-3">
-        Quando scrivi può capitare di commettere errori di cui non ti accorgi e che gli altri ti fanno notare.
-      </p>
-      <p class="font-bold text-pink-700 mb-3">
-        Riguarda i tuoi quaderni di classe quarta. In quali tipi di compiti ti è capitato di commetterli più spesso?
-      </p>
-    </div>
+  <div class="mb-6">
+    <p class="text-sm md:text-base text-pink-700">
+      Osserva l'immagine della biblioteca e tocca i cartellini per ascoltare la parola corretta.
+    </p>
   </div>
 
-  <!-- Exercise 1: Types of errors -->
-  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
-    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
-      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
-      Tipi comuni di errori ortografici
-    </h2>
+  <!-- Interactive Image -->
+  <div class="relative rounded-2xl overflow-hidden border-4 border-pink-200 shadow-2xl">
+    <%= image_tag "nvl5_gram/p004/p04_01.jpg",
+        alt: "Biblioteca con cartellini: finestra, manifesto, scala, scaffale, lampada, quaderno, tavolo, libro, sedia, cuscino, tappeto, poltrona, schermo interattivo e bibliotecaria",
+        class: "w-full h-full object-cover select-none pointer-events-none" %>
 
-    <div class="space-y-3">
-      <div class="p-3 bg-pink-50 rounded-lg">
-        <p class="font-bold text-gray-800 mb-2">Dimenticanza di lettere</p>
-        <p class="text-gray-700">Esempio: "eroporto" invece di "aeroporto"</p>
-      </div>
+    <div class="absolute inset-0">
+      <% hotspots = [
+        { label: "Finestra", top: "8.5%", left: "8.0%", width: "10.0%", height: "3.5%" },
+        { label: "Manifesto", top: "8.5%", left: "31.0%", width: "10.5%", height: "3.5%" },
+        { label: "Scala", top: "28.5%", left: "11.5%", width: "7.0%", height: "3.5%" },
+        { label: "Scaffale", top: "40.5%", left: "12.0%", width: "9.5%", height: "3.5%" },
+        { label: "Lampada", top: "48.5%", left: "3.5%", width: "9.0%", height: "3.5%" },
+        { label: "Quaderno", top: "45.0%", left: "30.0%", width: "10.5%", height: "3.5%" },
+        { label: "Tavolo", top: "48.5%", left: "51.5%", width: "8.5%", height: "3.5%" },
+        { label: "Libro", top: "48.0%", left: "27.0%", width: "7.0%", height: "3.5%" },
+        { label: "Sedia", top: "58.0%", left: "35.0%", width: "6.5%", height: "3.5%" },
+        { label: "Cuscino", top: "58.0%", left: "15.0%", width: "8.5%", height: "3.5%" },
+        { label: "Tappeto", top: "68.0%", left: "12.5%", width: "9.5%", height: "3.5%" },
+        { label: "Poltrona", top: "68.0%", left: "35.5%", width: "10.0%", height: "3.5%" },
+        { label: "Schermo interattivo", top: "32.0%", left: "66.0%", width: "16.0%", height: "3.5%" },
+        { label: "Bibliotecaria", top: "68.0%", left: "79.0%", width: "14.5%", height: "3.5%" }
+      ] %>
 
-      <div class="p-3 bg-pink-50 rounded-lg">
-        <p class="font-bold text-gray-800 mb-2">Aggiunta di lettere</p>
-        <p class="text-gray-700">Esempio: "bissonte" invece di "bisonte"</p>
-      </div>
-
-      <div class="p-3 bg-pink-50 rounded-lg">
-        <p class="font-bold text-gray-800 mb-2">Inversione di lettere</p>
-        <p class="text-gray-700">Esempio: "matimateca" invece di "matematica"</p>
-      </div>
-
-      <div class="p-3 bg-pink-50 rounded-lg">
-        <p class="font-bold text-gray-800 mb-2">Scrittura errata di suoni difficili</p>
-        <p class="text-gray-700">gn/gl, sce/scie, sce/sche, sci/schi, ce/cie, ge/gie, cu/qu, cqu/qq</p>
-      </div>
-
-      <div class="p-3 bg-pink-50 rounded-lg">
-        <p class="font-bold text-gray-800 mb-2">H nel verbo avere</p>
-        <p class="text-gray-700">Dimenticare o aggiungere la H in modo errato</p>
-      </div>
-
-      <div class="p-3 bg-pink-50 rounded-lg">
-        <p class="font-bold text-gray-800 mb-2">Unione o separazione delle parole</p>
-        <p class="text-gray-700">Esempio: "lanotte" invece di "la notte"</p>
-      </div>
-
-      <div class="p-3 bg-pink-50 rounded-lg">
-        <p class="font-bold text-gray-800 mb-2">Apostrofo e Accento</p>
-        <p class="text-gray-700">Uso scorretto dell'apostrofo o dell'accento</p>
-      </div>
-
-      <div class="p-3 bg-pink-50 rounded-lg">
-        <p class="font-bold text-gray-800 mb-2">Doppie</p>
-        <p class="text-gray-700">Omissione o aggiunta di doppie consonanti</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Exercise 2: Tips for improvement -->
-  <div class="mb-6 md:mb-8 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-4 md:p-6 shadow-md border-2 border-pink-300">
-    <h2 class="text-lg md:text-xl font-bold text-pink-600 mb-4">
-      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
-      Consigli per allenarti
-    </h2>
-
-    <div class="space-y-4">
-      <div class="p-4 bg-white rounded-lg border-l-4 border-pink-500">
-        <p class="font-bold text-pink-700 mb-2">Consiglio 1: Visualizzazione</p>
-        <p class="text-gray-700">Scrivi con attenzione la parola su un foglio. Osservala dopo averla scritta cercando di "fotografarla con la mente". Chiudi gli occhi e visualizzala: sarà più facile ricordarla.</p>
-      </div>
-
-      <div class="p-4 bg-white rounded-lg border-l-4 border-pink-500">
-        <p class="font-bold text-pink-700 mb-2">Consiglio 2: Quaderno personale</p>
-        <p class="text-gray-700">Scrivi le parole che per te sono più difficili da ricordare su un apposito quaderno. Così, quando non sei sicura/o di come si scrivono puoi controllare sul tuo quaderno.</p>
-      </div>
+      <% hotspots.each do |hotspot| %>
+        <button type="button"
+                class="absolute rounded-xl bg-pink-500 hover:bg-pink-500/25 border-2 border-transparent hover:border-pink-500 focus:border-pink-600 focus:outline-none transition shadow-sm"
+                style="top: <%= hotspot[:top] %>; left: <%= hotspot[:left] %>; width: <%= hotspot[:width] %>; height: <%= hotspot[:height] %>;"
+                aria-label="Leggi: <%= hotspot[:label] %>"
+                data-controller="image-speech"
+                data-image-speech-word-value="<%= hotspot[:label] %>"
+                data-image-speech-lang-value="it-IT"
+                data-action="click->image-speech#speak">
+          <span class="sr-only"><%= hotspot[:label] %></span>
+        </button>
+      <% end %>
     </div>
   </div>
 
   <!-- Exercise Controls -->
-  <%= render 'shared/exercise_controls', color: 'pink' %>
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'pink', show_exercise_buttons: false %>
+  </div>
 </div>
