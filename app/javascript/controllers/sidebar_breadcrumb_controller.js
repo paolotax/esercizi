@@ -335,13 +335,13 @@ export default class extends Controller {
            data-turbo-frame="_top"
            data-action="click->sidebar-breadcrumb#handlePaginaClick"
            class="flex items-center gap-3 p-3 rounded-lg transition group ${activeClasses}"
-           style="${isActive ? `ring-color: ${disciplinaColore}` : ''}">
+           style="${isActive ? `--tw-ring-color: ${disciplinaColore};` : ''}">
           <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
                style="background-color: ${disciplinaColore}">
             ${paginaNumero}
           </div>
           <div class="flex-1 min-w-0">
-            <div class="text-sm font-medium ${isActive ? 'font-bold' : ''} text-gray-800 truncate">${paginaTitolo}</div>
+            <div class="text-sm ${isActive ? 'font-bold' : 'font-medium'} text-gray-800 truncate">${paginaTitolo}</div>
             <div class="text-xs text-gray-500">Pag. ${paginaNumero}</div>
           </div>
         </a>
