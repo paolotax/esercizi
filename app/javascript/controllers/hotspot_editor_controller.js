@@ -37,15 +37,25 @@ export default class extends Controller {
     if (!this.hasInfoTarget) {
       const info = document.createElement('div')
       info.dataset.hotspotEditorTarget = "info"
-      info.className = "fixed top-4 right-4 bg-white border-4 border-blue-500 rounded-lg shadow-2xl z-50 cursor-move"
+      info.className = "fixed top-4 right-4 bg-white border-4 border-blue-500 rounded-lg shadow-2xl z-50"
       info.style.width = "600px"
       info.innerHTML = `
-        <div class="bg-blue-500 text-white px-3 py-2 font-bold text-sm" data-panel-header>
-          Hotspot Values (drag to move)
+        <div class="bg-blue-500 text-white px-3 py-2 font-bold text-sm flex items-center justify-between cursor-move" data-panel-header>
+          <span>Hotspot Values (drag to move)</span>
+          <button class="bg-white text-blue-600 px-3 py-1 rounded font-bold hover:bg-blue-50 transition cursor-pointer" data-copy-button>
+            Copy
+          </button>
         </div>
         <div id="hotspot-values" class="font-mono text-xs bg-gray-100 p-3 max-h-96 overflow-y-auto"></div>
       `
       document.body.appendChild(info)
+
+      // Add copy button handler
+      const copyButton = info.querySelector('[data-copy-button]')
+      copyButton.addEventListener('click', (e) => {
+        e.stopPropagation()
+        this.copyToClipboard()
+      })
 
       // Make panel draggable
       const header = info.querySelector('[data-panel-header]')
@@ -259,17 +269,41 @@ export default class extends Controller {
     valuesDiv.innerHTML = `<pre class="text-xs leading-relaxed">${code}</pre>`
   }
 
-  copyAll() {
+  copyToClipboard() {
     const hotspots = this.hotspotTargets.map(hotspot => {
       const label = hotspot.querySelector('.sr-only')?.textContent || 'Unknown'
-      return `        { label: "${label}", top: "${hotspot.style.top}", left: "${hotspot.style.left}", width: "${hotspot.style.width}", height: "${hotspot.style.height}" }`
-    }).join(',\n')
+      return {
+        label,
+        top: hotspot.style.top,
+        left: hotspot.style.left,
+        width: hotspot.style.width,
+        height: hotspot.style.height
+      }
+    })
 
-    const code = `      <% hotspots = [\n${hotspots}\n      ] %>`
+    const code = hotspots.map(h =>
+      `        { label: "${h.label}", top: "${h.top}", left: "${h.left}", width: "${h.width}", height: "${h.height}" }`
+    ).join(',\n')
 
     navigator.clipboard.writeText(code).then(() => {
-      alert('Codice copiato negli appunti!')
-      console.log(code)
+      // Visual feedback
+      const copyButton = document.querySelector('[data-copy-button]')
+      if (copyButton) {
+        const originalText = copyButton.textContent
+        copyButton.textContent = 'Copied!'
+        copyButton.classList.add('bg-green-500', 'text-white')
+        copyButton.classList.remove('bg-white', 'text-blue-600')
+
+        setTimeout(() => {
+          copyButton.textContent = originalText
+          copyButton.classList.remove('bg-green-500', 'text-white')
+          copyButton.classList.add('bg-white', 'text-blue-600')
+        }, 2000)
+      }
+      console.log('Copied to clipboard:\n' + code)
+    }).catch(err => {
+      console.error('Failed to copy:', err)
+      alert('Errore durante la copia. Seleziona e copia manualmente.')
     })
   }
 
