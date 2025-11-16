@@ -143,17 +143,26 @@ class ImageImporter
       copy_html(html_path, page_dir)
     end
 
-    # Parse il primo HTML per trovare le immagini (gli HTML dovrebbero avere le stesse immagini)
+    # Parse tutti gli HTML per trovare le immagini (alcuni HTML potrebbero essere vuoti)
     images_to_copy = []
     if html_files.any?
-      begin
-        doc = Nokogiri::HTML(File.read(html_files.first))
-        images = doc.css("img").map { |img| img["src"] }.compact
-        images_to_copy = images.select { |src| src.include?("images/") }
-                               .map { |src| File.basename(src) }
-      rescue => e
-        puts "  [ERROR] Errore parsing HTML: #{e.message}"
-        @stats[:errors] << "#{html_files.first}: #{e.message}"
+      html_files.each do |html_file|
+        begin
+          content = File.read(html_file)
+          # Salta HTML vuoti
+          next if content.include?("Questa pagina non ha contenuti ad alta leggibilità")
+
+          doc = Nokogiri::HTML(content)
+          images = doc.css("img").map { |img| img["src"] }.compact
+          new_images = images.select { |src| src.include?("images/") }
+                             .map { |src| File.basename(src) }
+
+          # Aggiungi le nuove immagini trovate (evita duplicati)
+          images_to_copy = (images_to_copy + new_images).uniq
+        rescue => e
+          puts "  [ERROR] Errore parsing HTML #{File.basename(html_file)}: #{e.message}"
+          @stats[:errors] << "#{html_file}: #{e.message}"
+        end
       end
     end
 
