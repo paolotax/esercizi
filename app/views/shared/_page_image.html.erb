@@ -1,0 +1,32 @@
+<%
+  # Partial per mostrare l'immagine della pagina
+  # Parametri:
+  # - pagina: oggetto Pagina (opzionale, usa @pagina se non fornito)
+  # - image_path: percorso dell'immagine (opzionale, generato automaticamente se non fornito)
+  
+  pagina_obj = local_assigns[:pagina] || @pagina
+  if local_assigns[:image_path]
+    img_path = local_assigns[:image_path]
+    alt_text = local_assigns[:alt] || "Pagina #{pagina_obj&.numero}"
+  else
+    # Genera il percorso automaticamente dal slug della pagina
+    if pagina_obj
+      libro = pagina_obj.slug.split("_p").first
+      numero_str = pagina_obj.numero.to_s.rjust(3, "0")
+      img_path = "#{libro}/p#{numero_str}/page.png"
+      alt_text = "#{pagina_obj.titolo} - Pagina #{pagina_obj.numero}"
+    else
+      img_path = local_assigns[:image_path] || "bus3_mat/p001/page.png"
+      alt_text = local_assigns[:alt] || "Pagina"
+    end
+  end
+%>
+
+<div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+  <div class="flex justify-center">
+    <%= image_tag img_path,
+        alt: alt_text,
+        class: "w-full h-auto max-w-5xl" %>
+  </div>
+</div>
+

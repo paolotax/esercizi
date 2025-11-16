@@ -325,7 +325,29 @@ bus_matematica = bus_volume3.discipline.create!(
   bus_matematica.pagine.create!(pagina_data)
 end
 
+# Pagine generiche per bus3_mat (p001-p192, escludendo le 11 già definite sopra)
+existing_pages = [25, 26, 32, 34, 35, 74, 75, 76, 77, 78, 144]
+generic_pages_created = 0
+
+(1..192).each do |numero|
+  next if existing_pages.include?(numero)
+  
+  numero_str = numero.to_s.rjust(3, '0')
+  slug = "bus3_mat_p#{numero_str}"
+  view_template = "bus3_mat_p#{numero_str}"
+  
+  # Usa find_or_create_by per rendere il seed idempotente
+  bus_matematica.pagine.find_or_create_by(slug: slug) do |pagina|
+    pagina.numero = numero
+    pagina.titolo = "Pagina #{numero}"
+    pagina.view_template = view_template
+  end
+  
+  generic_pages_created += 1
+end
+
 puts "  ✓ Creato volume '#{bus_volume3.nome}' con #{bus_matematica.pagine.count} pagine"
+puts "  ✓ Aggiunte #{generic_pages_created} pagine generiche"
 
 # 3b. BANDA DEL BUS 2
 bus_volume2 = bus.volumi.create!(
