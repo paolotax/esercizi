@@ -414,6 +414,8 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 7, titolo: "Geometria", slug: "nvi5_mat_p007", view_template: "nvi5_mat_p007", sottotitolo: "PER RICOMINCIARE", base_color: "pink" },
   { numero: 8, titolo: "Numeri Potenze", slug: "nvi5_mat_p008", view_template: "nvi5_mat_p008", sottotitolo: "PAROLE AL CENTRO", base_color: "pink" },
   { numero: 9, titolo: "Numeri Relativi", slug: "nvi5_mat_p009", view_template: "nvi5_mat_p009", sottotitolo: "PAROLE AL CENTRO", base_color: "pink" },
+  { numero: 10, titolo: "Numeri Molto Grandi", slug: "nvi5_mat_p010", view_template: "nvi5_mat_p010", sottotitolo: "NUMERI", base_color: "blue" },
+  { numero: 11, titolo: "Diverse Scritture dei Numeri", slug: "nvi5_mat_p011", view_template: "nvi5_mat_p011", sottotitolo: "NUMERI", base_color: "purple" },
   { numero: 12, titolo: "I Numeri Romani", slug: "nvi5_mat_p012", view_template: "nvi5_mat_p012", sottotitolo: "NUMERI", base_color: "purple" },
   { numero: 13, titolo: "I Numeri Grandi", slug: "nvi5_mat_p013", view_template: "nvi5_mat_p013", sottotitolo: "NUMERI", base_color: "purple" },
   { numero: 14, titolo: "I Numeri Decimali", slug: "nvi5_mat_p014", view_template: "nvi5_mat_p014", sottotitolo: "NUMERI", base_color: "purple" },
@@ -450,7 +452,10 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 71, titolo: "Modello INVALSI - Frazioni e Percentuale", slug: "nvi5_mat_p071", view_template: "nvi5_mat_p071" },
   { numero: 72, titolo: "Risolvere Problemi - Usare le Immagini", slug: "nvi5_mat_p072", view_template: "nvi5_mat_p072" },
   { numero: 73, titolo: "Esercizi - Risolvere Problemi", slug: "nvi5_mat_p073", view_template: "nvi5_mat_p073" },
-  { numero: 74, titolo: "Riflettere sui Dati e sul Risultato", slug: "nvi5_mat_p074", view_template: "nvi5_mat_p074" }
+  { numero: 74, titolo: "Riflettere sui Dati e sul Risultato", slug: "nvi5_mat_p074", view_template: "nvi5_mat_p074" },
+  { numero: 75, titolo: "Problemi con Divisione", slug: "nvi5_mat_p075", view_template: "nvi5_mat_p075", sottotitolo: "RISOLVERE PROBLEMI", base_color: "orange" },
+  { numero: 76, titolo: "TUTTOPROBLEMI", slug: "nvi5_mat_p076", view_template: "nvi5_mat_p076", sottotitolo: "RISOLVERE PROBLEMI", base_color: "green" },
+  { numero: 77, titolo: "TUTTOPROBLEMI", slug: "nvi5_mat_p077", view_template: "nvi5_mat_p077", sottotitolo: "RISOLVERE PROBLEMI", base_color: "indigo" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end
