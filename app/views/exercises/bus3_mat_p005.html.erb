@@ -1,12 +1,228 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-gradient-to-b from-cyan-50 to-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p005/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 2: Scrivi la decina successiva -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Scrivi la <strong class="underline">decina successiva</strong>. Segui l'esempio.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <!-- Esempio -->
+      <div class="bg-yellow-100 p-4 rounded-lg">
+        <span class="text-lg font-bold">43 → 50</span>
+      </div>
+
+      <div class="bg-green-100 p-4 rounded-lg flex items-center gap-2">
+        <span class="text-lg font-bold">37 →</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="40"
+               class="w-16 px-2 py-1 border-2 border-green-400 rounded text-center font-bold"
+               maxlength="2" inputmode="numeric">
+      </div>
+
+      <div class="bg-blue-100 p-4 rounded-lg flex items-center gap-2">
+        <span class="text-lg font-bold">76 →</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="80"
+               class="w-16 px-2 py-1 border-2 border-blue-400 rounded text-center font-bold"
+               maxlength="2" inputmode="numeric">
+      </div>
+
+      <div class="bg-pink-100 p-4 rounded-lg flex items-center gap-2">
+        <span class="text-lg font-bold">28 →</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="30"
+               class="w-16 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold"
+               maxlength="2" inputmode="numeric">
+      </div>
+
+      <div class="bg-cyan-100 p-4 rounded-lg flex items-center gap-2">
+        <span class="text-lg font-bold">21 →</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="30"
+               class="w-16 px-2 py-1 border-2 border-cyan-400 rounded text-center font-bold"
+               maxlength="2" inputmode="numeric">
+      </div>
+
+      <div class="bg-orange-100 p-4 rounded-lg flex items-center gap-2">
+        <span class="text-lg font-bold">19 →</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="20"
+               class="w-16 px-2 py-1 border-2 border-orange-400 rounded text-center font-bold"
+               maxlength="2" inputmode="numeric">
+      </div>
+
+      <div class="bg-blue-100 p-4 rounded-lg flex items-center gap-2">
+        <span class="text-lg font-bold">55 →</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="60"
+               class="w-16 px-2 py-1 border-2 border-blue-400 rounded text-center font-bold"
+               maxlength="2" inputmode="numeric">
+      </div>
+
+      <div class="bg-purple-100 p-4 rounded-lg flex items-center gap-2">
+        <span class="text-lg font-bold">62 →</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="70"
+               class="w-16 px-2 py-1 border-2 border-purple-400 rounded text-center font-bold"
+               maxlength="2" inputmode="numeric">
+      </div>
+
+      <div class="bg-yellow-100 p-4 rounded-lg flex items-center gap-2">
+        <span class="text-lg font-bold">86 →</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="90"
+               class="w-16 px-2 py-1 border-2 border-yellow-400 rounded text-center font-bold"
+               maxlength="2" inputmode="numeric">
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 3: Completa la tabella -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Completa la tabella.
+      </p>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full border-2 border-pink-400">
+        <thead>
+          <tr class="bg-pink-100">
+            <th class="border-2 border-pink-400 p-3 text-center font-bold text-blue-600">precedente</th>
+            <th class="border-2 border-pink-400 p-3 text-center font-bold">numero</th>
+            <th class="border-2 border-pink-400 p-3 text-center font-bold text-red-600">successivo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% [68, 20, 13, 47, 81, 39].each do |num| %>
+            <tr>
+              <td class="border-2 border-pink-400 p-3 text-center">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= num - 1 %>"
+                       class="w-16 px-2 py-1 border-2 border-blue-400 rounded text-center font-bold"
+                       maxlength="2" inputmode="numeric">
+              </td>
+              <td class="border-2 border-pink-400 p-3 text-center font-bold text-lg"><%= num %></td>
+              <td class="border-2 border-pink-400 p-3 text-center">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= num + 1 %>"
+                       class="w-16 px-2 py-1 border-2 border-red-400 rounded text-center font-bold"
+                       maxlength="2" inputmode="numeric">
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Esercizio 4: Confronta numeri -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="word-choice">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        4
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Confronta ogni coppia di numeri: scrivi il simbolo <strong class="underline">&gt;</strong>, <strong class="underline">&lt;</strong> oppure <strong class="underline">=</strong>.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <%
+        comparisons = [
+          [57, 75, '<'], [72, 70, '>'],
+          [63, 63, '='], [31, 53, '<'],
+          [78, 93, '<'], [84, 84, '='],
+          [96, 69, '>'], [66, 49, '>']
+        ]
+
+        comparisons.each do |num1, num2, correct|
+      %>
+        <div class="bg-blue-100 border-2 border-blue-300 p-4 rounded-lg flex items-center justify-center gap-2">
+          <span class="text-lg font-bold"><%= num1 %></span>
+          <select data-word-choice-target="select" data-correct-answer="<%= correct %>"
+                  class="border-2 border-blue-400 rounded px-2 py-1 font-bold text-lg">
+            <option value="">?</option>
+            <option value="<">&lt;</option>
+            <option value="=">=</option>
+            <option value=">">&gt;</option>
+          </select>
+          <span class="text-lg font-bold"><%= num2 %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Esercizio 5: Numera in avanti per 3 -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        5
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Numera <strong class="underline">in avanti per 3</strong>.
+      </p>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center gap-2">
+      <% [70, 73, 76, 79, 82, 85, 88, 91].each_with_index do |num, idx| %>
+        <% if [70, 73, 79, 91].include?(num) %>
+          <!-- Numero fisso -->
+          <div class="w-12 h-12 sm:w-16 sm:h-16 bg-<%= ['pink', 'yellow', 'pink', 'cyan'][idx % 4] %>-200 border-4 border-<%= ['pink', 'yellow', 'pink', 'cyan'][idx % 4] %>-400 rounded-full flex items-center justify-center">
+            <span class="font-bold text-lg"><%= num %></span>
+          </div>
+        <% else %>
+          <!-- Input -->
+          <div class="w-12 h-12 sm:w-16 sm:h-16 bg-purple-100 border-4 border-purple-400 rounded-full flex items-center justify-center">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= num %>"
+                   class="w-10 h-10 sm:w-12 sm:h-12 bg-transparent text-center font-bold text-sm sm:text-base border-none focus:outline-none"
+                   maxlength="2" inputmode="numeric">
+          </div>
+        <% end %>
+        <% if idx < 7 %>
+          <span class="text-2xl font-bold text-gray-600">→</span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Esercizio 6: Numera all'indietro per 2 -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        6
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Numera <strong class="underline">all'indietro per 2</strong>.
+      </p>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center gap-2">
+      <% [83, 85, 87, 89, 91, 93, 95, 97, 99].reverse.each_with_index do |num, idx| %>
+        <% if [99, 97, 89].include?(num) %>
+          <!-- Numero fisso -->
+          <div class="w-12 h-12 sm:w-16 sm:h-16 bg-<%= ['yellow', 'cyan', 'cyan'][idx % 3] %>-200 border-4 border-<%= ['yellow', 'cyan', 'cyan'][idx % 3] %>-400 rounded-full flex items-center justify-center">
+            <span class="font-bold text-lg"><%= num %></span>
+          </div>
+        <% else %>
+          <!-- Input -->
+          <div class="w-12 h-12 sm:w-16 sm:h-16 bg-purple-100 border-4 border-purple-400 rounded-full flex items-center justify-center">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= num %>"
+                   class="w-10 h-10 sm:w-12 sm:h-12 bg-transparent text-center font-bold text-sm sm:text-base border-none focus:outline-none"
+                   maxlength="2" inputmode="numeric">
+          </div>
+        <% end %>
+        <% if idx < 8 %>
+          <span class="text-2xl font-bold text-gray-600">←</span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

@@ -313,6 +313,7 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 1, titolo: "Copertina", slug: "bus3_mat_p001", view_template: "bus3_mat_p001", base_color: "blue" },
   { numero: 2, titolo: "Indice", slug: "bus3_mat_p002", view_template: "bus3_mat_p002", base_color: "blue" },
   { numero: 4, titolo: "I NUMERI FINO A 99", sottotitolo: "PER RIPASSARE", slug: "bus3_mat_p004", view_template: "bus3_mat_p004", base_color: "cyan" },
+  { numero: 5, titolo: "I NUMERI FINO A 99 - Esercizi", sottotitolo: "PER RIPASSARE", slug: "bus3_mat_p005", view_template: "bus3_mat_p005", base_color: "cyan" },
   { numero: 25, titolo: "Addizioni in colonna", slug: "bus3_mat_p025", view_template: "bus3_mat_p025" },
   { numero: 26, titolo: "Addizioni con il cambio", slug: "bus3_mat_p026", view_template: "bus3_mat_p026" },
   { numero: 32, titolo: "Sottrazioni con il cambio", slug: "bus3_mat_p032", view_template: "bus3_mat_p032" },
@@ -333,8 +334,8 @@ bus_matematica = bus_volume3.discipline.create!(
   end
 end
 
-# Pagine generiche per bus3_mat (p001-p192, escludendo le 13 già definite sopra)
-existing_pages = [ 1, 2, 4, 25, 26, 32, 34, 35, 74, 75, 76, 77, 78, 144 ]
+# Pagine generiche per bus3_mat (p001-p192, escludendo le 14 già definite sopra)
+existing_pages = [ 1, 2, 4, 5, 25, 26, 32, 34, 35, 74, 75, 76, 77, 78, 144 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|
