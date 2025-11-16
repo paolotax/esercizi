@@ -1,12 +1,72 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-gradient-to-b from-cyan-50 to-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p004/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1: Completa il serpente -->
+  <div class="bg-white rounded-xl shadow-lg p-4 md:p-8 mb-8" data-controller="fill-blanks snake-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Completa il serpente con i numeri da <strong class="underline">0</strong> a <strong class="underline">99</strong>.
+      </p>
+    </div>
+
+    <!-- Serpente interattivo con griglia di input -->
+    <div class="flex justify-center">
+      <div class="relative w-full max-w-4xl">
+        <!-- Immagine di sfondo -->
+        <%= image_tag "bus3_mat/p004/p04_1.jpg",
+            alt: "Serpente con numeri da 0 a 99 da completare",
+            class: "w-full h-auto rounded-lg shadow-md" %>
+
+        <!-- Griglia di input sovrapposta -->
+        <div class="absolute inset-0 pt-[11.4%] pl-[5.0%] pr-[7.5%] pb-[3%]">
+          <%
+            # Definizione dei numeri pre-compilati visibili nell'immagine
+            prefilled =  [] #[0, 10, 11, 20, 30, 50, 99]
+
+            # Generazione della griglia 10x10 (100 numeri da 0 a 99)
+            10.times do |row|
+              # Le righe pari vanno da sinistra a destra, le dispari da destra a sinistra (serpente)
+              is_even_row = row.even?
+          %>
+          <div class="flex flex-row gap-0 mb-[1%] h-[9.5%]">
+            <% 10.times do |col| %>
+              <%
+                # Calcola il numero corretto in base alla direzione del serpente
+                # Righe pari (0,2,4...): 0→9, 20→29, 40→49...
+                # Righe dispari (1,3,5...): 19→10, 39→30, 59→50...
+                number = is_even_row ? (row * 10 + col) : (row * 10 + 9 - col)
+                is_prefilled = prefilled.include?(number)
+              %>
+              <div class="flex-1 flex items-center justify-center">
+                <% if is_prefilled %>
+                  <!-- Spazio vuoto trasparente per mostrare il numero dell'immagine sotto -->
+                  <div class="w-full h-full"></div>
+                <% else %>
+                  <!-- Input interattivo più piccolo -->
+                  <input type="text"
+                         data-fill-blanks-target="input"
+                         data-snake-advance-target="input"
+                         data-correct-answer="<%= number %>"
+                         class="w-[60%] h-[60%] bg-white/60 hover:bg-white/80 focus:bg-white border border-black focus:border-cyan-400 rounded-full text-center font-bold text-[11px] sm:text-sm md:text-base transition-colors"
+                         maxlength="<%= number < 10 ? '1' : '2' %>"
+                         inputmode="numeric"
+                         pattern="[0-9]*">
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

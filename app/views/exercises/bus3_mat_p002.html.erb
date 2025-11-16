@@ -1,12 +1,37 @@
-<% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
+<% content_for :left_page_content do %>
+  <%= render 'exercises/bus3_mat_index_page_2' %>
+<% end %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
-  <!-- Header -->
-  <%= render 'shared/page_header', pagina: @pagina %>
+<% content_for :right_page_content do %>
+  <%= render 'exercises/bus3_mat_index_page_3' %>
+<% end %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+<div class="max-w-[1800px] mx-auto p-2 lg:p-8 bg-gradient-to-b from-blue-50 via-white to-blue-50">
 
-  <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <!-- Two-page horizontal layout like an open book -->
+  <div class="grid lg:grid-cols-2 gap-3 lg:gap-8">
+
+    <!-- LEFT PAGE - Page 2 -->
+    <div class="bg-white rounded-xl shadow-2xl p-3 lg:p-8 relative border-4 border-blue-200">
+      <!-- Page number top right -->
+      <div class="absolute top-2 right-2 lg:top-4 lg:right-4 bg-blue-600 text-white rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center font-bold text-base lg:text-xl shadow-lg">
+        2
+      </div>
+
+      <%= content_for(:left_page_content) %>
+    </div>
+
+    <!-- RIGHT PAGE - Page 3 -->
+    <div class="bg-white rounded-xl shadow-2xl p-3 lg:p-8 relative border-4 border-blue-200">
+      <!-- Page number top right -->
+      <div class="absolute top-2 right-2 lg:top-4 lg:right-4 bg-blue-600 text-white rounded-full w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center font-bold text-base lg:text-xl shadow-lg">
+        3
+      </div>
+
+      <%= content_for(:right_page_content) %>
+    </div>
+
+  </div>
+
+  <%= render 'shared/exercise_controls', color: 'blue', show_exercise_buttons: false %>
 </div>

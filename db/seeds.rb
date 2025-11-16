@@ -310,6 +310,9 @@ bus_matematica = bus_volume3.discipline.create!(
 )
 
 [
+  { numero: 1, titolo: "Copertina", slug: "bus3_mat_p001", view_template: "bus3_mat_p001", base_color: "blue" },
+  { numero: 2, titolo: "Indice", slug: "bus3_mat_p002", view_template: "bus3_mat_p002", base_color: "blue" },
+  { numero: 4, titolo: "I NUMERI FINO A 99", sottotitolo: "PER RIPASSARE", slug: "bus3_mat_p004", view_template: "bus3_mat_p004", base_color: "cyan" },
   { numero: 25, titolo: "Addizioni in colonna", slug: "bus3_mat_p025", view_template: "bus3_mat_p025" },
   { numero: 26, titolo: "Addizioni con il cambio", slug: "bus3_mat_p026", view_template: "bus3_mat_p026" },
   { numero: 32, titolo: "Sottrazioni con il cambio", slug: "bus3_mat_p032", view_template: "bus3_mat_p032" },
@@ -322,27 +325,32 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 78, titolo: "Dall'Unità Frazionaria all'Intero", slug: "bus3_mat_p078", view_template: "bus3_mat_p078" },
   { numero: 144, titolo: "Proprietà dell'Addizione", slug: "bus3_mat_p144", view_template: "bus3_mat_p144" }
 ].each do |pagina_data|
-  bus_matematica.pagine.create!(pagina_data)
+  bus_matematica.pagine.find_or_create_by!(slug: pagina_data[:slug]) do |pagina|
+    pagina.numero = pagina_data[:numero]
+    pagina.titolo = pagina_data[:titolo]
+    pagina.view_template = pagina_data[:view_template]
+    pagina.base_color = pagina_data[:base_color] if pagina_data[:base_color]
+  end
 end
 
-# Pagine generiche per bus3_mat (p001-p192, escludendo le 11 già definite sopra)
-existing_pages = [25, 26, 32, 34, 35, 74, 75, 76, 77, 78, 144]
+# Pagine generiche per bus3_mat (p001-p192, escludendo le 13 già definite sopra)
+existing_pages = [ 1, 2, 4, 25, 26, 32, 34, 35, 74, 75, 76, 77, 78, 144 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|
   next if existing_pages.include?(numero)
-  
+
   numero_str = numero.to_s.rjust(3, '0')
   slug = "bus3_mat_p#{numero_str}"
   view_template = "bus3_mat_p#{numero_str}"
-  
+
   # Usa find_or_create_by per rendere il seed idempotente
   bus_matematica.pagine.find_or_create_by(slug: slug) do |pagina|
     pagina.numero = numero
     pagina.titolo = "Pagina #{numero}"
     pagina.view_template = view_template
   end
-  
+
   generic_pages_created += 1
 end
 
