@@ -16,119 +16,214 @@
       </p>
     </div>
 
-    <!-- Esercizio 1: Associa unità di misura -->
-    <div class="bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6">
+    <!-- Esercizio 1: Associa unità di misura con flower-matcher -->
+    <div class="bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="flower-matcher">
       <h3 class="text-lg md:text-xl font-bold text-blue-700 mb-4 flex items-center gap-3">
         <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">1</span>
         <span>Associa ciascun elemento alla sua unità di misura.</span>
       </h3>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-4">
-        <!-- Immagine 1 -->
-        <div class="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
-          <div class="text-center mb-3">
+      <div class="relative">
+        <!-- SVG Canvas per disegnare le linee -->
+        <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-30"
+             data-flower-matcher-target="canvas">
+        </svg>
+
+        <!-- Riga superiore: le immagini -->
+        <div class="flex justify-around mb-16 relative z-20">
+          <!-- Immagine 1 -->
+          <div class="bg-blue-50 border-3 border-blue-300 rounded-xl p-3 cursor-pointer hover:bg-blue-100 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="img-1"
+               data-pair="unit-g">
             <img src="<%= asset_path('nvi5_mat/p006/output-1715938802006_178_453_53_95.png') %>"
-                 alt="Oggetto"
-                 class="w-24 h-24 mx-auto object-contain">
+                 alt="Oggetto 1"
+                 class="w-20 h-20 md:w-24 md:h-24 object-contain">
           </div>
-          <select class="w-full px-2 py-1 border-2 border-gray-300 rounded focus:border-blue-500 focus:outline-none text-center"
-                  data-correct-answer="g">
-            <option value="">?</option>
-            <option value="g">g</option>
-            <option value="ℓ">ℓ</option>
-            <option value="kg">kg</option>
-            <option value="km">km</option>
-            <option value="cm">cm</option>
-          </select>
-        </div>
 
-        <!-- Immagine 2 -->
-        <div class="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
-          <div class="text-center mb-3">
+          <!-- Immagine 2 -->
+          <div class="bg-blue-50 border-3 border-blue-300 rounded-xl p-3 cursor-pointer hover:bg-blue-100 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="img-2"
+               data-pair="unit-l">
             <img src="<%= asset_path('nvi5_mat/p006/output-1715938802006_300_446_161_116.png') %>"
-                 alt="Oggetto"
-                 class="w-24 h-24 mx-auto object-contain">
+                 alt="Oggetto 2"
+                 class="w-20 h-20 md:w-24 md:h-24 object-contain">
           </div>
-          <select class="w-full px-2 py-1 border-2 border-gray-300 rounded focus:border-blue-500 focus:outline-none text-center"
-                  data-correct-answer="ℓ">
-            <option value="">?</option>
-            <option value="g">g</option>
-            <option value="ℓ">ℓ</option>
-            <option value="kg">kg</option>
-            <option value="km">km</option>
-            <option value="cm">cm</option>
-          </select>
-        </div>
 
-        <!-- Immagine 3 -->
-        <div class="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
-          <div class="text-center mb-3">
+          <!-- Immagine 3 -->
+          <div class="bg-blue-50 border-3 border-blue-300 rounded-xl p-3 cursor-pointer hover:bg-blue-100 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="img-3"
+               data-pair="unit-kg">
             <img src="<%= asset_path('nvi5_mat/p006/output-1715938802006_513_448_72_126.png') %>"
-                 alt="Oggetto"
-                 class="w-24 h-24 mx-auto object-contain">
+                 alt="Oggetto 3"
+                 class="w-20 h-20 md:w-24 md:h-24 object-contain">
           </div>
-          <select class="w-full px-2 py-1 border-2 border-gray-300 rounded focus:border-blue-500 focus:outline-none text-center"
-                  data-correct-answer="kg">
-            <option value="">?</option>
-            <option value="g">g</option>
-            <option value="ℓ">ℓ</option>
-            <option value="kg">kg</option>
-            <option value="km">km</option>
-            <option value="cm">cm</option>
-          </select>
-        </div>
 
-        <!-- Immagine 4 -->
-        <div class="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
-          <div class="text-center mb-3">
+          <!-- Immagine 4 -->
+          <div class="bg-blue-50 border-3 border-blue-300 rounded-xl p-3 cursor-pointer hover:bg-blue-100 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="img-4"
+               data-pair="unit-km">
             <img src="<%= asset_path('nvi5_mat/p006/output-1715938802006_679_454_93_99.png') %>"
-                 alt="Oggetto"
-                 class="w-24 h-24 mx-auto object-contain">
+                 alt="Oggetto 4"
+                 class="w-20 h-20 md:w-24 md:h-24 object-contain">
           </div>
-          <select class="w-full px-2 py-1 border-2 border-gray-300 rounded focus:border-blue-500 focus:outline-none text-center"
-                  data-correct-answer="km">
-            <option value="">?</option>
-            <option value="g">g</option>
-            <option value="ℓ">ℓ</option>
-            <option value="kg">kg</option>
-            <option value="km">km</option>
-            <option value="cm">cm</option>
-          </select>
+
+          <!-- Immagine 5 -->
+          <div class="bg-blue-50 border-3 border-blue-300 rounded-xl p-3 cursor-pointer hover:bg-blue-100 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="img-5"
+               data-pair="unit-cm">
+            <img src="<%= asset_path('nvi5_mat/p006/output-1715938802006_848_458_88_88.png') %>"
+                 alt="Oggetto 5"
+                 class="w-20 h-20 md:w-24 md:h-24 object-contain">
+          </div>
         </div>
 
-        <!-- Immagine 5 -->
-        <div class="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
-          <div class="text-center mb-3">
-            <img src="<%= asset_path('nvi5_mat/p006/output-1715938802006_848_458_88_88.png') %>"
-                 alt="Oggetto"
-                 class="w-24 h-24 mx-auto object-contain">
-          </div>
-          <select class="w-full px-2 py-1 border-2 border-gray-300 rounded focus:border-blue-500 focus:outline-none text-center"
-                  data-correct-answer="cm">
-            <option value="">?</option>
-            <option value="g">g</option>
-            <option value="ℓ">ℓ</option>
-            <option value="kg">kg</option>
-            <option value="km">km</option>
-            <option value="cm">cm</option>
-          </select>
+        <!-- Riga inferiore: le unità di misura -->
+        <div class="flex justify-around relative z-20">
+          <div class="bg-pink-100 border-3 border-pink-400 rounded-lg px-4 py-3 md:px-6 md:py-4 text-lg md:text-xl font-bold cursor-pointer hover:bg-pink-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="unit-g"
+               data-pair="img-1">g</div>
+
+          <div class="bg-pink-100 border-3 border-pink-400 rounded-lg px-4 py-3 md:px-6 md:py-4 text-lg md:text-xl font-bold cursor-pointer hover:bg-pink-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="unit-l"
+               data-pair="img-2">ℓ</div>
+
+          <div class="bg-pink-100 border-3 border-pink-400 rounded-lg px-4 py-3 md:px-6 md:py-4 text-lg md:text-xl font-bold cursor-pointer hover:bg-pink-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="unit-kg"
+               data-pair="img-3">kg</div>
+
+          <div class="bg-pink-100 border-3 border-pink-400 rounded-lg px-4 py-3 md:px-6 md:py-4 text-lg md:text-xl font-bold cursor-pointer hover:bg-pink-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="unit-km"
+               data-pair="img-4">km</div>
+
+          <div class="bg-pink-100 border-3 border-pink-400 rounded-lg px-4 py-3 md:px-6 md:py-4 text-lg md:text-xl font-bold cursor-pointer hover:bg-pink-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="unit-cm"
+               data-pair="img-5">cm</div>
         </div>
       </div>
     </div>
 
-    <!-- Esercizio 2: Cerchia la cifra indicata dalla marca -->
-    <div class="bg-white rounded-2xl border-4 border-pink-200 shadow-2xl p-4 md:p-6">
+    <!-- Esercizio 2: Cerchia la cifra indicata dalla marca con word-highlighter -->
+    <div class="bg-white rounded-2xl border-4 border-pink-200 shadow-2xl p-4 md:p-6" data-controller="word-highlighter">
       <h3 class="text-lg md:text-xl font-bold text-pink-700 mb-4 flex items-center gap-3">
         <span class="bg-pink-500 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">2</span>
         <span>Cerchia la cifra indicata dalla marca. Segui l'esempio.</span>
       </h3>
 
-      <div class="bg-pink-50 rounded-xl p-4">
-        <img src="<%= asset_path('nvi5_mat/p006/p006_01.jpg') %>"
-             alt="Esempio cifre con marca"
-             class="w-full max-w-4xl mx-auto">
+      <div class="bg-pink-50 rounded-xl p-4 space-y-4">
+        <!-- Esempio già completato -->
+        <div class="flex flex-wrap items-center gap-3 text-xl md:text-2xl font-bold">
+          <span class="text-gray-700">Esempio:</span>
+          <span class="bg-pink-300 rounded-full px-3 py-1">8</span>
+          <span class="text-pink-600">m</span>
+        </div>
+
+        <!-- Numeri da evidenziare -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xl md:text-2xl font-bold">
+          <!-- 12,5 ℓ -->
+          <div class="flex items-center gap-1">
+            <span>1</span>
+            <span>2</span>
+            <span>,</span>
+            <span class="cursor-pointer hover:bg-pink-100 px-2 py-1 rounded transition"
+                  data-word-highlighter-target="word"
+                  data-correct-color="pink"
+                  data-action="click->word-highlighter#highlightWord">5</span>
+            <span class="text-pink-600 ml-2">ℓ</span>
+          </div>
+
+          <!-- 321 kg -->
+          <div class="flex items-center gap-1">
+            <span>3</span>
+            <span class="cursor-pointer hover:bg-pink-100 px-2 py-1 rounded transition"
+                  data-word-highlighter-target="word"
+                  data-correct-color="pink"
+                  data-action="click->word-highlighter#highlightWord">2</span>
+            <span>1</span>
+            <span class="text-pink-600 ml-2">kg</span>
+          </div>
+
+          <!-- 45,8 g -->
+          <div class="flex items-center gap-1">
+            <span>4</span>
+            <span>5</span>
+            <span>,</span>
+            <span class="cursor-pointer hover:bg-pink-100 px-2 py-1 rounded transition"
+                  data-word-highlighter-target="word"
+                  data-correct-color="pink"
+                  data-action="click->word-highlighter#highlightWord">8</span>
+            <span class="text-pink-600 ml-2">g</span>
+          </div>
+
+          <!-- 68 m -->
+          <div class="flex items-center gap-1">
+            <span>6</span>
+            <span class="cursor-pointer hover:bg-pink-100 px-2 py-1 rounded transition"
+                  data-word-highlighter-target="word"
+                  data-correct-color="pink"
+                  data-action="click->word-highlighter#highlightWord">8</span>
+            <span class="text-pink-600 ml-2">m</span>
+          </div>
+
+          <!-- 137 km -->
+          <div class="flex items-center gap-1">
+            <span>1</span>
+            <span>3</span>
+            <span class="cursor-pointer hover:bg-pink-100 px-2 py-1 rounded transition"
+                  data-word-highlighter-target="word"
+                  data-correct-color="pink"
+                  data-action="click->word-highlighter#highlightWord">7</span>
+            <span class="text-pink-600 ml-2">km</span>
+          </div>
+
+          <!-- 3,5 hg -->
+          <div class="flex items-center gap-1">
+            <span>3</span>
+            <span>,</span>
+            <span class="cursor-pointer hover:bg-pink-100 px-2 py-1 rounded transition"
+                  data-word-highlighter-target="word"
+                  data-correct-color="pink"
+                  data-action="click->word-highlighter#highlightWord">5</span>
+            <span class="text-pink-600 ml-2">hg</span>
+          </div>
+        </div>
+
+        <div class="mt-4 flex items-center gap-4">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-pink-400 rounded-full cursor-pointer"
+                 data-word-highlighter-target="colorBox"
+                 data-color="pink"
+                 data-action="click->word-highlighter#selectColor"
+                 title="Clicca per selezionare">
+            </div>
+            <span class="text-sm text-gray-700">Clicca per cerchiare la cifra</span>
+          </div>
+          <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition"
+                  data-action="click->word-highlighter#clearHighlights">
+            Cancella
+          </button>
+        </div>
       </div>
-      <p class="text-sm text-gray-600 italic mt-2">Osserva l'esempio nell'immagine sopra e cerchia la cifra indicata dalla marca.</p>
+      <p class="text-sm text-gray-600 italic mt-2">Ricorda: la marca si riferisce sempre alla cifra delle unità!</p>
     </div>
 
     <!-- Esercizio 3: Trova l'altezza -->
@@ -145,26 +240,87 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-white rounded-lg p-4 border-2 border-blue-300">
-          <div class="font-bold text-blue-700 mb-2">Filippo</div>
-          <input type="text" class="w-full px-3 py-2 border-2 border-blue-400 rounded focus:border-blue-600 focus:outline-none text-center font-bold"
-                 data-correct-answer="180" placeholder="...">
-          <span class="ml-1">cm</span>
+        <!-- Filippo -->
+        <div class="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
+          <div class="text-center mb-3">
+            <div class="text-4xl mb-2">👦</div>
+            <div class="font-bold text-blue-700 text-lg">Filippo</div>
+          </div>
+          <div class="space-y-2">
+            <div class="bg-white rounded p-2 text-center">
+              <span class="text-gray-700">Altezza totale: </span>
+              <span class="font-bold">180 cm</span>
+            </div>
+            <div class="bg-white rounded p-2 text-center">
+              <span class="text-gray-700">Sgabello: </span>
+              <span class="font-bold">25 cm</span>
+            </div>
+            <div class="bg-blue-200 rounded p-3 text-center font-bold">
+              <div class="text-sm text-gray-700 mb-1">Altezza Filippo:</div>
+              <div class="text-xs text-gray-600 mb-2">(totale - sgabello)</div>
+              <input type="text" class="w-24 px-3 py-2 border-2 border-blue-400 rounded focus:border-blue-600 focus:outline-none text-center font-bold text-blue-700"
+                     data-correct-answer="155" placeholder="?">
+              <span class="ml-1">cm</span>
+            </div>
+          </div>
         </div>
 
-        <div class="bg-white rounded-lg p-4 border-2 border-pink-300">
-          <div class="font-bold text-pink-700 mb-2">Claudia</div>
-          <input type="text" class="w-full px-3 py-2 border-2 border-pink-400 rounded focus:border-pink-600 focus:outline-none text-center font-bold"
-                 data-correct-answer="226" placeholder="...">
-          <span class="ml-1">cm</span>
+        <!-- Claudia -->
+        <div class="bg-pink-50 rounded-xl p-4 border-2 border-pink-200">
+          <div class="text-center mb-3">
+            <div class="text-4xl mb-2">👧</div>
+            <div class="font-bold text-pink-700 text-lg">Claudia</div>
+          </div>
+          <div class="space-y-2">
+            <div class="bg-white rounded p-2 text-center">
+              <span class="text-gray-700">Altezza totale: </span>
+              <span class="font-bold">226 cm</span>
+            </div>
+            <div class="bg-white rounded p-2 text-center">
+              <span class="text-gray-700">Sedia: </span>
+              <span class="font-bold">48 cm</span>
+            </div>
+            <div class="bg-pink-200 rounded p-3 text-center font-bold">
+              <div class="text-sm text-gray-700 mb-1">Altezza Claudia:</div>
+              <div class="text-xs text-gray-600 mb-2">(totale - sedia)</div>
+              <input type="text" class="w-24 px-3 py-2 border-2 border-pink-400 rounded focus:border-pink-600 focus:outline-none text-center font-bold text-pink-700"
+                     data-correct-answer="178" placeholder="?">
+              <span class="ml-1">cm</span>
+            </div>
+          </div>
         </div>
 
-        <div class="bg-white rounded-lg p-4 border-2 border-blue-300">
-          <div class="font-bold text-blue-700 mb-2">Sergio</div>
-          <input type="text" class="w-full px-3 py-2 border-2 border-blue-400 rounded focus:border-blue-600 focus:outline-none text-center font-bold"
-                 data-correct-answer="265" placeholder="...">
-          <span class="ml-1">cm</span>
+        <!-- Sergio -->
+        <div class="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
+          <div class="text-center mb-3">
+            <div class="text-4xl mb-2">👨</div>
+            <div class="font-bold text-blue-700 text-lg">Sergio</div>
+          </div>
+          <div class="space-y-2">
+            <div class="bg-white rounded p-2 text-center">
+              <span class="text-gray-700">Altezza totale: </span>
+              <span class="font-bold">265 cm</span>
+            </div>
+            <div class="bg-white rounded p-2 text-center">
+              <span class="text-gray-700">Cassetta: </span>
+              <span class="font-bold">65 cm</span>
+            </div>
+            <div class="bg-blue-200 rounded p-3 text-center font-bold">
+              <div class="text-sm text-gray-700 mb-1">Altezza Sergio:</div>
+              <div class="text-xs text-gray-600 mb-2">(totale - cassetta)</div>
+              <input type="text" class="w-24 px-3 py-2 border-2 border-blue-400 rounded focus:border-blue-600 focus:outline-none text-center font-bold text-blue-700"
+                     data-correct-answer="200" placeholder="?">
+              <span class="ml-1">cm</span>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="mt-4 bg-yellow-50 rounded-lg p-3">
+        <p class="text-sm text-gray-700">
+          <span class="font-bold">Suggerimento:</span>
+          Per trovare l'altezza dei bambini, sottrai l'altezza dello sgabello/sedia/cassetta dall'altezza totale.
+        </p>
       </div>
     </div>
 
