@@ -343,7 +343,7 @@ bus_matematica = bus_volume3.discipline.create!(
 end
 
 # Pagine generiche per bus3_mat (p001-p192, escludendo le 20 già definite sopra)
-existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 25, 26, 32, 34, 35, 74, 75, 76, 77, 78, 144 ]
+existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 25, 26, 32, 34, 35, 74, 75, 76, 77, 78, 144 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|
