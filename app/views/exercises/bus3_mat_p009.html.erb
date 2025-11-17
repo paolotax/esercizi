@@ -1,12 +1,470 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-gradient-to-b from-cyan-50 to-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p009/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 3: Collega ogni numero in lettere al corrispondente numero in cifre -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="flower-matcher">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Collega ogni numero in lettere al corrispondente numero in cifre.
+      </p>
+    </div>
+
+    <div class="relative">
+      <!-- SVG Canvas per disegnare le linee -->
+      <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-30"
+           data-flower-matcher-target="canvas">
+      </svg>
+
+      <!-- Griglia con numeri in lettere a sinistra e numeri in cifre a destra -->
+      <div class="grid grid-cols-3 gap-x-8 gap-y-6 relative z-20">
+        <%
+          word_numbers = [
+            { word: "centodue", number: 102 },
+            { word: "centoventi", number: 120 },
+            { word: "centotrentuno", number: 131 },
+            { word: "duecentonove", number: 209 },
+            { word: "seicentosessanta", number: 660 }
+          ]
+
+          digit_numbers = [
+            { number: 102 },
+            { number: 506 },
+            { number: 131 },
+            { number: 200 },
+            { number: 120 },
+            { number: 307 },
+            { number: 660 },
+            { number: 722 },
+            { number: 209 },
+            { number: 805 }
+          ]
+
+          # Riga 1
+        %>
+        <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="word-centodue"
+             data-pair="pair-102">
+          <p class="font-bold text-base md:text-lg text-center">centodue</p>
+        </div>
+
+        <div class="flex gap-4 items-center justify-center">
+          <div class="bg-yellow-100 border-3 border-yellow-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-yellow-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="num-102"
+               data-pair="pair-102">
+            <p class="font-bold text-xl text-center">102</p>
+          </div>
+          <div class="bg-yellow-100 border-3 border-yellow-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-yellow-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="num-506"
+               data-pair="pair-506">
+            <p class="font-bold text-xl text-center">506</p>
+          </div>
+        </div>
+
+        <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="word-duecento"
+             data-pair="pair-200">
+          <p class="font-bold text-base md:text-lg text-center">duecento</p>
+        </div>
+
+        <!-- Riga 2 -->
+        <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="word-centoventi"
+             data-pair="pair-120">
+          <p class="font-bold text-base md:text-lg text-center">centoventi</p>
+        </div>
+
+        <div class="flex gap-4 items-center justify-center">
+          <div class="bg-yellow-100 border-3 border-yellow-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-yellow-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="num-131"
+               data-pair="pair-131">
+            <p class="font-bold text-xl text-center">131</p>
+          </div>
+          <div class="bg-yellow-100 border-3 border-yellow-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-yellow-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="num-200"
+               data-pair="pair-200">
+            <p class="font-bold text-xl text-center">200</p>
+          </div>
+        </div>
+
+        <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="word-trecentosette"
+             data-pair="pair-307">
+          <p class="font-bold text-base md:text-lg text-center">trecentosette</p>
+        </div>
+
+        <!-- Riga 3 -->
+        <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="word-centotrentuno"
+             data-pair="pair-131">
+          <p class="font-bold text-base md:text-lg text-center">centotrentuno</p>
+        </div>
+
+        <div class="flex gap-4 items-center justify-center">
+          <div class="bg-yellow-100 border-3 border-yellow-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-yellow-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="num-120"
+               data-pair="pair-120">
+            <p class="font-bold text-xl text-center">120</p>
+          </div>
+          <div class="bg-yellow-100 border-3 border-yellow-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-yellow-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="num-307"
+               data-pair="pair-307">
+            <p class="font-bold text-xl text-center">307</p>
+          </div>
+        </div>
+
+        <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="word-cinquecentosei"
+             data-pair="pair-506">
+          <p class="font-bold text-base md:text-lg text-center">cinquecentosei</p>
+        </div>
+
+        <!-- Riga 4 -->
+        <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="word-duecentonove"
+             data-pair="pair-209">
+          <p class="font-bold text-base md:text-lg text-center">duecentonove</p>
+        </div>
+
+        <div class="flex gap-4 items-center justify-center">
+          <div class="bg-yellow-100 border-3 border-yellow-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-yellow-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="num-660"
+               data-pair="pair-660">
+            <p class="font-bold text-xl text-center">660</p>
+          </div>
+          <div class="bg-yellow-100 border-3 border-yellow-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-yellow-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="num-722"
+               data-pair="pair-722">
+            <p class="font-bold text-xl text-center">722</p>
+          </div>
+        </div>
+
+        <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="word-ottocentocinque"
+             data-pair="pair-805">
+          <p class="font-bold text-base md:text-lg text-center">ottocentocinque</p>
+        </div>
+
+        <!-- Riga 5 -->
+        <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="word-seicentosessanta"
+             data-pair="pair-660">
+          <p class="font-bold text-base md:text-lg text-center">seicentosessanta</p>
+        </div>
+
+        <div class="flex gap-4 items-center justify-center">
+          <div class="bg-yellow-100 border-3 border-yellow-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-yellow-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="num-209"
+               data-pair="pair-209">
+            <p class="font-bold text-xl text-center">209</p>
+          </div>
+          <div class="bg-yellow-100 border-3 border-yellow-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-yellow-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="num-805"
+               data-pair="pair-805">
+            <p class="font-bold text-xl text-center">805</p>
+          </div>
+        </div>
+
+        <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="word-settecentoventidue"
+             data-pair="pair-722">
+          <p class="font-bold text-base md:text-lg text-center">settecentoventidue</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pulsanti di controllo -->
+    <div class="mt-6 flex gap-3 items-center">
+      <button class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-12 h-12"
+              data-action="click->flower-matcher#reset"
+              title="Ricomincia collegamenti">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Esercizio 4: Osserva le linee e scrivi i numeri nei cartellini -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        4
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Osserva le linee e scrivi i numeri nei cartellini.
+      </p>
+    </div>
+
+    <!-- Prima linea dei numeri: 100-140 -->
+    <div class="mb-16">
+      <div class="relative" style="height: 120px;">
+        <!-- SVG per linea e tacche -->
+        <svg class="absolute top-12 left-0 w-full" style="height: 60px;" viewBox="0 0 1000 60" preserveAspectRatio="xMidYMid meet">
+          <!-- Freccia arancione all'inizio -->
+          <polygon points="10,30 30,20 30,40" fill="#f97316" stroke="#f97316" stroke-width="2"/>
+
+          <!-- Linea principale -->
+          <line x1="30" y1="30" x2="970" y2="30" stroke="#f59e0b" stroke-width="4"/>
+
+          <!-- Freccia alla fine -->
+          <polygon points="970,30 990,20 990,40" fill="#f97316" stroke="#f97316" stroke-width="2"/>
+
+          <!-- Tacche da 100 a 140 (41 tacche in totale) -->
+          <% (100..140).each do |num| %>
+            <%
+              x = 30 + ((num - 100) * 23.5)  # Spaziatura tra tacche
+              height = if (num % 10 == 0)
+                         20  # Tacca grande ogni 10
+                       elsif (num % 5 == 0)
+                         12  # Tacca media ogni 5
+                       else
+                         6   # Tacca piccola
+                       end
+            %>
+            <line x1="<%= x %>" y1="30" x2="<%= x %>" y2="<%= 30 + height %>" stroke="#374151" stroke-width="2"/>
+
+            <!-- Numeri ogni 10 -->
+            <% if num % 10 == 0 %>
+              <text x="<%= x %>" y="58" font-size="16" font-weight="bold" fill="#1f2937" text-anchor="middle">
+                <%= num %>
+              </text>
+            <% end %>
+          <% end %>
+        </svg>
+
+        <!-- Input sopra la linea -->
+        <%
+          inputs_line1 = [
+            { value: 103, position: 3 },
+            { value: 108, position: 8 },
+            { value: 113, position: 13 },
+            { value: 125, position: 25 },
+            { value: 133, position: 33 },
+            { value: 137, position: 37 }
+          ]
+
+          inputs_line1.each do |input|
+            x_percent = ((input[:position]) / 40.0 * 94) + 3  # Calcola posizione percentuale
+        %>
+          <input type="text"
+                 data-fill-blanks-target="input"
+                 data-correct-answer="<%= input[:value] %>"
+                 class="absolute top-0 w-16 px-2 py-1 border-2 border-cyan-400 bg-cyan-50 rounded text-center font-bold text-base"
+                 style="left: <%= x_percent %>%; transform: translateX(-50%);"
+                 maxlength="3"
+                 inputmode="numeric">
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Seconda linea dei numeri: 125-165 -->
+    <div class="mb-8">
+      <div class="relative" style="height: 120px;">
+        <!-- SVG per linea e tacche -->
+        <svg class="absolute top-12 left-0 w-full" style="height: 60px;" viewBox="0 0 1000 60" preserveAspectRatio="xMidYMid meet">
+          <!-- Freccia arancione all'inizio -->
+          <polygon points="10,30 30,20 30,40" fill="#f97316" stroke="#f97316" stroke-width="2"/>
+
+          <!-- Linea principale -->
+          <line x1="30" y1="30" x2="970" y2="30" stroke="#f59e0b" stroke-width="4"/>
+
+          <!-- Freccia alla fine -->
+          <polygon points="970,30 990,20 990,40" fill="#f97316" stroke="#f97316" stroke-width="2"/>
+
+          <!-- Tacche da 125 a 165 (41 tacche in totale) -->
+          <% (125..165).each do |num| %>
+            <%
+              x = 30 + ((num - 125) * 23.5)
+              height = if (num % 10 == 0) || (num % 5 == 0 && num == 125) || (num % 5 == 0 && num == 165)
+                         20
+                       elsif (num % 5 == 0)
+                         12
+                       else
+                         6
+                       end
+            %>
+            <line x1="<%= x %>" y1="30" x2="<%= x %>" y2="<%= 30 + height %>" stroke="#374151" stroke-width="2"/>
+
+            <!-- Numeri ogni 10 + 125, 165 -->
+            <% if num == 125 || num == 135 || num == 145 || num == 155 || num == 165 %>
+              <text x="<%= x %>" y="58" font-size="16" font-weight="bold" fill="#1f2937" text-anchor="middle">
+                <%= num %>
+              </text>
+            <% end %>
+          <% end %>
+        </svg>
+
+        <!-- Input sopra la linea -->
+        <%
+          inputs_line2 = [
+            { value: 130, position: 5 },
+            { value: 140, position: 15 },
+            { value: 148, position: 23 },
+            { value: 149, position: 24 },
+            { value: 158, position: 33 },
+            { value: 159, position: 34 },
+            { value: 163, position: 38 }
+          ]
+
+          inputs_line2.each do |input|
+            x_percent = ((input[:position]) / 40.0 * 94) + 3
+        %>
+          <input type="text"
+                 data-fill-blanks-target="input"
+                 data-correct-answer="<%= input[:value] %>"
+                 class="absolute top-0 w-16 px-2 py-1 border-2 border-cyan-400 bg-cyan-50 rounded text-center font-bold text-base"
+                 style="left: <%= x_percent %>%; transform: translateX(-50%);"
+                 maxlength="3"
+                 inputmode="numeric">
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 5: Completa le tabelle -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        5
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Completa le tabelle.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <!-- Tabella 1: -2u -->
+      <div class="bg-white rounded-lg border-2 border-blue-300 overflow-hidden">
+        <div class="bg-blue-500 text-white font-bold text-center py-2 px-3">
+          <span class="underline">− 2 u</span>
+        </div>
+        <div class="p-3 space-y-2">
+          <% [156, 235, 202, 477].each do |num| %>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-lg min-w-[3rem]"><%= num %></span>
+              <span class="text-lg">→</span>
+              <input type="text"
+                     data-fill-blanks-target="input"
+                     data-correct-answer="<%= num - 2 %>"
+                     class="flex-1 px-2 py-1 border-2 border-blue-300 rounded text-center font-bold"
+                     maxlength="3"
+                     inputmode="numeric">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Tabella 2: +3da -->
+      <div class="bg-white rounded-lg border-2 border-green-300 overflow-hidden">
+        <div class="bg-green-500 text-white font-bold text-center py-2 px-3">
+          <span class="underline">+ 3 da</span>
+        </div>
+        <div class="p-3 space-y-2">
+          <% [138, 306, 469, 521].each do |num| %>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-lg min-w-[3rem]"><%= num %></span>
+              <span class="text-lg">→</span>
+              <input type="text"
+                     data-fill-blanks-target="input"
+                     data-correct-answer="<%= num + 30 %>"
+                     class="flex-1 px-2 py-1 border-2 border-green-300 rounded text-center font-bold"
+                     maxlength="3"
+                     inputmode="numeric">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Tabella 3: -3h -->
+      <div class="bg-white rounded-lg border-2 border-orange-300 overflow-hidden">
+        <div class="bg-orange-500 text-white font-bold text-center py-2 px-3">
+          <span class="underline">− 3 h</span>
+        </div>
+        <div class="p-3 space-y-2">
+          <% [460, 732, 359, 591].each do |num| %>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-lg min-w-[3rem]"><%= num %></span>
+              <span class="text-lg">→</span>
+              <input type="text"
+                     data-fill-blanks-target="input"
+                     data-correct-answer="<%= num - 300 %>"
+                     class="flex-1 px-2 py-1 border-2 border-orange-300 rounded text-center font-bold"
+                     maxlength="3"
+                     inputmode="numeric">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Tabella 4: +4h -->
+      <div class="bg-white rounded-lg border-2 border-purple-300 overflow-hidden">
+        <div class="bg-purple-500 text-white font-bold text-center py-2 px-3">
+          <span class="underline">+ 4 h</span>
+        </div>
+        <div class="p-3 space-y-2">
+          <% [273, 158, 69, 402].each do |num| %>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-lg min-w-[3rem]"><%= num %></span>
+              <span class="text-lg">→</span>
+              <input type="text"
+                     data-fill-blanks-target="input"
+                     data-correct-answer="<%= num + 400 %>"
+                     class="flex-1 px-2 py-1 border-2 border-purple-300 rounded text-center font-bold"
+                     maxlength="3"
+                     inputmode="numeric">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

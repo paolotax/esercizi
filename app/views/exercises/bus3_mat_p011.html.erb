@@ -1,12 +1,241 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-gradient-to-b from-cyan-50 to-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p011/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Parte teorica -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 mb-8 rounded-lg border-2 border-blue-300">
+    <p class="text-base md:text-lg text-gray-800 mb-4">
+      <strong>• Per confrontare due o più numeri procedi come indicato.</strong>
+    </p>
+
+    <ul class="space-y-6">
+      <!-- Regola 1 -->
+      <li>
+        <p class="text-base md:text-lg text-gray-800 mb-3">
+          <strong>Confronta il numero di cifre:</strong> è maggiore il numero che ha più cifre:
+        </p>
+        <div class="bg-white p-4 rounded-lg border-2 border-yellow-400">
+          <div class="flex flex-wrap gap-6 justify-center text-xl md:text-2xl font-bold">
+            <div>251 <span class="text-red-600 underline">&gt;</span> 46</div>
+            <div>106 <span class="text-red-600 underline">&gt;</span> 9</div>
+            <div>63 <span class="text-red-600 underline">&gt;</span> 7</div>
+          </div>
+        </div>
+      </li>
+
+      <!-- Regola 2 -->
+      <li>
+        <p class="text-base md:text-lg text-gray-800 mb-3">
+          <strong>Se il numero di cifre è uguale,</strong> confronta le cifre iniziando da sinistra.
+        </p>
+
+        <!-- Esempio 1: 251 vs 246 -->
+        <div class="bg-white p-4 rounded-lg border-2 border-green-400 mb-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="overflow-x-auto">
+              <table class="w-full border-2 border-gray-400">
+                <thead>
+                  <tr class="bg-yellow-100">
+                    <th class="border-2 border-gray-400 px-4 py-2">h</th>
+                    <th class="border-2 border-gray-400 px-4 py-2">da</th>
+                    <th class="border-2 border-gray-400 px-4 py-2">u</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border-2 border-gray-400 px-4 py-3 text-center font-bold text-xl">2</td>
+                    <td class="border-2 border-gray-400 px-4 py-3 text-center font-bold text-xl">5</td>
+                    <td class="border-2 border-gray-400 px-4 py-3 text-center font-bold text-xl">1</td>
+                  </tr>
+                  <tr>
+                    <td class="border-2 border-gray-400 px-4 py-3 text-center font-bold text-xl">2</td>
+                    <td class="border-2 border-gray-400 px-4 py-3 text-center font-bold text-xl">4</td>
+                    <td class="border-2 border-gray-400 px-4 py-3 text-center font-bold text-xl">6</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex items-center">
+              <p class="text-base text-gray-700">
+                I numeri hanno entrambi 3 cifre.<br>
+                Confronta le cifre delle centinaia:<br>
+                <strong class="text-lg">2 <span class="underline">=</span> 2</strong><br><br>
+                Confronta quindi le cifre delle decine.<br>
+                5 è maggiore di 4.<br>
+                Allora: <strong class="text-xl text-red-600">251 <span class="underline">&gt;</span> 246</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Esempio 2: 251 vs 257 -->
+        <div class="bg-white p-4 rounded-lg border-2 border-purple-400">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="overflow-x-auto">
+              <table class="w-full border-2 border-gray-400">
+                <thead>
+                  <tr class="bg-yellow-100">
+                    <th class="border-2 border-gray-400 px-4 py-2">h</th>
+                    <th class="border-2 border-gray-400 px-4 py-2">da</th>
+                    <th class="border-2 border-gray-400 px-4 py-2">u</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border-2 border-gray-400 px-4 py-3 text-center font-bold text-xl">2</td>
+                    <td class="border-2 border-gray-400 px-4 py-3 text-center font-bold text-xl">5</td>
+                    <td class="border-2 border-gray-400 px-4 py-3 text-center font-bold text-xl">1</td>
+                  </tr>
+                  <tr>
+                    <td class="border-2 border-gray-400 px-4 py-3 text-center font-bold text-xl">2</td>
+                    <td class="border-2 border-gray-400 px-4 py-3 text-center font-bold text-xl">5</td>
+                    <td class="border-2 border-gray-400 px-4 py-3 text-center font-bold text-xl">7</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex items-center">
+              <p class="text-base text-gray-700">
+                Se anche la cifra delle decine è uguale,<br>
+                confronta le cifre delle unità.<br>
+                1 è minore di 7.<br>
+                Allora: <strong class="text-xl text-red-600">251 <span class="underline">&lt;</span> 257</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Legenda simboli -->
+    <div class="mt-6 bg-white p-4 rounded-lg border-2 border-blue-400">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center text-lg font-bold">
+        <div>
+          <span class="text-2xl text-red-600">&gt;</span> significa è <strong class="text-green-600">maggiore di</strong>
+        </div>
+        <div>
+          <span class="text-2xl text-red-600">&lt;</span> significa è <strong class="text-blue-600">minore di</strong>
+        </div>
+        <div>
+          <span class="text-2xl text-red-600">=</span> significa è <strong class="text-purple-600">uguale a</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 1: Confronta coppie di numeri -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Confronta ogni coppia di numeri: scrivi il simbolo <strong class="underline">&gt;</strong>, <strong class="underline">&lt;</strong> o <strong class="underline">=</strong>.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <%
+        comparisons = [
+          { a: 203, b: 302, answer: "<" },
+          { a: 872, b: 782, answer: ">" },
+          { a: 456, b: 546, answer: "<" },
+          { a: 865, b: 856, answer: ">" },
+          { a: 486, b: 648, answer: "<" },
+          { a: 158, b: 158, answer: "=" },
+          { a: 395, b: 395, answer: "=" },
+          { a: 623, b: 236, answer: ">" }
+        ]
+
+        comparisons.each do |comp|
+      %>
+        <div class="bg-blue-50 p-4 rounded-lg border-2 border-blue-300 flex items-center justify-center gap-3">
+          <span class="text-2xl font-bold"><%= comp[:a] %></span>
+          <input type="text"
+                 data-fill-blanks-target="input"
+                 data-correct-answer="<%= comp[:answer] %>"
+                 class="w-16 px-2 py-2 border-2 border-blue-400 rounded text-center font-bold text-2xl"
+                 maxlength="1">
+          <span class="text-2xl font-bold"><%= comp[:b] %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Ordina i numeri -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Scrivi i numeri:
+      </p>
+    </div>
+
+    <!-- Ordine crescente -->
+    <div class="bg-green-50 p-4 md:p-6 rounded-lg border-2 border-green-400 mb-8">
+      <h3 class="text-lg font-bold text-green-700 mb-4">
+        • In <span class="underline">ordine crescente</span> (dal minore al maggiore).
+      </h3>
+
+      <div class="mb-4">
+        <p class="text-lg font-bold text-center mb-2">Numeri da ordinare:</p>
+        <div class="flex flex-wrap justify-center gap-3 mb-6">
+          <% [698, 548, 58, 125, 992, 664, 400].each do |num| %>
+            <span class="bg-white px-4 py-2 rounded-lg border-2 border-green-500 font-bold text-xl"><%= num %></span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        <% 7.times do |i| %>
+          <input type="text"
+                 data-fill-blanks-target="input"
+                 data-correct-answer="<%= [58, 125, 400, 548, 664, 698, 992][i] %>"
+                 class="w-20 px-2 py-2 border-2 border-green-500 rounded text-center font-bold text-xl"
+                 maxlength="3"
+                 inputmode="numeric">
+          <% if i < 6 %>
+            <span class="text-2xl font-bold text-green-700">&lt;</span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Ordine decrescente -->
+    <div class="bg-orange-50 p-4 md:p-6 rounded-lg border-2 border-orange-400">
+      <h3 class="text-lg font-bold text-orange-700 mb-4">
+        • In <span class="underline">ordine decrescente</span> (dal maggiore al minore).
+      </h3>
+
+      <div class="mb-4">
+        <p class="text-lg font-bold text-center mb-2">Numeri da ordinare:</p>
+        <div class="flex flex-wrap justify-center gap-3 mb-6">
+          <% [845, 236, 695, 542, 121, 210, 620].each do |num| %>
+            <span class="bg-white px-4 py-2 rounded-lg border-2 border-orange-500 font-bold text-xl"><%= num %></span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        <% 7.times do |i| %>
+          <input type="text"
+                 data-fill-blanks-target="input"
+                 data-correct-answer="<%= [845, 695, 620, 542, 236, 210, 121][i] %>"
+                 class="w-20 px-2 py-2 border-2 border-orange-500 rounded text-center font-bold text-xl"
+                 maxlength="3"
+                 inputmode="numeric">
+          <% if i < 6 %>
+            <span class="text-2xl font-bold text-orange-700">&gt;</span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

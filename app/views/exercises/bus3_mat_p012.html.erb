@@ -1,12 +1,395 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p012/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Colonna sinistra -->
+    <div class="space-y-8">
+      <!-- Esercizio 1: Scrivi i numeri in lettere -->
+      <div class="bg-transparent p-4" data-controller="fill-blanks">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            1
+          </div>
+          <p class="text-base md:text-lg text-gray-700">
+            Scrivi i numeri in lettere.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="text-xl font-bold min-w-[60px]">856</span>
+            <span class="text-xl text-blue-600">→</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="ottocentocinquantasei"
+                   class="flex-1 px-3 py-2 border-b-2 border-blue-400 text-center font-bold"
+                   maxlength="25">
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="text-xl font-bold min-w-[60px]">799</span>
+            <span class="text-xl text-blue-600">→</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="settecentonovantanove"
+                   class="flex-1 px-3 py-2 border-b-2 border-blue-400 text-center font-bold"
+                   maxlength="25">
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="text-xl font-bold min-w-[60px]">317</span>
+            <span class="text-xl text-blue-600">→</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="trecentodiciassette"
+                   class="flex-1 px-3 py-2 border-b-2 border-blue-400 text-center font-bold"
+                   maxlength="25">
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2: Scrivi i numeri in cifre -->
+      <div class="bg-transparent p-4" data-controller="fill-blanks">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            2
+          </div>
+          <p class="text-base md:text-lg text-gray-700">
+            Scrivi i numeri in cifre.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="text-base font-bold min-w-[200px]">novecentosettantaquattro</span>
+            <span class="text-xl text-blue-600">→</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="974"
+                   class="w-24 px-3 py-2 border-b-2 border-blue-400 text-center font-bold text-xl"
+                   maxlength="3" inputmode="numeric">
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="text-base font-bold min-w-[200px]">duecentodiciannove</span>
+            <span class="text-xl text-blue-600">→</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="219"
+                   class="w-24 px-3 py-2 border-b-2 border-blue-400 text-center font-bold text-xl"
+                   maxlength="3" inputmode="numeric">
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="text-base font-bold min-w-[200px]">seicentosessantatré</span>
+            <span class="text-xl text-blue-600">→</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="663"
+                   class="w-24 px-3 py-2 border-b-2 border-blue-400 text-center font-bold text-xl"
+                   maxlength="3" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 3: Collega ogni numero alla scomposizione giusta -->
+      <div class="bg-transparent p-4" data-controller="flower-matcher">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            3
+          </div>
+          <p class="text-base md:text-lg text-gray-700">
+            Collega ogni numero alla scomposizione giusta.
+          </p>
+        </div>
+
+        <div class="relative">
+          <!-- SVG Canvas per disegnare le linee -->
+          <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-30"
+               data-flower-matcher-target="canvas">
+          </svg>
+
+          <!-- Tronchi superiori -->
+          <div class="flex justify-around mb-8 relative z-20">
+            <div class="bg-amber-700 text-white rounded-full px-6 py-3 cursor-pointer hover:bg-amber-600 transition border-4 border-amber-900"
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="top-0"
+                 data-pair="pair-593">
+              <p class="font-bold text-base text-center whitespace-nowrap">
+                9 da, 3 u, 5 h
+              </p>
+            </div>
+            <div class="bg-amber-700 text-white rounded-full px-6 py-3 cursor-pointer hover:bg-amber-600 transition border-4 border-amber-900"
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="top-1"
+                 data-pair="pair-503">
+              <p class="font-bold text-base text-center whitespace-nowrap">
+                0 da, 3 u, 5 h
+              </p>
+            </div>
+          </div>
+
+          <!-- Numeri centrali -->
+          <div class="flex justify-center gap-4 mb-8 relative z-20">
+            <%
+              numbers_ex3 = [
+                { num: 539, pair: "pair-539" },
+                { num: 593, pair: "pair-593" },
+                { num: 503, pair: "pair-503" },
+                { num: 350, pair: "pair-350" }
+              ]
+
+              numbers_ex3.each do |item|
+            %>
+              <div class="bg-white border-3 border-amber-600 rounded-lg px-5 py-3 cursor-pointer hover:bg-amber-50 transition"
+                   data-action="click->flower-matcher#selectFlower"
+                   data-flower-matcher-target="flower"
+                   data-flower-id="num-<%= item[:num] %>"
+                   data-pair="<%= item[:pair] %>">
+                <p class="font-bold text-xl text-center">
+                  <%= item[:num] %>
+                </p>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Tronchi inferiori -->
+          <div class="flex justify-around relative z-20">
+            <div class="bg-amber-700 text-white rounded-full px-6 py-3 cursor-pointer hover:bg-amber-600 transition border-4 border-amber-900"
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="bottom-0"
+                 data-pair="pair-539">
+              <p class="font-bold text-base text-center whitespace-nowrap">
+                3 da, 5 h, 9 u
+              </p>
+            </div>
+            <div class="bg-amber-700 text-white rounded-full px-6 py-3 cursor-pointer hover:bg-amber-600 transition border-4 border-amber-900"
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="bottom-1"
+                 data-pair="pair-350">
+              <p class="font-bold text-base text-center whitespace-nowrap">
+                5 da, 0 u, 3 h
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pulsanti di controllo -->
+        <div class="mt-4 flex gap-3 items-center">
+          <button class="bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-12 h-12"
+                  data-action="click->flower-matcher#reset"
+                  title="Ricomincia collegamenti">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Esercizio 4: Indica il valore della cifra evidenziata -->
+      <div class="bg-transparent p-4" data-controller="fill-blanks">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            4
+          </div>
+          <p class="text-base md:text-lg text-gray-700">
+            Indica il valore della cifra evidenziata.
+          </p>
+        </div>
+
+        <div class="flex justify-around items-center flex-wrap gap-3">
+          <%
+            digit_values = [
+              { num: "136", underline: 0, answer: "100" },
+              { num: "584", underline: 1, answer: "80" },
+              { num: "191", underline: 2, answer: "1" },
+              { num: "333", underline: 1, answer: "30" },
+              { num: "605", underline: 2, answer: "5" }
+            ]
+
+            digit_values.each do |item|
+              digits = item[:num].chars
+          %>
+            <div class="text-center">
+              <div class="text-3xl font-bold mb-2">
+                <% digits.each_with_index do |digit, idx| %><% if idx == item[:underline] %><span class="text-red-500"><%= digit %></span><% else %><span class="text-black"><%= digit %></span><% end %><% end %>
+              </div>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= item[:answer] %>"
+                     class="w-20 px-2 py-1 border-2 border-blue-400 rounded text-center font-bold"
+                     maxlength="3" inputmode="numeric">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colonna destra -->
+    <div class="space-y-8">
+      <!-- Esercizio 5: Completa con >, < o = -->
+      <div class="bg-transparent p-4" data-controller="fill-blanks auto-advance">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            5
+          </div>
+          <p class="text-base md:text-lg text-gray-700">
+            Completa con <strong>&gt;</strong>, <strong>&lt;</strong> o <strong>=</strong>.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <%
+            comparisons = [
+              { a: 152, b: 528, answer: "<" },
+              { a: 861, b: 618, answer: ">" },
+              { a: 548, b: 693, answer: "<" },
+              { a: 333, b: 259, answer: ">" },
+              { a: 669, b: 669, answer: "=" },
+              { a: 651, b: 615, answer: ">" },
+              { a: 999, b: 899, answer: ">" },
+              { a: 295, b: 299, answer: "<" },
+              { a: 426, b: 426, answer: "=" }
+            ]
+
+            comparisons.each do |comp|
+          %>
+            <div class="p-3 rounded-lg flex items-center justify-center gap-3">
+              <span class="text-xl font-bold min-w-[50px] text-center"><%= comp[:a] %></span>
+              <input type="text"
+                     data-fill-blanks-target="input"
+                     data-correct-answer="<%= comp[:answer] %>"
+                     class="w-12 px-2 py-1 border-b-2 border-blue-400 text-center font-bold text-xl"
+                     maxlength="1">
+              <span class="text-xl font-bold min-w-[50px] text-center"><%= comp[:b] %></span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Esercizio 6: Completa -->
+      <div class="bg-transparent p-4" data-controller="fill-blanks auto-advance">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            6
+          </div>
+          <p class="text-base md:text-lg text-gray-700">
+            Completa.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <%
+            conversions = [
+              { question: "5 h", answer: "50", unit: "da" },
+              { question: "600 u", answer: "6", unit: "h" },
+              { question: "3 da", answer: "30", unit: "u" },
+              { question: "90 da", answer: "900", unit: "u" },
+              { question: "500 u", answer: "5", unit: "h" },
+              { question: "4 h", answer: "400", unit: "u" },
+              { question: "700 u", answer: "70", unit: "da" },
+              { question: "60 da", answer: "6", unit: "h" },
+              { question: "11 da", answer: "110", unit: "u" },
+              { question: "9 h", answer: "90", unit: "da" },
+              { question: "870 u", answer: "87", unit: "da" },
+              { question: "1 h", answer: "10", unit: "da" }
+            ]
+
+            conversions.each do |conv|
+          %>
+            <div class="p-3 flex items-center justify-center gap-2">
+              <span class="text-base font-bold"><%= conv[:question] %></span>
+              <span class="text-base font-bold">=</span>
+              <input type="text"
+                     data-fill-blanks-target="input"
+                     data-correct-answer="<%= conv[:answer] %>"
+                     class="w-16 px-2 py-1 border-b-2 border-green-400 rounded text-center font-bold"
+                     maxlength="3" inputmode="numeric">
+              <span class="text-base font-bold"><%= conv[:unit] %></span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Esercizio 7: In ogni gruppo colora il numero maggiore -->
+      <div class="bg-transparent p-4" data-controller="clickable-choice">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            7
+          </div>
+          <p class="text-base md:text-lg text-gray-700">
+            In ogni gruppo colora il <strong class="text-blue-600">numero maggiore</strong>.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Gruppo blu -->
+          <div class="flex gap-2 flex-wrap" data-clickable-choice-target="group" data-correct-answer="700">
+            <% [673, 189, 394, 700].each do |num| %>
+              <div class="border-3 border-blue-500 rounded-lg px-6 py-3 cursor-pointer hover:bg-blue-100 transition"
+                   data-action="click->clickable-choice#select"
+                   data-clickable-choice-target="choice"
+                   data-value="<%= num %>"
+                   data-selected-class="bg-blue-500 text-white"
+                   data-default-class="bg-white">
+                <span class="text-xl font-bold"><%= num %></span>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Gruppo arancio -->
+          <div class="flex gap-2 flex-wrap" data-clickable-choice-target="group" data-correct-answer="521">
+            <% [268, 484, 521, 352].each do |num| %>
+              <div class="border-3 border-orange-500 rounded-lg px-6 py-3 cursor-pointer hover:bg-orange-100 transition"
+                   data-action="click->clickable-choice#select"
+                   data-clickable-choice-target="choice"
+                   data-value="<%= num %>"
+                   data-selected-class="bg-orange-500 text-white"
+                   data-default-class="bg-white">
+                <span class="text-xl font-bold"><%= num %></span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 8: In ogni gruppo colora il numero minore -->
+      <div class="bg-transparent p-4" data-controller="clickable-choice">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            8
+          </div>
+          <p class="text-base md:text-lg text-gray-700">
+            In ogni gruppo colora il <strong class="text-blue-600">numero minore</strong>.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Gruppo blu -->
+          <div class="flex gap-2 flex-wrap" data-clickable-choice-target="group" data-correct-answer="26">
+            <% [802, 355, 26, 412].each do |num| %>
+              <div class="border-3 border-blue-500 rounded-lg px-6 py-3 cursor-pointer hover:bg-blue-100 transition"
+                   data-action="click->clickable-choice#select"
+                   data-clickable-choice-target="choice"
+                   data-value="<%= num %>"
+                   data-selected-class="bg-blue-500 text-white"
+                   data-default-class="bg-white">
+                <span class="text-xl font-bold"><%= num %></span>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Gruppo arancio -->
+          <div class="flex gap-2 flex-wrap" data-clickable-choice-target="group" data-correct-answer="119">
+            <% [127, 275, 304, 119].each do |num| %>
+              <div class="border-3 border-orange-500 rounded-lg px-6 py-3 cursor-pointer hover:bg-orange-100 transition"
+                   data-action="click->clickable-choice#select"
+                   data-clickable-choice-target="choice"
+                   data-value="<%= num %>"
+                   data-selected-class="bg-orange-500 text-white"
+                   data-default-class="bg-white">
+                <span class="text-xl font-bold"><%= num %></span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

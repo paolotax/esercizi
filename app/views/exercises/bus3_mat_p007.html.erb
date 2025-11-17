@@ -1,12 +1,188 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-gradient-to-b from-cyan-50 to-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p007/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Testo introduttivo -->
+  <div class="bg-transparent p-4 md:p-6 mb-6">
+    <p class="text-base md:text-lg text-gray-700">
+      I numeri <strong class="underline">36</strong> e <strong class="underline">63</strong> sono formati dalle stesse cifre,
+      ma rappresentano quantità diverse.
+    </p>
+  </div>
+
+  <!-- Grid 2 colonne: Esercizio 1 e Teoria -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+
+    <!-- Esercizio 1: Osserva ogni abaco e rispondi -->
+    <div class="bg-transparent p-4 md:p-8" data-controller="fill-blanks auto-advance">
+      <div class="flex items-start gap-3 mb-6">
+        <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          1
+        </div>
+        <p class="text-base md:text-lg text-gray-700">
+          Osserva ogni abaco e rispondi.
+        </p>
+      </div>
+
+      <!-- Immagine abachi -->
+      <div class="mb-6 flex justify-center">
+        <%= image_tag "bus3_mat/p007/p07_1.jpg",
+            alt: "Abachi 36 e 63",
+            class: "max-w-md" %>
+      </div>
+
+      <div class="space-y-4">
+        <div class="flex items-center gap-3">
+          <span class="text-lg">• Quanto vale la cifra 6 nel numero 36?</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
+                 class="w-16 px-3 py-2 border-2 border-blue-400 rounded text-center font-bold text-lg"
+                 maxlength="2" inputmode="numeric">
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span class="text-lg">• Quanto vale la cifra 6 nel numero 63?</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="60"
+                 class="w-16 px-3 py-2 border-2 border-blue-400 rounded text-center font-bold text-lg"
+                 maxlength="2" inputmode="numeric">
+        </div>
+      </div>
+    </div>
+
+    <!-- Teoria: Sistema Posizionale -->
+    <div class="bg-transparent p-4 md:p-8">
+      <div class="bg-pink-100 p-6 rounded-lg border-2 border-pink-300 mb-6">
+        <div class="flex items-start gap-3">
+          <div class="text-3xl">🤓</div>
+          <p class="text-base md:text-lg text-gray-700">
+            Il nostro sistema di numerazione è <strong class="text-blue-600 underline">posizionale</strong>
+            perché il valore di ogni cifra cambia a seconda della posizione che occupa nel numero.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Sezione LO ZERO SEGNAPOSTO -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <h3 class="text-xl font-bold text-blue-600 mb-4">LO ZERO SEGNAPOSTO</h3>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div>
+        <p class="text-base md:text-lg text-gray-700 mb-4">
+          Sull'abaco a lato è rappresentato il numero <strong class="underline">50</strong>.<br>
+          Lo <strong class="text-blue-600 underline">zero</strong> indica il posto delle decine ed è indispensabile:
+          se lo togli, cambia il valore del numero.
+        </p>
+
+        <div class="flex items-center gap-3 mt-6">
+          <span class="text-lg">• Quale numero ottieni se provi a togliere lo zero?</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+                 class="w-16 px-3 py-2 border-2 border-blue-400 rounded text-center font-bold text-lg"
+                 maxlength="1" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p007/p07_2.jpg",
+            alt: "Abaco 50",
+            class: "max-w-xs" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Colora la risposta giusta -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="clickable-choice">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Colora la risposta giusta.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Domanda 1 -->
+      <div class="space-y-4">
+        <p class="text-lg font-bold">• In quale numero la cifra 9 vale 9 u?</p>
+        <div class="flex gap-4 justify-center">
+          <button type="button"
+                  data-clickable-choice-target="option"
+                  data-correct="true"
+                  class="w-24 h-24 rounded-full border-4 border-blue-300 bg-white hover:bg-blue-100 flex items-center justify-center transition-colors">
+            <span class="text-2xl font-bold">39</span>
+          </button>
+          <button type="button"
+                  data-clickable-choice-target="option"
+                  data-correct="false"
+                  class="w-24 h-24 rounded-full border-4 border-blue-300 bg-white hover:bg-blue-100 flex items-center justify-center transition-colors">
+            <span class="text-2xl font-bold">98</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Domanda 2 -->
+      <div class="space-y-4">
+        <p class="text-lg font-bold">• In quale numero la cifra 1 vale 1 da?</p>
+        <div class="flex gap-4 justify-center">
+          <button type="button"
+                  data-clickable-choice-target="option"
+                  data-correct="true"
+                  class="w-24 h-24 rounded-full border-4 border-blue-300 bg-white hover:bg-blue-100 flex items-center justify-center transition-colors">
+            <span class="text-2xl font-bold">10</span>
+          </button>
+          <button type="button"
+                  data-clickable-choice-target="option"
+                  data-correct="false"
+                  class="w-24 h-24 rounded-full border-4 border-blue-300 bg-white hover:bg-blue-100 flex items-center justify-center transition-colors">
+            <span class="text-2xl font-bold">31</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Domanda 3 -->
+      <div class="space-y-4">
+        <p class="text-lg font-bold">• In quale numero la cifra 5 occupa il posto delle unità?</p>
+        <div class="flex gap-4 justify-center">
+          <button type="button"
+                  data-clickable-choice-target="option"
+                  data-correct="false"
+                  class="w-24 h-24 rounded-full border-4 border-blue-300 bg-white hover:bg-blue-100 flex items-center justify-center transition-colors">
+            <span class="text-2xl font-bold">52</span>
+          </button>
+          <button type="button"
+                  data-clickable-choice-target="option"
+                  data-correct="true"
+                  class="w-24 h-24 rounded-full border-4 border-blue-300 bg-white hover:bg-blue-100 flex items-center justify-center transition-colors">
+            <span class="text-2xl font-bold">65</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Domanda 4 -->
+      <div class="space-y-4">
+        <p class="text-lg font-bold">• In quale numero la cifra 4 occupa il posto delle decine?</p>
+        <div class="flex gap-4 justify-center">
+          <button type="button"
+                  data-clickable-choice-target="option"
+                  data-correct="false"
+                  class="w-24 h-24 rounded-full border-4 border-blue-300 bg-white hover:bg-blue-100 flex items-center justify-center transition-colors">
+            <span class="text-2xl font-bold">43</span>
+          </button>
+          <button type="button"
+                  data-clickable-choice-target="option"
+                  data-correct="true"
+                  class="w-24 h-24 rounded-full border-4 border-blue-300 bg-white hover:bg-blue-100 flex items-center justify-center transition-colors">
+            <span class="text-2xl font-bold">74</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

@@ -1,12 +1,185 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-gradient-to-b from-cyan-50 to-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p008/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Parte teorica: Da 99 a 100 -->
+  <div class="bg-[#C7EAFB]  p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="text-3xl">🧠</div>
+      <p class="text-base md:text-lg text-gray-700">
+        Ricordi che cosa succede sull'abaco se aggiungi <strong class="text-blue-600">1 u</strong> al numero 99?
+      </p>
+    </div>
+
+    <!-- Immagini abachi -->
+    <div class="flex justify-center mb-6">
+      <%= image_tag "bus3_mat/p008/p08_1.jpg",
+          alt: "Abachi da 99 a 100",
+          class: "max-w-3xl" %>
+    </div>
+
+    <div class="mx-auto max-w-xl bg-white p-4 rounded-xl border-4 border-pink-300">
+      <div class="flex items-start gap-3">
+        <div class="text-3xl">🤓</div>
+        <div class="space-y-2">
+          <p class="text-base md:text-lg text-gray-700">
+            <strong class="text-blue-600">10 unità</strong> raggrupate formano <strong class="text-red-600">1 decina.</strong>
+            <span class="ml-4 font-bold">10 u → 1 da</span>
+          </p>
+          <p class="text-base md:text-lg text-gray-700">
+            <strong class="text-red-600">10 decine</strong> raggrupate formano <strong class="text-green-600">1 centinaio.</strong>
+            <span class="ml-4 font-bold">10 da → 1 h</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 1: Scrivi il numero che manca per arrivare a 100 -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Scrivi il numero che manca per arrivare a <strong class="underline">100</strong>.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      <%
+        pairs = [
+          [30, 70],
+          [50, 50],
+          [75, 25],
+          [42, 58],
+          [87, 13]
+        ]
+
+        pairs.each do |start, answer|
+      %>
+        <div class="bg-blue-100 border-2 border-blue-300 p-4 rounded-lg flex items-center justify-center gap-2">
+          <span class="text-xl font-bold"><%= start %></span>
+          <span class="text-xl">→</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= answer %>"
+                 class="w-16 px-2 py-1 border-2 border-blue-400 rounded text-center font-bold text-lg"
+                 maxlength="2" inputmode="numeric">
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Collega ogni scomposizione al numero corrispondente -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="flower-matcher">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Collega ogni scomposizione al numero corrispondente.
+      </p>
+    </div>
+
+    <div class="relative">
+      <!-- SVG Canvas per disegnare le linee -->
+      <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-30"
+           data-flower-matcher-target="canvas">
+      </svg>
+
+      <!-- Riga superiore: 4 scomposizioni -->
+      <div class="flex justify-around mb-12 relative z-20">
+        <%
+          top_decompositions = [
+            { h: 3, da: 5, u: 2, number: 352, pair_id: "pair-352" },
+            { h: 1, da: 5, u: 3, number: 153, pair_id: "pair-153" },
+            { h: 5, da: 3, u: 1, number: 531, pair_id: "pair-531" },
+            { h: 3, da: 2, u: 5, number: 325, pair_id: "pair-325" }
+          ]
+
+          top_decompositions.each_with_index do |dec, idx|
+        %>
+          <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="top-<%= idx %>"
+               data-pair="<%= dec[:pair_id] %>">
+            <p class="font-bold text-base md:text-lg text-center whitespace-nowrap">
+              <%= dec[:h] %> h <%= dec[:da] %> da <%= dec[:u] %> u
+            </p>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Riga centrale: 8 numeri -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12 relative z-20">
+        <%
+          all_numbers = [352, 153, 531, 325, 253, 135, 513, 235]
+
+          # Mappatura: numero → pair_id
+          number_pairs = {
+            352 => "pair-352",  # si collega con 3h5da2u sopra
+            153 => "pair-153",  # si collega con 1h5da3u sopra
+            531 => "pair-531",  # si collega con 5h3da1u sopra
+            325 => "pair-325",  # si collega con 3h2da5u sopra
+            135 => "pair-135",  # si collega con 1h3da5u sotto
+            513 => "pair-513",  # si collega con 5h1da3u sotto
+            235 => "pair-235",  # si collega con 2h3da5u sotto
+            253 => "pair-253"   # si collega con 2h5da3u sotto
+          }
+
+          all_numbers.shuffle.each do |num|
+        %>
+          <div class="bg-yellow-100 border-3 border-yellow-400 rounded-full px-5 py-3 cursor-pointer hover:bg-yellow-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="num-<%= num %>"
+               data-pair="<%= number_pairs[num] %>">
+            <p class="font-bold text-xl text-center">
+              <%= num %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Riga inferiore: 4 scomposizioni diverse -->
+      <div class="flex justify-around relative z-20">
+        <%
+          bottom_decompositions = [
+            { h: 1, da: 3, u: 5, number: 135, pair_id: "pair-135" },
+            { h: 5, da: 1, u: 3, number: 513, pair_id: "pair-513" },
+            { h: 2, da: 3, u: 5, number: 235, pair_id: "pair-235" },
+            { h: 2, da: 5, u: 3, number: 253, pair_id: "pair-253" }
+          ]
+
+          bottom_decompositions.each_with_index do |dec, idx|
+        %>
+          <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+               data-action="click->flower-matcher#selectFlower"
+               data-flower-matcher-target="flower"
+               data-flower-id="bottom-<%= idx %>"
+               data-pair="<%= dec[:pair_id] %>">
+            <p class="font-bold text-base md:text-lg text-center whitespace-nowrap">
+              <%= dec[:h] %> h <%= dec[:da] %> da <%= dec[:u] %> u
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Pulsanti di controllo -->
+    <div class="mt-6 flex gap-3 items-center">
+      <button class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-12 h-12"
+              data-action="click->flower-matcher#reset"
+              title="Ricomincia collegamenti">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      </button>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

@@ -314,6 +314,13 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 2, titolo: "Indice", slug: "bus3_mat_p002", view_template: "bus3_mat_p002", base_color: "blue" },
   { numero: 4, titolo: "I NUMERI FINO A 99", sottotitolo: "PER RIPASSARE", slug: "bus3_mat_p004", view_template: "bus3_mat_p004", base_color: "cyan" },
   { numero: 5, titolo: "I NUMERI FINO A 99 - Esercizi", sottotitolo: "PER RIPASSARE", slug: "bus3_mat_p005", view_template: "bus3_mat_p005", base_color: "cyan" },
+  { numero: 6, titolo: "IL SISTEMA DECIMALE", sottotitolo: "PER RIPASSARE", slug: "bus3_mat_p006", view_template: "bus3_mat_p006", base_color: "cyan" },
+  { numero: 7, titolo: "IL SISTEMA POSIZIONALE", sottotitolo: "PER RIPASSARE", slug: "bus3_mat_p007", view_template: "bus3_mat_p007", base_color: "cyan" },
+  { numero: 8, titolo: "UNITÀ, DECINE, CENTINAIA", sottotitolo: "PER RIPASSARE", slug: "bus3_mat_p008", view_template: "bus3_mat_p008", base_color: "cyan" },
+  { numero: 9, titolo: "NUMERI E OPERAZIONI", sottotitolo: "PER RIPASSARE", slug: "bus3_mat_p009", view_template: "bus3_mat_p009", base_color: "cyan" },
+  { numero: 10, titolo: "COMPORRE E SCOMPORRE", sottotitolo: "PER RIPASSARE", slug: "bus3_mat_p010", view_template: "bus3_mat_p010", base_color: "cyan" },
+  { numero: 11, titolo: "CONFRONTARE E ORDINARE", sottotitolo: "PER RIPASSARE", slug: "bus3_mat_p011", view_template: "bus3_mat_p011", base_color: "cyan" },
+  { numero: 12, titolo: "I NUMERI FINO A 999", sottotitolo: "PER RIPASSARE", slug: "bus3_mat_p012", view_template: "bus3_mat_p012", base_color: "cyan" },
   { numero: 25, titolo: "Addizioni in colonna", slug: "bus3_mat_p025", view_template: "bus3_mat_p025" },
   { numero: 26, titolo: "Addizioni con il cambio", slug: "bus3_mat_p026", view_template: "bus3_mat_p026" },
   { numero: 32, titolo: "Sottrazioni con il cambio", slug: "bus3_mat_p032", view_template: "bus3_mat_p032" },
@@ -331,11 +338,12 @@ bus_matematica = bus_volume3.discipline.create!(
     pagina.titolo = pagina_data[:titolo]
     pagina.view_template = pagina_data[:view_template]
     pagina.base_color = pagina_data[:base_color] if pagina_data[:base_color]
+    pagina.sottotitolo = pagina_data[:sottotitolo] if pagina_data[:sottotitolo]
   end
 end
 
-# Pagine generiche per bus3_mat (p001-p192, escludendo le 14 già definite sopra)
-existing_pages = [ 1, 2, 4, 5, 25, 26, 32, 34, 35, 74, 75, 76, 77, 78, 144 ]
+# Pagine generiche per bus3_mat (p001-p192, escludendo le 20 già definite sopra)
+existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 25, 26, 32, 34, 35, 74, 75, 76, 77, 78, 144 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|
