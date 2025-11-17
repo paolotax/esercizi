@@ -37,6 +37,9 @@ export default class extends Controller {
     // Get flower matcher controller if present
     const flowerMatcher = this.element.querySelector("[data-controller=\"flower-matcher\"]")
 
+    // Get fill-blanks controllers if present
+    const fillBlanksControllers = this.element.querySelectorAll("[data-controller*=\"fill-blanks\"]")
+
     // Get all input fields with correct answers within this controller's element
     const inputFields = this.element.querySelectorAll("input[data-correct-answer]")
 
@@ -58,6 +61,30 @@ export default class extends Controller {
           feedback.push(`Fiori: ⚠️ ${result.message}`)
         }
       }
+    }
+
+    // Check fill-blanks exercises
+    if (fillBlanksControllers.length > 0) {
+      fillBlanksControllers.forEach(fillBlanksElement => {
+        const fillBlanksController = this.application.getControllerForElementAndIdentifier(fillBlanksElement, "fill-blanks")
+        if (fillBlanksController && fillBlanksController.checkAnswers) {
+          const result = fillBlanksController.checkAnswers()
+          if (result) {
+            if (!result.allCorrect) {
+              allCorrect = false
+            }
+            if (result.correctCount > 0) {
+              feedback.push(`Input corretti: ${result.correctCount}/${result.total} ✅`)
+            }
+            if (result.incorrectCount > 0) {
+              feedback.push(`Input errati: ${result.incorrectCount} ❌`)
+            }
+            if (result.emptyCount > 0) {
+              feedback.push(`Input da completare: ${result.emptyCount} ⚠️`)
+            }
+          }
+        }
+      })
     }
 
     // Check checkboxes (for exercises like "cerchia i numeri decimali")

@@ -23,21 +23,23 @@ export default class extends Controller {
       const correctAnswer = (input.dataset.answer || input.dataset.correctAnswer || '').trim().toLowerCase()
       const userAnswer = input.value.trim().toLowerCase()
 
-      // Remove previous styling
+      // Remove previous styling (including transparent backgrounds and borders)
       input.classList.remove("border-green-500", "border-red-500", "border-yellow-500",
-                            "bg-green-50", "bg-red-50", "bg-yellow-50")
+                            "bg-green-50", "bg-red-50", "bg-yellow-50",
+                            "bg-white/60", "bg-white/80", "bg-white",
+                            "border-transparent", "border-cyan-400")
 
       if (userAnswer === "") {
         emptyCount++
         allCorrect = false
-        input.classList.add("border-yellow-500", "bg-yellow-50")
+        input.classList.add("border-yellow-500", "border-2", "bg-yellow-100")
       } else if (userAnswer === correctAnswer) {
         correctCount++
-        input.classList.add("border-green-500", "bg-green-50")
+        input.classList.add("border-green-500", "border-2", "bg-green-100")
       } else {
         incorrectCount++
         allCorrect = false
-        input.classList.add("border-red-500", "bg-red-50")
+        input.classList.add("border-red-500", "border-2", "bg-red-100")
 
         // Shake animation
         input.classList.add("animate-shake")
@@ -96,13 +98,15 @@ export default class extends Controller {
       // Use both data-answer and data-correct-answer for compatibility
       const correctAnswer = (input.dataset.answer || input.dataset.correctAnswer || '').trim()
 
-      // Remove previous styling
+      // Remove previous styling (including transparent backgrounds and borders)
       input.classList.remove("border-green-500", "border-red-500", "border-yellow-500",
-                            "bg-green-50", "bg-red-50", "bg-yellow-50")
+                            "bg-green-50", "bg-red-50", "bg-yellow-50",
+                            "bg-white/60", "bg-white/80", "bg-white",
+                            "border-transparent", "border-cyan-400")
 
       // Show correct answer
       input.value = correctAnswer
-      input.classList.add("border-green-500", "bg-green-50")
+      input.classList.add("border-green-500", "border-2", "bg-green-100")
     })
 
     // Show feedback
@@ -126,8 +130,13 @@ export default class extends Controller {
   reset() {
     this.inputTargets.forEach(input => {
       input.value = ""
+      // Remove all styling and restore original transparent style
       input.classList.remove("border-green-500", "border-red-500", "border-yellow-500",
-                            "bg-green-50", "bg-red-50", "bg-yellow-50")
+                            "bg-green-50", "bg-red-50", "bg-yellow-50",
+                            "bg-green-100", "bg-red-100", "bg-yellow-100",
+                            "border-2")
+      // Restore original transparent background and border
+      input.classList.add("bg-white/60", "border-transparent")
     })
 
     const feedback = this.element.querySelector(".fill-blanks-feedback")
