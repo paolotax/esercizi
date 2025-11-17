@@ -9,13 +9,28 @@ export default class extends Controller {
     this.element.querySelectorAll('input[type="text"]').forEach((input, index, inputs) => {
       input.addEventListener('input', (e) => {
         if (e.target.value.length === 1 && index < inputs.length - 1) {
-          inputs[index + 1].focus()
+          // Find next input that is not readonly
+          let nextIndex = index + 1
+          while (nextIndex < inputs.length && inputs[nextIndex].readOnly) {
+            nextIndex++
+          }
+          if (nextIndex < inputs.length) {
+            inputs[nextIndex].focus()
+          }
         }
       })
 
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
-          inputs[index - 1].focus()
+          // Find previous input that is not readonly
+          let prevIndex = index - 1
+          while (prevIndex >= 0 && inputs[prevIndex].readOnly) {
+            prevIndex--
+          }
+          if (prevIndex >= 0) {
+            e.preventDefault()
+            inputs[prevIndex].focus()
+          }
         }
       })
     })
