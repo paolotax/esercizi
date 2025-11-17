@@ -41,62 +41,104 @@
   </div>
 
   <!-- Exercise 1 -->
-  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 border-4 border-yellow-400">
+  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 border-4 border-yellow-400" data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
     <h2 class="text-lg md:text-xl font-bold text-gray-800 mb-4">
       <span class="bg-blue-800 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
       <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold">IMPARARE TUTTI</span>
       Cerchia le <strong class="text-red-600">parole troncate</strong>, come nell'esempio.
     </h2>
 
-    <div class="space-y-5">
+    <!-- Hidden color selector for monocolor mode -->
+    <div class="hidden">
+      <span data-word-highlighter-target="colorBox" data-color="red"></span>
+    </div>
+
+    <div class="space-y-1 cursor-pointer sm:ml-7">
       <% exercise_1_items = [
         {
-          sentence: "Tommy soggiornerà in un albergo.",
-          options: [
-            { word: "Tommy", correct: false },
-            { word: "un", correct: true },
-            { word: "albergo", correct: false }
+          words: [
+            { text: "Tommy", correct: false },
+            { text: " ", correct: false },
+            { text: "soggiornerà", correct: false },
+            { text: " ", correct: false },
+            { text: "in", correct: false },
+            { text: " ", correct: false },
+            { text: "un", correct: true },
+            { text: " ", correct: false },
+            { text: "albergo", correct: false },
+            { text: ".", correct: false }
           ]
         },
         {
-          sentence: "La porta non s’apre, in nessun modo.",
-          options: [
-            { word: "s’apre", correct: false },
-            { word: "nessun", correct: true },
-            { word: "modo", correct: false }
+          words: [
+            { text: "La", correct: false },
+            { text: " ", correct: false },
+            { text: "porta", correct: false },
+            { text: " ", correct: false },
+            { text: "non", correct: false },
+            { text: " ", correct: false },
+            { text: "s'apre", correct: false },
+            { text: ",", correct: false },
+            { text: " ", correct: false },
+            { text: "in", correct: false },
+            { text: " ", correct: false },
+            { text: "nessun", correct: true },
+            { text: " ", correct: false },
+            { text: "modo", correct: false },
+            { text: ".", correct: false }
           ]
         },
         {
-          sentence: "Tanti auguri di buon compleanno!",
-          options: [
-            { word: "Tanti", correct: false },
-            { word: "buon", correct: true },
-            { word: "compleanno", correct: false }
+          words: [
+            { text: "Tanti", correct: false },
+            { text: " ", correct: false },
+            { text: "auguri", correct: false },
+            { text: " ", correct: false },
+            { text: "di", correct: false },
+            { text: " ", correct: false },
+            { text: "buon", correct: true },
+            { text: " ", correct: false },
+            { text: "compleanno", correct: false },
+            { text: "!", correct: false }
           ]
         },
         {
-          sentence: "Qual è il tuo gioco di squadra preferito?",
-          options: [
-            { word: "Qual", correct: true },
-            { word: "gioco", correct: false },
-            { word: "squadra", correct: false }
+          words: [
+            { text: "Qual", correct: true },
+            { text: " ", correct: false },
+            { text: "è", correct: false },
+            { text: " ", correct: false },
+            { text: "il", correct: false },
+            { text: " ", correct: false },
+            { text: "tuo", correct: false },
+            { text: " ", correct: false },
+            { text: "gioco", correct: false },
+            { text: " ", correct: false },
+            { text: "di", correct: false },
+            { text: " ", correct: false },
+            { text: "squadra", correct: false },
+            { text: " ", correct: false },
+            { text: "preferito", correct: false },
+            { text: "?", correct: false }
           ]
         }
       ] %>
 
-      <% exercise_1_items.each_with_index do |item, index| %>
-        <div class="rounded-lg p-4">
-          <p class="text-base md:text-lg text-gray-800 mb-3"><span class="text-red-600 font-bold text-2xl mr-2">•</span> <%= item[:sentence] %></p>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            <% item[:options].each do |option| %>
-              <label class="flex items-center gap-2 bg-white border-2 border-pink-200 rounded-lg px-3 py-2 shadow-sm hover:border-pink-400 transition">
-                <input type="checkbox"
-                       class="w-5 h-5 text-pink-600 focus:ring-pink-500"
-                       data-correct-answer="<%= option[:correct] %>">
-                <span class="text-gray-700 font-medium"><%= option[:word] %></span>
-              </label>
+      <% exercise_1_items.each do |item| %>
+        <div class="rounded-lg px-4 py-2 bg-gray-50">
+          <p class="text-base md:text-lg text-gray-800">
+            <span class="text-cyan-700 font-bold text-2xl mr-2">•</span>
+            <% item[:words].each do |word| %>
+              <% if word[:text].strip.empty? || word[:text] == " " %>
+                <%= word[:text] %>
+              <% else %>
+                <span data-word-highlighter-target="word"
+                      data-correct="<%= word[:correct] %>"
+                      data-action="click->word-highlighter#toggleHighlight"
+                      class="px-1 rounded"><%= word[:text] %></span>
+              <% end %>
             <% end %>
-          </div>
+          </p>
         </div>
       <% end %>
     </div>
@@ -110,7 +152,7 @@
         Scrivi inserendo l'<strong class="text-cyan-700">elisione</strong> o il <strong class="text-red-600">troncamento</strong>.
       </h2>
 
-      <div class="space-y-4 text-base md:text-lg">
+      <div class="space-y-4 text-base md:text-lg sm:ml-7">
       <% exercise_2_pairs = [
         { prompt: "buono amico", answer: "buon amico" },
         { prompt: "buona amica", answer: "buon'amica" },
@@ -120,7 +162,7 @@
 
       <% exercise_2_pairs.each do |item| %>
         <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-2">
-          <span class="text-gray-700"><span class="text-red-600 font-bold text-2xl mr-2">•</span> <%= item[:prompt] %> <span class="text-red-600">→</span></span>
+          <span class="text-gray-700"><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> <%= item[:prompt] %> <span class="text-cyan-700">→</span></span>
           <input type="text"
                  class="border-b-2 border-pink-500 bg-white w-48 md:w-64 text-center focus:outline-none focus:border-pink-700"
                  data-fill-blanks-target="input"
@@ -146,8 +188,8 @@
         Tronca le parole tra parentesi, come nell'esempio.
       </h2>
 
-      <div class="space-y-4 text-base md:text-lg leading-relaxed">
-      <p><span class="text-red-600 font-bold text-2xl mr-2">•</span> (Vai) <span class="font-bold text-red-600">Va'</span> dove ti porta il cuore, ma (fai)
+      <div class="space-y-4 text-base md:text-lg leading-relaxed sm:ml-7">
+      <p><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> (Vai) <span class="font-bold text-red-600">Va'</span> dove ti porta il cuore, ma (fai)
         <input type="text"
                class="border-b-2 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700"
                data-fill-blanks-target="input"
@@ -157,7 +199,7 @@
         attenzione a tutto.
       </p>
 
-      <p><span class="text-red-600 font-bold text-2xl mr-2">•</span> (Dai)
+      <p><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> (Dai)
         <input type="text"
                class="border-b-2 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700"
                data-fill-blanks-target="input"

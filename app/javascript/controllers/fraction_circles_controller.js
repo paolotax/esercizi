@@ -99,7 +99,7 @@ export default class extends Controller {
 
     const title = document.createElement('h3')
     title.className = 'text-2xl font-bold mb-4 ' + (allCorrect ? 'text-green-800' : 'text-orange-800')
-    title.textContent = allCorrect ? '🎉 Perfetto! Tutte le frazioni sono corrette!' : '📝 Controlla i cerchi evidenziati'
+    title.textContent = allCorrect ? '🎉 Perfetto! Tutte le risposte sono corrette!' : '📝 Controlla i cerchi evidenziati'
 
     const messageList = document.createElement('ul')
     messageList.className = 'space-y-2'

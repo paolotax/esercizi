@@ -57,7 +57,7 @@ export default class extends Controller {
     })
 
     if (correct === total) {
-      this.feedback1Target.innerHTML = '<span class="text-green-600">✓ Perfetto! Tutte le frazioni sono corrette!</span>'
+      this.feedback1Target.innerHTML = '<span class="text-green-600">✓ Perfetto! Tutte le risposte sono corrette!</span>'
     } else {
       this.feedback1Target.innerHTML = `<span class="text-orange-600">Hai completato ${correct} su ${total}. Riprova!</span>`
     }

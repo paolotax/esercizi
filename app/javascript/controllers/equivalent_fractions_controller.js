@@ -205,7 +205,7 @@ export default class extends Controller {
 
     const title = document.createElement("h2")
     title.className = "text-2xl font-bold mb-4 " + (allCorrect ? "text-green-800" : "text-orange-800")
-    title.textContent = allCorrect ? "🎉 Eccellente! Tutte le frazioni sono corrette!" : "📝 Controlla le frazioni evidenziate"
+    title.textContent = allCorrect ? "🎉 Eccellente! Tutte le frazioni sono corrette!" : "📝 Controlla le risposte evidenziate"
 
     const stats = document.createElement("div")
     stats.className = "text-lg space-y-2"

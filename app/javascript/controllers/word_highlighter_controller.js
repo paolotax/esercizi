@@ -191,7 +191,7 @@ export default class extends Controller {
 
     const title = document.createElement("h2")
     title.className = "text-2xl font-bold mb-4 text-blue-800"
-    title.textContent = "💡 Ecco le frazioni corrette evidenziate!"
+    title.textContent = "💡 Ecco le risposte corrette evidenziate!"
 
     feedbackDiv.appendChild(title)
     this.element.appendChild(feedbackDiv)
@@ -297,7 +297,7 @@ export default class extends Controller {
 
     const title = document.createElement("h2")
     title.className = "text-2xl font-bold mb-4 " + (allCorrect ? "text-green-800" : "text-orange-800")
-    title.textContent = allCorrect ? "🎉 Perfetto! Tutte le frazioni sono corrette!" : "📝 Controlla le frazioni evidenziate"
+    title.textContent = allCorrect ? "🎉 Perfetto! Tutte le risposte sono corrette!" : "📝 Controlla le risposte evidenziate"
 
     const stats = document.createElement("div")
     stats.className = "text-lg space-y-2"
