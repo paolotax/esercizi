@@ -1,72 +1,80 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-3 md:p-6 bg-gradient-to-b from-cyan-50 to-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p006/page.png') %>">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p006/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Teoria -->
-  <div class="bg-blue-100 p-4 md:p-6 mb-8 border-l-4 border-blue-500">
-    <p class="text-base md:text-lg text-gray-700 mb-3">
-      Il nostro sistema di numerazione è decimale perché per contare formiamo gruppi di 10 elementi, cioè contiamo in <strong class="underline">base 10</strong>.
-    </p>
-    <p class="text-base md:text-lg text-gray-700">
-      Un gruppo di <strong class="underline">10 elementi</strong> forma <strong class="underline">1 decina</strong>.
-    </p>
-  </div>
-
-  <!-- Esercizio 1: Raggruppa in base 10 queste biglie -->
-  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
-    <div class="flex items-start gap-3 mb-6">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-        1
-      </div>
+  <!-- Box azzurro: Teoria + Esercizio 1 -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 mb-8">
+    <!-- Teoria -->
+    <div class="mb-6">
+      <p class="text-base md:text-lg text-gray-700 mb-3">
+        Il nostro sistema di numerazione è decimale perché per contare formiamo gruppi di 10 elementi, cioè contiamo in <strong class="text-blue-600">base 10</strong>.
+      </p>
       <p class="text-base md:text-lg text-gray-700">
-        Raggruppa in base 10 queste biglie.
+        Un gruppo di <strong class="text-blue-600">10 elementi</strong> forma <strong class="text-blue-600">1 decina</strong>.
       </p>
     </div>
 
-    <!-- Immagine biglie -->
-    <div class="mb-6 flex justify-center">
-      <%= image_tag "bus3_mat/p006/output-1743504902006_670_342_312_183.png",
-          alt: "Biglie da raggruppare",
-          class: "max-w-md" %>
-    </div>
+    <!-- Esercizio 1: Raggruppa in base 10 queste biglie -->
+    <div data-controller="fill-blanks auto-advance">
+      <div class="flex items-start gap-6 mb-6">
+        <!-- Contenuto esercizio a sinistra -->
+        <div class="flex-1">
+          <div class="flex items-start gap-3 mb-6">
+            <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+              1
+            </div>
+            <p class="text-base md:text-lg text-gray-700 font-bold">
+              Raggruppa in base 10 queste biglie.
+            </p>
+          </div>
 
-    <div class="space-y-4">
-      <div class="flex items-center gap-3">
-        <span class="text-lg font-bold">• Quante decine hai formato?</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
-               class="w-16 px-3 py-2 border-2 border-blue-400 rounded text-center font-bold text-lg"
-               maxlength="1" inputmode="numeric">
-      </div>
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <span class="text-lg"><span class="text-red-600">•</span> Quante decine hai formato?</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
+                     class="w-16 px-3 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
+                     maxlength="1" inputmode="numeric">
+            </div>
 
-      <div class="flex items-center gap-3">
-        <span class="text-lg font-bold">• Quante sono le unità, cioè le biglie non raggruppate?</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
-               class="w-16 px-3 py-2 border-2 border-blue-400 rounded text-center font-bold text-lg"
-               maxlength="1" inputmode="numeric">
-      </div>
-    </div>
-
-    <!-- Spiegazione visiva -->
-    <div class="mt-8 bg-white p-6 rounded-lg border-2 border-blue-300">
-      <p class="text-gray-700 mb-4">Puoi rappresentare le biglie anche così:</p>
-
-      <div class="flex items-center justify-center gap-4 flex-wrap">
-        <div class="text-center">
-          <%= image_tag "bus3_mat/p006/output-1743504902006_136_556_215_48.png", class: "mb-2" %>
-          <p class="font-bold">1 <span class="underline">decina</span> → 1 <span class="underline">da</span></p>
+            <div class="text-lg">
+              <span class="text-red-600">•</span> Quante sono le unità, cioè le biglie non raggruppate?
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+                     class="w-16 px-3 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg inline-block ml-2"
+                     maxlength="1" inputmode="numeric">
+            </div>
+          </div>
         </div>
 
-        <span class="text-2xl font-bold">+</span>
-
-        <div class="text-center">
-          <%= image_tag "bus3_mat/p006/output-1743504902006_446_555_86_45.png", class: "mb-2" %>
-          <p class="font-bold">2 <span class="underline">unità</span> → 2 <span class="underline">u</span></p>
+        <!-- Immagine biglie a destra -->
+        <div class="flex-shrink-0">
+          <%= image_tag "bus3_mat/p006/output-1743504902006_670_342_312_183.png",
+              alt: "Biglie da raggruppare",
+              class: "max-w-md" %>
         </div>
+      </div>
 
-        <span class="text-2xl font-bold">=</span>
-        <span class="text-3xl font-bold text-blue-600">12</span>
+      <!-- Spiegazione visiva -->
+      <div class="mt-8">
+        <p class="text-lg text-gray-700 mb-4">Puoi rappresentare le biglie anche così:</p>
+
+        <div class="flex items-center gap-4 flex-wrap">
+          <div class="text-center">
+            <%= image_tag "bus3_mat/p006/output-1743504902006_136_556_215_48.png", class: "mb-2" %>
+            <p class="font-bold">1 <span class="underline text-red-600">decina</span> → 1 <span class="underline text-red-600">da</span></p>
+          </div>
+
+          <span class="text-2xl font-bold">+</span>
+
+          <div class="text-center">
+            <%= image_tag "bus3_mat/p006/output-1743504902006_446_555_86_45.png", class: "mb-2" %>
+            <p class="font-bold">2 <span class="underline text-cyan-600">unità</span> → 2 <span class="underline text-cyan-600">u</span></p>
+          </div>
+
+          <span class="text-2xl font-bold">=</span>
+          <span class="text-3xl font-bold text-blue-600">12</span>
+        </div>
       </div>
     </div>
   </div>
@@ -89,18 +97,18 @@
         <!-- Prima griglia -->
         <div class="flex items-center gap-4">
           <%= image_tag "bus3_mat/p006/output-1743504902006_99_877_180_137.png", class: "w-32" %>
-          <span class="text-2xl font-bold">→</span>
+          <span class="text-2xl font-bold text-red-600">→</span>
           <div class="flex gap-2">
             <div class="text-center">
               <p class="font-bold mb-2">da</p>
               <input type="text" data-fill-blanks-target="input" data-correct-answer="7"
-                     class="w-16 px-2 py-2 border-2 border-red-400 rounded text-center font-bold text-lg"
+                     class="w-16 px-2 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
                      maxlength="1" inputmode="numeric">
             </div>
             <div class="text-center">
               <p class="font-bold mb-2">u</p>
               <input type="text" data-fill-blanks-target="input" data-correct-answer="7"
-                     class="w-16 px-2 py-2 border-2 border-blue-400 rounded text-center font-bold text-lg"
+                     class="w-16 px-2 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
                      maxlength="1" inputmode="numeric">
             </div>
           </div>
@@ -109,18 +117,18 @@
         <!-- Seconda griglia -->
         <div class="flex items-center gap-4">
           <%= image_tag "bus3_mat/p006/output-1743504902006_97_1025_225_138.png", class: "w-32" %>
-          <span class="text-2xl font-bold">→</span>
+          <span class="text-2xl font-bold text-red-600">→</span>
           <div class="flex gap-2">
             <div class="text-center">
               <p class="font-bold mb-2">da</p>
               <input type="text" data-fill-blanks-target="input" data-correct-answer="9"
-                     class="w-16 px-2 py-2 border-2 border-red-400 rounded text-center font-bold text-lg"
+                     class="w-16 px-2 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
                      maxlength="1" inputmode="numeric">
             </div>
             <div class="text-center">
               <p class="font-bold mb-2">u</p>
               <input type="text" data-fill-blanks-target="input" data-correct-answer="9"
-                     class="w-16 px-2 py-2 border-2 border-blue-400 rounded text-center font-bold text-lg"
+                     class="w-16 px-2 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
                      maxlength="1" inputmode="numeric">
             </div>
           </div>
@@ -165,13 +173,13 @@
             <div class="text-center">
               <p class="font-bold mb-2 text-sm">da</p>
               <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= da %>"
-                     class="w-12 px-2 py-2 border-2 border-red-400 rounded text-center font-bold"
+                     class="w-12 px-2 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold"
                      maxlength="1" inputmode="numeric">
             </div>
             <div class="text-center">
               <p class="font-bold mb-2 text-sm">u</p>
               <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= u %>"
-                     class="w-12 px-2 py-2 border-2 border-blue-400 rounded text-center font-bold"
+                     class="w-12 px-2 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold"
                      maxlength="1" inputmode="numeric">
             </div>
           </div>
