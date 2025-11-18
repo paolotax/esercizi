@@ -1,12 +1,268 @@
-<% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white"
+     data-controller="exercise-checker fill-blanks auto-advance"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p030/page.png') %>">
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Titolo -->
+  <div class="mb-6">
+    <h1 class="text-2xl md:text-3xl font-bold text-cyan-600 text-center">LA PROPRIETÀ DELLA SOTTRAZIONE</h1>
+  </div>
+
+  <!-- Esercizio 1: Box azzurro con biglie -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 -ml-3 md:-ml-0 -mr-3 md:mr-0 mb-8">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        <strong>Leggi, osserva le biglie e rispondi.</strong>
+      </p>
+    </div>
+
+    <div class="space-y-8">
+      <!-- Prima situazione -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div>
+          <%= image_tag "bus3_mat/p030/p30_1.jpg",
+              alt: "Biglie iniziali",
+              class: "max-w-full w-full" %>
+        </div>
+        <div>
+          <p class="text-base text-gray-700 mb-3">
+            <span class="text-red-500 text-sm">●</span> Qual è la differenza tra il numero di biglie rosa e verdi?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-lg font-bold">16 - 12 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                   class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                   maxlength="1" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <!-- Seconda situazione: +3 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div>
+          <%= image_tag "bus3_mat/p030/p30_2.jpg",
+              alt: "Biglie +3",
+              class: "max-w-full w-full" %>
+        </div>
+        <div>
+          <p class="text-base text-gray-700 mb-3">
+            <span class="text-red-500 text-sm">●</span> Alle biglie iniziali sono state aggiunte 3 biglie rosa e 3 biglie verdi. Qual è ora la differenza tra il numero di biglie rosa e verdi?
+          </p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-lg font-bold">16 - 12 =</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                     class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                     maxlength="1" inputmode="numeric">
+            </div>
+            <div class="text-center text-lg font-bold text-red-500">
+              ↓+3&nbsp;&nbsp;&nbsp;↓+3
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-lg font-bold">19 - 15 =</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                     class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                     maxlength="1" inputmode="numeric">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Terza situazione: -2 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div>
+          <%= image_tag "bus3_mat/p030/p30_3.jpg",
+              alt: "Biglie -2",
+              class: "max-w-full w-full" %>
+        </div>
+        <div>
+          <p class="text-base text-gray-700 mb-3">
+            <span class="text-red-500 text-sm">●</span> Dalle biglie iniziali sono state tolte 2 biglie rosa e 2 biglie verdi. Qual è ora la differenza tra il numero di biglie rosa e verdi?
+          </p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-lg font-bold">16 - 12 =</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                     class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                     maxlength="1" inputmode="numeric">
+            </div>
+            <div class="text-center text-lg font-bold text-red-500">
+              ↓-2&nbsp;&nbsp;&nbsp;↓-2
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-lg font-bold">14 - 10 =</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                     class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                     maxlength="1" inputmode="numeric">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Box rosa teoria -->
+    <div class="mt-8 bg-pink-50 border-3 border-pink-400 rounded-lg p-6">
+      <div class="flex items-start gap-3">
+        <div class="text-3xl flex-shrink-0">😊</div>
+        <p class="text-base md:text-lg text-gray-700">
+          <strong><span class="text-cyan-600">Proprietà invariantiva</span>: se ai due termini di una sottrazione aggiungi o togli uno stesso numero, il risultato non cambia.</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Applica proprietà -->
+  <div class="bg-transparent p-4 md:p-8 mb-8">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        <strong>Applica la proprietà invariantiva e calcola.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Esempio 1 -->
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 justify-center text-lg font-bold">
+          <span>35</span>
+          <span>-</span>
+          <span>15</span>
+          <span>=</span>
+          <span>20</span>
+        </div>
+        <div class="text-center text-base font-bold text-red-500">
+          ↓-5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓-5
+        </div>
+        <div class="flex items-center gap-2 justify-center text-lg font-bold">
+          <span>30</span>
+          <span>-</span>
+          <span>10</span>
+          <span>=</span>
+          <span>20</span>
+        </div>
+      </div>
+
+      <!-- Esempio 2 -->
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 justify-center text-lg font-bold">
+          <span>56</span>
+          <span>-</span>
+          <span>26</span>
+          <span>=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="30"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+        </div>
+        <div class="text-center text-base font-bold text-red-500">
+          ↓+4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓+4
+        </div>
+        <div class="flex items-center gap-2 justify-center text-lg font-bold">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="60"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+          <span>-</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="30"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+          <span>=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="30"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+        </div>
+      </div>
+
+      <!-- Esempio 3 -->
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 justify-center text-lg font-bold">
+          <span>69</span>
+          <span>-</span>
+          <span>17</span>
+          <span>=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="52"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+        </div>
+        <div class="text-center text-base font-bold text-red-500">
+          ↓-7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓-7
+        </div>
+        <div class="flex items-center gap-2 justify-center text-lg font-bold">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="62"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+          <span>-</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+          <span>=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="52"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+        </div>
+      </div>
+
+      <!-- Esempio 4 -->
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 justify-center text-lg font-bold">
+          <span>75</span>
+          <span>-</span>
+          <span>55</span>
+          <span>=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="20"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+        </div>
+        <div class="text-center text-base font-bold text-red-500">
+          ↓+5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓+5
+        </div>
+        <div class="flex items-center gap-2 justify-center text-lg font-bold">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="80"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+          <span>-</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="60"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+          <span>=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="20"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 3: Sul quaderno -->
+  <div class="bg-transparent p-4 md:p-8 mb-8">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        <strong>Calcola sul quaderno. Applica la proprietà invariantiva usando la sottrazione o l'addizione.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-3 text-base text-gray-700">
+      <p>96 - 53 =</p>
+      <p>39 - 15 =</p>
+      <p>54 - 31 =</p>
+      <p>369 - 36 =</p>
+      <p>78 - 54 =</p>
+      <p>47 - 11 =</p>
+      <p>58 - 34 =</p>
+      <p>99 - 66 =</p>
+      <p>158 - 38 =</p>
+      <p>223 - 13 =</p>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

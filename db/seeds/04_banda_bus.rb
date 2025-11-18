@@ -44,7 +44,13 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 24, titolo: "LE PROPRIETÀ DELL'ADDIZIONE", sottotitolo: "ADDIZIONE", slug: "bus3_mat_p024", view_template: "bus3_mat_p024", base_color: "blue" },
   { numero: 25, titolo: "Addizioni in colonna", sottotitolo: "ADDIZIONE", slug: "bus3_mat_p025", view_template: "bus3_mat_p025", base_color: "blue" },
   { numero: 26, titolo: "Addizioni con il cambio", slug: "bus3_mat_p026", view_template: "bus3_mat_p026", base_color: "blue", sottotitolo: "ADDIZIONE" },
+  { numero: 27, titolo: "LA PROVA DELL'ADDIZIONE", sottotitolo: "ADDIZIONE", slug: "bus3_mat_p027", view_template: "bus3_mat_p027", base_color: "orange" },
+  { numero: 28, titolo: "LA SOTTRAZIONE", sottotitolo: "SOTTRAZIONE", slug: "bus3_mat_p028", view_template: "bus3_mat_p028", base_color: "cyan" },
+  { numero: 29, titolo: "Sottrazione - Proprietà", sottotitolo: "SOTTRAZIONE", slug: "bus3_mat_p029", view_template: "bus3_mat_p029", base_color: "cyan" },
+  { numero: 30, titolo: "LA PROPRIETÀ DELLA SOTTRAZIONE", sottotitolo: "SOTTRAZIONE", slug: "bus3_mat_p030", view_template: "bus3_mat_p030", base_color: "cyan" },
+  { numero: 31, titolo: "SOTTRAZIONI IN COLONNA", sottotitolo: "SOTTRAZIONE", slug: "bus3_mat_p031", view_template: "bus3_mat_p031", base_color: "cyan" },
   { numero: 32, titolo: "Sottrazioni con il cambio", slug: "bus3_mat_p032", view_template: "bus3_mat_p032", sottotitolo: "SOTTRAZIONE", base_color: "red" },
+  { numero: 33, titolo: "LA PROVA DELLA SOTTRAZIONE", sottotitolo: "SOTTRAZIONE", slug: "bus3_mat_p033", view_template: "bus3_mat_p033", base_color: "cyan" },
   { numero: 34, titolo: "Calcoli veloci", slug: "bus3_mat_p034", view_template: "bus3_mat_p034", sottotitolo: "ADDIZIONE E SOTTRAZIONE", base_color: "cyan" },
   { numero: 35, titolo: "Calcoli veloci", slug: "bus3_mat_p035", view_template: "bus3_mat_p035", sottotitolo: "ADDIZIONE E SOTTRAZIONE", base_color: "cyan" },
   { numero: 74, titolo: "Le Frazioni", slug: "bus3_mat_p074", view_template: "bus3_mat_p074", sottotitolo: "FRAZIONI", base_color: "purple" },
@@ -63,8 +69,8 @@ bus_matematica = bus_volume3.discipline.create!(
   end
 end
 
-# Pagine generiche per bus3_mat (p001-p192, escludendo le 20 già definite sopra)
-existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 25, 26, 32, 34, 35, 74, 75, 76, 77, 78, 144 ]
+# Pagine generiche per bus3_mat (p001-p192, escludendo le pagine già definite sopra)
+existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 74, 75, 76, 77, 78, 144 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|
