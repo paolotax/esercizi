@@ -1,12 +1,72 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p014/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Titolo principale -->
+  <div class="mb-8 text-center">
+    <h1 class="text-3xl md:text-4xl font-bold text-blue-600">IL MIGLIAIO</h1>
+  </div>
+
+  <!-- Parte teorica -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 mb-8 rounded-lg">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="text-3xl">🧠</div>
+      <p class="text-base md:text-lg text-gray-700 font-bold">
+        Osserva il migliaio, cioè il numero <span class="text-purple-600 text-xl">1000</span>, sull'abaco e con i blocchetti.
+      </p>
+    </div>
+
+    <!-- Immagine abaci -->
+    <div class="flex justify-center mb-8">
+      <%= image_tag "bus3_mat/p014/p14_1.jpg",
+          alt: "Abachi che mostrano il passaggio a 1000",
+          class: "max-w-4xl w-full" %>
+    </div>
+
+    <div class="bg-pink-50 border-3 border-pink-400 rounded-2xl p-6 mb-8 mx-auto max-w-3xl">
+      <div class="flex items-start gap-3">
+        <div class="text-4xl">😊</div>
+        <div class="space-y-3">
+          <p class="text-base md:text-lg text-gray-700">
+            <strong class="text-cyan-600">10 unità</strong> raggruppatе formano <strong class="text-red-600">1 decina.</strong>
+            <span class="ml-4 font-bold text-lg"><span class="text-cyan-600">10 u</span> → <span class="text-red-600">1 da</span></span>
+          </p>
+          <p class="text-base md:text-lg text-gray-700">
+            <strong class="text-red-600">10 decine</strong> raggruppatе formano <strong class="text-green-600">1 centinaio.</strong>
+            <span class="ml-4 font-bold text-lg"><span class="text-red-600">10 da</span> → <span class="text-green-600">1 h</span></span>
+          </p>
+          <p class="text-base md:text-lg text-gray-700">
+            <strong class="text-green-600">10 centinaia</strong> raggruppatе formano <strong class="text-purple-600">1 migliaio.</strong>
+            <span class="ml-4 font-bold text-lg"><span class="text-green-600">10 h</span> → <span class="text-purple-600">1 k</span></span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Immagine cubo migliaio -->
+    <div class="flex justify-center mb-6">
+      <%= image_tag "bus3_mat/p014/p14_2.jpg",
+          alt: "Il cubo del migliaio e le sue scomposizioni",
+          class: "max-w-3xl w-full" %>
+    </div>
+
+    <div class="bg-pink-50 border-3 border-pink-400 rounded-2xl p-6 mx-auto max-w-2xl">
+      <div class="flex items-start gap-3">
+        <div class="text-4xl">😊</div>
+        <div class="text-center flex-1">
+          <p class="text-xl md:text-2xl font-bold text-gray-800">
+            <span class="text-purple-600">1 k</span> =
+            <span class="text-green-600">10 h</span> =
+            <span class="text-red-600">100 da</span> =
+            <span class="text-cyan-600">1000 u</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

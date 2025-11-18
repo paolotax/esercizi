@@ -1,12 +1,351 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p019/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 5: Scrivi i numeri al posto giusto -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        5
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Scrivi i numeri al posto giusto.
+      </p>
+    </div>
+
+    <!-- Prima linea dei numeri: 1000-3999 -->
+    <div class="mb-8">
+      <div class="flex items-center justify-center gap-3 mb-4 flex-wrap">
+        <span class="text-xl font-bold">1049</span>
+        <span class="text-red-500">•</span>
+        <span class="text-xl font-bold">3102</span>
+        <span class="text-red-500">•</span>
+        <span class="text-xl font-bold">3856</span>
+        <span class="text-red-500">•</span>
+        <span class="text-xl font-bold">3874</span>
+        <span class="text-red-500">•</span>
+        <span class="text-xl font-bold">1001</span>
+        <span class="text-red-500">•</span>
+        <span class="text-xl font-bold">3241</span>
+        <span class="text-red-500">•</span>
+        <span class="text-xl font-bold">2442</span>
+      </div>
+
+      <div class="bg-green-50 border-2 border-green-400 rounded-lg p-4 relative">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-xl font-bold text-green-700">1000</span>
+          <span class="text-xl font-bold text-green-700">2000</span>
+          <span class="text-xl font-bold text-green-700">3000</span>
+          <span class="text-xl font-bold text-green-700">3999</span>
+        </div>
+        <div class="h-2 bg-green-300 rounded-full mb-4"></div>
+
+        <div class="grid grid-cols-7 gap-2">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="1001"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="1049"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="2442"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3102"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3241"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3856"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3874"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+        </div>
+      </div>
+    </div>
+
+    <!-- Seconda linea dei numeri: 5000-3000 (decrescente) -->
+    <div class="mb-6">
+      <div class="flex items-center justify-center gap-3 mb-4 flex-wrap">
+        <span class="text-xl font-bold">4165</span>
+        <span class="text-red-500">•</span>
+        <span class="text-xl font-bold">3024</span>
+        <span class="text-red-500">•</span>
+        <span class="text-xl font-bold">3420</span>
+        <span class="text-red-500">•</span>
+        <span class="text-xl font-bold">2987</span>
+        <span class="text-red-500">•</span>
+        <span class="text-xl font-bold">4959</span>
+        <span class="text-red-500">•</span>
+        <span class="text-xl font-bold">3607</span>
+        <span class="text-red-500">•</span>
+        <span class="text-xl font-bold">3706</span>
+      </div>
+
+      <div class="bg-orange-50 border-2 border-orange-400 rounded-lg p-4 relative">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-xl font-bold text-orange-700">5000</span>
+          <span class="text-xl font-bold text-orange-700">4599</span>
+          <span class="text-xl font-bold text-orange-700">4000</span>
+          <span class="text-xl font-bold text-orange-700">3000</span>
+        </div>
+        <div class="h-2 bg-orange-300 rounded-full mb-4"></div>
+
+        <div class="grid grid-cols-7 gap-2">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="4959"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="4165"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3706"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3607"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3420"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3024"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="2987"
+                 class="px-2 py-2 border-2 border-dotted border-gray-400 rounded text-center font-bold text-sm"
+                 maxlength="4" inputmode="numeric">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 6: Confronti con >, <, = -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        6
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Completa con <strong class="text-blue-600">&gt;</strong>, <strong class="text-blue-600">&lt;</strong> o <strong class="text-blue-600">=</strong>.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold">70 h</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="<"
+               class="w-10 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-xl"
+               maxlength="1">
+        <span class="text-lg font-bold">800</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold">4 k</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer=">"
+               class="w-10 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-xl"
+               maxlength="1">
+        <span class="text-lg font-bold">400 da</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold">60 da</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer=">"
+               class="w-10 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-xl"
+               maxlength="1">
+        <span class="text-lg font-bold">500</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold">3 u 9 k</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer=">"
+               class="w-10 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-xl"
+               maxlength="1">
+        <span class="text-lg font-bold">903</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold">95 da</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="<"
+               class="w-10 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-xl"
+               maxlength="1">
+        <span class="text-lg font-bold">9 k</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold">6 h</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="<"
+               class="w-10 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-xl"
+               maxlength="1">
+        <span class="text-lg font-bold">90 u</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold">35 h</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="<"
+               class="w-10 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-xl"
+               maxlength="1">
+        <span class="text-lg font-bold">3700</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold">5 da 8 h</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="<"
+               class="w-10 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-xl"
+               maxlength="1">
+        <span class="text-lg font-bold">8500</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold">14 h</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="="
+               class="w-10 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-xl"
+               maxlength="1">
+        <span class="text-lg font-bold">14 da</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold">3 k</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="="
+               class="w-10 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-xl"
+               maxlength="1">
+        <span class="text-lg font-bold">3000</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold">6285</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="<"
+               class="w-10 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-xl"
+               maxlength="1">
+        <span class="text-lg font-bold">6300</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-lg font-bold">3821</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="<"
+               class="w-10 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-xl"
+               maxlength="1">
+        <span class="text-lg font-bold">3 k, 92 da</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 7: Indica con X i numeri -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="exercise-checker">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        7
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Indica con una <strong class="text-red-600">X</strong> i numeri:
+      </p>
+    </div>
+
+    <div class="space-y-6">
+      <!-- Minori di 2939 -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-6">
+        <p class="font-bold text-lg mb-4 text-red-500">• minori di 2939:</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <%
+            nums_minor = [2940, 1950, 2393, 3009]
+            correct_minor = [1950, 2393]
+          %>
+          <% nums_minor.each do |num| %>
+            <label class="flex items-center gap-3 cursor-pointer p-3 bg-white border-2 border-cyan-400 rounded-lg hover:bg-cyan-100 transition">
+              <input type="checkbox" data-correct-answer="<%= correct_minor.include?(num) %>" class="w-5 h-5">
+              <span class="text-xl font-bold"><%= num %></span>
+            </label>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Maggiori di 3565 -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-6">
+        <p class="font-bold text-lg mb-4 text-red-500">• maggiori di 3565:</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <%
+            nums_major = [2655, 3656, 3600, 3560]
+            correct_major = [3656, 3600]
+          %>
+          <% nums_major.each do |num| %>
+            <label class="flex items-center gap-3 cursor-pointer p-3 bg-white border-2 border-cyan-400 rounded-lg hover:bg-cyan-100 transition">
+              <input type="checkbox" data-correct-answer="<%= correct_major.include?(num) %>" class="w-5 h-5">
+              <span class="text-xl font-bold"><%= num %></span>
+            </label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 8 GIOCO: Il numero segreto della cassaforte -->
+  <div class="bg-gradient-to-r from-blue-50 to-cyan-50 border-3 border-blue-400 rounded-2xl p-6 md:p-8 mb-8" data-controller="fill-blanks">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        8
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="bg-gradient-to-r from-cyan-400 to-blue-500 text-white px-4 py-1 rounded-full font-bold text-sm">GIOCO</span>
+        <p class="text-base md:text-lg text-gray-700 font-bold">
+          Aiuta il capitano Brick a scoprire il numero che apre la cassaforte della sua nave. Leggi le indicazioni e scrivi il numero segreto.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Indizi -->
+      <div class="lg:col-span-2 space-y-4">
+        <div class="bg-white rounded-lg p-4 border-2 border-blue-300">
+          <div class="flex items-start gap-3">
+            <span class="text-red-500 text-xl">•</span>
+            <p class="text-base text-gray-700">Il numero ha <strong>4 cifre</strong> e non contiene né 0 né 9.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-4 border-2 border-blue-300">
+          <div class="flex items-start gap-3">
+            <span class="text-red-500 text-xl">•</span>
+            <p class="text-base text-gray-700">È <strong>minore di 2000</strong> e <strong>finisce con 3</strong>.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-4 border-2 border-blue-300">
+          <div class="flex items-start gap-3">
+            <span class="text-red-500 text-xl">•</span>
+            <p class="text-base text-gray-700">La cifra delle <strong>decine è maggiore</strong> di tutte le altre cifre.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-4 border-2 border-blue-300">
+          <div class="flex items-start gap-3">
+            <span class="text-red-500 text-xl">•</span>
+            <p class="text-base text-gray-700">La cifra delle centinaia è quella delle unità aumentata di 4.</p>
+          </div>
+        </div>
+
+        <div class="bg-yellow-100 border-3 border-yellow-400 rounded-lg p-6 mt-6">
+          <div class="flex items-center gap-3 justify-center">
+            <span class="text-xl font-bold">Il numero segreto è</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="1783"
+                   class="w-28 px-4 py-3 border-3 border-blue-500 rounded-lg text-center font-bold text-2xl bg-white"
+                   maxlength="4" inputmode="numeric">
+            <span class="text-xl">.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Immagine cassaforte -->
+      <div class="flex justify-center items-center">
+        <div class="text-center">
+          <div class="text-8xl mb-4">🔒</div>
+          <p class="text-sm text-gray-600 italic">Cassaforte del capitano Brick</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

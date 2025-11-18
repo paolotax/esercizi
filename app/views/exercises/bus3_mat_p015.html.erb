@@ -1,12 +1,188 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p015/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1: Forma il numero 1000: usa solo centinaia -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Forma il numero <strong class="text-purple-600 text-xl">1000</strong>: usa solo centinaia.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <% [[300, 700], [600, 400], [500, 500], [700, 300], [400, 600], [200, 800], [900, 100], [100, 900]].each do |first, answer| %>
+        <div class="flex items-center gap-3">
+          <span class="text-xl font-bold min-w-[60px]"><%= first %></span>
+          <span class="text-xl text-blue-600">+</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= answer %>"
+                 class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
+                 maxlength="3" inputmode="numeric">
+          <span class="text-xl">=</span>
+          <span class="text-xl font-bold text-purple-600">1000</span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Forma il numero 1000: colora la casella con il numero corretto -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="exercise-checker">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Forma il numero <strong class="text-purple-600 text-xl">1000</strong>: colora la casella con il numero corretto.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <%
+        exercises = [
+          [350, [650, 550, 750], 650],
+          [510, [590, 490, 390], 490],
+          [160, [940, 840, 740], 840],
+          [790, [210, 290, 310], 210],
+          [440, [600, 660, 560], 560],
+          [680, [420, 320, 520], 320]
+        ]
+
+        exercises.each do |first, options, correct|
+      %>
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="text-xl font-bold"><%= first %></span>
+          <span class="text-xl text-blue-600">+</span>
+          <div class="flex gap-2">
+            <% options.each do |opt| %>
+              <label class="cursor-pointer">
+                <input type="radio" name="ex2-<%= first %>" data-correct-answer="<%= opt == correct %>" class="peer hidden">
+                <div class="border-3 border-cyan-400 rounded-lg px-4 py-2 peer-checked:bg-cyan-200 hover:bg-cyan-50 transition">
+                  <span class="text-lg font-bold"><%= opt %></span>
+                </div>
+              </label>
+            <% end %>
+          </div>
+          <span class="text-xl">=</span>
+          <span class="text-xl font-bold text-purple-600">1k</span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Esercizio 3: Completa (equivalenze) -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        Completa.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <%
+        equivalences = [
+          ["1 da", "10", "u"],
+          ["1 k", "10", "h"],
+          ["1000 u", "1", "k"],
+          ["100 da", "1", "k"],
+          ["1 h", "10", "da"],
+          ["1 k", "100", "da"],
+          ["1000 u", "10", "h"],
+          ["100 da", "10", "h"],
+          ["1 h", "100", "u"],
+          ["1 k", "1000", "u"],
+          ["1000 u", "100", "da"],
+          ["10 h", "1", "k"]
+        ]
+
+        equivalences.each do |left, answer, right|
+      %>
+        <div class="flex items-center gap-2">
+          <span class="text-lg font-bold min-w-[80px]"><%= left %></span>
+          <span class="text-lg">=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= answer %>"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span class="text-lg font-bold"><%= right %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Esercizio 4 GIOCO: Leggi, osserva il disegno e rispondi -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        4
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="bg-gradient-to-r from-cyan-400 to-blue-500 text-white px-4 py-1 rounded-full font-bold text-sm">GIOCO</span>
+        <p class="text-base md:text-lg text-gray-700 font-bold">
+          Leggi, osserva il disegno e rispondi.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Testo problema -->
+      <div class="space-y-4">
+        <p class="text-base md:text-lg text-gray-700">
+          Una tipografia deve stampare <strong class="text-purple-600">1000 cartoncini</strong> colorati.
+          Ogni pacco contiene il numero di cartoncini indicato nel disegno.
+        </p>
+
+        <div class="bg-yellow-50 border-3 border-yellow-400 rounded-lg p-4">
+          <p class="text-base text-gray-800 font-bold mb-3">
+            • In totale, ci sono ALMENO 1000 cartoncini nei pacchi?
+          </p>
+
+          <div class="space-y-3">
+            <label class="flex items-start gap-3 cursor-pointer p-3 bg-white rounded-lg border-2 border-cyan-300 hover:bg-cyan-50 transition">
+              <input type="radio" name="ex4-answer" data-fill-blanks-target="input" data-correct-answer="false" class="mt-1">
+              <div class="flex-1">
+                <span class="text-gray-700">No. Mancano</span>
+                <input type="text"
+                       class="w-16 mx-1 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                       maxlength="2" inputmode="numeric" disabled>
+                <span class="text-gray-700">cartoncini.</span>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-3 cursor-pointer p-3 bg-white rounded-lg border-2 border-cyan-300 hover:bg-cyan-50 transition">
+              <input type="radio" name="ex4-answer" data-fill-blanks-target="input" data-correct-answer="true" class="mt-1">
+              <div class="flex-1">
+                <span class="text-gray-700">Sì. Avanzano</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="30"
+                       class="w-16 mx-1 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                       maxlength="2" inputmode="numeric">
+                <span class="text-gray-700">cartoncini.</span>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Immagine pacchi -->
+      <div class="flex justify-center items-start">
+        <%= image_tag "bus3_mat/p015/p15_1.jpg",
+            alt: "Pacchi con cartoncini: 350, 3h, 150, 23da",
+            class: "max-w-md w-full" %>
+
+        <div class="mt-4 text-sm text-gray-600 text-center">
+          <p><strong>Pacchi:</strong></p>
+          <p>350 + 3h (300) + 150 + 23da (230) = 1030</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>
