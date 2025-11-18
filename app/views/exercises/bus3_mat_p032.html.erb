@@ -1,35 +1,24 @@
-<div class="max-w-7xl mx-auto p-6" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6" 
+     data-controller="exercise-checker" >
+
   <!-- Header -->
-  <div class="mb-8">
-    <div class="flex items-start sm:items-center justify-between gap-4 mb-4">
-      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-        <div class="bg-cyan-500 text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold">
-          SOTTRAZIONE
-        </div>
-        <h1 class="text-2xl sm:text-3xl font-bold text-cyan-600">SOTTRAZIONI CON IL CAMBIO</h1>
-      </div>
-      <div class="flex-shrink-0 bg-red-600 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl">
-        32
-      </div>
-    </div>
-  </div>
+  <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-8">
-
     <!-- Exercise 1: Osserva come si calcola -->
-    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-      <div class="flex items-start gap-3 mb-6">
+    <div class="bg-[#C7EAFB] -ml-3 md:-ml-0 -mr-3 md:mr-0 p-6 mb-6">
+      <div class="flex items-center gap-3 mb-6">
         <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
           1
         </div>
-        <h2 class="text-xl font-bold text-gray-800">Osserva come si calcola 487 - 258.</h2>
+        <h2>Osserva come si calcola <span class="whitespace-nowrap font-bold">487 - 258</span>.</h2>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
         <!-- Passo 1: Sottrai le unità -->
-        <div class="space-y-4">
-          <div class="bg-cyan-50 p-4 rounded-lg">
+        <div class="flex flex-col justify-between">
+          <div class="p-4">
             <p class="text-sm mb-2">
               Sottrai le <span class="text-blue-600 font-bold">unità</span>: 7 - 8 non si può fare!
             </p>
@@ -43,14 +32,14 @@
                show_exercise: false,
                show_minuend_subtrahend: true,
                show_solution: false,
-               show_toolbar: true,
+               show_toolbar: false,
                show_borrow: true
           } %>
         </div>
 
         <!-- Passo 2: Sottrai le decine -->
-        <div class="space-y-4">
-          <div class="bg-cyan-50 p-4 rounded-lg">
+        <div class="flex flex-col justify-between">
+          <div class="p-4">
             <p class="text-sm mb-2">
               Sottrai le <span class="text-red-600 font-bold">decine</span>.
             </p>
@@ -63,14 +52,14 @@
                show_exercise: false,
                show_minuend_subtrahend: true,
                show_solution: false,
-               show_toolbar: true,
+               show_toolbar: false,
                show_borrow: true
           } %>
         </div>
 
         <!-- Passo 3: Sottrai le centinaia -->
         <div class="space-y-4">
-          <div class="bg-cyan-50 p-4 rounded-lg">
+          <div class="p-4">
             <p class="text-sm mb-2">
               Sottrai le <span class="text-green-600 font-bold">centinaia</span>.
             </p>
@@ -80,7 +69,7 @@
                show_exercise: false,
                show_minuend_subtrahend: true,
                show_solution: true,
-               show_toolbar: true,
+               show_toolbar: false,
                show_borrow: true
           } %>
         </div>
@@ -89,12 +78,12 @@
     </div>
 
     <!-- Exercise 2: Metti in colonna e calcola -->
-    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-      <div class="flex items-start gap-3 mb-6">
+    <div class="p-6 mb-6">
+      <div class="flex items-center gap-3 mb-6">
         <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
           2
         </div>
-        <h2 class="text-xl font-bold text-gray-800">Metti in colonna e calcola.</h2>
+        <h2>Metti in colonna e calcola.</h2>
       </div>
 
       <div class="flex flex-wrap gap-8 justify-center items-start">
@@ -127,17 +116,17 @@
     </div>
 
     <!-- Exercise 3: Calcola in colonna sul quaderno (con modal) -->
-    <div class="bg-white rounded-lg shadow-lg p-6 mb-6" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
-      <div class="flex items-start gap-3 mb-6">
+    <div class="p-6 mb-6" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
+      <div class="flex items-center gap-3 mb-6">
         <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
           3
         </div>
-        <h2 class="text-xl font-bold text-gray-800">Calcola in colonna sul quaderno.</h2>
+        <h2>Calcola in colonna sul quaderno.</h2>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Column a -->
-        <div class="bg-cyan-50 p-4 rounded-lg">
+        <div class="p-4">
           <div class="font-bold text-red-500 mb-3">a.</div>
           <div class="space-y-2">
             <div class="text-lg">61 - 35 =</div>
@@ -148,7 +137,7 @@
         </div>
 
         <!-- Column b -->
-        <div class="bg-cyan-50 p-4 rounded-lg">
+        <div class="p-4">
           <div class="font-bold text-red-500 mb-3">b.</div>
           <div class="space-y-2">
             <div class="text-lg">237 - 156 =</div>
@@ -159,7 +148,7 @@
         </div>
 
         <!-- Column c -->
-        <div class="bg-cyan-50 p-4 rounded-lg">
+        <div class="p-4">
           <div class="font-bold text-red-500 mb-3">c.</div>
           <div class="space-y-2">
             <div class="text-lg">327 - 250 =</div>
@@ -170,7 +159,7 @@
         </div>
 
         <!-- Column d -->
-        <div class="bg-cyan-50 p-4 rounded-lg">
+        <div class="p-4">
           <div class="font-bold text-red-500 mb-3">d.</div>
           <div class="space-y-2">
             <div class="text-lg">334 - 287 =</div>
@@ -183,6 +172,7 @@
     </div>
 
     <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'cyan', current_page: 'bus3_mat_p032' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
+
 </div>

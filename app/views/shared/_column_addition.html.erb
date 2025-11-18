@@ -141,7 +141,7 @@
   <% end %>
   
   <div class="flex items-start justify-center gap-2">
-    <div class="inline-block border-4 border-blue-400 rounded-lg" data-controller="column-input">
+    <div class="inline-block border-4 border-blue-400 rounded-lg bg-white" data-controller="column-input">
       
       <!-- Header con le etichette delle colonne -->
       <div class="border-b-2 border-gray-300" style="<%= grid_style %>">
@@ -154,17 +154,17 @@
       
       <!-- Riga dei riporti (cambi) -->
       <% if show_carry %>
-      <div class="bg-blue-50 border-b border-gray-200" style="<%= grid_style %>">
+      <div class="border-b border-gray-200" style="<%= grid_style %>">
         <% carries.each_with_index do |carry, idx| %>
           <input type="text" 
-                 class="text-center text-sm font-bold <%= labels_colors[idx] %> <%= idx == max_digits - 1 ? 'bg-white' : 'bg-blue-50' %> <%= 'border-r-2 border-gray-300' unless idx == max_digits - 1 %>" 
+                 class="text-center text-sm font-bold <%= labels_colors[idx] %> <%= idx == max_digits - 1 ? 'bg-white' : 'bg-blue-200' %> <%= 'border-r-2 border-gray-300' unless idx == max_digits - 1 %>" 
                  data-column-input-target="carry" 
                  data-correct-answer="<%= carry %>" 
                  maxlength="1" 
                  placeholder=""
                  <% if show_solution && carry.present? %>value="<%= carry %>"<% end %>
                  <% if idx == max_digits - 1 %>disabled<% end %>
-                 style="height: 2rem;">
+                 style="height: 1.5rem;">
         <% end %>
       </div>
       <% end %>

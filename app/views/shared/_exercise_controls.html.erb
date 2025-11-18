@@ -5,7 +5,8 @@
   # - pagina: Pagina object (optional, will use @pagina if not provided)
   # - show_exercise_buttons: Show Controlla/Soluzioni/Ricomincia buttons (default: true)
 
-  color = local_assigns[:color] || 'orange'
+  pagina_obj = local_assigns[:pagina] || @pagina
+  color = pagina_obj.base_color || local_assigns[:color] || 'orange'
   current_page = local_assigns[:current_page]
   pagina_obj = local_assigns[:pagina] || @pagina
   show_exercise_buttons = local_assigns.fetch(:show_exercise_buttons, true)
@@ -88,7 +89,7 @@
       <% if prev_page %>
         <%= link_to pagina_path(prev_page.slug), 
             data: { turbo_frame: "_top" },
-            class: "flex items-center justify-center #{colors[:primary]} text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 w-14 h-14 md:w-auto md:h-auto" do %>
+            class: "flex items-center justify-center #{colors[:primary]} text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 w-11 h-11 sm:w-14 sm:h-14 md:w-auto md:h-auto" do %>
           <span class="text-xl md:text-2xl font-bold text-white">←</span>
         <% end %>
       <% else %>
@@ -103,7 +104,7 @@
       <div class="flex flex-wrap gap-2 md:gap-4 justify-center items-center flex-1">
 
         <!-- Reset Button -->
-        <button class="border-2 <%= colors[:outline] %> bg-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-14 h-14 md:w-auto md:h-auto"
+        <button class="border-2 <%= colors[:outline] %> bg-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 md:w-auto md:h-auto"
                 onclick="window.location.href = window.location.href.split('?')[0] + '?t=' + Date.now()"
                 title="Ricomincia">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -113,7 +114,7 @@
         </button>
 
         <!-- Check Answers Button -->
-        <button class="<%= colors[:primary] %> text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-14 h-14 md:w-auto md:h-auto"
+        <button class="<%= colors[:primary] %> text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 md:w-auto md:h-auto"
                 data-action="click->exercise-checker#checkAnswers"
                 title="Controlla">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -123,7 +124,7 @@
         </button>
 
         <!-- Solve Button -->
-        <button class="<%= colors[:secondary] %> text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-14 h-14 md:w-auto md:h-auto"
+        <button class="<%= colors[:secondary] %> text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 md:w-auto md:h-auto"
                 data-action="click->exercise-checker#showSolutions"
                 title="Soluzioni">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -134,7 +135,7 @@
         </button>
 
         <!-- Text Toggle Button (MAIUSCOLO/minuscolo) - Only visible if text-toggle controller exists -->
-        <button class="border-2 <%= colors[:outline] %> bg-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-14 h-14 md:w-auto md:h-auto hidden"
+        <button class="border-2 <%= colors[:outline] %> bg-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 md:w-auto md:h-auto hidden"
                 data-controller-check="text-toggle"
                 data-action="click->text-toggle#toggle"
                 title="Toggle maiuscolo/minuscolo">
@@ -145,7 +146,7 @@
         </button>
 
         <!-- Text to Speech Button (Leggi) - Only visible if text-to-speech controller exists -->
-        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-14 h-14 md:w-auto md:h-auto hidden"
+        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 md:w-auto md:h-auto hidden"
                 data-controller-check="text-to-speech"
                 data-action="click->text-to-speech#read"
                 data-text-to-speech-target="button"
@@ -163,7 +164,7 @@
       <% if next_page %>
         <%= link_to pagina_path(next_page.slug), 
             data: { turbo_frame: "_top" },
-            class: "flex items-center justify-center #{colors[:primary]} text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 w-14 h-14 md:w-auto md:h-auto" do %>
+            class: "flex items-center justify-center #{colors[:primary]} text-white font-bold py-4 px-4 md:py-4 md:px-8 rounded-full shadow-lg transition transform hover:scale-105 w-11 h-11 sm:w-14 sm:h-14 md:w-auto md:h-auto" do %>
           <span class="text-xl md:text-2xl font-bold text-white">→</span>
         <% end %>
       <% else %>

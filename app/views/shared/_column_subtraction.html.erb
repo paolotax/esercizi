@@ -127,7 +127,7 @@
   <% end %>
 
   <div class="flex items-start justify-center gap-2">
-    <div class="inline-block border-4 border-blue-400 rounded-lg" data-controller="column-subtraction">
+    <div class="inline-block border-4 border-blue-400 rounded-lg bg-white" data-controller="column-subtraction">
 
       <!-- Header con le etichette delle colonne -->
       <div class="border-b-2 border-gray-300 flex">
@@ -143,19 +143,19 @@
 
       <!-- Riga dei prestiti -->
       <% if show_borrow %>
-      <div class="bg-red-50 border-b border-gray-200 flex">
+      <div class="border-b border-gray-200 flex">
         <div class="w-8"></div>
         <div style="<%= grid_style %>">
           <% borrows.each_with_index do |borrow, idx| %>
             <input type="text"
-                   class="text-center text-sm font-bold <%= labels_colors[idx] %> <%= idx == max_digits - 1 ? 'bg-white' : 'bg-red-50' %> <%= 'border-r-2 border-gray-300' unless idx == max_digits - 1 %>"
+                   class="text-center text-sm font-bold <%= labels_colors[idx] %> <%= idx == max_digits - 1 ? 'bg-white' : 'bg-blue-100' %> <%= 'border-r-2 border-gray-300' unless idx == max_digits - 1 %>"
                    data-column-subtraction-target="carry"
                    data-correct-answer="<%= borrow %>"
                    maxlength="1"
                    placeholder=""
                    <% if show_solution && borrow.present? %>value="<%= borrow %>"<% end %>
                    <% if idx == max_digits - 1 %>disabled<% end %>
-                   style="height: 2rem;">
+                   style="height: 1.5rem;">
           <% end %>
         </div>
       </div>
