@@ -1,12 +1,46 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p050/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Regole del gioco -->
+  <div class="bg-[#FFE4C4] p-4 md:p-6 mb-8">
+    <p class="text-base md:text-lg text-gray-800 mb-4">
+      <strong>• Gioca da sola/o, con un'amica o un amico, oppure con tutta la tua classe.</strong>
+    </p>
+
+    <h3 class="font-bold text-lg mb-3"><u>COME SI GIOCA</u></h3>
+    <p class="mb-4">
+      Procurati un dado e tante pedine segnaposto quanti sono i giocatori.
+      A turno, ognuno lancia il dado e sposta la pedina di un numero di caselle pari al lancio.
+    </p>
+
+    <p class="font-bold mb-2">Se capiti sulla casella:</p>
+    <ul class="list-disc ml-6 space-y-2">
+      <li><strong><u>dado →</u></strong> lancia di nuovo il dado.</li>
+      <li><strong><u>freccia →</u></strong> sposta la pedina dove indica la freccia.</li>
+      <li><strong><u>gialla →</u></strong> calcola a mente: se non riesci stai ferma/o un turno.</li>
+      <li><strong><u>azzurra →</u></strong> ripeti la tabellina.</li>
+      <li><strong><u>rosa →</u></strong> spiega l'argomento indicato.</li>
+    </ul>
+
+    <p class="mt-4">
+      Vince chi arriva per prima/o alla <strong>casella 20</strong>.
+    </p>
+
+    <p class="mt-4 text-center text-lg font-bold">
+      <u>BUON DIVERTIMENTO!</u>
+    </p>
+  </div>
+
+  <!-- Immagine del gioco dell'oca -->
+  <div class="flex justify-center mb-8">
+    <%= image_tag "bus3_mat/p050/p50_1.jpg",
+        alt: "Il gioco dell'oca della moltiplicazione",
+        class: "max-w-4xl w-full border-3 border-orange-400 rounded-lg" %>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'orange', show_exercise_buttons: false %>
 </div>

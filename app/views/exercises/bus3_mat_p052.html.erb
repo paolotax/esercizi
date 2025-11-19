@@ -1,12 +1,152 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p052/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1: Ricordi quando usi la divisione? -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        <strong>Ricordi quando usi la divisione? Leggi e completa.</strong>
+      </p>
+    </div>
+
+    <!-- Per formare gruppi uguali -->
+    <div class="bg-[#C7EAFB] p-4 md:p-6 mb-6">
+      <h3 class="font-bold text-lg mb-3">• Per <u>formare gruppi uguali</u></h3>
+
+      <p class="mb-4">
+        Alice sistema 12 fiori. Ne mette 4 in ogni vaso. Di quanti vasi ha bisogno Alice?<br>
+        Continua a raggruppare per 4 i fiori e conta quanti gruppi hai formato.
+      </p>
+
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-bold">12 :</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+               maxlength="1" inputmode="numeric">
+        <span class="font-bold">=</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="3"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+               maxlength="1" inputmode="numeric">
+      </div>
+
+      <%= image_tag "bus3_mat/p052/output-1743504902052_495_277_471_288.png",
+          alt: "Fiori da raggruppare",
+          class: "w-full max-w-md mx-auto" %>
+    </div>
+
+    <!-- Per distribuire una quantità -->
+    <div class="bg-[#FFE4E1] p-4 md:p-6 mb-6">
+      <h3 class="font-bold text-lg mb-3">• Per <u>distribuire</u> una quantità</h3>
+
+      <p class="mb-4">
+        Alice sistema 8 dolcetti in parti uguali su 2 vassoi. Quanti dolcetti mette su ogni vassoio?<br>
+        Continua a usare le frecce per distribuire i dolcetti.
+      </p>
+
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-bold">8 : 2 =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+               maxlength="1" inputmode="numeric">
+      </div>
+
+      <%= image_tag "bus3_mat/p052/output-1743504902052_524_599_394_181.png",
+          alt: "Dolcetti da distribuire",
+          class: "w-full max-w-md mx-auto" %>
+    </div>
+
+    <!-- Schema divisione -->
+    <div class="bg-[#FFF9E6] p-4 md:p-6 mb-6 border-3 border-cyan-400 rounded-lg">
+      <p class="font-bold mb-4">
+        Con la <u>divisione</u> puoi formare gruppi uguali o distribuire una quantità in parti uguali.
+      </p>
+
+      <div class="flex items-center justify-center gap-4 text-xl">
+        <div class="text-center">
+          <div class="font-bold text-2xl">40</div>
+          <div class="text-sm"><u><strong>dividendo</strong></u></div>
+        </div>
+        <div class="font-bold text-2xl">:</div>
+        <div class="text-center">
+          <div class="font-bold text-2xl">8</div>
+          <div class="text-sm"><u><strong>divisore</strong></u></div>
+        </div>
+        <div class="font-bold text-2xl">=</div>
+        <div class="text-center">
+          <div class="font-bold text-2xl">5</div>
+          <div class="text-sm"><u><strong>quoziente</strong></u></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Risolvi i problemi -->
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-base md:text-lg text-gray-700">
+        <strong>Risolvi i problemi.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Problema a -->
+      <div class="bg-white border-3 border-cyan-400 rounded-lg p-4">
+        <div class="bg-cyan-100 text-center font-bold py-2 mb-3 rounded">a</div>
+        <p class="mb-4 text-gray-700">
+          Le galline oggi hanno fatto 32 uova. Il contadino ne mette 8 in ogni contenitore.<br>
+          Di quanti contenitori ha bisogno il contadino?
+        </p>
+        <div class="flex items-center gap-2">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="32"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+          <span>:</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="8"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="1" inputmode="numeric">
+          <span>=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="1" inputmode="numeric">
+        </div>
+      </div>
+
+      <!-- Problema b -->
+      <div class="bg-white border-3 border-cyan-400 rounded-lg p-4">
+        <div class="bg-cyan-100 text-center font-bold py-2 mb-3 rounded">b</div>
+        <p class="mb-4 text-gray-700">
+          Giada dispone lo stesso numero di sedie attorno a 8 tavoli. Se le sedie sono 48, quante sedie mette attorno a ogni tavolo?
+        </p>
+        <div class="flex items-center gap-2">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="48"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
+          <span>:</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="8"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="1" inputmode="numeric">
+          <span>=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="1" inputmode="numeric">
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 text-center text-gray-600">
+      <p><strong>Quaderno → p. 152</strong></p>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>
