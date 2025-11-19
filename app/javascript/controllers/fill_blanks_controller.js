@@ -23,28 +23,37 @@ export default class extends Controller {
       const correctAnswer = (input.dataset.answer || input.dataset.correctAnswer || '').trim().toLowerCase()
       const userAnswer = input.value.trim().toLowerCase()
 
-      // Remove previous styling (including transparent backgrounds and borders)
+      console.log("Checking input:", userAnswer, "vs", correctAnswer)
+      console.log("Classes before:", input.className)
+
+      // Remove previous styling (including all backgrounds and borders)
       input.classList.remove("border-green-500", "border-red-500", "border-yellow-500",
                             "bg-green-50", "bg-red-50", "bg-yellow-50",
-                            "bg-white/60", "bg-white/80", "bg-white",
-                            "border-transparent", "border-cyan-400")
+                            "bg-green-100", "bg-red-100", "bg-yellow-100",
+                            "bg-white", "bg-white/60", "bg-white/80",
+                            "text-gray-900", "font-bold",
+                            "border-transparent", "border-cyan-400", "text-black")
+
+      console.log("Classes after remove:", input.className)
 
       if (userAnswer === "") {
         emptyCount++
         allCorrect = false
-        input.classList.add("border-yellow-500", "border-2", "bg-yellow-100")
+        input.classList.add("border-yellow-500", "border-2", "bg-yellow-100", "text-gray-900")
       } else if (userAnswer === correctAnswer) {
         correctCount++
-        input.classList.add("border-green-500", "border-2", "bg-green-100")
+        input.classList.add("border-green-500", "border-2", "bg-green-100", "text-gray-900")
       } else {
         incorrectCount++
         allCorrect = false
-        input.classList.add("border-red-500", "border-2", "bg-red-100")
+        input.classList.add("border-red-500", "border-2", "bg-red-100", "text-gray-900")
 
         // Shake animation
         input.classList.add("animate-shake")
         setTimeout(() => input.classList.remove("animate-shake"), 500)
       }
+
+      console.log("Classes after add:", input.className)
     })
 
     this.showFeedback(allCorrect, correctCount, incorrectCount, emptyCount)
@@ -98,15 +107,23 @@ export default class extends Controller {
       // Use both data-answer and data-correct-answer for compatibility
       const correctAnswer = (input.dataset.answer || input.dataset.correctAnswer || '').trim()
 
-      // Remove previous styling (including transparent backgrounds and borders)
+      // Remove previous styling (including all backgrounds and borders)
       input.classList.remove("border-green-500", "border-red-500", "border-yellow-500",
                             "bg-green-50", "bg-red-50", "bg-yellow-50",
-                            "bg-white/60", "bg-white/80", "bg-white",
+                            "bg-green-100", "bg-red-100", "bg-yellow-100",
+                            "bg-white", "bg-white/60", "bg-white/80",
+                            "text-gray-900", "font-bold",
                             "border-transparent", "border-cyan-400")
 
       // Show correct answer
       input.value = correctAnswer
-      input.classList.add("border-green-500", "border-2", "bg-green-100")
+
+      input.classList.add("border-green-500", "border-2", "bg-green-100", "text-gray-900", "font-bold")
+
+      // Force render for textareas
+      if (input.tagName === 'TEXTAREA') {
+        input.textContent = correctAnswer
+      }
     })
 
     // Show feedback
@@ -130,13 +147,19 @@ export default class extends Controller {
   reset() {
     this.inputTargets.forEach(input => {
       input.value = ""
-      // Remove all styling and restore original transparent style
+      // Remove all styling
       input.classList.remove("border-green-500", "border-red-500", "border-yellow-500",
                             "bg-green-50", "bg-red-50", "bg-yellow-50",
                             "bg-green-100", "bg-red-100", "bg-yellow-100",
-                            "border-2")
-      // Restore original transparent background and border
-      input.classList.add("bg-white/60", "border-transparent")
+                            "bg-white", "text-gray-900", "font-bold",
+                            "border-2", "border-4")
+
+      // Restore original background if it was removed
+      const hasBgClass = Array.from(input.classList).some(cls => cls.startsWith('bg-'))
+      if (!hasBgClass) {
+        // No background class left, restore bg-white/60
+        input.classList.add("bg-white/60")
+      }
     })
 
     const feedback = this.element.querySelector(".fill-blanks-feedback")

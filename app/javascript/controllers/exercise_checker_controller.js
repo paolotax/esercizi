@@ -488,10 +488,13 @@ export default class extends Controller {
         const correctAnswer = input.dataset.correctAnswer.trim().replace(/\s+/g, '')
         const userAnswer = input.value.trim().replace(/\s+/g, '')
 
-        // Remove all previous styling
+        // Remove all previous styling (including transparent backgrounds and borders)
         input.classList.remove("border-yellow-500", "border-green-500", "border-red-500",
-                               "border-gray-300", "border-2", "border-4",
-                               "bg-yellow-50", "bg-green-50", "bg-red-50")
+                               "border-gray-300", "border-2", "border-4", "border-transparent",
+                               "bg-yellow-50", "bg-green-50", "bg-red-50",
+                               "bg-yellow-100", "bg-green-100", "bg-red-100",
+                               "bg-white", "bg-white/60", "bg-white/80",
+                               "text-black", "text-gray-900")
 
         if (userAnswer === "") {
           inputsEmpty++
@@ -657,7 +660,6 @@ export default class extends Controller {
 
   showSolutions(event) {
     event.preventDefault()
-
     // First reset the exercise
     this.resetExercise()
 
@@ -779,10 +781,21 @@ export default class extends Controller {
 
     // Fill in correct answers for text input fields
     const textInputFields = this.element.querySelectorAll("input[type='text'][data-correct-answer], textarea[data-correct-answer]")
+
     textInputFields.forEach(input => {
       const correctAnswer = input.dataset.correctAnswer.trim()
+
+      // Remove ALL background classes
+      input.classList.remove("bg-transparent", "bg-white/60", "bg-white/80", "bg-white")
+
       input.value = correctAnswer
-      input.classList.add("border-green-500", "border-4", "bg-green-50")
+
+      // For textareas, also set textContent
+      if (input.tagName === 'TEXTAREA') {
+        input.textContent = correctAnswer
+      }
+
+      input.classList.add("border-green-500", "border-4", "bg-green-50", "text-gray-900", "font-bold")
     })
 
     // Show correct answers for word-highlighter

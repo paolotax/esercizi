@@ -234,7 +234,7 @@ Quando crei/aggiorni una pagina nel seed, includi:
 <!-- Container principale -->
 <div class="p-3 md:p-8">                          <!-- Ridotto su mobile -->
   <div class="p-4 md:p-8">                        <!-- Contenuto interno -->
-    <div class="exercise-block p-4 md:p-6">      <!-- Blocchi esercizi -->
+    <div class="p-4 md:p-6">      <!-- Blocchi esercizi -->
 ```
 
 ### Header su Una Riga

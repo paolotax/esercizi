@@ -1,7 +1,7 @@
 # PROMPT PER CREAZIONE PAGINE BUS3_MAT
 
 ## OBIETTIVO
-Creare pagine interattive HTML/ERB per il volume bus3_mat seguendo lo stile delle pagine esistenti (p010-p013).
+Creare pagine interattive HTML/ERB per il volume bus3_mat seguendo lo stile delle pagine esistenti (p010-p011-p012).
 
 ## OPERAZIONI DA ESEGUIRE
 
@@ -16,14 +16,18 @@ Creare pagine interattive HTML/ERB per il volume bus3_mat seguendo lo stile dell
 
 **Container principale:**
 ```erb
-<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white"
-     data-controller="exercise-checker page-viewer fill-blanks auto-advance"
-     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/pXXX/page.png') %>">
-```
+<div class="max-w-7xl mx-auto p-3 md:p-6"
+     data-controller="exercise-checker">
 
-**Header:**
-```erb
-<%= render 'shared/page_header', pagina: @pagina %>
+  <!-- Header -->
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <!-- contenuto -->
+
+  <!-- Footer con controlli -->
+  <%= render 'shared/exercise_controls' %>
+
+</div>
 ```
 
 **Numero esercizio:**
@@ -107,11 +111,7 @@ Creare pagine interattive HTML/ERB per il volume bus3_mat seguendo lo stile dell
        class="custom-checkbox">
 ```
 
-**Footer:**
-```erb
-<%= render 'shared/exercise_controls', color: 'cyan' %>
-<!-- oppure color: 'orange' per addizioni -->
-```
+
 
 ### 3. IMMAGINI
 
@@ -135,17 +135,8 @@ Creare pagine interattive HTML/ERB per il volume bus3_mat seguendo lo stile dell
 - `fill-blanks`: per input con risposte
 - `auto-advance`: per avanzamento automatico
 
-### 5. COLORI PER MATERIA
 
-| Materia | Colore principale | Bg box | Bordi |
-|---------|------------------|--------|-------|
-| NUMERI | cyan | #C7EAFB | border-cyan-400 |
-| ADDIZIONI | orange | #FFE4C4 | border-orange-400 |
-| SOTTRAZIONI | red | #FECACA | border-red-400 |
-| MOLTIPLICAZIONI | green | #D1FAE5 | border-green-400 |
-| DIVISIONI | purple | #E9D5FF | border-purple-400 |
-
-### 6. PATTERN COMUNI
+### 5. PATTERN COMUNI
 
 **Tabella con bordi:**
 ```erb
@@ -164,7 +155,7 @@ Creare pagine interattive HTML/ERB per il volume bus3_mat seguendo lo stile dell
 
 **Grid responsive:**
 ```erb
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
   <!-- colonne -->
 </div>
 ```
@@ -198,7 +189,6 @@ Creare pagine interattive HTML/ERB per il volume bus3_mat seguendo lo stile dell
 - [ ] Tutte le risposte corrette sono specificate in `data-correct-answer`
 - [ ] Le immagini sono tutte presenti e caricate correttamente
 - [ ] Il layout è semplice e pulito (NO gradienti complessi, NO shadow-lg)
-- [ ] Il colore segue la materia (cyan per numeri, orange per addizioni)
 - [ ] Header e footer sono inclusi con i partial corretti
 - [ ] I controller Stimulus sono tutti specificati
 - [ ] Il codice è responsive (usa md: breakpoint)
@@ -206,6 +196,7 @@ Creare pagine interattive HTML/ERB per il volume bus3_mat seguendo lo stile dell
 ### 8. COSA NON FARE
 
 ❌ NON usare:
+- Non scrivere Titolo e Sottotitolo della pagina. Ci pensa il partial
 - `bg-gradient-to-b` (solo bg-white)
 - `shadow-lg` `shadow-xl` (troppo pesante)
 - `rounded-xl` (usa rounded-lg)
@@ -253,12 +244,12 @@ http://localhost:3000/exercises/bus3_mat_pXXX
 Vedi pagine di riferimento:
 - `app/views/exercises/bus3_mat_p010.html.erb` (NUMERI - tabelle)
 - `app/views/exercises/bus3_mat_p013.html.erb` (NUMERI - esercizi misti)
-- `app/views/exercises/bus3_mat_p022.html.erb` (ADDIZIONI - problemi)
+
 
 ## NOTE FINALI
 
 - Segui SEMPRE lo stile delle pagine p010-p013
-- Leggi SEMPRE l'HTML originale prima di creare
+- Leggi SEMPRE l'HTML originale ed il page.png prima di creare
 - Usa SOLO le immagini che esistono
 - Testa la pagina dopo averla creata
 - Mantieni il codice SEMPLICE e PULITO

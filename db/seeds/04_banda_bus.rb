@@ -53,6 +53,16 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 33, titolo: "LA PROVA DELLA SOTTRAZIONE", sottotitolo: "SOTTRAZIONE", slug: "bus3_mat_p033", view_template: "bus3_mat_p033", base_color: "cyan" },
   { numero: 34, titolo: "Calcoli veloci", slug: "bus3_mat_p034", view_template: "bus3_mat_p034", sottotitolo: "ADDIZIONE E SOTTRAZIONE", base_color: "cyan" },
   { numero: 35, titolo: "Calcoli veloci", slug: "bus3_mat_p035", view_template: "bus3_mat_p035", sottotitolo: "ADDIZIONE E SOTTRAZIONE", base_color: "cyan" },
+  { numero: 36, titolo: "OPERAZIONI A CONFRONTO", sottotitolo: "ADDIZIONE E SOTTRAZIONE", slug: "bus3_mat_p036", view_template: "bus3_mat_p036", base_color: "cyan" },
+  { numero: 37, titolo: "QUANTE OPERAZIONI!", sottotitolo: "ADDIZIONE E SOTTRAZIONE", slug: "bus3_mat_p037", view_template: "bus3_mat_p037", base_color: "cyan" },
+  { numero: 38, titolo: "PROBLEMI", sottotitolo: "ADDIZIONE E SOTTRAZIONE", slug: "bus3_mat_p038", view_template: "bus3_mat_p038", base_color: "cyan" },
+  { numero: 39, titolo: "PROBLEMI", sottotitolo: "ADDIZIONE E SOTTRAZIONE", slug: "bus3_mat_p039", view_template: "bus3_mat_p039", base_color: "cyan" },
+  { numero: 40, titolo: "SAI LEGGERE NEL PENSIERO?", sottotitolo: "PAROLE AL CENTRO", slug: "bus3_mat_p040", view_template: "bus3_mat_p040", base_color: "purple" },
+  { numero: 41, titolo: "GIOCO E RIPASSO", sottotitolo: "PAROLE AL CENTRO", slug: "bus3_mat_p041", view_template: "bus3_mat_p041", base_color: "purple" },
+  { numero: 42, titolo: "LA MOLTIPLICAZIONE", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p042", view_template: "bus3_mat_p042", base_color: "green" },
+  { numero: 43, titolo: "SCHIERAMENTI E INCROCI", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p043", view_template: "bus3_mat_p043", base_color: "green" },
+  { numero: 44, titolo: "LE PROPRIETÀ... COMMUTATIVA E ASSOCIATIVA", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p044", view_template: "bus3_mat_p044", base_color: "green" },
+  { numero: 45, titolo: "... DELLA MOLTIPLICAZIONE DISTRIBUTIVA", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p045", view_template: "bus3_mat_p045", base_color: "green" },
   { numero: 74, titolo: "Le Frazioni", slug: "bus3_mat_p074", view_template: "bus3_mat_p074", sottotitolo: "FRAZIONI", base_color: "purple" },
   { numero: 75, titolo: "Leggere e scrivere le frazioni", slug: "bus3_mat_p075", view_template: "bus3_mat_p075", sottotitolo: "FRAZIONI", base_color: "purple" },
   { numero: 76, titolo: "Frazioni - L'unità frazionaria", slug: "bus3_mat_p076", view_template: "bus3_mat_p076", sottotitolo: "FRAZIONI", base_color: "purple" },
@@ -70,7 +80,7 @@ bus_matematica = bus_volume3.discipline.create!(
 end
 
 # Pagine generiche per bus3_mat (p001-p192, escludendo le pagine già definite sopra)
-existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 74, 75, 76, 77, 78, 144 ]
+existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 74, 75, 76, 77, 78, 144 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|

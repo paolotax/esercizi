@@ -111,6 +111,11 @@ export default class extends Controller {
   }
 
   startDrag(event) {
+    // Non iniziare drag se non siamo in edit mode
+    if (!this.editMode) {
+      return
+    }
+
     // Non iniziare drag se stiamo cliccando sul resize handle
     if (event.target.dataset.resizeHandle !== undefined) {
       return
@@ -120,7 +125,10 @@ export default class extends Controller {
 
     this.dragging = event.currentTarget
     const rect = this.dragging.getBoundingClientRect()
-    const containerRect = this.containerTarget.getBoundingClientRect()
+
+    // Trova il container parent specifico per questo hotspot
+    this.currentContainer = this.dragging.closest('[data-hotspot-editor-target="container"]')
+    const containerRect = this.currentContainer.getBoundingClientRect()
 
     this.startX = event.clientX
     this.startY = event.clientY
@@ -167,11 +175,11 @@ export default class extends Controller {
   }
 
   drag(event) {
-    if (!this.dragging) return
+    if (!this.dragging || !this.currentContainer) return
 
     event.preventDefault()
 
-    const containerRect = this.containerTarget.getBoundingClientRect()
+    const containerRect = this.currentContainer.getBoundingClientRect()
     const deltaX = event.clientX - this.startX
     const deltaY = event.clientY - this.startY
 
@@ -270,6 +278,7 @@ export default class extends Controller {
     document.removeEventListener('mouseup', this.boundMouseUp)
 
     this.dragging = null
+    this.currentContainer = null
   }
 
   updateInfoPanel() {
@@ -360,6 +369,9 @@ export default class extends Controller {
         // Rimuovi /10 dall'opacità
         hotspot.className = currentBg.replace(/bg-(\w+)-(\d+)\/10/, 'bg-$1-$2')
 
+        // Aggiungi cursor-move per indicare draggabilità
+        hotspot.classList.add('cursor-move')
+
         // Mostra resize handle
         const handle = hotspot.querySelector('[data-resize-handle]')
         if (handle) {
@@ -382,6 +394,9 @@ export default class extends Controller {
         if (!currentBg.includes('/10')) {
           hotspot.className = currentBg.replace(/bg-(\w+)-(\d+)(?!\/)/, 'bg-$1-$2/10')
         }
+
+        // Rimuovi cursor-move
+        hotspot.classList.remove('cursor-move')
 
         // Nascondi resize handle
         const handle = hotspot.querySelector('[data-resize-handle]')

@@ -1,12 +1,151 @@
-<% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
+<div class="max-w-[1800px] mx-auto p-4 lg:p-8"
+     data-controller="exercise-checker fill-blanks hotspot-editor auto-advance">
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
-  <!-- Header -->
-  <%= render 'shared/page_header', pagina: @pagina %>
+  <!-- Header (se disponibile) -->
+  <% if @pagina.present? %>
+    <%= render 'shared/page_header', pagina: @pagina %>
+  <% end %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Two-page horizontal layout like an open book -->
+  <div class="grid lg:grid-cols-2 gap-3 lg:gap-0">
 
-  <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+    <!-- LEFT PAGE - Page 40 8->
+    <!-- E5.9cizio 1: Calcola il risultato delle operazioni -->
+    <div class="relative" data-hotspot-editor-target="container">
+      <%= image_tag "bus3_mat/p040/page.png",
+            alt: "Calcola il risultato delle operazioni",
+            class: "w-full h-auto select-none pointer-events-none" %>
+
+      <!-- Input overlay per i risultati delle operazioni -->
+      <div class="absolute inset-0">
+        <%
+        # Definizione posizioni input per ogni operazione - come in nvi5_mat_p008
+        # Tutti i risultati secondo la legenda di p041
+        operations = [
+
+          { label: "424",  top: "44.59%", left: "33.1%", width: "6.475%", height: "3.25%", answer: "424" },
+          { label: "462",  top: "48.82%", left: "33.1%", width: "6.475%", height: "3.25%", answer: "462" },
+          { label: "417",  top: "53.12%", left: "33.1%", width: "6.475%", height: "3.25%", answer: "417" },
+          { label: "1000", top: "57.19%", left: "33.1%", width: "6.475%", height: "3.25%", answer: "1000" },
+          { label: "1045", top: "61.42%", left: "33.1%", width: "6.475%", height: "3.25%", answer: "1045" },
+          { label: "831",  top: "65.51%", left: "33.1%", width: "6.475%", height: "3.25%", answer: "831" },
+          { label: "2099", top: "69.53%", left: "33.1%", width: "6.675%", height: "3.25%", answer: "2099" },
+          { label: "741",  top: "74.13%", left: "33.1%", width: "6.475%", height: "3.25%", answer: "741" },
+
+          { label: "650",  top: "40.80%", left: "65.97%", width: "6.475%", height: "3.25%", answer: "650" },
+          { label: "970",  top: "44.59%", left: "65.87%", width: "6.475%", height: "3.25%", answer: "970" },
+          { label: "700",  top: "48.82%", left: "65.87%", width: "6.475%", height: "3.25%", answer: "700" },
+          { label: "963",  top: "53.12%", left: "65.87%", width: "6.475%", height: "3.25%", answer: "963" },
+          { label: "100",  top: "57.19%", left: "65.87%", width: "6.475%", height: "3.25%", answer: "100" },
+          { label: "4903", top: "61.42%", left: "65.87%", width: "6.675%", height: "3.25%", answer: "4903" },
+          { label: "401",  top: "65.51%", left: "65.87%", width: "6.475%", height: "3.25%", answer: "401" },
+          { label: "515",  top: "69.53%", left: "65.87%", width: "6.475%", height: "3.25%", answer: "515" },
+        ]
+
+        letters = [
+          { label: "V", top: "44.59%",  left: "40.81%", width: "5.45%", height: "3.25%", answer: "V" },
+          { label: "V", top: "48.82%",  left: "40.81%", width: "5.45%", height: "3.25%", answer: "V" },
+          { label: "I", top: "53.12%",  left: "40.81%", width: "5.45%", height: "3.25%", answer: "I" },
+          { label: "V", top: "57.19%",  left: "40.81%", width: "5.45%", height: "3.25%", answer: "V" },
+          { label: "A", top: "61.42%",  left: "40.81%", width: "5.45%", height: "3.25%", answer: "A" },
+          { label: "L", top: "65.51%",  left: "40.81%", width: "5.45%", height: "3.25%", answer: "L" },
+          { label: "A", top: "69.53%",  left: "40.81%", width: "5.45%", height: "3.25%", answer: "A" },
+          { label: "P", top: "74.13%",  left: "40.81%", width: "5.45%", height: "3.25%", answer: "P" },
+
+          { label: "A", top: "40.80%",  left: "73.57%", width: "5.45%", height: "3.25%", answer: "A" },
+          { label: "L", top: "44.59%",  left: "73.57%", width: "5.45%", height: "3.25%", answer: "L" },
+          { label: "L", top: "48.82%",  left: "73.57%", width: "5.45%", height: "3.25%", answer: "L" },
+          { label: "A", top: "53.12%",  left: "73.57%", width: "5.45%", height: "3.25%", answer: "A" },
+          { label: "V", top: "57.19%",  left: "73.57%", width: "5.45%", height: "3.25%", answer: "V" },
+          { label: "O", top: "61.42%",  left: "73.57%", width: "5.45%", height: "3.25%", answer: "O" },
+          { label: "L", top: "65.51%",  left: "73.57%", width: "5.45%", height: "3.25%", answer: "L" },
+          { label: "O", top: "69.53%",  left: "73.57%", width: "5.45%", height: "3.25%", answer: "O" }
+        ]
+
+        %>
+
+        <% operations.each do |op| %>
+          <div class="absolute"
+               style="top: <%= op[:top] %>; left: <%= op[:left] %>; width: <%= op[:width] %>; height: <%= op[:height] %>;"
+               data-hotspot-editor-target="hotspot"
+               data-auto-advance-target="input"
+               data-action="mousedown->hotspot-editor#startDrag">
+            <input type="text"
+                   data-fill-blanks-target="input"
+                   data-correct-answer="<%= op[:answer].to_i %>"
+                   class="w-full h-full py-2 bg-white/60 hover:bg-white/80 focus:bg-white border-2 text-black border-transparent hover:border-purple-500 focus:border-purple-600 rounded text-center font-bold text-sm transition-colors"
+                   maxlength="<%= op[:answer].length %>"
+                   inputmode="numeric"
+                   pattern="[0-9]*"
+                   aria-label="<%= op[:label] %>">
+          </div>
+        <% end %>
+        <% letters.each do |letter| %>
+          <div class="absolute"
+               style="top: <%= letter[:top] %>; left: <%= letter[:left] %>; width: <%= letter[:width] %>; height: <%= letter[:height] %>;"
+               data-hotspot-editor-target="hotspot"
+               data-auto-advance-target="input"
+               data-action="mousedown->hotspot-editor#startDrag">
+            <input type="text"
+                   data-fill-blanks-target="input"
+                   data-correct-answer="<%= letter[:answer] %>"
+                   class="w-full h-full py-2 bg-white/60 hover:bg-white/80 focus:bg-white border-2 text-black border-transparent hover:border-purple-500 focus:border-purple-600 rounded text-center font-bold text-sm transition-colors"
+                   maxlength="1"
+                   inputmode="text"
+                   pattern="[A-Za-z]*"
+                   aria-label="<%= letter[:label] %>">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+
+    <!-- RIGHT PAGE - Page 41 -->
+    <!-- Esercizio 2 e 3 -->
+    <div class="relative" data-hotspot-editor-target="container">
+      <%= image_tag "bus3_mat/p041/page.png",
+            alt: "Scrivi le lettere e il pensiero di Tommaso",
+            class: "w-full h-auto select-none pointer-events-none" %>
+
+      <!-- Input overlay per le lettere -->
+      <div class="absolute inset-0">
+        <%
+        # Definizione posizioni input per le lettere e fumetto - come in nvi5_mat_p008
+        # Le lettere formano PALLAVOLO
+        inputs_p41 = [
+          { label: "Pensiero di Tommaso", top: "74.06%", left: "31.60%", width: "35.34%", height: "8.61%", answer: "EVVIVA LA PALLAVOLO", type: "textarea" },
+        ]
+        %>
+
+        <!-- Input per le lettere e fumetto -->
+        <% inputs_p41.each do |input| %>
+          <div class="absolute"
+               style="top: <%= input[:top] %>; left: <%= input[:left] %>; width: <%= input[:width] %>; height: <%= input[:height] %>;"
+               data-hotspot-editor-target="hotspot"
+               data-action="mousedown->hotspot-editor#startDrag">
+            <% if input[:type] == "textarea" %>
+              <textarea data-fill-blanks-target="input"
+                        data-correct-answer="<%= input[:answer] %>"
+                        class="w-full h-full py-2 px-2 bg-white/60 hover:bg-white/80 focus:bg-white border-2 border-transparent hover:border-purple-500 focus:border-purple-600 rounded text-center font-bold text-xs transition-colors resize-none"
+                        placeholder="Scrivi qui..."
+                        aria-label="<%= input[:label] %>"></textarea>
+            <% else %>
+              <input type="text"
+                     data-fill-blanks-target="input"
+                     data-correct-answer="<%= input[:answer] %>"
+                     class="w-full h-full py-2 bg-white/60 hover:bg-white/80 focus:bg-white border-2 border-transparent hover:border-purple-500 focus:border-purple-600 rounded text-center font-bold text-base transition-colors"
+                     maxlength="20"
+                     inputmode="text"
+                     pattern="[A-Za-z ]*"
+                     placeholder=""
+                     aria-label="<%= input[:label] %>">
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+  <%= render 'shared/exercise_controls' %>
 </div>
