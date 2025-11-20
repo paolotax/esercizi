@@ -2,7 +2,7 @@
 
 <div class="max-w-6xl mx-auto px-6 py-8">
   <!-- Header -->
-  <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+  <div class="bg-white print:hidden rounded-lg shadow-lg p-8 mb-8">
     <div class="flex items-center justify-between mb-4">
       <h1 class="text-3xl font-bold text-gray-800">Abaco Interattivo</h1>
       <%= link_to strumenti_abaco_examples_path, class: "inline-flex items-center gap-2 px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors shadow-lg" do %>
@@ -18,99 +18,140 @@
     </p>
   </div>
 
-  <!-- Abaco Libero -->
-  <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg shadow-lg p-8 mb-8">
-    <h2 class="text-2xl font-bold text-gray-800 mb-4">Abaco Libero</h2>
-    <p class="text-gray-700 text-lg mb-6">
-      Clicca sulle colonne per formare qualsiasi numero. Le palline si aggiungono dal basso verso l'alto.
-    </p>
-    <div class="flex justify-center">
-      <%= render 'shared/abaco', migliaia: 0, centinaia: 0, decine: 0, unita: 0 %>
-    </div>
-  </div>
+  <!-- Layout a 2 colonne -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 print:hidden items-start">
 
-  <!-- Generatore di Abachi -->
-  <div class="print-hidden bg-white rounded-lg shadow-lg p-8 mb-8">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">Generatore di Abachi</h2>
-
-    <p class="text-gray-600 mb-4">
-      Inserisci uno o più numeri separati da spazio o nuova riga.
-      <br>
-      <strong>Formato base:</strong> <code class="bg-gray-100 px-2 py-1 rounded">numero</code> (tutto da completare)
-      <br>
-      <strong>Con parametri:</strong> <code class="bg-gray-100 px-2 py-1 rounded">numero:param=valore,param=valore</code>
-    </p>
-
-    <p class="text-sm text-gray-600 mb-6">
-      <strong>Parametri disponibili:</strong>
-      h, k, da, u (valori iniziali: numero o nil per da completare),
-      editable (true/false),
-      show_value (true/false),
-      correct_value (numero corretto)
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-      <div class="bg-gray-50 p-4 rounded-lg">
-        <p class="text-sm font-semibold text-gray-700 mb-2">Numeri semplici (tutto da completare):</p>
-        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">125
-573
-1234</code>
-      </div>
-
-      <div class="bg-gray-50 p-4 rounded-lg">
-        <p class="text-sm font-semibold text-gray-700 mb-2">Con centinaia precompilate:</p>
-        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">125:k=1,da=nil,u=nil
-300:k=3,da=nil,u=nil</code>
-      </div>
-
-      <div class="bg-gray-50 p-4 rounded-lg">
-        <p class="text-sm font-semibold text-gray-700 mb-2">Solo visualizzazione (non editabile):</p>
-        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">573:editable=false
-999:editable=false</code>
-      </div>
-
-      <div class="bg-gray-50 p-4 rounded-lg">
-        <p class="text-sm font-semibold text-gray-700 mb-2">Misti (alcuni precompilati):</p>
-        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">1234:h=1,k=2,da=nil,u=nil
-5678:h=5,k=nil,da=nil,u=8</code>
+    <!-- Colonna Sinistra: Abaco Libero -->
+    <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Abaco Libero</h2>
+      <p class="text-gray-700 text-lg mb-6">
+        Clicca sulle colonne per formare qualsiasi numero. Le palline si aggiungono dal basso verso l'alto.
+      </p>
+      <div class="flex justify-center">
+        <%= render 'shared/abaco', migliaia: 0, centinaia: 0, decine: 0, unita: 0 %>
       </div>
     </div>
 
-    <%= form_with url: strumenti_abaco_path, method: :get, local: true,
-                  data: { turbo: false },
-                  class: "mb-8" do |f| %>
-      <div class="mb-4">
-        <%= f.text_area :numbers,
-                        value: @numbers,
-                        placeholder: "125\n573:k=5,da=nil,u=nil\n1234:h=1,k=2,da=nil,u=nil\n999:editable=false",
-                        rows: 6,
-                        class: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none font-mono text-sm" %>
+    <!-- Colonna Destra: Esempi e Form -->
+    <div class="flex flex-col gap-8">
+
+      <!-- Box Esempi -->
+      <div class="bg-white rounded-lg shadow-lg p-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Esempi da Copiare</h2>
+
+        <p class="text-gray-600 mb-4 text-sm">
+          <strong>Formato base:</strong> <code class="bg-gray-100 px-2 py-1 rounded">numero</code> (tutto da completare)
+          <br>
+          <strong>Con parametri:</strong> <code class="bg-gray-100 px-2 py-1 rounded">numero:param=valore,param=valore</code>
+        </p>
+
+        <!-- Esempi da copiare -->
+        <div class="grid grid-cols-1 gap-2" data-controller="copy-to-clipboard">
+          <div class="bg-gray-50 p-3 rounded-lg">
+            <div class="flex items-center justify-between mb-1">
+              <p class="text-xs font-semibold text-gray-700">Numeri semplici:</p>
+              <button type="button"
+                      data-action="click->copy-to-clipboard#copy"
+                      data-copy-to-clipboard-text-param="125&#x0A;573&#x0A;1234"
+                      class="text-xs px-2 py-1 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition-colors">
+                Copia
+              </button>
+            </div>
+            <code class="bg-white px-2 py-1 rounded border block font-mono text-xs">125 573 1234</code>
+          </div>
+
+          <div class="bg-gray-50 p-3 rounded-lg">
+            <div class="flex items-center justify-between mb-1">
+              <p class="text-xs font-semibold text-gray-700">Centinaia precompilate:</p>
+              <button type="button"
+                      data-action="click->copy-to-clipboard#copy"
+                      data-copy-to-clipboard-text-param="125:k=1,da=nil,u=nil 300:k=3,da=nil,u=nil"
+                      class="text-xs px-2 py-1 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition-colors">
+                Copia
+              </button>
+            </div>
+            <code class="bg-white px-2 py-1 rounded border block font-mono text-xs">125:k=1,da=nil,u=nil 300:k=3,da=nil,u=nil</code>
+          </div>
+
+          <div class="bg-gray-50 p-3 rounded-lg">
+            <div class="flex items-center justify-between mb-1">
+              <p class="text-xs font-semibold text-gray-700">Con show_value:</p>
+              <button type="button"
+                      data-action="click->copy-to-clipboard#copy"
+                      data-copy-to-clipboard-text-param="573:show_value=true 999:show_value=true"
+                      class="text-xs px-2 py-1 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition-colors">
+                Copia
+              </button>
+            </div>
+            <code class="bg-white px-2 py-1 rounded border block font-mono text-xs">573:show_value=true 999:show_value=true</code>
+          </div>
+
+          <div class="bg-gray-50 p-3 rounded-lg">
+            <div class="flex items-center justify-between mb-1">
+              <p class="text-xs font-semibold text-gray-700">Misti:</p>
+              <button type="button"
+                      data-action="click->copy-to-clipboard#copy"
+                      data-copy-to-clipboard-text-param="1234:h=1,k=2,da=nil,u=nil 5678:h=5,k=nil,da=nil,u=8"
+                      class="text-xs px-2 py-1 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition-colors">
+                Copia
+              </button>
+            </div>
+            <code class="bg-white px-2 py-1 rounded border block font-mono text-xs">1234:h=1,k=2,da=nil,u=nil 5678:h=5,k=nil,da=nil,u=8</code>
+          </div>
+        </div>
       </div>
 
-      <div class="flex gap-4">
-        <%= f.submit "Genera Abachi",
-                    class: "bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+      <!-- Box Generatore -->
+      <div class="bg-white rounded-lg shadow-lg p-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Generatore di Abachi</h2>
 
-        <% if @numbers.present? %>
-          <%= link_to "Cancella", strumenti_abaco_path,
-                      class: "bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+        <p class="text-sm text-gray-600 mb-4">
+          <strong>Parametri disponibili:</strong>
+          h, k, da, u (valori iniziali: numero o nil per da completare),
+          editable (true/false),
+          show_value (true/false),
+          correct_value (numero corretto)
+        </p>
+
+        <%= form_with url: strumenti_abaco_path, method: :get, local: true,
+                      data: { turbo: false } do |f| %>
+          <div class="mb-4">
+            <%= f.text_area :numbers,
+                            value: @numbers,
+                            placeholder: "Incolla qui i tuoi numeri...",
+                            rows: 6,
+                            class: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none font-mono text-sm" %>
+          </div>
+
+          <div class="flex gap-4">
+            <%= f.submit "Genera Abachi",
+                        class: "bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+
+            <% if @numbers.present? %>
+              <%= link_to "Cancella", strumenti_abaco_path,
+                          class: "bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <% if @numbers.present? && @numbers_array.blank? %>
+          <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
+            <p class="text-yellow-900 text-sm">
+              <strong>Attenzione:</strong> Non sono stati trovati numeri validi.
+              Inserisci numeri da 0 a 9999.
+            </p>
+          </div>
         <% end %>
       </div>
-    <% end %>
+    </div>
+    <!-- Fine Colonna Destra -->
 
-    <% if @numbers.present? && @numbers_array.blank? %>
-      <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-8">
-        <p class="text-yellow-900">
-          <strong>Attenzione:</strong> Non sono stati trovati numeri validi.
-          Inserisci numeri da 0 a 9999.
-        </p>
-      </div>
-    <% end %>
   </div>
+  <!-- Fine Layout a 2 colonne -->
 
   <!-- Abachi Generati -->
   <% if @numbers_array && @numbers_array.any? %>
-    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-8 print:gap-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-8 print:gap-24 ">
       <% @numbers_array.each_with_index do |item, index| %>
         <%
           number = item[:number]
@@ -127,37 +168,25 @@
           # Controlla se ci sono parametri espliciti per le colonne
           has_explicit_params = item.key?(:h) || item.key?(:k) || item.key?(:da) || item.key?(:u)
 
-          # Colonne da mostrare (basate sul numero, oppure override dai parametri)
-          # Se il parametro è specificato esplicitamente (anche nil), usalo
-          # Altrimenti usa il valore di default dal numero
-
-          if item.key?(:h)
-            abaco_params[:migliaia] = item[:h]
-          elsif number >= 1000
-            abaco_params[:migliaia] = h_digit
-          end
-
-          if item.key?(:k)
-            abaco_params[:centinaia] = item[:k]
-          elsif number >= 100
-            abaco_params[:centinaia] = k_digit
-          end
-
-          if item.key?(:da)
-            abaco_params[:decine] = item[:da]
-          elsif number >= 10
-            abaco_params[:decine] = da_digit
-          end
-
-          if item.key?(:u)
-            abaco_params[:unita] = item[:u]
+          # Se NON ci sono parametri espliciti, mostra tutte le colonne vuote (nil)
+          # Se ci sono parametri espliciti, usa quelli
+          if has_explicit_params
+            # Usa i parametri espliciti
+            abaco_params[:migliaia] = item[:h] if item.key?(:h)
+            abaco_params[:centinaia] = item[:k] if item.key?(:k)
+            abaco_params[:decine] = item[:da] if item.key?(:da)
+            abaco_params[:unita] = item[:u] if item.key?(:u)
           else
-            abaco_params[:unita] = u_digit
+            # Nessun parametro esplicito: mostra le colonne necessarie ma tutte vuote (nil)
+            abaco_params[:migliaia] = nil if number >= 1000
+            abaco_params[:centinaia] = nil if number >= 100
+            abaco_params[:decine] = nil if number >= 10
+            abaco_params[:unita] = nil
           end
 
           # Altri parametri
           abaco_params[:editable] = item.fetch(:editable, true)
-          abaco_params[:show_value] = item.fetch(:show_value, true)
+          abaco_params[:show_value] = item.fetch(:show_value, false)
           abaco_params[:correct_value] = item[:correct_value]
 
           # Disabilita auto-zeros se ci sono parametri espliciti

@@ -663,7 +663,8 @@ export default class extends Controller {
   }
 
   checkCorrectness() {
-    if (!this.hasFeedbackTarget || this.correctValue === null) return
+    // Se non c'è correct_value, non c'è nulla da verificare
+    if (this.correctValue === null) return
 
     // Calcola il totale attuale basandosi sulle colonne visibili
     const currentTotal = (this.showHValue ? this.migliaiaValue * 1000 : 0) +
@@ -739,29 +740,34 @@ export default class extends Controller {
         this.hasCorrectAnswer = true
       }
 
-      this.feedbackTarget.innerHTML = `
-        <span class="inline-flex items-center gap-2 text-green-600 font-bold">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-          </svg>
-          Corretto!
-        </span>
-      `
+      // Mostra feedback solo se il target esiste
+      if (this.hasFeedbackTarget) {
+        this.feedbackTarget.innerHTML = `
+          <span class="inline-flex items-center gap-2 text-green-600 font-bold">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            Corretto!
+          </span>
+        `
+      }
     } else {
       this.hasCorrectAnswer = false
       // Mostra "Riprova" solo se tutti i campi sono compilati ma sbagliati
-      if (allFieldsValid) {
-        this.feedbackTarget.innerHTML = `
-          <span class="inline-flex items-center gap-2 text-orange-500 font-bold">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-            </svg>
-            Riprova
-          </span>
-        `
-      } else {
-        // Campi incompleti: nessun feedback
-        this.feedbackTarget.innerHTML = ""
+      if (this.hasFeedbackTarget) {
+        if (allFieldsValid) {
+          this.feedbackTarget.innerHTML = `
+            <span class="inline-flex items-center gap-2 text-orange-500 font-bold">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+              </svg>
+              Riprova
+            </span>
+          `
+        } else {
+          // Campi incompleti: nessun feedback
+          this.feedbackTarget.innerHTML = ""
+        }
       }
     }
   }

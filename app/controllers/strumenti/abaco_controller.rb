@@ -46,7 +46,8 @@ class Strumenti::AbacoController < ApplicationController
     # Parametri di default
     result = {
       number: number,
-      correct_value: number
+      correct_value: number,
+      show_value: false # Default: non mostra valore
     }
 
     # Parse parametri opzionali
