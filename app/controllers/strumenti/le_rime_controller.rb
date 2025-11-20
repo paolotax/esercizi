@@ -13,7 +13,7 @@ class Strumenti::LeRimeController < ApplicationController
     # Extract last word from each line (rimando)
     last_words = lines.map do |line|
       # Remove punctuation and get last word
-      cleaned_line = line.gsub(/[.,;:!?()\[\]{}"]/, '')
+      cleaned_line = line.gsub(/[.,;:!?()\[\]{}"]/, "")
       words = cleaned_line.split(/\s+/)
       last_word = words.last&.downcase
       { line: line, last_word: last_word, original_last_word: words.last }
@@ -40,7 +40,7 @@ class Strumenti::LeRimeController < ApplicationController
       else
         rhyme_groups[group_id] = {
           last_word: word_data[:last_word],
-          words: [{ index: index, word: word_data[:original_last_word], line: word_data[:line] }]
+          words: [ { index: index, word: word_data[:original_last_word], line: word_data[:line] } ]
         }
         group_id += 1
       end
@@ -69,11 +69,11 @@ class Strumenti::LeRimeController < ApplicationController
   def extract_rhyme_sound(word)
     # Remove accents and normalize
     normalized = word.downcase
-                      .gsub(/[àáâãäå]/, 'a')
-                      .gsub(/[èéêë]/, 'e')
-                      .gsub(/[ìíîï]/, 'i')
-                      .gsub(/[òóôõö]/, 'o')
-                      .gsub(/[ùúûü]/, 'u')
+                      .gsub(/[àáâãäå]/, "a")
+                      .gsub(/[èéêë]/, "e")
+                      .gsub(/[ìíîï]/, "i")
+                      .gsub(/[òóôõö]/, "o")
+                      .gsub(/[ùúûü]/, "u")
 
     # Get last 2-4 characters (typically enough for Italian rhymes)
     # Try last 3 first (most common), then 2, then 4
@@ -86,4 +86,3 @@ class Strumenti::LeRimeController < ApplicationController
     end
   end
 end
-

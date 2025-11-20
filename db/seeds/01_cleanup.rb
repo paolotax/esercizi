@@ -4,4 +4,3 @@ Pagina.destroy_all
 Disciplina.destroy_all
 Volume.destroy_all
 Corso.destroy_all
-

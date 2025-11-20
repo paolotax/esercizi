@@ -123,4 +123,3 @@ bus2_lettura_grammatica = bus_volume2.discipline.create!(
 end
 
 puts "  ✓ Creato volume '#{bus_volume2.nome}' con #{bus2_lettura_grammatica.pagine.count} pagine"
-

@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
-require 'fileutils'
+require "fileutils"
 
 namespace :images do
   desc "Pulisce HTML vuoti con 'Questa pagina non ha contenuti ad alta leggibilità'"
-  task :clean, [:prefix] => :environment do |t, args|
+  task :clean, [ :prefix ] => :environment do |t, args|
     cleaner = HtmlCleaner.new(
       prefix: args[:prefix],  # es: 'nvl5_gram' o nil per tutti
-      base_dir: Rails.root.join('app/assets/images')
+      base_dir: Rails.root.join("app/assets/images")
     )
     cleaner.run
   end
@@ -135,10 +135,10 @@ end
 # Task aggiuntivo per analisi (solo report senza eliminare)
 namespace :images do
   desc "Analizza HTML vuoti senza eliminarli"
-  task :analyze, [:prefix] => :environment do |t, args|
+  task :analyze, [ :prefix ] => :environment do |t, args|
     analyzer = HtmlAnalyzer.new(
       prefix: args[:prefix],
-      base_dir: Rails.root.join('app/assets/images')
+      base_dir: Rails.root.join("app/assets/images")
     )
     analyzer.run
   end

@@ -34,4 +34,3 @@ cai_metodo = cai_volume1.discipline.create!(
 end
 
 puts "  ✓ Creato volume '#{cai_volume1.nome}' con #{cai_metodo.pagine.count} pagine"
-

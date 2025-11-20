@@ -7,4 +7,3 @@ puts "   - #{Disciplina.count} discipline"
 puts "   - #{Pagina.count} pagine"
 
 puts "\n🚀 Puoi visitare http://localhost:3000 per vedere i corsi!"
-

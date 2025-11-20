@@ -111,4 +111,3 @@ nvi5_matematica = nvi_volume5.discipline.create!(
 end
 
 puts "  ✓ Creato volume '#{nvi_volume5.nome}' con #{nvi5_matematica.pagine.count} pagine"
-

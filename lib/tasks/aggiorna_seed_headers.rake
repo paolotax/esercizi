@@ -1,12 +1,12 @@
 namespace :pages do
   desc "Aggiorna il seed con sottotitolo e base_color estratti"
-  task :update_seed, [:prefix] => :environment do |t, args|
-    prefix = args[:prefix] || 'nvl5_gram'
+  task :update_seed, [ :prefix ] => :environment do |t, args|
+    prefix = args[:prefix] || "nvl5_gram"
 
     puts "Aggiornamento seed per #{prefix}..."
 
     # Leggi il seed attuale
-    seed_file = Rails.root.join('db/seeds.rb')
+    seed_file = Rails.root.join("db/seeds.rb")
     content = File.read(seed_file)
 
     # Trova tutte le pagine di questo prefix nel database

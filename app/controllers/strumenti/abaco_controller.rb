@@ -35,7 +35,7 @@ class Strumenti::AbacoController < ApplicationController
 
   def parse_abaco_line(line)
     # Formato: "numero:param1=val1,param2=val2"
-    parts = line.split(':', 2)
+    parts = line.split(":", 2)
     number_str = parts[0].strip
     params_str = parts[1]&.strip
 
@@ -52,17 +52,17 @@ class Strumenti::AbacoController < ApplicationController
 
     # Parse parametri opzionali
     if params_str.present?
-      params_str.split(',').each do |param|
-        key, value = param.split('=', 2).map(&:strip)
+      params_str.split(",").each do |param|
+        key, value = param.split("=", 2).map(&:strip)
         next unless key && value
 
         # Converti valore
         parsed_value = case value.downcase
-        when 'nil', 'null', ''
+        when "nil", "null", ""
           nil
-        when 'true'
+        when "true"
           true
-        when 'false'
+        when "false"
           false
         else
           value.to_i

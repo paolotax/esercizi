@@ -1,16 +1,16 @@
 #!/usr/bin/env ruby
-require 'nokogiri'
+require "nokogiri"
 
 namespace :pages do
   desc "Estrae sottotitolo e colore dagli header ERB per aggiornare il seed"
-  task :extract_headers, [:prefix] => :environment do |t, args|
-    prefix = args[:prefix] || 'nvl5_gram'
+  task :extract_headers, [ :prefix ] => :environment do |t, args|
+    prefix = args[:prefix] || "nvl5_gram"
 
     puts "=" * 80
     puts "ESTRAZIONE HEADER INFO: #{prefix}"
     puts "=" * 80
 
-    views_dir = Rails.root.join('app/views/exercises')
+    views_dir = Rails.root.join("app/views/exercises")
     erb_files = Dir.glob("#{views_dir}/#{prefix}_p*.html.erb").sort
 
     if erb_files.empty?
@@ -21,7 +21,7 @@ namespace :pages do
     results = []
 
     erb_files.each do |file_path|
-      filename = File.basename(file_path, '.html.erb')
+      filename = File.basename(file_path, ".html.erb")
 
       # Leggi il contenuto
       content = File.read(file_path)
@@ -76,24 +76,24 @@ namespace :pages do
     # Cerca sottotitolo (badge categoria)
     # Pattern 1: div con bg-COLORE-500 che contiene il sottotitolo
     badge_div = doc.css('div[class*="bg-"][class*="-500"]').find do |div|
-      div['class'].match?(/bg-(blue|purple|cyan|green|orange|red|pink)-500/) &&
-      div['class'].include?('text-white') &&
-      div['class'].include?('rounded-lg')
+      div["class"].match?(/bg-(blue|purple|cyan|green|orange|red|pink)-500/) &&
+      div["class"].include?("text-white") &&
+      div["class"].include?("rounded-lg")
     end
 
     if badge_div
       sottotitolo = badge_div.text.strip
 
       # Estrai colore dal badge
-      color_match = badge_div['class'].match(/bg-(blue|purple|cyan|green|orange|red|pink)-500/)
+      color_match = badge_div["class"].match(/bg-(blue|purple|cyan|green|orange|red|pink)-500/)
       base_color = color_match[1] if color_match
 
       # Estrai titolo (h1)
-      h1 = doc.css('h1').first
+      h1 = doc.css("h1").first
       titolo = h1.text.strip if h1
 
       # Determina disciplina dal filename
-      disciplina = filename.match(/_([a-z]+)_p\d+$/)[1] rescue 'unknown'
+      disciplina = filename.match(/_([a-z]+)_p\d+$/)[1] rescue "unknown"
 
       return {
         numero: numero,
@@ -121,7 +121,7 @@ namespace :pages do
       end
 
       if sottotitolo && base_color
-        disciplina = filename.match(/_([a-z]+)_p\d+$/)[1] rescue 'unknown'
+        disciplina = filename.match(/_([a-z]+)_p\d+$/)[1] rescue "unknown"
 
         return {
           numero: numero,

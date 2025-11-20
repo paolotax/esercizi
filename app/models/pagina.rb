@@ -24,7 +24,7 @@ class Pagina < ApplicationRecord
     codice_corso = disciplina.volume.corso.codice
     classe_volume = disciplina.volume.classe
     codice_disciplina = disciplina.codice
-    numero_pagina = numero.to_s.rjust(3, '0')
+    numero_pagina = numero.to_s.rjust(3, "0")
 
     self.slug = "#{codice_corso}#{classe_volume}_#{codice_disciplina}_p#{numero_pagina}"
   end
