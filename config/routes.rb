@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   # Strumenti
   namespace :strumenti do
     get "addizioni", to: "addizioni#show", as: "addizioni"
+    post "addizioni/generate", to: "addizioni#generate", as: "addizioni_generate"
     get "sottrazioni", to: "sottrazioni#show", as: "sottrazioni"
+    post "sottrazioni/generate", to: "sottrazioni#generate", as: "sottrazioni_generate"
     get "le_rime", to: "le_rime#show", as: "le_rime"
     get "abaco", to: "abaco#show", as: "abaco"
     post "abaco/generate", to: "abaco#generate", as: "abaco_generate"

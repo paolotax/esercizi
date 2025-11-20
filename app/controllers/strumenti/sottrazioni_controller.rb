@@ -1,22 +1,25 @@
 class Strumenti::SottrazioniController < ApplicationController
   def show
-    @operations = params[:operations] || ""
-    @show_minuend_subtrahend = params[:show_minuend_subtrahend] == "true"
-    @operations_array = parse_operations(@operations) if @operations.present?
+    # Mostra solo il form
   end
 
-  private
+  def generate
+    @operations = params[:operations] || ""
+    show_minuend_subtrahend = params[:show_minuend_subtrahend] == "true"
 
-  def parse_operations(operations_string)
-    # Supporta più formati:
-    # - Una operazione per riga: "487 - 258\n234 - 156"
-    # - Operazioni separate da virgola: "487 - 258, 234 - 156"
-    # - Operazioni separate da punto e virgola: "487 - 258; 234 - 156"
+    if @operations.present?
+      @sottrazioni = Sottrazione.parse_multiple(@operations).map do |sottrazione|
+        # Ricrea la sottrazione con le opzioni di visualizzazione
+        Sottrazione.new(
+          minuend: sottrazione.minuend,
+          subtrahend: sottrazione.subtrahend,
+          show_minuend_subtrahend: show_minuend_subtrahend,
+          show_toolbar: true,
+          show_borrow: true
+        )
+      end
+    end
 
-    operations_string
-      .split(/[,;\n]/)
-      .map(&:strip)
-      .reject(&:blank?)
-      .map { |op| op.strip }
+    render :show
   end
 end

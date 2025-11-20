@@ -1,22 +1,25 @@
 class Strumenti::AddizioniController < ApplicationController
   def show
-    @operations = params[:operations] || ""
-    @show_addends = params[:show_addends] == "true"
-    @operations_array = parse_operations(@operations) if @operations.present?
+    # Mostra solo il form
   end
 
-  private
+  def generate
+    @operations = params[:operations] || ""
+    show_addends = params[:show_addends] == "true"
 
-  def parse_operations(operations_string)
-    # Supporta più formati:
-    # - Una operazione per riga: "234 + 1234\n45 + 67"
-    # - Operazioni separate da virgola: "234 + 1234, 45 + 67"
-    # - Operazioni separate da punto e virgola: "234 + 1234; 45 + 67"
+    if @operations.present?
+      @addizioni = Addizione.parse_multiple(@operations).map do |addizione|
+        # Ricrea l'addizione con le opzioni di visualizzazione
+        Addizione.new(
+          addends: addizione.addends,
+          operator: addizione.operator,
+          show_addends: show_addends,
+          show_toolbar: true,
+          show_carry: true
+        )
+      end
+    end
 
-    operations_string
-      .split(/[,;\n]/)
-      .map(&:strip)
-      .reject(&:blank?)
-      .map { |op| op.strip }
+    render :show
   end
 end

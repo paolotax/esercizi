@@ -248,4 +248,93 @@ export default class extends Controller {
       event.preventDefault()
     }
   }
+
+  // Toolbar Actions
+  clearGrid() {
+    const inputs = this.element.querySelectorAll('input')
+    inputs.forEach(input => {
+      input.value = ''
+      input.classList.remove('bg-green-100', 'bg-red-100', 'line-through')
+    })
+  }
+
+  showNumbers() {
+    this.inputTargets.forEach(input => {
+      const correctAnswer = input.getAttribute('data-correct-answer')
+      if (correctAnswer) {
+        input.value = correctAnswer
+      }
+    })
+  }
+
+  showResult() {
+    // Mostra i prestiti
+    if (this.hasCarryTarget) {
+      this.carryTargets.forEach(input => {
+        const correctAnswer = input.getAttribute('data-correct-answer')
+        if (correctAnswer) {
+          input.value = correctAnswer
+        }
+      })
+    }
+
+    // Mostra i risultati
+    if (this.hasResultTarget) {
+      this.resultTargets.forEach(input => {
+        const correctAnswer = input.getAttribute('data-correct-answer')
+        if (correctAnswer) {
+          input.value = correctAnswer
+        }
+      })
+    }
+
+    // Applica line-through alle cifre del minuendo che hanno prestato
+    this.inputTargets.forEach(input => {
+      const crossedOut = input.getAttribute('data-crossed-out') === 'true'
+      if (crossedOut) {
+        input.classList.add('line-through')
+      }
+    })
+  }
+
+  verifyAnswers() {
+    // Raccogli tutti gli input: prestiti, numeri e risultati
+    const borrows = this.hasCarryTarget ? Array.from(this.carryTargets) : []
+    const inputs = Array.from(this.inputTargets)
+    const results = this.hasResultTarget ? Array.from(this.resultTargets) : []
+
+    const allInputs = [...borrows, ...inputs, ...results]
+
+    let correct = 0
+    let total = 0
+
+    allInputs.forEach(input => {
+      const correctAnswer = input.getAttribute('data-correct-answer')
+      const userAnswer = input.value.trim()
+
+      // Salta le celle vuote che devono rimanere vuote
+      if (correctAnswer === '' && userAnswer === '') {
+        return
+      }
+
+      total++
+
+      // Rimuovi colori precedenti
+      input.classList.remove('bg-green-100', 'bg-red-100')
+
+      if (userAnswer === correctAnswer) {
+        input.classList.add('bg-green-100')
+        correct++
+      } else if (userAnswer !== '') {
+        input.classList.add('bg-red-100')
+      }
+    })
+
+    // Mostra messaggio dettagliato
+    const message = correct === total
+      ? `🎉 Perfetto! ${correct}/${total} risposte corrette!`
+      : `📊 ${correct}/${total} risposte corrette. Continua così!`
+
+    alert(message)
+  }
 }

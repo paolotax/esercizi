@@ -225,5 +225,91 @@ export default class extends Controller {
       event.preventDefault()
     }
   }
+
+  // === Toolbar Actions ===
+
+  // Cancella tutti gli input
+  clearGrid() {
+    const inputs = this.element.querySelectorAll('input')
+    inputs.forEach(input => {
+      input.value = ''
+      input.classList.remove('bg-green-100', 'bg-red-100')
+    })
+  }
+
+  // Mostra gli addendi
+  showAddends() {
+    this.inputTargets.forEach(input => {
+      const correctAnswer = input.getAttribute('data-correct-answer')
+      if (correctAnswer) {
+        input.value = correctAnswer
+      }
+    })
+  }
+
+  // Mostra il risultato (inclusi i riporti)
+  showResult() {
+    // Mostra i riporti
+    if (this.hasCarryTarget) {
+      this.carryTargets.forEach(input => {
+        const correctAnswer = input.getAttribute('data-correct-answer')
+        if (correctAnswer) {
+          input.value = correctAnswer
+        }
+      })
+    }
+
+    // Mostra i risultati
+    if (this.hasResultTarget) {
+      this.resultTargets.forEach(input => {
+        const correctAnswer = input.getAttribute('data-correct-answer')
+        if (correctAnswer) {
+          input.value = correctAnswer
+        }
+      })
+    }
+  }
+
+  // Verifica le risposte
+  verifyAnswers() {
+    // Raccogli tutti gli input: riporti, addendi e risultati
+    const carries = this.hasCarryTarget ? Array.from(this.carryTargets) : []
+    const inputs = Array.from(this.inputTargets)
+    const results = this.hasResultTarget ? Array.from(this.resultTargets) : []
+
+    const allInputs = [...carries, ...inputs, ...results]
+
+    let correct = 0
+    let total = 0
+
+    allInputs.forEach(input => {
+      const correctAnswer = input.getAttribute('data-correct-answer')
+      const userAnswer = input.value.trim()
+
+      // Salta le celle vuote che devono rimanere vuote
+      if (correctAnswer === '' && userAnswer === '') {
+        return
+      }
+
+      total++
+
+      // Rimuovi colori precedenti
+      input.classList.remove('bg-green-100', 'bg-red-100')
+
+      if (userAnswer === correctAnswer) {
+        input.classList.add('bg-green-100')
+        correct++
+      } else if (userAnswer !== '') {
+        input.classList.add('bg-red-100')
+      }
+    })
+
+    // Mostra messaggio dettagliato
+    const message = correct === total
+      ? `🎉 Perfetto! ${correct}/${total} risposte corrette!`
+      : `📊 ${correct}/${total} risposte corrette. Continua così!`
+
+    alert(message)
+  }
 }
 
