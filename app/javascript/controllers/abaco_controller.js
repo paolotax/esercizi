@@ -81,7 +81,15 @@ export default class extends Controller {
 
     // k: mostra solo se > 0, altrimenti vuoto (è sempre leftmost se presente)
     if (this.hasInputKTarget) {
-      this.inputKTarget.value = this.migliaiaValue > 0 ? this.migliaiaValue.toString() : ''
+      if (this.migliaiaValue > 0) {
+        this.inputKTarget.value = this.migliaiaValue.toString()
+      } else if (leftmost === 'k') {
+        this.inputKTarget.value = ''
+      } else if (this.showHValue && this.migliaiaValue > 0) {
+        this.inputKTarget.value = '0'
+      } else {
+        this.inputKTarget.value = ''
+      }
     }
 
     // h: mostra se > 0, OPPURE mostra "0" se non è leftmost e c'è valore a sinistra
@@ -690,41 +698,41 @@ export default class extends Controller {
 
 
     if (this.showKValue && this.hasInputKTarget) {
-      if (leftmost === 'k' && correctK === 0) {
-        // Leftmost con valore 0: accetta '' o '0'
+      if (correctK === 0) {
+        // Valore corretto è 0: accetta '' o '0'
         allFieldsValid = allFieldsValid && (this.inputKTarget.value === '' || this.inputKTarget.value === '0')
       } else {
-        // Deve essere compilato
+        // Valore corretto non è 0: deve essere compilato
         allFieldsValid = allFieldsValid && this.inputKTarget.value !== ''
       }
     }
 
     if (this.showHValue && this.hasInputHTarget) {
-      if (leftmost === 'h' && correctH === 0) {
-        // Leftmost con valore 0: accetta '' o '0'
+      if (correctH === 0) {
+        // Valore corretto è 0: accetta '' o '0'
         allFieldsValid = allFieldsValid && (this.inputHTarget.value === '' || this.inputHTarget.value === '0')
       } else {
-        // Deve essere compilato
+        // Valore corretto non è 0: deve essere compilato
         allFieldsValid = allFieldsValid && this.inputHTarget.value !== ''
       }
     }
 
     if (this.showDaValue && this.hasInputDaTarget) {
-      if (leftmost === 'da' && correctDa === 0) {
-        // Leftmost con valore 0: accetta '' o '0'
+      if (correctDa === 0) {
+        // Valore corretto è 0: accetta '' o '0'
         allFieldsValid = allFieldsValid && (this.inputDaTarget.value === '' || this.inputDaTarget.value === '0')
       } else {
-        // Deve essere compilato
+        // Valore corretto non è 0: deve essere compilato
         allFieldsValid = allFieldsValid && this.inputDaTarget.value !== ''
       }
     }
 
     if (this.showUValue && this.hasInputUTarget) {
-      if (leftmost === 'u' && correctU === 0) {
-        // Leftmost con valore 0: accetta '' o '0'
+      if (correctU === 0) {
+        // Valore corretto è 0: accetta '' o '0'
         allFieldsValid = allFieldsValid && (this.inputUTarget.value === '' || this.inputUTarget.value === '0')
       } else {
-        // Deve essere compilato
+        // Valore corretto non è 0: deve essere compilato
         allFieldsValid = allFieldsValid && this.inputUTarget.value !== ''
       }
     }
