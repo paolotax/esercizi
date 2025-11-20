@@ -48,19 +48,19 @@ class Abaco
 
   # Metodi per verificare quali colonne mostrare
   def show_h?
-    defined?(@migliaia)
+    defined?(@migliaia) ? true : false
   end
 
   def show_k?
-    defined?(@centinaia)
+    defined?(@centinaia) ? true : false
   end
 
   def show_da?
-    defined?(@decine)
+    defined?(@decine) ? true : false
   end
 
   def show_u?
-    defined?(@unita)
+    defined?(@unita) ? true : false
   end
 
   # Valori delle colonne (0 se nil)
