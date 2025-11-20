@@ -1,9 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
+import JSConfetti from "js-confetti"
 
 export default class extends Controller {
   static targets = ["input", "result", "carry"]
 
   connect() {
+    this.jsConfetti = new JSConfetti()
     // Aggiungi gli event listener per i riporti (carry)
     if (this.hasCarryTarget) {
       this.carryTargets.forEach((input, index) => {
@@ -304,12 +306,14 @@ export default class extends Controller {
       }
     })
 
-    // Mostra messaggio dettagliato
-    const message = correct === total
-      ? `🎉 Perfetto! ${correct}/${total} risposte corrette!`
-      : `📊 ${correct}/${total} risposte corrette. Continua così!`
-
-    alert(message)
+    // Lancia confetti se tutte le risposte sono corrette
+    if (correct === total) {
+      this.jsConfetti.addConfetti({
+        emojis: ['🎉', '✨', '🌟', '⭐', '💫'],
+        emojiSize: 50,
+        confettiNumber: 60
+      })
+    }
   }
 }
 
