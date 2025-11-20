@@ -29,6 +29,10 @@
   show_value = local_assigns.fetch(:show_value, true)
   correct_value = local_assigns.fetch(:correct_value, nil)
 
+  # Se disable_auto_zeros=true, non applica la logica automatica degli zeri
+  # (usato quando i valori sono specificati esplicitamente)
+  disable_auto_zeros = local_assigns.fetch(:disable_auto_zeros, false)
+
   # Determina quale colonna è la più significativa (leftmost)
   leftmost = nil
   leftmost = 'h' if show_h
@@ -37,24 +41,44 @@
   leftmost ||= 'u' if show_u
 
   # Calcola i valori degli input secondo la logica degli zeri
-  # La colonna più a sinistra può essere vuota quando è 0
-  # Le altre mostrano "0" se una colonna più significativa ha valore
-  if show_h
-    input_h = migliaia > 0 ? migliaia.to_s : ''
-  end
+  if disable_auto_zeros
+    # Modo esplicito: mostra esattamente quello che è stato passato
+    # 0 = vuoto, qualsiasi altro numero = mostra il numero
+    if show_h
+      input_h = migliaia > 0 ? migliaia.to_s : ''
+    end
 
-  if show_k
-    input_k = centinaia > 0 ? centinaia.to_s : (show_h && migliaia > 0 ? '0' : '')
-  end
+    if show_k
+      input_k = centinaia > 0 ? centinaia.to_s : ''
+    end
 
-  if show_da
-    has_higher = (show_h && migliaia > 0) || (show_k && centinaia > 0)
-    input_da = decine > 0 ? decine.to_s : (has_higher ? '0' : '')
-  end
+    if show_da
+      input_da = decine > 0 ? decine.to_s : ''
+    end
 
-  if show_u
-    has_higher = (show_h && migliaia > 0) || (show_k && centinaia > 0) || (show_da && decine > 0)
-    input_u = unita > 0 ? unita.to_s : (has_higher ? '0' : '')
+    if show_u
+      input_u = unita > 0 ? unita.to_s : ''
+    end
+  else
+    # Modo automatico: la colonna leftmost può essere vuota quando è 0
+    # Le altre mostrano "0" se una colonna più significativa ha valore
+    if show_h
+      input_h = migliaia > 0 ? migliaia.to_s : ''
+    end
+
+    if show_k
+      input_k = centinaia > 0 ? centinaia.to_s : (show_h && migliaia > 0 ? '0' : '')
+    end
+
+    if show_da
+      has_higher = (show_h && migliaia > 0) || (show_k && centinaia > 0)
+      input_da = decine > 0 ? decine.to_s : (has_higher ? '0' : '')
+    end
+
+    if show_u
+      has_higher = (show_h && migliaia > 0) || (show_k && centinaia > 0) || (show_da && decine > 0)
+      input_u = unita > 0 ? unita.to_s : (has_higher ? '0' : '')
+    end
   end
 %>
 

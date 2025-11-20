@@ -33,31 +33,46 @@
   <div class="print-hidden bg-white rounded-lg shadow-lg p-8 mb-8">
     <h2 class="text-2xl font-bold text-gray-800 mb-6">Generatore di Abachi</h2>
 
-    <p class="text-gray-600 mb-8">
-      Inserisci uno o più numeri separati da virgola, punto e virgola o nuova riga.
+    <p class="text-gray-600 mb-4">
+      Inserisci uno o più numeri separati da spazio o nuova riga.
       <br>
-      <strong>Esempi da copiare e incollare:</strong>
+      <strong>Formato base:</strong> <code class="bg-gray-100 px-2 py-1 rounded">numero</code> (tutto da completare)
+      <br>
+      <strong>Con parametri:</strong> <code class="bg-gray-100 px-2 py-1 rounded">numero:param=valore,param=valore</code>
+    </p>
+
+    <p class="text-sm text-gray-600 mb-6">
+      <strong>Parametri disponibili:</strong>
+      h, k, da, u (valori iniziali: numero o nil per da completare),
+      editable (true/false),
+      show_value (true/false),
+      correct_value (numero corretto)
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
       <div class="bg-gray-50 p-4 rounded-lg">
-        <p class="text-sm font-semibold text-gray-700 mb-2">Solo unità (0-9):</p>
-        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">5, 8, 3, 9</code>
+        <p class="text-sm font-semibold text-gray-700 mb-2">Numeri semplici (tutto da completare):</p>
+        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">125
+573
+1234</code>
       </div>
 
       <div class="bg-gray-50 p-4 rounded-lg">
-        <p class="text-sm font-semibold text-gray-700 mb-2">Decine e unità (10-99):</p>
-        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">23, 56, 89, 41</code>
+        <p class="text-sm font-semibold text-gray-700 mb-2">Con centinaia precompilate:</p>
+        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">125:k=1,da=nil,u=nil
+300:k=3,da=nil,u=nil</code>
       </div>
 
       <div class="bg-gray-50 p-4 rounded-lg">
-        <p class="text-sm font-semibold text-gray-700 mb-2">Centinaia, decine e unità (100-999):</p>
-        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">125, 300, 573, 999</code>
+        <p class="text-sm font-semibold text-gray-700 mb-2">Solo visualizzazione (non editabile):</p>
+        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">573:editable=false
+999:editable=false</code>
       </div>
 
       <div class="bg-gray-50 p-4 rounded-lg">
-        <p class="text-sm font-semibold text-gray-700 mb-2">Con migliaia (1000-9999):</p>
-        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">1234, 5000, 8765</code>
+        <p class="text-sm font-semibold text-gray-700 mb-2">Misti (alcuni precompilati):</p>
+        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">1234:h=1,k=2,da=nil,u=nil
+5678:h=5,k=nil,da=nil,u=8</code>
       </div>
     </div>
 
@@ -67,9 +82,9 @@
       <div class="mb-4">
         <%= f.text_area :numbers,
                         value: @numbers,
-                        placeholder: "125\n36\n573\n1234",
+                        placeholder: "125\n573:k=5,da=nil,u=nil\n1234:h=1,k=2,da=nil,u=nil\n999:editable=false",
                         rows: 6,
-                        class: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none font-mono text-lg" %>
+                        class: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none font-mono text-sm" %>
       </div>
 
       <div class="flex gap-4">
@@ -95,23 +110,58 @@
 
   <!-- Abachi Generati -->
   <% if @numbers_array && @numbers_array.any? %>
-    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-3 gap-8 print:gap-12">
-      <% @numbers_array.each_with_index do |number, index| %>
+    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-8 print:gap-12">
+      <% @numbers_array.each_with_index do |item, index| %>
         <%
-          # Determina quali colonne mostrare in base al numero
-          h = (number / 1000) % 10
-          k = (number / 100) % 10
-          da = (number / 10) % 10
-          u = number % 10
+          number = item[:number]
+
+          # Estrai le cifre dal numero
+          h_digit = (number / 1000) % 10
+          k_digit = (number / 100) % 10
+          da_digit = (number / 10) % 10
+          u_digit = number % 10
 
           # Parametri per il partial
           abaco_params = {}
-          abaco_params[:migliaia] = h if number >= 1000
-          abaco_params[:centinaia] = k if number >= 100
-          abaco_params[:decine] = da if number >= 10
-          abaco_params[:unita] = u
-          abaco_params[:editable] = true
-          abaco_params[:correct_value] = number
+
+          # Controlla se ci sono parametri espliciti per le colonne
+          has_explicit_params = item.key?(:h) || item.key?(:k) || item.key?(:da) || item.key?(:u)
+
+          # Colonne da mostrare (basate sul numero, oppure override dai parametri)
+          # Se il parametro è specificato esplicitamente (anche nil), usalo
+          # Altrimenti usa il valore di default dal numero
+
+          if item.key?(:h)
+            abaco_params[:migliaia] = item[:h]
+          elsif number >= 1000
+            abaco_params[:migliaia] = h_digit
+          end
+
+          if item.key?(:k)
+            abaco_params[:centinaia] = item[:k]
+          elsif number >= 100
+            abaco_params[:centinaia] = k_digit
+          end
+
+          if item.key?(:da)
+            abaco_params[:decine] = item[:da]
+          elsif number >= 10
+            abaco_params[:decine] = da_digit
+          end
+
+          if item.key?(:u)
+            abaco_params[:unita] = item[:u]
+          else
+            abaco_params[:unita] = u_digit
+          end
+
+          # Altri parametri
+          abaco_params[:editable] = item.fetch(:editable, true)
+          abaco_params[:show_value] = item.fetch(:show_value, true)
+          abaco_params[:correct_value] = item[:correct_value]
+
+          # Disabilita auto-zeros se ci sono parametri espliciti
+          abaco_params[:disable_auto_zeros] = has_explicit_params
         %>
 
         <div class="flex flex-col items-center print:break-inside-avoid bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg p-6">
