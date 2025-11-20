@@ -113,7 +113,7 @@
           correct_value (numero corretto)
         </p>
 
-        <%= form_with url: strumenti_abaco_path, method: :get, local: true,
+        <%= form_with url: strumenti_abaco_generate_path, method: :post, local: true,
                       data: { turbo: false } do |f| %>
           <div class="mb-4">
             <%= f.text_area :numbers,
@@ -134,7 +134,7 @@
           </div>
         <% end %>
 
-        <% if @numbers.present? && @numbers_array.blank? %>
+        <% if @numbers.present? && @abachi.blank? %>
           <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
             <p class="text-yellow-900 text-sm">
               <strong>Attenzione:</strong> Non sono stati trovati numeri validi.
@@ -150,55 +150,15 @@
   <!-- Fine Layout a 2 colonne -->
 
   <!-- Abachi Generati -->
-  <% if @numbers_array && @numbers_array.any? %>
-    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-8 print:gap-24 ">
-      <% @numbers_array.each_with_index do |item, index| %>
-        <%
-          number = item[:number]
-
-          # Estrai le cifre dal numero
-          h_digit = (number / 1000) % 10
-          k_digit = (number / 100) % 10
-          da_digit = (number / 10) % 10
-          u_digit = number % 10
-
-          # Parametri per il partial
-          abaco_params = {}
-
-          # Controlla se ci sono parametri espliciti per le colonne
-          has_explicit_params = item.key?(:h) || item.key?(:k) || item.key?(:da) || item.key?(:u)
-
-          # Se NON ci sono parametri espliciti, mostra tutte le colonne vuote (nil)
-          # Se ci sono parametri espliciti, usa quelli
-          if has_explicit_params
-            # Usa i parametri espliciti
-            abaco_params[:migliaia] = item[:h] if item.key?(:h)
-            abaco_params[:centinaia] = item[:k] if item.key?(:k)
-            abaco_params[:decine] = item[:da] if item.key?(:da)
-            abaco_params[:unita] = item[:u] if item.key?(:u)
-          else
-            # Nessun parametro esplicito: mostra le colonne necessarie ma tutte vuote (nil)
-            abaco_params[:migliaia] = nil if number >= 1000
-            abaco_params[:centinaia] = nil if number >= 100
-            abaco_params[:decine] = nil if number >= 10
-            abaco_params[:unita] = nil
-          end
-
-          # Altri parametri
-          abaco_params[:editable] = item.fetch(:editable, true)
-          abaco_params[:show_value] = item.fetch(:show_value, false)
-          abaco_params[:correct_value] = item[:correct_value]
-
-          # Disabilita auto-zeros se ci sono parametri espliciti
-          abaco_params[:disable_auto_zeros] = has_explicit_params
-        %>
-
+  <% if @abachi && @abachi.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-8 print:gap-12 print:divide-x print:divide-gray-300">
+      <% @abachi.each do |abaco| %>
         <div class="flex flex-col items-center print:break-inside-avoid bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg p-6">
           <h3 class="text-xl font-semibold text-gray-700 mb-6">
-            Forma il numero <%= number %>
+            Forma il numero <%= abaco.number %>
           </h3>
 
-          <%= render 'shared/abaco', **abaco_params %>
+          <%= render 'shared/abaco', **abaco.to_partial_params %>
         </div>
       <% end %>
     </div>

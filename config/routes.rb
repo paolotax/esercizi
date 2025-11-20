@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get "sottrazioni", to: "sottrazioni#show", as: "sottrazioni"
     get "le_rime", to: "le_rime#show", as: "le_rime"
     get "abaco", to: "abaco#show", as: "abaco"
+    post "abaco/generate", to: "abaco#generate", as: "abaco_generate"
     get "abaco/examples", to: "abaco#examples", as: "abaco_examples"
   end
 
