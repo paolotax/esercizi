@@ -31,21 +31,21 @@ export default class extends Controller {
   }
 
   // Click su una pallina specifica: setta il valore a index+1
-  clickBallH(event) {
+  clickBallK(event) {
     if (!this.editableValue) return
 
     const index = parseInt(event.currentTarget.dataset.index)
-    this.migliaiaValue = index + 1
+    this.migliaiaValue = index + 1  // k = migliaia (thousands)
     this.syncInputs()
     this.updateDisplay()
     this.checkCorrectness()
   }
 
-  clickBallK(event) {
+  clickBallH(event) {
     if (!this.editableValue) return
 
     const index = parseInt(event.currentTarget.dataset.index)
-    this.centinaiaValue = index + 1
+    this.centinaiaValue = index + 1  // h = centinaia (hundreds)
     this.syncInputs()
     this.updateDisplay()
     this.checkCorrectness()
@@ -517,7 +517,7 @@ export default class extends Controller {
   }
 
   // Update da input numerico
-  updateFromInputH(event) {
+  updateFromInputK(event) {
     if (!this.editableValue) return
 
     const input = event.target
@@ -525,7 +525,7 @@ export default class extends Controller {
     const cleanValue = input.value.replace(/[^0-9]/g, '')
 
     if (cleanValue === '') {
-      this.migliaiaValue = 0
+      this.migliaiaValue = 0  // k = migliaia (thousands)
       input.value = ''
     } else {
       let value = parseInt(cleanValue)
@@ -538,7 +538,7 @@ export default class extends Controller {
     this.checkCorrectness()
   }
 
-  updateFromInputK(event) {
+  updateFromInputH(event) {
     if (!this.editableValue) return
 
     const input = event.target
@@ -546,7 +546,7 @@ export default class extends Controller {
     const cleanValue = input.value.replace(/[^0-9]/g, '')
 
     if (cleanValue === '') {
-      this.centinaiaValue = 0
+      this.centinaiaValue = 0  // h = centinaia (hundreds)
       input.value = ''
     } else {
       let value = parseInt(cleanValue)
@@ -600,9 +600,9 @@ export default class extends Controller {
   }
 
   updateDisplay() {
-    // Aggiorna palline migliaia (viola)
-    if (this.hasBallHTarget) {
-      this.ballHTargets.forEach((ball, index) => {
+    // Aggiorna palline migliaia (viola) - K
+    if (this.hasBallKTarget) {
+      this.ballKTargets.forEach((ball, index) => {
         if (index < this.migliaiaValue) {
           ball.classList.remove("bg-transparent", "border-2", "border-dashed", "border-orange-200")
           ball.classList.add("bg-purple-500")
@@ -613,9 +613,9 @@ export default class extends Controller {
       })
     }
 
-    // Aggiorna palline centinaia (verdi)
-    if (this.hasBallKTarget) {
-      this.ballKTargets.forEach((ball, index) => {
+    // Aggiorna palline centinaia (verdi) - H
+    if (this.hasBallHTarget) {
+      this.ballHTargets.forEach((ball, index) => {
         if (index < this.centinaiaValue) {
           ball.classList.remove("bg-transparent", "border-2", "border-dashed", "border-orange-200")
           ball.classList.add("bg-green-500")
