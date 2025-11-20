@@ -27,33 +27,42 @@
      data-abaco-correct-value="<%= correct_value %>">
 
   <!-- Container abaco -->
-  <div class="flex gap-4 justify-center items-end">
+  <div class="flex gap-4 justify-center items-end" data-controller="auto-advance">
 
     <!-- Colonna CENTINAIA -->
     <div class="flex flex-col items-center">
       <!-- Asta con slots per palline -->
       <div class="relative bg-orange-400 w-2 h-64 rounded-full flex flex-col-reverse justify-start items-center py-2"
-           data-abaco-target="columnK"
-           data-action="<%= editable ? 'click->abaco#toggleK' : '' %>">
+           data-abaco-target="columnK">
 
         <!-- Trattini orizzontali grigi -->
         <% max_per_column.times do |i| %>
-          <div class="absolute w-8 h-0.5 bg-gray-400" style="bottom: <%= 38 + (i * 27) %>px; left: 50%; transform: translateX(-50%);"></div>
+          <div class="absolute w-8 h-0.5 bg-gray-400" style="bottom: <%= 32 + (i * 27) %>px; left: 50%; transform: translateX(-50%);"></div>
         <% end %>
 
         <!-- Palline centinaia (generate dinamicamente) -->
         <% max_per_column.times do |i| %>
-          <div class="w-6 h-6 rounded-full <%= i < centinaia ? 'bg-green-500' : 'bg-transparent border-2 border-dashed border-orange-200' %> transition-all duration-200 relative z-10"
+          <div class="w-6 h-6 rounded-full <%= i < centinaia ? 'bg-green-500' : 'bg-transparent border-2 border-dashed border-orange-200' %> transition-all duration-200 relative z-10 <%= editable ? 'cursor-pointer hover:scale-110' : '' %>"
                data-abaco-target="ballK"
                data-index="<%= i %>"
+               data-action="<%= editable ? 'click->abaco#clickBallK' : '' %>"
                style="margin-bottom: <%= i == 0 ? '0' : '3px' %>;"></div>
         <% end %>
       </div>
 
-      <!-- Etichetta CENTINAIA -->
-      <div class="mt-1 bg-white border-3 border-green-400 rounded-lg px-4 py-2">
+      <!-- Input CENTINAIA -->
+      <div class="-mt-2 z-10 bg-white border-3 border-green-400 rounded-lg px-3 py-2">
         <div class="text-sm font-bold text-green-600 text-center">k</div>
-        <div class="text-2xl font-bold text-green-600 text-center" data-abaco-target="labelK"><%= centinaia %></div>
+        <input type="text"
+               inputmode="numeric"
+               pattern="[0-9]*"
+               maxlength="1"
+               value="<%= centinaia > 0 ? centinaia : '' %>"
+               data-abaco-target="inputK"
+               data-action="input->abaco#updateFromInputK"
+               <%= editable ? '' : 'disabled' %>
+               class="text-2xl font-bold text-green-600 text-center w-10 bg-transparent border-0 border-b-2 border-dotted border-green-400 focus:border-green-600 focus:outline-none <%= editable ? '' : 'opacity-50' %> [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+               placeholder="">
       </div>
     </div>
 
@@ -61,27 +70,36 @@
     <div class="flex flex-col items-center">
       <!-- Asta con slots per palline -->
       <div class="relative bg-orange-400 w-2 h-64 rounded-full flex flex-col-reverse justify-start items-center py-2"
-           data-abaco-target="columnDa"
-           data-action="<%= editable ? 'click->abaco#toggleDa' : '' %>">
+           data-abaco-target="columnDa">
 
         <!-- Trattini orizzontali grigi -->
         <% max_per_column.times do |i| %>
-          <div class="absolute w-8 h-0.5 bg-gray-400" style="bottom: <%= 38 + (i * 27) %>px; left: 50%; transform: translateX(-50%);"></div>
+          <div class="absolute w-8 h-0.5 bg-gray-400" style="bottom: <%= 32 + (i * 27) %>px; left: 50%; transform: translateX(-50%);"></div>
         <% end %>
 
         <!-- Palline decine (generate dinamicamente) -->
         <% max_per_column.times do |i| %>
-          <div class="w-6 h-6 rounded-full <%= i < decine ? 'bg-red-500' : 'bg-transparent border-2 border-dashed border-orange-200' %> transition-all duration-200 relative z-10"
+          <div class="w-6 h-6 rounded-full <%= i < decine ? 'bg-red-500' : 'bg-transparent border-2 border-dashed border-orange-200' %> transition-all duration-200 relative z-10 <%= editable ? 'cursor-pointer hover:scale-110' : '' %>"
                data-abaco-target="ballDa"
                data-index="<%= i %>"
+               data-action="<%= editable ? 'click->abaco#clickBallDa' : '' %>"
                style="margin-bottom: <%= i == 0 ? '0' : '3px' %>;"></div>
         <% end %>
       </div>
 
-      <!-- Etichetta DECINE -->
-      <div class="mt-1 bg-white border-3 border-red-400 rounded-lg px-4 py-2">
+      <!-- Input DECINE -->
+      <div class="-mt-2 z-10 bg-white border-3 border-red-500 rounded-lg px-3 py-2">
         <div class="text-sm font-bold text-red-600 text-center">da</div>
-        <div class="text-2xl font-bold text-red-600 text-center" data-abaco-target="labelDa"><%= decine %></div>
+        <input type="text"
+               inputmode="numeric"
+               pattern="[0-9]*"
+               maxlength="1"
+               value="<%= decine > 0 ? decine : '' %>"
+               data-abaco-target="inputDa"
+               data-action="input->abaco#updateFromInputDa"
+               <%= editable ? '' : 'disabled' %>
+               class="text-2xl font-bold text-red-600 text-center w-10 bg-transparent border-0 border-b-2 border-dotted border-red-400 focus:border-red-600 focus:outline-none <%= editable ? '' : 'opacity-50' %> [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+               placeholder="">
       </div>
     </div>
 
@@ -89,27 +107,36 @@
     <div class="flex flex-col items-center">
       <!-- Asta con slots per palline -->
       <div class="relative bg-orange-400 w-2 h-64 rounded-full flex flex-col-reverse justify-start items-center py-2"
-           data-abaco-target="columnU"
-           data-action="<%= editable ? 'click->abaco#toggleU' : '' %>">
+           data-abaco-target="columnU">
 
         <!-- Trattini orizzontali grigi -->
         <% max_per_column.times do |i| %>
-          <div class="absolute w-8 h-0.5 bg-gray-400" style="bottom: <%= 38 + (i * 27) %>px; left: 50%; transform: translateX(-50%);"></div>
+          <div class="absolute w-8 h-0.5 bg-gray-400" style="bottom: <%= 32 + (i * 27) %>px; left: 50%; transform: translateX(-50%);"></div>
         <% end %>
 
         <!-- Palline unità (generate dinamicamente) -->
         <% max_per_column.times do |i| %>
-          <div class="w-6 h-6 rounded-full <%= i < unita ? 'bg-blue-500' : 'bg-transparent border-2 border-dashed border-orange-200' %> transition-all duration-200 relative z-10"
+          <div class="w-6 h-6 rounded-full <%= i < unita ? 'bg-blue-500' : 'bg-transparent border-2 border-dashed border-orange-200' %> transition-all duration-200 relative z-10 <%= editable ? 'cursor-pointer hover:scale-110' : '' %>"
                data-abaco-target="ballU"
                data-index="<%= i %>"
+               data-action="<%= editable ? 'click->abaco#clickBallU' : '' %>"
                style="margin-bottom: <%= i == 0 ? '0' : '3px' %>;"></div>
         <% end %>
       </div>
 
-      <!-- Etichetta UNITÀ -->
-      <div class="mt-1 bg-white border-3 border-blue-400 rounded-lg px-4 py-2">
+      <!-- Input UNITÀ -->
+      <div class="-mt-2 z-10 bg-white border-3 border-blue-500 rounded-lg px-3 py-2">
         <div class="text-sm font-bold text-blue-600 text-center">u</div>
-        <div class="text-2xl font-bold text-blue-600 text-center" data-abaco-target="labelU"><%= unita %></div>
+        <input type="text"
+               inputmode="numeric"
+               pattern="[0-9]*"
+               maxlength="1"
+               value="<%= unita > 0 ? unita : '' %>"
+               data-abaco-target="inputU"
+               data-action="input->abaco#updateFromInputU"
+               <%= editable ? '' : 'disabled' %>
+               class="text-2xl font-bold text-blue-600 text-center w-10 bg-transparent border-0 border-b-2 border-dotted border-blue-400 focus:border-blue-600 focus:outline-none <%= editable ? '' : 'opacity-50' %> [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+               placeholder="">
       </div>
     </div>
   </div>
@@ -119,6 +146,22 @@
     <div class="mt-4 text-center">
       <span class="text-lg font-bold text-gray-700">Valore: </span>
       <span class="text-3xl font-bold text-cyan-600" data-abaco-target="totalValue"><%= centinaia * 100 + decine * 10 + unita %></span>
+
+      <!-- Pulsanti globali +/- -->
+      <% if editable %>
+        <div class="flex items-center justify-center gap-3 mt-4">
+          <button type="button"
+                  data-action="click->abaco#decrementGlobal"
+                  class="w-10 h-10 flex items-center justify-center text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors shadow-lg">
+            <span class="text-2xl font-bold">−</span>
+          </button>
+          <button type="button"
+                  data-action="click->abaco#incrementGlobal"
+                  class="w-10 h-10 flex items-center justify-center text-white bg-cyan-500 hover:bg-cyan-600 rounded-full transition-colors shadow-lg">
+            <span class="text-2xl font-bold">+</span>
+          </button>
+        </div>
+      <% end %>
 
       <!-- Feedback correttezza (se specificato correct_value) -->
       <% if correct_value %>

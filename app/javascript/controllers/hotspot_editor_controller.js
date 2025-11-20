@@ -40,7 +40,7 @@ export default class extends Controller {
   createEditButton() {
     const editBtn = document.createElement('button')
     editBtn.className = "fixed bottom-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold px-4 py-2 rounded-lg shadow-2xl z-40 transition"
-    editBtn.textContent = "✏️ Edit Hotspots"
+    editBtn.textContent = "✏️ Edit"
     editBtn.addEventListener('click', () => this.toggleEditMode())
     document.body.appendChild(editBtn)
     this.editButton = editBtn
@@ -359,7 +359,7 @@ export default class extends Controller {
     if (this.editMode) {
       // Attiva modalità edit
       info.classList.remove('hidden')
-      this.editButton.textContent = "👁️ View Mode"
+      this.editButton.textContent = "👁️ View"
       this.editButton.classList.remove('bg-yellow-500', 'hover:bg-yellow-600')
       this.editButton.classList.add('bg-green-500', 'hover:bg-green-600')
 
@@ -383,7 +383,7 @@ export default class extends Controller {
     } else {
       // Disattiva modalità edit
       info.classList.add('hidden')
-      this.editButton.textContent = "✏️ Edit Hotspots"
+      this.editButton.textContent = "✏️ Edit"
       this.editButton.classList.remove('bg-green-500', 'hover:bg-green-600')
       this.editButton.classList.add('bg-yellow-500', 'hover:bg-yellow-600')
 
