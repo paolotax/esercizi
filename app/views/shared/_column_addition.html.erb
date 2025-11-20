@@ -1,32 +1,32 @@
 <style>
   /* Rendi le celle quadrate */
-  [data-column-input-target="input"],
-  [data-column-input-target="result"] {
+  [data-column-addition-target="input"],
+  [data-column-addition-target="result"] {
     width: 4rem;
     height: 4rem;
   }
 
   /* Celle per i riporti (cambi) - più piccole */
-  [data-column-input-target="carry"] {
+  [data-column-addition-target="carry"] {
     width: 4rem;
     height: 2rem;
   }
 
   /* Placeholder più piccolo */
-  [data-column-input-target="input"]::placeholder,
-  [data-column-input-target="result"]::placeholder {
+  [data-column-addition-target="input"]::placeholder,
+  [data-column-addition-target="result"]::placeholder {
     font-size: 0.75rem;
     opacity: 0.3;
   }
 </style>
 
-<div class="text-center">
+<div class="text-center" data-controller="column-addition">
   <% if addizione.title.present? %>
     <div class="text-xl font-bold mb-4"><%= addizione.title %></div>
   <% end %>
 
   <div class="flex items-start justify-center gap-2">
-    <div class="inline-block border-4 border-blue-400 rounded-lg bg-white" data-controller="column-input">
+    <div class="inline-block border-4 border-blue-400 rounded-lg bg-white" >
 
       <!-- Header con le etichette delle colonne -->
       <div class="border-b-2 border-gray-300" style="<%= addizione.grid_style %>">
@@ -43,7 +43,7 @@
         <% addizione.carries.each_with_index do |carry, idx| %>
           <input type="text"
                  class="text-center text-sm font-bold <%= addizione.column_colors[idx] %> <%= idx == addizione.max_digits - 1 ? 'bg-white' : 'bg-blue-200' %> <%= 'border-r-2 border-gray-300' unless idx == addizione.max_digits - 1 %>"
-                 data-column-input-target="carry"
+                 data-column-addition-target="carry"
                  data-correct-answer="<%= carry %>"
                  maxlength="1"
                  placeholder=""
@@ -60,7 +60,7 @@
           <% digits.each_with_index do |digit, idx| %>
             <input type="text"
                    class="text-center text-2xl font-bold <%= 'border-r-2 border-gray-300' unless idx == digits.length - 1 %>"
-                   data-column-input-target="input"
+                   data-column-addition-target="input"
                    data-correct-answer="<%= digit %>"
                    maxlength="1"
                    placeholder="."
@@ -75,7 +75,7 @@
           <% addizione.result_digits.each_with_index do |digit, idx| %>
             <input type="text"
                    class="text-center text-2xl font-bold <%= 'border-r-2 border-gray-300' unless idx == addizione.result_digits.length - 1 %>"
-                   data-column-input-target="result"
+                   data-column-addition-target="result"
                    data-correct-answer="<%= digit %>"
                    maxlength="1"
                    placeholder="."
@@ -104,7 +104,7 @@
   <div class="print-hidden flex justify-center gap-4 mt-6">
     <!-- Cancella -->
     <button type="button"
-            data-action="click->column-input#clearGrid"
+            data-action="click->column-addition#clearGrid"
             class="w-14 h-14 rounded-full bg-gray-500 hover:bg-gray-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
             title="Cancella">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -114,7 +114,7 @@
 
     <!-- Mostra Addendi -->
     <button type="button"
-            data-action="click->column-input#showAddends"
+            data-action="click->column-addition#showAddends"
             class="w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
             title="Mostra Addendi">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -124,7 +124,7 @@
 
     <!-- Mostra Risultato -->
     <button type="button"
-            data-action="click->column-input#showResult"
+            data-action="click->column-addition#showResult"
             class="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
             title="Mostra Risultato">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -134,7 +134,7 @@
 
     <!-- Verifica -->
     <button type="button"
-            data-action="click->column-input#verifyAnswers"
+            data-action="click->column-addition#verifyAnswers"
             class="w-14 h-14 rounded-full bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
             title="Verifica">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
