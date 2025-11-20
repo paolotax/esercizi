@@ -12,10 +12,10 @@ class Abaco
     @max_per_column = options.fetch(:max_per_column, 9)
 
     # Estrai le cifre dal numero
-    h_digit = (number / 1000) % 10
-    k_digit = (number / 100) % 10
-    da_digit = (number / 10) % 10
-    u_digit = number % 10
+    k_digit = (number / 1000) % 10  # k = migliaia (thousands)
+    h_digit = (number / 100) % 10   # h = centinaia (hundreds)
+    da_digit = (number / 10) % 10   # da = decine (tens)
+    u_digit = number % 10           # u = unità (units)
 
     # Controlla se ci sono parametri espliciti per le colonne
     has_explicit_params = options.key?(:h) || options.key?(:k) || options.key?(:da) || options.key?(:u)
@@ -29,8 +29,8 @@ class Abaco
     # Se ci sono parametri espliciti, usa quelli; altrimenti tutto nil (da completare)
     if has_explicit_params
       # Mostra le colonne necessarie, usando i valori specificati o nil
-      @migliaia = options[:h] if show_migliaia
-      @centinaia = options[:k] if show_centinaia
+      @migliaia = options[:k] if show_migliaia    # k = migliaia (thousands)
+      @centinaia = options[:h] if show_centinaia  # h = centinaia (hundreds)
       @decine = options[:da] if show_decine
       @unita = options[:u] if show_unita
     else
@@ -47,12 +47,12 @@ class Abaco
   end
 
   # Metodi per verificare quali colonne mostrare
-  def show_h?
-    defined?(@migliaia) ? true : false
+  def show_k?
+    defined?(@migliaia) ? true : false  # k = migliaia (thousands)
   end
 
-  def show_k?
-    defined?(@centinaia) ? true : false
+  def show_h?
+    defined?(@centinaia) ? true : false  # h = centinaia (hundreds)
   end
 
   def show_da?
@@ -81,8 +81,8 @@ class Abaco
   end
 
   # Calcola i valori degli input secondo la logica degli zeri
-  def input_h
-    return nil unless show_h?
+  def input_k
+    return nil unless show_k?
 
     if @disable_auto_zeros
       # Modo esplicito: nil = vuoto, qualsiasi numero (anche 0) = mostra il numero
@@ -92,14 +92,14 @@ class Abaco
     end
   end
 
-  def input_k
-    return nil unless show_k?
+  def input_h
+    return nil unless show_h?
 
     if @disable_auto_zeros
       # Modo esplicito: nil = vuoto, qualsiasi numero (anche 0) = mostra il numero
       @centinaia.nil? ? "" : @centinaia.to_s
     else
-      @centinaia.to_i > 0 ? @centinaia.to_s : (show_h? && migliaia_value > 0 ? "0" : "")
+      @centinaia.to_i > 0 ? @centinaia.to_s : (show_k? && migliaia_value > 0 ? "0" : "")
     end
   end
 
@@ -110,7 +110,7 @@ class Abaco
       # Modo esplicito: nil = vuoto, qualsiasi numero (anche 0) = mostra il numero
       @decine.nil? ? "" : @decine.to_s
     else
-      has_higher = (show_h? && migliaia_value > 0) || (show_k? && centinaia_value > 0)
+      has_higher = (show_k? && migliaia_value > 0) || (show_h? && centinaia_value > 0)
       @decine.to_i > 0 ? @decine.to_s : (has_higher ? "0" : "")
     end
   end
@@ -122,7 +122,7 @@ class Abaco
       # Modo esplicito: nil = vuoto, qualsiasi numero (anche 0) = mostra il numero
       @unita.nil? ? "" : @unita.to_s
     else
-      has_higher = (show_h? && migliaia_value > 0) || (show_k? && centinaia_value > 0) || (show_da? && decine_value > 0)
+      has_higher = (show_k? && migliaia_value > 0) || (show_h? && centinaia_value > 0) || (show_da? && decine_value > 0)
       @unita.to_i > 0 ? @unita.to_s : (has_higher ? "0" : "")
     end
   end
@@ -163,10 +163,10 @@ class Abaco
         end
 
         case key.downcase
-        when "h", "migliaia"
-          options[:h] = parsed_value
-        when "k", "centinaia"
+        when "k", "migliaia"
           options[:k] = parsed_value
+        when "h", "centinaia"
+          options[:h] = parsed_value
         when "da", "decine"
           options[:da] = parsed_value
         when "u", "unita"
