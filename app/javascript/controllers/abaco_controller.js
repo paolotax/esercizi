@@ -3,11 +3,16 @@ import JSConfetti from "js-confetti"
 
 // Connects to data-controller="abaco"
 export default class extends Controller {
-  static targets = ["columnK", "columnDa", "columnU", "ballK", "ballDa", "ballU", "inputK", "inputDa", "inputU", "totalValue", "feedback"]
+  static targets = ["columnH", "columnK", "columnDa", "columnU", "ballH", "ballK", "ballDa", "ballU", "inputH", "inputK", "inputDa", "inputU", "totalValue", "feedback"]
   static values = {
+    migliaia: { type: Number, default: 0 },
     centinaia: { type: Number, default: 0 },
     decine: { type: Number, default: 0 },
     unita: { type: Number, default: 0 },
+    showH: { type: Boolean, default: false },
+    showK: { type: Boolean, default: false },
+    showDa: { type: Boolean, default: false },
+    showU: { type: Boolean, default: false },
     max: { type: Number, default: 9 },
     editable: { type: Boolean, default: true },
     correct: { type: Number, default: null }
@@ -26,15 +31,22 @@ export default class extends Controller {
   }
 
   // Click su una pallina specifica: setta il valore a index+1
+  clickBallH(event) {
+    if (!this.editableValue) return
+
+    const index = parseInt(event.currentTarget.dataset.index)
+    this.migliaiaValue = index + 1
+    this.syncInputs()
+    this.updateDisplay()
+    this.checkCorrectness()
+  }
+
   clickBallK(event) {
     if (!this.editableValue) return
 
     const index = parseInt(event.currentTarget.dataset.index)
     this.centinaiaValue = index + 1
-    // Aggiorna anche l'input
-    if (this.hasInputKTarget) {
-      this.inputKTarget.value = this.centinaiaValue.toString()
-    }
+    this.syncInputs()
     this.updateDisplay()
     this.checkCorrectness()
   }
@@ -44,10 +56,7 @@ export default class extends Controller {
 
     const index = parseInt(event.currentTarget.dataset.index)
     this.decineValue = index + 1
-    // Aggiorna anche l'input
-    if (this.hasInputDaTarget) {
-      this.inputDaTarget.value = this.decineValue.toString()
-    }
+    this.syncInputs()
     this.updateDisplay()
     this.checkCorrectness()
   }
@@ -57,45 +66,147 @@ export default class extends Controller {
 
     const index = parseInt(event.currentTarget.dataset.index)
     this.unitaValue = index + 1
-    // Aggiorna anche l'input
-    if (this.hasInputUTarget) {
-      this.inputUTarget.value = this.unitaValue.toString()
-    }
+    this.syncInputs()
     this.updateDisplay()
     this.checkCorrectness()
+  }
+
+  // Sincronizza gli input con i valori correnti (gestisce correttamente gli zeri)
+  syncInputs() {
+    // Determina quale colonna è la leftmost (più significativa)
+    const leftmost = this.showHValue ? 'h' :
+                    this.showKValue ? 'k' :
+                    this.showDaValue ? 'da' :
+                    this.showUValue ? 'u' : null
+
+    // h: mostra solo se > 0, altrimenti vuoto (è sempre leftmost se presente)
+    if (this.hasInputHTarget) {
+      this.inputHTarget.value = this.migliaiaValue > 0 ? this.migliaiaValue.toString() : ''
+    }
+
+    // k: mostra se > 0, OPPURE mostra "0" se non è leftmost e c'è valore a sinistra
+    if (this.hasInputKTarget) {
+      if (this.centinaiaValue > 0) {
+        this.inputKTarget.value = this.centinaiaValue.toString()
+      } else if (leftmost === 'k') {
+        this.inputKTarget.value = ''
+      } else if (this.showHValue && this.migliaiaValue > 0) {
+        this.inputKTarget.value = '0'
+      } else {
+        this.inputKTarget.value = ''
+      }
+    }
+
+    // da: mostra se > 0, OPPURE mostra "0" se non è leftmost e c'è valore a sinistra
+    if (this.hasInputDaTarget) {
+      if (this.decineValue > 0) {
+        this.inputDaTarget.value = this.decineValue.toString()
+      } else if (leftmost === 'da') {
+        this.inputDaTarget.value = ''
+      } else {
+        const hasHigher = (this.showHValue && this.migliaiaValue > 0) || (this.showKValue && this.centinaiaValue > 0)
+        this.inputDaTarget.value = hasHigher ? '0' : ''
+      }
+    }
+
+    // u: mostra se > 0, OPPURE mostra "0" se non è leftmost e c'è valore a sinistra
+    if (this.hasInputUTarget) {
+      if (this.unitaValue > 0) {
+        this.inputUTarget.value = this.unitaValue.toString()
+      } else if (leftmost === 'u') {
+        this.inputUTarget.value = ''
+      } else {
+        const hasHigher = (this.showHValue && this.migliaiaValue > 0) ||
+                          (this.showKValue && this.centinaiaValue > 0) ||
+                          (this.showDaValue && this.decineValue > 0)
+        this.inputUTarget.value = hasHigher ? '0' : ''
+      }
+    }
   }
 
   // Pulsanti globali +/- (incrementano/decrementano il valore totale)
   incrementGlobal(event) {
     if (!this.editableValue) return
 
-    // Incrementa unità
-    if (this.unitaValue < this.maxValue) {
-      this.unitaValue++
-    } else {
-      // Riporto: u 9→0 e da +1
-      this.unitaValue = 0
-
+    // Incrementa dalla colonna più a destra visibile
+    if (this.showUValue) {
+      if (this.unitaValue < this.maxValue) {
+        this.unitaValue++
+      } else {
+        this.unitaValue = 0
+        // Carry a decine se visibili
+        if (this.showDaValue) {
+          if (this.decineValue < this.maxValue) {
+            this.decineValue++
+          } else {
+            this.decineValue = 0
+            // Carry a centinaia se visibili
+            if (this.showKValue) {
+              if (this.centinaiaValue < this.maxValue) {
+                this.centinaiaValue++
+              } else {
+                this.centinaiaValue = 0
+                // Carry a migliaia se visibili
+                if (this.showHValue) {
+                  if (this.migliaiaValue < this.maxValue) {
+                    this.migliaiaValue++
+                  } else {
+                    this.migliaiaValue = 0 // Cicla
+                  }
+                }
+                // else: cicla (centinaia è leftmost)
+              }
+            }
+            // else: cicla (decine è leftmost)
+          }
+        }
+        // else: cicla (unità è leftmost)
+      }
+    } else if (this.showDaValue) {
+      // Incrementa decine (rightmost)
       if (this.decineValue < this.maxValue) {
         this.decineValue++
       } else {
-        // Riporto: da 9→0 e k +1
         this.decineValue = 0
-
-        if (this.centinaiaValue < this.maxValue) {
-          this.centinaiaValue++
-        } else {
-          // Cicla: k 9→0 (tutti tornano a 000)
-          this.centinaiaValue = 0
+        if (this.showKValue) {
+          if (this.centinaiaValue < this.maxValue) {
+            this.centinaiaValue++
+          } else {
+            this.centinaiaValue = 0
+            if (this.showHValue) {
+              if (this.migliaiaValue < this.maxValue) {
+                this.migliaiaValue++
+              } else {
+                this.migliaiaValue = 0
+              }
+            }
+          }
         }
+      }
+    } else if (this.showKValue) {
+      // Incrementa centinaia (rightmost)
+      if (this.centinaiaValue < this.maxValue) {
+        this.centinaiaValue++
+      } else {
+        this.centinaiaValue = 0
+        if (this.showHValue) {
+          if (this.migliaiaValue < this.maxValue) {
+            this.migliaiaValue++
+          } else {
+            this.migliaiaValue = 0
+          }
+        }
+      }
+    } else if (this.showHValue) {
+      // Incrementa migliaia (rightmost e leftmost)
+      if (this.migliaiaValue < this.maxValue) {
+        this.migliaiaValue++
+      } else {
+        this.migliaiaValue = 0
       }
     }
 
-    // Aggiorna input
-    this.inputKTarget.value = this.centinaiaValue > 0 ? this.centinaiaValue.toString() : ''
-    this.inputDaTarget.value = this.decineValue > 0 ? this.decineValue.toString() : (this.centinaiaValue > 0 ? '0' : '')
-    this.inputUTarget.value = this.unitaValue > 0 ? this.unitaValue.toString() : ((this.centinaiaValue > 0 || this.decineValue > 0) ? '0' : '')
-
+    this.syncInputs()
     this.updateDisplay()
     this.checkCorrectness()
   }
@@ -103,33 +214,85 @@ export default class extends Controller {
   decrementGlobal(event) {
     if (!this.editableValue) return
 
-    // Decrementa unità
-    if (this.unitaValue > 0) {
-      this.unitaValue--
-    } else {
-      // Prestito: u 0→9 e da -1
-      this.unitaValue = this.maxValue
-
+    // Decrementa dalla colonna più a destra visibile
+    if (this.showUValue) {
+      if (this.unitaValue > 0) {
+        this.unitaValue--
+      } else {
+        this.unitaValue = this.maxValue
+        // Borrow da decine se visibili
+        if (this.showDaValue) {
+          if (this.decineValue > 0) {
+            this.decineValue--
+          } else {
+            this.decineValue = this.maxValue
+            // Borrow da centinaia se visibili
+            if (this.showKValue) {
+              if (this.centinaiaValue > 0) {
+                this.centinaiaValue--
+              } else {
+                this.centinaiaValue = this.maxValue
+                // Borrow da migliaia se visibili
+                if (this.showHValue) {
+                  if (this.migliaiaValue > 0) {
+                    this.migliaiaValue--
+                  } else {
+                    this.migliaiaValue = this.maxValue // Cicla
+                  }
+                }
+                // else: cicla (centinaia è leftmost)
+              }
+            }
+            // else: cicla (decine è leftmost)
+          }
+        }
+        // else: cicla (unità è leftmost)
+      }
+    } else if (this.showDaValue) {
+      // Decrementa decine (rightmost)
       if (this.decineValue > 0) {
         this.decineValue--
       } else {
-        // Prestito: da 0→9 e k -1
         this.decineValue = this.maxValue
-
-        if (this.centinaiaValue > 0) {
-          this.centinaiaValue--
-        } else {
-          // Cicla: 000 → 999
-          this.centinaiaValue = this.maxValue
+        if (this.showKValue) {
+          if (this.centinaiaValue > 0) {
+            this.centinaiaValue--
+          } else {
+            this.centinaiaValue = this.maxValue
+            if (this.showHValue) {
+              if (this.migliaiaValue > 0) {
+                this.migliaiaValue--
+              } else {
+                this.migliaiaValue = this.maxValue
+              }
+            }
+          }
         }
+      }
+    } else if (this.showKValue) {
+      // Decrementa centinaia (rightmost)
+      if (this.centinaiaValue > 0) {
+        this.centinaiaValue--
+      } else {
+        this.centinaiaValue = this.maxValue
+        if (this.showHValue) {
+          if (this.migliaiaValue > 0) {
+            this.migliaiaValue--
+          } else {
+            this.migliaiaValue = this.maxValue
+          }
+        }
+      }
+    } else if (this.showHValue) {
+      // Decrementa migliaia (rightmost e leftmost)
+      if (this.migliaiaValue > 0) {
+        this.migliaiaValue--
+      } else {
+        this.migliaiaValue = this.maxValue
       }
     }
 
-    // Aggiorna input
-    this.inputKTarget.value = this.centinaiaValue > 0 ? this.centinaiaValue.toString() : ''
-    this.inputDaTarget.value = this.decineValue > 0 ? this.decineValue.toString() : (this.centinaiaValue > 0 ? '0' : '')
-    this.inputUTarget.value = this.unitaValue > 0 ? this.unitaValue.toString() : ((this.centinaiaValue > 0 || this.decineValue > 0) ? '0' : '')
-
+    this.syncInputs()
     this.updateDisplay()
     this.checkCorrectness()
   }
@@ -354,6 +517,27 @@ export default class extends Controller {
   }
 
   // Update da input numerico
+  updateFromInputH(event) {
+    if (!this.editableValue) return
+
+    const input = event.target
+    // Permetti solo numeri 0-9
+    const cleanValue = input.value.replace(/[^0-9]/g, '')
+
+    if (cleanValue === '') {
+      this.migliaiaValue = 0
+      input.value = ''
+    } else {
+      let value = parseInt(cleanValue)
+      value = Math.min(Math.max(0, value), this.maxValue)
+      this.migliaiaValue = value
+      input.value = value.toString() // Mantieni "0" se digitato
+    }
+
+    this.updateDisplay()
+    this.checkCorrectness()
+  }
+
   updateFromInputK(event) {
     if (!this.editableValue) return
 
@@ -416,6 +600,19 @@ export default class extends Controller {
   }
 
   updateDisplay() {
+    // Aggiorna palline migliaia (viola)
+    if (this.hasBallHTarget) {
+      this.ballHTargets.forEach((ball, index) => {
+        if (index < this.migliaiaValue) {
+          ball.classList.remove("bg-transparent", "border-2", "border-dashed", "border-orange-200")
+          ball.classList.add("bg-purple-500")
+        } else {
+          ball.classList.remove("bg-purple-500")
+          ball.classList.add("bg-transparent", "border-2", "border-dashed", "border-orange-200")
+        }
+      })
+    }
+
     // Aggiorna palline centinaia (verdi)
     if (this.hasBallKTarget) {
       this.ballKTargets.forEach((ball, index) => {
@@ -460,7 +657,7 @@ export default class extends Controller {
 
     // Aggiorna valore totale
     if (this.hasTotalValueTarget) {
-      const total = this.centinaiaValue * 100 + this.decineValue * 10 + this.unitaValue
+      const total = this.migliaiaValue * 1000 + this.centinaiaValue * 100 + this.decineValue * 10 + this.unitaValue
       this.totalValueTarget.textContent = total
     }
   }
@@ -516,21 +713,31 @@ export default class extends Controller {
   }
 
   // Metodo pubblico per impostare un valore dall'esterno
-  setValue(centinaia, decine, unita) {
-    this.centinaiaValue = Math.min(Math.max(0, centinaia), this.maxValue)
-    this.decineValue = Math.min(Math.max(0, decine), this.maxValue)
-    this.unitaValue = Math.min(Math.max(0, unita), this.maxValue)
+  setValue(migliaia = 0, centinaia = 0, decine = 0, unita = 0) {
+    // Supporta sia la nuova firma (4 parametri) che la vecchia (3 parametri)
+    // Se migliaia è un oggetto, si aspetta { migliaia, centinaia, decine, unita }
+    if (typeof migliaia === 'object') {
+      const params = migliaia
+      this.migliaiaValue = Math.min(Math.max(0, params.migliaia || 0), this.maxValue)
+      this.centinaiaValue = Math.min(Math.max(0, params.centinaia || 0), this.maxValue)
+      this.decineValue = Math.min(Math.max(0, params.decine || 0), this.maxValue)
+      this.unitaValue = Math.min(Math.max(0, params.unita || 0), this.maxValue)
+    } else if (arguments.length === 3) {
+      // Retrocompatibilità: setValue(centinaia, decine, unita)
+      this.migliaiaValue = 0
+      this.centinaiaValue = Math.min(Math.max(0, migliaia), this.maxValue)
+      this.decineValue = Math.min(Math.max(0, centinaia), this.maxValue)
+      this.unitaValue = Math.min(Math.max(0, decine), this.maxValue)
+    } else {
+      // Nuova firma: setValue(migliaia, centinaia, decine, unita)
+      this.migliaiaValue = Math.min(Math.max(0, migliaia), this.maxValue)
+      this.centinaiaValue = Math.min(Math.max(0, centinaia), this.maxValue)
+      this.decineValue = Math.min(Math.max(0, decine), this.maxValue)
+      this.unitaValue = Math.min(Math.max(0, unita), this.maxValue)
+    }
 
-    // Aggiorna anche gli input
-    if (this.hasInputKTarget) {
-      this.inputKTarget.value = this.centinaiaValue > 0 ? this.centinaiaValue : ''
-    }
-    if (this.hasInputDaTarget) {
-      this.inputDaTarget.value = this.decineValue > 0 ? this.decineValue : ''
-    }
-    if (this.hasInputUTarget) {
-      this.inputUTarget.value = this.unitaValue > 0 ? this.unitaValue : ''
-    }
+    // Sincronizza gli input con la logica corretta degli zeri
+    this.syncInputs()
 
     this.updateDisplay()
     this.checkCorrectness()
@@ -538,6 +745,6 @@ export default class extends Controller {
 
   // Metodo pubblico per ottenere il valore corrente
   getValue() {
-    return this.centinaiaValue * 100 + this.decineValue * 10 + this.unitaValue
+    return this.migliaiaValue * 1000 + this.centinaiaValue * 100 + this.decineValue * 10 + this.unitaValue
   }
 }

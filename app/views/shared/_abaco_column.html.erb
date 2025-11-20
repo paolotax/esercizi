@@ -1,0 +1,56 @@
+<%
+  # Parametri richiesti:
+  # - label: etichetta della colonna ("h", "k", "da", "u")
+  # - color: colore delle palline ("purple", "green", "red", "blue")
+  # - value: numero di palline da mostrare (0-9)
+  # - max_per_column: numero massimo di palline (default: 9)
+  # - editable: se true permette di modificare (default: true)
+  # - input_value: valore da mostrare nell'input (stringa, può essere vuota o "0")
+
+  label = local_assigns.fetch(:label)
+  color = local_assigns.fetch(:color)
+  value = local_assigns.fetch(:value, 0)
+  max_per_column = local_assigns.fetch(:max_per_column, 9)
+  editable = local_assigns.fetch(:editable, true)
+  input_value = local_assigns.fetch(:input_value, '')
+
+  # Capitalizza label per i data-targets (h -> H, k -> K, da -> Da, u -> U)
+  label_capitalized = label == "da" ? "Da" : label.upcase
+%>
+
+<!-- Colonna <%= label.upcase %> -->
+<div class="flex flex-col items-center">
+  <!-- Asta con slots per palline -->
+  <div class="relative bg-orange-400 w-2 h-64 rounded-full flex flex-col-reverse justify-start items-center py-2"
+       data-abaco-target="column<%= label_capitalized %>">
+
+    <!-- Trattini orizzontali grigi -->
+    <% max_per_column.times do |i| %>
+      <div class="absolute w-8 h-0.5 bg-gray-400" style="bottom: <%= 32 + (i * 27) %>px; left: 50%; transform: translateX(-50%);"></div>
+    <% end %>
+
+    <!-- Palline (generate dinamicamente) -->
+    <% max_per_column.times do |i| %>
+      <div class="w-6 h-6 rounded-full <%= i < value ? "bg-#{color}-500" : 'bg-transparent border-2 border-dashed border-orange-200' %> transition-all duration-200 relative z-10 <%= editable ? 'cursor-pointer hover:scale-110' : '' %>"
+           data-abaco-target="ball<%= label_capitalized %>"
+           data-index="<%= i %>"
+           data-action="<%= editable ? "click->abaco#clickBall#{label_capitalized}" : '' %>"
+           style="margin-bottom: <%= i == 0 ? '0' : '3px' %>;"></div>
+    <% end %>
+  </div>
+
+  <!-- Input -->
+  <div class="-mt-2 z-10 bg-white border-3 border-<%= color %>-<%= color == 'purple' ? '500' : '400' %> rounded-lg px-3 py-2">
+    <div class="text-sm font-bold text-<%= color %>-600 text-center"><%= label %></div>
+    <input type="text"
+           inputmode="numeric"
+           pattern="[0-9]*"
+           maxlength="1"
+           value="<%= input_value %>"
+           data-abaco-target="input<%= label_capitalized %>"
+           data-action="input->abaco#updateFromInput<%= label_capitalized %>"
+           <%= editable ? '' : 'disabled' %>
+           class="text-2xl font-bold text-<%= color %>-600 text-center w-10 bg-transparent border-0 border-b-2 border-dotted border-<%= color %>-400 focus:border-<%= color %>-600 focus:outline-none <%= editable ? '' : 'opacity-50' %> [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+           placeholder="">
+  </div>
+</div>
