@@ -332,22 +332,13 @@ export default class extends Controller {
       }
     })
 
-    // Mostra messaggio dettagliato
+    // Lancia confetti se tutte le risposte sono corrette
     if (correct === total) {
-      // Tutte le risposte corrette: lancia confetti!
       this.jsConfetti.addConfetti({
         emojis: ['🎉', '✨', '🌟', '⭐', '💫'],
         emojiSize: 50,
         confettiNumber: 60
       })
-
-      // Messaggio di successo
-      setTimeout(() => {
-        alert(`🎉 Perfetto! ${correct}/${total} risposte corrette!`)
-      }, 100)
-    } else {
-      // Alcune risposte sbagliate
-      alert(`📊 ${correct}/${total} risposte corrette. Continua così!`)
     }
   }
 }
