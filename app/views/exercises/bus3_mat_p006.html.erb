@@ -1,27 +1,29 @@
-<% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
-
-<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p006/page.png') %>">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" 
+     data-controller="exercise-checker hotspot-editor">
+  
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Box azzurro: Teoria + Esercizio 1 -->
-  <div class="bg-[#C7EAFB] p-4 md:p-6 mb-8">
+  <div class="bg-[#C7EAFB] p-4 -mx-3 md:-mx-0 md:p-6 mb-8">
     <!-- Teoria -->
     <div class="mb-6">
-      <p class="text-base md:text-lg text-gray-700 mb-3">
-        Il nostro sistema di numerazione è decimale perché per contare formiamo gruppi di 10 elementi, cioè contiamo in <strong class="text-blue-600">base 10</strong>.
+      <p class="text-base md:text-lg text-gray-700">
+        Il nostro sistema di numerazione è decimale perché per contare formiamo gruppi di 10 elementi, cioè contiamo in <strong class="text-cyan-600">base 10</strong>.
       </p>
       <p class="text-base md:text-lg text-gray-700">
-        Un gruppo di <strong class="text-blue-600">10 elementi</strong> forma <strong class="text-blue-600">1 decina</strong>.
+        Un gruppo di <strong class="text-cyan-600">10 elementi</strong> forma <strong class="text-cyan-600">1 decina</strong>.
       </p>
     </div>
 
     <!-- Esercizio 1: Raggruppa in base 10 queste biglie -->
     <div data-controller="fill-blanks auto-advance">
-      <div class="flex items-start gap-6 mb-6">
+      <div class="flex flex-col gap-6 mb-6">
+        
         <!-- Contenuto esercizio a sinistra -->
-        <div class="flex-1">
-          <div class="flex items-start gap-3 mb-6">
+        <div class="">
+ 
+          <div class="flex items-center gap-3 mb-6">
             <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
               1
             </div>
@@ -30,53 +32,60 @@
             </p>
           </div>
 
-          <div class="space-y-4">
-            <div class="flex items-center gap-3">
-              <span class="text-lg"><span class="text-red-600">•</span> Quante decine hai formato?</span>
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
-                     class="w-16 px-3 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
-                     maxlength="1" inputmode="numeric">
+          <div class="flex flex-col gap-3 md:flex-row-reverse md:justify-between md:items-start">
+
+            <!-- Immagine biglie a destra -->
+            <div class="flex-shrink-0">
+              <%= image_tag "bus3_mat/p006/output-1743504902006_670_342_312_183.png",
+                  alt: "Biglie da raggruppare",
+                  class: "max-w-md" %>
             </div>
 
-            <div class="text-lg">
-              <span class="text-red-600">•</span> Quante sono le unità, cioè le biglie non raggruppate?
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
-                     class="w-16 px-3 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg inline-block ml-2"
-                     maxlength="1" inputmode="numeric">
-            </div>
-          </div>
-        </div>
+            <div class="flex flex-col gap-3 text-gray-700">
+              <div class="flex items-center gap-3">
+                <span class="text-lg"><span class="text-red-600">•</span> Quante decine hai formato?</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
+                      class="w-16 px-3 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
+                      maxlength="1" inputmode="numeric">
+              </div>
 
-        <!-- Immagine biglie a destra -->
-        <div class="flex-shrink-0">
-          <%= image_tag "bus3_mat/p006/output-1743504902006_670_342_312_183.png",
-              alt: "Biglie da raggruppare",
-              class: "max-w-md" %>
-        </div>
+              <div class="text-lg">
+                <span class="text-red-600">•</span> Quante sono le unità, cioè le biglie non raggruppate?
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+                      class="w-16 px-3 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg inline-block ml-2"
+                      maxlength="1" inputmode="numeric">
+              </div>
+
+              <p class="text-lg text-gray-700 mb-4">Puoi rappresentare le biglie anche così:</p>
+            </div>
+          </div>        
+        </div>        
       </div>
+
 
       <!-- Spiegazione visiva -->
       <div class="mt-8">
-        <p class="text-lg text-gray-700 mb-4">Puoi rappresentare le biglie anche così:</p>
+        
 
         <div class="flex items-center gap-4 flex-wrap">
           <div class="text-center">
             <%= image_tag "bus3_mat/p006/output-1743504902006_136_556_215_48.png", class: "mb-2" %>
-            <p class="font-bold">1 <span class="underline text-red-600">decina</span> → 1 <span class="underline text-red-600">da</span></p>
+            <p class="font-bold">1 <span class="text-red-600">decina</span> → 1 <span class="text-red-600">da</span></p>
           </div>
 
           <span class="text-2xl font-bold">+</span>
 
           <div class="text-center">
             <%= image_tag "bus3_mat/p006/output-1743504902006_446_555_86_45.png", class: "mb-2" %>
-            <p class="font-bold">2 <span class="underline text-cyan-600">unità</span> → 2 <span class="underline text-cyan-600">u</span></p>
+            <p class="font-bold">2 <span class="text-cyan-600">unità</span> → 2 <span class="text-cyan-600">u</span></p>
           </div>
 
           <span class="text-2xl font-bold">=</span>
-          <span class="text-3xl font-bold text-blue-600">12</span>
+          <span class="text-3xl font-bold text-cyan-600">12</span>
         </div>
       </div>
     </div>
+    
   </div>
 
   <!-- Esercizi 2 e 3 in 2 colonne -->
@@ -93,43 +102,53 @@
         </p>
       </div>
 
-      <div class="space-y-6">
+      <div class="space-y-8">
         <!-- Prima griglia -->
-        <div class="flex items-center gap-4">
-          <%= image_tag "bus3_mat/p006/output-1743504902006_99_877_180_137.png", class: "w-32" %>
-          <span class="text-2xl font-bold text-red-600">→</span>
-          <div class="flex gap-2">
-            <div class="text-center">
-              <p class="font-bold mb-2">da</p>
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="7"
-                     class="w-16 px-2 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
-                     maxlength="1" inputmode="numeric">
-            </div>
-            <div class="text-center">
-              <p class="font-bold mb-2">u</p>
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="7"
-                     class="w-16 px-2 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
-                     maxlength="1" inputmode="numeric">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mr-20">
+          
+          <%= image_tag "bus3_mat/p006/output-1743504902006_99_877_180_137.png", class: "w-auto h-auto" %>
+          
+          <div class="flex items-center gap-2">
+            <span class="text-2xl font-bold text-red-600">→</span>
+            
+            <div class="flex gap-2">
+              <div class="text-center border-4 border-red-500 shadow-md shadow-red-500/30 rounded-lg px-3 pt-0.5 pb-2">
+                <p class="text-2xl font-bold text-red-500">da</p>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="7"
+                      class="w-9 px-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
+                      maxlength="1" inputmode="numeric">
+              </div>
+
+              <div class="text-center border-4 border-cyan-600 shadow-md shadow-cyan-600/30 rounded-lg px-3 pt-0.5 pb-2">
+                <p class="text-2xl font-bold text-cyan-600">u</p>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+                      class="w-9 px-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
+                      maxlength="1" inputmode="numeric">
+              </div>   
             </div>
           </div>
         </div>
 
         <!-- Seconda griglia -->
-        <div class="flex items-center gap-4">
-          <%= image_tag "bus3_mat/p006/output-1743504902006_97_1025_225_138.png", class: "w-32" %>
-          <span class="text-2xl font-bold text-red-600">→</span>
-          <div class="flex gap-2">
-            <div class="text-center">
-              <p class="font-bold mb-2">da</p>
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="9"
-                     class="w-16 px-2 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
-                     maxlength="1" inputmode="numeric">
-            </div>
-            <div class="text-center">
-              <p class="font-bold mb-2">u</p>
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="9"
-                     class="w-16 px-2 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
-                     maxlength="1" inputmode="numeric">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mr-20">
+          <%= image_tag "bus3_mat/p006/output-1743504902006_97_1025_225_138.png", class: "w-auto h-auto" %>
+          <div class="flex items-center gap-2">
+            <span class="text-2xl font-bold text-red-600">→</span>
+            
+            <div class="flex gap-2">
+              <div class="text-center border-4 border-red-500 shadow-md shadow-red-500/30 rounded-lg px-3 pt-0.5 pb-2">
+                <p class="text-2xl font-bold text-red-500">da</p>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="9"
+                      class="w-9 px-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
+                      maxlength="1" inputmode="numeric">
+              </div>
+
+              <div class="text-center border-4 border-cyan-600 shadow-md shadow-cyan-600/30 rounded-lg px-3 pt-0.5 pb-2">
+                <p class="text-2xl font-bold text-cyan-600">u</p>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
+                      class="w-9 px-2 border-b-2 border-dotted border-gray-400 text-center font-bold text-lg"
+                      maxlength="1" inputmode="numeric">
+              </div>   
             </div>
           </div>
         </div>
@@ -148,42 +167,49 @@
       </div>
 
       <!-- Immagine abachi -->
-      <div class="mb-4">
-        <%= image_tag "bus3_mat/p006/p06_2.jpg",
-            alt: "Abachi con numeri",
-            class: "w-full max-w-lg mx-auto" %>
-      </div>
+      <div class="relative" data-hotspot-editor-target="container">
 
-      <!-- Grid input per i 6 abachi -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-        <%
-          # Numeri corrispondenti agli abachi nell'immagine (da verificare)
-          abaci_numbers = [
-            [1, 1], # 11
-            [3, 4], # 34
-            [3, 0], # 30
-            [0, 4], # 04
-            [5, 0], # 50
-            [0, 0]  # 00
+        <div class="mb-4">
+          <%= image_tag "bus3_mat/p006/p06_2.jpg",
+              alt: "Abachi con numeri",
+              class: "w-full max-w-lg mx-auto" %>
+        </div>
+
+        <!-- Input overlay per i 6 abachi -->
+        <div class="absolute inset-0">
+          <%
+          # Definizione posizioni input per pagina 21
+          # TODO: Aggiungere le posizioni degli input
+          inputs_p21 = [
+            # Esempi da personalizzare:
+            
+            { label: "5", top: "83%", left: "6.04402%", width: "5%", height: "3.5%", answer: "5" },
+            { label: "2", top: "83%", left: "19.8512%", width: "5%", height: "3.5%", answer: "2" },
+            { label: "6", top: "83%", left: "39.2689%", width: "5%", height: "3.5%", answer: "6" },
+            { label: "7", top: "83%", left: "53.873%", width: "5%", height: "3.5%", answer: "7" },
+            { label: "7", top: "83%", left: "72.9472%", width: "5%", height: "3.5%", answer: "7" },
+            { label: "0", top: "83%", left: "87.0230%", width: "5%", height: "3.5%", answer: "0" },
+
           ]
+          %>
 
-          abaci_numbers.each do |da, u|
-        %>
-          <div class="flex gap-2 justify-center">
-            <div class="text-center">
-              <p class="font-bold mb-2 text-sm">da</p>
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= da %>"
-                     class="w-12 px-2 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                     maxlength="1" inputmode="numeric">
+          <% inputs_p21.each do |input| %>
+            <div class="absolute"
+                style="top: <%= input[:top] %>; left: <%= input[:left] %>; width: <%= input[:width] %>; height: <%= input[:height] %>;"
+                data-hotspot-editor-target="hotspot"
+                data-auto-advance-target="input"
+                data-action="mousedown->hotspot-editor#startDrag">
+              <input type="text"
+                    data-fill-blanks-target="input"
+                    data-correct-answer="<%= input[:answer] %>"
+                    class="w-full h-full py-2 bg-white/60 hover:bg-white/80 focus:bg-white border-2 text-black border-transparent hover:border-purple-500 focus:border-purple-600 rounded text-center font-bold text-sm transition-colors"
+                    maxlength="<%= input[:answer].to_s.length %>"
+                    inputmode="<%= input[:answer].to_s.match?(/^\d+$/) ? 'numeric' : 'text' %>"
+                    pattern="<%= input[:answer].to_s.match?(/^\d+$/) ? '[0-9]*' : '[A-Za-z ]*' %>"
+                    aria-label="<%= input[:label] %>">
             </div>
-            <div class="text-center">
-              <p class="font-bold mb-2 text-sm">u</p>
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= u %>"
-                     class="w-12 px-2 py-2 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                     maxlength="1" inputmode="numeric">
-            </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
 

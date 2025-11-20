@@ -1,0 +1,129 @@
+<%
+  # Parametri:
+  # - centinaia: numero di palline nelle centinaia (default: 0)
+  # - decine: numero di palline nelle decine (default: 0)
+  # - unita: numero di palline nelle unità (default: 0)
+  # - max_per_column: numero massimo di palline per colonna (default: 9)
+  # - editable: se true permette di modificare le palline (default: true)
+  # - show_value: se true mostra il valore numerico sotto (default: true)
+  # - correct_value: se impostato, verifica la correttezza (opzionale)
+
+  centinaia = local_assigns.fetch(:centinaia, 0)
+  decine = local_assigns.fetch(:decine, 0)
+  unita = local_assigns.fetch(:unita, 0)
+  max_per_column = local_assigns.fetch(:max_per_column, 9)
+  editable = local_assigns.fetch(:editable, true)
+  show_value = local_assigns.fetch(:show_value, true)
+  correct_value = local_assigns.fetch(:correct_value, nil)
+%>
+
+<div class="inline-block"
+     data-controller="abaco"
+     data-abaco-centinaia-value="<%= centinaia %>"
+     data-abaco-decine-value="<%= decine %>"
+     data-abaco-unita-value="<%= unita %>"
+     data-abaco-max-value="<%= max_per_column %>"
+     data-abaco-editable-value="<%= editable %>"
+     data-abaco-correct-value="<%= correct_value %>">
+
+  <!-- Container abaco -->
+  <div class="flex gap-4 justify-center items-end">
+
+    <!-- Colonna CENTINAIA -->
+    <div class="flex flex-col items-center">
+      <!-- Asta con slots per palline -->
+      <div class="relative bg-orange-400 w-2 h-64 rounded-full flex flex-col-reverse justify-start items-center py-2"
+           data-abaco-target="columnK"
+           data-action="<%= editable ? 'click->abaco#toggleK' : '' %>">
+
+        <!-- Trattini orizzontali grigi -->
+        <% max_per_column.times do |i| %>
+          <div class="absolute w-8 h-0.5 bg-gray-400" style="bottom: <%= 38 + (i * 27) %>px; left: 50%; transform: translateX(-50%);"></div>
+        <% end %>
+
+        <!-- Palline centinaia (generate dinamicamente) -->
+        <% max_per_column.times do |i| %>
+          <div class="w-6 h-6 rounded-full <%= i < centinaia ? 'bg-green-500' : 'bg-transparent border-2 border-dashed border-orange-200' %> transition-all duration-200 relative z-10"
+               data-abaco-target="ballK"
+               data-index="<%= i %>"
+               style="margin-bottom: <%= i == 0 ? '0' : '3px' %>;"></div>
+        <% end %>
+      </div>
+
+      <!-- Etichetta CENTINAIA -->
+      <div class="mt-1 bg-white border-3 border-green-400 rounded-lg px-4 py-2">
+        <div class="text-sm font-bold text-green-600 text-center">k</div>
+        <div class="text-2xl font-bold text-green-600 text-center" data-abaco-target="labelK"><%= centinaia %></div>
+      </div>
+    </div>
+
+    <!-- Colonna DECINE -->
+    <div class="flex flex-col items-center">
+      <!-- Asta con slots per palline -->
+      <div class="relative bg-orange-400 w-2 h-64 rounded-full flex flex-col-reverse justify-start items-center py-2"
+           data-abaco-target="columnDa"
+           data-action="<%= editable ? 'click->abaco#toggleDa' : '' %>">
+
+        <!-- Trattini orizzontali grigi -->
+        <% max_per_column.times do |i| %>
+          <div class="absolute w-8 h-0.5 bg-gray-400" style="bottom: <%= 38 + (i * 27) %>px; left: 50%; transform: translateX(-50%);"></div>
+        <% end %>
+
+        <!-- Palline decine (generate dinamicamente) -->
+        <% max_per_column.times do |i| %>
+          <div class="w-6 h-6 rounded-full <%= i < decine ? 'bg-red-500' : 'bg-transparent border-2 border-dashed border-orange-200' %> transition-all duration-200 relative z-10"
+               data-abaco-target="ballDa"
+               data-index="<%= i %>"
+               style="margin-bottom: <%= i == 0 ? '0' : '3px' %>;"></div>
+        <% end %>
+      </div>
+
+      <!-- Etichetta DECINE -->
+      <div class="mt-1 bg-white border-3 border-red-400 rounded-lg px-4 py-2">
+        <div class="text-sm font-bold text-red-600 text-center">da</div>
+        <div class="text-2xl font-bold text-red-600 text-center" data-abaco-target="labelDa"><%= decine %></div>
+      </div>
+    </div>
+
+    <!-- Colonna UNITÀ -->
+    <div class="flex flex-col items-center">
+      <!-- Asta con slots per palline -->
+      <div class="relative bg-orange-400 w-2 h-64 rounded-full flex flex-col-reverse justify-start items-center py-2"
+           data-abaco-target="columnU"
+           data-action="<%= editable ? 'click->abaco#toggleU' : '' %>">
+
+        <!-- Trattini orizzontali grigi -->
+        <% max_per_column.times do |i| %>
+          <div class="absolute w-8 h-0.5 bg-gray-400" style="bottom: <%= 38 + (i * 27) %>px; left: 50%; transform: translateX(-50%);"></div>
+        <% end %>
+
+        <!-- Palline unità (generate dinamicamente) -->
+        <% max_per_column.times do |i| %>
+          <div class="w-6 h-6 rounded-full <%= i < unita ? 'bg-blue-500' : 'bg-transparent border-2 border-dashed border-orange-200' %> transition-all duration-200 relative z-10"
+               data-abaco-target="ballU"
+               data-index="<%= i %>"
+               style="margin-bottom: <%= i == 0 ? '0' : '3px' %>;"></div>
+        <% end %>
+      </div>
+
+      <!-- Etichetta UNITÀ -->
+      <div class="mt-1 bg-white border-3 border-blue-400 rounded-lg px-4 py-2">
+        <div class="text-sm font-bold text-blue-600 text-center">u</div>
+        <div class="text-2xl font-bold text-blue-600 text-center" data-abaco-target="labelU"><%= unita %></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Valore totale (opzionale) -->
+  <% if show_value %>
+    <div class="mt-4 text-center">
+      <span class="text-lg font-bold text-gray-700">Valore: </span>
+      <span class="text-3xl font-bold text-cyan-600" data-abaco-target="totalValue"><%= centinaia * 100 + decine * 10 + unita %></span>
+
+      <!-- Feedback correttezza (se specificato correct_value) -->
+      <% if correct_value %>
+        <div class="mt-2" data-abaco-target="feedback"></div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

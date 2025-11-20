@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     get "addizioni", to: "addizioni#show", as: "addizioni"
     get "sottrazioni", to: "sottrazioni#show", as: "sottrazioni"
     get "le_rime", to: "le_rime#show", as: "le_rime"
+    get "abaco", to: "abaco#show", as: "abaco"
   end
 
   # Defines the root path route ("/")
