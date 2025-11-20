@@ -310,7 +310,7 @@ export default class extends Controller {
     if (correct === total) {
       this.jsConfetti.addConfetti({
         emojis: ['🎉', '✨', '🌟', '⭐', '💫'],
-        emojiSize: 50,
+        emojiSize: 30,
         confettiNumber: 60
       })
     }
