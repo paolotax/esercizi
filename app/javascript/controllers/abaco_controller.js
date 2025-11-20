@@ -665,16 +665,70 @@ export default class extends Controller {
   checkCorrectness() {
     if (!this.hasFeedbackTarget || this.correctValue === null) return
 
-    // Verifica che tutti gli input siano compilati (anche con "0")
-    const allFieldsFilled =
-      this.inputKTarget.value !== '' &&
-      this.inputDaTarget.value !== '' &&
-      this.inputUTarget.value !== ''
+    // Calcola il totale attuale basandosi sulle colonne visibili
+    const currentTotal = (this.showHValue ? this.migliaiaValue * 1000 : 0) +
+                         (this.showKValue ? this.centinaiaValue * 100 : 0) +
+                         (this.showDaValue ? this.decineValue * 10 : 0) +
+                         (this.showUValue ? this.unitaValue : 0)
 
-    const currentTotal = this.centinaiaValue * 100 + this.decineValue * 10 + this.unitaValue
+    // Calcola le cifre del valore corretto
+    const correctH = Math.floor(this.correctValue / 1000) % 10
+    const correctK = Math.floor(this.correctValue / 100) % 10
+    const correctDa = Math.floor(this.correctValue / 10) % 10
+    const correctU = this.correctValue % 10
 
-    // Corretto solo se: tutti i campi compilati E valore corretto
-    if (allFieldsFilled && currentTotal === this.correctValue) {
+    // Determina quale colonna è la leftmost
+    const leftmost = this.showHValue ? 'h' :
+                    this.showKValue ? 'k' :
+                    this.showDaValue ? 'da' :
+                    this.showUValue ? 'u' : null
+
+    // Verifica che tutti gli input siano compilati correttamente
+    // La colonna leftmost può essere vuota se il suo valore corretto è 0
+    let allFieldsValid = true
+
+    if (this.showHValue && this.hasInputHTarget) {
+      if (leftmost === 'h' && correctH === 0) {
+        // Leftmost con valore 0: accetta '' o '0'
+        allFieldsValid = allFieldsValid && (this.inputHTarget.value === '' || this.inputHTarget.value === '0')
+      } else {
+        // Deve essere compilato
+        allFieldsValid = allFieldsValid && this.inputHTarget.value !== ''
+      }
+    }
+
+    if (this.showKValue && this.hasInputKTarget) {
+      if (leftmost === 'k' && correctK === 0) {
+        // Leftmost con valore 0: accetta '' o '0'
+        allFieldsValid = allFieldsValid && (this.inputKTarget.value === '' || this.inputKTarget.value === '0')
+      } else {
+        // Deve essere compilato
+        allFieldsValid = allFieldsValid && this.inputKTarget.value !== ''
+      }
+    }
+
+    if (this.showDaValue && this.hasInputDaTarget) {
+      if (leftmost === 'da' && correctDa === 0) {
+        // Leftmost con valore 0: accetta '' o '0'
+        allFieldsValid = allFieldsValid && (this.inputDaTarget.value === '' || this.inputDaTarget.value === '0')
+      } else {
+        // Deve essere compilato
+        allFieldsValid = allFieldsValid && this.inputDaTarget.value !== ''
+      }
+    }
+
+    if (this.showUValue && this.hasInputUTarget) {
+      if (leftmost === 'u' && correctU === 0) {
+        // Leftmost con valore 0: accetta '' o '0'
+        allFieldsValid = allFieldsValid && (this.inputUTarget.value === '' || this.inputUTarget.value === '0')
+      } else {
+        // Deve essere compilato
+        allFieldsValid = allFieldsValid && this.inputUTarget.value !== ''
+      }
+    }
+
+    // Corretto solo se: tutti i campi validi E valore corretto
+    if (allFieldsValid && currentTotal === this.correctValue) {
       // Lancia confetti (solo la prima volta)
       if (!this.hasCorrectAnswer) {
         this.confetti.addConfetti({
@@ -696,7 +750,7 @@ export default class extends Controller {
     } else {
       this.hasCorrectAnswer = false
       // Mostra "Riprova" solo se tutti i campi sono compilati ma sbagliati
-      if (allFieldsFilled) {
+      if (allFieldsValid) {
         this.feedbackTarget.innerHTML = `
           <span class="inline-flex items-center gap-2 text-orange-500 font-bold">
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
