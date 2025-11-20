@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import JSConfetti from "js-confetti"
 
 // Controller specifico per le sottrazioni in colonna
 // Estende le funzionalità base con logica specifica per i prestiti
@@ -6,6 +7,7 @@ export default class extends Controller {
   static targets = ["input", "result", "carry"]
 
   connect() {
+    this.jsConfetti = new JSConfetti()
     // Aggiungi gli event listener per i prestiti (carry)
     if (this.hasCarryTarget) {
       this.carryTargets.forEach((input, index) => {
@@ -331,10 +333,21 @@ export default class extends Controller {
     })
 
     // Mostra messaggio dettagliato
-    const message = correct === total
-      ? `🎉 Perfetto! ${correct}/${total} risposte corrette!`
-      : `📊 ${correct}/${total} risposte corrette. Continua così!`
+    if (correct === total) {
+      // Tutte le risposte corrette: lancia confetti!
+      this.jsConfetti.addConfetti({
+        emojis: ['🎉', '✨', '🌟', '⭐', '💫'],
+        emojiSize: 50,
+        confettiNumber: 60
+      })
 
-    alert(message)
+      // Messaggio di successo
+      setTimeout(() => {
+        alert(`🎉 Perfetto! ${correct}/${total} risposte corrette!`)
+      }, 100)
+    } else {
+      // Alcune risposte sbagliate
+      alert(`📊 ${correct}/${total} risposte corrette. Continua così!`)
+    }
   }
 }
