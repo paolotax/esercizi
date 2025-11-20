@@ -46,10 +46,44 @@
       </p>
     </div>
 
-    <div class="flex justify-center">
-      <%= image_tag "bus3_mat/p033/p33_2.jpg",
-          alt: "Esercizi in colonna",
-          class: "max-w-4xl w-full" %>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Prima coppia: 862 - 184 -->
+      <div class="flex items-center justify-center gap-6">
+        <!-- Sottrazione -->
+        <%= render partial: "shared/column_subtraction",
+                   locals: Sottrazione.new(minuend: 862, subtrahend: 184,
+                                           show_minuend_subtrahend: true,
+                                           show_toolbar: false,
+                                           show_borrow: true).to_partial_params %>
+
+        <div class="text-3xl font-bold text-cyan-600">→</div>
+
+        <!-- Addizione per la prova -->
+        <%= render partial: "shared/column_addition",
+                   locals: Addizione.new(addends: [184, 678],
+                                         show_exercise: true,
+                                         show_toolbar: false,
+                                         show_carry: true).to_partial_params %>
+      </div>
+
+      <!-- Seconda coppia: 536 - 275 -->
+      <div class="flex items-center justify-center gap-6">
+        <!-- Sottrazione -->
+        <%= render partial: "shared/column_subtraction",
+                   locals: Sottrazione.new(minuend: 536, subtrahend: 275,
+                                           show_minuend_subtrahend: true,
+                                           show_toolbar: false,
+                                           show_borrow: true).to_partial_params %>
+
+        <div class="text-3xl font-bold text-cyan-600">→</div>
+
+        <!-- Addizione per la prova -->
+        <%= render partial: "shared/column_addition",
+                   locals: Addizione.new(addends: [275, 261],
+                                         show_exercise: true,
+                                         show_toolbar: false,
+                                         show_carry: true).to_partial_params %>
+      </div>
     </div>
   </div>
 
