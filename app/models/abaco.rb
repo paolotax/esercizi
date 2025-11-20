@@ -3,11 +3,13 @@
 # Modello per rappresentare un abaco con le sue configurazioni
 class Abaco
   attr_reader :number, :migliaia, :centinaia, :decine, :unita,
-              :editable, :show_value, :correct_value, :disable_auto_zeros
+              :editable, :show_value, :correct_value, :disable_auto_zeros,
+              :max_per_column
 
   def initialize(number:, **options)
     @number = number
     @correct_value = options[:correct_value] || number
+    @max_per_column = options.fetch(:max_per_column, 9)
 
     # Estrai le cifre dal numero
     h_digit = (number / 1000) % 10
@@ -42,6 +44,88 @@ class Abaco
     @editable = options.fetch(:editable, true)
     @show_value = options.fetch(:show_value, false)
     @disable_auto_zeros = has_explicit_params
+  end
+
+  # Metodi per verificare quali colonne mostrare
+  def show_h?
+    defined?(@migliaia)
+  end
+
+  def show_k?
+    defined?(@centinaia)
+  end
+
+  def show_da?
+    defined?(@decine)
+  end
+
+  def show_u?
+    defined?(@unita)
+  end
+
+  # Valori delle colonne (0 se nil)
+  def migliaia_value
+    @migliaia.to_i
+  end
+
+  def centinaia_value
+    @centinaia.to_i
+  end
+
+  def decine_value
+    @decine.to_i
+  end
+
+  def unita_value
+    @unita.to_i
+  end
+
+  # Calcola i valori degli input secondo la logica degli zeri
+  def input_h
+    return nil unless show_h?
+
+    if @disable_auto_zeros
+      @migliaia.to_i > 0 ? @migliaia.to_s : ""
+    else
+      @migliaia.to_i > 0 ? @migliaia.to_s : ""
+    end
+  end
+
+  def input_k
+    return nil unless show_k?
+
+    if @disable_auto_zeros
+      @centinaia.to_i > 0 ? @centinaia.to_s : ""
+    else
+      @centinaia.to_i > 0 ? @centinaia.to_s : (show_h? && migliaia_value > 0 ? "0" : "")
+    end
+  end
+
+  def input_da
+    return nil unless show_da?
+
+    if @disable_auto_zeros
+      @decine.to_i > 0 ? @decine.to_s : ""
+    else
+      has_higher = (show_h? && migliaia_value > 0) || (show_k? && centinaia_value > 0)
+      @decine.to_i > 0 ? @decine.to_s : (has_higher ? "0" : "")
+    end
+  end
+
+  def input_u
+    return nil unless show_u?
+
+    if @disable_auto_zeros
+      @unita.to_i > 0 ? @unita.to_s : ""
+    else
+      has_higher = (show_h? && migliaia_value > 0) || (show_k? && centinaia_value > 0) || (show_da? && decine_value > 0)
+      @unita.to_i > 0 ? @unita.to_s : (has_higher ? "0" : "")
+    end
+  end
+
+  # Valore totale
+  def total_value
+    migliaia_value * 1000 + centinaia_value * 100 + decine_value * 10 + unita_value
   end
 
   # Parsing di una stringa come "125:k=1,da=nil,u=nil"
@@ -108,22 +192,8 @@ class Abaco
       .compact
   end
 
-  # Parametri da passare al partial _abaco
+  # Parametri da passare al partial _abaco - semplicemente l'oggetto stesso
   def to_partial_params
-    params = {}
-
-    # Includi le colonne solo se sono state definite (anche se nil)
-    params[:migliaia] = @migliaia if defined?(@migliaia)
-    params[:centinaia] = @centinaia if defined?(@centinaia)
-    params[:decine] = @decine if defined?(@decine)
-    params[:unita] = @unita if defined?(@unita)
-
-    # Altri parametri (sempre inclusi)
-    params[:editable] = @editable
-    params[:show_value] = @show_value
-    params[:correct_value] = @correct_value
-    params[:disable_auto_zeros] = @disable_auto_zeros
-
-    params
+    { abaco: self }
   end
 end

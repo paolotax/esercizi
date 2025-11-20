@@ -5,48 +5,49 @@
   <!-- Esempio 1: Abaco vuoto modificabile -->
   <div class="bg-gray-50 p-6 rounded-lg">
     <h3 class="text-xl font-bold mb-4">1. Abaco vuoto (clicca per aggiungere palline)</h3>
-    <%= render 'shared/abaco', unita: nil, decine: nil %>
+    <%= render 'shared/abaco', **Abaco.new(number: 10, u: nil, da: nil).to_partial_params %>
   </div>
 
   <div class="bg-gray-50 p-6 rounded-lg">
-        <%= render 'shared/abaco',
-              centinaia: 3,
-              decine: 0,
-              unita: 5,
-              max_per_column: 9,
-              editable: true,
-              show_value: true,
-              correct_value: 305  # Se specificato, abilita validazione
-          %>
+    <%= render 'shared/abaco',
+          **Abaco.new(number: 305,
+                      k: 3,
+                      da: 0,
+                      u: 5,
+                      max_per_column: 9,
+                      editable: true,
+                      show_value: true,
+                      correct_value: 305).to_partial_params %>
   </div>
 
   <!-- Esempio 2: Abaco con valore iniziale -->
   <div class="bg-gray-50 p-6 rounded-lg">
     <h3 class="text-xl font-bold mb-4">2. Abaco con valore iniziale 50</h3>
-    <%= render 'shared/abaco', decine: 5, unita: 0 %>
+    <%= render 'shared/abaco', **Abaco.new(number: 50, da: 5, u: 0).to_partial_params %>
   </div>
 
   <!-- Esempio 3: Abaco con valore da verificare -->
   <div class="bg-gray-50 p-6 rounded-lg">
     <h3 class="text-xl font-bold mb-4">3. Abaco con verifica (forma il numero 36)</h3>
     <p class="text-gray-700 mb-4">Clicca sulle colonne per formare il numero corretto e vedere il feedback!</p>
-    <%= render 'shared/abaco', 
-          correct_value: 36,
-          unita: nil,
-          decine: nil,
-          centinaia: nil  %>
+    <%= render 'shared/abaco',
+          **Abaco.new(number: 100,
+                      k: nil,
+                      da: nil,
+                      u: nil,
+                      correct_value: 36).to_partial_params %>
   </div>
 
   <!-- Esempio 4: Abaco non modificabile (solo visualizzazione) -->
   <div class="bg-gray-50 p-6 rounded-lg">
     <h3 class="text-xl font-bold mb-4">4. Abaco di sola lettura (mostra 73)</h3>
-    <%= render 'shared/abaco', decine: 7, unita: 3, editable: false %>
+    <%= render 'shared/abaco', **Abaco.new(number: 73, da: 7, u: 3, editable: false).to_partial_params %>
   </div>
 
   <!-- Esempio 5: Abaco senza valore mostrato -->
   <div class="bg-gray-50 p-6 rounded-lg">
     <h3 class="text-xl font-bold mb-4">5. Abaco senza valore totale visualizzato</h3>
-    <%= render 'shared/abaco', decine: 4, unita: 8, show_value: false %>
+    <%= render 'shared/abaco', **Abaco.new(number: 48, da: 4, u: 8, show_value: false).to_partial_params %>
   </div>
 
   <!-- Esempio 6: Due abachi affiancati per confronto -->
@@ -55,11 +56,11 @@
     <div class="flex gap-8 justify-center items-start flex-wrap">
       <div class="text-center">
         <p class="text-lg font-bold mb-4 text-cyan-600">36</p>
-        <%= render 'shared/abaco', decine: 3, unita: 6, editable: false %>
+        <%= render 'shared/abaco', **Abaco.new(number: 36, da: 3, u: 6, editable: false).to_partial_params %>
       </div>
       <div class="text-center">
         <p class="text-lg font-bold mb-4 text-cyan-600">63</p>
-        <%= render 'shared/abaco', decine: 6, unita: 3, editable: false %>
+        <%= render 'shared/abaco', **Abaco.new(number: 63, da: 6, u: 3, editable: false).to_partial_params %>
       </div>
     </div>
   </div>
@@ -70,7 +71,7 @@
     <p class="text-lg text-gray-700 mb-6">
       Clicca sulle colonne dell'abaco per formare il numero <strong class="text-cyan-600">25</strong>
     </p>
-    <%= render 'shared/abaco', correct_value: 25 %>
+    <%= render 'shared/abaco', **Abaco.new(number: 25, correct_value: 25).to_partial_params %>
   </div>
 
 </div>
@@ -79,11 +80,12 @@
 <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mt-8">
   <h4 class="font-bold text-lg mb-2">Come usare il componente Abaco:</h4>
   <pre class="bg-white p-4 rounded text-sm overflow-x-auto"><code>&lt;%= render 'shared/abaco',
-  decine: 5,              # Numero iniziale di palline nelle decine (default: 0)
-  unita: 3,               # Numero iniziale di palline nelle unità (default: 0)
-  max_per_column: 9,      # Massimo numero di palline per colonna (default: 9)
-  editable: true,         # Se false, l'abaco è di sola lettura (default: true)
-  show_value: true,       # Se true mostra il valore numerico (default: true)
-  correct_value: 53       # Se impostato, verifica la correttezza (opzionale)
-%&gt;</code></pre>
+  **Abaco.new(number: 53,
+              da: 5,              # Numero iniziale di palline nelle decine
+              u: 3,               # Numero iniziale di palline nelle unità
+              max_per_column: 9,  # Massimo numero di palline per colonna (default: 9)
+              editable: true,     # Se false, l'abaco è di sola lettura (default: true)
+              show_value: true,   # Se true mostra il valore numerico (default: false)
+              correct_value: 53   # Se impostato, verifica la correttezza (opzionale)
+  ).to_partial_params %&gt;</code></pre>
 </div>

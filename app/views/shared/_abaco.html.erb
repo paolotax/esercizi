@@ -1,151 +1,67 @@
-<%
-  # Parametri:
-  # - migliaia: numero di palline nelle migliaia (se non passato, colonna non mostrata)
-  # - centinaia: numero di palline nelle centinaia (se non passato, colonna non mostrata)
-  # - decine: numero di palline nelle decine (se non passato, colonna non mostrata)
-  # - unita: numero di palline nelle unità (se non passato, colonna non mostrata)
-  # - max_per_column: numero massimo di palline per colonna (default: 9)
-  # - editable: se true permette di modificare le palline (default: true)
-  # - show_value: se true mostra il valore numerico sotto (default: true)
-  # - correct_value: se impostato, verifica la correttezza (opzionale)
-  #
-  # Nota: Passare nil esplicito (es. migliaia: nil) mostra la colonna vuota
-  #       Non passare il parametro nasconde completamente la colonna
-
-  # Verifica quali colonne sono state richieste
-  show_h = local_assigns.key?(:migliaia)
-  show_k = local_assigns.key?(:centinaia)
-  show_da = local_assigns.key?(:decine)
-  show_u = local_assigns.key?(:unita)
-
-  # Ottieni i valori (0 se nil)
-  migliaia = local_assigns.fetch(:migliaia, 0).to_i
-  centinaia = local_assigns.fetch(:centinaia, 0).to_i
-  decine = local_assigns.fetch(:decine, 0).to_i
-  unita = local_assigns.fetch(:unita, 0).to_i
-
-  max_per_column = local_assigns.fetch(:max_per_column, 9)
-  editable = local_assigns.fetch(:editable, true)
-  show_value = local_assigns.fetch(:show_value, true)
-  correct_value = local_assigns.fetch(:correct_value, nil)
-
-  # Se disable_auto_zeros=true, non applica la logica automatica degli zeri
-  # (usato quando i valori sono specificati esplicitamente)
-  disable_auto_zeros = local_assigns.fetch(:disable_auto_zeros, false)
-
-  # Determina quale colonna è la più significativa (leftmost)
-  leftmost = nil
-  leftmost = 'h' if show_h
-  leftmost ||= 'k' if show_k
-  leftmost ||= 'da' if show_da
-  leftmost ||= 'u' if show_u
-
-  # Calcola i valori degli input secondo la logica degli zeri
-  if disable_auto_zeros
-    # Modo esplicito: mostra esattamente quello che è stato passato
-    # 0 = vuoto, qualsiasi altro numero = mostra il numero
-    if show_h
-      input_h = migliaia > 0 ? migliaia.to_s : ''
-    end
-
-    if show_k
-      input_k = centinaia > 0 ? centinaia.to_s : ''
-    end
-
-    if show_da
-      input_da = decine > 0 ? decine.to_s : ''
-    end
-
-    if show_u
-      input_u = unita > 0 ? unita.to_s : ''
-    end
-  else
-    # Modo automatico: la colonna leftmost può essere vuota quando è 0
-    # Le altre mostrano "0" se una colonna più significativa ha valore
-    if show_h
-      input_h = migliaia > 0 ? migliaia.to_s : ''
-    end
-
-    if show_k
-      input_k = centinaia > 0 ? centinaia.to_s : (show_h && migliaia > 0 ? '0' : '')
-    end
-
-    if show_da
-      has_higher = (show_h && migliaia > 0) || (show_k && centinaia > 0)
-      input_da = decine > 0 ? decine.to_s : (has_higher ? '0' : '')
-    end
-
-    if show_u
-      has_higher = (show_h && migliaia > 0) || (show_k && centinaia > 0) || (show_da && decine > 0)
-      input_u = unita > 0 ? unita.to_s : (has_higher ? '0' : '')
-    end
-  end
-%>
-
 <div class="inline-block"
      data-controller="abaco"
-     data-abaco-migliaia-value="<%= migliaia %>"
-     data-abaco-centinaia-value="<%= centinaia %>"
-     data-abaco-decine-value="<%= decine %>"
-     data-abaco-unita-value="<%= unita %>"
-     data-abaco-show-h-value="<%= show_h %>"
-     data-abaco-show-k-value="<%= show_k %>"
-     data-abaco-show-da-value="<%= show_da %>"
-     data-abaco-show-u-value="<%= show_u %>"
-     data-abaco-max-value="<%= max_per_column %>"
-     data-abaco-editable-value="<%= editable %>"
-     data-abaco-correct-value="<%= correct_value %>">
+     data-abaco-migliaia-value="<%= abaco.migliaia_value %>"
+     data-abaco-centinaia-value="<%= abaco.centinaia_value %>"
+     data-abaco-decine-value="<%= abaco.decine_value %>"
+     data-abaco-unita-value="<%= abaco.unita_value %>"
+     data-abaco-show-h-value="<%= abaco.show_h? %>"
+     data-abaco-show-k-value="<%= abaco.show_k? %>"
+     data-abaco-show-da-value="<%= abaco.show_da? %>"
+     data-abaco-show-u-value="<%= abaco.show_u? %>"
+     data-abaco-max-value="<%= abaco.max_per_column %>"
+     data-abaco-editable-value="<%= abaco.editable %>"
+     data-abaco-correct-value="<%= abaco.correct_value %>">
 
   <!-- Container abaco -->
   <div class="flex gap-4 justify-center items-end" data-controller="auto-advance">
 
-    <% if show_h %>
+    <% if abaco.show_h? %>
       <%= render 'shared/abaco_column',
                  label: 'h',
                  color: 'purple',
-                 value: migliaia,
-                 max_per_column: max_per_column,
-                 editable: editable,
-                 input_value: input_h %>
+                 value: abaco.migliaia_value,
+                 max_per_column: abaco.max_per_column,
+                 editable: abaco.editable,
+                 input_value: abaco.input_h %>
     <% end %>
 
-    <% if show_k %>
+    <% if abaco.show_k? %>
       <%= render 'shared/abaco_column',
                  label: 'k',
                  color: 'green',
-                 value: centinaia,
-                 max_per_column: max_per_column,
-                 editable: editable,
-                 input_value: input_k %>
+                 value: abaco.centinaia_value,
+                 max_per_column: abaco.max_per_column,
+                 editable: abaco.editable,
+                 input_value: abaco.input_k %>
     <% end %>
 
-    <% if show_da %>
+    <% if abaco.show_da? %>
       <%= render 'shared/abaco_column',
                  label: 'da',
                  color: 'red',
-                 value: decine,
-                 max_per_column: max_per_column,
-                 editable: editable,
-                 input_value: input_da %>
+                 value: abaco.decine_value,
+                 max_per_column: abaco.max_per_column,
+                 editable: abaco.editable,
+                 input_value: abaco.input_da %>
     <% end %>
 
-    <% if show_u %>
+    <% if abaco.show_u? %>
       <%= render 'shared/abaco_column',
                  label: 'u',
                  color: 'blue',
-                 value: unita,
-                 max_per_column: max_per_column,
-                 editable: editable,
-                 input_value: input_u %>
+                 value: abaco.unita_value,
+                 max_per_column: abaco.max_per_column,
+                 editable: abaco.editable,
+                 input_value: abaco.input_u %>
     <% end %>
   </div>
 
   <!-- Valore totale (opzionale) -->
-  <% if show_value %>
+  <% if abaco.show_value %>
     <div class="mt-4 text-center">
       <!-- Pulsanti globali +/- -->
-      
-      <% if editable %>
+
+      <% if abaco.editable %>
         <div class="flex items-center justify-center gap-3 mt-4">
           <button type="button"
                   data-action="click->abaco#decrementGlobal"
@@ -162,12 +78,12 @@
         <!-- Valore totale -->
         <div class="flex items-center justify-center mt-3 mb-3 gap-3">
           <span class="text-lg font-bold text-gray-700">Valore: </span>
-          <span class="text-3xl font-bold text-cyan-600" data-abaco-target="totalValue"><%= migliaia * 1000 + centinaia * 100 + decine * 10 + unita %></span>
+          <span class="text-3xl font-bold text-cyan-600" data-abaco-target="totalValue"><%= abaco.total_value %></span>
         </div>
       <% end %>
 
       <!-- Feedback correttezza (se specificato correct_value) -->
-      <% if correct_value %>
+      <% if abaco.correct_value %>
         <div class="mt-2" data-abaco-target="feedback"></div>
       <% end %>
     </div>
