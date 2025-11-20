@@ -85,7 +85,8 @@ class Abaco
     return nil unless show_h?
 
     if @disable_auto_zeros
-      @migliaia.to_i > 0 ? @migliaia.to_s : ""
+      # Modo esplicito: nil = vuoto, qualsiasi numero (anche 0) = mostra il numero
+      @migliaia.nil? ? "" : @migliaia.to_s
     else
       @migliaia.to_i > 0 ? @migliaia.to_s : ""
     end
@@ -95,7 +96,8 @@ class Abaco
     return nil unless show_k?
 
     if @disable_auto_zeros
-      @centinaia.to_i > 0 ? @centinaia.to_s : ""
+      # Modo esplicito: nil = vuoto, qualsiasi numero (anche 0) = mostra il numero
+      @centinaia.nil? ? "" : @centinaia.to_s
     else
       @centinaia.to_i > 0 ? @centinaia.to_s : (show_h? && migliaia_value > 0 ? "0" : "")
     end
@@ -105,7 +107,8 @@ class Abaco
     return nil unless show_da?
 
     if @disable_auto_zeros
-      @decine.to_i > 0 ? @decine.to_s : ""
+      # Modo esplicito: nil = vuoto, qualsiasi numero (anche 0) = mostra il numero
+      @decine.nil? ? "" : @decine.to_s
     else
       has_higher = (show_h? && migliaia_value > 0) || (show_k? && centinaia_value > 0)
       @decine.to_i > 0 ? @decine.to_s : (has_higher ? "0" : "")
@@ -116,7 +119,8 @@ class Abaco
     return nil unless show_u?
 
     if @disable_auto_zeros
-      @unita.to_i > 0 ? @unita.to_s : ""
+      # Modo esplicito: nil = vuoto, qualsiasi numero (anche 0) = mostra il numero
+      @unita.nil? ? "" : @unita.to_s
     else
       has_higher = (show_h? && migliaia_value > 0) || (show_k? && centinaia_value > 0) || (show_da? && decine_value > 0)
       @unita.to_i > 0 ? @unita.to_s : (has_higher ? "0" : "")
