@@ -3,7 +3,7 @@ import JSConfetti from "js-confetti"
 
 // Connects to data-controller="abaco"
 export default class extends Controller {
-  static targets = ["columnH", "columnK", "columnDa", "columnU", "ballH", "ballK", "ballDa", "ballU", "inputH", "inputK", "inputDa", "inputU", "totalValue", "feedback"]
+  static targets = ["columnK", "columnH", "columnDa", "columnU", "ballK", "ballH", "ballDa", "ballU", "inputK", "inputH", "inputDa", "inputU", "totalValue", "feedback"]
   static values = {
     migliaia: { type: Number, default: 0 },
     centinaia: { type: Number, default: 0 },
@@ -74,26 +74,26 @@ export default class extends Controller {
   // Sincronizza gli input con i valori correnti (gestisce correttamente gli zeri)
   syncInputs() {
     // Determina quale colonna è la leftmost (più significativa)
-    const leftmost = this.showHValue ? 'h' :
-                    this.showKValue ? 'k' :
+    const leftmost = this.showKValue ? 'k' :  // k = migliaia (leftmost)
+                    this.showHValue ? 'h' :    // h = centinaia
                     this.showDaValue ? 'da' :
                     this.showUValue ? 'u' : null
 
-    // h: mostra solo se > 0, altrimenti vuoto (è sempre leftmost se presente)
-    if (this.hasInputHTarget) {
-      this.inputHTarget.value = this.migliaiaValue > 0 ? this.migliaiaValue.toString() : ''
+    // k: mostra solo se > 0, altrimenti vuoto (è sempre leftmost se presente)
+    if (this.hasInputKTarget) {
+      this.inputKTarget.value = this.migliaiaValue > 0 ? this.migliaiaValue.toString() : ''
     }
 
-    // k: mostra se > 0, OPPURE mostra "0" se non è leftmost e c'è valore a sinistra
-    if (this.hasInputKTarget) {
+    // h: mostra se > 0, OPPURE mostra "0" se non è leftmost e c'è valore a sinistra
+    if (this.hasInputHTarget) {
       if (this.centinaiaValue > 0) {
-        this.inputKTarget.value = this.centinaiaValue.toString()
-      } else if (leftmost === 'k') {
-        this.inputKTarget.value = ''
+        this.inputHTarget.value = this.centinaiaValue.toString()
+      } else if (leftmost === 'h') {
+        this.inputHTarget.value = ''
       } else if (this.showHValue && this.migliaiaValue > 0) {
-        this.inputKTarget.value = '0'
+        this.inputHTarget.value = '0'
       } else {
-        this.inputKTarget.value = ''
+        this.inputHTarget.value = ''
       }
     }
 
@@ -298,223 +298,223 @@ export default class extends Controller {
   }
 
   // Pulsanti increment/decrement con riporto automatico (DEPRECATI - tenuti per compatibilità)
-  incrementK(event) {
-    if (!this.editableValue) return
+  // incrementK(event) {
+  //   if (!this.editableValue) return
 
-    if (this.centinaiaValue >= this.maxValue) {
-      // Se siamo al massimo, torna a 0
-      this.centinaiaValue = 0
-      if (this.hasInputKTarget) {
-        this.inputKTarget.value = ''
-      }
-    } else {
-      this.centinaiaValue++
-      if (this.hasInputKTarget) {
-        this.inputKTarget.value = this.centinaiaValue.toString()
-      }
-    }
-    this.updateDisplay()
-    this.checkCorrectness()
-  }
+  //   if (this.centinaiaValue >= this.maxValue) {
+  //     // Se siamo al massimo, torna a 0
+  //     this.centinaiaValue = 0
+  //     if (this.hasInputKTarget) {
+  //       this.inputKTarget.value = ''
+  //     }
+  //   } else {
+  //     this.centinaiaValue++
+  //     if (this.hasInputKTarget) {
+  //       this.inputKTarget.value = this.centinaiaValue.toString()
+  //     }
+  //   }
+  //   this.updateDisplay()
+  //   this.checkCorrectness()
+  // }
 
-  decrementK(event) {
-    if (!this.editableValue) return
+  // decrementK(event) {
+  //   if (!this.editableValue) return
 
-    if (this.centinaiaValue <= 0) {
-      // Da 0 (vuoto), vai al massimo (cicla)
-      this.centinaiaValue = this.maxValue
-      if (this.hasInputKTarget) {
-        this.inputKTarget.value = this.centinaiaValue.toString()
-      }
-    } else if (this.centinaiaValue === 1) {
-      // Da 1, diventa 0 vuoto (cifra più significativa)
-      this.centinaiaValue = 0
-      if (this.hasInputKTarget) {
-        this.inputKTarget.value = ''
-      }
-    } else {
-      // Altrimenti decrementa normalmente
-      this.centinaiaValue--
-      if (this.hasInputKTarget) {
-        this.inputKTarget.value = this.centinaiaValue.toString()
-      }
-    }
-    this.updateDisplay()
-    this.checkCorrectness()
-  }
+  //   if (this.centinaiaValue <= 0) {
+  //     // Da 0 (vuoto), vai al massimo (cicla)
+  //     this.centinaiaValue = this.maxValue
+  //     if (this.hasInputKTarget) {
+  //       this.inputKTarget.value = this.centinaiaValue.toString()
+  //     }
+  //   } else if (this.centinaiaValue === 1) {
+  //     // Da 1, diventa 0 vuoto (cifra più significativa)
+  //     this.centinaiaValue = 0
+  //     if (this.hasInputKTarget) {
+  //       this.inputKTarget.value = ''
+  //     }
+  //   } else {
+  //     // Altrimenti decrementa normalmente
+  //     this.centinaiaValue--
+  //     if (this.hasInputKTarget) {
+  //       this.inputKTarget.value = this.centinaiaValue.toString()
+  //     }
+  //   }
+  //   this.updateDisplay()
+  //   this.checkCorrectness()
+  // }
 
-  incrementDa(event) {
-    if (!this.editableValue) return
+  // incrementDa(event) {
+  //   if (!this.editableValue) return
 
-    if (this.decineValue >= this.maxValue) {
-      // Riporto: decine 9 → 0 (MOSTRATO!) e centinaia +1
-      this.decineValue = 0
-      if (this.hasInputDaTarget) {
-        this.inputDaTarget.value = '0' // Mostra "0" non vuoto!
-      }
+  //   if (this.decineValue >= this.maxValue) {
+  //     // Riporto: decine 9 → 0 (MOSTRATO!) e centinaia +1
+  //     this.decineValue = 0
+  //     if (this.hasInputDaTarget) {
+  //       this.inputDaTarget.value = '0' // Mostra "0" non vuoto!
+  //     }
 
-      // Incrementa centinaia con riporto
-      if (this.centinaiaValue >= this.maxValue) {
-        // k cicla: 9 → vuoto
-        this.centinaiaValue = 0
-        if (this.hasInputKTarget) {
-          this.inputKTarget.value = ''
-        }
-      } else {
-        this.centinaiaValue++
-        if (this.hasInputKTarget) {
-          this.inputKTarget.value = this.centinaiaValue.toString()
-        }
-      }
-    } else {
-      this.decineValue++
-      if (this.hasInputDaTarget) {
-        this.inputDaTarget.value = this.decineValue.toString()
-      }
-    }
-    this.updateDisplay()
-    this.checkCorrectness()
-  }
+  //     // Incrementa centinaia con riporto
+  //     if (this.centinaiaValue >= this.maxValue) {
+  //       // k cicla: 9 → vuoto
+  //       this.centinaiaValue = 0
+  //       if (this.hasInputKTarget) {
+  //         this.inputKTarget.value = ''
+  //       }
+  //     } else {
+  //       this.centinaiaValue++
+  //       if (this.hasInputKTarget) {
+  //         this.inputKTarget.value = this.centinaiaValue.toString()
+  //       }
+  //     }
+  //   } else {
+  //     this.decineValue++
+  //     if (this.hasInputDaTarget) {
+  //       this.inputDaTarget.value = this.decineValue.toString()
+  //     }
+  //   }
+  //   this.updateDisplay()
+  //   this.checkCorrectness()
+  // }
 
-  decrementDa(event) {
-    if (!this.editableValue) return
+  // decrementDa(event) {
+  //   if (!this.editableValue) return
 
-    if (this.decineValue === 0) {
-      // Prestito: da 0 → 9 e centinaia -1
-      this.decineValue = this.maxValue
-      if (this.hasInputDaTarget) {
-        this.inputDaTarget.value = this.decineValue.toString()
-      }
+  //   if (this.decineValue === 0) {
+  //     // Prestito: da 0 → 9 e centinaia -1
+  //     this.decineValue = this.maxValue
+  //     if (this.hasInputDaTarget) {
+  //       this.inputDaTarget.value = this.decineValue.toString()
+  //     }
 
-      // Decrementa centinaia
-      if (this.centinaiaValue > 1) {
-        this.centinaiaValue--
-        if (this.hasInputKTarget) {
-          this.inputKTarget.value = this.centinaiaValue.toString()
-        }
-      } else if (this.centinaiaValue === 1) {
-        // Da 1 a 0 vuoto
-        this.centinaiaValue = 0
-        if (this.hasInputKTarget) {
-          this.inputKTarget.value = ''
-        }
-      } else {
-        // Se centinaia è già 0 (vuoto), cicla a 9
-        this.centinaiaValue = this.maxValue
-        if (this.hasInputKTarget) {
-          this.inputKTarget.value = this.centinaiaValue.toString()
-        }
-      }
-    } else {
-      // Decrementa normalmente: 5→4, 2→1, 1→0 (mostrato!)
-      this.decineValue--
-      if (this.hasInputDaTarget) {
-        this.inputDaTarget.value = this.decineValue.toString() // Mostra anche "0"
-      }
-    }
-    this.updateDisplay()
-    this.checkCorrectness()
-  }
+  //     // Decrementa centinaia
+  //     if (this.centinaiaValue > 1) {
+  //       this.centinaiaValue--
+  //       if (this.hasInputKTarget) {
+  //         this.inputKTarget.value = this.centinaiaValue.toString()
+  //       }
+  //     } else if (this.centinaiaValue === 1) {
+  //       // Da 1 a 0 vuoto
+  //       this.centinaiaValue = 0
+  //       if (this.hasInputKTarget) {
+  //         this.inputKTarget.value = ''
+  //       }
+  //     } else {
+  //       // Se centinaia è già 0 (vuoto), cicla a 9
+  //       this.centinaiaValue = this.maxValue
+  //       if (this.hasInputKTarget) {
+  //         this.inputKTarget.value = this.centinaiaValue.toString()
+  //       }
+  //     }
+  //   } else {
+  //     // Decrementa normalmente: 5→4, 2→1, 1→0 (mostrato!)
+  //     this.decineValue--
+  //     if (this.hasInputDaTarget) {
+  //       this.inputDaTarget.value = this.decineValue.toString() // Mostra anche "0"
+  //     }
+  //   }
+  //   this.updateDisplay()
+  //   this.checkCorrectness()
+  // }
 
-  incrementU(event) {
-    if (!this.editableValue) return
+  // incrementU(event) {
+  //   if (!this.editableValue) return
 
-    if (this.unitaValue >= this.maxValue) {
-      // Riporto: unità 9 → 0 (MOSTRATO!) e decine +1
-      this.unitaValue = 0
-      if (this.hasInputUTarget) {
-        this.inputUTarget.value = '0' // Mostra "0" non vuoto!
-      }
+  //   if (this.unitaValue >= this.maxValue) {
+  //     // Riporto: unità 9 → 0 (MOSTRATO!) e decine +1
+  //     this.unitaValue = 0
+  //     if (this.hasInputUTarget) {
+  //       this.inputUTarget.value = '0' // Mostra "0" non vuoto!
+  //     }
 
-      // Incrementa decine con riporto
-      if (this.decineValue >= this.maxValue) {
-        // da: 9 → 0 (MOSTRATO!)
-        this.decineValue = 0
-        if (this.hasInputDaTarget) {
-          this.inputDaTarget.value = '0' // Mostra "0" non vuoto!
-        }
+  //     // Incrementa decine con riporto
+  //     if (this.decineValue >= this.maxValue) {
+  //       // da: 9 → 0 (MOSTRATO!)
+  //       this.decineValue = 0
+  //       if (this.hasInputDaTarget) {
+  //         this.inputDaTarget.value = '0' // Mostra "0" non vuoto!
+  //       }
 
-        // Incrementa centinaia
-        if (this.centinaiaValue >= this.maxValue) {
-          // k cicla: 9 → vuoto
-          this.centinaiaValue = 0
-          if (this.hasInputKTarget) {
-            this.inputKTarget.value = ''
-          }
-        } else {
-          this.centinaiaValue++
-          if (this.hasInputKTarget) {
-            this.inputKTarget.value = this.centinaiaValue.toString()
-          }
-        }
-      } else {
-        this.decineValue++
-        if (this.hasInputDaTarget) {
-          this.inputDaTarget.value = this.decineValue.toString()
-        }
-      }
-    } else {
-      this.unitaValue++
-      if (this.hasInputUTarget) {
-        this.inputUTarget.value = this.unitaValue.toString()
-      }
-    }
-    this.updateDisplay()
-    this.checkCorrectness()
-  }
+  //       // Incrementa centinaia
+  //       if (this.centinaiaValue >= this.maxValue) {
+  //         // k cicla: 9 → vuoto
+  //         this.centinaiaValue = 0
+  //         if (this.hasInputKTarget) {
+  //           this.inputKTarget.value = ''
+  //         }
+  //       } else {
+  //         this.centinaiaValue++
+  //         if (this.hasInputKTarget) {
+  //           this.inputKTarget.value = this.centinaiaValue.toString()
+  //         }
+  //       }
+  //     } else {
+  //       this.decineValue++
+  //       if (this.hasInputDaTarget) {
+  //         this.inputDaTarget.value = this.decineValue.toString()
+  //       }
+  //     }
+  //   } else {
+  //     this.unitaValue++
+  //     if (this.hasInputUTarget) {
+  //       this.inputUTarget.value = this.unitaValue.toString()
+  //     }
+  //   }
+  //   this.updateDisplay()
+  //   this.checkCorrectness()
+  // }
 
-  decrementU(event) {
-    if (!this.editableValue) return
+  // decrementU(event) {
+  //   if (!this.editableValue) return
 
-    if (this.unitaValue === 0) {
-      // Prestito: da 0 → 9 e decine -1
-      this.unitaValue = this.maxValue
-      if (this.hasInputUTarget) {
-        this.inputUTarget.value = this.unitaValue.toString()
-      }
+  //   if (this.unitaValue === 0) {
+  //     // Prestito: da 0 → 9 e decine -1
+  //     this.unitaValue = this.maxValue
+  //     if (this.hasInputUTarget) {
+  //       this.inputUTarget.value = this.unitaValue.toString()
+  //     }
 
-      // Decrementa decine con prestito
-      if (this.decineValue > 0) {
-        this.decineValue--
-        if (this.hasInputDaTarget) {
-          this.inputDaTarget.value = this.decineValue.toString() // Mostra anche "0"
-        }
-      } else {
-        // Decine è 0, prendi prestito da centinaia
-        this.decineValue = this.maxValue
-        if (this.hasInputDaTarget) {
-          this.inputDaTarget.value = this.decineValue.toString()
-        }
+  //     // Decrementa decine con prestito
+  //     if (this.decineValue > 0) {
+  //       this.decineValue--
+  //       if (this.hasInputDaTarget) {
+  //         this.inputDaTarget.value = this.decineValue.toString() // Mostra anche "0"
+  //       }
+  //     } else {
+  //       // Decine è 0, prendi prestito da centinaia
+  //       this.decineValue = this.maxValue
+  //       if (this.hasInputDaTarget) {
+  //         this.inputDaTarget.value = this.decineValue.toString()
+  //       }
 
-        if (this.centinaiaValue > 1) {
-          this.centinaiaValue--
-          if (this.hasInputKTarget) {
-            this.inputKTarget.value = this.centinaiaValue.toString()
-          }
-        } else if (this.centinaiaValue === 1) {
-          // Da 1 a 0 vuoto
-          this.centinaiaValue = 0
-          if (this.hasInputKTarget) {
-            this.inputKTarget.value = ''
-          }
-        } else {
-          // Se centinaia è già 0 (vuoto), cicla a 9
-          this.centinaiaValue = this.maxValue
-          if (this.hasInputKTarget) {
-            this.inputKTarget.value = this.centinaiaValue.toString()
-          }
-        }
-      }
-    } else {
-      // Decrementa normalmente: 5→4, 2→1, 1→0 (mostrato!)
-      this.unitaValue--
-      if (this.hasInputUTarget) {
-        this.inputUTarget.value = this.unitaValue.toString() // Mostra anche "0"
-      }
-    }
-    this.updateDisplay()
-    this.checkCorrectness()
-  }
+  //       if (this.centinaiaValue > 1) {
+  //         this.centinaiaValue--
+  //         if (this.hasInputKTarget) {
+  //           this.inputKTarget.value = this.centinaiaValue.toString()
+  //         }
+  //       } else if (this.centinaiaValue === 1) {
+  //         // Da 1 a 0 vuoto
+  //         this.centinaiaValue = 0
+  //         if (this.hasInputKTarget) {
+  //           this.inputKTarget.value = ''
+  //         }
+  //       } else {
+  //         // Se centinaia è già 0 (vuoto), cicla a 9
+  //         this.centinaiaValue = this.maxValue
+  //         if (this.hasInputKTarget) {
+  //           this.inputKTarget.value = this.centinaiaValue.toString()
+  //         }
+  //       }
+  //     }
+  //   } else {
+  //     // Decrementa normalmente: 5→4, 2→1, 1→0 (mostrato!)
+  //     this.unitaValue--
+  //     if (this.hasInputUTarget) {
+  //       this.inputUTarget.value = this.unitaValue.toString() // Mostra anche "0"
+  //     }
+  //   }
+  //   this.updateDisplay()
+  //   this.checkCorrectness()
+  // }
 
   // Update da input numerico
   updateFromInputK(event) {
@@ -667,20 +667,20 @@ export default class extends Controller {
     if (this.correctValue === null) return
 
     // Calcola il totale attuale basandosi sulle colonne visibili
-    const currentTotal = (this.showHValue ? this.migliaiaValue * 1000 : 0) +
-                         (this.showKValue ? this.centinaiaValue * 100 : 0) +
+    const currentTotal = (this.showKValue ? this.migliaiaValue * 1000 : 0) +  // k = migliaia
+                         (this.showHValue ? this.centinaiaValue * 100 : 0) +   // h = centinaia
                          (this.showDaValue ? this.decineValue * 10 : 0) +
                          (this.showUValue ? this.unitaValue : 0)
 
     // Calcola le cifre del valore corretto
-    const correctH = Math.floor(this.correctValue / 1000) % 10
-    const correctK = Math.floor(this.correctValue / 100) % 10
+    const correctK = Math.floor(this.correctValue / 1000) % 10  // k = migliaia
+    const correctH = Math.floor(this.correctValue / 100) % 10   // h = centinaia
     const correctDa = Math.floor(this.correctValue / 10) % 10
     const correctU = this.correctValue % 10
 
     // Determina quale colonna è la leftmost
-    const leftmost = this.showHValue ? 'h' :
-                    this.showKValue ? 'k' :
+    const leftmost = this.showKValue ? 'k' :  // k = migliaia (leftmost)
+                    this.showHValue ? 'h' :    // h = centinaia
                     this.showDaValue ? 'da' :
                     this.showUValue ? 'u' : null
 
@@ -688,15 +688,6 @@ export default class extends Controller {
     // La colonna leftmost può essere vuota se il suo valore corretto è 0
     let allFieldsValid = true
 
-    if (this.showHValue && this.hasInputHTarget) {
-      if (leftmost === 'h' && correctH === 0) {
-        // Leftmost con valore 0: accetta '' o '0'
-        allFieldsValid = allFieldsValid && (this.inputHTarget.value === '' || this.inputHTarget.value === '0')
-      } else {
-        // Deve essere compilato
-        allFieldsValid = allFieldsValid && this.inputHTarget.value !== ''
-      }
-    }
 
     if (this.showKValue && this.hasInputKTarget) {
       if (leftmost === 'k' && correctK === 0) {
@@ -705,6 +696,16 @@ export default class extends Controller {
       } else {
         // Deve essere compilato
         allFieldsValid = allFieldsValid && this.inputKTarget.value !== ''
+      }
+    }
+
+    if (this.showHValue && this.hasInputHTarget) {
+      if (leftmost === 'h' && correctH === 0) {
+        // Leftmost con valore 0: accetta '' o '0'
+        allFieldsValid = allFieldsValid && (this.inputHTarget.value === '' || this.inputHTarget.value === '0')
+      } else {
+        // Deve essere compilato
+        allFieldsValid = allFieldsValid && this.inputHTarget.value !== ''
       }
     }
 
