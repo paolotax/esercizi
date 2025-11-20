@@ -1,0 +1,81 @@
+<% content_for :titolo, "Esempi Moltiplicazioni - Strumenti" %>
+
+<div class="max-w-6xl mx-auto px-6 py-8">
+  <!-- Header -->
+  <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-3xl font-bold text-gray-800">Esempi di Moltiplicazioni</h1>
+      <%= link_to strumenti_moltiplicazioni_path, class: "inline-flex items-center gap-2 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors shadow-lg" do %>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Torna allo Strumento
+      <% end %>
+    </div>
+    <p class="text-gray-600 text-lg">
+      Esplora diversi modi di utilizzare il componente moltiplicazione nelle tue pagine.
+    </p>
+  </div>
+
+  <div class="space-y-12">
+
+    <!-- Esempio 1: Moltiplicazione semplice -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h3 class="text-xl font-bold mb-4">1. Moltiplicazione semplice (23 × 4)</h3>
+      <%= render 'shared/column_multiplication',
+            **Moltiplicazione.new(multiplicand: 23, multiplier: 4).to_partial_params %>
+    </div>
+
+    <!-- Esempio 2: Con moltiplicatore a 2 cifre -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h3 class="text-xl font-bold mb-4">2. Moltiplicatore a 2 cifre (25 × 12)</h3>
+      <%= render 'shared/column_multiplication',
+            **Moltiplicazione.new(multiplicand: 25, multiplier: 12).to_partial_params %>
+    </div>
+
+    <!-- Esempio 3: Senza toolbar -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h3 class="text-xl font-bold mb-4">3. Senza toolbar (156 × 34)</h3>
+      <%= render 'shared/column_multiplication',
+            **Moltiplicazione.new(multiplicand: 156, multiplier: 34, show_toolbar: false).to_partial_params %>
+    </div>
+
+    <!-- Esempio 4: Senza prodotti parziali (solo risultato) -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h3 class="text-xl font-bold mb-4">4. Solo risultato finale (48 × 15)</h3>
+      <%= render 'shared/column_multiplication',
+            **Moltiplicazione.new(multiplicand: 48, multiplier: 15, show_partial_products: false).to_partial_params %>
+    </div>
+
+    <!-- Esempio 5: Con esercizio mostrato -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h3 class="text-xl font-bold mb-4">5. Con esercizio (78 × 23)</h3>
+      <%= render 'shared/column_multiplication',
+            **Moltiplicazione.new(multiplicand: 78, multiplier: 23, show_exercise: true).to_partial_params %>
+    </div>
+
+    <!-- Esempio 6: Da completare (numeri nascosti) -->
+    <div class="bg-gray-50 p-6 rounded-lg">
+      <h3 class="text-xl font-bold mb-4">6. Completa l'operazione (? × ?)</h3>
+      <%= render 'shared/column_multiplication',
+            **Moltiplicazione.new(multiplicand: 42, multiplier: 17,
+                                  show_multiplicand_multiplier: false).to_partial_params %>
+    </div>
+
+  </div>
+
+  <!-- Note sull'utilizzo -->
+  <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mt-8">
+    <h4 class="font-bold text-lg mb-2">Come usare il componente Moltiplicazione:</h4>
+    <pre class="bg-white p-4 rounded text-sm overflow-x-auto"><code>&lt;%= render 'shared/column_multiplication',
+  **Moltiplicazione.new(
+    multiplicand: 25,                      # Moltiplicando
+    multiplier: 12,                        # Moltiplicatore
+    show_multiplicand_multiplier: true,    # Mostra i numeri (default: true)
+    show_toolbar: true,                    # Mostra pulsanti (default: true)
+    show_partial_products: true,           # Mostra prodotti parziali (default: true)
+    editable: true,                        # Permetti modifica (default: true)
+    show_exercise: false                   # Mostra esercizio (default: false)
+  ).to_partial_params %&gt;</code></pre>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<% content_for :titolo, "Moltiplicazioni in Colonna - Strumenti" %>
+
+<div class="max-w-6xl mx-auto px-6 py-8">
+  <!-- Header -->
+  <div class="bg-white print:hidden rounded-lg shadow-lg p-8 mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-3xl font-bold text-gray-800">Moltiplicazioni in Colonna</h1>
+      <%= link_to strumenti_moltiplicazioni_examples_path, class: "inline-flex items-center gap-2 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors shadow-lg" do %>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        Vedi Esempi
+      <% end %>
+    </div>
+    <p class="text-gray-600 text-lg">
+      Strumento per esercitarsi con le moltiplicazioni in colonna.
+      Supporta moltiplicatori con più cifre e prodotti parziali.
+    </p>
+  </div>
+
+  <!-- Generatore -->
+  <div class="bg-white print:hidden rounded-lg shadow-lg p-8 mb-8">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Generatore di Moltiplicazioni</h2>
+
+    <p class="text-sm text-gray-600 mb-4">
+      <strong>Formato:</strong> <code class="bg-gray-100 px-2 py-1 rounded">123x45</code> o <code class="bg-gray-100 px-2 py-1 rounded">123*45</code>
+      <br>
+      <strong>Con parametri:</strong> <code class="bg-gray-100 px-2 py-1 rounded">123x45:show_toolbar=false</code>
+      <br>
+      <strong>Parametri disponibili:</strong> show_multiplicand_multiplier, show_toolbar, show_partial_products, editable, show_exercise
+    </p>
+
+    <!-- Esempi da copiare -->
+    <div class="grid grid-cols-1 gap-2 mb-4" data-controller="copy-to-clipboard">
+      <div class="bg-gray-50 p-3 rounded-lg">
+        <div class="flex items-center justify-between mb-1">
+          <p class="text-xs font-semibold text-gray-700">Moltiplicazioni semplici:</p>
+          <button type="button"
+                  data-action="click->copy-to-clipboard#copy"
+                  data-copy-to-clipboard-text-param="23x4 56x7 125x3"
+                  class="text-xs px-2 py-1 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors">
+            Copia
+          </button>
+        </div>
+        <code class="bg-white px-2 py-1 rounded border block font-mono text-xs">23x4 56x7 125x3</code>
+      </div>
+
+      <div class="bg-gray-50 p-3 rounded-lg">
+        <div class="flex items-center justify-between mb-1">
+          <p class="text-xs font-semibold text-gray-700">Moltiplicazioni con 2 cifre:</p>
+          <button type="button"
+                  data-action="click->copy-to-clipboard#copy"
+                  data-copy-to-clipboard-text-param="25x12 34x23 156x45"
+                  class="text-xs px-2 py-1 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors">
+            Copia
+          </button>
+        </div>
+        <code class="bg-white px-2 py-1 rounded border block font-mono text-xs">25x12 34x23 156x45</code>
+      </div>
+    </div>
+
+    <%= form_with url: strumenti_moltiplicazioni_generate_path, method: :post, local: true,
+                  data: { turbo: false } do |f| %>
+      <div class="mb-4">
+        <%= f.text_area :multiplications,
+                        value: @multiplications_string,
+                        placeholder: "Inserisci le moltiplicazioni qui...\nEsempio: 23x4 125x12 34x56",
+                        rows: 6,
+                        class: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none font-mono text-sm" %>
+      </div>
+
+      <div class="flex gap-4">
+        <%= f.submit "Genera Moltiplicazioni",
+                    class: "bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+
+        <% if @multiplications_string.present? %>
+          <%= link_to "Cancella", strumenti_moltiplicazioni_path,
+                      class: "bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @multiplications_string.present? && @multiplications.blank? %>
+      <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
+        <p class="text-yellow-900 text-sm">
+          <strong>Attenzione:</strong> Non sono state trovate moltiplicazioni valide.
+          Usa il formato: 123x45 o 123*45
+        </p>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Moltiplicazioni Generate -->
+  <% if @multiplications && @multiplications.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-8 print:gap-12">
+      <% @multiplications.each do |moltiplicazione| %>
+        <div class="flex flex-col items-center print:break-inside-avoid">
+          <%= render 'shared/column_multiplication', **moltiplicazione.to_partial_params %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
