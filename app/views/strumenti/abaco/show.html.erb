@@ -13,134 +13,115 @@
       <% end %>
     </div>
     <p class="text-gray-600 text-lg">
-      Strumento didattico per imparare il sistema posizionale con decine e unità.
+      Strumento didattico per imparare il sistema posizionale con migliaia, centinaia, decine e unità.
       Clicca sulle colonne dell'abaco per aggiungere o rimuovere palline.
     </p>
   </div>
 
-  <!-- Esempi -->
-  <div class="space-y-8">
-
-    <!-- Abaco libero -->
-    <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg shadow-lg p-8">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">Abaco Libero</h2>
-      <p class="text-gray-700 text-lg mb-6">
-        Clicca sulle colonne per formare qualsiasi numero da 0 a 99. Le palline si aggiungono dal basso verso l'alto.
-      </p>
-      <div class="flex justify-center">
-        <%= render 'shared/abaco', centinaia: 0, decine: 0, unita: 0 %>
-      </div>
+  <!-- Abaco Libero -->
+  <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg shadow-lg p-8 mb-8">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Abaco Libero</h2>
+    <p class="text-gray-700 text-lg mb-6">
+      Clicca sulle colonne per formare qualsiasi numero. Le palline si aggiungono dal basso verso l'alto.
+    </p>
+    <div class="flex justify-center">
+      <%= render 'shared/abaco', migliaia: 0, centinaia: 0, decine: 0, unita: 0 %>
     </div>
-
-    <!-- Esercizi guidati -->
-    <div class="bg-white rounded-lg shadow-lg p-8">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6">Esercizi Guidati</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        <!-- Esercizio 1 -->
-        <div class="bg-cyan-50 p-6 rounded-lg">
-          <h3 class="text-xl font-bold text-cyan-700 mb-4">Forma il numero 125</h3>
-          <p class="text-gray-700 mb-4">
-            Clicca sulle colonne dell'abaco per rappresentare il numero <strong class="text-2xl">125</strong>
-          </p>
-          <%= render 'shared/abaco', centinaia: 0, decine: 0, unita: 0, correct_value: 125 %>
-        </div>
-
-        <!-- Esercizio 2 -->
-        <div class="bg-green-50 p-6 rounded-lg">
-          <h3 class="text-xl font-bold text-green-700 mb-4">Forma il numero 300</h3>
-          <p class="text-gray-700 mb-4">
-            Rappresenta il numero <strong class="text-2xl">300</strong>. Ricorda: gli zeri sono importanti!
-          </p>
-          <%= render 'shared/abaco', centinaia: 0, decine: 0, unita: 0, correct_value: 300 %>
-        </div>
-
-        <!-- Esercizio 3 -->
-        <div class="bg-purple-50 p-6 rounded-lg">
-          <h3 class="text-xl font-bold text-purple-700 mb-4">Forma il numero 573</h3>
-          <p class="text-gray-700 mb-4">
-            Forma il numero <strong class="text-2xl">573</strong> sull'abaco
-          </p>
-          <%= render 'shared/abaco', centinaia: 0, decine: 0, unita: 0, correct_value: 573 %>
-        </div>
-
-        <!-- Esercizio 4 -->
-        <div class="bg-pink-50 p-6 rounded-lg">
-          <h3 class="text-xl font-bold text-pink-700 mb-4">Forma il numero 999</h3>
-          <p class="text-gray-700 mb-4">
-            Rappresenta il numero più grande possibile: <strong class="text-2xl">999</strong>
-          </p>
-          <%= render 'shared/abaco', centinaia: 0, decine: 0, unita: 0, correct_value: 999 %>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Confronto tra numeri -->
-    <div class="bg-white rounded-lg shadow-lg p-8">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6">Sistema Posizionale</h2>
-      <p class="text-gray-700 text-lg mb-6">
-        Osserva come lo stesso numero (la cifra 5) ha valori diversi a seconda della posizione che occupa:
-      </p>
-
-      <div class="flex gap-8 justify-center items-start flex-wrap">
-        <div class="text-center">
-          <div class="bg-blue-100 rounded-lg p-4 mb-4">
-            <p class="text-3xl font-bold text-blue-700 mb-2">5</p>
-            <p class="text-sm text-gray-600">Il 5 vale <strong>5 unità</strong></p>
-          </div>
-          <%= render 'shared/abaco', centinaia: 0, decine: 0, unita: 5, editable: false %>
-        </div>
-
-        <div class="text-center">
-          <div class="bg-red-100 rounded-lg p-4 mb-4">
-            <p class="text-3xl font-bold text-red-700 mb-2">50</p>
-            <p class="text-sm text-gray-600">Il 5 vale <strong>5 decine = 50</strong></p>
-          </div>
-          <%= render 'shared/abaco', centinaia: 0, decine: 5, unita: 0, editable: false %>
-        </div>
-
-        <div class="text-center">
-          <div class="bg-green-100 rounded-lg p-4 mb-4">
-            <p class="text-3xl font-bold text-green-700 mb-2">500</p>
-            <p class="text-sm text-gray-600">Il 5 vale <strong>5 centinaia = 500</strong></p>
-          </div>
-          <%= render 'shared/abaco', centinaia: 5, decine: 0, unita: 0, editable: false %>
-        </div>
-      </div>
-    </div>
-
-    <!-- Istruzioni -->
-    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
-      <h3 class="text-xl font-bold text-blue-900 mb-4">Come funziona l'abaco</h3>
-      <ul class="space-y-2 text-gray-700">
-        <li class="flex items-start gap-2">
-          <span class="text-green-600 font-bold">•</span>
-          <span>Clicca sulla colonna delle <strong class="text-green-600">centinaia (k)</strong> per aggiungere palline verdi (ogni pallina vale 100)</span>
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="text-red-600 font-bold">•</span>
-          <span>Clicca sulla colonna delle <strong class="text-red-600">decine (da)</strong> per aggiungere palline rosse (ogni pallina vale 10)</span>
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="text-blue-600 font-bold">•</span>
-          <span>Clicca sulla colonna delle <strong class="text-blue-600">unità (u)</strong> per aggiungere palline blu (ogni pallina vale 1)</span>
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="text-gray-600 font-bold">•</span>
-          <span>Le palline si riempiono dal basso verso l'alto, come in un vero abaco</span>
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="text-gray-600 font-bold">•</span>
-          <span>Il valore totale viene calcolato automaticamente: (centinaia × 100) + (decine × 10) + unità</span>
-        </li>
-        <li class="flex items-start gap-2">
-          <span class="text-gray-600 font-bold">•</span>
-          <span>Negli esercizi guidati, ricevi un feedback immediato quando formi il numero corretto</span>
-        </li>
-      </ul>
-    </div>
-
   </div>
+
+  <!-- Generatore di Abachi -->
+  <div class="print-hidden bg-white rounded-lg shadow-lg p-8 mb-8">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Generatore di Abachi</h2>
+
+    <p class="text-gray-600 mb-8">
+      Inserisci uno o più numeri separati da virgola, punto e virgola o nuova riga.
+      <br>
+      <strong>Esempi da copiare e incollare:</strong>
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <p class="text-sm font-semibold text-gray-700 mb-2">Solo unità (0-9):</p>
+        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">5, 8, 3, 9</code>
+      </div>
+
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <p class="text-sm font-semibold text-gray-700 mb-2">Decine e unità (10-99):</p>
+        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">23, 56, 89, 41</code>
+      </div>
+
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <p class="text-sm font-semibold text-gray-700 mb-2">Centinaia, decine e unità (100-999):</p>
+        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">125, 300, 573, 999</code>
+      </div>
+
+      <div class="bg-gray-50 p-4 rounded-lg">
+        <p class="text-sm font-semibold text-gray-700 mb-2">Con migliaia (1000-9999):</p>
+        <code class="bg-white px-3 py-2 rounded border block font-mono text-sm">1234, 5000, 8765</code>
+      </div>
+    </div>
+
+    <%= form_with url: strumenti_abaco_path, method: :get, local: true,
+                  data: { turbo: false },
+                  class: "mb-8" do |f| %>
+      <div class="mb-4">
+        <%= f.text_area :numbers,
+                        value: @numbers,
+                        placeholder: "125\n36\n573\n1234",
+                        rows: 6,
+                        class: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none font-mono text-lg" %>
+      </div>
+
+      <div class="flex gap-4">
+        <%= f.submit "Genera Abachi",
+                    class: "bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+
+        <% if @numbers.present? %>
+          <%= link_to "Cancella", strumenti_abaco_path,
+                      class: "bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @numbers.present? && @numbers_array.blank? %>
+      <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-8">
+        <p class="text-yellow-900">
+          <strong>Attenzione:</strong> Non sono stati trovati numeri validi.
+          Inserisci numeri da 0 a 9999.
+        </p>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Abachi Generati -->
+  <% if @numbers_array && @numbers_array.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-3 gap-8 print:gap-12">
+      <% @numbers_array.each_with_index do |number, index| %>
+        <%
+          # Determina quali colonne mostrare in base al numero
+          h = (number / 1000) % 10
+          k = (number / 100) % 10
+          da = (number / 10) % 10
+          u = number % 10
+
+          # Parametri per il partial
+          abaco_params = {}
+          abaco_params[:migliaia] = h if number >= 1000
+          abaco_params[:centinaia] = k if number >= 100
+          abaco_params[:decine] = da if number >= 10
+          abaco_params[:unita] = u
+          abaco_params[:editable] = true
+          abaco_params[:correct_value] = number
+        %>
+
+        <div class="flex flex-col items-center print:break-inside-avoid bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-gray-700 mb-6">
+            Forma il numero <%= number %>
+          </h3>
+
+          <%= render 'shared/abaco', **abaco_params %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
