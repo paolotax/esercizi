@@ -4,17 +4,67 @@ module Strumenti
   class MoltiplicazioniController < ApplicationController
     def show
       @multiplications = []
+      @options = default_options
     end
 
     def generate
       @multiplications_string = params[:multiplications]
-      @multiplications = Moltiplicazione.parse_multiple(@multiplications_string)
+      @options = parse_options
+
+      # Crea le moltiplicazioni applicando le opzioni globali
+      @multiplications = parse_multiplications_with_options(@multiplications_string, @options)
 
       render :show
     end
 
     def examples
       # Pagina con esempi di utilizzo
+    end
+
+    private
+
+    def default_options
+      {
+        show_toolbar: true,
+        show_partial_products: false,
+        editable: true,
+        show_exercise: false
+      }
+    end
+
+    def parse_options
+      {
+        show_toolbar: params[:show_toolbar] == "true",
+        show_partial_products: params[:show_partial_products] == "true",
+        editable: params[:editable] == "true",
+        show_exercise: params[:show_exercise] == "true"
+      }
+    end
+
+    def parse_multiplications_with_options(multiplications_string, options)
+      return [] if multiplications_string.blank?
+
+      multiplications_string
+        .split(/[\s\n]+/)
+        .map(&:strip)
+        .reject(&:blank?)
+        .map { |line| parse_single_multiplication(line, options) }
+        .compact
+    end
+
+    def parse_single_multiplication(line, global_options)
+      # Parse solo i numeri (ignora eventuali parametri inline)
+      numbers_str = line.split(":", 2).first
+      return nil if numbers_str.blank?
+
+      match = numbers_str.match(/^(\d+)\s*[x*×]\s*(\d+)$/i)
+      return nil unless match
+
+      Moltiplicazione.new(
+        multiplicand: match[1].to_i,
+        multiplier: match[2].to_i,
+        **global_options
+      )
     end
   end
 end
