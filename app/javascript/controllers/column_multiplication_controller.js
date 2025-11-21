@@ -20,6 +20,7 @@ export default class extends Controller {
     if (this.hasCarryPartialTarget) {
       this.carryPartialTargets.forEach((input, index) => {
         input.addEventListener('input', (e) => this.handleCarryPartialInput(e, index))
+        input.addEventListener('keydown', (e) => this.handleCarryPartialKeydown(e, index))
       })
     }
 
@@ -35,6 +36,7 @@ export default class extends Controller {
     if (this.hasCarryResultTarget) {
       this.carryResultTargets.forEach((input, index) => {
         input.addEventListener('input', (e) => this.handleCarryResultInput(e, index))
+        input.addEventListener('keydown', (e) => this.handleCarryResultKeydown(e, index))
       })
     }
   }
@@ -75,6 +77,12 @@ export default class extends Controller {
       event.preventDefault()
       this.partialInputTargets[index + 1].focus()
     }
+
+    // ArrowUp/ArrowDown: naviga per colonna
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      event.preventDefault()
+      this.navigateVertical(input, event.key === 'ArrowUp' ? -1 : 1)
+    }
   }
 
   handleCarryPartialInput(event, index) {
@@ -90,6 +98,34 @@ export default class extends Controller {
     // Auto-advance verso sinistra (indice minore)
     if (value !== '' && index > 0) {
       this.carryPartialTargets[index - 1].focus()
+    }
+  }
+
+  handleCarryPartialKeydown(event, index) {
+    const input = event.target
+
+    // Backspace su campo vuoto: torna a destra (indice maggiore)
+    if (event.key === 'Backspace' && input.value === '' && index < this.carryPartialTargets.length - 1) {
+      event.preventDefault()
+      this.carryPartialTargets[index + 1].focus()
+    }
+
+    // ArrowLeft: vai a sinistra (indice minore)
+    if (event.key === 'ArrowLeft' && index > 0) {
+      event.preventDefault()
+      this.carryPartialTargets[index - 1].focus()
+    }
+
+    // ArrowRight: vai a destra (indice maggiore)
+    if (event.key === 'ArrowRight' && index < this.carryPartialTargets.length - 1) {
+      event.preventDefault()
+      this.carryPartialTargets[index + 1].focus()
+    }
+
+    // ArrowUp/ArrowDown: naviga per colonna
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      event.preventDefault()
+      this.navigateVertical(input, event.key === 'ArrowUp' ? -1 : 1)
     }
   }
 
@@ -129,6 +165,12 @@ export default class extends Controller {
       event.preventDefault()
       this.resultInputTargets[index + 1].focus()
     }
+
+    // ArrowUp/ArrowDown: naviga per colonna
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      event.preventDefault()
+      this.navigateVertical(input, event.key === 'ArrowUp' ? -1 : 1)
+    }
   }
 
   handleCarryResultInput(event, index) {
@@ -144,6 +186,84 @@ export default class extends Controller {
     // Auto-advance verso sinistra (indice minore)
     if (value !== '' && index > 0) {
       this.carryResultTargets[index - 1].focus()
+    }
+  }
+
+  handleCarryResultKeydown(event, index) {
+    const input = event.target
+
+    // Backspace su campo vuoto: torna a destra (indice maggiore)
+    if (event.key === 'Backspace' && input.value === '' && index < this.carryResultTargets.length - 1) {
+      event.preventDefault()
+      this.carryResultTargets[index + 1].focus()
+    }
+
+    // ArrowLeft: vai a sinistra (indice minore)
+    if (event.key === 'ArrowLeft' && index > 0) {
+      event.preventDefault()
+      this.carryResultTargets[index - 1].focus()
+    }
+
+    // ArrowRight: vai a destra (indice maggiore)
+    if (event.key === 'ArrowRight' && index < this.carryResultTargets.length - 1) {
+      event.preventDefault()
+      this.carryResultTargets[index + 1].focus()
+    }
+
+    // ArrowUp/ArrowDown: naviga per colonna
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      event.preventDefault()
+      this.navigateVertical(input, event.key === 'ArrowUp' ? -1 : 1)
+    }
+  }
+
+  // Navigazione verticale basata su data-column e data-row
+  navigateVertical(currentInput, direction) {
+    const currentCol = parseInt(currentInput.getAttribute('data-column'))
+    const currentRow = parseInt(currentInput.getAttribute('data-row'))
+
+    if (isNaN(currentCol) || isNaN(currentRow)) return
+
+    const targetRow = currentRow + direction
+
+    // Raccogli tutti gli input con data-column e data-row
+    const allInputs = [
+      ...this.carryPartialTargets,
+      ...this.partialInputTargets,
+      ...this.carryResultTargets,
+      ...this.resultInputTargets
+    ]
+
+    // Trova l'input nella stessa colonna con la row più vicina nella direzione desiderata
+    let bestMatch = null
+    let bestRowDiff = Infinity
+
+    allInputs.forEach(input => {
+      const col = parseInt(input.getAttribute('data-column'))
+      const row = parseInt(input.getAttribute('data-row'))
+
+      if (isNaN(col) || isNaN(row)) return
+      if (col !== currentCol) return
+      if (input === currentInput) return
+
+      // Verifica che sia nella direzione giusta
+      if (direction > 0 && row > currentRow) {
+        const diff = row - currentRow
+        if (diff < bestRowDiff) {
+          bestRowDiff = diff
+          bestMatch = input
+        }
+      } else if (direction < 0 && row < currentRow) {
+        const diff = currentRow - row
+        if (diff < bestRowDiff) {
+          bestRowDiff = diff
+          bestMatch = input
+        }
+      }
+    })
+
+    if (bestMatch) {
+      bestMatch.focus()
     }
   }
 

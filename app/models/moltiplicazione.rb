@@ -10,7 +10,7 @@ class Moltiplicazione
     @multiplier = multiplier.to_i
     @show_multiplicand_multiplier = options.fetch(:show_multiplicand_multiplier, true)
     @show_toolbar = options.fetch(:show_toolbar, true)
-    @show_partial_products = options.fetch(:show_partial_products, true)
+    @show_partial_products = options.fetch(:show_partial_products, false)
     @editable = options.fetch(:editable, true)
     @show_exercise = options.fetch(:show_exercise, false)
   end
@@ -122,7 +122,7 @@ class Moltiplicazione
   # Dati per i prodotti parziali (una riga per ogni cifra del moltiplicatore)
   # Restituisce un array di hash con :digits, :carries, :num_inputs, :num_carries
   def partial_products_data
-    return [] unless show_partial_products && multiplier_length > 1
+    return [] unless multiplier_length > 1
 
     multiplier_digits.reverse.each_with_index.map do |digit, row_index|
       partial_product = multiplicand * digit
@@ -171,11 +171,11 @@ class Moltiplicazione
 
   # Riporti per il risultato finale
   def result_carries
-    if show_partial_products && multiplier_length > 1
+    if multiplier_length > 1
       # Riporti dalla somma dei prodotti parziali
       calculate_sum_carries
     else
-      # Riporti dalla moltiplicazione diretta
+      # Riporti dalla moltiplicazione diretta (moltiplicatore a 1 cifra)
       calculate_direct_multiplication_carries
     end
   end
@@ -202,7 +202,7 @@ class Moltiplicazione
   # Calcola i riporti dalla somma dei prodotti parziali
   def calculate_sum_carries
     multiplier_reversed = multiplier.to_s.chars.reverse.map(&:to_i)
-    carries = []
+    carries = Array.new(product_length, nil)
     carry = 0
 
     product_length.times do |col|
@@ -220,13 +220,17 @@ class Moltiplicazione
       end
 
       carry = sum / 10
-      carries << (carry > 0 ? carry : nil) if col < product_length - 1
+      # Il riporto dalla colonna col va sopra la colonna col+1 (a sinistra)
+      # Nell'array result_digits [8,1,6], indice 0=centinaia, 1=decine, 2=unità
+      # La colonna col (da destra, 0=unità) corrisponde all'indice product_length - 1 - col
+      # Il riporto va sopra la colonna col+1, cioè indice product_length - 1 - (col+1) = product_length - col - 2
+      if carry > 0 && col < product_length - 1
+        target_index = product_length - col - 2
+        carries[target_index] = carry
+      end
     end
 
-    # Padding per avere product_length elementi (allineato con il risultato)
-    # I riporti vanno sopra le cifre dalla seconda posizione in poi
-    result = Array.new(product_length - carries.length - 1, nil) + carries.reverse + [nil]
-    result
+    carries
   end
 
   # Cifre del risultato con correct answer

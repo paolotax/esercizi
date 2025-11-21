@@ -58,17 +58,20 @@
       <% end %>
     </div>
 
-    <!-- Prodotti parziali (se richiesto) -->
-    <% if moltiplicazione.show_partial_products && moltiplicazione.multiplier_length > 1 %>
+    <!-- Prodotti parziali (per moltiplicatori con più di 1 cifra) -->
+    <% if moltiplicazione.multiplier_length > 1 %>
       <% moltiplicazione.partial_products_data.each do |partial_data| %>
         <!-- Riporti del prodotto parziale -->
         <div class="flex justify-end gap-1 mb-1">
-          <% partial_data[:carries].each do |carry| %>
+          <% partial_data[:carries].each_with_index do |carry, i| %>
+            <% col = partial_data[:num_carries] - i + partial_data[:row_index] %>
             <input type="text"
                    class="w-12 h-6 text-center text-xs text-gray-500 border border-dashed border-gray-300 rounded focus:border-purple-400 focus:outline-none"
                    data-column-multiplication-target="carryPartial"
                    data-correct-answer="<%= carry %>"
-                   <% if carry %>value="<%= carry %>"<% end %>
+                   data-column="<%= col %>"
+                   data-row="<%= partial_data[:row_index] * 2 %>"
+                   <% if moltiplicazione.show_partial_products && carry %>value="<%= carry %>"<% end %>
                    maxlength="1"
                    <%= moltiplicazione.editable ? '' : 'disabled' %>>
           <% end %>
@@ -82,7 +85,8 @@
 
         <!-- Cifre del prodotto parziale -->
         <div class="flex justify-end gap-1 mb-3">
-          <% partial_data[:digits].each do |digit| %>
+          <% partial_data[:digits].each_with_index do |digit, i| %>
+            <% col = partial_data[:num_inputs] - 1 - i + partial_data[:row_index] %>
             <% if digit.nil? %>
               <div class="w-12"></div>
             <% else %>
@@ -90,7 +94,9 @@
                      class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-purple-500 focus:outline-none"
                      data-column-multiplication-target="partialInput"
                      data-correct-answer="<%= digit %>"
-                     value="<%= digit %>"
+                     data-column="<%= col %>"
+                     data-row="<%= partial_data[:row_index] * 2 + 1 %>"
+                     <% if moltiplicazione.show_partial_products %>value="<%= digit %>"<% end %>
                      maxlength="1"
                      placeholder="·"
                      <%= moltiplicazione.editable ? '' : 'disabled' %>>
@@ -108,12 +114,16 @@
     <% end %>
 
     <!-- Riporti risultato finale -->
+    <% result_row = moltiplicazione.show_partial_products && moltiplicazione.multiplier_length > 1 ? moltiplicazione.multiplier_length * 2 : 0 %>
     <div class="flex justify-end gap-1 mb-1">
-      <% moltiplicazione.result_carries.each do |carry| %>
+      <% moltiplicazione.result_carries.each_with_index do |carry, i| %>
+        <% col = moltiplicazione.result_carries.length - 1 - i %>
         <input type="text"
                class="w-12 h-6 text-center text-xs text-gray-500 border border-dashed border-gray-300 rounded focus:border-purple-400 focus:outline-none"
                data-column-multiplication-target="carryResult"
                data-correct-answer="<%= carry %>"
+               data-column="<%= col %>"
+               data-row="<%= result_row %>"
                <% if moltiplicazione.show_exercise && carry %>value="<%= carry %>"<% end %>
                maxlength="1"
                <%= moltiplicazione.editable ? '' : 'disabled' %>>
@@ -122,11 +132,14 @@
 
     <!-- Risultato finale -->
     <div class="flex justify-end gap-1">
-      <% moltiplicazione.result_digits_array.each do |digit| %>
+      <% moltiplicazione.result_digits_array.each_with_index do |digit, i| %>
+        <% col = moltiplicazione.result_digits_array.length - 1 - i %>
         <input type="text"
                class="w-12 text-center text-2xl font-bold border-2 border-purple-300 rounded focus:border-purple-600 focus:outline-none bg-purple-50"
                data-column-multiplication-target="resultInput"
                data-correct-answer="<%= digit %>"
+               data-column="<%= col %>"
+               data-row="<%= result_row + 1 %>"
                <% if moltiplicazione.show_exercise %>value="<%= digit %>"<% end %>
                maxlength="1"
                placeholder="·"
