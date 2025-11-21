@@ -223,8 +223,9 @@ class Moltiplicazione
       carries << (carry > 0 ? carry : nil) if col < product_length - 1
     end
 
-    # Padding per avere product_length + 1 elementi (allineato con il risultato)
-    result = Array.new(product_length + 1 - carries.length - 1, nil) + carries.reverse + [nil]
+    # Padding per avere product_length elementi (allineato con il risultato)
+    # I riporti vanno sopra le cifre dalla seconda posizione in poi
+    result = Array.new(product_length - carries.length - 1, nil) + carries.reverse + [nil]
     result
   end
 

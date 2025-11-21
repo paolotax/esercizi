@@ -49,28 +49,28 @@ export default class extends Controller {
       return
     }
 
-    // Auto-advance: passa al prossimo input se questo è compilato
-    if (value !== '' && index < this.partialInputTargets.length - 1) {
-      this.partialInputTargets[index + 1].focus()
+    // Auto-advance verso sinistra (indice minore)
+    if (value !== '' && index > 0) {
+      this.partialInputTargets[index - 1].focus()
     }
   }
 
   handlePartialKeydown(event, index) {
     const input = event.target
 
-    // Backspace su campo vuoto: torna indietro
-    if (event.key === 'Backspace' && input.value === '' && index > 0) {
+    // Backspace su campo vuoto: torna a destra (indice maggiore)
+    if (event.key === 'Backspace' && input.value === '' && index < this.partialInputTargets.length - 1) {
       event.preventDefault()
-      this.partialInputTargets[index - 1].focus()
+      this.partialInputTargets[index + 1].focus()
     }
 
-    // ArrowLeft: vai al precedente
+    // ArrowLeft: vai a sinistra (indice minore)
     if (event.key === 'ArrowLeft' && index > 0) {
       event.preventDefault()
       this.partialInputTargets[index - 1].focus()
     }
 
-    // ArrowRight: vai al successivo
+    // ArrowRight: vai a destra (indice maggiore)
     if (event.key === 'ArrowRight' && index < this.partialInputTargets.length - 1) {
       event.preventDefault()
       this.partialInputTargets[index + 1].focus()
@@ -87,9 +87,9 @@ export default class extends Controller {
       return
     }
 
-    // Auto-advance verso destra per i riporti
-    if (value !== '' && index < this.carryPartialTargets.length - 1) {
-      this.carryPartialTargets[index + 1].focus()
+    // Auto-advance verso sinistra (indice minore)
+    if (value !== '' && index > 0) {
+      this.carryPartialTargets[index - 1].focus()
     }
   }
 
@@ -103,28 +103,28 @@ export default class extends Controller {
       return
     }
 
-    // Auto-advance
-    if (value !== '' && index < this.resultInputTargets.length - 1) {
-      this.resultInputTargets[index + 1].focus()
+    // Auto-advance verso sinistra (indice minore)
+    if (value !== '' && index > 0) {
+      this.resultInputTargets[index - 1].focus()
     }
   }
 
   handleResultKeydown(event, index) {
     const input = event.target
 
-    // Backspace su campo vuoto: torna indietro
-    if (event.key === 'Backspace' && input.value === '' && index > 0) {
+    // Backspace su campo vuoto: torna a destra (indice maggiore)
+    if (event.key === 'Backspace' && input.value === '' && index < this.resultInputTargets.length - 1) {
       event.preventDefault()
-      this.resultInputTargets[index - 1].focus()
+      this.resultInputTargets[index + 1].focus()
     }
 
-    // ArrowLeft
+    // ArrowLeft: vai a sinistra (indice minore)
     if (event.key === 'ArrowLeft' && index > 0) {
       event.preventDefault()
       this.resultInputTargets[index - 1].focus()
     }
 
-    // ArrowRight
+    // ArrowRight: vai a destra (indice maggiore)
     if (event.key === 'ArrowRight' && index < this.resultInputTargets.length - 1) {
       event.preventDefault()
       this.resultInputTargets[index + 1].focus()
@@ -141,9 +141,9 @@ export default class extends Controller {
       return
     }
 
-    // Auto-advance
-    if (value !== '' && index < this.carryResultTargets.length - 1) {
-      this.carryResultTargets[index + 1].focus()
+    // Auto-advance verso sinistra (indice minore)
+    if (value !== '' && index > 0) {
+      this.carryResultTargets[index - 1].focus()
     }
   }
 
@@ -200,7 +200,7 @@ export default class extends Controller {
     }
   }
 
-  showSolution() {
+  showPartials() {
     // Mostra i riporti dei prodotti parziali
     if (this.hasCarryPartialTarget) {
       this.carryPartialTargets.forEach(input => {
@@ -223,6 +223,11 @@ export default class extends Controller {
         }
       })
     }
+  }
+
+  showSolution() {
+    // Prima mostra i prodotti parziali
+    this.showPartials()
 
     // Mostra i riporti del risultato
     if (this.hasCarryResultTarget) {

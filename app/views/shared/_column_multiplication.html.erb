@@ -9,26 +9,6 @@
 
 <div class="text-center" data-controller="column-multiplication">
 
-  <!-- Toolbar (opzionale) -->
-  <% if moltiplicazione.show_toolbar %>
-    <div class="flex gap-2 justify-center mb-4">
-      <button type="button"
-              data-action="click->column-multiplication#clearGrid"
-              class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
-        Cancella
-      </button>
-      <button type="button"
-              data-action="click->column-multiplication#checkResults"
-              class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-        Verifica
-      </button>
-      <button type="button"
-              data-action="click->column-multiplication#showSolution"
-              class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
-        Soluzione
-      </button>
-    </div>
-  <% end %>
 
   <!-- Griglia moltiplicazione -->
   <div class="inline-block border-4 border-purple-400 rounded-lg p-4 bg-white shadow-lg">
@@ -88,6 +68,7 @@
                    class="w-12 h-6 text-center text-xs text-gray-500 border border-dashed border-gray-300 rounded focus:border-purple-400 focus:outline-none"
                    data-column-multiplication-target="carryPartial"
                    data-correct-answer="<%= carry %>"
+                   <% if carry %>value="<%= carry %>"<% end %>
                    maxlength="1"
                    <%= moltiplicazione.editable ? '' : 'disabled' %>>
           <% end %>
@@ -102,13 +83,18 @@
         <!-- Cifre del prodotto parziale -->
         <div class="flex justify-end gap-1 mb-3">
           <% partial_data[:digits].each do |digit| %>
-            <input type="text"
-                   class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-purple-500 focus:outline-none"
-                   data-column-multiplication-target="partialInput"
-                   data-correct-answer="<%= digit %>"
-                   maxlength="1"
-                   placeholder="·"
-                   <%= moltiplicazione.editable ? '' : 'disabled' %>>
+            <% if digit.nil? %>
+              <div class="w-12"></div>
+            <% else %>
+              <input type="text"
+                     class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-purple-500 focus:outline-none"
+                     data-column-multiplication-target="partialInput"
+                     data-correct-answer="<%= digit %>"
+                     value="<%= digit %>"
+                     maxlength="1"
+                     placeholder="·"
+                     <%= moltiplicazione.editable ? '' : 'disabled' %>>
+            <% end %>
           <% end %>
           <!-- Zeri segnaposto a destra -->
           <% partial_data[:row_index].times do %>
@@ -128,6 +114,7 @@
                class="w-12 h-6 text-center text-xs text-gray-500 border border-dashed border-gray-300 rounded focus:border-purple-400 focus:outline-none"
                data-column-multiplication-target="carryResult"
                data-correct-answer="<%= carry %>"
+               <% if moltiplicazione.show_exercise && carry %>value="<%= carry %>"<% end %>
                maxlength="1"
                <%= moltiplicazione.editable ? '' : 'disabled' %>>
       <% end %>
@@ -140,6 +127,7 @@
                class="w-12 text-center text-2xl font-bold border-2 border-purple-300 rounded focus:border-purple-600 focus:outline-none bg-purple-50"
                data-column-multiplication-target="resultInput"
                data-correct-answer="<%= digit %>"
+               <% if moltiplicazione.show_exercise %>value="<%= digit %>"<% end %>
                maxlength="1"
                placeholder="·"
                <%= moltiplicazione.editable ? '' : 'disabled' %>>
@@ -154,4 +142,49 @@
     <% end %>
 
   </div>
+
+  <!-- Toolbar (opzionale) -->
+  <% if moltiplicazione.show_toolbar %>
+    <div class="flex gap-4 justify-center mt-4">
+      <!-- Cancella -->
+      <button type="button"
+              data-action="click->column-multiplication#clearGrid"
+              class="w-14 h-14 rounded-full bg-gray-500 hover:bg-gray-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              title="Cancella">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+      </button>
+
+      <!-- Mostra Prodotti Parziali -->
+      <button type="button"
+              data-action="click->column-multiplication#showPartials"
+              class="w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              title="Mostra Prodotti Parziali">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+      </button>
+
+      <!-- Mostra Soluzione -->
+      <button type="button"
+              data-action="click->column-multiplication#showSolution"
+              class="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              title="Mostra Soluzione">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </button>
+
+      <!-- Verifica -->
+      <button type="button"
+              data-action="click->column-multiplication#checkResults"
+              class="w-14 h-14 rounded-full bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              title="Verifica">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+        </svg>
+      </button>
+    </div>
+  <% end %>
 </div>
