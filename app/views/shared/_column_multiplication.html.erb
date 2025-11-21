@@ -87,20 +87,16 @@
         <div class="flex justify-end gap-1 mb-3">
           <% partial_data[:digits].each_with_index do |digit, i| %>
             <% col = partial_data[:num_inputs] - 1 - i + partial_data[:row_index] %>
-            <% if digit.nil? %>
-              <div class="w-12"></div>
-            <% else %>
-              <input type="text"
-                     class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-purple-500 focus:outline-none"
-                     data-column-multiplication-target="partialInput"
-                     data-correct-answer="<%= digit %>"
-                     data-column="<%= col %>"
-                     data-row="<%= partial_data[:row_index] * 2 + 1 %>"
-                     <% if moltiplicazione.show_partial_products %>value="<%= digit %>"<% end %>
-                     maxlength="1"
-                     placeholder="·"
-                     <%= moltiplicazione.editable ? '' : 'disabled' %>>
-            <% end %>
+            <input type="text"
+                   class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-purple-500 focus:outline-none"
+                   data-column-multiplication-target="partialInput"
+                   data-correct-answer="<%= digit %>"
+                   data-column="<%= col %>"
+                   data-row="<%= partial_data[:row_index] * 2 + 1 %>"
+                   <% if moltiplicazione.show_partial_products && digit %>value="<%= digit %>"<% end %>
+                   maxlength="1"
+                   placeholder="·"
+                   <%= moltiplicazione.editable ? '' : 'disabled' %>>
           <% end %>
           <!-- Zeri segnaposto a destra -->
           <% partial_data[:row_index].times do %>
@@ -113,11 +109,11 @@
       <div class="border-t-2 border-gray-800 pt-2 mt-2"></div>
     <% end %>
 
-    <!-- Riporti risultato finale -->
-    <% result_row = moltiplicazione.show_partial_products && moltiplicazione.multiplier_length > 1 ? moltiplicazione.multiplier_length * 2 : 0 %>
+    <!-- Riporti risultato finale (product_length - 1 elementi, allineati a sinistra) -->
+    <% result_row = moltiplicazione.multiplier_length > 1 ? moltiplicazione.multiplier_length * 2 : 0 %>
     <div class="flex justify-end gap-1 mb-1">
       <% moltiplicazione.result_carries.each_with_index do |carry, i| %>
-        <% col = moltiplicazione.result_carries.length - 1 - i %>
+        <% col = moltiplicazione.result_carries.length - i %>
         <input type="text"
                class="w-12 h-6 text-center text-xs text-gray-500 border border-dashed border-gray-300 rounded focus:border-purple-400 focus:outline-none"
                data-column-multiplication-target="carryResult"
@@ -128,6 +124,8 @@
                maxlength="1"
                <%= moltiplicazione.editable ? '' : 'disabled' %>>
       <% end %>
+      <!-- Spazio vuoto per allineare con le unità del risultato -->
+      <div class="w-12 h-6"></div>
     </div>
 
     <!-- Risultato finale -->

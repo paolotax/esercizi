@@ -139,7 +139,7 @@ class Moltiplicazione
 
       # Calcola i riporti
       carries = calculate_partial_carries(digit)
-      # Padding a sinistra per allineare
+      # Padding a sinistra per allineare (nil per i riporti non presenti)
       padded_carries = Array.new(num_carries - carries.length, nil) + carries.reverse
 
       {
@@ -181,28 +181,33 @@ class Moltiplicazione
   end
 
   # Calcola i riporti dalla moltiplicazione diretta (senza prodotti parziali)
+  # Restituisce product_length - 1 elementi (uno per ogni colonna tranne le unità)
   def calculate_direct_multiplication_carries
     multiplicand_reversed = multiplicand.to_s.chars.reverse.map(&:to_i)
+    num_carries = product_length - 1
+    carries = Array.new(num_carries, nil)
     carry = 0
-    carries = []
 
     multiplicand_reversed.each_with_index do |d, i|
       partial_result = d * multiplier + carry
       carry = partial_result / 10
-      # Il riporto va sopra la cifra successiva (più a sinistra)
-      carries << (carry > 0 ? carry : nil) if i < multiplicand_reversed.length - 1
+      # Il riporto dalla colonna i va sopra la colonna i+1 (a sinistra)
+      # carries ha num_carries elementi, indice 0 = sopra la cifra più a sinistra
+      if carry > 0 && i < multiplicand_reversed.length - 1
+        target_index = num_carries - 1 - i
+        carries[target_index] = carry
+      end
     end
 
-    # Padding a sinistra per avere product_length + 1 elementi
-    # I riporti sono allineati con le cifre del risultato (shiftati di 1 a sinistra)
-    result = Array.new(product_length + 1 - carries.length - 1, nil) + carries.reverse + [nil]
-    result
+    carries
   end
 
   # Calcola i riporti dalla somma dei prodotti parziali
+  # Restituisce product_length - 1 elementi (uno per ogni colonna tranne le unità)
   def calculate_sum_carries
     multiplier_reversed = multiplier.to_s.chars.reverse.map(&:to_i)
-    carries = Array.new(product_length, nil)
+    num_carries = product_length - 1
+    carries = Array.new(num_carries, nil)
     carry = 0
 
     product_length.times do |col|
@@ -221,11 +226,10 @@ class Moltiplicazione
 
       carry = sum / 10
       # Il riporto dalla colonna col va sopra la colonna col+1 (a sinistra)
-      # Nell'array result_digits [8,1,6], indice 0=centinaia, 1=decine, 2=unità
-      # La colonna col (da destra, 0=unità) corrisponde all'indice product_length - 1 - col
-      # Il riporto va sopra la colonna col+1, cioè indice product_length - 1 - (col+1) = product_length - col - 2
+      # carries ha num_carries elementi, indice 0 = sopra la cifra più a sinistra
+      # Il riporto dalla colonna col va all'indice num_carries - 1 - col
       if carry > 0 && col < product_length - 1
-        target_index = product_length - col - 2
+        target_index = num_carries - 1 - col
         carries[target_index] = carry
       end
     end
