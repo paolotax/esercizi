@@ -1,11 +1,11 @@
 <% content_for :titolo, "Moltiplicazioni in Colonna - Strumenti" %>
 
-<div class="max-w-6xl mx-auto px-6 py-8">
+<div class="max-w-6xl mx-auto px-2 md:px-6 py-8">
   <!-- Header -->
   <div class="bg-white print:hidden rounded-lg shadow-lg p-8 mb-8">
-    <div class="flex items-center justify-between mb-4">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
       <h1 class="text-3xl font-bold text-gray-800">Moltiplicazioni in Colonna</h1>
-      <%= link_to strumenti_moltiplicazioni_examples_path, class: "inline-flex items-center gap-2 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors shadow-lg" do %>
+      <%= link_to strumenti_moltiplicazioni_examples_path, class: "inline-flex items-center gap-2 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors shadow-lg w-fit" do %>
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
         </svg>
@@ -59,7 +59,7 @@
       </div>
 
       <div class="flex gap-4">
-        <%= f.submit "Genera Moltiplicazioni",
+        <%= f.submit "Genera",
                     class: "bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105 cursor-pointer" %>
 
         <% if @multiplications_string.present? %>
@@ -84,7 +84,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-8 print:gap-12">
       <% @multiplications.each do |moltiplicazione| %>
         <div class="flex flex-col items-center print:break-inside-avoid">
-          <%= render 'shared/column_multiplication', **moltiplicazione.to_partial_params %>
+          <%= render 'strumenti/moltiplicazioni/column_multiplication', **moltiplicazione.to_partial_params %>
         </div>
       <% end %>
     </div>
