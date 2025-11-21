@@ -17,17 +17,17 @@
     <div class="flex gap-2 justify-center mb-4">
       <button type="button"
               data-action="click->column-multiplication#clearGrid"
-              class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors">
+              class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
         Cancella
       </button>
       <button type="button"
               data-action="click->column-multiplication#checkResults"
-              class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+              class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
         Verifica
       </button>
       <button type="button"
               data-action="click->column-multiplication#showSolution"
-              class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
+              class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
         Soluzione
       </button>
     </div>
@@ -82,35 +82,42 @@
     <!-- Prodotti parziali (se richiesto) -->
     <% if moltiplicazione.show_partial_products && moltiplicazione.multiplier_length > 1 %>
       <% moltiplicazione.multiplier_length.times do |row_index| %>
+        <%# Numero di input per questa riga = product_length - zeri_segnaposto %>
+        <% num_inputs_for_row = moltiplicazione.product_length - row_index %>
+        <% num_carry_for_row = num_inputs_for_row - 1 %>
+
         <!-- Riporti del prodotto parziale -->
         <div class="flex justify-end gap-1 mb-1">
-          <% row_index.times do %>
-            <div class="w-12"></div>
-          <% end %>
-          <% (moltiplicazione.multiplicand_length + 1).times do |i| %>
+          <!-- I riporti vanno sopra le cifre di ordine superiore, non sopra le unità -->
+          <% num_carry_for_row.times do |i| %>
             <input type="text"
                    class="w-12 h-6 text-center text-xs text-gray-500 border border-dashed border-gray-300 rounded focus:border-purple-400 focus:outline-none"
                    data-column-multiplication-target="carryPartial"
                    maxlength="1"
                    <%= moltiplicazione.editable ? '' : 'disabled' %>>
           <% end %>
+          <!-- Spazio vuoto per allineare con le unità del prodotto parziale -->
+          <div class="w-12"></div>
+          <!-- Spazio sopra gli zeri segnaposto -->
+          <% row_index.times do %>
+            <div class="w-12"></div>
+          <% end %>
         </div>
 
         <!-- Cifre del prodotto parziale -->
         <div class="flex justify-end gap-1 mb-3">
-          <!-- Zeri a destra per lo shift posizionale -->
-          <% row_index.times do %>
-            <div class="w-12 text-center text-2xl font-bold text-gray-400">0</div>
-          <% end %>
-
-          <!-- Input per il prodotto parziale -->
-          <% (moltiplicazione.multiplicand_length + 1).times do |i| %>
+          <!-- Input per il prodotto parziale (numero variabile in base alla riga) -->
+          <% num_inputs_for_row.times do |i| %>
             <input type="text"
                    class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-purple-500 focus:outline-none"
                    data-column-multiplication-target="partialInput"
                    maxlength="1"
                    placeholder="·"
                    <%= moltiplicazione.editable ? '' : 'disabled' %>>
+          <% end %>
+          <!-- Zeri segnaposto a destra -->
+          <% row_index.times do %>
+            <div class="w-12 text-center text-2xl font-bold text-gray-400">0</div>
           <% end %>
         </div>
       <% end %>

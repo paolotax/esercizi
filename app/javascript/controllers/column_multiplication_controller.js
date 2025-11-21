@@ -165,8 +165,8 @@ export default class extends Controller {
 
     const product = multiplicand * multiplier
 
-    // Verifica il risultato finale
-    const resultDigits = product.toString().split('').reverse()
+    // Verifica il risultato finale (i target sono da sinistra a destra, le cifre da destra a sinistra)
+    const resultDigits = product.toString().split('')
     let correct = 0
     let total = 0
 
@@ -201,10 +201,135 @@ export default class extends Controller {
 
     if (isNaN(multiplicand) || isNaN(multiplier)) return
 
-    const product = multiplicand * multiplier
-    const resultDigits = product.toString().split('').reverse()
+    // Mostra i prodotti parziali (se presenti)
+    if (this.hasPartialInputTarget) {
+      const multiplicandDigits = multiplicand.toString().split('').reverse()
+      const multiplierDigits = multiplier.toString().split('').reverse()  // Reverse: inizia dalle unità
+      let partialInputIndex = 0
+      let carryPartialIndex = 0
 
-    // Mostra il risultato
+      // Calcola product_length per determinare il numero di input per riga
+      const productLength = (multiplicand * multiplier).toString().length
+
+      multiplierDigits.forEach((digit, rowIndex) => {
+        const partialProduct = multiplicand * parseInt(digit)
+        const partialDigits = partialProduct.toString().split('')  // Da sinistra a destra
+
+        // Numero di input per questa riga = product_length - zeri_segnaposto (row_index)
+        const numInputsForRow = productLength - rowIndex
+        const numCarriesForRow = numInputsForRow - 1
+
+        // Calcola i riporti
+        const multiplicandDigitsReversed = multiplicand.toString().split('').reverse()
+        let carry = 0
+        const carries = []
+
+        for (let i = 0; i < multiplicandDigitsReversed.length; i++) {
+          const multiplicandDigit = parseInt(multiplicandDigitsReversed[i])
+          const product = multiplicandDigit * parseInt(digit) + carry
+          carry = Math.floor(product / 10)
+          carries.push(carry)
+        }
+
+        // Riempi le cifre del prodotto parziale (allineate a destra negli input)
+        // Gli input vanno da sinistra a destra, le cifre del prodotto parziale anche
+        // Ma dobbiamo allineare a destra: se il prodotto ha meno cifre degli input,
+        // le prime caselle restano vuote
+        const offset = numInputsForRow - partialDigits.length
+        partialDigits.forEach((d, i) => {
+          const targetIdx = partialInputIndex + offset + i
+          if (this.partialInputTargets[targetIdx]) {
+            this.partialInputTargets[targetIdx].value = d
+            this.partialInputTargets[targetIdx].classList.remove('bg-red-100')
+            this.partialInputTargets[targetIdx].classList.add('bg-green-100')
+          }
+        })
+
+        // Riempi i riporti (allineati a sinistra, sopra le cifre di ordine superiore)
+        // carries[0] è il riporto dalla prima moltiplicazione (unità), va nella posizione più a destra dei riporti
+        // carries[1] è il riporto dalla seconda moltiplicazione (decine), va una posizione a sinistra
+        carries.forEach((c, i) => {
+          if (c > 0) {
+            // L'indice nel target: i riporti sono da sinistra a destra
+            // carries[0] (dalle unità) va nella posizione più a destra (numCarriesForRow - 1)
+            const targetIdx = carryPartialIndex + (numCarriesForRow - 1 - i)
+            if (this.carryPartialTargets[targetIdx]) {
+              this.carryPartialTargets[targetIdx].value = c.toString()
+              this.carryPartialTargets[targetIdx].classList.add('bg-green-100')
+            }
+          }
+        })
+
+        partialInputIndex += numInputsForRow
+        carryPartialIndex += numCarriesForRow
+      })
+    }
+
+    // Mostra il risultato finale con riporti
+    const product = multiplicand * multiplier
+    const resultDigits = product.toString().split('')
+    const productLength = product.toString().length
+
+    // Calcola i riporti per la somma finale (se ci sono prodotti parziali)
+    if (this.hasPartialInputTarget && this.hasCarryResultTarget) {
+      const multiplierDigits = multiplier.toString().split('').reverse()  // Reverse: inizia dalle unità
+      const productDigitsReversed = product.toString().split('').reverse()
+
+      let carry = 0
+      for (let col = 0; col < productLength; col++) {
+        let sum = carry
+
+        // Somma le cifre dei prodotti parziali per questa colonna (da destra a sinistra)
+        multiplierDigits.forEach((digit, rowIndex) => {
+          const partialProduct = multiplicand * parseInt(digit)
+          const partialString = partialProduct.toString()
+          const colInPartial = col - rowIndex
+
+          if (colInPartial >= 0 && colInPartial < partialString.length) {
+            const partialDigits = partialString.split('').reverse()
+            sum += parseInt(partialDigits[colInPartial])
+          }
+        })
+
+        carry = Math.floor(sum / 10)
+
+        // Mostra il riporto se > 0 (l'indice nei target va da sinistra a destra)
+        if (carry > 0 && col < productLength - 1) {
+          const targetIndex = productLength - col - 1
+          if (this.carryResultTargets[targetIndex]) {
+            this.carryResultTargets[targetIndex].value = carry.toString()
+            this.carryResultTargets[targetIndex].classList.add('bg-green-100')
+          }
+        }
+      }
+    } else if (this.hasCarryResultTarget) {
+      // Moltiplicazione semplice (senza prodotti parziali): calcola i riporti della moltiplicazione diretta
+      const multiplicandDigitsReversed = multiplicand.toString().split('').reverse()
+      let carry = 0
+
+      for (let i = 0; i < multiplicandDigitsReversed.length; i++) {
+        const digit = parseInt(multiplicandDigitsReversed[i])
+        const partialResult = digit * multiplier + carry
+        carry = Math.floor(partialResult / 10)
+
+        // Mostra il riporto se > 0
+        // I carryResultTargets hanno productLength + 1 elementi (indici 0 a productLength)
+        // I resultInputTargets hanno productLength elementi (indici 0 a productLength - 1)
+        // carryResult[k] è sopra result[k-1] (shiftato di 1 a sinistra)
+        // Il riporto dalla moltiplicazione della cifra i (da destra) va sopra la cifra i+1 (da destra) del risultato
+        // Cifra i+1 da destra nel risultato = indice (productLength - 1) - (i + 1) = productLength - i - 2
+        // Casella riporto corrispondente = (productLength - i - 2) + 1 = productLength - i - 1
+        if (carry > 0 && i < multiplicandDigitsReversed.length - 1) {
+          const targetIndex = productLength - i - 1
+          if (targetIndex >= 0 && this.carryResultTargets[targetIndex]) {
+            this.carryResultTargets[targetIndex].value = carry.toString()
+            this.carryResultTargets[targetIndex].classList.add('bg-green-100')
+          }
+        }
+      }
+    }
+
+    // Mostra il risultato finale
     this.resultInputTargets.forEach((input, index) => {
       input.value = resultDigits[index] || ''
       input.classList.remove('bg-red-100')
