@@ -22,44 +22,49 @@
     <!-- Esempio 1: Moltiplicazione semplice -->
     <div class="bg-gray-50 p-6 rounded-lg">
       <h3 class="text-xl font-bold mb-4">1. Moltiplicazione semplice (23 × 4)</h3>
+      <p class="text-sm text-gray-600 mb-4">Moltiplicatore a 1 cifra, senza prodotti parziali.</p>
       <%= render 'shared/column_multiplication',
             **Moltiplicazione.new(multiplicand: 23, multiplier: 4).to_partial_params %>
     </div>
 
     <!-- Esempio 2: Con moltiplicatore a 2 cifre -->
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h3 class="text-xl font-bold mb-4">2. Moltiplicatore a 2 cifre (25 × 12)</h3>
+      <h3 class="text-xl font-bold mb-4">2. Moltiplicatore a 2 cifre (56 × 12)</h3>
+      <p class="text-sm text-gray-600 mb-4">Con prodotti parziali da completare.</p>
       <%= render 'shared/column_multiplication',
-            **Moltiplicazione.new(multiplicand: 25, multiplier: 12).to_partial_params %>
+            **Moltiplicazione.new(multiplicand: 56, multiplier: 12).to_partial_params %>
     </div>
 
-    <!-- Esempio 3: Senza toolbar -->
+    <!-- Esempio 3: Con prodotti parziali già compilati -->
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h3 class="text-xl font-bold mb-4">3. Senza toolbar (156 × 34)</h3>
+      <h3 class="text-xl font-bold mb-4">3. Prodotti parziali compilati (156 × 34)</h3>
+      <p class="text-sm text-gray-600 mb-4">I prodotti parziali sono già visibili, manca solo il risultato finale.</p>
       <%= render 'shared/column_multiplication',
-            **Moltiplicazione.new(multiplicand: 156, multiplier: 34, show_toolbar: false).to_partial_params %>
+            **Moltiplicazione.new(multiplicand: 156, multiplier: 34, show_partial_products: true).to_partial_params %>
     </div>
 
-    <!-- Esempio 4: Senza prodotti parziali (solo risultato) -->
+    <!-- Esempio 4: Senza toolbar -->
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h3 class="text-xl font-bold mb-4">4. Solo risultato finale (48 × 15)</h3>
+      <h3 class="text-xl font-bold mb-4">4. Senza barra strumenti (48 × 15)</h3>
+      <p class="text-sm text-gray-600 mb-4">Nasconde i pulsanti Cancella, Verifica, ecc.</p>
       <%= render 'shared/column_multiplication',
-            **Moltiplicazione.new(multiplicand: 48, multiplier: 15, show_partial_products: false).to_partial_params %>
+            **Moltiplicazione.new(multiplicand: 48, multiplier: 15, show_toolbar: false).to_partial_params %>
     </div>
 
-    <!-- Esempio 5: Con esercizio mostrato -->
+    <!-- Esempio 5: Con soluzione -->
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h3 class="text-xl font-bold mb-4">5. Con esercizio (78 × 23)</h3>
+      <h3 class="text-xl font-bold mb-4">5. Con soluzione completa (78 × 23)</h3>
+      <p class="text-sm text-gray-600 mb-4">Mostra tutto compilato: prodotti parziali e risultato finale.</p>
       <%= render 'shared/column_multiplication',
             **Moltiplicazione.new(multiplicand: 78, multiplier: 23, show_exercise: true).to_partial_params %>
     </div>
 
-    <!-- Esempio 6: Da completare (numeri nascosti) -->
+    <!-- Esempio 6: Non modificabile -->
     <div class="bg-gray-50 p-6 rounded-lg">
-      <h3 class="text-xl font-bold mb-4">6. Completa l'operazione (? × ?)</h3>
+      <h3 class="text-xl font-bold mb-4">6. Non modificabile (42 × 17)</h3>
+      <p class="text-sm text-gray-600 mb-4">I campi sono disabilitati, utile per mostrare solo la struttura.</p>
       <%= render 'shared/column_multiplication',
-            **Moltiplicazione.new(multiplicand: 42, multiplier: 17,
-                                  show_multiplicand_multiplier: false).to_partial_params %>
+            **Moltiplicazione.new(multiplicand: 42, multiplier: 17, editable: false, show_toolbar: false).to_partial_params %>
     </div>
 
   </div>
@@ -71,11 +76,10 @@
   **Moltiplicazione.new(
     multiplicand: 25,                      # Moltiplicando
     multiplier: 12,                        # Moltiplicatore
-    show_multiplicand_multiplier: true,    # Mostra i numeri (default: true)
-    show_toolbar: true,                    # Mostra pulsanti (default: true)
-    show_partial_products: true,           # Mostra prodotti parziali (default: true)
-    editable: true,                        # Permetti modifica (default: true)
-    show_exercise: false                   # Mostra esercizio (default: false)
+    show_toolbar: true,                    # Mostra barra strumenti (default: true)
+    show_partial_products: false,          # Mostra prodotti parziali compilati (default: false)
+    editable: true,                        # Campi modificabili (default: true)
+    show_exercise: false                   # Mostra soluzione completa (default: false)
   ).to_partial_params %&gt;</code></pre>
   </div>
 </div>
