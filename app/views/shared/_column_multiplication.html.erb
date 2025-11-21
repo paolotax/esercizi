@@ -7,10 +7,7 @@
   }
 </style>
 
-<div class="text-center"
-     data-controller="column-multiplication"
-     data-multiplicand="<%= moltiplicazione.multiplicand %>"
-     data-multiplier="<%= moltiplicazione.multiplier %>">
+<div class="text-center" data-controller="column-multiplication">
 
   <!-- Toolbar (opzionale) -->
   <% if moltiplicazione.show_toolbar %>
@@ -47,10 +44,11 @@
       </div>
     <% else %>
       <div class="flex justify-end gap-1 mb-2">
-        <% moltiplicazione.multiplicand_length.times do |i| %>
+        <% moltiplicazione.multiplicand_digits.each do |digit| %>
           <input type="text"
                  class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-purple-500 focus:outline-none"
                  data-column-multiplication-target="multiplicandInput"
+                 data-correct-answer="<%= digit %>"
                  maxlength="1"
                  placeholder="·"
                  <%= moltiplicazione.editable ? '' : 'disabled' %>>
@@ -68,10 +66,11 @@
           </div>
         <% end %>
       <% else %>
-        <% moltiplicazione.multiplier_length.times do |i| %>
+        <% moltiplicazione.multiplier_digits.each do |digit| %>
           <input type="text"
                  class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-purple-500 focus:outline-none"
                  data-column-multiplication-target="multiplierInput"
+                 data-correct-answer="<%= digit %>"
                  maxlength="1"
                  placeholder="·"
                  <%= moltiplicazione.editable ? '' : 'disabled' %>>
@@ -81,42 +80,38 @@
 
     <!-- Prodotti parziali (se richiesto) -->
     <% if moltiplicazione.show_partial_products && moltiplicazione.multiplier_length > 1 %>
-      <% moltiplicazione.multiplier_length.times do |row_index| %>
-        <%# Numero di input per questa riga = product_length - zeri_segnaposto %>
-        <% num_inputs_for_row = moltiplicazione.product_length - row_index %>
-        <% num_carry_for_row = num_inputs_for_row - 1 %>
-
+      <% moltiplicazione.partial_products_data.each do |partial_data| %>
         <!-- Riporti del prodotto parziale -->
         <div class="flex justify-end gap-1 mb-1">
-          <!-- I riporti vanno sopra le cifre di ordine superiore, non sopra le unità -->
-          <% num_carry_for_row.times do |i| %>
+          <% partial_data[:carries].each do |carry| %>
             <input type="text"
                    class="w-12 h-6 text-center text-xs text-gray-500 border border-dashed border-gray-300 rounded focus:border-purple-400 focus:outline-none"
                    data-column-multiplication-target="carryPartial"
+                   data-correct-answer="<%= carry %>"
                    maxlength="1"
                    <%= moltiplicazione.editable ? '' : 'disabled' %>>
           <% end %>
           <!-- Spazio vuoto per allineare con le unità del prodotto parziale -->
           <div class="w-12"></div>
           <!-- Spazio sopra gli zeri segnaposto -->
-          <% row_index.times do %>
+          <% partial_data[:row_index].times do %>
             <div class="w-12"></div>
           <% end %>
         </div>
 
         <!-- Cifre del prodotto parziale -->
         <div class="flex justify-end gap-1 mb-3">
-          <!-- Input per il prodotto parziale (numero variabile in base alla riga) -->
-          <% num_inputs_for_row.times do |i| %>
+          <% partial_data[:digits].each do |digit| %>
             <input type="text"
                    class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-purple-500 focus:outline-none"
                    data-column-multiplication-target="partialInput"
+                   data-correct-answer="<%= digit %>"
                    maxlength="1"
                    placeholder="·"
                    <%= moltiplicazione.editable ? '' : 'disabled' %>>
           <% end %>
           <!-- Zeri segnaposto a destra -->
-          <% row_index.times do %>
+          <% partial_data[:row_index].times do %>
             <div class="w-12 text-center text-2xl font-bold text-gray-400">0</div>
           <% end %>
         </div>
@@ -128,10 +123,11 @@
 
     <!-- Riporti risultato finale -->
     <div class="flex justify-end gap-1 mb-1">
-      <% (moltiplicazione.product_length + 1).times do |i| %>
+      <% moltiplicazione.result_carries.each do |carry| %>
         <input type="text"
                class="w-12 h-6 text-center text-xs text-gray-500 border border-dashed border-gray-300 rounded focus:border-purple-400 focus:outline-none"
                data-column-multiplication-target="carryResult"
+               data-correct-answer="<%= carry %>"
                maxlength="1"
                <%= moltiplicazione.editable ? '' : 'disabled' %>>
       <% end %>
@@ -139,10 +135,11 @@
 
     <!-- Risultato finale -->
     <div class="flex justify-end gap-1">
-      <% moltiplicazione.product_length.times do |i| %>
+      <% moltiplicazione.result_digits_array.each do |digit| %>
         <input type="text"
                class="w-12 text-center text-2xl font-bold border-2 border-purple-300 rounded focus:border-purple-600 focus:outline-none bg-purple-50"
                data-column-multiplication-target="resultInput"
+               data-correct-answer="<%= digit %>"
                maxlength="1"
                placeholder="·"
                <%= moltiplicazione.editable ? '' : 'disabled' %>>

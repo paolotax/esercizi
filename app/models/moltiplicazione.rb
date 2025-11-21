@@ -119,6 +119,120 @@ class Moltiplicazione
       .compact
   end
 
+  # Dati per i prodotti parziali (una riga per ogni cifra del moltiplicatore)
+  # Restituisce un array di hash con :digits, :carries, :num_inputs, :num_carries
+  def partial_products_data
+    return [] unless show_partial_products && multiplier_length > 1
+
+    multiplier_digits.reverse.each_with_index.map do |digit, row_index|
+      partial_product = multiplicand * digit
+      partial_str = partial_product.to_s
+
+      # Numero di input per questa riga = product_length - zeri_segnaposto
+      num_inputs = product_length - row_index
+      num_carries = num_inputs - 1
+
+      # Calcola le cifre del prodotto parziale (allineate a destra)
+      digits = partial_str.chars.map(&:to_i)
+      # Padding a sinistra con nil per allineare a destra
+      padded_digits = Array.new(num_inputs - digits.length, nil) + digits
+
+      # Calcola i riporti
+      carries = calculate_partial_carries(digit)
+      # Padding a sinistra per allineare
+      padded_carries = Array.new(num_carries - carries.length, nil) + carries.reverse
+
+      {
+        digits: padded_digits,
+        carries: padded_carries,
+        num_inputs: num_inputs,
+        num_carries: num_carries,
+        row_index: row_index
+      }
+    end
+  end
+
+  # Calcola i riporti per un prodotto parziale (moltiplicando × una cifra del moltiplicatore)
+  def calculate_partial_carries(multiplier_digit)
+    multiplicand_reversed = multiplicand.to_s.chars.reverse.map(&:to_i)
+    carry = 0
+    carries = []
+
+    multiplicand_reversed.each do |d|
+      product = d * multiplier_digit + carry
+      carry = product / 10
+      carries << (carry > 0 ? carry : nil)
+    end
+
+    # Rimuovi l'ultimo riporto (va oltre il numero di cifre)
+    carries.pop
+    carries
+  end
+
+  # Riporti per il risultato finale
+  def result_carries
+    if show_partial_products && multiplier_length > 1
+      # Riporti dalla somma dei prodotti parziali
+      calculate_sum_carries
+    else
+      # Riporti dalla moltiplicazione diretta
+      calculate_direct_multiplication_carries
+    end
+  end
+
+  # Calcola i riporti dalla moltiplicazione diretta (senza prodotti parziali)
+  def calculate_direct_multiplication_carries
+    multiplicand_reversed = multiplicand.to_s.chars.reverse.map(&:to_i)
+    carry = 0
+    carries = []
+
+    multiplicand_reversed.each_with_index do |d, i|
+      partial_result = d * multiplier + carry
+      carry = partial_result / 10
+      # Il riporto va sopra la cifra successiva (più a sinistra)
+      carries << (carry > 0 ? carry : nil) if i < multiplicand_reversed.length - 1
+    end
+
+    # Padding a sinistra per avere product_length + 1 elementi
+    # I riporti sono allineati con le cifre del risultato (shiftati di 1 a sinistra)
+    result = Array.new(product_length + 1 - carries.length - 1, nil) + carries.reverse + [nil]
+    result
+  end
+
+  # Calcola i riporti dalla somma dei prodotti parziali
+  def calculate_sum_carries
+    multiplier_reversed = multiplier.to_s.chars.reverse.map(&:to_i)
+    carries = []
+    carry = 0
+
+    product_length.times do |col|
+      sum = carry
+
+      # Somma le cifre dei prodotti parziali per questa colonna
+      multiplier_reversed.each_with_index do |digit, row_index|
+        partial = multiplicand * digit
+        partial_str = partial.to_s.reverse
+        col_in_partial = col - row_index
+
+        if col_in_partial >= 0 && col_in_partial < partial_str.length
+          sum += partial_str[col_in_partial].to_i
+        end
+      end
+
+      carry = sum / 10
+      carries << (carry > 0 ? carry : nil) if col < product_length - 1
+    end
+
+    # Padding per avere product_length + 1 elementi (allineato con il risultato)
+    result = Array.new(product_length + 1 - carries.length - 1, nil) + carries.reverse + [nil]
+    result
+  end
+
+  # Cifre del risultato con correct answer
+  def result_digits_array
+    product.to_s.chars.map(&:to_i)
+  end
+
   # Parametri da passare al partial
   def to_partial_params
     { moltiplicazione: self }
