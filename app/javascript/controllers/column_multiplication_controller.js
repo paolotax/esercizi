@@ -90,7 +90,7 @@ export default class extends Controller {
            this.hasCarryResultTarget && this.carryResultTargets.includes(input)
   }
 
-  // Navigazione per input normali: sinistra nella riga, poi inizio riga sotto (no carry)
+  // Navigazione per input normali: sinistra nella riga, poi ultima a destra della riga sotto (no carry)
   navigateInputFlow(currentInput) {
     const rowMap = this.getInputsByRow()
     const sortedRows = this.getSortedRows()
@@ -110,7 +110,7 @@ export default class extends Controller {
       return
     }
 
-    // Siamo all'inizio della riga: vai all'inizio della prossima riga di input (no carry)
+    // Siamo all'inizio della riga: vai all'ultima a destra della prossima riga di input (no carry)
     const currentRowIndex = sortedRows.indexOf(currentRow)
 
     // Cerca la prossima riga con input normali (righe dispari = input, righe pari = carry)
@@ -120,8 +120,8 @@ export default class extends Controller {
       if (nextRow % 2 === 1 || this.isResultRow(nextRow, sortedRows)) {
         const nextRowInputs = rowMap.get(nextRow)
         if (nextRowInputs && nextRowInputs.length > 0) {
-          // Vai al primo input (più a sinistra) della riga
-          nextRowInputs[0].focus()
+          // Vai all'ultimo input (più a destra) della riga
+          nextRowInputs[nextRowInputs.length - 1].focus()
           return
         }
       }
@@ -156,7 +156,21 @@ export default class extends Controller {
       case 'Backspace':
         if (input.value === '') {
           event.preventDefault()
-          this.navigateHorizontal(input, 1)
+          // Backspace su campo vuoto: segue lo stesso giro dell'input
+          if (this.isCarryInput(input)) {
+            this.navigateVertical(input, 1)
+          } else {
+            this.navigateInputFlow(input)
+          }
+        }
+        break
+      case 'Enter':
+        event.preventDefault()
+        // Enter: segue lo stesso giro dell'input
+        if (this.isCarryInput(input)) {
+          this.navigateVertical(input, 1)
+        } else {
+          this.navigateInputFlow(input)
         }
         break
     }
