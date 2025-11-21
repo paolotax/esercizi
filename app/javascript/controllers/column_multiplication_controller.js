@@ -7,41 +7,62 @@ export default class extends Controller {
 
   connect() {
     this.jsConfetti = new JSConfetti()
-
-    // Event listeners per i prodotti parziali
-    if (this.hasPartialInputTarget) {
-      this.partialInputTargets.forEach((input, index) => {
-        input.addEventListener('input', (e) => this.handlePartialInput(e, index))
-        input.addEventListener('keydown', (e) => this.handlePartialKeydown(e, index))
-      })
-    }
-
-    // Event listeners per i riporti dei prodotti parziali
-    if (this.hasCarryPartialTarget) {
-      this.carryPartialTargets.forEach((input, index) => {
-        input.addEventListener('input', (e) => this.handleCarryPartialInput(e, index))
-        input.addEventListener('keydown', (e) => this.handleCarryPartialKeydown(e, index))
-      })
-    }
-
-    // Event listeners per il risultato finale
-    if (this.hasResultInputTarget) {
-      this.resultInputTargets.forEach((input, index) => {
-        input.addEventListener('input', (e) => this.handleResultInput(e, index))
-        input.addEventListener('keydown', (e) => this.handleResultKeydown(e, index))
-      })
-    }
-
-    // Event listeners per i riporti del risultato
-    if (this.hasCarryResultTarget) {
-      this.carryResultTargets.forEach((input, index) => {
-        input.addEventListener('input', (e) => this.handleCarryResultInput(e, index))
-        input.addEventListener('keydown', (e) => this.handleCarryResultKeydown(e, index))
-      })
-    }
+    this.setupNavigation()
   }
 
-  handlePartialInput(event, index) {
+  setupNavigation() {
+    // Raccogli tutti gli input navigabili
+    const allInputs = this.getAllInputs()
+
+    allInputs.forEach(input => {
+      input.addEventListener('input', (e) => this.handleInput(e))
+      input.addEventListener('keydown', (e) => this.handleKeydown(e))
+    })
+  }
+
+  getAllInputs() {
+    return [
+      ...(this.hasCarryPartialTarget ? this.carryPartialTargets : []),
+      ...(this.hasPartialInputTarget ? this.partialInputTargets : []),
+      ...(this.hasCarryResultTarget ? this.carryResultTargets : []),
+      ...(this.hasResultInputTarget ? this.resultInputTargets : [])
+    ]
+  }
+
+  // Raggruppa gli input per riga (data-row)
+  getInputsByRow() {
+    const allInputs = this.getAllInputs()
+    const rowMap = new Map()
+
+    allInputs.forEach(input => {
+      const row = parseInt(input.getAttribute('data-row'))
+      if (!isNaN(row)) {
+        if (!rowMap.has(row)) {
+          rowMap.set(row, [])
+        }
+        rowMap.get(row).push(input)
+      }
+    })
+
+    // Ordina ogni riga per colonna (da sinistra a destra = colonna decrescente)
+    rowMap.forEach((inputs, row) => {
+      inputs.sort((a, b) => {
+        const colA = parseInt(a.getAttribute('data-column')) || 0
+        const colB = parseInt(b.getAttribute('data-column')) || 0
+        return colB - colA // colonna maggiore = più a sinistra
+      })
+    })
+
+    return rowMap
+  }
+
+  // Ottieni le righe ordinate (dalla più alta alla più bassa)
+  getSortedRows() {
+    const rowMap = this.getInputsByRow()
+    return Array.from(rowMap.keys()).sort((a, b) => a - b)
+  }
+
+  handleInput(event) {
     const input = event.target
     const value = input.value
 
@@ -51,188 +72,97 @@ export default class extends Controller {
       return
     }
 
-    // Auto-advance verso sinistra (indice minore)
-    if (value !== '' && index > 0) {
-      this.partialInputTargets[index - 1].focus()
+    // Auto-advance verso sinistra nella stessa riga
+    if (value !== '') {
+      this.navigateHorizontal(input, -1)
     }
   }
 
-  handlePartialKeydown(event, index) {
+  handleKeydown(event) {
     const input = event.target
 
-    // Backspace su campo vuoto: torna a destra (indice maggiore)
-    if (event.key === 'Backspace' && input.value === '' && index < this.partialInputTargets.length - 1) {
-      event.preventDefault()
-      this.partialInputTargets[index + 1].focus()
-    }
-
-    // ArrowLeft: vai a sinistra (indice minore)
-    if (event.key === 'ArrowLeft' && index > 0) {
-      event.preventDefault()
-      this.partialInputTargets[index - 1].focus()
-    }
-
-    // ArrowRight: vai a destra (indice maggiore)
-    if (event.key === 'ArrowRight' && index < this.partialInputTargets.length - 1) {
-      event.preventDefault()
-      this.partialInputTargets[index + 1].focus()
-    }
-
-    // ArrowUp/ArrowDown: naviga per colonna
-    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-      event.preventDefault()
-      this.navigateVertical(input, event.key === 'ArrowUp' ? -1 : 1)
+    switch (event.key) {
+      case 'ArrowLeft':
+        event.preventDefault()
+        this.navigateHorizontal(input, -1)
+        break
+      case 'ArrowRight':
+        event.preventDefault()
+        this.navigateHorizontal(input, 1)
+        break
+      case 'ArrowUp':
+        event.preventDefault()
+        this.navigateVertical(input, -1)
+        break
+      case 'ArrowDown':
+        event.preventDefault()
+        this.navigateVertical(input, 1)
+        break
+      case 'Backspace':
+        if (input.value === '') {
+          event.preventDefault()
+          this.navigateHorizontal(input, 1)
+        }
+        break
     }
   }
 
-  handleCarryPartialInput(event, index) {
-    const input = event.target
-    const value = input.value
+  // Navigazione orizzontale con wrap alla riga sopra/sotto
+  navigateHorizontal(currentInput, direction) {
+    const rowMap = this.getInputsByRow()
+    const sortedRows = this.getSortedRows()
+    const currentRow = parseInt(currentInput.getAttribute('data-row'))
 
-    // Permetti solo numeri 0-9
-    if (!/^[0-9]?$/.test(value)) {
-      input.value = value.slice(0, -1)
+    if (isNaN(currentRow)) return
+
+    const rowInputs = rowMap.get(currentRow)
+    if (!rowInputs) return
+
+    const currentIndex = rowInputs.indexOf(currentInput)
+    if (currentIndex === -1) return
+
+    const newIndex = currentIndex + direction
+
+    // Se siamo dentro la riga, spostiamo normalmente
+    if (newIndex >= 0 && newIndex < rowInputs.length) {
+      rowInputs[newIndex].focus()
       return
     }
 
-    // Auto-advance verso sinistra (indice minore)
-    if (value !== '' && index > 0) {
-      this.carryPartialTargets[index - 1].focus()
+    // Wrap alla riga sopra/sotto
+    const currentRowIndex = sortedRows.indexOf(currentRow)
+
+    if (direction < 0 && newIndex < 0) {
+      // Freccia sinistra dall'inizio: vai alla fine della riga sopra
+      const prevRowIndex = currentRowIndex - 1
+      if (prevRowIndex >= 0) {
+        const prevRow = sortedRows[prevRowIndex]
+        const prevRowInputs = rowMap.get(prevRow)
+        if (prevRowInputs && prevRowInputs.length > 0) {
+          prevRowInputs[prevRowInputs.length - 1].focus()
+        }
+      }
+    } else if (direction > 0 && newIndex >= rowInputs.length) {
+      // Freccia destra dalla fine: vai all'inizio della riga sotto
+      const nextRowIndex = currentRowIndex + 1
+      if (nextRowIndex < sortedRows.length) {
+        const nextRow = sortedRows[nextRowIndex]
+        const nextRowInputs = rowMap.get(nextRow)
+        if (nextRowInputs && nextRowInputs.length > 0) {
+          nextRowInputs[0].focus()
+        }
+      }
     }
   }
 
-  handleCarryPartialKeydown(event, index) {
-    const input = event.target
-
-    // Backspace su campo vuoto: torna a destra (indice maggiore)
-    if (event.key === 'Backspace' && input.value === '' && index < this.carryPartialTargets.length - 1) {
-      event.preventDefault()
-      this.carryPartialTargets[index + 1].focus()
-    }
-
-    // ArrowLeft: vai a sinistra (indice minore)
-    if (event.key === 'ArrowLeft' && index > 0) {
-      event.preventDefault()
-      this.carryPartialTargets[index - 1].focus()
-    }
-
-    // ArrowRight: vai a destra (indice maggiore)
-    if (event.key === 'ArrowRight' && index < this.carryPartialTargets.length - 1) {
-      event.preventDefault()
-      this.carryPartialTargets[index + 1].focus()
-    }
-
-    // ArrowUp/ArrowDown: naviga per colonna
-    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-      event.preventDefault()
-      this.navigateVertical(input, event.key === 'ArrowUp' ? -1 : 1)
-    }
-  }
-
-  handleResultInput(event, index) {
-    const input = event.target
-    const value = input.value
-
-    // Permetti solo numeri 0-9
-    if (!/^[0-9]?$/.test(value)) {
-      input.value = value.slice(0, -1)
-      return
-    }
-
-    // Auto-advance verso sinistra (indice minore)
-    if (value !== '' && index > 0) {
-      this.resultInputTargets[index - 1].focus()
-    }
-  }
-
-  handleResultKeydown(event, index) {
-    const input = event.target
-
-    // Backspace su campo vuoto: torna a destra (indice maggiore)
-    if (event.key === 'Backspace' && input.value === '' && index < this.resultInputTargets.length - 1) {
-      event.preventDefault()
-      this.resultInputTargets[index + 1].focus()
-    }
-
-    // ArrowLeft: vai a sinistra (indice minore)
-    if (event.key === 'ArrowLeft' && index > 0) {
-      event.preventDefault()
-      this.resultInputTargets[index - 1].focus()
-    }
-
-    // ArrowRight: vai a destra (indice maggiore)
-    if (event.key === 'ArrowRight' && index < this.resultInputTargets.length - 1) {
-      event.preventDefault()
-      this.resultInputTargets[index + 1].focus()
-    }
-
-    // ArrowUp/ArrowDown: naviga per colonna
-    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-      event.preventDefault()
-      this.navigateVertical(input, event.key === 'ArrowUp' ? -1 : 1)
-    }
-  }
-
-  handleCarryResultInput(event, index) {
-    const input = event.target
-    const value = input.value
-
-    // Permetti solo numeri 0-9
-    if (!/^[0-9]?$/.test(value)) {
-      input.value = value.slice(0, -1)
-      return
-    }
-
-    // Auto-advance verso sinistra (indice minore)
-    if (value !== '' && index > 0) {
-      this.carryResultTargets[index - 1].focus()
-    }
-  }
-
-  handleCarryResultKeydown(event, index) {
-    const input = event.target
-
-    // Backspace su campo vuoto: torna a destra (indice maggiore)
-    if (event.key === 'Backspace' && input.value === '' && index < this.carryResultTargets.length - 1) {
-      event.preventDefault()
-      this.carryResultTargets[index + 1].focus()
-    }
-
-    // ArrowLeft: vai a sinistra (indice minore)
-    if (event.key === 'ArrowLeft' && index > 0) {
-      event.preventDefault()
-      this.carryResultTargets[index - 1].focus()
-    }
-
-    // ArrowRight: vai a destra (indice maggiore)
-    if (event.key === 'ArrowRight' && index < this.carryResultTargets.length - 1) {
-      event.preventDefault()
-      this.carryResultTargets[index + 1].focus()
-    }
-
-    // ArrowUp/ArrowDown: naviga per colonna
-    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-      event.preventDefault()
-      this.navigateVertical(input, event.key === 'ArrowUp' ? -1 : 1)
-    }
-  }
-
-  // Navigazione verticale basata su data-column e data-row
+  // Navigazione verticale nella stessa colonna
   navigateVertical(currentInput, direction) {
     const currentCol = parseInt(currentInput.getAttribute('data-column'))
     const currentRow = parseInt(currentInput.getAttribute('data-row'))
 
     if (isNaN(currentCol) || isNaN(currentRow)) return
 
-    const targetRow = currentRow + direction
-
-    // Raccogli tutti gli input con data-column e data-row
-    const allInputs = [
-      ...this.carryPartialTargets,
-      ...this.partialInputTargets,
-      ...this.carryResultTargets,
-      ...this.resultInputTargets
-    ]
+    const allInputs = this.getAllInputs()
 
     // Trova l'input nella stessa colonna con la row più vicina nella direzione desiderata
     let bestMatch = null
@@ -246,7 +176,6 @@ export default class extends Controller {
       if (col !== currentCol) return
       if (input === currentInput) return
 
-      // Verifica che sia nella direzione giusta
       if (direction > 0 && row > currentRow) {
         const diff = row - currentRow
         if (diff < bestRowDiff) {
@@ -277,13 +206,7 @@ export default class extends Controller {
   }
 
   checkResults() {
-    // Raccogli tutti gli input
-    const allInputs = [
-      ...(this.hasCarryPartialTarget ? this.carryPartialTargets : []),
-      ...(this.hasPartialInputTarget ? this.partialInputTargets : []),
-      ...(this.hasCarryResultTarget ? this.carryResultTargets : []),
-      ...(this.hasResultInputTarget ? this.resultInputTargets : [])
-    ]
+    const allInputs = this.getAllInputs()
 
     let correct = 0
     let total = 0
