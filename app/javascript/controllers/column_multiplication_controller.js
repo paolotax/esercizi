@@ -72,10 +72,65 @@ export default class extends Controller {
       return
     }
 
-    // Auto-advance verso sinistra nella stessa riga
     if (value !== '') {
-      this.navigateHorizontal(input, -1)
+      // Comportamento diverso per carry e input normali
+      if (this.isCarryInput(input)) {
+        // Carry: vai all'input sotto (stessa colonna)
+        this.navigateVertical(input, 1)
+      } else {
+        // Input normale: vai a sinistra, se sei all'inizio vai alla riga sotto
+        this.navigateInputFlow(input)
+      }
     }
+  }
+
+  // Verifica se l'input è un carry
+  isCarryInput(input) {
+    return this.hasCarryPartialTarget && this.carryPartialTargets.includes(input) ||
+           this.hasCarryResultTarget && this.carryResultTargets.includes(input)
+  }
+
+  // Navigazione per input normali: sinistra nella riga, poi inizio riga sotto (no carry)
+  navigateInputFlow(currentInput) {
+    const rowMap = this.getInputsByRow()
+    const sortedRows = this.getSortedRows()
+    const currentRow = parseInt(currentInput.getAttribute('data-row'))
+
+    if (isNaN(currentRow)) return
+
+    const rowInputs = rowMap.get(currentRow)
+    if (!rowInputs) return
+
+    const currentIndex = rowInputs.indexOf(currentInput)
+    if (currentIndex === -1) return
+
+    // Prova ad andare a sinistra nella stessa riga
+    if (currentIndex > 0) {
+      rowInputs[currentIndex - 1].focus()
+      return
+    }
+
+    // Siamo all'inizio della riga: vai all'inizio della prossima riga di input (no carry)
+    const currentRowIndex = sortedRows.indexOf(currentRow)
+
+    // Cerca la prossima riga con input normali (righe dispari = input, righe pari = carry)
+    for (let i = currentRowIndex + 1; i < sortedRows.length; i++) {
+      const nextRow = sortedRows[i]
+      // Le righe dispari sono gli input, le righe pari sono i carry
+      if (nextRow % 2 === 1 || this.isResultRow(nextRow, sortedRows)) {
+        const nextRowInputs = rowMap.get(nextRow)
+        if (nextRowInputs && nextRowInputs.length > 0) {
+          // Vai al primo input (più a sinistra) della riga
+          nextRowInputs[0].focus()
+          return
+        }
+      }
+    }
+  }
+
+  // Verifica se è la riga del risultato finale
+  isResultRow(row, sortedRows) {
+    return row === sortedRows[sortedRows.length - 1]
   }
 
   handleKeydown(event) {
