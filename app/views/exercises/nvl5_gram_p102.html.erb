@@ -1,9 +1,9 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-lime-50 via-white to-green-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Info Box -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6">
+  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
     <p class="text-base md:text-lg text-gray-700 mb-4 font-semibold">
       La <strong>frase</strong> è una sequenza di parole di senso compiuto.
     </p>
@@ -13,23 +13,23 @@
     </p>
 
     <!-- Schema FRASE -->
-    <div class="bg-white rounded-xl p-4 border-2 border-yellow-200">
-      <h3 class="text-center text-xl font-bold text-yellow-700 mb-4">FRASE</h3>
+    <div class="bg-white rounded-lg p-4">
+      <h3 class="text-center text-xl font-bold text-<%= @pagina.base_color %>-700 mb-4">FRASE</h3>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-blue-50 rounded-xl p-4 border-2 border-blue-300">
+        <div class="bg-blue-50 rounded-lg p-4">
           <h4 class="font-bold text-blue-700 mb-2 text-center">soggetto</h4>
           <p class="text-sm text-gray-700 mb-2">È ciò di cui si parla.</p>
           <p class="text-sm text-gray-700 italic">Può essere espresso, sottinteso o assente.</p>
         </div>
 
-        <div class="bg-red-50 rounded-xl p-4 border-2 border-red-300">
+        <div class="bg-red-50 rounded-lg p-4">
           <h4 class="font-bold text-red-700 mb-2 text-center">predicato</h4>
           <p class="text-sm text-gray-700 mb-2">Dice che cosa fa o come è il soggetto.</p>
           <p class="text-sm text-gray-700 italic">Può essere verbale o nominale.</p>
         </div>
 
-        <div class="bg-green-50 rounded-xl p-4 border-2 border-green-300">
+        <div class="bg-green-50 rounded-lg p-4">
           <h4 class="font-bold text-green-700 mb-2 text-center">complementi o espansioni</h4>
           <p class="text-sm text-gray-700 mb-2">Danno informazioni aggiuntive.</p>
           <p class="text-sm text-gray-700 italic">Possono essere diretti o indiretti.</p>
@@ -38,20 +38,20 @@
 
       <div class="mt-4 text-center">
         <div class="flex flex-wrap items-center justify-center gap-2 text-lg">
-          <span class="bg-blue-100 border-2 border-blue-400 rounded px-3 py-2 font-semibold">Luca</span>
-          <span class="bg-red-100 border-2 border-red-400 rounded px-3 py-2 font-semibold">prepara</span>
-          <span class="bg-green-100 border-2 border-green-400 rounded px-3 py-2 font-semibold">una torta</span>
+          <span class="bg-blue-100 border border-blue-400 rounded px-3 py-2 font-semibold">Luca</span>
+          <span class="bg-red-100 border border-red-400 rounded px-3 py-2 font-semibold">prepara</span>
+          <span class="bg-green-100 border border-green-400 rounded px-3 py-2 font-semibold">una torta</span>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Exercise 1: IMPARARE TUTTI -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-4 flex items-center flex-wrap gap-2">
-      <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+  <div class="bg-<%= @pagina.base_color %>-100 p-4 md:p-6 pb-8 rounded-lg" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center flex-wrap gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
-      <span>In ogni frase colora <span class="text-blue-600">soggetto<span class="inline-block w-6 h-6 bg-blue-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span>, <span class="text-red-600">verbo<span class="inline-block w-6 h-6 bg-red-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span> e <span class="text-green-600">complementi<span class="inline-block w-6 h-6 bg-green-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span></span>.</span>
+      <span>In ogni frase colora soggetto<span class="inline-block w-5 h-5 bg-blue-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span>, verbo<span class="inline-block w-5 h-5 bg-red-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span> e complementi<span class="inline-block w-5 h-5 bg-green-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span>.</span>
     </h2>
 
     <p class="text-base md:text-lg text-gray-700 mb-4 italic">
@@ -59,44 +59,44 @@
     </p>
 
     <div class="space-y-3 text-base md:text-lg cursor-pointer">
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3">
-        <span class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Toby</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">è il cagnolino</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">di Vittoria</span></span>
+      <div class="bg-white rounded-lg p-4">
+        <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Toby</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">è il cagnolino</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">di Vittoria</span></span>
       </div>
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3">
-        <span class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">Oggi</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">zio Mario</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">ha comprato</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">i biglietti</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">per il cinema</span></span>
+      <div class="bg-white rounded-lg p-4">
+        <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">Oggi</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">zio Mario</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">ha comprato</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">i biglietti</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">per il cinema</span></span>
       </div>
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3">
-        <span class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Io e mia sorella</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">andremo</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">al mare</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">in Sardegna</span></span>
+      <div class="bg-white rounded-lg p-4">
+        <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Io e mia sorella</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">andremo</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">al mare</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">in Sardegna</span></span>
       </div>
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3">
-        <span class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">In giardino</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">la nonna</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">innaffia</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">le piante</span></span>
+      <div class="bg-white rounded-lg p-4">
+        <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">In giardino</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">la nonna</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">innaffia</span> | <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">le piante</span></span>
       </div>
     </div>
   </div>
 
   <!-- Exercise 2 -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-4 flex items-center flex-wrap gap-2">
-      <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
-      <span>Dividi le frasi in sintagmi e sottolinea <span class="text-blue-600">soggetto<span class="inline-block w-6 h-6 bg-blue-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span>, <span class="text-red-600">verbo<span class="inline-block w-6 h-6 bg-red-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span> e <span class="text-green-600">complementi<span class="inline-block w-6 h-6 bg-green-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span></span>.</span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center flex-wrap gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
+      <span>Dividi le frasi in sintagmi e sottolinea soggetto<span class="inline-block w-5 h-5 bg-blue-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span>, verbo<span class="inline-block w-5 h-5 bg-red-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span> e complementi<span class="inline-block w-5 h-5 bg-green-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span>.</span>
     </h2>
 
     <div class="space-y-3 text-base md:text-lg cursor-pointer">
-      <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-4 py-3">
-        <span class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">Ho comprato</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">la frutta</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">al supermercato</span>.</span>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">Ho comprato</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">la frutta</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">al supermercato</span>.</span>
       </div>
-      <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-4 py-3">
-        <span class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Il tè</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">è caldo</span>.</span>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Il tè</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">è caldo</span>.</span>
       </div>
-      <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-4 py-3">
-        <span class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">A pranzo</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Justin</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">ha mangiato</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">un panino con il formaggio</span>.</span>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">A pranzo</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Justin</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">ha mangiato</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">un panino con il formaggio</span>.</span>
       </div>
-      <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-4 py-3">
-        <span class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">La prossima domenica</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">i miei genitori</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">partiranno</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">per un viaggio</span>.</span>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">La prossima domenica</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">i miei genitori</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">partiranno</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">per un viaggio</span>.</span>
       </div>
     </div>
   </div>
 
-  <%= render partial: "shared/exercise_controls" %>
+  <%= render 'shared/exercise_controls' %>
 
 </div>
