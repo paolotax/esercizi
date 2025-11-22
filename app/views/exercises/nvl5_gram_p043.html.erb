@@ -1,11 +1,12 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 via-white to-purple-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 3: Maschile o Femminile -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
-      <span class="font-bold">3</span> Indica con una X se il nome è maschile (M) o femminile (F).
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
+      Indica con una X se il nome è maschile (M) o femminile (F).
     </h2>
 
     <% nouns_gender = [
@@ -31,8 +32,8 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-base md:text-lg">
       <% nouns_gender.each_with_index do |noun, index| %>
-        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3 flex items-center justify-between">
-          <span class="font-semibold text-gray-700"><%= noun[:word] %></span>
+        <div class="rounded-lg p-3 flex items-center justify-between gap-4">
+          <span class="font-semibold text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= noun[:word] %></span>
           <div class="flex gap-3">
             <label class="flex items-center gap-1 cursor-pointer">
               <input type="radio" name="gender<%= index %>" value="M" data-correct-answer="<%= noun[:gender] %>" class="w-4 h-4">
@@ -49,9 +50,10 @@
   </div>
 
   <!-- Exercise 4: Colora i nomi invariabili -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
-      <span class="font-bold">4</span> Colora i nomi che al maschile e al femminile non cambiano (8 parole).
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
+      Colora i nomi che al maschile e al femminile non cambiano (8 parole).
     </h2>
 
     <% invariable_nouns = [
@@ -79,7 +81,7 @@
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-base md:text-lg">
       <% invariable_nouns.each do |noun| %>
-        <label class="flex items-center gap-2 bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-2 cursor-pointer hover:bg-purple-100 transition">
+        <label class="flex items-center gap-2 rounded-lg p-2 cursor-pointer hover:bg-<%= @pagina.base_color %>-50 transition">
           <input type="checkbox" value="<%= noun[:word] %>" data-correct-answer="<%= noun[:invariable] ? 'checked' : 'unchecked' %>" class="w-4 h-4">
           <span class="text-gray-700"><%= noun[:word] %></span>
         </label>
@@ -88,9 +90,10 @@
   </div>
 
   <!-- Exercise 5: Indipendente, Comune o Promiscuo -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
-      <span class="font-bold">5</span> Per ogni nome indica se è indipendente (I), di genere comune (C) o di genere promiscuo (P).
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">5</span>
+      Per ogni nome indica se è indipendente (I), di genere comune (C) o di genere promiscuo (P).
     </h2>
 
     <% noun_types = [
@@ -110,10 +113,8 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base md:text-lg">
       <% noun_types.each_with_index do |noun, index| %>
-        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
-          <div class="flex items-center justify-between mb-2">
-            <span class="font-semibold text-gray-700"><%= noun[:word] %></span>
-          </div>
+        <div class="rounded-lg p-3 flex items-center justify-between gap-4">
+          <span class="font-semibold text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= noun[:word] %></span>
           <div class="flex gap-3">
             <label class="flex items-center gap-1 cursor-pointer">
               <input type="radio" name="type<%= index %>" value="I" data-correct-answer="<%= noun[:type] %>" class="w-4 h-4">
@@ -134,9 +135,10 @@
   </div>
 
   <!-- Exercise 6: Multiple choice -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-orange-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
-    <h2 class="text-lg md:text-xl font-bold text-orange-700 mb-3">
-      <span class="font-bold">6</span> In quale frase non puoi distinguere il genere del nome evidenziato?
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">6</span>
+      In quale frase non puoi distinguere il genere del nome evidenziato?
     </h2>
 
     <% sentences = [
@@ -148,9 +150,9 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <% sentences.each_with_index do |sentence, index| %>
-        <label class="flex items-start gap-3 bg-orange-50 border-2 border-orange-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-orange-100 transition">
+        <label class="flex items-start gap-3 rounded-lg p-3 cursor-pointer hover:bg-<%= @pagina.base_color %>-50 transition">
           <input type="radio" name="sentence_choice" value="<%= index %>" data-correct-answer="<%= index == 1 ? 'correct' : 'incorrect' %>" class="w-5 h-5 mt-1">
-          <span class="text-gray-700"><%= sentence %></span>
+          <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= sentence %></span>
         </label>
       <% end %>
     </div>
@@ -161,7 +163,5 @@
   </div>
 
   <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl5_gram_p043' %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 </div>

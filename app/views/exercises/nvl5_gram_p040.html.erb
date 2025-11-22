@@ -1,16 +1,15 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-green-50 via-white to-green-50 rounded-3xl shadow-xl">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <div class="mb-6">
-    <p class="text-sm md:text-base text-green-700">
-      Osserva l'immagine della palestra e tocca i cartellini per ascoltare la parola corretta.
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <p class="text-base md:text-lg text-gray-700">
+      <span class="text-<%= @pagina.base_color %>-500">•</span> Osserva l'immagine della palestra e tocca i cartellini per ascoltare la parola corretta.
     </p>
   </div>
 
   <!-- Interactive Image -->
-  <div class="relative rounded-2xl overflow-hidden border-4 border-green-200 shadow-2xl"
+  <div class="relative rounded-lg overflow-hidden"
        data-controller="hotspot-editor"
        data-hotspot-editor-target="container">
     <%= image_tag "nvl5_gram/p040/p040_01.jpg",
@@ -19,7 +18,6 @@
 
     <div class="absolute inset-0">
       <% hotspots = [
-
         { label: "Tabellone", top: "19.0041%", left: "7.58161%", width: "9.05015%", height: "3.5%" },
         { label: "Canestro", top: "32.882%", left: "11.7866%", width: "10%", height: "3.5%" },
         { label: "Muri", top: "43.2592%", left: "9.3117%", width: "6.5%", height: "3.5%" },
@@ -39,7 +37,7 @@
 
       <% hotspots.each do |hotspot| %>
         <button type="button"
-                class="absolute rounded-xl bg-green-500/10 hover:bg-green-500/25 border-2 border-transparent hover:border-green-500 focus:border-green-600 focus:outline-none transition shadow-sm cursor-move"
+                class="absolute rounded-lg bg-<%= @pagina.base_color %>-500/10 hover:bg-<%= @pagina.base_color %>-500/25 border-2 border-transparent hover:border-<%= @pagina.base_color %>-500 focus:border-<%= @pagina.base_color %>-600 focus:outline-none transition cursor-move"
                 style="top: <%= hotspot[:top] %>; left: <%= hotspot[:left] %>; width: <%= hotspot[:width] %>; height: <%= hotspot[:height] %>;"
                 aria-label="Leggi: <%= hotspot[:label] %>"
                 data-controller="image-speech"
@@ -54,7 +52,5 @@
   </div>
 
   <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'green', show_exercise_buttons: false %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 </div>
