@@ -1,17 +1,13 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-cyan-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 1: Primitive nouns from derived -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-yellow-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-yellow-700 mb-3">
-      <div class="flex items-center gap-2 flex-wrap">
-        <div class="flex items-center gap-2">
-          <span class="bg-yellow-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">1</span>
-          <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold whitespace-nowrap">IMPARARE TUTTI</span>
-        </div>
-        <span>Per ciascuno dei seguenti <span class="text-yellow-600 font-bold underline">nomi derivati</span>, scrivi il nome primitivo.</span>
-      </div>
+  <div class="mb-6 bg-<%= @pagina.base_color %>-100 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center flex-wrap gap-2">
+      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center text-sm font-bold">1</span>
+      <span class="bg-yellow-400 text-<%= @pagina.base_color %>-900 px-3 py-1 rounded-lg font-bold text-sm">IMPARARE TUTTI</span>
+      <span>Per ciascuno dei seguenti <span class="text-<%= @pagina.base_color %>-600 font-bold">nomi derivati</span>, scrivi il nome primitivo.</span>
     </h2>
 
     <% derived_nouns = [
@@ -29,27 +25,25 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base md:text-lg">
       <% derived_nouns.each do |item| %>
-        <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl px-3 py-3">
-          <div class="flex items-center gap-2">
-            <span class="text-gray-700 font-semibold">• <%= item[:derived] %></span>
-            <span class="text-xl text-yellow-500">→</span>
-            <input type="text"
-                   class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 flex-1 min-w-[120px]"
-                   data-fill-blanks-target="input"
-                   data-answer="<%= item[:primitive] %>"
-                   data-correct-answer="<%= item[:primitive] %>"
-                   placeholder="">
-          </div>
+        <div class="flex items-center gap-3 bg-white rounded-lg p-3">
+          <span class="text-<%= @pagina.base_color %>-600 font-bold">•</span>
+          <span class="text-gray-700 font-semibold w-28"><%= item[:derived] %></span>
+          <span class="text-gray-400">→</span>
+          <input type="text"
+                 class="border-b-2 border-dotted border-gray-400 bg-transparent px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-grow"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:primitive] %>"
+                 data-correct-answer="<%= item[:primitive] %>">
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 2: Altered nouns -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3 flex items-start gap-2">
-      <span class="bg-purple-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">2</span>
-      <span>Scrivi il significato dei seguenti <span class="text-purple-600 font-bold underline">nomi alterati</span>, come nell'esempio. Poi inseriscili al posto giusto nella tabella.</span>
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center gap-2">
+      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center text-sm font-bold">2</span>
+      <span>Scrivi il significato dei seguenti <span class="text-<%= @pagina.base_color %>-600 font-bold">nomi alterati</span>, come nell'esempio. Poi inseriscili al posto giusto nella tabella.</span>
     </h2>
 
     <% altered_nouns = [
@@ -75,62 +69,60 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base md:text-lg mb-6">
       <% altered_nouns.each do |item| %>
-        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3">
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="text-gray-700 font-semibold">• <%= item[:noun] %></span>
-            <span class="text-xl text-purple-500">→</span>
-            <% if item[:example] %>
-              <span class="font-bold text-purple-700"><%= item[:meaning] %></span>
-            <% else %>
-              <input type="text"
-                     class="border-b-2 border-purple-500 bg-transparent px-2 py-1 focus:outline-none focus:border-purple-700 flex-1 min-w-[180px]"
-                     data-fill-blanks-target="input"
-                     data-answer="<%= item[:meaning] %>"
-                     data-correct-answer="<%= item[:meaning] %>"
-                     placeholder="">
-            <% end %>
-          </div>
+        <div class="flex items-center gap-3 bg-white rounded-lg p-3">
+          <span class="text-<%= @pagina.base_color %>-600 font-bold">•</span>
+          <span class="text-gray-700 font-semibold w-32"><%= item[:noun] %></span>
+          <span class="text-gray-400">→</span>
+          <% if item[:example] %>
+            <span class="font-bold text-<%= @pagina.base_color %>-700"><%= item[:meaning] %></span>
+          <% else %>
+            <input type="text"
+                   class="border-b-2 border-dotted border-gray-400 bg-transparent px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-grow"
+                   data-fill-blanks-target="input"
+                   data-answer="<%= item[:meaning] %>"
+                   data-correct-answer="<%= item[:meaning] %>">
+          <% end %>
         </div>
       <% end %>
     </div>
 
     <div class="overflow-x-auto">
-      <table class="w-full border-collapse text-sm md:text-base">
+      <table class="w-full text-sm md:text-base">
         <thead>
-          <tr class="bg-cyan-100">
-            <th class="border-2 border-cyan-300 px-4 py-3 text-cyan-700 font-bold">Accrescitivo</th>
-            <th class="border-2 border-cyan-300 px-4 py-3 text-cyan-700 font-bold">Diminutivo</th>
-            <th class="border-2 border-cyan-300 px-4 py-3 text-cyan-700 font-bold">Vezzeggiativo</th>
-            <th class="border-2 border-cyan-300 px-4 py-3 text-cyan-700 font-bold">Dispregiativo</th>
+          <tr class="bg-<%= @pagina.base_color %>-200">
+            <th class="border border-gray-300 px-4 py-3 text-<%= @pagina.base_color %>-700 font-bold">Accrescitivo</th>
+            <th class="border border-gray-300 px-4 py-3 text-<%= @pagina.base_color %>-700 font-bold">Diminutivo</th>
+            <th class="border border-gray-300 px-4 py-3 text-<%= @pagina.base_color %>-700 font-bold">Vezzeggiativo</th>
+            <th class="border border-gray-300 px-4 py-3 text-<%= @pagina.base_color %>-700 font-bold">Dispregiativo</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="border-2 border-cyan-200 px-4 py-3 bg-cyan-50 align-top">
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="nasone" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="finestrona" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500" data-fill-blanks-target="input" data-answer="omone" placeholder="">
+            <td class="border border-gray-300 px-4 py-3 bg-white align-top">
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="nasone"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="finestrona"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500" data-fill-blanks-target="input" data-answer="omone">
             </td>
-            <td class="border-2 border-cyan-200 px-4 py-3 bg-white align-top">
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="cameretta" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="vestitino" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="orticello" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="mostriciattolo" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="anellino" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="vasetto" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500" data-fill-blanks-target="input" data-answer="patatina" placeholder="">
+            <td class="border border-gray-300 px-4 py-3 bg-<%= @pagina.base_color %>-50 align-top">
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="cameretta"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="vestitino"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="orticello"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="mostriciattolo"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="anellino"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="vasetto"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500" data-fill-blanks-target="input" data-answer="patatina">
             </td>
-            <td class="border-2 border-cyan-200 px-4 py-3 bg-cyan-50 align-top">
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="castelluzzo" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="porticciolo" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="casuccia" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500" data-fill-blanks-target="input" data-answer="volpacchiotto" placeholder="">
+            <td class="border border-gray-300 px-4 py-3 bg-white align-top">
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="castelluzzo"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="porticciolo"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="casuccia"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500" data-fill-blanks-target="input" data-answer="volpacchiotto">
             </td>
-            <td class="border-2 border-cyan-200 px-4 py-3 bg-white align-top">
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="stradaccia" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="cagnaccio" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500 mb-2" data-fill-blanks-target="input" data-answer="zampaccia" placeholder=""><br>
-              <input type="text" class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-cyan-500" data-fill-blanks-target="input" data-answer="poetastro" placeholder="">
+            <td class="border border-gray-300 px-4 py-3 bg-<%= @pagina.base_color %>-50 align-top">
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="stradaccia"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="cagnaccio"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="zampaccia"><br>
+              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500" data-fill-blanks-target="input" data-answer="poetastro">
             </td>
           </tr>
         </tbody>
@@ -138,12 +130,6 @@
     </div>
   </div>
 
-  <div class="text-right text-sm text-gray-500 mb-6">
-    Grammatica p. <%= link_to "47", pagina_path("nvl5_gram_p047"), class: "text-red-600 hover:text-red-800 underline font-bold" %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 
-  <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'cyan', current_page: 'nvl5_gram_p150' %>
-  </div>
 </div>

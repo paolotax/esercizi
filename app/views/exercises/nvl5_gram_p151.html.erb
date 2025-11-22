@@ -1,12 +1,12 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-cyan-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 3: Substitute with altered nouns -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3 flex items-start gap-2">
-      <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">3</span>
-      <span>Sostituisci alle seguenti espressioni un <span class="text-blue-600 font-bold underline">alterato</span> adatto.</span>
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center gap-2">
+      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center text-sm font-bold">3</span>
+      <span>Sostituisci alle seguenti espressioni un <span class="text-<%= @pagina.base_color %>-600 font-bold">alterato</span> adatto.</span>
     </h2>
 
     <% alterations = [
@@ -28,30 +28,28 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base md:text-lg">
       <% alterations.each do |item| %>
-        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3">
-          <div class="flex items-center gap-2">
-            <span class="text-gray-700 font-semibold">• <%= item[:expression] %></span>
-            <span class="text-xl text-blue-500">→</span>
-            <input type="text"
-                   class="border-b-2 border-blue-500 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-700 flex-1 min-w-[120px]"
-                   data-fill-blanks-target="input"
-                   data-answer="<%= item[:altered] %>"
-                   data-correct-answer="<%= item[:altered] %>"
-                   placeholder="...............">
-          </div>
+        <div class="flex items-center gap-3 bg-white rounded-lg p-3">
+          <span class="text-<%= @pagina.base_color %>-600 font-bold">•</span>
+          <span class="text-gray-700 font-semibold"><%= item[:expression] %></span>
+          <span class="text-gray-400">→</span>
+          <input type="text"
+                 class="border-b-2 border-dotted border-gray-400 bg-transparent px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-grow"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:altered] %>"
+                 data-correct-answer="<%= item[:altered] %>">
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 4: Underline with colors -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3 flex items-start gap-2">
-      <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">4</span>
-      <span>Sottolinea in rosso i <span class="text-red-600 font-bold underline">nomi primitivi<span class="inline-block w-6 h-6 bg-red-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span>, in verde i <span class="text-green-600 font-bold underline">derivati<span class="inline-block w-6 h-6 bg-green-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span></span>, in blu gli <span class="text-blue-600 font-bold underline">alterati<span class="inline-block w-6 h-6 bg-blue-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span>.</span>
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+    <h2 class="text-lg md:text-xl font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center gap-2">
+      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center text-sm font-bold">4</span>
+      <span>Sottolinea in rosso i <span class="text-red-600 font-bold">nomi primitivi<span class="inline-block w-6 h-6 bg-red-300 rounded ml-1 align-middle cursor-pointer" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span>, in verde i <span class="text-green-600 font-bold">derivati<span class="inline-block w-6 h-6 bg-green-300 rounded ml-1 align-middle cursor-pointer" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span></span>, in blu gli <span class="text-blue-600 font-bold">alterati<span class="inline-block w-6 h-6 bg-blue-300 rounded ml-1 align-middle cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span>.</span>
     </h2>
 
-    <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-4 text-base md:text-lg text-gray-700 leading-relaxed">
+    <div class="bg-white rounded-lg px-4 py-4 text-base md:text-lg text-gray-700 leading-relaxed">
       <p>
         <span data-word-highlighter-target="word" data-correct-color="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">pastorello</span> •
         <span data-word-highlighter-target="word" data-correct-color="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">manubrio</span> •
@@ -82,10 +80,10 @@
   </div>
 
   <!-- Exercise 5: Derived and altered from primitive -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-orange-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-orange-700 mb-4 flex items-start gap-2">
-      <span class="bg-orange-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">5</span>
-      <span>Per ciascuno di questi nomi scrivi un <span class="text-orange-600 font-bold underline">nome derivato</span> (D) e un <span class="text-orange-600 font-bold underline">nome alterato</span> (A).</span>
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center gap-2">
+      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center text-sm font-bold">5</span>
+      <span>Per ciascuno di questi nomi scrivi un <span class="text-<%= @pagina.base_color %>-600 font-bold">nome derivato</span> (D) e un <span class="text-<%= @pagina.base_color %>-600 font-bold">nome alterato</span> (A).</span>
     </h2>
 
     <% noun_pairs = [
@@ -101,29 +99,27 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-base md:text-lg">
       <% noun_pairs.each do |item| %>
-        <div class="bg-orange-50 border-2 border-orange-200 rounded-xl p-4">
+        <div class="bg-white rounded-lg p-4">
           <div class="flex items-center gap-3 mb-3">
-            <div class="bg-orange-500 text-white font-bold px-4 py-2 rounded-lg text-center min-w-[100px]">
+            <div class="bg-<%= @pagina.base_color %>-500 text-white font-bold px-4 py-2 rounded-lg text-center min-w-[100px]">
               <%= item[:primitive] %>
             </div>
             <div class="flex-1">
               <div class="flex items-center gap-2 mb-2">
-                <span class="text-orange-500 text-xl">→</span>
-                <span class="bg-orange-100 px-2 py-1 rounded font-semibold text-sm">D</span>
+                <span class="text-<%= @pagina.base_color %>-500">→</span>
+                <span class="bg-<%= @pagina.base_color %>-100 px-2 py-1 rounded font-semibold text-sm">D</span>
                 <input type="text"
-                       class="border-b-2 border-orange-500 bg-transparent px-2 py-1 focus:outline-none focus:border-orange-700 flex-1"
+                       class="border-b-2 border-dotted border-gray-400 bg-transparent px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-1"
                        data-fill-blanks-target="input"
-                       data-answer="<%= item[:derived] %>"
-                       placeholder=".....................">
+                       data-answer="<%= item[:derived] %>">
               </div>
               <div class="flex items-center gap-2">
-                <span class="text-orange-500 text-xl">→</span>
-                <span class="bg-orange-100 px-2 py-1 rounded font-semibold text-sm">A</span>
+                <span class="text-<%= @pagina.base_color %>-500">→</span>
+                <span class="bg-<%= @pagina.base_color %>-100 px-2 py-1 rounded font-semibold text-sm">A</span>
                 <input type="text"
-                       class="border-b-2 border-orange-500 bg-transparent px-2 py-1 focus:outline-none focus:border-orange-700 flex-1"
+                       class="border-b-2 border-dotted border-gray-400 bg-transparent px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-1"
                        data-fill-blanks-target="input"
-                       data-answer="<%= item[:altered] %>"
-                       placeholder=".....................">
+                       data-answer="<%= item[:altered] %>">
               </div>
             </div>
           </div>
@@ -132,12 +128,6 @@
     </div>
   </div>
 
-  <div class="text-right text-sm text-gray-500 mb-6">
-    Grammatica p. <%= link_to "47", pagina_path("nvl5_gram_p047"), class: "text-red-600 hover:text-red-800 underline font-bold" %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 
-  <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'cyan', current_page: 'nvl5_gram_p151' %>
-  </div>
 </div>
