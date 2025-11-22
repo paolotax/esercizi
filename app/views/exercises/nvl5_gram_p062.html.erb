@@ -1,33 +1,33 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-lime-50 via-white to-green-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Info Box -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6">
+  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
     <p class="text-base md:text-lg text-gray-700 mb-4">
-      Esempio: Elisa è la ragazza <strong>che</strong> ha vinto la gara. → Elisa è la ragazza. La ragazza ha vinto la gara.
+      <span class="text-<%= @pagina.base_color %>-500">•</span> Esempio: Elisa è la ragazza <strong>che</strong> ha vinto la gara. → Elisa è la ragazza. La ragazza ha vinto la gara.
     </p>
 
     <div class="overflow-x-auto">
       <table class="w-full border-collapse text-sm md:text-base">
         <thead>
-          <tr class="bg-amber-200">
-            <th class="border-2 border-amber-400 px-4 py-2 font-bold">Pronome</th>
-            <th class="border-2 border-amber-400 px-4 py-2 font-bold">Funzione</th>
+          <tr class="bg-<%= @pagina.base_color %>-100">
+            <th class="border border-<%= @pagina.base_color %>-300 px-4 py-2 font-bold">Pronome</th>
+            <th class="border border-<%= @pagina.base_color %>-300 px-4 py-2 font-bold">Funzione</th>
           </tr>
         </thead>
         <tbody>
           <tr class="bg-white">
-            <td class="border-2 border-amber-300 px-4 py-2 font-semibold text-center">che</td>
-            <td class="border-2 border-amber-300 px-4 py-2">soggetto o complemento oggetto</td>
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-2 font-semibold text-center">che</td>
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-2">soggetto o complemento oggetto</td>
           </tr>
-          <tr class="bg-amber-50">
-            <td class="border-2 border-amber-300 px-4 py-2 font-semibold text-center">cui</td>
-            <td class="border-2 border-amber-300 px-4 py-2">complemento indiretto (con preposizione)</td>
+          <tr class="bg-<%= @pagina.base_color %>-50">
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-2 font-semibold text-center">cui</td>
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-2">complemento indiretto (con preposizione)</td>
           </tr>
           <tr class="bg-white">
-            <td class="border-2 border-amber-300 px-4 py-2 font-semibold text-center">il quale, la quale<br>i quali, le quali</td>
-            <td class="border-2 border-amber-300 px-4 py-2">soggetto o complemento indiretto</td>
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-2 font-semibold text-center">il quale, la quale<br>i quali, le quali</td>
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-2">soggetto o complemento indiretto</td>
           </tr>
         </tbody>
       </table>
@@ -35,88 +35,82 @@
   </div>
 
   <!-- Exercise 1: IMPARARE TUTTI -->
-  <div class="mb-6 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-2xl border-4 border-blue-300 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-4">
-      <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
-      <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold mr-2">IMPARARE TUTTI</span>
-      Sottolinea i pronomi relativi <span class="inline-block w-4 h-4 bg-blue-300 rounded ml-1 align-middle"></span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+      Sottolinea i pronomi relativi<span class="inline-block w-5 h-5 bg-blue-300 rounded ml-1"></span>
     </h2>
 
     <!-- Color Selector (hidden for mono-color) -->
     <div class="hidden">
-      <div class="w-6 h-6 bg-blue-300"
-           data-word-highlighter-target="colorBox"
-           data-color="blue">
-      </div>
+      <div class="w-6 h-6 bg-blue-300" data-word-highlighter-target="colorBox" data-color="blue"></div>
     </div>
 
-    <div class="grid grid-cols-1 gap-3 text-base md:text-lg cursor-pointer">
-      <div class="bg-white rounded-lg p-4">
-        <p class="text-gray-700">• La città <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">in cui</span> vivo è molto grande.</p>
+    <div class="space-y-3 text-base md:text-lg cursor-pointer">
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> La città <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">in cui</span> vivo è molto grande.</p>
       </div>
-      <div class="bg-white rounded-lg p-4">
-        <p class="text-gray-700">• I compagni <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">con cui</span> studio sono simpatici.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> I compagni <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">con cui</span> studio sono simpatici.</p>
       </div>
-      <div class="bg-white rounded-lg p-4">
-        <p class="text-gray-700">• Il motivo <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">per cui</span> ti ho chiamato è importante.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Il motivo <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">per cui</span> ti ho chiamato è importante.</p>
       </div>
-      <div class="bg-white rounded-lg p-4">
-        <p class="text-gray-700">• La signora <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">la quale</span> abita al piano di sopra è molto gentile.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> La signora <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">la quale</span> abita al piano di sopra è molto gentile.</p>
       </div>
     </div>
   </div>
 
   <!-- Exercise 2: Complete with relative pronouns -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-4">
-      <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
-      Completa le frasi scegliendo tra: su cui, nella quale, in cui, con i quali, con cui, per cui, alla quale.
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
+      Completa le frasi scegliendo tra: <span class="text-red-600 font-bold">su cui • nella quale • in cui • con i quali • con cui • per cui • alla quale</span>
     </h2>
 
-    <div class="space-y-3 text-base md:text-lg">
-      <% sentences = [
-        { text: "La scuola", answer: "alla quale", continuation: "sono iscritto organizza molte gite." },
-        { text: "Il tavolo", answer: "su cui", continuation: "ho appoggiato i libri è molto grande." },
-        { text: "Il parco", answer: "in cui", continuation: "gioco è vicino a casa mia." },
-        { text: "Gli amici", answer: "con i quali", continuation: "esco sono molto divertenti." },
-        { text: "La ragione", answer: "per cui", continuation: "sono arrivato in ritardo è il traffico." }
-      ] %>
+    <% sentences = [
+      { text: "La scuola", answer: "alla quale", continuation: "sono iscritto organizza molte gite." },
+      { text: "Il tavolo", answer: "su cui", continuation: "ho appoggiato i libri è molto grande." },
+      { text: "Il parco", answer: "in cui", continuation: "gioco è vicino a casa mia." },
+      { text: "Gli amici", answer: "con i quali", continuation: "esco sono molto divertenti." },
+      { text: "La ragione", answer: "per cui", continuation: "sono arrivato in ritardo è il traffico." }
+    ] %>
 
+    <div class="space-y-3 text-base md:text-lg">
       <% sentences.each do |item| %>
-        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
-          <p class="text-gray-700">
-            • <%= item[:text] %>
-            <input type="text"
-                   class="border-b-2 border-green-500 bg-transparent px-2 py-1 w-40 focus:outline-none focus:border-green-700"
-                   data-fill-blanks-target="input"
-                   data-answer="<%= item[:answer] %>"
-                   data-correct-answer="<%= item[:answer] %>"
-                   placeholder="...........">
-            <%= item[:continuation] %>
-          </p>
+        <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <span class="text-gray-700"><%= item[:text] %></span>
+          <input type="text"
+                 class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:answer] %>"
+                 data-correct-answer="<%= item[:answer] %>">
+          <span class="text-gray-700"><%= item[:continuation] %></span>
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 3: Transform sentences -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-4">
-      <span class="bg-purple-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">3</span>
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Riscrivi sostituendo che/cui con forme di quale.
     </h2>
 
     <div class="space-y-4 text-base md:text-lg">
-      <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700 mb-2">• Il libro che ho letto è interessante.</p>
-        <textarea class="w-full border-2 border-purple-300 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
+      <div class="rounded-lg p-3">
+        <p class="text-gray-700 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> Il libro che ho letto è interessante.</p>
+        <textarea class="w-full border-2 border-<%= @pagina.base_color %>-200 rounded-lg px-3 py-2 focus:outline-none focus:border-<%= @pagina.base_color %>-500"
                   rows="2"
                   placeholder="Riscrivi la frase qui..."></textarea>
       </div>
 
-      <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700 mb-2">• La ragazza di cui ti ho parlato è mia cugina.</p>
-        <textarea class="w-full border-2 border-purple-300 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
+      <div class="rounded-lg p-3">
+        <p class="text-gray-700 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> La ragazza di cui ti ho parlato è mia cugina.</p>
+        <textarea class="w-full border-2 border-<%= @pagina.base_color %>-200 rounded-lg px-3 py-2 focus:outline-none focus:border-<%= @pagina.base_color %>-500"
                   rows="2"
                   placeholder="Riscrivi la frase qui..."></textarea>
       </div>
@@ -124,29 +118,29 @@
   </div>
 
   <!-- Exercise 4: Join sentences -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-orange-200 shadow-2xl p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-orange-700 mb-4">
-      <span class="bg-orange-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">4</span>
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
       Unisci coppie di frasi con un pronome relativo.
     </h2>
 
-    <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-4 py-3 mb-4">
+    <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 mb-4">
       <p class="text-gray-700 font-semibold mb-2">Esempio:</p>
-      <p class="text-gray-700">• Mio zio Luca vive a Milano. Mio zio Luca è medico.</p>
+      <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Mio zio Luca vive a Milano. Mio zio Luca è medico.</p>
       <p class="text-green-700 mt-2">→ Mio zio Luca, <strong>che</strong> vive a Milano, è medico.</p>
     </div>
 
     <div class="space-y-4 text-base md:text-lg">
-      <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700 mb-2">• Ho incontrato Maria. Maria è la mia compagna di classe.</p>
-        <textarea class="w-full border-2 border-orange-300 rounded-lg px-3 py-2 focus:outline-none focus:border-orange-500"
+      <div class="rounded-lg p-3">
+        <p class="text-gray-700 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> Ho incontrato Maria. Maria è la mia compagna di classe.</p>
+        <textarea class="w-full border-2 border-<%= @pagina.base_color %>-200 rounded-lg px-3 py-2 focus:outline-none focus:border-<%= @pagina.base_color %>-500"
                   rows="2"
                   placeholder="Scrivi qui la frase unita..."></textarea>
       </div>
 
-      <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700 mb-2">• Questo è il parco. Nel parco gioco a calcio.</p>
-        <textarea class="w-full border-2 border-orange-300 rounded-lg px-3 py-2 focus:outline-none focus:border-orange-500"
+      <div class="rounded-lg p-3">
+        <p class="text-gray-700 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> Questo è il parco. Nel parco gioco a calcio.</p>
+        <textarea class="w-full border-2 border-<%= @pagina.base_color %>-200 rounded-lg px-3 py-2 focus:outline-none focus:border-<%= @pagina.base_color %>-500"
                   rows="2"
                   placeholder="Scrivi qui la frase unita..."></textarea>
       </div>
@@ -154,17 +148,17 @@
   </div>
 
   <!-- Exercise 5: Write sentences -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-pink-200 shadow-2xl p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-pink-700 mb-4">
-      <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">5</span>
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">5</span>
       Scrivi sei frasi con cui usando: per cui, di cui, con cui, a cui, in cui, su cui.
     </h2>
 
     <div class="space-y-3 text-base md:text-lg">
       <% ['per cui', 'di cui', 'con cui', 'a cui', 'in cui', 'su cui'].each do |pronoun| %>
-        <div class="bg-pink-50 border-2 border-pink-200 rounded-xl px-4 py-3">
+        <div class="rounded-lg p-3">
           <p class="font-semibold text-gray-700 mb-2"><%= pronoun %>:</p>
-          <textarea class="w-full border-2 border-pink-300 rounded-lg px-3 py-2 focus:outline-none focus:border-pink-500"
+          <textarea class="w-full border-2 border-<%= @pagina.base_color %>-200 rounded-lg px-3 py-2 focus:outline-none focus:border-<%= @pagina.base_color %>-500"
                     rows="2"
                     placeholder="Scrivi qui la tua frase..."></textarea>
         </div>
@@ -172,11 +166,9 @@
     </div>
   </div>
 
-  <!-- Reference -->
-  <div class="mt-6 text-center">
-    <p class="text-red-600 font-bold text-base md:text-lg">Esercizi pp. <%= link_to "161", pagina_path("nvl5_gram_p161"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "162", pagina_path("nvl5_gram_p162"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "163", pagina_path("nvl5_gram_p163"), class: "text-gray-600 hover:text-gray-800 underline" %></p>
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Esercizi pp. <%= link_to "161", pagina_path("nvl5_gram_p161"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "162", pagina_path("nvl5_gram_p162"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "163", pagina_path("nvl5_gram_p163"), class: "text-gray-600 hover:text-gray-800 underline" %>
   </div>
 
-  <%= render partial: "shared/exercise_controls" %>
-
+  <%= render 'shared/exercise_controls' %>
 </div>
