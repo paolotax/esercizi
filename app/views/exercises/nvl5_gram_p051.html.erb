@@ -1,11 +1,12 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-red-50 via-white to-orange-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 3: Classify noun structure -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="multiple-choice">
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
-      <span class="font-bold">3</span> Classifica i nomi scrivendo D (derivato), A (alterato) o C (composto).
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="multiple-choice">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
+      Classifica i nomi scrivendo D (derivato), A (alterato) o C (composto).
     </h2>
 
     <% noun_classification = [
@@ -33,11 +34,12 @@
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 text-base md:text-lg">
       <% noun_classification.each_with_index do |noun, index| %>
-        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3">
+        <div class="rounded-lg p-3">
           <div class="flex items-center justify-between mb-2">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
             <span class="font-semibold text-gray-700"><%= noun[:word] %></span>
           </div>
-          <div class="flex gap-2">
+          <div class="flex gap-2 justify-end">
             <label class="flex items-center gap-1 cursor-pointer">
               <input type="radio" name="classification<%= index %>" value="D" data-multiple-choice-target="answer" data-correct-answer="<%= noun[:type] == 'D' ? 'true' : 'false' %>" class="w-4 h-4">
               <span class="text-xs">D</span>
@@ -57,18 +59,19 @@
   </div>
 
   <!-- Exercise 4: Identify articles in text -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
-      <span class="font-bold">4</span> Sottolinea in <span class="text-blue-600 font-bold">blu<span class="inline-block w-6 h-6 bg-blue-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span> gli articoli determinativi, in <span class="text-red-600 font-bold">rosso<span class="inline-block w-6 h-6 bg-red-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span> gli indeterminativi. Poi <span class="text-green-600 font-bold">cerchia<span class="inline-block w-6 h-6 bg-green-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span></span> gli articoli partitivi.
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
+      Sottolinea in blu<span class="inline-block w-5 h-5 bg-blue-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span> gli articoli determinativi, in rosso<span class="inline-block w-5 h-5 bg-red-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span> gli indeterminativi. Poi cerchia<span class="inline-block w-5 h-5 bg-green-300 rounded-full ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span> gli articoli partitivi.
     </h2>
 
-    <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-4 text-base md:text-lg text-gray-700 leading-relaxed">
+    <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 text-base md:text-lg text-gray-700 leading-relaxed">
       <div class="mb-4 cursor-pointer">
         <p class="mb-2">
           Ieri pomeriggio ho accompagnato
           <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">la</span> nonna a fare <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">delle</span> spese. Abbiamo
           comprato <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">una</span> maglia per <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">il</span> compleanno
-          <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">del</span> nonno e <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">un</span> ombrello.
+          del nonno e <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">un</span> ombrello.
         </p>
       </div>
       <div class="mb-4 cursor-pointer">
@@ -81,7 +84,7 @@
       </div>
       <div class="mb-4 cursor-pointer">
         <p class="mb-2">
-          Per <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">la</span> festa <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">del</span> mio compleanno ho
+          Per <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">la</span> festa del mio compleanno ho
           invitato <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">i</span> miei compagni di classe e anche
           <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">delle</span> mie amiche che abitano qui vicino.
         </p>
@@ -103,18 +106,19 @@
   </div>
 
   <!-- Le mie competenze section -->
-  <div class="mb-6 bg-gradient-to-r from-blue-100 to-purple-100 rounded-2xl border-4 border-blue-300 shadow-2xl p-4 md:p-6">
-    <div class="mb-3 inline-block bg-blue-500 text-white px-4 py-2 rounded-full text-sm md:text-base font-bold shadow-lg">
+  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
+    <div class="mb-3 inline-block bg-<%= @pagina.base_color %>-500 text-white px-4 py-2 rounded-full text-sm md:text-base font-bold">
       Le mie competenze
     </div>
 
     <!-- Exercise 5: Count nouns -->
     <div class="mb-6" data-controller="word-highlighter multiple-choice" data-word-highlighter-multi-color-value="true">
-      <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
-        <span class="font-bold">5</span> <span class="text-blue-600 font-bold">Sottolinea<span class="inline-block w-6 h-6 bg-blue-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span> tutti i nomi, poi <span class="text-green-600 font-bold">cerchia<span class="inline-block w-6 h-6 bg-green-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span></span> i nomi collettivi. Infine rispondi.
+      <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+        <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">5</span>
+        Sottolinea<span class="inline-block w-5 h-5 bg-blue-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span> tutti i nomi, poi cerchia<span class="inline-block w-5 h-5 bg-green-300 rounded-full ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span> i nomi collettivi. Infine rispondi.
       </h2>
 
-      <div class="bg-white border-2 border-blue-200 rounded-xl px-4 py-4 mb-4 text-base md:text-lg text-gray-700 leading-relaxed cursor-pointer">
+      <div class="bg-white rounded-lg p-4 mb-4 text-base md:text-lg text-gray-700 leading-relaxed cursor-pointer">
         <p>
           "La <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">folla</span> di <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">formiche</span> ascoltava attenta.
           L'<span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">ape</span> disse che avrebbe parlato anche agli <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">uccelli</span>,
@@ -127,7 +131,7 @@
       </div>
 
       <div class="space-y-3">
-        <div class="bg-white border-2 border-blue-200 rounded-xl px-4 py-3">
+        <div class="bg-white rounded-lg p-3">
           <p class="text-base md:text-lg mb-2">Quanti nomi hai trovato?</p>
           <div class="flex gap-3">
             <label class="flex items-center gap-2 cursor-pointer">
@@ -149,7 +153,7 @@
           </div>
         </div>
 
-        <div class="bg-white border-2 border-blue-200 rounded-xl px-4 py-3">
+        <div class="bg-white rounded-lg p-3">
           <p class="text-base md:text-lg mb-2">Quanti nomi collettivi hai trovato?</p>
           <div class="flex gap-3">
             <label class="flex items-center gap-2 cursor-pointer">
@@ -174,25 +178,26 @@
     </div>
 
     <!-- Exercise 6: Identify partitive article -->
-    <div class="mb-4" data-controller="multiple-choice">
-      <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
-        <span class="font-bold">6</span> In quale di queste frasi c'è un articolo partitivo?
+    <div data-controller="multiple-choice">
+      <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+        <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">6</span>
+        In quale di queste frasi c'è un articolo partitivo?
       </h2>
 
       <div class="space-y-3 text-base md:text-lg">
-        <label class="flex items-start gap-3 bg-white border-2 border-purple-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-purple-50 transition">
+        <label class="flex items-start gap-3 bg-white rounded-lg p-3 cursor-pointer hover:bg-gray-50 transition">
           <input type="radio" name="partitive_sentence" value="1" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5 mt-1">
           <span class="text-gray-700">I petali si sono rovinati a causa del vento.</span>
         </label>
-        <label class="flex items-start gap-3 bg-white border-2 border-purple-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-purple-50 transition">
+        <label class="flex items-start gap-3 bg-white rounded-lg p-3 cursor-pointer hover:bg-gray-50 transition">
           <input type="radio" name="partitive_sentence" value="2" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5 mt-1">
           <span class="text-gray-700">Mi piace il profumo intenso del gelsomino.</span>
         </label>
-        <label class="flex items-start gap-3 bg-white border-2 border-purple-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-purple-50 transition">
+        <label class="flex items-start gap-3 bg-white rounded-lg p-3 cursor-pointer hover:bg-gray-50 transition">
           <input type="radio" name="partitive_sentence" value="3" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5 mt-1">
           <span class="text-gray-700">Federico ha molta cura delle piante dell'orto.</span>
         </label>
-        <label class="flex items-start gap-3 bg-white border-2 border-purple-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-purple-50 transition">
+        <label class="flex items-start gap-3 bg-white rounded-lg p-3 cursor-pointer hover:bg-gray-50 transition">
           <input type="radio" name="partitive_sentence" value="4" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5 mt-1">
           <span class="text-gray-700">In giardino ci sono delle rose bellissime.</span>
         </label>
@@ -200,8 +205,5 @@
     </div>
   </div>
 
-  <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'red', current_page: 'nvl5_gram_p051' %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 </div>
