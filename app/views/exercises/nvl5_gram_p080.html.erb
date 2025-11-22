@@ -1,23 +1,23 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-lime-50 via-white to-green-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Info Box -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6">
+  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
     <div class="space-y-4 text-base md:text-lg text-gray-700">
-      <div class="bg-white rounded-lg p-4 border-2 border-blue-200">
-        <p class="font-semibold text-blue-700 mb-2">• Quando il soggetto compie l'azione, il verbo è usato nella <strong>forma attiva</strong>:</p>
-        <div class="bg-blue-50 rounded p-3 font-mono text-gray-800">
-          <div class="grid grid-cols-3 gap-2">
-            <div class="text-center">
+      <div class="bg-white rounded-lg p-4">
+        <p class="font-semibold text-blue-700 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> Quando il soggetto compie l'azione, il verbo è usato nella <strong>forma attiva</strong>:</p>
+        <div class="bg-blue-50 rounded p-3 text-gray-800">
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div>
               <p class="text-sm text-gray-500">soggetto</p>
               <p class="font-bold">Eva</p>
             </div>
-            <div class="text-center">
+            <div>
               <p class="text-sm text-gray-500">verbo (forma attiva)</p>
               <p class="font-bold">legge</p>
             </div>
-            <div class="text-center">
+            <div>
               <p class="text-sm text-gray-500">compl. oggetto</p>
               <p class="font-bold">un libro</p>
             </div>
@@ -25,19 +25,19 @@
         </div>
       </div>
 
-      <div class="bg-white rounded-lg p-4 border-2 border-green-200">
-        <p class="font-semibold text-green-700 mb-2">• Quando il soggetto subisce l'azione, il verbo è usato nella <strong>forma passiva</strong>:</p>
-        <div class="bg-green-50 rounded p-3 font-mono text-gray-800">
-          <div class="grid grid-cols-3 gap-2">
-            <div class="text-center">
+      <div class="bg-white rounded-lg p-4">
+        <p class="font-semibold text-green-700 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> Quando il soggetto subisce l'azione, il verbo è usato nella <strong>forma passiva</strong>:</p>
+        <div class="bg-green-50 rounded p-3 text-gray-800">
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div>
               <p class="text-sm text-gray-500">soggetto</p>
               <p class="font-bold">Il libro</p>
             </div>
-            <div class="text-center">
+            <div>
               <p class="text-sm text-gray-500">verbo (forma passiva)</p>
               <p class="font-bold">è letto</p>
             </div>
-            <div class="text-center">
+            <div>
               <p class="text-sm text-gray-500">compl. indiretto</p>
               <p class="font-bold">da Eva</p>
             </div>
@@ -56,108 +56,48 @@
         </li>
         <li class="flex items-start gap-2">
           <span class="text-red-600 font-bold">•</span>
-          <span>I verbi intransitivi possono avere solo la forma attiva → <em>Luca cammina / ~~Luca è camminato~~</em>.</span>
+          <span>I verbi intransitivi possono avere solo la forma attiva → <em>Luca cammina</em>.</span>
         </li>
       </ul>
     </div>
   </div>
 
   <!-- Exercise 1: IMPARARE TUTTI -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6" data-controller="multiple-choice">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-4">
-      <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
-      <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold mr-2">IMPARARE TUTTI</span>
-      Sottolinea i verbi e per ciascuno scrivi se è di forma attiva (FA) o di forma passiva (FP), come nell'esempio.
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="multiple-choice">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+      Sottolinea i verbi e per ciascuno scrivi se è di forma attiva (FA) o di forma passiva (FP).
     </h2>
 
     <div class="space-y-3 text-base md:text-lg">
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3 flex items-center justify-between">
-        <span class="text-gray-700">• L'olmo <mark class="bg-yellow-200">è stato colpito</mark> da un fulmine.</span>
-        <div class="flex gap-2">
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_1" value="FA" class="w-4 h-4"><span class="font-semibold">FA</span></label>
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_1" value="FP" class="w-4 h-4"><span class="font-semibold">FP</span></label>
-        </div>
-      </div>
+      <% sentences = [
+        { text: "L'olmo <mark class=\"bg-yellow-200\">è stato colpito</mark> da un fulmine.", correct: "FP" },
+        { text: "<mark class=\"bg-yellow-200\">Hai innaffiato</mark> troppo l'orchidea.", correct: "FA" },
+        { text: "Il nonno <mark class=\"bg-yellow-200\">fu assunto</mark> dall'azienda.", correct: "FP" },
+        { text: "La città <mark class=\"bg-yellow-200\">è stata ricostruita</mark> completamente.", correct: "FP" },
+        { text: "Il polline <mark class=\"bg-yellow-200\">viene trasportato</mark> dal vento.", correct: "FP" },
+        { text: "Io e Isa <mark class=\"bg-yellow-200\">frequenteremo</mark> la prima media.", correct: "FA" },
+        { text: "La mamma <mark class=\"bg-yellow-200\">è stata nominata</mark> direttrice.", correct: "FP" },
+        { text: "Paolo <mark class=\"bg-yellow-200\">scrisse</mark> molte poesie.", correct: "FA" },
+        { text: "La canzone vincitrice <mark class=\"bg-yellow-200\">sarà proclamata</mark> domani dalla giuria.", correct: "FP" },
+        { text: "L'attore <mark class=\"bg-yellow-200\">riceve</mark> l'applauso del pubblico.", correct: "FA" }
+      ] %>
 
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3 flex items-center justify-between">
-        <span class="text-gray-700">• <mark class="bg-yellow-200">Hai innaffiato</mark> troppo l'orchidea.</span>
-        <div class="flex gap-2">
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_2" value="FA" class="w-4 h-4"><span class="font-semibold">FA</span></label>
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_2" value="FP" class="w-4 h-4"><span class="font-semibold">FP</span></label>
+      <% sentences.each_with_index do |item, idx| %>
+        <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-3 flex items-center justify-between">
+          <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= item[:text].html_safe %></span>
+          <div class="flex gap-2">
+            <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_<%= idx + 1 %>" value="FA" class="w-4 h-4"><span class="font-semibold">FA</span></label>
+            <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_<%= idx + 1 %>" value="FP" class="w-4 h-4"><span class="font-semibold">FP</span></label>
+          </div>
         </div>
-      </div>
-
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3 flex items-center justify-between">
-        <span class="text-gray-700">• Il nonno <mark class="bg-yellow-200">fu assunto</mark> dall'azienda.</span>
-        <div class="flex gap-2">
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_3" value="FA" class="w-4 h-4"><span class="font-semibold">FA</span></label>
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_3" value="FP" class="w-4 h-4"><span class="font-semibold">FP</span></label>
-        </div>
-      </div>
-
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3 flex items-center justify-between">
-        <span class="text-gray-700">• La città <mark class="bg-yellow-200">è stata ricostruita</mark> completamente.</span>
-        <div class="flex gap-2">
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_4" value="FA" class="w-4 h-4"><span class="font-semibold">FA</span></label>
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_4" value="FP" class="w-4 h-4"><span class="font-semibold">FP</span></label>
-        </div>
-      </div>
-
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3 flex items-center justify-between">
-        <span class="text-gray-700">• Il polline <mark class="bg-yellow-200">viene trasportato</mark> dal vento.</span>
-        <div class="flex gap-2">
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_5" value="FA" class="w-4 h-4"><span class="font-semibold">FA</span></label>
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_5" value="FP" class="w-4 h-4"><span class="font-semibold">FP</span></label>
-        </div>
-      </div>
-
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3 flex items-center justify-between">
-        <span class="text-gray-700">• Io e Isa <mark class="bg-yellow-200">frequenteremo</mark> la prima media.</span>
-        <div class="flex gap-2">
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_6" value="FA" class="w-4 h-4"><span class="font-semibold">FA</span></label>
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_6" value="FP" class="w-4 h-4"><span class="font-semibold">FP</span></label>
-        </div>
-      </div>
-
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3 flex items-center justify-between">
-        <span class="text-gray-700">• La mamma <mark class="bg-yellow-200">è stata nominata</mark> direttrice.</span>
-        <div class="flex gap-2">
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_7" value="FA" class="w-4 h-4"><span class="font-semibold">FA</span></label>
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_7" value="FP" class="w-4 h-4"><span class="font-semibold">FP</span></label>
-        </div>
-      </div>
-
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3 flex items-center justify-between">
-        <span class="text-gray-700">• Paolo <mark class="bg-yellow-200">scrisse</mark> molte poesie.</span>
-        <div class="flex gap-2">
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_8" value="FA" class="w-4 h-4"><span class="font-semibold">FA</span></label>
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_8" value="FP" class="w-4 h-4"><span class="font-semibold">FP</span></label>
-        </div>
-      </div>
-
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3 flex items-center justify-between">
-        <span class="text-gray-700">• La canzone vincitrice <mark class="bg-yellow-200">sarà proclamata</mark> domani dalla giuria.</span>
-        <div class="flex gap-2">
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_9" value="FA" class="w-4 h-4"><span class="font-semibold">FA</span></label>
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_9" value="FP" class="w-4 h-4"><span class="font-semibold">FP</span></label>
-        </div>
-      </div>
-
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3 flex items-center justify-between">
-        <span class="text-gray-700">• L'attore <mark class="bg-yellow-200">riceve</mark> l'applauso del pubblico.</span>
-        <div class="flex gap-2">
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_10" value="FA" class="w-4 h-4"><span class="font-semibold">FA</span></label>
-          <label class="inline-flex items-center gap-1"><input type="radio" name="ex1_10" value="FP" class="w-4 h-4"><span class="font-semibold">FP</span></label>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
 
-  <!-- Reference -->
-  <div class="mt-6 text-center">
-    <p class="text-red-600 font-bold text-base md:text-lg">Esercizi p. <%= link_to "172", pagina_path("nvl5_gram_p172"), class: "text-gray-600 hover:text-gray-800 underline" %></p>
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Esercizi p. <%= link_to "172", pagina_path("nvl5_gram_p172"), class: "text-gray-600 hover:text-gray-800 underline" %>
   </div>
 
-  <%= render partial: "shared/exercise_controls" %>
-
+  <%= render 'shared/exercise_controls' %>
 </div>
