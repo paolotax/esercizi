@@ -1,33 +1,36 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-orange-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-<%= @pagina.base_color %>-100" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Compound words -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">Alcune parole sono composte da due nomi</h2>
-    <p class="text-sm md:text-base text-gray-600 mb-4">Osserva l’esempio e completa.</p>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-gray-800 mb-3">Alcune parole sono composte da due nomi</h2>
+    <p class="text-sm md:text-base text-gray-600 mb-4">Osserva l'esempio e completa.</p>
 
-    <p class="font-semibold text-blue-700 mb-3">Caporeparto = capo + reparto</p>
+    <p class="font-semibold text-<%= @pagina.base_color %>-600 mb-3">
+      <span class="text-<%= @pagina.base_color %>-500">•</span> Caporeparto = capo + reparto
+    </p>
 
     <% compound_words = {
-      "Cavolfiore" => ["cavo", "fiore"],
+      "Cavolfiore" => ["cavol", "fiore"],
       "Melograno" => ["melo", "grano"],
       "Pescespada" => ["pesce", "spada"]
     } %>
 
     <div class="space-y-3 text-base md:text-lg">
       <% compound_words.each do |word, parts| %>
-        <p class="bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-2 flex flex-wrap items-center gap-2 leading-relaxed">
-          <span class="font-semibold text-blue-700"><%= word %>:</span>
+        <p class="rounded-lg p-3 flex flex-wrap items-center gap-2 leading-relaxed">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <span class="font-semibold text-gray-800"><%= word %>:</span>
           <input type="text"
-                 class="border-b-2 border-blue-500 bg-transparent w-24 md:w-28 text-center focus:outline-none focus:border-blue-700"
+                 class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white w-24 md:w-28 text-center focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= parts.first %>"
                  data-correct-answer="<%= parts.first %>"
                  maxlength="12">
           <span>+</span>
           <input type="text"
-                 class="border-b-2 border-blue-500 bg-transparent w-24 md:w-28 text-center focus:outline-none focus:border-blue-700"
+                 class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white w-24 md:w-28 text-center focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= parts.last %>"
                  data-correct-answer="<%= parts.last %>"
@@ -38,21 +41,19 @@
   </div>
 
   <!-- CLIL -->
-  <div class="bg-white rounded-2xl border-4 border-gray-200 shadow-2xl p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-3 flex items-center gap-2">
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <h2 class="text-lg md:text-xl font-bold text-gray-800 mb-3 flex items-center gap-2">
       <span class="text-xl">🇬🇧</span>
       CLIL – Shopping words
     </h2>
     <ul class="space-y-2 text-base md:text-lg text-gray-700">
-      <li><span class="font-semibold text-blue-600">Borsa</span> → <span class="italic">shopping bag</span></li>
-      <li><span class="font-semibold text-blue-600">Carrello</span> → <span class="italic">shopping trolley</span></li>
-      <li><span class="font-semibold text-blue-600">Cassa</span> → <span class="italic">check-out</span></li>
+      <li><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="font-semibold text-<%= @pagina.base_color %>-600">Borsa</span> → <span class="italic">shopping bag</span></li>
+      <li><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="font-semibold text-<%= @pagina.base_color %>-600">Carrello</span> → <span class="italic">shopping trolley</span></li>
+      <li><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="font-semibold text-<%= @pagina.base_color %>-600">Cassa</span> → <span class="italic">check-out</span></li>
     </ul>
   </div>
 
   <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'orange', current_page: 'nvl5_gram_p023' %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 </div>
 

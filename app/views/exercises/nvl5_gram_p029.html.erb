@@ -1,11 +1,12 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-indigo-50 via-white to-pink-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 4: Rewrite sentences with antonyms -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
-      <span class="font-bold">4</span> Riscrivi le frasi sostituendo le parole sottolineate con i loro contrari.
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
+      Riscrivi le frasi sostituendo le parole sottolineate con i loro contrari.
     </h2>
 
     <% sentences = [
@@ -17,14 +18,13 @@
 
     <div class="space-y-4 text-base md:text-lg">
       <% sentences.each do |item| %>
-        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3">
-          <p class="text-gray-700 mb-3"><%= item[:original] %></p>
+        <div class="rounded-lg p-3">
+          <p class="text-gray-700 mb-3"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= item[:original] %></p>
           <input type="text"
-                 class="w-full border-b-2 border-blue-500 bg-white rounded px-3 py-2 focus:outline-none focus:border-blue-700"
+                 class="w-full border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white px-2 py-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:answer] %>"
                  data-correct-answer="<%= item[:answer] %>"
-                 placeholder="Riscrivi la frase..."
                  maxlength="100">
         </div>
       <% end %>
@@ -32,12 +32,13 @@
   </div>
 
   <!-- Exercise 5: Replace "parlare" with synonyms -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
-      <span class="font-bold">5</span> In ogni frase sostituisci il verbo parlare con uno di significato simile.
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">5</span>
+      In ogni frase sostituisci il verbo parlare con uno di significato simile.
     </h2>
     <p class="text-sm md:text-base text-gray-600 mb-4">
-      Scegli tra: <em class="text-purple-600">urlare • strillare • sbraitare • mormorare • bisbigliare • chiacchierare • intervenire • prendere la parola • raccontare • spifferare • svelare</em>
+      Scegli tra: <em class="text-<%= @pagina.base_color %>-600">urlare • strillare • sbraitare • mormorare • bisbigliare • chiacchierare • intervenire • prendere la parola • raccontare • spifferare • svelare</em>
     </p>
 
     <% parlare_exercises = [
@@ -49,18 +50,16 @@
 
     <div class="space-y-4 text-base md:text-lg">
       <% parlare_exercises.each do |item| %>
-        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3">
-          <p class="text-gray-700 mb-2"><%= item[:sentence] %></p>
-          <div class="flex items-center gap-2">
-            <span class="text-gray-600">Finitela di</span>
+        <div class="rounded-lg p-3">
+          <p class="text-gray-700 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= item[:sentence] %></p>
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-gray-600">Sinonimo:</span>
             <input type="text"
-                   class="flex-1 border-b-2 border-purple-500 bg-transparent text-center focus:outline-none focus:border-purple-700"
+                   class="w-40 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                    data-fill-blanks-target="input"
                    data-answer="<%= item[:answer] %>"
                    data-correct-answer="<%= item[:answer] %>"
-                   placeholder="..."
                    maxlength="20">
-            <span class="text-gray-600">!</span>
           </div>
         </div>
       <% end %>
@@ -68,31 +67,32 @@
   </div>
 
   <!-- Exercise 6: Writing exercise -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
-      <span class="font-bold">6</span> Utilizza i seguenti aggettivi per scrivere almeno tre frasi sul tuo quaderno.
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">6</span>
+      Utilizza i seguenti aggettivi per scrivere almeno tre frasi sul tuo quaderno.
     </h2>
     <p class="text-sm md:text-base text-gray-600 mb-4">
       Poi trasforma le frasi che hai scritto in frasi di significato opposto.
     </p>
 
-    <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-4">
-      <div class="flex flex-wrap gap-2 justify-center text-base md:text-lg">
-        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full font-semibold">scarso</span>
-        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full font-semibold">fragile</span>
-        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full font-semibold">tenue</span>
-        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full font-semibold">leggero</span>
-        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full font-semibold">difficile</span>
-        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full font-semibold">fioco</span>
-        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full font-semibold">flebile</span>
-        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full font-semibold">gigantesco</span>
-        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full font-semibold">indebolito</span>
+    <div class="rounded-lg p-3">
+      <div class="flex flex-wrap gap-2 text-base md:text-lg">
+        <span class="bg-<%= @pagina.base_color %>-100 text-<%= @pagina.base_color %>-700 px-3 py-1 rounded-full font-semibold">scarso</span>
+        <span class="bg-<%= @pagina.base_color %>-100 text-<%= @pagina.base_color %>-700 px-3 py-1 rounded-full font-semibold">fragile</span>
+        <span class="bg-<%= @pagina.base_color %>-100 text-<%= @pagina.base_color %>-700 px-3 py-1 rounded-full font-semibold">tenue</span>
+        <span class="bg-<%= @pagina.base_color %>-100 text-<%= @pagina.base_color %>-700 px-3 py-1 rounded-full font-semibold">leggero</span>
+        <span class="bg-<%= @pagina.base_color %>-100 text-<%= @pagina.base_color %>-700 px-3 py-1 rounded-full font-semibold">difficile</span>
+        <span class="bg-<%= @pagina.base_color %>-100 text-<%= @pagina.base_color %>-700 px-3 py-1 rounded-full font-semibold">fioco</span>
+        <span class="bg-<%= @pagina.base_color %>-100 text-<%= @pagina.base_color %>-700 px-3 py-1 rounded-full font-semibold">flebile</span>
+        <span class="bg-<%= @pagina.base_color %>-100 text-<%= @pagina.base_color %>-700 px-3 py-1 rounded-full font-semibold">gigantesco</span>
+        <span class="bg-<%= @pagina.base_color %>-100 text-<%= @pagina.base_color %>-700 px-3 py-1 rounded-full font-semibold">indebolito</span>
       </div>
     </div>
 
-    <div class="mt-4 bg-yellow-50 border-2 border-yellow-300 rounded-xl px-3 py-3">
+    <div class="mt-4 bg-gray-50 rounded-lg p-3">
       <p class="text-sm md:text-base text-gray-700 italic">
-        💡 Esempio: "Il rumore era tenue." → "Il rumore era forte."
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Esempio: "Il rumore era tenue." → "Il rumore era forte."
       </p>
     </div>
   </div>
@@ -102,7 +102,5 @@
   </div>
 
   <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'indigo', current_page: 'nvl5_gram_p029' %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 </div>

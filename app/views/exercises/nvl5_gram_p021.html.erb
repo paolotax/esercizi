@@ -1,11 +1,11 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-<%= @pagina.base_color %>-100 rounded-3xl shadow-xl" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 5 -->
-  <div class="bg-white p-4 md:p-6 mb-6 md:mb-8 " data-controller="fill-blanks">
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
-      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">5</span>
       Dividi in sillabe le parole.
     </h2>
 
@@ -35,9 +35,9 @@
   </div>
 
   <!-- Exercise 6 -->
-  <div class="bg-white p-4 md:p-6 mb-6 md:mb-8 " data-controller="fill-blanks">
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
-      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">6</span>
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">6</span>
       Inserisci l’H solo quando serve.
     </h2>
 
@@ -71,9 +71,9 @@
   </div>
 
   <!-- Exercise 7 -->
-  <div class="bg-white p-4 md:p-6 mb-6 md:mb-8 ">
+  <div class="bg-white p-4 md:p-6 pb-8">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
-      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">7</span>
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">7</span>
       Completa con la forma corretta.
     </h2>
     
@@ -111,9 +111,9 @@
   </div>
 
   <!-- Exercise 8 -->
-  <div class="bg-white p-4 md:p-6 mb-6 md:mb-8 " data-controller="fill-blanks">
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
-      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">8</span>
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">8</span>
       Metti l’accento dove serve.
     </h2>
 
@@ -145,58 +145,66 @@
     </div>
   </div>
 
-  <!-- Le mie competenze -->
-  <div class="bg-white p-4 md:p-6 mb-6 md:mb-8 space-y-6">
-    <div>
-      <h3 class="text-lg md:text-xl font-bold mb-3 flex items-center gap-2">
-        <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">9</span>
-        Quale frase è scritta correttamente?
-      </h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <% phrases = [
-          { text: "È un bravuomo, ma non ha nessun’amico.", correct: false },
-          { text: "È un brav’uomo, ma non ha nessun’amico.", correct: false },
-          { text: "È un brav uomo, ma non ha nessun amico.", correct: false },
-          { text: "È un brav’uomo, ma non ha nessun amico.", correct: true }
-        ] %>
-        <% phrases.each_with_index do |phrase, idx| %>
-          <label class="flex items-center gap-3 bg-<%= @pagina.base_color %>-50 border-2 border-<%= @pagina.base_color %>-200 rounded-lg px-3 py-2 shadow-sm hover:border-<%= @pagina.base_color %>-400 transition">
-            <input type="radio"
-                   name="q9"
-                   class="w-5 h-5 text-<%= @pagina.base_color %>-600 focus:ring-<%= @pagina.base_color %>-500"
-                   data-correct-answer="<%= phrase[:correct] %>">
-            <span class="text-gray-800"><%= phrase[:text] %></span>
-          </label>
-        <% end %>
-      </div>
-    </div>
 
-    <div>
-      <h3 class="text-lg md:text-xl font-bold mb-3 flex items-center gap-2">
-        <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">10</span>
-        Qual è il plurale corretto della frase?
-      </h3>
+  <div class="bg-white md:p-6 pb-6">
+    <h3 class="text-lg md:text-xl font-bold flex items-center rounded-t-lg">
+      <span class="rounded-t-full px-8 py-2 flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white inline-flex items-center justify-center">Le mie competenze</span>
+    </h3>
+    <hr class=" -mt-1 border-<%= @pagina.base_color %>-500 border-2">
+  </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <% plural_options = [
-          { text: "Sognamo di curare le rege di film mitici.", correct: false },
-          { text: "Sogniamo di curare le regie di film mitici.", correct: true },
-          { text: "Sognamo di curare le regie di film mitici.", correct: false },
-          { text: "Sogniamo di curare le rege di film mitici.", correct: false }
-        ] %>
-
-        <% plural_options.each_with_index do |option, idx| %>
-          <label class="flex items-center gap-3 bg-<%= @pagina.base_color %>-50 border-2 border-<%= @pagina.base_color %>-200 rounded-lg px-3 py-2 shadow-sm hover:border-<%= @pagina.base_color %>-400 transition">
-            <input type="radio"
-                   name="q10"
-                   class="w-5 h-5 text-<%= @pagina.base_color %>-600 focus:ring-<%= @pagina.base_color %>-500"
-                   data-correct-answer="<%= option[:correct] %>">
-            <span class="text-gray-800"><%= option[:text] %></span>
-          </label>
-        <% end %>
-      </div>
+  <!--Esercizio 9 -->
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <h3 class="text-lg md:text-xl font-bold mb-8 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">9</span>
+      Quale frase è scritta correttamente?
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <% phrases = [
+        { text: "È un bravuomo, ma non ha nessun’amico.", correct: false },
+        { text: "È un brav’uomo, ma non ha nessun’amico.", correct: false },
+        { text: "È un brav uomo, ma non ha nessun amico.", correct: false },
+        { text: "È un brav’uomo, ma non ha nessun amico.", correct: true }
+      ] %>
+      <% phrases.each_with_index do |phrase, idx| %>
+        <label class="flex items-center gap-3 bg-<%= @pagina.base_color %>-50 border-2 border-<%= @pagina.base_color %>-200 rounded-lg px-3 py-2 shadow-sm hover:border-<%= @pagina.base_color %>-400 transition">
+          <input type="radio"
+                  name="q9"
+                  class="w-5 h-5 text-<%= @pagina.base_color %>-600 focus:ring-<%= @pagina.base_color %>-500"
+                  data-correct-answer="<%= phrase[:correct] %>">
+          <span class="text-gray-800"><%= phrase[:text] %></span>
+        </label>
+      <% end %>
     </div>
   </div>
+
+  <!-- Esercizio 10 -->
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <h3 class="text-lg md:text-xl font-bold mb-8 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">10</span>
+      Qual è il plurale corretto della frase?
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <% plural_options = [
+        { text: "Sognamo di curare le rege di film mitici.", correct: false },
+        { text: "Sogniamo di curare le regie di film mitici.", correct: true },
+        { text: "Sognamo di curare le regie di film mitici.", correct: false },
+        { text: "Sogniamo di curare le rege di film mitici.", correct: false }
+      ] %>
+
+      <% plural_options.each_with_index do |option, idx| %>
+        <label class="flex items-center gap-3 bg-<%= @pagina.base_color %>-50 border-2 border-<%= @pagina.base_color %>-200 rounded-lg px-3 py-2 shadow-sm hover:border-<%= @pagina.base_color %>-400 transition">
+          <input type="radio"
+                  name="q10"
+                  class="w-5 h-5 text-<%= @pagina.base_color %>-600 focus:ring-<%= @pagina.base_color %>-500"
+                  data-correct-answer="<%= option[:correct] %>">
+          <span class="text-gray-800"><%= option[:text] %></span>
+        </label>
+      <% end %>
+    </div>
+  </div>
+
 
   <!-- Exercise Controls -->
   <%= render 'shared/exercise_controls' %>

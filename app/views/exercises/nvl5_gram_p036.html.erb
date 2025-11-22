@@ -1,37 +1,35 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Introduction -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-emerald-200 shadow-2xl p-4 md:p-6">
+  <div class="bg-white p-4 md:p-6 pb-8">
     <div class="space-y-3 text-base md:text-lg">
       <p class="text-gray-700">
-        Vado in montagna con i miei cugini. → <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded font-semibold">significato proprio</span>
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Vado in montagna con i miei cugini. → <span class="font-semibold text-<%= @pagina.base_color %>-700">significato proprio</span>
       </p>
       <p class="text-gray-700">
-        Ho una montagna di compiti. → <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded font-semibold">significato figurato</span>
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Ho una montagna di compiti. → <span class="font-semibold text-<%= @pagina.base_color %>-700">significato figurato</span>
       </p>
     </div>
 
-    <div class="mt-4 bg-emerald-50 border-2 border-emerald-200 rounded-xl px-4 py-3">
+    <div class="mt-4 bg-<%= @pagina.base_color %>-50 rounded-lg p-3">
       <p class="text-base md:text-lg text-gray-700 mb-2">
-        Possiamo usare le parole:
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Possiamo usare le parole:
       </p>
       <p class="text-base text-gray-700">
-        • nel <strong class="text-blue-700">significato proprio</strong> o <strong class="text-blue-700">letterale</strong> (es. montagna = rilievo terrestre)
+        <span class="text-<%= @pagina.base_color %>-500">•</span> nel <strong>significato proprio</strong> o <strong>letterale</strong> (es. montagna = rilievo terrestre)
       </p>
       <p class="text-base text-gray-700">
-        • con <strong class="text-purple-700">significato figurato</strong>, legato a quello proprio ma in contesto diverso (montagna di compiti = molti compiti)
+        <span class="text-<%= @pagina.base_color %>-500">•</span> con <strong>significato figurato</strong>, legato a quello proprio ma in contesto diverso (montagna di compiti = molti compiti)
       </p>
     </div>
   </div>
 
   <!-- Exercise 1: Identify proper meaning of "cuore" -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
-    <div class="mb-4 inline-block bg-gradient-to-r from-emerald-500 to-cyan-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
-      1 IMPARARE TUTTI
-    </div>
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Indica con una X la frase in cui la parola "cuore" è usata nel suo significato proprio.
     </h2>
 
@@ -44,22 +42,23 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <% heart_sentences.each_with_index do |sentence, index| %>
-        <label class="flex items-start gap-3 bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-blue-100 transition">
+        <label class="flex items-start gap-3 rounded-lg p-3 cursor-pointer hover:bg-<%= @pagina.base_color %>-50 transition">
           <input type="checkbox"
                  name="heart_meaning"
                  value="<%= index %>"
                  data-correct-answer="<%= sentence[:correct] ? 'true' : 'false' %>"
                  class="w-5 h-5 mt-0.5">
-          <span class="text-gray-700">- <%= sentence[:text] %></span>
+          <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= sentence[:text] %></span>
         </label>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 2: Identify proper (P) or figurative (F) meaning -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
-      <span class="font-bold">2</span> Indica con una X se la parola evidenziata è usata nel significato proprio (P) o figurato (F).
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
+      Indica con una X se la parola evidenziata è usata nel significato proprio (P) o figurato (F).
     </h2>
 
     <% meaning_exercises = [
@@ -75,9 +74,9 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <% meaning_exercises.each_with_index do |exercise, index| %>
-        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3">
-          <p class="text-gray-700 mb-2">• <%= exercise[:text] %></p>
-          <div class="flex gap-6 ml-4">
+        <div class="rounded-lg p-3">
+          <p class="text-gray-700 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= exercise[:text] %></p>
+          <div class="flex gap-6 ml-6">
             <label class="flex items-center gap-2 cursor-pointer">
               <span class="text-sm font-semibold text-gray-600">P</span>
               <input type="radio"
@@ -105,7 +104,5 @@
   </div>
 
   <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'emerald', current_page: 'nvl5_gram_p036' %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 </div>

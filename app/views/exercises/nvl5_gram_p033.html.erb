@@ -1,27 +1,25 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 via-white to-rose-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Introduction -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-pink-200 shadow-2xl p-4 md:p-6">
+  <div class="bg-white p-4 md:p-6 pb-8">
     <p class="text-base md:text-lg text-gray-700 mb-3 font-semibold">
-      Gli omonimi hanno più significati e valori grammaticali diversi.
+      <span class="text-<%= @pagina.base_color %>-500">•</span> Gli omonimi hanno più significati e valori grammaticali diversi.
     </p>
     <p class="text-base md:text-lg text-gray-700 mb-1">
-      Manca un'<strong>ora</strong> <span class="text-sm text-gray-500">(nome)</span> a mezzanotte.
+      <span class="text-<%= @pagina.base_color %>-500">•</span> Manca un'<strong>ora</strong> <span class="text-sm text-gray-500">(nome)</span> a mezzanotte.
     </p>
     <p class="text-base md:text-lg text-gray-700">
-      <strong>Ora</strong> <span class="text-sm text-gray-500">(avverbio)</span> facciamo merenda.
+      <span class="text-<%= @pagina.base_color %>-500">•</span> <strong>Ora</strong> <span class="text-sm text-gray-500">(avverbio)</span> facciamo merenda.
     </p>
   </div>
 
   <!-- Exercise 1: Complete with indicated word -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <div class="mb-4 inline-block bg-gradient-to-r from-pink-500 to-blue-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
-      1 IMPARARE TUTTI
-    </div>
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
-      Completa le frasi con la parola indicata, poi scrivi il corrispondente valore grammaticale. Segui l'esempio.
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+      Completa le frasi con la parola indicata, poi scrivi il corrispondente valore grammaticale.
     </h2>
 
     <% homonym_groups = [
@@ -54,12 +52,12 @@
 
     <div class="space-y-5">
       <% homonym_groups.each_with_index do |group, group_index| %>
-        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
-          <p class="text-lg font-bold text-blue-700 mb-3"><%= group[:word] %></p>
+        <div class="rounded-lg p-3">
+          <p class="text-lg font-bold text-<%= @pagina.base_color %>-700 mb-3"><%= group[:word] %></p>
           <div class="space-y-2 mb-3">
             <% group[:sentences].each_with_index do |sentence, sent_index| %>
               <div class="flex flex-wrap items-center gap-2 text-base md:text-lg">
-                <span class="text-gray-700">•</span>
+                <span class="text-<%= @pagina.base_color %>-500">•</span>
                 <% if sentence[:text].present? %>
                   <span class="text-gray-700"><%= sentence[:text] %></span>
                 <% end %>
@@ -67,11 +65,10 @@
                   <span class="text-gray-700">.</span>
                 <% else %>
                   <input type="text"
-                         class="border-b-2 border-blue-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-blue-700 w-32"
+                         class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                          data-fill-blanks-target="input"
                          data-answer="<%= sentence[:answer] %>"
                          data-correct-answer="<%= sentence[:answer] %>"
-                         placeholder="................."
                          maxlength="20">
                 <% end %>
                 <% if sentence[:suffix] %>
@@ -86,27 +83,24 @@
               <span class="text-gray-700"><%= group[:values][0] %></span>
               <span class="text-gray-700">/</span>
               <input type="text"
-                     class="border-b-2 border-blue-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-blue-700 w-32"
+                     class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                      data-fill-blanks-target="input"
                      data-answer="<%= group[:values][1] %>"
                      data-correct-answer="<%= group[:values][1] %>"
-                     placeholder="................."
                      maxlength="20">
             <% else %>
               <input type="text"
-                     class="border-b-2 border-blue-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-blue-700 w-32"
+                     class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                      data-fill-blanks-target="input"
                      data-answer="<%= group[:values][0] %>"
                      data-correct-answer="<%= group[:values][0] %>"
-                     placeholder="................."
                      maxlength="20">
               <span class="text-gray-700">/</span>
               <input type="text"
-                     class="border-b-2 border-blue-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-blue-700 w-32"
+                     class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                      data-fill-blanks-target="input"
                      data-answer="<%= group[:values][1] %>"
                      data-correct-answer="<%= group[:values][1] %>"
-                     placeholder="................."
                      maxlength="20">
             <% end %>
           </div>
@@ -116,9 +110,10 @@
   </div>
 
   <!-- Exercise 2: Write sentences -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
-      <span class="font-bold">2</span> Per ogni parola scrivi una frase con ciascuno dei valori grammaticali indicati.
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
+      Per ogni parola scrivi una frase con ciascuno dei valori grammaticali indicati.
     </h2>
 
     <% sentence_exercises = [
@@ -129,9 +124,10 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <% sentence_exercises.each do |exercise| %>
-        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
+        <div class="rounded-lg p-3">
           <p class="text-gray-700">
-            <strong class="text-green-700"><%= exercise[:word] %></strong> → <%= exercise[:values] %>
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <strong class="text-<%= @pagina.base_color %>-700"><%= exercise[:word] %></strong> → <%= exercise[:values] %>
           </p>
         </div>
       <% end %>
@@ -139,7 +135,5 @@
   </div>
 
   <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl5_gram_p033' %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 </div>

@@ -1,20 +1,18 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-teal-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Introduction -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-teal-200 shadow-2xl p-4 md:p-6">
+  <div class="bg-white p-4 md:p-6 pb-8">
     <p class="text-base md:text-lg text-gray-700">
-      Nella lingua italiana sono presenti parole prese in prestito da varie lingue straniere e che sono diventate di uso comune.
+      <span class="text-<%= @pagina.base_color %>-500">•</span> Nella lingua italiana sono presenti parole prese in prestito da varie lingue straniere e che sono diventate di uso comune.
     </p>
   </div>
 
   <!-- Exercise 1: Match English words -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
-    <div class="mb-4 inline-block bg-gradient-to-r from-teal-500 to-blue-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
-      1 IMPARARE TUTTI
-    </div>
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Collega ogni parola inglese alla parola italiana corrispondente.
     </h2>
 
@@ -34,9 +32,9 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base md:text-lg">
       <% english_words.each do |english, italian| %>
-        <label class="flex flex-col bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3 shadow-sm">
-          <span class="font-semibold text-blue-700 mb-2">• <%= english %></span>
-          <select class="border-2 border-blue-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500"
+        <label class="flex flex-col rounded-lg p-3">
+          <span class="font-semibold text-gray-800 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= english %></span>
+          <select class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 rounded-lg px-3 py-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                   data-correct-answer="<%= italian %>">
             <option value="">Scegli...</option>
             <% italian_meanings.each do |meaning| %>
@@ -49,9 +47,10 @@
   </div>
 
   <!-- Exercise 2: Write Italian equivalents -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
-      <span class="font-bold">2</span> Scrivi la parola italiana che corrisponde a ciascuna delle seguenti parole straniere.
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
+      Scrivi la parola italiana che corrisponde a ciascuna delle seguenti parole straniere.
     </h2>
     <p class="text-sm md:text-base text-gray-600 mb-4">
       Se hai bisogno di aiuto, consulta il dizionario.
@@ -68,15 +67,17 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base md:text-lg">
       <% foreign_words.each do |foreign, italian| %>
-        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3 flex items-center gap-2">
-          <span class="font-semibold text-green-700"><%= foreign %></span>
-          <span>→</span>
+        <div class="rounded-lg p-3 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="font-semibold text-gray-800"><%= foreign %></span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+          </div>
           <input type="text"
-                 class="flex-1 border-b-2 border-green-500 bg-transparent text-center focus:outline-none focus:border-green-700"
+                 class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= italian %>"
                  data-correct-answer="<%= italian %>"
-                 placeholder="..."
                  maxlength="20">
         </div>
       <% end %>
@@ -84,9 +85,10 @@
   </div>
 
   <!-- Exercise 3: Group work -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-yellow-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-yellow-700 mb-3">
-      <span class="font-bold">3</span> Lavora in coppia con un compagno o una compagna e scrivete almeno un'altra parola che l'italiano ha preso in prestito da queste lingue straniere.
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
+      Lavora in coppia con un compagno o una compagna e scrivete almeno un'altra parola che l'italiano ha preso in prestito da queste lingue straniere.
     </h2>
 
     <% language_examples = {
@@ -98,14 +100,17 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <% language_examples.each do |lang, example| %>
-        <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl px-3 py-3 flex flex-wrap items-center gap-2">
-          <span class="font-semibold text-yellow-700 w-full sm:w-auto"><%= lang %> →</span>
-          <span class="text-gray-700"><%= example %>,</span>
+        <div class="rounded-lg p-3 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="font-semibold text-gray-800"><%= lang %></span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="text-gray-700"><%= example %>,</span>
+          </div>
           <input type="text"
-                 class="flex-1 min-w-[150px] border-b-2 border-yellow-500 bg-transparent focus:outline-none focus:border-yellow-700"
+                 class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer=""
-                 placeholder="..."
                  maxlength="30">
         </div>
       <% end %>
@@ -113,7 +118,5 @@
   </div>
 
   <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'teal', current_page: 'nvl5_gram_p027' %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 </div>

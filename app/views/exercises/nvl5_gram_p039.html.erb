@@ -1,11 +1,12 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-orange-50 via-white to-red-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-<%= @pagina.base_color %>-100" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 6: Identify homonyms and grammatical values -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
-      <span class="font-bold">6</span> Evidenzia gli omonimi e indica per ognuno il valore grammaticale.
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">6</span>
+      Evidenzia gli omonimi e indica per ognuno il valore grammaticale.
     </h2>
 
     <% homonym_sentences = [
@@ -17,52 +18,57 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <% homonym_sentences.each do |sentence| %>
-        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3">
-          <p class="text-gray-700 mb-2"><%= sentence[:text] %></p>
-          <input type="text"
-                 class="w-full border-b-2 border-blue-500 bg-white rounded px-3 py-1 focus:outline-none focus:border-blue-700"
-                 data-fill-blanks-target="input"
-                 data-answer="<%= sentence[:answer] %>"
-                 data-correct-answer="<%= sentence[:answer] %>"
-                 placeholder="..............................................."
-                 maxlength="40">
+        <div class="rounded-lg p-3">
+          <p class="text-gray-700 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= sentence[:text] %></p>
+          <div class="flex items-center justify-between gap-4 ml-6">
+            <span class="text-gray-500">valore grammaticale:</span>
+            <input type="text"
+                   class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                   data-fill-blanks-target="input"
+                   data-answer="<%= sentence[:answer] %>"
+                   data-correct-answer="<%= sentence[:answer] %>"
+                   maxlength="20">
+          </div>
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 7: Identify sector language -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
-      <span class="font-bold">7</span> Indica se la frase appartiene al linguaggio informatico, meteorologico, politico o dello spettacolo (colora il quadratino).
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">7</span>
+      Indica se la frase appartiene al linguaggio informatico, meteorologico, politico o dello spettacolo.
     </h2>
 
     <% sector_sentences = [
-      { text: "Sono in arrivo venti da ponente.", sector: "meteorologico", color: "blue" },
-      { text: "L'opposizione chiede elezioni anticipate.", sector: "politico", color: "red" },
-      { text: "Il processore è di ultima generazione.", sector: "informatico", color: "purple" },
-      { text: "Dietro il palco ci sono i camerini.", sector: "dello spettacolo", color: "pink" }
+      { text: "Sono in arrivo venti da ponente.", sector: "meteorologico" },
+      { text: "L'opposizione chiede elezioni anticipate.", sector: "politico" },
+      { text: "Il processore è di ultima generazione.", sector: "informatico" },
+      { text: "Dietro il palco ci sono i camerini.", sector: "dello spettacolo" }
     ] %>
 
     <div class="space-y-3 text-base md:text-lg">
       <% sector_sentences.each_with_index do |sentence, index| %>
-        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3">
-          <label class="flex items-start gap-3 cursor-pointer">
-            <input type="checkbox"
-                   name="sector<%= index %>"
+        <div class="rounded-lg p-3">
+          <p class="text-gray-700 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= sentence[:text] %></p>
+          <div class="flex items-center justify-between gap-4 ml-6">
+            <span class="text-gray-500">linguaggio:</span>
+            <input type="text"
+                   class="w-40 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                    data-correct-answer="<%= sentence[:sector] %>"
-                   class="w-5 h-5 mt-0.5">
-            <span class="text-gray-700"><%= sentence[:text] %></span>
-          </label>
+                   maxlength="30">
+          </div>
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 8: Write sentences with proper meaning -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
-      <span class="font-bold">8</span> Le parole evidenziate hanno significato figurato. Scrivi una frase in cui la stessa parola è usata nel significato proprio.
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">8</span>
+      Le parole evidenziate hanno significato figurato. Scrivi una frase in cui la stessa parola è usata nel significato proprio.
     </h2>
 
     <% figurative_sentences = [
@@ -74,24 +80,25 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <% figurative_sentences.each do |sentence| %>
-        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
-          <p class="text-gray-700 mb-2 font-semibold"><%= sentence %></p>
-          <p class="text-gray-500 text-sm">Scrivi qui la frase con significato proprio: ...............................................</p>
+        <div class="rounded-lg p-3">
+          <p class="text-gray-700 mb-2 font-semibold"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= sentence %></p>
+          <p class="text-gray-500 text-sm ml-6">Scrivi qui la frase con significato proprio: ...............................................</p>
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- Le mie competenze section -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6">
-    <h2 class="text-xl md:text-2xl font-bold text-amber-700 mb-4">
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <h2 class="text-xl md:text-2xl font-bold text-<%= @pagina.base_color %>-700 mb-4">
       Le mie competenze
     </h2>
 
     <!-- Exercise 9: Identify metaphor -->
     <div class="mb-6" data-controller="exercise-group">
-      <h3 class="text-lg md:text-xl font-bold text-amber-700 mb-3">
-        <span class="font-bold">9</span> In quale frase si usa una metafora? (seleziona una risposta)
+      <h3 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+        <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">9</span>
+        In quale frase si usa una metafora? (seleziona una risposta)
       </h3>
 
       <% metaphor_sentences = [
@@ -103,22 +110,23 @@
 
       <div class="space-y-3 text-base md:text-lg">
         <% metaphor_sentences.each_with_index do |sentence, index| %>
-          <label class="flex items-start gap-3 bg-yellow-50 border-2 border-yellow-200 rounded-xl px-3 py-3 cursor-pointer hover:bg-yellow-100 transition">
+          <label class="flex items-start gap-3 rounded-lg p-3 cursor-pointer hover:bg-<%= @pagina.base_color %>-50 transition">
             <input type="radio"
                    name="metaphor"
                    value="<%= index %>"
                    data-correct-answer="<%= sentence[:is_metaphor] ? 'true' : 'false' %>"
                    class="w-5 h-5 mt-0.5">
-            <span class="text-gray-700"><%= sentence[:text] %></span>
+            <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= sentence[:text] %></span>
           </label>
         <% end %>
       </div>
     </div>
 
     <!-- Exercise 10: Identify archaisms and neologisms -->
-    <div class="bg-white rounded-xl p-4 md:p-6" data-controller="fill-blanks">
-      <h3 class="text-lg md:text-xl font-bold text-amber-700 mb-3">
-        <span class="font-bold">10</span> Leggi le frasi, poi esegui e rispondi.
+    <div data-controller="fill-blanks">
+      <h3 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+        <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">10</span>
+        Leggi le frasi, poi esegui e rispondi.
       </h3>
 
       <% sentences_10 = [
@@ -130,22 +138,21 @@
 
       <div class="space-y-3 text-base md:text-lg mb-4">
         <% sentences_10.each do |sentence| %>
-          <div class="bg-amber-50 border-2 border-amber-200 rounded-xl px-3 py-3">
-            <p class="text-gray-700"><%= sentence %></p>
+          <div class="rounded-lg p-3">
+            <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= sentence %></p>
           </div>
         <% end %>
       </div>
 
-      <div class="space-y-3">
-        <p class="text-gray-700">- Sottolinea una volta gli arcaismi, due volte il neologismo.</p>
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-gray-700">- Ci sono frasi senza arcaismi né neologismi? Quante?</span>
+      <div class="space-y-3 ml-6">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Sottolinea una volta gli arcaismi, due volte il neologismo.</p>
+        <div class="flex items-center justify-between gap-4">
+          <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Ci sono frasi senza arcaismi né neologismi? Quante?</span>
           <input type="text"
-                 class="border-b-2 border-amber-500 bg-transparent px-2 py-1 text-center focus:outline-none focus:border-amber-700 w-24"
+                 class="w-20 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="2"
                  data-correct-answer="2"
-                 placeholder=".................."
                  maxlength="5">
         </div>
       </div>
@@ -157,7 +164,5 @@
   </div>
 
   <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'orange', current_page: 'nvl5_gram_p039' %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 </div>

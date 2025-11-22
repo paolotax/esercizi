@@ -1,24 +1,22 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Introduction -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6">
+  <div class="bg-white p-4 md:p-6 pb-8">
     <p class="text-base md:text-lg text-gray-700 mb-3">
-      Molte parole italiane derivano dal <strong>latino</strong>, la lingua parlata dagli antichi Romani.
+      <span class="text-<%= @pagina.base_color %>-500">•</span> Molte parole italiane derivano dal <strong>latino</strong>, la lingua parlata dagli antichi Romani.
     </p>
     <p class="text-base md:text-lg text-gray-700">
-      Dal latino hanno avuto origine anche altre lingue, tra cui il francese, lo spagnolo, il portoghese e il rumeno.
+      <span class="text-<%= @pagina.base_color %>-500">•</span> Dal latino hanno avuto origine anche altre lingue, tra cui il francese, lo spagnolo, il portoghese e il rumeno.
       Queste lingue sono dette <strong>neolatine</strong>.
     </p>
   </div>
 
   <!-- Exercise 1: Translate Latin words -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <div class="mb-4 inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
-      1 IMPARARE TUTTI
-    </div>
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3">
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Leggi queste parole latine e prova a tradurle in italiano, come nell'esempio.
     </h2>
 
@@ -33,18 +31,20 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <% translations.each do |latin, italian| %>
-        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3 flex flex-wrap items-center gap-2">
-          <span class="font-semibold text-purple-700 w-20"><%= latin %></span>
-          <span>→</span>
+        <div class="rounded-lg p-3 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="font-semibold text-gray-800"><%= latin %></span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+          </div>
           <% if latin == "lupus" %>
             <span class="text-gray-700"><%= italian %></span>
           <% else %>
             <input type="text"
-                   class="border-b-2 border-purple-500 bg-transparent flex-1 min-w-[120px] text-center focus:outline-none focus:border-purple-700"
+                   class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                    data-fill-blanks-target="input"
                    data-answer="<%= italian %>"
                    data-correct-answer="<%= italian %>"
-                   placeholder="..."
                    maxlength="15">
           <% end %>
         </div>
@@ -53,9 +53,10 @@
   </div>
 
   <!-- Exercise 2: Latin expressions -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="exercise-group">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
-      <span class="font-bold">2</span> Alcune espressioni latine sono usate ogni giorno nella lingua italiana.
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
+      Alcune espressioni latine sono usate ogni giorno nella lingua italiana.
     </h2>
     <p class="text-sm md:text-base text-gray-600 mb-4">Collega ogni espressione al suo significato.</p>
 
@@ -70,9 +71,10 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <% expressions.each do |expr, meaning| %>
-        <label class="flex flex-col bg-blue-50 border-2 border-blue-200 rounded-xl px-3 py-3 shadow-sm">
-          <span class="font-semibold text-blue-700 italic mb-2"><%= expr %></span>
-          <select class="border-2 border-blue-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500"
+        <label class="flex flex-col rounded-lg p-3">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <span class="font-semibold text-<%= @pagina.base_color %>-600 italic mb-2"><%= expr %></span>
+          <select class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 rounded-lg px-3 py-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                   data-correct-answer="<%= meaning %>">
             <option value="">Scegli il significato...</option>
             <% meanings.each do |opt| %>
@@ -85,7 +87,5 @@
   </div>
 
   <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'blue', current_page: 'nvl5_gram_p024' %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 </div>
