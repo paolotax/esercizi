@@ -1,13 +1,13 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-lime-50 via-white to-green-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Story Introduction -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6">
+  <div class="bg-white p-4 md:p-6 pb-8">
     <p class="text-base md:text-lg text-gray-700 mb-4">
-      Luigi scrive un breve tema sul suo amico Joy.
+      <span class="text-<%= @pagina.base_color %>-500">•</span> Luigi scrive un breve tema sul suo amico Joy.
     </p>
-    <div class="bg-blue-50 rounded-xl p-4 border-2 border-blue-300">
+    <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
       <p class="text-base md:text-lg text-gray-700 italic">
         Nella bella copia, Luigi ha unito le frasi con le congiunzioni.
       </p>
@@ -15,7 +15,7 @@
   </div>
 
   <!-- Info Box -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6">
+  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
     <ul class="space-y-3 text-base md:text-lg text-gray-700">
       <li class="flex items-start gap-2">
         <span class="text-blue-600 font-bold">•</span>
@@ -29,15 +29,14 @@
   </div>
 
   <!-- Exercise 1: IMPARARE TUTTI -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-4">
-      <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
-      <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold mr-2">IMPARARE TUTTI</span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Completa le frasi con la congiunzione adatta. Scegli fra:
     </h2>
 
-    <div class="mb-4 bg-white rounded-xl p-4 border-2 border-yellow-200">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-base md:text-lg text-center font-semibold text-blue-700">
+    <div class="mb-4 bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-base md:text-lg text-center font-semibold text-<%= @pagina.base_color %>-700">
         <div>perché</div>
         <div>ma</div>
         <div>perciò</div>
@@ -46,34 +45,38 @@
     </div>
 
     <div class="space-y-3 text-base md:text-lg">
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3">
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
         <div class="flex flex-wrap items-center gap-2">
-          <span class="text-gray-700">• Mangio qualcosa</span>
-          <input type="text" class="border-b-2 border-blue-500 bg-transparent px-2 py-1 w-32" data-fill-blanks-target="input" data-answer="perché" data-correct-answer="perché" placeholder="..........">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <span class="text-gray-700">Mangio qualcosa</span>
+          <input type="text" class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="perché" data-correct-answer="perché">
           <span class="text-gray-700">ho fame.</span>
         </div>
       </div>
 
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3">
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
         <div class="flex flex-wrap items-center gap-2">
-          <span class="text-gray-700">• C'è rumore</span>
-          <input type="text" class="border-b-2 border-blue-500 bg-transparent px-2 py-1 w-32" data-fill-blanks-target="input" data-answer="perciò" data-correct-answer="perciò" placeholder="..........">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <span class="text-gray-700">C'è rumore</span>
+          <input type="text" class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="perciò" data-correct-answer="perciò">
           <span class="text-gray-700">non ti sento.</span>
         </div>
       </div>
 
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3">
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
         <div class="flex flex-wrap items-center gap-2">
-          <span class="text-gray-700">• Io parlo</span>
-          <input type="text" class="border-b-2 border-blue-500 bg-transparent px-2 py-1 w-32" data-fill-blanks-target="input" data-answer="ma" data-correct-answer="ma" placeholder="..........">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <span class="text-gray-700">Io parlo</span>
+          <input type="text" class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="ma" data-correct-answer="ma">
           <span class="text-gray-700">tu non ascolti.</span>
         </div>
       </div>
 
-      <div class="bg-white border-2 border-yellow-200 rounded-xl px-4 py-3">
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
         <div class="flex flex-wrap items-center gap-2">
-          <span class="text-gray-700">• Queen è orgogliosa</span>
-          <input type="text" class="border-b-2 border-blue-500 bg-transparent px-2 py-1 w-32" data-fill-blanks-target="input" data-answer="però" data-correct-answer="però" placeholder="..........">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <span class="text-gray-700">Queen è orgogliosa</span>
+          <input type="text" class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="però" data-correct-answer="però">
           <span class="text-gray-700">dolce.</span>
         </div>
       </div>
@@ -81,24 +84,21 @@
   </div>
 
   <!-- Exercise 2 -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="multiple-choice word-highlighter" data-word-highlighter-multi-color-value="false">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-4">
-      <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
-      Sottolinea le congiunzioni <span class="inline-block w-4 h-4 bg-green-300 rounded ml-1 align-middle"></span> e indica se sono coordinative (C) o subordinative (S).
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="multiple-choice word-highlighter" data-word-highlighter-multi-color-value="false">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
+      Sottolinea le congiunzioni<span class="inline-block w-5 h-5 bg-green-300 rounded ml-1"></span> e indica se sono coordinative (C) o subordinative (S).
     </h2>
 
     <!-- Color Selector (hidden for mono-color) -->
     <div class="hidden">
-      <div class="w-6 h-6 bg-green-300"
-           data-word-highlighter-target="colorBox"
-           data-color="green">
-      </div>
+      <div class="w-6 h-6 bg-green-300" data-word-highlighter-target="colorBox" data-color="green"></div>
     </div>
 
     <div class="space-y-3 text-base md:text-lg cursor-pointer">
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
         <div class="flex items-start justify-between gap-4">
-          <span class="text-gray-700">• Mi sto divertendo <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">quindi</span> resterò ancora.</span>
+          <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Mi sto divertendo <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">quindi</span> resterò ancora.</span>
           <div class="flex gap-3 flex-shrink-0">
             <label class="inline-flex items-center gap-1">
               <input type="checkbox" name="ex2_1" value="C" class="w-4 h-4">
@@ -112,9 +112,9 @@
         </div>
       </div>
 
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
         <div class="flex items-start justify-between gap-4">
-          <span class="text-gray-700">• Ho acquistato una sciarpa <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">e</span> un cappello.</span>
+          <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Ho acquistato una sciarpa <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">e</span> un cappello.</span>
           <div class="flex gap-3 flex-shrink-0">
             <label class="inline-flex items-center gap-1">
               <input type="checkbox" name="ex2_2" value="C" class="w-4 h-4">
@@ -128,9 +128,9 @@
         </div>
       </div>
 
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
         <div class="flex items-start justify-between gap-4">
-          <span class="text-gray-700">• Tommy ha mal di gola <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">perché</span> ha preso freddo.</span>
+          <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Tommy ha mal di gola <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">perché</span> ha preso freddo.</span>
           <div class="flex gap-3 flex-shrink-0">
             <label class="inline-flex items-center gap-1">
               <input type="checkbox" name="ex2_3" value="C" class="w-4 h-4">
@@ -144,9 +144,9 @@
         </div>
       </div>
 
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
         <div class="flex items-start justify-between gap-4">
-          <span class="text-gray-700">• Sono in ritardo <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">ma</span> sto arrivando.</span>
+          <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Sono in ritardo <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="green">ma</span> sto arrivando.</span>
           <div class="flex gap-3 flex-shrink-0">
             <label class="inline-flex items-center gap-1">
               <input type="checkbox" name="ex2_4" value="C" class="w-4 h-4">
@@ -162,11 +162,9 @@
     </div>
   </div>
 
-  <!-- Reference -->
-  <div class="mt-6 text-center">
-    <p class="text-red-600 font-bold text-base md:text-lg">Esercizi pp. <%= link_to "178", pagina_path("nvl5_gram_p178"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "179", pagina_path("nvl5_gram_p179"), class: "text-gray-600 hover:text-gray-800 underline" %></p>
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Esercizi pp. <%= link_to "178", pagina_path("nvl5_gram_p178"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "179", pagina_path("nvl5_gram_p179"), class: "text-gray-600 hover:text-gray-800 underline" %>
   </div>
 
-  <%= render partial: "shared/exercise_controls" %>
-
+  <%= render 'shared/exercise_controls' %>
 </div>
