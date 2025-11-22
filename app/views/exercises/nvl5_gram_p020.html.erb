@@ -1,15 +1,16 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg shadow-lg" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-8 bg-white rounded-lg shadow-lg" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 1 -->
-  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
-    <h2 class="text-lg md:text-xl font-bold text-purple-600 mb-4 flex items-center gap-2">
-      <span class="bg-purple-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+  <div class="bg-prasparent p-4 md:p-6 mb-6 md:mb-8 ">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Sottolinea le parole scritte correttamente, poi correggi quelle sbagliate.
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 xl:grid-cols-4 gap-4 mb-6">
+      
       <% correct_words = %w[culla cinque liquefare acquaragia acquedotto soqquadro cura quadretto cospicuo inquinato quaranta] %>
       <% all_words = [
         "risquotere", "acquaragia", "tacquino", "acquedotto",
@@ -18,26 +19,27 @@
         "aqquario", "cospicuo", "inquinato", "quaranta"
       ] %>
 
-      <% all_words.each_slice((all_words.length / 2.0).ceil).with_index do |column_words, col_index| %>
-        <div class="bg-purple-50 rounded-lg p-4 space-y-3">
-          <% column_words.each do |word| %>
-            <label class="flex items-center gap-3 bg-white border-2 rounded-lg px-3 py-2 shadow-sm hover:border-purple-400 transition"
-                   data-controller="exercise-group"
-                   data-exercise-group-target="option"
-                   data-correct="<%= correct_words.include?(word) %>">
-              <input type="checkbox"
-                     class="w-5 h-5 text-purple-600 focus:ring-purple-500"
-                     data-correct-answer="<%= correct_words.include?(word) %>">
-              <span class="text-gray-800 font-medium"><%= word %></span>
-              <span class="hidden" data-exercise-group-target="checkmark">✅</span>
-            </label>
-          <% end %>
+      <% all_words.each do |word| %>
+        <div>
+          <label class="flex items-center gap-3 bg-white border-2 border-transparent rounded-lg px-3 py-2 hover:border-purple-400 transition"
+                  data-controller="exercise-group"
+                  data-exercise-group-target="option"
+                  data-correct="<%= correct_words.include?(word) %>">
+            <input type="checkbox"
+                    class="w-5 h-5 text-purple-600 focus:ring-purple-500"
+                    data-correct-answer="<%= correct_words.include?(word) %>">
+            <span class="text-gray-800 font-medium"><%= word %></span>
+            <span class="hidden" data-exercise-group-target="checkmark">✅</span>
+          </label>
         </div>
       <% end %>
+
     </div>
 
-    <div class="bg-purple-50 rounded-lg p-4">
-      <p class="text-base md:text-lg font-semibold text-purple-700 mb-3">Scrivi correttamente le parole sbagliate.</p>
+
+
+    <div class="p-4">
+      <p class="text-base md:text-lg text-gray-600 mb-3">Scrivi correttamente le parole sbagliate.</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3" data-controller="fill-blanks">
         <% corrections = {
           "risquotere" => "riscuotere",
@@ -47,10 +49,10 @@
           "aqquario" => "acquario"
         } %>
         <% corrections.each do |wrong, right| %>
-          <label class="flex flex-col bg-white border-2 border-purple-200 rounded-lg px-3 py-2 shadow-sm">
-            <span class="text-sm text-gray-600 mb-1">Da “<%= wrong %>” a…</span>
+          <label class="flex flex-col px-3 py-2">
+            
             <input type="text"
-                   class="border-b-2 border-purple-500 bg-white text-center focus:outline-none focus:border-purple-700 text-base md:text-lg"
+                   class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-center focus:outline-none focus:border-<%= @pagina.base_color %>-700 text-base md:text-lg"
                    data-fill-blanks-target="input"
                    data-answer="<%= right %>"
                    data-correct-answer="<%= right %>"
@@ -62,12 +64,12 @@
   </div>
 
   <!-- Exercise 2 -->
-  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
-    <h2 class="text-lg md:text-xl font-bold text-purple-600 mb-4 flex items-center gap-2">
-      <span class="bg-purple-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
+  <div class="bg-trasparent p-4 md:p-6 mb-6 md:mb-8 ">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Cerchia la forma corretta.
     </h2>
-
+    
     <div class="space-y-4 text-base md:text-lg" data-controller="word-choice">
       <% sentences = [
         { parts: ["Il papà di Livio è ", ["usciere", "uscere"], " in un grande albergo."], correct: ["uscere"] },
@@ -83,7 +85,7 @@
       ] %>
 
       <% sentences.each_with_index do |sentence, index| %>
-        <div class="p-3 bg-purple-50 rounded-lg">
+        <div class="p-3">
           <p class="leading-relaxed">
             <% group_counter = 0 %>
             <% sentence[:parts].each do |part| %>
@@ -109,9 +111,9 @@
   </div>
 
   <!-- Exercise 3 -->
-  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-purple-600 mb-4 flex items-center gap-2">
-      <span class="bg-purple-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
+  <div class="bg-trasparent p-4 md:p-6 mb-6 md:mb-8 " data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Completa coniugando i verbi tra parentesi.
     </h2>
 
@@ -126,7 +128,7 @@
       ] %>
 
       <% verbs.each do |item| %>
-        <p class="bg-purple-50 rounded-lg p-3 flex flex-wrap items-center gap-1 leading-relaxed">
+        <p class="blex flex-wrap items-center gap-1 leading-relaxed">
           <% item[:text].each do |piece| %>
             <% if piece.is_a?(Hash) %>
               <input type="text"
@@ -145,10 +147,10 @@
   </div>
 
   <!-- Exercise 4 -->
-  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6 shadow-md">
-    <h2 class="text-lg md:text-xl font-bold text-purple-600 mb-4 flex items-center gap-2">
-      <span class="bg-purple-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
-      Indica con una X la forma corretta.
+  <div class="bg-trasparent p-4 md:p-6 mb-6 md:mb-8 ">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
+      Indica con una <span class="text-red-500">X</span> la forma corretta.
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base md:text-lg">
@@ -176,14 +178,13 @@
       ] %>
 
       <% options_groups.each_with_index do |group, idx| %>
-        <div class="bg-purple-50 rounded-lg p-4 space-y-3" data-controller="exercise-group">
-          <p class="font-semibold text-purple-700"><%= group[:title] %></p>
+        <div class="p-4 space-y-3" data-controller="exercise-group">
           <% group[:choices].each_with_index do |choice, choice_idx| %>
-            <label class="flex items-center gap-3 bg-white border-2 border-purple-200 rounded-lg px-3 py-2 shadow-sm hover:border-purple-400 transition"
+            <label class="flex items-center gap-3 bg-<%= @pagina.base_color %>-50 border-2 border-<%= @pagina.base_color %>-200 rounded-lg px-3 py-2 hover:border-<%= @pagina.base_color %>-400 transition"
                    data-exercise-group-target="option"
                    data-correct="<%= choice[:correct] %>">
               <input type="checkbox"
-                     class="w-5 h-5 text-purple-600 focus:ring-purple-500"
+                     class="w-5 h-5 text-<%= @pagina.base_color %>-600 focus:ring-<%= @pagina.base_color %>-500"
                      data-correct-answer="<%= choice[:correct] %>">
               <span class="text-gray-800"><%= choice[:text] %></span>
               <span class="hidden" data-exercise-group-target="checkmark">✅</span>
@@ -195,6 +196,6 @@
   </div>
 
   <!-- Exercise Controls -->
-  <%= render 'shared/exercise_controls', color: 'purple', current_page: 'nvl5_gram_p020' %>
+  <%= render 'shared/exercise_controls' %>
 </div>
 
