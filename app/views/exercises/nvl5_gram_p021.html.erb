@@ -3,7 +3,7 @@
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 5 -->
-  <div class="bg-trasparent p-4 md:p-6 mb-6 md:mb-8 " data-controller="fill-blanks">
+  <div class="bg-white p-4 md:p-6 mb-6 md:mb-8 " data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Dividi in sillabe le parole.
@@ -35,7 +35,7 @@
   </div>
 
   <!-- Exercise 6 -->
-  <div class="bg-trasparent p-4 md:p-6 mb-6 md:mb-8 " data-controller="fill-blanks">
+  <div class="bg-white p-4 md:p-6 mb-6 md:mb-8 " data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">6</span>
       Inserisci l’H solo quando serve.
@@ -43,15 +43,16 @@
 
     <div class="space-y-4 text-base md:text-lg leading-relaxed">
       <% sentences_h = [
-        ["• Elisa è andata ", { answer: "a" }, " Roma perché ", { answer: "ha" }, " vinto un premio."],
-        ["• Su Marte c’è l’acqua: l’", { answer: "hanno" }, " detto alla televisione l’", { answer: "hanno" }, " scorso."],
-        ["• ", { answer: "Ho" }, " preso i pomodori: vuoi che faccia un sugo ", { answer: "o" }, " l’insalata?"],
-        ["• Chi ", { answer: "ha" }, " vinto il festival l’", { answer: "hanno" }, " scorso?"],
-        ["• ", { answer: "Oh" }, "! Ma che cosa ", { answer: "hai" }, " combinato?"]
+        ["Elisa è andata ", { answer: "a" }, " Roma perché ", { answer: "ha" }, " vinto un premio."],
+        ["Su Marte c’è l’acqua: l’", { answer: "hanno" }, " detto alla televisione l’", { answer: "hanno" }, " scorso."],
+        ["", { answer: "Ho" }, " preso i pomodori: vuoi che faccia un sugo ", { answer: "o" }, " l’insalata?"],
+        ["Chi ", { answer: "ha" }, " vinto il festival l’", { answer: "hanno" }, " scorso?"],
+        ["", { answer: "Oh" }, "! Ma che cosa ", { answer: "hai" }, " combinato?"]
       ] %>
 
       <% sentences_h.each do |sentence| %>
         <p class="rounded-lg p-3 flex flex-wrap items-center gap-1">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> 
           <% sentence.each do |part| %>
             <% if part.is_a?(Hash) %>
               <input type="text"
@@ -70,7 +71,7 @@
   </div>
 
   <!-- Exercise 7 -->
-  <div class="bg-trasparent p-4 md:p-6 mb-6 md:mb-8 ">
+  <div class="bg-white p-4 md:p-6 mb-6 md:mb-8 ">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">7</span>
       Completa con la forma corretta.
@@ -78,14 +79,16 @@
     
     <div class="space-y-4 text-base md:text-lg" data-controller="word-choice">
       <% forms = [
-        { parts: ["• Siamo in ritardo di ", ["mezzora", "mezz’ora"], " …"], correct: ["mezz’ora"] },
-        { parts: ["• ", ["Qual’è", "Qual è"], " ", ["un", "un’"], " aiuola adatta al nostro giardino?"], correct: ["Qual è", "un’"] },
-        { parts: ["• Auguri di ", ["buon", "buon’"], " onomastico! Oggi è ", ["san", "santo"], " Lorenzo."], correct: ["buon", "san"] }
+        { parts: ["Siamo in ritardo di ", ["mezzora", "mezz’ora"], " …"], correct: ["mezz’ora"] },
+        { parts: ["", ["Qual’è", "Qual è"], " ", ["un", "un’"], " aiuola adatta al nostro giardino?"], correct: ["Qual è", "un’"] },
+        { parts: ["Auguri di ", ["buon", "buon’"], " onomastico! Oggi è ", ["san", "santo"], " Lorenzo."], correct: ["buon", "san"] }
       ] %>
 
       <% forms.each_with_index do |row, idx| %>
         <div class="p-3 rounded-lg leading-relaxed">
           <% group_counter = 0 %>
+                      <span class="text-<%= @pagina.base_color %>-500">•</span> 
+
           <% row[:parts].each do |part| %>
             <% if part.is_a?(Array) %>
               <% group_id = "f#{idx}_g#{group_counter}" %>
@@ -108,22 +111,23 @@
   </div>
 
   <!-- Exercise 8 -->
-  <div class="bg-trasparent p-4 md:p-6 mb-6 md:mb-8 " data-controller="fill-blanks">
+  <div class="bg-white p-4 md:p-6 mb-6 md:mb-8 " data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">8</span>
       Metti l’accento dove serve.
     </h2>
 
     <% accents = [
-      ["• Il re si ", { answer: "è" }, " svegliato da poco e ora sta facendo colazione di ", { answer: "là" }, ", nel suo studio."],
-      ["• Chi non ", { answer: "dà" }, " fiducia a nessuno, non ", { answer: "può" }, " pretendere di ottenerla per ", { answer: "sé" }, " dagli altri."],
-      ["• ", { answer: "Dò" }, " il mio posto a sedere a quell’uomo che viene da molto lontano."],
-      ["• Sei ", { answer: "già" }, " stata qui? Il locale ", { answer: "è" }, " molto alla moda e ha un ascensore che ti porta su in terrazza."]
+      ["Il re si ", { answer: "è" }, " svegliato da poco e ora sta facendo colazione di ", { answer: "là" }, ", nel suo studio."],
+      ["Chi non ", { answer: "dà" }, " fiducia a nessuno, non ", { answer: "può" }, " pretendere di ottenerla per ", { answer: "sé" }, " dagli altri."],
+      ["", { answer: "Dò" }, " il mio posto a sedere a quell’uomo che viene da molto lontano."],
+      ["Sei ", { answer: "già" }, " stata qui? Il locale ", { answer: "è" }, " molto alla moda e ha un ascensore che ti porta su in terrazza."]
     ] %>
 
     <div class="space-y-4 text-base md:text-lg">
       <% accents.each do |sentence| %>
         <p class="rounded-lg p-3 flex flex-wrap items-center gap-1 leading-relaxed">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> 
           <% sentence.each do |piece| %>
             <% if piece.is_a?(Hash) %>
               <input type="text"
@@ -142,7 +146,7 @@
   </div>
 
   <!-- Le mie competenze -->
-  <div class="bg-trasparent p-4 md:p-6 mb-6 md:mb-8 space-y-6">
+  <div class="bg-white p-4 md:p-6 mb-6 md:mb-8 space-y-6">
     <div>
       <h3 class="text-lg md:text-xl font-bold mb-3 flex items-center gap-2">
         <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">9</span>
