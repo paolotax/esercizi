@@ -1,91 +1,82 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-lime-50 via-white to-green-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Info Box -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6">
+  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
     <p class="text-base md:text-lg text-gray-700 mb-3">
-      I verbi <strong>essere</strong> e <strong>avere</strong>:
+      <span class="text-<%= @pagina.base_color %>-500">•</span> I verbi <strong>essere</strong> e <strong>avere</strong>:
     </p>
-    <ul class="space-y-3 text-base md:text-lg text-gray-700">
-      <li class="flex items-start gap-2">
-        <span class="text-blue-600 font-bold">•</span>
-        <span>sono <strong class="text-blue-600">ausiliari</strong> quando aiutano a formare i tempi composti degli altri verbi;</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-red-600 font-bold">•</span>
-        <span>hanno <strong class="text-red-600">significato proprio</strong> quando non sono seguiti da un altro verbo e indicano:</span>
-      </li>
-    </ul>
-    <div class="ml-8 mt-2 space-y-2 text-base md:text-lg text-gray-700">
+    <div class="space-y-3 text-base md:text-lg text-gray-700 ml-6">
+      <p><span class="text-blue-500">•</span> sono <strong class="text-blue-600">ausiliari</strong> quando aiutano a formare i tempi composti degli altri verbi;</p>
+      <p><span class="text-red-500">•</span> hanno <strong class="text-red-600">significato proprio</strong> quando non sono seguiti da un altro verbo e indicano:</p>
+    </div>
+    <div class="ml-12 mt-2 space-y-2 text-base md:text-lg text-gray-700">
       <p>- essere → esistere, stare / trovarsi, un modo di essere</p>
       <p>- avere → possedere, sentire, ottenere.</p>
     </div>
   </div>
 
   <!-- Exercise 1: IMPARARE TUTTI -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-4 flex items-center flex-wrap gap-2">
-      <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
-      <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
-      <span>Sottolinea <span class="text-blue-600">ausiliari<span class="inline-block w-6 h-6 bg-blue-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span> e <span class="text-red-600">significato proprio<span class="inline-block w-6 h-6 bg-red-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span>.</span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+      Sottolinea ausiliari<span class="inline-block w-5 h-5 bg-blue-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span> e significato proprio<span class="inline-block w-5 h-5 bg-red-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span>.
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base md:text-lg cursor-pointer">
-      <div class="bg-white rounded-lg p-4 space-y-3">
-        <p class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Sono</span> andata a trovare mia zia e <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">abbiamo</span> preso un caffè insieme.</p>
-        <p class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">Avevo</span> fame e <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">ho</span> mangiato un bel panino.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 space-y-3">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Sono</span> andata a trovare mia zia e <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">abbiamo</span> preso un caffè insieme.</p>
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">Avevo</span> fame e <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">ho</span> mangiato un bel panino.</p>
       </div>
-      <div class="bg-white rounded-lg p-4 space-y-3">
-        <p class="text-gray-700">• La tuta <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">è</span> nel secondo cassetto dell'armadio.</p>
-        <p class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Ho</span> comprato dei fiori. <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">Sono</span> molto profumati.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 space-y-3">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> La tuta <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">è</span> nel secondo cassetto dell'armadio.</p>
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Ho</span> comprato dei fiori. <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">Sono</span> molto profumati.</p>
       </div>
     </div>
   </div>
 
   <!-- Exercise 2: Complete with correct auxiliary -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-4">
-      <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Completa le frasi con l'ausiliare corretto.
     </h2>
 
-    <div class="space-y-3 text-base md:text-lg">
-      <% auxiliaries = [
-        { text: "Tu", answer: "sei", continuation: "andato a Londra a trovare tua sorella?" },
-        { text: "Io", answer: "ho", continuation: "pensato di andare al parco, ma ha iniziato a piovere." },
-        { text: "Vi", answer: "siete", continuation: "ricordati che oggi abbiamo l'allenamento?" },
-        { text: "Mirko", answer: "è", continuation: "nato in aprile." },
-        { text: "Dove", answer: "avete", continuation: "lasciato i vostri cappelli?" }
-      ] %>
+    <% auxiliaries = [
+      { text: "Tu", answer: "sei", continuation: "andato a Londra a trovare tua sorella?" },
+      { text: "Io", answer: "ho", continuation: "pensato di andare al parco, ma ha iniziato a piovere." },
+      { text: "Vi", answer: "siete", continuation: "ricordati che oggi abbiamo l'allenamento?" },
+      { text: "Mirko", answer: "è", continuation: "nato in aprile." },
+      { text: "Dove", answer: "avete", continuation: "lasciato i vostri cappelli?" }
+    ] %>
 
+    <div class="space-y-3 text-base md:text-lg">
       <% auxiliaries.each do |item| %>
-        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="text-gray-700">• <%= item[:text] %></span>
-            <input type="text"
-                   class="border-b-2 border-green-500 bg-transparent px-2 py-1 w-24 focus:outline-none"
-                   data-fill-blanks-target="input"
-                   data-answer="<%= item[:answer] %>"
-                   data-correct-answer="<%= item[:answer] %>"
-                   placeholder=".......">
-            <span class="text-gray-700"><%= item[:continuation] %></span>
-          </div>
+        <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <span class="text-gray-700"><%= item[:text] %></span>
+          <input type="text"
+                 class="w-24 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:answer] %>"
+                 data-correct-answer="<%= item[:answer] %>">
+          <span class="text-gray-700"><%= item[:continuation] %></span>
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 3: Write proper meaning -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-4">
-      <span class="bg-purple-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">3</span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Scrivi con quale significato proprio sono usati essere e avere, come nell'esempio.
     </h2>
 
     <div class="space-y-3 text-base md:text-lg">
-      <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700">• Federico ha mal di pancia. → <strong class="text-green-700">sentire</strong></p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Federico ha mal di pancia. → <strong class="text-green-700">sentire</strong></p>
       </div>
 
       <% meanings = [
@@ -97,21 +88,18 @@
       ] %>
 
       <% meanings.each do |item| %>
-        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-3">
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="text-gray-700">• <%= item[:sentence] %> →</span>
-            <input type="text"
-                   class="border-b-2 border-purple-500 bg-transparent px-2 py-1 flex-1 min-w-[150px] focus:outline-none"
-                   data-fill-blanks-target="input"
-                   data-answer="<%= item[:answer] %>"
-                   data-correct-answer="<%= item[:answer] %>"
-                   placeholder="..........">
-          </div>
+        <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <span class="text-gray-700"><%= item[:sentence] %> →</span>
+          <input type="text"
+                 class="flex-1 min-w-[150px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:answer] %>"
+                 data-correct-answer="<%= item[:answer] %>">
         </div>
       <% end %>
     </div>
   </div>
 
-  <%= render partial: "shared/exercise_controls" %>
-
+  <%= render 'shared/exercise_controls' %>
 </div>

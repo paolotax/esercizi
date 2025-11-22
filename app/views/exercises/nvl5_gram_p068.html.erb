@@ -1,125 +1,102 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-lime-50 via-white to-green-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Info Box -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6">
+  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
     <p class="text-base md:text-lg text-gray-700 mb-4">
-      L'<strong>indicativo</strong> è il modo della certezza. Indica azioni che sono accadute, che accadono o che accadranno. È formato da:
+      <span class="text-<%= @pagina.base_color %>-500">•</span> L'<strong>indicativo</strong> è il modo della certezza. Indica azioni che sono accadute, che accadono o che accadranno. È formato da:
     </p>
-    <ul class="space-y-2 text-base md:text-lg text-gray-700">
-      <li class="flex items-start gap-2">
-        <span class="text-red-600 font-bold">•</span>
-        <span><strong>quattro tempi semplici</strong> → presente, imperfetto, passato remoto, futuro semplice;</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-blue-600 font-bold">•</span>
-        <span><strong>quattro tempi composti</strong> → passato prossimo, trapassato prossimo, trapassato remoto, futuro anteriore.</span>
-      </li>
-    </ul>
+    <div class="space-y-2 text-base md:text-lg text-gray-700 ml-6">
+      <p><span class="text-red-500">•</span> <strong>quattro tempi semplici</strong> → presente, imperfetto, passato remoto, futuro semplice;</p>
+      <p><span class="text-blue-500">•</span> <strong>quattro tempi composti</strong> → passato prossimo, trapassato prossimo, trapassato remoto, futuro anteriore.</p>
+    </div>
   </div>
 
   <!-- Exercise 1: IMPARARE TUTTI -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-4">
-      <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">1</span>
-      <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold mr-2">IMPARARE TUTTI</span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Osserva lo schema del modo indicativo e completa le frasi coniugando il verbo <strong>suonare</strong> al tempo indicato.
     </h2>
 
     <div class="overflow-x-auto">
       <table class="w-full border-collapse text-sm md:text-base">
         <thead>
-          <tr class="bg-amber-200">
-            <th class="border-2 border-amber-400 px-4 py-3 font-bold">Tempi semplici</th>
-            <th class="border-2 border-amber-400 px-4 py-3 font-bold">Tempi composti</th>
+          <tr class="bg-<%= @pagina.base_color %>-100">
+            <th class="border border-<%= @pagina.base_color %>-300 px-4 py-3 font-bold">Tempi semplici</th>
+            <th class="border border-<%= @pagina.base_color %>-300 px-4 py-3 font-bold">Tempi composti</th>
           </tr>
         </thead>
         <tbody>
           <tr class="bg-white">
-            <td class="border-2 border-amber-300 px-4 py-4">
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-4">
               <p class="font-semibold text-red-700 mb-2">Presente</p>
               <div class="flex flex-wrap items-center gap-2">
                 <span>Io</span>
-                <input type="text" class="border-b-2 border-red-500 bg-transparent px-2 py-1 w-32"
-                       data-fill-blanks-target="input" data-answer="suono" data-correct-answer="suono"
-                       placeholder="........">
+                <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="suono" data-correct-answer="suono">
                 <span>il campanello.</span>
               </div>
             </td>
-            <td class="border-2 border-amber-300 px-4 py-4">
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-4">
               <p class="font-semibold text-blue-700 mb-2">Passato prossimo</p>
               <div class="flex flex-wrap items-center gap-2">
                 <span>Io</span>
-                <input type="text" class="border-b-2 border-blue-500 bg-transparent px-2 py-1 w-32"
-                       data-fill-blanks-target="input" data-answer="ho suonato" data-correct-answer="ho suonato"
-                       placeholder="........">
+                <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="ho suonato" data-correct-answer="ho suonato">
                 <span>il campanello.</span>
               </div>
             </td>
           </tr>
-          <tr class="bg-amber-50">
-            <td class="border-2 border-amber-300 px-4 py-4">
+          <tr class="bg-<%= @pagina.base_color %>-50">
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-4">
               <p class="font-semibold text-red-700 mb-2">Imperfetto</p>
               <div class="flex flex-wrap items-center gap-2">
                 <span>Io</span>
-                <input type="text" class="border-b-2 border-red-500 bg-transparent px-2 py-1 w-32"
-                       data-fill-blanks-target="input" data-answer="suonavo" data-correct-answer="suonavo"
-                       placeholder="........">
+                <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="suonavo" data-correct-answer="suonavo">
                 <span>il campanello.</span>
               </div>
             </td>
-            <td class="border-2 border-amber-300 px-4 py-4">
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-4">
               <p class="font-semibold text-blue-700 mb-2">Trapassato prossimo</p>
               <div class="flex flex-wrap items-center gap-2">
                 <span>Io</span>
-                <input type="text" class="border-b-2 border-blue-500 bg-transparent px-2 py-1 w-32"
-                       data-fill-blanks-target="input" data-answer="avevo suonato" data-correct-answer="avevo suonato"
-                       placeholder="........">
+                <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="avevo suonato" data-correct-answer="avevo suonato">
                 <span>il campanello.</span>
               </div>
             </td>
           </tr>
           <tr class="bg-white">
-            <td class="border-2 border-amber-300 px-4 py-4">
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-4">
               <p class="font-semibold text-red-700 mb-2">Passato remoto</p>
               <div class="flex flex-wrap items-center gap-2">
                 <span>Io</span>
-                <input type="text" class="border-b-2 border-red-500 bg-transparent px-2 py-1 w-32"
-                       data-fill-blanks-target="input" data-answer="suonai" data-correct-answer="suonai"
-                       placeholder="........">
+                <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="suonai" data-correct-answer="suonai">
                 <span>il campanello.</span>
               </div>
             </td>
-            <td class="border-2 border-amber-300 px-4 py-4">
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-4">
               <p class="font-semibold text-blue-700 mb-2">Trapassato remoto</p>
               <div class="flex flex-wrap items-center gap-2">
                 <span>Io</span>
-                <input type="text" class="border-b-2 border-blue-500 bg-transparent px-2 py-1 w-32"
-                       data-fill-blanks-target="input" data-answer="ebbi suonato" data-correct-answer="ebbi suonato"
-                       placeholder="........">
+                <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="ebbi suonato" data-correct-answer="ebbi suonato">
                 <span>il campanello.</span>
               </div>
             </td>
           </tr>
-          <tr class="bg-amber-50">
-            <td class="border-2 border-amber-300 px-4 py-4">
+          <tr class="bg-<%= @pagina.base_color %>-50">
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-4">
               <p class="font-semibold text-red-700 mb-2">Futuro semplice</p>
               <div class="flex flex-wrap items-center gap-2">
                 <span>Io</span>
-                <input type="text" class="border-b-2 border-red-500 bg-transparent px-2 py-1 w-32"
-                       data-fill-blanks-target="input" data-answer="suonerò" data-correct-answer="suonerò"
-                       placeholder="........">
+                <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="suonerò" data-correct-answer="suonerò">
                 <span>il campanello.</span>
               </div>
             </td>
-            <td class="border-2 border-amber-300 px-4 py-4">
+            <td class="border border-<%= @pagina.base_color %>-200 px-4 py-4">
               <p class="font-semibold text-blue-700 mb-2">Futuro anteriore</p>
               <div class="flex flex-wrap items-center gap-2">
                 <span>Io</span>
-                <input type="text" class="border-b-2 border-blue-500 bg-transparent px-2 py-1 w-32"
-                       data-fill-blanks-target="input" data-answer="avrò suonato" data-correct-answer="avrò suonato"
-                       placeholder="........">
+                <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="avrò suonato" data-correct-answer="avrò suonato">
                 <span>il campanello.</span>
               </div>
             </td>
@@ -130,36 +107,34 @@
   </div>
 
   <!-- Exercise 2: Underline simple and compound tenses -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-4 flex items-center flex-wrap gap-2">
-      <span class="bg-purple-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
-      <span>Sottolinea <span class="text-red-600">tempi semplici<span class="inline-block w-6 h-6 bg-red-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span> e <span class="text-blue-600">tempi composti<span class="inline-block w-6 h-6 bg-blue-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span>.</span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
+      Sottolinea tempi semplici<span class="inline-block w-5 h-5 bg-red-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span> e tempi composti<span class="inline-block w-5 h-5 bg-blue-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span>.
     </h2>
 
     <div class="space-y-3 text-base md:text-lg cursor-pointer">
-      <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700">• Tra pochi minuti <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">usciremo</span> tutti dallo spogliatoio.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Tra pochi minuti <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">usciremo</span> tutti dallo spogliatoio.</p>
       </div>
-      <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Era stata</span> una notte durissima a causa del temporale.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Era stata</span> una notte durissima a causa del temporale.</p>
       </div>
-      <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700">• Quando <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">ascolto</span> questa musica, <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">sono</span> felice!</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Quando <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">ascolto</span> questa musica, <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">sono</span> felice!</p>
       </div>
-      <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Avevo invitato</span> Michela a casa mia, ma <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">ha detto</span> di no.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Avevo invitato</span> Michela a casa mia, ma <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">ha detto</span> di no.</p>
       </div>
-      <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-4 py-3">
-        <p class="text-gray-700">• Dopo che <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">avrò parlato</span> con Bea, ti <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">dirò</span> che cosa <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">penso</span>.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Dopo che <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">avrò parlato</span> con Bea, ti <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">dirò</span> che cosa <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">penso</span>.</p>
       </div>
     </div>
   </div>
 
-  <!-- Reference -->
-  <div class="mt-6 text-center">
-    <p class="text-red-600 font-bold text-base md:text-lg">Esercizi pp. <%= link_to "164", pagina_path("nvl5_gram_p164"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "165", pagina_path("nvl5_gram_p165"), class: "text-gray-600 hover:text-gray-800 underline" %> e <%= link_to "169", pagina_path("nvl5_gram_p169"), class: "text-gray-600 hover:text-gray-800 underline" %></p>
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Esercizi pp. <%= link_to "164", pagina_path("nvl5_gram_p164"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "165", pagina_path("nvl5_gram_p165"), class: "text-gray-600 hover:text-gray-800 underline" %> e <%= link_to "169", pagina_path("nvl5_gram_p169"), class: "text-gray-600 hover:text-gray-800 underline" %>
   </div>
 
-  <%= render partial: "shared/exercise_controls" %>
-
+  <%= render 'shared/exercise_controls' %>
 </div>
