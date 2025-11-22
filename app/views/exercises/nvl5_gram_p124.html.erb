@@ -1,22 +1,20 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
-  <!-- Header con badge SINTASSI -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Introduzione teorica -->
-  <div class="bg-orange-50 border-2 border-orange-300 rounded-lg p-6 mb-8">
+  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
     <p class="text-gray-700 font-semibold mb-4">Le <strong class="underline text-blue-600">frasi secondarie</strong> possono essere:</p>
 
     <!-- Coordinate -->
-    <div class="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4 mb-4">
+    <div class="bg-yellow-50 rounded-lg p-4 mb-4">
       <p class="text-gray-700 mb-2">
-        • <strong class="underline text-green-600">coordinate →</strong> frasi collegate tra loro ma ognuna con significato autonomo.<br>
+        <span class="text-<%= @pagina.base_color %>-500">•</span> <strong class="underline text-green-600">coordinate →</strong> frasi collegate tra loro ma ognuna con significato autonomo.<br>
         Le coordinate sono collegate da <strong>segni di punteggiatura</strong> o da <strong>congiunzioni</strong> (e, o, ma, oppure, infatti...).
       </p>
       <div class="flex items-center justify-center mt-4">
         <div class="text-center">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100' viewBox='0 0 200 100'%3E%3Cellipse cx='100' cy='50' rx='80' ry='40' fill='%23A5F3FC' stroke='%2306B6D4' stroke-width='2'/%3E%3Ccircle cx='85' cy='40' r='8' fill='%23FFF'/%3E%3Ccircle cx='115' cy='40' r='8' fill='%23FFF'/%3E%3Ccircle cx='87' cy='40' r='3' fill='%23000'/%3E%3Ccircle cx='113' cy='40' r='3' fill='%23000'/%3E%3Cpath d='M85,55 Q100,65 115,55' stroke='%23000' stroke-width='2' fill='none'/%3E%3Cpath d='M70,30 Q75,20 85,25 M115,25 Q125,20 130,30' stroke='%2306B6D4' stroke-width='2' fill='none'/%3E%3C/svg%3E" class="w-48 mb-2" alt="dormire">
-          <div class="border-2 border-green-400 rounded-lg px-6 py-3 bg-green-50">
+          <div class="border border-green-400 rounded-lg px-6 py-3 bg-green-50">
             <span class="text-gray-700">Dormo <strong class="underline">e sogno</strong>.</span>
           </div>
           <div class="text-lg mt-2">↓</div>
@@ -26,14 +24,13 @@
     </div>
 
     <!-- Subordinate -->
-    <div class="bg-purple-50 border-2 border-purple-300 rounded-lg p-4 mb-4">
+    <div class="bg-purple-50 rounded-lg p-4">
       <p class="text-gray-700 mb-2">
-        • <strong class="underline text-purple-600">subordinate →</strong> frasi che dipendono da un'altra frase e che, da sole, non hanno significato. La subordinata è legata alla principale da <strong>preposizioni</strong> (per, a, di...), <strong>congiunzioni</strong> (quando, perché, sebbene...) o <strong>pronomi relativi</strong> (che, il quale...).
+        <span class="text-<%= @pagina.base_color %>-500">•</span> <strong class="underline text-purple-600">subordinate →</strong> frasi che dipendono da un'altra frase e che, da sole, non hanno significato. La subordinata è legata alla principale da <strong>preposizioni</strong> (per, a, di...), <strong>congiunzioni</strong> (quando, perché, sebbene...) o <strong>pronomi relativi</strong> (che, il quale...).
       </p>
       <div class="flex items-center justify-center mt-4">
         <div class="text-center">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='120' viewBox='0 0 200 120'%3E%3Cellipse cx='100' cy='80' rx='50' ry='30' fill='%23FEF3C7' stroke='%23F59E0B' stroke-width='2'/%3E%3Ccircle cx='80' cy='50' r='15' fill='%23DC2626'/%3E%3Ccircle cx='120' cy='50' r='15' fill='%23DC2626'/%3E%3Ccircle cx='100' cy='65' r='12' fill='%23DC2626'/%3E%3Crect x='60' y='30' width='80' height='8' rx='4' fill='%23DC2626'/%3E%3Cpath d='M50,100 L60,110 M70,100 L80,110 M90,100 L100,110 M110,100 L120,110 M130,100 L140,110 M150,100 L160,110' stroke='%23F59E0B' stroke-width='3'/%3E%3C/svg%3E" class="w-48 mb-2" alt="polpette">
-          <div class="border-2 border-purple-400 rounded-lg px-6 py-3 bg-purple-50">
+          <div class="border border-purple-400 rounded-lg px-6 py-3 bg-purple-50">
             <span class="text-gray-700">Mangio le polpette <strong class="underline">che ha preparato la zia</strong>.</span>
           </div>
           <div class="text-lg mt-2">↓</div>
@@ -44,102 +41,101 @@
   </div>
 
   <!-- Esercizio 1 - IMPARARE TUTTI -->
-  <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6 mb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
-    <div class="mb-4 inline-block bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 md:px-6 py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
-      1 IMPARARE TUTTI
-    </div>
-    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4">
+  <div class="bg-<%= @pagina.base_color %>-100 p-4 md:p-6 pb-8 rounded-lg" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+      <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
       Cerchia le <em class="underline text-red-600">frasi principali<span class="inline-block w-6 h-6 bg-red-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></em>, sottolinea una volta le frasi <strong class="underline text-green-600">coordinate<span class="inline-block w-6 h-6 bg-green-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span></strong> e due volte quelle <strong class="underline text-purple-600">subordinate<span class="inline-block w-6 h-6 bg-purple-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="purple" data-action="click->word-highlighter#selectColor"></span></strong>.
     </h2>
 
     <ul class="space-y-3 cursor-pointer">
-      <li class="bg-white border-2 border-yellow-200 rounded-lg p-4">
-        • <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Samuele si è stufato</span> <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">di aspettare l'autobus</span>.
+      <li class="bg-white rounded-lg p-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Samuele si è stufato</span> <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">di aspettare l'autobus</span>.
       </li>
-      <li class="bg-white border-2 border-yellow-200 rounded-lg p-4">
-        • <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Il mio gattino fa le fusa</span> <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">quando lo accarezzo</span>.
+      <li class="bg-white rounded-lg p-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Il mio gattino fa le fusa</span> <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">quando lo accarezzo</span>.
       </li>
-      <li class="bg-white border-2 border-yellow-200 rounded-lg p-4">
-        • <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">I bambini giocavano</span> e <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">saltavano nella stanza</span>.
+      <li class="bg-white rounded-lg p-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">I bambini giocavano</span> e <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">saltavano nella stanza</span>.
       </li>
-      <li class="bg-white border-2 border-yellow-200 rounded-lg p-4">
-        • <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Prendo sempre il caffè</span> <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">dopo aver pranzato</span>.
+      <li class="bg-white rounded-lg p-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Prendo sempre il caffè</span> <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">dopo aver pranzato</span>.
       </li>
-      <li class="bg-white border-2 border-yellow-200 rounded-lg p-4">
-        • <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Mangio la pasta</span> ma <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">preferisco la pizza</span>.
+      <li class="bg-white rounded-lg p-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Mangio la pasta</span> ma <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">preferisco la pizza</span>.
       </li>
-      <li class="bg-white border-2 border-yellow-200 rounded-lg p-4">
-        • <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Lia indossa la collana</span> <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">che le hai regalato</span>.
+      <li class="bg-white rounded-lg p-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Lia indossa la collana</span> <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">che le hai regalato</span>.
       </li>
     </ul>
   </div>
 
   <!-- Esercizio 2 - Completa le frasi principali -->
-  <div class="bg-blue-50 border-2 border-blue-300 rounded-lg p-6 mb-8">
-    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4">
-      <span class="bg-blue-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Completa le <em class="underline text-red-600">frasi principali</em> con una <strong class="underline text-green-600">coordinata</strong> e una <strong class="underline text-purple-600">subordinata</strong>.
     </h2>
 
     <div class="space-y-6">
       <!-- Frase 1 -->
-      <div class="bg-white border-2 border-blue-200 rounded-lg p-4">
+      <div class="bg-white rounded-lg p-4">
         <div class="flex items-center gap-3 mb-2">
           <span class="text-gray-600">•</span>
-          <span class="font-semibold text-gray-700 border-2 border-red-300 rounded px-3 py-1 bg-red-50">Il mio cane abbaia</span>
+          <span class="font-semibold text-gray-700 border border-red-300 rounded px-3 py-1 bg-red-50">Il mio cane abbaia</span>
         </div>
         <div class="ml-8 space-y-2">
           <div class="flex items-center gap-2">
             <span class="text-purple-600">→</span>
             <span class="text-purple-600 font-semibold">perché</span>
-            <input type="text" class="flex-1 border-b-2 border-dotted border-blue-400 px-2 py-1 focus:outline-none" data-correct-answer="" placeholder="...">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 px-2 py-1 focus:outline-none bg-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
           </div>
           <div class="flex items-center gap-2">
             <span class="text-green-600">→</span>
             <span class="text-green-600 font-semibold">e</span>
-            <input type="text" class="flex-1 border-b-2 border-dotted border-blue-400 px-2 py-1 focus:outline-none" data-correct-answer="" placeholder="...">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 px-2 py-1 focus:outline-none bg-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
           </div>
         </div>
         <p class="text-sm text-gray-500 mt-2 italic ml-8">Risposte libere</p>
       </div>
 
       <!-- Frase 2 -->
-      <div class="bg-white border-2 border-blue-200 rounded-lg p-4">
+      <div class="bg-white rounded-lg p-4">
         <div class="flex items-center gap-3 mb-2">
           <span class="text-gray-600">•</span>
-          <span class="font-semibold text-gray-700 border-2 border-red-300 rounded px-3 py-1 bg-red-50">Ho preso l'ombrello</span>
+          <span class="font-semibold text-gray-700 border border-red-300 rounded px-3 py-1 bg-red-50">Ho preso l'ombrello</span>
         </div>
         <div class="ml-8 space-y-2">
           <div class="flex items-center gap-2">
             <span class="text-green-600">→</span>
             <span class="text-green-600 font-semibold">ma</span>
-            <input type="text" class="flex-1 border-b-2 border-dotted border-blue-400 px-2 py-1 focus:outline-none" data-correct-answer="" placeholder="...">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 px-2 py-1 focus:outline-none bg-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
           </div>
           <div class="flex items-center gap-2">
             <span class="text-purple-600">→</span>
             <span class="text-purple-600 font-semibold">che</span>
-            <input type="text" class="flex-1 border-b-2 border-dotted border-blue-400 px-2 py-1 focus:outline-none" data-correct-answer="" placeholder="...">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 px-2 py-1 focus:outline-none bg-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
           </div>
         </div>
         <p class="text-sm text-gray-500 mt-2 italic ml-8">Risposte libere</p>
       </div>
 
       <!-- Frase 3 -->
-      <div class="bg-white border-2 border-blue-200 rounded-lg p-4">
+      <div class="bg-white rounded-lg p-4">
         <div class="flex items-center gap-3 mb-2">
           <span class="text-gray-600">•</span>
-          <span class="font-semibold text-gray-700 border-2 border-red-300 rounded px-3 py-1 bg-red-50">Mi ha detto una bugia</span>
+          <span class="font-semibold text-gray-700 border border-red-300 rounded px-3 py-1 bg-red-50">Mi ha detto una bugia</span>
         </div>
         <div class="ml-8 space-y-2">
           <div class="flex items-center gap-2">
             <span class="text-green-600">→</span>
             <span class="text-green-600 font-semibold">però</span>
-            <input type="text" class="flex-1 border-b-2 border-dotted border-blue-400 px-2 py-1 focus:outline-none" data-correct-answer="" placeholder="...">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 px-2 py-1 focus:outline-none bg-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
           </div>
           <div class="flex items-center gap-2">
             <span class="text-purple-600">→</span>
             <span class="text-purple-600 font-semibold">affinché</span>
-            <input type="text" class="flex-1 border-b-2 border-dotted border-blue-400 px-2 py-1 focus:outline-none" data-correct-answer="" placeholder="...">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 px-2 py-1 focus:outline-none bg-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
           </div>
         </div>
         <p class="text-sm text-gray-500 mt-2 italic ml-8">Risposte libere</p>
@@ -147,6 +143,5 @@
     </div>
   </div>
 
-  <!-- Exercise controls -->
-  <%= render 'shared/exercise_controls', color: 'orange' %>
+  <%= render 'shared/exercise_controls' %>
 </div>
