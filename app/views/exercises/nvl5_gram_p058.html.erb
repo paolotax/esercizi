@@ -1,61 +1,55 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-lime-50 via-white to-green-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Info Box with Illustration -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6">
+  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
     <div class="grid grid-cols-1 gap-4">
       <div>
-        <%= image_tag "nvl5_gram/p058/p058_01.jpg", alt: "Illustrazione indefiniti", class: "w-full rounded-lg shadow-lg mb-4" %>
+        <%= image_tag "nvl5_gram/p058/p058_01.jpg", alt: "Illustrazione indefiniti", class: "w-full rounded-lg mb-4" %>
       </div>
       <div>
         <p class="text-base md:text-lg text-gray-700 mb-3">
-          Gli <strong>indefiniti</strong> indicano in modo non preciso qualcosa o qualcuno oppure una quantità generica.
+          <span class="text-<%= @pagina.base_color %>-500">•</span> Gli <strong>indefiniti</strong> indicano in modo non preciso qualcosa o qualcuno oppure una quantità generica.
         </p>
-        <ul class="space-y-2 text-base md:text-lg text-gray-700">
-          <li class="flex items-start gap-2">
-            <span class="text-red-600 font-bold">•</span>
-            <span>Gli <strong class="text-red-600">aggettivi indefiniti</strong> accompagnano il nome → <strong>alcune</strong> regole, <strong>ciascun</strong> visitatore, <strong>qualche</strong> domanda;</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-blue-600 font-bold">•</span>
-            <span>I <strong class="text-blue-600">pronomi indefiniti</strong> sostituiscono il nome → <strong>ognuno</strong> resti..., <strong>qualcuno</strong> ha....</span>
-          </li>
-        </ul>
+        <div class="space-y-2 text-base md:text-lg text-gray-700 ml-6">
+          <p><span class="text-red-500">•</span> Gli <strong class="text-red-600">aggettivi indefiniti</strong> accompagnano il nome → <strong>alcune</strong> regole, <strong>ciascun</strong> visitatore, <strong>qualche</strong> domanda;</p>
+          <p><span class="text-blue-500">•</span> I <strong class="text-blue-600">pronomi indefiniti</strong> sostituiscono il nome → <strong>ognuno</strong> resti..., <strong>qualcuno</strong> ha....</p>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Attention Box -->
-  <div class="mb-6 bg-gradient-to-r from-orange-100 to-red-100 rounded-xl border-3 border-orange-400 p-4">
+  <div class="bg-white p-4 md:p-6 pb-8">
     <p class="text-base md:text-lg text-gray-800">
-      <strong class="text-orange-700">Attenzione!</strong> Alcuni indefiniti sono <strong class="text-red-600">solo aggettivi</strong>,
+      <span class="text-<%= @pagina.base_color %>-500">•</span> <strong class="text-<%= @pagina.base_color %>-700">Attenzione!</strong> Alcuni indefiniti sono <strong class="text-red-600">solo aggettivi</strong>,
       altri sono <strong class="text-blue-600">solo pronomi</strong>, altri ancora sono <strong class="text-purple-600">sia aggettivi sia pronomi</strong>. Osserva.
     </p>
   </div>
 
   <!-- Table of indefinites -->
-  <div class="mb-6 overflow-x-auto">
+  <div class="bg-white p-4 md:p-6 pb-8 overflow-x-auto">
     <table class="w-full border-collapse text-sm md:text-base">
       <thead>
-        <tr class="bg-gradient-to-r from-red-100 to-blue-100">
-          <th class="border-3 border-gray-300 px-4 py-3 text-red-700 font-bold">Solo aggettivi indefiniti</th>
-          <th class="border-3 border-gray-300 px-4 py-3 text-blue-700 font-bold">Solo pronomi indefiniti</th>
-          <th class="border-3 border-gray-300 px-4 py-3 text-purple-700 font-bold">Aggettivi e pronomi indefiniti</th>
+        <tr class="bg-<%= @pagina.base_color %>-100">
+          <th class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-red-700 font-bold">Solo aggettivi indefiniti</th>
+          <th class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-blue-700 font-bold">Solo pronomi indefiniti</th>
+          <th class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-purple-700 font-bold">Aggettivi e pronomi indefiniti</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="border-2 border-gray-300 px-4 py-6 text-center bg-red-50">
+          <td class="border border-<%= @pagina.base_color %>-200 px-4 py-6 text-center bg-red-50">
             <p class="font-semibold">qualche • ogni</p>
             <p class="font-semibold">qualunque • qualsiasi</p>
           </td>
-          <td class="border-2 border-gray-300 px-4 py-6 text-center bg-blue-50">
+          <td class="border border-<%= @pagina.base_color %>-200 px-4 py-6 text-center bg-blue-50">
             <p class="font-semibold">uno / una • qualcuno • qualcosa</p>
             <p class="font-semibold">ognuno • nulla</p>
             <p class="font-semibold">niente • chiunque</p>
           </td>
-          <td class="border-2 border-gray-300 px-4 py-6 text-center bg-purple-50">
+          <td class="border border-<%= @pagina.base_color %>-200 px-4 py-6 text-center bg-purple-50">
             <p class="font-semibold">alcuno • certo • nessuno • molto</p>
             <p class="font-semibold">poco • parecchio • troppo • tanto</p>
             <p class="font-semibold">altro • ciascuno • tutto • tale</p>
@@ -67,40 +61,29 @@
   </div>
 
   <!-- Exercise 1: IMPARARE TUTTI -->
-  <div class="mb-6 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-2xl border-4 border-yellow-300 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-4 flex items-center flex-wrap gap-2">
-      <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
-      <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
-      <span>Clicca sugli aggettivi indefiniti <span class="inline-block w-4 h-4 bg-red-300 rounded ml-1 align-middle"></span></span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+      Clicca sugli aggettivi indefiniti<span class="inline-block w-5 h-5 bg-red-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span>
     </h2>
 
-    <!-- Color Selector (hidden for mono-color) -->
-    <div class="hidden">
-      <div class="w-6 h-6 bg-red-300"
-           data-word-highlighter-target="colorBox"
-           data-color="red">
-      </div>
-    </div>
-
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base md:text-lg cursor-pointer">
-      <div class="bg-white rounded-lg p-4 space-y-3">
-        <p class="text-gray-700">• Ho invitato <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">molti</span> <u>amici</u> al mio compleanno.</p>
-        <p class="text-gray-700">• Vado a scuola <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">tutti</span> i <u>giorni</u> con la bicicletta.</p>
-        <p class="text-gray-700">• Quest'auto dà <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">troppi</span> <u>problemi</u>, dobbiamo sostituirla.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 space-y-3">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Ho invitato <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">molti</span> <u>amici</u> al mio compleanno.</p>
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Vado a scuola <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">tutti</span> i <u>giorni</u> con la bicicletta.</p>
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Quest'auto dà <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">troppi</span> <u>problemi</u>, dobbiamo sostituirla.</p>
       </div>
-      <div class="bg-white rounded-lg p-4 space-y-3">
-        <p class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">Ciascun</span> <u>giocatore</u> deve conoscere le regole.</p>
-        <p class="text-gray-700">• Ci sarà un'<span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">altra</span> <u>occasione</u> per la tua squadra.</p>
-        <p class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">Nessun</span> <u>essere umano</u> ha mai battuto Alpha Go agli scacchi.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 space-y-3">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">Ciascun</span> <u>giocatore</u> deve conoscere le regole.</p>
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Ci sarà un'<span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">altra</span> <u>occasione</u> per la tua squadra.</p>
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">Nessun</span> <u>essere umano</u> ha mai battuto Alpha Go agli scacchi.</p>
       </div>
     </div>
   </div>
 
-  <!-- Reference -->
-  <div class="mt-6 text-center">
-    <p class="text-red-600 font-bold text-base md:text-lg">Esercizi p. <%= link_to "159", pagina_path("nvl5_gram_p159"), class: "text-gray-600 hover:text-gray-800 underline" %> e <%= link_to "163", pagina_path("nvl5_gram_p163"), class: "text-gray-600 hover:text-gray-800 underline" %></p>
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Esercizi p. <%= link_to "159", pagina_path("nvl5_gram_p159"), class: "text-gray-600 hover:text-gray-800 underline" %> e <%= link_to "163", pagina_path("nvl5_gram_p163"), class: "text-gray-600 hover:text-gray-800 underline" %>
   </div>
 
-  <%= render partial: "shared/exercise_controls" %>
-
+  <%= render 'shared/exercise_controls' %>
 </div>

@@ -1,148 +1,142 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-lime-50 via-white to-green-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 2: Complete with correct form -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-4">
-      <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">2</span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Completa le frasi con la forma corretta dell'aggettivo indefinito tra parentesi.
     </h2>
 
-    <div class="bg-cyan-50 rounded-lg p-4 mb-4">
+    <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 mb-4">
       <p class="text-base md:text-lg text-gray-700">
-        Gli aggettivi <strong class="text-red-600">ciascuno, nessuno</strong> e <strong class="text-red-600">alcuno</strong> si comportano come gli articoli <strong>un / un'</strong>.
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Gli aggettivi <strong class="text-red-600">ciascuno, nessuno</strong> e <strong class="text-red-600">alcuno</strong> si comportano come gli articoli <strong>un / un'</strong>.
       </p>
     </div>
 
-    <div class="space-y-3 text-base md:text-lg">
-      <% sentences_ciascuno = [
-        { text: "Non abbiamo (alcuno)", answer: "alcuna", continuation: "idea in proposito." },
-        { text: "Non c'è (nessuno)", answer: "nessun", continuation: "alunno in classe." },
-        { text: "(Nessuno)", answer: "Nessuno", continuation: "scopo giustifica i mezzi" },
-        { text: "(Ciascuno)", answer: "Ciascun", continuation: "attore ha le sue caratteristiche." },
-        { text: "Il testo non ha (alcuno)", answer: "alcun", continuation: "errore." },
-        { text: "Non hai (nessuno)", answer: "nessun'", continuation: "altra scelta, purtroppo." }
-      ] %>
+    <% sentences_ciascuno = [
+      { text: "Non abbiamo (alcuno)", answer: "alcuna", continuation: "idea in proposito." },
+      { text: "Non c'è (nessuno)", answer: "nessun", continuation: "alunno in classe." },
+      { text: "(Nessuno)", answer: "Nessuno", continuation: "scopo giustifica i mezzi" },
+      { text: "(Ciascuno)", answer: "Ciascun", continuation: "attore ha le sue caratteristiche." },
+      { text: "Il testo non ha (alcuno)", answer: "alcun", continuation: "errore." },
+      { text: "Non hai (nessuno)", answer: "nessun'", continuation: "altra scelta, purtroppo." }
+    ] %>
 
+    <div class="space-y-3 text-base md:text-lg">
       <% sentences_ciascuno.each do |item| %>
-        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl px-4 py-3">
-          <p class="text-gray-700">
-            • <%= item[:text] %>
-            <input type="text"
-                   class="border-b-2 border-blue-500 bg-transparent px-2 py-1 w-32 focus:outline-none focus:border-blue-700"
-                   data-fill-blanks-target="input"
-                   data-answer="<%= item[:answer] %>"
-                   data-correct-answer="<%= item[:answer] %>"
-                   placeholder=".........">
-            <%= item[:continuation] %>
-          </p>
+        <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <span class="text-gray-700"><%= item[:text] %></span>
+          <input type="text"
+                 class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:answer] %>"
+                 data-correct-answer="<%= item[:answer] %>">
+          <span class="text-gray-700"><%= item[:continuation] %></span>
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 3: Complete with indefinite pronouns -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-4">
-      <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">3</span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Completa ogni frase con il pronome indefinito adatto. Scegli fra: <span class="text-red-600 font-bold">niente • qualcosa • qualcuno • nessuno • altro • ognuno • tutto</span>
     </h2>
 
-    <div class="space-y-3 text-base md:text-lg">
-      <% pronoun_sentences = [
-        { before: "", answer: "Nessuno", after: "è entrato in casa: la porta è stata forzata." },
-        { before: "", answer: "Qualcuno", after: "dica a voce alta ciò che pensa." },
-        { before: "Portiamo", answer: "qualcosa", after: "da mangiare in gita." },
-        { before: "Non aiutarmi, non dirmi", answer: "niente", after: ": me la cavo da solo." },
-        { before: "Non aggiungere", answer: "altro", after: ", ho già capito", continuation: "tutto." },
-        { before: "Credo che", answer: "ognuno", after: "possa sapere la verità." }
-      ] %>
+    <% pronoun_sentences = [
+      { before: "", answer: "Nessuno", after: "è entrato in casa: la porta è stata forzata." },
+      { before: "", answer: "Qualcuno", after: "dica a voce alta ciò che pensa." },
+      { before: "Portiamo", answer: "qualcosa", after: "da mangiare in gita." },
+      { before: "Non aiutarmi, non dirmi", answer: "niente", after: ": me la cavo da solo." },
+      { before: "Non aggiungere", answer: "altro", after: ", ho già capito", continuation: "tutto." },
+      { before: "Credo che", answer: "ognuno", after: "possa sapere la verità." }
+    ] %>
 
+    <div class="space-y-3 text-base md:text-lg">
       <% pronoun_sentences.each do |item| %>
-        <div class="bg-green-50 border-2 border-green-200 rounded-xl px-4 py-3">
-          <p class="text-gray-700">
-            • <%= item[:before] %>
-            <input type="text"
-                   class="border-b-2 border-green-500 bg-transparent px-2 py-1 w-32 focus:outline-none focus:border-green-700"
-                   data-fill-blanks-target="input"
-                   data-answer="<%= item[:answer] %>"
-                   data-correct-answer="<%= item[:answer] %>"
-                   placeholder=".........">
-            <%= item[:after] %>
-            <%= item[:continuation] if item[:continuation] %>
-          </p>
+        <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <% if item[:before].present? %>
+            <span class="text-gray-700"><%= item[:before] %></span>
+          <% end %>
+          <input type="text"
+                 class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:answer] %>"
+                 data-correct-answer="<%= item[:answer] %>">
+          <span class="text-gray-700"><%= item[:after] %></span>
+          <% if item[:continuation] %>
+            <span class="text-gray-700"><%= item[:continuation] %></span>
+          <% end %>
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 4: Underline and circle -->
-  <div class="mb-6 bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl border-4 border-purple-300 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-4 flex items-center flex-wrap gap-2">
-      <span class="bg-purple-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
-      <span>Clicca sugli <span class="text-red-600">aggettivi indefiniti<span class="inline-block w-6 h-6 bg-red-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span> e sui <span class="text-blue-600">pronomi indefiniti<span class="inline-block w-6 h-6 bg-blue-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span>.</span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
+      Clicca sugli aggettivi indefiniti<span class="inline-block w-5 h-5 bg-red-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span> e sui pronomi indefiniti<span class="inline-block w-5 h-5 bg-blue-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span>.
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base md:text-lg cursor-pointer">
-      <div class="bg-white rounded-lg p-4 space-y-3">
-        <p class="text-gray-700">• Enrico ha distribuito <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">parecchi</span> inviti per il suo compleanno.</p>
-        <p class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Alcuni</span> non si sono comportati bene.</p>
-        <p class="text-gray-700">• Hai fatto <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">molto</span> lavoro in <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">pochi</span> giorni.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 space-y-3">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Enrico ha distribuito <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">parecchi</span> inviti per il suo compleanno.</p>
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Alcuni</span> non si sono comportati bene.</p>
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Hai fatto <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">molto</span> lavoro in <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="red">pochi</span> giorni.</p>
       </div>
-      <div class="bg-white rounded-lg p-4 space-y-3">
-        <p class="text-gray-700">• Comprerebbe <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">qualsiasi</span> cosa le piace.</p>
-        <p class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Parecchi</span> dicono che non si ammaleranno mai.</p>
-        <p class="text-gray-700">• <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Ciascuno</span> deve pensare per sé, prima di giudicare gli altri.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 space-y-3">
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Comprerebbe <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">qualsiasi</span> cosa le piace.</p>
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Parecchi</span> dicono che non si ammaleranno mai.</p>
+        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <span class="transition" data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" data-correct="blue">Ciascuno</span> deve pensare per sé, prima di giudicare gli altri.</p>
       </div>
     </div>
   </div>
 
   <!-- Exercise 5: Complete and indicate A or P -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-orange-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-orange-700 mb-4">
-      <span class="bg-orange-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">5</span>
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">5</span>
       Completa con l'indefinito adatto, poi indica con una X se è un aggettivo (A) o un pronome (P).
     </h2>
 
-    <div class="space-y-3 text-base md:text-lg">
-      <% ap_exercises = [
-        { answer: "Ogni", text: "automobilista deve rispettare il codice della strada.", correct: "A" },
-        { answer: "Tutti", text: "si alzarono per salutare la preside.", correct: "P" },
-        { answer: "qualche", text: "Regaliamo", continuation: "alla nonna per il suo compleanno.", correct: "A" },
-        { answer: "quel", text: "Da", continuation: "giorno non ho più sue notizie.", correct: "A" },
-        { answer: "Alcuni", text: "", continuation: "pensano di avere sempre ragione.", correct: "P" },
-        { answer: "ciascuno", text: "", continuation: "può dirti che cosa devi scrivere: pensa con la tua testa.", correct: "P" }
-      ] %>
+    <% ap_exercises = [
+      { answer: "Ogni", text: "", continuation: "automobilista deve rispettare il codice della strada.", correct: "A" },
+      { answer: "Tutti", text: "", continuation: "si alzarono per salutare la preside.", correct: "P" },
+      { answer: "qualcosa", text: "Regaliamo", continuation: "alla nonna per il suo compleanno.", correct: "P" },
+      { answer: "quel", text: "Da", continuation: "giorno non ho più sue notizie.", correct: "A" },
+      { answer: "Alcuni", text: "", continuation: "pensano di avere sempre ragione.", correct: "P" },
+      { answer: "Nessuno", text: "", continuation: "può dirti che cosa devi scrivere: pensa con la tua testa.", correct: "P" }
+    ] %>
 
-      <% ap_exercises.each do |item| %>
-        <div class="bg-orange-50 border-2 border-orange-200 rounded-xl px-4 py-3">
+    <div class="space-y-3 text-base md:text-lg">
+      <% ap_exercises.each_with_index do |item, index| %>
+        <div class="rounded-lg p-3">
           <div class="flex flex-col md:flex-row md:items-center gap-3">
-            <div class="flex-1">
-              <p class="text-gray-700">
-                • <%= item[:text] %>
-                <input type="text"
-                       class="border-b-2 border-orange-500 bg-transparent px-2 py-1 w-28 focus:outline-none focus:border-orange-700"
-                       data-fill-blanks-target="input"
-                       data-answer="<%= item[:answer] %>"
-                       data-correct-answer="<%= item[:answer] %>"
-                       placeholder=".........">
-                <%= item[:continuation] if item[:continuation] %>
-              </p>
+            <div class="flex-1 flex flex-wrap items-center gap-2">
+              <span class="text-<%= @pagina.base_color %>-500">•</span>
+              <% if item[:text].present? %>
+                <span class="text-gray-700"><%= item[:text] %></span>
+              <% end %>
+              <input type="text"
+                     class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                     data-fill-blanks-target="input"
+                     data-answer="<%= item[:answer] %>"
+                     data-correct-answer="<%= item[:answer] %>">
+              <span class="text-gray-700"><%= item[:continuation] %></span>
             </div>
             <div class="flex gap-2">
               <label class="inline-flex items-center gap-1 cursor-pointer">
-                <input type="radio"
-                       name="ap_<%= item[:answer] %>"
-                       value="A"
-                       class="w-4 h-4">
+                <input type="radio" name="ap_<%= index %>" value="A" class="w-4 h-4">
                 <span class="bg-red-200 text-red-700 font-bold px-3 py-1 rounded">A</span>
               </label>
               <label class="inline-flex items-center gap-1 cursor-pointer">
-                <input type="radio"
-                       name="ap_<%= item[:answer] %>"
-                       value="P"
-                       class="w-4 h-4">
+                <input type="radio" name="ap_<%= index %>" value="P" class="w-4 h-4">
                 <span class="bg-blue-200 text-blue-700 font-bold px-3 py-1 rounded">P</span>
               </label>
             </div>
@@ -153,15 +147,13 @@
   </div>
 
   <!-- Illustration -->
-  <div class="mb-6">
-    <%= image_tag "nvl5_gram/p059/page.png", alt: "Illustrazione", class: "w-full max-w-md mx-auto rounded-lg shadow-lg" %>
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <%= image_tag "nvl5_gram/p059/page.png", alt: "Illustrazione", class: "w-full max-w-md mx-auto rounded-lg" %>
   </div>
 
-  <!-- Reference -->
-  <div class="mt-6 text-center">
-    <p class="text-red-600 font-bold text-base md:text-lg">Esercizi p. <%= link_to "159", pagina_path("nvl5_gram_p159"), class: "text-gray-600 hover:text-gray-800 underline" %> e <%= link_to "163", pagina_path("nvl5_gram_p163"), class: "text-gray-600 hover:text-gray-800 underline" %></p>
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Esercizi p. <%= link_to "159", pagina_path("nvl5_gram_p159"), class: "text-gray-600 hover:text-gray-800 underline" %> e <%= link_to "163", pagina_path("nvl5_gram_p163"), class: "text-gray-600 hover:text-gray-800 underline" %>
   </div>
 
-  <%= render partial: "shared/exercise_controls" %>
-
+  <%= render 'shared/exercise_controls' %>
 </div>
