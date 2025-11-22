@@ -1,68 +1,46 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
-  <!-- Header con badge SINTASSI -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Illustrazione in cucina -->
-  <div class="mb-8 relative">
-    <div class="bg-yellow-100 rounded-xl p-6">
+  <!-- Illustrazione -->
+  <div class="mb-6 relative">
+    <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
       <%= image_tag "nvl5_gram/p112/p112_01.jpg", class: "w-full rounded-lg", alt: "Cucina con chef" %>
-
-      <!-- Fumetti dei personaggi -->
-      <div class="absolute top-4 left-8 bg-white border-2 border-gray-300 rounded-lg p-3 shadow-lg max-w-xs">
-        <p class="text-sm">La ricetta dice di montare l'impasto <span class="text-purple-600 font-bold">con la frusta elettrica</span>, ma non l'abbiamo!</p>
-      </div>
-
-      <div class="absolute top-4 right-8 bg-white border-2 border-gray-300 rounded-lg p-3 shadow-lg max-w-xs">
-        <p class="text-sm">Monteremo l'impasto <span class="text-purple-600 font-bold">con la forza</span> delle nostre braccia!</p>
-      </div>
     </div>
   </div>
 
-  <!-- Box teoria -->
-  <div class="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-6 mb-8">
-    <ul class="space-y-3 text-gray-700">
-      <li class="flex">
-        <span class="text-gray-500 mr-2">•</span>
-        <span>Il <strong class="underline">complemento di mezzo</strong> è un complemento indiretto;</span>
+  <!-- Info Box -->
+  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
+    <ul class="space-y-3 text-base md:text-lg text-gray-700">
+      <li class="flex items-start gap-2">
+        <span class="text-<%= @pagina.base_color %>-500 font-bold">•</span>
+        <span>Il <strong>complemento di mezzo</strong> è un complemento indiretto;</span>
       </li>
-      <li class="flex">
-        <span class="text-gray-500 mr-2">•</span>
+      <li class="flex items-start gap-2">
+        <span class="text-<%= @pagina.base_color %>-500 font-bold">•</span>
         <span>indica per mezzo di chi o di che cosa viene compiuta l'azione espressa dal predicato;</span>
       </li>
-      <li class="flex">
-        <span class="text-gray-500 mr-2">•</span>
+      <li class="flex items-start gap-2">
+        <span class="text-<%= @pagina.base_color %>-500 font-bold">•</span>
         <div>
-          <span>risponde alle domande: </span>
-          <strong class="underline">per mezzo di chi?</strong> /
-          <strong class="underline">per mezzo di che cosa?</strong> /
-          <strong class="underline">con che cosa?</strong>
-          <div class="mt-2">
-            → Bisogna montare l'impasto (<em>con che cosa?</em>) <strong class="underline text-purple-600">con la frusta elettrica</strong>.
+          <span>risponde alle domande: <strong>per mezzo di chi?</strong> / <strong>per mezzo di che cosa?</strong> / <strong>con che cosa?</strong></span>
+          <div class="mt-2 text-sm italic">
+            → Bisogna montare l'impasto (<em>con che cosa?</em>) <strong class="text-purple-600">con la frusta elettrica</strong>.
           </div>
         </div>
       </li>
     </ul>
   </div>
 
-  <!-- Esercizio 1 - IMPARARE TUTTI -->
-  <div class="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-6 mb-8">
-    <div class="flex items-center gap-3 mb-4">
-      <div class="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl">
-        1
-      </div>
-      <div class="bg-blue-500 text-white px-4 py-2 rounded-lg font-bold">
-        IMPARARE TUTTI
-      </div>
-    </div>
+  <!-- Exercise 1: IMPARARE TUTTI -->
+  <div class="bg-<%= @pagina.base_color %>-100 p-4 md:p-6 pb-8 rounded-lg">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+      <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
+      Dividi la frase in sintagmi e sottolinea il complemento di mezzo.
+    </h2>
 
-    <div class="mb-4">
-      <p class="font-bold text-gray-700">
-        Dividi la frase in sintagmi e sottolinea il <span class="underline">complemento di mezzo</span>.
-      </p>
-    </div>
-
-    <div class="space-y-3">
+    <div class="space-y-3 text-base md:text-lg">
       <% frases_mezzo = [
         { text: "Stendo la pasta con il mattarello.", complement: "con il mattarello" },
         { text: "Verremo al mare da te in treno.", complement: "in treno" },
@@ -71,9 +49,9 @@
       ] %>
 
       <% frases_mezzo.each do |frase| %>
-        <div class="bg-white p-3 rounded-lg">
+        <div class="bg-white rounded-lg p-4">
           <div class="flex items-center gap-2">
-            <span class="text-gray-500">•</span>
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
             <div data-controller="word-highlighter">
               <% words = frase[:text].split(/\s+/) %>
               <% words.each_with_index do |word, i| %>
@@ -94,29 +72,24 @@
     </div>
   </div>
 
-  <!-- Esercizio 2 - Sottolinea il sintagma -->
-  <div class="bg-white border-2 border-gray-300 rounded-lg p-6 mb-8">
-    <div class="flex items-center gap-3 mb-4">
-      <div class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl">
-        2
-      </div>
-    </div>
+  <!-- Exercise 2 -->
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
+      Sottolinea il sintagma che corrisponde a un complemento di mezzo.
+    </h2>
 
-    <p class="font-bold text-gray-700 mb-4">
-      Sottolinea il sintagma che corrisponde a un <span class="underline">complemento di mezzo</span>.
-    </p>
-
-    <div class="space-y-3">
+    <div class="space-y-3 text-base md:text-lg">
       <% [
         { text: "Andrò a Catania", option1: "con Alice", option2: "con l'aereo", correct: 2 },
         { text: "Vi avvertiremo", option1: "con una mail", option2: "in tempo", correct: 1 },
         { text: "Scrivete", option1: "con precisione", option2: "con la biro blu", correct: 2 },
         { text: "Ci muoveremo", option1: "in gruppo", option2: "in bicicletta", correct: 2 }
-      ].each_with_index do |item, index| %>
-        <div class="bg-gray-50 p-3 rounded-lg">
+      ].each do |item| %>
+        <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
           <div class="flex items-center gap-2">
-            <span class="text-gray-500">•</span>
-            <span><%= item[:text] %></span>
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="text-gray-700"><%= item[:text] %></span>
             <div class="flex gap-4 ml-2" data-controller="word-highlighter">
               <span class="cursor-pointer px-2 py-1 border-b-2 border-gray-300 hover:bg-blue-100 transition"
                     data-word-highlighter-target="word"
@@ -138,25 +111,20 @@
     </div>
   </div>
 
-  <!-- Esercizio 3 - Analisi logica -->
-  <div class="bg-white border-2 border-gray-300 rounded-lg p-6 mb-8" data-controller="fill-blanks">
-    <div class="flex items-center gap-3 mb-4">
-      <div class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl">
-        3
-      </div>
-    </div>
-
-    <p class="font-bold text-gray-700 mb-4">
+  <!-- Exercise 3 -->
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Esegui l'analisi logica della seguente frase. Il soggetto è sottinteso.
-    </p>
+    </h2>
 
-    <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-4 mb-4">
-      <p class="text-lg font-semibold text-gray-700">
-        • Oggi sono andata a casa di Giovanni con il pullman.
+    <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 mb-4">
+      <p class="text-base md:text-lg font-semibold text-gray-700">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Oggi sono andata a casa di Giovanni con il pullman.
       </p>
     </div>
 
-    <div class="space-y-3">
+    <div class="space-y-3 text-base md:text-lg">
       <% [
         { parte: "Oggi", analisi: "complemento di tempo" },
         { parte: "sono andata", analisi: "predicato verbale" },
@@ -164,26 +132,24 @@
         { parte: "di Giovanni", analisi: "complemento di specificazione" },
         { parte: "con il pullman", analisi: "complemento di mezzo" }
       ].each do |item| %>
-        <div class="flex items-center gap-3">
-          <span class="font-semibold text-gray-700 w-32"><%= item[:parte] %> =</span>
-          <input type="text"
-                 class="flex-1 px-3 py-2 border-b-2 border-dotted border-gray-400 focus:border-blue-500 focus:outline-none"
-                 data-fill-blanks-target="input"
-                 data-correct-answer="<%= item[:analisi] %>">
+        <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="font-semibold text-gray-700 w-32"><%= item[:parte] %> =</span>
+            <input type="text"
+                   class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white px-2 focus:outline-none"
+                   data-fill-blanks-target="input"
+                   data-correct-answer="<%= item[:analisi] %>">
+          </div>
         </div>
       <% end %>
     </div>
   </div>
 
-  <!-- Riferimento esercizi aggiuntivi -->
-  <div class="mt-8 text-center">
-    <div class="inline-block bg-orange-100 border-2 border-orange-300 rounded-lg px-6 py-3">
-      <p class="font-bold text-orange-700">
-        Esercizi pp. <%= link_to "186", pagina_path("nvl5_gram_p186"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "187", pagina_path("nvl5_gram_p187"), class: "text-gray-600 hover:text-gray-800 underline" %>
-      </p>
-    </div>
+  <!-- Reference -->
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Esercizi pp. <%= link_to "186", pagina_path("nvl5_gram_p186"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "187", pagina_path("nvl5_gram_p187"), class: "text-gray-600 hover:text-gray-800 underline" %>
   </div>
 
-  <!-- Exercise controls -->
-  <%= render 'shared/exercise_controls', color: 'orange' %>
+  <%= render 'shared/exercise_controls' %>
+
 </div>

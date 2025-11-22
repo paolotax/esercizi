@@ -1,96 +1,90 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
-  <!-- Header con badge SINTASSI -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Box introduttivo -->
-  <div class="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-6 mb-8">
-    <p class="text-gray-700 mb-2">
-      Esistono altri tipi di <strong class="underline">complementi indiretti</strong>, distinti a seconda
+  <!-- Info Box -->
+  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
+    <p class="text-base md:text-lg text-gray-700 mb-2">
+      Esistono altri tipi di <strong>complementi indiretti</strong>, distinti a seconda
       del tipo di informazione che forniscono.
     </p>
-    <p class="text-gray-700">
-      Per riconoscerli individua la <strong class="underline">domanda</strong> a cui rispondono.
+    <p class="text-base md:text-lg text-gray-700">
+      Per riconoscerli individua la <strong>domanda</strong> a cui rispondono.
     </p>
   </div>
 
   <!-- Tabella dei complementi -->
-  <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-    <table class="w-full">
-      <thead>
-        <tr class="bg-blue-100">
-          <th class="border border-gray-300 px-4 py-3 text-center w-16">#</th>
-          <th class="border border-gray-300 px-4 py-3 text-left">Complemento</th>
-          <th class="border border-gray-300 px-4 py-3 text-center">Domanda/e</th>
-          <th class="border border-gray-300 px-4 py-3 text-left">Esempio</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="hover:bg-gray-50">
-          <td class="border border-gray-300 px-4 py-3 text-center font-bold">1</td>
-          <td class="border border-gray-300 px-4 py-3 text-purple-600 font-semibold">di argomento</td>
-          <td class="border border-gray-300 px-4 py-3 text-center text-purple-600 italic">di quale argomento?</td>
-          <td class="border border-gray-300 px-4 py-3">• Ho letto il libro <span class="underline">di geografia</span>.</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="border border-gray-300 px-4 py-3 text-center font-bold">2</td>
-          <td class="border border-gray-300 px-4 py-3 text-purple-600 font-semibold">di compagnia</td>
-          <td class="border border-gray-300 px-4 py-3 text-center text-purple-600 italic">con chi?</td>
-          <td class="border border-gray-300 px-4 py-3">• <span class="underline">Con lo zio</span> faccio lunghe passeggiate.</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="border border-gray-300 px-4 py-3 text-center font-bold">3</td>
-          <td class="border border-gray-300 px-4 py-3 text-purple-600 font-semibold">di causa</td>
-          <td class="border border-gray-300 px-4 py-3 text-center text-purple-600 italic">per quale causa?</td>
-          <td class="border border-gray-300 px-4 py-3">• Sono rimasta a casa <span class="underline">per lo sciopero</span>.</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="border border-gray-300 px-4 py-3 text-center font-bold">4</td>
-          <td class="border border-gray-300 px-4 py-3 text-purple-600 font-semibold">di fine o scopo</td>
-          <td class="border border-gray-300 px-4 py-3 text-center text-purple-600 italic">per che cosa? / a quale scopo?</td>
-          <td class="border border-gray-300 px-4 py-3">• Isa dipinge <span class="underline">per passatempo</span>.</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="border border-gray-300 px-4 py-3 text-center font-bold">5</td>
-          <td class="border border-gray-300 px-4 py-3 text-purple-600 font-semibold">di materia</td>
-          <td class="border border-gray-300 px-4 py-3 text-center text-purple-600 italic">di quale materiale?</td>
-          <td class="border border-gray-300 px-4 py-3">• Prendi i fogli <span class="underline">di carta</span>.</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="border border-gray-300 px-4 py-3 text-center font-bold">6</td>
-          <td class="border border-gray-300 px-4 py-3 text-purple-600 font-semibold">di modo</td>
-          <td class="border border-gray-300 px-4 py-3 text-center text-purple-600 italic">in che modo? / come?</td>
-          <td class="border border-gray-300 px-4 py-3">• Andiamo a scuola <span class="underline">a piedi</span>.</td>
-        </tr>
-        <tr class="hover:bg-gray-50">
-          <td class="border border-gray-300 px-4 py-3 text-center font-bold">7</td>
-          <td class="border border-gray-300 px-4 py-3 text-purple-600 font-semibold">d'agente o di causa efficiente</td>
-          <td class="border border-gray-300 px-4 py-3 text-center text-purple-600 italic">da chi? / da che cosa?</td>
-          <td class="border border-gray-300 px-4 py-3">
-            • Sono stata punta <span class="underline">da un'ape</span>!<br>
-            • Bobi è spaventato <span class="underline">dai tuoni</span>.
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="bg-white p-4 md:p-6 pb-8">
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-sm md:text-base">
+        <thead>
+          <tr class="bg-<%= @pagina.base_color %>-200">
+            <th class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center w-16">#</th>
+            <th class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-left">Complemento</th>
+            <th class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center">Domanda/e</th>
+            <th class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-left">Esempio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-white">
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center font-bold">1</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-<%= @pagina.base_color %>-600 font-semibold">di argomento</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center text-<%= @pagina.base_color %>-600 italic">di quale argomento?</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3">Ho letto il libro <span class="underline">di geografia</span>.</td>
+          </tr>
+          <tr class="bg-<%= @pagina.base_color %>-50">
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center font-bold">2</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-<%= @pagina.base_color %>-600 font-semibold">di compagnia</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center text-<%= @pagina.base_color %>-600 italic">con chi?</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3"><span class="underline">Con lo zio</span> faccio lunghe passeggiate.</td>
+          </tr>
+          <tr class="bg-white">
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center font-bold">3</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-<%= @pagina.base_color %>-600 font-semibold">di causa</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center text-<%= @pagina.base_color %>-600 italic">per quale causa?</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3">Sono rimasta a casa <span class="underline">per lo sciopero</span>.</td>
+          </tr>
+          <tr class="bg-<%= @pagina.base_color %>-50">
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center font-bold">4</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-<%= @pagina.base_color %>-600 font-semibold">di fine o scopo</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center text-<%= @pagina.base_color %>-600 italic">per che cosa? / a quale scopo?</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3">Isa dipinge <span class="underline">per passatempo</span>.</td>
+          </tr>
+          <tr class="bg-white">
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center font-bold">5</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-<%= @pagina.base_color %>-600 font-semibold">di materia</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center text-<%= @pagina.base_color %>-600 italic">di quale materiale?</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3">Prendi i fogli <span class="underline">di carta</span>.</td>
+          </tr>
+          <tr class="bg-<%= @pagina.base_color %>-50">
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center font-bold">6</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-<%= @pagina.base_color %>-600 font-semibold">di modo</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center text-<%= @pagina.base_color %>-600 italic">in che modo? / come?</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3">Andiamo a scuola <span class="underline">a piedi</span>.</td>
+          </tr>
+          <tr class="bg-white">
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center font-bold">7</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-<%= @pagina.base_color %>-600 font-semibold">d'agente o di causa efficiente</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3 text-center text-<%= @pagina.base_color %>-600 italic">da chi? / da che cosa?</td>
+            <td class="border border-<%= @pagina.base_color %>-300 px-4 py-3">
+              Sono stata punta <span class="underline">da un'ape</span>!<br>
+              Bobi è spaventato <span class="underline">dai tuoni</span>.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <!-- Esercizio 1 - IMPARARE TUTTI -->
-  <div class="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-6 mb-8" data-controller="fill-blanks">
-    <div class="flex items-center gap-3 mb-4">
-      <div class="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl">
-        1
-      </div>
-      <div class="bg-blue-500 text-white px-4 py-2 rounded-lg font-bold">
-        IMPARARE TUTTI
-      </div>
-    </div>
-
-    <p class="font-bold text-gray-700 mb-4">
+  <!-- Exercise 1: IMPARARE TUTTI -->
+  <div class="bg-<%= @pagina.base_color %>-100 p-4 md:p-6 pb-8 rounded-lg" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
+      <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
       Scrivi il numero corrispondente al complemento sottolineato.
-    </p>
+    </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-base md:text-lg">
       <% [
         { text: "Gioco sempre volentieri", complement: "con Marco", answer: "2" },
         { text: "Batteva i denti", complement: "per il freddo", answer: "3" },
@@ -101,13 +95,13 @@
         { text: "", complement: "Per lavoro", extra: "domani andrò a Milano", answer: "4" },
         { text: "È infastidito", complement: "dal chiasso", answer: "7" }
       ].each do |item| %>
-        <div class="bg-white p-3 rounded-lg flex items-center gap-3">
-          <span class="text-gray-500">•</span>
-          <span class="flex-1">
+        <div class="bg-white rounded-lg p-4 flex items-center gap-3">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <span class="flex-1 text-gray-700">
             <%= item[:text] %> <span class="underline font-semibold"><%= item[:complement] %></span><%= " #{item[:extra]}" if item[:extra] %>.
           </span>
           <input type="text"
-                 class="w-12 h-12 text-center border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none font-bold text-lg"
+                 class="w-12 h-12 text-center border-2 border-<%= @pagina.base_color %>-300 rounded-lg focus:border-<%= @pagina.base_color %>-500 focus:outline-none font-bold text-lg"
                  data-fill-blanks-target="input"
                  data-correct-answer="<%= item[:answer] %>"
                  maxlength="1">
@@ -116,27 +110,22 @@
     </div>
   </div>
 
-  <!-- Esercizio 2 - Scrivi frasi -->
-  <div class="bg-white border-2 border-gray-300 rounded-lg p-6 mb-8" data-controller="fill-blanks">
-    <div class="flex items-center gap-3 mb-4">
-      <div class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl">
-        2
-      </div>
-    </div>
-
-    <p class="font-bold text-gray-700 mb-4">
+  <!-- Exercise 2 -->
+  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Scrivi una frase con ognuno dei seguenti complementi indiretti.
-    </p>
+    </h2>
 
-    <div class="space-y-4">
+    <div class="space-y-4 text-base md:text-lg">
       <% ["di compagnia", "di materia"].each do |complemento| %>
-        <div class="bg-gray-50 rounded-lg p-4">
-          <div class="flex items-center gap-4">
+        <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+          <div class="flex flex-wrap items-center gap-4">
             <div class="bg-green-100 text-green-700 px-4 py-2 rounded-lg font-semibold min-w-[150px] text-center">
               <%= complemento %>
             </div>
             <input type="text"
-                   class="flex-1 px-4 py-2 border-b-2 border-dotted border-gray-400 focus:border-blue-500 focus:outline-none"
+                   class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white px-2 focus:outline-none"
                    data-fill-blanks-target="input"
                    data-correct-answer="libera">
           </div>
@@ -145,15 +134,11 @@
     </div>
   </div>
 
-  <!-- Riferimento esercizi aggiuntivi -->
-  <div class="mt-8 text-center">
-    <div class="inline-block bg-orange-100 border-2 border-orange-300 rounded-lg px-6 py-3">
-      <p class="font-bold text-orange-700">
-        Esercizi pp. <%= link_to "186", pagina_path("nvl5_gram_p186"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "187", pagina_path("nvl5_gram_p187"), class: "text-gray-600 hover:text-gray-800 underline" %>
-      </p>
-    </div>
+  <!-- Reference -->
+  <div class="text-right text-sm text-gray-500 mb-6">
+    Esercizi pp. <%= link_to "186", pagina_path("nvl5_gram_p186"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "187", pagina_path("nvl5_gram_p187"), class: "text-gray-600 hover:text-gray-800 underline" %>
   </div>
 
-  <!-- Exercise controls -->
-  <%= render 'shared/exercise_controls', color: 'orange' %>
+  <%= render 'shared/exercise_controls' %>
+
 </div>
