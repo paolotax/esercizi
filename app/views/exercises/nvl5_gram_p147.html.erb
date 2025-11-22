@@ -1,17 +1,13 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-cyan-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 1: Plurals -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-yellow-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-yellow-700 mb-3">
-      <div class="flex items-center gap-2 flex-wrap">
-        <div class="flex items-center gap-2">
-          <span class="bg-yellow-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">1</span>
-          <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold whitespace-nowrap">IMPARARE TUTTI</span>
-        </div>
-        <span>Volgi al <span class="text-yellow-600 font-bold underline">plurale</span> i seguenti nomi. Se hai dubbi, aiutati con il dizionario.</span>
-      </div>
+  <div class="mb-6 bg-<%= @pagina.base_color %>-100 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center flex-wrap gap-2">
+      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center text-sm font-bold">1</span>
+      <span class="bg-yellow-400 text-<%= @pagina.base_color %>-900 px-3 py-1 rounded-lg font-bold text-sm">IMPARARE TUTTI</span>
+      <span>Volgi al <span class="text-<%= @pagina.base_color %>-600 font-bold">plurale</span> i seguenti nomi. Se hai dubbi, aiutati con il dizionario.</span>
     </h2>
 
     <% plurals = [
@@ -37,27 +33,25 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base md:text-lg">
       <% plurals.each do |item| %>
-        <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl px-3 py-3">
-          <div class="flex items-center gap-2">
-            <span class="text-gray-700 font-semibold">• <%= item[:word] %></span>
-            <span class="text-xl text-yellow-500">→</span>
-            <input type="text"
-                   class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 flex-1 min-w-[120px]"
-                   data-fill-blanks-target="input"
-                   data-answer="<%= item[:plural] %>"
-                   data-correct-answer="<%= item[:plural] %>"
-                   placeholder="...............">
-          </div>
+        <div class="flex items-center gap-3 bg-white rounded-lg p-3">
+          <span class="text-<%= @pagina.base_color %>-600 font-bold">•</span>
+          <span class="text-gray-700 font-semibold w-24"><%= item[:word] %></span>
+          <span class="text-gray-400">→</span>
+          <input type="text"
+                 class="border-b-2 border-dotted border-gray-400 bg-transparent px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-grow"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:plural] %>"
+                 data-correct-answer="<%= item[:plural] %>">
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 2: Singulars -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-purple-700 mb-3 flex items-start gap-2">
-      <span class="bg-purple-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">2</span>
-      <span>Volgi al <span class="text-purple-600 font-bold underline">singolare</span> i seguenti nomi.</span>
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center gap-2">
+      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center text-sm font-bold">2</span>
+      <span>Volgi al <span class="text-<%= @pagina.base_color %>-600 font-bold">singolare</span> i seguenti nomi.</span>
     </h2>
 
     <% singulars = [
@@ -80,27 +74,25 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base md:text-lg">
       <% singulars.each do |item| %>
-        <div class="bg-purple-50 border-2 border-purple-200 rounded-xl px-3 py-3">
-          <div class="flex items-center gap-2">
-            <span class="text-gray-700 font-semibold">• <%= item[:plural] %></span>
-            <span class="text-xl text-purple-500">→</span>
-            <input type="text"
-                   class="border-b-2 border-purple-500 bg-transparent px-2 py-1 focus:outline-none focus:border-purple-700 flex-1 min-w-[120px]"
-                   data-fill-blanks-target="input"
-                   data-answer="<%= item[:singular] %>"
-                   data-correct-answer="<%= item[:singular] %>"
-                   placeholder="...............">
-          </div>
+        <div class="flex items-center gap-3 bg-white rounded-lg p-3">
+          <span class="text-<%= @pagina.base_color %>-600 font-bold">•</span>
+          <span class="text-gray-700 font-semibold w-28"><%= item[:plural] %></span>
+          <span class="text-gray-400">→</span>
+          <input type="text"
+                 class="border-b-2 border-dotted border-gray-400 bg-transparent px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-grow"
+                 data-fill-blanks-target="input"
+                 data-answer="<%= item[:singular] %>"
+                 data-correct-answer="<%= item[:singular] %>">
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 3: Promiscuous gender animals -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="card-selector">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-4 flex items-start gap-2">
-      <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">3</span>
-      <span>Colora i nomi di animale di <span class="text-green-600 font-bold underline">genere promiscuo</span> ai quali è necessario aggiungere "maschio" o "femmina" per distinguere il genere.</span>
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="card-selector">
+    <h2 class="text-lg md:text-xl font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center gap-2">
+      <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center text-sm font-bold">3</span>
+      <span>Colora i nomi di animale di <span class="text-<%= @pagina.base_color %>-600 font-bold">genere promiscuo</span> ai quali è necessario aggiungere "maschio" o "femmina" per distinguere il genere.</span>
     </h2>
 
     <% animals = [
@@ -121,7 +113,7 @@
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-base md:text-lg">
       <% animals.each do |animal| %>
         <div class="relative">
-          <div class="border-2 border-gray-300 rounded-xl px-4 py-3 text-center cursor-pointer transition-all hover:shadow-md"
+          <div class="border border-gray-300 rounded-lg px-4 py-3 text-center cursor-pointer transition-all hover:bg-<%= @pagina.base_color %>-50 bg-white"
                data-card-selector-target="card"
                data-correct="<%= animal[:promiscuous] %>"
                data-action="click->card-selector#toggle">
@@ -132,12 +124,6 @@
     </div>
   </div>
 
-  <div class="text-right text-sm text-gray-500 mb-6">
-    Grammatica pp. <%= link_to "42", pagina_path("nvl5_gram_p042"), class: "text-red-600 hover:text-red-800 underline font-bold" %>, <%= link_to "43", pagina_path("nvl5_gram_p043"), class: "text-red-600 hover:text-red-800 underline font-bold" %>, <%= link_to "44", pagina_path("nvl5_gram_p044"), class: "text-red-600 hover:text-red-800 underline font-bold" %>, <%= link_to "45", pagina_path("nvl5_gram_p045"), class: "text-red-600 hover:text-red-800 underline font-bold" %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 
-  <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'cyan', current_page: 'nvl5_gram_p147' %>
-  </div>
 </div>
