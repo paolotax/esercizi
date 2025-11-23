@@ -30,6 +30,8 @@ Rails.application.routes.draw do
         post :add_operation
         delete :remove_operation
         patch :reorder_operations
+        get :operation_properties
+        patch :update_operation
       end
     end
     resources :esercizio_templates

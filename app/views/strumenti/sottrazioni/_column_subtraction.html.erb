@@ -31,12 +31,12 @@
 </style>
 
 <div class="text-center" data-controller="column-subtraction">
-  <% if sottrazione.title.present? %>
-    <div class="text-xl font-bold mb-4"><%= sottrazione.title %></div>
+  <% if defined?(operation_title) && operation_title.present? %>
+    <div class="text-xl font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= operation_title %></div>
   <% end %>
 
   <div class="flex items-start justify-center gap-2">
-    <div class="inline-block border-4 border-blue-400 rounded-lg bg-white" >
+    <div class="inline-block border-4 border-red-400 rounded-lg bg-white" >
 
       <!-- Header con le etichette delle colonne -->
       <div class="border-b-2 border-gray-300 flex">
@@ -57,7 +57,7 @@
         <div style="<%= sottrazione.grid_style %>">
           <% sottrazione.borrows.each_with_index do |borrow, idx| %>
             <input type="text"
-                   class="text-center text-sm font-bold <%= sottrazione.column_colors[idx] %> <%= idx == sottrazione.max_digits - 1 ? 'bg-white' : 'bg-blue-100' %> <%= 'border-r-2 border-gray-300' unless idx == sottrazione.max_digits - 1 %>"
+                   class="text-center text-sm font-bold <%= sottrazione.column_colors[idx] %> <%= idx == sottrazione.max_digits - 1 ? 'bg-white' : 'bg-red-100' %> <%= 'border-r-2 border-gray-300' unless idx == sottrazione.max_digits - 1 %>"
                    data-column-subtraction-target="carry"
                    data-correct-answer="<%= borrow %>"
                    maxlength="1"
@@ -89,7 +89,7 @@
 
       <!-- Riga del sottraendo -->
       <div class="border-b border-gray-200 flex" style="height: 4rem;">
-        <div class="w-8 flex items-center justify-center text-2xl font-bold text-blue-600">-</div>
+        <div class="w-8 flex items-center justify-center text-2xl font-bold text-red-600">-</div>
         <div style="<%= sottrazione.grid_style %>">
           <% sottrazione.subtrahend_digits.each_with_index do |digit, idx| %>
             <input type="text"
@@ -105,10 +105,11 @@
 
       <!-- Riga del risultato -->
       <div class="border-t-4 border-gray-500 flex" style="height: 4rem;">
-        <div class="w-8 flex items-center justify-center text-2xl font-bold text-blue-600">=</div>
+        <div class="w-8 flex items-center justify-center text-2xl font-bold text-red-600">=</div>
         <div style="<%= sottrazione.grid_style %>">
           <% sottrazione.result_digits.each_with_index do |digit, idx| %>
             <input type="text"
+                   <% if defined?(operation_id) %>name="results[<%= operation_id %>][result][<%= idx %>]"<% end %>
                    class="text-center text-2xl font-bold <%= 'border-r-2 border-gray-300' unless idx == sottrazione.result_digits.length - 1 %>"
                    data-column-subtraction-target="result"
                    data-correct-answer="<%= digit %>"

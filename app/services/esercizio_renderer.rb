@@ -18,19 +18,19 @@ class EsercizioRenderer
       html << render_operation(operation)
     end
 
-    html << '</div>'
+    html << "</div>"
     html.join("\n").html_safe
   end
 
   def render_operation(operation)
-    case operation['type']
-    when 'addizione'
+    case operation["type"]
+    when "addizione"
       render_addizione(operation)
-    when 'sottrazione'
+    when "sottrazione"
       render_sottrazione(operation)
-    when 'moltiplicazione'
+    when "moltiplicazione"
       render_moltiplicazione(operation)
-    when 'abaco'
+    when "abaco"
       render_abaco(operation)
     else
       render_unknown_operation(operation)
@@ -40,34 +40,62 @@ class EsercizioRenderer
   private
 
   def render_addizione(operation)
-    config = operation['config'] || {}
+    config = operation["config"] || {}
 
-    # Genera valori casuali basati sulla config
-    max_value = config['max_value'] || 20
-    min_value = config['min_value'] || 1
+    # Usa SOLO i valori salvati dall'utente
+    if config["operation_text"].present?
+      # Parsa il testo per estrarre i numeri
+      numbers = config["operation_text"].scan(/\d+/).map(&:to_i)
+      addends = numbers.any? ? numbers : [0, 0]  # Default a 0 se non ci sono numeri
+    elsif config["values"].present? && config["values"].any?
+      # Usa i valori salvati
+      addends = config["values"]
+    else
+      # Non generare numeri casuali - usa valori vuoti di default
+      addends = [0, 0]
+    end
 
-    operand1 = rand(min_value..max_value)
-    operand2 = rand(min_value..max_value)
+    # Crea oggetto Addizione con opzioni corrette
+    addizione = Addizione.new(
+      addends: addends,
+      operator: "+",
+      show_toolbar: config["show_toolbar"] == true,
+      show_exercise: true,
+      show_solution: config["show_solution"] == true,
+      show_carry: config["show_carry"] == true,
+      show_addends: config["show_addends"] == true
+    )
 
-    # Crea oggetto Addizione
-    addizione = Addizione.new(addends: [operand1, operand2], operator: '+')
+    # Prepara il titolo dell'operazione (usa il campo title se presente, altrimenti mostra operation_text)
+    operation_title = config["title"].present? ? config["title"] : (config["operation_text"].present? ? config["operation_text"] : nil)
 
     html = []
     html << %Q(<div class="operation-container" data-operation-id="#{operation['id']}" data-operation-type="addizione">)
 
     if @view_context
-      # Usa il partial esistente
+      # Usa il partial esistente con il titolo e l'operation_id
       html << @view_context.render(
-        partial: 'strumenti/addizioni/column_addition',
-        locals: { addizione: addizione, show_toolbar: false }
+        partial: "strumenti/addizioni/column_addition",
+        locals: {
+          addizione: addizione,
+          operation_title: operation_title,
+          operation_id: operation['id']
+        }
       )
     else
       # Fallback HTML semplice
       html << %Q(<div class="p-4 border rounded">)
       html << %Q(<div class="text-center font-mono text-2xl">)
-      html << %Q(<div>#{operand1}</div>)
-      html << %Q(<div class="border-b-2">+ #{operand2}</div>)
-      html << %Q(<div class="mt-2">= #{operand1 + operand2}</div>)
+      addends.each_with_index do |addend, index|
+        if index == 0
+          html << %Q(<div>#{addend}</div>)
+        elsif index == addends.length - 1
+          html << %Q(<div class="border-b-2">+ #{addend}</div>)
+        else
+          html << %Q(<div>+ #{addend}</div>)
+        end
+      end
+      html << %Q(<div class="mt-2">____</div>)
       html << %Q(</div>)
       html << %Q(</div>)
     end
@@ -77,34 +105,57 @@ class EsercizioRenderer
   end
 
   def render_sottrazione(operation)
-    config = operation['config'] || {}
+    config = operation["config"] || {}
 
-    # Genera valori casuali basati sulla config
-    max_value = config['max_value'] || 20
-    min_value = config['min_value'] || 1
+    # Usa SOLO i valori salvati dall'utente
+    if config["operation_text"].present?
+      # Parsa il testo per estrarre i numeri (es: "500 - 123")
+      numbers = config["operation_text"].scan(/\d+/).map(&:to_i)
+      minuend = numbers[0] || 0
+      subtrahend = numbers[1] || 0
+    elsif config["values"].present? && config["values"].any?
+      minuend = config["values"][0] || 0
+      subtrahend = config["values"][1] || 0
+    else
+      # Non generare numeri casuali - usa valori vuoti di default
+      minuend = 0
+      subtrahend = 0
+    end
 
-    operand1 = rand((min_value + 5)..max_value)
-    operand2 = rand(min_value..[operand1 - 1, max_value].min)
+    # Crea oggetto Sottrazione corretto
+    sottrazione = Sottrazione.new(
+      minuend: minuend,
+      subtrahend: subtrahend,
+      show_toolbar: config["show_toolbar"] == true,
+      show_exercise: true,
+      show_solution: config["show_solution"] == true,
+      show_minuend_subtrahend: config["show_addends"] == true,
+      show_borrow: config["show_borrow"] == true
+    )
 
-    # Crea oggetto per sottrazione (usa Addizione con operatore -)
-    sottrazione = Addizione.new(addends: [operand1, operand2], operator: '-')
+    # Prepara il titolo dell'operazione (usa il campo title se presente, altrimenti mostra operation_text)
+    operation_title = config["title"].present? ? config["title"] : (config["operation_text"].present? ? config["operation_text"] : nil)
 
     html = []
     html << %Q(<div class="operation-container" data-operation-id="#{operation['id']}" data-operation-type="sottrazione">)
 
     if @view_context
-      # Usa il partial esistente
+      # Usa il partial esistente con il titolo e l'operation_id
       html << @view_context.render(
-        partial: 'strumenti/sottrazioni/column_subtraction',
-        locals: { sottrazione: sottrazione, show_toolbar: false }
+        partial: "strumenti/sottrazioni/column_subtraction",
+        locals: {
+          sottrazione: sottrazione,
+          operation_title: operation_title,
+          operation_id: operation['id']
+        }
       )
     else
       # Fallback HTML semplice
       html << %Q(<div class="p-4 border rounded">)
       html << %Q(<div class="text-center font-mono text-2xl">)
-      html << %Q(<div>#{operand1}</div>)
-      html << %Q(<div class="border-b-2">- #{operand2}</div>)
-      html << %Q(<div class="mt-2">= #{operand1 - operand2}</div>)
+      html << %Q(<div>#{minuend}</div>)
+      html << %Q(<div class="border-b-2">- #{subtrahend}</div>)
+      html << %Q(<div class="mt-2">____</div>)
       html << %Q(</div>)
       html << %Q(</div>)
     end
@@ -114,31 +165,61 @@ class EsercizioRenderer
   end
 
   def render_moltiplicazione(operation)
-    config = operation['config'] || {}
+    config = operation["config"] || {}
 
-    # Genera valori casuali basati sulla config
-    operand1 = rand((config['min_table'] || 1)..(config['max_table'] || 10))
-    operand2 = rand((config['min_multiplier'] || 1)..(config['max_multiplier'] || 10))
+    # Usa SOLO i valori salvati dall'utente
+    if config["operation_text"].present?
+      # Parsa il testo per estrarre i numeri (es: "12 x 5" o "12 × 5")
+      numbers = config["operation_text"].scan(/\d+/).map(&:to_i)
+      multiplicand = numbers[0] || 0
+      multiplier = numbers[1] || 0
+    elsif config["multiplicand"].present? && config["multiplier"].present?
+      multiplicand = config["multiplicand"]
+      multiplier = config["multiplier"]
+    elsif config["values"].present? && config["values"].any?
+      multiplicand = config["values"][0] || 0
+      multiplier = config["values"][1] || 0
+    else
+      # Non generare numeri casuali - usa valori vuoti di default
+      multiplicand = 0
+      multiplier = 0
+    end
 
-    # Crea oggetto per moltiplicazione
-    moltiplicazione = Addizione.new(addends: [operand1, operand2], operator: '×')
+    # Crea oggetto Moltiplicazione corretto
+    moltiplicazione = Moltiplicazione.new(
+      multiplicand: multiplicand,
+      multiplier: multiplier,
+      show_multiplicand_multiplier: config["show_addends"] != false,
+      show_toolbar: config["show_toolbar"] == true,
+      show_partial_products: config["show_partial_products"] == true,
+      show_solution: config["show_solution"] == true,
+      editable: true,
+      show_exercise: true
+    )
+
+    # Prepara il titolo dell'operazione (usa il campo title se presente, altrimenti mostra operation_text)
+    operation_title = config["title"].present? ? config["title"] : (config["operation_text"].present? ? config["operation_text"] : nil)
 
     html = []
     html << %Q(<div class="operation-container" data-operation-id="#{operation['id']}" data-operation-type="moltiplicazione">)
 
     if @view_context
-      # Usa il partial esistente
+      # Usa il partial esistente con il titolo e l'operation_id
       html << @view_context.render(
-        partial: 'strumenti/moltiplicazioni/column_multiplication',
-        locals: { moltiplicazione: moltiplicazione, show_toolbar: false }
+        partial: "strumenti/moltiplicazioni/column_multiplication",
+        locals: {
+          moltiplicazione: moltiplicazione,
+          operation_title: operation_title,
+          operation_id: operation['id']
+        }
       )
     else
       # Fallback HTML semplice
       html << %Q(<div class="p-4 border rounded">)
       html << %Q(<div class="text-center font-mono text-2xl">)
-      html << %Q(<div>#{operand1}</div>)
-      html << %Q(<div class="border-b-2">× #{operand2}</div>)
-      html << %Q(<div class="mt-2">= #{operand1 * operand2}</div>)
+      html << %Q(<div>#{multiplicand}</div>)
+      html << %Q(<div class="border-b-2">× #{multiplier}</div>)
+      html << %Q(<div class="mt-2">____</div>)
       html << %Q(</div>)
       html << %Q(</div>)
     end
@@ -148,32 +229,72 @@ class EsercizioRenderer
   end
 
   def render_abaco(operation)
-    config = operation['config'] || {}
+    config = operation["config"] || {}
 
-    # Genera valore casuale basato sulla config
-    value = rand((config['min_value'] || 1)..(config['max_value'] || 100))
+    # Usa SOLO i valori salvati dall'utente
+    if config["operation_text"].present?
+      # Parsa il testo per estrarre il numero
+      value = config["operation_text"].scan(/\d+/).first&.to_i || 0
+    elsif config["value"].present?
+      value = config["value"]
+    elsif config["values"].present? && config["values"].any?
+      value = config["values"][0] || 0
+    else
+      # Non generare numeri casuali - usa valore vuoto di default
+      value = 0
+    end
 
-    # Crea oggetto Abaco
-    abaco = Abaco.new(number: value, editable: true, show_value: false)
+    # Crea oggetto Abaco con parametri corretti
+    abaco = Abaco.new(
+      number: value,
+      editable: config["editable"] != false,
+      show_value: config["show_value"] == true,
+      max_per_column: (config["max_per_column"] || 9).to_i
+    )
+
+    # Prepara il titolo dell'operazione (usa il campo title se presente, altrimenti mostra operation_text)
+    operation_title = config["title"].present? ? config["title"] : (config["operation_text"].present? ? config["operation_text"] : nil)
 
     html = []
     html << %Q(<div class="operation-container" data-operation-id="#{operation['id']}" data-operation-type="abaco">)
 
     if @view_context
-      # Usa il partial esistente
+      # Usa il partial esistente con il titolo e l'operation_id
       html << @view_context.render(
-        partial: 'strumenti/abaco/abaco',
-        locals: { abaco: abaco }
+        partial: "strumenti/abaco/abaco",
+        locals: {
+          abaco: abaco,
+          operation_title: operation_title,
+          operation_id: operation['id']
+        }
       )
     else
       # Fallback HTML semplice
       html << %Q(<div class="p-4 border rounded">)
       html << %Q(<div class="text-center">)
-      html << %Q(<p class="text-lg font-semibold mb-2">Abaco: #{value}</p>)
-      html << %Q(<div class="grid grid-cols-3 gap-2">)
-      html << %Q(<div><span class="text-sm">C:</span> #{value / 100}</div>)
-      html << %Q(<div><span class="text-sm">D:</span> #{(value % 100) / 10}</div>)
-      html << %Q(<div><span class="text-sm">U:</span> #{value % 10}</div>)
+      html << %Q(<p class="text-lg font-semibold mb-2">Abaco</p>)
+      html << %Q(<div class="grid grid-cols-3 gap-2 mt-4">)
+
+      # Mostra solo le colonne necessarie
+      if value >= 100
+        html << %Q(<div class="text-center">)
+        html << %Q(<div class="text-xs text-gray-500 mb-1">C</div>)
+        html << %Q(<div class="font-mono text-lg">#{value / 100}</div>)
+        html << %Q(</div>)
+      end
+
+      if value >= 10
+        html << %Q(<div class="text-center">)
+        html << %Q(<div class="text-xs text-gray-500 mb-1">D</div>)
+        html << %Q(<div class="font-mono text-lg">#{(value % 100) / 10}</div>)
+        html << %Q(</div>)
+      end
+
+      html << %Q(<div class="text-center">)
+      html << %Q(<div class="text-xs text-gray-500 mb-1">U</div>)
+      html << %Q(<div class="font-mono text-lg">#{value % 10}</div>)
+      html << %Q(</div>)
+
       html << %Q(</div>)
       html << %Q(</div>)
       html << %Q(</div>)

@@ -20,9 +20,9 @@ export default class extends Controller {
       generator.addEventListener('dragend', this.handleDragEnd.bind(this))
     })
 
-    // Inizializza drop zone
-    this.dropZoneTarget.addEventListener('dragover', this.handleDragOver.bind(this))
-    this.dropZoneTarget.addEventListener('drop', this.handleDrop.bind(this))
+    // Inizializza drop zone - usa event capturing per catturare eventi sulla griglia interna
+    this.dropZoneTarget.addEventListener('dragover', this.handleDragOver.bind(this), true)
+    this.dropZoneTarget.addEventListener('drop', this.handleDrop.bind(this), true)
     this.dropZoneTarget.addEventListener('dragleave', this.handleDragLeave.bind(this))
 
     // Inizializza drag per operazioni esistenti
@@ -34,12 +34,45 @@ export default class extends Controller {
     operations.forEach(op => {
       op.addEventListener('dragstart', this.handleOperationDragStart.bind(this))
       op.addEventListener('dragend', this.handleOperationDragEnd.bind(this))
+      op.addEventListener('dragover', this.handleOperationDragOver.bind(this))
+      op.addEventListener('drop', this.handleOperationDrop.bind(this))
+      // Aggiungi click per aprire le proprietà
+      op.addEventListener('click', this.handleOperationClick.bind(this))
+      // Aggiungi classe per indicare che è cliccabile
+      op.classList.add('cursor-pointer', 'hover:shadow-lg', 'transition-shadow')
     })
   }
 
+  handleOperationClick(e) {
+    // Previeni click sui pulsanti interni
+    if (e.target.closest('button')) {
+      return
+    }
+
+    const operationElement = e.currentTarget
+    const operationId = operationElement.dataset.operationId
+    const operationType = operationElement.dataset.operationType
+
+    // Rimuovi selezione precedente
+    this.dropZoneTarget.querySelectorAll('.operation-item').forEach(op => {
+      op.classList.remove('ring-2', 'ring-blue-500')
+    })
+
+    // Evidenzia l'operazione selezionata
+    operationElement.classList.add('ring-2', 'ring-blue-500')
+
+    // Dispatch evento per aprire il pannello proprietà
+    document.dispatchEvent(new CustomEvent('open-properties', {
+      detail: { operationId, operationType }
+    }))
+  }
+
   handleDragStart(e) {
+    const generator = e.target.closest('.operation-generator')
+    const operationType = generator ? generator.dataset.operationType : e.target.dataset.operationType
+    console.log("handleDragStart - operationType:", operationType)
     e.dataTransfer.effectAllowed = 'copy'
-    e.dataTransfer.setData('operationType', e.target.dataset.operationType)
+    e.dataTransfer.setData('operationType', operationType)
     e.dataTransfer.setData('isNew', 'true')
     e.target.classList.add('dragging')
   }
@@ -58,25 +91,156 @@ export default class extends Controller {
 
   handleOperationDragEnd(e) {
     e.target.classList.remove('dragging')
+    // Rimuovi tutti gli indicatori di inserimento
+    this.dropZoneTarget.querySelectorAll('.operation-item').forEach(op => {
+      op.classList.remove('drag-over-top', 'drag-over-bottom')
+    })
     this.draggedElement = null
+  }
+
+  handleOperationDragOver(e) {
+    e.preventDefault()
+    e.stopPropagation()
+
+    if (!this.draggedElement || this.draggedElement === e.currentTarget) return
+
+    const afterElement = this.getDragAfterElement(e.currentTarget, e.clientY)
+    const operation = e.currentTarget
+
+    // Rimuovi classi da tutti gli elementi
+    this.dropZoneTarget.querySelectorAll('.operation-item').forEach(op => {
+      op.classList.remove('drag-over-top', 'drag-over-bottom')
+    })
+
+    // Aggiungi indicatore visuale
+    if (afterElement) {
+      operation.classList.add('drag-over-bottom')
+    } else {
+      operation.classList.add('drag-over-top')
+    }
+  }
+
+  handleOperationDrop(e) {
+    e.preventDefault()
+    e.stopPropagation()
+
+    if (!this.draggedElement || this.draggedElement === e.currentTarget) return
+
+    const afterElement = this.getDragAfterElement(e.currentTarget, e.clientY)
+    const targetOperation = e.currentTarget
+    const operationsGrid = this.dropZoneTarget.querySelector('#operations-grid') || this.dropZoneTarget
+
+    if (afterElement) {
+      // Inserisci dopo l'elemento target
+      targetOperation.parentNode.insertBefore(this.draggedElement, targetOperation.nextSibling)
+    } else {
+      // Inserisci prima dell'elemento target
+      targetOperation.parentNode.insertBefore(this.draggedElement, targetOperation)
+    }
+
+    // Rimuovi indicatori visuali
+    this.dropZoneTarget.querySelectorAll('.operation-item').forEach(op => {
+      op.classList.remove('drag-over-top', 'drag-over-bottom')
+    })
+
+    // Salva il nuovo ordine
+    this.saveOperationsOrder()
+  }
+
+  getDragAfterElement(container, y) {
+    const box = container.getBoundingClientRect()
+    const offset = y - box.top - box.height / 2
+    return offset > 0
   }
 
   handleDragOver(e) {
     e.preventDefault()
     e.dataTransfer.dropEffect = 'copy'
     this.dropZoneTarget.classList.add('drag-over')
+
+    // Mostra indicatore di posizionamento
+    this.showDropIndicator(e)
+  }
+
+  showDropIndicator(e) {
+    const existingOperations = this.dropZoneTarget.querySelectorAll('.operation-item')
+
+    // Rimuovi tutti gli indicatori precedenti
+    existingOperations.forEach(op => {
+      op.classList.remove('drag-over-top', 'drag-over-bottom', 'drag-over-left', 'drag-over-right')
+    })
+
+    // Se non ci sono operazioni, non serve indicatore
+    if (existingOperations.length === 0) return
+
+    const mouseX = e.clientX
+    const mouseY = e.clientY
+
+    let closestElement = null
+    let closestDistance = Infinity
+    let position = 'before'
+
+    // Trova l'elemento più vicino al cursore
+    existingOperations.forEach((op) => {
+      const rect = op.getBoundingClientRect()
+      const centerX = rect.left + rect.width / 2
+      const centerY = rect.top + rect.height / 2
+
+      // Calcola la distanza dal centro dell'elemento
+      const distance = Math.sqrt(
+        Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2)
+      )
+
+      if (distance < closestDistance) {
+        closestDistance = distance
+        closestElement = op
+
+        // Determina se inserire prima o dopo basandosi sulla posizione relativa
+        const deltaX = mouseX - centerX
+        const deltaY = mouseY - centerY
+
+        // Se siamo principalmente sopra/sotto
+        if (Math.abs(deltaY) > Math.abs(deltaX)) {
+          position = deltaY < 0 ? 'top' : 'bottom'
+        } else {
+          // Se siamo principalmente a sinistra/destra
+          position = deltaX < 0 ? 'left' : 'right'
+        }
+      }
+    })
+
+    // Applica la classe appropriata
+    if (closestElement) {
+      if (position === 'top' || position === 'left') {
+        closestElement.classList.add('drag-over-top')
+      } else {
+        closestElement.classList.add('drag-over-bottom')
+      }
+    }
   }
 
   handleDragLeave(e) {
     if (e.target === this.dropZoneTarget) {
       this.dropZoneTarget.classList.remove('drag-over')
+      // Rimuovi indicatori di posizionamento
+      const existingOperations = this.dropZoneTarget.querySelectorAll('.operation-item')
+      existingOperations.forEach(op => {
+        op.classList.remove('drag-over-top', 'drag-over-bottom')
+      })
     }
   }
 
   async handleDrop(e) {
+    console.log("handleDrop called")
     e.preventDefault()
     e.stopPropagation()
     this.dropZoneTarget.classList.remove('drag-over')
+
+    // Rimuovi tutti gli indicatori di posizionamento
+    const existingOperations = this.dropZoneTarget.querySelectorAll('.operation-item')
+    existingOperations.forEach(op => {
+      op.classList.remove('drag-over-top', 'drag-over-bottom')
+    })
 
     const isNew = e.dataTransfer.getData('isNew') === 'true'
     console.log("Drop event - isNew:", isNew)
@@ -84,8 +248,15 @@ export default class extends Controller {
     if (isNew) {
       const operationType = e.dataTransfer.getData('operationType')
       console.log("Adding new operation:", operationType)
+
+      // Determina la posizione dove inserire l'operazione
+      const position = this.getDropPosition(e)
+      console.log("Position calculated:", position)
+
       if (operationType) {
-        await this.addNewOperation(operationType)
+        await this.addNewOperation(operationType, position)
+      } else {
+        console.error("No operation type found in dataTransfer!")
       }
     } else {
       const operationId = e.dataTransfer.getData('operationId')
@@ -94,7 +265,53 @@ export default class extends Controller {
     }
   }
 
-  async addNewOperation(type) {
+  getDropPosition(e) {
+    const existingOperations = this.dropZoneTarget.querySelectorAll('.operation-item')
+    if (existingOperations.length === 0) return 0
+
+    const mouseX = e.clientX
+    const mouseY = e.clientY
+
+    // Trova l'operazione più vicina al cursore
+    let closestOperation = null
+    let closestDistance = Infinity
+    let insertBefore = false
+
+    Array.from(existingOperations).forEach((op, index) => {
+      const rect = op.getBoundingClientRect()
+      const centerX = rect.left + rect.width / 2
+      const centerY = rect.top + rect.height / 2
+
+      // Calcola la distanza dal centro dell'elemento
+      const distance = Math.sqrt(Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2))
+
+      if (distance < closestDistance) {
+        closestDistance = distance
+        closestOperation = { element: op, index: index, rect: rect }
+
+        // Determina se inserire prima o dopo basandosi sulla posizione del mouse
+        if (mouseY < centerY) {
+          // Mouse sopra il centro - inserisci prima
+          insertBefore = true
+        } else if (mouseY > centerY) {
+          // Mouse sotto il centro - inserisci dopo
+          insertBefore = false
+        } else {
+          // Stessa altezza, usa X
+          insertBefore = mouseX < centerX
+        }
+      }
+    })
+
+    if (!closestOperation) {
+      return existingOperations.length // Aggiungi alla fine
+    }
+
+    // Ritorna la posizione corretta per l'inserimento
+    return insertBefore ? closestOperation.index : closestOperation.index + 1
+  }
+
+  async addNewOperation(type, position = null) {
     const config = this.getDefaultConfig(type)
 
     try {
@@ -106,7 +323,8 @@ export default class extends Controller {
         },
         body: JSON.stringify({
           operation_type: type,
-          config: config
+          config: config,
+          position: position
         })
       })
 
@@ -179,23 +397,28 @@ export default class extends Controller {
 
       operations.forEach(operation => {
         const bgColor = this.getOperationColor(operation.type)
+        const icon = this.getOperationIcon(operation.type)
         html += `
-          <div class="operation-item ${bgColor} p-4 rounded-lg border-2 border-dashed border-gray-300"
+          <div class="operation-item ${bgColor} p-4 rounded-lg border-2 border-dashed border-gray-300 cursor-pointer hover:shadow-lg transition-shadow"
                data-operation-id="${operation.id}"
                data-operation-type="${operation.type}"
                draggable="true">
-            <div class="flex justify-between items-start mb-2">
-              <span class="font-medium">${operation.type.charAt(0).toUpperCase() + operation.type.slice(1)}</span>
-              <button class="text-red-500 hover:text-red-700"
+            <div class="flex justify-between items-start mb-3">
+              <div class="flex items-center gap-2">
+                ${icon}
+                <span class="font-semibold text-gray-700">${operation.type.charAt(0).toUpperCase() + operation.type.slice(1)}</span>
+              </div>
+              <button class="text-red-500 hover:text-red-700 transition"
                       data-action="click->esercizio-builder#removeOperation"
                       data-operation-id="${operation.id}">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                 </svg>
               </button>
             </div>
-            <div class="text-sm text-gray-600">
-              ${this.renderOperationPreview(operation)}
+            ${this.renderOperationPreview(operation)}
+            <div class="text-xs text-gray-400 text-center mt-3 pt-2 border-t border-gray-200">
+              Clicca per modificare • Trascina per riordinare
             </div>
           </div>
         `
@@ -219,47 +442,100 @@ export default class extends Controller {
     return colors[type] || 'bg-gray-50'
   }
 
+  getOperationIcon(type) {
+    const icons = {
+      'addizione': '<svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>',
+      'sottrazione': '<svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>',
+      'moltiplicazione': '<svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>',
+      'abaco': '<svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>'
+    }
+    return icons[type] || ''
+  }
+
   renderOperationPreview(operation) {
     const config = operation.config || {}
+    let html = '<div class="space-y-2">'
 
-    switch(operation.type) {
-      case 'addizione':
-        return `Addizione: ${config.max_value || 100} (max)`
-      case 'sottrazione':
-        return `Sottrazione: ${config.max_value || 100} (max)`
-      case 'moltiplicazione':
-        return `Moltiplicazione: ${config.max_table || 10} × ${config.max_table || 10}`
-      case 'abaco':
-        return `Abaco: ${config.max_value || 999} (max)`
-      default:
-        return 'Configurazione personalizzata'
+    // Titolo se presente
+    if (config.title) {
+      html += `<div class="text-sm font-medium text-gray-800">📝 ${config.title}</div>`
     }
+
+    // Operazione
+    if (config.operation_text) {
+      html += `<div class="font-mono text-lg text-gray-700 bg-white px-3 py-2 rounded border border-gray-200">${config.operation_text}</div>`
+    } else if (config.values && config.values.length > 0) {
+      html += '<div class="font-mono text-lg text-gray-700">'
+      switch(operation.type) {
+        case 'addizione':
+          html += config.values.join(' + ')
+          break
+        case 'sottrazione':
+          html += config.values.join(' - ')
+          break
+        case 'moltiplicazione':
+          html += config.multiplicand && config.multiplier ? `${config.multiplicand} × ${config.multiplier}` : ''
+          break
+        case 'abaco':
+          html += config.value || config.values?.[0] || ''
+          break
+      }
+      html += '</div>'
+    } else {
+      html += '<div class="text-sm text-gray-500 italic">Operazione vuota - clicca per configurare</div>'
+    }
+
+    // Opzioni attive
+    html += '<div class="flex flex-wrap gap-1 mt-2">'
+    if (config.show_toolbar === true) {
+      html += '<span class="inline-flex items-center px-2 py-1 text-xs bg-gray-200 text-gray-600 rounded">🛠️ Toolbar</span>'
+    }
+    if (config.show_solution === true) {
+      html += '<span class="inline-flex items-center px-2 py-1 text-xs bg-green-200 text-green-700 rounded">✓ Risultato</span>'
+    }
+    if (config.show_carry === true || config.show_borrow === true) {
+      html += '<span class="inline-flex items-center px-2 py-1 text-xs bg-blue-200 text-blue-700 rounded">↗️ Riporti</span>'
+    }
+    if (config.show_addends === true) {
+      html += '<span class="inline-flex items-center px-2 py-1 text-xs bg-yellow-200 text-yellow-700 rounded">📊 Valori</span>'
+    }
+    if (config.show_partial_products === true) {
+      html += '<span class="inline-flex items-center px-2 py-1 text-xs bg-purple-200 text-purple-700 rounded">📋 Parziali</span>'
+    }
+    html += '</div>'
+
+    html += '</div>'
+    return html
   }
 
   getDefaultConfig(type) {
     switch(type) {
       case 'addizione':
         return {
-          min_value: 1,
-          max_value: 20,
-          allow_carry: false
+          operation_text: '',  // Vuoto per inserimento manuale
+          show_carry: true,
+          show_toolbar: false,
+          show_solution: false
         }
       case 'sottrazione':
         return {
-          min_value: 1,
-          max_value: 20,
-          allow_borrow: false
+          operation_text: '',  // Vuoto per inserimento manuale
+          show_borrow: true,
+          show_toolbar: false,
+          show_solution: false
         }
       case 'moltiplicazione':
         return {
-          min_table: 1,
-          max_table: 10
+          operation_text: '',  // Vuoto per inserimento manuale
+          show_partial_products: false,
+          show_toolbar: false
         }
       case 'abaco':
         return {
-          min_value: 1,
-          max_value: 100,
-          show_hundreds: false
+          operation_text: '',  // Vuoto per inserimento manuale
+          show_value: false,
+          editable: true,
+          max_per_column: 9
         }
       default:
         return {}
@@ -275,7 +551,7 @@ export default class extends Controller {
     this.renderOperations([])
   }
 
-  async saveLayout() {
+  async saveOperationsOrder() {
     // Raccogli l'ordine corrente delle operazioni
     const operations = this.dropZoneTarget.querySelectorAll('.operation-item')
     const operationIds = Array.from(operations).map(op => op.dataset.operationId)
@@ -293,14 +569,19 @@ export default class extends Controller {
       })
 
       if (response.ok) {
-        this.showNotification('Layout salvato con successo', 'success')
+        this.showNotification('Ordine aggiornato', 'success')
       } else {
-        this.showNotification('Errore nel salvataggio', 'error')
+        this.showNotification('Errore nel salvataggio dell\'ordine', 'error')
       }
     } catch (error) {
       console.error('Errore:', error)
       this.showNotification('Errore di connessione', 'error')
     }
+  }
+
+  async saveLayout() {
+    // Alias per compatibilità
+    await this.saveOperationsOrder()
   }
 
   showNotification(message, type) {

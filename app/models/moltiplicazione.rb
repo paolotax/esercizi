@@ -3,7 +3,7 @@
 # Modello per rappresentare una moltiplicazione in colonna
 class Moltiplicazione
   attr_reader :multiplicand, :multiplier, :show_multiplicand_multiplier, :show_toolbar,
-              :show_partial_products, :editable, :show_exercise
+              :show_partial_products, :editable, :show_exercise, :show_solution
 
   def initialize(multiplicand:, multiplier:, **options)
     @multiplicand = multiplicand.to_i
@@ -13,6 +13,7 @@ class Moltiplicazione
     @show_partial_products = options.fetch(:show_partial_products, false)
     @editable = options.fetch(:editable, true)
     @show_exercise = options.fetch(:show_exercise, false)
+    @show_solution = options.fetch(:show_solution, false)
   end
 
   # Cifre del moltiplicando (da destra a sinistra)

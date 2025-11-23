@@ -1,3 +1,4 @@
+<div class="text-center">
 <div class="inline-block"
      data-controller="abaco"
      data-abaco-migliaia-value="<%= abaco.migliaia_value %>"
@@ -11,6 +12,10 @@
      data-abaco-max-value="<%= abaco.max_per_column %>"
      data-abaco-editable-value="<%= abaco.editable %>"
      data-abaco-correct-value="<%= abaco.correct_value %>">
+
+  <% if defined?(operation_title) && operation_title.present? %>
+    <div class="text-xl font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block text-center"><%= operation_title %></div>
+  <% end %>
 
   <!-- Container abaco -->
   <div class="flex gap-4 justify-center items-end" data-controller="auto-advance">
@@ -79,6 +84,9 @@
         <div class="flex items-center justify-center mt-3 mb-3 gap-3">
           <span class="text-lg font-bold text-gray-700">Valore: </span>
           <span class="text-3xl font-bold text-cyan-600" data-abaco-target="totalValue"><%= abaco.total_value %></span>
+          <% if defined?(operation_id) %>
+            <input type="hidden" name="results[<%= operation_id %>][total]" value="<%= abaco.total_value %>" data-abaco-target="totalInput">
+          <% end %>
         </div>
       <% end %>
 
@@ -88,4 +96,5 @@
       <% end %>
     </div>
   <% end %>
+</div>
 </div>

@@ -1,4 +1,134 @@
-<div>
-  <h1 class="font-bold text-4xl">PublicEsercizi#show</h1>
-  <p>Find me in app/views/public_esercizi/show.html.erb</p>
+<% content_for :title, @esercizio.title %>
+<% content_for :page_title, @esercizio.title %>
+
+<div class="min-h-screen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Descrizione esercizio -->
+    <% if @esercizio.description.present? %>
+      <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-blue-700">
+              <%= @esercizio.description %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Info bar -->
+    <div class="bg-white shadow-sm rounded-lg px-4 py-3 mb-6">
+      <div class="flex items-center justify-between text-sm">
+        <div class="flex items-center space-x-4">
+          <span class="text-gray-500">
+            <strong><%= @esercizio.operations.count %></strong> operazioni
+          </span>
+          <% if @esercizio.category.present? %>
+            <span class="text-gray-500">
+              Categoria: <strong><%= @esercizio.category.capitalize %></strong>
+            </span>
+          <% end %>
+          <% if @esercizio.difficulty.present? %>
+            <span class="text-gray-500">
+              Difficoltà: <strong><%= @esercizio.difficulty.capitalize %></strong>
+            </span>
+          <% end %>
+        </div>
+        <div id="timer" class="text-gray-600 font-mono">
+          <span id="minutes">00</span>:<span id="seconds">00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form per l'esercizio -->
+    <%= form_with url: public_esercizio_attempt_path(share_token: @esercizio.share_token),
+                  local: true, id: "exercise-form", data: { turbo: false } do |form| %>
+
+      <!-- Griglia delle operazioni -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <% @esercizio.operations.each_with_index do |operation, index| %>
+          <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <!-- Numero operazione -->
+            <div class="flex justify-between items-center mb-4">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                Esercizio <%= index + 1 %>
+              </span>
+              <span class="text-sm text-gray-500 capitalize">
+                <%= operation['type'] %>
+              </span>
+            </div>
+
+            <!-- Contenuto operazione con input per risposta -->
+            <div class="operation-content" data-operation-id="<%= operation['id'] %>">
+              <%= EsercizioRenderer.new(@esercizio, self).render_operation(operation).html_safe %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Sezione per identificazione studente e submit -->
+      <div class="bg-white shadow rounded-lg px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <label for="student_name" class="text-sm font-medium text-gray-700">
+              Nome (opzionale):
+            </label>
+            <input type="text"
+                   id="student_name"
+                   name="student_name"
+                   class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                   placeholder="Il tuo nome">
+          </div>
+
+          <button type="submit"
+                  class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <svg class="mr-2 -ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 0016 0zm-6-3a2 2 0 114 0 2 2 0 01-4 0zm-2-9a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0z" clip-rule="evenodd" />
+            </svg>
+            Consegna Esercizio
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
+
+<script>
+// Timer
+let startTime = Date.now();
+let timerInterval;
+
+function updateTimer() {
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const minutes = Math.floor(elapsed / 60);
+  const seconds = elapsed % 60;
+
+  document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+  document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+}
+
+// Avvia il timer
+timerInterval = setInterval(updateTimer, 1000);
+
+// Aggiungi il tempo al form prima del submit
+document.getElementById('exercise-form').addEventListener('submit', function(e) {
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = 'time_spent';
+  input.value = elapsed;
+  this.appendChild(input);
+});
+
+// Pulisci il timer quando si lascia la pagina
+window.addEventListener('beforeunload', function() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+  }
+});
+</script>

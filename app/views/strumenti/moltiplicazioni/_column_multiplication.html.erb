@@ -8,10 +8,12 @@
 </style>
 
 <div class="text-center" data-controller="column-multiplication">
-
+  <% if defined?(operation_title) && operation_title.present? %>
+    <div class="text-xl font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= operation_title %></div>
+  <% end %>
 
   <!-- Griglia moltiplicazione -->
-  <div class="inline-block border-4 border-purple-400 rounded-lg p-4 bg-white shadow-lg">
+  <div class="inline-block border-4 border-green-500 rounded-lg p-4 bg-white shadow-lg">
 
     <!-- Moltiplicando -->
     <% if moltiplicazione.show_multiplicand_multiplier %>
@@ -26,7 +28,7 @@
       <div class="flex justify-end gap-1 mb-2">
         <% moltiplicazione.multiplicand_digits.each do |digit| %>
           <input type="text"
-                 class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-purple-500 focus:outline-none"
+                 class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-green-500 focus:outline-none"
                  data-column-multiplication-target="multiplicandInput"
                  data-correct-answer="<%= digit %>"
                  maxlength="1"
@@ -38,7 +40,7 @@
 
     <!-- Simbolo × e Moltiplicatore -->
     <div class="flex justify-end gap-1 mb-2 border-b-2 border-gray-800 pb-2">
-      <div class="w-12 text-center text-2xl font-bold text-purple-600">×</div>
+      <div class="w-12 text-center text-2xl font-bold text-green-600">×</div>
       <% if moltiplicazione.show_multiplicand_multiplier %>
         <% moltiplicazione.multiplier_digits.each do |digit| %>
           <div class="w-12 text-center text-2xl font-bold text-gray-700">
@@ -48,7 +50,7 @@
       <% else %>
         <% moltiplicazione.multiplier_digits.each do |digit| %>
           <input type="text"
-                 class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-purple-500 focus:outline-none"
+                 class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-green-500 focus:outline-none"
                  data-column-multiplication-target="multiplierInput"
                  data-correct-answer="<%= digit %>"
                  maxlength="1"
@@ -66,7 +68,7 @@
           <% partial_data[:carries].each_with_index do |carry, i| %>
             <% col = partial_data[:num_carries] - i + partial_data[:row_index] %>
             <input type="text"
-                   class="w-12 h-6 text-center text-xs text-gray-500 border border-dashed border-gray-300 rounded focus:border-purple-400 focus:outline-none"
+                   class="w-12 h-6 text-center text-xs text-gray-500 border border-dashed border-gray-300 rounded focus:border-green-400 focus:outline-none"
                    data-column-multiplication-target="carryPartial"
                    data-correct-answer="<%= carry %>"
                    data-column="<%= col %>"
@@ -88,7 +90,7 @@
           <% partial_data[:digits].each_with_index do |digit, i| %>
             <% col = partial_data[:num_inputs] - 1 - i + partial_data[:row_index] %>
             <input type="text"
-                   class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-purple-500 focus:outline-none"
+                   class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-green-500 focus:outline-none"
                    data-column-multiplication-target="partialInput"
                    data-correct-answer="<%= digit %>"
                    data-column="<%= col %>"
@@ -115,12 +117,12 @@
       <% moltiplicazione.result_carries.each_with_index do |carry, i| %>
         <% col = moltiplicazione.result_carries.length - i %>
         <input type="text"
-               class="w-12 h-6 text-center text-xs text-gray-500 border border-dashed border-gray-300 rounded focus:border-purple-400 focus:outline-none"
+               class="w-12 h-6 text-center text-xs text-gray-500 border border-dashed border-gray-300 rounded focus:border-green-400 focus:outline-none"
                data-column-multiplication-target="carryResult"
                data-correct-answer="<%= carry %>"
                data-column="<%= col %>"
                data-row="<%= result_row %>"
-               <% if moltiplicazione.show_exercise && carry %>value="<%= carry %>"<% end %>
+               <% if moltiplicazione.show_solution && carry %>value="<%= carry %>"<% end %>
                maxlength="1"
                <%= moltiplicazione.editable ? '' : 'disabled' %>>
       <% end %>
@@ -133,12 +135,13 @@
       <% moltiplicazione.result_digits_array.each_with_index do |digit, i| %>
         <% col = moltiplicazione.result_digits_array.length - 1 - i %>
         <input type="text"
-               class="w-12 text-center text-2xl font-bold border-2 border-purple-300 rounded focus:border-purple-600 focus:outline-none bg-purple-50"
+               <% if defined?(operation_id) %>name="results[<%= operation_id %>][result][<%= i %>]"<% end %>
+               class="w-12 text-center text-2xl font-bold border-2 border-green-300 rounded focus:border-green-600 focus:outline-none bg-green-50"
                data-column-multiplication-target="resultInput"
                data-correct-answer="<%= digit %>"
                data-column="<%= col %>"
                data-row="<%= result_row + 1 %>"
-               <% if moltiplicazione.show_exercise %>value="<%= digit %>"<% end %>
+               <% if moltiplicazione.show_solution %>value="<%= digit %>"<% end %>
                maxlength="1"
                placeholder="·"
                <%= moltiplicazione.editable ? '' : 'disabled' %>>
@@ -147,7 +150,7 @@
 
     <!-- Mostra esercizio -->
     <% if moltiplicazione.show_exercise %>
-      <div class="mt-4 text-lg font-bold text-purple-600">
+      <div class="mt-4 text-lg font-bold text-green-600">
         <%= moltiplicazione.multiplicand %> × <%= moltiplicazione.multiplier %> = ?
       </div>
     <% end %>
@@ -190,7 +193,7 @@
       <!-- Verifica -->
       <button type="button"
               data-action="click->column-multiplication#checkResults"
-              class="w-14 h-14 rounded-full bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              class="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
               title="Verifica">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />

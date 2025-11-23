@@ -3,7 +3,7 @@ import JSConfetti from "js-confetti"
 
 // Connects to data-controller="abaco"
 export default class extends Controller {
-  static targets = ["columnK", "columnH", "columnDa", "columnU", "ballK", "ballH", "ballDa", "ballU", "inputK", "inputH", "inputDa", "inputU", "totalValue", "feedback"]
+  static targets = ["columnK", "columnH", "columnDa", "columnU", "ballK", "ballH", "ballDa", "ballU", "inputK", "inputH", "inputDa", "inputU", "totalValue", "totalInput", "feedback"]
   static values = {
     migliaia: { type: Number, default: 0 },
     centinaia: { type: Number, default: 0 },
@@ -664,9 +664,15 @@ export default class extends Controller {
     // Questo previene il bug dove digitare "0" viene cancellato
 
     // Aggiorna valore totale
+    const total = this.migliaiaValue * 1000 + this.centinaiaValue * 100 + this.decineValue * 10 + this.unitaValue
+
     if (this.hasTotalValueTarget) {
-      const total = this.migliaiaValue * 1000 + this.centinaiaValue * 100 + this.decineValue * 10 + this.unitaValue
       this.totalValueTarget.textContent = total
+    }
+
+    // Aggiorna anche l'input nascosto se presente
+    if (this.hasTotalInputTarget) {
+      this.totalInputTarget.value = total
     }
   }
 

@@ -1,4 +1,112 @@
-<div>
-  <h1 class="font-bold text-4xl">PublicEsercizi#results</h1>
-  <p>Find me in app/views/public_esercizi/results.html.erb</p>
+<% content_for :title, "Risultati - #{@esercizio.title}" %>
+<% content_for :page_title, "Risultati Esercizio" %>
+
+<div class="min-h-screen">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Card dei risultati -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <!-- Header con punteggio -->
+      <div class="bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-8 text-white">
+        <div class="text-center">
+          <h2 class="text-2xl font-bold mb-2">Esercizio Completato!</h2>
+          <div class="text-6xl font-bold mb-2">
+            <%= @attempt.score || 0 %>%
+          </div>
+          <p class="text-lg opacity-90">
+            Punteggio Ottenuto
+          </p>
+        </div>
+      </div>
+
+      <!-- Dettagli -->
+      <div class="px-6 py-6">
+        <!-- Statistiche -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-gray-900">
+              <%= @esercizio.operations.count %>
+            </div>
+            <div class="text-sm text-gray-600">
+              Esercizi Totali
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-green-600">
+              <% correct_count = @attempt.results['operations']&.count { |op| op['correct'] } || 0 %>
+              <%= correct_count %>
+            </div>
+            <div class="text-sm text-gray-600">
+              Risposte Corrette
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-gray-900">
+              <%= @attempt.formatted_duration || "0:00" %>
+            </div>
+            <div class="text-sm text-gray-600">
+              Tempo Impiegato
+            </div>
+          </div>
+        </div>
+
+        <!-- Informazioni studente -->
+        <% if @attempt.student_display_name.present? %>
+          <div class="border-t pt-4 mb-4">
+            <p class="text-sm text-gray-600">
+              <strong>Studente:</strong> <%= @attempt.student_display_name %>
+            </p>
+            <p class="text-sm text-gray-600">
+              <strong>Data:</strong> <%= @attempt.completed_at.strftime("%d/%m/%Y alle %H:%M") %>
+            </p>
+          </div>
+        <% end %>
+
+        <!-- Messaggio motivazionale -->
+        <div class="bg-gray-50 rounded-lg p-4 mb-6">
+          <% if @attempt.score && @attempt.score >= 80 %>
+            <p class="text-green-700 font-semibold">
+              🎉 Ottimo lavoro! Hai completato l'esercizio con successo!
+            </p>
+          <% elsif @attempt.score && @attempt.score >= 60 %>
+            <p class="text-yellow-700 font-semibold">
+              👍 Buon lavoro! Continua così per migliorare ancora!
+            </p>
+          <% else %>
+            <p class="text-blue-700 font-semibold">
+              💪 Non arrenderti! Ogni esercizio ti aiuta a migliorare!
+            </p>
+          <% end %>
+        </div>
+
+        <!-- Azioni -->
+        <div class="flex justify-center space-x-4">
+          <%= link_to public_esercizio_path(share_token: @esercizio.share_token),
+                      class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+            <svg class="mr-2 -ml-1 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z" clip-rule="evenodd" />
+            </svg>
+            Riprova Esercizio
+          <% end %>
+
+          <button onclick="window.print()"
+                  class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <svg class="mr-2 -ml-1 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z" clip-rule="evenodd" />
+            </svg>
+            Stampa Risultati
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info aggiuntive -->
+    <div class="mt-6 text-center text-sm text-gray-500">
+      <p>
+        Esercizio: <strong><%= @esercizio.title %></strong>
+        <% if @esercizio.category.present? %>
+          • Categoria: <strong><%= @esercizio.category.capitalize %></strong>
+        <% end %>
+      </p>
+    </div>
+  </div>
 </div>

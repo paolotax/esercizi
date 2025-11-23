@@ -9,7 +9,7 @@ class Abaco
   def initialize(number:, **options)
     @number = number
     @correct_value = options[:correct_value] || number
-    @max_per_column = options.fetch(:max_per_column, 9)
+    @max_per_column = options.fetch(:max_per_column, 9).to_i
 
     # Estrai le cifre dal numero
     k_digit = (number / 1000) % 10  # k = migliaia (thousands)

@@ -51,15 +51,25 @@ class Esercizio < ApplicationRecord
   end
 
   # Gestione contenuto JSON
-  def add_operation(type, config)
+  def add_operation(type, config, position = nil)
     ensure_content_structure
     new_operation = {
       'id' => SecureRandom.uuid,
       'type' => type,
       'config' => config,
-      'position' => self.content['operations'].size
+      'position' => position || self.content['operations'].size
     }
-    self.content['operations'] << new_operation
+
+    # Se è stata specificata una posizione, inserisci l'operazione in quella posizione
+    if position && position < self.content['operations'].size
+      self.content['operations'].insert(position, new_operation)
+      # Riordina le posizioni delle operazioni successive
+      reorder_operations
+    else
+      # Altrimenti aggiungila alla fine
+      self.content['operations'] << new_operation
+    end
+
     self.content_will_change! # Forza Rails a riconoscere il cambiamento
     save
   end

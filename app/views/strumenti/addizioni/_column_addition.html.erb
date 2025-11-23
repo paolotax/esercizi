@@ -21,8 +21,8 @@
 </style>
 
 <div class="text-center" data-controller="column-addition">
-  <% if addizione.title.present? %>
-    <div class="text-xl font-bold mb-4"><%= addizione.title %></div>
+  <% if defined?(operation_title) && operation_title.present? %>
+    <div class="text-xl font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= operation_title %></div>
   <% end %>
 
   <div class="flex items-start justify-center gap-2">
@@ -74,6 +74,7 @@
         <div style="<%= addizione.grid_style %>">
           <% addizione.result_digits.each_with_index do |digit, idx| %>
             <input type="text"
+                   <% if defined?(operation_id) %>name="results[<%= operation_id %>][result][<%= idx %>]"<% end %>
                    class="text-center text-2xl font-bold <%= 'border-r-2 border-gray-300' unless idx == addizione.result_digits.length - 1 %>"
                    data-column-addition-target="result"
                    data-correct-answer="<%= digit %>"

@@ -1,0 +1,33 @@
+<!-- Pannello laterale proprietà operazione -->
+<div id="properties-panel"
+     class="fixed right-0 top-0 h-full w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50"
+     data-controller="properties-panel">
+
+  <!-- Header del pannello -->
+  <div class="flex items-center justify-between p-4 border-b bg-gray-50">
+    <h3 class="text-lg font-semibold text-gray-800">Proprietà Operazione</h3>
+    <button data-action="click->properties-panel#close"
+            class="p-2 hover:bg-gray-200 rounded-lg transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Contenuto del pannello -->
+  <div class="p-6 overflow-y-auto h-[calc(100%-80px)]">
+    <%= turbo_frame_tag "operation_properties", class: "block" do %>
+      <div class="text-gray-500 text-center py-8">
+        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+        </svg>
+        <p>Seleziona un'operazione per modificarne le proprietà</p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- Overlay scuro quando il pannello è aperto -->
+<div id="properties-overlay"
+     class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"
+     data-action="click->properties-panel#close"></div>
