@@ -1,0 +1,225 @@
+<div class="container mx-auto px-4 py-8">
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">I Miei Esercizi</h1>
+    <%= link_to new_dashboard_esercizio_path,
+                class: "bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center gap-2" do %>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+      </svg>
+      Crea Nuovo Esercizio
+    <% end %>
+  </div>
+
+  <!-- Filtri -->
+  <div class="bg-white p-4 rounded-lg shadow mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <!-- Filtro Categoria -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Categoria</label>
+        <%= form_with url: dashboard_esercizi_path, method: :get, local: true do |f| %>
+          <%= select_tag :category,
+              options_for_select([
+                ['Tutte le categorie', ''],
+                ['Matematica', 'matematica'],
+                ['Italiano', 'italiano'],
+                ['Geometria', 'geometria']
+              ], params[:category]),
+              onchange: "this.form.submit()",
+              class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" %>
+        <% end %>
+      </div>
+
+      <!-- Filtro Difficoltà -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Difficoltà</label>
+        <%= form_with url: dashboard_esercizi_path, method: :get, local: true do |f| %>
+          <%= select_tag :difficulty,
+              options_for_select([
+                ['Tutte le difficoltà', ''],
+                ['Facile', 'facile'],
+                ['Medio', 'medio'],
+                ['Difficile', 'difficile']
+              ], params[:difficulty]),
+              onchange: "this.form.submit()",
+              class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" %>
+        <% end %>
+      </div>
+
+      <!-- Filtro Stato -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Stato</label>
+        <%= form_with url: dashboard_esercizi_path, method: :get, local: true do |f| %>
+          <%= select_tag :status,
+              options_for_select([
+                ['Tutti gli stati', ''],
+                ['Pubblicati', 'published'],
+                ['Bozze', 'draft']
+              ], params[:status]),
+              onchange: "this.form.submit()",
+              class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" %>
+        <% end %>
+      </div>
+
+      <!-- Ricerca -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Cerca</label>
+        <%= form_with url: dashboard_esercizi_path, method: :get, local: true do |f| %>
+          <%= text_field_tag :search, params[:search],
+              placeholder: "Cerca esercizi...",
+              class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista Esercizi -->
+  <% if @esercizi.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% @esercizi.each do |esercizio| %>
+        <div class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow">
+          <!-- Card Header -->
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-xl font-semibold text-gray-900">
+                <%= link_to esercizio.title, dashboard_esercizio_path(esercizio),
+                    class: "hover:text-blue-600 transition" %>
+              </h3>
+              <% if esercizio.published? %>
+                <span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded">
+                  Pubblicato
+                </span>
+              <% else %>
+                <span class="px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded">
+                  Bozza
+                </span>
+              <% end %>
+            </div>
+
+            <% if esercizio.description.present? %>
+              <p class="text-gray-600 mb-4 line-clamp-2">
+                <%= esercizio.description %>
+              </p>
+            <% end %>
+
+            <!-- Metadata -->
+            <div class="flex flex-wrap gap-2 mb-4 text-sm text-gray-500">
+              <% if esercizio.category.present? %>
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M7 7h10M7 12h10m-7 5h4"></path>
+                  </svg>
+                  <%= esercizio.category.capitalize %>
+                </span>
+              <% end %>
+
+              <% if esercizio.difficulty.present? %>
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                  </svg>
+                  <%= esercizio.difficulty.capitalize %>
+                </span>
+              <% end %>
+
+              <span class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                <%= esercizio.views_count %> visualizzazioni
+              </span>
+            </div>
+
+            <!-- Stats -->
+            <div class="border-t pt-4 mb-4">
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-500">Operazioni:</span>
+                <span class="font-medium"><%= esercizio.operations.count %></span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-500">Tentativi:</span>
+                <span class="font-medium"><%= esercizio.esercizio_attempts.count %></span>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-2">
+              <%= link_to edit_dashboard_esercizio_path(esercizio),
+                  class: "flex-1 text-center px-3 py-2 text-sm text-blue-600 bg-blue-50 rounded hover:bg-blue-100 transition" do %>
+                Modifica
+              <% end %>
+
+              <% if esercizio.share_token.present? %>
+                <%= link_to public_esercizio_path(share_token: esercizio.share_token),
+                    target: "_blank",
+                    class: "flex-1 text-center px-3 py-2 text-sm text-green-600 bg-green-50 rounded hover:bg-green-100 transition" do %>
+                  Visualizza
+                <% end %>
+              <% end %>
+
+              <%= button_to duplicate_dashboard_esercizio_path(esercizio),
+                  method: :post,
+                  class: "flex-1 text-center px-3 py-2 text-sm text-gray-600 bg-gray-50 rounded hover:bg-gray-100 transition" do %>
+                Duplica
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Share Link (if available) -->
+          <% if esercizio.share_token.present? %>
+            <div class="bg-gray-50 px-6 py-3 border-t">
+              <div class="flex items-center gap-2">
+                <input type="text"
+                       value="<%= public_esercizio_url(share_token: esercizio.share_token) %>"
+                       readonly
+                       class="flex-1 px-2 py-1 text-xs bg-white border rounded"
+                       onclick="this.select()">
+                <button onclick="navigator.clipboard.writeText(this.previousElementSibling.value)"
+                        class="p-1 text-gray-600 hover:text-gray-800">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Paginazione Pagy -->
+    <% if @pagy.pages > 1 %>
+      <div class="mt-8 flex justify-center">
+        <%== pagy_nav(@pagy,
+             nav_extra: 'class="pagy-nav flex flex-wrap items-center justify-center gap-1"',
+             link_extra: 'class="px-3 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded hover:bg-gray-50"',
+             active_extra: 'class="px-3 py-2 text-sm text-white bg-blue-600 border border-blue-600 rounded"') %>
+      </div>
+    <% end %>
+  <% else %>
+    <!-- Empty State -->
+    <div class="text-center py-12">
+      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+      </svg>
+      <h3 class="mt-2 text-sm font-medium text-gray-900">Nessun esercizio</h3>
+      <p class="mt-1 text-sm text-gray-500">Inizia creando un nuovo esercizio.</p>
+      <div class="mt-6">
+        <%= link_to new_dashboard_esercizio_path,
+            class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700" do %>
+          <svg class="mr-2 -ml-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          Crea il tuo primo esercizio
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

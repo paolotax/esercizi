@@ -21,121 +21,72 @@
       <div class="flex justify-center">
         <%= render partial: "strumenti/addizioni/column_addition",
                    locals: Addizione.new(addends: [234, 567],
+                                         show_addends: true,
                                          show_toolbar: true,
                                          show_carry: true).to_partial_params %>
       </div>
     </div>
 
-    <!-- Colonna Destra: Esempi e Form -->
-    <div class="flex flex-col gap-8">
+    <!-- Generatore -->
+    <div class="bg-white print:hidden rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Generatore di Addizioni</h2>
 
-      <!-- Box Esempi -->
-      <div class="bg-white rounded-lg shadow-lg p-8">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Esempi da Copiare</h2>
-
-        <p class="text-gray-600 mb-4 text-sm">
-          Inserisci operazioni separate da virgola, punto e virgola o nuova riga.
-        </p>
-
-        <!-- Esempi da copiare -->
-        <div class="grid grid-cols-1 gap-2" data-controller="copy-to-clipboard">
-          <div class="bg-gray-50 p-3 rounded-lg">
-            <div class="flex items-center justify-between mb-1">
-              <p class="text-xs font-semibold text-gray-700">Addizioni semplici:</p>
-              <button type="button"
-                      data-action="click->copy-to-clipboard#copy"
-                      data-copy-to-clipboard-text-param="234 + 567&#x0A;45 + 89&#x0A;123 + 456"
-                      class="text-xs px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-                Copia
-              </button>
-            </div>
-            <code class="bg-white px-2 py-1 rounded border block font-mono text-xs">234 + 567, 45 + 89, 123 + 456</code>
-          </div>
-
-          <div class="bg-gray-50 p-3 rounded-lg">
-            <div class="flex items-center justify-between mb-1">
-              <p class="text-xs font-semibold text-gray-700">Addizioni con più addendi:</p>
-              <button type="button"
-                      data-action="click->copy-to-clipboard#copy"
-                      data-copy-to-clipboard-text-param="12 + 34 + 56&#x0A;100 + 200 + 300&#x0A;45 + 67 + 89 + 12"
-                      class="text-xs px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-                Copia
-              </button>
-            </div>
-            <code class="bg-white px-2 py-1 rounded border block font-mono text-xs">12 + 34 + 56; 100 + 200 + 300; 45 + 67 + 89 + 12</code>
-          </div>
-
-          <div class="bg-gray-50 p-3 rounded-lg">
-            <div class="flex items-center justify-between mb-1">
-              <p class="text-xs font-semibold text-gray-700">Con riporti:</p>
-              <button type="button"
-                      data-action="click->copy-to-clipboard#copy"
-                      data-copy-to-clipboard-text-param="567 + 489&#x0A;178 + 945&#x0A;234 + 876 + 543"
-                      class="text-xs px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-                Copia
-              </button>
-            </div>
-            <code class="bg-white px-2 py-1 rounded border block font-mono text-xs">567 + 489, 178 + 945, 234 + 876 + 543</code>
-          </div>
-
-          <div class="bg-gray-50 p-3 rounded-lg">
-            <div class="flex items-center justify-between mb-1">
-              <p class="text-xs font-semibold text-gray-700">Numeri grandi:</p>
-              <button type="button"
-                      data-action="click->copy-to-clipboard#copy"
-                      data-copy-to-clipboard-text-param="1234 + 5678&#x0A;2345 + 6789 + 1234&#x0A;9876 + 5432"
-                      class="text-xs px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-                Copia
-              </button>
-            </div>
-            <code class="bg-white px-2 py-1 rounded border block font-mono text-xs">1234 + 5678, 2345 + 6789 + 1234, 9876 + 5432</code>
-          </div>
+      <%= form_with url: strumenti_addizioni_generate_path, method: :post, local: true,
+                    data: { turbo: false } do |f| %>
+        <div class="mb-4">
+          <%= f.text_area :operations,
+                          value: @operations,
+                          placeholder: "Inserisci le addizioni qui...\nEsempio: 234 + 567, 45 + 89, 123 + 456 + 789",
+                          rows: 4,
+                          class: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none font-mono text-sm" %>
         </div>
-      </div>
 
-      <!-- Box Generatore -->
-      <div class="bg-white rounded-lg shadow-lg p-8">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Generatore di Addizioni</h2>
+        <!-- Opzioni -->
+        <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+          <p class="text-sm font-semibold text-gray-700 mb-3">Opzioni:</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= f.check_box :show_toolbar, { checked: @options[:show_toolbar] != false, class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500" }, "true", "false" %>
+              <span class="text-sm text-gray-700">Mostra barra strumenti</span>
+            </label>
 
-        <%= form_with url: strumenti_addizioni_generate_path, method: :post, local: true,
-                      data: { turbo: false } do |f| %>
-          <div class="mb-4">
-            <%= f.text_area :operations,
-                            value: @operations,
-                            placeholder: "Incolla qui le tue addizioni...\n234 + 567\n45 + 89\n123 + 456 + 789",
-                            rows: 6,
-                            class: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none font-mono text-sm" %>
-          </div>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= f.check_box :show_carry, { checked: @options[:show_carry] != false, class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500" }, "true", "false" %>
+              <span class="text-sm text-gray-700">Mostra celle riporti</span>
+            </label>
 
-          <div class="mb-4">
-            <label class="flex items-center gap-2 text-gray-700">
-              <%= f.check_box :show_addends, {}, "true", "false" %>
-              <span class="font-semibold text-sm">Mostra addendi già compilati (solo risultato da scrivere)</span>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= f.check_box :show_addends, { checked: @options[:show_addends] == true, class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500" }, "true", "false" %>
+              <span class="text-sm text-gray-700">Mostra addendi</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= f.check_box :show_solution, { checked: @options[:show_solution] == true, class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500" }, "true", "false" %>
+              <span class="text-sm text-gray-700">Mostra risultato</span>
             </label>
           </div>
+        </div>
 
-          <div class="flex gap-4">
-            <%= f.submit "Genera Griglie",
-                        class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+        <div class="flex gap-4">
+          <%= f.submit "Genera",
+                      class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105 cursor-pointer" %>
 
-            <% if @operations.present? %>
-              <%= link_to "Cancella", strumenti_addizioni_path,
-                          class: "bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
-            <% end %>
-          </div>
-        <% end %>
+          <% if @operations.present? %>
+            <%= link_to "Cancella", strumenti_addizioni_path,
+                        class: "bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+          <% end %>
+        </div>
+      <% end %>
 
-        <% if @operations.present? && @addizioni.blank? %>
-          <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
-            <p class="text-yellow-900 text-sm">
-              <strong>Attenzione:</strong> Non sono state trovate operazioni valide.
-              Assicurati di inserire operazioni nel formato corretto (es: "234 + 1234").
-            </p>
-          </div>
-        <% end %>
-      </div>
+      <% if @operations.present? && @addizioni.blank? %>
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
+          <p class="text-yellow-900 text-sm">
+            <strong>Attenzione:</strong> Non sono state trovate operazioni valide.
+            Usa il formato: 234 + 567
+          </p>
+        </div>
+      <% end %>
     </div>
-    <!-- Fine Colonna Destra -->
 
   </div>
   <!-- Fine Layout a 2 colonne -->

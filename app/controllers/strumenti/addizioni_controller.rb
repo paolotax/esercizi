@@ -1,25 +1,49 @@
+# frozen_string_literal: true
+
 class Strumenti::AddizioniController < ApplicationController
   def show
-    # Mostra solo il form
+    @addizioni = []
+    @options = default_options
   end
 
   def generate
     @operations = params[:operations] || ""
-    show_addends = params[:show_addends] == "true"
+    @options = parse_options
 
-    if @operations.present?
-      @addizioni = Addizione.parse_multiple(@operations).map do |addizione|
-        # Ricrea l'addizione con le opzioni di visualizzazione
-        Addizione.new(
-          addends: addizione.addends,
-          operator: addizione.operator,
-          show_addends: show_addends,
-          show_toolbar: true,
-          show_carry: true
-        )
-      end
-    end
+    @addizioni = parse_addizioni_with_options(@operations, @options) if @operations.present?
 
     render :show
+  end
+
+  private
+
+  def default_options
+    {
+      show_addends: false,
+      show_toolbar: true,
+      show_carry: true,
+      show_solution: false
+    }
+  end
+
+  def parse_options
+    {
+      show_addends: params[:show_addends] == "true",
+      show_toolbar: params[:show_toolbar] == "true",
+      show_carry: params[:show_carry] == "true",
+      show_solution: params[:show_solution] == "true"
+    }
+  end
+
+  def parse_addizioni_with_options(operations_string, options)
+    return [] if operations_string.blank?
+
+    Addizione.parse_multiple(operations_string).map do |addizione|
+      Addizione.new(
+        addends: addizione.addends,
+        operator: addizione.operator,
+        **options
+      )
+    end
   end
 end

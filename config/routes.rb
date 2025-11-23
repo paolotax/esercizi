@@ -20,6 +20,26 @@ Rails.application.routes.draw do
   # API endpoint for dynamic column addition grid
   get "exercises/column_addition_grid", to: "exercises#column_addition_grid", as: "column_addition_grid"
 
+  # Dashboard per costruzione esercizi
+  namespace :dashboard do
+    resources :esercizi do
+      member do
+        post :duplicate
+        get :preview
+        get :export_pdf
+        post :add_operation
+        delete :remove_operation
+        patch :reorder_operations
+      end
+    end
+    resources :esercizio_templates
+  end
+
+  # Area pubblica per esercizi condivisi
+  get 'e/:share_token', to: 'public_esercizi#show', as: :public_esercizio
+  post 'e/:share_token/attempt', to: 'public_esercizi#attempt', as: :public_esercizio_attempt
+  get 'e/:share_token/results/:attempt_id', to: 'public_esercizi#results', as: :public_esercizio_results
+
   # Strumenti
   namespace :strumenti do
     get "addizioni", to: "addizioni#show", as: "addizioni"

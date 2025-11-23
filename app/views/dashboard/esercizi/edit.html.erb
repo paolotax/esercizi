@@ -1,0 +1,246 @@
+<div class="container-fluid px-4 py-6" data-controller="esercizio-builder">
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-6 bg-white p-4 rounded-lg shadow">
+    <div class="flex items-center gap-4">
+      <h1 class="text-2xl font-bold text-gray-900">
+        <%= @esercizio.title %>
+      </h1>
+      <% if @esercizio.published? %>
+        <span class="px-3 py-1 text-sm font-medium text-green-800 bg-green-100 rounded">
+          Pubblicato
+        </span>
+      <% else %>
+        <span class="px-3 py-1 text-sm font-medium text-gray-600 bg-gray-100 rounded">
+          Bozza
+        </span>
+      <% end %>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <%= link_to preview_dashboard_esercizio_path(@esercizio),
+                  target: "_blank",
+                  class: "px-4 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition" do %>
+        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+        </svg>
+        Anteprima
+      <% end %>
+
+      <% if @esercizio.draft? %>
+        <%= button_to "Pubblica",
+                      dashboard_esercizio_path(@esercizio),
+                      method: :patch,
+                      params: { esercizio: { published_at: Time.current } },
+                      class: "px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 transition" %>
+      <% end %>
+
+      <%= link_to dashboard_esercizio_path(@esercizio),
+                  class: "px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition" do %>
+        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        Salva e Esci
+      <% end %>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-12 gap-6">
+    <!-- Sidebar Sinistra: Generatori Disponibili -->
+    <div class="col-span-2">
+      <div class="bg-white rounded-lg shadow sticky top-6">
+        <div class="p-4 border-b">
+          <h3 class="font-semibold text-gray-900">Generatori</h3>
+        </div>
+        <div class="p-4 space-y-2">
+          <!-- Addizione -->
+          <div class="operation-generator bg-blue-50 border-2 border-blue-200 rounded-lg p-3 cursor-move hover:shadow-md transition"
+               data-operation-type="addizione"
+               draggable="true">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+              <span class="font-medium text-blue-900">Addizione</span>
+            </div>
+          </div>
+
+          <!-- Sottrazione -->
+          <div class="operation-generator bg-red-50 border-2 border-red-200 rounded-lg p-3 cursor-move hover:shadow-md transition"
+               data-operation-type="sottrazione"
+               draggable="true">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+              </svg>
+              <span class="font-medium text-red-900">Sottrazione</span>
+            </div>
+          </div>
+
+          <!-- Moltiplicazione -->
+          <div class="operation-generator bg-green-50 border-2 border-green-200 rounded-lg p-3 cursor-move hover:shadow-md transition"
+               data-operation-type="moltiplicazione"
+               draggable="true">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+              <span class="font-medium text-green-900">Moltiplicazione</span>
+            </div>
+          </div>
+
+          <!-- Abaco -->
+          <div class="operation-generator bg-purple-50 border-2 border-purple-200 rounded-lg p-3 cursor-move hover:shadow-md transition"
+               data-operation-type="abaco"
+               draggable="true">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+              <span class="font-medium text-purple-900">Abaco</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Area Centrale: Canvas per Drag & Drop -->
+    <div class="col-span-8">
+      <div class="bg-white rounded-lg shadow min-h-[600px]">
+        <div class="p-4 border-b flex justify-between items-center">
+          <h3 class="font-semibold text-gray-900">Area di Lavoro</h3>
+          <div class="flex gap-2">
+            <button class="px-3 py-1 text-sm text-gray-600 bg-gray-100 rounded hover:bg-gray-200"
+                    data-action="click->esercizio-builder#clearAll">
+              Svuota Tutto
+            </button>
+            <button class="px-3 py-1 text-sm text-blue-600 bg-blue-100 rounded hover:bg-blue-200"
+                    data-action="click->esercizio-builder#saveLayout">
+              Salva Layout
+            </button>
+          </div>
+        </div>
+
+        <!-- Drop Zone -->
+        <div id="operations-container"
+             class="p-6 min-h-[500px]"
+             data-esercizio-builder-target="dropZone"
+             data-esercizio-id="<%= @esercizio.id %>">
+
+          <% if @esercizio.operations.any? %>
+            <!-- Renderizza operazioni esistenti -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="operations-grid">
+              <% @esercizio.operations.each do |operation| %>
+                <div class="operation-item bg-gray-50 p-4 rounded-lg border-2 border-dashed border-gray-300"
+                     data-operation-id="<%= operation['id'] %>"
+                     data-operation-type="<%= operation['type'] %>"
+                     draggable="true">
+                  <div class="flex justify-between items-start mb-2">
+                    <span class="font-medium"><%= operation['type'].capitalize %></span>
+                    <button class="text-red-500 hover:text-red-700"
+                            data-action="click->esercizio-builder#removeOperation"
+                            data-operation-id="<%= operation['id'] %>">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="text-sm text-gray-600">
+                    Configurazione: <%= operation['config'].to_json %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <!-- Empty State -->
+            <div class="flex flex-col items-center justify-center h-[400px] text-gray-400">
+              <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+              </svg>
+              <p class="text-lg font-medium mb-2">Trascina qui le operazioni</p>
+              <p class="text-sm">Seleziona un generatore dalla barra laterale e trascinalo in quest'area</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Destra: Proprietà -->
+    <div class="col-span-2">
+      <div class="bg-white rounded-lg shadow sticky top-6">
+        <div class="p-4 border-b">
+          <h3 class="font-semibold text-gray-900">Proprietà</h3>
+        </div>
+
+        <!-- Form Proprietà Esercizio -->
+        <%= form_with model: @esercizio, url: dashboard_esercizio_path(@esercizio), method: :patch, local: false, data: { 'esercizio-builder-target': 'propertiesForm' } do |form| %>
+          <div class="p-4 space-y-4">
+            <div>
+              <%= form.label :title, "Titolo", class: "block text-sm font-medium text-gray-700 mb-1" %>
+              <%= form.text_field :title, class: "w-full px-3 py-2 border border-gray-300 rounded-md text-sm" %>
+            </div>
+
+            <div>
+              <%= form.label :category, "Categoria", class: "block text-sm font-medium text-gray-700 mb-1" %>
+              <%= form.select :category,
+                  options_for_select([
+                    ['Matematica', 'matematica'],
+                    ['Italiano', 'italiano'],
+                    ['Geometria', 'geometria']
+                  ], @esercizio.category),
+                  {},
+                  class: "w-full px-3 py-2 border border-gray-300 rounded-md text-sm" %>
+            </div>
+
+            <div>
+              <%= form.label :difficulty, "Difficoltà", class: "block text-sm font-medium text-gray-700 mb-1" %>
+              <%= form.select :difficulty,
+                  options_for_select([
+                    ['Facile', 'facile'],
+                    ['Medio', 'medio'],
+                    ['Difficile', 'difficile']
+                  ], @esercizio.difficulty),
+                  {},
+                  class: "w-full px-3 py-2 border border-gray-300 rounded-md text-sm" %>
+            </div>
+
+            <div>
+              <%= form.submit "Aggiorna Proprietà", class: "w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition text-sm" %>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Pannello Configurazione Operazione (nascosto di default) -->
+        <div id="operation-config-panel" class="hidden border-t">
+          <div class="p-4">
+            <h4 class="font-medium text-gray-900 mb-3">Configura Operazione</h4>
+            <div id="operation-config-form">
+              <!-- Il contenuto verrà generato dinamicamente -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Stili per il drag & drop */
+  .dragging {
+    opacity: 0.5;
+  }
+
+  .drag-over {
+    background-color: #EBF8FF;
+    border-color: #3182CE;
+  }
+
+  .operation-item {
+    transition: transform 0.2s;
+  }
+
+  .operation-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+</style>

@@ -1,0 +1,20 @@
+<div class="operation-item bg-white p-4 rounded-lg border-2 border-gray-300 shadow-sm hover:shadow-md transition-shadow"
+     data-operation-id="<%= operation['id'] %>"
+     data-operation-type="<%= operation['type'] %>"
+     draggable="true">
+
+  <div class="flex justify-between items-start mb-2">
+    <span class="font-medium text-lg capitalize"><%= operation['type'] %></span>
+    <button class="text-red-500 hover:text-red-700 transition"
+            data-action="click->esercizio-builder#removeOperation"
+            data-operation-id="<%= operation['id'] %>">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="operation-preview">
+    <%= EsercizioRenderer.new(nil, self).render_operation(operation) %>
+  </div>
+</div>

@@ -76,13 +76,13 @@
         <div style="<%= sottrazione.grid_style %>">
           <% sottrazione.minuend_digits.each_with_index do |digit, idx| %>
             <input type="text"
-                   class="text-center text-2xl font-bold <%= 'border-r-2 border-gray-300' unless idx == sottrazione.minuend_digits.length - 1 %> <%= 'line-through' if sottrazione.crossed_out[idx] && sottrazione.show_solution %>"
+                   class="text-center text-2xl font-bold <%= 'border-r-2 border-gray-300' unless idx == sottrazione.minuend_digits.length - 1 %>"
                    data-column-subtraction-target="input"
                    data-correct-answer="<%= digit %>"
                    data-crossed-out="<%= sottrazione.crossed_out[idx] %>"
                    maxlength="1"
                    placeholder="."
-                   <% if (sottrazione.show_minuend_subtrahend || sottrazione.show_solution) && digit.present? %>value="<%= digit %>"<% end %>>
+                   <% if sottrazione.show_minuend_subtrahend && digit.present? %>value="<%= digit %>"<% end %>>
           <% end %>
         </div>
       </div>
@@ -98,7 +98,7 @@
                    data-correct-answer="<%= digit %>"
                    maxlength="1"
                    placeholder="."
-                   <% if (sottrazione.show_minuend_subtrahend || sottrazione.show_solution) && digit.present? %>value="<%= digit %>"<% end %>>
+                   <% if sottrazione.show_minuend_subtrahend && digit.present? %>value="<%= digit %>"<% end %>>
           <% end %>
         </div>
       </div>

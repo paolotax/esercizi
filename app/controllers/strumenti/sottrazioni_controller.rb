@@ -1,25 +1,49 @@
+# frozen_string_literal: true
+
 class Strumenti::SottrazioniController < ApplicationController
   def show
-    # Mostra solo il form
+    @sottrazioni = []
+    @options = default_options
   end
 
   def generate
     @operations = params[:operations] || ""
-    show_minuend_subtrahend = params[:show_minuend_subtrahend] == "true"
+    @options = parse_options
 
-    if @operations.present?
-      @sottrazioni = Sottrazione.parse_multiple(@operations).map do |sottrazione|
-        # Ricrea la sottrazione con le opzioni di visualizzazione
-        Sottrazione.new(
-          minuend: sottrazione.minuend,
-          subtrahend: sottrazione.subtrahend,
-          show_minuend_subtrahend: show_minuend_subtrahend,
-          show_toolbar: true,
-          show_borrow: true
-        )
-      end
-    end
+    @sottrazioni = parse_sottrazioni_with_options(@operations, @options) if @operations.present?
 
     render :show
+  end
+
+  private
+
+  def default_options
+    {
+      show_minuend_subtrahend: false,
+      show_toolbar: true,
+      show_borrow: true,
+      show_solution: false
+    }
+  end
+
+  def parse_options
+    {
+      show_minuend_subtrahend: params[:show_minuend_subtrahend] == "true",
+      show_toolbar: params[:show_toolbar] == "true",
+      show_borrow: params[:show_borrow] == "true",
+      show_solution: params[:show_solution] == "true"
+    }
+  end
+
+  def parse_sottrazioni_with_options(operations_string, options)
+    return [] if operations_string.blank?
+
+    Sottrazione.parse_multiple(operations_string).map do |sottrazione|
+      Sottrazione.new(
+        minuend: sottrazione.minuend,
+        subtrahend: sottrazione.subtrahend,
+        **options
+      )
+    end
   end
 end

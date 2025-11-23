@@ -18,65 +18,80 @@
     </p>
   </div>
 
-  <!-- Generatore -->
-  <div class="bg-white print:hidden rounded-lg shadow-lg p-8 mb-8">
-    <h2 class="text-2xl font-bold text-gray-800 mb-4">Generatore di Moltiplicazioni</h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 print:hidden items-start">
 
-    <%= form_with url: strumenti_moltiplicazioni_generate_path, method: :post, local: true,
-                  data: { turbo: false } do |f| %>
-      <div class="mb-4">
-        <%= f.text_area :multiplications,
-                        value: @multiplications_string,
-                        placeholder: "Inserisci le moltiplicazioni qui...\nEsempio: 23x4 125x12 34x56",
-                        rows: 4,
-                        class: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none font-mono text-sm" %>
+    <!-- Colonna Sinistra: Moltiplicazioni Libere -->
+    <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Moltiplicazioni Libere</h2>
+      <p class="text-gray-700 text-lg mb-6">
+        Prova a calcolare una moltiplicazione interattiva. Usa i pulsanti per aiutarti!
+      </p>
+      <div class="flex justify-center">
+        <%= render 'strumenti/moltiplicazioni/column_multiplication', **Moltiplicazione.new(multiplicand: 25, multiplier: 12, editable: true, show_toolbar: true).to_partial_params %>
       </div>
+    </div>
 
-      <!-- Opzioni -->
-      <div class="mb-6 p-4 bg-gray-50 rounded-lg">
-        <p class="text-sm font-semibold text-gray-700 mb-3">Opzioni:</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <%= f.check_box :show_toolbar, { checked: @options[:show_toolbar] != false, class: "w-4 h-4 text-purple-600 rounded focus:ring-purple-500" }, "true", "false" %>
-            <span class="text-sm text-gray-700">Mostra barra strumenti</span>
-          </label>
+    <!-- Generatore -->
+    <div class="bg-white print:hidden rounded-lg shadow-lg p-8 mb-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Generatore di Moltiplicazioni</h2>
 
-          <label class="flex items-center gap-2 cursor-pointer">
-            <%= f.check_box :show_partial_products, { checked: @options[:show_partial_products] == true, class: "w-4 h-4 text-purple-600 rounded focus:ring-purple-500" }, "true", "false" %>
-            <span class="text-sm text-gray-700">Mostra prodotti parziali</span>
-          </label>
-
-          <label class="flex items-center gap-2 cursor-pointer">
-            <%= f.check_box :editable, { checked: @options[:editable] != false, class: "w-4 h-4 text-purple-600 rounded focus:ring-purple-500" }, "true", "false" %>
-            <span class="text-sm text-gray-700">Campi modificabili</span>
-          </label>
-
-          <label class="flex items-center gap-2 cursor-pointer">
-            <%= f.check_box :show_exercise, { checked: @options[:show_exercise] == true, class: "w-4 h-4 text-purple-600 rounded focus:ring-purple-500" }, "true", "false" %>
-            <span class="text-sm text-gray-700">Mostra esercizio (soluzione)</span>
-          </label>
+      <%= form_with url: strumenti_moltiplicazioni_generate_path, method: :post, local: true,
+                    data: { turbo: false } do |f| %>
+        <div class="mb-4">
+          <%= f.text_area :multiplications,
+                          value: @multiplications_string,
+                          placeholder: "Inserisci le moltiplicazioni qui...\nEsempio: 23x4 125x12 34x56",
+                          rows: 4,
+                          class: "w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none font-mono text-sm" %>
         </div>
-      </div>
 
-      <div class="flex gap-4">
-        <%= f.submit "Genera",
-                    class: "bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105 cursor-pointer" %>
+        <!-- Opzioni -->
+        <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+          <p class="text-sm font-semibold text-gray-700 mb-3">Opzioni:</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= f.check_box :show_toolbar, { checked: @options[:show_toolbar] != false, class: "w-4 h-4 text-purple-600 rounded focus:ring-purple-500" }, "true", "false" %>
+              <span class="text-sm text-gray-700">Mostra barra strumenti</span>
+            </label>
 
-        <% if @multiplications_string.present? %>
-          <%= link_to "Cancella", strumenti_moltiplicazioni_path,
-                      class: "bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
-        <% end %>
-      </div>
-    <% end %>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= f.check_box :show_partial_products, { checked: @options[:show_partial_products] == true, class: "w-4 h-4 text-purple-600 rounded focus:ring-purple-500" }, "true", "false" %>
+              <span class="text-sm text-gray-700">Mostra prodotti parziali</span>
+            </label>
 
-    <% if @multiplications_string.present? && @multiplications.blank? %>
-      <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
-        <p class="text-yellow-900 text-sm">
-          <strong>Attenzione:</strong> Non sono state trovate moltiplicazioni valide.
-          Usa il formato: 123x45 o 123*45
-        </p>
-      </div>
-    <% end %>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= f.check_box :editable, { checked: @options[:editable] != false, class: "w-4 h-4 text-purple-600 rounded focus:ring-purple-500" }, "true", "false" %>
+              <span class="text-sm text-gray-700">Campi modificabili</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= f.check_box :show_exercise, { checked: @options[:show_exercise] == true, class: "w-4 h-4 text-purple-600 rounded focus:ring-purple-500" }, "true", "false" %>
+              <span class="text-sm text-gray-700">Mostra risultato</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <%= f.submit "Genera",
+                      class: "bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105 cursor-pointer" %>
+
+          <% if @multiplications_string.present? %>
+            <%= link_to "Cancella", strumenti_moltiplicazioni_path,
+                        class: "bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @multiplications_string.present? && @multiplications.blank? %>
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
+          <p class="text-yellow-900 text-sm">
+            <strong>Attenzione:</strong> Non sono state trovate moltiplicazioni valide.
+            Usa il formato: 123x45 o 123*45
+          </p>
+        </div>
+      <% end %>
+    </div>
+
   </div>
 
   <!-- Moltiplicazioni Generate -->

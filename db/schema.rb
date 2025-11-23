@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_15_112225) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_23_112725) do
   create_table "corsi", force: :cascade do |t|
     t.string "codice", null: false
     t.datetime "created_at", null: false
@@ -28,6 +28,52 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_15_112225) do
     t.datetime "updated_at", null: false
     t.integer "volume_id", null: false
     t.index ["volume_id"], name: "index_discipline_on_volume_id"
+  end
+
+  create_table "esercizi", force: :cascade do |t|
+    t.string "category"
+    t.text "content", default: "{}"
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "difficulty"
+    t.datetime "published_at"
+    t.string "share_token"
+    t.string "slug", null: false
+    t.text "tags", default: "[]"
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.integer "views_count", default: 0
+    t.index ["category"], name: "index_esercizi_on_category"
+    t.index ["published_at"], name: "index_esercizi_on_published_at"
+    t.index ["share_token"], name: "index_esercizi_on_share_token", unique: true
+    t.index ["slug"], name: "index_esercizi_on_slug", unique: true
+  end
+
+  create_table "esercizio_attempts", force: :cascade do |t|
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.integer "esercizio_id", null: false
+    t.text "results", default: "{}"
+    t.float "score"
+    t.datetime "started_at"
+    t.string "student_identifier"
+    t.integer "time_spent"
+    t.datetime "updated_at", null: false
+    t.index ["esercizio_id", "student_identifier"], name: "idx_on_esercizio_id_student_identifier_efe29ead75"
+    t.index ["esercizio_id"], name: "index_esercizio_attempts_on_esercizio_id"
+    t.index ["student_identifier"], name: "index_esercizio_attempts_on_student_identifier"
+  end
+
+  create_table "esercizio_templates", force: :cascade do |t|
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.text "default_config", default: "{}"
+    t.text "description"
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.integer "usage_count", default: 0
+    t.index ["category"], name: "index_esercizio_templates_on_category"
+    t.index ["name"], name: "index_esercizio_templates_on_name"
   end
 
   create_table "pagine", force: :cascade do |t|
@@ -56,6 +102,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_15_112225) do
   end
 
   add_foreign_key "discipline", "volumi"
+  add_foreign_key "esercizio_attempts", "esercizi"
   add_foreign_key "pagine", "discipline"
   add_foreign_key "volumi", "corsi"
 end
