@@ -78,11 +78,17 @@ export default class extends Controller {
   }
 
   handleOperationDragStart(e) {
+    const operationItem = e.target.closest('.operation-item')
+    if (!operationItem) return
+
+    const operationId = operationItem.dataset.operationId
+    console.log("handleOperationDragStart - operationId:", operationId)
+
     e.dataTransfer.effectAllowed = 'move'
-    e.dataTransfer.setData('operationId', e.target.dataset.operationId)
+    e.dataTransfer.setData('operationId', operationId)
     e.dataTransfer.setData('isNew', 'false')
-    e.target.classList.add('dragging')
-    this.draggedElement = e.target
+    operationItem.classList.add('dragging')
+    this.draggedElement = operationItem
   }
 
   handleDragEnd(e) {
@@ -90,7 +96,10 @@ export default class extends Controller {
   }
 
   handleOperationDragEnd(e) {
-    e.target.classList.remove('dragging')
+    const operationItem = e.target.closest('.operation-item')
+    if (operationItem) {
+      operationItem.classList.remove('dragging')
+    }
     // Rimuovi tutti gli indicatori di inserimento
     this.dropZoneTarget.querySelectorAll('.operation-item').forEach(op => {
       op.classList.remove('drag-over-top', 'drag-over-bottom')
@@ -102,10 +111,11 @@ export default class extends Controller {
     e.preventDefault()
     e.stopPropagation()
 
-    if (!this.draggedElement || this.draggedElement === e.currentTarget) return
+    const targetOperation = e.target.closest('.operation-item')
+    if (!targetOperation) return
+    if (!this.draggedElement || this.draggedElement === targetOperation) return
 
-    const afterElement = this.getDragAfterElement(e.currentTarget, e.clientY)
-    const operation = e.currentTarget
+    const afterElement = this.getDragAfterElement(targetOperation, e.clientY)
 
     // Rimuovi classi da tutti gli elementi
     this.dropZoneTarget.querySelectorAll('.operation-item').forEach(op => {
@@ -114,9 +124,9 @@ export default class extends Controller {
 
     // Aggiungi indicatore visuale
     if (afterElement) {
-      operation.classList.add('drag-over-bottom')
+      targetOperation.classList.add('drag-over-bottom')
     } else {
-      operation.classList.add('drag-over-top')
+      targetOperation.classList.add('drag-over-top')
     }
   }
 
@@ -124,11 +134,13 @@ export default class extends Controller {
     e.preventDefault()
     e.stopPropagation()
 
-    if (!this.draggedElement || this.draggedElement === e.currentTarget) return
+    const targetOperation = e.target.closest('.operation-item')
+    if (!targetOperation) return
+    if (!this.draggedElement || this.draggedElement === targetOperation) return
 
-    const afterElement = this.getDragAfterElement(e.currentTarget, e.clientY)
-    const targetOperation = e.currentTarget
-    const operationsGrid = this.dropZoneTarget.querySelector('#operations-grid') || this.dropZoneTarget
+    console.log("handleOperationDrop - moving operation")
+
+    const afterElement = this.getDragAfterElement(targetOperation, e.clientY)
 
     if (afterElement) {
       // Inserisci dopo l'elemento target
@@ -155,7 +167,11 @@ export default class extends Controller {
 
   handleDragOver(e) {
     e.preventDefault()
-    e.dataTransfer.dropEffect = 'copy'
+
+    // Determina se stiamo trascinando una nuova operazione o riordinando
+    const isNew = this.draggedElement === null
+    e.dataTransfer.dropEffect = isNew ? 'copy' : 'move'
+
     this.dropZoneTarget.classList.add('drag-over')
 
     // Mostra indicatore di posizionamento
@@ -259,9 +275,35 @@ export default class extends Controller {
         console.error("No operation type found in dataTransfer!")
       }
     } else {
+      // Riordinamento operazione esistente
       const operationId = e.dataTransfer.getData('operationId')
-      // Qui potresti implementare il riordinamento
       console.log('Riordinamento operazione:', operationId)
+
+      if (this.draggedElement) {
+        const targetOperation = e.target.closest('.operation-item')
+
+        if (targetOperation && targetOperation !== this.draggedElement) {
+          // Determina se inserire prima o dopo
+          const afterElement = this.getDragAfterElement(targetOperation, e.clientY)
+
+          if (afterElement) {
+            targetOperation.parentNode.insertBefore(this.draggedElement, targetOperation.nextSibling)
+          } else {
+            targetOperation.parentNode.insertBefore(this.draggedElement, targetOperation)
+          }
+
+          console.log("Operation moved, saving order...")
+          await this.saveOperationsOrder()
+        } else if (!targetOperation) {
+          // Drop su area vuota - sposta alla fine
+          const operationsGrid = this.dropZoneTarget.querySelector('#operations-grid')
+          if (operationsGrid) {
+            operationsGrid.appendChild(this.draggedElement)
+            console.log("Operation moved to end, saving order...")
+            await this.saveOperationsOrder()
+          }
+        }
+      }
     }
   }
 
