@@ -167,6 +167,7 @@ export default class extends Controller {
 
   handleDragOver(e) {
     e.preventDefault()
+    e.stopPropagation()
 
     // Determina se stiamo trascinando una nuova operazione o riordinando
     const isNew = this.draggedElement === null
