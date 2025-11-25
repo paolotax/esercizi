@@ -1,14 +1,13 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-cyan-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Esercizio 1: Sottolinea e trascrivi l'attributo -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-yellow-200 shadow-2xl p-4 md:p-6" data-controller="word-highlighter fill-blanks" data-word-highlighter-multi-color-value="false">
-    <h2 class="text-lg md:text-xl font-bold text-yellow-700 mb-3">
+  <div class="mb-6 bg-<%= @pagina.base_color %>-100 rounded-lg p-4 md:p-6" data-controller="word-highlighter fill-blanks" data-word-highlighter-multi-color-value="false">
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-3">
       <div class="flex items-center gap-2 flex-wrap">
         <div class="flex items-center gap-2">
-          <span class="bg-yellow-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">1</span>
+          <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">1</span>
           <span class="bg-yellow-400 text-blue-800 px-2 py-1 rounded text-sm md:text-base font-bold whitespace-nowrap">IMPARARE TUTTI</span>
         </div>
         <span>Sottolinea e trascrivi l'<span class="text-blue-600 font-bold underline">attributo</span>, poi spiega <em>a chi</em> o <em>a che cosa</em> si riferisce. Osserva l'esempio.</span>
@@ -22,7 +21,7 @@
 
     <div class="space-y-4">
       <!-- Esempio -->
-      <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4">
+      <div class="bg-white rounded-lg p-4">
         <p class="text-base md:text-lg mb-2 cursor-pointer">• Un gatto <span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded underline">goloso</span> ha rubato il formaggio.</p>
         <div class="flex items-center gap-2 ml-4">
           <span class="text-gray-700 font-bold">goloso</span>
@@ -32,85 +31,85 @@
       </div>
 
       <!-- Frasi da completare -->
-      <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4">
+      <div class="bg-white rounded-lg p-4">
         <p class="text-base md:text-lg mb-2 cursor-pointer">• Tu mi hai dato un <span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">buon</span> consiglio.</p>
         <div class="flex items-center gap-2 ml-4">
           <input type="text"
-                 class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 w-24"
+                 class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 w-24"
                  data-fill-blanks-target="input"
                  data-correct-answer="buon"
                  placeholder="">
           <span>= attr. del</span>
           <input type="text"
-                 class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 w-40"
+                 class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 w-40"
                  data-fill-blanks-target="input"
                  data-correct-answer="complemento oggetto"
                  placeholder="">
         </div>
       </div>
 
-      <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4">
+      <div class="bg-white rounded-lg p-4">
         <p class="text-base md:text-lg mb-2 cursor-pointer">• Ci sono <span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">due</span> gatti sul tetto.</p>
         <div class="flex items-center gap-2 ml-4">
           <input type="text"
-                 class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 w-24"
+                 class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 w-24"
                  data-fill-blanks-target="input"
                  data-correct-answer="due"
                  placeholder="">
           <span>= attr. del</span>
           <input type="text"
-                 class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 w-40"
+                 class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 w-40"
                  data-fill-blanks-target="input"
                  data-correct-answer="soggetto"
                  placeholder="">
         </div>
       </div>
 
-      <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4">
+      <div class="bg-white rounded-lg p-4">
         <p class="text-base md:text-lg mb-2 cursor-pointer">• Ho mangiato un'<span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">ottima</span> pizza.</p>
         <div class="flex items-center gap-2 ml-4">
           <input type="text"
-                 class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 w-24"
+                 class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 w-24"
                  data-fill-blanks-target="input"
                  data-correct-answer="ottima"
                  placeholder="">
           <span>= attr. del</span>
           <input type="text"
-                 class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 w-40"
+                 class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 w-40"
                  data-fill-blanks-target="input"
                  data-correct-answer="complemento oggetto"
                  placeholder="">
         </div>
       </div>
 
-      <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4">
+      <div class="bg-white rounded-lg p-4">
         <p class="text-base md:text-lg mb-2 cursor-pointer">• Ecco la foto del <span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">mio</span> papà.</p>
         <div class="flex items-center gap-2 ml-4">
           <input type="text"
-                 class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 w-24"
+                 class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 w-24"
                  data-fill-blanks-target="input"
                  data-correct-answer="mio"
                  placeholder="">
           <span>= attr. del</span>
           <input type="text"
-                 class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 w-40"
+                 class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 w-40"
                  data-fill-blanks-target="input"
                  data-correct-answer="complemento di specificazione"
                  placeholder="">
         </div>
       </div>
 
-      <div class="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4">
+      <div class="bg-white rounded-lg p-4">
         <p class="text-base md:text-lg mb-2 cursor-pointer">• Scrivo con una penna <span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">rossa</span>.</p>
         <div class="flex items-center gap-2 ml-4">
           <input type="text"
-                 class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 w-24"
+                 class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 w-24"
                  data-fill-blanks-target="input"
                  data-correct-answer="rossa"
                  placeholder="">
           <span>= attr. del</span>
           <input type="text"
-                 class="border-b-2 border-yellow-500 bg-transparent px-2 py-1 focus:outline-none focus:border-yellow-700 w-40"
+                 class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 w-40"
                  data-fill-blanks-target="input"
                  data-correct-answer="complemento di mezzo"
                  placeholder="">
@@ -120,38 +119,38 @@
   </div>
 
   <!-- Esercizio 2: Riscrivi con attributi -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-blue-700 mb-3">
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-3">
       <div class="flex items-center gap-2 flex-wrap">
-        <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">2</span>
+        <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">2</span>
         <span>Riscrivi le frasi e arricchiscile con degli <span class="text-blue-600 font-bold underline">attributi</span>. Poi spiega a chi o a che cosa si riferiscono.</span>
       </div>
     </h2>
 
     <div class="space-y-4">
-      <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
+      <div class="bg-white rounded-lg p-4">
         <p class="text-gray-700 mb-3">• Ti ho scritto una lettera con il computer.</p>
         <input type="text"
-               class="w-full border-b-2 border-blue-500 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-700 mb-2"
+               class="w-full border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 mb-2"
                data-fill-blanks-target="input"
                data-correct-answer="libera"
                placeholder="Riscrivi la frase con attributi...">
         <input type="text"
-               class="w-full border-b-2 border-blue-500 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-700"
+               class="w-full border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1"
                data-fill-blanks-target="input"
                data-correct-answer="libera"
                placeholder="Spiega a chi o a che cosa si riferiscono...">
       </div>
 
-      <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
+      <div class="bg-white rounded-lg p-4">
         <p class="text-gray-700 mb-3">• Un bambino correva in un prato insieme al suo cane.</p>
         <input type="text"
-               class="w-full border-b-2 border-blue-500 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-700 mb-2"
+               class="w-full border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 mb-2"
                data-fill-blanks-target="input"
                data-correct-answer="libera"
                placeholder="Riscrivi la frase con attributi...">
         <input type="text"
-               class="w-full border-b-2 border-blue-500 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-700"
+               class="w-full border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1"
                data-fill-blanks-target="input"
                data-correct-answer="libera"
                placeholder="Spiega a chi o a che cosa si riferiscono...">
@@ -160,36 +159,36 @@
   </div>
 
   <!-- Esercizio 3: Sottolinea attributi e cerchia apposizioni -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
-    <h2 class="text-lg md:text-xl font-bold text-green-700 mb-3">
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-3">
       <div class="flex items-center gap-2 flex-wrap">
-        <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center flex-shrink-0">3</span>
+        <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">3</span>
         <span>Sottolinea gli <span class="text-blue-600 font-bold">attributi<span class="inline-block w-6 h-6 bg-blue-300 rounded ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span> e cerchia le <span class="text-red-600 font-bold">apposizioni<span class="inline-block w-6 h-6 bg-red-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span>.</span>
       </div>
     </h2>
 
     <div class="space-y-3 text-base md:text-lg cursor-pointer">
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
+      <div class="bg-white rounded-lg px-3 py-3">
         <span class="text-gray-700">• <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Mia</span> sorella <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Lucia</span> legge <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">tanti</span> fumetti.</span>
       </div>
 
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
+      <div class="bg-white rounded-lg px-3 py-3">
         <span class="text-gray-700">• <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Questo</span> quadro è opera del <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">pittore</span> Tiziano.</span>
       </div>
 
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
+      <div class="bg-white rounded-lg px-3 py-3">
         <span class="text-gray-700">• Il <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">grande</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">poeta</span> Dante nacque a Firenze.</span>
       </div>
 
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
+      <div class="bg-white rounded-lg px-3 py-3">
         <span class="text-gray-700">• Passami <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">quel</span> libro, per cortesia.</span>
       </div>
 
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
+      <div class="bg-white rounded-lg px-3 py-3">
         <span class="text-gray-700">• Il <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">fiume</span> Arno bagna Firenze, <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">bellissima</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">città</span> d'arte.</span>
       </div>
 
-      <div class="bg-green-50 border-2 border-green-200 rounded-xl px-3 py-3">
+      <div class="bg-white rounded-lg px-3 py-3">
         <span class="text-gray-700">• Ulisse desiderava tanto rivedere il <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">caro</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">figlio</span> Telemaco e l'<span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">amata</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">moglie</span> Penelope.</span>
       </div>
     </div>
@@ -199,8 +198,5 @@
     Grammatica pp. <%= link_to "114", pagina_path("nvl5_gram_p114"), class: "text-red-600 hover:text-red-800 underline font-bold" %>, <%= link_to "115", pagina_path("nvl5_gram_p115"), class: "text-red-600 hover:text-red-800 underline font-bold" %>
   </div>
 
-  <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'cyan', current_page: 'nvl5_gram_p188' %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 </div>
