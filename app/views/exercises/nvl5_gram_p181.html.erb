@@ -1,163 +1,76 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-cyan-50 via-white to-blue-50 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Esercizio 3: Articoli e pronomi -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-yellow-200 shadow-2xl p-4 md:p-6" data-controller="multiple-choice">
-    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4">
-      <span class="bg-yellow-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">3</span>
-      Leggi il testo seguente e osserva le parole evidenziate: alcune sono articoli, altri pronomi. Completa la tabella.
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="multiple-choice">
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">3</span>
+      <span>Leggi il testo seguente e osserva le parole evidenziate: alcune sono articoli, altri pronomi. Completa la tabella.</span>
     </h2>
 
-    <div class="mb-4 text-base md:text-lg text-gray-700">
+    <div class="mb-4 text-base md:text-lg text-gray-700 bg-white rounded-lg p-3">
       <p>"<strong>Il</strong> papà prepara per Mattia e i suoi amici <strong>una</strong> focaccia. Quando è cotta, <strong>la</strong> toglie dal forno e <strong>la</strong> taglia a fette; poi prende tutte <strong>le</strong> parti e <strong>le</strong> mette in <strong>un</strong> contenitore perché Mattia porti <strong>la</strong> focaccia è al parco per merenda."</p>
     </div>
 
     <div class="space-y-3 text-base md:text-lg">
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3 flex items-center justify-between">
-        <span class="text-gray-700"><strong>Il</strong> (1)</span>
-        <div class="flex items-center gap-4">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word1" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5">
-            <span>Articolo</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word1" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
-            <span>Pronome</span>
-          </label>
+      <% [
+        { word: "Il", num: 1, articolo: true },
+        { word: "una", num: 2, articolo: true },
+        { word: "la", num: 3, articolo: false },
+        { word: "la", num: 4, articolo: false },
+        { word: "le", num: 5, articolo: true },
+        { word: "le", num: 6, articolo: false },
+        { word: "un", num: 7, articolo: true },
+        { word: "la", num: 8, articolo: true }
+      ].each do |item| %>
+        <div class="bg-white rounded-lg p-3 flex items-center justify-between">
+          <span class="text-gray-700"><strong><%= item[:word] %></strong> (<%= item[:num] %>)</span>
+          <div class="flex items-center gap-4">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="word<%= item[:num] %>" data-multiple-choice-target="answer" data-correct-answer="<%= item[:articolo] %>" class="w-5 h-5">
+              <span>Articolo</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="word<%= item[:num] %>" data-multiple-choice-target="answer" data-correct-answer="<%= !item[:articolo] %>" class="w-5 h-5">
+              <span>Pronome</span>
+            </label>
+          </div>
         </div>
-      </div>
-
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3 flex items-center justify-between">
-        <span class="text-gray-700"><strong>una</strong> (2)</span>
-        <div class="flex items-center gap-4">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word2" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5">
-            <span>Articolo</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word2" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
-            <span>Pronome</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3 flex items-center justify-between">
-        <span class="text-gray-700"><strong>la</strong> (3)</span>
-        <div class="flex items-center gap-4">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word3" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
-            <span>Articolo</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word3" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5">
-            <span>Pronome</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3 flex items-center justify-between">
-        <span class="text-gray-700"><strong>la</strong> (4)</span>
-        <div class="flex items-center gap-4">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word4" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
-            <span>Articolo</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word4" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5">
-            <span>Pronome</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3 flex items-center justify-between">
-        <span class="text-gray-700"><strong>le</strong> (5)</span>
-        <div class="flex items-center gap-4">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word5" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5">
-            <span>Articolo</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word5" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
-            <span>Pronome</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3 flex items-center justify-between">
-        <span class="text-gray-700"><strong>le</strong> (6)</span>
-        <div class="flex items-center gap-4">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word6" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
-            <span>Articolo</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word6" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5">
-            <span>Pronome</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3 flex items-center justify-between">
-        <span class="text-gray-700"><strong>un</strong> (7)</span>
-        <div class="flex items-center gap-4">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word7" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5">
-            <span>Articolo</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word7" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
-            <span>Pronome</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3 flex items-center justify-between">
-        <span class="text-gray-700"><strong>la</strong> (8)</span>
-        <div class="flex items-center gap-4">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word8" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5">
-            <span>Articolo</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="radio" name="word8" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
-            <span>Pronome</span>
-          </label>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
 
   <!-- Esercizio 4: Aggettivi qualificativi -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-blue-200 shadow-2xl p-4 md:p-6" data-controller="multiple-choice">
-    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4">
-      <span class="bg-blue-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">4</span>
-      Quale dei seguenti gruppi di aggettivi contiene solo aggettivi qualificativi?
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="multiple-choice">
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">4</span>
+      <span>Quale dei seguenti gruppi di aggettivi contiene solo aggettivi qualificativi?</span>
     </h2>
 
     <div class="space-y-3 text-base md:text-lg">
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3">
+      <div class="bg-white rounded-lg p-3">
         <label class="flex items-center gap-3 cursor-pointer">
           <input type="radio" name="aggettivi" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
           <span class="text-gray-700">alto • buono • molto • simpatico</span>
         </label>
       </div>
 
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3">
+      <div class="bg-white rounded-lg p-3">
         <label class="flex items-center gap-3 cursor-pointer">
           <input type="radio" name="aggettivi" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
           <span class="text-gray-700">splendido • vostro • difficile • profumato</span>
         </label>
       </div>
 
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3">
+      <div class="bg-white rounded-lg p-3">
         <label class="flex items-center gap-3 cursor-pointer">
           <input type="radio" name="aggettivi" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
           <span class="text-gray-700">leggero • interessante • questo • umido</span>
         </label>
       </div>
 
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3">
+      <div class="bg-white rounded-lg p-3">
         <label class="flex items-center gap-3 cursor-pointer">
           <input type="radio" name="aggettivi" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5">
           <span class="text-gray-700">superficiale • fresco • liscio • liquido</span>
@@ -167,51 +80,51 @@
   </div>
 
   <!-- Esercizio 5: Pronome relativo e preposizione -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-green-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4">
-      <span class="bg-green-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">5</span>
-      Inserisci tra le due frasi un pronome relativo e una preposizione adatti.
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">5</span>
+      <span>Inserisci tra le due frasi un pronome relativo e una preposizione adatti.</span>
     </h2>
 
     <div class="space-y-3 text-base md:text-lg">
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3">
+      <div class="bg-white rounded-lg p-3">
         <span class="text-gray-700">• La persona</span>
-        <input type="text" class="border-b-2 border-green-400 bg-transparent px-2 py-1 focus:outline-none focus:border-green-600 w-32" data-fill-blanks-target="input" data-correct-answer="a cui" placeholder="">
+        <input type="text" class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 w-32" data-fill-blanks-target="input" data-correct-answer="a cui" placeholder="">
         <span class="text-gray-700">ti ho parlato è arrivata.</span>
       </div>
     </div>
   </div>
 
   <!-- Esercizio 6: Poco come avverbio -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-purple-200 shadow-2xl p-4 md:p-6" data-controller="multiple-choice">
-    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4">
-      <span class="bg-purple-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">6</span>
-      In quale delle seguenti frasi <strong class="underline text-blue-600">poco</strong> è un avverbio?
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="multiple-choice">
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">6</span>
+      <span>In quale delle seguenti frasi <strong class="underline text-blue-600">poco</strong> è un avverbio?</span>
     </h2>
 
     <div class="space-y-3 text-base md:text-lg">
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3">
+      <div class="bg-white rounded-lg p-3">
         <label class="flex items-center gap-3 cursor-pointer">
           <input type="radio" name="poco" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
           <span class="text-gray-700">Mangia quel poco che è rimasto.</span>
         </label>
       </div>
 
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3">
+      <div class="bg-white rounded-lg p-3">
         <label class="flex items-center gap-3 cursor-pointer">
           <input type="radio" name="poco" data-multiple-choice-target="answer" data-correct-answer="true" class="w-5 h-5">
           <span class="text-gray-700">A pranzo ho mangiato poco.</span>
         </label>
       </div>
 
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3">
+      <div class="bg-white rounded-lg p-3">
         <label class="flex items-center gap-3 cursor-pointer">
           <input type="radio" name="poco" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
           <span class="text-gray-700">Mi accontento di poco.</span>
         </label>
       </div>
 
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3">
+      <div class="bg-white rounded-lg p-3">
         <label class="flex items-center gap-3 cursor-pointer">
           <input type="radio" name="poco" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
           <span class="text-gray-700">Metti poco zucchero, mi raccomando.</span>
@@ -221,16 +134,16 @@
   </div>
 
   <!-- Esercizio 7: Congiunzione -->
-  <div class="mb-6 bg-white rounded-2xl border-4 border-indigo-200 shadow-2xl p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4">
-      <span class="bg-indigo-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">7</span>
-      Collega le due frasi con una congiunzione adatta.
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-gray-700 mb-4 flex items-center gap-2">
+      <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">7</span>
+      <span>Collega le due frasi con una congiunzione adatta.</span>
     </h2>
 
     <div class="space-y-3 text-base md:text-lg">
-      <div class="bg-gray-50 border-2 border-gray-200 rounded-xl p-3">
+      <div class="bg-white rounded-lg p-3">
         <span class="text-gray-700">• Il cane si stava avviando verso la casa</span>
-        <input type="text" class="border-b-2 border-indigo-400 bg-transparent px-2 py-1 focus:outline-none focus:border-indigo-600 w-24" data-fill-blanks-target="input" data-correct-answer="quando" placeholder="">
+        <input type="text" class="border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white focus:outline-none focus:border-<%= @pagina.base_color %>-600 px-2 py-1 w-24" data-fill-blanks-target="input" data-correct-answer="quando" placeholder="">
         <span class="text-gray-700">qualcuno lo chiamò.</span>
       </div>
     </div>
@@ -241,6 +154,5 @@
     <p class="text-red-600 font-bold text-lg">Grammatica - Ripasso generale</p>
   </div>
 
-  <!-- Exercise controls -->
-  <%= render 'shared/exercise_controls', color: 'cyan' %>
+  <%= render 'shared/exercise_controls' %>
 </div>
