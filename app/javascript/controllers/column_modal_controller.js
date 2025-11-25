@@ -17,8 +17,14 @@ export default class extends Controller {
     // showOperands: se false, minuendo/sottraendo sono vuoti
     const showOperands = button.dataset.showOperands !== "false"
 
-    // Determina il tipo di operazione (addizione o sottrazione)
-    this.operationType = operations.includes('-') ? 'subtraction' : 'addition'
+    // Determina il tipo di operazione (addizione, sottrazione o moltiplicazione)
+    if (operations.includes('x') || operations.includes('×') || operations.includes('*')) {
+      this.operationType = 'multiplication'
+    } else if (operations.includes('-')) {
+      this.operationType = 'subtraction'
+    } else {
+      this.operationType = 'addition'
+    }
 
     // Carica i risultati salvati (se esistono)
     this.savedResults = button.dataset.savedResults ? JSON.parse(button.dataset.savedResults) : {}
@@ -29,7 +35,10 @@ export default class extends Controller {
 
     // Calcola i risultati corretti per ogni operazione
     this.correctResults = operations.split(',').map(op => {
-      if (this.operationType === 'subtraction') {
+      if (this.operationType === 'multiplication') {
+        const parts = op.split(/[x×*]/i)
+        return parseInt(parts[0]) * parseInt(parts[1])
+      } else if (this.operationType === 'subtraction') {
         const parts = op.split('-')
         return parseInt(parts[0]) - parseInt(parts[1])
       } else {
@@ -39,7 +48,8 @@ export default class extends Controller {
     })
 
     // Aggiorna il titolo del modal
-    let opName = this.operationType === 'subtraction' ? 'Sottrazioni' : 'Addizioni'
+    let opName = this.operationType === 'multiplication' ? 'Moltiplicazioni' :
+                 this.operationType === 'subtraction' ? 'Sottrazioni' : 'Addizioni'
     if (withProof) opName += ' con prova'
     this.titleTarget.textContent = `Gruppo ${this.currentGroup.toUpperCase()} - ${opName} in colonna`
 
@@ -66,6 +76,8 @@ export default class extends Controller {
         let targetSelector
         if (withProof) {
           targetSelector = 'input[data-column-subtraction-target="result"], input[data-column-addition-target="result"]'
+        } else if (this.operationType === 'multiplication') {
+          targetSelector = 'input[data-column-multiplication-target="resultInput"]'
         } else if (this.operationType === 'subtraction') {
           targetSelector = 'input[data-column-subtraction-target="result"]'
         } else {
@@ -89,9 +101,14 @@ export default class extends Controller {
     if (!this.savedResults) return
 
     const operationItems = this.gridTarget.querySelectorAll('.operation-item')
-    const targetSelector = this.operationType === 'subtraction'
-      ? 'input[data-column-subtraction-target="result"]'
-      : 'input[data-column-addition-target="result"]'
+    let targetSelector
+    if (this.operationType === 'multiplication') {
+      targetSelector = 'input[data-column-multiplication-target="resultInput"]'
+    } else if (this.operationType === 'subtraction') {
+      targetSelector = 'input[data-column-subtraction-target="result"]'
+    } else {
+      targetSelector = 'input[data-column-addition-target="result"]'
+    }
 
     operationItems.forEach((item, idx) => {
       const savedDigits = this.savedResults[idx]
@@ -143,8 +160,11 @@ export default class extends Controller {
         targetElement = item.querySelector('.main-operation') || item
       }
 
-      // Cerca prima sottrazioni, poi addizioni
-      let resultInputs = targetElement.querySelectorAll('input[data-column-subtraction-target="result"]')
+      // Cerca prima moltiplicazioni, poi sottrazioni, poi addizioni
+      let resultInputs = targetElement.querySelectorAll('input[data-column-multiplication-target="resultInput"]')
+      if (resultInputs.length === 0) {
+        resultInputs = targetElement.querySelectorAll('input[data-column-subtraction-target="result"]')
+      }
       if (resultInputs.length === 0) {
         resultInputs = targetElement.querySelectorAll('input[data-column-addition-target="result"]')
       }

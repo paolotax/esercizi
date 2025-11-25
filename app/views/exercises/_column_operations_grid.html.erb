@@ -1,7 +1,7 @@
 <%#
   Partial unificato per griglie di operazioni in colonna.
   Può gestire:
-  - Singole addizioni o sottrazioni
+  - Singole addizioni, sottrazioni o moltiplicazioni
   - Coppie operazione + prova (sottrazione + addizione per la prova)
 
   Parametri:
@@ -11,9 +11,9 @@
                 'subtraction' per prova addizione (somma - addendo = altro addendo) - non comune
 %>
 
-<div class="space-y-8">
+<div class="grid grid-cols-1 <% unless with_proof %>md:grid-cols-2<% end %> gap-6 md:gap-8">
   <% operations.each_with_index do |op, idx| %>
-    <div class="operation-item" data-operation-index="<%= idx %>">
+    <div class="operation-item flex justify-center" data-operation-index="<%= idx %>">
       <% if with_proof %>
         <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
           <!-- Operazione principale -->
@@ -82,6 +82,18 @@
           %>
           <%= render partial: 'strumenti/sottrazioni/column_subtraction',
                      locals: { sottrazione: sottrazione, operation_id: idx } %>
+        <% elsif op[:type] == 'multiplication' %>
+          <%
+            title = op[:show_operands] == false ? "#{op[:operands][0]} × #{op[:operands][1]} =" : nil
+            moltiplicazione = Moltiplicazione.new(
+               multiplicand: op[:operands][0],
+               multiplier: op[:operands][1],
+               show_multiplicand_multiplier: op[:show_operands] != false,
+               show_toolbar: false
+             )
+          %>
+          <%= render partial: 'strumenti/moltiplicazioni/column_multiplication',
+                     locals: { moltiplicazione: moltiplicazione, operation_id: idx, operation_title: title } %>
         <% else %>
           <%
             title = op[:show_operands] == false ? "#{op[:operands][0]} + #{op[:operands][1]} =" : nil

@@ -1,0 +1,43 @@
+<%#
+  Modal per operazioni in colonna (addizioni, sottrazioni, moltiplicazioni)
+
+
+  Parametri:
+  - title: titolo del modal (default: "Operazioni in colonna")
+  - color: colore del titolo - blue (default), green, cyan, orange
+  - show_save: mostra pulsante "Salva risultati" (default: false)
+%>
+<% title ||= "Operazioni in colonna" %>
+<% color ||= "blue" %>
+<% show_save = local_assigns.fetch(:show_save, false) %>
+<%
+  color_classes = {
+    "blue" => "text-blue-600",
+    "green" => "text-green-600",
+    "cyan" => "text-cyan-600",
+    "orange" => "text-orange-600",
+    "red" => "text-red-600"
+  }
+  title_color = color_classes[color] || color_classes["blue"]
+%>
+
+<div data-column-modal-target="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" data-action="click->column-modal#closeOnBackdrop">
+  <div class="bg-white rounded-lg p-6 md:p-8 max-w-7xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="text-2xl font-bold <%= title_color %>" data-column-modal-target="title"><%= title %></h3>
+      <button class="text-gray-500 hover:text-gray-700 text-3xl" data-action="click->column-modal#close">&times;</button>
+    </div>
+
+    <!-- Contenitore dinamico per le griglie -->
+    <div data-column-modal-target="grid" class="mb-6">
+      <!-- Il contenuto verrà caricato dinamicamente -->
+    </div>
+
+    <div class="flex gap-4 justify-center">
+      <% if show_save %>
+        <button class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold text-lg" data-action="click->column-modal#saveGroup">Salva risultati</button>
+      <% end %>
+      <button class="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-400 transition font-bold text-lg" data-action="click->column-modal#close">Chiudi</button>
+    </div>
+  </div>
+</div>

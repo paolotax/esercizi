@@ -63,6 +63,10 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 43, titolo: "SCHIERAMENTI E INCROCI", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p043", view_template: "bus3_mat_p043", base_color: "green" },
   { numero: 44, titolo: "LE PROPRIETÀ... COMMUTATIVA E ASSOCIATIVA", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p044", view_template: "bus3_mat_p044", base_color: "green" },
   { numero: 45, titolo: "... DELLA MOLTIPLICAZIONE DISTRIBUTIVA", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p045", view_template: "bus3_mat_p045", base_color: "green" },
+  { numero: 46, titolo: "LA TABELLA DELLA MOLTIPLICAZIONE", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p046", view_template: "bus3_mat_p046", base_color: "green" },
+  { numero: 47, titolo: "MOLTIPLICAZIONI CON UNA CIFRA AL MOLTIPLICATORE", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p047", view_template: "bus3_mat_p047", base_color: "green" },
+  { numero: 48, titolo: "MOLTIPLICAZIONI CON DUE CIFRE AL MOLTIPLICATORE", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p048", view_template: "bus3_mat_p048", base_color: "green" },
+  { numero: 49, titolo: "MOLTIPLICARE PER 10, 100, 1000", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p049", view_template: "bus3_mat_p049", base_color: "green" },
   { numero: 74, titolo: "Le Frazioni", slug: "bus3_mat_p074", view_template: "bus3_mat_p074", sottotitolo: "FRAZIONI", base_color: "purple" },
   { numero: 75, titolo: "Leggere e scrivere le frazioni", slug: "bus3_mat_p075", view_template: "bus3_mat_p075", sottotitolo: "FRAZIONI", base_color: "purple" },
   { numero: 76, titolo: "Frazioni - L'unità frazionaria", slug: "bus3_mat_p076", view_template: "bus3_mat_p076", sottotitolo: "FRAZIONI", base_color: "purple" },
@@ -80,7 +84,7 @@ bus_matematica = bus_volume3.discipline.create!(
 end
 
 # Pagine generiche per bus3_mat (p001-p192, escludendo le pagine già definite sopra)
-existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 74, 75, 76, 77, 78, 144 ]
+existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 74, 75, 76, 77, 78, 144 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|

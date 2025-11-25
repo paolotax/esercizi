@@ -2,7 +2,7 @@
 
 class ExercisesController < ApplicationController
   # GET /exercises/column_operations_grid
-  # Endpoint unificato per qualsiasi tipo di operazione (addizioni, sottrazioni, miste)
+  # Endpoint unificato per qualsiasi tipo di operazione (addizioni, sottrazioni, moltiplicazioni, miste)
   # Supporta anche la prova (sottrazione + addizione per verificare)
   def column_operations_grid
     operations_param = params[:operations]
@@ -15,7 +15,7 @@ class ExercisesController < ApplicationController
     @operations = []
 
     if operations_param.present?
-      # Formato: "714-354,681-159,..." oppure "345+253,382+216,..."
+      # Formato: "714-354,681-159,..." oppure "345+253,382+216,..." oppure "36x12,37x14,..."
       @operations = operations_param.split(",").map do |op|
         op = op.strip
         if op.include?("-")
@@ -26,6 +26,14 @@ class ExercisesController < ApplicationController
             operands: [parts[0].to_i, parts[1].to_i],
             show_borrow: show_borrow,
             show_carry: show_carry,
+            show_operands: show_operands
+          }
+        elsif op.match?(/[x×*]/i)
+          parts = op.split(/[x×*]/i)
+          next nil unless parts.length == 2
+          {
+            type: "multiplication",
+            operands: [parts[0].to_i, parts[1].to_i],
             show_operands: show_operands
           }
         elsif op.include?("+")

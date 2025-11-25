@@ -48,7 +48,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
       <!-- Prima coppia: 862 - 184 -->
-      <div class="flex items-center justify-center gap-6">
+      <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
         <!-- Sottrazione -->
         <%= render partial: "strumenti/sottrazioni/column_subtraction",
                    locals: Sottrazione.new(minuend: 862, subtrahend: 184,
@@ -56,7 +56,7 @@
                                            show_toolbar: false,
                                            show_borrow: true).to_partial_params %>
 
-        <div class="text-3xl font-bold text-cyan-600">→</div>
+        <div class="text-3xl font-bold text-cyan-600 rotate-90 md:rotate-0">→</div>
 
         <!-- Addizione per la prova -->
         <%= render partial: "strumenti/addizioni/column_addition",
@@ -67,7 +67,7 @@
       </div>
 
       <!-- Seconda coppia: 536 - 275 -->
-      <div class="flex items-center justify-center gap-6">
+      <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
         <!-- Sottrazione -->
         <%= render partial: "strumenti/sottrazioni/column_subtraction",
                    locals: Sottrazione.new(minuend: 536, subtrahend: 275,
@@ -75,7 +75,7 @@
                                            show_toolbar: false,
                                            show_borrow: true).to_partial_params %>
 
-        <div class="text-3xl font-bold text-cyan-600">→</div>
+        <div class="text-3xl font-bold text-cyan-600 rotate-90 md:rotate-0">→</div>
 
         <!-- Addizione per la prova -->
         <%= render partial: "strumenti/addizioni/column_addition",
@@ -123,22 +123,7 @@
         </button>
 
         <!-- Modal -->
-        <div data-column-modal-target="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" data-action="click->column-modal#closeOnBackdrop">
-          <div class="bg-white rounded-lg p-6 md:p-8 max-w-7xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-              <h3 class="text-2xl font-bold text-red-600" data-column-modal-target="title">Sottrazioni con prova</h3>
-              <button class="text-gray-500 hover:text-gray-700 text-3xl" data-action="click->column-modal#close">&times;</button>
-            </div>
-
-            <div data-column-modal-target="grid" class="mb-6">
-            </div>
-
-            <div class="flex gap-4 justify-center">
-              <button class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold text-lg" data-action="click->column-modal#saveGroup">Salva risultati</button>
-              <button class="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-400 transition font-bold text-lg" data-action="click->column-modal#close">Chiudi</button>
-            </div>
-          </div>
-        </div>
+        <%= render 'shared/column_modal', title: "Sottrazioni con prova", color: "red", show_save: true %>
       </div>
 
       <!-- Esercizio 5 -->
@@ -296,22 +281,7 @@
     </div>
 
     <!-- Modal -->
-    <div data-column-modal-target="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" data-action="click->column-modal#closeOnBackdrop">
-      <div class="bg-white rounded-lg p-6 md:p-8 max-w-7xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-        <div class="flex justify-between items-center mb-6">
-          <h3 class="text-2xl font-bold text-red-600" data-column-modal-target="title">Sottrazioni con prova</h3>
-          <button class="text-gray-500 hover:text-gray-700 text-3xl" data-action="click->column-modal#close">&times;</button>
-        </div>
-
-        <div data-column-modal-target="grid" class="mb-6">
-        </div>
-
-        <div class="flex gap-4 justify-center">
-          <button class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold text-lg" data-action="click->column-modal#saveGroup">Salva risultati</button>
-          <button class="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-400 transition font-bold text-lg" data-action="click->column-modal#close">Chiudi</button>
-        </div>
-      </div>
-    </div>
+    <%= render 'shared/column_modal', title: "Sottrazioni con prova", color: "red", show_save: true %>
   </div>
 
   <!-- Footer con controlli -->
