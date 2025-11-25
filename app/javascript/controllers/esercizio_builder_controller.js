@@ -8,36 +8,88 @@ export default class extends Controller {
     this.initializeDragAndDrop()
     this.esercizioId = this.dropZoneTarget.dataset.esercizioId
     console.log("Esercizio ID:", this.esercizioId)
+
+    // Reset delle variabili di stato
+    this.draggedElement = null
+    this.isNewOperation = false
+    this.currentDragType = null
   }
 
   initializeDragAndDrop() {
+    console.log("=== initializeDragAndDrop START ===")
+
+    // Crea bound functions una volta sola (fuori dal loop)
+    if (!this.boundDragStart) {
+      this.boundDragStart = this.handleDragStart.bind(this)
+      this.boundDragEnd = this.handleDragEnd.bind(this)
+      this.boundDragOver = this.handleDragOver.bind(this)
+      this.boundDrop = this.handleDrop.bind(this)
+      this.boundDragLeave = this.handleDragLeave.bind(this)
+      console.log("Created bound functions")
+    }
+
     // Inizializza drag per i generatori
     const generators = document.querySelectorAll('.operation-generator')
     console.log(`Found ${generators.length} generators`)
 
-    generators.forEach(generator => {
-      generator.addEventListener('dragstart', this.handleDragStart.bind(this))
-      generator.addEventListener('dragend', this.handleDragEnd.bind(this))
+    generators.forEach((generator, index) => {
+      // Rimuovi eventuali listener precedenti
+      generator.removeEventListener('dragstart', this.boundDragStart)
+      generator.removeEventListener('dragend', this.boundDragEnd)
+
+      // Aggiungi i listener
+      generator.addEventListener('dragstart', this.boundDragStart)
+      generator.addEventListener('dragend', this.boundDragEnd)
+
+      // Debug: verifica che draggable sia true e dataset sia presente
+      console.log(`Generator ${index + 1}:`, {
+        type: generator.dataset.operationType,
+        draggable: generator.draggable,
+        hasDataset: !!generator.dataset.operationType,
+        element: generator
+      })
     })
 
+    // Rimuovi listener precedenti dalla drop zone
+    this.dropZoneTarget.removeEventListener('dragover', this.boundDragOver, true)
+    this.dropZoneTarget.removeEventListener('drop', this.boundDrop, true)
+    this.dropZoneTarget.removeEventListener('dragleave', this.boundDragLeave)
+
     // Inizializza drop zone - usa event capturing per catturare eventi sulla griglia interna
-    this.dropZoneTarget.addEventListener('dragover', this.handleDragOver.bind(this), true)
-    this.dropZoneTarget.addEventListener('drop', this.handleDrop.bind(this), true)
-    this.dropZoneTarget.addEventListener('dragleave', this.handleDragLeave.bind(this))
+    this.dropZoneTarget.addEventListener('dragover', this.boundDragOver, true)
+    this.dropZoneTarget.addEventListener('drop', this.boundDrop, true)
+    this.dropZoneTarget.addEventListener('dragleave', this.boundDragLeave)
 
     // Inizializza drag per operazioni esistenti
     this.initializeExistingOperations()
   }
 
   initializeExistingOperations() {
+    // Crea bound functions per le operazioni se non esistono
+    if (!this.boundOperationDragStart) {
+      this.boundOperationDragStart = this.handleOperationDragStart.bind(this)
+      this.boundOperationDragEnd = this.handleOperationDragEnd.bind(this)
+      this.boundOperationDragOver = this.handleOperationDragOver.bind(this)
+      this.boundOperationDrop = this.handleOperationDrop.bind(this)
+      this.boundOperationClick = this.handleOperationClick.bind(this)
+    }
+
     const operations = this.dropZoneTarget.querySelectorAll('.operation-item')
     operations.forEach(op => {
-      op.addEventListener('dragstart', this.handleOperationDragStart.bind(this))
-      op.addEventListener('dragend', this.handleOperationDragEnd.bind(this))
-      op.addEventListener('dragover', this.handleOperationDragOver.bind(this))
-      op.addEventListener('drop', this.handleOperationDrop.bind(this))
-      // Aggiungi click per aprire le proprietà
-      op.addEventListener('click', this.handleOperationClick.bind(this))
+      // Rimuovi listener precedenti per evitare duplicazioni
+      op.removeEventListener('dragstart', this.boundOperationDragStart)
+      op.removeEventListener('dragend', this.boundOperationDragEnd)
+      op.removeEventListener('dragover', this.boundOperationDragOver)
+      op.removeEventListener('drop', this.boundOperationDrop)
+      op.removeEventListener('click', this.boundOperationClick)
+
+      // Aggiungi i listener
+      op.addEventListener('dragstart', this.boundOperationDragStart)
+      op.addEventListener('dragend', this.boundOperationDragEnd)
+      op.addEventListener('dragover', this.boundOperationDragOver)
+      op.addEventListener('drop', this.boundOperationDrop)
+      op.addEventListener('click', this.boundOperationClick)
+
       // Aggiungi classe per indicare che è cliccabile
       op.classList.add('cursor-pointer', 'hover:shadow-lg', 'transition-shadow')
     })
@@ -68,17 +120,39 @@ export default class extends Controller {
   }
 
   handleDragStart(e) {
-    const generator = e.target.closest('.operation-generator')
-    const operationType = generator ? generator.dataset.operationType : e.target.dataset.operationType
+    console.log("handleDragStart - event target:", e.target.tagName, e.target.className)
+
+    // L'elemento che ha ricevuto l'evento potrebbe essere il generatore stesso
+    // o un elemento figlio (come l'icona o il testo)
+    const generator = e.currentTarget // Usa currentTarget invece di target
+    console.log("handleDragStart - generator found:", !!generator)
+
+    const operationType = generator.dataset.operationType
     console.log("handleDragStart - operationType:", operationType)
+
+    if (!operationType) {
+      console.error("handleDragStart - NO OPERATION TYPE FOUND!")
+      return
+    }
+
+    // Salva il tipo di operazione nel controller per il drop
+    // IMPORTANTE: Usiamo le variabili dell'istanza come fonte primaria
+    this.currentDragType = operationType
+    this.isNewOperation = true
+    this.draggedElement = null // Assicurati che sia nullo per le nuove operazioni
+
     e.dataTransfer.effectAllowed = 'copy'
-    e.dataTransfer.setData('operationType', operationType)
-    e.dataTransfer.setData('isNew', 'true')
-    e.target.classList.add('dragging')
+    // Usa solo text/plain per massima compatibilità
+    e.dataTransfer.setData('text/plain', operationType)
+
+    // Aggiungi classe dragging al generator
+    generator.classList.add('dragging')
+
+    console.log("handleDragStart - set successfully, currentDragType:", this.currentDragType, "isNewOperation:", this.isNewOperation)
   }
 
   handleOperationDragStart(e) {
-    const operationItem = e.target.closest('.operation-item')
+    const operationItem = e.currentTarget
     if (!operationItem) return
 
     const operationId = operationItem.dataset.operationId
@@ -89,14 +163,19 @@ export default class extends Controller {
     e.dataTransfer.setData('isNew', 'false')
     operationItem.classList.add('dragging')
     this.draggedElement = operationItem
+    this.isNewOperation = false  // Imposta esplicitamente che non è una nuova operazione
   }
 
   handleDragEnd(e) {
-    e.target.classList.remove('dragging')
+    // Usa currentTarget per essere coerente con handleDragStart
+    e.currentTarget.classList.remove('dragging')
+    // Reset delle variabili di drag
+    this.currentDragType = null
+    this.isNewOperation = false
   }
 
   handleOperationDragEnd(e) {
-    const operationItem = e.target.closest('.operation-item')
+    const operationItem = e.currentTarget
     if (operationItem) {
       operationItem.classList.remove('dragging')
     }
@@ -105,6 +184,8 @@ export default class extends Controller {
       op.classList.remove('drag-over-top', 'drag-over-bottom')
     })
     this.draggedElement = null
+    this.isNewOperation = false
+    this.currentDragType = null
   }
 
   handleOperationDragOver(e) {
@@ -167,7 +248,8 @@ export default class extends Controller {
 
   handleDragOver(e) {
     e.preventDefault()
-    e.stopPropagation()
+    // Non usare stopPropagation per permettere al drop di funzionare
+    // e.stopPropagation()
 
     // Determina se stiamo trascinando una nuova operazione o riordinando
     const isNew = this.draggedElement === null
@@ -248,7 +330,10 @@ export default class extends Controller {
   }
 
   async handleDrop(e) {
-    console.log("handleDrop called")
+    console.log("=== handleDrop START ===")
+    console.log("Target:", e.target.tagName, e.target.className)
+    console.log("Current state - isNewOperation:", this.isNewOperation, "currentDragType:", this.currentDragType, "draggedElement:", this.draggedElement)
+
     e.preventDefault()
     e.stopPropagation()
     this.dropZoneTarget.classList.remove('drag-over')
@@ -259,53 +344,58 @@ export default class extends Controller {
       op.classList.remove('drag-over-top', 'drag-over-bottom')
     })
 
-    const isNew = e.dataTransfer.getData('isNew') === 'true'
-    console.log("Drop event - isNew:", isNew)
-
-    if (isNew) {
-      const operationType = e.dataTransfer.getData('operationType')
-      console.log("Adding new operation:", operationType)
+    // IMPORTANTE: Usa le variabili dell'istanza come fonte primaria
+    // perché dataTransfer potrebbe non funzionare in tutti i browser
+    if (this.isNewOperation === true && this.currentDragType) {
+      console.log("=> Adding NEW operation:", this.currentDragType)
 
       // Determina la posizione dove inserire l'operazione
       const position = this.getDropPosition(e)
       console.log("Position calculated:", position)
 
-      if (operationType) {
-        await this.addNewOperation(operationType, position)
-      } else {
-        console.error("No operation type found in dataTransfer!")
-      }
-    } else {
-      // Riordinamento operazione esistente
-      const operationId = e.dataTransfer.getData('operationId')
-      console.log('Riordinamento operazione:', operationId)
+      await this.addNewOperation(this.currentDragType, position)
 
-      if (this.draggedElement) {
-        const targetOperation = e.target.closest('.operation-item')
+    } else if (this.draggedElement && !this.isNewOperation) {
+      console.log("=> REORDERING existing operation")
 
-        if (targetOperation && targetOperation !== this.draggedElement) {
-          // Determina se inserire prima o dopo
-          const afterElement = this.getDragAfterElement(targetOperation, e.clientY)
+      const targetOperation = e.target.closest('.operation-item')
 
-          if (afterElement) {
-            targetOperation.parentNode.insertBefore(this.draggedElement, targetOperation.nextSibling)
-          } else {
-            targetOperation.parentNode.insertBefore(this.draggedElement, targetOperation)
-          }
+      if (targetOperation && targetOperation !== this.draggedElement) {
+        // Determina se inserire prima o dopo
+        const afterElement = this.getDragAfterElement(targetOperation, e.clientY)
 
-          console.log("Operation moved, saving order...")
+        if (afterElement) {
+          targetOperation.parentNode.insertBefore(this.draggedElement, targetOperation.nextSibling)
+        } else {
+          targetOperation.parentNode.insertBefore(this.draggedElement, targetOperation)
+        }
+
+        console.log("Operation moved, saving order...")
+        await this.saveOperationsOrder()
+      } else if (!targetOperation) {
+        // Drop su area vuota - sposta alla fine
+        const operationsGrid = this.dropZoneTarget.querySelector('#operations-grid')
+        if (operationsGrid) {
+          operationsGrid.appendChild(this.draggedElement)
+          console.log("Operation moved to end, saving order...")
           await this.saveOperationsOrder()
-        } else if (!targetOperation) {
-          // Drop su area vuota - sposta alla fine
-          const operationsGrid = this.dropZoneTarget.querySelector('#operations-grid')
-          if (operationsGrid) {
-            operationsGrid.appendChild(this.draggedElement)
-            console.log("Operation moved to end, saving order...")
-            await this.saveOperationsOrder()
-          }
         }
       }
+    } else {
+      console.warn("⚠️ Drop event but no valid operation detected")
+      console.log("Debug info:", {
+        isNewOperation: this.isNewOperation,
+        currentDragType: this.currentDragType,
+        draggedElement: this.draggedElement,
+        dataTransferText: e.dataTransfer.getData('text/plain')
+      })
     }
+
+    // Reset delle variabili di drag alla fine
+    console.log("=== handleDrop END - Resetting state ===")
+    this.draggedElement = null
+    this.isNewOperation = false
+    this.currentDragType = null
   }
 
   getDropPosition(e) {
@@ -393,9 +483,9 @@ export default class extends Controller {
   async removeOperation(e) {
     const operationId = e.currentTarget.dataset.operationId
 
-    if (!confirm('Sei sicuro di voler rimuovere questa operazione?')) {
-      return
-    }
+    // if (!confirm('Sei sicuro di voler rimuovere questa operazione?')) {
+    //   return
+    // }
 
     try {
       const response = await fetch(`/dashboard/esercizi/${this.esercizioId}/remove_operation`, {

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Drag & Drop</title>
+    <style>
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .generator {
+            padding: 10px;
+            margin: 10px 0;
+            background: #e0e0ff;
+            border: 2px solid #8080ff;
+            border-radius: 4px;
+            cursor: move;
+        }
+
+        .generator.dragging {
+            opacity: 0.5;
+        }
+
+        .dropzone {
+            flex: 1;
+            min-height: 400px;
+            background: #ffffff;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .dropzone.drag-over {
+            background: #f0f8ff;
+            border-color: #4080ff;
+        }
+
+        .operation {
+            padding: 15px;
+            margin: 10px 0;
+            background: #ffffcc;
+            border: 2px solid #ffcc00;
+            border-radius: 4px;
+        }
+
+        .log {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 300px;
+            height: 200px;
+            background: black;
+            color: green;
+            font-family: monospace;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Drag & Drop Semplice</h1>
+
+    <div class="container">
+        <div class="sidebar">
+            <h3>Generatori</h3>
+            <div class="generator" draggable="true" data-type="addizione">
+                Addizione
+            </div>
+            <div class="generator" draggable="true" data-type="sottrazione">
+                Sottrazione
+            </div>
+            <div class="generator" draggable="true" data-type="moltiplicazione">
+                Moltiplicazione
+            </div>
+        </div>
+
+        <div class="dropzone" id="dropzone">
+            <p>Trascina qui le operazioni</p>
+        </div>
+    </div>
+
+    <div class="log" id="log">
+        Console log:<br>
+    </div>
+
+    <script>
+        // Logging helper
+        function log(message) {
+            const logEl = document.getElementById('log');
+            logEl.innerHTML += message + '<br>';
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(message);
+        }
+
+        // Variables to track drag state
+        let draggedType = null;
+        let isNewOperation = false;
+        let draggedElement = null;
+
+        // Initialize generators
+        const generators = document.querySelectorAll('.generator');
+        generators.forEach(gen => {
+            gen.addEventListener('dragstart', (e) => {
+                log(`dragstart: ${gen.dataset.type}`);
+                draggedType = gen.dataset.type;
+                isNewOperation = true;
+                draggedElement = null;
+                gen.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'copy';
+                e.dataTransfer.setData('text/plain', draggedType);
+            });
+
+            gen.addEventListener('dragend', (e) => {
+                log(`dragend: ${gen.dataset.type}`);
+                gen.classList.remove('dragging');
+            });
+        });
+
+        // Initialize dropzone
+        const dropzone = document.getElementById('dropzone');
+
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = isNewOperation ? 'copy' : 'move';
+            dropzone.classList.add('drag-over');
+        });
+
+        dropzone.addEventListener('dragleave', (e) => {
+            if (e.target === dropzone) {
+                dropzone.classList.remove('drag-over');
+            }
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            log(`drop: isNewOperation=${isNewOperation}, type=${draggedType}`);
+            dropzone.classList.remove('drag-over');
+
+            if (isNewOperation && draggedType) {
+                // Create new operation
+                const operation = document.createElement('div');
+                operation.className = 'operation';
+                operation.textContent = `Operazione: ${draggedType}`;
+                operation.draggable = true;
+
+                // Make it draggable for reordering
+                operation.addEventListener('dragstart', (e) => {
+                    log(`operation dragstart`);
+                    draggedElement = operation;
+                    isNewOperation = false;
+                    draggedType = null;
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+
+                operation.addEventListener('dragend', (e) => {
+                    log(`operation dragend`);
+                    draggedElement = null;
+                });
+
+                dropzone.appendChild(operation);
+                log(`Added new operation: ${draggedType}`);
+            } else if (draggedElement) {
+                // Reorder existing operation
+                log(`Reordered operation`);
+            }
+
+            // Reset state
+            draggedType = null;
+            isNewOperation = false;
+            draggedElement = null;
+        });
+
+        log('Test page loaded and initialized');
+    </script>
+</body>
+</html>
