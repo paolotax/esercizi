@@ -16,7 +16,7 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 items-center">
+    <div class="flex flex-col md:flex-row gap-4 items-center justify-center">
       <!-- Passo 1 -->
       <div class="text-center">
         <p class="text-base text-gray-700 mb-4">
@@ -24,7 +24,7 @@
         </p>
         <%= image_tag "bus3_mat/p031/p31_1.jpg",
             alt: "Sottrai unità",
-            class: "max-w-full w-full" %>
+            class: "max-w-full" %>
       </div>
 
       <!-- Freccia -->
@@ -37,7 +37,7 @@
         </p>
         <%= image_tag "bus3_mat/p031/p31_2.jpg",
             alt: "Sottrai decine",
-            class: "max-w-full w-full" %>
+            class: "max-w-full" %>
       </div>
 
       <!-- Freccia -->
@@ -50,7 +50,7 @@
         </p>
         <%= image_tag "bus3_mat/p031/p31_3.jpg",
             alt: "Sottrai centinaia",
-            class: "max-w-full w-full" %>
+            class: "max-w-full" %>
       </div>
     </div>
   </div>
@@ -94,7 +94,7 @@
   </div>
 
   <!-- Esercizio 3: Sul quaderno -->
-  <div class="bg-transparent p-4 md:p-8 mb-8">
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
     <div class="flex items-start gap-3 mb-6">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         3
@@ -106,58 +106,88 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6">
       <!-- Colonna a -->
-      <div>
-        <p class="text-base text-gray-700 mb-3">
-          <span class="font-bold text-orange-600 text-lg">a.</span>
-        </p>
-        <div class="space-y-2 text-base text-gray-700">
-          <p>386 - 162 =</p>
-          <p>295 - 133 =</p>
-          <p>248 - 136 =</p>
-          <p>427 - 215 =</p>
-          <p>469 - 348 =</p>
+      <button class="bg-orange-50 p-4 rounded-lg hover:bg-orange-100 transition cursor-pointer text-left border-2 border-transparent hover:border-orange-400"
+              data-action="click->column-modal#openGroup"
+              data-group="a"
+              data-operations="386-162,295-133,248-136,427-215,469-348"
+              data-show-borrow="true"
+              data-column-modal-target="groupButton">
+        <div class="font-bold text-orange-600 text-lg mb-3">a.</div>
+        <div class="space-y-2 text-base text-gray-700" data-column-modal-target="operationsList" data-group="a">
+          <div class="operation-item" data-index="0">386 - 162 =</div>
+          <div class="operation-item" data-index="1">295 - 133 =</div>
+          <div class="operation-item" data-index="2">248 - 136 =</div>
+          <div class="operation-item" data-index="3">427 - 215 =</div>
+          <div class="operation-item" data-index="4">469 - 348 =</div>
         </div>
-      </div>
+      </button>
 
       <!-- Colonna b -->
-      <div>
-        <p class="text-base text-gray-700 mb-3">
-          <span class="font-bold text-orange-600 text-lg">b.</span>
-        </p>
-        <div class="space-y-2 text-base text-gray-700">
-          <p>582 - 340 =</p>
-          <p>748 - 526 =</p>
-          <p>144 - 23 =</p>
-          <p>489 - 251 =</p>
-          <p>785 - 425 =</p>
+      <button class="bg-blue-50 p-4 rounded-lg hover:bg-blue-100 transition cursor-pointer text-left border-2 border-transparent hover:border-blue-400"
+              data-action="click->column-modal#openGroup"
+              data-group="b"
+              data-operations="582-340,748-526,144-23,489-251,785-425"
+              data-show-borrow="true"
+              data-column-modal-target="groupButton">
+        <div class="font-bold text-orange-600 text-lg mb-3">b.</div>
+        <div class="space-y-2 text-base text-gray-700" data-column-modal-target="operationsList" data-group="b">
+          <div class="operation-item" data-index="0">582 - 340 =</div>
+          <div class="operation-item" data-index="1">748 - 526 =</div>
+          <div class="operation-item" data-index="2">144 - 23 =</div>
+          <div class="operation-item" data-index="3">489 - 251 =</div>
+          <div class="operation-item" data-index="4">785 - 425 =</div>
         </div>
-      </div>
+      </button>
 
       <!-- Colonna c -->
-      <div>
-        <p class="text-base text-gray-700 mb-3">
-          <span class="font-bold text-orange-600 text-lg">c.</span>
-        </p>
-        <div class="space-y-2 text-base text-gray-700">
-          <p>864 - 753 =</p>
-          <p>624 - 502 =</p>
-          <p>767 - 245 =</p>
-          <p>673 - 153 =</p>
-          <p>931 - 621 =</p>
+      <button class="bg-green-50 p-4 rounded-lg hover:bg-green-100 transition cursor-pointer text-left border-2 border-transparent hover:border-green-400"
+              data-action="click->column-modal#openGroup"
+              data-group="c"
+              data-operations="864-753,624-502,767-245,673-153,931-621"
+              data-show-borrow="true"
+              data-column-modal-target="groupButton">
+        <div class="font-bold text-orange-600 text-lg mb-3">c.</div>
+        <div class="space-y-2 text-base text-gray-700" data-column-modal-target="operationsList" data-group="c">
+          <div class="operation-item" data-index="0">864 - 753 =</div>
+          <div class="operation-item" data-index="1">624 - 502 =</div>
+          <div class="operation-item" data-index="2">767 - 245 =</div>
+          <div class="operation-item" data-index="3">673 - 153 =</div>
+          <div class="operation-item" data-index="4">931 - 621 =</div>
         </div>
-      </div>
+      </button>
 
       <!-- Colonna d -->
-      <div>
-        <p class="text-base text-gray-700 mb-3">
-          <span class="font-bold text-orange-600 text-lg">d.</span>
-        </p>
-        <div class="space-y-2 text-base text-gray-700">
-          <p>1788 - 427 =</p>
-          <p>2363 - 1052 =</p>
-          <p>1957 - 626 =</p>
-          <p>2438 - 1121 =</p>
-          <p>3518 - 1413 =</p>
+      <button class="bg-purple-50 p-4 rounded-lg hover:bg-purple-100 transition cursor-pointer text-left border-2 border-transparent hover:border-purple-400"
+              data-action="click->column-modal#openGroup"
+              data-group="d"
+              data-operations="1788-427,2363-1052,1957-626,2438-1121,3518-1413"
+              data-show-borrow="true"
+              data-column-modal-target="groupButton">
+        <div class="font-bold text-orange-600 text-lg mb-3">d.</div>
+        <div class="space-y-2 text-base text-gray-700" data-column-modal-target="operationsList" data-group="d">
+          <div class="operation-item" data-index="0">1788 - 427 =</div>
+          <div class="operation-item" data-index="1">2363 - 1052 =</div>
+          <div class="operation-item" data-index="2">1957 - 626 =</div>
+          <div class="operation-item" data-index="3">2438 - 1121 =</div>
+          <div class="operation-item" data-index="4">3518 - 1413 =</div>
+        </div>
+      </button>
+    </div>
+
+    <!-- Modal -->
+    <div data-column-modal-target="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" data-action="click->column-modal#closeOnBackdrop">
+      <div class="bg-white rounded-lg p-6 md:p-8 max-w-7xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-bold text-red-600" data-column-modal-target="title">Gruppo di operazioni</h3>
+          <button class="text-gray-500 hover:text-gray-700 text-3xl" data-action="click->column-modal#close">&times;</button>
+        </div>
+
+        <div data-column-modal-target="grid" class="mb-6">
+        </div>
+
+        <div class="flex gap-4 justify-center">
+          <button class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold text-lg" data-action="click->column-modal#saveGroup">Salva risultati</button>
+          <button class="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-400 transition font-bold text-lg" data-action="click->column-modal#close">Chiudi</button>
         </div>
       </div>
     </div>

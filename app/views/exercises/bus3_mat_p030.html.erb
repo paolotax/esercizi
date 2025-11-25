@@ -234,7 +234,7 @@
   </div>
 
   <!-- Esercizio 3: Sul quaderno -->
-  <div class="bg-transparent p-4 md:p-8 mb-8">
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
     <div class="flex items-start gap-3 mb-6">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         3
@@ -244,17 +244,60 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-3 text-base text-gray-700">
-      <p>96 - 53 =</p>
-      <p>39 - 15 =</p>
-      <p>54 - 31 =</p>
-      <p>369 - 36 =</p>
-      <p>78 - 54 =</p>
-      <p>47 - 11 =</p>
-      <p>58 - 34 =</p>
-      <p>99 - 66 =</p>
-      <p>158 - 38 =</p>
-      <p>223 - 13 =</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Gruppo a -->
+      <button class="bg-orange-50 p-4 rounded-lg hover:bg-orange-100 transition cursor-pointer text-left border-2 border-transparent hover:border-orange-400"
+              data-action="click->column-modal#openGroup"
+              data-group="a"
+              data-operations="96-53,39-15,54-31,369-36,78-54"
+              data-show-borrow="false"
+              data-show-operands="false"
+              data-column-modal-target="groupButton">
+        <div class="font-bold text-orange-600 text-lg mb-3">a.</div>
+        <div class="grid grid-cols-2 gap-2 text-base text-gray-700" data-column-modal-target="operationsList" data-group="a">
+          <div class="operation-item" data-index="0">96 - 53 =</div>
+          <div class="operation-item" data-index="1">39 - 15 =</div>
+          <div class="operation-item" data-index="2">54 - 31 =</div>
+          <div class="operation-item" data-index="3">369 - 36 =</div>
+          <div class="operation-item" data-index="4">78 - 54 =</div>
+        </div>
+      </button>
+
+      <!-- Gruppo b -->
+      <button class="bg-blue-50 p-4 rounded-lg hover:bg-blue-100 transition cursor-pointer text-left border-2 border-transparent hover:border-blue-400"
+              data-action="click->column-modal#openGroup"
+              data-group="b"
+              data-operations="47-11,58-34,99-66,158-38,223-13"
+              data-show-borrow="false"
+              data-show-operands="false"
+              data-column-modal-target="groupButton">
+        <div class="font-bold text-orange-600 text-lg mb-3">b.</div>
+        <div class="grid grid-cols-2 gap-2 text-base text-gray-700" data-column-modal-target="operationsList" data-group="b">
+          <div class="operation-item" data-index="0">47 - 11 =</div>
+          <div class="operation-item" data-index="1">58 - 34 =</div>
+          <div class="operation-item" data-index="2">99 - 66 =</div>
+          <div class="operation-item" data-index="3">158 - 38 =</div>
+          <div class="operation-item" data-index="4">223 - 13 =</div>
+        </div>
+      </button>
+    </div>
+
+    <!-- Modal -->
+    <div data-column-modal-target="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" data-action="click->column-modal#closeOnBackdrop">
+      <div class="bg-white rounded-lg p-6 md:p-8 max-w-7xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-bold text-cyan-600" data-column-modal-target="title">Sottrazioni in colonna</h3>
+          <button class="text-gray-500 hover:text-gray-700 text-3xl" data-action="click->column-modal#close">&times;</button>
+        </div>
+
+        <div data-column-modal-target="grid" class="mb-6">
+        </div>
+
+        <div class="flex gap-4 justify-center">
+          <button class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold text-lg" data-action="click->column-modal#saveGroup">Salva risultati</button>
+          <button class="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-400 transition font-bold text-lg" data-action="click->column-modal#close">Chiudi</button>
+        </div>
+      </div>
     </div>
   </div>
 

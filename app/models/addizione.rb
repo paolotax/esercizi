@@ -3,7 +3,8 @@
 # Modello per rappresentare un'operazione in colonna (addizione o sottrazione)
 class Addizione
   attr_reader :addends, :operator, :result, :max_digits,
-              :title, :show_exercise, :show_addends, :show_solution, :show_toolbar, :show_carry
+              :title, :show_exercise, :show_addends, :show_solution, :show_toolbar, :show_carry,
+              :show_addend_indices
 
   def initialize(addends:, operator: "+", **options)
     @addends = addends
@@ -18,6 +19,18 @@ class Addizione
     @show_solution = options.fetch(:show_solution, false)
     @show_toolbar = options.fetch(:show_toolbar, false)
     @show_carry = options.fetch(:show_carry, true)
+    # Array di indici degli addendi da mostrare (es: [0] per mostrare solo il primo)
+    # Se nil, usa show_addends per tutti
+    @show_addend_indices = options[:show_addend_indices]
+  end
+
+  # Verifica se un addendo specifico deve essere mostrato
+  def show_addend?(index)
+    if @show_addend_indices
+      @show_addend_indices.include?(index)
+    else
+      @show_addends
+    end
   end
 
   # Parsing di una stringa come "234 + 1234" o "500 - 123"

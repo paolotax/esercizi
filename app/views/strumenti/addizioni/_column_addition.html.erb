@@ -21,8 +21,13 @@
 </style>
 
 <div class="text-center" data-controller="column-addition">
+  
   <% if defined?(operation_title) && operation_title.present? %>
     <div class="text-xl font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= operation_title %></div>
+  <% elsif defined?(title) && title.present? %>
+    <div class="text-xl font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= title %></div>
+  <% elsif addizione.title.present? %>
+    <div class="text-xl font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= addizione.title %></div>
   <% end %>
 
   <div class="flex items-start justify-center gap-2">
@@ -55,7 +60,7 @@
       <% end %>
 
       <!-- Righe degli addendi -->
-      <% addizione.addends_digits.each do |digits| %>
+      <% addizione.addends_digits.each_with_index do |digits, addend_idx| %>
         <div class="border-b border-gray-200" style="<%= addizione.grid_style %>">
           <% digits.each_with_index do |digit, idx| %>
             <input type="text"
@@ -64,7 +69,7 @@
                    data-correct-answer="<%= digit %>"
                    maxlength="1"
                    placeholder="."
-                   <% if addizione.show_addends && digit.present? %>value="<%= digit %>"<% end %>>
+                   <% if addizione.show_addend?(addend_idx) && digit.present? %>value="<%= digit %>"<% end %>>
           <% end %>
         </div>
       <% end %>

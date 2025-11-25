@@ -20,7 +20,7 @@
       <div class="flex justify-center">
         <%= image_tag "bus3_mat/p033/p33_1.jpg",
             alt: "Esempio prova sottrazione",
-            class: "max-w-full w-full" %>
+            class: "max-w-full" %>
       </div>
 
       <!-- Box teorico -->
@@ -92,7 +92,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
 
       <!-- Esercizio 3 -->
-      <div>
+      <div data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
         <div class="flex items-center gap-3 mb-6">
           <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
             3
@@ -102,14 +102,41 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-2 gap-4 text-base text-gray-700">
-          <div class="space-y-3">
-            <p>714 - 354 =</p>
-            <p>681 - 159 =</p>
+        <button class="bg-cyan-50 p-4 rounded-lg hover:bg-cyan-100 transition cursor-pointer text-left border-2 border-transparent hover:border-cyan-400 w-full"
+                data-action="click->column-modal#openGroup"
+                data-group="ex3"
+                data-operations="714-354,681-159,576-328,487-188"
+                data-show-borrow="true"
+                data-show-carry="true"
+                data-with-proof="true"
+                data-column-modal-target="groupButton">
+          <div class="grid grid-cols-2 gap-4 text-base text-gray-700" data-column-modal-target="operationsList" data-group="ex3">
+            <div class="space-y-3">
+              <div class="operation-item" data-index="0">714 - 354 =</div>
+              <div class="operation-item" data-index="1">681 - 159 =</div>
+            </div>
+            <div class="space-y-3">
+              <div class="operation-item" data-index="2">576 - 328 =</div>
+              <div class="operation-item" data-index="3">487 - 188 =</div>
+            </div>
           </div>
-          <div class="space-y-3">
-            <p>576 - 328 =</p>
-            <p>487 - 188 =</p>
+        </button>
+
+        <!-- Modal -->
+        <div data-column-modal-target="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" data-action="click->column-modal#closeOnBackdrop">
+          <div class="bg-white rounded-lg p-6 md:p-8 max-w-7xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+              <h3 class="text-2xl font-bold text-red-600" data-column-modal-target="title">Sottrazioni con prova</h3>
+              <button class="text-gray-500 hover:text-gray-700 text-3xl" data-action="click->column-modal#close">&times;</button>
+            </div>
+
+            <div data-column-modal-target="grid" class="mb-6">
+            </div>
+
+            <div class="flex gap-4 justify-center">
+              <button class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold text-lg" data-action="click->column-modal#saveGroup">Salva risultati</button>
+              <button class="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-400 transition font-bold text-lg" data-action="click->column-modal#close">Chiudi</button>
+            </div>
           </div>
         </div>
       </div>
@@ -216,7 +243,7 @@
   </div>
 
   <!-- Esercizio 4: Due colonne -->
-  <div class="bg-transparent p-4 md:p-8 mb-8">
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
     <div class="flex items-center gap-3 mb-6">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         4
@@ -228,32 +255,60 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
       <!-- Colonna a -->
-      <div>
-        <p class="text-base text-gray-700 mb-3">
-          <span class="font-bold text-orange-600 text-lg">a.</span>
-        </p>
-        <div class="space-y-2 text-base text-gray-700">
-          <p>5298 - 4182 =</p>
-          <p>3698 - 2354 =</p>
-          <p>1268 - 1204 =</p>
-          <p>2369 - 658 =</p>
-          <p>6574 - 2684 =</p>
-          <p>2641 - 1592 =</p>
+      <button class="bg-orange-50 p-4 rounded-lg hover:bg-orange-100 transition cursor-pointer text-left border-2 border-transparent hover:border-orange-400"
+              data-action="click->column-modal#openGroup"
+              data-group="a"
+              data-operations="5298-4182,3698-2354,1268-1204,2369-658,6574-2684,2641-1592"
+              data-show-borrow="true"
+              data-show-carry="true"
+              data-with-proof="true"
+              data-column-modal-target="groupButton">
+        <div class="font-bold text-orange-600 text-lg mb-3">a.</div>
+        <div class="space-y-2 text-base text-gray-700" data-column-modal-target="operationsList" data-group="a">
+          <div class="operation-item" data-index="0">5298 - 4182 =</div>
+          <div class="operation-item" data-index="1">3698 - 2354 =</div>
+          <div class="operation-item" data-index="2">1268 - 1204 =</div>
+          <div class="operation-item" data-index="3">2369 - 658 =</div>
+          <div class="operation-item" data-index="4">6574 - 2684 =</div>
+          <div class="operation-item" data-index="5">2641 - 1592 =</div>
         </div>
-      </div>
+      </button>
 
       <!-- Colonna b -->
-      <div>
-        <p class="text-base text-gray-700 mb-3">
-          <span class="font-bold text-orange-600 text-lg">b.</span>
-        </p>
-        <div class="space-y-2 text-base text-gray-700">
-          <p>1269 - 1108 =</p>
-          <p>2821 - 1312 =</p>
-          <p>2408 - 2157 =</p>
-          <p>8965 - 3265 =</p>
-          <p>8985 - 715 =</p>
-          <p>4930 - 2614 =</p>
+      <button class="bg-blue-50 p-4 rounded-lg hover:bg-blue-100 transition cursor-pointer text-left border-2 border-transparent hover:border-blue-400"
+              data-action="click->column-modal#openGroup"
+              data-group="b"
+              data-operations="1269-1108,2821-1312,2408-2157,8965-3265,8985-715,4930-2614"
+              data-show-borrow="true"
+              data-show-carry="true"
+              data-with-proof="true"
+              data-column-modal-target="groupButton">
+        <div class="font-bold text-orange-600 text-lg mb-3">b.</div>
+        <div class="space-y-2 text-base text-gray-700" data-column-modal-target="operationsList" data-group="b">
+          <div class="operation-item" data-index="0">1269 - 1108 =</div>
+          <div class="operation-item" data-index="1">2821 - 1312 =</div>
+          <div class="operation-item" data-index="2">2408 - 2157 =</div>
+          <div class="operation-item" data-index="3">8965 - 3265 =</div>
+          <div class="operation-item" data-index="4">8985 - 715 =</div>
+          <div class="operation-item" data-index="5">4930 - 2614 =</div>
+        </div>
+      </button>
+    </div>
+
+    <!-- Modal -->
+    <div data-column-modal-target="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" data-action="click->column-modal#closeOnBackdrop">
+      <div class="bg-white rounded-lg p-6 md:p-8 max-w-7xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-bold text-red-600" data-column-modal-target="title">Sottrazioni con prova</h3>
+          <button class="text-gray-500 hover:text-gray-700 text-3xl" data-action="click->column-modal#close">&times;</button>
+        </div>
+
+        <div data-column-modal-target="grid" class="mb-6">
+        </div>
+
+        <div class="flex gap-4 justify-center">
+          <button class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold text-lg" data-action="click->column-modal#saveGroup">Salva risultati</button>
+          <button class="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-400 transition font-bold text-lg" data-action="click->column-modal#close">Chiudi</button>
         </div>
       </div>
     </div>

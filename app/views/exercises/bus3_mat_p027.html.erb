@@ -49,7 +49,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
       <!-- Prima coppia: 187 + 463 -->
-      <div class="flex items-center justify-center gap-6">
+      <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
         <!-- Addizione -->
         <%= render partial: "strumenti/addizioni/column_addition",
                    locals: Addizione.new(addends: [187, 463],
@@ -57,7 +57,7 @@
                                          show_toolbar: false,
                                          show_carry: true).to_partial_params %>
 
-        <div class="text-3xl font-bold text-cyan-600">→</div>
+        <div class="text-3xl font-bold text-cyan-600 rotate-90 md:rotate-0">→</div>
 
         <!-- Prova con proprietà commutativa -->
         <%= render partial: "strumenti/addizioni/column_addition",
@@ -68,7 +68,7 @@
       </div>
 
       <!-- Seconda coppia: 518 + 229 -->
-      <div class="flex items-center justify-center gap-6">
+      <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
         <!-- Addizione -->
         <%= render partial: "strumenti/addizioni/column_addition",
                    locals: Addizione.new(addends: [518, 229],
@@ -76,7 +76,7 @@
                                          show_toolbar: false,
                                          show_carry: true).to_partial_params %>
 
-        <div class="text-3xl font-bold text-cyan-600">→</div>
+        <div class="text-3xl font-bold text-cyan-600 rotate-90 md:rotate-0">→</div>
 
         <!-- Prova con proprietà commutativa -->
         <%= render partial: "strumenti/addizioni/column_addition",
@@ -93,7 +93,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
 
       <!-- Esercizio 3 -->
-      <div>
+      <div data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
         <div class="flex items-start gap-3 mb-6">
           <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
             3
@@ -103,11 +103,37 @@
           </p>
         </div>
 
-        <div class="space-y-3 text-base text-gray-700">
-          <p>721 + 416 =</p>
-          <p>819 + 111 =</p>
-          <p>604 + 256 =</p>
-          <p>408 + 395 =</p>
+        <button class="bg-cyan-50 p-4 rounded-lg hover:bg-cyan-100 transition cursor-pointer text-left border-2 border-transparent hover:border-cyan-400 w-full"
+                data-action="click->column-modal#openGroup"
+                data-group="ex3"
+                data-operations="721+416,819+111,604+256,408+395"
+                data-show-carry="true"
+                data-with-proof="true"
+                data-column-modal-target="groupButton">
+          <div class="space-y-2 text-base text-gray-700" data-column-modal-target="operationsList" data-group="ex3">
+            <div class="operation-item" data-index="0">721 + 416 =</div>
+            <div class="operation-item" data-index="1">819 + 111 =</div>
+            <div class="operation-item" data-index="2">604 + 256 =</div>
+            <div class="operation-item" data-index="3">408 + 395 =</div>
+          </div>
+        </button>
+
+        <!-- Modal -->
+        <div data-column-modal-target="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" data-action="click->column-modal#closeOnBackdrop">
+          <div class="bg-white rounded-lg p-6 md:p-8 max-w-7xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+              <h3 class="text-2xl font-bold text-cyan-600" data-column-modal-target="title">Calcola e fai la prova</h3>
+              <button class="text-gray-500 hover:text-gray-700 text-3xl" data-action="click->column-modal#close">&times;</button>
+            </div>
+
+            <div data-column-modal-target="grid" class="mb-6">
+            </div>
+
+            <div class="flex gap-4 justify-center">
+              <button class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold text-lg" data-action="click->column-modal#saveGroup">Salva risultati</button>
+              <button class="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-400 transition font-bold text-lg" data-action="click->column-modal#close">Chiudi</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -213,7 +239,7 @@
   </div>
 
   <!-- Esercizio 4: Due colonne -->
-  <div class="bg-transparent p-4 md:p-8 mb-8">
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
     <div class="flex items-start gap-3 mb-6">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         4
@@ -225,32 +251,58 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
       <!-- Colonna a -->
-      <div>
-        <p class="text-base text-gray-700 mb-3">
-          <span class="font-bold text-orange-600 text-lg">a.</span>
-        </p>
-        <div class="space-y-2 text-base text-gray-700">
-          <p>2416 + 731 =</p>
-          <p>3632 + 89 =</p>
-          <p>3069 + 1916 =</p>
-          <p>2215 + 886 =</p>
-          <p>1529 + 306 =</p>
-          <p>1058 + 215 =</p>
+      <button class="bg-orange-50 p-4 rounded-lg hover:bg-orange-100 transition cursor-pointer text-left border-2 border-transparent hover:border-orange-400"
+              data-action="click->column-modal#openGroup"
+              data-group="a"
+              data-operations="2416+731,3632+89,3069+1916,2215+886,1529+306,1058+215"
+              data-show-carry="true"
+              data-column-modal-target="groupButton">
+        <div class="font-bold text-orange-600 text-lg mb-3">a.</div>
+        <div class="space-y-2 text-base text-gray-700" data-column-modal-target="operationsList" data-group="a">
+          <div class="operation-item" data-index="0">2416 + 731 =</div>
+          <div class="operation-item" data-index="1">3632 + 89 =</div>
+          <div class="operation-item" data-index="2">3069 + 1916 =</div>
+          <div class="operation-item" data-index="3">2215 + 886 =</div>
+          <div class="operation-item" data-index="4">1529 + 306 =</div>
+          <div class="operation-item" data-index="5">1058 + 215 =</div>
         </div>
-      </div>
+      </button>
 
       <!-- Colonna b -->
-      <div>
-        <p class="text-base text-gray-700 mb-3">
-          <span class="font-bold text-orange-600 text-lg">b.</span>
-        </p>
-        <div class="space-y-2 text-base text-gray-700">
-          <p>897 + 562 =</p>
-          <p>5695 + 968 =</p>
-          <p>5569 + 305 =</p>
-          <p>1422 + 753 =</p>
-          <p>6024 + 1881 =</p>
-          <p>2293 + 437 =</p>
+      <button class="bg-blue-50 p-4 rounded-lg hover:bg-blue-100 transition cursor-pointer text-left border-2 border-transparent hover:border-blue-400"
+              data-action="click->column-modal#openGroup"
+              data-group="b"
+              data-operations="897+562,5695+968,5569+305,1422+753,6024+1881,2293+437"
+              data-show-carry="true"
+              data-column-modal-target="groupButton">
+        <div class="font-bold text-orange-600 text-lg mb-3">b.</div>
+        <div class="space-y-2 text-base text-gray-700" data-column-modal-target="operationsList" data-group="b">
+          <div class="operation-item" data-index="0">897 + 562 =</div>
+          <div class="operation-item" data-index="1">5695 + 968 =</div>
+          <div class="operation-item" data-index="2">5569 + 305 =</div>
+          <div class="operation-item" data-index="3">1422 + 753 =</div>
+          <div class="operation-item" data-index="4">6024 + 1881 =</div>
+          <div class="operation-item" data-index="5">2293 + 437 =</div>
+        </div>
+      </button>
+    </div>
+
+    <!-- Modal -->
+    <div data-column-modal-target="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" data-action="click->column-modal#closeOnBackdrop">
+      <div class="bg-white rounded-lg p-6 md:p-8 max-w-7xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-bold text-blue-600" data-column-modal-target="title">Gruppo di operazioni</h3>
+          <button class="text-gray-500 hover:text-gray-700 text-3xl" data-action="click->column-modal#close">&times;</button>
+        </div>
+
+        <!-- Contenitore dinamico per le griglie -->
+        <div data-column-modal-target="grid" class="mb-6">
+          <!-- Il contenuto verrà caricato dinamicamente -->
+        </div>
+
+        <div class="flex gap-4 justify-center">
+          <button class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold text-lg" data-action="click->column-modal#saveGroup">Salva risultati</button>
+          <button class="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-400 transition font-bold text-lg" data-action="click->column-modal#close">Chiudi</button>
         </div>
       </div>
     </div>

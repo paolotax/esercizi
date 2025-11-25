@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   # Dynamic page routing by slug
   get "pagine/:slug", to: "pagine#show", as: "pagina"
 
-  # API endpoint for dynamic column addition grid
-  get "exercises/column_addition_grid", to: "exercises#column_addition_grid", as: "column_addition_grid"
+  # API endpoint for dynamic column operations grid (addizioni, sottrazioni, miste, con prova)
+  get "exercises/column_operations_grid", to: "exercises#column_operations_grid", as: "column_operations_grid"
 
   # Dashboard per costruzione esercizi
   namespace :dashboard do

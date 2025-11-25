@@ -168,15 +168,15 @@
 
         <!-- Esempio 1: Esercizio vuoto - 2 addendi semplici -->
         <%= render partial: 'strumenti/addizioni/column_addition',
-                   locals: Addizione.new(addends: [345, 253], title: "a) 345 + 253 =", show_addends: true, show_carry: false).to_partial_params %>
+                   locals: Addizione.new(addends: [345, 253], title: "345 + 253 =", show_addends: true, show_carry: false).to_partial_params %>
 
         <!-- Esempio 2: Esercizio vuoto - 2 addendi semplici -->
         <%= render partial: 'strumenti/addizioni/column_addition',
-                   locals: Addizione.new(addends: [382, 216], title: "b) 382 + 216 =", show_carry: false).to_partial_params %>
+                   locals: Addizione.new(addends: [382, 216], title: "382 + 216 =", show_carry: false).to_partial_params %>
 
         <!-- Esempio 3: Soluzione completa - 2 addendi grandi -->
         <%= render partial: 'strumenti/addizioni/column_addition',
-                   locals: Addizione.new(addends: [617, 370], title: "c) 617 + 370 =", show_carry: false).to_partial_params %>
+                   locals: Addizione.new(addends: [617, 370], title: "617 + 370 =", show_carry: false).to_partial_params %>
 
       </div>
       
@@ -195,70 +195,86 @@
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Column a -->
-        <div class="bg-blue-50 p-4 rounded-lg">
+        <button class="bg-blue-50 p-4 rounded-lg hover:bg-blue-100 transition cursor-pointer text-left border-2 border-transparent hover:border-blue-400"
+                data-action="click->column-modal#openGroup"
+                data-group="a"
+                data-operations="216+372,385+414,721+200,74+120,308+290"
+                data-column-modal-target="groupButton">
           <div class="font-bold text-red-500 mb-3">a.</div>
-          <div class="space-y-2">
-            <button class="text-lg hover:bg-blue-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="216" data-num2="372">216 + 372 =</button>
-            <button class="text-lg hover:bg-blue-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="385" data-num2="414">385 + 414 =</button>
-            <button class="text-lg hover:bg-blue-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="721" data-num2="200">721 + 200 =</button>
-            <button class="text-lg hover:bg-blue-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="74" data-num2="120">74 + 120 =</button>
-            <button class="text-lg hover:bg-blue-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="308" data-num2="290">308 + 290 =</button>
+          <div class="space-y-2" data-column-modal-target="operationsList" data-group="a">
+            <div class="text-lg operation-item" data-index="0">216 + 372 =</div>
+            <div class="text-lg operation-item" data-index="1">385 + 414 =</div>
+            <div class="text-lg operation-item" data-index="2">721 + 200 =</div>
+            <div class="text-lg operation-item" data-index="3">74 + 120 =</div>
+            <div class="text-lg operation-item" data-index="4">308 + 290 =</div>
           </div>
-        </div>
+        </button>
 
         <!-- Column b -->
-        <div class="bg-green-50 p-4 rounded-lg">
+        <button class="bg-green-50 p-4 rounded-lg hover:bg-green-100 transition cursor-pointer text-left border-2 border-transparent hover:border-green-400"
+                data-action="click->column-modal#openGroup"
+                data-group="b"
+                data-operations="527+261,252+426,580+17,834+152,423+266"
+                data-column-modal-target="groupButton">
           <div class="font-bold text-red-500 mb-3">b.</div>
-          <div class="space-y-2">
-            <button class="text-lg hover:bg-green-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="527" data-num2="261">527 + 261 =</button>
-            <button class="text-lg hover:bg-green-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="252" data-num2="426">252 + 426 =</button>
-            <button class="text-lg hover:bg-green-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="580" data-num2="17">580 + 17 =</button>
-            <button class="text-lg hover:bg-green-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="834" data-num2="152">834 + 152 =</button>
-            <button class="text-lg hover:bg-green-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="423" data-num2="266">423 + 266 =</button>
+          <div class="space-y-2" data-column-modal-target="operationsList" data-group="b">
+            <div class="text-lg operation-item" data-index="0">527 + 261 =</div>
+            <div class="text-lg operation-item" data-index="1">252 + 426 =</div>
+            <div class="text-lg operation-item" data-index="2">580 + 17 =</div>
+            <div class="text-lg operation-item" data-index="3">834 + 152 =</div>
+            <div class="text-lg operation-item" data-index="4">423 + 266 =</div>
           </div>
-        </div>
+        </button>
 
         <!-- Column c -->
-        <div class="bg-purple-50 p-4 rounded-lg">
+        <button class="bg-purple-50 p-4 rounded-lg hover:bg-purple-100 transition cursor-pointer text-left border-2 border-transparent hover:border-purple-400"
+                data-action="click->column-modal#openGroup"
+                data-group="c"
+                data-operations="337+240,615+384,290+208,36+251,134+562"
+                data-column-modal-target="groupButton">
           <div class="font-bold text-red-500 mb-3">c.</div>
-          <div class="space-y-2">
-            <button class="text-lg hover:bg-purple-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="337" data-num2="240">337 + 240 =</button>
-            <button class="text-lg hover:bg-purple-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="615" data-num2="384">615 + 384 =</button>
-            <button class="text-lg hover:bg-purple-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="290" data-num2="208">290 + 208 =</button>
-            <button class="text-lg hover:bg-purple-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="36" data-num2="251">36 + 251 =</button>
-            <button class="text-lg hover:bg-purple-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="134" data-num2="562">134 + 562 =</button>
+          <div class="space-y-2" data-column-modal-target="operationsList" data-group="c">
+            <div class="text-lg operation-item" data-index="0">337 + 240 =</div>
+            <div class="text-lg operation-item" data-index="1">615 + 384 =</div>
+            <div class="text-lg operation-item" data-index="2">290 + 208 =</div>
+            <div class="text-lg operation-item" data-index="3">36 + 251 =</div>
+            <div class="text-lg operation-item" data-index="4">134 + 562 =</div>
           </div>
-        </div>
+        </button>
 
         <!-- Column d -->
-        <div class="bg-pink-50 p-4 rounded-lg">
+        <button class="bg-pink-50 p-4 rounded-lg hover:bg-pink-100 transition cursor-pointer text-left border-2 border-transparent hover:border-pink-400"
+                data-action="click->column-modal#openGroup"
+                data-group="d"
+                data-operations="1303+594,2438+1131,1027+351,2571+1307,2438+450"
+                data-column-modal-target="groupButton">
           <div class="font-bold text-red-500 mb-3">d.</div>
-          <div class="space-y-2">
-            <button class="text-lg hover:bg-pink-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="1303" data-num2="594">1303 + 594 =</button>
-            <button class="text-lg hover:bg-pink-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="2438" data-num2="1131">2438 + 1131 =</button>
-            <button class="text-lg hover:bg-pink-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="1027" data-num2="351">1027 + 351 =</button>
-            <button class="text-lg hover:bg-pink-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="2571" data-num2="1307">2571 + 1307 =</button>
-            <button class="text-lg hover:bg-pink-200 px-2 py-1 rounded w-full text-left transition" data-action="click->column-modal#open" data-num1="2438" data-num2="450">2438 + 450 =</button>
+          <div class="space-y-2" data-column-modal-target="operationsList" data-group="d">
+            <div class="text-lg operation-item" data-index="0">1303 + 594 =</div>
+            <div class="text-lg operation-item" data-index="1">2438 + 1131 =</div>
+            <div class="text-lg operation-item" data-index="2">1027 + 351 =</div>
+            <div class="text-lg operation-item" data-index="3">2571 + 1307 =</div>
+            <div class="text-lg operation-item" data-index="4">2438 + 450 =</div>
           </div>
-        </div>
+        </button>
       </div>
 
       <!-- Modal -->
       <div data-column-modal-target="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" data-action="click->column-modal#closeOnBackdrop">
-        <div class="bg-white rounded-lg p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div class="bg-white rounded-lg p-6 md:p-8 max-w-7xl w-full mx-4 max-h-[90vh] overflow-y-auto">
           <div class="flex justify-between items-center mb-6">
-            <h3 class="text-2xl font-bold text-blue-600" data-column-modal-target="title">Addizione in colonna</h3>
+            <h3 class="text-2xl font-bold text-blue-600" data-column-modal-target="title">Gruppo di operazioni</h3>
             <button class="text-gray-500 hover:text-gray-700 text-3xl" data-action="click->column-modal#close">&times;</button>
           </div>
-          
-          <!-- Contenitore dinamico per la griglia -->
-          <div data-column-modal-target="grid">
+
+          <!-- Contenitore dinamico per le griglie -->
+          <div data-column-modal-target="grid" class="mb-6">
             <!-- Il contenuto verrà caricato dinamicamente -->
           </div>
 
-          <div class="mt-6 flex gap-4">
-            <button class="flex-1 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition font-bold" data-action="click->column-modal#save">Salva</button>
-            <button class="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition font-bold" data-action="click->column-modal#close">Chiudi</button>
+          <div class="flex gap-4 justify-center">
+            <button class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold text-lg" data-action="click->column-modal#saveGroup">Salva risultati</button>
+            <button class="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-400 transition font-bold text-lg" data-action="click->column-modal#close">Chiudi</button>
           </div>
         </div>
       </div>
