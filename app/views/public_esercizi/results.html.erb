@@ -78,6 +78,58 @@
           <% end %>
         </div>
 
+        <!-- Dettaglio Operazioni -->
+        <% if @attempt.results['operations'].present? %>
+          <div class="border-t pt-6 mb-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Dettaglio Operazioni</h3>
+            <div class="space-y-3">
+              <% @attempt.results['operations'].each_with_index do |op, index| %>
+                <div class="flex items-center justify-between p-4 rounded-lg <%= op['correct'] ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200' %>">
+                  <!-- Numero operazione e tipo -->
+                  <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                      <div class="w-8 h-8 rounded-full <%= op['correct'] ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' %> flex items-center justify-center font-bold text-sm">
+                        <%= index + 1 %>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="font-medium text-gray-900">
+                        <%= render_operation_display(op) %>
+                      </div>
+                      <div class="text-sm text-gray-600">
+                        <%= op['type'].capitalize %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Risultato -->
+                  <div class="text-right">
+                    <div class="text-sm text-gray-600">
+                      Risposta corretta: <span class="font-semibold text-gray-900"><%= op['correct_answer'] %></span>
+                    </div>
+                    <div class="text-sm <%= op['correct'] ? 'text-green-700' : 'text-red-700' %>">
+                      Tua risposta: <span class="font-semibold"><%= op['user_answer'].present? ? op['user_answer'] : '(non risposto)' %></span>
+                    </div>
+                  </div>
+
+                  <!-- Icona check/cross -->
+                  <div class="flex-shrink-0 ml-4">
+                    <% if op['correct'] %>
+                      <svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                      </svg>
+                    <% else %>
+                      <svg class="h-6 w-6 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                      </svg>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
         <!-- Azioni -->
         <div class="flex justify-center space-x-4">
           <%= link_to public_esercizio_path(share_token: @esercizio.share_token),
