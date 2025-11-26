@@ -67,6 +67,13 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 47, titolo: "MOLTIPLICAZIONI CON UNA CIFRA AL MOLTIPLICATORE", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p047", view_template: "bus3_mat_p047", base_color: "green" },
   { numero: 48, titolo: "MOLTIPLICAZIONI CON DUE CIFRE AL MOLTIPLICATORE", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p048", view_template: "bus3_mat_p048", base_color: "green" },
   { numero: 49, titolo: "MOLTIPLICARE PER 10, 100, 1000", sottotitolo: "MOLTIPLICAZIONE", slug: "bus3_mat_p049", view_template: "bus3_mat_p049", base_color: "green" },
+  { numero: 50, titolo: "IL GIOCO DELL'OCA DELLA MOLTIPLICAZIONE", sottotitolo: "PAROLE AL CENTRO", slug: "bus3_mat_p050", view_template: "bus3_mat_p050", base_color: "blue" },
+  { numero: 51, titolo: "GIOCO E RIPASSO", sottotitolo: "PAROLE AL CENTRO", slug: "bus3_mat_p051", view_template: "bus3_mat_p051", base_color: "blue" },
+  { numero: 52, titolo: "LA DIVISIONE", sottotitolo: "DIVISIONE", slug: "bus3_mat_p052", view_template: "bus3_mat_p052", base_color: "cyan" },
+  { numero: 53, titolo: "IL RESTO DELLA DIVISIONE", sottotitolo: "DIVISIONE", slug: "bus3_mat_p053", view_template: "bus3_mat_p053", base_color: "cyan" },
+  { numero: 54, titolo: "LA PROPRIETÀ INVARIANTIVA", sottotitolo: "DIVISIONE", slug: "bus3_mat_p054", view_template: "bus3_mat_p054", base_color: "cyan" },
+  { numero: 55, titolo: "OPERAZIONI A CONFRONTO", sottotitolo: "DIVISIONE", slug: "bus3_mat_p055", view_template: "bus3_mat_p055", base_color: "cyan" },
+  { numero: 56, titolo: "DIVISIONI IN COLONNA", sottotitolo: "DIVISIONE", slug: "bus3_mat_p056", view_template: "bus3_mat_p056", base_color: "cyan" },
   { numero: 74, titolo: "Le Frazioni", slug: "bus3_mat_p074", view_template: "bus3_mat_p074", sottotitolo: "FRAZIONI", base_color: "purple" },
   { numero: 75, titolo: "Leggere e scrivere le frazioni", slug: "bus3_mat_p075", view_template: "bus3_mat_p075", sottotitolo: "FRAZIONI", base_color: "purple" },
   { numero: 76, titolo: "Frazioni - L'unità frazionaria", slug: "bus3_mat_p076", view_template: "bus3_mat_p076", sottotitolo: "FRAZIONI", base_color: "purple" },
@@ -84,7 +91,7 @@ bus_matematica = bus_volume3.discipline.create!(
 end
 
 # Pagine generiche per bus3_mat (p001-p192, escludendo le pagine già definite sopra)
-existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 74, 75, 76, 77, 78, 144 ]
+existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 74, 75, 76, 77, 78, 144 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|

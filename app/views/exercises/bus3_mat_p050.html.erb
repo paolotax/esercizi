@@ -1,46 +1,89 @@
-<% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
+<div class="max-w-[1800px] mx-auto p-4 lg:p-8"
+     data-controller="exercise-checker hotspot-editor">
 
-<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p050/page.png') %>">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Regole del gioco -->
-  <div class="bg-[#FFE4C4] p-4 md:p-6 mb-8">
-    <p class="text-base md:text-lg text-gray-800 mb-4">
-      <strong>• Gioca da sola/o, con un'amica o un amico, oppure con tutta la tua classe.</strong>
-    </p>
+  <!-- Two-page horizontal layout like an open book -->
+  <div class="grid lg:grid-cols-2 gap-3 lg:gap-0">
 
-    <h3 class="font-bold text-lg mb-3"><u>COME SI GIOCA</u></h3>
-    <p class="mb-4">
-      Procurati un dado e tante pedine segnaposto quanti sono i giocatori.
-      A turno, ognuno lancia il dado e sposta la pedina di un numero di caselle pari al lancio.
-    </p>
+    <!-- LEFT PAGE - Page 50 -->
+    <div class="relative" data-hotspot-editor-target="container">
+      <%= image_tag "bus3_mat/p050/page.png",
+            alt: "Il gioco dell'oca della moltiplicazione - Partenza, caselle 1-7",
+            class: "w-full h-auto select-none pointer-events-none" %>
 
-    <p class="font-bold mb-2">Se capiti sulla casella:</p>
-    <ul class="list-disc ml-6 space-y-2">
-      <li><strong><u>dado →</u></strong> lancia di nuovo il dado.</li>
-      <li><strong><u>freccia →</u></strong> sposta la pedina dove indica la freccia.</li>
-      <li><strong><u>gialla →</u></strong> calcola a mente: se non riesci stai ferma/o un turno.</li>
-      <li><strong><u>azzurra →</u></strong> ripeti la tabellina.</li>
-      <li><strong><u>rosa →</u></strong> spiega l'argomento indicato.</li>
-    </ul>
+      <div class="absolute inset-0">
+        <% hotspots_p50 = [
+          { label: "Partenza", top: "75.0%", left: "12.0%", width: "12.0%", height: "4.0%" },
+          { label: "Dado", top: "77.0%", left: "28.0%", width: "8.0%", height: "10.0%" },
+          { label: "24 per 1000", top: "77.0%", left: "42.0%", width: "18.0%", height: "5.0%" },
+          { label: "Casella 4", top: "58.0%", left: "18.0%", width: "8.0%", height: "6.0%" },
+          { label: "Casella 5", top: "48.0%", left: "26.0%", width: "8.0%", height: "6.0%" },
+          { label: "Proprietà associativa", top: "38.0%", left: "50.0%", width: "18.0%", height: "6.0%" },
+          { label: "Casella 7", top: "26.0%", left: "58.0%", width: "8.0%", height: "6.0%" },
+          { label: "Tabellina del 3", top: "18.0%", left: "70.0%", width: "14.0%", height: "6.0%" },
+          { label: "0 e 1 nella moltiplicazione", top: "58.0%", left: "55.0%", width: "20.0%", height: "6.0%" }
+        ] %>
 
-    <p class="mt-4">
-      Vince chi arriva per prima/o alla <strong>casella 20</strong>.
-    </p>
+        <% hotspots_p50.each do |hotspot| %>
+          <button type="button"
+                  class="absolute rounded-xl bg-blue-500/10 hover:bg-blue-500/25 border-2 border-transparent hover:border-blue-500 focus:border-blue-600 focus:outline-none transition shadow-sm cursor-move"
+                  style="top: <%= hotspot[:top] %>; left: <%= hotspot[:left] %>; width: <%= hotspot[:width] %>; height: <%= hotspot[:height] %>;"
+                  aria-label="Leggi: <%= hotspot[:label] %>"
+                  data-controller="image-speech"
+                  data-hotspot-editor-target="hotspot"
+                  data-image-speech-word-value="<%= hotspot[:label] %>"
+                  data-image-speech-lang-value="it-IT"
+                  data-action="mousedown->hotspot-editor#startDrag click->image-speech#speak">
+            <span class="sr-only"><%= hotspot[:label] %></span>
+          </button>
+        <% end %>
+      </div>
+    </div>
 
-    <p class="mt-4 text-center text-lg font-bold">
-      <u>BUON DIVERTIMENTO!</u>
-    </p>
+    <!-- RIGHT PAGE - Page 51 -->
+    <div class="relative" data-hotspot-editor-target="container">
+      <%= image_tag "bus3_mat/p051/page.png",
+            alt: "Il gioco dell'oca della moltiplicazione - Caselle 8-20, Arrivo",
+            class: "w-full h-auto select-none pointer-events-none" %>
+
+      <div class="absolute inset-0">
+        <% hotspots_p51 = [
+          { label: "15 per 10", top: "10.0%", left: "5.0%", width: "14.0%", height: "5.0%" },
+          { label: "93 per 100", top: "12.0%", left: "22.0%", width: "16.0%", height: "5.0%" },
+          { label: "Casella 10", top: "18.0%", left: "32.0%", width: "8.0%", height: "6.0%" },
+          { label: "Proprietà commutativa", top: "30.0%", left: "22.0%", width: "18.0%", height: "6.0%" },
+          { label: "Dado", top: "42.0%", left: "35.0%", width: "10.0%", height: "10.0%" },
+          { label: "31 per 100", top: "58.0%", left: "22.0%", width: "16.0%", height: "5.0%" },
+          { label: "Tabellina del 9", top: "75.0%", left: "25.0%", width: "14.0%", height: "6.0%" },
+          { label: "Proprietà distributiva", top: "80.0%", left: "48.0%", width: "18.0%", height: "6.0%" },
+          { label: "Casella 15", top: "68.0%", left: "55.0%", width: "8.0%", height: "6.0%" },
+          { label: "Casella 16", top: "58.0%", left: "62.0%", width: "8.0%", height: "6.0%" },
+          { label: "Tabellina del 5", top: "50.0%", left: "60.0%", width: "14.0%", height: "6.0%" },
+          { label: "Dado", top: "38.0%", left: "52.0%", width: "10.0%", height: "10.0%" },
+          { label: "Tabellina del 7", top: "28.0%", left: "60.0%", width: "14.0%", height: "6.0%" },
+          { label: "Casella 19", top: "15.0%", left: "70.0%", width: "8.0%", height: "6.0%" },
+          { label: "Arrivo", top: "8.0%", left: "52.0%", width: "12.0%", height: "5.0%" }
+        ] %>
+
+        <% hotspots_p51.each do |hotspot| %>
+          <button type="button"
+                  class="absolute rounded-xl bg-blue-500/10 hover:bg-blue-500/25 border-2 border-transparent hover:border-blue-500 focus:border-blue-600 focus:outline-none transition shadow-sm cursor-move"
+                  style="top: <%= hotspot[:top] %>; left: <%= hotspot[:left] %>; width: <%= hotspot[:width] %>; height: <%= hotspot[:height] %>;"
+                  aria-label="Leggi: <%= hotspot[:label] %>"
+                  data-controller="image-speech"
+                  data-hotspot-editor-target="hotspot"
+                  data-image-speech-word-value="<%= hotspot[:label] %>"
+                  data-image-speech-lang-value="it-IT"
+                  data-action="mousedown->hotspot-editor#startDrag click->image-speech#speak">
+            <span class="sr-only"><%= hotspot[:label] %></span>
+          </button>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Immagine del gioco dell'oca -->
-  <div class="flex justify-center mb-8">
-    <%= image_tag "bus3_mat/p050/p50_1.jpg",
-        alt: "Il gioco dell'oca della moltiplicazione",
-        class: "max-w-4xl w-full border-3 border-orange-400 rounded-lg" %>
-  </div>
-
-  <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'orange', show_exercise_buttons: false %>
+  <%= render 'shared/exercise_controls', color: 'blue', show_exercise_buttons: false %>
 </div>
