@@ -1,12 +1,225 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p087/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 4: Scrivi in cifre il valore complessivo -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        4
+      </div>
+      <p class="text-gray-700">
+        <strong>Scrivi in cifre il valore complessivo rappresentato.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Gruppo 1: 5€ + 5€ + 1€ + 5c + 5c + 5c = 11,15 -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <div class="flex items-center gap-2 flex-wrap mb-3">
+          <%= image_tag "bus3_mat/p087/output-1743504902087_593_742_151_76.png", alt: "5 euro", class: "h-10" %>
+          <%= image_tag "bus3_mat/p087/output-1743504902087_593_742_151_76.png", alt: "5 euro", class: "h-10" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-8 h-8" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_894_998_71_68.png", alt: "5 centesimi", class: "w-7 h-7" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_894_998_71_68.png", alt: "5 centesimi", class: "w-7 h-7" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_894_998_71_68.png", alt: "5 centesimi", class: "w-7 h-7" %>
+        </div>
+        <div class="flex items-center gap-2">
+          <span>€</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="11,15"
+                 class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+        </div>
+      </div>
+
+      <!-- Gruppo 2: 2€ + 2€ + 10c + 10c + 2c + 2c = 4,24 -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <div class="flex items-center gap-2 flex-wrap mb-3">
+          <%= image_tag "bus3_mat/p086/output-1743504902086_591_999_60_65.png", alt: "2 euro", class: "w-8 h-8" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_591_999_60_65.png", alt: "2 euro", class: "w-8 h-8" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_288_1093_72_69.png", alt: "10 centesimi", class: "w-7 h-7" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_288_1093_72_69.png", alt: "10 centesimi", class: "w-7 h-7" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_591_999_60_65.png", alt: "2 centesimi", class: "w-7 h-7" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_591_999_60_65.png", alt: "2 centesimi", class: "w-7 h-7" %>
+        </div>
+        <div class="flex items-center gap-2">
+          <span>€</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="4,24"
+                 class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+        </div>
+      </div>
+
+      <!-- Gruppo 3: 10€ + 10€ + 1€ + 1€ + 20c + 2c = 22,22 -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <div class="flex items-center gap-2 flex-wrap mb-3">
+          <%= image_tag "bus3_mat/p087/output-1743504902087_587_842_232_87.png", alt: "10 euro + 2 euro", class: "h-10" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-8 h-8" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-8 h-8" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_593_1092_65_65.png", alt: "20 centesimi", class: "w-7 h-7" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_591_999_60_65.png", alt: "2 centesimi", class: "w-7 h-7" %>
+        </div>
+        <div class="flex items-center gap-2">
+          <span>€</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="22,22"
+                 class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+        </div>
+      </div>
+
+      <!-- Gruppo 4: 5€ + 5€ + 1€ + 5c + 50c + 20c + 20c = 11,95 -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <div class="flex items-center gap-2 flex-wrap mb-3">
+          <%= image_tag "bus3_mat/p087/output-1743504902087_593_742_151_76.png", alt: "5 euro", class: "h-10" %>
+          <%= image_tag "bus3_mat/p087/output-1743504902087_593_742_151_76.png", alt: "5 euro", class: "h-10" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-8 h-8" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_894_998_71_68.png", alt: "5 centesimi", class: "w-7 h-7" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_896_1088_74_75.png", alt: "50 centesimi", class: "w-7 h-7" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_593_1092_65_65.png", alt: "20 centesimi", class: "w-7 h-7" %>
+          <%= image_tag "bus3_mat/p086/output-1743504902086_593_1092_65_65.png", alt: "20 centesimi", class: "w-7 h-7" %>
+        </div>
+        <div class="flex items-center gap-2">
+          <span>€</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="11,95"
+                 class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 5: Completa la tabella -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        5
+      </div>
+      <p class="text-gray-700">
+        <strong>Completa la tabella.</strong>
+      </p>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse border-2 border-cyan-400">
+        <thead>
+          <tr class="bg-cyan-100">
+            <th class="border-2 border-cyan-400 p-3 text-cyan-600">COMPRO</th>
+            <th class="border-2 border-cyan-400 p-3 text-cyan-600">SPENDO</th>
+            <th class="border-2 border-cyan-400 p-3 text-cyan-600">PAGO CON</th>
+            <th class="border-2 border-cyan-400 p-3 text-cyan-600">RESTO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Riga 1: Pallone €2 + Girandola €1,50 = €3,50 - Pago con €5 + €1 = €6 - Resto €2,50 -->
+          <tr>
+            <td class="border-2 border-cyan-400 p-3">
+              <div class="flex items-center gap-2">
+                <%= image_tag "bus3_mat/p087/p87_01.jpg", alt: "Pallone e girandola", class: "w-20" %>
+                <span class="text-sm">€2 + €1,50</span>
+              </div>
+            </td>
+            <td class="border-2 border-cyan-400 p-3 text-center">
+              <span>€</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="3,50"
+                     class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+            </td>
+            <td class="border-2 border-cyan-400 p-3 text-center">
+              <div class="flex items-center justify-center gap-1">
+                <%= image_tag "bus3_mat/p087/output-1743504902087_593_742_151_76.png", alt: "5 euro", class: "h-8" %>
+                <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-7 h-7" %>
+              </div>
+            </td>
+            <td class="border-2 border-cyan-400 p-3 text-center">
+              <span>€</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="2,50"
+                     class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+            </td>
+          </tr>
+
+          <!-- Riga 2: Cappello €3 + Libro €8,50 = €11,50 - Pago con €10 + €2 = €12 - Resto €0,50 -->
+          <tr>
+            <td class="border-2 border-cyan-400 p-3">
+              <div class="flex items-center gap-2">
+                <%= image_tag "bus3_mat/p087/p87_02.jpg", alt: "Cappello e libro", class: "w-20" %>
+                <span class="text-sm">€3 + €8,50</span>
+              </div>
+            </td>
+            <td class="border-2 border-cyan-400 p-3 text-center">
+              <span>€</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="11,50"
+                     class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+            </td>
+            <td class="border-2 border-cyan-400 p-3 text-center">
+              <div class="flex items-center justify-center gap-1">
+                <%= image_tag "bus3_mat/p087/output-1743504902087_587_842_232_87.png", alt: "10 euro + 2 euro", class: "h-8" %>
+              </div>
+            </td>
+            <td class="border-2 border-cyan-400 p-3 text-center">
+              <span>€</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="0,50"
+                     class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+            </td>
+          </tr>
+
+          <!-- Riga 3: Zaino €10,50 + Matite €8,50 = €19 - Pago con €20 + €20 = €40 - Resto €21 -->
+          <tr>
+            <td class="border-2 border-cyan-400 p-3">
+              <div class="flex items-center gap-2">
+                <%= image_tag "bus3_mat/p087/p87_03.jpg", alt: "Zaino e matite", class: "w-20" %>
+                <span class="text-sm">€10,50 + €8,50</span>
+              </div>
+            </td>
+            <td class="border-2 border-cyan-400 p-3 text-center">
+              <span>€</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="19"
+                     class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+            </td>
+            <td class="border-2 border-cyan-400 p-3 text-center">
+              <div class="flex items-center justify-center gap-1">
+                <%= image_tag "bus3_mat/p087/output-1743504902087_588_950_226_87.png", alt: "20 euro", class: "h-8" %>
+                <%= image_tag "bus3_mat/p087/output-1743504902087_588_950_226_87.png", alt: "20 euro", class: "h-8" %>
+              </div>
+            </td>
+            <td class="border-2 border-cyan-400 p-3 text-center">
+              <span>€</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="21"
+                     class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+            </td>
+          </tr>
+
+          <!-- Riga 4: Bici €40 + Bandiera €11 = €51 - Pago con €50 + €50 + €2 = €102 - Resto €51 -->
+          <tr>
+            <td class="border-2 border-cyan-400 p-3">
+              <div class="flex items-center gap-2">
+                <%= image_tag "bus3_mat/p087/p87_04.jpg", alt: "Bici e bandiera", class: "w-20" %>
+                <span class="text-sm">€40 + €11</span>
+              </div>
+            </td>
+            <td class="border-2 border-cyan-400 p-3 text-center">
+              <span>€</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="51"
+                     class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+            </td>
+            <td class="border-2 border-cyan-400 p-3 text-center">
+              <div class="flex items-center justify-center gap-1">
+                <%= image_tag "bus3_mat/p087/output-1743504902087_590_1053_230_95.png", alt: "50 euro + 1 euro", class: "h-8" %>
+                <%= image_tag "bus3_mat/p087/output-1743504902087_590_1053_230_95.png", alt: "50 euro + 1 euro", class: "h-8" %>
+              </div>
+            </td>
+            <td class="border-2 border-cyan-400 p-3 text-center">
+              <span>€</span>
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="51"
+                     class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

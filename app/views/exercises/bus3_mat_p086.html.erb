@@ -1,12 +1,210 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p086/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1: Osserva -->
+  <div class="mb-8">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>I numeri decimali sono molto utili nelle misure in euro. Osserva.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <!-- Pomodori e prezzo -->
+      <div class="flex items-center gap-4">
+        <%= image_tag "bus3_mat/p086/p86_01.jpg", alt: "Pomodori", class: "w-24" %>
+        <div class="bg-gray-100 px-4 py-2 rounded-lg">
+          <span class="text-2xl font-bold">€ 1,67</span>
+        </div>
+      </div>
+
+      <!-- Tabella parte intera/decimale -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <div class="flex gap-4 justify-center mb-2">
+          <span class="text-cyan-600 font-bold">parte intera</span>
+          <span class="text-cyan-600 font-bold">parte decimale</span>
+        </div>
+        <div class="flex items-center justify-center gap-2">
+          <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-10 h-10" %>
+          <span class="text-2xl font-bold">1</span>
+          <span class="text-2xl font-bold">,</span>
+          <span class="text-2xl font-bold">6</span>
+          <span class="text-2xl font-bold">7</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spiegazione monete -->
+    <div class="bg-cyan-50 border-2 border-cyan-400 rounded-lg p-4 space-y-3">
+      <div class="flex items-start gap-3">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-10 h-10" %>
+        <div>
+          <p>• La moneta da <strong class="text-red-500">1 euro</strong> è l'<strong class="text-cyan-600">intero</strong>.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_290_999_55_63.png", alt: "1 centesimo", class: "w-10 h-10" %>
+        <div>
+          <p>• La moneta da 1 centesimo è <strong class="text-red-500">0,01 euro</strong>.</p>
+          <p class="text-sm">È <strong class="text-cyan-600">un centesimo</strong> dell'intero.</p>
+          <p class="text-sm">100 monete da 1 centesimo valgono 1 euro.</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_288_1093_72_69.png", alt: "10 centesimi", class: "w-10 h-10" %>
+        <div>
+          <p>• La moneta da 10 centesimi è <strong class="text-red-500">0,10 euro</strong>.</p>
+          <p class="text-sm">È <strong class="text-cyan-600">un decimo</strong> dell'intero.</p>
+          <p class="text-sm">10 monete da 10 centesimi valgono 1 euro.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Scrivi i valori -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Scrivi i valori delle monete in parole e con i numeri decimali.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <!-- Esempio: 1 centesimo -->
+      <div class="bg-cyan-100 border-2 border-cyan-400 rounded-lg p-3 text-center">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_290_999_55_63.png", alt: "1 centesimo", class: "w-12 h-12 mx-auto mb-2" %>
+        <p class="text-red-500 font-bold">1 centesimo</p>
+        <p class="text-red-500 font-bold">0,01</p>
+      </div>
+
+      <!-- 2 centesimi -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 text-center">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_591_999_60_65.png", alt: "2 centesimi", class: "w-12 h-12 mx-auto mb-2" %>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="2 centesimi"
+               class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center mb-1">
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="0,02"
+               class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+      </div>
+
+      <!-- 5 centesimi -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 text-center">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_894_998_71_68.png", alt: "5 centesimi", class: "w-12 h-12 mx-auto mb-2" %>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="5 centesimi"
+               class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center mb-1">
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="0,05"
+               class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+      </div>
+
+      <!-- 10 centesimi -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 text-center">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_288_1093_72_69.png", alt: "10 centesimi", class: "w-12 h-12 mx-auto mb-2" %>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="10 centesimi"
+               class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center mb-1">
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="0,10"
+               class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+      </div>
+
+      <!-- 20 centesimi -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 text-center">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_593_1092_65_65.png", alt: "20 centesimi", class: "w-12 h-12 mx-auto mb-2" %>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="20 centesimi"
+               class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center mb-1">
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="0,20"
+               class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+      </div>
+
+      <!-- 50 centesimi -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 text-center">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_896_1088_74_75.png", alt: "50 centesimi", class: "w-12 h-12 mx-auto mb-2" %>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="50 centesimi"
+               class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center mb-1">
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="0,50"
+               class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 3: Completa come nell'esempio -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-gray-700">
+        <strong>Completa come nell'esempio.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <!-- Esempio: 1€ vale 100 monete da 1c -->
+      <div class="bg-cyan-100 border-2 border-cyan-400 rounded-lg p-3 flex items-center gap-2 flex-wrap justify-center">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-8 h-8" %>
+        <span>vale</span>
+        <span class="text-red-500 font-bold">100</span>
+        <%= image_tag "bus3_mat/p086/output-1743504902086_290_999_55_63.png", alt: "1 centesimo", class: "w-8 h-8" %>
+      </div>
+
+      <!-- 1€ vale ? da 2c -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 flex items-center gap-2 flex-wrap justify-center">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-8 h-8" %>
+        <span>vale</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="50"
+               class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_591_999_60_65.png", alt: "2 centesimi", class: "w-8 h-8" %>
+      </div>
+
+      <!-- 1€ vale ? da 5c -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 flex items-center gap-2 flex-wrap justify-center">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-8 h-8" %>
+        <span>vale</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="20"
+               class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_894_998_71_68.png", alt: "5 centesimi", class: "w-8 h-8" %>
+      </div>
+
+      <!-- 1€ vale ? da 10c -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 flex items-center gap-2 flex-wrap justify-center">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-8 h-8" %>
+        <span>vale</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+               class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_288_1093_72_69.png", alt: "10 centesimi", class: "w-8 h-8" %>
+      </div>
+
+      <!-- 1€ vale ? da 20c -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 flex items-center gap-2 flex-wrap justify-center">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-8 h-8" %>
+        <span>vale</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+               class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_593_1092_65_65.png", alt: "20 centesimi", class: "w-8 h-8" %>
+      </div>
+
+      <!-- 1€ vale ? da 50c -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 flex items-center gap-2 flex-wrap justify-center">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_104_997_70_68.png", alt: "1 euro", class: "w-8 h-8" %>
+        <span>vale</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+               class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <%= image_tag "bus3_mat/p086/output-1743504902086_896_1088_74_75.png", alt: "50 centesimi", class: "w-8 h-8" %>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>
