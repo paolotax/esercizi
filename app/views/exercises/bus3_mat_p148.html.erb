@@ -1,12 +1,167 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p148/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1: Leggi e completa -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-yellow-400 rounded-full w-10 h-10 flex items-center justify-center border-4 border-cyan-500 flex-shrink-0">
+        <span class="text-cyan-600 font-bold text-xs text-center leading-tight">1</span>
+      </div>
+      <div>
+        <span class="bg-yellow-400 text-cyan-600 px-2 py-0.5 rounded text-sm font-bold">IMPARARE TUTTI</span>
+        <p class="text-gray-700 mt-1"><strong>Leggi, osserva i disegni e completa.</strong></p>
+      </div>
+    </div>
+
+    <!-- Box spiegazione moltiplicazione -->
+    <div class="bg-cyan-50 border-2 border-cyan-400 rounded-lg p-4 mb-6">
+      <p>La <strong class="text-cyan-600">moltiplicazione</strong> permette di sommare più volte la stessa quantità.</p>
+    </div>
+
+    <div class="space-y-8">
+      <!-- Problema A: Cioccolatini -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-4">
+        <div class="flex flex-col lg:flex-row gap-4 items-center">
+          <div class="flex-1">
+            <div class="bg-cyan-500 text-white px-2 py-0.5 rounded text-sm font-bold inline-block mb-2">A</div>
+            <p class="text-cyan-600 font-bold mb-2">Domanda: Quanti cioccolatini ci sono nella scatola?</p>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2 flex-wrap">
+                <strong>Operazione →</strong>
+                <span>4 +</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                       class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+                <span>+</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                       class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+                <span>=</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="12"
+                       class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold" inputmode="numeric">
+              </div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <strong class="text-cyan-600">oppure →</strong>
+                <span>4 ×</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="3"
+                       class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+                <span>=</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="12"
+                       class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold" inputmode="numeric">
+              </div>
+              <p class="text-sm text-gray-600 ml-8">↓</p>
+              <p class="text-sm text-cyan-600 ml-8">4 <span class="underline">ripetuto</span> volte</p>
+            </div>
+            <p class="text-gray-700 mt-2"><strong>Risposta:</strong> Nella scatola ci sono
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="12"
+                     class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+              cioccolatini.
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <%= image_tag "bus3_mat/p148/p148_01.jpg", alt: "Scatola di cioccolatini", class: "max-w-[200px]" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Problema B: Triangoli -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-4">
+        <div class="flex flex-col lg:flex-row gap-4 items-center">
+          <div class="flex-1">
+            <div class="bg-cyan-500 text-white px-2 py-0.5 rounded text-sm font-bold inline-block mb-2">B</div>
+            <p class="text-cyan-600 font-bold mb-2">Domanda: Quanti triangoli ci sono nel quadro?</p>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2 flex-wrap">
+                <strong>Operazione →</strong>
+                <span>6 +</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
+                       class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+                <span>+</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
+                       class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+                <span>=</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="18"
+                       class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold" inputmode="numeric">
+              </div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <strong class="text-cyan-600">oppure →</strong>
+                <span>6 ×</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="3"
+                       class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+                <span>=</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="18"
+                       class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold" inputmode="numeric">
+              </div>
+            </div>
+            <p class="text-gray-700 mt-2"><strong>Risposta:</strong> Nel quadro ci sono
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="18"
+                     class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+              triangoli.
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <%= image_tag "bus3_mat/p148/p148_02.jpg", alt: "Triangoli nel quadro", class: "max-w-[150px]" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Risolvi i problemi -->
+  <div class="mb-8">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Risolvi i problemi sul quaderno.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <p class="font-bold text-cyan-600 mb-2">a.</p>
+        <p class="text-gray-700">In una chitarra ci sono 6 corde. Quante corde ci sono in 8 chitarre?</p>
+      </div>
+
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <p class="font-bold text-cyan-600 mb-2">b.</p>
+        <p class="text-gray-700">Alla fase finale di un torneo di pallavolo femminile sono state ammesse 10 squadre, ciascuna formata da 6 giocatrici. Quante giocatrici ci sono in tutto?</p>
+      </div>
+
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <p class="font-bold text-cyan-600 mb-2">c.</p>
+        <p class="text-gray-700">Per una visita a un parco zoologico l'insegnante di una classe terza ha comprato 20 biglietti a € 8 l'uno. Qual è stata la spesa totale?</p>
+      </div>
+
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <p class="font-bold text-cyan-600 mb-2">d.</p>
+        <p class="text-gray-700">Un impiegato lavora 8 ore al giorno. Quante ore lavora in 7 giorni?</p>
+      </div>
+
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <p class="font-bold text-cyan-600 mb-2">e.</p>
+        <p class="text-gray-700">In un teatro ci sono 54 file di poltrone. Ogni fila ha 10 poltrone. Quanti spettatori può accogliere il teatro?</p>
+      </div>
+
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <p class="font-bold text-cyan-600 mb-2">f.</p>
+        <p class="text-gray-700">In una scatola ci sono 8 pennarelli. Quanti pennarelli ci sono in 9 scatole tutte uguali?</p>
+      </div>
+
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4 md:col-span-2">
+        <p class="font-bold text-cyan-600 mb-2">g.</p>
+        <p class="text-gray-700">Per andare all'allenamento di calcio Luigi percorre 6 chilometri al giorno. Quanti chilometri fa in una settimana?</p>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

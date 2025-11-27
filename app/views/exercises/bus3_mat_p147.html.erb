@@ -1,12 +1,139 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p147/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1: Colora il cartellino -->
+  <div class="mb-8" data-controller="fill-blanks">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>Leggi con attenzione e colora il cartellino con l'operazione che devi utilizzare, poi risolvi i problemi sul quaderno.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Problema a -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-4">
+        <p class="font-bold text-cyan-600 mb-2">a.</p>
+        <p class="text-gray-700 mb-4">Un automobilista ha speso € 289 per la revisione dell'auto e € 378 per cambiare le gomme. Quanto ha speso in tutto?</p>
+        <div class="flex gap-4">
+          <span class="px-4 py-2 border-2 border-blue-400 rounded-lg font-bold bg-blue-100">addizione</span>
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg font-bold">sottrazione</span>
+        </div>
+      </div>
+
+      <!-- Problema b -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-4">
+        <p class="font-bold text-cyan-600 mb-2">b.</p>
+        <p class="text-gray-700 mb-4">Un automobilista ha speso € 667 per cambiare il parabrezza e le gomme. Se ha speso € 378 per le gomme, quanto gli è costato il parabrezza?</p>
+        <div class="flex gap-4">
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg font-bold">addizione</span>
+          <span class="px-4 py-2 border-2 border-red-400 rounded-lg font-bold bg-red-100">sottrazione</span>
+        </div>
+      </div>
+
+      <!-- Problema c -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-4">
+        <p class="font-bold text-cyan-600 mb-2">c.</p>
+        <p class="text-gray-700 mb-4">Alcuni giardinieri comunali devono piantare 253 nuovi alberi. Ne hanno già piantati 185. Quanti ne devono ancora piantare?</p>
+        <div class="flex gap-4">
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg font-bold">addizione</span>
+          <span class="px-4 py-2 border-2 border-red-400 rounded-lg font-bold bg-red-100">sottrazione</span>
+        </div>
+      </div>
+
+      <!-- Problema d -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-4">
+        <p class="font-bold text-cyan-600 mb-2">d.</p>
+        <p class="text-gray-700 mb-4">Alcuni giardinieri comunali hanno piantato 253 nuovi alberi di mattina e 185 nel pomeriggio. Quanti nuovi alberi hanno piantato in tutto?</p>
+        <div class="flex gap-4">
+          <span class="px-4 py-2 border-2 border-blue-400 rounded-lg font-bold bg-blue-100">addizione</span>
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg font-bold">sottrazione</span>
+        </div>
+      </div>
+
+      <!-- Problema e -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-4">
+        <p class="font-bold text-cyan-600 mb-2">e.</p>
+        <p class="text-gray-700 mb-4">In un bar ieri sono stati serviti 327 cappuccini e 208 caffè. Quante tazze in tutto?</p>
+        <div class="flex gap-4">
+          <span class="px-4 py-2 border-2 border-blue-400 rounded-lg font-bold bg-blue-100">addizione</span>
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg font-bold">sottrazione</span>
+        </div>
+      </div>
+
+      <!-- Problema f -->
+      <div class="bg-white border-2 border-cyan-300 rounded-lg p-4">
+        <p class="font-bold text-cyan-600 mb-2">f.</p>
+        <p class="text-gray-700 mb-4">In un bar ieri sono stati serviti 327 cappuccini e 208 caffè. Quanti cappuccini in più rispetto ai caffè?</p>
+        <div class="flex gap-4">
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg font-bold">addizione</span>
+          <span class="px-4 py-2 border-2 border-red-400 rounded-lg font-bold bg-red-100">sottrazione</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: LOGICA -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="bg-red-500 text-white px-1 py-0.5 rounded text-xs font-bold">L</span>
+        <span class="bg-orange-500 text-white px-1 py-0.5 rounded text-xs font-bold">O</span>
+        <span class="bg-yellow-500 text-white px-1 py-0.5 rounded text-xs font-bold">G</span>
+        <span class="bg-green-500 text-white px-1 py-0.5 rounded text-xs font-bold">I</span>
+        <span class="bg-blue-500 text-white px-1 py-0.5 rounded text-xs font-bold">C</span>
+        <span class="bg-purple-500 text-white px-1 py-0.5 rounded text-xs font-bold">A</span>
+        <p class="text-gray-700 ml-2"><strong>Leggi e rispondi.</strong></p>
+      </div>
+    </div>
+
+    <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+      <p class="text-gray-700 mb-4">
+        Su un autobus ci sono 39 passeggeri. Alla fermata, dalla porta per l'uscita scendono 18 passeggeri e da quella dell'entrata ne salgono 18.
+      </p>
+      <p class="text-gray-700 mb-4">• Con quanti passeggeri riparte l'autobus?</p>
+
+      <div class="mb-4">
+        <p class="text-cyan-600 font-bold">Operazioni:</p>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="39 - 18 + 18 = 39"
+               class="w-full px-3 py-2 border-b-2 border-dotted border-gray-400">
+      </div>
+
+      <div class="mb-4">
+        <p class="text-cyan-600 font-bold">Risposta:</p>
+        <span>L'autobus riparte con</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="39"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span>passeggeri.</span>
+      </div>
+
+      <div class="flex items-center gap-4 mb-4">
+        <span>• Era necessario eseguire le operazioni?</span>
+        <span class="px-3 py-1 border-2 border-gray-300 rounded">Sì</span>
+        <span class="px-3 py-1 border-2 border-cyan-400 rounded bg-cyan-100 font-bold">No</span>
+      </div>
+
+      <div>
+        <p class="text-gray-700">• Perché?</p>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="Perché scendono e salgono lo stesso numero di passeggeri"
+               class="w-full px-3 py-2 border-b-2 border-dotted border-gray-400">
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

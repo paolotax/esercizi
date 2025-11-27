@@ -1,12 +1,106 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker fill-blanks auto-advance page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p132/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Badge Economia -->
+  <div class="flex items-center gap-2 mb-4">
+    <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg">€</div>
+    <span class="text-cyan-600 font-bold">ECONOMIA A PICCOLI PASSI</span>
+  </div>
+
+  <!-- Titolo -->
+  <h1 class="text-2xl md:text-3xl font-bold text-cyan-600 mb-6">L'ECONOMIA CIRCOLARE</h1>
+
+  <!-- Introduzione -->
+  <div class="p-4 bg-cyan-50 rounded-lg mb-6 flex items-start gap-3">
+    <div class="text-3xl">🐷</div>
+    <p class="text-gray-700">Sai che cos'è l'<span class="bg-cyan-200 px-1 rounded">economia circolare</span>? È un modo per riutilizzare gli oggetti e per non sprecare le risorse naturali e... i soldi!</p>
+  </div>
+
+  <!-- Esercizio 1 -->
+  <div class="p-4 md:p-6 mb-6">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700"><strong>Leggi le regole delle <span class="text-cyan-600">4 R</span> su cui si basa l'economia circolare.</strong></p>
+    </div>
+
+    <!-- Schema 4R -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <!-- RIDUCI -->
+      <div class="p-4 bg-cyan-50 rounded-lg border-2 border-cyan-300">
+        <h3 class="text-cyan-600 font-bold text-lg mb-2">RIDUCI</h3>
+        <p class="text-gray-700 text-sm">Invece di fare piccoli disegni su tanti fogli diversi, usa pochi fogli e riempi tutto lo spazio.</p>
+      </div>
+      <!-- RIUSA -->
+      <div class="p-4 bg-cyan-50 rounded-lg border-2 border-cyan-300">
+        <h3 class="text-cyan-600 font-bold text-lg mb-2">RIUSA</h3>
+        <p class="text-gray-700 text-sm">Lo stesso foglio può essere usato ancora: giralo e avrai di nuovo un foglio bianco.</p>
+      </div>
+      <!-- RECUPERA -->
+      <div class="p-4 bg-green-50 rounded-lg border-2 border-green-300">
+        <h3 class="text-green-600 font-bold text-lg mb-2">RECUPERA</h3>
+        <p class="text-gray-700 text-sm">Se il foglio viene riciclato correttamente, può essere trasformato in un <span class="bg-green-200 px-1 rounded">nuovo oggetto</span>.</p>
+      </div>
+      <!-- RICICLA -->
+      <div class="p-4 bg-blue-50 rounded-lg border-2 border-blue-300">
+        <h3 class="text-blue-600 font-bold text-lg mb-2">RICICLA</h3>
+        <p class="text-gray-700 text-sm">Quando non puoi più usare il foglio, buttalo nel contenitore della carta. Fai la <span class="bg-blue-200 px-1 rounded">raccolta differenziata</span>.</p>
+      </div>
+    </div>
+
+    <!-- Frecce circolari (rappresentazione visiva) -->
+    <div class="flex justify-center my-6">
+      <div class="relative w-48 h-48">
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="w-32 h-32 rounded-full border-4 border-cyan-400 border-dashed"></div>
+        </div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-cyan-500 text-white px-2 py-1 rounded text-xs font-bold">RIDUCI</div>
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 bg-cyan-500 text-white px-2 py-1 rounded text-xs font-bold">RIUSA</div>
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 bg-green-500 text-white px-2 py-1 rounded text-xs font-bold">RECUPERA</div>
+        <div class="absolute left-0 top-1/2 -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded text-xs font-bold">RICICLA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="p-4 md:p-6 mb-6">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700"><strong>Chi NON sta seguendo una delle regole dell'economia circolare? Indica con una <span class="text-red-500 font-bold">X</span>.</strong></p>
+    </div>
+
+    <!-- Immagini con checkbox -->
+    <div class="flex justify-center">
+      <%= image_tag "bus3_mat/p132/output-1743504902132_163_914_774_251.png", alt: "Scene economia circolare", style: "width: 100%; max-width: 600px; height: auto;" %>
+    </div>
+
+    <div class="grid grid-cols-2 gap-8 mt-4 max-w-md mx-auto">
+      <div class="flex items-center justify-center">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" class="w-6 h-6 rounded border-2 border-gray-400">
+          <span class="text-gray-600">Immagine 1</span>
+        </label>
+      </div>
+      <div class="flex items-center justify-center">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" class="w-6 h-6 rounded border-2 border-gray-400">
+          <span class="text-gray-600">Immagine 2</span>
+        </label>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

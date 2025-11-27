@@ -1,12 +1,285 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p141/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1: Ricomponi i numeri -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-yellow-400 rounded-full w-10 h-10 flex items-center justify-center border-4 border-cyan-500 flex-shrink-0">
+        <span class="text-cyan-600 font-bold text-xs text-center leading-tight">1</span>
+      </div>
+      <div>
+        <span class="bg-yellow-400 text-cyan-600 px-2 py-0.5 rounded text-sm font-bold">IMPARARE TUTTI</span>
+        <p class="text-gray-700 mt-1"><strong>Ricomponi i numeri: rispetta il valore posizionale.</strong></p>
+      </div>
+    </div>
+
+    <div class="space-y-3">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-bold min-w-[200px]">1 k, 9 h, 3 da, 8 u</span>
+        <span>→</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="1938"
+               class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold" inputmode="numeric">
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-bold min-w-[200px]">7 da, 4 h, 6 u, 2 k</span>
+        <span>→</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="2476"
+               class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold" inputmode="numeric">
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-bold min-w-[200px]">5 k, 5 h, 3 u, 5 da</span>
+        <span>→</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="5553"
+               class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold" inputmode="numeric">
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-bold min-w-[200px]">6 da, 4 u, 1 k, 7 h</span>
+        <span>→</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="1764"
+               class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold" inputmode="numeric">
+      </div>
+    </div>
+
+    <div class="mt-4 p-3 bg-yellow-50 border-2 border-yellow-300 rounded-lg">
+      <p class="text-sm text-gray-700"><strong>Fai attenzione!</strong> Negli esercizi di questa pagina i simboli <span class="underline">k, h, da, u</span> non sempre sono nel giusto ordine.</p>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Completa le uguaglianze -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Completa le uguaglianze.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold">7 h =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="70"
+               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span>da</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="font-bold">1 000 u =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
+               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span>k</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="font-bold">2 k =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="2000"
+               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span>u</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="font-bold">300 da =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="3"
+               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span>k</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="font-bold">95 h =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="9500"
+               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span>u</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="font-bold">200 h =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="20"
+               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span>k</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 3: Valore posizionale della cifra 4 -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-gray-700">
+        <strong>Scrivi il valore posizionale della <span class="underline">cifra 4</span>.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="text-center">
+        <div class="bg-cyan-50 border-2 border-cyan-400 rounded-lg p-4 mb-2">
+          <span class="text-2xl font-bold">2<span class="text-red-500">4</span>07</span>
+        </div>
+        <div class="text-cyan-600 font-bold">centinaia</div>
+      </div>
+      <div class="text-center">
+        <div class="bg-cyan-50 border-2 border-cyan-400 rounded-lg p-4 mb-2">
+          <span class="text-2xl font-bold">20<span class="text-red-500">4</span>7</span>
+        </div>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="decine"
+               class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+      </div>
+      <div class="text-center">
+        <div class="bg-cyan-50 border-2 border-cyan-400 rounded-lg p-4 mb-2">
+          <span class="text-2xl font-bold">720<span class="text-red-500">4</span></span>
+        </div>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="unità"
+               class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 4: Scrivi il valore di ogni cifra -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        4
+      </div>
+      <p class="text-gray-700">
+        <strong>Scrivi il valore di ogni cifra, come nell'esempio.</strong>
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <!-- Esempio -->
+      <div class="flex items-center gap-2 flex-wrap bg-cyan-50 p-3 rounded-lg">
+        <span class="font-bold">1 627</span>
+        <span>→</span>
+        <span class="text-cyan-600 font-bold">1 k, 6 h, 2 da, 7 u</span>
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-bold min-w-[80px]">2 311</span>
+        <span>→</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="2 k, 3 h, 1 da, 1 u"
+               class="flex-1 min-w-[200px] px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-bold min-w-[80px]">1 425</span>
+        <span>→</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="1 k, 4 h, 2 da, 5 u"
+               class="flex-1 min-w-[200px] px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-bold min-w-[80px]">982</span>
+        <span>→</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="9 h, 8 da, 2 u"
+               class="flex-1 min-w-[200px] px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-bold min-w-[80px]">3 614</span>
+        <span>→</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="3 k, 6 h, 1 da, 4 u"
+               class="flex-1 min-w-[200px] px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-bold min-w-[80px]">4 927</span>
+        <span>→</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="4 k, 9 h, 2 da, 7 u"
+               class="flex-1 min-w-[200px] px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 5: Completa la tabella -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        5
+      </div>
+      <p class="text-gray-700">
+        <strong>Completa la tabella.</strong>
+      </p>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse border-2 border-cyan-400">
+        <thead>
+          <tr class="bg-cyan-100">
+            <th class="border-2 border-cyan-400 p-3 font-bold">→<br>–</th>
+            <th class="border-2 border-cyan-400 p-3 font-bold">1 da</th>
+            <th class="border-2 border-cyan-400 p-3 font-bold">1 h</th>
+            <th class="border-2 border-cyan-400 p-3 font-bold">1 k</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border-2 border-cyan-400 p-3 font-bold text-center">1 850</td>
+            <td class="border-2 border-cyan-400 p-3">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="1840"
+                     class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+            </td>
+            <td class="border-2 border-cyan-400 p-3">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="1750"
+                     class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+            </td>
+            <td class="border-2 border-cyan-400 p-3">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="850"
+                     class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+            </td>
+          </tr>
+          <tr>
+            <td class="border-2 border-cyan-400 p-3 font-bold text-center">2 070</td>
+            <td class="border-2 border-cyan-400 p-3">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="2060"
+                     class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+            </td>
+            <td class="border-2 border-cyan-400 p-3">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="1970"
+                     class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+            </td>
+            <td class="border-2 border-cyan-400 p-3">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="1070"
+                     class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+            </td>
+          </tr>
+          <tr>
+            <td class="border-2 border-cyan-400 p-3 font-bold text-center">3 458</td>
+            <td class="border-2 border-cyan-400 p-3">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="3448"
+                     class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+            </td>
+            <td class="border-2 border-cyan-400 p-3">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="3358"
+                     class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+            </td>
+            <td class="border-2 border-cyan-400 p-3">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="2458"
+                     class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Esercizio 6: Valore della cifra 2 -->
+  <div class="mb-8" data-controller="fill-blanks">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        6
+      </div>
+      <p class="text-gray-700">
+        <strong>Qual è il valore della <span class="underline">cifra 2</span>? Collega ciascun numero all'etichetta giusta.</strong>
+      </p>
+    </div>
+
+    <!-- Immagine esercizio -->
+    <div class="flex justify-center mb-4">
+      <%= image_tag "bus3_mat/p141/p141_01.jpg", alt: "Esercizio valore cifra 2", class: "max-w-full" %>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

@@ -1,12 +1,206 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p150/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1: Calcola in riga -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-yellow-400 rounded-full w-10 h-10 flex items-center justify-center border-4 border-cyan-500 flex-shrink-0">
+        <span class="text-cyan-600 font-bold text-xs text-center leading-tight">1</span>
+      </div>
+      <div>
+        <span class="bg-yellow-400 text-cyan-600 px-2 py-0.5 rounded text-sm font-bold">IMPARARE TUTTI</span>
+        <p class="text-gray-700 mt-1"><strong>Calcola in riga.</strong></p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <!-- × 10 -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-3">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <span>8 × 10 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="80"
+                   class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>31 × 10 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="310"
+                   class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>59 × 10 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="590"
+                   class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <!-- × 100 -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-3">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <span>23 × 100 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="2300"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>17 × 100 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="1700"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>99 × 100 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="9900"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <!-- × 1000 -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-3">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <span>6 × 1000 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="6000"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>3 × 1000 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="3000"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>5 × 1000 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="5000"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <!-- × 10 con numeri grandi -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-3">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <span>463 × 10 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="4630"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>760 × 10 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="7600"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>1 × 1000 =</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="1000"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Calcola in colonna -->
+  <div class="mb-8">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Calcola in colonna. Fai attenzione ai cambi!</strong>
+      </p>
+    </div>
+
+    <!-- Prima riga: moltiplicazioni 2 cifre × 1 cifra -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
+      <!-- 14 × 2 = 28 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 14, multiplier: 2,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 16 × 3 = 48 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 16, multiplier: 3,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 12 × 5 = 60 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 12, multiplier: 5,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 17 × 2 = 34 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 17, multiplier: 2,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 11 × 7 = 77 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 11, multiplier: 7,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+    </div>
+
+    <!-- Seconda riga: moltiplicazioni 3 cifre × 1 cifra -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <!-- 123 × 3 = 369 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 123, multiplier: 3,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 135 × 5 = 675 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 135, multiplier: 5,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 133 × 6 = 798 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 133, multiplier: 6,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 206 × 4 = 824 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 206, multiplier: 4,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+    </div>
+
+    <!-- Terza riga: moltiplicazioni 4 cifre × 1 cifra -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- 1232 × 4 = 4928 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 1232, multiplier: 4,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 530 × 3 = 1590 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 530, multiplier: 3,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 1072 × 5 = 5360 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 1072, multiplier: 5,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>
