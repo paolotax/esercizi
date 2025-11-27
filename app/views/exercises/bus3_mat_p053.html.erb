@@ -1,6 +1,10 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p053/page.png') %>">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p053/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
@@ -31,7 +35,7 @@
     <!-- Definizione resto -->
     <div class="bg-[#FFF9E6] p-4 md:p-6 border-3 border-cyan-400 rounded-lg mt-4">
       <p class="font-bold">
-        In tutte le divisioni c'è il <u>resto</u> (r.).<br>
+        In tutte le divisioni c'è il <span class="text-cyan-600 font-bold">resto</span> (r.).<br>
         Nella divisione esatta il resto è <strong>zero</strong>. Nella divisione non esatta il resto è <strong>diverso da zero</strong>.
       </p>
     </div>
@@ -217,8 +221,8 @@
       </div>
     </div>
 
-    <div class="mt-6 text-center text-gray-600">
-      <p><strong>Quaderno → p. 152</strong></p>
+    <div class="mt-6 text-right">
+      <span class="text-gray-600">Quaderno →</span> <%= link_to "p. 152", pagina_path("bus3_mat_p152"), class: "text-cyan-600 font-bold hover:underline" %>
     </div>
   </div>
 
