@@ -1,288 +1,247 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p046/page.png') %>">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white"
+     data-controller="exercise-checker fill-blanks auto-advance page-viewer text-toggle"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p046/page.png') %>"
+     data-text-toggle-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Esercizio 1: Completa la tabella della moltiplicazione -->
-  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
-    <div class="flex items-start gap-3 mb-6">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-        1
-      </div>
-      <div>
-        <p class="text-base md:text-lg text-gray-700 mb-4">
-          <strong>Completa la tabella della moltiplicazione, poi rispondi.</strong>
-        </p>
+  <div class="p-4 md:p-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+      <!-- Domande a sinistra -->
+      <div class="font-mono">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            1
+          </div>
+          <p class="font-mono text-sm md:text-base text-gray-700">
+            <strong>Completa la tabella della moltiplicazione, poi rispondi.</strong>
+          </p>
+        </div>
 
-        <!-- Domande Sì/No -->
-        <div class="space-y-3 mb-6">
-          <div class="flex items-center gap-4">
-            <span class="text-gray-700">• Hai completato tutta la tabella?</span>
-            <label class="inline-flex items-center gap-2">
-              <input type="radio" name="q1" data-correct-answer="true" class="w-5 h-5">
-              <span>Sì</span>
+        <div class="space-y-4 text-sm">
+          <div class="flex items-center gap-3 flex-wrap">
+            <span><span class="text-red-500 font-bold">•</span> Hai completato tutta la tabella?</span>
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="q1" value="si" data-correct-answer="true" class="w-4 h-4">
+              <span class="font-bold">Sì</span>
             </label>
-            <label class="inline-flex items-center gap-2">
-              <input type="radio" name="q1" data-correct-answer="false" class="w-5 h-5">
-              <span>No</span>
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="q1" value="no" class="w-4 h-4">
+              <span class="font-bold">No</span>
             </label>
           </div>
 
-          <div class="flex items-center gap-4">
-            <span class="text-gray-700">• La moltiplicazione è un'operazione che si può sempre eseguire?</span>
-            <label class="inline-flex items-center gap-2">
-              <input type="radio" name="q2" data-correct-answer="true" class="w-5 h-5">
-              <span>Sì</span>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span><span class="text-red-500 font-bold">•</span> La moltiplicazione è un'operazione che si può sempre eseguire?</span>
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="q2" value="si" data-correct-answer="true" class="w-4 h-4">
+              <span class="font-bold">Sì</span>
             </label>
-            <label class="inline-flex items-center gap-2">
-              <input type="radio" name="q2" data-correct-answer="false" class="w-5 h-5">
-              <span>No</span>
+            <label class="inline-flex items-center gap-1">
+              <input type="radio" name="q2" value="no" class="w-4 h-4">
+              <span class="font-bold">No</span>
             </label>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Tabella della moltiplicazione -->
-    <div class="overflow-x-auto mb-6">
-      <div class="border-3 border-cyan-400 rounded-2xl overflow-hidden inline-block">
-        <table class="border-collapse">
-          <tbody>
-            <!-- Header row -->
-            <tr>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-blue-100 w-12">×</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-blue-100 w-12">0</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-cyan-100 w-12">1</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-blue-100 w-12">2</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-blue-100 w-12">3</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-blue-100 w-12">4</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-blue-100 w-12">5</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-blue-100 w-12">6</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-blue-100 w-12">7</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-blue-100 w-12">8</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-blue-100 w-12">9</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-blue-100 w-12">10</td>
-            </tr>
-
-            <!-- Row 0 -->
-            <tr>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-pink-100">0</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-white">0</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-white">0</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 bg-white">
-                <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                       class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-1"
-                       maxlength="2" inputmode="numeric">
-              </td>
-              <td class="border-2 border-cyan-400 px-2 py-2 bg-white">
-                <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                       class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-1"
-                       maxlength="2" inputmode="numeric">
-              </td>
-              <td class="border-2 border-cyan-400 px-2 py-2 bg-white">
-                <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                       class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-1"
-                       maxlength="2" inputmode="numeric">
-              </td>
-              <td class="border-2 border-cyan-400 px-2 py-2 bg-white">
-                <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                       class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-1"
-                       maxlength="2" inputmode="numeric">
-              </td>
-              <td class="border-2 border-cyan-400 px-2 py-2 bg-white">
-                <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                       class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-1"
-                       maxlength="2" inputmode="numeric">
-              </td>
-              <td class="border-2 border-cyan-400 px-2 py-2 bg-white">
-                <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                       class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-1"
-                       maxlength="2" inputmode="numeric">
-              </td>
-              <td class="border-2 border-cyan-400 px-2 py-2 bg-white">
-                <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                       class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-1"
-                       maxlength="2" inputmode="numeric">
-              </td>
-              <td class="border-2 border-cyan-400 px-2 py-2 bg-white">
-                <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                       class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-1"
-                       maxlength="2" inputmode="numeric">
-              </td>
-              <td class="border-2 border-cyan-400 px-2 py-2 bg-white">
-                <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                       class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-1"
-                       maxlength="2" inputmode="numeric">
-              </td>
-            </tr>
-
-            <!-- Row 1 -->
-            <tr>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-cyan-100">1</td>
-              <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-white">0</td>
-              <% (1..10).each do |col| %>
-                <td class="border-2 border-cyan-400 px-2 py-2 bg-white">
-                  <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= col %>"
-                         class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-1"
-                         maxlength="2" inputmode="numeric">
-                </td>
-              <% end %>
-            </tr>
-
-            <!-- Rows 2-10 -->
-            <% (2..10).each do |row| %>
+      <!-- Tabella della moltiplicazione a destra -->
+      <div class="md:col-span-2 overflow-x-auto">
+        <div class="border-3 border-yellow-400 rounded-2xl overflow-hidden inline-block">
+          <table class="border-collapse font-mono text-sm">
+            <tbody>
+              <!-- Header row -->
               <tr>
-                <td class="border-2 border-cyan-400 px-2 py-2 text-center font-bold bg-blue-100"><%= row %></td>
-                <% (0..10).each do |col| %>
-                  <td class="border-2 border-cyan-400 px-2 py-2 bg-white">
-                    <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= row * col %>"
-                           class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-1"
-                           maxlength="3" inputmode="numeric">
+                <td class="border-2 border-yellow-400 px-2 py-1 text-center font-bold bg-yellow-100 w-10">×</td>
+                <td class="border-2 border-yellow-400 px-2 py-1 text-center font-bold bg-pink-100 w-10">0</td>
+                <td class="border-2 border-yellow-400 px-2 py-1 text-center font-bold bg-cyan-100 w-10">1</td>
+                <% (2..10).each do |n| %>
+                  <td class="border-2 border-yellow-400 px-2 py-1 text-center font-bold bg-yellow-100 w-10"><%= n %></td>
+                <% end %>
+              </tr>
+
+              <!-- Row 0 -->
+              <tr>
+                <td class="border-2 border-yellow-400 px-2 py-1 text-center font-bold bg-pink-100">0</td>
+                <td class="border-2 border-yellow-400 px-2 py-1 text-center font-bold bg-white">0</td>
+                <td class="border-2 border-yellow-400 px-2 py-1 text-center font-bold bg-white">0</td>
+                <% (2..10).each do %>
+                  <td class="border-2 border-yellow-400 px-2 py-1 bg-white">
+                    <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
+                           class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-0 text-sm"
+                           maxlength="2" inputmode="numeric">
                   </td>
                 <% end %>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+
+              <!-- Row 1 -->
+              <tr>
+                <td class="border-2 border-yellow-400 px-2 py-1 text-center font-bold bg-cyan-100">1</td>
+                <td class="border-2 border-yellow-400 px-2 py-1 text-center font-bold bg-white">0</td>
+                <% (1..10).each do |col| %>
+                  <td class="border-2 border-yellow-400 px-2 py-1 bg-white">
+                    <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= col %>"
+                           class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-0 text-sm"
+                           maxlength="2" inputmode="numeric">
+                  </td>
+                <% end %>
+              </tr>
+
+              <!-- Rows 2-10 -->
+              <% (2..10).each do |row| %>
+                <tr>
+                  <td class="border-2 border-yellow-400 px-2 py-1 text-center font-bold bg-yellow-100"><%= row %></td>
+                  <% (0..10).each do |col| %>
+                    <td class="border-2 border-yellow-400 px-2 py-1 bg-white">
+                      <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= row * col %>"
+                             class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-0 text-sm"
+                             maxlength="3" inputmode="numeric">
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Esercizio 2: L'1 nella moltiplicazione -->
-  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
-    <div class="flex items-start gap-3 mb-6">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-        2
+  <!-- Esercizi 2 e 3 affiancati -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <!-- Esercizio 2: L'1 nella moltiplicazione -->
+    <div class="p-4 md:p-6 font-mono">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          2
+        </div>
+        <p class="font-mono text-sm md:text-base text-gray-700">
+          <strong>Osserva i risultati nella riga e nella colonna azzurra e completa. Poi scrivi i numeri mancanti.</strong>
+        </p>
       </div>
-      <p class="text-base md:text-lg text-gray-700">
-        <strong>Osserva i risultati nella riga e nella colonna azzurra e completa. Poi scrivi i numeri mancanti.</strong>
-      </p>
-    </div>
 
-    <div class="bg-[#C7EAFB] p-4 md:p-6 mb-4">
-      <h3 class="font-bold text-lg mb-3">L'<u>1</u> nella moltiplicazione</h3>
-      <p class="mb-4">
-        Qualsiasi numero moltiplicato per
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="1" inputmode="numeric">
-        ha come risultato il numero stesso.
-      </p>
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4 mb-4">
+        <h3 class="font-bold text-base mb-2">L'<span class="text-cyan-600">1</span> nella moltiplicazione</h3>
+        <p class="text-sm mb-3">
+          Qualsiasi numero moltiplicato per
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="1" inputmode="numeric">
+          ha come risultato il numero stesso.
+        </p>
+      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="flex items-center gap-2">
+      <div class="grid grid-cols-2 gap-3 text-sm">
+        <div class="flex items-center gap-1">
           <span>8 × 1 =</span>
           <input type="text" data-fill-blanks-target="input" data-correct-answer="8"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
                  maxlength="2" inputmode="numeric">
         </div>
-
-        <div class="flex items-center gap-2">
-          <span>10 ×</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                 maxlength="1" inputmode="numeric">
-          <span>= 10</span>
-        </div>
-
-        <div class="flex items-center gap-2">
-          <span>107 ×</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                 maxlength="1" inputmode="numeric">
-          <span>= 107</span>
-        </div>
-
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1">
           <input type="text" data-fill-blanks-target="input" data-correct-answer="75"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
                  maxlength="2" inputmode="numeric">
           <span>× 1 = 75</span>
         </div>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1">
+          <span>10 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="1" inputmode="numeric">
+          <span>= 10</span>
+        </div>
+        <div class="flex items-center gap-1">
           <span>1 × 3 =</span>
           <input type="text" data-fill-blanks-target="input" data-correct-answer="3"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
                  maxlength="1" inputmode="numeric">
         </div>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1">
+          <span>107 ×</span>
           <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="1" inputmode="numeric">
+          <span>= 107</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
                  maxlength="1" inputmode="numeric">
           <span>× 28 = 28</span>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Esercizio 3: Lo 0 nella moltiplicazione -->
-  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
-    <div class="flex items-start gap-3 mb-6">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-        3
+    <!-- Esercizio 3: Lo 0 nella moltiplicazione -->
+    <div class="p-4 md:p-6 font-mono">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          3
+        </div>
+        <p class="font-mono text-sm md:text-base text-gray-700">
+          <strong>Osserva i risultati nella riga e nella colonna rosa e completa. Poi scrivi i numeri mancanti.</strong>
+        </p>
       </div>
-      <p class="text-base md:text-lg text-gray-700">
-        <strong>Osserva i risultati nella riga e nella colonna rosa e completa. Poi scrivi i numeri mancanti.</strong>
-      </p>
-    </div>
 
-    <div class="bg-[#FFE4E1] p-4 md:p-6 mb-4">
-      <h3 class="font-bold text-lg mb-3">Lo <u>0</u> nella moltiplicazione</h3>
-      <p class="mb-4">
-        Qualsiasi numero moltiplicato per
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="1" inputmode="numeric">
-        ha come risultato 0.
-      </p>
+      <div class="bg-pink-50 border-2 border-pink-300 rounded-lg p-4 mb-4">
+        <h3 class="font-bold text-base mb-2">Lo <span class="text-pink-600">0</span> nella moltiplicazione</h3>
+        <p class="text-sm mb-3">
+          Qualsiasi numero moltiplicato per
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="1" inputmode="numeric">
+          ha come risultato 0.
+        </p>
+      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="flex items-center gap-2">
+      <div class="grid grid-cols-2 gap-3 text-sm">
+        <div class="flex items-center gap-1">
           <span>4 × 0 =</span>
           <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
                  maxlength="1" inputmode="numeric">
         </div>
-
-        <div class="flex items-center gap-2">
-          <span>0 × 18 =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                 maxlength="1" inputmode="numeric">
-        </div>
-
-        <div class="flex items-center gap-2">
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                 maxlength="1" inputmode="numeric">
-          <span>× 56 = 0</span>
-        </div>
-
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1">
           <span>104 ×</span>
           <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
                  maxlength="1" inputmode="numeric">
           <span>= 0</span>
         </div>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1">
+          <span>0 × 18 =</span>
           <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="1" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-1">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
                  maxlength="1" inputmode="numeric">
           <span>× 123 =</span>
           <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
                  maxlength="1" inputmode="numeric">
         </div>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="1" inputmode="numeric">
+          <span>× 56 = 0</span>
+        </div>
+        <div class="flex items-center gap-1">
           <span>0 × 79 =</span>
           <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
                  maxlength="1" inputmode="numeric">
         </div>
       </div>
@@ -290,5 +249,5 @@
   </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'cyan' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

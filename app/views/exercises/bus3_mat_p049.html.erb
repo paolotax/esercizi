@@ -1,306 +1,312 @@
+<% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
+
 <div class="max-w-7xl mx-auto p-3 md:p-6 bg-white"
-     data-controller="exercise-checker fill-blanks auto-advance"
-     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p049/page.png') %>">
+     data-controller="exercise-checker fill-blanks auto-advance text-toggle"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p049/page.png') %>"
+     data-text-toggle-target="content">
 
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Esercizio 1 con box azzurro -->
+  <!-- Parte teorica: Moltiplicare per 10, 100, 1000 -->
   <div class="bg-[#C7EAFB] p-4 md:p-6 -ml-3 md:-ml-0 -mr-3 md:mr-0 mb-8">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-        1
+    <!-- Header con box viola a sinistra e titolo esercizio -->
+    <div class="flex flex-col md:flex-row gap-4 mb-6 items-start justify-between">
+
+      <!-- Titolo esercizio 1 -->
+      <div class="flex items-center gap-3">
+        <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          1
+        </div>
+        <p class="font-mono text-base md:text-lg text-gray-700">
+          <strong>Leggi, osserva e completa.</strong>
+        </p>
       </div>
-      <p class="text-base md:text-lg text-gray-700">
-        <strong>Leggi, osserva e completa.</strong>
-      </p>
-    </div>
 
-    <!-- Box teorico verde -->
-    <div class="bg-green-50 border-3 border-green-400 rounded-lg p-4 mb-6">
-      <p class="text-base text-gray-700">
-        <strong>Per <span class="underline">moltiplicare</span> un numero per <span class="underline">10</span>, <span class="underline">100</span> o <span class="underline">1000</span> aggiungi a <span class="underline">destra</span> del numero <span class="underline">1</span>, <span class="underline">2</span> o <span class="underline">3 zeri</span>.</strong>
-      </p>
-    </div>
 
-    <!-- Problema × 10 -->
-    <div class="mb-6">
-      <div class="flex flex-col md:flex-row gap-4 items-start">
-        <div class="flex-1">
-          <p class="text-base text-gray-700 mb-2">• Il sarto usa 3 bottoni per ogni giacca.</p>
-          <p class="text-base text-gray-700 mb-2">Quanti bottoni servono per preparare</p>
-          <div class="flex items-center gap-2 mb-3 flex-wrap">
-            <span class="text-base text-gray-700">10 giacche? → 3 × 10 =</span>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="30"
-                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                   maxlength="2" inputmode="numeric">
-          </div>
-          <p class="text-base text-gray-700">
-            <strong>Nella moltiplicazione × 10, le unità diventano decine e al posto vuoto delle unità metti 1 zero.</strong>
-          </p>
-        </div>
-        <div class="flex-shrink-0">
-          <%= image_tag "bus3_mat/p049/p49_1.jpg",
-              alt: "Tabella × 10",
-              class: "max-w-full" %>
-        </div>
+      <!-- Box viola con la regola -->
+      <div class="md:max-w-1/2 bg-purple-100 border-3 border-purple-400 rounded-lg p-4 flex-1">
+        <p class="font-mono text-base text-gray-800">
+          <span class="text-red-500 font-bold">•</span> Per <span class="font-bold">moltiplicare</span> un numero per <span class="font-bold">10</span>, <span class="font-bold">100</span> o <span class="font-bold">1000</span> aggiungi a <span class="font-bold">destra</span> del numero <span class="font-bold">1</span>, <span class="font-bold">2</span> o <span class="font-bold">3 zeri</span>.
+        </p>
       </div>
+
+
     </div>
 
-    <!-- Problema × 100 -->
-    <div class="mb-6">
-      <div class="flex flex-col md:flex-row gap-4 items-start">
-        <div class="flex-1">
-          <p class="text-base text-gray-700 mb-2">• E se le giacche sono 100?</p>
-          <div class="flex items-center gap-2 mb-3 flex-wrap">
-            <span class="text-base text-gray-700">Quanti bottoni servono? → 3 × 100 =</span>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="300"
-                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                   maxlength="3" inputmode="numeric">
-          </div>
-          <div class="text-base text-gray-700">
-            <strong>Nella moltiplicazione × 100, le unità diventano</strong>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="centinaia"
-                   class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                   maxlength="10">
-            <strong>e al posto vuoto delle unità e delle decine metti</strong>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="2 zeri"
-                   class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                   maxlength="10">
-            <strong>.</strong>
-          </div>
+    <!-- Passo 1: × 10 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-start">
+      <div class="font-mono text-sm text-gray-700">
+        <p class="mb-2"><span class="text-red-500 font-bold">•</span> Il sarto usa 3 bottoni per ogni giacca.</p>
+        <p class="mb-2">Quanti bottoni servono per preparare</p>
+        <div class="flex items-center gap-2 mb-3 flex-wrap">
+          <span>10 giacche? → 3 × 10 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="30"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="2" inputmode="numeric">
         </div>
-        <div class="flex-shrink-0">
-          <%= image_tag "bus3_mat/p049/p49_2.jpg",
-              alt: "Tabella × 100",
-              class: "max-w-full" %>
-        </div>
+        <p>
+          <span class="text-red-500 font-bold">•</span> Nella moltiplicazione × 10, le <span class="text-cyan-500 font-bold">unità</span> diventano <span class="text-red-500 font-bold">decine</span> e al posto vuoto delle <span class="text-cyan-500 font-bold">unità</span> metti <span class="font-bold">1 zero</span>.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p049/p49_1.jpg",
+            alt: "Tabella × 10",
+            class: "max-w-full" %>
       </div>
     </div>
 
-    <!-- Problema × 1000 -->
-    <div>
-      <div class="flex flex-col md:flex-row gap-4 items-start">
-        <div class="flex-1">
-          <p class="text-base text-gray-700 mb-2">• E se le giacche sono 1000?</p>
-          <div class="flex items-center gap-2 mb-3 flex-wrap">
-            <span class="text-base text-gray-700">Quanti bottoni servono? → 3 × 1000 =</span>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="3000"
-                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                   maxlength="4" inputmode="numeric">
-          </div>
-          <div class="text-base text-gray-700">
-            <strong>Nella moltiplicazione × 1000, le unità diventano</strong>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="migliaia"
-                   class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                   maxlength="10">
-            <strong>e al posto vuoto delle unità, delle decine e delle centinaia metti</strong>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="3 zeri"
-                   class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-                   maxlength="10">
-            <strong>.</strong>
-          </div>
+    <!-- Passo 2: × 100 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-start">
+      <div class="font-mono text-sm text-gray-700">
+        <p class="mb-2"><span class="text-red-500 font-bold">•</span> E se le giacche sono 100?</p>
+        <div class="flex items-center gap-2 mb-3 flex-wrap">
+          <span>Quanti bottoni servono? → 3 × 100 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="300"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="3" inputmode="numeric">
         </div>
-        <div class="flex-shrink-0">
-          <%= image_tag "bus3_mat/p049/p49_3.jpg",
-              alt: "Tabella × 1000",
-              class: "max-w-full" %>
+        <div class="flex items-center gap-1 flex-wrap">
+          <span><span class="text-red-500 font-bold">•</span> Nella moltiplicazione × 100, le <span class="text-cyan-500 font-bold">unità</span> diventano</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="centinaia"
+                 class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="10">
+          <span>e al posto vuoto delle <span class="text-cyan-500 font-bold">unità</span> e delle <span class="text-red-500 font-bold">decine</span> metti</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="2 zeri"
+                 class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="10">
+          <span>.</span>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p049/p49_2.jpg",
+            alt: "Tabella × 100",
+            class: "max-w-full" %>
+      </div>
+    </div>
+
+    <!-- Passo 3: × 1000 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      <div class="font-mono text-sm text-gray-700">
+        <p class="mb-2"><span class="text-red-500 font-bold">•</span> E se le giacche sono 1000?</p>
+        <div class="flex items-center gap-2 mb-3 flex-wrap">
+          <span>Quanti bottoni servono? → 3 × 1000 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3000"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-1 flex-wrap">
+          <span><span class="text-red-500 font-bold">•</span> Nella moltiplicazione × 1000, le <span class="text-cyan-500 font-bold">unità</span> diventano</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="migliaia"
+                 class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="10">
+          <span>e al posto vuoto delle <span class="text-cyan-500 font-bold">unità</span>, delle <span class="text-red-500 font-bold">decine</span> e delle <span class="text-green-500 font-bold">centinaia</span> metti</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3 zeri"
+                 class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="10">
+          <span>.</span>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p049/p49_3.jpg",
+            alt: "Tabella × 1000",
+            class: "max-w-full" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizi 2 e 3 affiancati su schermi grandi -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <!-- Esercizio 2: Calcola in riga -->
+    <div class="p-4 md:p-6 font-mono">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          2
+        </div>
+        <p class="font-mono text-base md:text-lg text-gray-700">
+          <strong>Calcola in riga.</strong>
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>5 × 10 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="50"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="3" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>5 × 100 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="500"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>0 × 1000 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>25 × 10 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="250"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>25 × 100 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="2500"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="5" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>9 × 1000 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="9000"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="5" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>10 × 100 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="1000"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="5" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>420 × 10 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="4200"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="5" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>152 × 100 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="15200"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="6" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>250 × 10 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="2500"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="5" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>8 × 1000 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="8000"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="5" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>741 × 10 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="7410"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="5" inputmode="numeric">
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Completa -->
+    <div class="p-4 md:p-6 font-mono">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          3
+        </div>
+        <p class="font-mono text-base md:text-lg text-gray-700">
+          <strong>Completa.</strong>
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>45 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span>= 450</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>32 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="100"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span>= 3200</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>15 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="100"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span>= 1500</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>500 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span>= 5000</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>330 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span>= 3300</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>10 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="100"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span>= 1000</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>8 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span>= 80</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>721 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span>= 7210</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>100 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span>= 0</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>301 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span>= 3010</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>105 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span>= 1050</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>99 ×</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+                 class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 maxlength="4" inputmode="numeric">
+          <span>= 990</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Esercizio 2 -->
-  <div class="bg-transparent p-4 md:p-8 mb-8">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-        2
-      </div>
-      <p class="text-base md:text-lg text-gray-700">
-        <strong>Calcola in riga.</strong>
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>5 × 10 =</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="50"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="3" inputmode="numeric">
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>5 × 100 =</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="500"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>0 × 1000 =</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>25 × 10 =</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="250"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>25 × 100 =</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="2500"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="5" inputmode="numeric">
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>9 × 1000 =</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="9000"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="5" inputmode="numeric">
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>10 × 100 =</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="1000"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="5" inputmode="numeric">
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>420 × 10 =</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="4200"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="5" inputmode="numeric">
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>152 × 100 =</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="15200"
-               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="6" inputmode="numeric">
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>250 × 10 =</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="2500"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="5" inputmode="numeric">
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>8 × 1000 =</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="8000"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="5" inputmode="numeric">
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>741 × 10 =</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="7410"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="5" inputmode="numeric">
-      </div>
-    </div>
-  </div>
-
-  <!-- Esercizio 3 -->
-  <div class="bg-transparent p-4 md:p-8 mb-8">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-        3
-      </div>
-      <p class="text-base md:text-lg text-gray-700">
-        <strong>Completa.</strong>
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>45 ×</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-        <span>= 450</span>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>32 ×</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="100"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-        <span>= 3200</span>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>15 ×</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="100"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-        <span>= 1500</span>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>500 ×</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-        <span>= 5000</span>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>330 ×</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-        <span>= 3300</span>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>10 ×</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="100"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-        <span>= 1000</span>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>8 ×</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-        <span>= 80</span>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>721 ×</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-        <span>= 7210</span>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>100 ×</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-        <span>= 0</span>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>301 ×</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-        <span>= 3010</span>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>105 ×</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-        <span>= 1050</span>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span>99 ×</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
-               maxlength="4" inputmode="numeric">
-        <span>= 990</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Nota quaderno -->
-  <div class="p-4 bg-blue-50 border-2 border-blue-300 rounded-lg mb-8">
-    <p class="text-base font-bold text-gray-700 text-center">
-      <strong>Quaderno → p. 150 • verifica p. 175</strong>
-    </p>
+  <!-- Quaderno link allineato a destra -->
+  <div class="p-4 mb-8 text-right font-mono">
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "p. 150", pagina_path("bus3_mat_p150"), class: "text-cyan-600 font-bold hover:underline" %> • <span class="text-gray-600">verifica →</span> <%= link_to "p. 175", pagina_path("bus3_mat_p175"), class: "text-cyan-600 font-bold hover:underline" %>
   </div>
 
   <!-- Footer con controlli -->

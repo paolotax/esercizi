@@ -1,73 +1,76 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p048/page.png') %>">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white" data-controller="exercise-checker page-viewer text-toggle" data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p048/page.png') %>" data-text-toggle-target="content">
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Parte teorica: Moltiplicazioni con due cifre -->
   <div class="bg-[#C7EAFB] p-4 md:p-6 -ml-3 md:-ml-0 -mr-3 md:mr-0 mb-8">
-    <p class="text-base md:text-lg text-gray-800 mb-4">
-      <strong>• Osserva e leggi come si eseguono le moltiplicazioni con due cifre al moltiplicatore.</strong>
+    <p class="font-mono text-base md:text-lg text-gray-800 mb-6">
+      <strong class="text-lg text-red-500">•</strong> Osserva e leggi come si eseguono le moltiplicazioni con due cifre al moltiplicatore.
     </p>
 
-    <ul class="list-disc ml-6 mb-4 space-y-2 text-gray-800">
-      <li>Prima moltiplichi le unità del moltiplicatore e trovi il <strong>primo prodotto parziale</strong>.</li>
-      <li>Poi moltiplichi le decine del moltiplicatore e trovi il <strong>secondo prodotto parziale</strong>.</li>
-      <li>Infine sommi i due prodotti parziali.</li>
+    <ul class="font-mono list-none ml-4 mb-6 space-y-2 text-gray-800">
+      <li><span class="text-red-500 font-bold">•</span> Prima moltiplichi le <span class="text-cyan-500 font-bold">unità</span> del moltiplicatore e trovi il <span class="font-bold">primo prodotto parziale</span>.</li>
+      <li><span class="text-red-500 font-bold">•</span> Poi moltiplichi le <span class="text-red-500 font-bold">decine</span> del moltiplicatore e trovi il <span class="font-bold">secondo prodotto parziale</span>.</li>
+      <li><span class="text-red-500 font-bold">•</span> Infine sommi i due prodotti parziali.</li>
     </ul>
 
-    <!-- Immagini esempi -->
+    <!-- Immagini esempi affiancate -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-      <div>
+      <div class="flex flex-col items-start gap-2">
         <%= image_tag "bus3_mat/p048/p48_1.jpg",
             alt: "Primo prodotto parziale",
-            class: "max-w-full" %>
-        <p class="text-sm text-gray-700 mt-3">
-          • Il <u><strong>primo prodotto parziale</strong></u> si scrive iniziando dalla colonna
-          delle <u><strong>unità</strong></u>. Fai attenzione ai cambi.
+            class: "max-w-full ml-8" %>
+        <p class="font-mono text-sm text-gray-700 text-left">
+          <span class="text-red-500 font-bold">•</span> Il <span class="font-bold">primo prodotto parziale</span>
+          si scrive iniziando dalla colonna
+          delle <span class="text-cyan-500 font-bold">unità</span>.<br>
+          Fai attenzione ai cambi.
         </p>
       </div>
 
-      <div>
+      <div class="flex flex-col items-start gap-2">
         <%= image_tag "bus3_mat/p048/p48_2.jpg",
             alt: "Secondo prodotto parziale",
-            class: "max-w-full" %>
-        <p class="text-sm text-gray-700 mt-3">
-          • Il <u><strong>secondo prodotto parziale</strong></u> si scrive iniziando dalla colonna delle
-          <u><strong>decine</strong></u>, quindi si mette uno <u><strong>0</strong></u>
-          segnaposto nella colonna delle <u><strong>unità</strong></u>. Poi si
-          sommano i prodotti parziali: ecco il <strong>prodotto finale</strong>.
+            class: "max-w-full ml-8" %>
+        <p class="font-mono text-sm text-gray-700 text-left">
+          <span class="text-red-500 font-bold">•</span> Il <span class="font-bold">secondo prodotto parziale</span> si scrive iniziando
+          dalla colonna delle <span class="text-red-500 font-bold">decine</span>, quindi si mette uno
+          <span class="text-cyan-500 font-bold">0</span> segnaposto nella colonna delle <span class="text-cyan-500 font-bold">unità</span>. Poi si
+          sommano i prodotti parziali: ecco il <span class="font-bold">prodotto finale</span>.
         </p>
       </div>
     </div>
   </div>
 
   <!-- Esercizio 1: Calcola in colonna -->
-  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
-    <div class="flex items-start gap-3 mb-6">
+  <div class="p-4 md:p-8 mb-8 font-mono" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
+    <div class="flex items-center gap-3 mb-6">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         1
       </div>
-      <p class="text-base md:text-lg text-gray-700">
-        <strong>Calcola in colonna.</strong>
+      <p class="font-mono text-base md:text-lg text-gray-700">
+        Calcola in colonna sul quaderno.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
       <!-- Colonna a -->
-      <button class="bg-green-50 p-4 rounded-lg hover:bg-green-100 transition cursor-pointer text-left border-2 border-transparent hover:border-green-400"
+      <button class="bg-orange-50 p-4 rounded-lg hover:bg-orange-100 transition cursor-pointer text-left border-2 border-transparent hover:border-orange-400"
               data-action="click->column-modal#openGroup"
               data-group="a"
-              data-operations="36x12,37x14,42x20,19x27,25x16,58x35"
+              data-operations="36×12,37×14,42×20,19×27,25×16,58×35"
+              data-show-carry="true"
               data-column-modal-target="groupButton">
-        <div class="font-bold text-green-600 mb-3">a.</div>
-        <div class="space-y-2 text-gray-700" data-column-modal-target="operationsList" data-group="a">
-          <div class="operation-item" data-index="0">36 × 12 =</div>
-          <div class="operation-item" data-index="1">37 × 14 =</div>
-          <div class="operation-item" data-index="2">42 × 20 =</div>
-          <div class="operation-item" data-index="3">19 × 27 =</div>
-          <div class="operation-item" data-index="4">25 × 16 =</div>
-          <div class="operation-item" data-index="5">58 × 35 =</div>
+        <div class="font-mono text-base md:text-lg mb-3"><strong class="text-orange-500">a.</strong></div>
+        <div class="space-y-2" data-column-modal-target="operationsList" data-group="a">
+          <div class="text-lg operation-item" data-index="0">36 × 12 =</div>
+          <div class="text-lg operation-item" data-index="1">37 × 14 =</div>
+          <div class="text-lg operation-item" data-index="2">42 × 20 =</div>
+          <div class="text-lg operation-item" data-index="3">19 × 27 =</div>
+          <div class="text-lg operation-item" data-index="4">25 × 16 =</div>
+          <div class="text-lg operation-item" data-index="5">58 × 35 =</div>
         </div>
       </button>
 
@@ -75,62 +78,65 @@
       <button class="bg-blue-50 p-4 rounded-lg hover:bg-blue-100 transition cursor-pointer text-left border-2 border-transparent hover:border-blue-400"
               data-action="click->column-modal#openGroup"
               data-group="b"
-              data-operations="60x21,38x24,52x19,23x45,65x47,25x38"
+              data-operations="60×21,38×24,52×19,23×45,65×47,25×38"
+              data-show-carry="true"
               data-column-modal-target="groupButton">
-        <div class="font-bold text-green-600 mb-3">b.</div>
-        <div class="space-y-2 text-gray-700" data-column-modal-target="operationsList" data-group="b">
-          <div class="operation-item" data-index="0">60 × 21 =</div>
-          <div class="operation-item" data-index="1">38 × 24 =</div>
-          <div class="operation-item" data-index="2">52 × 19 =</div>
-          <div class="operation-item" data-index="3">23 × 45 =</div>
-          <div class="operation-item" data-index="4">65 × 47 =</div>
-          <div class="operation-item" data-index="5">25 × 38 =</div>
+        <div class="font-mono text-base md:text-lg mb-3"><strong class="text-blue-500">b.</strong></div>
+        <div class="space-y-2" data-column-modal-target="operationsList" data-group="b">
+          <div class="text-lg operation-item" data-index="0">60 × 21 =</div>
+          <div class="text-lg operation-item" data-index="1">38 × 24 =</div>
+          <div class="text-lg operation-item" data-index="2">52 × 19 =</div>
+          <div class="text-lg operation-item" data-index="3">23 × 45 =</div>
+          <div class="text-lg operation-item" data-index="4">65 × 47 =</div>
+          <div class="text-lg operation-item" data-index="5">25 × 38 =</div>
         </div>
       </button>
 
       <!-- Colonna c -->
-      <button class="bg-purple-50 p-4 rounded-lg hover:bg-purple-100 transition cursor-pointer text-left border-2 border-transparent hover:border-purple-400"
+      <button class="bg-green-50 p-4 rounded-lg hover:bg-green-100 transition cursor-pointer text-left border-2 border-transparent hover:border-green-400"
               data-action="click->column-modal#openGroup"
               data-group="c"
-              data-operations="216x34,205x28,118x26,49x19,136x38,155x41"
+              data-operations="216×34,205×28,118×26,49×19,136×38,155×41"
+              data-show-carry="true"
               data-column-modal-target="groupButton">
-        <div class="font-bold text-green-600 mb-3">c.</div>
-        <div class="space-y-2 text-gray-700" data-column-modal-target="operationsList" data-group="c">
-          <div class="operation-item" data-index="0">216 × 34 =</div>
-          <div class="operation-item" data-index="1">205 × 28 =</div>
-          <div class="operation-item" data-index="2">118 × 26 =</div>
-          <div class="operation-item" data-index="3">49 × 19 =</div>
-          <div class="operation-item" data-index="4">136 × 38 =</div>
-          <div class="operation-item" data-index="5">155 × 41 =</div>
+        <div class="font-mono text-base md:text-lg mb-3"><strong class="text-green-500">c.</strong></div>
+        <div class="space-y-2" data-column-modal-target="operationsList" data-group="c">
+          <div class="text-lg operation-item" data-index="0">216 × 34 =</div>
+          <div class="text-lg operation-item" data-index="1">205 × 28 =</div>
+          <div class="text-lg operation-item" data-index="2">118 × 26 =</div>
+          <div class="text-lg operation-item" data-index="3">49 × 19 =</div>
+          <div class="text-lg operation-item" data-index="4">136 × 38 =</div>
+          <div class="text-lg operation-item" data-index="5">155 × 41 =</div>
         </div>
       </button>
 
       <!-- Colonna d -->
-      <button class="bg-pink-50 p-4 rounded-lg hover:bg-pink-100 transition cursor-pointer text-left border-2 border-transparent hover:border-pink-400"
+      <button class="bg-purple-50 p-4 rounded-lg hover:bg-purple-100 transition cursor-pointer text-left border-2 border-transparent hover:border-purple-400"
               data-action="click->column-modal#openGroup"
               data-group="d"
-              data-operations="204x28,444x13,205x36,148x55,403x24,299x27"
+              data-operations="204×28,444×13,205×36,148×55,403×24,299×27"
+              data-show-carry="true"
               data-column-modal-target="groupButton">
-        <div class="font-bold text-green-600 mb-3">d.</div>
-        <div class="space-y-2 text-gray-700" data-column-modal-target="operationsList" data-group="d">
-          <div class="operation-item" data-index="0">204 × 28 =</div>
-          <div class="operation-item" data-index="1">444 × 13 =</div>
-          <div class="operation-item" data-index="2">205 × 36 =</div>
-          <div class="operation-item" data-index="3">148 × 55 =</div>
-          <div class="operation-item" data-index="4">403 × 24 =</div>
-          <div class="operation-item" data-index="5">299 × 27 =</div>
+        <div class="font-mono text-base md:text-lg mb-3"><strong class="text-purple-500">d.</strong></div>
+        <div class="space-y-2" data-column-modal-target="operationsList" data-group="d">
+          <div class="text-lg operation-item" data-index="0">204 × 28 =</div>
+          <div class="text-lg operation-item" data-index="1">444 × 13 =</div>
+          <div class="text-lg operation-item" data-index="2">205 × 36 =</div>
+          <div class="text-lg operation-item" data-index="3">148 × 55 =</div>
+          <div class="text-lg operation-item" data-index="4">403 × 24 =</div>
+          <div class="text-lg operation-item" data-index="5">299 × 27 =</div>
         </div>
       </button>
     </div>
 
-    <div class="mt-6 text-center text-gray-600">
-      <p><strong>Quaderno → p. 151</strong></p>
+    <div class="mt-6 text-right">
+      <span class="font-mono text-gray-600">Quaderno →</span> <%= link_to "p. 151", pagina_path("bus3_mat_p151"), class: "font-mono text-cyan-600 font-bold hover:underline" %>
     </div>
 
     <!-- Modal per operazioni in colonna -->
-    <%= render 'shared/column_modal', title: "Moltiplicazioni in colonna", color: "green", show_save: true %>
+    <%= render 'shared/column_modal', title: "Calcola in colonna", color: "green", show_save: true %>
   </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'orange' %>
+  <%= render 'shared/exercise_controls' %>
 </div>
