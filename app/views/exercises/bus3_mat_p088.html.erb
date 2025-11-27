@@ -1,12 +1,80 @@
-<% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
+<div class="max-w-[1800px] mx-auto p-4 lg:p-8"
+     data-controller="exercise-checker fill-blanks hotspot-editor auto-advance text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
-  <!-- Header -->
-  <%= render 'shared/page_header', pagina: @pagina %>
+  <!-- Header (se disponibile) -->
+  <% if @pagina.present? %>
+    <%= render 'shared/page_header', pagina: @pagina %>
+  <% end %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Two-page horizontal layout like an open book -->
+  <div class="grid lg:grid-cols-2 gap-3 lg:gap-0">
 
-  <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+    <!-- LEFT PAGE - Page 88 (vassoio dolcetti - solo visualizzazione) -->
+    <div class="relative">
+      <%= image_tag "bus3_mat/p088/page.png",
+            alt: "Pagina 88 - Frazioni in pasticceria - Vassoio 100 dolcetti",
+            class: "w-full h-auto select-none pointer-events-none" %>
+    </div>
+
+    <!-- RIGHT PAGE - Page 89 (esercizi con input) -->
+    <div class="relative" data-hotspot-editor-target="container">
+      <%= image_tag "bus3_mat/p089/page.png",
+            alt: "Pagina 89 - Gioco e ripasso",
+            class: "w-full h-auto select-none pointer-events-none" %>
+
+      <!-- Input overlay per gli esercizi di pagina 89 -->
+      <div class="absolute inset-0">
+        <%
+        # Posizioni input per pagina 89
+        # Bambino 1: biscotti al cioccolato - scrivi in lettere la frazione
+        # Bambino 2: tortine alla fragola - scrivi la frazione (numeratore/denominatore)
+        # Bambino 3: pastine con i kiwi - scrivi la frazione (numeratore/denominatore)
+        # Bambino 4: 7 centesimi - qual è il dolcetto?
+        # Domanda finale: quale dolcetto rimane?
+        inputs_p89 = [
+          # Bambino 1 - biscotti al cioccolato (20/100 = venti centesimi)
+          { label: "Frazione biscotti in lettere", top: "26%", left: "5%", width: "35%", height: "3%", answer: "venti centesimi" },
+
+          # Bambino 2 - tortine alla fragola (20/100)
+          { label: "Numeratore tortine", top: "18%", left: "72%", width: "8%", height: "2.5%", answer: "20" },
+          { label: "Denominatore tortine", top: "21%", left: "72%", width: "8%", height: "2.5%", answer: "100" },
+
+          # Bambino 3 - pastine con i kiwi (10/100)
+          { label: "Numeratore pastine", top: "62%", left: "18%", width: "8%", height: "2.5%", answer: "10" },
+          { label: "Denominatore pastine", top: "65%", left: "18%", width: "8%", height: "2.5%", answer: "100" },
+
+          # Bambino 4 - 7 centesimi del vassoio = muffin
+          { label: "Dolcetto 7 centesimi", top: "70%", left: "48%", width: "40%", height: "3%", answer: "muffin" },
+
+          # Domanda finale - quale dolcetto rimane (crostatine = 10/100)
+          { label: "Dolcetto rimasto", top: "82%", left: "55%", width: "30%", height: "2.5%", answer: "crostatine" },
+          { label: "Frazione in cifre numeratore", top: "86%", left: "32%", width: "6%", height: "2%", answer: "10" },
+          { label: "Frazione in cifre denominatore", top: "88%", left: "32%", width: "6%", height: "2%", answer: "100" },
+          { label: "Frazione in lettere", top: "91%", left: "35%", width: "50%", height: "2.5%", answer: "dieci centesimi" },
+        ]
+        %>
+
+        <% inputs_p89.each do |input| %>
+          <div class="absolute"
+               style="top: <%= input[:top] %>; left: <%= input[:left] %>; width: <%= input[:width] %>; height: <%= input[:height] %>;"
+               data-hotspot-editor-target="hotspot"
+               data-image-speech-word-value="<%= input[:label] %>"
+               data-auto-advance-target="input"
+               data-action="mousedown->hotspot-editor#startDrag">
+            <input type="text"
+                   data-fill-blanks-target="input"
+                   data-correct-answer="<%= input[:answer] %>"
+                   class="w-full h-full py-1 bg-white/60 hover:bg-white/80 focus:bg-white border-2 text-black border-transparent hover:border-cyan-500 focus:border-cyan-600 rounded text-center font-bold text-xs sm:text-sm transition-colors"
+                   inputmode="<%= input[:answer].to_s.match?(/^\d+$/) ? 'numeric' : 'text' %>"
+                   aria-label="<%= input[:label] %>">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

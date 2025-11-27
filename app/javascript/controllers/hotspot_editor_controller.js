@@ -250,7 +250,7 @@ export default class extends Controller {
     this.updateInfoPanel()
 
     // Log in console
-    const label = this.resizing.querySelector('.sr-only')?.textContent || 'Unknown'
+    const label = this.getHotspotLabel(this.resizing)
     console.log(`{ label: "${label}", top: "${this.resizing.style.top}", left: "${this.resizing.style.left}", width: "${this.resizing.style.width}", height: "${this.resizing.style.height}" },`)
 
     // Cleanup
@@ -270,7 +270,7 @@ export default class extends Controller {
     this.updateInfoPanel()
 
     // Log in console
-    const label = this.dragging.querySelector('.sr-only')?.textContent || 'Unknown'
+    const label = this.getHotspotLabel(this.dragging)
     console.log(`{ label: "${label}", top: "${this.dragging.style.top}", left: "${this.dragging.style.left}", width: "${this.dragging.style.width}", height: "${this.dragging.style.height}" },`)
 
     // Cleanup
@@ -281,12 +281,21 @@ export default class extends Controller {
     this.currentContainer = null
   }
 
+  getHotspotLabel(hotspot) {
+    // Cerca in ordine: .sr-only, data-image-speech-word-value, aria-label su input, aria-label sul hotspot stesso
+    return hotspot.querySelector('.sr-only')?.textContent
+        || hotspot.dataset.imageSpeechWordValue
+        || hotspot.querySelector('input')?.getAttribute('aria-label')
+        || hotspot.getAttribute('aria-label')
+        || 'Unknown'
+  }
+
   updateInfoPanel() {
     const valuesDiv = document.getElementById('hotspot-values')
     if (!valuesDiv) return
 
     const hotspots = this.hotspotTargets.map(hotspot => {
-      const label = hotspot.querySelector('.sr-only')?.textContent || 'Unknown'
+      const label = this.getHotspotLabel(hotspot)
       return {
         label,
         top: hotspot.style.top,
@@ -305,7 +314,7 @@ export default class extends Controller {
 
   copyToClipboard() {
     const hotspots = this.hotspotTargets.map(hotspot => {
-      const label = hotspot.querySelector('.sr-only')?.textContent || 'Unknown'
+      const label = this.getHotspotLabel(hotspot)
       return {
         label,
         top: hotspot.style.top,
