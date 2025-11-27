@@ -123,7 +123,8 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 147, titolo: "ADDIZIONE O SOTTRAZIONE?", slug: "bus3_mat_p147", view_template: "bus3_mat_p147", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 148, titolo: "LA MOLTIPLICAZIONE", slug: "bus3_mat_p148", view_template: "bus3_mat_p148", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 149, titolo: "PROPRIETÀ DELLA MOLTIPLICAZIONE", slug: "bus3_mat_p149", view_template: "bus3_mat_p149", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 150, titolo: "TANTE MOLTIPLICAZIONI", slug: "bus3_mat_p150", view_template: "bus3_mat_p150", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 150, titolo: "TANTE MOLTIPLICAZIONI", slug: "bus3_mat_p150", view_template: "bus3_mat_p150", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 151, titolo: "CON IL MOLTIPLICATORE A DUE CIFRE", slug: "bus3_mat_p151", view_template: "bus3_mat_p151", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   bus_matematica.pagine.find_or_create_by!(slug: pagina_data[:slug]) do |pagina|
     pagina.numero = pagina_data[:numero]

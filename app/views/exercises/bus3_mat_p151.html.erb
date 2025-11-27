@@ -1,12 +1,142 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p151/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1: Calcola in colonna con moltiplicatore a due cifre -->
+  <div class="mb-8">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>Calcola in colonna. Ricordati di aggiungere uno zero segnaposto prima di moltiplicare le decine del moltiplicatore!</strong>
+      </p>
+    </div>
+
+    <!-- Prima riga di moltiplicazioni -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <!-- 42 × 15 = 630 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 42, multiplier: 15,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 36 × 23 = 828 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 36, multiplier: 23,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 29 × 25 = 725 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 29, multiplier: 25,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 33 × 28 = 924 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 33, multiplier: 28,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+    </div>
+
+    <!-- Seconda riga di moltiplicazioni -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <!-- 47 × 18 = 846 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 47, multiplier: 18,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 39 × 20 = 780 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 39, multiplier: 20,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 54 × 17 = 918 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 54, multiplier: 17,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+
+      <!-- 29 × 31 = 899 -->
+      <%= render partial: "strumenti/moltiplicazioni/column_multiplication",
+                 locals: Moltiplicazione.new(multiplicand: 29, multiplier: 31,
+                                             show_multiplicand_multiplier: true,
+                                             show_toolbar: false).to_partial_params %>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Calcola e colora il risultato corretto -->
+  <div class="mb-8" data-controller="fill-blanks">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Calcola sul quaderno e colora i risultati corretti.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Colonna sinistra -->
+      <div class="space-y-3">
+        <div class="flex items-center gap-4">
+          <span class="w-28">32 × 27 =</span>
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg">862</span>
+          <span class="px-4 py-2 border-2 border-cyan-400 rounded-lg bg-cyan-100 font-bold">864</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-28">54 × 23 =</span>
+          <span class="px-4 py-2 border-2 border-cyan-400 rounded-lg bg-cyan-100 font-bold">1242</span>
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg">1240</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-28">87 × 46 =</span>
+          <span class="px-4 py-2 border-2 border-cyan-400 rounded-lg bg-cyan-100 font-bold">4002</span>
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg">4004</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-28">74 × 35 =</span>
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg">2589</span>
+          <span class="px-4 py-2 border-2 border-cyan-400 rounded-lg bg-cyan-100 font-bold">2590</span>
+        </div>
+      </div>
+
+      <!-- Colonna destra -->
+      <div class="space-y-3">
+        <div class="flex items-center gap-4">
+          <span class="w-28">221 × 24 =</span>
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg">5314</span>
+          <span class="px-4 py-2 border-2 border-cyan-400 rounded-lg bg-cyan-100 font-bold">5304</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-28">194 × 26 =</span>
+          <span class="px-4 py-2 border-2 border-cyan-400 rounded-lg bg-cyan-100 font-bold">5044</span>
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg">4044</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-28">219 × 37 =</span>
+          <span class="px-4 py-2 border-2 border-cyan-400 rounded-lg bg-cyan-100 font-bold">8103</span>
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg">8113</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-28">163 × 45 =</span>
+          <span class="px-4 py-2 border-2 border-cyan-400 rounded-lg bg-cyan-100 font-bold">7335</span>
+          <span class="px-4 py-2 border-2 border-gray-300 rounded-lg">7355</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>
