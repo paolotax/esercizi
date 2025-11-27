@@ -1,9 +1,10 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white"
-     data-controller="exercise-checker fill-blanks auto-advance page-viewer text-toggle"
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker fill-blanks auto-advance page-viewer text-toggle font-controls"
      data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p046/page.png') %>"
-     data-text-toggle-target="content">
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
@@ -12,17 +13,17 @@
   <div class="p-4 md:p-6 mb-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
       <!-- Domande a sinistra -->
-      <div class="font-mono">
+      <div>
         <div class="flex items-center gap-3 mb-6">
           <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
             1
           </div>
-          <p class="font-mono text-sm md:text-base text-gray-700">
+          <p class="text-gray-700">
             <strong>Completa la tabella della moltiplicazione, poi rispondi.</strong>
           </p>
         </div>
 
-        <div class="space-y-4 text-sm">
+        <div class="space-y-4">
           <div class="flex items-center gap-3 flex-wrap">
             <span><span class="text-red-500 font-bold">•</span> Hai completato tutta la tabella?</span>
             <label class="inline-flex items-center gap-1">
@@ -52,7 +53,7 @@
       <!-- Tabella della moltiplicazione a destra -->
       <div class="md:col-span-2 overflow-x-auto">
         <div class="border-3 border-yellow-400 rounded-2xl overflow-hidden inline-block">
-          <table class="border-collapse font-mono text-sm">
+          <table class="border-collapse text-sm lg:text-base">
             <tbody>
               <!-- Header row -->
               <tr>
@@ -72,7 +73,7 @@
                 <% (2..10).each do %>
                   <td class="border-2 border-yellow-400 px-2 py-1 bg-white">
                     <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                           class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-0 text-sm"
+                           class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-0"
                            maxlength="2" inputmode="numeric">
                   </td>
                 <% end %>
@@ -85,7 +86,7 @@
                 <% (1..10).each do |col| %>
                   <td class="border-2 border-yellow-400 px-2 py-1 bg-white">
                     <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= col %>"
-                           class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-0 text-sm"
+                           class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-0"
                            maxlength="2" inputmode="numeric">
                   </td>
                 <% end %>
@@ -98,7 +99,7 @@
                   <% (0..10).each do |col| %>
                     <td class="border-2 border-yellow-400 px-2 py-1 bg-white">
                       <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= row * col %>"
-                             class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-0 text-sm"
+                             class="w-full text-center font-bold border-0 focus:ring-1 focus:ring-cyan-400 p-0"
                              maxlength="3" inputmode="numeric">
                     </td>
                   <% end %>
@@ -114,19 +115,19 @@
   <!-- Esercizi 2 e 3 affiancati -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
     <!-- Esercizio 2: L'1 nella moltiplicazione -->
-    <div class="p-4 md:p-6 font-mono">
+    <div class="p-4 md:p-6">
       <div class="flex items-center gap-3 mb-4">
         <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
           2
         </div>
-        <p class="font-mono text-sm md:text-base text-gray-700">
+        <p class="text-gray-700">
           <strong>Osserva i risultati nella riga e nella colonna azzurra e completa. Poi scrivi i numeri mancanti.</strong>
         </p>
       </div>
 
       <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4 mb-4">
-        <h3 class="font-bold text-base mb-2">L'<span class="text-cyan-600">1</span> nella moltiplicazione</h3>
-        <p class="text-sm mb-3">
+        <h3 class="font-bold mb-2">L'<span class="text-cyan-600">1</span> nella moltiplicazione</h3>
+        <p class="mb-3">
           Qualsiasi numero moltiplicato per
           <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
                  class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
@@ -135,7 +136,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-2 gap-3 text-sm">
+      <div class="grid grid-cols-2 gap-3">
         <div class="flex items-center gap-1">
           <span>8 × 1 =</span>
           <input type="text" data-fill-blanks-target="input" data-correct-answer="8"
@@ -180,19 +181,19 @@
     </div>
 
     <!-- Esercizio 3: Lo 0 nella moltiplicazione -->
-    <div class="p-4 md:p-6 font-mono">
+    <div class="p-4 md:p-6">
       <div class="flex items-center gap-3 mb-4">
         <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
           3
         </div>
-        <p class="font-mono text-sm md:text-base text-gray-700">
+        <p class="text-gray-700">
           <strong>Osserva i risultati nella riga e nella colonna rosa e completa. Poi scrivi i numeri mancanti.</strong>
         </p>
       </div>
 
       <div class="bg-pink-50 border-2 border-pink-300 rounded-lg p-4 mb-4">
-        <h3 class="font-bold text-base mb-2">Lo <span class="text-pink-600">0</span> nella moltiplicazione</h3>
-        <p class="text-sm mb-3">
+        <h3 class="font-bold mb-2">Lo <span class="text-pink-600">0</span> nella moltiplicazione</h3>
+        <p class="mb-3">
           Qualsiasi numero moltiplicato per
           <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
                  class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
@@ -201,7 +202,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-2 gap-3 text-sm">
+      <div class="grid grid-cols-2 gap-3">
         <div class="flex items-center gap-1">
           <span>4 × 0 =</span>
           <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
