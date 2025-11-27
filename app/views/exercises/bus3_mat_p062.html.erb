@@ -1,11 +1,60 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker fill-blanks auto-advance page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p062/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Intro mateVIVA -->
+  <div class="bg-[#E8F5E9] p-4 md:p-6 -ml-3 md:-ml-0 -mr-3 md:mr-0 mb-8">
+    <p class="text-green-700 font-bold mb-4">mateVIVA</p>
+
+    <p class="text-gray-700 mb-4"><strong>Osserva, leggi e calcola.</strong></p>
+
+    <p class="text-gray-700 mb-4">
+      Tu e la tua classe siete appena entrati a teatro, dove assisterete a uno spettacolo di bolle di sapone… giganti. Che emozione!
+    </p>
+
+    <div class="flex justify-center mb-6">
+      <%= image_tag "bus3_mat/p062/p62_01.jpg", alt: "Teatro con platea", style: "width: 100%; max-width: 120%; height: auto;" %>
+    </div>
+
+    <p class="text-gray-700 font-bold mb-4">Quanti posti in platea?</p>
+
+    <ul class="space-y-4 text-gray-700">
+      <li class="flex items-start gap-2">
+        <span class="text-red-500 font-bold">•</span>
+        <div>
+          <p>Le poltrone della platea formano uno schieramento ordinato: puoi calcolare il numero di posti con una
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="moltiplicazione"
+                   class="w-36 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
+                   maxlength="20">.
+          </p>
+          <p class="mt-2">In una fila ci sono 9 poltrone. Le file sono 5.</p>
+          <p class="mt-2">Ci sono 2 settori: sinistro e destro.</p>
+          <p class="mt-2">
+            9 × 5 × 2 =
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="90"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
+                   maxlength="3" inputmode="numeric">
+          </p>
+        </div>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-red-500 font-bold">•</span>
+        <div>
+          <p>Puoi applicare la <strong>proprietà associativa</strong>:</p>
+          <div class="flex justify-center mt-2">
+            <%= image_tag "bus3_mat/p062/p62_02.jpg", alt: "Proprietà associativa", style: "width: 100%; max-width: 120%; height: auto;" %>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 
   <!-- Footer con controlli -->
   <%= render 'shared/exercise_controls', color: 'blue' %>

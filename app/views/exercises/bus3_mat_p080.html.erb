@@ -1,11 +1,161 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker fill-blanks auto-advance page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p080/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1: Leggi, osserva e completa - box azzurro -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 -ml-3 md:-ml-0 -mr-3 md:mr-0 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700"><strong>Leggi, osserva e completa.</strong></p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p080/output-1743504902080_141_280_322_592.png", alt: "Intero diviso in parti" %>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Intero -->
+        <div class="flex items-center gap-3">
+          <span class="text-red-500 font-bold">•</span>
+          <p class="text-gray-700">Questo è un <strong>intero</strong>.</p>
+        </div>
+
+        <!-- Decimi -->
+        <div class="flex items-start gap-3">
+          <span class="text-red-500 font-bold mt-1">•</span>
+          <div class="text-gray-700">
+            <p>L'intero è stato diviso in
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+                     class="w-14 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
+                     maxlength="2" inputmode="numeric">
+              <strong>parti uguali</strong>.
+            </p>
+            <p class="mt-1">
+              Ogni parte è <strong>un decimo</strong> dell'intero. →
+              <span class="inline-flex flex-col items-center mx-1">
+                <span class="border-b border-gray-800 px-2">1</span>
+                <span>10</span>
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Centesimi -->
+        <div class="flex items-start gap-3">
+          <span class="text-red-500 font-bold mt-1">•</span>
+          <div class="text-gray-700">
+            <p>L'intero è stato diviso in <strong>100 parti uguali</strong>.</p>
+            <p class="mt-1">
+              Ogni parte è <strong>un centesimo</strong> dell'intero. →
+              <span class="inline-flex flex-col items-center mx-1">
+                <span class="border-b border-gray-800 px-2">1</span>
+                <span>100</span>
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Millesimi -->
+        <div class="flex items-start gap-3">
+          <span class="text-red-500 font-bold mt-1">•</span>
+          <div class="text-gray-700">
+            <p>L'intero è stato diviso in <strong>1000 parti
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="uguali"
+                     class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
+                     maxlength="10"></strong>.
+            </p>
+            <p class="mt-1">
+              Ogni parte è <strong>un millesimo</strong> dell'intero. →
+              <span class="inline-flex flex-col items-center mx-1">
+                <span class="border-b border-gray-800 px-2">1</span>
+                <span>1000</span>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Box regola -->
+    <div class="mt-6 p-4 bg-[#FFF9E6] border-l-4 border-yellow-400">
+      <p class="text-gray-700 font-bold">
+        Le frazioni che hanno come <span class="text-cyan-600 font-bold">denominatore 10, 100, 1 000</span> si chiamano <span class="text-cyan-600 font-bold">frazioni decimali</span>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Quanti decimi? -->
+  <div class="p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700"><strong>Quanti decimi? Scrivi le frazioni che rappresentano le parti colorate.</strong></p>
+    </div>
+
+    <div class="flex justify-center mb-6">
+      <%= image_tag "bus3_mat/p080/p80_02.jpg", alt: "Barre con decimi colorati" %>
+    </div>
+
+    <!-- Risposte frazioni - 5 righe basate sull'immagine originale -->
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 justify-items-center">
+      <div class="text-center">
+        <span class="inline-flex flex-col items-center">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3"
+                 class="w-10 text-center font-bold bg-white border-b border-gray-800 px-2"
+                 maxlength="2" inputmode="numeric">
+          <span>10</span>
+        </span>
+      </div>
+      <div class="text-center">
+        <span class="inline-flex flex-col items-center">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="7"
+                 class="w-10 text-center font-bold bg-white border-b border-gray-800 px-2"
+                 maxlength="2" inputmode="numeric">
+          <span>10</span>
+        </span>
+      </div>
+      <div class="text-center">
+        <span class="inline-flex flex-col items-center">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+                 class="w-10 text-center font-bold bg-white border-b border-gray-800 px-2"
+                 maxlength="2" inputmode="numeric">
+          <span>10</span>
+        </span>
+      </div>
+      <div class="text-center">
+        <span class="inline-flex flex-col items-center">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
+                 class="w-10 text-center font-bold bg-white border-b border-gray-800 px-2"
+                 maxlength="2" inputmode="numeric">
+          <span>10</span>
+        </span>
+      </div>
+      <div class="text-center">
+        <span class="inline-flex flex-col items-center">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="9"
+                 class="w-10 text-center font-bold bg-white border-b border-gray-800 px-2"
+                 maxlength="2" inputmode="numeric">
+          <span>10</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quaderno link allineato a destra -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "p. 161", pagina_path("bus3_mat_p161"), class: "text-cyan-600 font-bold hover:underline" %>
+  </div>
 
   <!-- Footer con controlli -->
   <%= render 'shared/exercise_controls', color: 'blue' %>

@@ -1,11 +1,99 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker fill-blanks auto-advance page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p058/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Introduzione: Leggi e osserva - box azzurro -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 -ml-3 md:-ml-0 -mr-3 md:mr-0 mb-8">
+    <p class="text-gray-700 mb-4">
+      Leggi e osserva come si eseguono le divisioni in colonna se la prima cifra del dividendo è minore del divisore.
+    </p>
+
+    <div class="flex justify-center mb-6">
+      <%= image_tag "bus3_mat/p058/p58_01.jpg", alt: "Divisione in colonna 175:5", style: "width: 100%; max-width: 120%; height: auto;" %>
+    </div>
+
+    <ul class="space-y-4 text-gray-700">
+      <li class="flex items-start gap-2">
+        <span class="text-red-500 font-bold">•</span>
+        <span>1 : 5 non si può calcolare, perciò considera 17 decine 17 : 5 = 3 con resto 2. Scrivi 3 al quoziente e il resto 2 sotto le decine. Trascrivi le 5 unità accanto al resto.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-red-500 font-bold">•</span>
+        <span>Dividi 25 per il divisore 25 : 5 = 5 con resto 0. Scrivi 5 al quoziente e il resto 0 sotto le unità. Il risultato della divisione è 35 con resto 0.</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Esercizio 1 -->
+  <div class="p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700"><strong>Calcola in colonna.</strong></p>
+    </div>
+
+    <div class="flex justify-center">
+      <%= image_tag "bus3_mat/p058/p58_02.jpg", alt: "Esercizi divisioni in colonna", style: "width: 100%; max-width: 120%; height: auto;" %>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700"><strong>Calcola in colonna sul quaderno.</strong></p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-6 text-gray-700">
+      <div>
+        <p class="font-bold mb-2">a.</p>
+        <p>251 : 8 =</p>
+        <p>281 : 4 =</p>
+        <p>660 : 6 =</p>
+        <p>578 : 9 =</p>
+        <p>125 : 4 =</p>
+      </div>
+      <div>
+        <p class="font-bold mb-2">b.</p>
+        <p>184 : 4 =</p>
+        <p>851 : 8 =</p>
+        <p>168 : 5 =</p>
+        <p>262 : 4 =</p>
+        <p>349 : 3 =</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- mateVIVA -->
+  <div class="bg-[#E8F5E9] p-4 md:p-6 -ml-3 md:-ml-0 -mr-3 md:mr-0 mb-8">
+    <p class="text-green-700 font-bold mb-2">mateVIVA</p>
+    <p class="text-gray-700 font-bold mb-4">QUANTI SOLDI?</p>
+    <p class="text-gray-700 mb-2"><strong>Calcola sul quaderno e rispondi.</strong></p>
+    <p class="text-gray-700 mb-4">
+      Dai nonni hai ricevuto in regalo 126 euro per un corso di inglese che dura 6 giorni.
+    </p>
+    <p class="text-gray-700">
+      <span class="text-red-500 font-bold">•</span> Quanti euro costa 1 giorno di corso?
+      <input type="text" data-fill-blanks-target="input" data-correct-answer="21"
+             class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
+             maxlength="3" inputmode="numeric">
+    </p>
+  </div>
+
+  <!-- Quaderno link -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "pp. 154-155", pagina_path("bus3_mat_p154"), class: "text-cyan-600 font-bold hover:underline" %>
+  </div>
 
   <!-- Footer con controlli -->
   <%= render 'shared/exercise_controls', color: 'blue' %>

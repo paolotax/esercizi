@@ -1,11 +1,117 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker fill-blanks auto-advance page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p057/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Introduzione: Leggi e osserva - box azzurro -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 -ml-3 md:-ml-0 -mr-3 md:mr-0 mb-8">
+    <p class="text-gray-700 mb-4">
+      <strong>Leggi e osserva come si eseguono le divisioni in colonna con il dividendo di tre cifre.</strong>
+    </p>
+
+    <div class="flex justify-center mb-6">
+      <%= image_tag "bus3_mat/p057/p57_01.jpg", alt: "Divisione in colonna 867:4", style: "width: 100%; max-width: 120%; height: auto;" %>
+    </div>
+
+    <ul class="space-y-4 text-gray-700">
+      <li class="flex items-start gap-2">
+        <span class="text-red-500 font-bold">•</span>
+        <span>Dividi le centinaia del dividendo per il divisore 8 : 4 = 2 con resto 0. Scrivi 2 al quoziente e il resto 0 sotto le centinaia. Trascrivi le 6 decine accanto al resto.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-red-500 font-bold">•</span>
+        <span>Dividi 6 per il divisore 6 : 4 = 1 con resto 2. Scrivi 1 al quoziente e il resto 2 sotto le decine. Trascrivi le 7 unità accanto al resto.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-red-500 font-bold">•</span>
+        <span>Dividi 27 per il divisore 27 : 4 = 6 con resto 3. Scrivi 6 al quoziente e il resto 3 sotto le unità. Il risultato della divisione è 216 con resto 3.</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Esercizio 1 -->
+  <div class="p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700"><strong>Calcola in colonna e verifica il risultato con la prova. Ricorda di aggiungere il resto.</strong></p>
+    </div>
+
+    <div class="flex justify-center">
+      <%= image_tag "bus3_mat/p057/p57_02.jpg", alt: "Esercizi divisioni in colonna", style: "width: 100%; max-width: 120%; height: auto;" %>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700"><strong>Calcola in colonna sul quaderno e verifica il risultato con la prova.</strong></p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-gray-700">
+      <div>
+        <p class="font-bold mb-2">a.</p>
+        <p>557 : 5 =</p>
+        <p>87 : 4 =</p>
+      </div>
+      <div>
+        <p class="font-bold mb-2">b.</p>
+        <p>769 : 4 =</p>
+        <p>87 : 7 =</p>
+      </div>
+      <div>
+        <p class="font-bold mb-2">c.</p>
+        <p>95 : 6 =</p>
+        <p>314 : 3 =</p>
+      </div>
+      <div>
+        <p class="font-bold mb-2">d.</p>
+        <p>538 : 2 =</p>
+        <p>676 : 4 =</p>
+      </div>
+      <div>
+        <p class="font-bold mb-2">e.</p>
+        <p>391 : 2 =</p>
+        <p>97 : 8 =</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 3 -->
+  <div class="p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-gray-700"><strong>Risolvi i problemi sul quaderno.</strong></p>
+    </div>
+
+    <div class="space-y-4 text-gray-700">
+      <div class="flex items-start gap-2">
+        <span class="font-bold">a.</span>
+        <span>Un pasticciere prepara 76 croissant. Li distribuisce in 6 sacchi uguali. Quanti croissant rimangono fuori dal sacco?</span>
+      </div>
+      <div class="flex items-start gap-2">
+        <span class="font-bold">b.</span>
+        <span>Nella scatola di costruzioni ci sono 60 pezzi. Bruno costruisce alcune torri di 9 pezzi ciascuna. Quanti pezzi non utilizza?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quaderno link -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "pp. 154-155", pagina_path("bus3_mat_p154"), class: "text-cyan-600 font-bold hover:underline" %>
+  </div>
 
   <!-- Footer con controlli -->
   <%= render 'shared/exercise_controls', color: 'blue' %>

@@ -74,11 +74,35 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 54, titolo: "LA PROPRIETÀ INVARIANTIVA", sottotitolo: "DIVISIONE", slug: "bus3_mat_p054", view_template: "bus3_mat_p054", base_color: "cyan" },
   { numero: 55, titolo: "OPERAZIONI A CONFRONTO", sottotitolo: "DIVISIONE", slug: "bus3_mat_p055", view_template: "bus3_mat_p055", base_color: "cyan" },
   { numero: 56, titolo: "DIVISIONI IN COLONNA", sottotitolo: "DIVISIONE", slug: "bus3_mat_p056", view_template: "bus3_mat_p056", base_color: "cyan" },
+  { numero: 57, titolo: "ANCORA DIVISIONI IN COLONNA", sottotitolo: "DIVISIONE", slug: "bus3_mat_p057", view_template: "bus3_mat_p057", base_color: "cyan" },
+  { numero: 58, titolo: "CONSIDERO DUE CIFRE AL DIVIDENDO", sottotitolo: "DIVISIONE", slug: "bus3_mat_p058", view_template: "bus3_mat_p058", base_color: "cyan" },
+  { numero: 59, titolo: "DIVIDERE PER 10, 100, 1000", sottotitolo: "DIVISIONE", slug: "bus3_mat_p059", view_template: "bus3_mat_p059", base_color: "cyan" },
+  { numero: 60, titolo: "PROBLEMI", sottotitolo: "MOLTIPLICAZIONE E DIVISIONE", slug: "bus3_mat_p060", view_template: "bus3_mat_p060", base_color: "blue" },
+  { numero: 61, titolo: "PROBLEMI", sottotitolo: "MOLTIPLICAZIONE E DIVISIONE", slug: "bus3_mat_p061", view_template: "bus3_mat_p061", base_color: "blue" },
+  { numero: 62, titolo: "ANDIAMO A TEATRO!", sottotitolo: "mateVIVA", slug: "bus3_mat_p062", view_template: "bus3_mat_p062", base_color: "green" },
+  { numero: 63, titolo: "ANDIAMO A TEATRO!", sottotitolo: "MATEMATICA DI TUTTI I GIORNI", slug: "bus3_mat_p063", view_template: "bus3_mat_p063", base_color: "green" },
+  { numero: 64, titolo: "LA MERENDA", sottotitolo: "PROBLEMI", slug: "bus3_mat_p064", view_template: "bus3_mat_p064", base_color: "blue" },
+  { numero: 65, titolo: "LA TAVOLA DEI 7 NANI", sottotitolo: "PROBLEMI", slug: "bus3_mat_p065", view_template: "bus3_mat_p065", base_color: "blue" },
+  { numero: 66, titolo: "LE MASCHERE DI CARNEVALE", sottotitolo: "PROBLEMI", slug: "bus3_mat_p066", view_template: "bus3_mat_p066", base_color: "blue" },
+  { numero: 67, titolo: "LE PALLINE", sottotitolo: "PROBLEMI", slug: "bus3_mat_p067", view_template: "bus3_mat_p067", base_color: "blue" },
+  { numero: 68, titolo: "I DATI DEL PROBLEMA", sottotitolo: "PROBLEMI", slug: "bus3_mat_p068", view_template: "bus3_mat_p068", base_color: "blue" },
+  { numero: 69, titolo: "I DATI DEL PROBLEMA", sottotitolo: "PROBLEMI", slug: "bus3_mat_p069", view_template: "bus3_mat_p069", base_color: "blue" },
+  { numero: 70, titolo: "LA DOMANDA DEL PROBLEMA", sottotitolo: "PROBLEMI", slug: "bus3_mat_p070", view_template: "bus3_mat_p070", base_color: "blue" },
+  { numero: 71, titolo: "QUANTE DOMANDE?", sottotitolo: "PROBLEMI", slug: "bus3_mat_p071", view_template: "bus3_mat_p071", base_color: "blue" },
+  { numero: 72, titolo: "LA DOMANDA NASCOSTA", sottotitolo: "PROBLEMI", slug: "bus3_mat_p072", view_template: "bus3_mat_p072", base_color: "blue" },
+  { numero: 73, titolo: "RISOLVERE PROBLEMI", sottotitolo: "PROBLEMI", slug: "bus3_mat_p073", view_template: "bus3_mat_p073", base_color: "blue" },
   { numero: 74, titolo: "Le Frazioni", slug: "bus3_mat_p074", view_template: "bus3_mat_p074", sottotitolo: "FRAZIONI", base_color: "purple" },
   { numero: 75, titolo: "Leggere e scrivere le frazioni", slug: "bus3_mat_p075", view_template: "bus3_mat_p075", sottotitolo: "FRAZIONI", base_color: "purple" },
   { numero: 76, titolo: "Frazioni - L'unità frazionaria", slug: "bus3_mat_p076", view_template: "bus3_mat_p076", sottotitolo: "FRAZIONI", base_color: "purple" },
   { numero: 77, titolo: "Le Frazioni Equiestese", slug: "bus3_mat_p077", view_template: "bus3_mat_p077", sottotitolo: "FRAZIONI", base_color: "purple" },
   { numero: 78, titolo: "Dall'Unità Frazionaria all'Intero", slug: "bus3_mat_p078", view_template: "bus3_mat_p078", sottotitolo: "FRAZIONI", base_color: "purple" },
+  { numero: 79, titolo: "LE FRAZIONI EQUINUMEROSE", slug: "bus3_mat_p079", view_template: "bus3_mat_p079", sottotitolo: "FRAZIONI", base_color: "purple" },
+  { numero: 80, titolo: "LE FRAZIONI DECIMALI", slug: "bus3_mat_p080", view_template: "bus3_mat_p080", sottotitolo: "FRAZIONI", base_color: "purple" },
+  { numero: 81, titolo: "I DECIMI", slug: "bus3_mat_p081", view_template: "bus3_mat_p081", sottotitolo: "FRAZIONI", base_color: "purple" },
+  { numero: 82, titolo: "I CENTESIMI", slug: "bus3_mat_p082", view_template: "bus3_mat_p082", sottotitolo: "FRAZIONI", base_color: "purple" },
+  { numero: 83, titolo: "I MILLESIMI", slug: "bus3_mat_p083", view_template: "bus3_mat_p083", sottotitolo: "FRAZIONI", base_color: "purple" },
+  { numero: 84, titolo: "I NUMERI DECIMALI", slug: "bus3_mat_p084", view_template: "bus3_mat_p084", sottotitolo: "NUMERI DECIMALI", base_color: "purple" },
+  { numero: 85, titolo: "I NUMERI DECIMALI", slug: "bus3_mat_p085", view_template: "bus3_mat_p085", sottotitolo: "NUMERI DECIMALI", base_color: "purple" },
   { numero: 144, titolo: "Proprietà dell'Addizione", slug: "bus3_mat_p144", view_template: "bus3_mat_p144", sottotitolo: "esercizi", base_color: "cyan" }
 ].each do |pagina_data|
   bus_matematica.pagine.find_or_create_by!(slug: pagina_data[:slug]) do |pagina|
@@ -91,7 +115,7 @@ bus_matematica = bus_volume3.discipline.create!(
 end
 
 # Pagine generiche per bus3_mat (p001-p192, escludendo le pagine già definite sopra)
-existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 74, 75, 76, 77, 78, 144 ]
+existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 144 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|

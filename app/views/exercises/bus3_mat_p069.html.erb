@@ -1,11 +1,165 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker fill-blanks auto-advance page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p069/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- I dati mancanti -->
+  <div class="p-4 md:p-6 mb-8">
+    <p class="text-gray-700 font-bold text-lg mb-4">I dati mancanti</p>
+
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-gray-700"><strong>Leggi il testo del problema, cerchia i dati e completa.</strong></p>
+    </div>
+
+    <div class="p-4 bg-gray-50 rounded mb-4 text-gray-700">
+      <p>Amir compra in un panificio 5 teglie di pizza. Quanto spende in tutto?</p>
+    </div>
+
+    <div class="space-y-3 text-gray-700 mb-6">
+      <p class="flex items-center gap-4">
+        <span class="text-red-500 font-bold">•</span>
+        <span>Puoi calcolare quanto spende in tutto?</span>
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="radio" name="es3_calcola" value="si" data-correct-answer="false" class="w-5 h-5">
+          <span>Sì</span>
+        </label>
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="radio" name="es3_calcola" value="no" data-correct-answer="true" class="w-5 h-5">
+          <span>No</span>
+        </label>
+      </p>
+      <p>
+        <span class="text-red-500 font-bold">•</span>
+        Perché?
+        <input type="text" class="w-64 px-2 py-1 border-b-2 border-dotted border-gray-400 font-bold bg-white"
+               placeholder="Scrivi il motivo...">
+      </p>
+      <p>
+        <span class="text-red-500 font-bold">•</span>
+        Quale dato manca?
+        <input type="text" class="w-64 px-2 py-1 border-b-2 border-dotted border-gray-400 font-bold bg-white"
+               placeholder="Il prezzo di una teglia">
+      </p>
+    </div>
+
+    <!-- Box regola -->
+    <div class="p-4 bg-[#FFF9E6] border-l-4 border-yellow-400 mb-8">
+      <p class="text-gray-700 font-bold">
+        I <span class="text-cyan-600 font-bold">dati mancanti</span> sono le informazioni che non sono nel testo ma sono necessarie per risolvere il problema.
+      </p>
+    </div>
+  </div>
+
+  <!-- Esercizio 4 -->
+  <div class="p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        4
+      </div>
+      <p class="text-gray-700"><strong>Scrivi tu il dato mancante, poi risolvi sul quaderno.</strong></p>
+    </div>
+
+    <div class="p-4 bg-gray-50 rounded mb-4 text-gray-700">
+      <p>Il maestro in cartoleria compra alcune scatole di pastelli tutte uguali. Ogni scatola contiene 9 pastelli. Quanti pastelli ha comprato?</p>
+    </div>
+
+    <p class="text-gray-700">
+      <strong>Dato mancante:</strong>
+      <input type="text" class="w-48 px-2 py-1 border-b-2 border-dotted border-gray-400 font-bold bg-white"
+             placeholder="Numero di scatole">
+    </p>
+  </div>
+
+  <!-- I dati inutili -->
+  <div class="p-4 md:p-6 mb-8">
+    <p class="text-gray-700 font-bold text-lg mb-4">I dati inutili</p>
+
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        5
+      </div>
+      <p class="text-gray-700"><strong>Leggi il testo del problema, cerchia i dati e completa.</strong></p>
+    </div>
+
+    <div class="p-4 bg-gray-50 rounded mb-4 text-gray-700">
+      <p>In una classe ci sono 22 alunni: 15 femmine e 7 maschi.</p>
+      <p>La maestra ha portato 3 fotocopie per ciascuno. Quante fotocopie ha portato la maestra?</p>
+    </div>
+
+    <div class="space-y-3 text-gray-700 mb-6">
+      <p>
+        <strong>Dati:</strong>
+        <input type="text" class="w-48 px-2 py-1 border-b-2 border-dotted border-gray-400 font-bold bg-white"
+               placeholder="22, 15, 7, 3">
+      </p>
+      <p class="flex items-center gap-4">
+        <span class="text-red-500 font-bold">•</span>
+        <span>Tutti i dati sono utili per risolvere il problema?</span>
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="radio" name="es5_utili" value="si" data-correct-answer="false" class="w-5 h-5">
+          <span>Sì</span>
+        </label>
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="radio" name="es5_utili" value="no" data-correct-answer="true" class="w-5 h-5">
+          <span>No</span>
+        </label>
+      </p>
+    </div>
+
+    <!-- Box regola -->
+    <div class="p-4 bg-[#FFF9E6] border-l-4 border-yellow-400 mb-8">
+      <p class="text-gray-700 font-bold">
+        I <span class="text-cyan-600 font-bold">dati inutili</span> sono le informazioni che non servono per risolvere il problema.
+      </p>
+    </div>
+  </div>
+
+  <!-- Esercizio 6 -->
+  <div class="p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        6
+      </div>
+      <p class="text-gray-700"><strong>Leggi il testo del problema e sottolinea i dati inutili. Scrivi i dati utili e risolvi sul quaderno.</strong></p>
+    </div>
+
+    <div class="p-4 bg-gray-50 rounded mb-4 text-gray-700">
+      <p>Il fioraio oggi ha venduto 6 vasi di orchidee e 12 mazzi da 5 rose ciascuno.</p>
+      <p>Quante rose ha venduto?</p>
+    </div>
+
+    <div class="space-y-3 text-gray-700">
+      <p>
+        <strong>Dati utili:</strong>
+        <input type="text" class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 font-bold bg-white"
+               placeholder="12">
+        =
+        <input type="text" class="w-48 px-2 py-1 border-b-2 border-dotted border-gray-400 font-bold bg-white"
+               placeholder="mazzi di rose">
+      </p>
+      <p>
+        <input type="text" class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 font-bold bg-white"
+               placeholder="5">
+        =
+        <input type="text" class="w-48 px-2 py-1 border-b-2 border-dotted border-gray-400 font-bold bg-white"
+               placeholder="rose per mazzo">
+      </p>
+    </div>
+  </div>
+
+  <!-- Quaderno link -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "pp. 157-158", pagina_path("bus3_mat_p157"), class: "text-cyan-600 font-bold hover:underline" %>
+  </div>
 
   <!-- Footer con controlli -->
   <%= render 'shared/exercise_controls', color: 'blue' %>

@@ -95,10 +95,13 @@ l'unità frazionaria è un quindicesimo.
 - 🔍 Identifico le tipologie di esercizi: input di testo, dropdown, radio button, checkbox, drag&drop
 - 🔍 Deduco le soluzioni corrette dalle immagini
 - 🔍 Identifico lo stile: colori, badge speciali (GIOCO, etc.), mascotte
+- 🔍 Cerco nell'HTML originale (assets/images/{libro}/pXXX/*.html) il riferimento al Quaderno
 - 💾 Copio le immagini in app/assets/images/{libro}/p{numero}/ (struttura organizzata)
 - 💾 Aggiorno il seed
-- 💾 Creo la view completa
-- Aggiungi sempre in fondo alla pagina il partial exercise_controls
+- 💾 Creo la view completa con:
+  - Controller `text-toggle` e `font-controls` per formattazione testo
+  - Link al Quaderno allineato a destra (se presente nell'originale)
+  - Partial `exercise_controls` in fondo
 - 💾 Rigenero il database
 
 ### Tipologie di esercizi che riconosco automaticamente:
@@ -147,6 +150,85 @@ Nota: L'esercizio 3 richiede il riconoscimento vocale per la pronuncia.
 Crea la pagina del libro dall'immagine bus1_mat_p010.jpg in ~/Downloads/bus1_mat_p010/
 
 Nota: Questo è un nuovo volume (BUS 1) che va aggiunto al corso "Banda del BUS".
+```
+
+---
+
+## STRUTTURA BASE PAGINA (Template Completo)
+
+```erb
+<% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
+
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('LIBRO/pXXX/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <!-- Header -->
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <!-- Esercizi qui... -->
+
+  <!-- Quaderno link allineato a destra (cercare riferimento in HTML originale) -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "p. XXX", pagina_path("LIBRO_pXXX"), class: "text-cyan-600 font-bold hover:underline" %>
+  </div>
+
+  <!-- Footer con controlli -->
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
+</div>
+```
+
+### Controller Obbligatori nel Div Principale
+- `exercise-checker` - verifica risposte
+- `page-viewer` - visualizza pagina originale (click sul numero)
+- `text-toggle` - attiva/disattiva maiuscolo
+- `font-controls` - cambia font e dimensione
+
+### Data Attributes Obbligatori
+- `data-page-viewer-image-url-value` - path immagine originale
+- `data-text-toggle-target="content"` - target per maiuscolo
+- `data-font-controls-target="content"` - target per font
+
+---
+
+## LINK QUADERNO (Formati)
+
+### Link singolo:
+```erb
+<div class="p-4 mb-8 text-right">
+  <span class="text-gray-600">Quaderno →</span> <%= link_to "p. 140", pagina_path("bus3_mat_p140"), class: "text-cyan-600 font-bold hover:underline" %>
+</div>
+```
+
+### Due pagine consecutive:
+```erb
+<span class="text-gray-600">Quaderno →</span> <%= link_to "p. 141", pagina_path("bus3_mat_p141"), class: "text-cyan-600 font-bold hover:underline" %> - <%= link_to "142", pagina_path("bus3_mat_p142"), class: "text-cyan-600 font-bold hover:underline" %>
+```
+
+### Con verifica:
+```erb
+<span class="text-gray-600">Quaderno →</span> <%= link_to "p. 147", pagina_path("bus3_mat_p147"), class: "text-cyan-600 font-bold hover:underline" %> • <span class="text-gray-600">verifica →</span> <%= link_to "p. 173", pagina_path("bus3_mat_p173"), class: "text-cyan-600 font-bold hover:underline" %>
+```
+
+### Dove trovare il riferimento:
+Cercare nell'HTML originale in `app/assets/images/{libro}/pXXX/17*.html` la stringa "Quaderno"
+
+---
+
+## TESTO EVIDENZIATO (No Sottolineatura)
+
+**NON usare tag `<u>`:**
+```html
+<!-- SBAGLIATO -->
+<u>termine importante</u>
+```
+
+**Usare span colorato:**
+```html
+<!-- CORRETTO -->
+<span class="text-cyan-600 font-bold">termine importante</span>
 ```
 
 ---
@@ -318,4 +400,29 @@ Quando crei/aggiorni una pagina nel seed, includi:
 4. Note su esercizi particolari
 5. Indicazioni su volumi nuovi da creare
 
-**Il resto lo faccio io! 🚀**
+**Il resto lo faccio io!**
+
+---
+
+## CHECKLIST FINALE NUOVA PAGINA
+
+- [ ] Controller `exercise-checker page-viewer text-toggle font-controls` nel div principale
+- [ ] `data-text-toggle-target="content"` e `data-font-controls-target="content"` aggiunti
+- [ ] Header con `<%= render 'shared/page_header', pagina: @pagina %>`
+- [ ] Nessun tag `<u>` - usare `<span class="text-cyan-600 font-bold">`
+- [ ] Link Quaderno allineato a destra (`text-right`) prima del footer
+- [ ] Riferimento Quaderno corretto (controllato in HTML originale)
+- [ ] Footer con `<%= render 'shared/exercise_controls', color: 'cyan' %>`
+- [ ] Seed aggiornato con la nuova pagina
+- [ ] Database rigenerato
+
+---
+
+## COLORI BOX STANDARD
+
+| Colore | Classe Tailwind | Uso |
+|--------|----------------|-----|
+| Azzurro chiaro | `bg-[#C7EAFB]` | Box informativi, teoria |
+| Rosa chiaro | `bg-[#FFE4E1]` | Box alternativi, confronti |
+| Giallo chiaro | `bg-[#FFF9E6]` | Definizioni importanti, regole |
+| Bordo cyan | `border-3 border-cyan-400` | Evidenziare box importanti |

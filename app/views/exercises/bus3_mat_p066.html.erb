@@ -1,11 +1,45 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker fill-blanks auto-advance page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p066/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1: Leggi il testo -->
+  <div class="p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700"><strong>Leggi il testo.</strong></p>
+    </div>
+
+    <div class="space-y-4 text-gray-700">
+      <p>Per realizzare la festa di carnevale della classe gli alunni si dividono i compiti. Francesca si offre di preparare maschere di cartoncino bianco per tutti. Anna, Martina e Giulia si uniscono a lei. Per dare il tempo ai compagni di colorarle per la festa del Martedì grasso, le bambine dovranno realizzare 28 maschere entro lunedì.</p>
+
+      <p class="mt-4">Decidono di incontrarsi la domenica pomeriggio, ma all'ultimo momento Francesca avvisa le amiche che deve uscire con i genitori e che lei farà il lavoro da sola quando tornerà a casa.</p>
+
+      <p class="mt-4">La sera telefona alle amiche per sapere quante maschere hanno preparato. Anna le dice di averne fatte 8, Martina 6 e Giulia 5.</p>
+    </div>
+  </div>
+
+  <!-- Esercizio 2: Aiuta Francesca -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 -ml-3 md:-ml-0 -mr-3 md:mr-0 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700"><strong>Aiuta Francesca a capire quante maschere deve fare.</strong></p>
+    </div>
+
+    <div class="flex justify-center">
+      <%= image_tag "bus3_mat/p066/output-1743504902066_168_703_767_472.png", alt: "Calcolo maschere", style: "width: 100%; max-width: 120%; height: auto;" %>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
   <%= render 'shared/exercise_controls', color: 'blue' %>

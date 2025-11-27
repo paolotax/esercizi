@@ -1,11 +1,138 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker fill-blanks auto-advance page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p072/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Introduzione -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 -ml-3 md:-ml-0 -mr-3 md:mr-0 mb-8">
+    <p class="text-gray-700 font-bold">
+      Alcuni problemi hanno una sola domanda, ma per risolverli devi eseguire due operazioni. Per farlo può essere utile inserire nel testo la <span class="text-cyan-600 font-bold">domanda nascosta</span>.
+    </p>
+  </div>
+
+  <!-- Esercizio 1 -->
+  <div class="p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700"><strong>Leggi il testo del problema e completa.</strong></p>
+    </div>
+
+    <div class="p-4 bg-gray-50 rounded mb-6 text-gray-700">
+      <p>Matthias e la mamma comprano dal cartolaio due matite da disegno e spendono 2 euro, un album da disegno al costo di 7 euro e una confezione di pennarelli al costo di 12 euro.</p>
+      <p class="mt-2">Pagano con una banconota da 50 euro. Quanto ricevono di resto?</p>
+    </div>
+
+    <div class="space-y-6 text-gray-700">
+      <div class="p-4 bg-[#FFF9E6] border-l-4 border-yellow-400">
+        <p class="font-bold mb-2">Prima tappa:</p>
+        <p class="mb-2">prima devo sapere quanto viene speso in tutto.</p>
+        <p class="font-bold mb-2">La domanda nascosta è:</p>
+        <p class="mb-4">
+          Quanto
+          <input type="text" class="w-64 px-2 py-1 border-b-2 border-dotted border-gray-400 font-bold bg-white"
+                 placeholder="spendono in tutto">
+          ?
+        </p>
+        <p>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
+                 maxlength="2" inputmode="numeric">
+          +
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="7"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
+                 maxlength="2" inputmode="numeric">
+          +
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="12"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
+                 maxlength="2" inputmode="numeric">
+          =
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="21"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
+                 maxlength="2" inputmode="numeric">
+        </p>
+      </div>
+
+      <div class="p-4 bg-[#FFF9E6] border-l-4 border-yellow-400">
+        <p class="font-bold mb-2">Seconda tappa:</p>
+        <p class="mb-2">ora posso calcolare il resto</p>
+        <p>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="50"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
+                 maxlength="2" inputmode="numeric">
+          -
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="21"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
+                 maxlength="2" inputmode="numeric">
+          =
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="29"
+                 class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
+                 maxlength="2" inputmode="numeric">
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700"><strong>Leggi i testi dei problemi. Formula la domanda nascosta quando vedi l'asterisco ✱ e scrivila sotto. Poi risolvi sul quaderno seguendo la traccia che hai qui sopra.</strong></p>
+    </div>
+
+    <div class="space-y-4 text-gray-700">
+      <div class="p-4 bg-gray-50 rounded">
+        <p class="font-bold mb-2">a.</p>
+        <p class="mb-2">Per una gita sono stati noleggiati 5 pullman. Ogni pullman ha 55 posti. ✱</p>
+        <p class="mb-4">I partecipanti alla gita sono 225. Quanti posti rimangono liberi?</p>
+        <p>
+          <strong>Domanda nascosta:</strong>
+          <input type="text" class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 font-bold bg-white mt-1"
+                 placeholder="Quanti posti ci sono in tutto?">
+        </p>
+      </div>
+
+      <div class="p-4 bg-gray-50 rounded">
+        <p class="font-bold mb-2">b.</p>
+        <p class="mb-2">Chiara ha una scatola con 115 perle e ne usa 55 per fare una collana.</p>
+        <p class="mb-4">Usa ✱ le perle rimaste per fare 3 bracciali uguali. Quante perle usa per ogni bracciale?</p>
+        <p>
+          <strong>Domanda nascosta:</strong>
+          <input type="text" class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 font-bold bg-white mt-1"
+                 placeholder="Quante perle rimangono?">
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 3 -->
+  <div class="p-4 md:p-6 mb-8">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-gray-700"><strong>Ricopia il problema sul quaderno e scrivi la domanda nascosta dove vedi l'asterisco ✱. Poi risolvi.</strong></p>
+    </div>
+
+    <div class="p-4 bg-gray-50 rounded text-gray-700">
+      <p>Luca e Filippo mettono insieme i loro risparmi per fare un regalo al papà. Luca ha 15 euro e Filippo 25 euro. ✱ Acquistano una sciarpa e restano 8 euro.</p>
+      <p class="mt-2">Quanti euro è costata la sciarpa?</p>
+    </div>
+  </div>
+
+  <!-- Quaderno link -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "pp. 157-158", pagina_path("bus3_mat_p157"), class: "text-cyan-600 font-bold hover:underline" %>
+  </div>
 
   <!-- Footer con controlli -->
   <%= render 'shared/exercise_controls', color: 'blue' %>
