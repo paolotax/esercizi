@@ -1,12 +1,216 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p173/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Colonna sinistra -->
+    <div>
+      <!-- Esercizio 1 -->
+      <div class="mb-10">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            1
+          </div>
+          <p class="text-gray-700">
+            <strong>Calcola in colonna sul quaderno e verifica il risultato con la prova.</strong>
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <p class="text-cyan-600 font-bold mb-2">a.</p>
+            <div class="space-y-1">
+              <p>79 + 47 =</p>
+              <p>78 + 52 =</p>
+              <p>41 + 69 =</p>
+              <p>53 + 89 =</p>
+              <p>62 + 38 =</p>
+            </div>
+          </div>
+          <div>
+            <p class="text-cyan-600 font-bold mb-2">b.</p>
+            <div class="space-y-1">
+              <p>55 + 104 + 308 =</p>
+              <p>69 + 204 + 570 =</p>
+              <p>58 + 236 + 342 =</p>
+              <p>98 + 307 + 146 =</p>
+              <p>76 + 103 + 21 =</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="mb-10">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            2
+          </div>
+          <p class="text-gray-700">
+            <strong>Completa con le cifre mancanti. Fai attenzione ai cambi!</strong>
+          </p>
+        </div>
+
+        <div class="flex justify-center">
+          <%= image_tag "bus3_mat/p173/p173_01.jpg", alt: "Addizioni con cifre mancanti", class: "max-w-full rounded" %>
+        </div>
+      </div>
+
+      <!-- Esercizio 3 -->
+      <div class="mb-10">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            3
+          </div>
+          <p class="text-gray-700">
+            <strong>Scomponi gli addendi e completa.</strong>
+          </p>
+        </div>
+
+        <p class="text-sm text-gray-600 mb-4">Es: 38 + 56 = (30+8) + (50+6) = 80 + 14 = 94</p>
+        <div class="space-y-2">
+          <p>38 + 56 = ........</p>
+          <p>46 + 64 = ........</p>
+        </div>
+      </div>
+
+      <!-- Esercizio 4 -->
+      <div class="mb-10" data-controller="card-selector">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            4
+          </div>
+          <p class="text-gray-700">
+            <strong>Colora le caselle con le addizioni che hanno come risultato 175.</strong>
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="border border-gray-400 p-3 text-center cursor-pointer hover:bg-yellow-100"
+               data-card-selector-target="card" data-correct="true">
+            100 + 60 + 15 =
+          </div>
+          <div class="border border-gray-400 p-3 text-center cursor-pointer hover:bg-yellow-100"
+               data-card-selector-target="card" data-correct="true">
+            90 + 85 =
+          </div>
+          <div class="border border-gray-400 p-3 text-center cursor-pointer hover:bg-yellow-100"
+               data-card-selector-target="card">
+            70 + 70 + 75 =
+          </div>
+          <div class="border border-gray-400 p-3 text-center cursor-pointer hover:bg-yellow-100"
+               data-card-selector-target="card" data-correct="true">
+            120 + 55 =
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colonna destra -->
+    <div>
+      <!-- Esercizio 5 -->
+      <div class="mb-10" data-controller="card-selector fill-blanks">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            5
+          </div>
+          <p class="text-gray-700">
+            <strong>Se aggiungi prima 10 e poi 100 a 125, quale numero ottieni?</strong>
+          </p>
+        </div>
+
+        <div class="flex gap-4 mb-4">
+          <div class="border border-gray-400 px-4 py-2 cursor-pointer hover:bg-yellow-100"
+               data-card-selector-target="card">135</div>
+          <div class="border border-gray-400 px-4 py-2 cursor-pointer hover:bg-yellow-100"
+               data-card-selector-target="card" data-correct="true">235</div>
+          <div class="border border-gray-400 px-4 py-2 cursor-pointer hover:bg-yellow-100"
+               data-card-selector-target="card">325</div>
+        </div>
+
+        <div class="space-y-3">
+          <p>• E se aggiungi prima 100 e poi 10 a 125, qual è la somma?
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="235"
+                   class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+          </p>
+          <p>• Per quale proprietà dell'addizione la somma è uguale?
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="commutativa"
+                   class="w-40 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">
+          </p>
+        </div>
+      </div>
+
+      <!-- Esercizio 6 -->
+      <div class="mb-10" data-controller="card-selector">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            6
+          </div>
+          <p class="text-gray-700">
+            <strong>Quale numero puoi sostituire agli addendi ripetuti? Coloralo.</strong>
+          </p>
+        </div>
+
+        <p class="mb-4 text-center border border-gray-400 p-2 bg-gray-50">25 + 25 + 25 + 25 + 17</p>
+
+        <div class="flex gap-4 justify-center">
+          <div class="border border-gray-400 px-4 py-2 cursor-pointer hover:bg-yellow-100"
+               data-card-selector-target="card" data-correct="true">100</div>
+          <div class="border border-gray-400 px-4 py-2 cursor-pointer hover:bg-yellow-100"
+               data-card-selector-target="card">50</div>
+          <div class="border border-gray-400 px-4 py-2 cursor-pointer hover:bg-yellow-100"
+               data-card-selector-target="card">150</div>
+        </div>
+      </div>
+
+      <!-- Esercizio 7 -->
+      <div class="mb-10">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            7
+          </div>
+          <p class="text-gray-700">
+            <strong>Completa con le cifre mancanti.</strong>
+          </p>
+        </div>
+
+        <div class="flex justify-center">
+          <%= image_tag "bus3_mat/p173/p173_02.jpg", alt: "Sottrazioni con cifre mancanti", class: "max-w-full rounded" %>
+        </div>
+      </div>
+
+      <!-- Esercizio 8 -->
+      <div class="mb-10" data-controller="card-selector">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+            8
+          </div>
+          <p class="text-gray-700">
+            <strong>Dove è stata applicata correttamente la <span class="text-red-500">proprietà invariantiva</span> della sottrazione per calcolare 168 − 138?</strong>
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <label class="flex items-center gap-3 cursor-pointer p-2 border border-gray-300 rounded hover:bg-yellow-50">
+            <input type="radio" name="q8" data-card-selector-target="card" class="w-5 h-5">
+            <span>(168 <span class="text-red-500">−</span> 38) − (138 <span class="text-cyan-500">+</span> 38)</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer p-2 border border-gray-300 rounded hover:bg-yellow-50">
+            <input type="radio" name="q8" data-card-selector-target="card" data-correct="true" class="w-5 h-5">
+            <span>(168 <span class="text-red-500">−</span> 38) − (138 <span class="text-red-500">−</span> 38)</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

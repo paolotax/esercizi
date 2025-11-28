@@ -176,6 +176,11 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 168, titolo: "LE MISURE DI CAPACITÀ", slug: "bus3_mat_p168", view_template: "bus3_mat_p168", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 169, titolo: "LE MISURE DI PESO", slug: "bus3_mat_p169", view_template: "bus3_mat_p169", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 170, titolo: "RELAZIONI, DATI E PREVISIONI", slug: "bus3_mat_p170", view_template: "bus3_mat_p170", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 171, titolo: "I NUMERI FINO A 1000 E OLTRE", slug: "bus3_mat_p171", view_template: "bus3_mat_p171", sottotitolo: "VERIFICA", base_color: "cyan" },
+  { numero: 172, titolo: "VERIFICA NUMERI", slug: "bus3_mat_p172", view_template: "bus3_mat_p172", sottotitolo: "VERIFICA", base_color: "cyan" },
+  { numero: 173, titolo: "ADDIZIONE E SOTTRAZIONE", slug: "bus3_mat_p173", view_template: "bus3_mat_p173", sottotitolo: "VERIFICA", base_color: "cyan" },
+  { numero: 174, titolo: "VERIFICA ADDIZIONE E SOTTRAZIONE", slug: "bus3_mat_p174", view_template: "bus3_mat_p174", sottotitolo: "VERIFICA", base_color: "cyan" },
+  { numero: 175, titolo: "LA MOLTIPLICAZIONE", slug: "bus3_mat_p175", view_template: "bus3_mat_p175", sottotitolo: "VERIFICA", base_color: "cyan" },
   { numero: 122, titolo: "CLASSIFICARE", slug: "bus3_mat_p122", view_template: "bus3_mat_p122", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
   { numero: 123, titolo: "CLASSIFICARE", slug: "bus3_mat_p123", view_template: "bus3_mat_p123", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
   { numero: 124, titolo: "LE RELAZIONI", slug: "bus3_mat_p124", view_template: "bus3_mat_p124", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
@@ -194,7 +199,7 @@ bus_matematica = bus_volume3.discipline.create!(
 end
 
 # Pagine generiche per bus3_mat (p001-p192, escludendo le pagine già definite sopra)
-existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 122, 123, 124, 125, 126, 127, 128, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170 ]
+existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 122, 123, 124, 125, 126, 127, 128, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|
