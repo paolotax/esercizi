@@ -1,12 +1,173 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p181/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 -->
+  <div class="mb-10" data-controller="card-selector">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>Indica con una <span class="text-red-500">X</span> se le seguenti affermazioni sono vere (<span class="text-cyan-600">V</span>) o false (<span class="text-cyan-600">F</span>)?</strong>
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <div class="flex items-center justify-between border-b border-gray-200 pb-2">
+        <span>• I solidi hanno tre dimensioni.</span>
+        <div class="flex gap-4">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="q1a" data-card-selector-target="card" data-correct="true" class="w-5 h-5">
+            <span>V</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="q1a" data-card-selector-target="card" class="w-5 h-5">
+            <span>F</span>
+          </label>
+        </div>
+      </div>
+      <div class="flex items-center justify-between border-b border-gray-200 pb-2">
+        <span>• Le facce dei solidi non sono figure piane.</span>
+        <div class="flex gap-4">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="q1b" data-card-selector-target="card" class="w-5 h-5">
+            <span>V</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="q1b" data-card-selector-target="card" data-correct="true" class="w-5 h-5">
+            <span>F</span>
+          </label>
+        </div>
+      </div>
+      <div class="flex items-center justify-between border-b border-gray-200 pb-2">
+        <span>• Le figure piane hanno due dimensioni.</span>
+        <div class="flex gap-4">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="q1c" data-card-selector-target="card" data-correct="true" class="w-5 h-5">
+            <span>V</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="q1c" data-card-selector-target="card" class="w-5 h-5">
+            <span>F</span>
+          </label>
+        </div>
+      </div>
+      <div class="flex items-center justify-between border-b border-gray-200 pb-2">
+        <span>• Un poligono è una figura geometrica che ha per confine una linea spezzata aperta.</span>
+        <div class="flex gap-4">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="q1d" data-card-selector-target="card" class="w-5 h-5">
+            <span>V</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="q1d" data-card-selector-target="card" data-correct="true" class="w-5 h-5">
+            <span>F</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-10" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Scrivi il nome di queste rette.</strong>
+      </p>
+    </div>
+
+    <div class="flex justify-center mb-4">
+      <%= image_tag "bus3_mat/p181/p181_01.jpg", alt: "Tipi di rette", class: "max-w-full rounded" %>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 text-center">
+      <input type="text" data-fill-blanks-target="input" data-correct-answer="parallele"
+             class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">
+      <input type="text" data-fill-blanks-target="input" data-correct-answer="perpendicolari"
+             class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">
+      <input type="text" data-fill-blanks-target="input" data-correct-answer="incidenti"
+             class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">
+    </div>
+  </div>
+
+  <!-- Esercizio 3 -->
+  <div class="mb-10" data-controller="fill-blanks card-selector">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-gray-700">
+        <strong>Osserva le rette a lato, rispondi e completa.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <div class="flex items-center gap-2">
+          <span>• Le rette <strong>a</strong> e <strong>b</strong> sono incidenti. Sono anche perpendicolari?</span>
+          <label class="flex items-center gap-1 cursor-pointer">
+            <input type="radio" name="q3a" data-card-selector-target="card" data-correct="true" class="w-4 h-4">
+            <span>Sì</span>
+          </label>
+          <label class="flex items-center gap-1 cursor-pointer">
+            <input type="radio" name="q3a" data-card-selector-target="card" class="w-4 h-4">
+            <span>No</span>
+          </label>
+        </div>
+        <div class="flex items-center gap-2">
+          <span>• Le rette <strong>c</strong> e <strong>d</strong> sono incidenti. Sono anche perpendicolari?</span>
+          <label class="flex items-center gap-1 cursor-pointer">
+            <input type="radio" name="q3b" data-card-selector-target="card" class="w-4 h-4">
+            <span>Sì</span>
+          </label>
+          <label class="flex items-center gap-1 cursor-pointer">
+            <input type="radio" name="q3b" data-card-selector-target="card" data-correct="true" class="w-4 h-4">
+            <span>No</span>
+          </label>
+        </div>
+        <p>• La retta <strong>a</strong> è <input type="text" data-fill-blanks-target="input" data-correct-answer="parallela"
+               class="w-28 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white"> alla retta <strong>d</strong>.</p>
+        <p>• La retta <strong>b</strong> è <input type="text" data-fill-blanks-target="input" data-correct-answer="parallela"
+               class="w-28 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white"> alla retta <strong>c</strong>.</p>
+        <p>• La retta <strong>d</strong> è incidente a quali rette? <input type="text" data-fill-blanks-target="input" data-correct-answer="b, c"
+               class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white"></p>
+        <p>• La retta <strong>c</strong> è incidente alle rette <input type="text" data-fill-blanks-target="input" data-correct-answer="a, d"
+               class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white"> ed è <input type="text" data-fill-blanks-target="input" data-correct-answer="parallela"
+               class="w-28 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white"> alla retta <strong>b</strong>.</p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p181/p181_01.jpg", alt: "Schema rette", class: "max-w-xs rounded" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 4 -->
+  <div class="mb-10">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        4
+      </div>
+      <p class="text-gray-700">
+        <strong>Colora di <span class="text-green-500">verde</span> gli angoli acuti, di <span class="text-blue-500">blu</span> quelli retti e di <span class="text-purple-500">viola</span> quelli ottusi.</strong>
+      </p>
+    </div>
+
+    <div class="flex justify-center">
+      <%= image_tag "bus3_mat/p181/p181_01.jpg", alt: "Angoli da colorare", class: "max-w-full rounded" %>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

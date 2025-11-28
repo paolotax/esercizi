@@ -1,12 +1,109 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p185/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 -->
+  <div class="mb-10">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>Disegna nel diagramma di Eulero-Venn le seguenti figure e completa il cartellino.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p185/p185_01.jpg", alt: "Figure geometriche", class: "max-w-full rounded" %>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p185/p185_01.jpg", alt: "Diagramma Eulero-Venn", class: "max-w-full rounded" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-10" data-controller="fill-blanks">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Osserva il disegno. Tutte le frecce dicono la stessa cosa: scrivila tu.</strong><br>
+        Scegli tra: mangia • è genitore di • è figlio di • è il doppio di
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <p><input type="text" data-fill-blanks-target="input" data-correct-answer="è figlio di"
+               class="w-40 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white"> <span class="text-red-500">→</span></p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p185/p185_01.jpg", alt: "Albero genealogico", class: "max-w-xs rounded" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 3 -->
+  <div class="mb-10">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-gray-700">
+        <strong>Traccia le frecce che dicono:</strong> mangia <span class="text-red-500">→</span>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p185/p185_01.jpg", alt: "Animali", class: "max-w-xs rounded" %>
+      </div>
+      <div class="space-y-2">
+        <div class="border border-gray-400 p-2 text-center">lattuga</div>
+        <div class="border border-gray-400 p-2 text-center">carne</div>
+        <div class="border border-gray-400 p-2 text-center">erba</div>
+        <div class="border border-gray-400 p-2 text-center">semi</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 4 -->
+  <div class="mb-10">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        4
+      </div>
+      <p class="text-gray-700">
+        <strong>Traccia le frecce che dicono:</strong> è la metà di <span class="text-red-500">→</span>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
+      <div class="space-y-3">
+        <div class="border border-gray-400 p-2 text-center">100</div>
+        <div class="border border-gray-400 p-2 text-center">48</div>
+        <div class="border border-gray-400 p-2 text-center">9</div>
+        <div class="border border-gray-400 p-2 text-center">15</div>
+      </div>
+      <div class="space-y-3">
+        <div class="border border-gray-400 p-2 text-center">18</div>
+        <div class="border border-gray-400 p-2 text-center">50</div>
+        <div class="border border-gray-400 p-2 text-center">24</div>
+        <div class="border border-gray-400 p-2 text-center">30</div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>
