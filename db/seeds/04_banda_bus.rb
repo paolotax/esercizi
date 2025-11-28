@@ -103,6 +103,21 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 83, titolo: "I MILLESIMI", slug: "bus3_mat_p083", view_template: "bus3_mat_p083", sottotitolo: "FRAZIONI", base_color: "purple" },
   { numero: 84, titolo: "I NUMERI DECIMALI", slug: "bus3_mat_p084", view_template: "bus3_mat_p084", sottotitolo: "NUMERI DECIMALI", base_color: "purple" },
   { numero: 85, titolo: "I NUMERI DECIMALI", slug: "bus3_mat_p085", view_template: "bus3_mat_p085", sottotitolo: "NUMERI DECIMALI", base_color: "purple" },
+  { numero: 86, titolo: "I NUMERI DECIMALI E L'EURO", slug: "bus3_mat_p086", view_template: "bus3_mat_p086", sottotitolo: "NUMERI DECIMALI", base_color: "purple" },
+  { numero: 87, titolo: "I NUMERI DECIMALI E L'EURO", slug: "bus3_mat_p087", view_template: "bus3_mat_p087", sottotitolo: "NUMERI DECIMALI", base_color: "purple" },
+  { numero: 88, titolo: "FRAZIONI IN PASTICCERIA", slug: "bus3_mat_p088", view_template: "bus3_mat_p088", sottotitolo: "PAROLE AL CENTRO", base_color: "purple" },
+  { numero: 89, titolo: "GIOCO E RIPASSO", slug: "bus3_mat_p089", view_template: "bus3_mat_p089", sottotitolo: "PAROLE AL CENTRO", base_color: "purple" },
+  { numero: 90, titolo: "LE FIGURE SOLIDE", slug: "bus3_mat_p090", view_template: "bus3_mat_p090", sottotitolo: "SPAZIO E FIGURE", base_color: "cyan" },
+  { numero: 91, titolo: "FIGURE PIANE E SOLIDE", slug: "bus3_mat_p091", view_template: "bus3_mat_p091", sottotitolo: "SPAZIO E FIGURE", base_color: "cyan" },
+  { numero: 92, titolo: "SEGMENTO, SEMIRETTA, RETTA", slug: "bus3_mat_p092", view_template: "bus3_mat_p092", sottotitolo: "SPAZIO E FIGURE", base_color: "cyan" },
+  { numero: 93, titolo: "RETTE PARALLELE, INCIDENTI, PERPENDICOLARI", slug: "bus3_mat_p093", view_template: "bus3_mat_p093", sottotitolo: "SPAZIO E FIGURE", base_color: "cyan" },
+  { numero: 94, titolo: "GLI ANGOLI", slug: "bus3_mat_p094", view_template: "bus3_mat_p094", sottotitolo: "SPAZIO E FIGURE", base_color: "cyan" },
+  { numero: 95, titolo: "ANGOLO ACUTO E ANGOLO OTTUSO", slug: "bus3_mat_p095", view_template: "bus3_mat_p095", sottotitolo: "SPAZIO E FIGURE", base_color: "cyan" },
+  { numero: 96, titolo: "I POLIGONI", slug: "bus3_mat_p096", view_template: "bus3_mat_p096", sottotitolo: "SPAZIO E FIGURE", base_color: "cyan" },
+  { numero: 97, titolo: "GLI ELEMENTI DI UN POLIGONO", slug: "bus3_mat_p097", view_template: "bus3_mat_p097", sottotitolo: "SPAZIO E FIGURE", base_color: "cyan" },
+  { numero: 98, titolo: "POLIGONI ARTISTICI!", slug: "bus3_mat_p098", view_template: "bus3_mat_p098", sottotitolo: "mateVIVA", base_color: "green" },
+  { numero: 99, titolo: "TASSELLAZIONI", slug: "bus3_mat_p099", view_template: "bus3_mat_p099", sottotitolo: "mateVIVA", base_color: "green" },
+  { numero: 100, titolo: "IL PERIMETRO", slug: "bus3_mat_p100", view_template: "bus3_mat_p100", sottotitolo: "SPAZIO E FIGURE", base_color: "cyan" },
   { numero: 130, titolo: "FACCIAMO I CONTI!", slug: "bus3_mat_p130", view_template: "bus3_mat_p130", sottotitolo: "ECONOMIA A PICCOLI PASSI", base_color: "cyan" },
   { numero: 131, titolo: "IL SALVADANAIO", slug: "bus3_mat_p131", view_template: "bus3_mat_p131", sottotitolo: "ECONOMIA A PICCOLI PASSI", base_color: "cyan" },
   { numero: 132, titolo: "L'ECONOMIA CIRCOLARE", slug: "bus3_mat_p132", view_template: "bus3_mat_p132", sottotitolo: "ECONOMIA A PICCOLI PASSI", base_color: "cyan" },
@@ -136,7 +151,7 @@ bus_matematica = bus_volume3.discipline.create!(
 end
 
 # Pagine generiche per bus3_mat (p001-p192, escludendo le pagine già definite sopra)
-existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144 ]
+existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|
