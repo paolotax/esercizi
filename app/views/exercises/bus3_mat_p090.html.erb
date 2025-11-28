@@ -1,12 +1,120 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p090/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Introduzione -->
+  <div class="mb-8">
+    <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4 mb-6">
+      <p class="mb-3"><strong>Leggi e osserva attentamente questo <span class="text-cyan-600 font-bold">solido</span>.</strong></p>
+      <p class="mb-4">Tutti gli oggetti che ti circondano hanno <strong>3 dimensioni: lunghezza</strong>, <strong>larghezza</strong> (o profondità), <strong>altezza</strong> (o spessore).</p>
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p090/p90_01.jpg", alt: "Solido con dimensioni", class: "max-w-md" %>
+      </div>
+    </div>
+
+    <div class="bg-pink-100 border-2 border-pink-300 rounded-lg p-4 mb-6">
+      <p><strong>In geometria le figure con <span class="text-cyan-600 font-bold">3 dimensioni</span> si chiamano <span class="text-cyan-600 font-bold">figure solide</span>.</strong></p>
+    </div>
+  </div>
+
+  <!-- Esercizio 1 -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>Osserva i solidi e leggi il loro nome. Poi immagina di "spingerli": quali di essi rotolano?</strong>
+      </p>
+    </div>
+
+    <div class="flex justify-center mb-6">
+      <%= image_tag "bus3_mat/p090/output-1743504902090_141_541_825_147.png", alt: "Solidi geometrici", class: "max-w-full" %>
+    </div>
+
+    <div class="grid grid-cols-6 gap-2 text-center text-sm mb-6">
+      <div>cubo</div>
+      <div>parallelepipedo</div>
+      <div>piramide</div>
+      <div>cilindro</div>
+      <div>sfera</div>
+      <div>cono</div>
+    </div>
+
+    <div class="bg-gray-50 border-2 border-gray-300 rounded-lg p-4">
+      <div class="flex items-center gap-4 mb-3">
+        <span class="font-bold bg-gray-200 px-3 py-1 rounded">SOLIDI</span>
+        <span>→</span>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>ROTOLANO: cilindro,</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="sfera, cono"
+                 class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="font-bold bg-gray-200 px-3 py-1 rounded invisible">SOLIDI</span>
+        <span>→</span>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>NON ROTOLANO: cubo,</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="parallelepipedo, piramide"
+                 class="w-48 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teoria vertici, spigoli, facce -->
+  <div class="mb-8">
+    <div class="bg-pink-100 border-2 border-pink-300 rounded-lg p-4 mb-6">
+      <p class="mb-3"><strong>Nei <span class="text-cyan-600 font-bold">solidi</span> che non rotolano puoi riconoscere 3 elementi: vertici, spigoli, facce.</strong></p>
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p090/p90_02.jpg", alt: "Vertici, spigoli, facce", class: "max-w-sm" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-8" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Osserva e continua tu: segna con un pallino rosa i vertici, ripassa di blu gli spigoli e colora di verde le facce. Poi completa.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p090/output-1743504902090_538_964_201_194.png", alt: "Cubo da completare", class: "max-w-xs" %>
+      </div>
+      <div class="space-y-3">
+        <div class="flex items-center gap-2">
+          <span>• Numero facce:</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2">
+          <span>• Numero vertici:</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="8"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        </div>
+        <div class="flex items-center gap-2">
+          <span>• Numero spigoli:</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="12"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

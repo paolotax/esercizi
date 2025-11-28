@@ -1,12 +1,85 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p092/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 - Laboratorio -->
+  <div class="mb-8">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 text-white px-3 py-1 rounded font-bold text-sm">L A B O R A T O R I O</span>
+        <span class="font-bold">Leggi e prova anche tu!</span>
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <!-- Segmento -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+          <div class="flex justify-center">
+            <%= image_tag "bus3_mat/p092/p92_01.jpg", alt: "Segmento", class: "max-w-xs" %>
+          </div>
+          <div>
+            <p class="mb-2">• Su un foglio fai scorrere la matita lungo il righello. La linea che hai tracciato si chiama <span class="text-cyan-600 font-bold">segmento</span>.</p>
+            <p class="mb-2">Il punto di <strong>inizio</strong> e il punto di <strong>fine</strong> si chiamano <strong>estremi del segmento</strong> e si indicano con lettere maiuscole: AB.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Semiretta -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+          <div class="flex justify-center">
+            <%= image_tag "bus3_mat/p092/p92_02.jpg", alt: "Semiretta", class: "max-w-xs" %>
+          </div>
+          <div>
+            <p class="mb-2">• Immagina ora di prolungare il segmento AB dalla parte di B, mantenendo la direzione del righello e senza fermarti... neanche quando finisce il foglio!</p>
+            <p class="mb-2">Ottieni una linea che <strong>inizia da A e continua all'infinito</strong>: è una <span class="text-cyan-600 font-bold">semiretta</span>. Il punto A si chiama <strong>origine</strong> della semiretta.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Retta -->
+      <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+          <div class="flex justify-center">
+            <%= image_tag "bus3_mat/p092/p92_03.jpg", alt: "Retta", class: "max-w-xs" %>
+          </div>
+          <div>
+            <p class="mb-2">• Se prolunghi il segmento AB sia dalla parte di A sia dalla parte di B ottieni una linea che non ha <strong>né un inizio né una fine</strong>: è una <span class="text-cyan-600 font-bold">linea retta (r)</span>.</p>
+            <p>Per indicare che è <strong>illimitata</strong> si disegnano dei trattini da entrambe le parti.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-8">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Ripassa di blu le <span class="text-blue-600">rette</span>, di rosa le <span class="text-pink-500">semirette</span> e di verde i <span class="text-green-600">segmenti</span>.</strong><br>
+        <strong>Segna di viola l'origine delle semirette e di giallo gli estremi dei segmenti.</strong>
+      </p>
+    </div>
+
+    <div class="flex justify-center">
+      <%= image_tag "bus3_mat/p092/output-1743504902092_123_948_844_230.png", alt: "Rette, semirette e segmenti", class: "max-w-full" %>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>

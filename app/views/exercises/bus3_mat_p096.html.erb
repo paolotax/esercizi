@@ -1,12 +1,105 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p096/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 -->
+  <div class="mb-8">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>Osserva le figure. Poi colora i cartellini con le affermazioni corrette.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <!-- Figura curva chiusa (fagiolo rosso) -->
+      <div class="bg-white border-2 border-gray-300 rounded-lg p-4 text-center">
+        <%= image_tag "bus3_mat/p096/output-1743504902096_153_277_143_122.png", alt: "Figura curva chiusa", class: "mx-auto mb-3 max-h-24" %>
+        <p class="mb-2">Questa figura è delimitata da una linea:</p>
+        <div class="space-y-2">
+          <div class="border border-gray-300 rounded px-3 py-1 text-sm">retta</div>
+          <div class="border border-gray-300 rounded px-3 py-1 text-sm">curva aperta</div>
+          <div class="border border-gray-300 rounded px-3 py-1 text-sm bg-cyan-100 border-cyan-400">curva chiusa</div>
+        </div>
+      </div>
+
+      <!-- Figura spezzata chiusa (quadrato blu) -->
+      <div class="bg-white border-2 border-gray-300 rounded-lg p-4 text-center">
+        <%= image_tag "bus3_mat/p096/output-1743504902096_484_288_111_112.png", alt: "Figura spezzata chiusa", class: "mx-auto mb-3 max-h-24" %>
+        <p class="mb-2">Questa figura è delimitata da una linea:</p>
+        <div class="space-y-2">
+          <div class="border border-gray-300 rounded px-3 py-1 text-sm">curva chiusa</div>
+          <div class="border border-gray-300 rounded px-3 py-1 text-sm">spezzata aperta</div>
+          <div class="border border-gray-300 rounded px-3 py-1 text-sm bg-cyan-100 border-cyan-400">spezzata chiusa</div>
+        </div>
+      </div>
+
+      <!-- Figura mista chiusa (mezzaluna verde) -->
+      <div class="bg-white border-2 border-gray-300 rounded-lg p-4 text-center">
+        <%= image_tag "bus3_mat/p096/output-1743504902096_795_260_81_142.png", alt: "Figura mista chiusa", class: "mx-auto mb-3 max-h-24" %>
+        <p class="mb-2">Questa figura è delimitata da una linea:</p>
+        <div class="space-y-2">
+          <div class="border border-gray-300 rounded px-3 py-1 text-sm">curva chiusa</div>
+          <div class="border border-gray-300 rounded px-3 py-1 text-sm">mista aperta</div>
+          <div class="border border-gray-300 rounded px-3 py-1 text-sm bg-cyan-100 border-cyan-400">mista chiusa</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-pink-100 border-2 border-pink-300 rounded-lg p-4 mb-6">
+      <p class="mb-2">Le figure piane delimitate da una <strong>linea spezzata chiusa</strong> sono <span class="text-cyan-600 font-bold">poligoni</span>. Tra le figure disegnate sopra solo il quadrato è un poligono.</p>
+      <p><strong>Un <span class="text-cyan-600 font-bold">poligono</span> è una figura piana che ha per confine una <span class="text-cyan-600 font-bold">linea spezzata chiusa</span>.</strong></p>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-8">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Colora solo i poligoni.</strong>
+      </p>
+    </div>
+
+    <div class="flex justify-center mb-4">
+      <%= image_tag "bus3_mat/p096/output-1743504902096_100_774_869_283.png", alt: "Figure da colorare", class: "max-w-full" %>
+    </div>
+    <p class="text-sm text-gray-500 text-center">(Colora: freccia, pentagono, croce - sono poligoni perché delimitati da linea spezzata chiusa)</p>
+  </div>
+
+  <!-- Esercizio 3 - GIOCO -->
+  <div class="mb-8">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="bg-gradient-to-r from-green-500 via-cyan-500 to-blue-500 text-white px-3 py-1 rounded font-bold text-sm">G I O C O</span>
+        <span><strong>Usa due segmenti per dividere questo poligono in tre poligoni. Poi confronta il tuo lavoro con quello delle compagne e dei compagni.</strong></span>
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <%= image_tag "bus3_mat/p096/output-1743504902096_637_1082_330_84.png", alt: "Poligono da dividere", class: "max-w-xs" %>
+    </div>
+  </div>
+
+  <!-- Quaderno -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "p. 164", pagina_path("bus3_mat_p164"), class: "text-cyan-600 font-bold hover:underline" %>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls', color: 'cyan' %>
 </div>
