@@ -4,11 +4,31 @@ Usa questo prompt per creare nuove pagine di esercizi di geometria seguendo lo s
 
 ---
 
+## IMPORTANTE: Prima di Iniziare
+
+**Controlla SEMPRE questi due riferimenti:**
+
+1. **HTML esistente** - Leggi il file `.html.erb` della pagina se esiste già:
+   ```
+   app/views/exercises/bus3_mat_pXXX.html.erb
+   ```
+
+2. **Immagine originale** - Visualizza il `page.png` per vedere il layout originale del libro:
+   ```
+   app/assets/images/bus3_mat/pXXX/page.png
+   ```
+
+Il `page.png` è il riferimento visivo principale per:
+- Capire la struttura degli esercizi
+- Verificare quali testi sono già nelle immagini (non duplicarli!)
+- Controllare i colori dei box e degli sfondi
+- Identificare il tipo di esercizio (completamento, selezione, disegno, ecc.)
+
+---
+
 ## Struttura Base della Pagina
 
 ```erb
-<% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
-
 <div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
      data-controller="exercise-checker page-viewer text-toggle font-controls"
      data-page-viewer-image-url-value="<%= asset_path('bus3_mat/pXXX/page.png') %>"
@@ -46,7 +66,7 @@ Usa questo prompt per creare nuove pagine di esercizi di geometria seguendo lo s
 ### 3. Numero Esercizio (pallino rosso)
 ```erb
 <div class="flex items-start gap-3 mb-4">
-  <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+  <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center md:items-start font-bold flex-shrink-0">
     1
   </div>
   <p class="text-gray-700">
