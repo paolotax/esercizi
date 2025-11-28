@@ -1,12 +1,169 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p126/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>Leggi e osserva il grafico. Poi rispondi alle domande.</strong>
+      </p>
+    </div>
+
+    <p class="mb-4">L'insegnante ha chiesto alla classe: "Qual è il luogo in cui preferite trascorrere le vacanze estive?". Ecco le risposte delle bambine e dei bambini, rappresentate in un <span class="text-cyan-600 font-bold">ideogramma</span> (grafico con disegni).</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+      <!-- Tabella ideogramma -->
+      <div class="md:col-span-2">
+        <table class="w-full border-collapse border-2 border-cyan-400">
+          <thead>
+            <tr class="bg-cyan-50">
+              <th class="border-2 border-cyan-400 px-4 py-2 text-cyan-600">LUOGO PREFERITO</th>
+              <th class="border-2 border-cyan-400 px-4 py-2 text-cyan-600">PREFERENZE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">montagna</td>
+              <td class="border-2 border-cyan-400 px-4 py-2">
+                <%= image_tag "bus3_mat/p126/output-1743504902126_370_427_202_38.png", alt: "5 valigie", class: "h-8" %>
+              </td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">collina</td>
+              <td class="border-2 border-cyan-400 px-4 py-2">
+                <%= image_tag "bus3_mat/p126/output-1743504902126_369_470_113_39.png", alt: "3 valigie", class: "h-8" %>
+              </td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">mare</td>
+              <td class="border-2 border-cyan-400 px-4 py-2">
+                <%= image_tag "bus3_mat/p126/output-1743504902126_370_512_267_39.png", alt: "7 valigie", class: "h-8" %>
+              </td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">lago</td>
+              <td class="border-2 border-cyan-400 px-4 py-2">
+                <%= image_tag "bus3_mat/p126/output-1743504902126_369_555_112_38.png", alt: "3 valigie", class: "h-8" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Legenda -->
+      <div>
+        <p class="font-bold text-cyan-600">LEGENDA</p>
+        <div class="flex items-center gap-2 mt-2">
+          <%= image_tag "bus3_mat/p126/output-1743504902126_713_426_55_45.png", alt: "Valigia", class: "h-8" %>
+          <span>= 2 preferenze</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domande -->
+    <div class="space-y-4 mt-6">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-red-500">•</span>
+        <span>Quali luoghi di vacanza hanno avuto lo stesso numero di preferenze?</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="collina e lago"
+               class="w-36 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-red-500">•</span>
+        <span>Qual è la moda dell'indagine sul luogo di vacanza?</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="mare"
+               class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-red-500">•</span>
+        <span>Quanti hanno indicato la vacanza in montagna come preferita?</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric" placeholder="...">
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-red-500">•</span>
+        <span>Quanti bambini e bambine hanno partecipato all'indagine?</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="36"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric" placeholder="...">
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-12">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Usa i dati contenuti nella tabella di pagina 125 per completare l'ideogramma.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+      <!-- Tabella ideogramma da completare -->
+      <div class="md:col-span-2">
+        <table class="w-full border-collapse border-2 border-cyan-400">
+          <thead>
+            <tr class="bg-cyan-50">
+              <th class="border-2 border-cyan-400 px-4 py-2 text-cyan-600">SPORT</th>
+              <th class="border-2 border-cyan-400 px-4 py-2 text-cyan-600">PREFERENZE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">tennis</td>
+              <td class="border-2 border-cyan-400 px-4 py-2 h-12"></td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">pallavolo</td>
+              <td class="border-2 border-cyan-400 px-4 py-2 h-12"></td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">basket</td>
+              <td class="border-2 border-cyan-400 px-4 py-2 h-12"></td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">karate</td>
+              <td class="border-2 border-cyan-400 px-4 py-2 h-12"></td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">rugby</td>
+              <td class="border-2 border-cyan-400 px-4 py-2 h-12"></td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">scherma</td>
+              <td class="border-2 border-cyan-400 px-4 py-2 h-12"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Legenda -->
+      <div>
+        <p class="font-bold text-cyan-600">LEGENDA</p>
+        <div class="flex items-center gap-2 mt-2">
+          <%= image_tag "bus3_mat/p126/output-1743504902126_713_889_36_38.png", alt: "Faccina", class: "h-8" %>
+          <span>= 1 preferenza</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

@@ -1,12 +1,136 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p122/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>Osserva le caratteristiche di bambine e bambini sulla neve. Come puoi classificarli? Scrivi i nomi al posto giusto nel <span class="text-cyan-600 font-bold">diagramma di Eulero-Venn</span>.</strong>
+      </p>
+    </div>
+
+    <div class="flex justify-center mb-6">
+      <%= image_tag "bus3_mat/p122/p122_01.jpg", alt: "Bambini sulla neve", class: "max-w-3xl w-full" %>
+    </div>
+
+    <!-- Diagramma di Eulero-Venn -->
+    <div class="bg-cyan-50 border-2 border-cyan-200 rounded-lg p-4 md:p-6 mb-6">
+      <div class="text-center mb-4">
+        <span class="border border-gray-400 px-4 py-1 bg-white">Bambine e bambini sulla neve</span>
+      </div>
+
+      <div class="flex justify-center items-center gap-2 md:gap-4 flex-wrap">
+        <!-- Nome fuori dai cerchi (Mari) -->
+        <div class="absolute md:relative md:mr-4">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="Mari"
+                 class="w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white" placeholder="...">
+        </div>
+
+        <!-- Cerchio sinistro - con cappello (senza sciarpa) -->
+        <div class="relative">
+          <div class="w-40 md:w-48 h-28 md:h-32 border-2 border-orange-400 rounded-full flex flex-col items-center justify-center bg-white/50 px-8">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="Alex"
+                   class="w-16 md:w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-transparent mb-1" placeholder="...">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="Fabio"
+                   class="w-16 md:w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-transparent" placeholder="...">
+          </div>
+          <div class="text-center mt-2 border border-gray-400 px-2 py-0.5 bg-white">con cappello</div>
+        </div>
+
+        <!-- Intersezione - con cappello e sciarpa -->
+        <div class="relative -mx-6 md:-mx-8 z-10">
+          <div class="w-32 md:w-40 h-24 md:h-28 flex flex-col items-center justify-center border-2 border-orange-400 rounded-full bg-orange-50/50">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="Lea"
+                   class="w-16 md:w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-transparent mb-1" placeholder="...">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="Clara"
+                   class="w-16 md:w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-transparent" placeholder="...">
+          </div>
+          <div class="text-center mt-2 border border-gray-400 px-2 py-0.5 bg-white text-sm md:text-base">con cappello e sciarpa</div>
+        </div>
+
+        <!-- Cerchio destro - con sciarpa (senza cappello) -->
+        <div class="relative">
+          <div class="w-40 md:w-48 h-28 md:h-32 border-2 border-orange-400 rounded-full flex flex-col items-center justify-center bg-white/50 px-8">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="Teo"
+                   class="w-16 md:w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-transparent mb-1" placeholder="...">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="Asia"
+                   class="w-16 md:w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-transparent" placeholder="...">
+          </div>
+          <div class="text-center mt-2 border border-gray-400 px-2 py-0.5 bg-white">con sciarpa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Adesso classifica bambine e bambini con il <span class="text-cyan-600 font-bold">diagramma di Carroll</span>.</strong>
+      </p>
+    </div>
+
+    <!-- Tabella di Carroll -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse border-2 border-cyan-400">
+        <thead>
+          <tr class="bg-cyan-50">
+            <th class="border-2 border-cyan-400 px-4 py-2">Bambine/i...</th>
+            <th class="border-2 border-cyan-400 px-4 py-2">con sciarpa</th>
+            <th class="border-2 border-cyan-400 px-4 py-2"><strong>NON</strong> con sciarpa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border-2 border-cyan-400 px-4 py-3 bg-pink-50">con cappello</td>
+            <td class="border-2 border-cyan-400 px-4 py-3 text-center">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="Lea"
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+              ,
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="Clara"
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+            </td>
+            <td class="border-2 border-cyan-400 px-4 py-3 text-center">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="Alex"
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+              ,
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="Fabio"
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+            </td>
+          </tr>
+          <tr>
+            <td class="border-2 border-cyan-400 px-4 py-3 bg-pink-50"><strong>NON</strong> con cappello</td>
+            <td class="border-2 border-cyan-400 px-4 py-3 text-center">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="Teo"
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+              ,
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="Asia"
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+            </td>
+            <td class="border-2 border-cyan-400 px-4 py-3 text-center">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="Mari"
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

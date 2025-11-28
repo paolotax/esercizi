@@ -1,12 +1,151 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p125/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 -->
+  <div class="mb-12">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>Leggi e osserva la tabella.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      <!-- Testo e immagine -->
+      <div>
+        <p class="mb-4">L'insegnante di educazione fisica della terza A ha effettuato un'indagine in classe per sapere quali sport le alunne e gli alunni preferirebbero fare nella nuova palestra. Ognuno ha espresso una preferenza.</p>
+        <div class="flex justify-center">
+          <%= image_tag "bus3_mat/p125/output-1743504902125_116_408_417_184.png", alt: "Bambini che giocano a pallacanestro", class: "max-w-sm w-full" %>
+        </div>
+      </div>
+
+      <!-- Tabella preferenze -->
+      <div>
+        <table class="w-full border-collapse border-2 border-cyan-400">
+          <thead>
+            <tr class="bg-cyan-50">
+              <th class="border-2 border-cyan-400 px-4 py-2 text-cyan-600">SPORT</th>
+              <th class="border-2 border-cyan-400 px-4 py-2 text-cyan-600">PREFERENZE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">tennis</td>
+              <td class="border-2 border-cyan-400 px-4 py-2 font-bold text-red-500">X X X X X</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">pallavolo</td>
+              <td class="border-2 border-cyan-400 px-4 py-2 font-bold text-red-500">X X X X X X X</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">basket</td>
+              <td class="border-2 border-cyan-400 px-4 py-2 font-bold text-red-500">X X X X X X</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">karate</td>
+              <td class="border-2 border-cyan-400 px-4 py-2 font-bold text-red-500">X X X</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">rugby</td>
+              <td class="border-2 border-cyan-400 px-4 py-2 font-bold text-red-500">X</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-cyan-400 px-4 py-2">scherma</td>
+              <td class="border-2 border-cyan-400 px-4 py-2 font-bold text-red-500">X X X</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Rappresenta nell'<span class="text-cyan-600 font-bold">istogramma</span> (grafico a colonne) i dati riportati in tabella. Poi interpreta i dati dell'istogramma: rispondi alle domande.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Istogramma -->
+      <div>
+        <p class="text-center font-bold text-cyan-600 mb-4">SPORT PREFERITI</p>
+        <div class="flex justify-center">
+          <%= image_tag "bus3_mat/p125/output-1743504902125_113_733_569_245.png", alt: "Istogramma sport preferiti", class: "max-w-md w-full" %>
+        </div>
+        <div class="flex justify-center gap-4 mt-2 text-sm">
+          <span>tennis</span>
+          <span>pallavolo</span>
+          <span>basket</span>
+          <span>karate</span>
+          <span>rugby</span>
+          <span>scherma</span>
+        </div>
+      </div>
+
+      <!-- Legenda e domande -->
+      <div>
+        <div class="mb-4">
+          <p class="font-bold text-cyan-600">LEGENDA</p>
+          <div class="flex items-center gap-2 mt-2">
+            <%= image_tag "bus3_mat/p125/output-1743504902125_715_734_105_42.png", alt: "Simbolo legenda", class: "h-6" %>
+            <span>= 1 preferenza</span>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-red-500">•</span>
+            <span>Quanti bambini/e hanno risposto all'indagine?</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="25"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric" placeholder="...">
+          </div>
+
+          <div class="flex items-start gap-2 flex-wrap">
+            <span class="text-red-500">•</span>
+            <div>
+              <span>Il dato che ricorre con maggiore frequenza si chiama <span class="text-cyan-600 font-bold">moda</span>.</span>
+              <div class="mt-2">
+                <span>Qual è la moda?</span>
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="pallavolo"
+                       class="w-28 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Box regola -->
+  <div class="bg-pink-100 border-3 border-pink-300 rounded-lg p-4 mb-12">
+    <p><strong>Per fare un'indagine bisogna:</strong></p>
+    <ol class="list-decimal ml-6 mt-2 space-y-1">
+      <li><span class="text-cyan-600 font-bold">raccogliere</span> i dati;</li>
+      <li><span class="text-cyan-600 font-bold">rappresentare</span> i dati con un grafico;</li>
+      <li><span class="text-cyan-600 font-bold">saper leggere</span> e interpretare i dati.</li>
+    </ol>
+  </div>
+
+  <!-- Quaderno -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "p. 170", pagina_path("bus3_mat_p170"), class: "text-cyan-600 font-bold hover:underline" %>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

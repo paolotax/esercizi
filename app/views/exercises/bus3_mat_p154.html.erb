@@ -1,12 +1,299 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p154/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 - IMPARARE TUTTI -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="bg-yellow-400 text-black px-3 py-1 rounded font-bold">IMPARARE TUTTI</span>
+        <p class="text-gray-700"><strong>Calcola in colonna.</strong></p>
+      </div>
+    </div>
+
+    <!-- Griglia divisioni in colonna -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
+
+      <!-- 48 : 2 = 24 -->
+      <div class="bg-gray-50 border border-gray-300 rounded p-3">
+        <div class="flex items-center justify-center gap-1 mb-2">
+          <span class="font-bold">4</span>
+          <span class="font-bold">8</span>
+          <span class="mx-1">:</span>
+          <span class="font-bold">2</span>
+          <span class="mx-1">=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="24"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+      </div>
+
+      <!-- 85 : 5 = 17 -->
+      <div class="bg-gray-50 border border-gray-300 rounded p-3">
+        <div class="flex items-center justify-center gap-1 mb-2">
+          <span class="font-bold">8</span>
+          <span class="font-bold">5</span>
+          <span class="mx-1">:</span>
+          <span class="font-bold">5</span>
+          <span class="mx-1">=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="17"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+      </div>
+
+      <!-- 67 : 3 = 22 resto 1 -->
+      <div class="bg-gray-50 border border-gray-300 rounded p-3">
+        <div class="flex items-center justify-center gap-1 mb-2">
+          <span class="font-bold">6</span>
+          <span class="font-bold">7</span>
+          <span class="mx-1">:</span>
+          <span class="font-bold">3</span>
+          <span class="mx-1">=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="22"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+        <div class="text-center text-gray-600">
+          <span>r.</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
+                 class="w-8 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+      </div>
+
+      <!-- 58 : 4 = 14 resto 2 -->
+      <div class="bg-gray-50 border border-gray-300 rounded p-3">
+        <div class="flex items-center justify-center gap-1 mb-2">
+          <span class="font-bold">5</span>
+          <span class="font-bold">8</span>
+          <span class="mx-1">:</span>
+          <span class="font-bold">4</span>
+          <span class="mx-1">=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="14"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+        <div class="text-center text-gray-600">
+          <span>r.</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+                 class="w-8 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+      </div>
+
+      <!-- 90 : 6 = 15 -->
+      <div class="bg-gray-50 border border-gray-300 rounded p-3">
+        <div class="flex items-center justify-center gap-1 mb-2">
+          <span class="font-bold">9</span>
+          <span class="font-bold">0</span>
+          <span class="mx-1">:</span>
+          <span class="font-bold">6</span>
+          <span class="mx-1">=</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="15"
+                 class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Box Teoria - La prova della divisione -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 -mx-3 md:mx-0 mb-12 rounded-lg">
+    <div class="flex flex-col md:flex-row items-start gap-4">
+      <div class="flex-1">
+        <p class="mb-3">
+          La moltiplicazione è l'operazione inversa della divisione.<br>
+          Puoi usare la moltiplicazione come <span class="text-cyan-600 font-bold">prova</span> per la divisione.
+        </p>
+        <p>
+          Moltiplica il <span class="text-cyan-600 font-bold">quoziente</span> per il <span class="text-cyan-600 font-bold">divisore</span> e aggiungi il <span class="text-cyan-600 font-bold">resto</span>,
+          se è diverso da 0. Se ottieni il <span class="text-cyan-600 font-bold">dividendo</span>, la divisione
+          è stata eseguita correttamente.
+        </p>
+      </div>
+      <div class="flex-shrink-0 flex flex-col items-center">
+        <!-- Bruco -->
+        <svg viewBox="0 0 120 40" class="w-32 h-12 mb-2">
+          <circle cx="15" cy="20" r="12" fill="#8BC34A"/>
+          <circle cx="35" cy="20" r="10" fill="#4CAF50"/>
+          <circle cx="52" cy="20" r="10" fill="#8BC34A"/>
+          <circle cx="69" cy="20" r="10" fill="#4CAF50"/>
+          <circle cx="86" cy="20" r="10" fill="#8BC34A"/>
+          <circle cx="103" cy="20" r="10" fill="#4CAF50"/>
+          <!-- Occhi -->
+          <circle cx="12" cy="17" r="3" fill="white"/>
+          <circle cx="18" cy="17" r="3" fill="white"/>
+          <circle cx="12" cy="17" r="1.5" fill="black"/>
+          <circle cx="18" cy="17" r="1.5" fill="black"/>
+          <!-- Antenne -->
+          <line x1="10" y1="8" x2="8" y2="2" stroke="#4CAF50" stroke-width="2"/>
+          <line x1="20" y1="8" x2="22" y2="2" stroke="#4CAF50" stroke-width="2"/>
+          <circle cx="8" cy="2" r="2" fill="#FF5722"/>
+          <circle cx="22" cy="2" r="2" fill="#FF5722"/>
+        </svg>
+        <!-- Esempio -->
+        <div class="bg-white rounded px-3 py-2 border border-cyan-300">
+          <p class="text-center">30 : 7 = 4 resto 2</p>
+          <p class="text-center text-green-600">(4 × 7) + 2 = 30</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Calcola in colonna e verifica i risultati con la prova.</strong>
+      </p>
+    </div>
+
+    <!-- Griglia divisioni con prova -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- 93 : 3 = 31 (prova: 31 × 3 = 93) -->
+      <div class="bg-gray-50 border border-gray-300 rounded p-4">
+        <div class="flex items-center justify-center gap-2 mb-3">
+          <span class="font-bold text-lg">93 : 3 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="31"
+                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+        <div class="border-t border-gray-300 pt-3 mt-3">
+          <p class="text-center text-gray-600 mb-2">Prova:</p>
+          <div class="flex items-center justify-center gap-1">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="31"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+            <span>×</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="3"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+            <span>=</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="93"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <!-- 64 : 2 = 32 (prova: 32 × 2 = 64) -->
+      <div class="bg-gray-50 border border-gray-300 rounded p-4">
+        <div class="flex items-center justify-center gap-2 mb-3">
+          <span class="font-bold text-lg">64 : 2 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="32"
+                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+        <div class="border-t border-gray-300 pt-3 mt-3">
+          <p class="text-center text-gray-600 mb-2">Prova:</p>
+          <div class="flex items-center justify-center gap-1">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="32"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+            <span>×</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+            <span>=</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="64"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <!-- 55 : 5 = 11 (prova: 11 × 5 = 55) -->
+      <div class="bg-gray-50 border border-gray-300 rounded p-4">
+        <div class="flex items-center justify-center gap-2 mb-3">
+          <span class="font-bold text-lg">55 : 5 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="11"
+                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+        <div class="border-t border-gray-300 pt-3 mt-3">
+          <p class="text-center text-gray-600 mb-2">Prova:</p>
+          <div class="flex items-center justify-center gap-1">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="11"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+            <span>×</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+            <span>=</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="55"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <!-- 84 : 6 = 14 (prova: 14 × 6 = 84) -->
+      <div class="bg-gray-50 border border-gray-300 rounded p-4">
+        <div class="flex items-center justify-center gap-2 mb-3">
+          <span class="font-bold text-lg">84 : 6 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="14"
+                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+        <div class="border-t border-gray-300 pt-3 mt-3">
+          <p class="text-center text-gray-600 mb-2">Prova:</p>
+          <div class="flex items-center justify-center gap-1">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="14"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+            <span>×</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+            <span>=</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="84"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <!-- 76 : 4 = 19 (prova: 19 × 4 = 76) -->
+      <div class="bg-gray-50 border border-gray-300 rounded p-4">
+        <div class="flex items-center justify-center gap-2 mb-3">
+          <span class="font-bold text-lg">76 : 4 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="19"
+                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+        <div class="border-t border-gray-300 pt-3 mt-3">
+          <p class="text-center text-gray-600 mb-2">Prova:</p>
+          <div class="flex items-center justify-center gap-1">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="19"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+            <span>×</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+            <span>=</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="76"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <!-- 51 : 3 = 17 (prova: 17 × 3 = 51) -->
+      <div class="bg-gray-50 border border-gray-300 rounded p-4">
+        <div class="flex items-center justify-center gap-2 mb-3">
+          <span class="font-bold text-lg">51 : 3 =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="17"
+                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+        <div class="border-t border-gray-300 pt-3 mt-3">
+          <p class="text-center text-gray-600 mb-2">Prova:</p>
+          <div class="flex items-center justify-center gap-1">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="17"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+            <span>×</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="3"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+            <span>=</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="51"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

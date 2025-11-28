@@ -1,12 +1,192 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p128/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>Osserva, leggi e rispondi.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      <!-- Immagine ciambelle -->
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p128/p128_01.jpg", alt: "Ciambelle di vari gusti", class: "max-w-sm w-full" %>
+      </div>
+
+      <!-- Testo e domande -->
+      <div>
+        <p class="mb-4">Sul tavolo ci sono vari gusti di ciambelle. Jacopo ne prende una a caso senza guardare.</p>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-red-500">•</span>
+            <span>Quante ciambelle al cioccolato?</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+                   class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric" placeholder="...">
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-red-500">•</span>
+            <span>Quante ciambelle al pistacchio?</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                   class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric" placeholder="...">
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-red-500">•</span>
+            <span>Quante ciambelle alla fragola?</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+                   class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric" placeholder="...">
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-red-500">•</span>
+            <span>Quale gusto ha più probabilità di essere scelto?</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="cioccolato"
+                   class="w-28 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Box regola -->
+    <div class="bg-pink-100 border-3 border-pink-300 rounded-lg p-4 mt-6">
+      <p>Ci sono eventi che succedono più facilmente di altri: si dice che sono <span class="text-cyan-600 font-bold">più probabili</span>.</p>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Leggi e completa.</strong>
+      </p>
+    </div>
+
+    <p class="mb-4">Le ciambelle in tutto sono
+      <input type="text" data-fill-blanks-target="input" data-correct-answer="11"
+             class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric" placeholder="...">,
+      quindi sono 11 gli eventi che si possono verificare.
+    </p>
+
+    <p class="font-bold mb-4"><span class="text-red-500">•</span> Colora tanti rettangoli quante sono le ciambelle di ogni gusto. Segui l'esempio.</p>
+
+    <!-- Fragola -->
+    <div class="mb-6">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-pink-500 text-2xl">🍩</span>
+        <span class="text-pink-600 font-semibold">Fragola</span>
+      </div>
+      <div class="flex justify-center mb-2">
+        <%= image_tag "bus3_mat/p128/output-1743504902128_85_729_831_63.png", alt: "Barra fragola", class: "max-w-2xl w-full" %>
+      </div>
+      <p>La probabilità di prendere una ciambella alla fragola è
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+               class="w-10 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric" placeholder="...">
+        su 11 →
+        <span class="inline-flex items-center">
+          <span class="border-b-2 border-black px-1">2</span>
+          <span class="mx-1">/</span>
+          <span>11</span>
+        </span>
+        (due undicesimi).
+      </p>
+    </div>
+
+    <!-- Pistacchio -->
+    <div class="mb-6">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-green-500 text-2xl">🍩</span>
+        <span class="text-green-600 font-semibold">Pistacchio</span>
+      </div>
+      <div class="flex justify-center mb-2">
+        <%= image_tag "bus3_mat/p128/output-1743504902128_86_844_829_67.png", alt: "Barra pistacchio", class: "max-w-2xl w-full" %>
+      </div>
+      <p>La probabilità di prendere una ciambella al pistacchio è
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+               class="w-10 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric" placeholder="...">
+        su
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="11"
+               class="w-10 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric" placeholder="...">
+        →
+        <span class="inline-flex items-center">
+          <span class="border-b-2 border-black px-1">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                   class="w-6 px-0 border-none text-center" inputmode="numeric" placeholder="...">
+          </span>
+          <span class="mx-1">/</span>
+          <span>11</span>
+        </span>
+        (
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="quattro"
+               class="w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+        undicesimi).
+      </p>
+    </div>
+
+    <!-- Cioccolato -->
+    <div class="mb-6">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-amber-700 text-2xl">🍩</span>
+        <span class="text-amber-700 font-semibold">Cioccolato</span>
+      </div>
+      <div class="flex justify-center mb-2">
+        <%= image_tag "bus3_mat/p128/output-1743504902128_85_987_829_66.png", alt: "Barra cioccolato", class: "max-w-2xl w-full" %>
+      </div>
+      <p>La probabilità di prendere una ciambella al cioccolato è
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+               class="w-10 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric" placeholder="...">
+        su
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="11"
+               class="w-10 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric" placeholder="...">
+        →
+        <span class="inline-flex items-center">
+          <span class="border-b-2 border-black px-1">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+                   class="w-6 px-0 border-none text-center" inputmode="numeric" placeholder="...">
+          </span>
+          <span class="mx-1">/</span>
+          <span>11</span>
+        </span>
+        (
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="cinque"
+               class="w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+        undicesimi).
+      </p>
+    </div>
+
+    <!-- Conclusione -->
+    <div class="mt-4">
+      <p><span class="text-red-500">•</span> L'evento meno probabile è prendere una ciambella al gusto di
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="fragola"
+               class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">.
+      </p>
+    </div>
+  </div>
+
+  <!-- Quaderno e verifica -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "p. 170", pagina_path("bus3_mat_p170"), class: "text-cyan-600 font-bold hover:underline" %>
+    <span class="mx-2">•</span>
+    <span class="text-gray-600">verifica</span> <%= link_to "p. 185", pagina_path("bus3_mat_p185"), class: "text-cyan-600 font-bold hover:underline" %>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

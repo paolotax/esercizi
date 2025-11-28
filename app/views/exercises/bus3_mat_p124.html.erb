@@ -1,12 +1,185 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p124/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 -->
+  <div class="mb-12">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>Per realizzare un collage le bambine e i bambini della terza B possono usare uno o più materiali diversi. Osserva e leggi le relazioni.</strong>
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <p>La <span class="text-cyan-600 font-bold">freccia</span> significa <span class="bg-cyan-100 px-2 py-0.5 rounded">USA →</span> e mette in relazione gli elementi dei due gruppi.</p>
+    </div>
+
+    <div class="flex justify-center mb-6">
+      <%= image_tag "bus3_mat/p124/p124_01.jpg", alt: "Diagramma relazioni materiali collage", class: "max-w-3xl w-full" %>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-12" data-controller="card-selector">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Registra le relazioni in tabella. Segui l'esempio.</strong>
+      </p>
+    </div>
+
+    <!-- Tabella relazioni -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse border-2 border-cyan-400">
+        <thead>
+          <tr class="bg-cyan-50">
+            <th class="border-2 border-cyan-400 px-3 py-2">
+              <span class="bg-cyan-100 px-2 py-0.5 rounded">USA →</span>
+            </th>
+            <th class="border-2 border-cyan-400 px-3 py-2">ritagli di cartoncino</th>
+            <th class="border-2 border-cyan-400 px-3 py-2">ritagli di stoffa</th>
+            <th class="border-2 border-cyan-400 px-3 py-2">ritagli di carta crespa</th>
+            <th class="border-2 border-cyan-400 px-3 py-2">ritagli di giornale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border-2 border-cyan-400 px-3 py-3 bg-cyan-50 font-semibold">Matteo</td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center">
+              <span class="text-red-500 font-bold text-xl">X</span>
+            </td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="false"
+                data-action="click->card-selector#select"></td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="false"
+                data-action="click->card-selector#select"></td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="true"
+                data-action="click->card-selector#select"></td>
+          </tr>
+          <tr>
+            <td class="border-2 border-cyan-400 px-3 py-3 bg-cyan-50 font-semibold">Fatima</td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="true"
+                data-action="click->card-selector#select"></td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="true"
+                data-action="click->card-selector#select"></td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="true"
+                data-action="click->card-selector#select"></td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="false"
+                data-action="click->card-selector#select"></td>
+          </tr>
+          <tr>
+            <td class="border-2 border-cyan-400 px-3 py-3 bg-cyan-50 font-semibold">Lucia</td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="false"
+                data-action="click->card-selector#select"></td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="true"
+                data-action="click->card-selector#select"></td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="true"
+                data-action="click->card-selector#select"></td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="false"
+                data-action="click->card-selector#select"></td>
+          </tr>
+          <tr>
+            <td class="border-2 border-cyan-400 px-3 py-3 bg-cyan-50 font-semibold">Yuri</td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="false"
+                data-action="click->card-selector#select"></td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="false"
+                data-action="click->card-selector#select"></td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="false"
+                data-action="click->card-selector#select"></td>
+            <td class="border-2 border-cyan-400 px-3 py-3 text-center cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="true"
+                data-action="click->card-selector#select"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Esercizio 3 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance card-selector">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-gray-700">
+        <strong>Rispondi alle domande.</strong>
+      </p>
+    </div>
+
+    <div class="space-y-4 ml-8">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-red-500">•</span>
+        <span>Qualcuno ha usato tutti i materiali?</span>
+        <div class="inline-flex gap-2">
+          <span class="border border-gray-400 px-3 py-1 rounded cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="false"
+                data-action="click->card-selector#select">Sì</span>
+          <span class="border border-gray-400 px-3 py-1 rounded cursor-pointer hover:bg-cyan-50"
+                data-card-selector-target="card" data-correct="true"
+                data-action="click->card-selector#select">No</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-red-500">•</span>
+        <span>Chi ha usato un solo materiale?</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="Yuri"
+               class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-red-500">•</span>
+        <span>Quale?</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="ritagli di giornale"
+               class="w-40 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-red-500">•</span>
+        <span>Chi ha usato due materiali?</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="Lucia"
+               class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-red-500">•</span>
+        <span>Chi ha usato ritagli di stoffa e di carta crespa?</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="Fatima, Lucia"
+               class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+      </div>
+    </div>
+  </div>
+
+  <!-- Quaderno -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "p. 170", pagina_path("bus3_mat_p170"), class: "text-cyan-600 font-bold hover:underline" %>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

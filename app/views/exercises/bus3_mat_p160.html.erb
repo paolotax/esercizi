@@ -1,12 +1,466 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p160/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 - IMPARARE TUTTI -->
+  <div class="mb-12">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="bg-yellow-400 text-black px-3 py-1 rounded font-bold">IMPARARE TUTTI</span>
+        <p class="text-gray-700"><strong>Cerchia la frazione che indica la parte colorata.</strong></p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Figura 1: rettangolo 8 parti, 1 colorata = 1/6 -->
+      <div data-controller="card-selector" class="text-center">
+        <div class="flex mb-3 justify-center">
+          <div class="w-8 h-12 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-12 border border-gray-400 bg-cyan-300"></div>
+          <div class="w-8 h-12 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-12 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-12 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-12 border border-gray-400 bg-white"></div>
+        </div>
+        <div class="w-8 h-12 border border-gray-400 bg-orange-200 mx-auto mb-3"></div>
+        <div class="flex gap-3 justify-center">
+          <div class="border-2 border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-cyan-500"
+               data-card-selector-target="card" data-correct="false"
+               data-action="click->card-selector#select">
+            <div class="text-center"><span class="font-bold">1</span><hr class="border-black"><span class="font-bold">8</span></div>
+          </div>
+          <div class="border-2 border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-cyan-500"
+               data-card-selector-target="card" data-correct="true"
+               data-action="click->card-selector#select">
+            <div class="text-center"><span class="font-bold">1</span><hr class="border-black"><span class="font-bold">6</span></div>
+          </div>
+          <div class="border-2 border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-cyan-500"
+               data-card-selector-target="card" data-correct="false"
+               data-action="click->card-selector#select">
+            <div class="text-center"><span class="font-bold">1</span><hr class="border-black"><span class="font-bold">7</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Figura 2: 9 quadrati, 1 colorato = 1/9 -->
+      <div data-controller="card-selector" class="text-center">
+        <div class="grid grid-cols-3 gap-0 w-24 mx-auto mb-3">
+          <div class="w-8 h-8 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-pink-300"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-white"></div>
+        </div>
+        <div class="flex gap-3 justify-center">
+          <div class="border-2 border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-cyan-500"
+               data-card-selector-target="card" data-correct="false"
+               data-action="click->card-selector#select">
+            <div class="text-center"><span class="font-bold">1</span><hr class="border-black"><span class="font-bold">8</span></div>
+          </div>
+          <div class="border-2 border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-cyan-500"
+               data-card-selector-target="card" data-correct="true"
+               data-action="click->card-selector#select">
+            <div class="text-center"><span class="font-bold">1</span><hr class="border-black"><span class="font-bold">9</span></div>
+          </div>
+          <div class="border-2 border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-cyan-500"
+               data-card-selector-target="card" data-correct="false"
+               data-action="click->card-selector#select">
+            <div class="text-center"><span class="font-bold">1</span><hr class="border-black"><span class="font-bold">7</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Figura 3: 5 colonne, 1 colorata = 1/5 -->
+      <div data-controller="card-selector" class="text-center">
+        <div class="flex mb-3 justify-center">
+          <div class="w-6 h-16 border border-gray-400 bg-green-300"></div>
+          <div class="w-6 h-16 border border-gray-400 bg-white"></div>
+          <div class="w-6 h-16 border border-gray-400 bg-white"></div>
+          <div class="w-6 h-16 border border-gray-400 bg-white"></div>
+          <div class="w-6 h-16 border border-gray-400 bg-white"></div>
+        </div>
+        <div class="flex gap-3 justify-center">
+          <div class="border-2 border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-cyan-500"
+               data-card-selector-target="card" data-correct="false"
+               data-action="click->card-selector#select">
+            <div class="text-center"><span class="font-bold">1</span><hr class="border-black"><span class="font-bold">6</span></div>
+          </div>
+          <div class="border-2 border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-cyan-500"
+               data-card-selector-target="card" data-correct="true"
+               data-action="click->card-selector#select">
+            <div class="text-center"><span class="font-bold">1</span><hr class="border-black"><span class="font-bold">5</span></div>
+          </div>
+          <div class="border-2 border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-cyan-500"
+               data-card-selector-target="card" data-correct="false"
+               data-action="click->card-selector#select">
+            <div class="text-center"><span class="font-bold">1</span><hr class="border-black"><span class="font-bold">4</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Figura 4: quadrato 8 parti, 1 colorata = 1/8 -->
+      <div data-controller="card-selector" class="text-center">
+        <svg viewBox="0 0 80 80" class="w-20 h-20 mx-auto mb-3">
+          <polygon points="40,40 0,0 40,0" fill="white" stroke="black" stroke-width="1"/>
+          <polygon points="40,40 40,0 80,0" fill="white" stroke="black" stroke-width="1"/>
+          <polygon points="40,40 80,0 80,40" fill="white" stroke="black" stroke-width="1"/>
+          <polygon points="40,40 80,40 80,80" fill="white" stroke="black" stroke-width="1"/>
+          <polygon points="40,40 80,80 40,80" fill="white" stroke="black" stroke-width="1"/>
+          <polygon points="40,40 40,80 0,80" fill="white" stroke="black" stroke-width="1"/>
+          <polygon points="40,40 0,80 0,40" fill="white" stroke="black" stroke-width="1"/>
+          <polygon points="40,40 0,40 0,0" fill="#87CEEB" stroke="black" stroke-width="1"/>
+        </svg>
+        <div class="flex gap-3 justify-center">
+          <div class="border-2 border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-cyan-500"
+               data-card-selector-target="card" data-correct="false"
+               data-action="click->card-selector#select">
+            <div class="text-center"><span class="font-bold">1</span><hr class="border-black"><span class="font-bold">6</span></div>
+          </div>
+          <div class="border-2 border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-cyan-500"
+               data-card-selector-target="card" data-correct="true"
+               data-action="click->card-selector#select">
+            <div class="text-center"><span class="font-bold">1</span><hr class="border-black"><span class="font-bold">8</span></div>
+          </div>
+          <div class="border-2 border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-cyan-500"
+               data-card-selector-target="card" data-correct="false"
+               data-action="click->card-selector#select">
+            <div class="text-center"><span class="font-bold">1</span><hr class="border-black"><span class="font-bold">10</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-12">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Dividi ogni intero come indica il denominatore e colora la parte indicata dal numeratore.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- 3/4 -->
+      <div data-controller="svg-colorable" class="text-center">
+        <svg viewBox="0 0 120 30" class="w-32 h-8 mx-auto mb-2">
+          <rect x="0" y="0" width="30" height="30" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="true"
+                data-action="click->svg-colorable#toggleCell"/>
+          <rect x="30" y="0" width="30" height="30" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="true"
+                data-action="click->svg-colorable#toggleCell"/>
+          <rect x="60" y="0" width="30" height="30" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="true"
+                data-action="click->svg-colorable#toggleCell"/>
+          <rect x="90" y="0" width="30" height="30" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="false"
+                data-action="click->svg-colorable#toggleCell"/>
+        </svg>
+        <div class="text-center"><span class="font-bold">3</span><hr class="border-black w-4 mx-auto"><span class="font-bold">4</span></div>
+      </div>
+
+      <!-- 1/2 (triangolo) -->
+      <div data-controller="svg-colorable" class="text-center">
+        <svg viewBox="0 0 80 70" class="w-20 h-16 mx-auto mb-2">
+          <polygon points="40,0 0,70 40,70" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="true"
+                data-action="click->svg-colorable#toggleCell"/>
+          <polygon points="40,0 80,70 40,70" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="false"
+                data-action="click->svg-colorable#toggleCell"/>
+        </svg>
+        <div class="text-center"><span class="font-bold">1</span><hr class="border-black w-4 mx-auto"><span class="font-bold">2</span></div>
+      </div>
+
+      <!-- 3/3 -->
+      <div data-controller="svg-colorable" class="text-center">
+        <svg viewBox="0 0 90 30" class="w-24 h-8 mx-auto mb-2">
+          <rect x="0" y="0" width="30" height="30" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="true"
+                data-action="click->svg-colorable#toggleCell"/>
+          <rect x="30" y="0" width="30" height="30" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="true"
+                data-action="click->svg-colorable#toggleCell"/>
+          <rect x="60" y="0" width="30" height="30" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="true"
+                data-action="click->svg-colorable#toggleCell"/>
+        </svg>
+        <div class="text-center"><span class="font-bold">3</span><hr class="border-black w-4 mx-auto"><span class="font-bold">3</span></div>
+      </div>
+
+      <!-- 2/5 -->
+      <div data-controller="svg-colorable" class="text-center">
+        <svg viewBox="0 0 150 30" class="w-40 h-8 mx-auto mb-2">
+          <rect x="0" y="0" width="30" height="30" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="true"
+                data-action="click->svg-colorable#toggleCell"/>
+          <rect x="30" y="0" width="30" height="30" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="true"
+                data-action="click->svg-colorable#toggleCell"/>
+          <rect x="60" y="0" width="30" height="30" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="false"
+                data-action="click->svg-colorable#toggleCell"/>
+          <rect x="90" y="0" width="30" height="30" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="false"
+                data-action="click->svg-colorable#toggleCell"/>
+          <rect x="120" y="0" width="30" height="30" fill="white" stroke="black" stroke-width="2"
+                data-svg-colorable-target="cell" data-correct="false"
+                data-action="click->svg-colorable#toggleCell"/>
+        </svg>
+        <div class="text-center"><span class="font-bold">2</span><hr class="border-black w-4 mx-auto"><span class="font-bold">5</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 3 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-gray-700">
+        <strong>Scrivi la frazione corrispondente alla parte colorata.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <!-- Figura 1: 5 triangoli, 3 colorati = 3/5 -->
+      <div class="flex items-center gap-4">
+        <div class="flex flex-col items-center">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3"
+                 class="w-8 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+          <div class="border-t border-black w-6"></div>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+                 class="w-8 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+        <div class="flex">
+          <div class="w-0 h-0 border-l-[15px] border-l-transparent border-b-[26px] border-b-pink-300 border-r-[15px] border-r-transparent"></div>
+          <div class="w-0 h-0 border-l-[15px] border-l-transparent border-b-[26px] border-b-pink-300 border-r-[15px] border-r-transparent"></div>
+          <div class="w-0 h-0 border-l-[15px] border-l-transparent border-b-[26px] border-b-pink-300 border-r-[15px] border-r-transparent"></div>
+          <div class="w-0 h-0 border-l-[15px] border-l-transparent border-b-[26px] border-b-white border-r-[15px] border-r-transparent" style="border-bottom-color: white; filter: drop-shadow(0 0 1px black);"></div>
+          <div class="w-0 h-0 border-l-[15px] border-l-transparent border-b-[26px] border-b-white border-r-[15px] border-r-transparent" style="border-bottom-color: white; filter: drop-shadow(0 0 1px black);"></div>
+        </div>
+      </div>
+
+      <!-- Figura 2: 6 quadrati, 2 colorati = 2/6 -->
+      <div class="flex items-center gap-4">
+        <div class="flex flex-col items-center">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+                 class="w-8 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+          <div class="border-t border-black w-6"></div>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
+                 class="w-8 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+        <div class="grid grid-cols-3 gap-0">
+          <div class="w-8 h-8 border border-gray-400 bg-orange-300"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-orange-300"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-white"></div>
+          <div class="w-8 h-8 border border-gray-400 bg-white"></div>
+        </div>
+      </div>
+
+      <!-- Figura 3: 4 righe, 2 colorate = 2/4 -->
+      <div class="flex items-center gap-4">
+        <div class="flex flex-col items-center">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+                 class="w-8 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+          <div class="border-t border-black w-6"></div>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                 class="w-8 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+        <div class="flex flex-col">
+          <div class="w-24 h-6 border border-gray-400 bg-green-300"></div>
+          <div class="w-24 h-6 border border-gray-400 bg-green-300"></div>
+          <div class="w-24 h-6 border border-gray-400 bg-white"></div>
+          <div class="w-24 h-6 border border-gray-400 bg-white"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 4 -->
+  <div class="mb-12" data-controller="svg-colorable">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        4
+      </div>
+      <p class="text-gray-700">
+        <strong>Colora
+          <span class="inline-flex flex-col items-center mx-1">
+            <span class="font-bold">1</span>
+            <span class="border-t border-black w-3"></span>
+            <span class="font-bold">2</span>
+          </span>
+          di ogni figura.
+        </strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-3 sm:grid-cols-6 gap-4">
+      <!-- Riga 1 -->
+      <!-- Cerchio diviso in 4 -->
+      <svg viewBox="0 0 60 60" class="w-16 h-16 mx-auto">
+        <path d="M30 0 A30 30 0 0 1 60 30 L30 30 Z" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <path d="M60 30 A30 30 0 0 1 30 60 L30 30 Z" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <path d="M30 60 A30 30 0 0 1 0 30 L30 30 Z" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+        <path d="M0 30 A30 30 0 0 1 30 0 L30 30 Z" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+      </svg>
+
+      <!-- Cerchio diviso in 2 verticale -->
+      <svg viewBox="0 0 60 60" class="w-16 h-16 mx-auto">
+        <path d="M30 0 A30 30 0 0 1 30 60 L30 0 Z" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <path d="M30 0 A30 30 0 0 0 30 60 L30 0 Z" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+      </svg>
+
+      <!-- Cerchio diviso in 4 diagonale -->
+      <svg viewBox="0 0 60 60" class="w-16 h-16 mx-auto">
+        <path d="M30 30 L0 0 L60 0 Z" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <path d="M30 30 L60 0 L60 60 Z" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <path d="M30 30 L60 60 L0 60 Z" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+        <path d="M30 30 L0 60 L0 0 Z" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+        <circle cx="30" cy="30" r="29" fill="none" stroke="black" stroke-width="1.5"/>
+      </svg>
+
+      <!-- Quadrato diviso in 4 diagonale -->
+      <svg viewBox="0 0 60 60" class="w-16 h-16 mx-auto">
+        <polygon points="30,30 0,0 60,0" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <polygon points="30,30 60,0 60,60" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <polygon points="30,30 60,60 0,60" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+        <polygon points="30,30 0,60 0,0" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+      </svg>
+
+      <!-- Rettangolo diviso in 2 verticale -->
+      <svg viewBox="0 0 60 60" class="w-16 h-16 mx-auto">
+        <rect x="0" y="0" width="30" height="60" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <rect x="30" y="0" width="30" height="60" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+      </svg>
+
+      <!-- Triangolo diviso in 2 -->
+      <svg viewBox="0 0 60 60" class="w-16 h-16 mx-auto">
+        <polygon points="30,0 0,60 30,60" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <polygon points="30,0 60,60 30,60" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+      </svg>
+
+      <!-- Riga 2 -->
+      <!-- Rettangolo diviso in 4 verticale -->
+      <svg viewBox="0 0 60 40" class="w-16 h-10 mx-auto">
+        <rect x="0" y="0" width="15" height="40" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <rect x="15" y="0" width="15" height="40" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <rect x="30" y="0" width="15" height="40" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+        <rect x="45" y="0" width="15" height="40" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+      </svg>
+
+      <!-- Quadrato diviso in 2 -->
+      <svg viewBox="0 0 60 60" class="w-16 h-16 mx-auto">
+        <rect x="0" y="0" width="60" height="30" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <rect x="0" y="30" width="60" height="30" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+      </svg>
+
+      <!-- Rombo diviso in 2 orizzontale -->
+      <svg viewBox="0 0 60 60" class="w-16 h-16 mx-auto">
+        <polygon points="30,0 60,30 30,30 0,30" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <polygon points="0,30 30,30 60,30 30,60" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+      </svg>
+
+      <!-- Rombo diviso in 4 -->
+      <svg viewBox="0 0 60 60" class="w-16 h-16 mx-auto">
+        <polygon points="30,0 30,30 0,30" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <polygon points="30,0 60,30 30,30" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <polygon points="30,30 60,30 30,60" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+        <polygon points="30,30 0,30 30,60" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+      </svg>
+
+      <!-- Freccia/Rombo 2 -->
+      <svg viewBox="0 0 60 60" class="w-16 h-16 mx-auto">
+        <polygon points="30,0 60,30 30,60 30,30" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="true"
+              data-action="click->svg-colorable#toggleCell"/>
+        <polygon points="30,0 0,30 30,60 30,30" fill="white" stroke="black" stroke-width="1.5"
+              data-svg-colorable-target="cell" data-correct="false"
+              data-action="click->svg-colorable#toggleCell"/>
+      </svg>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>
