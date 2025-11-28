@@ -8,18 +8,21 @@ Usa questo prompt per creare nuove pagine di esercizi di geometria seguendo lo s
 
 **Controlla SEMPRE questi due riferimenti:**
 
-1. **HTML esistente** - Leggi il file `.html.erb` della pagina se esiste già:
+1. **HTML originale** - Leggi il file HTML con il testo estratto dalla pagina:
    ```
-   app/views/exercises/bus3_mat_pXXX.html.erb
+   app/assets/images/bus3_mat/pXXX/17*.html
    ```
+   (es: `1743504902100.html` per p100)
+   Questo file contiene il testo originale della pagina del libro, utile per copiare i contenuti corretti.
 
 2. **Immagine originale** - Visualizza il `page.png` per vedere il layout originale del libro:
    ```
    app/assets/images/bus3_mat/pXXX/page.png
    ```
 
-Il `page.png` è il riferimento visivo principale per:
-- Capire la struttura degli esercizi
+Questi due file sono i riferimenti principali per:
+- Copiare il testo corretto dal `page.html`
+- Capire la struttura degli esercizi dal `page.png`
 - Verificare quali testi sono già nelle immagini (non duplicarli!)
 - Controllare i colori dei box e degli sfondi
 - Identificare il tipo di esercizio (completamento, selezione, disegno, ecc.)
