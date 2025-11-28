@@ -1,12 +1,370 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p167/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Tabella misure di lunghezza -->
+  <div class="overflow-x-auto mb-8">
+    <table class="w-full border-collapse border border-gray-400 text-sm">
+      <thead>
+        <tr>
+          <th colspan="3" class="border border-gray-400 bg-cyan-100 px-2 py-1">MULTIPLI</th>
+          <th class="border border-gray-400 bg-cyan-200 px-2 py-1">UNITÀ FONDAMENTALE</th>
+          <th colspan="3" class="border border-gray-400 bg-cyan-100 px-2 py-1">SOTTOMULTIPLI</th>
+        </tr>
+        <tr class="text-cyan-600">
+          <th class="border border-gray-400 px-2 py-1">CHILOMETRO<br>km</th>
+          <th class="border border-gray-400 px-2 py-1">ETTOMETRO<br>hm</th>
+          <th class="border border-gray-400 px-2 py-1">DECAMETRO<br>dam</th>
+          <th class="border border-gray-400 bg-cyan-50 px-2 py-1">METRO<br>m</th>
+          <th class="border border-gray-400 px-2 py-1">DECIMETRO<br>dm</th>
+          <th class="border border-gray-400 px-2 py-1">CENTIMETRO<br>cm</th>
+          <th class="border border-gray-400 px-2 py-1">MILLIMETRO<br>mm</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="text-center">
+          <td class="border border-gray-400 px-2 py-1">1000 m</td>
+          <td class="border border-gray-400 px-2 py-1">100 m</td>
+          <td class="border border-gray-400 px-2 py-1">10 m</td>
+          <td class="border border-gray-400 bg-cyan-50 px-2 py-1">1 m</td>
+          <td class="border border-gray-400 px-2 py-1">0,1 m</td>
+          <td class="border border-gray-400 px-2 py-1">0,01 m</td>
+          <td class="border border-gray-400 px-2 py-1">0,001 m</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Esercizio 1 - IMPARARE TUTTI -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <div>
+        <span class="bg-yellow-300 text-red-600 font-bold px-2 py-1 text-sm">IMPARARE TUTTI</span>
+        <span class="text-gray-700 ml-2">Completa le tabelle. Segui l'esempio.</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Tabella 1: mm → cm (: 10) -->
+      <div>
+        <p class="text-center font-bold mb-2">: 10<br>→</p>
+        <table class="w-full border-collapse border border-gray-400">
+          <thead>
+            <tr class="bg-cyan-100 text-cyan-600">
+              <th class="border border-gray-400 px-2 py-1">mm</th>
+              <th class="border border-gray-400 px-2 py-1">cm</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center bg-yellow-50">
+              <td class="border border-gray-400 px-2 py-1">200</td>
+              <td class="border border-gray-400 px-2 py-1">20</td>
+            </tr>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">450</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="45"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">800</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="80"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">70</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="7"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Tabella 2: m → hm (: 100) -->
+      <div>
+        <p class="text-center font-bold mb-2">: 100<br>→</p>
+        <table class="w-full border-collapse border border-gray-400">
+          <thead>
+            <tr class="bg-cyan-100 text-cyan-600">
+              <th class="border border-gray-400 px-2 py-1">m</th>
+              <th class="border border-gray-400 px-2 py-1">hm</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">600</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">5400</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="54"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">900</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="9"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">1500</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="15"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Tabella 3: dam → dm (× 100) -->
+      <div>
+        <p class="text-center font-bold mb-2">× 100<br>→</p>
+        <table class="w-full border-collapse border border-gray-400">
+          <thead>
+            <tr class="bg-cyan-100 text-cyan-600">
+              <th class="border border-gray-400 px-2 py-1">dam</th>
+              <th class="border border-gray-400 px-2 py-1">dm</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">2</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="200"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">65</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="6500"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">10</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="1000"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">34</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="3400"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Tabella 4: m → km (: 1000) -->
+      <div>
+        <p class="text-center font-bold mb-2">: 1000<br>→</p>
+        <table class="w-full border-collapse border border-gray-400">
+          <thead>
+            <tr class="bg-cyan-100 text-cyan-600">
+              <th class="border border-gray-400 px-2 py-1">m</th>
+              <th class="border border-gray-400 px-2 py-1">km</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">4000</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">6000</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">9000</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="9"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+            <tr class="text-center">
+              <td class="border border-gray-400 px-2 py-1">1000</td>
+              <td class="border border-gray-400 px-2 py-1">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
+                       class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-12" data-controller="card-selector">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Cerchia l'unità di misura appropriata.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Formica -->
+      <div class="text-center">
+        <%= image_tag "bus3_mat/p167/output-1743504902167_233_828_98_82.png", alt: "Formica", class: "w-20 h-20 mx-auto mb-2" %>
+        <div class="flex justify-center gap-2">
+          <span class="px-3 py-1 border border-gray-400 rounded cursor-pointer hover:bg-gray-100"
+                data-card-selector-target="card">5 m</span>
+          <span class="px-3 py-1 border border-gray-400 rounded cursor-pointer hover:bg-gray-100"
+                data-card-selector-target="card">5 dm</span>
+          <span class="px-3 py-1 border border-gray-400 rounded cursor-pointer hover:bg-gray-100"
+                data-card-selector-target="card" data-correct="true">5 mm</span>
+        </div>
+      </div>
+
+      <!-- Bottiglia -->
+      <div class="text-center">
+        <%= image_tag "bus3_mat/p167/output-1743504902167_529_813_82_108.png", alt: "Bottiglia", class: "w-16 h-24 mx-auto mb-2" %>
+        <div class="flex justify-center gap-2">
+          <span class="px-3 py-1 border border-gray-400 rounded cursor-pointer hover:bg-gray-100"
+                data-card-selector-target="card">20 m</span>
+          <span class="px-3 py-1 border border-gray-400 rounded cursor-pointer hover:bg-gray-100"
+                data-card-selector-target="card">20 dm</span>
+          <span class="px-3 py-1 border border-gray-400 rounded cursor-pointer hover:bg-gray-100"
+                data-card-selector-target="card" data-correct="true">20 cm</span>
+        </div>
+      </div>
+
+      <!-- Albero -->
+      <div class="text-center">
+        <%= image_tag "bus3_mat/p167/output-1743504902167_759_789_140_125.png", alt: "Albero", class: "w-28 h-24 mx-auto mb-2" %>
+        <div class="flex justify-center gap-2">
+          <span class="px-3 py-1 border border-gray-400 rounded cursor-pointer hover:bg-gray-100"
+                data-card-selector-target="card" data-correct="true">4,5 m</span>
+          <span class="px-3 py-1 border border-gray-400 rounded cursor-pointer hover:bg-gray-100"
+                data-card-selector-target="card">4,5 dm</span>
+          <span class="px-3 py-1 border border-gray-400 rounded cursor-pointer hover:bg-gray-100"
+                data-card-selector-target="card">4,5 cm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 3 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-gray-700">
+        <strong>Misura con il righello e completa.</strong>
+      </p>
+    </div>
+
+    <div class="space-y-3">
+      <p class="text-gray-700">
+        • Il mio indice è lungo
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="6|7|8"
+               class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> cm.
+      </p>
+      <p class="text-gray-700">
+        • Il mio banco è largo
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="5|6|7"
+               class="w-14 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> dm.
+      </p>
+      <p class="text-gray-700">
+        • Due decimetri sono
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="200"
+               class="w-16 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> mm.
+      </p>
+      <p class="text-gray-700">
+        • Tre decimetri sono
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="300"
+               class="w-16 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> mm.
+      </p>
+    </div>
+  </div>
+
+  <!-- Esercizio 4 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        4
+      </div>
+      <p class="text-gray-700">
+        <strong>Esegui le equivalenze.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="space-y-3">
+        <p>2 m =
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="20"
+                 class="w-16 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> dm
+        </p>
+        <p>8 m =
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="800"
+                 class="w-16 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> cm
+        </p>
+        <p>11 dm =
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="110"
+                 class="w-16 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> cm
+        </p>
+        <p>90 mm =
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="9"
+                 class="w-16 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> cm
+        </p>
+      </div>
+      <div class="space-y-3">
+        <p>50 m =
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="500"
+                 class="w-16 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> dm
+        </p>
+        <p>600 dm =
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
+                 class="w-16 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> dam
+        </p>
+        <p>300 cm =
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="3"
+                 class="w-16 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> m
+        </p>
+        <p>18 cm =
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="180"
+                 class="w-16 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> mm
+        </p>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

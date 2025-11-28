@@ -1,12 +1,241 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p164/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 - IMPARARE TUTTI -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <div>
+        <span class="bg-yellow-300 text-red-600 font-bold px-2 py-1 text-sm">IMPARARE TUTTI</span>
+        <span class="text-gray-700 ml-2">Scrivi il nome di questi <span class="text-cyan-600">poligoni</span>. Scegli tra:</span>
+      </div>
+    </div>
+
+    <p class="text-center mb-6 text-gray-600">triangolo • pentagono • quadrilatero</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <!-- Quadrato -->
+      <div class="flex flex-col items-center gap-4">
+        <svg viewBox="0 0 100 100" class="w-24 h-24">
+          <rect x="20" y="20" width="60" height="60" fill="none" stroke="black" stroke-width="2"/>
+        </svg>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="quadrilatero"
+               class="w-40 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">
+      </div>
+
+      <!-- Triangolo -->
+      <div class="flex flex-col items-center gap-4">
+        <svg viewBox="0 0 100 100" class="w-24 h-24">
+          <polygon points="50,15 85,85 15,85" fill="none" stroke="black" stroke-width="2"/>
+        </svg>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="triangolo"
+               class="w-40 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">
+      </div>
+
+      <!-- Pentagono -->
+      <div class="flex flex-col items-center gap-4">
+        <svg viewBox="0 0 100 100" class="w-24 h-24">
+          <polygon points="50,10 90,40 75,90 25,90 10,40" fill="none" stroke="black" stroke-width="2"/>
+        </svg>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="pentagono"
+               class="w-40 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance svg-colorable">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Colora gli angoli interni e indica se sono retti (<span class="text-red-500">R</span>), acuti (<span class="text-cyan-600">A</span>) oppure ottusi (<span class="text-orange-500">O</span>).</strong><br>
+        <span class="text-sm">Poi indica se i lati sono paralleli (<span class="text-purple-600">PA</span>) oppure perpendicolari (<span class="text-green-600">PE</span>).</span>
+      </p>
+    </div>
+
+    <!-- Prima riga di figure -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 border-b border-dotted border-gray-300 pb-8">
+      <!-- Quadrato ABCD -->
+      <div class="space-y-4">
+        <div class="flex justify-center">
+          <svg viewBox="0 0 120 120" class="w-32 h-32">
+            <rect x="20" y="20" width="70" height="70" fill="none" stroke="black" stroke-width="2"/>
+            <text x="15" y="95" font-size="12">A</text>
+            <text x="92" y="95" font-size="12">B</text>
+            <text x="92" y="20" font-size="12">C</text>
+            <text x="15" y="20" font-size="12">D</text>
+          </svg>
+        </div>
+        <div class="space-y-2 text-sm">
+          <p>• Tutti gli angoli sono
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="R"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">.
+          </p>
+          <p>• AB è
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="PE"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">
+            ad AD.
+          </p>
+          <p>• AB è
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="PA"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">
+            a DC.
+          </p>
+        </div>
+      </div>
+
+      <!-- Triangolo ABC -->
+      <div class="space-y-4">
+        <div class="flex justify-center">
+          <svg viewBox="0 0 120 120" class="w-32 h-32">
+            <polygon points="60,20 100,95 20,95" fill="none" stroke="black" stroke-width="2"/>
+            <text x="15" y="105" font-size="12">A</text>
+            <text x="100" y="105" font-size="12">B</text>
+            <text x="55" y="15" font-size="12">C</text>
+          </svg>
+        </div>
+        <div class="space-y-2 text-sm">
+          <p>• Tutti gli angoli sono
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="A"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">.
+          </p>
+        </div>
+      </div>
+
+      <!-- Rettangolo ABCD -->
+      <div class="space-y-4">
+        <div class="flex justify-center">
+          <svg viewBox="0 0 140 100" class="w-36 h-24">
+            <rect x="15" y="20" width="100" height="60" fill="none" stroke="black" stroke-width="2"/>
+            <text x="8" y="85" font-size="12">A</text>
+            <text x="115" y="85" font-size="12">B</text>
+            <text x="115" y="18" font-size="12">C</text>
+            <text x="8" y="18" font-size="12">D</text>
+          </svg>
+        </div>
+        <div class="space-y-2 text-sm">
+          <p>• Tutti gli angoli sono
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="R"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">.
+          </p>
+          <p>• AB è
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="PE"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">
+            ad AD.
+          </p>
+          <p>• AB è
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="PA"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">
+            a DC.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seconda riga di figure -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Parallelogramma (Trapezio isometrico) ABCD -->
+      <div class="space-y-4">
+        <div class="flex justify-center">
+          <svg viewBox="0 0 140 100" class="w-36 h-24">
+            <polygon points="30,80 110,80 90,20 50,20" fill="none" stroke="black" stroke-width="2"/>
+            <text x="22" y="92" font-size="12">A</text>
+            <text x="110" y="92" font-size="12">B</text>
+            <text x="90" y="15" font-size="12">C</text>
+            <text x="42" y="15" font-size="12">D</text>
+          </svg>
+        </div>
+        <div class="space-y-2 text-sm">
+          <p>• A e C sono angoli
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="A"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">.
+          </p>
+          <p>• B e D sono angoli
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="O"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">.
+          </p>
+          <p>• AB è
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="PA"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">
+            a DC.
+          </p>
+          <p>• BC è
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="PA"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">
+            ad AD.
+          </p>
+        </div>
+      </div>
+
+      <!-- Trapezio ABCD -->
+      <div class="space-y-4">
+        <div class="flex justify-center">
+          <svg viewBox="0 0 140 100" class="w-36 h-24">
+            <polygon points="20,80 120,80 90,20 50,20" fill="none" stroke="black" stroke-width="2"/>
+            <text x="12" y="92" font-size="12">A</text>
+            <text x="120" y="92" font-size="12">B</text>
+            <text x="90" y="15" font-size="12">C</text>
+            <text x="42" y="15" font-size="12">D</text>
+          </svg>
+        </div>
+        <div class="space-y-2 text-sm">
+          <p>• A e B sono angoli
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="A"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">.
+          </p>
+          <p>• C e D sono angoli
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="O"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">.
+          </p>
+          <p>• AB è
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="PA"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">
+            a DC.
+          </p>
+        </div>
+      </div>
+
+      <!-- Triangolo rettangolo ABC -->
+      <div class="space-y-4">
+        <div class="flex justify-center">
+          <svg viewBox="0 0 120 100" class="w-32 h-24">
+            <polygon points="20,80 100,80 20,20" fill="none" stroke="black" stroke-width="2"/>
+            <text x="12" y="92" font-size="12">A</text>
+            <text x="100" y="92" font-size="12">B</text>
+            <text x="12" y="15" font-size="12">C</text>
+          </svg>
+        </div>
+        <div class="space-y-2 text-sm">
+          <p>• A è un angolo
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="R"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">.
+          </p>
+          <p>• B e C sono angoli
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="A"
+                   class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">.
+          </p>
+          <p>• AB è
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="PE"
+                   class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white uppercase">
+            ad AC.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

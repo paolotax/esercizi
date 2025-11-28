@@ -156,7 +156,33 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 148, titolo: "LA MOLTIPLICAZIONE", slug: "bus3_mat_p148", view_template: "bus3_mat_p148", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 149, titolo: "PROPRIETÀ DELLA MOLTIPLICAZIONE", slug: "bus3_mat_p149", view_template: "bus3_mat_p149", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 150, titolo: "TANTE MOLTIPLICAZIONI", slug: "bus3_mat_p150", view_template: "bus3_mat_p150", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 151, titolo: "CON IL MOLTIPLICATORE A DUE CIFRE", slug: "bus3_mat_p151", view_template: "bus3_mat_p151", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 151, titolo: "CON IL MOLTIPLICATORE A DUE CIFRE", slug: "bus3_mat_p151", view_template: "bus3_mat_p151", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 152, titolo: "LA DIVISIONE", slug: "bus3_mat_p152", view_template: "bus3_mat_p152", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 153, titolo: "TANTE DIVISIONI", slug: "bus3_mat_p153", view_template: "bus3_mat_p153", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 154, titolo: "LE DIVISIONI IN COLONNA", slug: "bus3_mat_p154", view_template: "bus3_mat_p154", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 155, titolo: "DIVISIONI IN COLONNA", slug: "bus3_mat_p155", view_template: "bus3_mat_p155", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 156, titolo: "MOLTIPLICAZIONE O DIVISIONE?", slug: "bus3_mat_p156", view_template: "bus3_mat_p156", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 157, titolo: "DAL DISEGNO AL PROBLEMA", slug: "bus3_mat_p157", view_template: "bus3_mat_p157", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 158, titolo: "ANNUNCI... E PROBLEMI!", slug: "bus3_mat_p158", view_template: "bus3_mat_p158", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 159, titolo: "LE FRAZIONI", slug: "bus3_mat_p159", view_template: "bus3_mat_p159", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 160, titolo: "ANCORA FRAZIONI", slug: "bus3_mat_p160", view_template: "bus3_mat_p160", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 161, titolo: "LE FRAZIONI DECIMALI", slug: "bus3_mat_p161", view_template: "bus3_mat_p161", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 162, titolo: "I DECIMI", slug: "bus3_mat_p162", view_template: "bus3_mat_p162", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 163, titolo: "I CENTESIMI E I MILLESIMI", slug: "bus3_mat_p163", view_template: "bus3_mat_p163", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 164, titolo: "I POLIGONI", slug: "bus3_mat_p164", view_template: "bus3_mat_p164", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 165, titolo: "IL PERIMETRO", slug: "bus3_mat_p165", view_template: "bus3_mat_p165", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 166, titolo: "L'AREA", slug: "bus3_mat_p166", view_template: "bus3_mat_p166", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 167, titolo: "LE MISURE DI LUNGHEZZA", slug: "bus3_mat_p167", view_template: "bus3_mat_p167", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 168, titolo: "LE MISURE DI CAPACITÀ", slug: "bus3_mat_p168", view_template: "bus3_mat_p168", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 169, titolo: "LE MISURE DI PESO", slug: "bus3_mat_p169", view_template: "bus3_mat_p169", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 170, titolo: "RELAZIONI, DATI E PREVISIONI", slug: "bus3_mat_p170", view_template: "bus3_mat_p170", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 122, titolo: "CLASSIFICARE", slug: "bus3_mat_p122", view_template: "bus3_mat_p122", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
+  { numero: 123, titolo: "CLASSIFICARE", slug: "bus3_mat_p123", view_template: "bus3_mat_p123", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
+  { numero: 124, titolo: "LE RELAZIONI", slug: "bus3_mat_p124", view_template: "bus3_mat_p124", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
+  { numero: 125, titolo: "LE INDAGINI", slug: "bus3_mat_p125", view_template: "bus3_mat_p125", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
+  { numero: 126, titolo: "DATI E GRAFICI", slug: "bus3_mat_p126", view_template: "bus3_mat_p126", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
+  { numero: 127, titolo: "CERTO, POSSIBILE, IMPOSSIBILE", slug: "bus3_mat_p127", view_template: "bus3_mat_p127", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
+  { numero: 128, titolo: "LA PROBABILITÀ", slug: "bus3_mat_p128", view_template: "bus3_mat_p128", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" }
 ].each do |pagina_data|
   bus_matematica.pagine.find_or_create_by!(slug: pagina_data[:slug]) do |pagina|
     pagina.numero = pagina_data[:numero]
@@ -168,7 +194,7 @@ bus_matematica = bus_volume3.discipline.create!(
 end
 
 # Pagine generiche per bus3_mat (p001-p192, escludendo le pagine già definite sopra)
-existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144 ]
+existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 122, 123, 124, 125, 126, 127, 128, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|

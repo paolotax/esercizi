@@ -1,12 +1,165 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p170/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 - IMPARARE TUTTI -->
+  <div class="mb-12">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <div>
+        <span class="bg-yellow-300 text-red-600 font-bold px-2 py-1 text-sm">IMPARARE TUTTI</span>
+        <span class="text-gray-700 ml-2">Leggi che cosa dice la freccia e collega i numeri.</span>
+      </div>
+    </div>
+
+    <div class="text-center mb-4">
+      <p class="font-bold text-lg mb-4">è il doppio di →</p>
+    </div>
+
+    <!-- Prima riga di numeri -->
+    <div class="flex justify-center gap-4 mb-4 flex-wrap">
+      <span class="border border-gray-400 px-4 py-2 rounded bg-white">12</span>
+      <span class="border border-gray-400 px-4 py-2 rounded bg-white">7</span>
+      <span class="border border-gray-400 px-4 py-2 rounded bg-white">20</span>
+      <span class="border border-gray-400 px-4 py-2 rounded bg-white">16</span>
+      <span class="border border-gray-400 px-4 py-2 rounded bg-white">3</span>
+      <span class="border border-gray-400 px-4 py-2 rounded bg-white">15</span>
+    </div>
+
+    <!-- Seconda riga di numeri -->
+    <div class="flex justify-center gap-4 flex-wrap">
+      <span class="border border-gray-400 px-4 py-2 rounded bg-white">10</span>
+      <span class="border border-gray-400 px-4 py-2 rounded bg-white">30</span>
+      <span class="border border-gray-400 px-4 py-2 rounded bg-white">6</span>
+      <span class="border border-gray-400 px-4 py-2 rounded bg-white">14</span>
+      <span class="border border-gray-400 px-4 py-2 rounded bg-white">8</span>
+    </div>
+
+    <p class="text-sm text-gray-500 mt-4 text-center">
+      Colleghi: 12→6, 7→14 (7 è metà di 14), 20→10, 16→8, 3→6 (no, 6→3), 15→30 (15 è metà di 30)
+    </p>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Osserva la tabella e rispondi alle domande.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Legenda e grafico -->
+      <div>
+        <div class="mb-4">
+          <p class="font-bold text-cyan-600">LEGENDA</p>
+          <p class="flex items-center gap-2">
+            <span class="inline-block w-6 h-4 border border-gray-400 bg-white"></span> = 1 matita
+          </p>
+        </div>
+
+        <!-- Grafico a barre con immagine -->
+        <div class="flex justify-center">
+          <%= image_tag "bus3_mat/p170/p170_01.jpg", alt: "Grafico matite", class: "max-w-full rounded" %>
+        </div>
+      </div>
+
+      <!-- Domande -->
+      <div class="space-y-4">
+        <div>
+          <p class="text-gray-700 mb-2">• Chi ha nell'astuccio meno matite?</p>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="Anna"
+                 class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">
+        </div>
+        <div>
+          <p class="text-gray-700 mb-2">• Chi ne ha di più?</p>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="Michele"
+                 class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">
+        </div>
+        <div>
+          <p class="text-gray-700 mb-2">• Quante matite ha Lapo più di Gaia?</p>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+                 class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+        </div>
+        <div>
+          <p class="text-gray-700 mb-2">• Chi ha lo stesso numero di matite?</p>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="Gianna e Gaia|Gaia e Gianna"
+                 class="w-48 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 3 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-6">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        3
+      </div>
+      <p class="text-gray-700">
+        <strong>Osserva e rispondi.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Immagine calzini -->
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p170/output-1743504902170_130_901_293_289.png", alt: "Cassetto con calzini", class: "max-w-full rounded" %>
+      </div>
+
+      <!-- Domande sulla probabilità -->
+      <div class="space-y-4">
+        <p class="text-gray-700 font-bold">Se pesco dal cassetto con gli occhi bendati:</p>
+
+        <div>
+          <p class="text-gray-700 mb-2">• è più probabile che prenda un calzino blu o un calzino a pallini?</p>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="blu"
+                 class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">
+        </div>
+
+        <div>
+          <p class="text-gray-700 mb-2">• qual è la probabilità che prenda un calzino blu?</p>
+          <div class="flex items-center gap-2">
+            <span class="inline-block text-center">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                     class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              <span class="block border-t-2 border-gray-600">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+                       class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-gray-700 mb-2">• qual è la probabilità che prenda un calzino a righe?</p>
+          <div class="flex items-center gap-2">
+            <span class="inline-block text-center">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+                     class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              <span class="block border-t-2 border-gray-600">
+                <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+                       class="w-10 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>
