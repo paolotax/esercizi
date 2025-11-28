@@ -191,6 +191,12 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 183, titolo: "MISURA", slug: "bus3_mat_p183", view_template: "bus3_mat_p183", sottotitolo: "VERIFICA", base_color: "cyan" },
   { numero: 184, titolo: "VERIFICA MISURA", slug: "bus3_mat_p184", view_template: "bus3_mat_p184", sottotitolo: "VERIFICA", base_color: "cyan" },
   { numero: 185, titolo: "RELAZIONI, DATI E PREVISIONI", slug: "bus3_mat_p185", view_template: "bus3_mat_p185", sottotitolo: "VERIFICA", base_color: "cyan" },
+  { numero: 186, titolo: "VERIFICA RELAZIONI", slug: "bus3_mat_p186", view_template: "bus3_mat_p186", sottotitolo: "VERIFICA", base_color: "red" },
+  { numero: 187, titolo: "INVALSI NUMERI E OPERAZIONI", slug: "bus3_mat_p187", view_template: "bus3_mat_p187", sottotitolo: "INVALSI", base_color: "red" },
+  { numero: 188, titolo: "INVALSI FRAZIONI E MISURA", slug: "bus3_mat_p188", view_template: "bus3_mat_p188", sottotitolo: "INVALSI", base_color: "red" },
+  { numero: 189, titolo: "INVALSI MISURA", slug: "bus3_mat_p189", view_template: "bus3_mat_p189", sottotitolo: "INVALSI", base_color: "red" },
+  { numero: 190, titolo: "INVALSI GEOMETRIA E RELAZIONI", slug: "bus3_mat_p190", view_template: "bus3_mat_p190", sottotitolo: "INVALSI", base_color: "red" },
+  { numero: 191, titolo: "BROWNIES PER TUTTI", slug: "bus3_mat_p191", view_template: "bus3_mat_p191", sottotitolo: "NELLA REALTÀ", base_color: "amber" },
   { numero: 122, titolo: "CLASSIFICARE", slug: "bus3_mat_p122", view_template: "bus3_mat_p122", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
   { numero: 123, titolo: "CLASSIFICARE", slug: "bus3_mat_p123", view_template: "bus3_mat_p123", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
   { numero: 124, titolo: "LE RELAZIONI", slug: "bus3_mat_p124", view_template: "bus3_mat_p124", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
@@ -209,7 +215,7 @@ bus_matematica = bus_volume3.discipline.create!(
 end
 
 # Pagine generiche per bus3_mat (p001-p192, escludendo le pagine già definite sopra)
-existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 122, 123, 124, 125, 126, 127, 128, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185 ]
+existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 122, 123, 124, 125, 126, 127, 128, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|

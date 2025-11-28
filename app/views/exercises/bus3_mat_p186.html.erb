@@ -1,12 +1,128 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p186/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 5 -->
+  <div class="mb-10" data-controller="fill-blanks">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        5
+      </div>
+      <p class="text-gray-700">
+        <strong>Osserva i risultati di questa indagine. Il grafico è un</strong>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="pittogramma"
+               class="w-40 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">.
+      </p>
+    </div>
+
+    <p class="text-cyan-600 font-bold mb-2">LEGENDA</p>
+    <p class="mb-4">1 animale = 1 bambina/o</p>
+
+    <div class="border border-gray-400 mb-6 max-w-md">
+      <div class="bg-gray-100 p-2 font-bold text-center border-b border-gray-400">Quale animale hai in casa?</div>
+      <div class="p-3">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-20">🐱</span>
+          <span>🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱</span>
+        </div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-20">🐶</span>
+          <span>🐶🐶🐶🐶🐶🐶🐶🐶</span>
+        </div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-20">🐦</span>
+          <span>🐦🐦🐦🐦🐦</span>
+        </div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-20">🐠</span>
+          <span>🐠</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-20">❌</span>
+          <span>❌❌❌</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="mb-4">Completa le frasi. Considera che ogni bambina e bambino ha un solo animale.</p>
+    <ul class="space-y-3">
+      <li>• Sono state raccolte <input type="text" data-fill-blanks-target="input" data-correct-answer="27"
+             class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> risposte.</li>
+      <li>• L'animale che più bambine e bambini hanno in casa è il <input type="text" data-fill-blanks-target="input" data-correct-answer="gatto"
+             class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">.</li>
+      <li>• Ci sono <input type="text" data-fill-blanks-target="input" data-correct-answer="3"
+             class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> bambine e bambini che non hanno animali.</li>
+      <li>• <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
+             class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"> bambino ha un pesciolino.</li>
+    </ul>
+  </div>
+
+  <!-- Esercizio 6 -->
+  <div class="mb-10" data-controller="fill-blanks">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        6
+      </div>
+      <p class="text-gray-700">
+        <strong>Osserva il sacchetto e rispondi.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <p>• Quante sono le stelle in tutto? <input type="text" data-fill-blanks-target="input" data-correct-answer="12"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric"></p>
+        <p>• Quale colore di stella hai la maggiore probabilità di pescare? <input type="text" data-fill-blanks-target="input" data-correct-answer="blu"
+               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white"></p>
+        <p>Perché? <input type="text" data-fill-blanks-target="input" data-correct-answer="ce ne sono di più"
+               class="w-48 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white"></p>
+        <p>• Indica con una frazione la probabilità di pescare:</p>
+        <div class="grid grid-cols-2 gap-4 ml-4">
+          <p>una stella rossa: <span class="inline-flex flex-col items-center mx-1"><input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                 class="w-10 px-1 py-0.5 border-b-2 border-gray-400 text-center bg-white text-sm" inputmode="numeric"><span class="border-t border-gray-600 w-10 text-center"><input type="text" data-fill-blanks-target="input" data-correct-answer="12"
+                 class="w-10 px-1 py-0.5 text-center bg-white text-sm" inputmode="numeric"></span></span></p>
+          <p>una stella blu: <span class="inline-flex flex-col items-center mx-1"><input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+                 class="w-10 px-1 py-0.5 border-b-2 border-gray-400 text-center bg-white text-sm" inputmode="numeric"><span class="border-t border-gray-600 w-10 text-center"><input type="text" data-fill-blanks-target="input" data-correct-answer="12"
+                 class="w-10 px-1 py-0.5 text-center bg-white text-sm" inputmode="numeric"></span></span></p>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p186/output-1743504902186_673_614_250_230.png", alt: "Sacchetto con stelle", class: "max-w-xs rounded" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 7 -->
+  <div class="mb-10">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        7
+      </div>
+      <p class="text-gray-700">
+        <strong>Colora le biglie in modo che pescando senza guardare:</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p186/output-1743504902186_125_891_280_254.png", alt: "Biglie da colorare", class: "max-w-xs rounded" %>
+      </div>
+      <ul class="space-y-2">
+        <li>• sia possibile estrarre una biglia viola;</li>
+        <li>• sia più probabile estrarre una biglia rossa che una biglia blu;</li>
+        <li>• sia impossibile estrarre una biglia verde;</li>
+        <li>• la probabilità di estrarre una biglia gialla sia <sup>3</sup>/<sub>8</sub>.</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

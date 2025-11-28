@@ -1,12 +1,133 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p191/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Introduzione -->
+  <div class="mb-8">
+    <p class="text-gray-700 mb-4">
+      Con l'aiuto dell'insegnante prepariamo ottimi dolcetti d'origine statunitense, che non hanno bisogno di cottura. Ecco la ricetta.
+    </p>
+
+    <!-- Ricetta -->
+    <div class="bg-amber-50 border-2 border-amber-300 rounded-lg p-4 mb-6">
+      <h3 class="font-bold text-lg mb-3">BROWNIES senza cottura (Ricetta per <span class="text-red-500">4</span> persone)</h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <p class="font-bold mb-2">INGREDIENTI:</p>
+          <ul class="space-y-1">
+            <li>• biscotti tipo digestive 80 g</li>
+            <li>• nocciole 20 g</li>
+            <li>• cacao in polvere 20 g</li>
+            <li>• latte condensato 40 g</li>
+            <li>• cioccolato fondente 100 g</li>
+            <li>• un pizzico di sale</li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-sm">
+            Sbriciolare i biscotti in un sacchetto da frigo. Tritare le nocciole.
+            Mescolare in una ciotola biscotti, nocciole, cacao e sale. Poi unire il latte condensato e il cioccolato fuso.
+            Amalgamare tutto molto bene. Stendere il composto in uno stampo di alluminio.
+            Mettere in frigorifero almeno per un'ora. Togliere il composto dallo stampo, tagliare a quadrotti e… buon appetito!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Problema -->
+  <div class="mb-8" data-controller="fill-blanks">
+    <p class="text-gray-700 mb-4">
+      Ora dobbiamo solo procurare gli ingredienti e preparare i nostri dolci... ma prima dobbiamo calcolare la quantità degli ingredienti!
+      La ricetta è per 4 persone e noi invece siamo <input type="text" data-fill-blanks-target="input" data-correct-answer=""
+             class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">.
+    </p>
+
+    <p class="mb-4">
+      • Tu che cosa suggerisci di fare? <input type="text" data-fill-blanks-target="input" data-correct-answer=""
+             class="w-64 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white">
+    </p>
+
+    <div class="bg-gray-100 p-4 rounded-lg mb-6">
+      <p class="text-gray-700">
+        Io divido il peso di ogni ingrediente per 4, cioè calcolo <sup>1</sup>/<sub>4</sub>.
+        Così trovo il peso di ogni ingrediente per una persona.
+        Poi lo moltiplico per il numero delle persone per le quali voglio preparare il dolce. Proviamo?
+      </p>
+    </div>
+
+    <!-- Tabella ingredienti -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse border border-gray-400 text-sm">
+        <thead>
+          <tr class="bg-cyan-100">
+            <th class="border border-gray-400 p-2">Ingredienti</th>
+            <th class="border border-gray-400 p-2">Quantità<br>per 4 persone</th>
+            <th class="border border-gray-400 p-2">Quantità<br>per 1 persona → <sup>1</sup>/<sub>4</sub></th>
+            <th class="border border-gray-400 p-2">Quantità per<br>la nostra classe</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-gray-400 p-2">biscotti</td>
+            <td class="border border-gray-400 p-2 text-center">80 g</td>
+            <td class="border border-gray-400 p-2 text-center">80 : 4 = <span class="text-cyan-600 font-bold">20 g</span></td>
+            <td class="border border-gray-400 p-2 text-center">20 × <input type="text" data-fill-blanks-target="input" data-correct-answer=""
+                   class="w-10 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white text-sm" inputmode="numeric"> = <input type="text" data-fill-blanks-target="input" data-correct-answer=""
+                   class="w-12 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white text-sm" inputmode="numeric"> g</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-400 p-2">nocciole tritate</td>
+            <td class="border border-gray-400 p-2 text-center">20 g</td>
+            <td class="border border-gray-400 p-2 text-center">20 : <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                   class="w-10 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white text-sm" inputmode="numeric"> = <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+                   class="w-12 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white text-sm" inputmode="numeric"> g</td>
+            <td class="border border-gray-400 p-2 text-center"><input type="text" data-fill-blanks-target="input" data-correct-answer=""
+                   class="w-24 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white text-sm"></td>
+          </tr>
+          <tr>
+            <td class="border border-gray-400 p-2">cacao in polvere</td>
+            <td class="border border-gray-400 p-2 text-center">20 g</td>
+            <td class="border border-gray-400 p-2 text-center"><input type="text" data-fill-blanks-target="input" data-correct-answer=""
+                   class="w-24 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white text-sm"></td>
+            <td class="border border-gray-400 p-2 text-center"><input type="text" data-fill-blanks-target="input" data-correct-answer=""
+                   class="w-24 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white text-sm"></td>
+          </tr>
+          <tr>
+            <td class="border border-gray-400 p-2">latte condensato</td>
+            <td class="border border-gray-400 p-2 text-center">40 g</td>
+            <td class="border border-gray-400 p-2 text-center"><input type="text" data-fill-blanks-target="input" data-correct-answer=""
+                   class="w-24 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white text-sm"></td>
+            <td class="border border-gray-400 p-2 text-center"><input type="text" data-fill-blanks-target="input" data-correct-answer=""
+                   class="w-24 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white text-sm"></td>
+          </tr>
+          <tr>
+            <td class="border border-gray-400 p-2">cioccolato fondente</td>
+            <td class="border border-gray-400 p-2 text-center">100 g</td>
+            <td class="border border-gray-400 p-2 text-center"><input type="text" data-fill-blanks-target="input" data-correct-answer=""
+                   class="w-24 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white text-sm"></td>
+            <td class="border border-gray-400 p-2 text-center"><input type="text" data-fill-blanks-target="input" data-correct-answer=""
+                   class="w-24 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white text-sm"></td>
+          </tr>
+          <tr>
+            <td class="border border-gray-400 p-2">sale</td>
+            <td class="border border-gray-400 p-2 text-center">un pizzico</td>
+            <td class="border border-gray-400 p-2 text-center">un pizzico</td>
+            <td class="border border-gray-400 p-2 text-center">un pizzico</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>
