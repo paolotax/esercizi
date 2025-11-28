@@ -123,6 +123,18 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 103, titolo: "LE FIGURE SIMMETRICHE", slug: "bus3_mat_p103", view_template: "bus3_mat_p103", sottotitolo: "SPAZIO E FIGURE", base_color: "cyan" },
   { numero: 104, titolo: "AGUZZA LA VISTA", slug: "bus3_mat_p104", view_template: "bus3_mat_p104", sottotitolo: "PAROLE AL CENTRO", base_color: "cyan" },
   { numero: 105, titolo: "GIOCO E RIPASSO", slug: "bus3_mat_p105", view_template: "bus3_mat_p105", sottotitolo: "GIOCO E RIPASSO", base_color: "cyan" },
+  { numero: 106, titolo: "MISURE DI OGNI GIORNO", slug: "bus3_mat_p106", view_template: "bus3_mat_p106", sottotitolo: "MISURA", base_color: "blue" },
+  { numero: 107, titolo: "LE MISURE DI LUNGHEZZA", slug: "bus3_mat_p107", view_template: "bus3_mat_p107", sottotitolo: "MISURA", base_color: "blue" },
+  { numero: 108, titolo: "LE EQUIVALENZE", slug: "bus3_mat_p108", view_template: "bus3_mat_p108", sottotitolo: "MISURA", base_color: "blue" },
+  { numero: 109, titolo: "LUNGHEZZA: MI ESERCITO", slug: "bus3_mat_p109", view_template: "bus3_mat_p109", sottotitolo: "MISURA", base_color: "blue" },
+  { numero: 110, titolo: "LE MISURE DI CAPACITÀ", slug: "bus3_mat_p110", view_template: "bus3_mat_p110", sottotitolo: "MISURA", base_color: "blue" },
+  { numero: 111, titolo: "CAPACITÀ: MI ESERCITO", slug: "bus3_mat_p111", view_template: "bus3_mat_p111", sottotitolo: "MISURA", base_color: "blue" },
+  { numero: 112, titolo: "LE MISURE DI PESO", slug: "bus3_mat_p112", view_template: "bus3_mat_p112", sottotitolo: "MISURA", base_color: "blue" },
+  { numero: 113, titolo: "PESO: MI ESERCITO", slug: "bus3_mat_p113", view_template: "bus3_mat_p113", sottotitolo: "MISURA", base_color: "blue" },
+  { numero: 114, titolo: "TANTE MISURE!", slug: "bus3_mat_p114", view_template: "bus3_mat_p114", sottotitolo: "MISURA", base_color: "blue" },
+  { numero: 115, titolo: "PESO LORDO, PESO NETTO, TARA", slug: "bus3_mat_p115", view_template: "bus3_mat_p115", sottotitolo: "MISURA", base_color: "blue" },
+  { numero: 116, titolo: "LE MISURE DI TEMPO", slug: "bus3_mat_p116", view_template: "bus3_mat_p116", sottotitolo: "MISURA", base_color: "blue" },
+  { numero: 117, titolo: "LE MISURE DI TEMPO", slug: "bus3_mat_p117", view_template: "bus3_mat_p117", sottotitolo: "MISURA", base_color: "blue" },
   { numero: 130, titolo: "FACCIAMO I CONTI!", slug: "bus3_mat_p130", view_template: "bus3_mat_p130", sottotitolo: "ECONOMIA A PICCOLI PASSI", base_color: "cyan" },
   { numero: 131, titolo: "IL SALVADANAIO", slug: "bus3_mat_p131", view_template: "bus3_mat_p131", sottotitolo: "ECONOMIA A PICCOLI PASSI", base_color: "cyan" },
   { numero: 132, titolo: "L'ECONOMIA CIRCOLARE", slug: "bus3_mat_p132", view_template: "bus3_mat_p132", sottotitolo: "ECONOMIA A PICCOLI PASSI", base_color: "cyan" },
@@ -156,7 +168,7 @@ bus_matematica = bus_volume3.discipline.create!(
 end
 
 # Pagine generiche per bus3_mat (p001-p192, escludendo le pagine già definite sopra)
-existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144 ]
+existing_pages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144 ]
 generic_pages_created = 0
 
 (1..192).each do |numero|
