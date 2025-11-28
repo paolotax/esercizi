@@ -227,6 +227,38 @@ Il `page.png` è il riferimento visivo principale per:
 
 ---
 
+## Ogni 5 Pagine: Seed e Indice
+
+**Ogni 5 pagine completate**, esegui questi passaggi:
+
+### 1. Aggiorna il file seeds
+Aggiungi le nuove pagine in `db/seeds.rb`:
+```ruby
+# Pagine XXX-YYY - Geometria
+{ codice: "bus3_mat_pXXX", titolo: "Titolo Argomento", numero: XXX, libro: bus3_mat, materia: "matematica", ordine: XXX },
+{ codice: "bus3_mat_pXXX", titolo: "Titolo Argomento", numero: XXX, libro: bus3_mat, materia: "matematica", ordine: XXX },
+...
+```
+
+### 2. Aggiorna l'indice in index.html.erb
+Aggiungi i link alle nuove pagine in `app/views/exercises/index.html.erb`:
+```erb
+<%= link_to "p. XXX", pagina_path("bus3_mat_pXXX"), class: "..." %>
+```
+
+### 3. Esegui il seed (se necessario)
+```bash
+bin/rails db:seed
+```
+
+### 4. Committa il batch
+```bash
+git add .
+git commit -m "feat: aggiungi pagine XXX-YYY geometria"
+```
+
+---
+
 ## Esempio Pagina Completa
 
 Vedi `/app/views/exercises/bus3_mat_p096.html.erb` o `/app/views/exercises/bus3_mat_p100.html.erb` come riferimento.
