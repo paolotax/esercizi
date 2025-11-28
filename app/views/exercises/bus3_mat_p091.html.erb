@@ -1,7 +1,7 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
 <div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
-     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-controller="exercise-checker page-viewer text-toggle font-controls hotspot-editor"
      data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p091/page.png') %>"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -10,81 +10,120 @@
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Introduzione -->
-  <div class="mb-8">
-    <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4 mb-6">
-      <p class="mb-4"><strong>Immagina di "aprire" i solidi e appoggiarli su un piano.</strong></p>
+  <div class="bg-[#C7EAFB] p-4 md:p-6 -ml-3 md:-ml-0 -mr-3 md:mr-0 mb-8">
+    <p class="mb-4"><strong>🔴 Immagina di "aprire" i solidi e appoggiarli su un piano.</strong></p>
 
-      <div class="grid grid-cols-3 gap-4 text-center">
-        <div>
-          <p class="font-bold mb-2">CUBO</p>
-          <%= image_tag "bus3_mat/p091/output-1743504902091_136_325_196_269.png", alt: "Sviluppo cubo", class: "mx-auto max-h-40" %>
-        </div>
-        <div>
-          <p class="font-bold mb-2">PARALLELEPIPEDO</p>
-          <%= image_tag "bus3_mat/p091/output-1743504902091_410_335_266_246.png", alt: "Sviluppo parallelepipedo", class: "mx-auto max-h-40" %>
-        </div>
-        <div>
-          <p class="font-bold mb-2">PIRAMIDE</p>
-          <%= image_tag "bus3_mat/p091/output-1743504902091_783_312_208_287.png", alt: "Sviluppo piramide", class: "mx-auto max-h-40" %>
-        </div>
+    <div class="grid grid-cols-3 gap-4 text-center mb-6">
+      <div>
+        <p class="font-bold mb-2">CUBO</p>
+        <%= image_tag "bus3_mat/p091/output-1743504902091_136_325_196_269.png", alt: "Sviluppo cubo", class: "mx-auto max-h-48" %>
+      </div>
+      <div>
+        <p class="font-bold mb-2">PARALLELEPIPEDO</p>
+        <%= image_tag "bus3_mat/p091/output-1743504902091_410_335_266_246.png", alt: "Sviluppo parallelepipedo", class: "mx-auto max-h-48" %>
+      </div>
+      <div>
+        <p class="font-bold mb-2">PIRAMIDE</p>
+        <%= image_tag "bus3_mat/p091/output-1743504902091_783_312_208_287.png", alt: "Sviluppo piramide", class: "mx-auto max-h-48" %>
       </div>
     </div>
 
-    <div class="bg-pink-100 border-2 border-pink-300 rounded-lg p-4 mb-6">
+    <!-- Teoria - box rosa dentro l'azzurro -->
+    <div class="bg-white border-3 border-pink-300 rounded-lg py-2 px-4 lg:max-w-2/3">
       <p class="mb-2"><strong>Ogni faccia di un solido è una <span class="text-cyan-600 font-bold">figura piana</span>, senza spessore.</strong></p>
-      <p class="mb-2"><strong>Ha solo due dimensioni: <span class="text-cyan-600 font-bold">lunghezza</span> e <span class="text-cyan-600 font-bold">larghezza</span>. Aprire un solido e appoggiarlo su un piano significa fare il suo <span class="text-cyan-600 font-bold">sviluppo</span>.</strong></p>
+      <p><strong>Ha solo due dimensioni: <span class="text-cyan-600 font-bold">lunghezza</span> e <span class="text-cyan-600 font-bold">larghezza</span>. Aprire un solido e appoggiarlo su un piano significa fare il suo <span class="text-cyan-600 font-bold">sviluppo</span>.</strong></p>
     </div>
   </div>
 
-  <!-- Esercizio 1 -->
-  <div class="mb-8">
-    <div class="flex items-start gap-3 mb-4">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-        1
+  <!-- Esercizi grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Esercizio 1 -->
+    <div class="mb-8 lg:mb-12">
+      <div class="flex items-start gap-3 mb-4">
+        <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          1
+        </div>
+        <p class="text-gray-700">
+          <strong>Cerchia solo le figure piane.</strong>
+        </p>
       </div>
-      <p class="text-gray-700">
-        <strong>Cerchia solo le figure piane.</strong>
-      </p>
-    </div>
 
-    <div class="flex justify-center">
-      <%= image_tag "bus3_mat/p091/output-1743504902091_110_805_437_367.png", alt: "Figure piane e solide", class: "max-w-md" %>
-    </div>
-    <p class="text-sm text-gray-500 mt-2 text-center">(Cerchia: rombo, cerchio, rettangolo, pentagono)</p>
-  </div>
-
-  <!-- Esercizio 2 -->
-  <div class="mb-8" data-controller="fill-blanks auto-advance">
-    <div class="flex items-start gap-3 mb-4">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-        2
-      </div>
-      <p class="text-gray-700">
-        <strong>Osserva lo sviluppo di questa piramide. Da quali figure piane è composto?</strong>
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
       <div class="flex justify-center">
+        <div class="relative inline-block" data-hotspot-editor-target="container">
+          <%= image_tag "bus3_mat/p091/output-1743504902091_110_805_437_367.png", alt: "Figure piane e solide", class: "max-w-full" %>
+          <%
+          hotspots = [
+
+            { label: "Rombo", top: "7.4902%", left: "5.91101%", width: "14.1077%", height: "17.6732%" },
+            { label: "Cerchio", top: "9.76907%", left: "36.6136%", width: "16.4496%", height: "20.4619%" },
+            { label: "Parallelepipedo", top: "0%", left: "72.6136%", width: "19.7283%", height: "25.7603%" },
+            { label: "Cubo", top: "38.0283%", left: "13.1265%", width: "19.26%", height: "23.8083%" },
+            { label: "Pentagono", top: "38.2397%", left: "46.8736%", width: "16.918%", height: "23.5294%" },
+            { label: "Triangolo", top: "36.634%", left: "83.4052%", width: "12.7026%", height: "17.9521%" },
+            { label: "Cilindro", top: "68.6144%", left: "0%", width: "18.3232%", height: "26.5969%" },
+            { label: "Rettangolo", top: "69.9412%", left: "36.8478%", width: "19.7283%", height: "23.5294%" },
+            { label: "Prisma", top: "68.8932%", left: "77.5504%", width: "19.26%", height: "25.7603%" }
+
+            # # Riga 1: rombo (piana), cerchio (piana), parallelepipedo (solida)
+            # { label: "Rombo", top: "10%", left: "12%", width: "12%", height: "16%", correct: true },
+            # { label: "Cerchio", top: "12%", left: "42%", width: "12%", height: "16%", correct: true },
+            # { label: "Parallelepipedo", top: "15%", left: "78%", width: "12%", height: "16%", correct: false },
+            # # Riga 2: cubo (solida), pentagono (piana), triangolo (piana)
+            # { label: "Cubo", top: "45%", left: "15%", width: "12%", height: "16%", correct: false },
+            # { label: "Pentagono", top: "48%", left: "45%", width: "12%", height: "16%", correct: true },
+            # { label: "Triangolo", top: "45%", left: "82%", width: "12%", height: "16%", correct: true },
+            # # Riga 3: cilindro (solida), rettangolo (piana), prisma (solida)
+            # { label: "Cilindro", top: "82%", left: "12%", width: "12%", height: "16%", correct: false },
+            # { label: "Rettangolo", top: "85%", left: "42%", width: "12%", height: "16%", correct: true },
+            # { label: "Prisma", top: "82%", left: "82%", width: "12%", height: "16%", correct: false },
+          ]
+          %>
+          <% hotspots.each do |hs| %>
+            <div class="absolute rounded-full border-0 border-cyan-500 bg-cyan-200/10 hover:bg-cyan-200/30 transition-colors"
+                 style="top: <%= hs[:top] %>; left: <%= hs[:left] %>; width: <%= hs[:width] %>; height: <%= hs[:height] %>;"
+                 data-hotspot-editor-target="hotspot"
+                 aria-label="<%= hs[:label] %>"
+                 data-correct="<%= hs[:correct] %>"
+                 data-action="mousedown->hotspot-editor#startDrag">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div class="mb-8 lg:mb-12" data-controller="fill-blanks auto-advance">
+      <div class="flex items-start gap-3 mb-4">
+        <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          2
+        </div>
+        <p class="text-gray-700">
+          <strong>Osserva lo sviluppo di questa piramide. Da quali figure piane è composto?</strong>
+        </p>
+      </div>
+
+      <div class="flex justify-center mb-4">
         <%= image_tag "bus3_mat/p091/output-1743504902091_688_838_252_232.png", alt: "Sviluppo piramide", class: "max-w-xs" %>
       </div>
-      <div class="space-y-3">
-        <div class="flex items-center gap-2">
-          <span>•</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
-          <span>triangoli</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span>•</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
-          <span>quadrato</span>
+      <div class="border-4 border-cyan-400 rounded-lg p-3 max-w-xs mx-auto">
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-red-500">•</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+            <span>triangoli</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-red-500">•</span>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
+                   class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+            <span>quadrato</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'cyan' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

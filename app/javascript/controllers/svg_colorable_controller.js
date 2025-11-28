@@ -17,7 +17,7 @@ export default class extends Controller {
   toggleCell(event) {
     const cell = event.currentTarget
 
-    if (cell.tagName === 'path' || cell.tagName === 'rect' || cell.tagName === 'circle' || cell.tagName === 'polygon') {
+    if (cell.tagName === 'path' || cell.tagName === 'rect' || cell.tagName === 'circle' || cell.tagName === 'polygon' || cell.tagName === 'ellipse') {
       const currentFill = cell.getAttribute('fill')
 
       // Se la cella ha il colore di default, applica il colore attivo
@@ -48,7 +48,7 @@ export default class extends Controller {
   // Metodo per resettare tutte le celle
   reset() {
     this.cellTargets.forEach(cell => {
-      if (cell.tagName === 'path' || cell.tagName === 'rect' || cell.tagName === 'circle' || cell.tagName === 'polygon') {
+      if (cell.tagName === 'path' || cell.tagName === 'rect' || cell.tagName === 'circle' || cell.tagName === 'polygon' || cell.tagName === 'ellipse') {
         cell.setAttribute('fill', this.defaultColorValue)
       }
     })
