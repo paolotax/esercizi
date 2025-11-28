@@ -1,12 +1,114 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p101/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 -mx-3 md:mx-0 mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        1
+      </div>
+      <p class="text-gray-700">
+        <strong>Leggi, osserva e completa.</strong>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      <div class="flex justify-center">
+        <%= image_tag "bus3_mat/p101/p101_01.jpg", alt: "Poligoni A e B su griglia", class: "max-w-md" %>
+      </div>
+      <div>
+        <p class="mb-4">Per calcolare l'area, bisogna scegliere una figura piana come <strong>unità di misura</strong>, per esempio il quadretto (<span class="inline-block w-4 h-4 bg-blue-200 border border-blue-400"></span>).</p>
+        <p>Poi si conta quante volte l'unità di misura è contenuta nella superficie da misurare.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center mt-6">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2">
+          <span>Area poligono A = 15</span>
+          <span class="inline-block w-4 h-4 bg-blue-200 border border-blue-400"></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span>Area poligono B =</span>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="12"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+          <span class="inline-block w-4 h-4 bg-blue-200 border border-blue-400"></span>
+        </div>
+      </div>
+      <div class="bg-white border-3 border-pink-300 rounded-lg py-2 px-4">
+        <p><strong>L'<span class="text-cyan-600 font-bold">area</span> di un poligono è la misura della superficie.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+        2
+      </div>
+      <p class="text-gray-700">
+        <strong>Misura la superficie di questi poligoni. Usa come unità di misura il quadretto.</strong>
+      </p>
+    </div>
+
+    <div class="flex justify-center">
+      <%= image_tag "bus3_mat/p101/p101_02.jpg", alt: "Poligoni A-F su griglia per calcolo area", class: "max-w-3xl w-full" %>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+      <div class="flex items-center gap-2">
+        <span>Area A =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="8"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span class="inline-block w-4 h-4 bg-blue-200 border border-blue-400"></span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span>Area B =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span class="inline-block w-4 h-4 bg-blue-200 border border-blue-400"></span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span>Area C =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="12"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span class="inline-block w-4 h-4 bg-blue-200 border border-blue-400"></span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span>Area D =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="14"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span class="inline-block w-4 h-4 bg-blue-200 border border-blue-400"></span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span>Area E =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="18"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span class="inline-block w-4 h-4 bg-blue-200 border border-blue-400"></span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span>Area F =</span>
+        <input type="text" data-fill-blanks-target="input" data-correct-answer="12"
+               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric">
+        <span class="inline-block w-4 h-4 bg-blue-200 border border-blue-400"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quaderno -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "p. 166", pagina_path("bus3_mat_p166"), class: "text-cyan-600 font-bold hover:underline" %>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>

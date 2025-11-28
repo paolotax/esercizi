@@ -1,12 +1,73 @@
-<% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
+<div class="max-w-4xl mx-auto p-4 lg:p-8"
+     data-controller="exercise-checker fill-blanks auto-advance text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
   <!-- Header -->
-  <%= render 'shared/page_header', pagina: @pagina %>
+  <% if @pagina.present? %>
+    <%= render 'shared/page_header', pagina: @pagina %>
+  <% end %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Consegna -->
+  <div class="mb-6">
+    <p class="text-gray-700">
+      <span class="text-red-500 font-bold">•</span>
+      <strong>Quante strade in questo paese!</strong> Osserva con attenzione il disegno e completa le frasi.
+    </p>
+  </div>
 
-  <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <!-- Immagine della mappa -->
+  <div class="mb-8">
+    <%= image_tag "bus3_mat/p104/p105_01.jpg",
+          alt: "Mappa del paese con Via Larga, Via delle Rose, Via della Neve, Via dei Colori, Viale delle Stelle",
+          class: "w-full h-auto rounded-lg border-2 border-gray-200" %>
+  </div>
+
+  <!-- Box GIOCO E RIPASSO -->
+  <div class="bg-cyan-50 border-2 border-cyan-200 rounded-lg p-4 md:p-6">
+    <div class="flex items-center gap-3 mb-6">
+      <span class="bg-gradient-to-r from-green-500 via-cyan-500 to-blue-500 text-white px-3 py-1 rounded font-bold whitespace-nowrap">G I O C O</span>
+      <span class="text-cyan-600 font-bold">E RIPASSO</span>
+    </div>
+
+    <div class="space-y-6">
+      <!-- Domanda 1 -->
+      <div>
+        <p class="mb-2">
+          <span class="text-red-500 font-bold">•</span>
+          Le strade perpendicolari a Viale delle Stelle sono
+        </p>
+        <div class="ml-4">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="Via Larga, Via delle Rose, Via della Neve, Via dei Colori"
+                 class="w-full px-3 py-2 border-b-2 border-dotted border-gray-400 bg-transparent">
+        </div>
+      </div>
+
+      <!-- Domanda 2 -->
+      <div>
+        <p class="mb-2">
+          <span class="text-red-500 font-bold">•</span>
+          Scrivi almeno una strada parallela a Via Larga
+        </p>
+        <div class="ml-4">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="Via delle Rose|Via della Neve|Via dei Colori"
+                 class="w-full px-3 py-2 border-b-2 border-dotted border-gray-400 bg-transparent">
+        </div>
+      </div>
+
+      <!-- Domanda 3 -->
+      <div>
+        <p class="mb-2">
+          <span class="text-red-500 font-bold">•</span>
+          L'incrocio tra Via dei Fiori e Via della Neve forma due rette
+        </p>
+        <div class="ml-4">
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="incidenti|perpendicolari"
+                 class="w-full px-3 py-2 border-b-2 border-dotted border-gray-400 bg-transparent">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%= render 'shared/exercise_controls' %>
 </div>
