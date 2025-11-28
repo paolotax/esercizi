@@ -1,12 +1,148 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-4xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer fill-blanks auto-advance text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p109/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Box teoria -->
+  <div class="bg-pink-50 border-2 border-pink-200 rounded-lg p-4 mb-8">
+    <p class="mb-2">Il simbolo che rappresenta l'unità di misura si chiama <strong class="text-blue-600">marca</strong> e si riferisce sempre alla <strong class="text-blue-600">cifra delle unità</strong>.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+      <div class="bg-white p-3 rounded">
+        <p>21<span class="text-blue-600 font-bold">6</span> cm = 200 cm + 10 cm + 6 cm</p>
+        <p class="ml-8">= 2 m + 1 dm + <span class="text-blue-600 font-bold">6 cm</span></p>
+        <p class="mt-2 text-sm">• Se il numero è intero, la cifra dell'unità è l'ultima a destra.</p>
+      </div>
+      <div class="bg-white p-3 rounded">
+        <p>1<span class="text-blue-600 font-bold">7</span>,8 m = 10 m + 7 m + 0,8 m</p>
+        <p class="ml-8">= 1 dam + <span class="text-blue-600 font-bold">7 m</span> + 8 dm</p>
+        <p class="mt-2 text-sm">• Se il numero è decimale, la cifra dell'unità è l'ultima prima della virgola.</p>
+      </div>
+    </div>
+  </div>
 
-  <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <!-- Esercizio 1 -->
+  <div class="mb-16">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+      <p class="text-gray-700"><strong>Cerchia di blu la marca e la cifra a cui si riferisce. Segui l'esempio.</strong></p>
+    </div>
+    <p class="text-sm text-gray-500 mb-4">(Esercizio da svolgere sull'immagine)</p>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-16">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
+      <p class="text-gray-700"><strong>Cerchia la cifra delle unità e inserisci i numeri in tabella. Poi completa le equivalenze.</strong></p>
+    </div>
+
+    <div class="overflow-x-auto mb-4">
+      <table class="w-full border-collapse text-center text-sm">
+        <thead>
+          <tr class="text-blue-600">
+            <th class="p-2 border"></th>
+            <th class="bg-gray-100 p-2 border">km</th>
+            <th class="bg-gray-100 p-2 border">hm</th>
+            <th class="bg-gray-100 p-2 border">dam</th>
+            <th class="bg-gray-100 p-2 border">m</th>
+            <th class="bg-gray-100 p-2 border">dm</th>
+            <th class="bg-gray-100 p-2 border">cm</th>
+            <th class="bg-gray-100 p-2 border">mm</th>
+            <th class="p-2 border"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-2 border">164 m</td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border">1</td>
+            <td class="p-2 border">6</td>
+            <td class="p-2 border">4</td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border">= <input type="text" data-fill-blanks-target="input" data-correct-answer="1640" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> dm</td>
+          </tr>
+          <tr>
+            <td class="p-2 border">2300 cm</td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border">= <input type="text" data-fill-blanks-target="input" data-correct-answer="23" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> m</td>
+          </tr>
+          <tr>
+            <td class="p-2 border">83 hm</td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border">= <input type="text" data-fill-blanks-target="input" data-correct-answer="830" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> dam</td>
+          </tr>
+          <tr>
+            <td class="p-2 border">7 dam</td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border"></td>
+            <td class="p-2 border">= <input type="text" data-fill-blanks-target="input" data-correct-answer="7000" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cm</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Esercizio 3 -->
+  <div class="mb-16">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
+      <p class="text-gray-700"><strong>Completa come nell'esempio.</strong></p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="space-y-2">
+        <p>1 m e 50 cm = <span class="text-blue-600">150</span> cm</p>
+        <p>1 m e 80 cm = <input type="text" data-fill-blanks-target="input" data-correct-answer="180" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cm</p>
+        <p>1 m e 60 cm = <input type="text" data-fill-blanks-target="input" data-correct-answer="160" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cm</p>
+        <p>2 m = <input type="text" data-fill-blanks-target="input" data-correct-answer="200" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cm</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 4 -->
+  <div class="mb-16">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
+      <p class="text-gray-700"><strong>Scomponi le misure come nell'esempio.</strong></p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="space-y-2">
+        <p>26,38 m = <span class="text-blue-600">2 dam 6 m 3 dm 8 cm</span></p>
+        <p>12 dam = <input type="text" data-fill-blanks-target="input" data-correct-answer="1 hm 2 dam" class="w-40 border-b-2 border-dotted border-gray-400 bg-transparent"></p>
+        <p>23,7 dm = <input type="text" data-fill-blanks-target="input" data-correct-answer="2 m 3 dm 7 cm" class="w-40 border-b-2 border-dotted border-gray-400 bg-transparent"></p>
+        <p>3500 m = <input type="text" data-fill-blanks-target="input" data-correct-answer="3 km 5 hm" class="w-40 border-b-2 border-dotted border-gray-400 bg-transparent"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quaderno -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <span class="text-blue-600 font-bold">p. 167</span>
+  </div>
+
+  <%= render 'shared/exercise_controls' %>
 </div>

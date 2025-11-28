@@ -1,12 +1,157 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-4xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer fill-blanks hotspot-editor auto-advance text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p106/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 -mx-3 md:mx-0 mb-12">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+      <p class="text-gray-700"><strong>Leggi il testo nelle nuvolette, poi completa con:</strong> lunghezza • peso • tempo • capacità.</p>
+    </div>
 
-  <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+    <div class="relative" data-hotspot-editor-target="container">
+      <%= image_tag "bus3_mat/p106/p106_01.jpg", alt: "Nuvolette con misure", class: "w-full h-auto select-none pointer-events-none" %>
+
+      <div class="absolute inset-0">
+        <%
+        inputs_es1 = [
+          { label: "lunghezza del tavolo", top: "28.493%", left: "20.8208%", width: "15.5142%", height: "7.7495%", answer: "lunghezza" },
+          { label: "capacità della brocca", top: "28.493%", left: "79.783%", width: "16.5755%", height: "7.7495%", answer: "capacità" },
+          { label: "peso delle carote", top: "79.2525%", left: "19.533%", width: "15.7594%", height: "6.7475%", answer: "peso" },
+          { label: "tempo della gara", top: "79.7535%", left: "79.0849%", width: "13.7547%", height: "7.7495%", answer: "tempo" }
+        ]
+        %>
+
+        <% inputs_es1.each do |input| %>
+          <div class="absolute"
+               style="top: <%= input[:top] %>; left: <%= input[:left] %>; width: <%= input[:width] %>; height: <%= input[:height] %>;"
+               data-hotspot-editor-target="hotspot"
+               data-auto-advance-target="input"
+               data-action="mousedown->hotspot-editor#startDrag">
+            <input type="text"
+                   data-fill-blanks-target="input"
+                   data-correct-answer="<%= input[:answer] %>"
+                   class="w-full h-full py-2 bg-white/60 hover:bg-white/80 focus:bg-white border-2 text-black border-transparent hover:border-purple-500 focus:border-purple-600 rounded text-center font-bold text-sm transition-colors"
+                   aria-label="<%= input[:label] %>">
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Box teoria -->
+  <div class="bg-pink-50 border-2 border-pink-200 rounded-lg p-4 mb-8">
+    <p class="mb-2">Ogni giorno misuriamo il peso, la lunghezza, la capacità, il tempo...</p>
+    <p class="mb-2">Per permettere a tutti di misurare allo stesso modo sono state create le <strong class="text-blue-600">unità di misura convenzionali</strong>, cioè valide per tutti e utilizzate in quasi ogni Paese del mondo.</p>
+    <p class="font-bold">Le principali unità di misura convenzionali sono:</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-2 text-center">
+      <div><span class="text-blue-600 font-bold">il metro (m)</span><br>misura la <span class="text-blue-600">lunghezza</span></div>
+      <div><span class="text-blue-600 font-bold">il litro (ℓ)</span><br>misura la <span class="text-blue-600">capacità</span></div>
+      <div><span class="text-blue-600 font-bold">il chilogrammo (kg)</span><br>misura il <span class="text-blue-600">peso</span></div>
+      <div><span class="text-blue-600 font-bold">il secondo (s)</span><br>misura il <span class="text-blue-600">tempo</span></div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-16" data-controller="flower-matcher">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
+      <p class="text-gray-700"><strong>Collega ogni strumento di misura alla grandezza da misurare.</strong></p>
+    </div>
+
+    <div class="relative">
+      <!-- SVG Canvas per disegnare le linee -->
+      <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-30"
+           data-flower-matcher-target="canvas">
+      </svg>
+
+      <!-- Strumenti di misura (riga superiore) -->
+      <div class="flex justify-around mb-8 relative z-20">
+        <div class="bg-blue-100 border-2 border-blue-400 rounded-lg p-3 cursor-pointer hover:bg-blue-200 transition text-center"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="top-0"
+             data-pair="pair-tempo">
+          <div class="text-3xl mb-1">⏰</div>
+          <p class="text-sm font-bold">Sveglia</p>
+        </div>
+        <div class="bg-blue-100 border-2 border-blue-400 rounded-lg p-3 cursor-pointer hover:bg-blue-200 transition text-center"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="top-1"
+             data-pair="pair-capacita">
+          <div class="text-3xl mb-1">🫗</div>
+          <p class="text-sm font-bold">Dosatore</p>
+        </div>
+        <div class="bg-blue-100 border-2 border-blue-400 rounded-lg p-3 cursor-pointer hover:bg-blue-200 transition text-center"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="top-2"
+             data-pair="pair-peso">
+          <div class="text-3xl mb-1">⚖️</div>
+          <p class="text-sm font-bold">Bilancia</p>
+        </div>
+        <div class="bg-blue-100 border-2 border-blue-400 rounded-lg p-3 cursor-pointer hover:bg-blue-200 transition text-center"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="top-3"
+             data-pair="pair-lunghezza">
+          <div class="text-3xl mb-1">📏</div>
+          <p class="text-sm font-bold">Righello</p>
+        </div>
+      </div>
+
+      <!-- Grandezze da misurare (riga inferiore) -->
+      <div class="flex justify-around relative z-20">
+        <div class="bg-amber-100 border-2 border-amber-400 rounded-lg px-4 py-2 cursor-pointer hover:bg-amber-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="bottom-0"
+             data-pair="pair-peso">
+          <p class="font-bold text-center">peso</p>
+        </div>
+        <div class="bg-amber-100 border-2 border-amber-400 rounded-lg px-4 py-2 cursor-pointer hover:bg-amber-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="bottom-1"
+             data-pair="pair-tempo">
+          <p class="font-bold text-center">tempo</p>
+        </div>
+        <div class="bg-amber-100 border-2 border-amber-400 rounded-lg px-4 py-2 cursor-pointer hover:bg-amber-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="bottom-2"
+             data-pair="pair-capacita">
+          <p class="font-bold text-center">capacità</p>
+        </div>
+        <div class="bg-amber-100 border-2 border-amber-400 rounded-lg px-4 py-2 cursor-pointer hover:bg-amber-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="bottom-3"
+             data-pair="pair-lunghezza">
+          <p class="font-bold text-center">lunghezza</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pulsante reset -->
+    <div class="mt-4 flex gap-3 items-center">
+      <button class="bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-12 h-12"
+              data-action="click->flower-matcher#reset"
+              title="Ricomincia collegamenti">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <%= render 'shared/exercise_controls' %>
 </div>

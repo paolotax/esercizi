@@ -1,12 +1,204 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-4xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer fill-blanks auto-advance text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p114/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 -->
+  <div class="mb-16">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+      <p class="text-gray-700"><strong>Per ogni misura colora il riquadro con la misura equivalente.</strong></p>
+    </div>
 
-  <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div>
+        <p class="text-blue-600 font-bold mb-2 text-center">5 hm</p>
+        <div class="space-y-2">
+          <div class="border-2 border-gray-300 rounded p-2 text-center">50 dam</div>
+          <div class="border-2 border-gray-300 rounded p-2 text-center">500 dam</div>
+        </div>
+      </div>
+      <div>
+        <p class="text-blue-600 font-bold mb-2 text-center">3 km</p>
+        <div class="space-y-2">
+          <div class="border-2 border-gray-300 rounded p-2 text-center">3000 m</div>
+          <div class="border-2 border-gray-300 rounded p-2 text-center">300 m</div>
+        </div>
+      </div>
+      <div>
+        <p class="text-blue-600 font-bold mb-2 text-center">400 m</p>
+        <div class="space-y-2">
+          <div class="border-2 border-gray-300 rounded p-2 text-center">4 hm</div>
+          <div class="border-2 border-gray-300 rounded p-2 text-center">40 hm</div>
+        </div>
+      </div>
+      <div>
+        <p class="text-blue-600 font-bold mb-2 text-center">700 cm</p>
+        <div class="space-y-2">
+          <div class="border-2 border-gray-300 rounded p-2 text-center">7 m</div>
+          <div class="border-2 border-gray-300 rounded p-2 text-center">7 dm</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-16" data-controller="flower-matcher">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
+      <p class="text-gray-700"><strong>Unisci le misure equivalenti. Segui l'esempio.</strong></p>
+    </div>
+
+    <div class="relative">
+      <!-- SVG Canvas per disegnare le linee -->
+      <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-30"
+           data-flower-matcher-target="canvas">
+      </svg>
+
+      <!-- Misure riga superiore -->
+      <div class="flex justify-around mb-8 relative z-20">
+        <div class="bg-blue-100 border-2 border-blue-400 rounded-lg px-3 py-2 cursor-pointer hover:bg-blue-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="top-0"
+             data-pair="pair-15hl">
+          <p class="font-bold text-center">150 dal</p>
+        </div>
+        <div class="bg-blue-100 border-2 border-blue-400 rounded-lg px-3 py-2 cursor-pointer hover:bg-blue-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="top-1"
+             data-pair="pair-15cl">
+          <p class="font-bold text-center">150 ml</p>
+        </div>
+        <div class="bg-blue-100 border-2 border-blue-400 rounded-lg px-3 py-2 cursor-pointer hover:bg-blue-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="top-2"
+             data-pair="pair-50dl">
+          <p class="font-bold text-center">5000 ml</p>
+        </div>
+        <div class="bg-blue-100 border-2 border-blue-400 rounded-lg px-3 py-2 cursor-pointer hover:bg-blue-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="top-3"
+             data-pair="pair-5hl">
+          <p class="font-bold text-center">500 l</p>
+        </div>
+        <div class="bg-blue-100 border-2 border-blue-400 rounded-lg px-3 py-2 cursor-pointer hover:bg-blue-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="top-4"
+             data-pair="pair-500dal">
+          <p class="font-bold text-center">50 hl</p>
+        </div>
+      </div>
+
+      <!-- Misure riga inferiore -->
+      <div class="flex justify-around relative z-20">
+        <div class="bg-cyan-100 border-2 border-cyan-400 rounded-lg px-3 py-2 cursor-pointer hover:bg-cyan-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="bottom-0"
+             data-pair="pair-15cl">
+          <p class="font-bold text-center">15 cl</p>
+        </div>
+        <div class="bg-cyan-100 border-2 border-cyan-400 rounded-lg px-3 py-2 cursor-pointer hover:bg-cyan-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="bottom-1"
+             data-pair="pair-50dl">
+          <p class="font-bold text-center">50 dl</p>
+        </div>
+        <div class="bg-cyan-100 border-2 border-cyan-400 rounded-lg px-3 py-2 cursor-pointer hover:bg-cyan-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="bottom-2"
+             data-pair="pair-500dal">
+          <p class="font-bold text-center">500 dal</p>
+        </div>
+        <div class="bg-cyan-100 border-2 border-cyan-400 rounded-lg px-3 py-2 cursor-pointer hover:bg-cyan-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="bottom-3"
+             data-pair="pair-15hl">
+          <p class="font-bold text-center">15 hl</p>
+        </div>
+        <div class="bg-cyan-100 border-2 border-cyan-400 rounded-lg px-3 py-2 cursor-pointer hover:bg-cyan-200 transition"
+             data-action="click->flower-matcher#selectFlower"
+             data-flower-matcher-target="flower"
+             data-flower-id="bottom-4"
+             data-pair="pair-5hl">
+          <p class="font-bold text-center">5 hl</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pulsante reset -->
+    <div class="mt-4 flex gap-3 items-center">
+      <button class="bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-12 h-12"
+              data-action="click->flower-matcher#reset"
+              title="Ricomincia collegamenti">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Esercizio 3 -->
+  <div class="mb-16">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
+      <p class="text-gray-700"><strong>Completa le equivalenze.</strong></p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="text-center">
+        <div class="bg-red-100 rounded-full w-16 h-16 mx-auto flex items-center justify-center mb-2">6 g</div>
+        <p><input type="text" data-fill-blanks-target="input" data-correct-answer="60" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> dg</p>
+        <p><input type="text" data-fill-blanks-target="input" data-correct-answer="600" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cg</p>
+        <p><input type="text" data-fill-blanks-target="input" data-correct-answer="6000" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> mg</p>
+      </div>
+      <div class="text-center">
+        <div class="bg-red-100 rounded-full w-16 h-16 mx-auto flex items-center justify-center mb-2">8 kg</div>
+        <p><input type="text" data-fill-blanks-target="input" data-correct-answer="80" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> hg</p>
+        <p><input type="text" data-fill-blanks-target="input" data-correct-answer="800" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> dag</p>
+        <p><input type="text" data-fill-blanks-target="input" data-correct-answer="8000" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> g</p>
+      </div>
+      <div class="text-center">
+        <div class="bg-red-100 rounded-full w-16 h-16 mx-auto flex items-center justify-center mb-2">300 dag</div>
+        <p><input type="text" data-fill-blanks-target="input" data-correct-answer="3000" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> g</p>
+        <p><input type="text" data-fill-blanks-target="input" data-correct-answer="30" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> hg</p>
+        <p><input type="text" data-fill-blanks-target="input" data-correct-answer="3" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> kg</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 4 -->
+  <div class="mb-16">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
+      <p class="text-gray-700"><strong>Leggi e completa.</strong></p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <p><strong>a.</strong> Ludovico compra un rotolo di spago lungo 53 m; ne usa 19 m. Gli restano <input type="text" data-fill-blanks-target="input" data-correct-answer="34" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> m di spago.</p>
+        <p><strong>b.</strong> Da casa di Thomas al parco c'è 1 km. Se ha già percorso 350 m, gli restano ancora da percorrere <input type="text" data-fill-blanks-target="input" data-correct-answer="650" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> m di strada.</p>
+      </div>
+      <div class="space-y-3">
+        <p><strong>c.</strong> Una bottiglia contiene 1 ℓ di aranciata. Claudio deve riempire 10 bicchieri. In ogni bicchiere versa <input type="text" data-fill-blanks-target="input" data-correct-answer="1" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> dℓ di aranciata.</p>
+        <p><strong>d.</strong> Stefania compra un sacco di patate da 5 kg. Ne regala 15 hg a Matteo. Le restano <input type="text" data-fill-blanks-target="input" data-correct-answer="35" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> hg di patate.</p>
+      </div>
+    </div>
+  </div>
+
+  <%= render 'shared/exercise_controls' %>
 </div>

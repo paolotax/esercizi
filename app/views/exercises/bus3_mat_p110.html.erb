@@ -1,12 +1,119 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-4xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer fill-blanks auto-advance text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p110/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Esercizio 1 -->
+  <div class="bg-[#C7EAFB] p-4 md:p-6 -mx-3 md:mx-0 mb-12">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+      <p class="text-gray-700"><strong>Leggi e osserva la tabella.</strong></p>
+    </div>
 
-  <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+    <p class="mb-4">L'unità di misura fondamentale di capacità è il <strong class="text-cyan-500">litro</strong>. Il suo simbolo è <strong class="text-cyan-500">ℓ</strong>.</p>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Per misurare <strong>capacità superiori al litro</strong>, come quella di una piscina o di una botte, si usano i <strong class="text-pink-500">multipli</strong> del litro.</li>
+      <li>Per misurare <strong>capacità inferiori al litro</strong>, come quella di una lattina di aranciata, si usano i <strong class="text-green-500">sottomultipli</strong> del litro.</li>
+    </ul>
+
+    <!-- Tabella misure -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-center text-sm">
+        <thead>
+          <tr>
+            <th colspan="2" class="bg-pink-100 text-pink-500 p-2 border font-bold">MULTIPLI</th>
+            <th class="bg-cyan-100 text-cyan-600 p-2 border font-bold">UNITÀ<br>FONDAMENTALE</th>
+            <th colspan="3" class="bg-green-100 text-green-500 p-2 border font-bold">SOTTOMULTIPLI</th>
+          </tr>
+          <tr>
+            <th class="bg-white p-2 border"><span class="text-pink-500">ETTOLITRO</span><br><span class="text-pink-500">hℓ</span></th>
+            <th class="bg-white p-2 border"><span class="text-pink-500">DECALITRO</span><br><span class="text-pink-500">daℓ</span></th>
+            <th class="bg-white p-2 border"><span class="text-cyan-500">LITRO</span><br><span class="text-cyan-500">ℓ</span></th>
+            <th class="bg-white p-2 border"><span class="text-green-500">DECILITRO</span><br><span class="text-green-500">dℓ</span></th>
+            <th class="bg-white p-2 border"><span class="text-green-500">CENTILITRO</span><br><span class="text-green-500">cℓ</span></th>
+            <th class="bg-white p-2 border"><span class="text-green-500">MILLILITRO</span><br><span class="text-green-500">mℓ</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-2 bg-white border">100 ℓ</td>
+            <td class="p-2 bg-white border">10 ℓ</td>
+            <td class="p-2 bg-white border">1 ℓ</td>
+            <td class="p-2 bg-white border">0,1 ℓ</td>
+            <td class="p-2 bg-white border">0,01 ℓ</td>
+            <td class="p-2 bg-white border">0,001 ℓ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bg-white border-4 border-purple-400 rounded-lg p-3 mt-4 text-center">
+      <p>Ogni misura è <strong class="text-pink-500">10 volte minore</strong> di quella alla sua sinistra e <strong class="text-pink-500">10 volte maggiore</strong> di quella alla sua destra.</p>
+    </div>
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div class="mb-16">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
+      <p class="text-gray-700"><strong>Osserva il disegno della caraffa graduata che contiene 1 litro di liquido. Poi completa.</strong></p>
+    </div>
+
+    <div class="space-y-2">
+      <p><span class="text-red-500">•</span> Sul recipiente da 1 litro sono segnate 10 tacche.</p>
+      <p><span class="text-red-500">•</span> La quantità di liquido compresa tra una tacca e l'altra è il <strong class="text-cyan-500">decilitro (dℓ)</strong>.</p>
+      <p><span class="text-red-500">•</span> In tutto ci sono <input type="text" data-fill-blanks-target="input" data-correct-answer="10" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> tacche, quindi in 1 litro ci sono <input type="text" data-fill-blanks-target="input" data-correct-answer="10" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> decilitri.</p>
+    </div>
+  </div>
+
+  <!-- Esercizio 3 -->
+  <div class="mb-16">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
+      <p class="text-gray-700"><strong>Leggi e completa.</strong></p>
+    </div>
+
+    <div class="bg-gray-100 p-3 rounded mb-4 text-center">
+      <p>1 ℓ = 10 dℓ = 100 cℓ = 1000 mℓ</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="space-y-2">
+        <p><span class="text-red-500">•</span> Quanti centilitri in 1 litro? <input type="text" data-fill-blanks-target="input" data-correct-answer="100" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></p>
+        <p><span class="text-red-500">•</span> Quanti centilitri in 1 decilitro? <input type="text" data-fill-blanks-target="input" data-correct-answer="10" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></p>
+        <p><span class="text-red-500">•</span> Quanti millilitri in 1 litro? <input type="text" data-fill-blanks-target="input" data-correct-answer="1000" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></p>
+      </div>
+      <div class="space-y-2">
+        <p><span class="text-red-500">•</span> Quanti millilitri in 1 centilitro? <input type="text" data-fill-blanks-target="input" data-correct-answer="10" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></p>
+        <p><span class="text-red-500">•</span> Quanti millilitri in 1 decilitro? <input type="text" data-fill-blanks-target="input" data-correct-answer="100" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></p>
+        <p><span class="text-red-500">•</span> Quanti decilitri in 1 litro? <input type="text" data-fill-blanks-target="input" data-correct-answer="10" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esercizio 4 -->
+  <div class="mb-16">
+    <div class="flex items-start gap-3 mb-4">
+      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
+      <p class="text-gray-700"><strong>Scrivi quanto manca per arrivare a 1 ℓ.</strong></p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <p>90 cℓ + <input type="text" data-fill-blanks-target="input" data-correct-answer="10" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cℓ = 1 ℓ</p>
+      <p>4 dℓ + <input type="text" data-fill-blanks-target="input" data-correct-answer="6" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> dℓ = 1 ℓ</p>
+    </div>
+  </div>
+
+  <!-- Quaderno -->
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span> <span class="text-blue-600 font-bold">p. 168</span>
+  </div>
+
+  <%= render 'shared/exercise_controls' %>
 </div>
