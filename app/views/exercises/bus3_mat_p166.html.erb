@@ -10,113 +10,76 @@
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Box definizione -->
-  <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-4 mb-8">
+  <div class="bg-white border-4 border-cyan-300 rounded-lg p-4 mb-8 mx-auto max-w-xl">
     <p class="text-gray-700">
       L'<span class="text-cyan-600 font-bold">area</span> è la <strong>misura della superficie</strong> di un poligono.
     </p>
     <div class="flex items-center gap-4 mt-4">
-      <div class="grid grid-cols-7 gap-0 border border-cyan-400">
-        <% 21.times do %>
-          <div class="w-4 h-4 bg-cyan-200 border border-cyan-300"></div>
-        <% end %>
+      <div class="relative">
+        <span class="absolute -top-4 -left-1 text-gray-600 font-bold">D</span>
+        <span class="absolute -top-4 right-0 text-gray-600 font-bold">C</span>
+        <span class="absolute -bottom-5 -left-1 text-gray-600 font-bold">A</span>
+        <span class="absolute -bottom-5 right-0 text-gray-600 font-bold">B</span>
+        <div class="grid grid-cols-7 gap-0 border border-cyan-400">
+          <% 21.times do %>
+            <div class="w-4 h-4 bg-cyan-200 border border-cyan-300"></div>
+          <% end %>
+        </div>
       </div>
       <p class="text-cyan-700 font-bold">A = 21 <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500 align-middle"></span></p>
     </div>
   </div>
 
   <!-- Esercizio 1 -->
-  <div class="mb-12" data-controller="fill-blanks auto-advance svg-colorable">
+  <div class="mb-12" data-controller="fill-blanks auto-advance">
     <div class="flex items-start gap-3 mb-6">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         1
       </div>
       <p class="text-gray-700">
         <strong>Utilizza l'unità di misura indicata e calcola l'area di questi poligoni.</strong><br>
-        <span class="text-sm">Poi colora con lo stesso colore i poligoni che hanno la stessa area. Infine rispondi.</span>
+        Poi colora con lo stesso colore i poligoni che hanno la stessa area. Infine rispondi.
       </p>
     </div>
 
-    <div class="bg-gray-100 p-4 rounded-lg mb-6">
-      <p class="text-sm text-gray-600 mb-4">Unità di misura: <span class="inline-block w-4 h-4 border border-gray-400 bg-white"></span></p>
+    <!-- Hotspot su immagine -->
+    <div class="relative mb-6"
+         data-controller="hotspot-editor"
+         data-hotspot-editor-target="container">
 
-      <!-- Uso l'immagine originale per la griglia con i poligoni -->
-      <div class="flex justify-center mb-4">
-        <%= image_tag "bus3_mat/p166/p166_02.jpg", alt: "Poligoni su griglia", class: "max-w-full rounded" %>
-      </div>
+      <%= image_tag "bus3_mat/p166/p166_02.jpg",
+          alt: "Poligoni su griglia per calcolo area",
+          class: "w-full h-full object-cover select-none pointer-events-none" %>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-        <div class="flex items-center gap-2">
-          <span class="text-cyan-600 font-bold">A =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
-                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
-          <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500"></span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-cyan-600 font-bold">A =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="8"
-                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
-          <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500"></span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-cyan-600 font-bold">A =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
-                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
-          <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500"></span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-cyan-600 font-bold">A =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="12"
-                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
-          <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500"></span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-cyan-600 font-bold">A =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
-                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
-          <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500"></span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-cyan-600 font-bold">A =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
-                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
-          <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500"></span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-cyan-600 font-bold">A =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="8"
-                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
-          <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500"></span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-cyan-600 font-bold">A =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="12"
-                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
-          <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500"></span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-cyan-600 font-bold">A =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
-                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
-          <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500"></span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-cyan-600 font-bold">A =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
-                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
-          <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500"></span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-cyan-600 font-bold">A =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
-                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
-          <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500"></span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-cyan-600 font-bold">A =</span>
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
-                 class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 text-center bg-white" inputmode="numeric">
-          <span class="inline-block w-4 h-4 bg-cyan-400 border border-cyan-500"></span>
-        </div>
+      <div class="absolute inset-0">
+        <% inputs = [
+          { label: "Area 1", top: "26.6019%", left: "9.81523%", width: "3.96864%", height: "5.15305%", answer: "24" },
+          { label: "Area 2", top: "26.6019%", left: "40.0705%", width: "4.75252%", height: "5.45915%", answer: "16" },
+          { label: "Area 3", top: "10.3268%", left: "74.8309%", width: "4.41657%", height: "5.45916%", answer: "24" },
+          { label: "Area 4", top: "38.9859%", left: "30.8001%", width: "4.46925%", height: "5.77834%", answer: "22" },
+          { label: "Area 5", top: "54.458%", left: "72.898%", width: "4.24145%", height: "5.62267%", answer: "16" },
+          { label: "Area 6", top: "48.419%", left: "86.4761%", width: "5.38041%", height: "5.93401%", answer: "20" },
+          { label: "Area 7", top: "80.37%", left: "10.0949%", width: "3.89977%", height: "5.15567%", answer: "24" },
+          { label: "Area 8", top: "90.2948%", left: "40.1624%", width: "4.19261%", height: "4.6939%", answer: "20" },
+          { label: "Area 9", top: "89.7859%", left: "68.29%", width: "4.08063%", height: "5.45915%", answer: "20" },
+          { label: "Area 10", top: "89.6328%", left: "89.0269%", width: "4.52856%", height: "5.76526%", answer: "16" }
+        ] %>
+
+        <% inputs.each do |input| %>
+          <div class="absolute"
+               style="top: <%= input[:top] %>; left: <%= input[:left] %>; width: <%= input[:width] %>; height: <%= input[:height] %>;"
+               data-hotspot-editor-target="hotspot"
+               data-action="mousedown->hotspot-editor#startDrag">
+            <input type="text"
+                   data-fill-blanks-target="input"
+                   data-auto-advance-target="input"
+                   data-correct-answer="<%= input[:answer] %>"
+                   class="w-full h-full py-1 bg-white/70 hover:bg-white/90 focus:bg-white border-2 text-black border-transparent hover:border-cyan-500 focus:border-cyan-600 rounded text-center font-bold transition-colors"
+                   maxlength="2"
+                   inputmode="numeric"
+                   aria-label="<%= input[:label] %>">
+          </div>
+        <% end %>
       </div>
     </div>
 

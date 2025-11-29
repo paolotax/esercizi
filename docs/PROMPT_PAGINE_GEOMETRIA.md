@@ -180,6 +180,46 @@ Questi due file sono i riferimenti principali per:
 </div>
 ```
 
+### E. Evidenziatore Parole/Cifre (word-highlighter)
+
+**IMPORTANTE**: Quando l'esercizio originale dice "Cerchia" o "Sottolinea", nella versione digitale la consegna deve sempre dire **"Colora"**, perché l'interazione è un click che colora/evidenzia.
+
+```erb
+<div class="mb-12" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+  <div class="flex items-center gap-3 mb-6">
+    <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+      1
+    </div>
+    <p class="text-gray-700"><strong>Colora di
+      <span class="w-5 h-5 bg-blue-300 rounded inline-block align-middle cursor-pointer ring-2 ring-transparent hover:ring-blue-500"
+            data-word-highlighter-target="colorBox"
+            data-color="blue"
+            data-action="click->word-highlighter#selectColor"></span>
+      <span class="text-blue-500">blu la parte intera</span> e di
+      <span class="w-5 h-5 bg-yellow-300 rounded inline-block align-middle cursor-pointer ring-2 ring-transparent hover:ring-yellow-500"
+            data-word-highlighter-target="colorBox"
+            data-color="yellow"
+            data-action="click->word-highlighter#selectColor"></span>
+      <span class="text-yellow-500">giallo la parte decimale</span> di questi numeri.</strong></p>
+  </div>
+
+  <div class="grid grid-cols-3 md:grid-cols-4 gap-4 text-center text-xl">
+    <div class="p-3 bg-gray-50 rounded cursor-pointer">
+      <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">2</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">4</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">1</span>
+    </div>
+  </div>
+</div>
+```
+
+**Colori disponibili**: blue, yellow, red, green, pink, purple, orange, cyan
+
+**Attributi chiave**:
+- `data-word-highlighter-multi-color-value="true"` - abilita più colori
+- `data-word-highlighter-target="colorBox"` - box selettore colore
+- `data-word-highlighter-target="word"` - elemento cliccabile
+- `data-correct="blue"` - colore corretto per la verifica
+- `data-correct=""` - elemento che NON deve essere colorato
+
 ---
 
 ## Immagini
