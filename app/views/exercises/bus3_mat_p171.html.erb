@@ -10,36 +10,51 @@
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Esercizio 1 -->
-  <div class="mb-12">
+  <div class="mb-12" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
     <div class="flex items-start gap-3 mb-6">
       <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         1
       </div>
       <p class="text-gray-700">
-        <strong>Cerchia nei seguenti numeri la cifra 8 quando vale 8 h.</strong>
+        <strong>Colora la cifra
+          <span class="w-5 h-5 bg-green-300 rounded inline-block align-middle cursor-pointer ring-2 ring-transparent hover:ring-green-500"
+                data-word-highlighter-target="colorBox"
+                data-color="green"
+                data-action="click->word-highlighter#selectColor"></span>
+          <span class="text-green-500">8 quando vale 8 h</span>.</strong>
       </p>
     </div>
 
-    <div class="flex flex-wrap gap-4 text-xl">
-      <span class="px-3 py-1">874</span>
+    <div class="flex flex-wrap gap-4 text-xl font-bold">
+      <!-- 874: 8=h ✓ -->
+      <span class="px-3 py-1"><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span></span>
       <span>•</span>
-      <span class="px-3 py-1">1 785</span>
+      <!-- 1785: 8=da ✗ -->
+      <span class="px-3 py-1"><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span></span>
       <span>•</span>
-      <span class="px-3 py-1">3 848</span>
+      <!-- 3848: primo 8=h ✓, secondo 8=u ✗ -->
+      <span class="px-3 py-1"><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span></span>
       <span>•</span>
-      <span class="px-3 py-1">4 586</span>
+      <!-- 4586: nessun 8 in h -->
+      <span class="px-3 py-1"><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span></span>
       <span>•</span>
-      <span class="px-3 py-1">8 888</span>
+      <!-- 8888: secondo 8=h ✓ -->
+      <span class="px-3 py-1"><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span></span>
       <span>•</span>
-      <span class="px-3 py-1">388</span>
+      <!-- 388: 8=da ✗, 8=u ✗ -->
+      <span class="px-3 py-1"><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span></span>
       <span>•</span>
-      <span class="px-3 py-1">2 784</span>
+      <!-- 2784: nessun 8 in h -->
+      <span class="px-3 py-1"><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span></span>
       <span>•</span>
-      <span class="px-3 py-1">1 948</span>
+      <!-- 1948: nessun 8 in h -->
+      <span class="px-3 py-1"><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">9</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span></span>
       <span>•</span>
-      <span class="px-3 py-1">2 785</span>
+      <!-- 2785: nessun 8 in h -->
+      <span class="px-3 py-1"><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span></span>
       <span>•</span>
-      <span class="px-3 py-1">848</span>
+      <!-- 848: primo 8=h ✓, secondo 8=u ✗ -->
+      <span class="px-3 py-1"><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span></span>
     </div>
   </div>
 

@@ -9,51 +9,94 @@
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Esercizio 1: Cerchia le cifre -->
-  <div class="mb-8" data-controller="fill-blanks auto-advance">
+  <!-- Esercizio 1: Colora le cifre -->
+  <div class="mb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
     <div class="flex items-start gap-3 mb-4">
       <div class="bg-yellow-400 rounded-full w-10 h-10 flex items-center justify-center border-4 border-cyan-500 flex-shrink-0">
         <span class="text-cyan-600 font-bold text-xs text-center leading-tight">1</span>
       </div>
       <div>
         <span class="bg-yellow-400 text-cyan-600 px-2 py-0.5 rounded text-sm font-bold">IMPARARE TUTTI</span>
-        <p class="text-gray-700 mt-1"><strong>Cerchia di verde la cifra delle centinaia.</strong></p>
+        <p class="text-gray-700 mt-1"><strong>Colora di
+          <span class="w-5 h-5 bg-green-300 rounded inline-block align-middle cursor-pointer ring-2 ring-transparent hover:ring-green-500"
+                data-word-highlighter-target="colorBox"
+                data-color="green"
+                data-action="click->word-highlighter#selectColor"></span>
+          <span class="text-green-500">verde le centinaia</span>, di
+          <span class="w-5 h-5 bg-red-300 rounded inline-block align-middle cursor-pointer ring-2 ring-transparent hover:ring-red-500"
+                data-word-highlighter-target="colorBox"
+                data-color="red"
+                data-action="click->word-highlighter#selectColor"></span>
+          <span class="text-red-500">rosso le decine</span> e di
+          <span class="w-5 h-5 bg-blue-300 rounded inline-block align-middle cursor-pointer ring-2 ring-transparent hover:ring-blue-500"
+                data-word-highlighter-target="colorBox"
+                data-color="blue"
+                data-action="click->word-highlighter#selectColor"></span>
+          <span class="text-blue-500">blu le unità</span>.</strong></p>
       </div>
     </div>
 
+    <!-- Colora di verde la cifra delle centinaia -->
+    <p class="text-gray-700 mb-2"><strong>Colora di <span class="text-green-500">verde</span> la cifra delle centinaia.</strong></p>
     <div class="flex flex-wrap gap-4 mb-6 text-xl font-bold">
-      <span>152</span><span class="text-cyan-500">•</span>
-      <span>871</span><span class="text-cyan-500">•</span>
-      <span>529</span><span class="text-cyan-500">•</span>
-      <span>447</span><span class="text-cyan-500">•</span>
-      <span>646</span><span class="text-cyan-500">•</span>
-      <span>708</span><span class="text-cyan-500">•</span>
-      <span>370</span><span class="text-cyan-500">•</span>
-      <span>297</span>
+      <!-- 152: h=1 -->
+      <span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span></span><span class="text-cyan-500">•</span>
+      <!-- 871: h=8 -->
+      <span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span></span><span class="text-cyan-500">•</span>
+      <!-- 529: h=5 -->
+      <span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">9</span></span><span class="text-cyan-500">•</span>
+      <!-- 447: h=4 -->
+      <span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span></span><span class="text-cyan-500">•</span>
+      <!-- 646: h=6 -->
+      <span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span></span><span class="text-cyan-500">•</span>
+      <!-- 708: h=7 -->
+      <span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span></span><span class="text-cyan-500">•</span>
+      <!-- 370: h=3 -->
+      <span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span></span><span class="text-cyan-500">•</span>
+      <!-- 297: h=2 -->
+      <span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">9</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span></span>
     </div>
 
-    <p class="text-gray-700 mb-4"><strong>Cerchia di rosso la cifra delle decine.</strong></p>
+    <!-- Colora di rosso la cifra delle decine -->
+    <p class="text-gray-700 mb-2"><strong>Colora di <span class="text-red-500">rosso</span> la cifra delle decine.</strong></p>
     <div class="flex flex-wrap gap-4 mb-6 text-xl font-bold">
-      <span>460</span><span class="text-cyan-500">•</span>
-      <span>684</span><span class="text-cyan-500">•</span>
-      <span>36</span><span class="text-cyan-500">•</span>
-      <span>458</span><span class="text-cyan-500">•</span>
-      <span>309</span><span class="text-cyan-500">•</span>
-      <span>54</span><span class="text-cyan-500">•</span>
-      <span>250</span><span class="text-cyan-500">•</span>
-      <span>99</span>
+      <!-- 460: da=6 -->
+      <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span></span><span class="text-cyan-500">•</span>
+      <!-- 684: da=8 -->
+      <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span></span><span class="text-cyan-500">•</span>
+      <!-- 36: da=3 -->
+      <span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span></span><span class="text-cyan-500">•</span>
+      <!-- 458: da=5 -->
+      <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span></span><span class="text-cyan-500">•</span>
+      <!-- 309: da=0 -->
+      <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">9</span></span><span class="text-cyan-500">•</span>
+      <!-- 54: da=5 -->
+      <span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span></span><span class="text-cyan-500">•</span>
+      <!-- 250: da=5 -->
+      <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span></span><span class="text-cyan-500">•</span>
+      <!-- 99: da=9 -->
+      <span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">9</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">9</span></span>
     </div>
 
-    <p class="text-gray-700 mb-4"><strong>Cerchia di blu la cifra delle <span class="underline">unità</span>.</strong></p>
+    <!-- Colora di blu la cifra delle unità -->
+    <p class="text-gray-700 mb-2"><strong>Colora di <span class="text-blue-500">blu</span> la cifra delle <span class="underline">unità</span>.</strong></p>
     <div class="flex flex-wrap gap-4 text-xl font-bold">
-      <span>463</span><span class="text-cyan-500">•</span>
-      <span>39</span><span class="text-cyan-500">•</span>
-      <span>661</span><span class="text-cyan-500">•</span>
-      <span>301</span><span class="text-cyan-500">•</span>
-      <span>5</span><span class="text-cyan-500">•</span>
-      <span>50</span><span class="text-cyan-500">•</span>
-      <span>17</span><span class="text-cyan-500">•</span>
-      <span>565</span>
+      <!-- 463: u=3 -->
+      <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span></span><span class="text-cyan-500">•</span>
+      <!-- 39: u=9 -->
+      <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">9</span></span><span class="text-cyan-500">•</span>
+      <!-- 661: u=1 -->
+      <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span></span><span class="text-cyan-500">•</span>
+      <!-- 301: u=1 -->
+      <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span></span><span class="text-cyan-500">•</span>
+      <!-- 5: u=5 -->
+      <span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span></span><span class="text-cyan-500">•</span>
+      <!-- 50: u=0 -->
+      <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span></span><span class="text-cyan-500">•</span>
+      <!-- 17: u=7 -->
+      <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span></span><span class="text-cyan-500">•</span>
+      <!-- 565: u=5 -->
+      <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span></span>
     </div>
   </div>
 

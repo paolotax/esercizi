@@ -10,29 +10,102 @@
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Box teoria -->
-  <div class="bg-pink-50 border-2 border-pink-200 rounded-lg p-4 mb-8">
-    <p class="mb-2">Il simbolo che rappresenta l'unità di misura si chiama <strong class="text-blue-600">marca</strong> e si riferisce sempre alla <strong class="text-blue-600">cifra delle unità</strong>.</p>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-      <div class="bg-white p-3 rounded">
-        <p>21<span class="text-blue-600 font-bold">6</span> cm = 200 cm + 10 cm + 6 cm</p>
-        <p class="ml-8">= 2 m + 1 dm + <span class="text-blue-600 font-bold">6 cm</span></p>
-        <p class="mt-2 text-sm">• Se il numero è intero, la cifra dell'unità è l'ultima a destra.</p>
+  <div class="bg-pink-50 border-3 border-pink-200 rounded-lg p-4 mb-8">
+    <p class="mb-2">Il simbolo che rappresenta l'unità di misura si chiama <strong class="text-cyan-600">marca</strong> e si riferisce sempre alla <strong class="text-cyan-600">cifra delle unità</strong>.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 divide-x-2 divide-dotted divide-cyan-600 gap-4 mt-4">
+      <div class="">
+        <p><span class="inline-block w-16 text-right">21<span class="text-cyan-600 font-bold">6 cm</span></span> = 200 cm + 10 cm + 6 cm</p>
+        <p><span class="inline-block w-16 text-right"></span> = 2 m + 1 dm + <span class="text-cyan-600 font-bold">6 cm</span></p>
+        <div class="flex mt-4 text-sm">
+          <strong class="text-cyan-600 flex-shrink-0">•</strong>
+          <span class="ml-1">Se il numero è intero, la cifra dell'unità è l'ultima a destra.</span>
+        </div>
       </div>
-      <div class="bg-white p-3 rounded">
-        <p>1<span class="text-blue-600 font-bold">7</span>,8 m = 10 m + 7 m + 0,8 m</p>
-        <p class="ml-8">= 1 dam + <span class="text-blue-600 font-bold">7 m</span> + 8 dm</p>
-        <p class="mt-2 text-sm">• Se il numero è decimale, la cifra dell'unità è l'ultima prima della virgola.</p>
+      <div class="pl-4">
+        <p><span class="inline-block w-16 text-right">1<span class="text-cyan-600 font-bold">7</span>,8 <span class="text-cyan-600 font-bold">m</span></span> = 10 m + 7 m + 0,8 m</p>
+        <p><span class="inline-block w-16 text-right"></span> = 1 dam + <span class="text-cyan-600 font-bold">7 m</span> + 8 dm</p>
+        <div class="flex mt-4 text-sm">
+          <strong class="text-cyan-600 flex-shrink-0">•</strong>
+          <span class="ml-1">Se il numero è decimale, la cifra dell'unità è l'ultima prima della virgola.</span>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Esercizio 1 -->
-  <div class="mb-16">
-    <div class="flex items-start gap-3 mb-4">
+  <div class="mb-16" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+    <div class="flex items-center gap-3 mb-4">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-      <p class="text-gray-700"><strong>Cerchia di blu la marca e la cifra a cui si riferisce. Segui l'esempio.</strong></p>
+      <p class="text-gray-700"><strong>Colora di
+        <span class="w-5 h-5 bg-blue-300 rounded inline-block align-middle cursor-pointer ring-2 ring-transparent hover:ring-blue-500"
+              data-word-highlighter-target="colorBox"
+              data-color="blue"
+              data-action="click->word-highlighter#selectColor"></span>
+        <span class="text-blue-500">blu</span> la marca e la cifra a cui si riferisce. Segui l'esempio.</strong></p>
     </div>
-    <p class="text-sm text-gray-500 mb-4">(Esercizio da svolgere sull'immagine)</p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 text-lg">
+      <!-- 3,9 dam - esempio: 9 e dam in blu -->
+      <div class="p-3 bg-gray-50 rounded text-center">
+        <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">3</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer bg-blue-300">9</span>
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer bg-blue-300">dam</span>
+      </div>
+      <!-- 1845 mm - 5 e mm -->
+      <div class="p-3 bg-gray-50 rounded text-center">
+        <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">5</span>
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">mm</span>
+      </div>
+      <!-- 173 dam - 3 e dam -->
+      <div class="p-3 bg-gray-50 rounded text-center">
+        <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">7</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">3</span>
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">dam</span>
+      </div>
+      <!-- 500 cm - 0 (unità) e cm -->
+      <div class="p-3 bg-gray-50 rounded text-center">
+        <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">0</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">0</span>
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">cm</span>
+      </div>
+      <!-- 3,547 m - 3 e m -->
+      <div class="p-3 bg-gray-50 rounded text-center">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">3</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">7</span>
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">m</span>
+      </div>
+      <!-- 79 hm - 9 e hm -->
+      <div class="p-3 bg-gray-50 rounded text-center">
+        <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">7</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">9</span>
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">hm</span>
+      </div>
+      <!-- 48 cm - 8 e cm -->
+      <div class="p-3 bg-gray-50 rounded text-center">
+        <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">8</span>
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">cm</span>
+      </div>
+      <!-- 6,48 m - 6 e m -->
+      <div class="p-3 bg-gray-50 rounded text-center">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">6</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">8</span>
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">m</span>
+      </div>
+      <!-- 115 m - 5 e m -->
+      <div class="p-3 bg-gray-50 rounded text-center">
+        <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">5</span>
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">m</span>
+      </div>
+      <!-- 800 m - 0 (unità) e m -->
+      <div class="p-3 bg-gray-50 rounded text-center">
+        <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">0</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">0</span>
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">m</span>
+      </div>
+      <!-- 325 mm - 5 e mm -->
+      <div class="p-3 bg-gray-50 rounded text-center">
+        <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">3</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">5</span>
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">mm</span>
+      </div>
+      <!-- 64,8 m - 4 e m -->
+      <div class="p-3 bg-gray-50 rounded text-center">
+        <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">4</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">8</span>
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-0.5 cursor-pointer">m</span>
+      </div>
+    </div>
   </div>
 
   <!-- Esercizio 2 -->
@@ -42,106 +115,106 @@
       <p class="text-gray-700"><strong>Cerchia la cifra delle unità e inserisci i numeri in tabella. Poi completa le equivalenze.</strong></p>
     </div>
 
-    <div class="overflow-x-auto mb-4">
-      <table class="w-full border-collapse text-center text-sm">
+    <div class="overflow-x-auto mb-4" data-controller="auto-advance">
+      <table class="mx-auto border-separate border-spacing-0 text-center text-sm">
         <thead>
-          <tr class="text-blue-600">
-            <th class="p-2 border"></th>
-            <th class="bg-gray-100 p-2 border">km</th>
-            <th class="bg-gray-100 p-2 border">hm</th>
-            <th class="bg-gray-100 p-2 border">dam</th>
-            <th class="bg-gray-100 p-2 border">m</th>
-            <th class="bg-gray-100 p-2 border">dm</th>
-            <th class="bg-gray-100 p-2 border">cm</th>
-            <th class="bg-gray-100 p-2 border">mm</th>
-            <th class="p-2 border"></th>
+          <tr class="font-bold">
+            <th class="px-2 py-1"></th>
+            <th class="border-t-2 border-l-2 border-r border-b border-cyan-400 px-2 py-1 rounded-tl-lg text-pink-500">km</th>
+            <th class="border-t-2 border-r border-b border-cyan-400 px-2 py-1 text-pink-500">hm</th>
+            <th class="border-t-2 border-r border-b border-cyan-400 px-2 py-1 text-pink-500">dam</th>
+            <th class="border-t-2 border-r border-b border-cyan-400 px-2 py-1 text-blue-500">m</th>
+            <th class="border-t-2 border-r border-b border-cyan-400 px-2 py-1 text-green-500">dm</th>
+            <th class="border-t-2 border-r border-b border-cyan-400 px-2 py-1 text-green-500">cm</th>
+            <th class="border-t-2 border-r-2 border-b border-cyan-400 px-2 py-1 rounded-tr-lg text-green-500">mm</th>
+            <th class="px-2 py-1"></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="p-2 border">164 m</td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border">1</td>
-            <td class="p-2 border">6</td>
-            <td class="p-2 border">4</td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border">= <input type="text" data-fill-blanks-target="input" data-correct-answer="1640" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> dm</td>
+          <!-- Riga esempio -->
+          <tr class="text-cyan-500">
+            <td class="border-t-2 border-l-2 border-r border-b border-cyan-400 px-3 py-1 rounded-tl-lg text-left">164 m</td>
+            <td class="border-t border-l-2 border-r border-b border-cyan-400 px-2 py-1"></td>
+            <td class="border-t border-r border-b border-cyan-400 px-2 py-1">1</td>
+            <td class="border-t border-r border-b border-cyan-400 px-2 py-1">6</td>
+            <td class="border-t border-r border-b border-cyan-400 px-2 py-1">4</td>
+            <td class="border-t border-r border-b border-cyan-400 px-2 py-1"></td>
+            <td class="border-t border-r border-b border-cyan-400 px-2 py-1"></td>
+            <td class="border-t border-r-2 border-b border-cyan-400 px-2 py-1"></td>
+            <td class="border-t-2 border-r-2 border-b border-cyan-400 px-3 py-1 rounded-tr-lg text-left">= 1640 dm</td>
           </tr>
           <tr>
-            <td class="p-2 border">2300 cm</td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border">= <input type="text" data-fill-blanks-target="input" data-correct-answer="23" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> m</td>
+            <td class="border-l-2 border-r border-b border-cyan-400 px-3 py-1 text-left">2300 cm</td>
+            <td class="border-l-2 border-r border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="2" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="3" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="0" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="0" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r-2 border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r-2 border-b border-cyan-400 px-3 py-1 text-left">= <input type="text" inputmode="numeric" data-fill-blanks-target="input" data-correct-answer="23" class="w-12 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> m</td>
           </tr>
           <tr>
-            <td class="p-2 border">83 hm</td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border">= <input type="text" data-fill-blanks-target="input" data-correct-answer="830" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> dam</td>
+            <td class="border-l-2 border-r border-b border-cyan-400 px-3 py-1 text-left">83 hm</td>
+            <td class="border-l-2 border-r border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="8" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="3" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r-2 border-b border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r-2 border-b border-cyan-400 px-3 py-1 text-left">= <input type="text" inputmode="numeric" data-fill-blanks-target="input" data-correct-answer="830" class="w-12 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> dam</td>
           </tr>
           <tr>
-            <td class="p-2 border">7 dam</td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border"></td>
-            <td class="p-2 border">= <input type="text" data-fill-blanks-target="input" data-correct-answer="7000" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cm</td>
+            <td class="border-l-2 border-r border-b-2 border-cyan-400 px-3 py-1 rounded-bl-lg text-left">7 dam</td>
+            <td class="border-l-2 border-r border-b-2 border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b-2 border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b-2 border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="7" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b-2 border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b-2 border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r border-b-2 border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r-2 border-b-2 border-cyan-400 px-2 py-1"><input type="text" inputmode="numeric" maxlength="1" data-fill-blanks-target="input" data-correct-answer="" class="w-8 border-b-2 border-dotted border-gray-400 bg-transparent text-center"></td>
+            <td class="border-r-2 border-b-2 border-cyan-400 px-3 py-1 rounded-br-lg text-left">= <input type="text" inputmode="numeric" data-fill-blanks-target="input" data-correct-answer="7000" class="w-12 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cm</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- Esercizio 3 -->
-  <div class="mb-16">
-    <div class="flex items-start gap-3 mb-4">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
-      <p class="text-gray-700"><strong>Completa come nell'esempio.</strong></p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="space-y-2">
-        <p>1 m e 50 cm = <span class="text-blue-600">150</span> cm</p>
-        <p>1 m e 80 cm = <input type="text" data-fill-blanks-target="input" data-correct-answer="180" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cm</p>
-        <p>1 m e 60 cm = <input type="text" data-fill-blanks-target="input" data-correct-answer="160" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cm</p>
-        <p>2 m = <input type="text" data-fill-blanks-target="input" data-correct-answer="200" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cm</p>
+  <!-- Esercizi 3 e 4 appaiati -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+    <!-- Esercizio 3 -->
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
+        <p class="text-gray-700"><strong>Completa come nell'esempio.</strong></p>
+      </div>
+      <div class="space-y-2 md:ml-11">
+        <div class="flex"><span class="w-28 whitespace-nowrap">1 m e 50 cm</span><span class="px-2">=</span><span class="text-cyan-500">150</span> cm</div>
+        <div class="flex"><span class="w-28 whitespace-nowrap">1 m e 80 cm</span><span class="px-2">=</span><input type="text" inputmode="numeric" data-fill-blanks-target="input" data-correct-answer="180" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cm</div>
+        <div class="flex"><span class="w-28 whitespace-nowrap">1 m e 60 cm</span><span class="px-2">=</span><input type="text" inputmode="numeric" data-fill-blanks-target="input" data-correct-answer="160" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cm</div>
+        <div class="flex"><span class="w-28 whitespace-nowrap">2 m</span><span class="px-2">=</span><input type="text" inputmode="numeric" data-fill-blanks-target="input" data-correct-answer="200" class="w-16 border-b-2 border-dotted border-gray-400 bg-transparent text-center"> cm</div>
       </div>
     </div>
-  </div>
 
-  <!-- Esercizio 4 -->
-  <div class="mb-16">
-    <div class="flex items-start gap-3 mb-4">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
-      <p class="text-gray-700"><strong>Scomponi le misure come nell'esempio.</strong></p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="space-y-2">
-        <p>26,38 m = <span class="text-blue-600">2 dam 6 m 3 dm 8 cm</span></p>
-        <p>12 dam = <input type="text" data-fill-blanks-target="input" data-correct-answer="1 hm 2 dam" class="w-40 border-b-2 border-dotted border-gray-400 bg-transparent"></p>
-        <p>23,7 dm = <input type="text" data-fill-blanks-target="input" data-correct-answer="2 m 3 dm 7 cm" class="w-40 border-b-2 border-dotted border-gray-400 bg-transparent"></p>
-        <p>3500 m = <input type="text" data-fill-blanks-target="input" data-correct-answer="3 km 5 hm" class="w-40 border-b-2 border-dotted border-gray-400 bg-transparent"></p>
+    <!-- Esercizio 4 -->
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
+        <p class="text-gray-700"><strong>Scomponi le misure come nell'esempio.</strong></p>
+      </div>
+      <div class="space-y-2 md:ml-11">
+        <div class="flex"><span class="w-20">26,38 m</span><span class="px-2">=</span><span class="text-cyan-500">2 dam 6 m 3 dm 8 cm</span></div>
+        <div class="flex"><span class="w-20">12 dam</span><span class="px-2">=</span><input type="text" data-fill-blanks-target="input" data-correct-answer="1 hm 2 dam" class="w-40 border-b-2 border-dotted border-gray-400 bg-transparent"></div>
+        <div class="flex"><span class="w-20">23,7 dm</span><span class="px-2">=</span><input type="text" data-fill-blanks-target="input" data-correct-answer="2 m 3 dm 7 cm" class="w-40 border-b-2 border-dotted border-gray-400 bg-transparent"></div>
+        <div class="flex"><span class="w-20">3500 m</span><span class="px-2">=</span><input type="text" data-fill-blanks-target="input" data-correct-answer="3 km 5 hm" class="w-40 border-b-2 border-dotted border-gray-400 bg-transparent"></div>
       </div>
     </div>
   </div>
 
   <!-- Quaderno -->
   <div class="p-4 mb-8 text-right">
-    <span class="text-gray-600">Quaderno →</span> <span class="text-blue-600 font-bold">p. 167</span>
+    <span class="text-gray-600">Quaderno →</span> <%= link_to "p. 167", pagina_path("bus3_mat_p167"), class: "text-cyan-600 font-bold hover:underline" %>
   </div>
 
   <%= render 'shared/exercise_controls' %>
