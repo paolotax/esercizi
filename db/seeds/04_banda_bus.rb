@@ -208,7 +208,8 @@ bus_matematica = bus_volume3.discipline.create!(
   { numero: 125, titolo: "LE INDAGINI", slug: "bus3_mat_p125", view_template: "bus3_mat_p125", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
   { numero: 126, titolo: "DATI E GRAFICI", slug: "bus3_mat_p126", view_template: "bus3_mat_p126", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
   { numero: 127, titolo: "CERTO, POSSIBILE, IMPOSSIBILE", slug: "bus3_mat_p127", view_template: "bus3_mat_p127", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
-  { numero: 128, titolo: "LA PROBABILITÀ", slug: "bus3_mat_p128", view_template: "bus3_mat_p128", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" }
+  { numero: 128, titolo: "LA PROBABILITÀ", slug: "bus3_mat_p128", view_template: "bus3_mat_p128", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "cyan" },
+  { numero: 129, titolo: "QUADERNO DI MATEMATICA", slug: "bus3_mat_p129", view_template: "bus3_mat_p129", sottotitolo: "INDICE", base_color: "cyan" }
 ].each do |pagina_data|
   bus_matematica.pagine.find_or_create_by!(slug: pagina_data[:slug]) do |pagina|
     pagina.numero = pagina_data[:numero]
