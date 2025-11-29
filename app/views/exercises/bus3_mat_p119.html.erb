@@ -1,12 +1,143 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-6 bg-gradient-to-b from-blue-50 to-white" data-controller="exercise-checker">
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+     data-controller="exercise-checker page-viewer text-toggle font-controls"
+     data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p119/page.png') %>"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Immagine della pagina -->
-  <%= render 'shared/page_image', pagina: @pagina %>
+  <!-- Intestazione -->
+  <div class="bg-cyan-600 text-white px-4 py-2 rounded-t-lg mb-0 inline-block">
+    <span class="font-bold">MATEMATICA DI TUTTI I GIORNI</span>
+  </div>
+
+  <p class="font-bold text-red-600 mb-6 mt-4">Leggi, osserva e rispondi.</p>
+
+  <!-- Sezione Scivolo -->
+  <div class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6" data-controller="fill-blanks card-selector">
+    <div>
+      <p class="mb-3">Questo scivolo può essere usato da chi ha un'altezza non superiore a 140 cm.</p>
+
+      <div class="space-y-3 mb-4">
+        <div class="flex items-center gap-3">
+          <span>• Claudia può usarlo?</span>
+          <label class="inline-flex items-center gap-1 cursor-pointer">
+            <input type="radio" name="claudia" data-card-selector-target="card" class="w-4 h-4">
+            <span class="border border-gray-400 px-2 py-1 rounded">Sì</span>
+          </label>
+          <label class="inline-flex items-center gap-1 cursor-pointer">
+            <input type="radio" name="claudia" data-card-selector-target="card" data-correct="true" class="w-4 h-4">
+            <span class="border border-gray-400 px-2 py-1 rounded">No</span>
+          </label>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span>• E Jack?</span>
+          <label class="inline-flex items-center gap-1 cursor-pointer">
+            <input type="radio" name="jack" data-card-selector-target="card" data-correct="true" class="w-4 h-4">
+            <span class="border border-gray-400 px-2 py-1 rounded">Sì</span>
+          </label>
+          <label class="inline-flex items-center gap-1 cursor-pointer">
+            <input type="radio" name="jack" data-card-selector-target="card" class="w-4 h-4">
+            <span class="border border-gray-400 px-2 py-1 rounded">No</span>
+          </label>
+        </div>
+      </div>
+
+      <p class="mb-2">• Lo scivolo è lungo 13 metri. Se un bambino scende per 7 volte, quanti centimetri sono?</p>
+      <p class="ml-4"><input type="text" data-fill-blanks-target="input" data-correct-answer="9100"
+             class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric"> cm</p>
+    </div>
+
+    <div class="flex justify-center">
+      <%= image_tag "bus3_mat/p119/p119_01.jpg", alt: "Scivolo con altezza massima 140 cm", class: "max-w-xs rounded" %>
+    </div>
+  </div>
+
+  <!-- Sezione Vasca -->
+  <div class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6" data-controller="fill-blanks">
+    <div class="flex justify-center">
+      <%= image_tag "bus3_mat/p119/output-1743504902119_84_445_447_311.png", alt: "Scivoli colorati", class: "max-w-xs rounded" %>
+    </div>
+
+    <div>
+      <p class="mb-3">Questo scivolo si getta in una vasca che contiene 15 000 litri di acqua.</p>
+
+      <div class="space-y-3">
+        <p>• Quanti ettolitri sono? <input type="text" data-fill-blanks-target="input" data-correct-answer="150"
+               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric"> hℓ</p>
+
+        <p>• Quanti decalitri sono? <input type="text" data-fill-blanks-target="input" data-correct-answer="1500"
+               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric"> daℓ</p>
+
+        <div>
+          <p class="mb-2">• Se in ogni 1 000 litri di acqua devono esserci 10 grammi di cloro, quanti grammi di cloro servono per l'acqua di questa vasca?</p>
+          <p class="ml-4"><input type="text" data-fill-blanks-target="input" data-correct-answer="150"
+                 class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric"> g</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sezione Ciambellone -->
+  <div class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6" data-controller="card-selector">
+    <div>
+      <p class="mb-3">Il ciambellone accanto può sopportare un peso massimo di 60 kg.</p>
+
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <span>• Jack e Claudia possono salirci insieme?</span>
+          <label class="inline-flex items-center gap-1 cursor-pointer">
+            <input type="radio" name="insieme" data-card-selector-target="card" data-correct="true" class="w-4 h-4">
+            <span class="border border-gray-400 px-2 py-1 rounded">Sì</span>
+          </label>
+          <label class="inline-flex items-center gap-1 cursor-pointer">
+            <input type="radio" name="insieme" data-card-selector-target="card" class="w-4 h-4">
+            <span class="border border-gray-400 px-2 py-1 rounded">No</span>
+          </label>
+        </div>
+
+        <div>
+          <p class="mb-2">• Pietro pesa 32 Kg, con chi può salire sul ciambellone?</p>
+          <div class="flex gap-4 ml-4">
+            <label class="inline-flex items-center gap-1 cursor-pointer">
+              <input type="checkbox" data-card-selector-target="card" data-correct="true" class="w-4 h-4">
+              <span>Con Jack.</span>
+            </label>
+            <label class="inline-flex items-center gap-1 cursor-pointer">
+              <input type="checkbox" data-card-selector-target="card" class="w-4 h-4">
+              <span>Con Claudia.</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <%= image_tag "bus3_mat/p119/output-1743504902119_581_787_332_219.png", alt: "Ciambellone", class: "max-w-xs rounded" %>
+    </div>
+  </div>
+
+  <!-- PROVA TU! -->
+  <div class="mb-8 bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4" data-controller="fill-blanks">
+    <p class="font-bold text-red-600 mb-3">PROVA TU!</p>
+    <p class="mb-3">Da uno scivolo possono scendere al massimo 2 bambine/i ogni 2 minuti.</p>
+
+    <div class="space-y-2">
+      <p>• Quante bambine/i al massimo scendono in 10 minuti? <input type="text" data-fill-blanks-target="input" data-correct-answer="10"
+             class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric"></p>
+
+      <p>• E in 20 minuti? <input type="text" data-fill-blanks-target="input" data-correct-answer="20"
+             class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric"></p>
+
+      <p>• E in 1 ora? <input type="text" data-fill-blanks-target="input" data-correct-answer="60"
+             class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center" inputmode="numeric"></p>
+    </div>
+  </div>
 
   <!-- Footer con controlli -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
+  <%= render 'shared/exercise_controls' %>
 </div>
