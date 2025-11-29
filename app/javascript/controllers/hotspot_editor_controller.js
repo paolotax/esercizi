@@ -286,47 +286,71 @@ export default class extends Controller {
     return hotspot.querySelector('.sr-only')?.textContent
         || hotspot.dataset.imageSpeechWordValue
         || hotspot.querySelector('input')?.getAttribute('aria-label')
+        || hotspot.querySelector('textarea')?.getAttribute('aria-label')
         || hotspot.getAttribute('aria-label')
         || 'Unknown'
+  }
+
+  getHotspotData(hotspot) {
+    const label = this.getHotspotLabel(hotspot)
+    const data = {
+      label,
+      top: hotspot.style.top,
+      left: hotspot.style.left,
+      width: hotspot.style.width,
+      height: hotspot.style.height
+    }
+
+    // Cerca input o textarea dentro l'hotspot per estrarre answer e type
+    const input = hotspot.querySelector('input')
+    const textarea = hotspot.querySelector('textarea')
+
+    if (textarea) {
+      const answer = textarea.dataset.correctAnswer
+      if (answer) {
+        data.answer = answer
+        data.type = 'textarea'
+      }
+    } else if (input) {
+      const answer = input.dataset.correctAnswer
+      if (answer) {
+        data.answer = answer
+      }
+    }
+
+    return data
+  }
+
+  formatHotspotCode(h) {
+    let parts = [
+      `label: "${h.label}"`,
+      `top: "${h.top}"`,
+      `left: "${h.left}"`,
+      `width: "${h.width}"`,
+      `height: "${h.height}"`
+    ]
+    if (h.answer !== undefined) {
+      parts.push(`answer: "${h.answer}"`)
+    }
+    if (h.type) {
+      parts.push(`type: "${h.type}"`)
+    }
+    return `        { ${parts.join(', ')} }`
   }
 
   updateInfoPanel() {
     const valuesDiv = document.getElementById('hotspot-values')
     if (!valuesDiv) return
 
-    const hotspots = this.hotspotTargets.map(hotspot => {
-      const label = this.getHotspotLabel(hotspot)
-      return {
-        label,
-        top: hotspot.style.top,
-        left: hotspot.style.left,
-        width: hotspot.style.width,
-        height: hotspot.style.height
-      }
-    })
-
-    const code = hotspots.map(h =>
-      `        { label: "${h.label}", top: "${h.top}", left: "${h.left}", width: "${h.width}", height: "${h.height}" }`
-    ).join(',\n')
+    const hotspots = this.hotspotTargets.map(hotspot => this.getHotspotData(hotspot))
+    const code = hotspots.map(h => this.formatHotspotCode(h)).join(',\n')
 
     valuesDiv.innerHTML = `<pre class="text-xs leading-relaxed">${code}</pre>`
   }
 
   copyToClipboard() {
-    const hotspots = this.hotspotTargets.map(hotspot => {
-      const label = this.getHotspotLabel(hotspot)
-      return {
-        label,
-        top: hotspot.style.top,
-        left: hotspot.style.left,
-        width: hotspot.style.width,
-        height: hotspot.style.height
-      }
-    })
-
-    const code = hotspots.map(h =>
-      `        { label: "${h.label}", top: "${h.top}", left: "${h.left}", width: "${h.width}", height: "${h.height}" }`
-    ).join(',\n')
+    const hotspots = this.hotspotTargets.map(hotspot => this.getHotspotData(hotspot))
+    const code = hotspots.map(h => this.formatHotspotCode(h)).join(',\n')
 
     navigator.clipboard.writeText(code).then(() => {
       // Visual feedback
@@ -378,6 +402,20 @@ export default class extends Controller {
         // Rimuovi /10 dall'opacità
         hotspot.className = currentBg.replace(/bg-(\w+)-(\d+)\/10/, 'bg-$1-$2')
 
+        // Aggiungi bordo dotted grigio scuro
+        hotspot.classList.remove('border-transparent')
+        hotspot.classList.add('border-2', 'border-dashed', 'border-gray-700')
+
+        // Aggiungi label visibile centrata
+        if (!hotspot.querySelector('[data-hotspot-label]')) {
+          const label = this.getHotspotLabel(hotspot)
+          const labelSpan = document.createElement('span')
+          labelSpan.dataset.hotspotLabel = ''
+          labelSpan.className = 'absolute inset-0 flex items-center justify-center text-xs font-bold text-gray-800 bg-white/70 rounded pointer-events-none'
+          labelSpan.textContent = label
+          hotspot.appendChild(labelSpan)
+        }
+
         // Aggiungi cursor-move per indicare draggabilità
         hotspot.classList.add('cursor-move')
 
@@ -403,6 +441,14 @@ export default class extends Controller {
         if (!currentBg.includes('/10')) {
           hotspot.className = currentBg.replace(/bg-(\w+)-(\d+)(?!\/)/, 'bg-$1-$2/10')
         }
+
+        // Rimuovi bordo dotted, rimetti trasparente
+        hotspot.classList.remove('border-dashed', 'border-gray-700')
+        hotspot.classList.add('border-transparent')
+
+        // Rimuovi label visibile
+        const labelSpan = hotspot.querySelector('[data-hotspot-label]')
+        if (labelSpan) labelSpan.remove()
 
         // Rimuovi cursor-move
         hotspot.classList.remove('cursor-move')

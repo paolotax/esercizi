@@ -5,6 +5,12 @@ export default class extends Controller {
   static targets = ["sidebar", "overlay"]
 
   connect() {
+    // Evita di re-inizializzare se già configurato (turbo-permanent)
+    if (this.element.dataset.sidebarInitialized) {
+      return
+    }
+    this.element.dataset.sidebarInitialized = "true"
+
     // Su mobile, nascondi sempre di default
     if (this.isMobile()) {
       if (this.hasSidebarTarget) {
