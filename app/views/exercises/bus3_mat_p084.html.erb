@@ -1,6 +1,6 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono"
      data-controller="exercise-checker fill-blanks auto-advance page-viewer text-toggle font-controls"
      data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p084/page.png') %>"
      data-text-toggle-target="content"
@@ -10,7 +10,7 @@
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Esercizio 1 -->
-  <div class="p-4 md:p-6 mb-8">
+  <div class="bg-[#C7EAFB] p-4 md:p-6 -mx-3 md:mx-0 mb-8">
     <div class="flex items-center gap-3 mb-6">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         1
@@ -18,75 +18,92 @@
       <p class="text-gray-700"><strong>Osserva il numero 4,385 scritto nella tabella. Poi leggi e rispondi.</strong></p>
     </div>
 
-    <!-- Tabella del numero 4,385 -->
-    <div class="overflow-x-auto flex justify-center mb-6">
-      <table class="border-separate border-spacing-0 border-2 border-cyan-400 rounded-lg overflow-hidden text-center">
-        <thead>
-          <tr>
-            <th class="border border-cyan-400 px-6 py-1 font-bold bg-cyan-100">parte intera</th>
-            <th class="border border-cyan-400 px-0 py-1 w-4"></th>
-            <th class="border border-cyan-400 px-6 py-1 font-bold bg-yellow-100" colspan="3">parte decimale</th>
-          </tr>
-          <tr>
-            <th class="border border-cyan-400 px-6 py-1 font-bold text-cyan-600">unità</th>
-            <th class="border border-cyan-400 px-0 py-1 w-4"></th>
-            <th class="border border-cyan-400 px-6 py-1 font-bold text-orange-500">decimi</th>
-            <th class="border border-cyan-400 px-6 py-1 font-bold text-orange-500">centesimi</th>
-            <th class="border border-cyan-400 px-6 py-1 font-bold text-orange-500">millesimi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="border border-cyan-400 px-6 py-1 font-bold text-2xl">4</td>
-            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-2xl text-red-500">,</td>
-            <td class="border border-cyan-400 px-6 py-1 font-bold text-2xl">3</td>
-            <td class="border border-cyan-400 px-6 py-1 font-bold text-2xl">8</td>
-            <td class="border border-cyan-400 px-6 py-1 font-bold text-2xl">5</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Tabella del numero 4,385 con testo a destra -->
+    <div class="flex flex-col lg:flex-row items-start gap-4 mb-6">
+      <div class="flex-shrink-0 overflow-x-auto md:overflow-visible w-full lg:w-auto">
+        <table class="border-separate border-spacing-0 border-2 border-cyan-400 rounded-lg text-center">
+          <thead>
+            <tr>
+              <th class="border border-cyan-400 px-6 py-1 font-bold bg-cyan-100">parte intera</th>
+              <th class="border border-cyan-400 px-0 py-1 w-4"></th>
+              <th class="border border-cyan-400 px-6 py-1 font-bold bg-yellow-100" colspan="3">parte decimale</th>
+            </tr>
+            <tr>
+              <th class="border border-cyan-400 px-6 py-1 font-bold text-cyan-600 bg-white">unità</th>
+              <th class="border border-cyan-400 px-0 py-1 w-4"></th>
+              <th class="border border-cyan-400 px-6 py-1 font-bold text-orange-500 bg-white">decimi</th>
+              <th class="border border-cyan-400 px-6 py-1 font-bold text-orange-500 bg-white">centesimi</th>
+              <th class="border border-cyan-400 px-6 py-1 font-bold text-orange-500 bg-white">millesimi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-cyan-400 px-6 py-1 font-bold bg-white">4</td>
+              <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-red-500 bg-white">,</td>
+              <td class="border border-cyan-400 px-6 py-1 font-bold bg-white">3</td>
+              <td class="border border-cyan-400 px-6 py-1 font-bold bg-white">8</td>
+              <td class="border border-cyan-400 px-6 py-1 font-bold bg-white">5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-gray-700">Anche nei numeri decimali il valore di ogni cifra dipende dalla sua posizione all'interno del numero.</p>
     </div>
 
-    <p class="text-gray-700 mb-4">Anche nei numeri decimali il valore di ogni cifra dipende dalla sua posizione all'interno del numero.</p>
-
-    <ul class="space-y-3 text-gray-700">
-      <li class="flex items-center gap-2">
-        <span>Quale posizione occupa la cifra 4?</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="unità"
-               class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white">
-      </li>
-      <li class="flex items-center gap-2">
-        <span>Quale posizione occupa la cifra 3?</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="decimi"
-               class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white">
-      </li>
-      <li class="flex items-center gap-2">
-        <span>Quale posizione occupa la cifra 8?</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="centesimi"
-               class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white">
-      </li>
-      <li class="flex items-center gap-2">
-        <span>Quale posizione occupa la cifra 5?</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="millesimi"
-               class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white">
-      </li>
-      <li class="flex items-center gap-2">
-        <span>Quale cifra vale di meno?</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
-               maxlength="1" inputmode="numeric">
-      </li>
-      <li class="flex items-center gap-2">
-        <span>Quale cifra vale di più?</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
-               class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
-               maxlength="1" inputmode="numeric">
-      </li>
-    </ul>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+      <ul class="space-y-3">
+        <li class="flex items-center gap-2">
+          <span>Quale posizione occupa la cifra 4?</span>
+        </li>
+        <li>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="unità"
+                 class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </li>
+        <li class="flex items-center gap-2">
+          <span>Quale posizione occupa la cifra 3?</span>
+        </li>
+        <li>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="decimi"
+                 class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </li>
+        <li class="flex items-center gap-2">
+          <span>Quale posizione occupa la cifra 8?</span>
+        </li>
+        <li>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="centesimi"
+                 class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </li>
+      </ul>
+      <ul class="space-y-3">
+        <li class="flex items-center gap-2">
+          <span>Quale posizione occupa la cifra 5?</span>
+        </li>
+        <li>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="millesimi"
+                 class="w-32 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </li>
+        <li class="flex items-center gap-2">
+          <span>Quale cifra vale di meno?</span>
+        </li>
+        <li>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"
+                 maxlength="1" inputmode="numeric">
+        </li>
+        <li class="flex items-center gap-2">
+          <span>Quale cifra vale di più?</span>
+        </li>
+        <li>
+          <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"
+                 maxlength="1" inputmode="numeric">
+        </li>
+      </ul>
+    </div>
 
     <!-- Box teoria -->
-    <div class="mt-6 p-4 bg-[#FFF9E6] border-l-4 border-yellow-400 rounded">
-      <p class="text-gray-700"><strong>I numeri decimali</strong> sono formati da una <strong>parte intera</strong> e da una <strong>parte decimale</strong> separate da una <strong>virgola</strong>.</p>
+    <div class="mt-6 bg-white border-3 border-pink-300 rounded-lg py-2 px-4">
+      <p><strong><span class="text-cyan-600 font-bold">I numeri decimali</span> sono formati da una <span class="text-cyan-600 font-bold">parte intera</span> e da una <span class="text-cyan-600 font-bold">parte decimale</span> separate da una <span class="text-cyan-600 font-bold">virgola</span>.</strong></p>
     </div>
   </div>
 
@@ -109,54 +126,54 @@
         <span class="text-yellow-500">giallo la parte decimale</span> di questi numeri.</strong></p>
     </div>
 
-    <div class="grid grid-cols-3 md:grid-cols-4 gap-4 text-center text-xl">
+    <div class="grid grid-cols-3 md:grid-cols-4 gap-4 text-center">
       <!-- 2,41 -->
-      <div class="p-3 bg-gray-50 rounded">
-        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span>
+      <div class="p-3 bg-gray-50 rounded cursor-pointer">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">2</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">4</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">1</span>
       </div>
       <!-- 7,09 -->
-      <div class="p-3 bg-gray-50 rounded">
-        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">9</span>
+      <div class="p-3 bg-gray-50 rounded cursor-pointer">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">7</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">0</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">9</span>
       </div>
       <!-- 15,62 -->
-      <div class="p-3 bg-gray-50 rounded">
-        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span>
+      <div class="p-3 bg-gray-50 rounded cursor-pointer">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">1</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">5</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">6</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">2</span>
       </div>
       <!-- 61,408 -->
-      <div class="p-3 bg-gray-50 rounded">
-        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span>
+      <div class="p-3 bg-gray-50 rounded cursor-pointer">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">6</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">1</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">4</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">0</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">8</span>
       </div>
       <!-- 53,80 -->
-      <div class="p-3 bg-gray-50 rounded">
-        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span>
+      <div class="p-3 bg-gray-50 rounded cursor-pointer">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">5</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">3</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">8</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">0</span>
       </div>
       <!-- 78,15 -->
-      <div class="p-3 bg-gray-50 rounded">
-        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span>
+      <div class="p-3 bg-gray-50 rounded cursor-pointer">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">7</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">8</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">1</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">5</span>
       </div>
       <!-- 4,25 -->
-      <div class="p-3 bg-gray-50 rounded">
-        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span>
+      <div class="p-3 bg-gray-50 rounded cursor-pointer">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">4</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">2</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">5</span>
       </div>
       <!-- 1,43 -->
-      <div class="p-3 bg-gray-50 rounded">
-        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span>
+      <div class="p-3 bg-gray-50 rounded cursor-pointer">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">1</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">4</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">3</span>
       </div>
       <!-- 0,06 -->
-      <div class="p-3 bg-gray-50 rounded">
-        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span>
+      <div class="p-3 bg-gray-50 rounded cursor-pointer">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">0</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">0</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">6</span>
       </div>
       <!-- 22,43 -->
-      <div class="p-3 bg-gray-50 rounded">
-        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span>
+      <div class="p-3 bg-gray-50 rounded cursor-pointer">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">2</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">2</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">4</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">3</span>
       </div>
       <!-- 0,87 -->
-      <div class="p-3 bg-gray-50 rounded">
-        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span>
+      <div class="p-3 bg-gray-50 rounded cursor-pointer">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">0</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">8</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">7</span>
       </div>
       <!-- 612,9 -->
-      <div class="p-3 bg-gray-50 rounded">
-        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">9</span>
+      <div class="p-3 bg-gray-50 rounded cursor-pointer">
+        <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">6</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">1</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">2</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="yellow" data-action="click->word-highlighter#toggleHighlight">9</span>
       </div>
     </div>
   </div>
@@ -185,45 +202,45 @@
         <span class="text-green-500">verde i millesimi</span> di questi numeri.</strong></p>
     </div>
 
-    <div class="space-y-4 text-xl text-center">
+    <div class="space-y-4 text-center">
       <div class="flex flex-wrap justify-center gap-4">
         <!-- 2,382: decimi=3(red), centesimi=8(blue), millesimi=2(green) -->
-        <span class="p-2 bg-gray-50 rounded">
-          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span>
+        <span class="p-2 bg-gray-50 rounded cursor-pointer">
+          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">2</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">3</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">8</span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight">2</span>
         </span>
         <!-- 0,025: decimi=0(red), centesimi=2(blue), millesimi=5(green) -->
-        <span class="p-2 bg-gray-50 rounded">
-          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span>
+        <span class="p-2 bg-gray-50 rounded cursor-pointer">
+          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">0</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">0</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">2</span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight">5</span>
         </span>
         <!-- 33,3: decimi=3(red), no centesimi, no millesimi -->
-        <span class="p-2 bg-gray-50 rounded">
-          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span>
+        <span class="p-2 bg-gray-50 rounded cursor-pointer">
+          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">3</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">3</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">3</span>
         </span>
         <!-- 1820,326: decimi=3(red), centesimi=2(blue), millesimi=6(green) -->
-        <span class="p-2 bg-gray-50 rounded">
-          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span>
+        <span class="p-2 bg-gray-50 rounded cursor-pointer">
+          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">1</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">8</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">2</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">0</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">3</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">2</span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight">6</span>
         </span>
       </div>
       <div class="flex flex-wrap justify-center gap-4">
         <!-- 5,604: decimi=6(red), centesimi=0(blue), millesimi=4(green) -->
-        <span class="p-2 bg-gray-50 rounded">
-          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span>
+        <span class="p-2 bg-gray-50 rounded cursor-pointer">
+          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">5</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">6</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">0</span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight">4</span>
         </span>
         <!-- 1,83: decimi=8(red), centesimi=3(blue), no millesimi -->
-        <span class="p-2 bg-gray-50 rounded">
-          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span>
+        <span class="p-2 bg-gray-50 rounded cursor-pointer">
+          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">1</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">8</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">3</span>
         </span>
         <!-- 124,6: decimi=6(red), no centesimi, no millesimi -->
-        <span class="p-2 bg-gray-50 rounded">
-          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span>
+        <span class="p-2 bg-gray-50 rounded cursor-pointer">
+          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">1</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">2</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">4</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">6</span>
         </span>
         <!-- 0,457: decimi=4(red), centesimi=5(blue), millesimi=7(green) -->
-        <span class="p-2 bg-gray-50 rounded">
-          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">7</span>
+        <span class="p-2 bg-gray-50 rounded cursor-pointer">
+          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">0</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">4</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">5</span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight">7</span>
         </span>
         <!-- 4,28: decimi=2(red), centesimi=8(blue), no millesimi -->
-        <span class="p-2 bg-gray-50 rounded">
-          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">8</span>
+        <span class="p-2 bg-gray-50 rounded cursor-pointer">
+          <span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight">4</span><span class="text-red-500">,</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">2</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">8</span>
         </span>
       </div>
     </div>
@@ -267,7 +284,7 @@
             <td class="border border-cyan-400 px-2 py-1"></td>
             <td class="border border-cyan-400 px-2 py-1"></td>
             <td class="border border-cyan-400 px-2 py-1 font-bold">6</td>
-            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-xl text-red-500">,</td>
+            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-red-500">,</td>
             <td class="border border-cyan-400 px-2 py-1 font-bold">4</td>
             <td class="border border-cyan-400 px-2 py-1 font-bold">9</td>
             <td class="border border-cyan-400 px-2 py-1"></td>
@@ -295,7 +312,7 @@
                      class="w-8 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
                      maxlength="1" inputmode="numeric">
             </td>
-            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-xl text-red-500">,</td>
+            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-red-500">,</td>
             <td class="border border-cyan-400 px-2 py-1">
               <input type="text" data-fill-blanks-target="input" data-auto-advance-target="input" data-correct-answer="5"
                      class="w-8 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
@@ -335,7 +352,7 @@
                      class="w-8 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
                      maxlength="1" inputmode="numeric">
             </td>
-            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-xl text-red-500">,</td>
+            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-red-500">,</td>
             <td class="border border-cyan-400 px-2 py-1">
               <input type="text" data-fill-blanks-target="input" data-auto-advance-target="input" data-correct-answer="0"
                      class="w-8 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
@@ -375,7 +392,7 @@
                      class="w-8 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
                      maxlength="1" inputmode="numeric">
             </td>
-            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-xl text-red-500">,</td>
+            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-red-500">,</td>
             <td class="border border-cyan-400 px-2 py-1">
               <input type="text" data-fill-blanks-target="input" data-auto-advance-target="input" data-correct-answer="1"
                      class="w-8 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
@@ -415,7 +432,7 @@
                      class="w-8 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
                      maxlength="1" inputmode="numeric">
             </td>
-            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-xl text-red-500">,</td>
+            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-red-500">,</td>
             <td class="border border-cyan-400 px-2 py-1">
               <input type="text" data-fill-blanks-target="input" data-auto-advance-target="input" data-correct-answer="3"
                      class="w-8 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
@@ -455,7 +472,7 @@
                      class="w-8 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
                      maxlength="1" inputmode="numeric">
             </td>
-            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-xl text-red-500">,</td>
+            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-red-500">,</td>
             <td class="border border-cyan-400 px-2 py-1">
               <input type="text" data-fill-blanks-target="input" data-auto-advance-target="input" data-correct-answer="0"
                      class="w-8 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
@@ -495,7 +512,7 @@
                      class="w-8 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"
                      maxlength="1" inputmode="numeric">
             </td>
-            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-xl text-red-500">,</td>
+            <td class="border border-cyan-400 px-0 py-1 w-4 font-bold text-red-500">,</td>
             <td class="border border-cyan-400 px-2 py-1">
               <input type="text" data-fill-blanks-target="input" data-auto-advance-target="input" data-correct-answer="0"
                      class="w-8 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"

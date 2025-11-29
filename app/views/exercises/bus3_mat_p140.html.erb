@@ -1,6 +1,6 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono text-base lg:text-lg xl:text-xl"
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white font-mono"
      data-controller="exercise-checker page-viewer text-toggle font-controls"
      data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p140/page.png') %>"
      data-text-toggle-target="content"
@@ -12,12 +12,14 @@
   <!-- Esercizio 1: Colora le cifre -->
   <div class="mb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
     <div class="flex items-start gap-3 mb-4">
-      <div class="bg-yellow-400 rounded-full w-10 h-10 flex items-center justify-center border-4 border-cyan-500 flex-shrink-0">
-        <span class="text-cyan-600 font-bold text-xs text-center leading-tight">1</span>
+      <div class="flex items-center">
+        <div class="bg-cyan-700 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0 z-10 relative">
+          1
+        </div>
+        <span class="bg-yellow-300 text-cyan-700 font-bold pl-5 pr-4 py-1 rounded-r-full -ml-3">IMPARARE TUTTI</span>
       </div>
       <div>
-        <span class="bg-yellow-400 text-cyan-600 px-2 py-0.5 rounded text-sm font-bold">IMPARARE TUTTI</span>
-        <p class="text-gray-700 mt-1"><strong>Colora di
+        <p class="text-gray-700"><strong>Colora di
           <span class="w-5 h-5 bg-green-300 rounded inline-block align-middle cursor-pointer ring-2 ring-transparent hover:ring-green-500"
                 data-word-highlighter-target="colorBox"
                 data-color="green"
@@ -38,7 +40,7 @@
 
     <!-- Colora di verde la cifra delle centinaia -->
     <p class="text-gray-700 mb-2"><strong>Colora di <span class="text-green-500">verde</span> la cifra delle centinaia.</strong></p>
-    <div class="flex flex-wrap gap-4 mb-6 text-xl font-bold">
+    <div class="flex flex-wrap gap-4 mb-6 font-bold">
       <!-- 152: h=1 -->
       <span><span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">1</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">5</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">2</span></span><span class="text-cyan-500">•</span>
       <!-- 871: h=8 -->
@@ -59,7 +61,7 @@
 
     <!-- Colora di rosso la cifra delle decine -->
     <p class="text-gray-700 mb-2"><strong>Colora di <span class="text-red-500">rosso</span> la cifra delle decine.</strong></p>
-    <div class="flex flex-wrap gap-4 mb-6 text-xl font-bold">
+    <div class="flex flex-wrap gap-4 mb-6 font-bold">
       <!-- 460: da=6 -->
       <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">0</span></span><span class="text-cyan-500">•</span>
       <!-- 684: da=8 -->
@@ -80,7 +82,7 @@
 
     <!-- Colora di blu la cifra delle unità -->
     <p class="text-gray-700 mb-2"><strong>Colora di <span class="text-blue-500">blu</span> la cifra delle <span class="underline">unità</span>.</strong></p>
-    <div class="flex flex-wrap gap-4 text-xl font-bold">
+    <div class="flex flex-wrap gap-4 font-bold">
       <!-- 463: u=3 -->
       <span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">4</span><span data-word-highlighter-target="word" data-correct="" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">6</span><span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 cursor-pointer">3</span></span><span class="text-cyan-500">•</span>
       <!-- 39: u=9 -->
@@ -119,23 +121,23 @@
     <!-- Risposte scomposizione -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <div class="bg-cyan-50 border-2 border-cyan-300 rounded-lg p-3 text-center">
-        <div class="font-bold text-lg mb-2">322</div>
+        <div class="font-bold mb-2">322</div>
         <div class="text-cyan-600">32 da, 2 u</div>
       </div>
       <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 text-center">
-        <div class="font-bold text-lg mb-2">143</div>
+        <div class="font-bold mb-2">143</div>
         <input type="text" data-fill-blanks-target="input" data-correct-answer="14 da, 3 u"
                class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center"
                placeholder="... da, ... u">
       </div>
       <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 text-center">
-        <div class="font-bold text-lg mb-2">216</div>
+        <div class="font-bold mb-2">216</div>
         <input type="text" data-fill-blanks-target="input" data-correct-answer="21 da, 6 u"
                class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center"
                placeholder="... da, ... u">
       </div>
       <div class="bg-white border-2 border-cyan-300 rounded-lg p-3 text-center">
-        <div class="font-bold text-lg mb-2">409</div>
+        <div class="font-bold mb-2">409</div>
         <input type="text" data-fill-blanks-target="input" data-correct-answer="40 da, 9 u"
                class="w-full px-2 py-1 border-b-2 border-dotted border-gray-400 text-center"
                placeholder="... da, ... u">
@@ -315,7 +317,7 @@
       </div>
     </div>
 
-    <p class="text-sm text-gray-500 mt-4 text-center">
+    <p  class=" text-gray-500 mt-4 text-center">
       (Collegamento: 2h,4da,8u → 200+40+8 | 7da,3u → 70+3 | 3h,5da,2u → 300+50+2 | 6h,4da,0u → 600+40+0)
     </p>
   </div>
