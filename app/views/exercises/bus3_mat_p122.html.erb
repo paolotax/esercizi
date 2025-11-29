@@ -9,7 +9,7 @@
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Esercizio 1 -->
+  <!-- Esercizio 1 - Hotspot su immagine -->
   <div class="mb-12" data-controller="fill-blanks auto-advance">
     <div class="flex items-start gap-3 mb-4">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
@@ -20,62 +20,48 @@
       </p>
     </div>
 
-    <div class="flex justify-center mb-6">
-      <%= image_tag "bus3_mat/p122/p122_01.jpg", alt: "Bambini sulla neve", class: "max-w-3xl w-full" %>
-    </div>
+    <!-- Immagine con hotspot -->
+    <div class="relative max-w-3xl mx-auto"
+         data-controller="hotspot-editor"
+         data-hotspot-editor-target="container">
 
-    <!-- Diagramma di Eulero-Venn -->
-    <div class="bg-cyan-50 border-2 border-cyan-200 rounded-lg p-4 md:p-6 mb-6">
-      <div class="text-center mb-4">
-        <span class="border border-gray-400 px-4 py-1 bg-white">Bambine e bambini sulla neve</span>
-      </div>
+      <%= image_tag "bus3_mat/p122/p122_01.jpg",
+          alt: "Bambini sulla neve e diagramma di Eulero-Venn",
+          class: "w-full h-full object-cover select-none pointer-events-none" %>
 
-      <div class="flex justify-center items-center gap-2 md:gap-4 flex-wrap">
-        <!-- Nome fuori dai cerchi (Mari) -->
-        <div class="absolute md:relative md:mr-4">
-          <input type="text" data-fill-blanks-target="input" data-correct-answer="Mari"
-                 class="w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-white" placeholder="...">
-        </div>
+      <div class="absolute inset-0">
+        <% inputs = [
+          { label: "Mari", top: "75.1427%", left: "75.8281%", width: "7.66142%", height: "5.16377%", answer: "Mari" },
+          { label: "Alex", top: "60.2443%", left: "6.63014%", width: "8.3125%", height: "5.90323%", answer: "Alex" },
+          { label: "Fabio", top: "67.2778%", left: "50.1198%", width: "7.27084%", height: "5.16378%", answer: "Fabio" },
+          { label: "Lea", top: "67.4542%", left: "72.4687%", width: "7.01043%", height: "5.5335%", answer: "Lea" },
+          { label: "Clara", top: "67.4629%", left: "28.9792%", width: "8.57292%", height: "5.71837%", answer: "Clara" },
+          { label: "Teo", top: "74.2941%", left: "30.4635%", width: "6.35937%", height: "5.34864%", answer: "Teo" },
+          { label: "Asia", top: "74.3027%", left: "51.0364%", width: "6.35938%", height: "4.97891%", answer: "Asia" }
+        ] %>
 
-        <!-- Cerchio sinistro - con cappello (senza sciarpa) -->
-        <div class="relative">
-          <div class="w-40 md:w-48 h-28 md:h-32 border-2 border-orange-400 rounded-full flex flex-col items-center justify-center bg-white/50 px-8">
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="Alex"
-                   class="w-16 md:w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-transparent mb-1" placeholder="...">
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="Fabio"
-                   class="w-16 md:w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-transparent" placeholder="...">
+        <% inputs.each do |input| %>
+          <div class="absolute"
+               style="top: <%= input[:top] %>; left: <%= input[:left] %>; width: <%= input[:width] %>; height: <%= input[:height] %>;"
+               data-hotspot-editor-target="hotspot"
+               data-auto-advance-target="input"
+               data-action="mousedown->hotspot-editor#startDrag">
+            <input type="text"
+                   data-fill-blanks-target="input"
+                   data-correct-answer="<%= input[:answer] %>"
+                   class="w-full h-full py-1 bg-white/60 hover:bg-white/80 focus:bg-white border-2 text-black border-transparent hover:border-cyan-500 focus:border-cyan-600 rounded text-center font-bold text-sm transition-colors"
+                   maxlength="<%= input[:answer].to_s.length + 2 %>"
+                   inputmode="text"
+                   aria-label="<%= input[:label] %>">
           </div>
-          <div class="text-center mt-2 border border-gray-400 px-2 py-0.5 bg-white">con cappello</div>
-        </div>
-
-        <!-- Intersezione - con cappello e sciarpa -->
-        <div class="relative -mx-6 md:-mx-8 z-10">
-          <div class="w-32 md:w-40 h-24 md:h-28 flex flex-col items-center justify-center border-2 border-orange-400 rounded-full bg-orange-50/50">
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="Lea"
-                   class="w-16 md:w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-transparent mb-1" placeholder="...">
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="Clara"
-                   class="w-16 md:w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-transparent" placeholder="...">
-          </div>
-          <div class="text-center mt-2 border border-gray-400 px-2 py-0.5 bg-white text-sm md:text-base">con cappello e sciarpa</div>
-        </div>
-
-        <!-- Cerchio destro - con sciarpa (senza cappello) -->
-        <div class="relative">
-          <div class="w-40 md:w-48 h-28 md:h-32 border-2 border-orange-400 rounded-full flex flex-col items-center justify-center bg-white/50 px-8">
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="Teo"
-                   class="w-16 md:w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-transparent mb-1" placeholder="...">
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="Asia"
-                   class="w-16 md:w-20 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center bg-transparent" placeholder="...">
-          </div>
-          <div class="text-center mt-2 border border-gray-400 px-2 py-0.5 bg-white">con sciarpa</div>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
 
   <!-- Esercizio 2 -->
   <div class="mb-12" data-controller="fill-blanks auto-advance">
-    <div class="flex items-start gap-3 mb-4">
+    <div class="flex items-center gap-3 mb-4">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         2
       </div>
@@ -86,44 +72,44 @@
 
     <!-- Tabella di Carroll -->
     <div class="overflow-x-auto">
-      <table class="w-full border-collapse border-2 border-cyan-400">
+      <table class="w-full border-separate border-spacing-0 border-2 border-cyan-400 rounded-lg overflow-hidden">
         <thead>
-          <tr class="bg-cyan-50">
-            <th class="border-2 border-cyan-400 px-4 py-2">Bambine/i...</th>
-            <th class="border-2 border-cyan-400 px-4 py-2">con sciarpa</th>
-            <th class="border-2 border-cyan-400 px-4 py-2"><strong>NON</strong> con sciarpa</th>
+          <tr>
+            <th class="border border-cyan-400 px-4 py-1 font-normal">Bambine/i...</th>
+            <th class="border border-cyan-400 px-4 py-1 font-normal">con sciarpa</th>
+            <th class="border border-cyan-400 px-4 py-1 font-normal"><strong>NON</strong> con sciarpa</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="border-2 border-cyan-400 px-4 py-3 bg-pink-50">con cappello</td>
-            <td class="border-2 border-cyan-400 px-4 py-3 text-center">
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="Lea"
-                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
-              ,
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="Clara"
-                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
-            </td>
-            <td class="border-2 border-cyan-400 px-4 py-3 text-center">
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="Alex"
-                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
-              ,
+            <td class="border border-cyan-400 px-4 py-1">con cappello</td>
+            <td class="border border-cyan-400 px-4 py-1 text-center">
               <input type="text" data-fill-blanks-target="input" data-correct-answer="Fabio"
-                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" >
+              ,
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="Asia"
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" >
+            </td>
+            <td class="border border-cyan-400 px-4 py-1 text-center">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="Clara"
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" >
+              ,
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="Teo"
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" >
             </td>
           </tr>
           <tr>
-            <td class="border-2 border-cyan-400 px-4 py-3 bg-pink-50"><strong>NON</strong> con cappello</td>
-            <td class="border-2 border-cyan-400 px-4 py-3 text-center">
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="Teo"
-                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+            <td class="border border-cyan-400 px-4 py-1"><strong>NON</strong> con cappello</td>
+            <td class="border border-cyan-400 px-4 py-1 text-center">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="Lea"
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" >
               ,
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="Asia"
-                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
-            </td>
-            <td class="border-2 border-cyan-400 px-4 py-3 text-center">
               <input type="text" data-fill-blanks-target="input" data-correct-answer="Mari"
-                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" >
+            </td>
+            <td class="border border-cyan-400 px-4 py-1 text-center">
+              <input type="text" data-fill-blanks-target="input" data-correct-answer="Alex"
+                     class="w-16 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" >
             </td>
           </tr>
         </tbody>

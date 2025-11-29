@@ -38,35 +38,45 @@ export default class extends Controller {
   }
 
   createEditButton() {
+    // Crea pulsante Edit dentro il container (non globale)
     const editBtn = document.createElement('button')
-    editBtn.className = "fixed bottom-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold px-4 py-2 rounded-lg shadow-2xl z-40 transition"
+    editBtn.className = "absolute top-2 right-2 bg-yellow-500 hover:bg-yellow-600 text-white font-bold px-3 py-1 rounded-lg shadow-lg z-40 transition text-sm opacity-50 hover:opacity-100"
     editBtn.textContent = "✏️ Edit"
-    editBtn.addEventListener('click', () => this.toggleEditMode())
-    document.body.appendChild(editBtn)
+    editBtn.addEventListener('click', (e) => {
+      e.preventDefault()
+      e.stopPropagation()
+      this.toggleEditMode()
+    })
+
+    // Aggiungi al container, non al body
+    this.containerTarget.appendChild(editBtn)
     this.editButton = editBtn
   }
 
   createInfoPanel() {
-    if (!this.hasInfoTarget) {
-      const info = document.createElement('div')
-      info.dataset.hotspotEditorTarget = "info"
-      info.className = "fixed top-4 right-4 bg-white border-4 border-blue-500 rounded-lg shadow-2xl z-50 hidden"
-      info.style.width = "600px"
-      info.innerHTML = `
-        <div class="bg-blue-500 text-white px-3 py-2 font-bold text-sm flex items-center justify-between cursor-move" data-panel-header>
-          <span>Hotspot Values (drag to move)</span>
-          <div class="flex gap-2">
-            <button class="bg-white text-blue-600 px-3 py-1 rounded font-bold hover:bg-blue-50 transition cursor-pointer" data-copy-button>
-              Copy
-            </button>
-            <button class="bg-red-500 text-white px-3 py-1 rounded font-bold hover:bg-red-600 transition cursor-pointer" data-close-button>
-              Close
-            </button>
-          </div>
+    // Genera un ID unico per questo controller
+    this.panelId = `hotspot-values-${Math.random().toString(36).substr(2, 9)}`
+
+    const info = document.createElement('div')
+    info.dataset.hotspotEditorTarget = "info"
+    info.className = "fixed top-4 right-4 bg-white border-4 border-blue-500 rounded-lg shadow-2xl z-50 hidden"
+    info.style.width = "600px"
+    info.innerHTML = `
+      <div class="bg-blue-500 text-white px-3 py-2 font-bold text-sm flex items-center justify-between cursor-move" data-panel-header>
+        <span>Hotspot Values (drag to move)</span>
+        <div class="flex gap-2">
+          <button class="bg-white text-blue-600 px-3 py-1 rounded font-bold hover:bg-blue-50 transition cursor-pointer" data-copy-button>
+            Copy
+          </button>
+          <button class="bg-red-500 text-white px-3 py-1 rounded font-bold hover:bg-red-600 transition cursor-pointer" data-close-button>
+            Close
+          </button>
         </div>
-        <div id="hotspot-values" class="font-mono text-xs bg-gray-100 p-3 max-h-96 overflow-y-auto"></div>
-      `
-      document.body.appendChild(info)
+      </div>
+      <div id="${this.panelId}" class="font-mono text-xs bg-gray-100 p-3 max-h-96 overflow-y-auto"></div>
+    `
+    document.body.appendChild(info)
+    this.infoPanel = info
 
       // Add copy button handler
       const copyButton = info.querySelector('[data-copy-button]')
@@ -107,7 +117,6 @@ export default class extends Controller {
       document.addEventListener('mouseup', () => {
         isDragging = false
       })
-    }
   }
 
   startDrag(event) {
@@ -339,7 +348,7 @@ export default class extends Controller {
   }
 
   updateInfoPanel() {
-    const valuesDiv = document.getElementById('hotspot-values')
+    const valuesDiv = document.getElementById(this.panelId)
     if (!valuesDiv) return
 
     const hotspots = this.hotspotTargets.map(hotspot => this.getHotspotData(hotspot))
@@ -353,8 +362,8 @@ export default class extends Controller {
     const code = hotspots.map(h => this.formatHotspotCode(h)).join(',\n')
 
     navigator.clipboard.writeText(code).then(() => {
-      // Visual feedback
-      const copyButton = document.querySelector('[data-copy-button]')
+      // Visual feedback - usa il pulsante del proprio panel
+      const copyButton = this.infoPanel.querySelector('[data-copy-button]')
       if (copyButton) {
         const originalText = copyButton.textContent
         copyButton.textContent = 'Copied!'
@@ -387,7 +396,7 @@ export default class extends Controller {
 
   toggleEditMode() {
     this.editMode = !this.editMode
-    const info = document.querySelector('[data-hotspot-editor-target="info"]')
+    const info = this.infoPanel
 
     if (this.editMode) {
       // Attiva modalità edit
@@ -464,8 +473,8 @@ export default class extends Controller {
 
   disconnect() {
     // Cleanup
-    if (this.hasInfoTarget) {
-      this.infoTarget.remove()
+    if (this.infoPanel) {
+      this.infoPanel.remove()
     }
     if (this.editButton) {
       this.editButton.remove()

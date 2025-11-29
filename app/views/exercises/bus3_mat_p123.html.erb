@@ -9,9 +9,9 @@
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Esercizio 3 -->
+  <!-- Esercizio 3 - Hotspot su immagine -->
   <div class="mb-12" data-controller="fill-blanks auto-advance">
-    <div class="flex items-start gap-3 mb-4">
+    <div class="flex items-center gap-3 mb-4">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         3
       </div>
@@ -21,10 +21,43 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-      <!-- Diagramma ad albero -->
+      <!-- Diagramma ad albero con hotspot -->
       <div class="md:col-span-2">
-        <div class="flex justify-center">
-          <%= image_tag "bus3_mat/p123/p123_01.jpg", alt: "Diagramma ad albero bambini", class: "max-w-lg w-full" %>
+        <div class="relative max-w-lg mx-auto"
+             data-controller="hotspot-editor"
+             data-hotspot-editor-target="container">
+
+          <%= image_tag "bus3_mat/p123/p123_01.jpg",
+              alt: "Diagramma ad albero bambini",
+              class: "w-full h-full object-cover select-none pointer-events-none" %>
+
+          <div class="absolute inset-0">
+            <% inputs = [
+              { label: "Fabio", top: "75.7723%", left: "8.27344%", width: "12%", height: "8%", answer: "Fabio" },
+              { label: "Asia", top: "84.2634%", left: "7.6875%", width: "12%", height: "8%", answer: "Asia" },
+              { label: "Clara", top: "76.1495%", left: "32.2969%", width: "12%", height: "8%", answer: "Clara" },
+              { label: "Teo", top: "85.7722%", left: "32.1016%", width: "11.6094%", height: "9.5089%", answer: "Teo" },
+              { label: "Lea", top: "76.1495%", left: "57.1484%", width: "12%", height: "8%", answer: "Lea" },
+              { label: "Mari", top: "86.1495%", left: "55.9766%", width: "12%", height: "8%", answer: "Mari" },
+              { label: "Alex", top: "78.0357%", left: "81.2188%", width: "12%", height: "8%", answer: "Alex" }
+            ] %>
+
+            <% inputs.each do |input| %>
+              <div class="absolute"
+                   style="top: <%= input[:top] %>; left: <%= input[:left] %>; width: <%= input[:width] %>; height: <%= input[:height] %>;"
+                   data-hotspot-editor-target="hotspot"
+                   data-auto-advance-target="input"
+                   data-action="mousedown->hotspot-editor#startDrag">
+                <input type="text"
+                       data-fill-blanks-target="input"
+                       data-correct-answer="<%= input[:answer] %>"
+                       class="w-full h-full py-1 bg-white/60 hover:bg-white/80 focus:bg-white border-2 text-black border-transparent hover:border-cyan-500 focus:border-cyan-600 rounded text-center font-bold text-sm transition-colors"
+                       maxlength="<%= input[:answer].to_s.length + 2 %>"
+                       inputmode="text"
+                       aria-label="<%= input[:label] %>">
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
 
@@ -35,101 +68,101 @@
     </div>
   </div>
 
-  <!-- Esercizio 4 -->
-  <div class="mb-12" data-controller="fill-blanks auto-advance">
-    <div class="flex items-start gap-3 mb-4">
+  <!-- Esercizio 4 - Drag & Drop scarpe -->
+  <div class="mb-12" data-controller="image-drop">
+    <div class="flex items-center gap-3 mb-4">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         4
       </div>
       <p class="text-gray-700">
-        <strong>Classifica le scarpe con i diagrammi.</strong>
+        <strong>Classifica le scarpe con i diagrammi. Trascina le scarpe nelle caselle giuste.</strong>
       </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <!-- Immagini scarpe -->
-      <div class="grid grid-cols-2 gap-4">
-        <div class="text-center">
-          <span class="text-red-500 font-bold">a.</span>
-          <%= image_tag "bus3_mat/p123/output-1743504902123_150_579_111_104.png", alt: "Scarpa a - tacchi blu", class: "max-h-20 mx-auto" %>
-        </div>
-        <div class="text-center">
-          <span class="text-red-500 font-bold">b.</span>
-          <%= image_tag "bus3_mat/p123/output-1743504902123_262_610_123_91.png", alt: "Scarpa b - mocassino", class: "max-h-20 mx-auto" %>
-        </div>
-        <div class="text-center">
-          <span class="text-red-500 font-bold">c.</span>
-          <%= image_tag "bus3_mat/p123/output-1743504902123_157_701_133_103.png", alt: "Scarpa c - sandalo", class: "max-h-20 mx-auto" %>
-        </div>
-        <div class="text-center">
-          <span class="text-red-500 font-bold">d.</span>
-          <%= image_tag "bus3_mat/p123/output-1743504902123_294_713_119_104.png", alt: "Scarpa d - scarpa verde", class: "max-h-20 mx-auto" %>
-        </div>
-        <div class="text-center">
-          <span class="text-red-500 font-bold">e.</span>
-          <%= image_tag "bus3_mat/p123/output-1743504902123_150_813_142_107.png", alt: "Scarpa e - ballerina rossa", class: "max-h-20 mx-auto" %>
-        </div>
-        <div class="text-center">
-          <span class="text-red-500 font-bold">f.</span>
-          <%= image_tag "bus3_mat/p123/output-1743504902123_295_824_128_100.png", alt: "Scarpa f - sneaker", class: "max-h-20 mx-auto" %>
-        </div>
-      </div>
+    <% scarpe = [
+      { id: "a", src: "bus3_mat/p123/output-1743504902123_150_579_111_104.png", alt: "tacchi blu" },
+      { id: "b", src: "bus3_mat/p123/output-1743504902123_262_610_123_91.png", alt: "mocassino" },
+      { id: "c", src: "bus3_mat/p123/output-1743504902123_157_701_133_103.png", alt: "sandalo" },
+      { id: "d", src: "bus3_mat/p123/output-1743504902123_294_713_119_104.png", alt: "scarpa verde" },
+      { id: "e", src: "bus3_mat/p123/output-1743504902123_150_813_142_107.png", alt: "ballerina rossa" },
+      { id: "f", src: "bus3_mat/p123/output-1743504902123_295_824_128_100.png", alt: "sneaker" }
+    ] %>
 
-      <!-- Diagrammi -->
-      <div class="space-y-6">
-        <!-- Diagramma ad albero scarpe -->
-        <div class="flex justify-center">
-          <%= image_tag "bus3_mat/p123/p123_02.jpg", alt: "Diagramma ad albero scarpe", class: "max-w-md w-full" %>
+    <!-- Scarpe trascinabili -->
+    <div class="grid grid-cols-3 md:grid-cols-6 gap-4 mb-8 p-4 bg-gray-50 rounded-lg">
+      <% scarpe.each do |scarpa| %>
+        <div class="text-center p-2 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+             data-image-drop-target="draggable"
+             data-image-drop-value="<%= scarpa[:id] %>"
+             data-image-src="<%= asset_path(scarpa[:src]) %>">
+          <span class="text-red-500 font-bold"><%= scarpa[:id] %>.</span>
+          <%= image_tag scarpa[:src], alt: scarpa[:alt], class: "max-h-16 mx-auto" %>
         </div>
-
-        <!-- Diagramma di Eulero-Venn scarpe -->
-        <div class="flex justify-center">
-          <%= image_tag "bus3_mat/p123/p123_03.jpg", alt: "Diagramma di Eulero-Venn scarpe", class: "max-w-md w-full" %>
-        </div>
-      </div>
+      <% end %>
     </div>
 
-    <!-- Tabella di Carroll per scarpe -->
-    <div class="overflow-x-auto mt-6">
-      <table class="w-full max-w-lg border-collapse border-2 border-cyan-400">
-        <thead>
-          <tr class="bg-cyan-50">
-            <th class="border-2 border-cyan-400 px-4 py-2">Scarpe...</th>
-            <th class="border-2 border-cyan-400 px-4 py-2">con lacci</th>
-            <th class="border-2 border-cyan-400 px-4 py-2"><strong>NON</strong> con lacci</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="border-2 border-cyan-400 px-4 py-3 bg-pink-50">con tacco</td>
-            <td class="border-2 border-cyan-400 px-4 py-3 text-center">
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="b"
-                     class="w-12 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
-            </td>
-            <td class="border-2 border-cyan-400 px-4 py-3 text-center">
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="a"
-                     class="w-12 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
-              ,
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="d"
-                     class="w-12 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
-            </td>
-          </tr>
-          <tr>
-            <td class="border-2 border-cyan-400 px-4 py-3 bg-pink-50"><strong>NON</strong> con tacco</td>
-            <td class="border-2 border-cyan-400 px-4 py-3 text-center">
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="f"
-                     class="w-12 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
-            </td>
-            <td class="border-2 border-cyan-400 px-4 py-3 text-center">
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="c"
-                     class="w-12 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
-              ,
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="e"
-                     class="w-12 px-1 py-0.5 border-b-2 border-dotted border-gray-400 text-center" placeholder="...">
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Diagramma ad albero scarpe con hotspot -->
+      <div class="relative max-w-md mx-auto"
+           data-controller="hotspot-editor"
+           data-hotspot-editor-target="container">
+
+        <%= image_tag "bus3_mat/p123/p123_02.jpg",
+            alt: "Diagramma ad albero scarpe",
+            class: "w-full h-full object-cover select-none pointer-events-none" %>
+
+        <div class="absolute inset-0">
+          <% albero_zones = [
+            { label: "b", top: "79.6046%", left: "7.125%", width: "12.6339%", height: "16.0837%", answer: "b" },
+            { label: "a", top: "79.7338%", left: "26.8928%", width: "9.95535%", height: "15.7034%", answer: "a" },
+            { label: "d", top: "80.1977%", left: "37.384%", width: "9.73214%", height: "14.5627%", answer: "d" },
+            { label: "f", top: "79.2243%", left: "56.3571%", width: "11.7411%", height: "17.2243%", answer: "f" },
+            { label: "c", top: "80.365%", left: "78.0089%", width: "9.50893%", height: "14.1825%", answer: "c" },
+            { label: "e", top: "80.1977%", left: "88.2768%", width: "9.0625%", height: "14.1825%", answer: "e" }
+          ] %>
+
+          <% albero_zones.each do |zone| %>
+            <div class="absolute flex items-center justify-center border-2 border-dashed border-gray-400 rounded bg-white/30 hover:bg-white/50 transition-colors"
+                 style="top: <%= zone[:top] %>; left: <%= zone[:left] %>; width: <%= zone[:width] %>; height: <%= zone[:height] %>;"
+                 data-image-drop-target="dropZone"
+                 data-correct-answer="<%= zone[:answer] %>"
+                 data-hotspot-editor-target="hotspot"
+                 data-action="mousedown->hotspot-editor#startDrag">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Diagramma di Eulero-Venn scarpe con hotspot -->
+      <div class="relative max-w-md mx-auto"
+           data-controller="hotspot-editor"
+           data-hotspot-editor-target="container">
+
+        <%= image_tag "bus3_mat/p123/p123_03.jpg",
+            alt: "Diagramma di Eulero-Venn scarpe",
+            class: "w-full h-full object-cover select-none pointer-events-none" %>
+
+        <div class="absolute inset-0">
+          <% venn_zones = [
+            { label: "a", top: "22.8327%", left: "6%", width: "10.25%", height: "15.4221%", answer: "a" },
+            { label: "d", top: "42.0152%", left: "15%", width: "9.5%", height: "13.9011%", answer: "d" },
+            { label: "b", top: "47.3232%", left: "45.5%", width: "10.25%", height: "13.2395%", answer: "b" },
+            { label: "f", top: "22.2281%", left: "84.5%", width: "11%", height: "14.7605%", answer: "f" },
+            { label: "c", top: "56.692%", left: "24.75%", width: "10.25%", height: "13.9011%", answer: "c" },
+            { label: "e", top: "46.0456%", left: "73.5%", width: "10.75%", height: "16.5627%", answer: "e" }
+          ] %>
+
+          <% venn_zones.each do |zone| %>
+            <div class="absolute flex items-center justify-center border-2 border-dashed border-gray-400 rounded bg-white/30 hover:bg-white/50 transition-colors"
+                 style="top: <%= zone[:top] %>; left: <%= zone[:left] %>; width: <%= zone[:width] %>; height: <%= zone[:height] %>;"
+                 data-image-drop-target="dropZone"
+                 data-correct-answer="<%= zone[:answer] %>"
+                 data-hotspot-editor-target="hotspot"
+                 data-action="mousedown->hotspot-editor#startDrag">
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 
