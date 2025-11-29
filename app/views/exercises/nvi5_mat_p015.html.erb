@@ -1,18 +1,13 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6" data-controller="exercise-checker page-viewer" data-page-viewer-image-url-value="<%= asset_path('nvi5_mat/p015/page.png') %>">   <!-- Header -->
- <div class="mb-8">  <div class="flex items-start sm:items-center justify-between gap-4 mb-4">  <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-4">  <div class="text-white text-md sm:text-xl px-2 sm:px-4 py-1.5 sm:py-2 font-bold">           NUMERI
-        </div>
-        <h1 class="text-2xl sm:text-3xl font-bold text-purple-600">ARROTONDAMENTO O APPROSSIMAZIONE</h1>
-      </div>
- <div class="flex-shrink-0 text-white w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl cursor-pointer hover:transition-colors"            data-action="click->page-viewer#openOriginal"
-           title="Clicca per vedere la pagina originale">
-        15
-      </div>
-    </div>
-  </div>
-
- <div> 
+<div class="max-w-6xl mx-auto p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+  <!-- Header -->
+  <%= render 'shared/page_header', pagina: @pagina %>
+  <div>
     <!-- Problema iniziale -->
- <div class="p-4 sm:p-6 mb-6">       <p class="text-gray-800 leading-relaxed mb-3">
+    <div class="p-4 sm:p-6 mb-6">
+      <p class="text-gray-800 leading-relaxed mb-3">
         Laura e Giulia hanno partecipato a una gara di ginnastica ritmica organizzata a scuola.
         Il voto della gara è stato <span class="font-bold text-blue-700">9,28</span> per Laura e <span class="font-bold text-blue-700">9,73</span> per Giulia.
       </p>
@@ -21,29 +16,31 @@
         decimale, non con due. Quali numeri inserirà l'insegnante?
       </p>
     </div>
-
     <!-- Spiegazione -->
- <div class="p-4 sm:p-6 mb-6">       <p class="text-gray-800 mb-4">
-        Poiché i voti non possono essere inseriti così come sono, occorre fare delle <span class="font-bold text-pink-600">approssimazioni</span>
+    <div class="p-4 sm:p-6 mb-6">
+      <p class="text-gray-800 mb-4">
+        Poiché i voti non possono essere inseriti così come sono, occorre fare delle <span class="font-bold text-blue-600">approssimazioni</span>
         (<span class="font-bold">arrotondamenti</span>), cioè sostituire i numeri esatti con numeri "più semplici", ma il più possibile vicini
         a quelli esatti.
       </p>
       <p class="text-gray-800 font-semibold mb-3">
         Per approssimare dobbiamo seguire alcune regole.
       </p>
-
- <div class="space-y-4">         <!-- Regola 1 -->
- <div class="p-4">           <p class="text-gray-800">
-            <span class="text-pink-600 font-bold">•</span> Innanzitutto dobbiamo stabilire <span class="font-bold text-pink-700">il valore al quale vogliamo arrotondare il numero</span>;
+      <div class="space-y-4">
+        <!-- Regola 1 -->
+        <div class="p-4">
+          <p class="text-gray-800">
+            <span class="text-blue-600 font-bold">•</span> Innanzitutto dobbiamo stabilire <span class="font-bold text-blue-600">il valore al quale vogliamo arrotondare il numero</span>;
             nel nostro caso i decimi.
           </p>
         </div>
-
         <!-- Regola 2 -->
- <div class="p-4">           <p class="text-gray-800 mb-2">
-            <span class="text-pink-600 font-bold">•</span> Poi dobbiamo osservare la prima cifra che non scriveremo più; nel nostro caso i centesimi:
+        <div class="p-4">
+          <p class="text-gray-800 mb-2">
+            <span class="text-blue-600 font-bold">•</span> Poi dobbiamo osservare la prima cifra che non scriveremo più; nel nostro caso i centesimi:
           </p>
- <div class="ml-6 space-y-2">             <p class="text-gray-700">
+          <div class="ml-6 space-y-2">
+            <p class="text-gray-700">
               – se essa è <span class="font-bold text-red-600">maggiore di 5</span>, facciamo un <span class="font-bold text-red-600">arrotondamento per eccesso</span>,
               cioè manteniamo di 1 l'ultima cifra considerata (nel nostro caso i decimi) e sostituiamo con zero le cifre successive.
             </p>
@@ -52,9 +49,9 @@
             </p>
           </div>
         </div>
-
         <!-- Regola 3 -->
- <div class="p-4">           <p class="text-gray-800 mb-2">
+        <div class="p-4">
+          <p class="text-gray-800 mb-2">
             – se essa è <span class="font-bold text-blue-600">minore di 5</span>, facciamo un <span class="font-bold text-blue-600">arrotondamento per difetto</span>,
             cioè sostituiamo con zero le cifre successive a quella considerata.
           </p>
@@ -62,155 +59,173 @@
             Giulia ha ottenuto <span class="font-bold">9,73</span> che arrotondiamo per difetto a <span class="font-bold text-blue-600">9,7</span>.
           </p>
         </div>
-
         <!-- Regola 4 -->
- <div class="p-4">           <p class="text-gray-800">
-            – se essa è <span class="font-bold text-purple-600">uguale a 5</span>, possiamo arrotondare per eccesso o per difetto.
+        <div class="p-4">
+          <p class="text-gray-800">
+            – se essa è <span class="font-bold text-blue-600">uguale a 5</span>, possiamo arrotondare per eccesso o per difetto.
           </p>
         </div>
       </div>
-
       <!-- Box laterale -->
- <div class="mt-6 p-4">         <p class="text-sm text-gray-700 mb-2">
+      <div class="mt-6 p-4">
+        <p class=" text-gray-700 mb-2">
           Quando arrotondiamo <span class="font-bold">per eccesso</span>, il numero approssimato è <span class="font-bold text-red-600">maggiore</span> del numero esatto; quando arrotondiamo <span class="font-bold">per difetto</span>, il numero approssimato è <span class="font-bold text-blue-600">minore</span> del numero esatto.
         </p>
       </div>
     </div>
-
     <!-- Risposta -->
- <div class="p-4 sm:p-6 mb-6">       <p class="text-gray-800">
+    <div class="p-4 sm:p-6 mb-6">
+      <p class="text-gray-800">
         Ora puoi rispondere: L'insegnante inserirà <span class="font-bold text-blue-700">9,7</span> per Giulia e <span class="font-bold text-red-700">9,3</span> per Laura.
       </p>
     </div>
-
     <!-- Sezione ESERCIZI -->
- <div class="p-4 sm:p-6 mb-6">       <h2 class="text-xl md:text-2xl font-bold text-white">ESERCIZI</h2>
+    <div class="p-4 sm:p-6 mb-6">
+      <h2 class=" font-bold text-white">ESERCIZI</h2>
     </div>
-
     <!-- Exercise 1: Arrotonda ai decimi -->
- <div class="p-4 sm:p-6 mb-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 text-white w-8 h-8 flex items-center justify-center font-bold text-sm">1</div>         <p class="text-base md:text-lg font-semibold text-blue-800 pt-1">
+    <div class="p-4 sm:p-6 mb-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+      <div class="flex items-start gap-3 mb-4">
+        <div class=" text-white   flex items-center justify-center font-bold ">1</div>
+        <p class=" font-semibold text-blue-800 pt-1">
           Arrotonda ai decimi i seguenti numeri. Poi cerchia con il
-          <span class="text-red-600">rosso<span class="inline-block w-6 h-6 bg-red-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span>
+          <span class="text-red-600">rosso<span class="inline-block   bg-red-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span>
           quelli che hai arrotondato per eccesso e in
-          <span class="text-blue-600">blu<span class="inline-block w-6 h-6 bg-blue-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span>
+          <span class="text-blue-600">blu<span class="inline-block   bg-blue-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span>
           quelli che hai arrotondato per difetto.
         </p>
       </div>
- <div class="md:ml-11"> 
- <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">  <div class="p-4">  <div class="flex items-center gap-3">             <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="text-lg font-bold text-gray-700 cursor-pointer transition px-1">3,14</span>
-            <span class="text-lg font-bold text-gray-700">→</span>
-            <input type="text"
-                   data-correct-answer="3,1"
-                   class="w-20 px-3 py-2 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none text-center text-lg">
+      <div class="ml-11">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="p-4">
+            <div class="flex items-center gap-3">
+              <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class=" font-bold text-gray-700 cursor-pointer transition px-1">3,14</span>
+              <span class=" font-bold text-gray-700">→</span>
+              <input type="text"
+                     data-correct-answer="3,1"
+                     class=" px-3 py-2 border-2 border-blue-300  focus:border-blue-500 focus:outline-none text-center ">
+            </div>
           </div>
-        </div>
-
- <div class="p-4">  <div class="flex items-center gap-3">             <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="text-lg font-bold text-gray-700 cursor-pointer transition px-1">18,25</span>
-            <span class="text-lg font-bold text-gray-700">→</span>
-            <input type="text"
-                   data-correct-answer="18,3"
-                   class="w-20 px-3 py-2 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none text-center text-lg">
+          <div class="p-4">
+            <div class="flex items-center gap-3">
+              <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class=" font-bold text-gray-700 cursor-pointer transition px-1">18,25</span>
+              <span class=" font-bold text-gray-700">→</span>
+              <input type="text"
+                     data-correct-answer="18,3"
+                     class=" px-3 py-2 border-2 border-blue-300  focus:border-blue-500 focus:outline-none text-center ">
+            </div>
           </div>
-        </div>
-
- <div class="p-4">  <div class="flex items-center gap-3">             <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="text-lg font-bold text-gray-700 cursor-pointer transition px-1">4,44</span>
-            <span class="text-lg font-bold text-gray-700">→</span>
-            <input type="text"
-                   data-correct-answer="4,4"
-                   class="w-20 px-3 py-2 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none text-center text-lg">
+          <div class="p-4">
+            <div class="flex items-center gap-3">
+              <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class=" font-bold text-gray-700 cursor-pointer transition px-1">4,44</span>
+              <span class=" font-bold text-gray-700">→</span>
+              <input type="text"
+                     data-correct-answer="4,4"
+                     class=" px-3 py-2 border-2 border-blue-300  focus:border-blue-500 focus:outline-none text-center ">
+            </div>
           </div>
-        </div>
-
- <div class="p-4">  <div class="flex items-center gap-3">             <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="text-lg font-bold text-gray-700 cursor-pointer transition px-1">12,356</span>
-            <span class="text-lg font-bold text-gray-700">→</span>
-            <input type="text"
-                   data-correct-answer="12,4"
-                   class="w-20 px-3 py-2 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none text-center text-lg">
+          <div class="p-4">
+            <div class="flex items-center gap-3">
+              <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class=" font-bold text-gray-700 cursor-pointer transition px-1">12,356</span>
+              <span class=" font-bold text-gray-700">→</span>
+              <input type="text"
+                     data-correct-answer="12,4"
+                     class=" px-3 py-2 border-2 border-blue-300  focus:border-blue-500 focus:outline-none text-center ">
+            </div>
           </div>
-        </div>
-
- <div class="p-4">  <div class="flex items-center gap-3">             <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="text-lg font-bold text-gray-700 cursor-pointer transition px-1">33,235</span>
-            <span class="text-lg font-bold text-gray-700">→</span>
-            <input type="text"
-                   data-correct-answer="33,2"
-                   class="w-20 px-3 py-2 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none text-center text-lg">
+          <div class="p-4">
+            <div class="flex items-center gap-3">
+              <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class=" font-bold text-gray-700 cursor-pointer transition px-1">33,235</span>
+              <span class=" font-bold text-gray-700">→</span>
+              <input type="text"
+                     data-correct-answer="33,2"
+                     class=" px-3 py-2 border-2 border-blue-300  focus:border-blue-500 focus:outline-none text-center ">
+            </div>
           </div>
-        </div>
-
- <div class="p-4">  <div class="flex items-center gap-3">             <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="text-lg font-bold text-gray-700 cursor-pointer transition px-1">6,38</span>
-            <span class="text-lg font-bold text-gray-700">→</span>
-            <input type="text"
-                   data-correct-answer="6,4"
-                   class="w-20 px-3 py-2 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none text-center text-lg">
+          <div class="p-4">
+            <div class="flex items-center gap-3">
+              <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class=" font-bold text-gray-700 cursor-pointer transition px-1">6,38</span>
+              <span class=" font-bold text-gray-700">→</span>
+              <input type="text"
+                     data-correct-answer="6,4"
+                     class=" px-3 py-2 border-2 border-blue-300  focus:border-blue-500 focus:outline-none text-center ">
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
-
     <!-- Exercise 2: Arrotonda all'unità -->
- <div class="p-4 sm:p-6 mb-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 text-white w-8 h-8 flex items-center justify-center font-bold text-sm">2</div>         <p class="text-base md:text-lg font-semibold text-green-800 pt-1">
+    <div class="p-4 sm:p-6 mb-6" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+      <div class="flex items-start gap-3 mb-4">
+        <div class=" text-white   flex items-center justify-center font-bold ">2</div>
+        <p class=" font-semibold text-green-800 pt-1">
           Arrotonda all'unità i seguenti numeri. Poi cerchia con il
-          <span class="text-red-600">rosso<span class="inline-block w-6 h-6 bg-red-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span>
+          <span class="text-red-600">rosso<span class="inline-block   bg-red-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span>
           quelli che hai arrotondato per eccesso e in
-          <span class="text-blue-600">blu<span class="inline-block w-6 h-6 bg-blue-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span>
+          <span class="text-blue-600">blu<span class="inline-block   bg-blue-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span>
           quelli che hai arrotondato per difetto.
         </p>
       </div>
- <div class="md:ml-11"> 
- <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">  <div class="p-4">  <div class="flex items-center gap-3">             <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="text-lg font-bold text-gray-700 cursor-pointer transition px-1">14,8</span>
-            <span class="text-lg font-bold text-gray-700">→</span>
-            <input type="text"
-                   data-correct-answer="15"
-                   class="w-16 px-3 py-2 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none text-center text-lg">
+      <div class="ml-11">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="p-4">
+            <div class="flex items-center gap-3">
+              <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class=" font-bold text-gray-700 cursor-pointer transition px-1">14,8</span>
+              <span class=" font-bold text-gray-700">→</span>
+              <input type="text"
+                     data-correct-answer="15"
+                     class=" px-3 py-2 border-2 border-green-300  focus:border-green-500 focus:outline-none text-center ">
+            </div>
           </div>
-        </div>
-
- <div class="p-4">  <div class="flex items-center gap-3">             <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="text-lg font-bold text-gray-700 cursor-pointer transition px-1">5,61</span>
-            <span class="text-lg font-bold text-gray-700">→</span>
-            <input type="text"
-                   data-correct-answer="6"
-                   class="w-16 px-3 py-2 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none text-center text-lg">
+          <div class="p-4">
+            <div class="flex items-center gap-3">
+              <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class=" font-bold text-gray-700 cursor-pointer transition px-1">5,61</span>
+              <span class=" font-bold text-gray-700">→</span>
+              <input type="text"
+                     data-correct-answer="6"
+                     class=" px-3 py-2 border-2 border-green-300  focus:border-green-500 focus:outline-none text-center ">
+            </div>
           </div>
-        </div>
-
- <div class="p-4">  <div class="flex items-center gap-3">             <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="text-lg font-bold text-gray-700 cursor-pointer transition px-1">24,18</span>
-            <span class="text-lg font-bold text-gray-700">→</span>
-            <input type="text"
-                   data-correct-answer="24"
-                   class="w-16 px-3 py-2 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none text-center text-lg">
+          <div class="p-4">
+            <div class="flex items-center gap-3">
+              <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class=" font-bold text-gray-700 cursor-pointer transition px-1">24,18</span>
+              <span class=" font-bold text-gray-700">→</span>
+              <input type="text"
+                     data-correct-answer="24"
+                     class=" px-3 py-2 border-2 border-green-300  focus:border-green-500 focus:outline-none text-center ">
+            </div>
           </div>
-        </div>
-
- <div class="p-4">  <div class="flex items-center gap-3">             <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="text-lg font-bold text-gray-700 cursor-pointer transition px-1">45,23</span>
-            <span class="text-lg font-bold text-gray-700">→</span>
-            <input type="text"
-                   data-correct-answer="45"
-                   class="w-16 px-3 py-2 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none text-center text-lg">
+          <div class="p-4">
+            <div class="flex items-center gap-3">
+              <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class=" font-bold text-gray-700 cursor-pointer transition px-1">45,23</span>
+              <span class=" font-bold text-gray-700">→</span>
+              <input type="text"
+                     data-correct-answer="45"
+                     class=" px-3 py-2 border-2 border-green-300  focus:border-green-500 focus:outline-none text-center ">
+            </div>
           </div>
-        </div>
-
- <div class="p-4">  <div class="flex items-center gap-3">             <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="text-lg font-bold text-gray-700 cursor-pointer transition px-1">18,234</span>
-            <span class="text-lg font-bold text-gray-700">→</span>
-            <input type="text"
-                   data-correct-answer="18"
-                   class="w-16 px-3 py-2 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none text-center text-lg">
+          <div class="p-4">
+            <div class="flex items-center gap-3">
+              <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class=" font-bold text-gray-700 cursor-pointer transition px-1">18,234</span>
+              <span class=" font-bold text-gray-700">→</span>
+              <input type="text"
+                     data-correct-answer="18"
+                     class=" px-3 py-2 border-2 border-green-300  focus:border-green-500 focus:outline-none text-center ">
+            </div>
           </div>
-        </div>
-
- <div class="p-4">  <div class="flex items-center gap-3">             <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="text-lg font-bold text-gray-700 cursor-pointer transition px-1">23,843</span>
-            <span class="text-lg font-bold text-gray-700">→</span>
-            <input type="text"
-                   data-correct-answer="24"
-                   class="w-16 px-3 py-2 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none text-center text-lg">
+          <div class="p-4">
+            <div class="flex items-center gap-3">
+              <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class=" font-bold text-gray-700 cursor-pointer transition px-1">23,843</span>
+              <span class=" font-bold text-gray-700">→</span>
+              <input type="text"
+                     data-correct-answer="24"
+                     class=" px-3 py-2 border-2 border-green-300  focus:border-green-500 focus:outline-none text-center ">
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
-
     <!-- Exercise Controls -->
     <%= render 'shared/exercise_controls', color: 'purple', current_page: 'nvi5_mat_p015' %>
-
   </div>
 </div>

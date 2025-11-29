@@ -1,35 +1,37 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6">  <div class="max-w-4xl mx-auto p-4 md:p-8"> 
-    <!-- Header -->
- <div class="mb-6" data-controller="page-viewer" data-page-viewer-image-url-value="<%= asset_path('nvi5_mat/p029/page.png') %>">  <div class="flex items-center justify-between">  <div class="inline-block text-white px-4 md:px-6 py-2 text-xs md:text-sm font-bold">           MODELLO INVALSI
-        </div>
-        <h1 class="text-xl md:text-3xl font-bold text-purple-600">I NUMERI - LIVELLO BASE</h1>
- <div class="flex-shrink-0 text-white w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold text-lg sm:text-xl cursor-pointer hover:transition-colors"              data-action="click->page-viewer#openOriginal"
-             title="Clicca per vedere la pagina originale">
-          29
-        </div>
-      </div>
-    </div>
+<div class="max-w-6xl mx-auto p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">  
 
- <div data-controller="exercise-checker" class="space-y-8"> 
+  <!-- Header -->
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-8">
       <!-- Esercizio 1: Valore posizionale -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">1</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Per ogni numero scegli la cifra richiesta.</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">1</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Per ogni numero scegli la cifra richiesta.</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 space-y-4">           <% [
+        <div class="ml-0 ml-11 space-y-4">           <% [
             {number: "48 213", prompt: "Cifra delle migliaia", options: {"8" => true, "4" => false, "2" => false}},
             {number: "305 671", prompt: "Cifra delle centinaia", options: {"6" => true, "5" => false, "7" => false}},
             {number: "9 140", prompt: "Cifra delle unità", options: {"0" => true, "9" => false, "4" => false}}
           ].each_with_index do |item, idx| %>
- <div class="p-4">               <p class="text-gray-700 font-semibold">Numero: <span class="text-purple-600"><%= item[:number] %></span></p>
+            <div class="p-4">               
+              <p class="text-gray-700 font-semibold">Numero: <span class="text-blue-600"><%= item[:number] %></span></p>
               <p class="text-gray-700 mb-3"><%= item[:prompt] %></p>
- <div class="flex flex-wrap gap-3">                 <% item[:options].each do |value, correct| %>
+              <div class="flex flex-wrap gap-3">                 <% item[:options].each do |value, correct| %>
                   <label class="flex items-center gap-2 bg-purple-100 hover:bg-purple-200 transition rounded-full px-4 py-2 cursor-pointer">
                     <input type="radio"
                            name="pos_<%= idx %>"
                            value="<%= value %>"
                            data-correct-answer="<%= correct ? 'true' : 'false' %>"
-                           class="w-5 h-5">
-                    <span class="text-sm text-gray-700"><%= value %></span>
+                           class=" ">
+                    <span class=" text-gray-700"><%= value %></span>
                   </label>
                 <% end %>
               </div>
@@ -37,32 +39,40 @@
           <% end %>
         </div>
       </div>
-
       <!-- Esercizio 2: Dal testo al numero -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">2</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Scrivi in cifre.</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">2</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Scrivi in cifre.</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 grid grid-cols-1 md:grid-cols-2 gap-3">           <% [
+        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
             {text: "trecentoquarantacinque", answer: "345"},
             {text: "otto mila e dodici", answer: "8012"},
             {text: "ventisette e cinque decimi", answer: "27,5"},
             {text: "zero virgola centouno", answer: "0,101"}
           ].each do |item| %>
-            <label class="bg-white rounded-lg px-4 py-3 flex items-center gap-3 shadow-sm">
+            <label class="bg-white  px-4 py-3 flex items-center gap-3 ">
               <span class="text-gray-700 flex-1"><%= item[:text] %></span>
               <input type="text"
-                     class="w-32 border-2 border-purple-200 rounded px-3 py-2 focus:border-purple-500 focus:outline-none text-right"
+                     class=" border-2 border-purple-200  px-3 py-2 focus:border-purple-500 focus:outline-none text-right"
                      data-correct-answer="<%= item[:answer] %>">
             </label>
           <% end %>
         </div>
       </div>
-
       <!-- Esercizio 3: Potenze di 10 -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">3</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Seleziona tutte le uguaglianze corrette.</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">3</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Seleziona tutte le uguaglianze corrette.</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 grid grid-cols-1 md:grid-cols-2 gap-3">           <% [
+        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
             {text: "10³ = 1 000", correct: true},
             {text: "10⁻¹ = 0,001", correct: false},
             {text: "5 × 10² = 500", correct: true},
@@ -70,9 +80,9 @@
             {text: "10⁰ = 1", correct: true},
             {text: "3 × 10¹ = 30", correct: true}
           ].each_with_index do |item, idx| %>
-            <label class="bg-white rounded-lg px-4 py-3 flex items-center gap-3 shadow-sm cursor-pointer hover:bg-purple-100 transition">
+            <label class="bg-white  px-4 py-3 flex items-center gap-3  cursor-pointer hover:bg-purple-100 transition">
               <input type="checkbox"
-                     class="w-5 h-5"
+                     class=" "
                      data-correct-answer="<%= item[:correct] ? 'true' : 'false' %>"
                      name="powers_<%= idx %>">
               <span class="text-gray-700"><%= item[:text] %></span>
@@ -80,35 +90,45 @@
           <% end %>
         </div>
       </div>
-
       <!-- Esercizio 4: Ordina i numeri -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">4</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Scrivi i numeri in ordine crescente inserendoli nelle caselle.</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">4</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Scrivi i numeri in ordine crescente inserendoli nelle caselle.</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 space-y-3">           <p class="text-gray-700">Numeri: 3,4 - 3,04 - 3,44 - 3,004 - 3,40</p>
- <div class="grid grid-cols-1 md:grid-cols-5 gap-3">             <% ["1°", "2°", "3°", "4°", "5°"].each_with_index do |label, idx| %>
- <div class="p-3 text-center">                 <p class="text-sm text-gray-500 mb-2"><%= label %></p>
+        <div class="ml-0 ml-11 space-y-3">           
+          <p class="text-gray-700">Numeri: 3,4 - 3,04 - 3,44 - 3,004 - 3,40</p>
+          <div class="grid grid-cols-1 grid-cols-5 gap-3">             <% ["1°", "2°", "3°", "4°", "5°"].each_with_index do |label, idx| %>
+              <div class="p-3 text-center">                 
+                <p class=" text-gray-500 mb-2"><%= label %></p>
                 <input type="text"
-                       class="w-full border-2 border-purple-200 rounded px-2 py-2 focus:border-purple-500 focus:outline-none text-center"
+                       class="full border-2 border-purple-200  px-2 py-2 focus:border-purple-500 focus:outline-none text-center"
                        data-correct-answer="<%= ["3,004", "3,04", "3,4", "3,40", "3,44"][idx] %>">
               </div>
             <% end %>
           </div>
         </div>
       </div>
-
       <!-- Esercizio 5: Confronti semplici -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">5</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Scegli il simbolo corretto (&lt;, =, &gt;).</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">5</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Scegli il simbolo corretto (&lt;, =, &gt;).</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 grid grid-cols-1 md:grid-cols-2 gap-3">           <% [
+        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
             {left: "-3", right: "+2", symbol: "<"},
             {left: "|-5|", right: "5", symbol: "="},
             {left: "0,7", right: "0,70", symbol: "="},
             {left: "-8", right: "-12", symbol: ">"}
           ].each do |item| %>
- <div class="px-4 py-3 flex items-center justify-center gap-4">               <span class="text-gray-700 font-semibold"><%= item[:left] %></span>
-              <select class="px-3 py-2 border-2 border-purple-300 rounded focus:border-purple-500 focus:outline-none text-lg font-bold"
+            <div class="px-4 py-3 flex items-center justify-center gap-4">               <span class="text-gray-700 font-semibold"><%= item[:left] %></span>
+              <select class="px-3 py-2 border-2 border-purple-300  focus:border-purple-500 focus:outline-none  font-bold"
                       data-correct-answer="<%= item[:symbol] %>">
                 <option value="">?</option>
                 <option value="<">&lt;</option>
@@ -120,102 +140,106 @@
           <% end %>
         </div>
       </div>
-
       <!-- Esercizio 6: Operazioni guidate -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">6</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Completa le operazioni.</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">6</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Completa le operazioni.</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 grid grid-cols-1 md:grid-cols-2 gap-3">           <% [
+        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
             {expr: "7 + (-3)", answer: "4"},
             {expr: "(-4) + (-5)", answer: "-9"},
             {expr: "12 - 8", answer: "4"},
             {expr: "6 × 5", answer: "30"}
           ].each do |item| %>
-            <label class="bg-white rounded-lg px-4 py-3 flex items-center justify-between gap-4 shadow-sm">
+            <label class="bg-white  px-4 py-3 flex items-center justify-between gap-4 ">
               <span class="font-semibold text-gray-700 whitespace-nowrap"><%= item[:expr] %> =</span>
               <input type="text"
-                     class="w-24 border-2 border-purple-200 rounded px-3 py-2 focus:border-purple-500 focus:outline-none text-right"
+                     class=" border-2 border-purple-200  px-3 py-2 focus:border-purple-500 focus:outline-none text-right"
                      data-correct-answer="<%= item[:answer] %>">
             </label>
           <% end %>
         </div>
-        <p class="text-purple-600 font-medium italic mt-4">→ Sul quaderno ripeti le operazioni scambiando il segno ai numeri.</p>
+        <p class="text-blue-600 font-medium italic mt-4">→ Sul quaderno ripeti le operazioni scambiando il segno ai numeri.</p>
       </div>
-
       <!-- Esercizio 7: Collega i numeri -->
- <div class="p-4 md:p-6" data-controller="flower-matcher">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">7</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Collega ogni forma del numero alla rappresentazione corretta.</p>
+      <div class="p-4 p-6" data-controller="flower-matcher">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">7</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Collega ogni forma del numero alla rappresentazione corretta.</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 relative">           <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
+        <div class="ml-0 ml-11 relative">           <svg class="absolute top-0 left-0 full full pointer-events-none z-10"
                data-flower-matcher-target="canvas">
           </svg>
-
- <div class="flex flex-wrap justify-around gap-3 mb-12 relative z-20">  <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-                 data-flower-matcher-target="flower"
-                 data-flower-id="pow-27-5"
-                 data-pair="pair-27">
+          <div class="flex flex-wrap justify-around gap-3 mb-12 relative z-20">  
+            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="pow-27-5"
+              data-pair="pair-27">
               27,5
             </div>
- <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-                 data-flower-matcher-target="flower"
-                 data-flower-id="pow-345"
-                 data-pair="pair-345">
+            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="pow-345"
+              data-pair="pair-345">
               345
             </div>
- <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-                 data-flower-matcher-target="flower"
-                 data-flower-id="pow-8012"
-                 data-pair="pair-8012">
+            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="pow-8012"
+              data-pair="pair-8012">
               8&nbsp;012
             </div>
- <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-                 data-flower-matcher-target="flower"
-                 data-flower-id="pow-0101"
-                 data-pair="pair-0101">
+            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="pow-0101"
+              data-pair="pair-0101">
               0,101
             </div>
           </div>
-
- <div class="flex flex-wrap justify-around gap-3 relative z-20">  <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-                 data-flower-matcher-target="flower"
-                 data-flower-id="res-345"
-                 data-pair="pair-345">
+          <div class="flex flex-wrap justify-around gap-3 relative z-20">  
+            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="res-345"
+              data-pair="pair-345">
               trecentoquarantacinque
             </div>
- <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-                 data-flower-matcher-target="flower"
-                 data-flower-id="res-27"
-                 data-pair="pair-27">
+            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="res-27"
+              data-pair="pair-27">
               ventisette e cinque decimi
             </div>
- <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-                 data-flower-matcher-target="flower"
-                 data-flower-id="res-0101"
-                 data-pair="pair-0101">
+            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="res-0101"
+              data-pair="pair-0101">
               zero virgola centouno
             </div>
- <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-                 data-flower-matcher-target="flower"
-                 data-flower-id="res-8012"
-                 data-pair="pair-8012">
+            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
+              data-flower-matcher-target="flower"
+              data-flower-id="res-8012"
+              data-pair="pair-8012">
               otto mila e dodici
             </div>
           </div>
-
- <div class="mt-8 flex gap-3 items-center">             <button class="bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-12 h-12"
+          <div class="mt-8 flex gap-3 items-center">             <button class="bg-blue-500 hover:bg-blue-500 text-white font-bold rounded-full  transition transform hover:scale-105 flex items-center justify-center  "
                     data-action="click->flower-matcher#reset"
-                    title="Ricomincia collegamenti">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              title="Ricomincia collegamenti">
+              <svg xmlns="http://www.w3.org/2000/svg" class=" " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
             </button>
           </div>
         </div>
       </div>
-
       <%= render "shared/exercise_controls", color: 'purple', current_page: 'nvi5_mat_p029' %>
-
     </div>
-
   </div>
 </div>

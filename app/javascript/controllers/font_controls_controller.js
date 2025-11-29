@@ -50,7 +50,7 @@ export default class extends Controller {
       if (this.fontFamily === "sans") {
         content.style.fontFamily = "ui-sans-serif, system-ui, sans-serif"
       } else {
-        content.style.fontFamily = ""
+        content.style.fontFamily = "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
       }
       // Font size
       content.style.fontSize = `${this.scaleFactor * 100}%`

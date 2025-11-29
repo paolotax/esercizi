@@ -1,19 +1,21 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6">  <div class="max-w-4xl mx-auto p-4 md:p-8"> 
-    <!-- Header -->
- <div class="mb-6">  <div class="flex items-center justify-between">  <div class="inline-block text-white px-4 md:px-6 py-2 text-xs md:text-sm font-bold">           MODELLO INVALSI
-        </div>
-        <h1 class="text-xl md:text-3xl font-bold text-purple-700">I NUMERI - LIVELLO AVANZATO</h1>
-      </div>
-    </div>
+<div class="max-w-6xl mx-auto p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">  
 
- <div data-controller="exercise-checker" class="space-y-8"> 
+  <!-- Header -->
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-8">
       <!-- Esercizio 1: Scomposizioni complesse -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold" cursor-pointer hover:transition-colors"            data-action="click->page-viewer#openOriginal"
-           title="Clicca per vedere la pagina originale">1</div>
- <div class="flex-1">             <p class="font-medium text-gray-800">Scegli la scomposizione corretta in potenze di 10 per ciascun numero.</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Scegli la scomposizione corretta in potenze di 10 per ciascun numero.</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 space-y-5">           <% [
+        <div class="ml-0 ml-11 space-y-5">           <% [
             {
               number: "48 703 205",
               name: "exp1",
@@ -45,15 +47,16 @@
               correct: "a"
             }
           ].each do |item| %>
- <div class="p-4">               <p class="font-semibold text-gray-700 mb-3">Numero: <span class="text-purple-700"><%= item[:number] %></span></p>
- <div class="grid grid-cols-1 md:grid-cols-3 gap-3">                 <% item[:options].each do |key, text| %>
-                  <label class="flex items-center gap-2 bg-purple-100 hover:bg-purple-200 transition rounded-md px-3 py-2 cursor-pointer">
+            <div class="p-4">               
+              <p class="font-semibold text-gray-700 mb-3">Numero: <span class="text-blue-600"><%= item[:number] %></span></p>
+              <div class="grid grid-cols-1 grid-cols-3 gap-3">                 <% item[:options].each do |key, text| %>
+                  <label class="flex items-center gap-2 bg-purple-100 hover:bg-purple-200 transition -md px-3 py-2 cursor-pointer">
                     <input type="radio"
                            name="<%= item[:name] %>"
                            value="<%= key %>"
                            data-correct-answer="<%= key == item[:correct] ? 'true' : 'false' %>"
-                           class="w-5 h-5">
-                    <span class="text-sm text-gray-700"><%= text %></span>
+                           class=" ">
+                    <span class=" text-gray-700"><%= text %></span>
                   </label>
                 <% end %>
               </div>
@@ -61,12 +64,16 @@
           <% end %>
         </div>
       </div>
-
       <!-- Esercizio 2: Potenze e valori assoluti -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">2</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Calcola e inserisci il risultato (usa il segno corretto).</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">2</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Calcola e inserisci il risultato (usa il segno corretto).</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 grid grid-cols-1 md:grid-cols-2 gap-3">           <% [
+        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
             {label: "5³ + 2⁴", answer: "161"},
             {label: "(-8)² - 6³", answer: "-184"},
             {label: "|-37| + 4²", answer: "53"},
@@ -74,21 +81,25 @@
             {label: "(-3)⁴ - (-3)²", answer: "72"},
             {label: "2³ × 5²", answer: "200"}
           ].each do |item| %>
-            <label class="bg-white rounded-lg px-4 py-3 flex items-center justify-between gap-4 shadow-sm">
+            <label class="bg-white  px-4 py-3 flex items-center justify-between gap-4 ">
               <span class="font-semibold text-gray-700 whitespace-nowrap"><%= item[:label] %> =</span>
               <input type="text"
-                     class="w-24 border-2 border-purple-200 rounded px-3 py-2 focus:border-purple-500 focus:outline-none text-right"
+                     class=" border-2 border-purple-200  px-3 py-2 focus:border-purple-500 focus:outline-none text-right"
                      data-correct-answer="<%= item[:answer] %>">
             </label>
           <% end %>
         </div>
       </div>
-
       <!-- Esercizio 3: Affermazioni true/false -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">3</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Seleziona V se l'affermazione è vera, F se è falsa.</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">3</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Seleziona V se l'affermazione è vera, F se è falsa.</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 grid grid-cols-1 md:grid-cols-2 gap-3">           <% [
+        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
             {text: "10⁻² = 0,01", correct: true},
             {text: "4 × 10³ + 6 × 10¹ = 4 600", correct: false},
             {text: "|-25| < 5²", correct: false},
@@ -96,46 +107,57 @@
             {text: "3,027 arrotondato ai centesimi diventa 3,03", correct: true},
             {text: "1,08 × 10³ = 108", correct: false}
           ].each_with_index do |item, idx| %>
- <div class="px-4 py-3 flex items-center justify-between">               <span class="text-gray-700"><%= item[:text] %></span>
- <div class="flex gap-4">                 <label class="flex items-center gap-1">
-                  <span class="text-sm font-semibold">V</span>
+            <div class="px-4 py-3 flex items-center justify-between">               <span class="text-gray-700"><%= item[:text] %></span>
+              <div class="flex gap-4">                 <label class="flex items-center gap-1">
+                  <span class=" font-semibold">V</span>
                   <input type="radio"
                          name="tf_<%= idx %>"
                          data-correct-answer="<%= item[:correct] ? 'true' : 'false' %>"
-                         class="w-5 h-5">
+                         class=" ">
                 </label>
                 <label class="flex items-center gap-1">
-                  <span class="text-sm font-semibold">F</span>
+                  <span class=" font-semibold">F</span>
                   <input type="radio"
                          name="tf_<%= idx %>"
                          data-correct-answer="<%= item[:correct] ? 'false' : 'true' %>"
-                         class="w-5 h-5">
+                         class=" ">
                 </label>
               </div>
             </div>
           <% end %>
         </div>
       </div>
-
       <!-- Esercizio 4: Ordinamenti complessi -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">4</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Ordina in senso crescente sul quaderno i numeri dati. Indica anche quale differisce di più da 0.</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">4</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Ordina in senso crescente sul quaderno i numeri dati. Indica anche quale differisce di più da 0.</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 grid gap-4">  <div class="p-4">             <p class="font-semibold text-gray-700 mb-2">A</p>
+        <div class="ml-0 ml-11 grid gap-4">  
+          <div class="p-4">             
+            <p class="font-semibold text-gray-700 mb-2">A</p>
             <p class="text-gray-700">-5,82 × 10² × 10⁻¹ × 0,593 × -58,2 × 0,0598</p>
           </div>
- <div class="p-4">             <p class="font-semibold text-gray-700 mb-2">B</p>
+          <div class="p-4">             
+            <p class="font-semibold text-gray-700 mb-2">B</p>
             <p class="text-gray-700">4,075 × 4,705 × 4,057 × 4,75 × 4,7050</p>
           </div>
-          <p class="text-purple-600 font-medium italic">→ Risolvi sul quaderno, poi confronta con un compagno.</p>
+          <p class="text-blue-600 font-medium italic">→ Risolvi sul quaderno, poi confronta con un compagno.</p>
         </div>
       </div>
-
       <!-- Esercizio 5: Confronti con segni -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">5</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Scegli il simbolo corretto (&lt;, =, &gt;).</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">5</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Scegli il simbolo corretto (&lt;, =, &gt;).</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 grid grid-cols-1 md:grid-cols-2 gap-3">           <% [
+        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
             {left: "-12 + 7", right: "-12 - 7", symbol: ">"},
             {left: "3 × 10³", right: "2 × 10⁴", symbol: "<"},
             {left: "|-48|", right: "5² + 4", symbol: "="},
@@ -143,8 +165,8 @@
             {left: "-5,4", right: "-5,39", symbol: "<"},
             {left: "1,2 × 10²", right: "120", symbol: "="}
           ].each do |item| %>
- <div class="px-4 py-3 flex items-center justify-center gap-4">               <span class="text-gray-700 font-semibold"><%= item[:left] %></span>
-              <select class="px-3 py-2 border-2 border-purple-300 rounded focus:border-purple-500 focus:outline-none text-lg font-bold"
+            <div class="px-4 py-3 flex items-center justify-center gap-4">               <span class="text-gray-700 font-semibold"><%= item[:left] %></span>
+              <select class="px-3 py-2 border-2 border-purple-300  focus:border-purple-500 focus:outline-none  font-bold"
                       data-correct-answer="<%= item[:symbol] %>">
                 <option value="">?</option>
                 <option value="<">&lt;</option>
@@ -156,32 +178,40 @@
           <% end %>
         </div>
       </div>
-
       <!-- Esercizio 6: Operazioni con parentesi -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">6</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Calcola il valore delle espressioni.</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">6</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Calcola il valore delle espressioni.</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 grid grid-cols-1 md:grid-cols-2 gap-3">           <% [
+        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
             {expr: "[(-9) + 14] - 3²", answer: "-4"},
             {expr: "{18 - [5 × (-2)]} : 4", answer: "7"},
             {expr: "(-12) : (-3) + 2³", answer: "12"},
             {expr: "(45 - 3 × 7) - (-18)", answer: "42"}
           ].each do |item| %>
-            <label class="bg-white rounded-lg px-4 py-3 flex items-center justify-between gap-4 shadow-sm">
+            <label class="bg-white  px-4 py-3 flex items-center justify-between gap-4 ">
               <span class="font-semibold text-gray-700 whitespace-nowrap"><%= item[:expr] %> =</span>
               <input type="text"
-                     class="w-24 border-2 border-purple-200 rounded px-3 py-2 focus:border-purple-500 focus:outline-none text-right"
+                     class=" border-2 border-purple-200  px-3 py-2 focus:border-purple-500 focus:outline-none text-right"
                      data-correct-answer="<%= item[:answer] %>">
             </label>
           <% end %>
         </div>
       </div>
-
       <!-- Esercizio 7: Rappresentazioni e arrotondamenti -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">7</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Seleziona tutte le rappresentazioni equivalenti al numero 0,00456.</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">7</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Seleziona tutte le rappresentazioni equivalenti al numero 0,00456.</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 grid grid-cols-1 md:grid-cols-2 gap-3">           <% [
+        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
             {text: "4,56 × 10⁻³", correct: true},
             {text: "456 × 10⁻⁴", correct: true},
             {text: "0,456 × 10⁻¹", correct: false},
@@ -189,9 +219,9 @@
             {text: "4 decimillesimi e 56 centomillesimi", correct: true},
             {text: "0,000456 × 10", correct: true}
           ].each_with_index do |item, idx| %>
-            <label class="bg-white rounded-lg px-4 py-3 flex items-center gap-3 shadow-sm cursor-pointer hover:bg-purple-100 transition">
+            <label class="bg-white  px-4 py-3 flex items-center gap-3  cursor-pointer hover:bg-purple-100 transition">
               <input type="checkbox"
-                     class="w-5 h-5"
+                     class=" "
                      data-correct-answer="<%= item[:correct] ? 'true' : 'false' %>"
                      name="repr_<%= idx %>">
               <span class="text-gray-700"><%= item[:text] %></span>
@@ -199,35 +229,39 @@
           <% end %>
         </div>
       </div>
-
       <!-- Sezione finale: Sfida rapida -->
- <div class="p-4 md:p-6">  <div class="flex items-start gap-3 mb-4">  <div class="flex-shrink-0 w-8 h-8 text-white flex items-center justify-center font-bold">8</div>  <div class="flex-1">             <p class="font-medium text-gray-800">Sfida: completa le seguenti indicazioni.</p>
+      <div class="p-4 p-6">  
+        <div class="flex items-start gap-3 mb-4">  
+          <div class="   text-white flex items-center justify-center font-bold">8</div>
+  
+          <div class="flex-1">             
+            <p class="font-medium text-gray-800">Sfida: completa le seguenti indicazioni.</p>
           </div>
         </div>
- <div class="ml-0 md:ml-11 space-y-4">  <div class="p-4">             <p class="text-gray-700 mb-3">Scrivi il numero che ha:</p>
+        <div class="ml-0 ml-11 space-y-4">  
+          <div class="p-4">             
+            <p class="text-gray-700 mb-3">Scrivi il numero che ha:</p>
             <ul class="text-gray-700 list-disc list-inside space-y-1">
               <li>5 centinaia di migliaia</li>
               <li>8 decine</li>
               <li>2 decimi</li>
               <li>nessun'altra cifra</li>
             </ul>
- <div class="mt-3 w-36 items-center gap-3">               <span class="font-semibold text-gray-700">Numero:</span>
+            <div class="mt-3  items-center gap-3">               <span class="font-semibold text-gray-700">Numero:</span>
               <input type="text"
-                     class="border-2 border-purple-200 rounded px-3 py-2 focus:border-purple-500 focus:outline-none"
+                     class="border-2 border-purple-200  px-3 py-2 focus:border-purple-500 focus:outline-none"
                      data-correct-answer="5000080,2">
             </div>
           </div>
- <div class="p-4">             <p class="text-gray-700 mb-3">Scrivi in notazione scientifica il numero 0,000 000 54.</p>
+          <div class="p-4">             
+            <p class="text-gray-700 mb-3">Scrivi in notazione scientifica il numero 0,000 000 54.</p>
             <input type="text"
-                   class="w-36 border-2 border-purple-200 rounded px-3 py-2 focus:border-purple-500 focus:outline-none"
+                   class=" border-2 border-purple-200  px-3 py-2 focus:border-purple-500 focus:outline-none"
                    data-correct-answer="5,4e-7">
           </div>
         </div>
       </div>
-
       <%= render "shared/exercise_controls", color: 'purple', current_page: 'nvi5_mat_p028' %>
-
     </div>
-
   </div>
 </div>
