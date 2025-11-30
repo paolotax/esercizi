@@ -2,32 +2,43 @@
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">   <!-- Header -->
+  
   <%= render 'shared/page_header', pagina: @pagina %>
-  <div class="space-y-6">     <!-- Ricorda box -->
-    <div class="p-4 p-6">       
-      <h3 class=" font-bold text-blue-600 mb-3 flex items-center gap-2">
-        <span>💡</span>
+  
+  <div class="space-y-6">     
+    
+    <!-- Ricorda box -->
+    <div class="p-4 md:p-6 bg-blue-100 rounded-2xl">       
+      <h3 class=" font-bold text-pink-600 mb-3 flex items-center gap-2">
         Ricorda!
       </h3>
-      <p class=" text-gray-800 leading-relaxed">
-        Per misurare bisogna usare un'<span class="font-bold text-blue-700">unità di misura</span> adatta all'oggetto da misurare.
-        La <span class="font-bold text-blue-600">marca</span>, cioè il simbolo che rappresenta l'unità di misura, si riferisce sempre
-        alla <span class="font-bold text-blue-700">cifra delle unità</span> del numero.
+      <p class=" text-gray-700 leading-relaxed">
+          Per misurare bisogna usare un'<span class="font-bold">unità di misura</span> adatta all'oggetto da misurare.
+        La <span class="font-bold">marca</span>, cioè il simbolo che rappresenta l'unità di misura, si riferisce sempre
+        alla <span class="font-bold">cifra delle unità</span> del numero.
       </p>
     </div>
+
     <!-- Esercizio 1: Associa unità di misura con flower-matcher -->
-    <div class="p-4 p-6" data-controller="flower-matcher">       
-      <h3 class=" font-bold text-blue-700 mb-4 flex items-center gap-3">
-        <span class="bg-blue-500 text-white rounded-full   flex items-center justify-center ">1</span>
-        <span>Associa ciascun elemento alla sua unità di misura.</span>
-      </h3>
-      <div class="relative">         <!-- SVG Canvas per disegnare le linee -->
+    <div class="p-4 p-6" data-controller="flower-matcher">         
+      <div class="flex items-start gap-3 mb-6">
+        <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          1
+        </div>
+        <p class="text-gray-700">
+          Associa ciascun elemento alla sua unità di misura.
+        </p>
+      </div>
+      <div class="relative">         
+        <!-- SVG Canvas per disegnare le linee -->
         <svg class="absolute top-0 left-0 full full pointer-events-none z-30"
              data-flower-matcher-target="canvas">
         </svg>
         <!-- Riga superiore: le immagini -->
-        <div class="flex justify-around mb-16 relative z-20">           <!-- Immagine 1 -->
-          <div class="p-3 cursor-pointer hover:transition"                data-action="click->flower-matcher#selectFlower"
+        <div class="flex justify-around mb-16 relative z-20">           
+          <!-- Immagine 1 -->
+          <div class="p-3 cursor-pointer hover:transition"                
+            data-action="click->flower-matcher#selectFlower"
             data-flower-matcher-target="flower"
             data-flower-id="img-1"
             data-pair="unit-g">
@@ -36,7 +47,8 @@
                  class="  md: ">
           </div>
           <!-- Immagine 2 -->
-          <div class="p-3 cursor-pointer hover:transition"                data-action="click->flower-matcher#selectFlower"
+          <div class="p-3 cursor-pointer hover:transition"                
+            data-action="click->flower-matcher#selectFlower"
             data-flower-matcher-target="flower"
             data-flower-id="img-2"
             data-pair="unit-l">
@@ -45,7 +57,8 @@
                  class="  md: ">
           </div>
           <!-- Immagine 3 -->
-          <div class="p-3 cursor-pointer hover:transition"                data-action="click->flower-matcher#selectFlower"
+          <div class="p-3 cursor-pointer hover:transition"                
+            data-action="click->flower-matcher#selectFlower"
             data-flower-matcher-target="flower"
             data-flower-id="img-3"
             data-pair="unit-kg">
@@ -54,7 +67,8 @@
                  class="  md: ">
           </div>
           <!-- Immagine 4 -->
-          <div class="p-3 cursor-pointer hover:transition"                data-action="click->flower-matcher#selectFlower"
+          <div class="p-3 cursor-pointer hover:transition"                
+            data-action="click->flower-matcher#selectFlower"
             data-flower-matcher-target="flower"
             data-flower-id="img-4"
             data-pair="unit-km">
@@ -63,7 +77,8 @@
                  class="  md: ">
           </div>
           <!-- Immagine 5 -->
-          <div class="p-3 cursor-pointer hover:transition"                data-action="click->flower-matcher#selectFlower"
+          <div class="p-3 cursor-pointer hover:transition"                
+            data-action="click->flower-matcher#selectFlower"
             data-flower-matcher-target="flower"
             data-flower-id="img-5"
             data-pair="unit-cm">
@@ -97,20 +112,28 @@
         </div>
       </div>
     </div>
+
     <!-- Esercizio 2: Cerchia la cifra indicata dalla marca con word-highlighter -->
     <div class="p-4 p-6" data-controller="word-highlighter">       
-      <h3 class=" font-bold text-blue-600 mb-4 flex items-center gap-3">
-        <span class="bg-blue-500 text-white rounded-full   flex items-center justify-center ">2</span>
-        <span>Cerchia la cifra indicata dalla marca. Segui l'esempio.</span>
-      </h3>
-      <div class="p-4 space-y-4">         <!-- Esempio già completato -->
+      <div class="flex items-start gap-3 mb-6">
+        <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          2
+        </div>
+        <p class="text-gray-700">
+          Cerchia la cifra indicata dalla marca. Segui l'esempio.
+        </p>
+      </div>
+      <div class="p-4 space-y-4">         
+        <!-- Esempio già completato -->
         <div class="flex flex-wrap items-center gap-3  font-bold">           <span class="text-gray-700">Esempio:</span>
           <span class="bg-pink-300 rounded-full px-3 py-1">8</span>
           <span class="text-blue-600">m</span>
         </div>
         <!-- Numeri da evidenziare -->
-        <div class="grid grid-cols-1 grid-cols-2 gap-4  font-bold">           <!-- 12,5 ℓ -->
-          <div class="flex items-center gap-1">             <span>1</span>
+        <div class="grid grid-cols-1 grid-cols-2 gap-4  font-bold">           
+          <!-- 12,5 ℓ -->
+          <div class="flex items-center gap-1">             
+            <span>1</span>
             <span>2</span>
             <span>,</span>
             <span class="cursor-pointer hover:bg-pink-100 px-2 py-1  transition"
@@ -120,7 +143,8 @@
             <span class="text-blue-600 ml-2">ℓ</span>
           </div>
           <!-- 321 kg -->
-          <div class="flex items-center gap-1">             <span>3</span>
+          <div class="flex items-center gap-1">             
+            <span>3</span>
             <span class="cursor-pointer hover:bg-pink-100 px-2 py-1  transition"
                   data-word-highlighter-target="word"
                   data-correct-color="pink"
@@ -129,7 +153,8 @@
             <span class="text-blue-600 ml-2">kg</span>
           </div>
           <!-- 45,8 g -->
-          <div class="flex items-center gap-1">             <span>4</span>
+          <div class="flex items-center gap-1">             
+            <span>4</span>
             <span>5</span>
             <span>,</span>
             <span class="cursor-pointer hover:bg-pink-100 px-2 py-1  transition"
@@ -182,13 +207,19 @@
       </div>
       <p class=" text-gray-600 italic mt-2">Ricorda: la marca si riferisce sempre alla cifra delle unità!</p>
     </div>
+
     <!-- Esercizio 3: Trova l'altezza -->
     <div class="p-4 p-6">       
-      <h3 class=" font-bold text-blue-700 mb-4 flex items-center gap-3">
-        <span class="bg-blue-500 text-white rounded-full   flex items-center justify-center ">3</span>
-        <span>Trova l'altezza di Filippo, Claudia e Sergio.</span>
-      </h3>
-      <div class="p-4 mb-4">         <img src="<%= asset_path('nvi5_mat/p006/p006_02.jpg') %>"
+      <div class="flex items-start gap-3 mb-6">
+        <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          3
+        </div>
+        <p class="text-gray-700">
+          Trova l'altezza di Filippo, Claudia e Sergio.
+        </p>
+      </div>
+      <div class="p-4 mb-4">         
+        <img src="<%= asset_path('nvi5_mat/p006/p006_02.jpg') %>"
              alt="Altezze di Filippo, Claudia e Sergio"
              class="full max-4xl mx-">
       </div>
@@ -272,86 +303,92 @@
         </p>
       </div>
     </div>
+
     <!-- Esercizio 4: Completa la tabella -->
-    <div class="p-4 p-6">       
-      <h3 class=" font-bold text-blue-600 mb-4 flex items-center gap-3">
-        <span class="bg-blue-500 text-white rounded-full   flex items-center justify-center ">4</span>
-        <span>Completa la tabella. Segui l'esempio.</span>
-      </h3>
-      <div class="overflow-x-">         
-        <table class="full border-collapse">
+    <div class="p-4 md:p-6">
+      <div class="flex items-start gap-3 mb-6">
+        <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+          4
+        </div>
+        <p class="text-gray-700">
+          Completa la tabella. Segui l'esempio.
+        </p>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full border-separate border-spacing-0 border-2 border-blue-400 rounded-lg overflow-hidden">
           <thead>
-            <tr class="bg-pink-400 text-white">
-              <th class="border-2 border-pink-300 py-3 px-4 text-center">PRODOTTO</th>
-              <th class="border-2 border-pink-300 py-3 px-4 text-center">
+            <tr>
+              <th class="border border-blue-400 px-4 py-2"></th>
+              <th class="border border-blue-400 px-4 py-2 text-center">
                 <img src="<%= asset_path('nvi5_mat/p006/output-1715938802006_358_1012_130_74.png') %>"
                      alt="Cassetta verdura"
-                     class=" mx-">
+                     class="mx-auto">
               </th>
-              <th class="border-2 border-pink-300 py-3 px-4 text-center">
+              <th class="border border-blue-400 px-4 py-2 text-center">
                 <img src="<%= asset_path('nvi5_mat/p006/output-1715938802006_519_1018_114_68.png') %>"
                      alt="Bilancia dolci"
-                     class=" mx-">
+                     class="mx-auto">
               </th>
-              <th class="border-2 border-pink-300 py-3 px-4 text-center">
+              <th class="border border-blue-400 px-4 py-2 text-center">
                 <img src="<%= asset_path('nvi5_mat/p006/output-1715938802006_704_1016_56_72.png') %>"
                      alt="Barattolo miele"
-                     class=" mx-">
+                     class="mx-auto">
               </th>
-              <th class="border-2 border-pink-300 py-3 px-4 text-center">
+              <th class="border border-blue-400 px-4 py-2 text-center">
                 <img src="<%= asset_path('nvi5_mat/p006/output-1715938802006_837_1017_94_70.png') %>"
                      alt="Valigia"
-                     class=" mx-">
+                     class="mx-auto">
               </th>
             </tr>
           </thead>
           <tbody>
             <!-- Peso Lordo -->
-            <tr class="bg-pink-50">
-              <td class="border-2 border-pink-200 py-3 px-4 font-bold">PESO LORDO</td>
-              <td class="border-2 border-pink-200 py-3 px-4 text-center font-bold ">13 kg</td>
-              <td class="border-2 border-pink-200 py-3 px-4 text-center font-bold ">500 g</td>
-              <td class="border-2 border-pink-200 py-3 px-4 text-center">
-                <input type="text" class=" px-3 py-2 border-2 border-pink-300  focus:border-pink-500 focus:outline-none text-center font-bold text-blue-600"
+            <tr>
+              <td class="border border-blue-400 px-4 py-2">PESO LORDO</td>
+              <td class="border border-blue-400 px-4 py-2 text-center">13 kg</td>
+              <td class="border border-blue-400 px-4 py-2 text-center">500 g</td>
+              <td class="border border-blue-400 px-4 py-2 text-center">
+                <input type="text" class="w-16 px-2 py-1 border-2 border-blue-400 rounded text-center text-blue-600 focus:border-blue-600 focus:outline-none"
                        data-correct-answer="520" placeholder="?">
-                <span class="ml-1 font-bold">g</span>
+                <span class="ml-1">g</span>
               </td>
-              <td class="border-2 border-pink-200 py-3 px-4 text-center font-bold ">10 kg</td>
+              <td class="border border-blue-400 px-4 py-2 text-center">10 kg</td>
             </tr>
             <!-- Peso Netto -->
-            <tr class="bg-white">
-              <td class="border-2 border-pink-200 py-3 px-4 font-bold">PESO NETTO</td>
-              <td class="border-2 border-pink-200 py-3 px-4 text-center font-bold ">12 kg</td>
-              <td class="border-2 border-pink-200 py-3 px-4 text-center font-bold ">460 g</td>
-              <td class="border-2 border-pink-200 py-3 px-4 text-center font-bold ">400 g</td>
-              <td class="border-2 border-pink-200 py-3 px-4 text-center">
-                <input type="text" class=" px-3 py-2 border-2 border-pink-300  focus:border-pink-500 focus:outline-none text-center font-bold text-blue-600"
+            <tr>
+              <td class="border border-blue-400 px-4 py-2">PESO NETTO</td>
+              <td class="border border-blue-400 px-4 py-2 text-center">12 kg</td>
+              <td class="border border-blue-400 px-4 py-2 text-center">460 g</td>
+              <td class="border border-blue-400 px-4 py-2 text-center">400 g</td>
+              <td class="border border-blue-400 px-4 py-2 text-center">
+                <input type="text" class="w-16 px-2 py-1 border-2 border-blue-400 rounded text-center text-blue-600 focus:border-blue-600 focus:outline-none"
                        data-correct-answer="8.5" placeholder="?">
-                <span class="ml-1 font-bold">kg</span>
+                <span class="ml-1">kg</span>
               </td>
             </tr>
             <!-- Tara -->
-            <tr class="bg-pink-50">
-              <td class="border-2 border-pink-200 py-3 px-4 font-bold">TARA</td>
-              <td class="border-2 border-pink-200 py-3 px-4 text-center font-bold  text-blue-600">1 kg</td>
-              <td class="border-2 border-pink-200 py-3 px-4 text-center">
-                <input type="text" class=" px-3 py-2 border-2 border-pink-300  focus:border-pink-500 focus:outline-none text-center font-bold text-blue-600"
+            <tr>
+              <td class="border border-blue-400 px-4 py-2">TARA</td>
+              <td class="border border-blue-400 px-4 py-2 text-center text-pink-600">1 kg</td>
+              <td class="border border-blue-400 px-4 py-2 text-center">
+                <input type="text" class="w-16 px-2 py-1 border-2 border-blue-400 rounded text-center text-blue-600 focus:border-blue-600 focus:outline-none"
                        data-correct-answer="40" placeholder="?">
-                <span class="ml-1 font-bold">g</span>
+                <span class="ml-1">g</span>
               </td>
-              <td class="border-2 border-pink-200 py-3 px-4 text-center font-bold ">120 g</td>
-              <td class="border-2 border-pink-200 py-3 px-4 text-center font-bold ">1,5 kg</td>
+              <td class="border border-blue-400 px-4 py-2 text-center">120 g</td>
+              <td class="border border-blue-400 px-4 py-2 text-center">1,5 kg</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="mt-4 p-3">         
-        <p class=" text-gray-700">
+      <div class="mt-4 p-3">
+        <p class="text-gray-700">
           <span class="font-bold">Ricorda:</span>
           PESO LORDO = PESO NETTO + TARA
         </p>
       </div>
     </div>
+
     <!-- Exercise Controls -->
     <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvi5_mat_p006' %>
   </div>
