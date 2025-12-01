@@ -2,132 +2,186 @@
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
-  <!-- Problema iniziale -->
-  <div class="mb-8">  
-    <div class="p-4 mb-6">       
-      <p class=" md:">
+
+  <div class="space-y-6">
+    <!-- Problema iniziale -->
+    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
+      <p class="text-gray-800 mb-4">
         Elena ha comprato una scatola di cioccolatini e li ha offerti ai suoi compagni di classe.<br>
-        Ora nella scatola sono rimasti 16 cioccolatini, che corrispondono a <%= image_tag "nvi5_mat/p064/p064_01.jpg", class: "inline align-middle" %> di tutti quelli che c'erano all'inizio.<br>
+        Ora nella scatola sono rimasti 16 cioccolatini, che corrispondono a
+        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
+          <span>2</span>
+          <span class="border-t-2 border-gray-700 px-2">5</span>
+        </span>
+        di tutti quelli che c'erano all'inizio.<br>
         Quanti cioccolatini c'erano nella scatola?
       </p>
+      <p class="text-gray-700">
+        Per rispondere devi calcolare l'intero. Sai che
+        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
+          <span>2</span>
+          <span class="border-t-2 border-gray-700 px-2">5</span>
+        </span>
+        dell'intero corrispondono a <strong class="text-cyan-500">16</strong> cioccolatini.
+      </p>
     </div>
-    <p class="mb-4">Per rispondere devi calcolare l'intero. Sai che <%= image_tag "nvi5_mat/p064/p064_02.jpg", class: "inline align-middle" %> dell'intero corrispondono a <strong>16</strong> cioccolatini.</p>
-  </div>
-  <!-- Spiegazione -->
-  <div class="mb-8 p-4 p-6">  
-    <div class="space-y-6">       <!-- Primo passo -->
-      <div>         
-        <p class="mb-4">• Innanzitutto calcola il valore dell'<strong>unità frazionaria</strong>: <strong>dividi</strong> il numero dei cioccolatini rimasti per il <strong>numeratore</strong>.</p>
-        <div class="p-4 mb-4">  
-          <div class="flex items-center justify-center gap-4  font-mono mb-4">             <span>16</span>
-            <span>:</span>
-            <span class="text-red-600 font-bold ">2</span>
-            <span>=</span>
-            <span>8</span>
-            <span class="text-gray-600">←</span>
-            <span class="text-blue-700 font-bold">valore dell'unità frazionaria</span>
+
+    <!-- Spiegazione -->
+    <div class="p-4 md:p-6 bg-white border-3 border-green-500 rounded-3xl">
+      <div class="space-y-6">
+        <!-- Primo passo -->
+        <div>
+          <p class="mb-4">
+            <strong><span class="text-pink-600">&#8226;</span></strong> Innanzitutto calcola il valore dell'<strong>unità frazionaria</strong>: <strong>dividi</strong> il numero dei cioccolatini rimasti per il <strong>numeratore</strong>.
+          </p>
+
+          <div class="p-4 mb-4 bg-gray-50 rounded-lg">
+            <div class="flex items-center justify-center gap-4 font-mono text-lg mb-4">
+              <span>16</span>
+              <span>:</span>
+              <span class="text-red-600 font-bold">2</span>
+              <span>=</span>
+              <span>8</span>
+              <span class="text-gray-500">←</span>
+              <span class="text-blue-700 font-bold text-base">valore dell'unità frazionaria</span>
+            </div>
+            <div class="flex items-center justify-around text-sm text-gray-600 text-center">
+              <span>n. cioccolatini<br>rimasti</span>
+              <span></span>
+              <span>n. gruppi<br>considerati</span>
+              <span></span>
+              <span>n. cioccolatini<br>in ogni gruppo</span>
+            </div>
           </div>
-          <div class="flex items-center justify-around  text-gray-600">             <span>n. cioccolatini<br>
-              rimasti</span>
-            <span></span>
-            <span>n. gruppi<br>
-              considerati</span>
-            <span></span>
-            <span>n. cioccolatini<br>
-              in ogni gruppo</span>
-          </div>
-        </div>
-        <%= image_tag "nvi5_mat/p064/p064_03.jpg", alt: "Visualizzazione cioccolatini" %>
-      </div>
-      <!-- Secondo passo -->
-      <div>         
-        <p class="mb-4">• Poi moltiplica il <strong>risultato</strong> per il <strong>denominatore</strong> in modo da ricostruire l'<strong>intero</strong>, poiché sai che l'intero è stato diviso in 5 parti.</p>
-        <div class="p-4 mb-4">  
-          <div class="flex items-center justify-center gap-4  font-mono mb-4">             <span>8</span>
-            <span>×</span>
-            <span class="text-red-600 font-bold ">5</span>
-            <span>=</span>
-            <span>40</span>
-            <span class="text-gray-600">←</span>
-            <span class="text-blue-700 font-bold">valore dell'intero</span>
-          </div>
-          <div class="flex items-center justify-around  text-gray-600">             <span>n. cioccolatini<br>
-              in ogni gruppo</span>
-            <span></span>
-            <span>n. gruppi in cui è<br>
-              stato diviso l'intero</span>
-            <span></span>
-            <span></span>
+
+          <div class="flex justify-center">
+            <%= image_tag "nvi5_mat/p064/p064_03.jpg", alt: "Visualizzazione cioccolatini", class: "max-w-md" %>
           </div>
         </div>
-        <%= image_tag "nvi5_mat/p064/p064_04.jpg", alt: "Visualizzazione intero" %>
-        <p class="text-center bg-cyan-100 border-2 border-cyan-300  p-3" data-controller="fill-blanks">
-          Ora puoi rispondere: Nella scatola c'erano
-          <input type="text"
-                 class=" px-2 py-1 border-2 border-purple-300  focus:border-purple-500 focus:outline-none text-center"
-                 data-fill-blanks-target="input"
-                 data-correct-answer="40">
-          cioccolatini.
-        </p>
-      </div>
-      <!-- Riassunto -->
-      <div class="p-4">         
-        <p class="text-gray-700">
-          Puoi anche "riassumere" i due passaggi in un'unica <strong>espressione</strong>:<br>
-          <span class="font-mono  text-blue-700">(16 : 2) × 5 = 8 × 5 = 40</span>
-        </p>
-      </div>
-      <!-- Regola -->
-      <div class="p-4">         
-        <p class="text-gray-800 font-bold">
-          Per calcolare l'intero conoscendo il valore di una frazione <strong>dividi</strong> il numero <strong>per il numeratore</strong> (ottieni l'unità frazionaria) e poi <strong>moltiplica</strong> il risultato <strong>per il denominatore</strong>.
-        </p>
-      </div>
-    </div>
-  </div>
-  <!-- ESERCIZI -->
-  <div class="p-4 p-6">     
-    <h2 class=" font-bold text-blue-600 mb-4">ESERCIZI</h2>
-    <!-- Esercizio 1 -->
-    <div class="p-4 mb-6" data-controller="fill-blanks">       
-      <h3 class=" font-bold mb-3">
-        <span class="bg-blue-500 text-white rounded-full   inline-flex items-center justify-center mr-2">1</span>
-        Calcola l'intero conoscendo il valore della frazione. Segui l'esempio.
-      </h3>
-      <div class="space-y-4">  
-        <div class="p-3 ">  
-          <div class="flex items-center gap-3 mb-2">             <span class="font-mono ">3/5 corrisponde a 21 →</span>
-            <span class="text-blue-700">(21 : 3) × 5 = 7 × 5 = 35</span>
+
+        <!-- Secondo passo -->
+        <div>
+          <p class="mb-4">
+            <strong><span class="text-pink-600">&#8226;</span></strong> Poi moltiplica il <strong>risultato</strong> per il <strong>denominatore</strong> in modo da ricostruire l'<strong>intero</strong>, poiché sai che l'intero è stato diviso in 5 parti.
+          </p>
+
+          <div class="p-4 mb-4 bg-gray-50 rounded-lg">
+            <div class="flex items-center justify-center gap-4 font-mono text-lg mb-4">
+              <span>8</span>
+              <span>×</span>
+              <span class="text-red-600 font-bold">5</span>
+              <span>=</span>
+              <span>40</span>
+              <span class="text-gray-500">←</span>
+              <span class="text-blue-700 font-bold text-base">valore dell'intero</span>
+            </div>
+            <div class="flex items-center justify-around text-sm text-gray-600 text-center">
+              <span>n. cioccolatini<br>in ogni gruppo</span>
+              <span></span>
+              <span>n. gruppi in cui è<br>stato diviso l'intero</span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="flex justify-center mb-4">
+            <%= image_tag "nvi5_mat/p064/p064_04.jpg", alt: "Visualizzazione intero", class: "max-w-md" %>
+          </div>
+
+          <div class="p-4 bg-cyan-100 border-2 border-cyan-300 rounded-lg text-center">
+            <p class="text-gray-800">
+              Ora puoi rispondere: Nella scatola c'erano
+              <input type="text" data-correct-answer="40" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold mx-1">
+              cioccolatini.
+            </p>
           </div>
         </div>
-        <div class="flex items-center gap-3">           <span class="font-mono ">4/5 corrisponde a 36 →</span>
-          <input type="text"
-                 class=" px-2 py-1 border-2 border-purple-300  focus:border-purple-500 focus:outline-none text-center"
-                 data-fill-blanks-target="input"
-                 data-correct-answer="45"
-                 placeholder="...........">
+
+        <!-- Riassunto -->
+        <div class="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+          <p class="text-gray-700">
+            Puoi anche "riassumere" i due passaggi in un'unica <strong>espressione</strong>:<br>
+            <span class="font-mono text-blue-700">(16 : 2) × 5 = 8 × 5 = 40</span>
+          </p>
         </div>
-        <div class="flex items-center gap-3">           <span class="font-mono ">2/3 corrisponde a 18 →</span>
-          <input type="text"
-                 class=" px-2 py-1 border-2 border-purple-300  focus:border-purple-500 focus:outline-none text-center"
-                 data-fill-blanks-target="input"
-                 data-correct-answer="27"
-                 placeholder="...........">
-        </div>
-        <div class="flex items-center gap-3">           <span class="font-mono ">2/7 corrisponde a 14 →</span>
-          <input type="text"
-                 class=" px-2 py-1 border-2 border-purple-300  focus:border-purple-500 focus:outline-none text-center"
-                 data-fill-blanks-target="input"
-                 data-correct-answer="49"
-                 placeholder="...........">
+
+        <!-- Regola -->
+        <div class="p-4 bg-purple-50 border-2 border-purple-200 rounded-lg">
+          <p class="text-gray-800 font-bold">
+            Per calcolare l'intero conoscendo il valore di una frazione <strong>dividi</strong> il numero <strong>per il numeratore</strong> (ottieni l'unità frazionaria) e poi <strong>moltiplica</strong> il risultato <strong>per il denominatore</strong>.
+          </p>
         </div>
       </div>
     </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <h2 class="font-bold text-blue-600 mb-4">ESERCIZI</h2>
+
+      <!-- Esercizio 1 -->
+      <div class="p-4 bg-white rounded-lg">
+        <div class="flex items-start gap-3 mb-4">
+          <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+          <p class="font-bold text-gray-700">Calcola l'intero conoscendo il valore della frazione. Segui l'esempio.</p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="p-3 bg-green-50 rounded-lg">
+            <div class="flex items-center gap-3">
+              <span class="inline-flex flex-col items-center font-bold text-cyan-500">
+                <span>3</span>
+                <span class="border-t-2 border-gray-700 px-2">5</span>
+              </span>
+              <span class="text-gray-700">corrisponde a 21</span>
+              <span class="text-pink-600 font-bold">→</span>
+              <span class="text-blue-700">(21 : 3) × 5 = 7 × 5 = <strong>35</strong></span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
+              <span>4</span>
+              <span class="border-t-2 border-gray-700 px-2">5</span>
+            </span>
+            <span class="text-gray-700">corrisponde a 36</span>
+            <span class="text-pink-600 font-bold">→</span>
+            <input type="text" data-correct-answer="45" class="w-32 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold" placeholder="...........">
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
+              <span>2</span>
+              <span class="border-t-2 border-gray-700 px-2">3</span>
+            </span>
+            <span class="text-gray-700">corrisponde a 18</span>
+            <span class="text-pink-600 font-bold">→</span>
+            <input type="text" data-correct-answer="27" class="w-32 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold" placeholder="...........">
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
+              <span>2</span>
+              <span class="border-t-2 border-gray-700 px-2">7</span>
+            </span>
+            <span class="text-gray-700">corrisponde a 14</span>
+            <span class="text-pink-600 font-bold">→</span>
+            <input type="text" data-correct-answer="49" class="w-32 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold" placeholder="...........">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Riferimento quaderno -->
+    <div class="p-4 text-right">
+      <p class="text-gray-700">
+        <span class="font-bold">Quaderno</span> pp. <a href="#" class="text-red-600 font-bold hover:underline">206</a>-<a href="#" class="text-red-600 font-bold hover:underline">207</a>
+      </p>
+    </div>
+
+    <!-- Exercise Controls -->
+    <%= render 'shared/exercise_controls', color: 'blue' %>
   </div>
-  <div class="mt-8 text-center">     
-    <p class="text-red-600 font-bold ">Quaderno esercizi pp. 206-207</p>
-  </div>
-  <%= render 'shared/exercise_controls', color: 'purple' %>
 </div>
