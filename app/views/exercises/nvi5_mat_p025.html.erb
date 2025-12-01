@@ -2,254 +2,153 @@
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
-  
-  <!-- Contenuto principale con cornice bianca -->
-  <div class="p-8 relative">
+
+  <div class="space-y-6">
     <!-- SEZIONE 1: IL NOSTRO SISTEMA DI NUMERAZIONE -->
-    <div class="relative mb-16">       <!-- Titolo principale -->
-      <div class="relative">
-        <div class="mx- fit text-white px-8 py-4 text-center relative">           
-          <h1 class=" font-bold">IL NOSTRO SISTEMA DI NUMERAZIONE</h1>
-        </div>
-        <!-- Frecce verso le sezioni -->
-        <div class="relative mt-4  pointer-events-none" style="max-width: 720px; margin: 0 ; z-index: 20;">           <svg class="absolute inset-0 full full" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="arrow-head-numerazione" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="" markerUnits="strokeWidth">
-                <path d="M0,0 L8,4 L0,8 Z" fill="#1D4ED8" />
-              </marker>
-            </defs>
-            <path d="M44 0 C44 16 32 18 24 48" fill="none" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" />
-            <line x1="24" y1="48" x2="18" y2="128" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow-head-numerazione)" />
-            <line x1="50" y1="0" x2="50" y2="142" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow-head-numerazione)" />
-            <path d="M50 0 C50 18 68 18 76 50" fill="none" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" />
-            <line x1="76" y1="50" x2="82" y2="122" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow-head-numerazione)" />
-          </svg>
-        </div>
-      </div>
-      <!-- Spazio per le frecce -->
-      <div></div>
-      <!-- Due colonne principali -->
-      <div class="grid grid-cols-2 gap-8">
+    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
+      <h1 class="font-bold text-center text-blue-700 mb-6">IL NOSTRO SISTEMA DI NUMERAZIONE</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Colonna 1: CARATTERISTICHE -->
-        <div>  
-          <div class="mx- fit text-white px-4 py-2 text-center mb-2">             
-            <h3 class=" font-bold">CARATTERISTICHE</h3>
-          </div>
-          <!-- Freccia verticale -->
-          <div class=" text-gray-500 leading-none text-center">↓</div>
-          <div class="mx- max-sm p-4 mt-2">  
-            <div class="space-y-4 ">  
-              <div>                 
-                <p class="font-bold text-blue-700 mb-2">• È POSIZIONALE:</p>
-                <p class="text-gray-700 ">ogni cifra ha un valore diverso a seconda della posizione che occupa nel numero.</p>
-                <div class="mt-2 space-y-1">                   
-                  <p class="font-semibold ">1 703 <span class="text-blue-600">→</span> 3 u</p>
-                  <p class="font-semibold ">1 370 <span class="text-blue-600">→</span> 3 h = 300 u</p>
-                </div>
+        <div class="p-4 bg-cyan-50 rounded-lg">
+          <h3 class="font-bold text-center text-cyan-700 mb-4">CARATTERISTICHE</h3>
+
+          <div class="space-y-4">
+            <div>
+              <p class="font-bold text-pink-600 mb-2">&#8226; È POSIZIONALE:</p>
+              <p class="text-gray-700 mb-2">ogni cifra ha un valore diverso a seconda della posizione che occupa nel numero.</p>
+              <div class="ml-4 space-y-1">
+                <p class="font-semibold"><span class="text-cyan-500">1 703</span> <span class="text-pink-600">→</span> 3 u</p>
+                <p class="font-semibold"><span class="text-cyan-500">1 370</span> <span class="text-pink-600">→</span> 3 h = 300 u</p>
               </div>
-              <div class="pt-3">                 
-                <p class="font-bold text-blue-700 mb-2">• È DECIMALE:</p>
-                <p class="text-gray-700 ">per contare si raggruppano le quantità di 10 in 10, cioè in base 10.</p>
-                <div class="mt-2 space-y-1">                   
-                  <p class="font-semibold ">10 u = 1 <span class="text-red-600">da</span></p>
-                  <p class="font-semibold ">10 <span class="text-red-600">da</span> = 1 h</p>
-                </div>
+            </div>
+
+            <div>
+              <p class="font-bold text-pink-600 mb-2">&#8226; È DECIMALE:</p>
+              <p class="text-gray-700 mb-2">per contare si raggruppano le quantità di 10 in 10, cioè in base 10.</p>
+              <div class="ml-4 space-y-1">
+                <p class="font-semibold">10 u = 1 <span class="text-red-600">da</span></p>
+                <p class="font-semibold">10 <span class="text-red-600">da</span> = 1 h</p>
               </div>
             </div>
           </div>
         </div>
-        <!-- Colonna 2: CIFRE e NUMERI GRANDI (uno sotto l'altro) -->
-        <div class="space-y-6">           <!-- Box CIFRE -->
-          <div>  
-            <div class="mx- fit text-white px-4 py-2 text-center mb-2">               
-              <h3 class=" font-bold">CIFRE</h3>
-            </div>
-            <!-- Freccia verticale -->
-            <div class=" text-gray-500 leading-none text-center">↓</div>
-            <div class="mx- max-sm p-4 mt-2">  
-              <div class="grid grid-cols-5 gap-2 text-center">  
-                <div class="px-2 py-2 shadow font-bold  text-blue-600">0</div>
-  
-                <div class="px-2 py-2 shadow font-bold  text-blue-600">1</div>
-  
-                <div class="px-2 py-2 shadow font-bold  text-blue-600">2</div>
-  
-                <div class="px-2 py-2 shadow font-bold  text-blue-600">3</div>
-  
-                <div class="px-2 py-2 shadow font-bold  text-blue-600">4</div>
-  
-                <div class="px-2 py-2 shadow font-bold  text-blue-600">5</div>
-  
-                <div class="px-2 py-2 shadow font-bold  text-blue-600">6</div>
-  
-                <div class="px-2 py-2 shadow font-bold  text-blue-600">7</div>
-  
-                <div class="px-2 py-2 shadow font-bold  text-blue-600">8</div>
-  
-                <div class="px-2 py-2 shadow font-bold  text-blue-600">9</div>
-               </div>
+
+        <!-- Colonna 2: CIFRE e NUMERI GRANDI -->
+        <div class="space-y-6">
+          <!-- Box CIFRE -->
+          <div class="p-4 bg-blue-50 rounded-lg">
+            <h3 class="font-bold text-center text-blue-700 mb-4">CIFRE</h3>
+            <div class="grid grid-cols-5 gap-2 text-center">
+              <% (0..9).each do |n| %>
+                <div class="px-2 py-2 bg-white rounded shadow font-bold text-blue-600"><%= n %></div>
+              <% end %>
             </div>
           </div>
-          <!-- Box NUMERI GRANDI (sotto CIFRE) -->
-          <div>  
-            <div class="mx- fit text-white px-4 py-2 text-center mb-2">               
-              <h3 class=" font-bold">NUMERI GRANDI</h3>
+
+          <!-- Box NUMERI GRANDI -->
+          <div class="p-4 bg-green-50 rounded-lg">
+            <h3 class="font-bold text-center text-green-700 mb-4">NUMERI GRANDI</h3>
+            <p class="text-gray-700 mb-4">I numeri sono organizzati in <span class="font-bold">classi</span>, ciascuna con tre <span class="font-bold">ordini</span> (u, da, h):</p>
+
+            <!-- Tabella delle classi -->
+            <div class="overflow-x-auto mb-4">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr>
+                    <th class="bg-orange-400 text-white border border-white px-2 py-1 text-center">classe dei<br>miliardi (G)</th>
+                    <th class="bg-green-500 text-white border border-white px-2 py-1 text-center">classe dei<br>milioni (M)</th>
+                    <th class="bg-blue-500 text-white border border-white px-2 py-1 text-center">classe delle<br>migliaia (k)</th>
+                    <th class="bg-cyan-500 text-white border border-white px-2 py-1 text-center">classe delle<br>unità semplici</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="bg-white">
+                    <td class="border border-gray-300 px-2 py-1 text-center font-mono">hG daG uG</td>
+                    <td class="border border-gray-300 px-2 py-1 text-center font-mono">hM daM uM</td>
+                    <td class="border border-gray-300 px-2 py-1 text-center font-mono">hk dak uk</td>
+                    <td class="border border-gray-300 px-2 py-1 text-center font-mono">h da u</td>
+                  </tr>
+                  <tr class="bg-yellow-100 font-bold">
+                    <td class="border border-gray-300 px-2 py-1 text-center"></td>
+                    <td class="border border-gray-300 px-2 py-1 text-center">1</td>
+                    <td class="border border-gray-300 px-2 py-1 text-center">0 3 6</td>
+                    <td class="border border-gray-300 px-2 py-1 text-center">0 0 0</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <!-- Freccia verticale -->
-            <div class=" text-gray-500 leading-none text-center">↓</div>
-            <div class="p-4 mt-2">               
-              <p class=" text-gray-700 mb-4">I numeri sono organizzati in <strong>classi</strong>, ciascuna con tre <strong>ordini</strong> (u, da, h):</p>
-              <!-- Tabella delle classi -->
-              <div class="overflow-x- mb-4">                 
-                <table class="full  border-collapse">
-                  <thead>
-                    <tr>
-                      <th class="bg-orange-400 text-white border border-white px-1 py-1 ">classe dei<br>
-                        miliardi (G)</th>
-                      <th class="bg-green-500 text-white border border-white px-1 py-1 ">classe dei<br>
-                        milioni (M)</th>
-                      <th class="bg-blue-500 text-white border border-white px-1 py-1 ">classe delle<br>
-                        migliaia (k)</th>
-                      <th class="bg-cyan-500 text-white border border-white px-1 py-1 ">classe delle<br>
-                        unità semplici</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="bg-white">
-                      <td class="border border-gray-300 px-1 py-1 text-center  font-mono">hG daG uG</td>
-                      <td class="border border-gray-300 px-1 py-1 text-center  font-mono">hM daM uM</td>
-                      <td class="border border-gray-300 px-1 py-1 text-center  font-mono">hk dak uk</td>
-                      <td class="border border-gray-300 px-1 py-1 text-center  font-mono">h da u</td>
-                    </tr>
-                    <tr class="bg-yellow-100 font-bold">
-                      <td class="border border-gray-300 px-1 py-1 text-center "></td>
-                      <td class="border border-gray-300 px-1 py-1 text-center ">1</td>
-                      <td class="border border-gray-300 px-1 py-1 text-center ">0 3 6</td>
-                      <td class="border border-gray-300 px-1 py-1 text-center ">0 0 0</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class=" text-gray-600 italic">• Si legge: un <strong>milione</strong> trentasei <strong>mila</strong></p>
-            </div>
+            <p class="text-gray-600 italic">
+              <span class="text-pink-600">&#8226;</span> Si legge: un <span class="font-bold">milione</span> trentasei <span class="font-bold">mila</span>
+            </p>
           </div>
         </div>
       </div>
     </div>
-    <!-- Separatore -->
-    <div class="my-12"></div>
+
     <!-- SEZIONE 2: I NUMERI RELATIVI -->
-    <div class="relative">       <!-- Titolo -->
-      <div class="relative">  
-        <div class="mx- fit text-white px-8 py-4 text-center relative">           
-          <h1 class=" font-bold">I NUMERI RELATIVI</h1>
-        </div>
-        <!-- Frecce verso le sottosezioni -->
-        <div class="relative mt-4  pointer-events-none" style="max-width: 760px; margin: 0 ; z-index: 20;">           <svg class="absolute inset-0 full full" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="arrow-head-relativi" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="" markerUnits="strokeWidth">
-                <path d="M0,0 L8,4 L0,8 Z" fill="#1D4ED8" />
-              </marker>
-            </defs>
-            <path d="M50 0 C50 24 36 24 28 80" fill="none" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" />
-            <line x1="28" y1="80" x2="24" y2="180" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow-head-relativi)" />
-            <line x1="50" y1="0" x2="50" y2="188" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow-head-relativi)" />
-            <path d="M50 0 C50 24 64 24 72 80" fill="none" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" />
-            <line x1="72" y1="80" x2="76" y2="172" stroke="#1D4ED8" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow-head-relativi)" />
-          </svg>
-        </div>
-      </div>
-      <!-- Spazio per le frecce -->
-      <div></div>
-      <!-- Due colonne in alto -->
-      <div class="grid grid-cols-2 gap-8 mb-8">
+    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
+      <h1 class="font-bold text-center text-blue-700 mb-6">I NUMERI RELATIVI</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <!-- Colonna 1: CHE COSA SONO -->
-        <div>  
-          <div class="mx- fit text-white px-4 py-2 text-center mb-2">             
-            <h3 class=" font-bold">CHE COSA SONO</h3>
-          </div>
-          <div class=" text-gray-500 leading-none text-center">↓</div>
-          <div class="mx- max-sm p-4 mt-2">  
-            <div class="space-y-3 ">               
-              <p><span class="font-bold">• Numeri preceduti dal segno +:</span><br>
-                numeri <strong class="text-blue-600">POSITIVI</strong>.</p>
-              <p><span class="font-bold">• Numeri preceduti dal segno –:</span><br>
-                numeri <strong class="text-red-600">NEGATIVI</strong>.</p>
-            </div>
+        <div class="p-4 bg-pink-50 rounded-lg">
+          <h3 class="font-bold text-center text-pink-700 mb-4">CHE COSA SONO</h3>
+          <div class="space-y-3">
+            <p><span class="font-bold text-pink-600">&#8226;</span> Numeri preceduti dal segno +:<br>
+              numeri <span class="font-bold text-blue-600">POSITIVI</span>.</p>
+            <p><span class="font-bold text-pink-600">&#8226;</span> Numeri preceduti dal segno –:<br>
+              numeri <span class="font-bold text-red-600">NEGATIVI</span>.</p>
           </div>
         </div>
+
         <!-- Colonna 2: COME SI SCRIVONO E SI LEGGONO -->
-        <div>  
-          <div class="mx- fit text-white px-4 py-2 text-center mb-2">             
-            <h3 class=" font-bold leading-tight">COME SI SCRIVONO<br>
-              E SI LEGGONO</h3>
-          </div>
-          <div class=" text-gray-500 leading-none text-center">↓</div>
-          <div class="mx- max-sm p-4 mt-2">  
-            <div class="space-y-4">  
-              <div class="p-3 shadow text-center">                 
-                <p class=" font-bold text-blue-600">+ 2 <span class=" text-gray-600">→</span> <span class=" text-gray-700">più due</span></p>
-              </div>
-              <div class="p-3 shadow text-center">                 
-                <p class=" font-bold text-red-600">– 2 <span class=" text-gray-600">→</span> <span class=" text-gray-700">meno due</span></p>
-              </div>
+        <div class="p-4 bg-purple-50 rounded-lg">
+          <h3 class="font-bold text-center text-purple-700 mb-4">COME SI SCRIVONO E SI LEGGONO</h3>
+          <div class="space-y-4">
+            <div class="p-3 bg-white rounded shadow text-center">
+              <p class="font-bold"><span class="text-blue-600">+ 2</span> <span class="text-pink-600">→</span> <span class="text-gray-700">più due</span></p>
+            </div>
+            <div class="p-3 bg-white rounded shadow text-center">
+              <p class="font-bold"><span class="text-red-600">– 2</span> <span class="text-pink-600">→</span> <span class="text-gray-700">meno due</span></p>
             </div>
           </div>
         </div>
       </div>
-      <!-- Spazio extra per la freccia centrale -->
-      <div></div>
-      <!-- COME SI ORDINANO - Box largo in basso -->
-      <div>  
-        <div class="mx- fit text-white px-4 py-2 text-center mb-2">           
-          <h3 class=" font-bold">COME SI ORDINANO</h3>
-        </div>
-        <div class=" text-gray-500 leading-none text-center">↓</div>
-        <div class="p-4 mt-2">  
-          <div class="relative pt-8 pb-12">             <!-- Etichette sopra -->
-            <div class="absolute top-0 left-0 right-0 flex justify-between  font-bold px-4">               <span class="text-red-600">← NUMERI NEGATIVI</span>
-              <span class="text-blue-600">NUMERI POSITIVI →</span>
-            </div>
-            <!-- Linea principale con numeri -->
-            <div class="absolute" style="top: 50px; left: 20px; right: 20px;">  
-              <div class="relative">                 <!-- Linea orizzontale -->
-                <div class="relative">                   <!-- Freccia sinistra -->
-                  <div class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-3">                     <span class=" text-gray-700">←</span>
-                  </div>
-                  <!-- Freccia destra -->
-                  <div class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-3">                     <span class=" text-gray-700">→</span>
-                  </div>
-                </div>
-              </div>
-              <!-- Numeri sotto la linea -->
-              <div class="flex justify-between items-start pt-3  font-semibold px-1">                 <span>– 9</span>
-                <span>– 8</span>
-                <span>– 7</span>
-                <span>– 6</span>
-                <span>– 5</span>
-                <span>– 4</span>
-                <span>– 3</span>
-                <span>– 2</span>
-                <span>– 1</span>
-                <span class="bg-gray-700 text-white px-2 py-1  font-bold">0</span>
-                <span>+1</span>
-                <span>+2</span>
-                <span>+3</span>
-                <span>+4</span>
-                <span>+5</span>
-                <span>+6</span>
-                <span>+7</span>
-                <span>+8</span>
-                <span>+9</span>
-              </div>
-            </div>
+
+      <!-- COME SI ORDINANO -->
+      <div class="p-4 bg-yellow-50 rounded-lg">
+        <h3 class="font-bold text-center text-yellow-700 mb-4">COME SI ORDINANO</h3>
+
+        <div class="relative pt-8 pb-4">
+          <!-- Etichette sopra -->
+          <div class="flex justify-between font-bold px-4 mb-4">
+            <span class="text-red-600">← NUMERI NEGATIVI</span>
+            <span class="text-blue-600">NUMERI POSITIVI →</span>
+          </div>
+
+          <!-- Linea dei numeri -->
+          <div class="flex justify-between items-center font-semibold px-2 py-3 bg-white rounded border-2 border-gray-300 overflow-x-auto">
+            <span class="text-gray-500">←</span>
+            <% (-9..9).each do |n| %>
+              <% if n < 0 %>
+                <span class="text-red-600 px-1"><%= "– #{n.abs}" %></span>
+              <% elsif n == 0 %>
+                <span class="bg-gray-700 text-white px-2 py-1 rounded font-bold">0</span>
+              <% else %>
+                <span class="text-blue-600 px-1"><%= "+#{n}" %></span>
+              <% end %>
+            <% end %>
+            <span class="text-gray-500">→</span>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'yellow', current_page: 'nvi5_mat_p025' %>
+    <%= render 'shared/exercise_controls', color: 'blue' %>
   </div>
 </div>

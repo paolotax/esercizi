@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-blue-50 via-white to-blue-50 rounded-3xl shadow-xl"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -6,24 +6,36 @@
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
+  <div class="mb-6">
+    <p class="text-sm md:text-base text-blue-700">
+      Osserva lo schema delle potenze e tocca i cartellini per ascoltare la parola corretta.
+    </p>
+  </div>
+
   <div class="space-y-6">
-    <div class="space-y-6">     <!-- Interactive Image -->
-      <div class="relative overflow-hidden"         data-controller="hotspot-editor"
-        data-hotspot-editor-target="container">
-        <%= image_tag "nvi5_mat/p008/p008_01.jpg",
-          alt: "Supermercato con cartellini: frigorifero, cartello del reparto, lampadario, scaffale, flaconi, espositore, caporeparto, cassa, scatole, cliente, cestino, bilancia, cassetta, borse, banco, carrello e corsia",
-          class: "full full  select-none pointer-events-none" %>
-        <div class="absolute inset-0">         <% hotspots = [
-          { label: "POTENZE", top: "8.58117%", left: "34.5076%", width: "28.6737%", height: "6.06406%" },
-          { label: "ESPONENTE", top: "20.9246%", left: "47.6976%", width: "21.8701%", height: "5.83096%" },
-          { label: "BASE", top: "34.2737%", left: "47.2502%", width: "13.4169%", height: "5.59786%" },
-          { label: "6 per 6 per 6", top: "71.2637%", left: "8.78187%", width: "26.7737%", height: "12.1246%" },
-          { label: "SEI ALLA TERZA", top: "69.2306%", left: "61.6888%", width: "22.6483%", height: "6.29715%" },
-          { label: "SEI ELEVATO ALLA TERZA", top: "80.3487%", left: "56.9154%", width: "32.2523%", height: "5.13167%" }
+
+    <!-- Interactive Image -->
+    <div class="relative rounded-2xl overflow-hidden border-4 border-blue-200 shadow-2xl"
+         data-controller="hotspot-editor"
+         data-hotspot-editor-target="container">
+
+      <%= image_tag "nvi5_mat/p008/p008_01.jpg",
+          alt: "Schema delle potenze: 6 alla terza con etichette POTENZE, ESPONENTE, BASE, 6 per 6 per 6, SEI ALLA TERZA, SEI ELEVATO ALLA TERZA",
+          class: "w-full h-full object-cover select-none pointer-events-none" %>
+
+      <div class="absolute inset-0">
+        <% hotspots = [
+          { label: "POTENZE", top: "8.58%", left: "34.51%", width: "28.67%", height: "6.06%" },
+          { label: "ESPONENTE", top: "20.92%", left: "47.70%", width: "21.87%", height: "5.83%" },
+          { label: "BASE", top: "34.27%", left: "47.25%", width: "13.42%", height: "5.60%" },
+          { label: "6 per 6 per 6", top: "71.26%", left: "8.78%", width: "26.77%", height: "12.12%" },
+          { label: "SEI ALLA TERZA", top: "69.23%", left: "61.69%", width: "22.65%", height: "6.30%" },
+          { label: "SEI ELEVATO ALLA TERZA", top: "80.35%", left: "56.92%", width: "32.25%", height: "5.13%" }
         ] %>
-          <% hotspots.each do |hotspot| %>
-            <button type="button"
-                  class="absolute  bg-blue-500/0 hover:bg-blue-500/25 border-2 border-transparent hover:border-blue-500 focus:border-blue-600 focus:outline-none transition  cursor-move"
+
+        <% hotspots.each do |hotspot| %>
+          <button type="button"
+                  class="absolute rounded-xl bg-blue-500/10 hover:bg-blue-500/25 border-2 border-transparent hover:border-blue-500 focus:border-blue-600 focus:outline-none transition shadow-sm cursor-move"
                   style="top: <%= hotspot[:top] %>; left: <%= hotspot[:left] %>; width: <%= hotspot[:width] %>; height: <%= hotspot[:height] %>;"
                   aria-label="Leggi: <%= hotspot[:label] %>"
                   data-controller="image-speech"
@@ -31,90 +43,102 @@
                   data-image-speech-word-value="<%= hotspot[:label] %>"
                   data-image-speech-lang-value="it-IT"
                   data-action="mousedown->hotspot-editor#startDrag click->image-speech#speak">
-              <span class="sr-only"><%= hotspot[:label] %></span>
-            </button>
-          <% end %>
-        </div>
+            <span class="sr-only"><%= hotspot[:label] %></span>
+          </button>
+        <% end %>
       </div>
-      <!-- Esercizio COLLEGA -->
-      <div class="p-6">       
-        <h2 class=" font-bold text-blue-600 mb-6 flex items-center gap-3">
-          <span class="text-pink-500">♥</span>
-          Collega.
-        </h2>
-        <div class="space-y-4">         <!-- L'ESPONENTE indica -->
-          <div class="p-4">  
-            <div class="flex flex-col flex-row items-start items-center gap-3">             <span class=" ">• L'<span class="font-bold text-blue-600">ESPONENTE</span> indica</span>
-              <select class="flex-1 px-4 py-2 border-2 border-pink-300  focus:border-pink-500 focus:outline-none text-gray-700"
-                    data-correct-answer="quante volte la base va moltiplicata per se stessa">
-                <option value="">Scegli...</option>
-                <option value="quante volte la base va moltiplicata per se stessa">quante volte la base va moltiplicata per se stessa</option>
-                <option value="il numero da moltiplicare">il numero da moltiplicare</option>
-                <option value="6 × 6 × 6">6 × 6 × 6</option>
-              </select>
-            </div>
-          </div>
-          <!-- La BASE indica -->
-          <div class="p-4">  
-            <div class="flex flex-col flex-row items-start items-center gap-3">             <span class=" ">• La <span class="font-bold text-blue-600">BASE</span> indica</span>
-              <select class="flex-1 px-4 py-2 border-2 border-pink-300  focus:border-pink-500 focus:outline-none text-gray-700"
-                    data-correct-answer="il numero da moltiplicare">
-                <option value="">Scegli...</option>
-                <option value="quante volte la base va moltiplicata per se stessa">quante volte la base va moltiplicata per se stessa</option>
-                <option value="il numero da moltiplicare">il numero da moltiplicare</option>
-                <option value="6 × 6 × 6">6 × 6 × 6</option>
-              </select>
-            </div>
-          </div>
-          <!-- La POTENZA 6³ significa -->
-          <div class="p-4">  
-            <div class="flex flex-col flex-row items-start items-center gap-3">             <span class=" ">• La <span class="font-bold text-blue-600">POTENZA</span> 6³ significa</span>
-              <select class="flex-1 px-4 py-2 border-2 border-pink-300  focus:border-pink-500 focus:outline-none text-gray-700"
-                    data-correct-answer="6 × 6 × 6">
-                <option value="">Scegli...</option>
-                <option value="quante volte la base va moltiplicata per se stessa">quante volte la base va moltiplicata per se stessa</option>
-                <option value="il numero da moltiplicare">il numero da moltiplicare</option>
-                <option value="6 × 6 × 6">6 × 6 × 6</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Esercizio SCEGLI -->
-      <div class="p-6">       
-        <h2 class=" font-bold text-blue-600 mb-6 flex items-center gap-3">
-          <span class="text-pink-500">♥</span>
-          Scegli.
-        </h2>
-        <div class="space-y-6">         <!-- La POTENZA 5⁴ si legge -->
-          <div class="space-y-3">           
-            <p class=" font-medium">• La <span class="font-bold text-blue-600">POTENZA</span> 5⁴ si legge:</p>
-            <div class="ml-6 space-y-3">             <label class="flex items-center gap-3 bg-pink-50 p-4  cursor-pointer hover:bg-pink-100 transition-colors">
-                <input type="radio" name="potenza_5_4" value="quattro alla quinta" class="  text-blue-600">
-                <span class=" font-bold text-blue-600">QUATTRO ALLA QUINTA</span>
-              </label>
-              <label class="flex items-center gap-3 bg-pink-50 p-4  cursor-pointer hover:bg-pink-100 transition-colors">
-                <input type="radio" name="potenza_5_4" value="cinque alla quarta" class="  text-blue-600" data-correct-answer="true">
-                <span class=" font-bold text-blue-600">CINQUE ALLA QUARTA</span>
-              </label>
-            </div>
-          </div>
-          <!-- OTTO ELEVATO ALLA SECONDA corrisponde -->
-          <div class="space-y-3">           
-            <p class=" font-medium">• <span class="font-bold text-blue-600">OTTO ELEVATO ALLA SECONDA</span> corrisponde:</p>
-            <div class="ml-6 space-y-3">             <label class="flex items-center gap-3 bg-pink-50 p-4  cursor-pointer hover:bg-pink-100 transition-colors">
-                <input type="radio" name="otto_seconda" value="8²" class="  text-blue-600" data-correct-answer="true">
-                <span>alla <span class="font-bold text-blue-600">POTENZA</span> 8²</span>
-              </label>
-              <label class="flex items-center gap-3 bg-pink-50 p-4  cursor-pointer hover:bg-pink-100 transition-colors">
-                <input type="radio" name="otto_seconda" value="2⁸" class="  text-blue-600">
-                <span>alla <span class="font-bold text-blue-600">POTENZA</span> 2⁸</span>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Exercise Controls -->
-      <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvi5_mat_p008' %>
     </div>
+
+    <!-- Esercizio Collega -->
+    <div class="p-4 md:p-6 bg-white rounded-2xl border-2 border-pink-200">
+      <div class="flex items-start gap-3 mb-6">
+        <span class="text-pink-500 text-xl">&#9829;</span>
+        <h3 class="font-bold text-gray-700">Collega.</h3>
+      </div>
+
+      <div class="space-y-4">
+        <!-- L'ESPONENTE indica -->
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-3">
+          <span class="text-gray-700">&#8226; L'<span class="font-bold text-blue-600">ESPONENTE</span> indica</span>
+          <select class="flex-1 px-4 py-2 border-2 border-pink-300 rounded-lg focus:border-pink-500 focus:outline-none text-gray-700"
+                  data-correct-answer="quante volte la base va moltiplicata per se stessa">
+            <option value="">Scegli...</option>
+            <option value="quante volte la base va moltiplicata per se stessa">quante volte la base va moltiplicata per se stessa.</option>
+            <option value="il numero da moltiplicare">il numero da moltiplicare.</option>
+            <option value="6 × 6 × 6">6 × 6 × 6.</option>
+          </select>
+        </div>
+
+        <!-- La BASE indica -->
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-3">
+          <span class="text-gray-700">&#8226; La <span class="font-bold text-blue-600">BASE</span> indica</span>
+          <select class="flex-1 px-4 py-2 border-2 border-pink-300 rounded-lg focus:border-pink-500 focus:outline-none text-gray-700"
+                  data-correct-answer="il numero da moltiplicare">
+            <option value="">Scegli...</option>
+            <option value="quante volte la base va moltiplicata per se stessa">quante volte la base va moltiplicata per se stessa.</option>
+            <option value="il numero da moltiplicare">il numero da moltiplicare.</option>
+            <option value="6 × 6 × 6">6 × 6 × 6.</option>
+          </select>
+        </div>
+
+        <!-- La POTENZA 6³ significa -->
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-3">
+          <span class="text-gray-700">&#8226; La <span class="font-bold text-blue-600">POTENZA</span> 6³ significa</span>
+          <select class="flex-1 px-4 py-2 border-2 border-pink-300 rounded-lg focus:border-pink-500 focus:outline-none text-gray-700"
+                  data-correct-answer="6 × 6 × 6">
+            <option value="">Scegli...</option>
+            <option value="quante volte la base va moltiplicata per se stessa">quante volte la base va moltiplicata per se stessa.</option>
+            <option value="il numero da moltiplicare">il numero da moltiplicare.</option>
+            <option value="6 × 6 × 6">6 × 6 × 6.</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio Scegli -->
+    <div class="p-4 md:p-6 bg-white rounded-2xl border-2 border-pink-200">
+      <div class="flex items-start gap-3 mb-6">
+        <span class="text-pink-500 text-xl">&#9829;</span>
+        <h3 class="font-bold text-gray-700">Scegli.</h3>
+      </div>
+
+      <div class="space-y-6">
+        <!-- La POTENZA 5⁴ si legge -->
+        <div class="space-y-3">
+          <p class="text-gray-700">&#8226; La <span class="font-bold text-blue-600">POTENZA</span> 5⁴ si legge:</p>
+          <div class="ml-6 space-y-3">
+            <label class="flex items-center gap-3 bg-pink-50 p-4 rounded-lg cursor-pointer hover:bg-pink-100 transition-colors">
+              <input type="radio" name="potenza_5_4" value="quattro alla quinta" class="w-5 h-5 text-blue-600">
+              <span class="font-bold text-blue-600">QUATTRO ALLA QUINTA.</span>
+            </label>
+            <label class="flex items-center gap-3 bg-pink-50 p-4 rounded-lg cursor-pointer hover:bg-pink-100 transition-colors">
+              <input type="radio" name="potenza_5_4" value="cinque alla quarta" class="w-5 h-5 text-blue-600" data-correct-answer="true">
+              <span class="font-bold text-blue-600">CINQUE ALLA QUARTA.</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- OTTO ELEVATO ALLA SECONDA corrisponde -->
+        <div class="space-y-3">
+          <p class="text-gray-700">&#8226; <span class="font-bold text-blue-600">OTTO ELEVATO ALLA SECONDA</span> corrisponde:</p>
+          <div class="ml-6 space-y-3">
+            <label class="flex items-center gap-3 bg-pink-50 p-4 rounded-lg cursor-pointer hover:bg-pink-100 transition-colors">
+              <input type="radio" name="otto_seconda" value="8²" class="w-5 h-5 text-blue-600" data-correct-answer="true">
+              <span class="text-gray-700">alla <span class="font-bold text-blue-600">POTENZA</span> 8².</span>
+            </label>
+            <label class="flex items-center gap-3 bg-pink-50 p-4 rounded-lg cursor-pointer hover:bg-pink-100 transition-colors">
+              <input type="radio" name="otto_seconda" value="2⁸" class="w-5 h-5 text-blue-600">
+              <span class="text-gray-700">alla <span class="font-bold text-blue-600">POTENZA</span> 2⁸.</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'blue' %>
+  </div>
+</div>

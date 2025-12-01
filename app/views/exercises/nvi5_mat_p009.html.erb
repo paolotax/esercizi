@@ -1,28 +1,42 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-blue-50 via-white to-blue-50 rounded-3xl shadow-xl"
      data-controller="exercise-checker text-toggle font-controls number-line"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
-  <div class="space-y-6 relative">     <!-- Interactive Image -->
-    <div class="relative overflow-hidden"         data-controller="hotspot-editor"
-        data-hotspot-editor-target="container">
+
+  <div class="mb-6">
+    <p class="text-sm md:text-base text-blue-700">
+      Osserva lo schema dei numeri relativi e tocca i cartellini per ascoltare la parola corretta.
+    </p>
+  </div>
+
+  <div class="space-y-6">
+
+    <!-- Interactive Image -->
+    <div class="relative rounded-2xl overflow-hidden border-4 border-blue-200 shadow-2xl"
+         data-controller="hotspot-editor"
+         data-hotspot-editor-target="container">
+
       <%= image_tag "nvi5_mat/p009/p009_01.jpg",
-          alt: "Supermercato con cartellini: frigorifero, cartello del reparto, lampadario, scaffale, flaconi, espositore, caporeparto, cassa, scatole, cliente, cestino, bilancia, cassetta, borse, banco, carrello e corsia",
-          class: "full full  select-none pointer-events-none" %>
-      <div class="absolute inset-0">         <% hotspots = [
-        { label: "NUMERI POSITIVI", top: "23.8885%", left: "10.7944%", width: "25.1811%", height: "6.18091%" },
-        { label: "NUMERI RELATIVI", top: "1.87802%", left: "28.488%", width: "41.9988%", height: "5.94781%" },
-        { label: "PIU' QUATTRO", top: "81.4812%", left: "13.2428%", width: "19.1154%", height: "5.48101%" },
-        { label: "NUMERI NEGATIVI", top: "24.2529%", left: "61.428%", width: "27.6429%", height: "6.0728%" },
-        { label: "MENO QUATTRO", top: "33.0537%", left: "62.7341%", width: "26.4061%", height: "21.0052%" },
-        { label: "PIU' QUATTRO", top: "33.1239%", left: "11.4131%", width: "24.6704%", height: "20.6697%" },
-        { label: "MENO QUATTRO", top: "81.7509%", left: "64.9117%", width: "21.5905%", height: "4.89797%" }        
+          alt: "Schema dei numeri relativi: +4 numeri positivi, -4 numeri negativi, come si legge PIU' QUATTRO e MENO QUATTRO",
+          class: "w-full h-full object-cover select-none pointer-events-none" %>
+
+      <div class="absolute inset-0">
+        <% hotspots = [
+          { label: "NUMERI RELATIVI", top: "1.88%", left: "28.49%", width: "42.00%", height: "5.95%" },
+          { label: "NUMERI POSITIVI", top: "23.89%", left: "10.79%", width: "25.18%", height: "6.18%" },
+          { label: "NUMERI NEGATIVI", top: "24.25%", left: "61.43%", width: "27.64%", height: "6.07%" },
+          { label: "PIU' QUATTRO", top: "33.12%", left: "11.41%", width: "24.67%", height: "20.67%" },
+          { label: "MENO QUATTRO", top: "33.05%", left: "62.73%", width: "26.41%", height: "21.01%" },
+          { label: "PIU' QUATTRO", top: "81.48%", left: "13.24%", width: "19.12%", height: "5.48%" },
+          { label: "MENO QUATTRO", top: "81.75%", left: "64.91%", width: "21.59%", height: "4.90%" }
         ] %>
+
         <% hotspots.each do |hotspot| %>
           <button type="button"
-                  class="absolute  bg-blue-500/0 hover:bg-blue-500/25 hover:border-blue-500 focus:border-blue-600 focus:outline-none transition cursor-move"
+                  class="absolute rounded-xl bg-blue-500/10 hover:bg-blue-500/25 border-2 border-transparent hover:border-blue-500 focus:border-blue-600 focus:outline-none transition shadow-sm cursor-move"
                   style="top: <%= hotspot[:top] %>; left: <%= hotspot[:left] %>; width: <%= hotspot[:width] %>; height: <%= hotspot[:height] %>;"
                   aria-label="Leggi: <%= hotspot[:label] %>"
                   data-controller="image-speech"
@@ -35,104 +49,119 @@
         <% end %>
       </div>
     </div>
+
     <!-- Esercizio Completa -->
-    <div class="p-6 p-8">  
-      <div class="flex items-center gap-3 mb-6">  
-        <div class="  flex items-center justify-center">           <svg class="  text-white" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
-            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
-          </svg>
-        </div>
-        <h3 class=" font-bold text-blue-600">Completa.</h3>
+    <div class="p-4 md:p-6 bg-white rounded-2xl border-2 border-pink-200">
+      <div class="flex items-start gap-3 mb-6">
+        <span class="text-pink-500 text-xl">&#9829;</span>
+        <h3 class="font-bold text-gray-700">Completa.</h3>
       </div>
-      <div class="space-y-4 ">  
-        <div class="flex flex-wrap items-center gap-2">           <span>I</span>
+
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center gap-2 text-gray-700">
+          <span>&#8226; I</span>
           <span class="font-bold text-blue-600">NUMERI POSITIVI</span>
           <span>e i</span>
           <input type="text"
-                 class=" px-4 py-2 border-b-4 border-pink-300 focus:border-pink-500 focus:outline-none font-bold text-blue-600 bg-pink-50 transition-colors"
-                 data-correct-answer="NUMERI NEGATIVI" >
+                 class="w-48 px-4 py-2 border-b-4 border-pink-300 focus:border-pink-500 focus:outline-none font-bold text-blue-600 bg-pink-50 rounded-t-lg transition-colors"
+                 data-correct-answer="NUMERI NEGATIVI"
+                 placeholder="...">
           <span>sono</span>
           <span class="font-bold text-blue-600">NUMERI RELATIVI</span><span>.</span>
         </div>
-        <div class="flex flex-wrap items-center gap-2">           <span>I</span>
+
+        <div class="flex flex-wrap items-center gap-2 text-gray-700">
+          <span>&#8226; I</span>
           <span class="font-bold text-blue-600">NUMERI</span>
           <input type="text"
-                 class=" px-4 py-2 border-b-4 border-pink-300 focus:border-pink-500 focus:outline-none font-bold text-blue-600 bg-pink-50 transition-colors"
-                 data-correct-answer="POSITIVI" >
+                 class="w-32 px-4 py-2 border-b-4 border-pink-300 focus:border-pink-500 focus:outline-none font-bold text-blue-600 bg-pink-50 rounded-t-lg transition-colors"
+                 data-correct-answer="POSITIVI"
+                 placeholder="...">
           <span>sono preceduti dal segno</span>
-          <span class="font-bold text-blue-600 ">+</span><span>.</span>
+          <span class="font-bold text-blue-600 text-xl">+</span><span>.</span>
         </div>
-        <div class="flex flex-wrap items-center gap-2">           <span>I</span>
+
+        <div class="flex flex-wrap items-center gap-2 text-gray-700">
+          <span>&#8226; I</span>
           <span class="font-bold text-blue-600">NUMERI</span>
           <input type="text"
-                 class=" px-4 py-2 border-b-4 border-pink-300 focus:border-pink-500 focus:outline-none font-bold text-blue-600 bg-pink-50 transition-colors"
-                 data-correct-answer="NEGATIVI" >
+                 class="w-32 px-4 py-2 border-b-4 border-pink-300 focus:border-pink-500 focus:outline-none font-bold text-blue-600 bg-pink-50 rounded-t-lg transition-colors"
+                 data-correct-answer="NEGATIVI"
+                 placeholder="...">
           <span>sono preceduti dal segno</span>
-          <span class="font-bold text-blue-600 ">-</span><span>.</span>
+          <span class="font-bold text-blue-600 text-xl">−</span><span>.</span>
         </div>
       </div>
     </div>
+
     <!-- Esercizio Linea dei numeri -->
-    <div class="p-6 p-8">  
-      <div class="flex items-center gap-3 mb-6">  
-        <div class="  flex items-center justify-center">           <svg class="  text-white" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
-            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
-          </svg>
-        </div>
-        <h3 class=" font-bold text-blue-600">
+    <div class="p-4 md:p-6 bg-white rounded-2xl border-2 border-pink-200">
+      <div class="flex items-start gap-3 mb-6">
+        <span class="text-pink-500 text-xl">&#9829;</span>
+        <h3 class="font-bold text-gray-700">
           Osserva la linea dei numeri e cerchia
-          <span class="text-blue-700">-7</span> e
-          <span class="text-blue-700">+5</span>.
+          <span class="text-blue-700 font-bold">−7</span> e
+          <span class="text-blue-700 font-bold">+5</span>.
         </h3>
       </div>
+
       <!-- Number Line -->
-      <div class="overflow-x- pb-4 -mx-4 px-4">  
-        <div class="relative py-6" style="min-width: 1600px;">           <!-- Numbers -->
-          <div class="relative flex items-center flex-nowrap px-8" style="gap: 3.5rem;">             <% [-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9].each do |num| %>
-              <div class="flex flex-col items-center relative" style="flex-shrink: 0;">                 <!-- Dot on line -->
-                <div class="  absolute top-1/2 -translate-y-1/2" style="z-index: 8;"></div>
+      <div class="overflow-x-auto pb-4">
+        <div class="relative py-8 min-w-max">
+          <!-- Line with arrows -->
+          <div class="absolute top-1/2 left-4 right-4 h-1 bg-blue-400 -translate-y-1/2"></div>
+
+          <!-- Left Arrow -->
+          <div class="absolute left-0 top-1/2 -translate-y-1/2">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"/>
+            </svg>
+          </div>
+
+          <!-- Right Arrow -->
+          <div class="absolute right-0 top-1/2 -translate-y-1/2">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/>
+            </svg>
+          </div>
+
+          <!-- Numbers -->
+          <div class="flex items-center justify-center gap-4 md:gap-6 px-8">
+            <% [-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9].each do |num| %>
+              <div class="flex flex-col items-center">
+                <!-- Dot on line -->
+                <div class="w-2 h-2 bg-blue-500 rounded-full mb-2"></div>
                 <!-- Number button -->
                 <button type="button"
-                        class="number-circle   md: rounded-full border-3 flex items-center justify-center font-bold  transition-all duration-300 hover:scale-110 focus:outline-none relative"
-                        style="margin-top: 3rem; z-index: 5;"
+                        class="number-circle w-10 h-10 md:w-12 md:h-12 rounded-full border-3 border-blue-500 bg-white flex items-center justify-center font-bold text-sm md:text-base transition-all duration-300 hover:scale-110 focus:outline-none"
                         data-number="<%= num %>"
                         data-number-line-target="numberButton"
                         data-action="click->number-line#toggleNumber"
-                  data-correct="<%= num == -7 || num == 5 %>">
-                  <% if num >= 0 && num > 0 %>
-                    <span class="text-blue-700">+<%= num %></span>
-                  <% elsif num == 0 %>
-                    <span class="text-gray-700"><%= num %></span>
-                  <% else %>
-                    <span class="text-blue-700"><%= num %></span>
-                  <% end %>
+                        data-correct="<%= num == -7 || num == 5 %>">
+                  <span class="<%= num == 0 ? 'text-gray-700' : 'text-blue-700' %>">
+                    <%= num > 0 ? "+#{num}" : num %>
+                  </span>
                 </button>
               </div>
             <% end %>
           </div>
-          <!-- Left Arrow -->
-          <svg class="  text-blue-600  absolute left-0 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="z-index: 10;">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"/>
-          </svg>
-          <!-- Continuous Line - extends beyond +9 -->
-          <div class="absolute left-6  top-1/2 -translate-y-1/2" style="right: -32rem; z-index: 7;"></div>
-          <!-- Right Arrow -->
-          <svg class="  text-blue-600  absolute top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="right: -33.3rem; z-index: 10;">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/>
-          </svg>
         </div>
       </div>
+
       <!-- Feedback message -->
-      <div class="mt-6 text-center">  
-        <div data-number-line-target="feedback" class="hidden  font-semibold"></div>
-       </div>
+      <div class="mt-4 text-center">
+        <div data-number-line-target="feedback" class="hidden text-lg font-semibold"></div>
+      </div>
     </div>
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvi5_mat_p009' %>
+
+  </div>
+
+  <!-- Exercise Controls -->
+  <div class="mt-6">
+    <%= render 'shared/exercise_controls', color: 'blue' %>
   </div>
 </div>
+
 <style>
   .number-circle {
     border-color: #3b82f6;
@@ -147,6 +176,10 @@
     border-width: 4px;
     transform: scale(1.15);
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  }
+
+  .number-circle.selected span {
+    color: white !important;
   }
 
   .number-circle:hover {
