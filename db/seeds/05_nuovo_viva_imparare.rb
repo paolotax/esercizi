@@ -84,7 +84,7 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 27, titolo: "I Numeri", slug: "nvi5_mat_p027", view_template: "nvi5_mat_p027", sottotitolo: "MODELLO INVALSI", base_color: "red" },
   { numero: 28, titolo: "I Numeri - Verifica Avanzata", slug: "nvi5_mat_p028", view_template: "nvi5_mat_p028", sottotitolo: "MODELLO INVALSI", base_color: "red" },
   { numero: 29, titolo: "I Numeri - Esercizi Guidati", slug: "nvi5_mat_p029", view_template: "nvi5_mat_p029", sottotitolo: "MODELLO INVALSI", base_color: "red" },
-  { numero: 56, titolo: "???", slug: "nvi5_mat_p056", view_template: "nvi5_mat_p056", sottotitolo: "???", base_color: "blue" },
+  { numero: 56, titolo: "Esercizi sulle Frazioni", slug: "nvi5_mat_p056", view_template: "nvi5_mat_p056", sottotitolo: "ESERCIZI", base_color: "blue" },
   { numero: 57, titolo: "Frazioni Proprie, Improprie e Apparenti", slug: "nvi5_mat_p057", view_template: "nvi5_mat_p057" },
   { numero: 58, titolo: "Laboratorio - Ricostruiamo l'Intero", slug: "nvi5_mat_p058", view_template: "nvi5_mat_p058" },
   { numero: 59, titolo: "Laboratorio - Ricostruiamo l'Intero (Frazioni Qualsiasi)", slug: "nvi5_mat_p059", view_template: "nvi5_mat_p059" },
