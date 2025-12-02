@@ -1,19 +1,18 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
     <!-- Lo Sconto -->
-    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
-      <h2 class="font-bold text-blue-600 mb-4">Lo Sconto</h2>
+    <div class="p-4 md:p-6">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 text-xl mb-4 italic">Lo sconto</h2>
 
-      <div class="flex items-start gap-4 mb-4">
+      <div class="flex flex-col md:flex-row gap-4 items-start">
         <div class="flex-1">
-          <div class="p-4 bg-blue-50 rounded-lg mb-4">
+          <div class="p-4 bg-cyan-50 rounded-lg mb-4">
             <p class="text-gray-700">
               Stefano ha comprato un libro che costa 15 euro con lo sconto del 25%. Quanto ha pagato il libro Stefano? Quanto ha risparmiato?
             </p>
@@ -23,26 +22,23 @@
             Per conoscere il prezzo ribassato del libro, devi prima calcolare il valore dello sconto, poi devi sottrarre lo sconto dal prezzo iniziale.
           </p>
 
-          <div class="space-y-2 mb-4 font-mono">
+          <div class="space-y-2 mb-4">
             <p class="text-gray-700">
               25% di 15 →
-              <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-                <span>25</span>
-                <span class="border-t-2 border-gray-700 px-2">100</span>
-              </span>
+              <%= render 'shared/frazione', num: 25, den: 100 %>
               di 15
             </p>
             <p class="text-gray-700">(15 : 100) × 25 =</p>
-            <p class="text-gray-700">0,15 × 25 = 3,75 <span class="text-blue-600">← valore dello sconto</span></p>
-            <p class="text-gray-700">15 − 3,75 = 11,25 <span class="text-blue-600">← prezzo scontato</span></p>
+            <p class="text-gray-700">0,15 × 25 = 3,75 <span class="text-<%= @pagina.base_color %>-600">← valore dello sconto</span></p>
+            <p class="text-gray-700">15 − 3,75 = 11,25 <span class="text-<%= @pagina.base_color %>-600">← prezzo scontato</span></p>
           </div>
 
-          <div class="p-4 bg-cyan-100 border-2 border-cyan-300 rounded-lg">
+          <div class="p-3 bg-cyan-100 rounded-lg mb-4">
             <p class="text-gray-800">
               Ora puoi rispondere: Stefano ha pagato il libro
-              <input type="text" data-correct-answer="11,25" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold mx-1">
+              <input type="text" data-correct-answer="11,25" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white mx-1">
               euro e ha risparmiato
-              <input type="text" data-correct-answer="3,75" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold mx-1">
+              <input type="text" data-correct-answer="3,75" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white mx-1">
               euro.
             </p>
           </div>
@@ -50,20 +46,20 @@
         <%= image_tag "nvi5_mat/p068/p068_01.jpg", alt: "Ragazzo con libro", class: "max-w-[120px]" %>
       </div>
 
-      <div class="p-4 bg-purple-50 border-2 border-purple-200 rounded-lg">
+      <div class="p-4 bg-white border-3 border-pink-700 rounded-2xl">
         <p class="text-gray-700">
-          Chi compra un oggetto con il prezzo ribassato riceve uno <strong class="text-blue-600">sconto</strong> sul prezzo iniziale.
+          Chi compra un oggetto con il prezzo ribassato riceve uno <strong class="text-<%= @pagina.base_color %>-600">sconto</strong> sul prezzo iniziale.
         </p>
       </div>
     </div>
 
     <!-- L'interesse -->
-    <div class="p-4 md:p-6 bg-white border-3 border-green-500 rounded-3xl">
-      <h2 class="font-bold text-green-600 mb-4">L'interesse</h2>
+    <div class="p-4 md:p-6">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 text-xl mb-4 italic">L'interesse</h2>
 
-      <div class="flex items-start gap-4 mb-4">
+      <div class="flex flex-col md:flex-row gap-4 items-start">
         <div class="flex-1">
-          <div class="p-4 bg-green-50 rounded-lg mb-4">
+          <div class="p-4 bg-cyan-50 rounded-lg mb-4">
             <p class="text-gray-700">
               Benedetta ha depositato in banca 600 euro e dopo un anno riceve un interesse pari al 2%. Quanto trova sul suo conto dopo un anno?
             </p>
@@ -73,74 +69,68 @@
             Per rispondere alla domanda devi calcolare l'interesse, poi sommarlo alla cifra iniziale.
           </p>
 
-          <div class="space-y-2 mb-4 font-mono">
+          <div class="space-y-2 mb-4">
             <p class="text-gray-700">
               2% di 600 →
-              <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-                <span>2</span>
-                <span class="border-t-2 border-gray-700 px-2">100</span>
-              </span>
+              <%= render 'shared/frazione', num: 2, den: 100 %>
               di 600
             </p>
             <p class="text-gray-700">(600 : 100) × 2 =</p>
-            <p class="text-gray-700">6 × 2 = 12 <span class="text-blue-600">← valore dell'interesse</span></p>
-            <p class="text-gray-700">600 + 12 = 612 <span class="text-blue-600">← somma aumentata</span></p>
+            <p class="text-gray-700">6 × 2 = 12 <span class="text-<%= @pagina.base_color %>-600">← valore dell'interesse</span></p>
+            <p class="text-gray-700">600 + 12 = 612 <span class="text-<%= @pagina.base_color %>-600">← somma aumentata</span></p>
           </div>
 
-          <div class="p-4 bg-cyan-100 border-2 border-cyan-300 rounded-lg">
+          <div class="p-3 bg-cyan-100 rounded-lg mb-4">
             <p class="text-gray-800">
               Ora puoi rispondere: Dopo un anno trova sul conto
-              <input type="text" data-correct-answer="612" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold mx-1">
+              <input type="text" data-correct-answer="612" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white mx-1">
               euro.
             </p>
           </div>
         </div>
-        <%= image_tag "nvi5_mat/p068/p068_02.jpg", alt: "Banca", class: "max-w-[120px]" %>
+        <%= image_tag "nvi5_mat/p068/p068_02.jpg", alt: "Banca", class: "max-w-[150px]" %>
       </div>
 
-      <div class="p-4 bg-purple-50 border-2 border-purple-200 rounded-lg">
+      <div class="p-4 bg-white border-3 border-pink-700 rounded-2xl">
         <p class="text-gray-700">
-          Chi deposita una somma di denaro in banca riceve una quota in più quando la ritira dopo un certo tempo: <strong class="text-blue-600">l'interesse</strong>.
+          Chi deposita una somma di denaro in banca riceve una quota in più quando la ritira dopo un certo tempo: l'<strong class="text-<%= @pagina.base_color %>-600">interesse</strong>.
         </p>
       </div>
     </div>
 
     <!-- ESERCIZI -->
     <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
-      <h2 class="font-bold text-blue-600 mb-4">ESERCIZI</h2>
+      <h2 class="inline-block px-3 py-1 bg-pink-600 text-white font-bold rounded mb-4">ESERCIZI</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="p-4 bg-white rounded-lg">
-          <div class="flex items-start gap-3 mb-3">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+        <div class="p-4 bg-cyan-50 rounded-lg">
+          <div class="flex items-start gap-3 mb-2">
+            <%= numero_esercizio_badge(1, colore: "cyan-700") %>
           </div>
-          <p class="text-gray-700">Sara ha acquistato un maglione che costa 120 euro con lo sconto del 25%. Quanto ha pagato il maglione? Quanto ha risparmiato?</p>
+          <p class="text-gray-700 text-sm">Sara ha acquistato un maglione che costa 120 euro con lo sconto del 25%. Quanto ha pagato il maglione? Quanto ha risparmiato?</p>
         </div>
 
-        <div class="p-4 bg-white rounded-lg">
-          <div class="flex items-start gap-3 mb-3">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
+        <div class="p-4 bg-cyan-50 rounded-lg">
+          <div class="flex items-start gap-3 mb-2">
+            <%= numero_esercizio_badge(3, colore: "cyan-700") %>
           </div>
-          <p class="text-gray-700">Giulio ha versato in banca 1 200 euro. Quanto troverà sul conto dopo un anno, se riceve un interesse dell'1,5%?</p>
+          <p class="text-gray-700 text-sm">Giulio ha versato in banca 1 200 euro. Quanto troverà sul conto dopo un anno, se riceve un interesse dell'1,5%?</p>
         </div>
 
-        <div class="p-4 bg-white rounded-lg md:col-span-2">
-          <div class="flex items-start gap-3 mb-3">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
+        <div class="p-4 bg-cyan-50 rounded-lg md:col-span-2">
+          <div class="flex items-start gap-3 mb-2">
+            <%= numero_esercizio_badge(2, colore: "cyan-700") %>
           </div>
-          <p class="text-gray-700">Luisa ha comprato uno skateboard che costa 65 euro con lo sconto del 30%. Quanto lo ha pagato? Quanto ha risparmiato?</p>
+          <p class="text-gray-700 text-sm">Luisa ha comprato uno skateboard che costa 65 euro con lo sconto del 30%. Quanto lo ha pagato? Quanto ha risparmiato?</p>
         </div>
       </div>
     </div>
 
     <!-- Riferimento quaderno -->
-    <div class="p-4 text-right">
-      <p class="text-gray-700">
-        <span class="font-bold">Quaderno</span> pp. <a href="#" class="text-red-600 font-bold hover:underline">211</a>-<a href="#" class="text-red-600 font-bold hover:underline">212</a>, <a href="#" class="text-red-600 font-bold hover:underline">214</a>
-      </p>
+    <div class="text-right text-sm">
+      <span class="text-pink-600 font-bold">Quaderno esercizi</span> pp. 211-212, 214
     </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

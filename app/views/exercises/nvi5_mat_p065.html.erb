@@ -1,72 +1,71 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
     <!-- Introduzione -->
-    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
+    <div class="p-4 md:p-6">
       <p class="text-gray-700 mb-4">
-        Le frazioni con <strong>denominatore 10, 100, 1000</strong>... si chiamano <strong class="text-blue-600">frazioni decimali</strong>, ma anche le frazioni che hanno denominatori diversi possono essere trasformate in <strong>frazioni decimali equivalenti</strong>.
+        Le frazioni con <strong>denominatore 10, 100, 1000</strong>... si chiamano <strong class="text-<%= @pagina.base_color %>-600">frazioni decimali</strong>, ma anche le frazioni che hanno denominatori diversi possono essere trasformate in <strong>frazioni decimali equivalenti</strong>.
       </p>
 
-      <div class="mb-4">
-        <%= image_tag "nvi5_mat/p065/p065_01.jpg", alt: "Trasformazione frazioni", class: "max-w-lg" %>
+      <p class="text-gray-700 mb-4">
+        Trasformiamo la frazione <%= render 'shared/frazione', num: 3, den: 5 %> in una frazione decimale equivalente (<%= render 'shared/frazione', num: 6, den: 10 %>).
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-6 items-center mb-4">
+        <%= image_tag "nvi5_mat/p065/p065_01.jpg", alt: "Trasformazione 3/5 in 6/10", class: "max-w-lg" %>
       </div>
 
       <p class="text-gray-700 mb-4">
-        Dunque, puoi scrivere
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>3</span>
-          <span class="border-t-2 border-gray-700 px-2">5</span>
-        </span>
-        anche in altri modi:
+        Dunque, puoi scrivere <%= render 'shared/frazione', num: 3, den: 5 %> anche in altri modi:
       </p>
-
       <p class="text-gray-700 mb-4">
         con una frazione decimale equivalente, a parole e con un numero decimale.
       </p>
 
-      <div class="flex items-center justify-center gap-8 mb-4">
-        <div class="inline-flex flex-col items-center font-bold text-cyan-500">
-          <span>6</span>
-          <span class="border-t-2 border-gray-700 px-2">10</span>
+      <div class="flex items-center justify-center gap-8 p-4 bg-cyan-50 rounded-lg mb-4">
+        <div class="text-center">
+          <span class="text-gray-500">↓</span><br>
+          <%= render 'shared/frazione', num: 6, den: 10, bold: true %>
         </div>
-        <div class="text-gray-700">sei decimi</div>
-        <div class="font-bold text-cyan-500 text-lg">0,6</div>
+        <div class="text-center">
+          <span class="text-gray-500">↓</span><br>
+          <span class="font-bold text-<%= @pagina.base_color %>-600">sei decimi</span>
+        </div>
+        <div class="text-center">
+          <span class="text-gray-500">↓</span><br>
+          <span class="font-bold text-<%= @pagina.base_color %>-600 text-xl">0,6</span>
+        </div>
+        <div class="text-gray-600 text-sm">
+          I numeri "con la virgola", come sai,<br>si chiamano <strong>numeri decimali</strong>.
+        </div>
       </div>
-
-      <p class="text-gray-600">I numeri "con la virgola", come sai, si chiamano <strong>numeri decimali</strong>.</p>
     </div>
 
     <!-- Prova tu -->
-    <div class="p-4 md:p-6 bg-white border-3 border-green-500 rounded-3xl">
-      <h3 class="font-bold text-green-600 mb-4"><span class="text-pink-600">&#8226;</span> Prova tu.</h3>
+    <div class="p-4 md:p-6">
+      <p class="mb-4"><strong><span class="text-pink-600">•</span> Prova tu.</strong></p>
       <p class="text-gray-700 mb-4">
-        Trasforma la frazione
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>4</span>
-          <span class="border-t-2 border-gray-700 px-2">25</span>
-        </span>
-        in una frazione decimale equivalente.
+        Trasforma la frazione <%= render 'shared/frazione', num: 4, den: 25 %> in una frazione decimale equivalente.
       </p>
 
       <div class="flex justify-center">
-        <%= image_tag "nvi5_mat/p065/p065_02.jpg", alt: "Esercizio trasformazione", class: "max-w-lg" %>
+        <%= image_tag "nvi5_mat/p065/p065_02.jpg", alt: "Esercizio trasformazione 4/25", class: "max-w-lg" %>
       </div>
     </div>
 
     <!-- ESERCIZI -->
     <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
-      <h2 class="font-bold text-blue-600 mb-4">ESERCIZI</h2>
+      <h2 class="inline-block px-3 py-1 bg-pink-600 text-white font-bold rounded mb-4">ESERCIZI</h2>
 
       <!-- Esercizio 1 -->
-      <div class="p-4 mb-6 bg-white rounded-lg">
+      <div class="p-4 mb-6">
         <div class="flex items-start gap-3 mb-4">
-          <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+          <%= numero_esercizio_badge(1, colore: "cyan-700") %>
           <p class="font-bold text-gray-700">Trasforma le frazioni date in frazioni decimali equivalenti.</p>
         </div>
         <div class="flex justify-center">
@@ -75,55 +74,31 @@
       </div>
 
       <!-- Esercizio 2 -->
-      <div class="p-4 bg-white rounded-lg">
+      <div class="p-4">
         <div class="flex items-start gap-3 mb-4">
-          <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
+          <%= numero_esercizio_badge(2, colore: "cyan-700") %>
           <p class="font-bold text-gray-700">
             Trasforma le frazioni date in frazioni decimali equivalenti, poi esprimile a parole e con un numero decimale. Esegui sul quaderno.
           </p>
         </div>
 
         <div class="flex flex-wrap gap-6 justify-center">
-          <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-            <span>3</span>
-            <span class="border-t-2 border-gray-700 px-2">4</span>
-          </span>
-          <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-            <span>3</span>
-            <span class="border-t-2 border-gray-700 px-2">5</span>
-          </span>
-          <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-            <span>2</span>
-            <span class="border-t-2 border-gray-700 px-2">4</span>
-          </span>
-          <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-            <span>14</span>
-            <span class="border-t-2 border-gray-700 px-2">25</span>
-          </span>
-          <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-            <span>13</span>
-            <span class="border-t-2 border-gray-700 px-2">50</span>
-          </span>
-          <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-            <span>45</span>
-            <span class="border-t-2 border-gray-700 px-2">300</span>
-          </span>
-          <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-            <span>1</span>
-            <span class="border-t-2 border-gray-700 px-2">25</span>
-          </span>
+          <%= render 'shared/frazione', num: 3, den: 4 %>
+          <%= render 'shared/frazione', num: 3, den: 5 %>
+          <%= render 'shared/frazione', num: 2, den: 4 %>
+          <%= render 'shared/frazione', num: 14, den: 25 %>
+          <%= render 'shared/frazione', num: 13, den: 50 %>
+          <%= render 'shared/frazione', num: 45, den: 300 %>
+          <%= render 'shared/frazione', num: 1, den: 25 %>
         </div>
       </div>
     </div>
 
     <!-- Riferimento quaderno -->
-    <div class="p-4 text-right">
-      <p class="text-gray-700">
-        <span class="font-bold">Quaderno</span> pp. <a href="#" class="text-red-600 font-bold hover:underline">209</a>, <a href="#" class="text-red-600 font-bold hover:underline">213</a>
-      </p>
+    <div class="text-right text-sm">
+      <span class="text-pink-600 font-bold">Quaderno esercizi</span> pp. 209, 213
     </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

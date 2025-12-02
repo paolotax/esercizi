@@ -1,121 +1,127 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
-    <!-- Problema pasticceria -->
-    <div class="p-4 md:p-6 bg-white border-3 border-cyan-500 rounded-3xl">
-      <h2 class="font-bold text-cyan-700 mb-4">In pasticceria</h2>
+    <!-- Problema In pasticceria -->
+    <div class="flex flex-col md:flex-row gap-4">
+      <div class="flex-1 p-4 bg-cyan-100 rounded-lg">
+        <h3 class="font-bold text-cyan-700 mb-3">In pasticceria</h3>
+        <p class="text-gray-800 mb-2">In pasticceria il papà di Barbara ordina il dolce al cioccolato per 2 bambini e il dolce alla frutta per 4 bambini.</p>
+        <p class="text-gray-800 font-bold">Quanto spenderà il papà di Barbara?</p>
+      </div>
+      <div class="flex items-start justify-center">
+        <%= image_tag "nvi5_mat/p072/output-1715938802072_603_310_392_196.png", alt: "Listino prezzi pasticceria", class: "w-[392px] h-[196px]" %>
+      </div>
+    </div>
 
-      <div class="flex flex-col md:flex-row gap-6 mb-6">
-        <div class="flex-1">
-          <p class="text-gray-800 mb-3">In pasticceria il papà di Barbara ordina il dolce al cioccolato per 2 bambini e il dolce alla frutta per 4 bambini.</p>
-          <p class="text-gray-800 font-bold">Quanto spenderà il papà di Barbara?</p>
-        </div>
-        <div class="flex justify-center">
-          <%= image_tag "nvi5_mat/p072/p072_01.jpg", alt: "Listino prezzi pasticceria", class: "max-w-xs rounded-lg" %>
+    <!-- Domande -->
+    <div class="space-y-4">
+      <div class="flex items-center gap-3 flex-wrap">
+        <span class="text-gray-700">– Il testo contiene tutte le informazioni per risolvere il problema?</span>
+        <div class="flex gap-1">
+          <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100">Sì</button>
+          <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100 bg-cyan-100" data-correct="true">No</button>
         </div>
       </div>
 
-      <div class="space-y-4 mb-4" data-controller="fill-blanks">
-        <div class="flex items-center gap-3 flex-wrap">
-          <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> Il testo contiene tutte le informazioni per risolvere il problema?</span>
-          <button class="px-4 py-1 border-2 border-cyan-300 rounded hover:bg-cyan-100">Sì</button>
-          <button class="px-4 py-1 border-2 border-cyan-300 rounded hover:bg-cyan-100">No</button>
+      <div class="flex items-center gap-3 flex-wrap">
+        <span class="text-gray-700">– Quali informazioni mancano?</span>
+        <input type="text" class="flex-1 max-w-md px-2 py-1 border-b border-dotted border-gray-400 bg-transparent focus:outline-none" data-correct-answer="i prezzi dei dolci">
+      </div>
+
+      <div class="flex items-center gap-3 flex-wrap">
+        <span class="text-gray-700">– L'immagine contiene le informazioni che mancano nel testo?</span>
+        <div class="flex gap-1">
+          <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100 bg-cyan-100" data-correct="true">Sì</button>
+          <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100">No</button>
         </div>
-        <div>
-          <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> Quali informazioni mancano?</span>
-          <input type="text" class="w-full mt-2 px-3 py-2 border-2 border-cyan-300 rounded focus:border-cyan-500 focus:outline-none" placeholder="Scrivi la risposta...">
-        </div>
-        <div class="flex items-center gap-3 flex-wrap">
-          <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> L'immagine contiene le informazioni che mancano nel testo?</span>
-          <button class="px-4 py-1 border-2 border-cyan-300 rounded hover:bg-cyan-100">Sì</button>
-          <button class="px-4 py-1 border-2 border-cyan-300 rounded hover:bg-cyan-100">No</button>
-        </div>
-        <div class="p-3 bg-cyan-50 rounded-lg">
-          <p class="text-gray-800"><strong>Risposta:</strong> Il papà di Barbara spenderà
-            <input type="text" class="w-24 px-2 py-1 border-2 border-cyan-300 rounded focus:border-cyan-500 focus:outline-none text-center font-bold" data-fill-blanks-target="input" placeholder="...">
-            euro.
-          </p>
-        </div>
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-bold text-gray-700">Risposta:</span>
+        <span class="text-gray-700">Il papà di Barbara spenderà</span>
+        <input type="text" class="w-20 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent text-center focus:outline-none" data-correct-answer="34">
+        <span class="text-gray-700">euro.</span>
       </div>
     </div>
 
     <!-- Problema grafico spese -->
-    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
-      <p class="font-bold text-gray-700 mb-4"><span class="text-pink-600">&#8226;</span> Sul grafico è rappresentato l'andamento delle spese della famiglia Bianchi dell'anno scorso.</p>
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700">• Sul grafico è rappresentato l'andamento delle spese della famiglia Bianchi dell'anno scorso.</p>
 
-      <div class="space-y-4">
-        <div class="flex flex-col md:flex-row items-start gap-3">
-          <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> In quale mese la famiglia Bianchi ha speso di più?</span>
-          <input type="text" class="w-40 px-3 py-2 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none">
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="flex-1 space-y-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">– In quale mese la famiglia Bianchi ha speso di più?</span>
+            <input type="text" class="w-32 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent focus:outline-none" data-correct-answer="agosto">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">– In quale ha speso di meno?</span>
+            <input type="text" class="w-32 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent focus:outline-none" data-correct-answer="febbraio">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">– Quanti euro ha speso in un anno intero?</span>
+            <input type="text" class="w-32 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent focus:outline-none" data-correct-answer="16200">
+          </div>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-gray-700">– A metà anno era già stata spesa la metà della spesa annuale?</span>
+            <div class="flex gap-1">
+              <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100">Sì</button>
+              <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100 bg-cyan-100" data-correct="true">No</button>
+            </div>
+          </div>
+          <div>
+            <span class="text-gray-700">– Secondo te, perché la famiglia ha speso di più ad agosto e a dicembre?</span>
+            <input type="text" class="w-full mt-1 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent focus:outline-none">
+          </div>
         </div>
-        <div class="flex flex-col md:flex-row items-start gap-3">
-          <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> In quale ha speso di meno?</span>
-          <input type="text" class="w-40 px-3 py-2 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none">
-        </div>
-        <div class="flex flex-col md:flex-row items-start gap-3">
-          <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> Quanti euro ha speso in un anno intero?</span>
-          <input type="text" class="w-40 px-3 py-2 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none">
-        </div>
-        <div class="flex items-center gap-3 flex-wrap">
-          <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> A metà anno era già stata spesa la metà della spesa annuale?</span>
-          <button class="px-4 py-1 border-2 border-blue-300 rounded hover:bg-blue-100">Sì</button>
-          <button class="px-4 py-1 border-2 border-blue-300 rounded hover:bg-blue-100">No</button>
-        </div>
-        <div>
-          <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> Secondo te, perché la famiglia ha speso di più ad agosto e a dicembre?</span>
-          <textarea class="w-full mt-2 px-3 py-2 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none" rows="2"></textarea>
-        </div>
+        <%= image_tag "nvi5_mat/p072/p072_01.jpg", alt: "Grafico spese famiglia", class: "w-[300px] h-[214px]" %>
       </div>
     </div>
 
     <!-- Problema parallelogramma -->
-    <div class="p-4 md:p-6 bg-white border-3 border-green-500 rounded-3xl">
-      <p class="font-bold text-gray-700 mb-4"><span class="text-pink-600">&#8226;</span> Il disegno rappresenta il cortile di una scuola: calcola l'area.</p>
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700">• Il disegno rappresenta il cortile di una scuola: calcola l'area.</p>
 
       <div class="flex flex-col md:flex-row gap-6">
-        <div class="flex-1 space-y-4">
+        <div class="flex-1 space-y-3">
           <div>
-            <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> Come si calcola l'area del parallelogramma?</span>
-            <input type="text" class="w-full mt-2 px-3 py-2 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none">
+            <span class="text-gray-700">– Come si calcola l'area del parallelogramma?</span>
+            <input type="text" class="w-full mt-1 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent focus:outline-none" data-correct-answer="base x altezza">
           </div>
           <div>
-            <p class="text-gray-700 mb-2"><span class="text-pink-600 font-bold">–</span> Osservando il disegno puoi trovare le misure necessarie:</p>
-            <div class="space-y-3 ml-4">
+            <p class="text-gray-700 mb-2">– Osservando il disegno puoi trovare le misure necessarie:</p>
+            <div class="space-y-2 ml-4">
               <div class="flex items-center gap-2 flex-wrap">
                 <span class="text-gray-700">misura della base del parallelogramma:</span>
-                <input type="text" class="w-20 px-2 py-1 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none text-center">
+                <input type="text" class="w-16 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent text-center focus:outline-none" data-correct-answer="20">
                 <span class="text-gray-700">m</span>
               </div>
               <div class="flex items-center gap-2 flex-wrap">
                 <span class="text-gray-700">misura dell'altezza del parallelogramma:</span>
-                <input type="text" class="w-20 px-2 py-1 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none text-center">
+                <input type="text" class="w-16 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent text-center focus:outline-none" data-correct-answer="15">
                 <span class="text-gray-700">m</span>
               </div>
               <div class="flex items-center gap-2 flex-wrap">
                 <span class="text-gray-700">misura dell'area del parallelogramma:</span>
-                <input type="text" class="w-16 px-2 py-1 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none text-center">
+                <input type="text" class="w-12 px-1 py-1 border-b border-dotted border-gray-400 bg-transparent text-center focus:outline-none" data-correct-answer="20">
                 <span class="text-gray-700">m ×</span>
-                <input type="text" class="w-16 px-2 py-1 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none text-center">
+                <input type="text" class="w-12 px-1 py-1 border-b border-dotted border-gray-400 bg-transparent text-center focus:outline-none" data-correct-answer="15">
                 <span class="text-gray-700">m =</span>
-                <input type="text" class="w-16 px-2 py-1 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none text-center">
+                <input type="text" class="w-12 px-1 py-1 border-b border-dotted border-gray-400 bg-transparent text-center focus:outline-none" data-correct-answer="300">
                 <span class="text-gray-700">m²</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="flex justify-center">
-          <%= image_tag "nvi5_mat/p072/p072_02.jpg", alt: "Parallelogramma cortile", class: "max-w-xs rounded-lg" %>
-        </div>
+        <%= image_tag "nvi5_mat/p072/p072_02.jpg", alt: "Parallelogramma cortile", class: "w-[350px] h-[160px]" %>
       </div>
     </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

@@ -1,307 +1,238 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
     <!-- ESERCIZI -->
     <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
-      <!-- Esercizio 1 -->
-      <div class="p-4 mb-6 bg-white rounded-lg">
+      <h2 class="inline-block px-3 py-1 bg-pink-600 text-white font-bold rounded mb-4">ESERCIZI</h2>
+
+      <!-- Esercizio 1 - IMPARARE TUTTI -->
+      <div class="p-4 mb-6">
         <div class="flex items-start gap-3 mb-4">
-          <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-          <p class="font-bold text-gray-700">IMPARARE TUTTI. Trasforma le percentuali in frazioni decimali come nell'esempio.</p>
+          <%= numero_esercizio_badge(1, colore: "cyan-700") %>
+          <span class="inline-block px-2 py-1 bg-yellow-400 text-gray-800 font-bold text-sm rounded mr-2">IMPARARE TUTTI</span>
+          <p class="font-bold text-gray-700">Trasforma le percentuali in frazioni decimali come nell'esempio.</p>
         </div>
 
-        <div class="flex flex-wrap items-center gap-6 justify-center">
-          <div class="p-3 bg-green-50 rounded-lg">
+        <div class="flex flex-wrap items-center gap-4 justify-center">
+          <div class="p-3 bg-green-100 rounded-lg">
             <div class="flex items-center gap-2">
-              <span class="font-mono">12% →</span>
-              <div class="inline-flex flex-col items-center font-bold text-cyan-500">
-                <span>12</span>
-                <span class="border-t-2 border-gray-700 px-2">100</span>
-              </div>
+              <span>12% →</span>
+              <%= render 'shared/frazione', num: 12, den: 100 %>
             </div>
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="font-mono">45% →</span>
-            <div class="inline-flex flex-col items-center">
-              <input type="text" data-correct-answer="45" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              <span class="border-t-2 border-gray-700 px-2 mt-1">100</span>
-            </div>
+            <span>45% →</span>
+            <%= render 'shared/frazione', num: nil, den: 100, num_answer: "45" %>
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="font-mono">6% →</span>
-            <div class="inline-flex flex-col items-center">
-              <input type="text" data-correct-answer="6" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              <span class="border-t-2 border-gray-700 px-2 mt-1">100</span>
-            </div>
+            <span>6% →</span>
+            <%= render 'shared/frazione', num: nil, den: 100, num_answer: "6" %>
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="font-mono">50% →</span>
-            <div class="inline-flex flex-col items-center">
-              <input type="text" data-correct-answer="50" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              <span class="border-t-2 border-gray-700 px-2 mt-1">100</span>
-            </div>
+            <span>50% →</span>
+            <%= render 'shared/frazione', num: nil, den: 100, num_answer: "50" %>
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="font-mono">22% →</span>
-            <div class="inline-flex flex-col items-center">
-              <input type="text" data-correct-answer="22" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              <span class="border-t-2 border-gray-700 px-2 mt-1">100</span>
-            </div>
+            <span>22% →</span>
+            <%= render 'shared/frazione', num: nil, den: 100, num_answer: "22" %>
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="font-mono">41% →</span>
-            <div class="inline-flex flex-col items-center">
-              <input type="text" data-correct-answer="41" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              <span class="border-t-2 border-gray-700 px-2 mt-1">100</span>
-            </div>
+            <span>41% →</span>
+            <%= render 'shared/frazione', num: nil, den: 100, num_answer: "41" %>
           </div>
         </div>
       </div>
 
       <!-- Esercizio 2 -->
-      <div class="p-4 mb-6 bg-white rounded-lg">
+      <div class="p-4 mb-6">
         <div class="flex items-start gap-3 mb-4">
-          <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
+          <%= numero_esercizio_badge(2, colore: "cyan-700") %>
           <p class="font-bold text-gray-700">Calcola il valore delle percentuali come nell'esempio.</p>
         </div>
 
-        <div class="space-y-3">
-          <div class="p-3 bg-green-50 rounded-lg">
-            <span class="font-mono">3% di 150 → <span class="text-blue-600">(150 : 100) × 3 = 1,5 × 3 = 4,5</span></span>
-          </div>
+        <div class="p-3 bg-green-100 rounded-lg mb-4">
+          <span>3% di 150 → <span class="text-<%= @pagina.base_color %>-700">(150 : 100) × 3 = 1,5 × 3 = 4,5</span></span>
+        </div>
 
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div class="flex items-center gap-3">
-            <span class="font-mono">50% di 2300 →</span>
-            <input type="text" data-correct-answer="1150" class="w-24 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <span>18% di 350 →</span>
+            <input type="text" data-correct-answer="63" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
-
           <div class="flex items-center gap-3">
-            <span class="font-mono">18% di 350 →</span>
-            <input type="text" data-correct-answer="63" class="w-24 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <span>50% di 2300 →</span>
+            <input type="text" data-correct-answer="1150" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
-
           <div class="flex items-center gap-3">
-            <span class="font-mono">15% di 600 →</span>
-            <input type="text" data-correct-answer="90" class="w-24 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <span>24% di 1200 →</span>
+            <input type="text" data-correct-answer="288" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
-
           <div class="flex items-center gap-3">
-            <span class="font-mono">24% di 1200 →</span>
-            <input type="text" data-correct-answer="288" class="w-24 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <span>15% di 600 →</span>
+            <input type="text" data-correct-answer="90" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
-
           <div class="flex items-center gap-3">
-            <span class="font-mono">48% di 1400 →</span>
-            <input type="text" data-correct-answer="672" class="w-24 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <span>6% di 850 →</span>
+            <input type="text" data-correct-answer="51" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
-
           <div class="flex items-center gap-3">
-            <span class="font-mono">6% di 850 →</span>
-            <input type="text" data-correct-answer="51" class="w-24 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <span>48% di 1400 →</span>
+            <input type="text" data-correct-answer="672" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
-
-          <div class="flex items-center gap-3">
-            <span class="font-mono">7% di 1750 →</span>
-            <input type="text" data-correct-answer="122,5" class="w-24 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+          <div class="flex items-center gap-3 md:col-span-2 justify-center">
+            <span>7% di 1750 →</span>
+            <input type="text" data-correct-answer="122,5" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
         </div>
       </div>
 
       <!-- Esercizio 3 -->
-      <div class="p-4 mb-6 bg-white rounded-lg">
+      <div class="p-4 mb-6">
         <div class="flex items-start gap-3 mb-4">
-          <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
+          <%= numero_esercizio_badge(3, colore: "cyan-700") %>
           <p class="font-bold text-gray-700">Calcola l'intero conoscendo il valore delle percentuali come nell'esempio.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="space-y-3">
-            <div class="p-3 bg-green-50 rounded-lg">
-              <span class="font-mono">25 è il 5% di? → <span class="text-blue-600">(25 : 5) × 100 = 5 × 100 = 500</span></span>
-            </div>
+        <div class="p-3 bg-green-100 rounded-lg mb-4">
+          <span>25 è il 5% di? → <span class="text-<%= @pagina.base_color %>-700">(25 : 5) × 100 = 5 × 100 = 500</span></span>
+        </div>
 
-            <div class="flex items-center gap-3">
-              <span class="font-mono">180 è il 3% di? →</span>
-              <input type="text" data-correct-answer="6000" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-            </div>
-
-            <div class="flex items-center gap-3">
-              <span class="font-mono">1500 è il 25% di? →</span>
-              <input type="text" data-correct-answer="6000" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-            </div>
-
-            <div class="flex items-center gap-3">
-              <span class="font-mono">810 è il 90% di? →</span>
-              <input type="text" data-correct-answer="900" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="flex items-center gap-3">
+            <span>180 è il 3% di? →</span>
+            <input type="text" data-correct-answer="6000" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
-
-          <div class="space-y-3">
-            <div class="flex items-center gap-3">
-              <span class="font-mono">680 è il 10% di? →</span>
-              <input type="text" data-correct-answer="6800" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-            </div>
-
-            <div class="flex items-center gap-3">
-              <span class="font-mono">1350 è il 75% di? →</span>
-              <input type="text" data-correct-answer="1800" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-            </div>
-
-            <div class="flex items-center gap-3">
-              <span class="font-mono">1280 è il 40% di? →</span>
-              <input type="text" data-correct-answer="3200" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-            </div>
-
-            <div class="flex items-center gap-3">
-              <span class="font-mono">138 è il 6% di? →</span>
-              <input type="text" data-correct-answer="2300" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-            </div>
+          <div class="flex items-center gap-3">
+            <span>680 è il 10% di? →</span>
+            <input type="text" data-correct-answer="6800" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-3">
+            <span>1500 è il 25% di? →</span>
+            <input type="text" data-correct-answer="6000" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-3">
+            <span>1350 è il 75% di? →</span>
+            <input type="text" data-correct-answer="1800" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-3">
+            <span>810 è il 90% di? →</span>
+            <input type="text" data-correct-answer="900" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-3">
+            <span>1280 è il 40% di? →</span>
+            <input type="text" data-correct-answer="3200" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-3 md:col-span-2 justify-center">
+            <span>138 è il 6% di? →</span>
+            <input type="text" data-correct-answer="2300" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
         </div>
       </div>
 
       <!-- Esercizio 4 -->
-      <div class="p-4 mb-6 bg-white rounded-lg">
+      <div class="p-4 mb-6">
         <div class="flex items-start gap-3 mb-4">
-          <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
+          <%= numero_esercizio_badge(4, colore: "cyan-700") %>
           <p class="font-bold text-gray-700">Trasforma le frazioni in percentuali. Segui l'esempio.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="p-3 bg-green-50 rounded-lg">
-            <div class="flex items-center gap-2">
-              <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-                <span>1</span>
-                <span class="border-t-2 border-gray-700 px-2">2</span>
-              </span>
-              <span class="text-pink-600 font-bold">→</span>
-              <span class="text-blue-600">1 : 2 = 0,5 → 50%</span>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="p-3 bg-green-100 rounded-lg">
+            <div class="flex items-center gap-2 flex-wrap">
+              <%= render 'shared/frazione', num: 1, den: 2 %>
+              <span>→ 1 : 2 = 0,5 → <strong>50%</strong></span>
             </div>
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>3</span>
-              <span class="border-t-2 border-gray-700 px-2">5</span>
-            </span>
-            <span class="text-pink-600 font-bold">→</span>
-            <input type="text" data-correct-answer="60%" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <%= render 'shared/frazione', num: 3, den: 5 %>
+            <span>→</span>
+            <input type="text" data-correct-answer="60%" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>2</span>
-              <span class="border-t-2 border-gray-700 px-2">8</span>
-            </span>
-            <span class="text-pink-600 font-bold">→</span>
-            <input type="text" data-correct-answer="25%" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <%= render 'shared/frazione', num: 2, den: 8 %>
+            <span>→</span>
+            <input type="text" data-correct-answer="25%" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>9</span>
-              <span class="border-t-2 border-gray-700 px-2">12</span>
-            </span>
-            <span class="text-pink-600 font-bold">→</span>
-            <input type="text" data-correct-answer="75%" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <%= render 'shared/frazione', num: 9, den: 12 %>
+            <span>→</span>
+            <input type="text" data-correct-answer="75%" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>28</span>
-              <span class="border-t-2 border-gray-700 px-2">40</span>
-            </span>
-            <span class="text-pink-600 font-bold">→</span>
-            <input type="text" data-correct-answer="70%" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <%= render 'shared/frazione', num: 28, den: 40 %>
+            <span>→</span>
+            <input type="text" data-correct-answer="70%" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>3</span>
-              <span class="border-t-2 border-gray-700 px-2">6</span>
-            </span>
-            <span class="text-pink-600 font-bold">→</span>
-            <input type="text" data-correct-answer="50%" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <%= render 'shared/frazione', num: 3, den: 6 %>
+            <span>→</span>
+            <input type="text" data-correct-answer="50%" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>12</span>
-              <span class="border-t-2 border-gray-700 px-2">15</span>
-            </span>
-            <span class="text-pink-600 font-bold">→</span>
-            <input type="text" data-correct-answer="80%" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <%= render 'shared/frazione', num: 12, den: 15 %>
+            <span>→</span>
+            <input type="text" data-correct-answer="80%" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>24</span>
-              <span class="border-t-2 border-gray-700 px-2">50</span>
-            </span>
-            <span class="text-pink-600 font-bold">→</span>
-            <input type="text" data-correct-answer="48%" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <%= render 'shared/frazione', num: 24, den: 50 %>
+            <span>→</span>
+            <input type="text" data-correct-answer="48%" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
 
           <div class="flex items-center gap-2">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>12</span>
-              <span class="border-t-2 border-gray-700 px-2">80</span>
-            </span>
-            <span class="text-pink-600 font-bold">→</span>
-            <input type="text" data-correct-answer="15%" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+            <%= render 'shared/frazione', num: 12, den: 80 %>
+            <span>→</span>
+            <input type="text" data-correct-answer="15%" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           </div>
         </div>
       </div>
 
-      <!-- Problemi -->
-      <div class="p-4 bg-white rounded-lg">
-        <h3 class="font-bold text-blue-600 mb-4">RISOLVI I PROBLEMI</h3>
+      <!-- RISOLVI I PROBLEMI -->
+      <div class="p-4">
+        <h3 class="font-bold text-pink-600 mb-4">RISOLVI I PROBLEMI</h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="p-4 bg-blue-50 rounded-lg">
+          <div class="p-4 bg-cyan-50 rounded-lg">
             <div class="flex items-start gap-3 mb-2">
-              <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">5</div>
+              <%= numero_esercizio_badge(5, colore: "cyan-700") %>
             </div>
-            <p class="text-gray-700 mb-2">Lucia ha un barattolo con 30 caramelle di tre gusti diversi:</p>
-            <p class="text-gray-700 mb-2">12 caramelle sono alla fragola, 3 caramelle sono alla menta, le altre sono al limone.</p>
-            <p class="text-gray-700 mb-2">Quante sono le caramelle al limone?</p>
-            <p class="text-gray-700">Quale percentuale dell'intero barattolo rappresentano le caramelle al limone?</p>
+            <p class="text-gray-700 text-sm">Lucia ha un barattolo con 30 caramelle di tre gusti diversi: 12 caramelle sono alla fragola, 3 caramelle sono alla menta, le altre sono al limone. Quante sono le caramelle al limone? Quale percentuale dell'intero barattolo rappresentano le caramelle al limone?</p>
           </div>
 
-          <div class="p-4 bg-green-50 rounded-lg">
+          <div class="p-4 bg-cyan-50 rounded-lg">
             <div class="flex items-start gap-3 mb-2">
-              <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">7</div>
+              <%= numero_esercizio_badge(7, colore: "cyan-700") %>
             </div>
-            <p class="text-gray-700 mb-2">Per i saldi di fine stagione, in un negozio di abbigliamento viene applicato uno sconto del 25% su tutta la merce:</p>
-            <p class="text-gray-700 mb-2">Pantaloni: € 120 • Gonne: € 95</p>
-            <p class="text-gray-700 mb-2">Camicie: € 80 • Maglioni: € 180</p>
-            <p class="text-gray-700 mb-2">Elena compra un paio di pantaloni, due camicie e un maglione.</p>
-            <p class="text-gray-700">Quanto spende? Quanto risparmia?</p>
+            <p class="text-gray-700 text-sm">Per i saldi di fine stagione, in un negozio di abbigliamento viene applicato uno sconto del 25% su tutta la merce: Pantaloni: € 120 • Gonne: € 95 • Camicie: € 80 • Maglioni: € 180. Elena compra un paio di pantaloni, due camicie e un maglione. Quanto spende? Quanto risparmia?</p>
           </div>
 
-          <div class="p-4 bg-yellow-50 rounded-lg md:col-span-2">
+          <div class="p-4 bg-cyan-50 rounded-lg md:col-span-2">
             <div class="flex items-start gap-3 mb-2">
-              <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">6</div>
+              <%= numero_esercizio_badge(6, colore: "cyan-700") %>
             </div>
-            <p class="text-gray-700 mb-2">In una scatola di 35 cioccolatini, 7 cioccolatini sono al caffè.</p>
-            <p class="text-gray-700">Quale frazione rappresenta il numero dei cioccolatini al caffè rispetto al totale dei cioccolatini della scatola? Quale percentuale dell'intera scatola rappresentano i cioccolatini al caffè?</p>
+            <p class="text-gray-700 text-sm">In una scatola di 35 cioccolatini, 7 cioccolatini sono al caffè. Quale frazione rappresenta il numero dei cioccolatini al caffè rispetto al totale dei cioccolatini della scatola? Quale percentuale dell'intera scatola rappresentano i cioccolatini al caffè?</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

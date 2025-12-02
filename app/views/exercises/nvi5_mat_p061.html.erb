@@ -1,154 +1,220 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
     <!-- Problema con Giorgio -->
-    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
-      <p class="text-gray-800 mb-4">
+    <div class="p-4 bg-blue-100 rounded-lg mb-4">
+      <p class="text-gray-800">
         Anche Giorgio si trova a dover scegliere se colorare i
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>3</span>
-          <span class="border-t-2 border-gray-700 px-2">5</span>
-        </span>
+        <%= render 'shared/frazione', num: 2, den: 5, bold: true %>
         o i
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>4</span>
-          <span class="border-t-2 border-gray-700 px-2">7</span>
-        </span>
+        <%= render 'shared/frazione', num: 3, den: 7, bold: true %>
         del cartellone.<br>
         Lui ama colorare e sceglie la parte più grande fra le due. Quale?
       </p>
+    </div>
 
+    <div class="p-4">
       <p class="text-gray-700 mb-4">
         Trasforma le frazioni da confrontare in frazioni equivalenti a quelle di partenza che abbiano lo stesso denominatore. Cerca perciò un <strong>multiplo comune a entrambi i denominatori</strong>, cioè multiplo sia di 5 sia di 7.
       </p>
 
-      <p class="text-cyan-700 font-bold mb-4">35 è multiplo sia di 5 sia di 7.</p>
-
-      <p class="text-gray-700 mb-4">
-        Trasforma la frazione
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>3</span>
-          <span class="border-t-2 border-gray-700 px-2">5</span>
-        </span>
-        in una frazione equivalente che abbia come denominatore 35.
+      <p class="text-<%= @pagina.base_color %>-600 font-bold mb-4">
+        <span class="text-pink-600">35</span> è multiplo sia di <span class="text-pink-600">5</span> sia di <span class="text-pink-600">7</span>.
       </p>
+    </div>
 
-      <div class="mb-4">
-        <%= image_tag "nvi5_mat/p061/p061_01.jpg", alt: "Trasformazione prima frazione", class: "max-w-md" %>
+    <!-- Due colonne per le trasformazioni -->
+    <div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-<%= @pagina.base_color %>-400 gap-4">
+      <!-- Prima trasformazione -->
+      <div class="p-4">
+        <p class="text-gray-700 mb-4">
+          Trasforma la frazione
+          <%= render 'shared/frazione', num: 2, den: 5, bold: true %>
+          in una frazione equivalente che abbia come denominatore 35.
+        </p>
+        <div class="flex justify-center">
+          <%= image_tag "nvi5_mat/p061/p061_01.jpg", alt: "Trasformazione 2/5 in 14/35", class: "max-w-[200px]" %>
+        </div>
       </div>
 
-      <p class="text-gray-700 mb-4">
-        Trasforma la frazione
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>4</span>
-          <span class="border-t-2 border-gray-700 px-2">7</span>
-        </span>
-        in una frazione equivalente che abbia come denominatore 35.
-      </p>
-
-      <div class="mb-4">
-        <%= image_tag "nvi5_mat/p061/p061_02.jpg", alt: "Trasformazione seconda frazione", class: "max-w-md" %>
+      <!-- Seconda trasformazione -->
+      <div class="p-4 pt-4 md:pt-4">
+        <p class="text-gray-700 mb-4">
+          Trasforma la frazione
+          <%= render 'shared/frazione', num: 3, den: 7, bold: true %>
+          in una frazione equivalente che abbia come denominatore 35.
+        </p>
+        <div class="flex justify-center">
+          <%= image_tag "nvi5_mat/p061/p061_02.jpg", alt: "Trasformazione 3/7 in 15/35", class: "max-w-[200px]" %>
+        </div>
       </div>
+    </div>
 
+    <!-- Confronto finale -->
+    <div class="p-4">
       <p class="text-gray-700 mb-4">
         Ora puoi confrontare le frazioni
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>21</span>
-          <span class="border-t-2 border-gray-700 px-2">35</span>
-        </span>
+        <%= render 'shared/frazione', num: 14, den: 35, bold: true %>
         e
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>20</span>
-          <span class="border-t-2 border-gray-700 px-2">35</span>
-        </span>
+        <%= render 'shared/frazione', num: 15, den: 35, bold: true %>
         e stabilire quale delle due è maggiore.
       </p>
 
-      <p class="mb-4"><strong><span class="text-pink-600">&#8226;</span> Inserisci &gt; oppure &lt;.</strong></p>
+      <p class="mb-4"><strong><span class="text-pink-600">•</span> Inserisci <span class="text-green-600">&gt;</span> oppure <span class="text-red-600">&lt;</span>.</strong></p>
 
-      <div class="flex items-center justify-center gap-4 mb-4">
-        <div class="inline-flex flex-col items-center font-bold">
-          <span>21</span>
-          <span class="border-t-2 border-gray-700 px-2">35</span>
-        </div>
-        <input type="text" data-correct-answer=">" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-        <div class="inline-flex flex-col items-center font-bold">
-          <span>20</span>
-          <span class="border-t-2 border-gray-700 px-2">35</span>
-        </div>
-      </div>
-
-      <div class="p-4 bg-cyan-100 border-2 border-cyan-300 rounded-lg text-center">
-        <p class="text-gray-800">
-          Ora puoi rispondere: Giorgio sceglie di colorare i
-          <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-            <span>3</span>
-            <span class="border-t-2 border-gray-700 px-2">5</span>
-          </span>
+      <div class="flex items-center justify-start gap-4 mb-4">
+        <%= render 'shared/frazione', num: 14, den: 35, bold: true %>
+        <input type="text" data-correct-answer="<" class="w-12 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+        <%= render 'shared/frazione', num: 15, den: 35, bold: true %>
+        <span class="ml-4 text-gray-600">Ora puoi rispondere:</span>
+        <span class="ml-2 p-2 bg-cyan-100 rounded-lg">
+          Giorgio sceglie di colorare i
+          <%= render 'shared/frazione', num: 3, den: 7, bold: true %>
           del cartellone.
-        </p>
+        </span>
       </div>
     </div>
 
     <!-- Il prodotto in croce -->
-    <div class="p-4 md:p-6 bg-white border-3 border-green-500 rounded-3xl">
-      <h2 class="font-bold text-green-600 mb-4">Il prodotto in croce</h2>
+    <div class="p-4 md:p-6 bg-white rounded-2xl">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 text-xl mb-4 italic\" >Il prodotto in croce</h2>
+
       <p class="text-gray-700 mb-4">Per fare tutti i passaggi in modo rapido, puoi usare la tecnica del <strong>prodotto in croce</strong>.</p>
 
-      <div class="mb-4">
-        <%= image_tag "nvi5_mat/p061/p061_03.jpg", alt: "Prodotto in croce", class: "max-w-lg" %>
-      </div>
+      <div class="flex flex-col md:flex-row gap-6 items-start">
+        <div class="flex-shrink-0">
+          <%= image_tag "nvi5_mat/p061/p061_03.jpg", alt: "Prodotto in croce", class: "max-w-[180px]" %>
+        </div>
 
-      <div class="p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-        <ol class="list-decimal list-inside space-y-2 text-gray-700">
-          <li>Moltiplica fra loro i denominatori per avere un denominatore comune.</li>
-          <li>Moltiplica il numeratore della prima frazione per il denominatore della seconda: ottieni il numeratore della prima frazione.</li>
-          <li>Moltiplica il numeratore della seconda frazione per il denominatore della prima: ottieni il numeratore della seconda frazione.</li>
-        </ol>
+        <div class="flex-1 p-4 bg-white border-3 border-pink-700 rounded-2xl">
+          <ol class="list-decimal list-inside space-y-2 text-gray-700">
+            <li>Moltiplica fra loro i denominatori per avere un denominatore comune.</li>
+            <li>Moltiplica il numeratore della prima frazione per il denominatore della seconda: ottieni il numeratore della prima frazione.</li>
+            <li>Moltiplica il numeratore della seconda frazione per il denominatore della prima: ottieni il numeratore della seconda frazione.</li>
+          </ol>
+        </div>
       </div>
     </div>
 
     <!-- ESERCIZI -->
     <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
-      <h2 class="font-bold text-blue-600 mb-4">ESERCIZI</h2>
+      <h2 class="inline-block px-3 py-1 bg-pink-600 text-white font-bold rounded mb-4">ESERCIZI</h2>
 
       <!-- Esercizio 1 -->
-      <div class="p-4 mb-6 bg-white rounded-lg">
+      <div class="p-4 mb-6">
         <div class="flex items-start gap-3 mb-4">
-          <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-          <p class="font-bold text-gray-700">Confronta le frazioni e inserisci i simboli &gt;, &lt; oppure =.</p>
+          <%= numero_esercizio_badge(1, colore: "cyan-700") %>
+          <p class="font-bold text-gray-700">Confronta le frazioni e inserisci i simboli <span class="text-pink-800">&gt;</span>, <span class="text-pink-800">&lt;</span> oppure <span class="text-pink-800">=</span>.</p>
         </div>
-        <div class="flex justify-center">
-          <%= image_tag "nvi5_mat/p061/p061_06.jpg", alt: "Esercizio 1", class: "max-w-full" %>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <!-- 2/8 □ 3/8 -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 2, den: 8 %>
+            <input type="text" data-correct-answer="<" class="w-10 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <%= render 'shared/frazione', num: 3, den: 8 %>
+          </div>
+
+          <!-- 4/5 □ 3/5 -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 4, den: 5 %>
+            <input type="text" data-correct-answer=">" class="w-10 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <%= render 'shared/frazione', num: 3, den: 5 %>
+          </div>
+
+          <!-- 6/7 □ 6/9 -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 6, den: 7 %>
+            <input type="text" data-correct-answer=">" class="w-10 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <%= render 'shared/frazione', num: 6, den: 9 %>
+          </div>
+
+          <!-- 1/5 □ 5/25 -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 1, den: 5 %>
+            <input type="text" data-correct-answer="=" class="w-10 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <%= render 'shared/frazione', num: 5, den: 25 %>
+          </div>
+
+          <!-- 12/30 □ 12/15 -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 12, den: 30 %>
+            <input type="text" data-correct-answer="<" class="w-10 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <%= render 'shared/frazione', num: 12, den: 15 %>
+          </div>
+
+          <!-- 3/5 □ 9/15 -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 3, den: 5 %>
+            <input type="text" data-correct-answer="=" class="w-10 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <%= render 'shared/frazione', num: 9, den: 15 %>
+          </div>
         </div>
       </div>
 
       <!-- Esercizio 2 -->
-      <div class="p-4 bg-white rounded-lg">
+      <div class="p-4 ">
         <div class="flex items-start gap-3 mb-4">
-          <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
-          <p class="font-bold text-gray-700">Trasforma le coppie di frazioni nel modo opportuno, confrontale e inserisci i simboli &gt;, &lt; oppure =.</p>
+          <%= numero_esercizio_badge(2, colore: "cyan-700") %>
+          <p class="font-bold text-gray-700">Trasforma le coppie di frazioni nel modo opportuno, confrontale e inserisci i simboli <span class="text-pink-800">&gt;</span>, <span class="text-pink-800">&lt;</span> oppure <span class="text-pink-800">=</span>.</p>
         </div>
-        <div class="flex justify-center">
-          <%= image_tag "nvi5_mat/p061/p061_07.jpg", alt: "Esercizio 2", class: "max-w-full" %>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <!-- 3/5 □ 2/9 -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 3, den: 5 %>
+            <input type="text" data-correct-answer=">" class="w-10 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <%= render 'shared/frazione', num: 2, den: 9 %>
+          </div>
+
+          <!-- 7/8 □ 5/6 -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 7, den: 8 %>
+            <input type="text" data-correct-answer=">" class="w-10 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <%= render 'shared/frazione', num: 5, den: 6 %>
+          </div>
+
+          <!-- 2/9 □ 3/10 -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 2, den: 9 %>
+            <input type="text" data-correct-answer="<" class="w-10 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <%= render 'shared/frazione', num: 3, den: 10 %>
+          </div>
+
+          <!-- 6/7 □ 9/11 -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 6, den: 7 %>
+            <input type="text" data-correct-answer=">" class="w-10 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <%= render 'shared/frazione', num: 9, den: 11 %>
+          </div>
+
+          <!-- 3/6 □ 2/4 -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 3, den: 6 %>
+            <input type="text" data-correct-answer="=" class="w-10 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <%= render 'shared/frazione', num: 2, den: 4 %>
+          </div>
+
+          <!-- 3/4 □ 7/10 -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 3, den: 4 %>
+            <input type="text" data-correct-answer=">" class="w-10 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <%= render 'shared/frazione', num: 7, den: 10 %>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Riferimento quaderno -->
-    <div class="p-4 text-right">
-      <p class="text-gray-700">
-        <span class="font-bold">Quaderno</span> pp. <a href="#" class="text-red-600 font-bold hover:underline">205</a>, <a href="#" class="text-red-600 font-bold hover:underline">208</a>
-      </p>
+    <div class="text-right text-sm">
+      <span class="text-pink-600 font-bold">Quaderno esercizi</span> pp. 205, 208
     </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

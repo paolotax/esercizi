@@ -1,151 +1,145 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
-     data-controller="exercise-checker text-toggle font-controls word-choice"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
     <!-- Introduzione -->
-    <div class="p-4 md:p-6">
+    <div class="p-4 bg-gray-100 rounded-lg">
       <p class="text-gray-800">Per risolvere un problema non basta eseguire un'operazione, bisogna anche <strong>riflettere sui risultati trovati e chiedersi se sono verosimili</strong>.</p>
     </div>
 
     <!-- Problema taxi -->
-    <div class="p-4 md:p-6 bg-white border-3 border-cyan-500 rounded-3xl">
-      <h2 class="font-bold text-cyan-700 mb-4">Viaggio in taxi</h2>
-
-      <div class="p-4 bg-cyan-50 rounded-lg mb-4">
-        <p class="text-gray-800">Un gruppo di 53 turisti, al termine del soggiorno in hotel, deve raggiungere la stazione. Il trasporto viene organizzato in taxi da 6 posti. Quanti taxi è necessario prenotare?</p>
-      </div>
-
-      <p class="font-bold text-gray-700 mb-4"><span class="text-pink-600">&#8226;</span> Osserva le soluzioni proposte da 3 bambini.</p>
-
-      <div class="space-y-3 mb-6">
-        <div class="p-3 bg-blue-50 rounded-lg">
-          <p class="text-gray-700"><strong>Enrico</strong> <span class="text-cyan-600 font-bold">→</span> <span class="text-cyan-600 font-mono">53 − 6 = 47</span></p>
-          <p class="text-gray-600 ml-4">È necessario prenotare 47 taxi.</p>
-        </div>
-        <div class="p-3 bg-green-50 rounded-lg">
-          <p class="text-gray-700"><strong>Giacomo</strong> <span class="text-cyan-600 font-bold">→</span> <span class="text-cyan-600 font-mono">53 × 6 = 318</span></p>
-          <p class="text-gray-600 ml-4">È necessario prenotare 318 taxi.</p>
-        </div>
-        <div class="p-3 bg-yellow-50 rounded-lg">
-          <p class="text-gray-700"><strong>Laura</strong> <span class="text-cyan-600 font-bold">→</span> <span class="text-cyan-600 font-mono">53 : 6 = 8 resto 5</span></p>
-          <p class="text-gray-600 ml-4">È necessario prenotare 9 taxi: 8 da 6 posti pieni e 1 per le 5 persone che restano.</p>
+    <div class="p-4 bg-cyan-50 rounded-lg">
+      <h3 class="font-bold text-cyan-700 mb-3">Viaggio in taxi</h3>
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1">
+          <p class="text-gray-800 mb-4">Un gruppo di 53 turisti, al termine del soggiorno in hotel, deve raggiungere la stazione. Il trasporto viene organizzato in taxi da 6 posti. Quanti taxi è necessario prenotare?</p>
         </div>
       </div>
+    </div>
 
-      <div class="flex items-center gap-3 flex-wrap">
+    <!-- Osserva le soluzioni -->
+    <div class="space-y-3">
+      <p class="font-bold text-gray-700">• Osserva le soluzioni proposte da 3 bambini.</p>
+
+      <div class="space-y-2 ml-4">
+        <p class="text-gray-700"><strong>Enrico</strong> → <span class="text-cyan-600">53 − 6 = 47</span> È necessario prenotare 47 taxi.</p>
+        <p class="text-gray-700"><strong>Giacomo</strong> → <span class="text-cyan-600">53 × 6 = 318</span> È necessario prenotare 318 taxi.</p>
+        <p class="text-gray-700"><strong>Laura</strong> → <span class="text-cyan-600">53 : 6 = 8 resto 5</span> È necessario prenotare 9 taxi: 8 da 6 posti pieni e 1 per le 5 persone che restano.</p>
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
         <span class="text-gray-700">Chi ha risposto correttamente?</span>
-        <input type="text" class="w-32 px-3 py-2 border-2 border-cyan-300 rounded focus:border-cyan-500 focus:outline-none" data-correct-answer="Laura">
+        <input type="text" class="w-24 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent focus:outline-none" data-correct-answer="Laura">
       </div>
+    </div>
 
-      <div class="p-4 mt-4 bg-purple-50 border-2 border-purple-200 rounded-lg">
-        <p class="text-gray-700">A volte può capitare di giudicare non accettabile il risultato di un problema. Allora che cosa fai? Rivedi i calcoli, cerchi l'errore e correggi. Altre volte non trovi errori e pensi: questo risultato è impossibile!</p>
-      </div>
+    <!-- Box viola -->
+    <div class="p-4 bg-purple-100 rounded-lg">
+      <p class="text-gray-700">A volte può capitare di giudicare non accettabile il risultato di un problema. Allora che cosa fai? Rivedi i calcoli, cerchi l'errore e correggi. Altre volte non trovi errori e pensi: questo risultato è impossibile!</p>
     </div>
 
     <!-- Osserva le situazioni -->
-    <div class="p-4 md:p-6">
-      <h2 class="font-bold text-blue-600 mb-4"><span class="text-pink-600">&#8226;</span> Osserva le situazioni rappresentate e prova a rispondere.</h2>
-    </div>
+    <p class="font-bold text-gray-700">• Osserva le situazioni rappresentate e prova a rispondere.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Problema gelati -->
-      <div class="p-4 md:p-6 bg-white border-3 border-green-500 rounded-3xl" data-controller="word-choice">
-        <div class="mb-4 flex justify-center">
-          <%= image_tag "nvi5_mat/p074/p074_01.jpg", alt: "Offerta gelati", class: "max-w-full rounded-lg" %>
-        </div>
+      <!-- Gelati -->
+      <div class="space-y-3">
+        <%= image_tag "nvi5_mat/p074/p074_01.jpg", alt: "Offerta gelati", class: "w-[300px] h-[114px]" %>
 
-        <div class="space-y-4">
-          <div class="flex flex-col md:flex-row items-start gap-3">
-            <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> Quanto paghi ogni confezione se ne acquisti tre?</span>
-            <input type="text" class="w-20 px-2 py-1 border-2 border-green-300 rounded focus:border-green-500 focus:outline-none text-center" data-correct-answer="6">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">– Quanto paghi ogni confezione se ne acquisti tre?</span>
+            <input type="text" class="w-16 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent text-center focus:outline-none" data-correct-answer="6">
             <span class="text-gray-700">€</span>
           </div>
           <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> La proposta è conveniente?</span>
-            <button class="px-4 py-1 border-2 border-green-300 rounded hover:bg-green-100 cursor-pointer" data-word-choice-target="word" data-group="gelati-conveniente" data-action="click->word-choice#select">Sì</button>
-            <button class="px-4 py-1 border-2 border-green-300 rounded hover:bg-green-100 cursor-pointer" data-word-choice-target="word" data-group="gelati-conveniente" data-action="click->word-choice#select" data-correct="true">No</button>
+            <span class="text-gray-700">– La proposta è conveniente?</span>
+            <div class="flex gap-1">
+              <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100">Sì</button>
+              <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100 bg-cyan-100" data-correct="true">No</button>
+            </div>
           </div>
           <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> Ci sono informazioni impossibili o non accettabili?</span>
-            <button class="px-4 py-1 border-2 border-green-300 rounded hover:bg-green-100 cursor-pointer" data-word-choice-target="word" data-group="gelati-impossibili" data-action="click->word-choice#select" data-correct="true">Sì</button>
-            <button class="px-4 py-1 border-2 border-green-300 rounded hover:bg-green-100 cursor-pointer" data-word-choice-target="word" data-group="gelati-impossibili" data-action="click->word-choice#select">No</button>
+            <span class="text-gray-700">– Ci sono informazioni impossibili o non accettabili?</span>
+            <div class="flex gap-1">
+              <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100 bg-cyan-100" data-correct="true">Sì</button>
+              <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100">No</button>
+            </div>
           </div>
         </div>
 
-        <div class="p-3 mt-4 bg-green-50 rounded-lg">
-          <p class="text-gray-700 text-sm">In questa situazione c'è un dato contraddittorio: comprando 3 confezioni, ognuna costa più di 5 euro, quindi non è vero che "paghi 2 prendi 3".</p>
-        </div>
+        <p class="text-gray-600 text-sm">In questa situazione c'è un dato contraddittorio: comprando 3 confezioni, ognuna costa più di 5 euro, quindi non è vero che "paghi 2 prendi 3".</p>
       </div>
 
-      <!-- Problema treni -->
-      <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl" data-controller="word-choice">
-        <table class="w-full border-2 border-blue-400 rounded-lg overflow-hidden mb-4">
+      <!-- Treni -->
+      <div class="space-y-3">
+        <table class="w-full border-collapse border border-gray-400 text-sm">
           <thead>
-            <tr class="bg-blue-200">
-              <th colspan="2" class="border border-blue-400 px-3 py-2 text-center font-bold">AI TRENI</th>
+            <tr class="bg-cyan-200">
+              <th colspan="2" class="border border-gray-400 px-3 py-1 font-bold text-center">AI TRENI</th>
             </tr>
-            <tr class="bg-blue-100">
-              <th class="border border-blue-400 px-3 py-2 text-center font-bold">Partenza ore</th>
-              <th class="border border-blue-400 px-3 py-2 text-center font-bold">Arrivo ore</th>
+            <tr class="bg-cyan-100">
+              <th class="border border-gray-400 px-3 py-1 font-bold">Partenza ore</th>
+              <th class="border border-gray-400 px-3 py-1 font-bold">Arrivo ore</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="border border-blue-400 px-3 py-2 text-center">Firenze 10:05</td>
-              <td class="border border-blue-400 px-3 py-2 text-center text-red-600 font-bold">Palermo 10:35</td>
+              <td class="border border-gray-400 px-3 py-1">Firenze 10:05</td>
+              <td class="border border-gray-400 px-3 py-1 text-red-600 font-bold">Palermo 10:35</td>
             </tr>
             <tr>
-              <td class="border border-blue-400 px-3 py-2 text-center">Firenze 10:20</td>
-              <td class="border border-blue-400 px-3 py-2 text-center">Torino 14:00</td>
+              <td class="border border-gray-400 px-3 py-1">Firenze 10:20</td>
+              <td class="border border-gray-400 px-3 py-1">Torino 14:00</td>
             </tr>
             <tr>
-              <td class="border border-blue-400 px-3 py-2 text-center">Firenze 10:40</td>
-              <td class="border border-blue-400 px-3 py-2 text-center">Milano 13:25</td>
+              <td class="border border-gray-400 px-3 py-1">Firenze 10:40</td>
+              <td class="border border-gray-400 px-3 py-1">Milano 13:25</td>
             </tr>
           </tbody>
         </table>
 
-        <div class="space-y-3">
-          <p class="text-gray-700"><span class="text-pink-600 font-bold">–</span> Quanto durano i tre viaggi?</p>
-          <div class="ml-4 space-y-2">
-            <div class="flex items-center gap-3">
-              <span class="text-gray-700 w-16">FI-PA</span>
-              <input type="text" class="w-32 px-2 py-1 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none" data-correct-answer="30 minuti">
+        <div class="space-y-2">
+          <p class="text-gray-700">– Quanto durano i tre viaggi?</p>
+          <div class="ml-4 space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 w-12">FI-PA</span>
+              <input type="text" class="w-28 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent focus:outline-none">
             </div>
-            <div class="flex items-center gap-3">
-              <span class="text-gray-700 w-16">FI-MI</span>
-              <input type="text" class="w-32 px-2 py-1 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none" data-correct-answer="2 ore e 45 minuti">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 w-12">FI-MI</span>
+              <input type="text" class="w-28 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent focus:outline-none">
             </div>
-            <div class="flex items-center gap-3">
-              <span class="text-gray-700 w-16">FI-TO</span>
-              <input type="text" class="w-32 px-2 py-1 border-2 border-blue-300 rounded focus:border-blue-500 focus:outline-none" data-correct-answer="3 ore e 40 minuti">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 w-12">FI-TO</span>
+              <input type="text" class="w-28 px-2 py-1 border-b border-dotted border-gray-400 bg-transparent focus:outline-none">
             </div>
           </div>
           <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> Sono tutti tempi possibili?</span>
-            <button class="px-4 py-1 border-2 border-blue-300 rounded hover:bg-blue-100 cursor-pointer" data-word-choice-target="word" data-group="treni-possibili" data-action="click->word-choice#select">Sì</button>
-            <button class="px-4 py-1 border-2 border-blue-300 rounded hover:bg-blue-100 cursor-pointer" data-word-choice-target="word" data-group="treni-possibili" data-action="click->word-choice#select" data-correct="true">No</button>
+            <span class="text-gray-700">– Sono tutti tempi possibili?</span>
+            <div class="flex gap-1">
+              <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100">Sì</button>
+              <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100 bg-cyan-100" data-correct="true">No</button>
+            </div>
             <span class="text-gray-700">Perché?</span>
           </div>
           <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-gray-700"><span class="text-pink-600 font-bold">–</span> Ci sono informazioni impossibili o non accettabili?</span>
-            <button class="px-4 py-1 border-2 border-blue-300 rounded hover:bg-blue-100 cursor-pointer" data-word-choice-target="word" data-group="treni-impossibili" data-action="click->word-choice#select" data-correct="true">Sì</button>
-            <button class="px-4 py-1 border-2 border-blue-300 rounded hover:bg-blue-100 cursor-pointer" data-word-choice-target="word" data-group="treni-impossibili" data-action="click->word-choice#select">No</button>
+            <span class="text-gray-700">– Ci sono informazioni impossibili o non accettabili?</span>
+            <div class="flex gap-1">
+              <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100 bg-cyan-100" data-correct="true">Sì</button>
+              <button class="px-3 py-1 border border-gray-400 rounded text-sm hover:bg-gray-100">No</button>
+            </div>
           </div>
         </div>
 
-        <div class="p-3 mt-4 bg-blue-50 rounded-lg">
-          <p class="text-gray-700 text-sm">In questa situazione c'è un'informazione impossibile perché anche il treno più veloce non può impiegare 30 minuti per andare da Firenze a Palermo!</p>
-        </div>
+        <p class="text-gray-600 text-sm">In questa situazione c'è un'informazione impossibile perché anche il treno più veloce non può impiegare 30 minuti per andare da Firenze a Palermo!</p>
       </div>
     </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>
