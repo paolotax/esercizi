@@ -1,137 +1,124 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
     <!-- Intro -->
     <div class="p-4 md:p-6">
-      <p class="text-gray-800 mb-6">Ricordi come si confrontano le frazioni?</p>
+      <p class="text-gray-700">Ricordi come si confrontano le frazioni?</p>
     </div>
 
-    <!-- Denominatore uguale -->
-    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
-      <h2 class="font-bold text-blue-600 mb-4">Denominatore uguale</h2>
-      <p class="mb-4"><strong><span class="text-pink-600">&#8226;</span> Confronta i numeratori e inserisci &gt; oppure &lt;.</strong></p>
+    <!-- Denominatore uguale + Numeratore uguale (2 colonne) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-<%= @pagina.base_color %>-600">
+      <!-- Denominatore uguale -->
+      <div class="p-4 md:p-6">
+        <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-4 italic">Denominatore uguale</h2>
+        <p class="mb-4"><strong><span class="text-pink-600">•</span> Confronta i numeratori e inserisci &gt; oppure &lt;.</strong></p>
 
-      <div class="mb-4">
-        <%= image_tag "nvi5_mat/p060/p060_05.jpg", alt: "Confronto denominatore uguale", class: "max-w-full rounded-lg" %>
+        <div class="mb-4 flex justify-center">
+          <%= image_tag "nvi5_mat/p060/p060_05.jpg", alt: "Confronto denominatore uguale", class: "max-w-full rounded-lg" %>
+        </div>
+
+        <div class="p-3 bg-pink-100 rounded-2xl">
+          <p class="text-gray-700">
+            Tra due o più frazioni che hanno lo <strong>stesso denominatore</strong> è <strong>maggiore</strong> (<strong>&gt;</strong>) la frazione che ha il <strong>numeratore maggiore</strong>.
+          </p>
+        </div>
       </div>
 
-      <div class="p-4 bg-purple-50 border-2 border-purple-200 rounded-lg">
-        <p class="text-gray-700">
-          Tra due o più frazioni che hanno lo <strong>stesso denominatore</strong> è <strong>maggiore</strong> (<strong>&gt;</strong>) la frazione che ha il <strong>numeratore maggiore</strong>.
-        </p>
-      </div>
-    </div>
+      <!-- Numeratore uguale -->
+      <div class="p-4 md:p-6">
+        <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-4 italic">Numeratore uguale</h2>
+        <p class="mb-4"><strong><span class="text-pink-600">•</span> Confronta i denominatori e inserisci &gt; oppure &lt;.</strong></p>
 
-    <!-- Numeratore uguale -->
-    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
-      <h2 class="font-bold text-blue-600 mb-4">Numeratore uguale</h2>
-      <p class="mb-4"><strong><span class="text-pink-600">&#8226;</span> Confronta i denominatori e inserisci &gt; oppure &lt;.</strong></p>
+        <div class="mb-4 flex justify-center">
+          <%= image_tag "nvi5_mat/p060/p060_06.jpg", alt: "Confronto numeratore uguale", class: "max-w-full rounded-lg" %>
+        </div>
 
-      <div class="mb-4">
-        <%= image_tag "nvi5_mat/p060/p060_06.jpg", alt: "Confronto numeratore uguale", class: "max-w-full rounded-lg" %>
-      </div>
-
-      <div class="p-4 bg-purple-50 border-2 border-purple-200 rounded-lg">
-        <p class="text-gray-700">
-          Tra due o più frazioni che hanno lo <strong>stesso numeratore</strong> è <strong>maggiore</strong> (<strong>&gt;</strong>) la frazione che ha il <strong>denominatore minore</strong>.
-        </p>
+        <div class="p-3 bg-pink-100 rounded-2xl">
+          <p class="text-gray-700">
+            Tra due o più frazioni che hanno lo <strong>stesso numeratore</strong> è <strong>maggiore</strong> (<strong>&gt;</strong>) la frazione che ha il <strong>denominatore minore</strong>.
+          </p>
+        </div>
       </div>
     </div>
 
     <!-- Frazioni equivalenti -->
-    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
-      <h2 class="font-bold text-blue-600 mb-4">Frazioni equivalenti</h2>
-      <p class="mb-4"><strong><span class="text-pink-600">&#8226;</span> Confronta e inserisci &gt;, &lt; oppure =.</strong></p>
-
-      <div class="mb-4">
-        <%= image_tag "nvi5_mat/p060/p060_07.jpg", alt: "Frazioni equivalenti", class: "max-w-full rounded-lg" %>
+    <div class="p-4 md:p-6">
+      <div class="flex flex-col md:flex-row gap-6 items-start">
+        <div class="flex-1">
+          <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-4 italic">Frazioni equivalenti</h2>
+          <p class="mb-4"><strong><span class="text-pink-600">•</span> Confronta e inserisci &gt;, &lt; oppure =.</strong></p>
+        </div>
+        <div class="flex-shrink-0 flex justify-center">
+          <%= image_tag "nvi5_mat/p060/p060_07.jpg", alt: "Frazioni equivalenti", class: "max-w-xs" %>
+        </div>
       </div>
     </div>
 
     <!-- Problema con Elisa -->
-    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+    <div class="p-4 md:p-6">
       <p class="mb-4">
-        <strong><span class="text-pink-600">&#8226;</span></strong> Impariamo ora a <strong>confrontare frazioni che non hanno lo stesso numeratore o lo stesso denominatore e non sono equivalenti</strong>.
+        <strong><span class="text-blue-600">▶</span></strong> Impariamo ora a <strong>confrontare frazioni che non hanno lo stesso numeratore o lo stesso denominatore e non sono equivalenti</strong>.
       </p>
 
-      <div class="p-4 mb-4 bg-white rounded-lg">
-        <p class="text-gray-800">
-          Gli alunni di 5ª B devono colorare un cartellone per lo spettacolo di fine anno.<br>
-          L'insegnante chiede a Elisa se preferisce colorare i
-          <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-            <span>2</span>
-            <span class="border-t-2 border-gray-700 px-2">3</span>
-          </span>
-          o i
-          <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-            <span>4</span>
-            <span class="border-t-2 border-gray-700 px-2">9</span>
-          </span>
-          del cartellone.<br>
-          Elisa non ama colorare e sceglie la parte più piccola fra le due. Quale?
-        </p>
-      </div>
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="flex-1">
+          <div class="p-4 mb-4 bg-cyan-50 rounded-lg">
+            <p class="text-gray-800">
+              Gli alunni di 5ª B devono colorare un cartellone per lo spettacolo di fine anno.
+              L'insegnante chiede a Elisa se preferisce colorare i
+              <%= render 'shared/frazione', num: 2, den: 3, bold: true %>
+              o i
+              <%= render 'shared/frazione', num: 4, den: 9, bold: true %>
+              del cartellone.
+              Elisa non ama colorare e sceglie la parte più piccola fra le due. Quale?
+            </p>
+          </div>
 
-      <p class="mb-4">
-        Trasforma le frazioni da confrontare in frazioni equivalenti a quelle di partenza che abbiano lo stesso denominatore. Cerca perciò un <strong>multiplo comune a entrambi i denominatori</strong>, cioè multiplo sia di 3 sia di 9.
-      </p>
+          <p class="mb-4">
+            Trasforma le frazioni da confrontare in frazioni equivalenti a quelle di partenza che abbiano lo stesso denominatore. Cerca perciò un <strong>multiplo comune a entrambi i denominatori</strong>, cioè multiplo sia di 3 sia di 9.
+          </p>
 
-      <p class="text-cyan-700 font-bold mb-4">9 è multiplo sia di 3 sia di 9.</p>
+          <p class="text-cyan-700 font-bold mb-4">9 è multiplo sia di 3 sia di 9.</p>
 
-      <p class="mb-4">
-        Trasforma la frazione
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>2</span>
-          <span class="border-t-2 border-gray-700 px-2">3</span>
-        </span>
-        in una frazione equivalente con denominatore 9.
-      </p>
+          <p class="mb-4">
+            Trasforma la frazione
+            <%= render 'shared/frazione', num: 2, den: 3, bold: true %>
+            in una frazione equivalente con denominatore 9.
+          </p>
 
-      <div class="mb-4">
-        <%= image_tag "nvi5_mat/p060/p060_04.jpg", alt: "Trasformazione frazione", class: "max-w-md" %>
-      </div>
+          <p class="mb-4">
+            Ora puoi confrontare le frazioni
+            <%= render 'shared/frazione', num: 6, den: 9, bold: true %>
+            e
+            <%= render 'shared/frazione', num: 4, den: 9, bold: true %>
+            e stabilire quale delle due è minore.
+          </p>
 
-      <p class="mb-4">
-        Ora puoi confrontare le frazioni
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>6</span>
-          <span class="border-t-2 border-gray-700 px-2">9</span>
-        </span>
-        e
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>4</span>
-          <span class="border-t-2 border-gray-700 px-2">9</span>
-        </span>
-        e stabilire quale delle due è minore.
-      </p>
+          <p class="mb-4"><strong><span class="text-pink-600">•</span> Inserisci &gt; oppure &lt;.</strong></p>
 
-      <div class="flex items-center justify-center gap-4 mb-4">
-        <div class="inline-flex flex-col items-center font-bold">
-          <span>6</span>
-          <span class="border-t-2 border-gray-700 px-2">9</span>
+          <div class="flex items-center justify-start gap-4 mb-4">
+            <%= render 'shared/frazione', num: 6, den: 9, bold: true %>
+            <input type="text" data-correct-answer=">" class="w-12 px-2 py-1 border-2 border-purple-300 rounded text-center font-bold">
+            <%= render 'shared/frazione', num: 4, den: 9, bold: true %>
+          </div>
+
+          <div class="p-4 bg-cyan-100 rounded-lg">
+            <p class="text-gray-800">
+              Ora puoi rispondere: Elisa sceglie di colorare i
+              <%= render 'shared/frazione', num: 4, den: 9, bold: true %>
+              del cartellone.
+            </p>
+          </div>
         </div>
-        <input type="text" data-correct-answer=">" class="w-12 px-2 py-1 border-2 border-purple-300 rounded text-center font-bold">
-        <div class="inline-flex flex-col items-center font-bold">
-          <span>4</span>
-          <span class="border-t-2 border-gray-700 px-2">9</span>
-        </div>
-      </div>
 
-      <div class="p-4 bg-cyan-100 border-2 border-cyan-300 rounded-lg text-center">
-        <p class="text-gray-800">
-          Ora puoi rispondere: Elisa sceglie di colorare i
-          <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-            <span>4</span>
-            <span class="border-t-2 border-gray-700 px-2">9</span>
-          </span>
-          del cartellone.
-        </p>
+        <div class="flex-shrink-0 flex justify-center">
+          <%= image_tag "nvi5_mat/p060/p060_04.jpg", alt: "Trasformazione frazione", class: "max-w-xs" %>
+        </div>
       </div>
     </div>
 
@@ -142,7 +129,6 @@
       </p>
     </div>
 
-    <!-- Exercise Controls -->
     <%= render 'shared/exercise_controls', color: 'blue' %>
   </div>
 </div>

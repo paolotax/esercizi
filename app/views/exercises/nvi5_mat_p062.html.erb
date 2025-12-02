@@ -1,257 +1,199 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
-    <!-- Problema iniziale -->
-    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
-      <p class="text-gray-800 mb-4">
-        Paolo ha diviso in 9 parti uguali un foglio rettangolare;<br>
-        ha colorato
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>2</span>
-          <span class="border-t-2 border-gray-700 px-2">9</span>
-        </span>
-        del foglio di rosso e
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>5</span>
-          <span class="border-t-2 border-gray-700 px-2">9</span>
-        </span>
-        del foglio di blu.
-      </p>
-      <p class="text-gray-700 mb-4">
-        Quale frazione rappresenta la parte del foglio che ha colorato?<br>
-        Quale frazione rappresenta la parte del foglio che deve ancora colorare?
-      </p>
 
-      <div class="flex justify-center mb-4">
-        <%= image_tag "nvi5_mat/p062/p062_11.jpg", alt: "Foglio colorato", class: "max-w-md" %>
+    <!-- Problema iniziale con immagine -->
+    <div class="flex flex-col md:flex-row gap-6">
+      <div class="flex-1">
+        <div class="p-4 bg-cyan-50 border-3 border-cyan-400 rounded-2xl mb-4">
+          <p class="text-gray-800 mb-2">
+            Paolo ha diviso in 9 parti uguali un foglio rettangolare;
+          </p>
+          <p class="text-gray-800 mb-2">
+            ha colorato <%= render 'shared/frazione', num: 2, den: 9, bold: true %> del foglio di rosso e
+            <%= render 'shared/frazione', num: 3, den: 9, bold: true %> del foglio di blu.
+          </p>
+          <p class="text-gray-700">
+            Quale frazione rappresenta la parte del foglio che ha colorato?<br>
+            Quale frazione rappresenta la parte del foglio che deve ancora colorare?
+          </p>
+        </div>
+      </div>
+      <div class="flex-shrink-0">
+        <%= image_tag "nvi5_mat/p062/p062_11.jpg", alt: "Foglio colorato", class: "max-w-xs rounded-lg" %>
       </div>
     </div>
 
     <!-- Addizione -->
-    <div class="p-4 md:p-6 bg-white border-3 border-green-500 rounded-3xl">
-      <p class="text-gray-700 mb-4">Per rispondere alla prima domanda, puoi usare l'<strong>addizione</strong>.</p>
+    <div class="flex flex-col md:flex-row gap-6">
+      <div class="flex-1">
+        <p class="text-gray-700 mb-4">Per rispondere alla prima domanda, puoi usare l'<strong>addizione</strong>.</p>
 
-      <div class="mb-4">
-        <%= image_tag "nvi5_mat/p062/p062_07.jpg", alt: "Addizione frazioni", class: "max-w-lg" %>
+        <div class="flex items-center justify-center gap-2 mb-4 text-2xl font-bold">
+          <%= render 'shared/frazione', num: 2, den: 9, bold: true %>
+          <span>+</span>
+          <%= render 'shared/frazione', num: 3, den: 9, bold: true %>
+          <span>=</span>
+          <%= render 'shared/frazione', num: 5, den: 9, bold: true %>
+        </div>
+
+        <div class="p-4 bg-pink-100 rounded-2xl mb-4">
+          <p class="text-gray-700">
+            Per <strong>addizionare due frazioni con lo stesso denominatore</strong><br>
+            somma i numeri dei numeratori. Il denominatore non cambia.
+          </p>
+        </div>
+
+        <p class="text-gray-700 mb-2">Ora puoi rispondere alla prima domanda:</p>
+        <div class="p-3 bg-cyan-100 inline-block">
+          <p class="text-gray-800">
+            Paolo ha colorato <%= render 'shared/frazione', num: 5, den: 9, bold: true %> del foglio.
+          </p>
+        </div>
       </div>
-
-      <div class="p-4 mb-4 bg-green-50 border-2 border-green-200 rounded-lg">
-        <p class="text-gray-700">
-          Per <strong>addizionare due frazioni con lo stesso denominatore</strong> somma i numeri dei numeratori. Il denominatore non cambia.
-        </p>
-      </div>
-
-      <p class="text-center text-gray-700 mb-2">Ora puoi rispondere alla prima domanda:</p>
-      <div class="p-4 bg-cyan-100 border-2 border-cyan-300 rounded-lg text-center">
-        <p class="text-gray-800 font-bold">
-          Paolo ha colorato
-          <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-            <span>7</span>
-            <span class="border-t-2 border-gray-700 px-2">9</span>
-          </span>
-          del foglio.
-        </p>
+      <div class="flex-shrink-0">
+        <%= image_tag "nvi5_mat/p062/p062_12.jpg", alt: "Foglio colorato addizione", class: "max-w-xs rounded-lg" %>
       </div>
     </div>
 
     <!-- Sottrazione -->
-    <div class="p-4 md:p-6 bg-white border-3 border-yellow-500 rounded-3xl">
-      <p class="text-gray-700 mb-4">Per rispondere alla seconda domanda, puoi usare la <strong>sottrazione</strong>.</p>
+    <div class="flex flex-col md:flex-row gap-6">
+      <div class="flex-1">
+        <p class="text-gray-700 mb-4">Per rispondere alla seconda domanda, puoi usare la <strong>sottrazione</strong>.</p>
 
-      <div class="mb-4">
-        <%= image_tag "nvi5_mat/p062/p062_08.jpg", alt: "Sottrazione frazioni", class: "max-w-lg" %>
+        <div class="flex items-center justify-center gap-2 mb-4 text-2xl font-bold">
+          <%= render 'shared/frazione', num: 9, den: 9, bold: true %>
+          <span>−</span>
+          <%= render 'shared/frazione', num: 5, den: 9, bold: true %>
+          <span>=</span>
+          <%= render 'shared/frazione', num: 4, den: 9, bold: true %>
+        </div>
+
+        <div class="p-4 bg-pink-100 rounded-2xl mb-4">
+          <p class="text-gray-700">
+            Per <strong>sottrarre due frazioni con lo stesso denominatore</strong><br>
+            sottrai i numeri dei numeratori. Il denominatore non cambia.
+          </p>
+        </div>
+
+        <p class="text-gray-700 mb-2">Ora puoi rispondere alla seconda domanda:</p>
+        <div class="p-3 bg-cyan-100 inline-block">
+          <p class="text-gray-800">
+            Paolo deve ancora colorare <%= render 'shared/frazione', num: 4, den: 9, bold: true %> del foglio.
+          </p>
+        </div>
       </div>
-
-      <div class="p-4 mb-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
-        <p class="text-gray-700">
-          Per <strong>sottrarre due frazioni con lo stesso denominatore</strong> sottrai i numeri dei numeratori. Il denominatore non cambia.
-        </p>
-      </div>
-
-      <p class="text-center text-gray-700 mb-2">Ora puoi rispondere alla seconda domanda:</p>
-      <div class="p-4 bg-cyan-100 border-2 border-cyan-300 rounded-lg text-center">
-        <p class="text-gray-800 font-bold">
-          Paolo deve ancora colorare
-          <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-            <span>2</span>
-            <span class="border-t-2 border-gray-700 px-2">9</span>
-          </span>
-          del foglio.
-        </p>
+      <div class="flex-shrink-0 flex items-center">
+        <span class="text-6xl text-gray-300">?</span>
       </div>
     </div>
 
     <!-- ESERCIZI -->
     <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
-      <h2 class="font-bold text-blue-600 mb-4">ESERCIZI</h2>
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-4 text-xl">ESERCIZI</h2>
 
-      <!-- Esercizio 1 -->
-      <div class="p-4 mb-6 bg-white rounded-lg">
-        <div class="flex items-start gap-3 mb-4">
-          <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-          <p class="font-bold text-gray-700">Calcola.</p>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-<%= @pagina.base_color %>-300">
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>5</span>
-              <span class="border-t-2 border-gray-700 px-2">8</span>
-            </span>
-            <span class="font-bold">+</span>
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>1</span>
-              <span class="border-t-2 border-gray-700 px-2">8</span>
-            </span>
-            <span class="font-bold">=</span>
-            <div class="inline-flex flex-col items-center">
-              <input type="text" data-correct-answer="6" class="w-10 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              <span class="border-t-2 border-gray-700 px-2 mt-1">8</span>
-            </div>
+        <!-- Colonna sinistra: Esercizio 1 -->
+        <div class="p-4 rounded-lg">
+          <div class="flex items-start gap-3 mb-4">
+            <%= numero_esercizio_badge(1, colore: "blue-500") %>
+            <p class="font-bold text-gray-700">Calcola.</p>
           </div>
 
-          <div class="flex items-center gap-3">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>9</span>
-              <span class="border-t-2 border-gray-700 px-2">13</span>
-            </span>
-            <span class="font-bold">+</span>
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>4</span>
-              <span class="border-t-2 border-gray-700 px-2">13</span>
-            </span>
-            <span class="font-bold">=</span>
-            <div class="inline-flex flex-col items-center">
-              <input type="text" data-correct-answer="13" class="w-10 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              <span class="border-t-2 border-gray-700 px-2 mt-1">13</span>
+          <div class="space-y-4">
+            <!-- 5/8 + 1/8 = 6/8 -->
+            <div class="flex items-center justify-center gap-2 flex-wrap">
+              <%= render 'shared/frazione', num: 5, den: 8, bold: true %>
+              <span class="font-bold">+</span>
+              <%= render 'shared/frazione', num: 1, den: 8, bold: true %>
+              <span class="font-bold">=</span>
+              <%= render 'shared/frazione', num: nil, den: 8, num_answer: "6" %>
             </div>
-          </div>
 
-          <div class="flex items-center gap-3">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>3</span>
-              <span class="border-t-2 border-gray-700 px-2">10</span>
-            </span>
-            <span class="font-bold">+</span>
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>2</span>
-              <span class="border-t-2 border-gray-700 px-2">10</span>
-            </span>
-            <span class="font-bold">=</span>
-            <div class="inline-flex flex-col items-center">
-              <input type="text" data-correct-answer="5" class="w-10 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              <span class="border-t-2 border-gray-700 px-2 mt-1">10</span>
+            <!-- 3/10 + 2/10 = 5/10 -->
+            <div class="flex items-center justify-center gap-2 flex-wrap">
+              <%= render 'shared/frazione', num: 3, den: 10, bold: true %>
+              <span class="font-bold">+</span>
+              <%= render 'shared/frazione', num: 2, den: 10, bold: true %>
+              <span class="font-bold">=</span>
+              <%= render 'shared/frazione', num: nil, den: 10, num_answer: "5" %>
             </div>
-          </div>
 
-          <div class="flex items-center gap-3">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>7</span>
-              <span class="border-t-2 border-gray-700 px-2">13</span>
-            </span>
-            <span class="font-bold">−</span>
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>4</span>
-              <span class="border-t-2 border-gray-700 px-2">13</span>
-            </span>
-            <span class="font-bold">=</span>
-            <div class="inline-flex flex-col items-center">
-              <input type="text" data-correct-answer="3" class="w-10 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              <span class="border-t-2 border-gray-700 px-2 mt-1">13</span>
+            <!-- 9/10 - 3/10 = 6/10 -->
+            <div class="flex items-center justify-center gap-2 flex-wrap">
+              <%= render 'shared/frazione', num: 9, den: 10, bold: true %>
+              <span class="font-bold">−</span>
+              <%= render 'shared/frazione', num: 3, den: 10, bold: true %>
+              <span class="font-bold">=</span>
+              <%= render 'shared/frazione', num: nil, den: 10, num_answer: "6" %>
             </div>
-          </div>
 
-          <div class="flex items-center gap-3">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>9</span>
-              <span class="border-t-2 border-gray-700 px-2">10</span>
-            </span>
-            <span class="font-bold">−</span>
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>3</span>
-              <span class="border-t-2 border-gray-700 px-2">10</span>
-            </span>
-            <span class="font-bold">=</span>
-            <div class="inline-flex flex-col items-center">
-              <input type="text" data-correct-answer="6" class="w-10 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              <span class="border-t-2 border-gray-700 px-2 mt-1">10</span>
+            <!-- 9/13 + 4/13 = 13/13 -->
+            <div class="flex items-center justify-center gap-2 flex-wrap">
+              <%= render 'shared/frazione', num: 9, den: 13, bold: true %>
+              <span class="font-bold">+</span>
+              <%= render 'shared/frazione', num: 4, den: 13, bold: true %>
+              <span class="font-bold">=</span>
+              <%= render 'shared/frazione', num: nil, den: 13, num_answer: "13" %>
             </div>
-          </div>
 
-          <div class="flex items-center gap-3">
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>8</span>
-              <span class="border-t-2 border-gray-700 px-2">15</span>
-            </span>
-            <span class="font-bold">−</span>
-            <span class="inline-flex flex-col items-center font-bold text-cyan-500">
-              <span>3</span>
-              <span class="border-t-2 border-gray-700 px-2">15</span>
-            </span>
-            <span class="font-bold">=</span>
-            <div class="inline-flex flex-col items-center">
-              <input type="text" data-correct-answer="5" class="w-10 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              <span class="border-t-2 border-gray-700 px-2 mt-1">15</span>
+            <!-- 7/13 - 4/13 = 3/13 -->
+            <div class="flex items-center justify-center gap-2 flex-wrap">
+              <%= render 'shared/frazione', num: 7, den: 13, bold: true %>
+              <span class="font-bold">−</span>
+              <%= render 'shared/frazione', num: 4, den: 13, bold: true %>
+              <span class="font-bold">=</span>
+              <%= render 'shared/frazione', num: nil, den: 13, num_answer: "3" %>
+            </div>
+
+            <!-- 8/15 - 3/15 = 5/15 -->
+            <div class="flex items-center justify-center gap-2 flex-wrap">
+              <%= render 'shared/frazione', num: 8, den: 15, bold: true %>
+              <span class="font-bold">−</span>
+              <%= render 'shared/frazione', num: 3, den: 15, bold: true %>
+              <span class="font-bold">=</span>
+              <%= render 'shared/frazione', num: nil, den: 15, num_answer: "5" %>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Esercizio 2 -->
-      <div class="p-4 mb-4 bg-white rounded-lg">
-        <div class="flex items-start gap-3">
-          <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
-          <p class="font-bold text-gray-700">
-            In una pasticceria sono stati venduti i
-            <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-              <span>5</span>
-              <span class="border-t-2 border-gray-700 px-2">8</span>
-            </span>
-            di tutti i pasticcini alla crema. Quale frazione rappresenta la quantità dei pasticcini che restano ancora da vendere?
-          </p>
-        </div>
-      </div>
+        <!-- Colonna destra: Esercizi 2 e 3 -->
+        <div class="p-4 md:pl-6 space-y-6">
+          <!-- Esercizio 2 -->
+          <div>
+            <div class="flex items-start gap-3">
+              <%= numero_esercizio_badge(2, colore: "blue-500") %>
+              <p class="text-gray-700">
+                In una pasticceria sono stati venduti i <%= render 'shared/frazione', num: 2, den: 12, bold: true %> di tutti
+                i pasticcini alla crema. Quale frazione rappresenta
+                la quantità dei pasticcini che restano ancora
+                da vendere?
+              </p>
+            </div>
+          </div>
 
-      <!-- Esercizio 3 -->
-      <div class="p-4 bg-white rounded-lg">
-        <div class="flex items-start gap-3">
-          <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
-          <p class="font-bold text-gray-700">
-            Angelo ha regalato a Davide
-            <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-              <span>2</span>
-              <span class="border-t-2 border-gray-700 px-2">10</span>
-            </span>
-            delle sue biglie, a Carlo
-            <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-              <span>3</span>
-              <span class="border-t-2 border-gray-700 px-2">10</span>
-            </span>
-            e a Filippo
-            <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-              <span>1</span>
-              <span class="border-t-2 border-gray-700 px-2">10</span>
-            </span>.
-            Quale frazione rappresenta la quantità di biglie che Angelo ha tenuto per sé?
-          </p>
+          <!-- Esercizio 3 -->
+          <div>
+            <div class="flex items-start gap-3">
+              <%= numero_esercizio_badge(3, colore: "blue-500") %>
+              <p class="text-gray-700">
+                Angelo ha regalato a Davide <%= render 'shared/frazione', num: 2, den: 8, bold: true %> delle sue biglie,
+                a Carlo <%= render 'shared/frazione', num: 4, den: 8, bold: true %> e a Filippo <%= render 'shared/frazione', num: 1, den: 8, bold: true %>.
+                Quale frazione rappresenta
+                la quantità di biglie che Angelo ha tenuto per sé?
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Riferimento quaderno -->
-    <div class="p-4 text-right">
-      <p class="text-gray-700">
-        <span class="font-bold">Quaderno</span> pp. <a href="#" class="text-red-600 font-bold hover:underline">203</a>, <a href="#" class="text-red-600 font-bold hover:underline">207</a>
-      </p>
-    </div>
-
-    <!-- Exercise Controls -->
     <%= render 'shared/exercise_controls', color: 'blue' %>
   </div>
 </div>

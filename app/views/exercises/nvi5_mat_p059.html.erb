@@ -1,117 +1,105 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
     <!-- Introduzione -->
     <div class="p-4 md:p-6">
-      <p class="text-gray-800 font-semibold">
+      <p class="text-gray-700">
         Ora ricostruiamo l'intero a partire da frazioni che non rappresentano l'unità frazionaria,
         cioè da frazioni qualsiasi.
       </p>
     </div>
 
-    <!-- Esercizio 1 -->
-    <div class="p-4 md:p-6 bg-white border-3 border-cyan-500 rounded-3xl">
-      <div class="flex items-start gap-3 mb-4">
-        <div class="bg-cyan-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-        <p class="font-bold text-gray-700">
-          Il triangolo che vedi corrisponde ai
-          <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-            <span>2</span>
-            <span class="border-t-2 border-gray-700 px-2">3</span>
-          </span>
-          dell'intero. Qual è l'intero?
-        </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Esercizio 1 -->
+      <div class="p-4 md:p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <%= numero_esercizio_badge(1, colore: "cyan-500") %>
+          <p class="font-bold text-gray-700">
+            Il triangolo che vedi corrisponde ai
+            <%= render 'shared/frazione', num: 2, den: 3, bold: true %>
+            dell'intero. Qual è l'intero?
+          </p>
+        </div>
+        <div class="p-4 flex justify-center">
+          <%= image_tag "nvi5_mat/p059/p059_02.jpg", alt: "Triangolo 2/3", class: "max-w-md" %>
+        </div>
       </div>
-      <div class="p-4 flex justify-center">
-        <%= image_tag "nvi5_mat/p059/p059_02.jpg", alt: "Triangolo 2/3", class: "max-w-md" %>
-      </div>
-    </div>
 
-    <!-- Esercizio 2 -->
-    <div class="p-4 md:p-6 bg-white border-3 border-green-500 rounded-3xl">
-      <div class="flex items-start gap-3 mb-4">
-        <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
-        <p class="font-bold text-gray-700">Per ricostruire l'intero, innanzitutto stabilisci qual è l'unità frazionaria.</p>
-      </div>
-      <div class="p-4 flex justify-center">
-        <%= image_tag "nvi5_mat/p059/p059_03.jpg", alt: "Stabilire unità frazionaria", class: "max-w-md" %>
+      <!-- Esercizio 2 -->
+      <div class="p-4 md:p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <%= numero_esercizio_badge(2, colore: "cyan-500") %>
+          <p class="font-bold text-gray-700">Per ricostruire l'intero, innanzitutto stabilisci qual è l'unità frazionaria.</p>
+        </div>
+        <div class="p-4 flex justify-center">
+          <%= image_tag "nvi5_mat/p059/p059_03.jpg", alt: "Stabilire unità frazionaria", class: "max-w-md" %>
+        </div>
       </div>
     </div>
 
     <!-- Esercizio 3 -->
-    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
-      <div class="flex items-start gap-3 mb-4">
-        <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
-        <p class="font-bold text-gray-700">
-          Per completare l'intero, cioè
-          <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-            <span>3</span>
-            <span class="border-t-2 border-gray-700 px-2">3</span>
-          </span>,
-          manca ancora
-          <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-            <span>1</span>
-            <span class="border-t-2 border-gray-700 px-2">3</span>
-          </span>: aggiungilo tu.
-        </p>
-      </div>
-      <p class="text-gray-700 mb-4 ml-11">
-        Puoi farlo in diversi modi: noi ne abbiamo disegnato uno in viola, tu disegnane un altro.
-      </p>
-      <div class="p-4 flex justify-center">
-        <%= image_tag "nvi5_mat/p059/output-1715938802059_597_433_223_218.png", alt: "Ricostruzione intero", class: "max-w-md" %>
+    <div class="p-4 md:p-6">
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="flex-1">
+          <div class="flex items-center gap-3 mb-4">
+            <%= numero_esercizio_badge(3, colore: "cyan-500") %>
+            <p class="font-bold text-gray-700">
+              Per completare l'intero, cioè
+              <%= render 'shared/frazione', num: 3, den: 3, bold: true %>,
+              manca ancora
+              <%= render 'shared/frazione', num: 1, den: 3, bold: true %>: aggiungilo tu.
+            </p>
+          </div>
+          <p class="text-gray-700 ml-11">
+            Puoi farlo in diversi modi: noi ne abbiamo disegnato uno in viola, tu disegnane un altro.
+          </p>
+        </div>
+        <div class="flex-shrink-0 flex justify-center">
+          <%= image_tag "nvi5_mat/p059/output-1715938802059_597_433_223_218.png", alt: "Ricostruzione intero", class: "max-w-xs" %>
+        </div>
       </div>
     </div>
 
-    <!-- Esercizio 4 - 3/4 -->
-    <div class="p-4 md:p-6 bg-white border-3 border-yellow-500 rounded-3xl">
-      <p class="text-gray-700 mb-4">
-        La figura che vedi corrisponde a
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>3</span>
-          <span class="border-t-2 border-gray-700 px-2">4</span>
-        </span>
-        dell'intero.
-      </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-cyan-600 gap-6">
+      <!-- Esercizio 4 - 3/4 -->
+      <div class="p-4 md:p-6">
+        <p class="text-gray-700 mb-4">
+          La figura che vedi corrisponde a
+          <%= render 'shared/frazione', num: 3, den: 4, bold: true %>
+          dell'intero.
+        </p>
 
-      <h3 class="font-bold text-yellow-700 mb-4"><span class="text-pink-600">&#8226;</span> Qual è l'intero? Disegnalo.</h3>
+        <h3 class="font-bold text-gray-700 mb-4"><span class="text-cyan-600">&#8226;</span> Qual è l'intero? Disegnalo.</h3>
 
-      <div class="p-4 mb-4 flex justify-center">
-        <%= image_tag "nvi5_mat/p059/output-1715938802059_173_746_307_305.png", alt: "Figura 3/4", class: "max-w-md" %>
-      </div>
+        <div class="p-4 mb-4 flex justify-center">
+          <%= image_tag "nvi5_mat/p059/output-1715938802059_173_746_307_305.png", alt: "Figura 3/4", class: "max-w-md" %>
+        </div>
 
-      <div class="p-4 bg-yellow-50 rounded-lg">
         <p class="text-gray-700">
           Confronta il tuo lavoro con quello dei compagni e delle compagne. Avete disegnato tutti la stessa
           figura? Ognuna è una possibile ricostruzione dell'intero? Verificalo.
         </p>
       </div>
-    </div>
 
-    <!-- Esercizio 5 - 3/5 -->
-    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-3xl">
-      <p class="text-gray-700 mb-4">
-        La figura che vedi corrisponde a
-        <span class="inline-flex flex-col items-center mx-1 font-bold text-cyan-500 align-middle">
-          <span>3</span>
-          <span class="border-t-2 border-gray-700 px-2">5</span>
-        </span>
-        dell'intero.
-      </p>
+      <!-- Esercizio 5 - 3/5 -->
+      <div class="p-4 md:p-6">
+        <p class="text-gray-700 mb-4">
+          La figura che vedi corrisponde a
+          <%= render 'shared/frazione', num: 3, den: 5, bold: true %>
+          dell'intero.
+        </p>
 
-      <h3 class="font-bold text-blue-600 mb-4"><span class="text-pink-600">&#8226;</span> Qual è l'intero? Disegnalo.</h3>
+        <h3 class="font-bold text-gray-700 mb-4"><span class="text-cyan-600">&#8226;</span> Qual è l'intero? Disegnalo.</h3>
 
-      <div class="p-4 mb-4 flex justify-center">
-        <%= image_tag "nvi5_mat/p059/output-1715938802059_597_747_307_302.png", alt: "Figura 3/5", class: "max-w-md" %>
-      </div>
+        <div class="p-4 mb-4 flex justify-center">
+          <%= image_tag "nvi5_mat/p059/output-1715938802059_597_747_307_302.png", alt: "Figura 3/5", class: "max-w-md" %>
+        </div>
 
-      <div class="p-4 bg-blue-50 rounded-lg">
         <p class="text-gray-700">
           Confronta il tuo lavoro con quello dei compagni e delle compagne. Avete disegnato tutti la stessa
           figura? Ognuna è una possibile ricostruzione dell'intero? Verificalo.
@@ -126,7 +114,6 @@
       </p>
     </div>
 
-    <!-- Exercise Controls -->
     <%= render 'shared/exercise_controls', color: 'blue' %>
   </div>
 </div>
