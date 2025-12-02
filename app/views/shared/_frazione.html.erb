@@ -1,0 +1,90 @@
+<%#
+  Partial per rendere frazioni in vari modi
+
+  Parametri:
+  - num: numeratore (numero o nil se input)
+  - den: denominatore (numero o nil se input)
+  - num_answer: risposta corretta per input numeratore (richiesto se num è nil)
+  - den_answer: risposta corretta per input denominatore (richiesto se den è nil)
+  - bold: true/false - se il testo deve essere bold (default: false)
+  - placeholder: placeholder per gli input (default: "..")
+  - border: colore bordo tailwind (es. "pink-400", "blue-500") o nil per nessun bordo
+  - bg: colore background tailwind (es. "white", "gray-100") o nil per trasparente
+  - line_color: colore linea frazione (default: "gray-900" per statiche, "gray-400" per input)
+  - rounded: true/false - angoli arrotondati (default: true se ha bordo)
+
+  Esempi di utilizzo:
+
+  Frazione statica (senza bordo):
+  render 'shared/frazione', num: 4, den: 4
+
+  Frazione statica con bordo:
+  render 'shared/frazione', num: 4, den: 4, border: "pink-400", bg: "white"
+
+  Input al numeratore (bordo rosa di default):
+  render 'shared/frazione', num: nil, den: 3, num_answer: "3"
+
+  Input al denominatore:
+  render 'shared/frazione', num: 10, den: nil, den_answer: "5"
+
+  Input con bordo blu:
+  render 'shared/frazione', num: nil, den: 3, num_answer: "3", border: "blue-500"
+%>
+
+<%
+  bold = local_assigns.fetch(:bold, false)
+  placeholder = local_assigns.fetch(:placeholder, "..")
+  has_input = num.nil? || den.nil?
+  input_data = local_assigns.fetch(:input_data, nil)
+
+  # Default: input ha bordo rosa, statiche no
+  border = local_assigns.fetch(:border, has_input ? "pink-400" : nil)
+  bg = local_assigns.fetch(:bg, has_input ? "white" : nil)
+  line_color = local_assigns.fetch(:line_color, has_input ? "gray-400" : "gray-900")
+  rounded = local_assigns.fetch(:rounded, border.present?)
+
+  # Larghezza input in base al numero di cifre
+  num_answer_str = local_assigns[:num_answer].to_s
+  den_answer_str = local_assigns[:den_answer].to_s
+  num_width = case num_answer_str.length
+              when 0..1 then "w-8"
+              when 2 then "w-10"
+              else "w-12"
+              end
+  den_width = case den_answer_str.length
+              when 0..1 then "w-8"
+              when 2 then "w-10"
+              else "w-12"
+              end
+
+  font_class = bold ? "font-bold" : ""
+  border_class = border.present? ? "border-2 border-#{border}" : ""
+  bg_class = bg.present? ? "bg-#{bg}" : ""
+  rounded_class = rounded ? "rounded" : ""
+  padding_class = border.present? ? "px-1" : ""
+  data_attr = input_data.present? ? "data-#{input_data}" : ""
+%>
+
+<span class="inline-flex flex-col items-center align-middle mx-1 <%= border_class %> <%= bg_class %> <%= rounded_class %> <%= padding_class %>">
+  <% if num.nil? %>
+    <input type="text"
+           data-correct-answer="<%= num_answer_str %>"
+           <%= data_attr %>
+           class="<%= num_width %> pt-1 text-center bg-transparent"
+           placeholder="<%= placeholder %>">
+  <% else %>
+    <span class="px-2 <%= font_class %>"><%= num %></span>
+  <% end %>
+
+  <span class="w-full h-0.5 bg-<%= line_color %>"></span>
+
+  <% if den.nil? %>
+    <input type="text"
+           data-correct-answer="<%= den_answer_str %>"
+           <%= data_attr %>
+           class="<%= den_width %> pb-1 text-center bg-transparent"
+           placeholder="<%= placeholder %>">
+  <% else %>
+    <span class="px-2 <%= font_class %>"><%= den %></span>
+  <% end %>
+</span>

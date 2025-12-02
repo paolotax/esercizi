@@ -6,338 +6,236 @@
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <div class="space-y-6">
-    <!-- Sezione ESERCIZI -->
-    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
-      <h2 class="font-bold text-pink-600 mb-6">ESERCIZI</h2>
+  <!-- Sezione ESERCIZI -->
+  <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
 
-      <div class="space-y-6">
-        <!-- Esercizio 1: Colora le frazioni -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-            <div>
-              <span class="bg-cyan-100 text-cyan-700 px-3 py-1 rounded font-bold">IMPARARE TUTTI</span>
-              <p class="font-bold text-gray-700 mt-2">Colora la parte indicata da ciascuna frazione. Poi cerchia la frazione che indica l'unità frazionaria. Segui l'esempio.</p>
-            </div>
+    <div class="space-y-6">
+
+      <!-- Esercizio 1: Colora le frazioni -->
+      <div class="p-4 bg-white rounded-2xl -mx-6 -mt-6 border-3 border-blue-500">
+        <div class="flex items-start gap-3 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          <p class="font-bold text-gray-700">Colora la parte indicata da ciascuna frazione. Poi cerchia la frazione che indica l'unità frazionaria. Segui l'esempio.</p>
+        </div>
+        <%= image_tag "nvi5_mat/p056/p056_01.jpg", alt: "Esercizio frazioni", class: "max-w-full mx-auto rounded-lg" %>
+      </div>
+
+
+      <!-- Esercizio 2: Frazioni di insiemi -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <%= numero_esercizio_badge(2, colore: "blue-500") %>
+          <p class="font-bold text-gray-700">Esprimi con una frazione la parte dell'insieme considerata.</p>
+        </div>
+        
+        <div class="space-y-6 grid grid-cols-1 md:grid-cols-2 items-start gap-4">
+          <!-- Prima riga: Triangoli -->
+          <div class="p-4 rounded-lg flex flex-wrap items-center justify-center gap-4">
+            <%= image_tag "nvi5_mat/p056/p056_06.jpg", alt: "Triangoli", class: "max-h-24" %>
+            <span class="font-bold text-gray-700">=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "4", den_answer: "10" %>
+            <span class="font-bold text-gray-700">di</span>
+            <input type="text" data-correct-answer="1" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center">
           </div>
-          <div class="ml-11 p-4 bg-white rounded-lg">
-            <%= image_tag "nvi5_mat/p056/p056_01.jpg", alt: "Esercizio frazioni", class: "max-w-full rounded-lg" %>
+
+          <!-- Seconda riga: Cerchi -->
+          <div class="p-4 rounded-lg flex flex-wrap items-center justify-center gap-4">
+            <%= image_tag "nvi5_mat/p056/p056_07.jpg", alt: "Cerchi", class: "max-h-24" %>
+            <span class="font-bold text-gray-700">=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "5", den_answer: "18" %>
+            <span class="font-bold text-gray-700">di</span>
+            <input type="text" data-correct-answer="1" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center">
           </div>
         </div>
+      </div>
 
-        <!-- Esercizio 2: Frazioni di insiemi -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
-            <p class="font-bold text-gray-700">Esprimi con una frazione la parte dell'insieme considerata.</p>
-          </div>
-          <div class="ml-11 space-y-6">
-            <!-- Prima riga: Triangoli -->
-            <div class="p-4 bg-white rounded-lg flex flex-wrap items-center justify-center gap-4">
-              <%= image_tag "nvi5_mat/p056/p056_06.jpg", alt: "Triangoli", class: "max-h-24" %>
-              <span class="font-bold text-gray-700">=</span>
-              <div class="inline-flex flex-col items-center">
-                <input type="text" data-correct-answer="4" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                <div class="w-full h-0.5 bg-gray-700 my-1"></div>
-                <input type="text" data-correct-answer="10" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              </div>
-              <span class="font-bold text-gray-700">di</span>
-              <input type="text" data-correct-answer="1" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-            </div>
-
-            <!-- Seconda riga: Cerchi -->
-            <div class="p-4 bg-white rounded-lg flex flex-wrap items-center justify-center gap-4">
-              <%= image_tag "nvi5_mat/p056/p056_07.jpg", alt: "Cerchi", class: "max-h-24" %>
-              <span class="font-bold text-gray-700">=</span>
-              <div class="inline-flex flex-col items-center">
-                <input type="text" data-correct-answer="5" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                <div class="w-full h-0.5 bg-gray-700 my-1"></div>
-                <input type="text" data-correct-answer="18" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              </div>
-              <span class="font-bold text-gray-700">di</span>
-              <input type="text" data-correct-answer="1" class="w-12 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-            </div>
-          </div>
+      <!-- Esercizio 3: Frazioni complementari -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <%= numero_esercizio_badge(3, colore: "blue-500") %>
+          <p class="font-bold text-gray-700">Lavora sulle frazioni complementari e completa le uguaglianze.</p>
         </div>
-
-        <!-- Esercizio 3: Frazioni complementari -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
-            <p class="font-bold text-gray-700">Lavora sulle frazioni complementari e completa le uguaglianze.</p>
-          </div>
-          <div class="ml-11 p-4 bg-white rounded-lg">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <% [
-                { f1_n: "2", f1_d: "6", f2_n: "4", f2_d: "6", res_n: "6", res_d: "6", f2_input: true, res_input: false },
-                { f1_n: "4", f1_d: "9", f2_n: "5", f2_d: "9", res_n: "9", res_d: "9", f2_input: true, res_input: true },
-                { f1_n: "8", f1_d: "13", f2_n: "5", f2_d: "13", res_n: "13", res_d: "13", f1_input: true, res_input: true },
-                { f1_n: "2", f1_d: "10", f2_n: "8", f2_d: "10", res_n: "10", res_d: "10", f2_input: true, res_input: true },
-                { f1_n: "1", f1_d: "2", f2_n: "1", f2_d: "2", res_n: "2", res_d: "2", f2_input: true, res_input: true },
-                { f1_n: "8", f1_d: "15", f2_n: "7", f2_d: "15", res_n: "15", res_d: "15", f1_input: true, res_input: true }
-              ].each do |row| %>
-                <div class="flex items-center justify-center gap-2 font-bold flex-wrap">
-                  <!-- Prima frazione -->
-                  <span class="inline-flex flex-col items-center">
-                    <% if row[:f1_input] %>
-                      <input type="text" data-correct-answer="<%= row[:f1_n] %>" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                    <% else %>
-                      <span class="px-2"><%= row[:f1_n] %></span>
-                    <% end %>
-                    <span class="w-full h-0.5 bg-gray-700 my-0.5"></span>
-                    <% if row[:f1_input] %>
-                      <input type="text" data-correct-answer="<%= row[:f1_d] %>" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                    <% else %>
-                      <span class="px-2"><%= row[:f1_d] %></span>
-                    <% end %>
-                  </span>
-                  <span>+</span>
-                  <!-- Seconda frazione -->
-                  <span class="inline-flex flex-col items-center">
-                    <% if row[:f2_input] %>
-                      <input type="text" data-correct-answer="<%= row[:f2_n] %>" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                    <% else %>
-                      <span class="px-2"><%= row[:f2_n] %></span>
-                    <% end %>
-                    <span class="w-full h-0.5 bg-gray-700 my-0.5"></span>
-                    <% if row[:f2_input] %>
-                      <input type="text" data-correct-answer="<%= row[:f2_d] %>" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                    <% else %>
-                      <span class="px-2"><%= row[:f2_d] %></span>
-                    <% end %>
-                  </span>
-                  <span>=</span>
-                  <!-- Risultato -->
-                  <span class="inline-flex flex-col items-center">
-                    <% if row[:res_input] %>
-                      <input type="text" data-correct-answer="<%= row[:res_n] %>" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                    <% else %>
-                      <span class="px-2"><%= row[:res_n] %></span>
-                    <% end %>
-                    <span class="w-full h-0.5 bg-gray-700 my-0.5"></span>
-                    <% if row[:res_input] %>
-                      <input type="text" data-correct-answer="<%= row[:res_d] %>" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                    <% else %>
-                      <span class="px-2"><%= row[:res_d] %></span>
-                    <% end %>
-                  </span>
-                  <span>= 1</span>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-
-        <!-- Esercizio 4: Frazioni equivalenti -->
-        <div data-controller="equivalent-fractions">
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
-            <p class="font-bold text-gray-700">Scrivi due frazioni equivalenti a ciascuna delle seguenti frazioni.</p>
-          </div>
-          <div class="ml-11 p-4 bg-white rounded-lg">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <% [
-                { num: 4, den: 9 },
-                { num: 2, den: 3 },
-                { num: 15, den: 20 },
-                { num: 12, den: 15 },
-                { num: 4, den: 7 },
-                { num: 3, den: 10 }
-              ].each do |frac| %>
-                <div class="flex items-center justify-center gap-3 font-bold" data-equivalent-fractions-target="fractionGroup" data-original-num="<%= frac[:num] %>" data-original-den="<%= frac[:den] %>">
-                  <span class="inline-flex flex-col items-center">
-                    <span class="px-2"><%= frac[:num] %></span>
-                    <span class="w-full h-0.5 bg-gray-700"></span>
-                    <span class="px-2"><%= frac[:den] %></span>
-                  </span>
-                  <span class="text-pink-600">→</span>
-                  <span class="inline-flex flex-col items-center">
-                    <input type="text" data-equivalent-fractions-target="input" class="w-10 px-1 py-1 border-2 border-purple-300 rounded text-center font-bold">
-                    <span class="w-full h-0.5 bg-gray-700"></span>
-                    <input type="text" data-equivalent-fractions-target="input" class="w-10 px-1 py-1 border-2 border-purple-300 rounded text-center font-bold">
-                  </span>
-                  <span class="inline-flex flex-col items-center">
-                    <input type="text" data-equivalent-fractions-target="input" class="w-10 px-1 py-1 border-2 border-purple-300 rounded text-center font-bold">
-                    <span class="w-full h-0.5 bg-gray-700"></span>
-                    <input type="text" data-equivalent-fractions-target="input" class="w-10 px-1 py-1 border-2 border-purple-300 rounded text-center font-bold">
-                  </span>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-
-        <!-- Esercizio 5: Verifica frazioni equivalenti -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">5</div>
-            <p class="font-bold text-gray-700">Verifica se le seguenti frazioni sono equivalenti riducendole ai minimi termini.</p>
-          </div>
-          <div class="ml-11 space-y-6">
-            <!-- Problema 1: 10/15 = 14/21 -->
-            <div class="p-4 bg-white rounded-lg space-y-4">
-              <div class="flex items-center justify-center gap-4 font-bold flex-wrap">
-                <span class="inline-flex flex-col items-center">
-                  <span class="px-2">10</span>
-                  <span class="w-full h-0.5 bg-gray-700"></span>
-                  <span class="px-2">15</span>
-                </span>
+        <div class="ml-11 p-4 rounded-lg">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <% [
+              { f1_n: 2, f1_d: 6, f2_n: 4, f2_d: 6, res_n: 6, res_d: 6, f2_input: true, res_input: false },
+              { f1_n: 4, f1_d: 9, f2_n: 5, f2_d: 9, res_n: 9, res_d: 9, f2_input: true, res_input: true },
+              { f1_n: 8, f1_d: 13, f2_n: 5, f2_d: 13, res_n: 13, res_d: 13, f1_input: true, res_input: true },
+              { f1_n: 2, f1_d: 10, f2_n: 8, f2_d: 10, res_n: 10, res_d: 10, f2_input: true, res_input: true },
+              { f1_n: 1, f1_d: 2, f2_n: 1, f2_d: 2, res_n: 2, res_d: 2, f2_input: true, res_input: true },
+              { f1_n: 8, f1_d: 15, f2_n: 7, f2_d: 15, res_n: 15, res_d: 15, f1_input: true, res_input: true }
+            ].each do |row| %>
+              <div class="flex items-center justify-center gap-2 flex-wrap">
+                <%= render 'shared/frazione',
+                    num: row[:f1_input] ? nil : row[:f1_n],
+                    den: row[:f1_input] ? nil : row[:f1_d],
+                    num_answer: row[:f1_n].to_s,
+                    den_answer: row[:f1_d].to_s %>
+                <span>+</span>
+                <%= render 'shared/frazione',
+                    num: row[:f2_input] ? nil : row[:f2_n],
+                    den: row[:f2_input] ? nil : row[:f2_d],
+                    num_answer: row[:f2_n].to_s,
+                    den_answer: row[:f2_d].to_s %>
                 <span>=</span>
-                <span class="inline-flex flex-col items-center">
-                  <span class="px-2">14</span>
-                  <span class="w-full h-0.5 bg-gray-700"></span>
-                  <span class="px-2">21</span>
-                </span>
-                <div class="flex gap-2">
-                  <label class="cursor-pointer px-4 py-2 border-2 border-green-400 rounded hover:bg-green-100 transition">
-                    <input type="radio" name="eq1" data-correct-answer="true" class="mr-1"> Sì
-                  </label>
-                  <label class="cursor-pointer px-4 py-2 border-2 border-red-400 rounded hover:bg-red-100 transition">
-                    <input type="radio" name="eq1" data-correct-answer="false" class="mr-1"> No
-                  </label>
-                </div>
+                <%= render 'shared/frazione',
+                    num: row[:res_input] ? nil : row[:res_n],
+                    den: row[:res_input] ? nil : row[:res_d],
+                    num_answer: row[:res_n].to_s,
+                    den_answer: row[:res_d].to_s %>
+                <span>= 1</span>
               </div>
-              <div class="flex items-center justify-center gap-6 flex-wrap text-gray-600">
-                <div class="flex items-center gap-2 font-bold">
-                  <span class="inline-flex flex-col items-center">
-                    <span class="px-2">10</span>
-                    <span class="w-full h-0.5 bg-gray-500"></span>
-                    <span class="px-2">15</span>
-                  </span>
-                  <span class="inline-flex flex-col items-center text-cyan-600">
-                    <span>:5</span>
-                    <input type="text" data-correct-answer=":5" class="w-10 p-0.5 border-2 border-cyan-300 rounded text-center font-bold">
-                  </span>
-                  <span class="text-pink-600">→</span>
-                  <span class="inline-flex flex-col items-center">
-                    <input type="text" data-correct-answer="2" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                    <span class="w-full h-0.5 bg-gray-700"></span>
-                    <input type="text" data-correct-answer="3" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                  </span>
-                </div>
-                <div class="flex items-center gap-2 font-bold">
-                  <span class="inline-flex flex-col items-center">
-                    <span class="px-2">14</span>
-                    <span class="w-full h-0.5 bg-gray-500"></span>
-                    <span class="px-2">21</span>
-                  </span>
-                  <span class="inline-flex flex-col items-center text-cyan-600">
-                    <span>:7</span>
-                    <input type="text" data-correct-answer=":7" class="w-10 p-0.5 border-2 border-cyan-300 rounded text-center font-bold">
-                  </span>
-                  <span class="text-pink-600">→</span>
-                  <span class="inline-flex flex-col items-center">
-                    <input type="text" data-correct-answer="2" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                    <span class="w-full h-0.5 bg-gray-700"></span>
-                    <input type="text" data-correct-answer="3" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Problema 2: 20/28 = 30/48 -->
-            <div class="p-4 bg-white rounded-lg space-y-4">
-              <div class="flex items-center justify-center gap-4 font-bold flex-wrap">
-                <span class="inline-flex flex-col items-center">
-                  <span class="px-2">20</span>
-                  <span class="w-full h-0.5 bg-gray-700"></span>
-                  <span class="px-2">28</span>
-                </span>
-                <span>=</span>
-                <span class="inline-flex flex-col items-center">
-                  <span class="px-2">30</span>
-                  <span class="w-full h-0.5 bg-gray-700"></span>
-                  <span class="px-2">48</span>
-                </span>
-                <div class="flex gap-2">
-                  <label class="cursor-pointer px-4 py-2 border-2 border-green-400 rounded hover:bg-green-100 transition">
-                    <input type="radio" name="eq2" data-correct-answer="false" class="mr-1"> Sì
-                  </label>
-                  <label class="cursor-pointer px-4 py-2 border-2 border-red-400 rounded hover:bg-red-100 transition">
-                    <input type="radio" name="eq2" data-correct-answer="true" class="mr-1"> No
-                  </label>
-                </div>
-              </div>
-              <div class="flex items-center justify-center gap-6 flex-wrap text-gray-600">
-                <div class="flex items-center gap-2 font-bold">
-                  <span class="inline-flex flex-col items-center">
-                    <span class="px-2">20</span>
-                    <span class="w-full h-0.5 bg-gray-500"></span>
-                    <span class="px-2">28</span>
-                  </span>
-                  <span class="inline-flex flex-col items-center text-cyan-600">
-                    <span>:4</span>
-                    <input type="text" data-correct-answer=":4" class="w-10 p-0.5 border-2 border-cyan-300 rounded text-center font-bold">
-                  </span>
-                  <span class="text-pink-600">→</span>
-                  <span class="inline-flex flex-col items-center">
-                    <input type="text" data-correct-answer="5" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                    <span class="w-full h-0.5 bg-gray-700"></span>
-                    <input type="text" data-correct-answer="7" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                  </span>
-                </div>
-                <div class="flex items-center gap-2 font-bold">
-                  <span class="inline-flex flex-col items-center">
-                    <span class="px-2">30</span>
-                    <span class="w-full h-0.5 bg-gray-500"></span>
-                    <span class="px-2">48</span>
-                  </span>
-                  <span class="inline-flex flex-col items-center text-cyan-600">
-                    <span>:6</span>
-                    <input type="text" data-correct-answer=":6" class="w-10 p-0.5 border-2 border-cyan-300 rounded text-center font-bold">
-                  </span>
-                  <span class="text-pink-600">→</span>
-                  <span class="inline-flex flex-col items-center">
-                    <input type="text" data-correct-answer="5" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                    <span class="w-full h-0.5 bg-gray-700"></span>
-                    <input type="text" data-correct-answer="8" class="w-10 px-1 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                  </span>
-                </div>
-              </div>
-            </div>
+            <% end %>
           </div>
         </div>
+      </div>
 
-        <!-- Esercizio 6: Cerchia frazioni equivalenti -->
-        <div data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">6</div>
-            <p class="font-bold text-gray-700">
-              Cerchia le frazioni equivalenti a
-              <span class="inline-flex flex-col items-center mx-1 align-middle font-bold">
-                <span>1</span>
-                <span class="border-t-2 border-gray-700 px-2">3</span>
-              </span>.
-            </p>
+      <!-- Esercizio 4: Frazioni equivalenti -->
+      <div data-controller="equivalent-fractions">
+        <div class="flex items-center gap-3 mb-4">
+          <%= numero_esercizio_badge(4, colore: "blue-500") %>
+          <p class="font-bold text-gray-700">Scrivi due frazioni equivalenti a ciascuna delle seguenti frazioni.</p>
+        </div>
+        <div class="ml-11 p-4 rounded-lg">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <% [
+              { num: 4, den: 9 },
+              { num: 2, den: 3 },
+              { num: 15, den: 20 },
+              { num: 12, den: 15 },
+              { num: 4, den: 7 },
+              { num: 3, den: 10 }
+            ].each do |frac| %>
+              <div class="flex items-center justify-center gap-3 font-bold" data-equivalent-fractions-target="fractionGroup" data-original-num="<%= frac[:num] %>" data-original-den="<%= frac[:den] %>">
+                <%= render 'shared/frazione', num: frac[:num], den: frac[:den] %>
+                <span class="text-pink-600">→</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "", den_answer: "", input_data: "equivalent-fractions-target=input" %>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "", den_answer: "", input_data: "equivalent-fractions-target=input" %>
+              </div>
+            <% end %>
           </div>
-          <div class="hidden">
-            <span data-word-highlighter-target="colorBox" data-color="yellow"></span>
-          </div>
-          <div class="ml-11 p-4 bg-white rounded-lg">
-            <div class="flex flex-wrap justify-center items-center gap-6 font-bold cursor-pointer">
-              <% [
-                { num: 4, den: 12, correct: true },
-                { num: 6, den: 15, correct: false },
-                { num: 8, den: 12, correct: false },
-                { num: 12, den: 36, correct: true },
-                { num: 15, den: 45, correct: true },
-                { num: 8, den: 16, correct: false },
-                { num: 7, den: 21, correct: true },
-                { num: 3, den: 9, correct: true }
-              ].each do |frac| %>
-                <span data-word-highlighter-target="word" data-correct="<%= frac[:correct] ? 'yellow' : 'false' %>" data-action="click->word-highlighter#toggleHighlight" class="px-2 py-1 inline-flex flex-col items-center hover:bg-yellow-100 transition rounded">
-                  <span><%= frac[:num] %></span>
-                  <span class="border-t-2 border-gray-700 px-2"><%= frac[:den] %></span>
+        </div>
+      </div>
+
+      <!-- Esercizio 5: Verifica frazioni equivalenti -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <%= numero_esercizio_badge(5, colore: "blue-500") %>
+          <p class="font-bold text-gray-700">Verifica se le seguenti frazioni sono equivalenti riducendole ai minimi termini.</p>
+        </div>
+        <div class="ml-11 space-y-6">
+          <!-- Problema 1: 10/15 = 14/21 -->
+          <div class="p-4 rounded-lg space-y-4">
+            <div class="flex items-center justify-center gap-4 font-bold flex-wrap">
+              <%= render 'shared/frazione', num: 10, den: 15 %>
+              <span>=</span>
+              <%= render 'shared/frazione', num: 14, den: 21 %>
+              <div class="flex gap-2">
+                <label class="cursor-pointer px-4 py-2 border-2 border-green-400 rounded hover:bg-green-100 transition">
+                  <input type="radio" name="eq1" data-correct-answer="true" class="mr-1"> Sì
+                </label>
+                <label class="cursor-pointer px-4 py-2 border-2 border-red-400 rounded hover:bg-red-100 transition">
+                  <input type="radio" name="eq1" data-correct-answer="false" class="mr-1"> No
+                </label>
+              </div>
+            </div>
+            <div class="flex items-center justify-center gap-6 flex-wrap text-gray-600">
+              <div class="flex items-center gap-2 font-bold">
+                <%= render 'shared/frazione', num: 10, den: 15, line_color: "gray-500" %>
+                <span class="inline-flex flex-col items-center text-cyan-600">
+                  <span>:5</span>
+                  <input type="text" data-correct-answer=":5" class="w-10 p-0.5 border-2 border-cyan-300 rounded text-center">
                 </span>
-              <% end %>
+                <span class="text-pink-600">→</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "2", den_answer: "3" %>
+              </div>
+              <div class="flex items-center gap-2 font-bold">
+                <%= render 'shared/frazione', num: 14, den: 21, line_color: "gray-500" %>
+                <span class="inline-flex flex-col items-center text-cyan-600">
+                  <span>:7</span>
+                  <input type="text" data-correct-answer=":7" class="w-10 p-0.5 border-2 border-cyan-300 rounded text-center">
+                </span>
+                <span class="text-pink-600">→</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "2", den_answer: "3" %>
+              </div>
+            </div>
+          </div>
+
+          <!-- Problema 2: 20/28 = 30/48 -->
+          <div class="p-4 rounded-lg space-y-4">
+            <div class="flex items-center justify-center gap-4 font-bold flex-wrap">
+              <%= render 'shared/frazione', num: 20, den: 28 %>
+              <span>=</span>
+              <%= render 'shared/frazione', num: 30, den: 48 %>
+              <div class="flex gap-2">
+                <label class="cursor-pointer px-4 py-2 border-2 border-green-400 rounded hover:bg-green-100 transition">
+                  <input type="radio" name="eq2" data-correct-answer="false" class="mr-1"> Sì
+                </label>
+                <label class="cursor-pointer px-4 py-2 border-2 border-red-400 rounded hover:bg-red-100 transition">
+                  <input type="radio" name="eq2" data-correct-answer="true" class="mr-1"> No
+                </label>
+              </div>
+            </div>
+            <div class="flex items-center justify-center gap-6 flex-wrap text-gray-600">
+              <div class="flex items-center gap-2 font-bold">
+                <%= render 'shared/frazione', num: 20, den: 28, line_color: "gray-500" %>
+                <span class="inline-flex flex-col items-center text-cyan-600">
+                  <span>:4</span>
+                  <input type="text" data-correct-answer=":4" class="w-10 p-0.5 border-2 border-cyan-300 rounded text-center">
+                </span>
+                <span class="text-pink-600">→</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "5", den_answer: "7" %>
+              </div>
+              <div class="flex items-center gap-2 font-bold">
+                <%= render 'shared/frazione', num: 30, den: 48, line_color: "gray-500" %>
+                <span class="inline-flex flex-col items-center text-cyan-600">
+                  <span>:6</span>
+                  <input type="text" data-correct-answer=":6" class="w-10 p-0.5 border-2 border-cyan-300 rounded text-center">
+                </span>
+                <span class="text-pink-600">→</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "5", den_answer: "8" %>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+      <!-- Esercizio 6: Cerchia frazioni equivalenti -->
+      <div data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
+        <div class="flex items-center gap-3 mb-4">
+          <%= numero_esercizio_badge(6, colore: "blue-500") %>
+          <p class="font-bold text-gray-700">
+            Cerchia le frazioni equivalenti a
+            <%= render 'shared/frazione', num: 1, den: 3, bold: true %>.
+          </p>
+        </div>
+        <div class="hidden">
+          <span data-word-highlighter-target="colorBox" data-color="yellow"></span>
+        </div>
+        <div class="ml-11 p-4 rounded-lg">
+          <div class="flex flex-wrap justify-center items-center gap-6 font-bold cursor-pointer">
+            <% [
+              { num: 4, den: 12, correct: true },
+              { num: 6, den: 15, correct: false },
+              { num: 8, den: 12, correct: false },
+              { num: 12, den: 36, correct: true },
+              { num: 15, den: 45, correct: true },
+              { num: 8, den: 16, correct: false },
+              { num: 7, den: 21, correct: true },
+              { num: 3, den: 9, correct: true }
+            ].each do |frac| %>
+              <span data-word-highlighter-target="word" data-correct="<%= frac[:correct] ? 'yellow' : 'false' %>" data-action="click->word-highlighter#toggleHighlight" class="px-2 py-1 inline-flex flex-col items-center hover:bg-yellow-100 transition rounded">
+                <span><%= frac[:num] %></span>
+                <span class="border-t-2 border-gray-700 px-2"><%= frac[:den] %></span>
+              </span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- Exercise Controls -->
+  <%= render 'shared/exercise_controls', color: 'blue' %>
+
 </div>
