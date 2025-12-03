@@ -27,7 +27,7 @@ Revisionare la pagina $ARGUMENTS seguendo i pattern stabiliti nelle pagine 56-59
 
   <div class="space-y-6">
     <!-- Contenuto -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>
 ```
@@ -59,7 +59,7 @@ Revisionare la pagina $ARGUMENTS seguendo i pattern stabiliti nelle pagine 56-59
 
 **Due colonne con divisore:**
 ```erb
-<div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-<%= @pagina.base_color %>-600 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-<%= @pagina.base_color %>-600">
 ```
 
 **Testo + immagine:**
@@ -75,7 +75,7 @@ Revisionare la pagina $ARGUMENTS seguendo i pattern stabiliti nelle pagine 56-59
 ## BOX COLORATI
 
 - **Regola (rosa):** `bg-pink-100 rounded-2xl`
-- **Problema (celeste):** `bg-cyan-50 rounded-lg`
+- **Problema (celeste):** `bg-cyan-50`
 - **Risposta:** `bg-cyan-100 rounded-lg`
 - **Esercizi:** `bg-orange-100 rounded-lg`
 
