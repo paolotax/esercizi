@@ -5,85 +5,212 @@
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <div class="space-y-6">
+  <div class="space-y-6 border-3 border-custom-sky rounded-2xl">
     <!-- Numeri primi -->
     <div class="p-4 md:p-6">
       <p class="text-gray-800 mb-4">
-        <span class="text-pink-600">•</span> I numeri naturali che hanno esattamente due divisori sono detti <strong class="text-<%= @pagina.base_color %>-600">numeri primi</strong>.<br>
+        <span class="text-custom-pink font-bold">•</span> I numeri naturali che hanno esattamente due divisori sono detti <strong>numeri primi</strong>.<br>
         Questi divisori sono <strong>1</strong> e il numero stesso.
       </p>
-      <ul class="list-disc list-inside space-y-2 text-gray-800 ml-4">
-        <li><strong class="text-red-600">0</strong> NON è un numero primo perché ha tanti divisori;</li>
-        <li><strong class="text-red-600">1</strong> NON è un numero primo perché ha solo un divisore, se stesso.</li>
+      <ul class="list-disc marker:text-custom-pink ml-6 space-y-1 text-gray-800">
+        <li><strong>0</strong> NON è un numero primo perché ha tanti divisori;</li>
+        <li><strong>1</strong> NON è un numero primo perché ha solo un divisore, se stesso.</li>
       </ul>
     </div>
 
     <!-- Il crivello di Eratostene -->
-    <div class="p-4 md:p-6 bg-white border-3 border-<%= @pagina.base_color %>-400 rounded-2xl">
-      <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-4">Il crivello di Eratostene</h2>
-      <p class="text-gray-800 mb-4">
-        Puoi trovare i numeri primi minori di 100 usando il "crivello (cioè setaccio) di Eratostene". Questo sistema fu infatti inventato da Eratostene di Cirene, un matematico, astronomo e poeta greco del periodo ellenistico (276 a.C.-194 a.C.).
-      </p>
-      <p class="font-bold text-gray-800 mb-2">Segui le indicazioni.</p>
-      <ul class="list-disc list-inside space-y-2 text-gray-800 mb-4 ml-4">
-        <li>Cancella tutti i multipli di <strong class="text-<%= @pagina.base_color %>-600">2</strong>, tranne <strong class="text-<%= @pagina.base_color %>-600">2</strong>.</li>
-        <li>Cancella tutti i multipli di <strong class="text-<%= @pagina.base_color %>-600">3</strong>, tranne <strong class="text-<%= @pagina.base_color %>-600">3</strong>.</li>
-        <li>Cancella tutti i multipli di <strong class="text-<%= @pagina.base_color %>-600">5</strong>, tranne <strong class="text-<%= @pagina.base_color %>-600">5</strong>.</li>
-        <li>Cancella tutti i multipli di <strong class="text-<%= @pagina.base_color %>-600">7</strong>, tranne <strong class="text-<%= @pagina.base_color %>-600">7</strong>.</li>
-      </ul>
-      <p class="text-gray-800 mb-4">
-        I numeri rimasti sono i <strong class="text-<%= @pagina.base_color %>-600">numeri primi minori di 100</strong>.
-      </p>
-
-      <%= image_tag "nvi5_mat/p048/p048_01.jpg", class: "mx-auto my-4", alt: "Crivello di Eratostene" %>
-    </div>
-
-    <!-- Numeri composti -->
-    <div class="p-4 md:p-6 bg-pink-100 rounded-2xl">
-      <p class="text-gray-800 mb-4">
-        <span class="text-pink-600">•</span> Tranne <strong>0</strong> e <strong>1</strong>, i numeri che <strong class="text-green-700">non sono primi</strong> si chiamano <strong class="text-green-700">numeri composti</strong>.<br>
-        Ogni numero composto può essere scomposto come un prodotto di fattori che sono tutti <strong class="text-green-700">fattori primi</strong>.
-      </p>
-    </div>
-
-    <!-- Scomposizione guidata -->
-    <div class="p-4 md:p-6 bg-white border-3 border-green-400 rounded-2xl">
-      <p class="font-bold text-gray-800 mb-4">Leggi e completa con i numeri mancanti.</p>
+    <div class="p-4 md:p-6">
+      <h2 class="font-bold text-custom-pink mb-4 italic">Il crivello di Eratostene</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="space-y-3">
-          <p class="text-gray-800">
-            <span class="text-pink-600">•</span> Per quale numero primo puoi dividere 54? Per 2: scrivi 2 nel cerchietto e il risultato 27 nel rettangolo.
+        <div>
+          <p class="text-gray-800 mb-4">
+            Puoi trovare i numeri primi minori di 100 usando il "crivello (cioè setaccio) di Eratostene". Questo sistema fu infatti inventato da Eratostene di Cirene, un matematico, astronomo e poeta greco del periodo ellenistico (276 a.C.-194 a.C.).
           </p>
+          <p class="font-bold text-gray-800 mb-2">Segui le indicazioni.</p>
+          <ul class="list-disc marker:text-custom-pink ml-6 space-y-1 text-gray-800 mb-4">
+            <li>Cancella tutti i multipli di <strong>2</strong>, tranne <strong>2</strong>.</li>
+            <li>Cancella tutti i multipli di <strong>3</strong>, tranne <strong>3</strong>.</li>
+            <li>Cancella tutti i multipli di <strong>5</strong>, tranne <strong>5</strong>.</li>
+            <li>Cancella tutti i multipli di <strong>7</strong>, tranne <strong>7</strong>.</li>
+          </ul>
           <p class="text-gray-800">
-            <span class="text-pink-600">•</span> Per quale numero primo puoi dividere 27? Per 3: scrivi 3 nel cerchietto e il risultato
-            <input type="text" data-correct-answer="9" class="w-12 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
-            nel rettangolo.
-          </p>
-          <p class="text-gray-800">
-            <span class="text-pink-600">•</span> Per quale numero primo puoi dividere
-            <input type="text" data-correct-answer="9" class="w-12 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">?
-            Per 3: scrivi 3 nel cerchietto e il risultato
-            <input type="text" data-correct-answer="3" class="w-12 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
-            nell'altro cerchietto. La scomposizione è conclusa.
+            I numeri rimasti sono i <strong>numeri primi minori di 100</strong>.
           </p>
         </div>
-        <div class="flex items-center justify-center">
-          <div class="text-center p-4 bg-green-50 rounded-lg">
-            <p class="text-gray-800 mb-2">Quindi:</p>
-            <p class="text-xl font-bold text-green-700 mb-3">54 = 2 × 3 × 3 × 3</p>
-            <p class="text-gray-800">Con le <strong>potenze</strong>:</p>
-            <p class="text-xl font-bold text-green-700">54 = 2 × 3³</p>
-          </div>
+        <div class="overflow-x-auto" data-controller="word-highlighter">
+          <table class="border-collapse bg-white">
+            <tbody>
+              <tr>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span class="line-through text-gray-400">1</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">2</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">3</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">4</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">5</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">6</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">7</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">8</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">9</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">10</span></td>
+              </tr>
+              <tr>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">11</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">12</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">13</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">14</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">15</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">16</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">17</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">18</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">19</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">20</span></td>
+              </tr>
+              <tr>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">21</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">22</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">23</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">24</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">25</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">26</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">27</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">28</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">29</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">30</span></td>
+              </tr>
+              <tr>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">31</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">32</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">33</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">34</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">35</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">36</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">37</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">38</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">39</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">40</span></td>
+              </tr>
+              <tr>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">41</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">42</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">43</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">44</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">45</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">46</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">47</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">48</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">49</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">50</span></td>
+              </tr>
+              <tr>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">51</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">52</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">53</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">54</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">55</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">56</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">57</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">58</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">59</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">60</span></td>
+              </tr>
+              <tr>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">61</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">62</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">63</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">64</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">65</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">66</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">67</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">68</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">69</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">70</span></td>
+              </tr>
+              <tr>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">71</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">72</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">73</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">74</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">75</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">76</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">77</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">78</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">79</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">80</span></td>
+              </tr>
+              <tr>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">81</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">82</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">83</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">84</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">85</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">86</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">87</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">88</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">89</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">90</span></td>
+              </tr>
+              <tr>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">91</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">92</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">93</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">94</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">95</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">96</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">97</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">98</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">99</span></td>
+                <td class="border-2 border-sky-light w-9 h-9 text-center"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">100</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
 
-    <!-- Quaderno -->
-    <div class="p-4 text-right">
-      <span class="text-gray-600">Quaderno esercizi →</span>
-      <span class="text-<%= @pagina.base_color %>-600 font-bold">pp. 199, 201</span>
+    <!-- Numeri composti -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-800">
+        <span class="text-custom-pink font-bold">•</span> Tranne <strong>0</strong> e <strong>1</strong>, i numeri che <strong>non sono primi</strong> si chiamano <strong>numeri composti</strong>.<br>
+        Ogni numero composto può essere scomposto come un prodotto di fattori che sono tutti <strong>fattori primi</strong>.
+      </p>
     </div>
 
-    <%= render 'shared/exercise_controls' %>
+    <!-- Scomposizione guidata -->
+    <div class="p-4 md:p-6">
+      <p class="font-bold text-gray-800 mb-4">Leggi e completa con i numeri mancanti.</p>
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="flex-1 space-y-3">
+          <p class="text-gray-800">
+            <span class="text-custom-pink font-bold">•</span> Per quale numero primo puoi dividere 54? Per 2: scrivi 2 nel cerchietto e il risultato 27 nel rettangolo.
+          </p>
+          <p class="text-gray-800">
+            <span class="text-custom-pink font-bold">•</span> Per quale numero primo puoi dividere 27? Per 3: scrivi 3 nel cerchietto e il risultato
+            <input type="text" data-correct-answer="9" class="w-12 px-2 py-1 border-b-2 border-dotted text-center font-bold bg-white">
+            nel rettangolo.
+          </p>
+          <p class="text-gray-800">
+            <span class="text-custom-pink font-bold">•</span> Per quale numero primo puoi dividere
+            <input type="text" data-correct-answer="9" class="w-12 px-2 py-1 border-b-2 border-dotted text-center font-bold bg-white">?
+            Per 3: scrivi 3 nel cerchietto e il risultato
+            <input type="text" data-correct-answer="3" class="w-12 px-2 py-1 border-b-2 border-dotted text-center font-bold bg-white">
+            nell'altro cerchietto. La scomposizione è conclusa.
+          </p>
+          <div class="pt-4">
+            <p class="text-gray-800">Quindi: <strong>54 = 2 × 3 × 3 × 3</strong></p>
+            <p class="text-gray-800 mt-2">Con le <strong>potenze</strong>: <strong>54 = 2 × 3³</strong></p>
+          </div>
+        </div>
+        <div class="flex-shrink-0 self-end">
+          <%= image_tag "nvi5_mat/p048/p048_01.jpg", class: "max-w-44", alt: "Scomposizione di 54" %>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- Quaderno -->
+  <div class="p-4 text-right">
+    <span class="text-gray-600">Quaderno esercizi →</span>
+    <span class="text-<%= @pagina.base_color %>-600 font-bold">pp. 199, 201</span>
+  </div>
+
+  <%= render 'shared/exercise_controls' %>
 </div>

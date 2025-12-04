@@ -35,6 +35,24 @@ Revisionare la pagina $ARGUMENTS seguendo i pattern delle pagine 68-71.
 
 ---
 
+## FONT SIZE (IMPORTANTE!)
+
+**NON usare classi di dimensione testo fisse** come `text-xs`, `text-sm`, `text-lg`, `text-xl`, ecc.
+
+Il controller `font-controls` gestisce la dimensione del testo dinamicamente. Se usi classi fisse, il ridimensionamento non funzionerà correttamente.
+
+```erb
+<!-- SBAGLIATO! -->
+<span class="text-xl font-bold">24</span>
+<p class="text-sm text-gray-600">Riassumendo:</p>
+
+<!-- CORRETTO -->
+<span class="font-bold">24</span>
+<p class="text-gray-600">Riassumendo:</p>
+```
+
+---
+
 ## BADGE ESERCIZI (IMPORTANTE!)
 
 **Helper disponibili (usano @pagina.base_color automaticamente):**
@@ -119,6 +137,7 @@ Colori personalizzati disponibili (definiti in `@theme`):
 | Classe | Colore | Uso |
 |--------|--------|-----|
 | `custom-pink` | #C657A0 | Rosa/fucsia per evidenziazioni |
+| `pink-light` | #EFD9E9 | Rosa chiaro per box regole/spiegazioni |
 | `custom-blue` | #C7EAFB | Celeste chiaro per sfondi |
 | `custom-sky` | #0095DA | Azzurro vivace |
 | `sky-light` | #C7EAFB | Alias per celeste chiaro |
@@ -212,7 +231,13 @@ Per colorare i bullet delle liste usa `marker:`:
 ## TITOLI
 
 ```erb
+<!-- Titolo sezione con colore dinamico -->
 <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-4 italic">Titolo sezione</h2>
+
+<!-- Titolo sezione con colore custom pink -->
+<h2 class="font-bold text-custom-pink mb-4 italic">Titolo sezione</h2>
+
+<!-- Bullet istruzione -->
 <p><strong><span class="text-pink-600">•</span> Istruzione</strong></p>
 ```
 
@@ -222,9 +247,29 @@ Per colorare i bullet delle liste usa `marker:`:
 
 - **Teoria/introduzione (celeste):** `bg-custom-blue` oppure `bg-custom-blue rounded-lg`
 - **Regola/evidenziazione (bordo rosa):** `bg-white rounded-2xl border-3 border-custom-pink`
+- **Regola/spiegazione (sfondo rosa chiaro):** `p-4 bg-pink-light rounded-3xl` (colore #EFD9E9)
 - **Esercizi:** `bg-orange-100 rounded-lg`
 - **Divisore esercizi:** `divide-custom-pink` o `divide-<%= @pagina.base_color %>-300`
 - **Esempio:** `p-3 mb-4` (senza background)
+
+**Layout spiegazione + regola (2 colonne):**
+```erb
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+  <p class="text-gray-800">
+    Testo descrittivo a sinistra...
+  </p>
+  <div class="p-4 bg-pink-light rounded-3xl">
+    <p class="text-gray-800">
+      Per moltiplicare un <strong>numero naturale</strong> per 10, 100, <span class="whitespace-nowrap">1 000</span> basta <strong>aggiungere uno</strong>, <strong>due</strong>, <strong>tre zeri</strong> alla fine del numero.
+    </p>
+  </div>
+</div>
+```
+
+**Numeri grandi senza a capo:**
+```erb
+<span class="whitespace-nowrap">1 000</span>
+```
 
 ---
 
@@ -254,10 +299,22 @@ Per colorare i bullet delle liste usa `marker:`:
 
 **word-highlighter:** Per cerchiare/sottolineare elementi
 ```erb
+<!-- Monocolor: data-correct="true" o "false" -->
+<div data-controller="word-highlighter">
+  <span data-word-highlighter-target="word" data-correct="true"
+        data-action="click->word-highlighter#toggleHighlight"
+        class="cursor-pointer hover:opacity-80">124</span>
+  <span data-word-highlighter-target="word" data-correct="false"
+        data-action="click->word-highlighter#toggleHighlight"
+        class="cursor-pointer hover:opacity-80">107</span>
+</div>
+
+<!-- Multicolor: data-correct è il nome colore (red, green, blue, ecc.) -->
 <div data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
   <span data-word-highlighter-target="word" data-correct="green"
         data-action="click->word-highlighter#toggleHighlight"
-        class="border-2 border-gray-300 rounded-lg px-3 py-2 cursor-pointer">
+        class="cursor-pointer hover:opacity-80">parola</span>
+</div>
 ```
 
 **equivalent-fractions:** Per frazioni equivalenti
