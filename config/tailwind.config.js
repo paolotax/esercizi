@@ -12,6 +12,14 @@ module.exports = {
     extend: {
       colors: {
         'sky-light': '#C7EAFB',
+        'custom-pink': '#C657A0',
+        'custom-blue': '#C7EAFB',
+        'custom-green': '#28A745',
+        'custom-yellow': '#FFC107',
+        'custom-purple': '#6F42C1',
+        'custom-orange': '#FD7E14',
+        'custom-red': '#DC3545',
+        'custom-gray': '#6C757D',
       },
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],

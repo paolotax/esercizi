@@ -6,91 +6,97 @@
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
-    <!-- Definizione -->
-    <div class="p-4 md:p-6">
-      <p class="text-gray-800 mb-4">
-        Un'<strong class="text-<%= @pagina.base_color %>-600">espressione aritmetica</strong> è un insieme di numeri legati tra loro da segni di operazione.
-      </p>
-      <p class="text-gray-800">
-        Per calcolare il valore di un'espressione, bisogna conoscere le <strong class="text-<%= @pagina.base_color %>-600">regole</strong> che stabiliscono l'<strong class="text-<%= @pagina.base_color %>-600">ordine</strong> in cui le <strong class="text-<%= @pagina.base_color %>-600">operazioni</strong> vanno eseguite.
-      </p>
-      <p class="text-gray-700 mt-4">
+
+    <div class="p-4 md:p-6 bg-white border-3 border-blue-500 rounded-2xl">
+      <!-- Definizione -->
+      <div class="p-4 md:px-6 -ml-4 md:-ml-6 -mt-4 md:-mt-6 bg-pink-100 rounded-2xl">
+        <p class="text-gray-800">
+          Un'<strong>espressione aritmetica</strong> è un insieme di numeri legati tra loro da segni di operazione.
+        </p>
+        <p class="text-gray-800">
+          Per calcolare il valore di un'espressione, bisogna conoscere le <strong>regole</strong> che stabiliscono l'<strong>ordine</strong> in cui le <strong>operazioni</strong> vanno eseguite.
+        </p>
+      </div>
+
+      <p class="text-gray-700 mt-4 mb-6">
         <span class="text-pink-600">•</span> Un'espressione aritmetica può contenere parentesi oppure no.
       </p>
-    </div>
 
-    <!-- Regole senza parentesi -->
-    <div class="p-4 md:p-6 bg-white border-3 border-<%= @pagina.base_color %>-400 rounded-2xl">
-      <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-6">Regole per le espressioni senza parentesi</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="p-4 bg-pink-100 rounded-lg">
-          <p class="text-gray-800 mb-4">
-            <span class="text-pink-600">•</span> Se ci sono solo <strong class="text-<%= @pagina.base_color %>-600">addizioni e sottrazioni</strong>, esegui le operazioni <strong class="text-<%= @pagina.base_color %>-600">nell'ordine</strong> in cui sono scritte.
-          </p>
-          <div class="p-3 bg-white rounded-lg font-mono text-sm">
-            <p class="mb-1"><span class="underline">14 + 6</span> – 5 + 3 =</p>
-            <p class="mb-1"><span class="underline">20 – 5</span> + 3 =</p>
-            <p>15 + 3 = <strong>18</strong></p>
+      <!-- Regole senza parentesi -->
+      <div class="">
+        <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-2 italic">Regole per le espressioni senza parentesi</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 divide-x divide-gray-300 mb-6">
+          <div class="">
+            <p class="text-gray-800 mb-4">
+              <span class="text-pink-600">•</span> Se ci sono solo <strong>addizioni e sottrazioni</strong>, esegui le operazioni <strong>nell'ordine</strong> in cui sono scritte.
+            </p>
+            <div class="p-3">
+              <p class="mb-1"><span class="underline">14 + 6</span> – 5 + 3 =</p>
+              <p class="mb-1"><span class="underline">20 – 5</span> + 3 =</p>
+              <p>15 + 3 = <strong>18</strong></p>
+            </div>
+          </div>
+          <div class="px-4 ">
+            <p class="text-gray-800 mb-4">
+              <span class="text-pink-600">•</span> Se ci sono solo <strong>moltiplicazioni e divisioni</strong>, esegui le operazioni <strong>nell'ordine</strong> in cui sono scritte.
+            </p>
+            <div class="p-3">
+              <p class="mb-1"><span class="underline">14 × 3</span> : 2 × 5 =</p>
+              <p class="mb-1"><span class="underline">42 : 2</span> × 5 =</p>
+              <p>21 × 5 = <strong>105</strong></p>
+            </div>
           </div>
         </div>
-        <div class="p-4 bg-pink-100 rounded-lg">
+        <div class="">
           <p class="text-gray-800 mb-4">
-            <span class="text-pink-600">•</span> Se ci sono solo <strong class="text-<%= @pagina.base_color %>-600">moltiplicazioni e divisioni</strong>, esegui le operazioni <strong class="text-<%= @pagina.base_color %>-600">nell'ordine</strong> in cui sono scritte.
+            <span class="text-pink-600">•</span> Se ci sono moltiplicazioni, divisioni, addizioni e sottrazioni, esegui <strong>prima le moltiplicazioni e le divisioni</strong>, poi le <strong>addizioni e le sottrazioni</strong>.
           </p>
-          <div class="p-3 bg-white rounded-lg font-mono text-sm">
-            <p class="mb-1"><span class="underline">14 × 3</span> : 2 × 5 =</p>
-            <p class="mb-1"><span class="underline">42 : 2</span> × 5 =</p>
-            <p>21 × 5 = <strong>105</strong></p>
+          <div class="p-3">
+            <p class="mb-1">25 + <span class="text-<%= @pagina.base_color %>-600 font-bold underline">2 × 3</span> – 8 + <span class="text-<%= @pagina.base_color %>-600 font-bold underline">4 : 2</span> =</p>
+            <p class="mb-1">25 + <span class="text-<%= @pagina.base_color %>-600 font-bold">6</span> – 8 + <span class="text-<%= @pagina.base_color %>-600 font-bold">2</span> =</p>
+            <p class="mb-1">31 – 8 + 2 =</p>
+            <p>23 + 2 = <strong>25</strong></p>
           </div>
         </div>
       </div>
-      <div class="p-4 bg-cyan-100 rounded-lg">
+
+      <!-- Regole con parentesi -->
+      <div class="mt-6">
+        <h2 class="font-bold text-<%= @pagina.base_color %>-600 italic mb-2">Regole per le espressioni con le parentesi</h2>
         <p class="text-gray-800 mb-4">
-          <span class="text-pink-600">•</span> Se ci sono moltiplicazioni, divisioni, addizioni e sottrazioni, esegui <strong class="text-<%= @pagina.base_color %>-600">prima le moltiplicazioni e le divisioni</strong>, poi le <strong class="text-<%= @pagina.base_color %>-600">addizioni e le sottrazioni</strong>.
+          Le <strong>parentesi</strong> stabiliscono l'<strong>ordine</strong> in cui devi eseguire le operazioni:
         </p>
-        <div class="p-3 bg-white rounded-lg font-mono text-sm">
-          <p class="mb-1">25 + <span class="text-<%= @pagina.base_color %>-600 font-bold underline">2 × 3</span> – 8 + <span class="text-<%= @pagina.base_color %>-600 font-bold underline">4 : 2</span> =</p>
-          <p class="mb-1">25 + <span class="text-<%= @pagina.base_color %>-600 font-bold">6</span> – 8 + <span class="text-<%= @pagina.base_color %>-600 font-bold">2</span> =</p>
-          <p class="mb-1">31 – 8 + 2 =</p>
-          <p>23 + 2 = <strong>25</strong></p>
+        <div class="flex flex-col md:flex-row pap-6">
+          <div class="">
+            <ul class="list-disc list-inside space-y-2 mb-6 text-gray-800">
+              <li>prima le operazioni dentro le parentesi <strong class="text-orange-700">tonde ( )</strong>;</li>
+              <li>poi le operazioni dentro le parentesi <strong class="text-blue-700">quadre [ ]</strong>;</li>
+              <li>infine le operazioni dentro le parentesi <strong class="text-purple-600">graffe { }</strong>.</li>
+            </ul>
+            <p class="text-gray-700 mb-4">Per le operazioni dentro le parentesi, segui le regole che già conosci.</p>
+          </div>
+          <div class="p-4 flex-shrink-0">
+            <p class="mb-1">24 : {9 + [11 – (<span class="text-orange-700 font-bold underline">3 + 2</span>)] : 2} =</p>
+            <p class="mb-1">24 : {9 + [<span class="text-blue-700 font-bold underline">11 – 5</span>] : 2} =</p>
+            <p class="mb-1">24 : {9 + <span class="text-blue-700 font-bold underline">6 : 2</span>} =</p>
+            <p class="mb-1">24 : {<span class="text-purple-600 font-bold underline">9 + 3</span>} =</p>
+            <p>24 : <span class="text-purple-600 font-bold">12</span> = <strong>2</strong></p>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Regole con parentesi -->
-    <div class="p-4 md:p-6 bg-white border-3 border-green-400 rounded-2xl">
-      <h2 class="font-bold text-green-700 mb-6">Regole per le espressioni con le parentesi</h2>
-      <p class="text-gray-800 mb-4">
-        Le <strong class="text-green-700">parentesi</strong> stabiliscono l'<strong class="text-green-700">ordine</strong> in cui devi eseguire le operazioni:
-      </p>
-      <ul class="list-disc list-inside space-y-2 mb-6 text-gray-800">
-        <li>prima le operazioni dentro le parentesi <strong class="text-orange-700">tonde ( )</strong>;</li>
-        <li>poi le operazioni dentro le parentesi <strong class="text-blue-700">quadre [ ]</strong>;</li>
-        <li>infine le operazioni dentro le parentesi <strong class="text-purple-600">graffe { }</strong>.</li>
-      </ul>
-      <p class="text-gray-700 mb-4">Per le operazioni dentro le parentesi, segui le regole che già conosci.</p>
-      <div class="p-4 bg-pink-100 rounded-lg font-mono text-sm">
-        <p class="mb-1">24 : {9 + [11 – (<span class="text-orange-700 font-bold underline">3 + 2</span>)] : 2} =</p>
-        <p class="mb-1">24 : {9 + [<span class="text-blue-700 font-bold underline">11 – 5</span>] : 2} =</p>
-        <p class="mb-1">24 : {9 + <span class="text-blue-700 font-bold underline">6 : 2</span>} =</p>
-        <p class="mb-1">24 : {<span class="text-purple-600 font-bold underline">9 + 3</span>} =</p>
-        <p>24 : <span class="text-purple-600 font-bold">12</span> = <strong>2</strong></p>
       </div>
     </div>
 
     <!-- ESERCIZI -->
     <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
-      <div class="p-4">
-        <p class="font-bold text-gray-700 mb-4">
-          <%= numero_esercizio_badge(1) %>
-          Calcola sul quaderno il valore delle seguenti espressioni.
-        </p>
-        <div class="space-y-2">
-          <p>5 + 3 × 5 – 3 × 6 =</p>
-          <p>3 + (7 – 8 : 2) =</p>
-          <p>[150 : (20 + 30)] × 25 =</p>
-          <p>130 – {81 : 9 × [7 × (5 + 3) – 50] + 9} =</p>
-        </div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(1) %>
+        Calcola sul quaderno il valore delle seguenti espressioni.
+      </p>
+      <div class="space-y-2">
+        <p>5 + 3 × 5 – 3 × 6 =</p>
+        <p>3 + (7 – 8 : 2) =</p>
+        <p>[150 : (20 + 30)] × 25 =</p>
+        <p>130 – {81 : 9 × [7 × (5 + 3) – 50] + 9} =</p>
       </div>
     </div>
 
