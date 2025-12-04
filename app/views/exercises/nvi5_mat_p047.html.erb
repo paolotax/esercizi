@@ -1,137 +1,205 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
-     data-font-controls-target="content">  
+     data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
-  <div class="space-y-6">     
-    <p class=" md:">Per stabilire rapidamente se un numero è divisibile per un altro, puoi usare alcune regole: i <strong class="text-blue-600">criteri di divisibilità</strong>.</p>
-    <div class="overflow-x-">       
-      <table class="full border-collapse">
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-800 mb-4">
+        Per stabilire rapidamente se un numero è divisibile per un altro, puoi usare alcune regole: i <strong class="text-<%= @pagina.base_color %>-600">criteri di divisibilità</strong>.
+      </p>
+    </div>
+
+    <!-- Tabella criteri -->
+    <div class="p-4 md:p-6 overflow-x-auto">
+      <table class="w-full border-collapse">
         <thead>
-          <tr class="bg-blue-100">
-            <th class="border-2 p-2">Un numero è divisibile per...</th>
-            <th class="border-2 p-2">se... (criterio di divisibilità)</th>
-            <th class="border-2 p-2">Esempi</th>
+          <tr class="bg-<%= @pagina.base_color %>-100">
+            <th class="border-2 border-<%= @pagina.base_color %>-300 p-2 text-center">Un numero è divisibile per...</th>
+            <th class="border-2 border-<%= @pagina.base_color %>-300 p-2">se... (criterio di divisibilità)</th>
+            <th class="border-2 border-<%= @pagina.base_color %>-300 p-2">Esempi</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="border-2 p-3 text-center"><span class=" font-bold text-red-600">2</span></td>
-            <td class="border-2 p-3">l'ultima cifra è pari.</td>
-            <td class="border-2 p-3"><strong class="text-blue-700">4 – 10 – 12 – 26 – 138</strong> sono <strong>divisibili</strong> per 2 perché 4 – 0 – 2 – 6 – 8 <strong>sono pari</strong>.</td>
+            <td class="border-2 border-gray-300 p-3 text-center"><span class="font-bold text-<%= @pagina.base_color %>-600 text-xl underline">2</span></td>
+            <td class="border-2 border-gray-300 p-3">l'ultima cifra è pari.</td>
+            <td class="border-2 border-gray-300 p-3">
+              <strong class="text-<%= @pagina.base_color %>-700">4</strong> – 1<strong class="text-<%= @pagina.base_color %>-700">0</strong> – 1<strong class="text-<%= @pagina.base_color %>-700">2</strong> – 2<strong class="text-<%= @pagina.base_color %>-700">6</strong> – 13<strong class="text-<%= @pagina.base_color %>-700">8</strong><br>
+              <strong>sono divisibili</strong> per 2 perché 4 – 0 – 2 – 6 – 8 <strong>sono pari</strong>.
+            </td>
           </tr>
           <tr>
-            <td class="border-2 p-3 text-center"><span class=" font-bold text-red-600">3</span></td>
-            <td class="border-2 p-3">la somma delle sue cifre è divisibile per 3.</td>
-            <td class="border-2 p-3">1 905 &nbsp; 1 + 9 + 0 + 5 = 15<br>
-              15 <strong>è divisibile</strong> per 3, dunque 1 905 è divisibile per 3.</td>
+            <td class="border-2 border-gray-300 p-3 text-center" rowspan="2"><span class="font-bold text-<%= @pagina.base_color %>-600 text-xl underline">3</span></td>
+            <td class="border-2 border-gray-300 p-3" rowspan="2">la somma delle sue cifre è divisibile per 3.</td>
+            <td class="border-2 border-gray-300 p-3">
+              1 905 → 1 + 9 + 0 + 5 = 15<br>
+              15 <strong>è divisibile</strong> per 3, dunque 1 905 è divisibile per 3.
+            </td>
           </tr>
           <tr>
-            <td class="border-2 p-3 text-center"><span class=" font-bold text-red-600">4</span></td>
-            <td class="border-2 p-3">termina con due zeri o se le ultime due cifre formano un numero multiplo di 4.</td>
-            <td class="border-2 p-3"><strong class="text-blue-700">200 – 3 500 – 45 600 – 87 200</strong> sono <strong>divisibili</strong> per 4.</td>
+            <td class="border-2 border-gray-300 p-3">
+              1 906 → 1 + 9 + 0 + 6 = 16<br>
+              16 <strong>non è divisibile</strong> per 3, dunque 1 906 non è divisibile per 3.
+            </td>
           </tr>
           <tr>
-            <td class="border-2 p-3 text-center"><span class=" font-bold text-red-600">5</span></td>
-            <td class="border-2 p-3">l'ultima cifra è 5 oppure 0.</td>
-            <td class="border-2 p-3"><strong class="text-blue-700">2 455 – 2 680 – 125 – 9 600</strong> sono <strong>divisibili</strong> per 5.</td>
+            <td class="border-2 border-gray-300 p-3 text-center" rowspan="3"><span class="font-bold text-<%= @pagina.base_color %>-600 text-xl underline">4</span></td>
+            <td class="border-2 border-gray-300 p-3" rowspan="3">termina con due zeri o se le ultime due cifre formano un numero multiplo di 4.</td>
+            <td class="border-2 border-gray-300 p-3">
+              2<strong class="text-<%= @pagina.base_color %>-700">00</strong> – 3 5<strong class="text-<%= @pagina.base_color %>-700">00</strong> – 45 6<strong class="text-<%= @pagina.base_color %>-700">00</strong> – 87 2<strong class="text-<%= @pagina.base_color %>-700">00</strong> <strong>sono divisibili</strong> per 4.
+            </td>
           </tr>
           <tr>
-            <td class="border-2 p-3 text-center"><span class=" font-bold text-red-600">9</span></td>
-            <td class="border-2 p-3">la somma delle sue cifre è divisibile per 9.</td>
-            <td class="border-2 p-3">1 386 &nbsp; 1 + 3 + 8 + 6 = 18<br>
-              18 <strong>è divisibile</strong> per 9, dunque 1 386 è divisibile per 9.</td>
+            <td class="border-2 border-gray-300 p-3">
+              7<strong class="text-<%= @pagina.base_color %>-700">12</strong> – 8<strong class="text-<%= @pagina.base_color %>-700">36</strong> – 1 0<strong class="text-<%= @pagina.base_color %>-700">44</strong> – 9<strong class="text-<%= @pagina.base_color %>-700">28</strong> <strong>sono divisibili</strong> per 4<br>
+              perché 12 – 36 – 44 – 28 sono divisibili per 4.
+            </td>
           </tr>
           <tr>
-            <td class="border-2 p-3 text-center"><span class=" font-bold text-red-600">10</span></td>
-            <td class="border-2 p-3">termina con 0.</td>
-            <td class="border-2 p-3"><strong class="text-blue-700">90 – 650 – 1 800 – 150 000</strong> sono <strong>divisibili</strong> per 10.</td>
+            <td class="border-2 border-gray-300 p-3">
+              6<strong>14</strong> – 8<strong>25</strong> – 9<strong>87</strong> – 1<strong>49</strong> <strong>non sono divisibili</strong> per 4<br>
+              perché 14 – 25 – 87 – 49 non sono divisibili per 4.
+            </td>
+          </tr>
+          <tr>
+            <td class="border-2 border-gray-300 p-3 text-center" rowspan="2"><span class="font-bold text-<%= @pagina.base_color %>-600 text-xl underline">5</span></td>
+            <td class="border-2 border-gray-300 p-3" rowspan="2">l'ultima cifra è 5 oppure 0.</td>
+            <td class="border-2 border-gray-300 p-3">
+              2 45<strong class="text-<%= @pagina.base_color %>-700">5</strong> – 2 68<strong class="text-<%= @pagina.base_color %>-700">0</strong> – 12<strong class="text-<%= @pagina.base_color %>-700">5</strong> – 9 60<strong class="text-<%= @pagina.base_color %>-700">0</strong> <strong>sono divisibili</strong> per 5.
+            </td>
+          </tr>
+          <tr>
+            <td class="border-2 border-gray-300 p-3">
+              4<strong>8</strong> – 12<strong>7</strong> – 45<strong>4</strong> <strong>non sono divisibili</strong> per 5.
+            </td>
+          </tr>
+          <tr>
+            <td class="border-2 border-gray-300 p-3 text-center" rowspan="2"><span class="font-bold text-<%= @pagina.base_color %>-600 text-xl underline">9</span></td>
+            <td class="border-2 border-gray-300 p-3" rowspan="2">la somma delle sue cifre è divisibile per 9.</td>
+            <td class="border-2 border-gray-300 p-3">
+              1 386 → 1 + 3 + 8 + 6 = 18<br>
+              18 <strong>è divisibile</strong> per 9, dunque 1 386 è divisibile per 9.
+            </td>
+          </tr>
+          <tr>
+            <td class="border-2 border-gray-300 p-3">
+              218 → 2 + 1 + 8 = 11<br>
+              11 <strong>non è divisibile</strong> per 9, dunque 218 non è divisibile per 9.
+            </td>
+          </tr>
+          <tr>
+            <td class="border-2 border-gray-300 p-3 text-center" rowspan="2"><span class="font-bold text-<%= @pagina.base_color %>-600 text-xl underline">10</span></td>
+            <td class="border-2 border-gray-300 p-3" rowspan="2">termina con 0.</td>
+            <td class="border-2 border-gray-300 p-3">
+              9<strong class="text-<%= @pagina.base_color %>-700">0</strong> – 65<strong class="text-<%= @pagina.base_color %>-700">0</strong> – 1 80<strong class="text-<%= @pagina.base_color %>-700">0</strong> – 150 00<strong class="text-<%= @pagina.base_color %>-700">0</strong> <strong>sono divisibili</strong> per 10.
+            </td>
+          </tr>
+          <tr>
+            <td class="border-2 border-gray-300 p-3">
+              9<strong>2</strong> – 7<strong>5</strong> – 10<strong>3</strong> <strong>non sono divisibili</strong> per 10.
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-600 mb-4">ESERCIZI</h2>
-      <div class="p-4">         
-        <h3 class=" font-bold mb-3"><span class="bg-blue-500 text-white rounded-full   inline-flex items-center justify-center mr-2">1</span>Cerchia i numeri divisibili per...</h3>
-        <div class="space-y-4 ml-11">  
-          <div>             <strong>4 →</strong>
-            <div class="flex flex-wrap gap-3 mt-2">               <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div class="p-4">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Cerchia i numeri divisibili per...
+        </p>
+        <div class="space-y-4">
+          <div>
+            <strong class="text-<%= @pagina.base_color %>-600">4 →</strong>
+            <div class="flex flex-wrap gap-3 mt-2">
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="true">124</span>
-              <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+                    data-correct-value="true">124</span>
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="false">107</span>
-              <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+                    data-correct-value="false">107</span>
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="true">100</span>
-              <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+                    data-correct-value="true">100</span>
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="true">548</span>
-              <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+                    data-correct-value="true">548</span>
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="true">1516</span>
+                    data-correct-value="true">1 516</span>
             </div>
           </div>
-          <div>             <strong>5 →</strong>
-            <div class="flex flex-wrap gap-3 mt-2">               <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+          <div>
+            <strong class="text-<%= @pagina.base_color %>-600">5 →</strong>
+            <div class="flex flex-wrap gap-3 mt-2">
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="false">864</span>
-              <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+                    data-correct-value="false">864</span>
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="true">530</span>
-              <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+                    data-correct-value="true">530</span>
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="true">225</span>
-              <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+                    data-correct-value="true">225</span>
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="true">85</span>
-              <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+                    data-correct-value="true">85</span>
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="false">1342</span>
+                    data-correct-value="false">1 342</span>
             </div>
           </div>
-          <div>             <strong>9 →</strong>
-            <div class="flex flex-wrap gap-3 mt-2">               <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+          <div>
+            <strong class="text-<%= @pagina.base_color %>-600">9 →</strong>
+            <div class="flex flex-wrap gap-3 mt-2">
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="false">399</span>
-              <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+                    data-correct-value="false">399</span>
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="false">83</span>
-              <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+                    data-correct-value="false">83</span>
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="true">270</span>
-              <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+                    data-correct-value="true">270</span>
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="true">324</span>
-              <span class="bg-white border-2 border-purple-300 px-4 py-2  font-bold  cursor-pointer hover:bg-purple-100 transition"
+                    data-correct-value="true">324</span>
+              <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
                     data-controller="word-highlighter"
                     data-action="click->word-highlighter#toggleHighlight"
-                data-correct-value="true">1809</span>
+                    data-correct-value="true">1 809</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="mt-8 text-center">
-      <p class="text-red-600 font-bold ">Quaderno esercizi pp. 198, 201</p>
+
+    <!-- Quaderno -->
+    <div class="p-4 text-right">
+      <span class="text-gray-600">Quaderno esercizi →</span>
+      <span class="text-<%= @pagina.base_color %>-600 font-bold">pp. 198, 201</span>
     </div>
-   </div>
-  <%= render 'shared/exercise_controls', color: 'purple' %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
 </div>

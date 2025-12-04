@@ -1,118 +1,164 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
-     data-controller="exercise-checker text-toggle font-controls"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls flower-matcher"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
-  
-  <div class="space-y-6">     <!-- Osserva e leggi -->
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-600 mb-6">
-        • Osserva e leggi come eseguire <span class="underline">2,34 × 15,3</span>
+
+  <div class="space-y-6">
+    <!-- Osserva e leggi -->
+    <div class="p-4 md:p-6 bg-white border-3 border-<%= @pagina.base_color %>-400 rounded-2xl">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-6">
+        <span class="text-pink-600">•</span> Osserva e leggi come eseguire <span class="underline text-cyan-500">2,34 × 15,3</span>.
       </h2>
-      <div class="flex flex-col items-center gap-6">         <%= image_tag "nvi5_mat/p033/p033_01.jpg", alt: "Moltiplicazione decimali - esempio" %>
-        <div class="grid grid-cols-1 grid-cols-2 gap-6 full">           <!-- Step 1 -->
-          <div class="p-4">             
-            <p class=" text-gray-700 text-center">
-              <strong class="text-blue-600 block mb-2">Passo 1:</strong>
-              Moltiplica i fattori senza considerare le virgole.
-            </p>
-          </div>
-          <!-- Step 2 -->
-          <div class="p-4">             
-            <p class=" text-gray-700 text-center">
-              <strong class="text-blue-600 block mb-2">Passo 2:</strong>
-              Nel prodotto finale metti la <strong class="text-blue-600">virgola</strong>, partendo da destra, dopo tante cifre quante sono in tutto le cifre decimali dei due fattori.
-            </p>
-          </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Step 1 -->
+        <div class="p-4 text-center">
+          <%= image_tag "nvi5_mat/p033/p033_01.jpg", alt: "Step 1", class: "mx-auto mb-3" %>
+          <p class="text-gray-700 text-sm">
+            Moltiplica i fattori senza considerare le virgole.
+          </p>
+        </div>
+        <!-- Step 2 -->
+        <div class="p-4 text-center">
+          <%= image_tag "nvi5_mat/p033/p033_02.jpg", alt: "Step 2", class: "mx-auto mb-3" %>
+          <p class="text-gray-700 text-sm">
+            Nel prodotto finale metti la <strong class="text-<%= @pagina.base_color %>-600">virgola</strong>, partendo da destra, dopo tante cifre quante sono in tutto le cifre decimali dei due fattori.
+          </p>
         </div>
       </div>
     </div>
-    <!-- Esercizi -->
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-600 mb-6">ESERCIZI</h2>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
       <!-- Esercizio 1 -->
-      <div class="mb-6 p-4 p-6">         
-        <h3 class=" font-bold text-gray-700 mb-4">
-          <span class="bg-blue-500 text-white rounded-full   inline-flex items-center justify-center mr-2">1</span>
+      <div class="p-4 mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
           Calcola in colonna sul quaderno. Calcola senza tenere conto della virgola, ma non dimenticarti di metterla al posto giusto nel prodotto.
-        </h3>
-        <div class="grid grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-3  md:">           
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
           <p>27,6 × 18 =</p>
-          <p>75 × 3,5 =</p>
           <p>4,35 × 6,7 =</p>
-          <p>65,8 × 3,15 =</p>
           <p>4,7 × 2,56 =</p>
-          <p>316 × 9,2 =</p>
           <p>852 × 4,23 =</p>
+          <p>75 × 3,5 =</p>
+          <p>65,8 × 3,15 =</p>
+          <p>316 × 9,2 =</p>
           <p>254 × 3,14 =</p>
         </div>
       </div>
+
       <!-- Esercizio 2 -->
-      <div class="mb-6 p-4 p-6" data-controller="fill-blanks">         
-        <h3 class=" font-bold text-gray-700 mb-4">
-          <span class="bg-blue-600 text-white rounded-full   inline-flex items-center justify-center mr-2">2</span>
+      <div class="p-4 mb-6">
+        <p class="font-bold text-gray-700 mb-2">
+          <%= numero_esercizio_badge(2) %>
           Calcola con la calcolatrice il risultato di <strong>287 × 135 =</strong>
-          <input type="text" class="border-b-2 border-blue-400 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-600  text-center font-bold" data-fill-blanks-target="input" data-correct-answer="38745">
-        </h3>
-        <p class=" text-gray-800 mb-4">
+          <input type="text" data-correct-answer="38745" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+        </p>
+        <p class="text-gray-700 mb-4">
           <strong>Ora riporta nelle moltiplicazioni qui sotto il risultato ottenuto con la calcolatrice e inserisci la virgola al posto giusto.</strong>
         </p>
-        <div class="grid grid-cols-1 grid-cols-2 lg:grid-cols-3 gap-4">           
-          <p>28,7 × 1,35 = <input type="text" class="border-b-2 border-blue-400 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-600  text-center" data-fill-blanks-target="input" data-correct-answer="38,745"></p>
-          <p>287 × 13,5 = <input type="text" class="border-b-2 border-blue-400 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-600  text-center" data-fill-blanks-target="input" data-correct-answer="3874,5"></p>
-          <p>0,287 × 1,35 = <input type="text" class="border-b-2 border-blue-400 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-600  text-center" data-fill-blanks-target="input" data-correct-answer="0,38745"></p>
-          <p>28,7 × 13,5 = <input type="text" class="border-b-2 border-blue-400 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-600  text-center" data-fill-blanks-target="input" data-correct-answer="387,45"></p>
-          <p>2,87 × 13,5 = <input type="text" class="border-b-2 border-blue-400 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-600  text-center" data-fill-blanks-target="input" data-correct-answer="38,745"></p>
-          <p>2,87 × 135 = <input type="text" class="border-b-2 border-blue-400 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-600  text-center" data-fill-blanks-target="input" data-correct-answer="387,45"></p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div class="flex items-center gap-2">
+            <span>28,7 × 1,35 =</span>
+            <input type="text" data-correct-answer="38,745" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>0,287 × 1,35 =</span>
+            <input type="text" data-correct-answer="0,38745" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>2,87 × 13,5 =</span>
+            <input type="text" data-correct-answer="38,745" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>287 × 13,5 =</span>
+            <input type="text" data-correct-answer="3874,5" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>28,7 × 13,5 =</span>
+            <input type="text" data-correct-answer="387,45" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>2,87 × 135 =</span>
+            <input type="text" data-correct-answer="387,45" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
         </div>
       </div>
+
       <!-- Esercizio 3 -->
-      <div class="p-4 p-6">         
-        <h3 class=" font-bold text-gray-700 mb-4">
-          <span class="bg-green-600 text-white rounded-full   inline-flex items-center justify-center mr-2">3</span>
+      <div class="p-4">
+        <p class="font-bold text-gray-700 mb-2">
+          <%= numero_esercizio_badge(3) %>
           Collega, senza fare i calcoli, le seguenti moltiplicazioni ai rispettivi risultati.
-        </h3>
-        <p class=" text-gray-700 mb-4">
+        </p>
+        <p class="text-gray-700 mb-4">
           Aiutati confrontando le cifre decimali dei fattori e dei prodotti. Poi verifica eseguendo le moltiplicazioni sul quaderno.
         </p>
-        <div class="grid grid-cols-2 grid-cols-4 gap-4 text-center">  
-          <div class="p-3">             
-            <p class="font-bold text-blue-600">32,54 × 2,18 =</p>
+
+        <div class="relative">
+          <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-30" data-flower-matcher-target="canvas"></svg>
+
+          <!-- Moltiplicazioni -->
+          <div class="flex flex-wrap justify-around gap-3 mb-8 relative z-20">
+            <% [
+              { id: "mult-1", pair: "p70", label: "32,54 × 2,18 =" },
+              { id: "mult-2", pair: "p14579", label: "287 × 50,8 =" },
+              { id: "mult-3", pair: "p314", label: "16,29 × 19,3 =" },
+              { id: "mult-4", pair: "p3023", label: "138,7 × 21,8 =" }
+            ].each do |item| %>
+              <div class="px-3 py-2 bg-cyan-100 rounded-lg text-center font-bold cursor-pointer hover:bg-cyan-200 transition"
+                   data-action="click->flower-matcher#selectFlower"
+                   data-flower-matcher-target="flower"
+                   data-flower-id="<%= item[:id] %>"
+                   data-pair="<%= item[:pair] %>"><%= item[:label] %></div>
+            <% end %>
           </div>
-          <div class="p-3">             
-            <p class="font-bold text-blue-700">287 × 50,8 =</p>
+
+          <!-- Risultati -->
+          <div class="flex flex-wrap justify-around gap-3 relative z-20">
+            <% [
+              { id: "res-1", pair: "p14579", label: "14 579,6" },
+              { id: "res-2", pair: "p3023", label: "3 023,66" },
+              { id: "res-3", pair: "p70", label: "70,9372" },
+              { id: "res-4", pair: "p314", label: "314,397" }
+            ].each do |item| %>
+              <div class="px-3 py-2 bg-pink-100 rounded-lg text-center font-bold cursor-pointer hover:bg-pink-200 transition"
+                   data-action="click->flower-matcher#selectFlower"
+                   data-flower-matcher-target="flower"
+                   data-flower-id="<%= item[:id] %>"
+                   data-pair="<%= item[:pair] %>"><%= item[:label] %></div>
+            <% end %>
           </div>
-          <div class="p-3">             
-            <p class="font-bold text-green-700">16,29 × 19,3 =</p>
-          </div>
-          <div class="p-3">             
-            <p class="font-bold text-orange-700">138,7 × 21,8 =</p>
-          </div>
-        </div>
-        <div class="my-6 text-center  text-gray-400">↕</div>
-        <div class="grid grid-cols-2 grid-cols-4 gap-4 text-center">  
-          <div class="p-3">             
-            <p class="font-bold">14 579,6</p>
-          </div>
-          <div class="p-3">             
-            <p class="font-bold">3 023,66</p>
-          </div>
-          <div class="p-3">             
-            <p class="font-bold">70,9372</p>
-          </div>
-          <div class="p-3">             
-            <p class="font-bold">314,397</p>
+
+          <!-- Controlli -->
+          <div class="mt-4 flex gap-3 items-center">
+            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full w-8 h-8 transition flex items-center justify-center"
+                    data-action="click->flower-matcher#reset" title="Ricomincia">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </button>
+            <button class="bg-green-500 hover:bg-green-600 text-white font-bold rounded-full w-8 h-8 transition flex items-center justify-center"
+                    data-action="click->flower-matcher#showSolutions" title="Soluzioni">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <!-- Footer con riferimento -->
-    <div class="mt-8 text-center">       
-      <p class="text-red-600 font-bold ">Quaderno esercizi p. 189</p>
+
+    <!-- Quaderno -->
+    <div class="p-4 text-right">
+      <span class="text-gray-600">Quaderno esercizi →</span>
+      <span class="text-<%= @pagina.base_color %>-600 font-bold">p. 189</span>
     </div>
+
+    <%= render 'shared/exercise_controls' %>
   </div>
-  <!-- Exercise controls -->
-  <%= render 'shared/exercise_controls', color: 'purple' %>
 </div>

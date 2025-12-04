@@ -1,164 +1,244 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
-  
-  <!-- Header -->
+
   <%= render 'shared/page_header', pagina: @pagina %>
-  
-  <!-- Esercizio 1 -->
-  <div class="p-4 sm:p-6 mb-6">  
-    <div class="flex items-start gap-3 mb-4">  
-      <div class=" text-white   flex items-center justify-center font-bold">         1
-      </div>
-      <p class=" font-semibold text-purple-800 pt-1">
-        Calcola le espressioni seguendo l'ordine corretto delle operazioni.
-      </p>
-    </div>
-    <div class="space-y-4 ml-11">  
-      <div class="p-4">         
-        <p class="font-mono  mb-2">a) 15 × 3 + 8 =
-          <input type="text"
-                 data-correct-answer="53"
-                 class=" px-2 py-2 border-2 border-purple-300  focus:border-purple-500 focus:outline-none text-center"></p>
-        <p class=" text-gray-600 italic">Ricorda: prima moltiplicazioni, poi addizioni</p>
-      </div>
-      <div class="p-4">         
-        <p class="font-mono  mb-2">b) (12 + 8) : 5 =
-          <input type="text"
-                 data-correct-answer="4"
-                 class=" px-2 py-2 border-2 border-purple-300  focus:border-purple-500 focus:outline-none text-center"></p>
-      </div>
-      <div class="p-4">         
-        <p class="font-mono  mb-2">c) 30 - 12 : 3 =
-          <input type="text"
-                 data-correct-answer="26"
-                 class=" px-2 py-2 border-2 border-purple-300  focus:border-purple-500 focus:outline-none text-center"></p>
-      </div>
-      <div class="p-4">         
-        <p class="font-mono  mb-2">d) 4 × (9 - 2) + 1 =
-          <input type="text"
-                 data-correct-answer="29"
-                 class=" px-2 py-2 border-2 border-purple-300  focus:border-purple-500 focus:outline-none text-center"></p>
-      </div>
-      <div class="p-4">         
-        <p class="font-mono  mb-2">e) 48 : 6 + 3 × 4 =
-          <input type="text"
-                 data-correct-answer="20"
-                 class=" px-2 py-2 border-2 border-purple-300  focus:border-purple-500 focus:outline-none text-center"></p>
-      </div>
-    </div>
-  </div>
-  <!-- Esercizio 2 -->
-  <div class="p-4 sm:p-6 mb-6">  
-    <div class="flex items-start gap-3 mb-4">  
-      <div class=" text-white   flex items-center justify-center font-bold">         2
-      </div>
-      <p class=" font-semibold text-blue-800 pt-1">
-        Cerchia i numeri divisibili per 2, sottolinea quelli divisibili per 5.
-      </p>
-    </div>
-    <div class="p-6 ml-11">  
-      <div class="flex flex-wrap gap-3 justify-center">         <span class="bg-white border-2 border-blue-300 px-4 py-2  font-bold  cursor-pointer hover:bg-blue-100 transition"
-              data-controller="word-highlighter"
-              data-action="click->word-highlighter#toggleHighlight"
-          data-correct-value="true">48</span>
-        <span class="bg-white border-2 border-blue-300 px-4 py-2  font-bold  cursor-pointer hover:bg-blue-100 transition"
-              data-controller="word-highlighter"
-              data-action="click->word-highlighter#toggleHighlight"
-          data-correct-value="false">125</span>
-        <span class="bg-white border-2 border-blue-300 px-4 py-2  font-bold  cursor-pointer hover:bg-blue-100 transition"
-              data-controller="word-highlighter"
-              data-action="click->word-highlighter#toggleHighlight"
-          data-correct-value="false">73</span>
-        <span class="bg-white border-2 border-blue-300 px-4 py-2  font-bold  cursor-pointer hover:bg-blue-100 transition"
-              data-controller="word-highlighter"
-              data-action="click->word-highlighter#toggleHighlight"
-          data-correct-value="true">90</span>
-        <span class="bg-white border-2 border-blue-300 px-4 py-2  font-bold  cursor-pointer hover:bg-blue-100 transition"
-              data-controller="word-highlighter"
-              data-action="click->word-highlighter#toggleHighlight"
-          data-correct-value="true">156</span>
-        <span class="bg-white border-2 border-blue-300 px-4 py-2  font-bold  cursor-pointer hover:bg-blue-100 transition"
-              data-controller="word-highlighter"
-              data-action="click->word-highlighter#toggleHighlight"
-          data-correct-value="false">211</span>
-        <span class="bg-white border-2 border-blue-300 px-4 py-2  font-bold  cursor-pointer hover:bg-blue-100 transition"
-              data-controller="word-highlighter"
-              data-action="click->word-highlighter#toggleHighlight"
-          data-correct-value="true">380</span>
-      </div>
-    </div>
-  </div>
-  <!-- Esercizio 3 -->
-  <div class="p-4 sm:p-6 mb-6">  
-    <div class="flex items-start gap-3 mb-4">  
-      <div class=" text-white   flex items-center justify-center font-bold">         3
-      </div>
-      <p class=" font-semibold text-green-800 pt-1">
-        Colora i numeri primi da 1 a 30.
-      </p>
-    </div>
-    <div class="p-6 ml-11">  
-      <div class="grid grid-cols-6 sm:grid-cols-10 gap-2">         <% prime_numbers = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29] %>
-        <% (1..30).each do |num| %>
-          <div class="aspect-square flex items-center justify-center font-bold  sm: hover:cursor-pointer transition"                data-controller="word-highlighter"
-               data-action="click->word-highlighter#toggleHighlight"
-            data-correct-value="<%= prime_numbers.include?(num) ? 'true' : 'false' %>">
-            <%= num %>
-          </div>
-        <% end %>
-      </div>
-      <p class=" text-gray-600 italic mt-3">
-        💡 Ricorda: i numeri primi sono divisibili solo per 1 e per se stessi
-      </p>
-    </div>
-  </div>
-  <!-- Esercizio 4 -->
-  <div class="p-4 sm:p-6 mb-6">  
-    <div class="flex items-start gap-3 mb-4">  
-      <div class=" text-white   flex items-center justify-center font-bold">         4
-      </div>
-      <p class=" font-semibold text-orange-800 pt-1">
-        Scomponi i seguenti numeri in fattori primi.
-      </p>
-    </div>
-    <div class="space-y-4 ml-11">  
-      <div class="p-4">         
-        <p class="font-bold  mb-2">a) 24 =
-          <input type="text"
-                 data-correct-answer="2 × 2 × 2 × 3"
-                 class=" px-2 py-2 border-2 border-orange-300  focus:border-orange-500 focus:outline-none text-center"></p>
-        <div class="flex items-center gap-2  text-gray-600 mt-2">           <span class="bg-white px-2 py-1  border border-orange-300">24</span>
-          <span>→</span>
-          <span class="bg-white px-2 py-1  border border-orange-300">12</span>
-          <span>→</span>
-          <span class="bg-white px-2 py-1  border border-orange-300">6</span>
-          <span>→</span>
-          <span class="bg-white px-2 py-1  border border-orange-300">3</span>
+
+  <div class="space-y-6">
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <!-- Esercizio 1 -->
+      <div class="p-4 mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Calcola sul quaderno il valore delle seguenti espressioni. Segui l'esempio.
+        </p>
+        <div class="p-3 bg-white rounded-lg mb-4">
+          <p class="font-bold text-<%= @pagina.base_color %>-600">6 : 2 + 25 × 2 = 3 + 50 = 53</p>
+        </div>
+        <div class="space-y-2">
+          <p>25 × 4 + 12 × 3 =</p>
+          <p>(126 + 4) : (5 × 2) =</p>
+          <p>6 × (100 : 2) =</p>
         </div>
       </div>
-      <div class="p-4">         
-        <p class="font-bold  mb-2">b) 36 =
-          <input type="text"
-                 data-correct-answer="2 × 2 × 3 × 3"
-                 class=" px-2 py-2 border-2 border-orange-300  focus:border-orange-500 focus:outline-none text-center"></p>
+
+      <!-- Esercizio 2 -->
+      <div class="p-4 mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Calcola il valore delle seguenti espressioni, poi rispondi.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div class="p-3 bg-white rounded-lg space-y-2">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span>8 + (16 × 2) − 9 =</span>
+              <input type="text" data-correct-answer="31" class="w-16 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span>(8 + 16) × 2 − 9 =</span>
+              <input type="text" data-correct-answer="39" class="w-16 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
+          </div>
+          <div class="p-3 bg-white rounded-lg space-y-2">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span>96 − (18 : 3) + 6 =</span>
+              <input type="text" data-correct-answer="96" class="w-16 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span>96 − 18 : (3 + 6) =</span>
+              <input type="text" data-correct-answer="94" class="w-16 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
+          </div>
+        </div>
+        <p class="text-gray-700">Che cosa noti? <span class="text-gray-500 italic">Le parentesi cambiano il risultato!</span></p>
       </div>
-      <div class="p-4">         
-        <p class="font-bold  mb-2">c) 60 =
-          <input type="text"
-                 data-correct-answer="2 × 2 × 3 × 5"
-                 class=" px-2 py-2 border-2 border-orange-300  focus:border-orange-500 focus:outline-none text-center"></p>
+
+      <!-- Esercizio 3 -->
+      <div class="p-4 mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Cancella i numeri non divisibili per 3.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="false">726</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="true">215</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="true">1 367</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="true">89</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="false">27</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="false">156</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="true">428</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="true">8 522</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="true">2 639</span>
+        </div>
       </div>
-      <div class="p-4">         
-        <p class="font-bold  mb-2">d) 75 =
-          <input type="text"
-                 data-correct-answer="3 × 5 × 5"
-                 class=" px-2 py-2 border-2 border-orange-300  focus:border-orange-500 focus:outline-none text-center"></p>
+
+      <!-- Esercizio 4 -->
+      <div class="p-4 mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(4) %>
+          Cancella i numeri non divisibili per 4.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="false">208</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="false">2 728</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="false">524</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="true">1 322</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="true">518</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="true">73</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="false">872</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="false">1 636</span>
+          <span class="bg-white border-2 border-pink-400 px-4 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                data-controller="word-highlighter"
+                data-action="click->word-highlighter#toggleHighlight"
+                data-correct-value="false">1 200</span>
+        </div>
+      </div>
+
+      <!-- Esercizio 5 -->
+      <div class="p-4 mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(5) %>
+          Indica con una X vero (V) o falso (F).
+        </p>
+        <div class="space-y-3">
+          <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+            <span>Ogni numero naturale pari è divisibile per 2.</span>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-1">
+                <input type="radio" name="es5_1" data-correct-answer="true" class="w-4 h-4"> V
+              </label>
+              <label class="flex items-center gap-1">
+                <input type="radio" name="es5_1" class="w-4 h-4"> F
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+            <span>Ogni numero naturale dispari è divisibile per 3.</span>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-1">
+                <input type="radio" name="es5_2" class="w-4 h-4"> V
+              </label>
+              <label class="flex items-center gap-1">
+                <input type="radio" name="es5_2" data-correct-answer="true" class="w-4 h-4"> F
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+            <span>Ogni numero naturale che termina per 5 è divisibile per 5.</span>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-1">
+                <input type="radio" name="es5_3" data-correct-answer="true" class="w-4 h-4"> V
+              </label>
+              <label class="flex items-center gap-1">
+                <input type="radio" name="es5_3" class="w-4 h-4"> F
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+            <span>Ogni numero naturale è divisibile per 1.</span>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-1">
+                <input type="radio" name="es5_4" data-correct-answer="true" class="w-4 h-4"> V
+              </label>
+              <label class="flex items-center gap-1">
+                <input type="radio" name="es5_4" class="w-4 h-4"> F
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+            <span>Ogni numero naturale che termina per 9 è divisibile per 9.</span>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-1">
+                <input type="radio" name="es5_5" class="w-4 h-4"> V
+              </label>
+              <label class="flex items-center gap-1">
+                <input type="radio" name="es5_5" data-correct-answer="true" class="w-4 h-4"> F
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 6 -->
+      <div class="p-4 mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(6) %>
+          Colora le caselle dei numeri primi.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <% [36, 37, 41, 42, 61, 65, 67, 71, 75, 79, 83, 85, 89, 90, 97].each do |num| %>
+            <% primes = [37, 41, 61, 67, 71, 79, 83, 89, 97] %>
+            <span class="bg-white border-2 border-pink-400 px-3 py-2 rounded font-bold cursor-pointer hover:bg-pink-100 transition"
+                  data-controller="word-highlighter"
+                  data-action="click->word-highlighter#toggleHighlight"
+                  data-correct-value="<%= primes.include?(num) ? 'true' : 'false' %>"><%= num %></span>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Esercizio 7 -->
+      <div class="p-4">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(7) %>
+          Scomponi i numeri in fattori primi e scrivili sotto forma di potenza.
+        </p>
+        <%= image_tag "nvi5_mat/p049/p049_01.jpg", class: "mx-auto", alt: "Scomposizione in fattori primi" %>
       </div>
     </div>
+
+    <%= render 'shared/exercise_controls' %>
   </div>
-  <%= image_tag "p049_01.jpg", alt: "Esercizi aggiuntivi" rescue nil %>
-  <!-- Exercise Controls -->
-  <%= render 'shared/exercise_controls', color: 'purple', current_page: 'nvi5_mat_p049' %>
 </div>

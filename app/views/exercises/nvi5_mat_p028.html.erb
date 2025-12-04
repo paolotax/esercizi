@@ -1,267 +1,140 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
-     data-font-controls-target="content">  
+     data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <div class="space-y-8">
-      <!-- Esercizio 1: Scomposizioni complesse -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Scegli la scomposizione corretta in potenze di 10 per ciascun numero.</p>
+  <div class="space-y-6">
+    <!-- Problema introduttivo -->
+    <div class="p-4 md:p-6">
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="flex-1">
+          <div class="p-4 bg-cyan-50 rounded-lg mb-4">
+            <p class="text-gray-800">
+              Lucia è stata tre giorni in vacanza e ha pagato 385,50 euro per la stanza in albergo, 195,75 euro per il ristorante e 15 euro per la colazione al bar. Quanto ha speso in tutto Lucia?
+            </p>
           </div>
+
+          <p class="text-gray-800 mb-4">
+            Per rispondere alla domanda, devi eseguire un'addizione.<br>
+            Ricordi? L'addizione è l'operazione che serve per <strong class="text-<%= @pagina.base_color %>-600">unire</strong>,
+            <strong class="text-<%= @pagina.base_color %>-600">aggiungere diverse quantità</strong> o
+            <strong class="text-<%= @pagina.base_color %>-600">aumentare la quantità data</strong>.
+          </p>
+          <p class="text-gray-800">
+            In questo caso devi eseguire <strong class="text-<%= @pagina.base_color %>-600">385,50 + 195,75 + 15</strong>.
+          </p>
         </div>
-        <div class="ml-0 ml-11 space-y-5">           <% [
-            {
-              number: "48 703 205",
-              name: "exp1",
-              options: {
-                "a" => "4 × 10⁷ + 8 × 10⁶ + 7 × 10³ + 3 × 10² + 2 × 10¹ + 5 × 10⁰",
-                "b" => "4 × 10⁷ + 8 × 10⁶ + 7 × 10⁴ + 3 × 10³ + 2 × 10² + 5 × 10⁰",
-                "c" => "4 × 10⁷ + 8 × 10⁵ + 7 × 10³ + 3 × 10² + 2 × 10¹ + 5 × 10⁰"
-              },
-              correct: "b"
-            },
-            {
-              number: "302 905 180 400",
-              name: "exp2",
-              options: {
-                "a" => "3 × 10¹¹ + 2 × 10⁹ + 9 × 10⁶ + 5 × 10⁵ + 1 × 10⁴ + 8 × 10² + 4 × 10²",
-                "b" => "3 × 10¹¹ + 2 × 10⁹ + 9 × 10⁶ + 5 × 10⁵ + 1 × 10⁴ + 8 × 10² + 4 × 10⁰",
-                "c" => "3 × 10¹¹ + 2 × 10¹⁰ + 9 × 10⁶ + 5 × 10⁵ + 1 × 10⁴ + 8 × 10² + 4 × 10⁰"
-              },
-              correct: "b"
-            },
-            {
-              number: "6 045 307,12",
-              name: "exp3",
-              options: {
-                "a" => "6 × 10⁶ + 4 × 10³ + 5 × 10² + 3 × 10¹ + 7 × 10⁰ + 1 × 10⁻¹ + 2 × 10⁻²",
-                "b" => "6 × 10⁶ + 4 × 10³ + 5 × 10² + 3 × 10¹ + 7 × 10⁰ + 1 × 10⁻² + 2 × 10⁻¹",
-                "c" => "6 × 10⁶ + 4 × 10⁴ + 5 × 10² + 3 × 10¹ + 7 × 10⁰ + 1 × 10⁻¹ + 2 × 10⁻²"
-              },
-              correct: "a"
-            }
-          ].each do |item| %>
-            <div class="p-4">               
-              <p class="font-semibold text-gray-700 mb-3">Numero: <span class="text-blue-600"><%= item[:number] %></span></p>
-              <div class="grid grid-cols-1 grid-cols-3 gap-3">                 <% item[:options].each do |key, text| %>
-                  <label class="flex items-center gap-2 bg-purple-100 hover:bg-purple-200 transition -md px-3 py-2 cursor-pointer">
-                    <input type="radio"
-                           name="<%= item[:name] %>"
-                           value="<%= key %>"
-                           data-correct-answer="<%= key == item[:correct] ? 'true' : 'false' %>"
-                           class=" ">
-                    <span class=" text-gray-700"><%= text %></span>
-                  </label>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
+        <div class="flex-shrink-0">
+          <%= image_tag "nvi5_mat/p028/page.png", class: "max-w-xs rounded-lg", style: "clip-path: inset(5% 0 55% 55%);" %>
         </div>
       </div>
-      <!-- Esercizio 2: Potenze e valori assoluti -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">2</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Calcola e inserisci il risultato (usa il segno corretto).</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
-            {label: "5³ + 2⁴", answer: "161"},
-            {label: "(-8)² - 6³", answer: "-184"},
-            {label: "|-37| + 4²", answer: "53"},
-            {label: "10⁵ - 9 × 10³", answer: "91000"},
-            {label: "(-3)⁴ - (-3)²", answer: "72"},
-            {label: "2³ × 5²", answer: "200"}
-          ].each do |item| %>
-            <label class="bg-white  px-4 py-3 flex items-center justify-between gap-4 ">
-              <span class="font-semibold text-gray-700 whitespace-nowrap"><%= item[:label] %> =</span>
-              <input type="text"
-                     class=" border-2 border-purple-200  px-3 py-2 focus:border-purple-500 focus:outline-none text-right"
-                     data-correct-answer="<%= item[:answer] %>">
-            </label>
-          <% end %>
-        </div>
-      </div>
-      <!-- Esercizio 3: Affermazioni true/false -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">3</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Seleziona V se l'affermazione è vera, F se è falsa.</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
-            {text: "10⁻² = 0,01", correct: true},
-            {text: "4 × 10³ + 6 × 10¹ = 4 600", correct: false},
-            {text: "|-25| < 5²", correct: false},
-            {text: "Tra -7,4 e -7,35 il maggiore è -7,35", correct: true},
-            {text: "3,027 arrotondato ai centesimi diventa 3,03", correct: true},
-            {text: "1,08 × 10³ = 108", correct: false}
-          ].each_with_index do |item, idx| %>
-            <div class="px-4 py-3 flex items-center justify-between">               <span class="text-gray-700"><%= item[:text] %></span>
-              <div class="flex gap-4">                 <label class="flex items-center gap-1">
-                  <span class=" font-semibold">V</span>
-                  <input type="radio"
-                         name="tf_<%= idx %>"
-                         data-correct-answer="<%= item[:correct] ? 'true' : 'false' %>"
-                         class=" ">
-                </label>
-                <label class="flex items-center gap-1">
-                  <span class=" font-semibold">F</span>
-                  <input type="radio"
-                         name="tf_<%= idx %>"
-                         data-correct-answer="<%= item[:correct] ? 'false' : 'true' %>"
-                         class=" ">
-                </label>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <!-- Esercizio 4: Ordinamenti complessi -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">4</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Ordina in senso crescente sul quaderno i numeri dati. Indica anche quale differisce di più da 0.</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 grid gap-4">  
-          <div class="p-4">             
-            <p class="font-semibold text-gray-700 mb-2">A</p>
-            <p class="text-gray-700">-5,82 × 10² × 10⁻¹ × 0,593 × -58,2 × 0,0598</p>
-          </div>
-          <div class="p-4">             
-            <p class="font-semibold text-gray-700 mb-2">B</p>
-            <p class="text-gray-700">4,075 × 4,705 × 4,057 × 4,75 × 4,7050</p>
-          </div>
-          <p class="text-blue-600 font-medium italic">→ Risolvi sul quaderno, poi confronta con un compagno.</p>
-        </div>
-      </div>
-      <!-- Esercizio 5: Confronti con segni -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">5</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Scegli il simbolo corretto (&lt;, =, &gt;).</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
-            {left: "-12 + 7", right: "-12 - 7", symbol: ">"},
-            {left: "3 × 10³", right: "2 × 10⁴", symbol: "<"},
-            {left: "|-48|", right: "5² + 4", symbol: "="},
-            {left: "0,806", right: "0,8060", symbol: "="},
-            {left: "-5,4", right: "-5,39", symbol: "<"},
-            {left: "1,2 × 10²", right: "120", symbol: "="}
-          ].each do |item| %>
-            <div class="px-4 py-3 flex items-center justify-center gap-4">               <span class="text-gray-700 font-semibold"><%= item[:left] %></span>
-              <select class="px-3 py-2 border-2 border-purple-300  focus:border-purple-500 focus:outline-none  font-bold"
-                      data-correct-answer="<%= item[:symbol] %>">
-                <option value="">?</option>
-                <option value="<">&lt;</option>
-                <option value="=">=</option>
-                <option value=">">&gt;</option>
-              </select>
-              <span class="text-gray-700 font-semibold"><%= item[:right] %></span>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <!-- Esercizio 6: Operazioni con parentesi -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">6</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Calcola il valore delle espressioni.</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
-            {expr: "[(-9) + 14] - 3²", answer: "-4"},
-            {expr: "{18 - [5 × (-2)]} : 4", answer: "7"},
-            {expr: "(-12) : (-3) + 2³", answer: "12"},
-            {expr: "(45 - 3 × 7) - (-18)", answer: "42"}
-          ].each do |item| %>
-            <label class="bg-white  px-4 py-3 flex items-center justify-between gap-4 ">
-              <span class="font-semibold text-gray-700 whitespace-nowrap"><%= item[:expr] %> =</span>
-              <input type="text"
-                     class=" border-2 border-purple-200  px-3 py-2 focus:border-purple-500 focus:outline-none text-right"
-                     data-correct-answer="<%= item[:answer] %>">
-            </label>
-          <% end %>
-        </div>
-      </div>
-      <!-- Esercizio 7: Rappresentazioni e arrotondamenti -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">7</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Seleziona tutte le rappresentazioni equivalenti al numero 0,00456.</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
-            {text: "4,56 × 10⁻³", correct: true},
-            {text: "456 × 10⁻⁴", correct: true},
-            {text: "0,456 × 10⁻¹", correct: false},
-            {text: "456 millesimi", correct: false},
-            {text: "4 decimillesimi e 56 centomillesimi", correct: true},
-            {text: "0,000456 × 10", correct: true}
-          ].each_with_index do |item, idx| %>
-            <label class="bg-white  px-4 py-3 flex items-center gap-3  cursor-pointer hover:bg-purple-100 transition">
-              <input type="checkbox"
-                     class=" "
-                     data-correct-answer="<%= item[:correct] ? 'true' : 'false' %>"
-                     name="repr_<%= idx %>">
-              <span class="text-gray-700"><%= item[:text] %></span>
-            </label>
-          <% end %>
-        </div>
-      </div>
-      <!-- Sezione finale: Sfida rapida -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">8</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Sfida: completa le seguenti indicazioni.</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 space-y-4">  
-          <div class="p-4">             
-            <p class="text-gray-700 mb-3">Scrivi il numero che ha:</p>
-            <ul class="text-gray-700 list-disc list-inside space-y-1">
-              <li>5 centinaia di migliaia</li>
-              <li>8 decine</li>
-              <li>2 decimi</li>
-              <li>nessun'altra cifra</li>
-            </ul>
-            <div class="mt-3  items-center gap-3">               <span class="font-semibold text-gray-700">Numero:</span>
-              <input type="text"
-                     class="border-2 border-purple-200  px-3 py-2 focus:border-purple-500 focus:outline-none"
-                     data-correct-answer="5000080,2">
-            </div>
-          </div>
-          <div class="p-4">             
-            <p class="text-gray-700 mb-3">Scrivi in notazione scientifica il numero 0,000 000 54.</p>
-            <input type="text"
-                   class=" border-2 border-purple-200  px-3 py-2 focus:border-purple-500 focus:outline-none"
-                   data-correct-answer="5,4e-7">
-          </div>
-        </div>
-      </div>
-      <%= render "shared/exercise_controls", color: 'purple', current_page: 'nvi5_mat_p028' %>
     </div>
+
+    <!-- Osserva e leggi -->
+    <div class="p-4 md:p-6 bg-white border-3 border-<%= @pagina.base_color %>-400 rounded-2xl">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-6">
+        <span class="text-pink-600">•</span> Osserva e leggi.
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Step 1 -->
+        <div class="p-4 text-center">
+          <%= image_tag "nvi5_mat/p028/p028_01.jpg", alt: "Step 1", class: "mx-auto mb-3" %>
+          <p class="text-gray-700 text-sm">
+            Metti in colonna rispettando il valore posizionale delle cifre.<br>
+            <strong class="text-<%= @pagina.base_color %>-600">Incolonna bene anche le virgole.</strong>
+          </p>
+        </div>
+        <!-- Step 2 -->
+        <div class="p-4 text-center">
+          <%= image_tag "nvi5_mat/p028/p028_02.jpg", alt: "Step 2", class: "mx-auto mb-3" %>
+          <p class="text-gray-700 text-sm">
+            Pareggia le cifre decimali con gli zeri segnaposto.
+          </p>
+        </div>
+        <!-- Step 3 -->
+        <div class="p-4 text-center">
+          <%= image_tag "nvi5_mat/p028/p028_03.jpg", alt: "Step 3", class: "mx-auto mb-3" %>
+          <p class="text-gray-700 text-sm">
+            Addiziona le cifre di ogni colonna partendo da destra. Quando la somma è maggiore di 9, esegui il cambio.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-6 p-4 bg-cyan-100 rounded-lg">
+        <p class="text-gray-800">
+          Ora puoi rispondere: Lucia ha speso in tutto
+          <input type="text" data-correct-answer="596,25" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          euro.
+        </p>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+
+      <!-- Esercizio 1 -->
+      <div class="p-4 mb-6">
+        <div class="mb-4">
+          <p class="font-bold text-gray-700">
+            <%= numero_esercizio_badge(1) %>
+            Calcola in colonna sul quaderno.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-pink-400">
+          <div class="p-4">
+            <h4 class="font-bold text-<%= @pagina.base_color %>-600 mb-3">Con i numeri interi</h4>
+            <div class="grid grid-cols-2 gap-2">
+              <p>354 + 525 =</p>
+              <p>1 456 + 2 037 =</p>
+              <p>5 705 + 1 479 =</p>
+              <p>3 657 + 894 =</p>
+            </div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-<%= @pagina.base_color %>-600 mb-3">Con i numeri decimali</h4>
+            <div class="grid grid-cols-2 gap-2">
+              <p>317,4 + 3,2 + 18 =</p>
+              <p>0,45 + 25,98 =</p>
+              <p>0,76 + 0,062 + 0,04 =</p>
+              <p>674,14 + 56 + 34,36 =</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizi 2, 3 e 4 -->
+      <div class="grid grid-cols-1 md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-pink-400">
+        <div class="p-4">
+          <p class="text-gray-700">
+            <%= numero_esercizio_badge(2) %>
+            Pietro ha 8,50 euro. La zia gli regala 15 euro. Quanti euro ha in tutto Pietro adesso?
+          </p>
+        </div>
+        <div class="p-4">
+          <p class="text-gray-700">
+            <%= numero_esercizio_badge(3) %>
+            Carola ha 138 figurine di piante e 206 di animali. Quante figurine ha in tutto?
+          </p>
+        </div>
+        <div class="p-4">
+          <p class="text-gray-700">
+            <%= numero_esercizio_badge(4) %>
+            Alessio non può comprare una giacca perché ha 38 euro e la giacca costa 17 euro in più. Quanto costa la giacca?
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quaderno -->
+    <div class="p-4 text-right">
+      <span class="text-gray-600">Quaderno esercizi →</span>
+      <span class="text-<%= @pagina.base_color %>-600 font-bold">p. 184</span>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

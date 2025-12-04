@@ -1,103 +1,169 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
-  
-  <div class="space-y-6">     <!-- Introduzione -->
-    <div class="p-6">       
-      <p class=" text-gray-800 mb-4">
-        Ricordi che cosa succede quando moltiplichi un numero naturale o un numero decimale per <strong class="text-blue-700">10, 100 o 1 000</strong>?
+
+  <div class="space-y-6">
+    <!-- Intro -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-800 mb-4">
+        Ricordi che cosa succede quando moltiplichi un numero naturale o un numero decimale per <strong class="text-<%= @pagina.base_color %>-600">10, 100 o 1 000</strong>?
       </p>
-      <p class=" text-gray-700">• Osserva e completa.</p>
+      <p class="font-bold text-gray-800">
+        <span class="text-pink-600">•</span> Osserva e completa.
+      </p>
     </div>
+
     <!-- Con i numeri naturali -->
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-600 mb-6">Con i numeri naturali</h2>
-      <div class="grid grid-cols-1 grid-cols-3 gap-6 mb-6">  
-        <div class="p-4">           
-          <p class=" mb-4">21 × <strong class="text-blue-600">10</strong> = <input type="text" data-correct-answer="210" class=" px-2 py-1 border-2 border-pink-300  focus:border-pink-500 focus:outline-none text-center"></p>
-          <%= image_tag "nvi5_mat/p040/p040_01.jpg", alt: "Moltiplicazione per 10" %>
+    <div class="p-4 md:p-6 bg-white border-3 border-<%= @pagina.base_color %>-400 rounded-2xl">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-4">Con i numeri naturali</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-4 text-center">
+          <div class="flex items-center justify-center gap-2 mb-3 flex-wrap">
+            <span>21 ×</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">10</span>
+            <span>=</span>
+            <input type="text" data-correct-answer="210" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <%= image_tag "nvi5_mat/p040/p040_01.jpg", class: "mx-auto" %>
         </div>
-        <div class="p-4">           
-          <p class=" mb-4">21 × <strong class="text-blue-600">100</strong> = <input type="text" data-correct-answer="2100" class=" px-2 py-1 border-2 border-pink-300  focus:border-pink-500 focus:outline-none text-center"></p>
-          <%= image_tag "nvi5_mat/p040/p040_02.jpg", alt: "Moltiplicazione per 100" %>
+        <div class="p-4 text-center">
+          <div class="flex items-center justify-center gap-2 mb-3 flex-wrap">
+            <span>21 ×</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">100</span>
+            <span>=</span>
+            <input type="text" data-correct-answer="2100" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <%= image_tag "nvi5_mat/p040/p040_02.jpg", class: "mx-auto" %>
         </div>
-        <div class="p-4">           
-          <p class=" mb-4">21 × <strong class="text-blue-600">1 000</strong> = <input type="text" data-correct-answer="21000" class=" px-2 py-1 border-2 border-pink-300  focus:border-pink-500 focus:outline-none text-center"></p>
-          <%= image_tag "nvi5_mat/p040/p040_03.jpg", alt: "Moltiplicazione per 1000" %>
+        <div class="p-4 text-center">
+          <div class="flex items-center justify-center gap-2 mb-3 flex-wrap">
+            <span>21 ×</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">1 000</span>
+            <span>=</span>
+            <input type="text" data-correct-answer="21000" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <%= image_tag "nvi5_mat/p040/p040_03.jpg", class: "mx-auto" %>
         </div>
       </div>
-      <div class="p-6">         
-        <p class=" text-gray-800 leading-relaxed">
-          Quando moltiplico un numero naturale per 10, 100, 1 000, ogni sua cifra diventa <strong class="text-blue-600">10, 100, 1 000 volte più grande</strong>.
+
+      <div class="p-4 bg-pink-100 rounded-lg">
+        <p class="text-gray-800 mb-2">
+          Quando moltiplico un numero naturale per 10, 100, 1 000, ogni sua cifra diventa <strong class="text-<%= @pagina.base_color %>-600">10, 100, 1 000 volte più grande</strong>.
         </p>
-        <p class=" text-gray-800 mt-3">
-          Per moltiplicare un <strong>numero naturale</strong> per 10, 100, 1 000 basta <strong class="text-blue-600">aggiungere uno, due, tre zeri</strong> alla fine del numero.
+        <p class="text-gray-800">
+          Per moltiplicare un <strong>numero naturale</strong> per 10, 100, 1 000 basta <strong class="text-<%= @pagina.base_color %>-600">aggiungere uno, due, tre zeri</strong> alla fine del numero.
         </p>
       </div>
     </div>
+
     <!-- Con i numeri decimali -->
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-700 mb-6">Con i numeri decimali</h2>
-      <div class="grid grid-cols-1 grid-cols-3 gap-6 mb-6">  
-        <div class="p-4">           
-          <p class=" mb-4">1,54 × <strong class="text-blue-700">10</strong> = <input type="text" data-correct-answer="15,4" class=" px-2 py-1 border-2 border-blue-300  focus:border-blue-500 focus:outline-none text-center"></p>
-          <%= image_tag "nvi5_mat/p040/p040_04.jpg", alt: "Moltiplicazione decimali per 10" %>
+    <div class="p-4 md:p-6 bg-white border-3 border-<%= @pagina.base_color %>-400 rounded-2xl">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-4">Con i numeri decimali</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="p-4 text-center">
+          <div class="flex items-center justify-center gap-2 mb-3 flex-wrap">
+            <span>1,54 ×</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">10</span>
+            <span>=</span>
+            <input type="text" data-correct-answer="15,4" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <%= image_tag "nvi5_mat/p040/p040_04.jpg", class: "mx-auto" %>
         </div>
-        <div class="p-4">           
-          <p class=" mb-4">1,54 × <strong class="text-blue-700">100</strong> = <input type="text" data-correct-answer="154" class=" px-2 py-1 border-2 border-blue-300  focus:border-blue-500 focus:outline-none text-center"></p>
-          <%= image_tag "nvi5_mat/p040/p040_05.jpg", alt: "Moltiplicazione decimali per 100" %>
+        <div class="p-4 text-center">
+          <div class="flex items-center justify-center gap-2 mb-3 flex-wrap">
+            <span>1,54 ×</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">100</span>
+            <span>=</span>
+            <input type="text" data-correct-answer="154" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <%= image_tag "nvi5_mat/p040/p040_05.jpg", class: "mx-auto" %>
         </div>
-        <div class="p-4">           
-          <p class=" mb-4">1,54 × <strong class="text-blue-700">1 000</strong> = <input type="text" data-correct-answer="1540" class=" px-2 py-1 border-2 border-blue-300  focus:border-blue-500 focus:outline-none text-center"></p>
-          <%= image_tag "nvi5_mat/p040/p040_06.jpg", alt: "Moltiplicazione decimali per 1000" %>
+        <div class="p-4 text-center">
+          <div class="flex items-center justify-center gap-2 mb-3 flex-wrap">
+            <span>1,54 ×</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">1 000</span>
+            <span>=</span>
+            <input type="text" data-correct-answer="1540" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <%= image_tag "nvi5_mat/p040/p040_06.jpg", class: "mx-auto" %>
         </div>
       </div>
-      <div class="p-6">         
-        <p class=" text-gray-800 leading-relaxed">
-          Quando moltiplico un numero decimale per 10, 100, 1 000, ogni sua cifra diventa <strong class="text-blue-700">10, 100, 1 000 volte più grande</strong> e la virgola "slitta" di 1, 2, 3 posti verso destra.
+
+      <div class="p-4 bg-pink-100 rounded-lg">
+        <p class="text-gray-800 mb-2">
+          Quando moltiplico un numero decimale per 10, 100, 1 000, ogni sua cifra diventa <strong class="text-<%= @pagina.base_color %>-600">10, 100, 1 000 volte più grande</strong> e la virgola "slitta" di 1, 2, 3 posti verso destra.
         </p>
-        <p class=" text-gray-800 mt-3">
-          Per moltiplicare un <strong>numero decimale</strong> per 10, 100, 1 000 basta <strong class="text-blue-700">spostare la virgola verso destra di uno, due, tre posti</strong>. Se mancano delle cifre a destra, si scrivono tanti zeri quante sono le posizioni mancanti.
+        <p class="text-gray-800">
+          Per moltiplicare un <strong>numero decimale</strong> per 10, 100, 1 000 basta <strong class="text-<%= @pagina.base_color %>-600">spostare la virgola verso destra di uno, due, tre posti</strong>. Se mancano delle cifre a destra, si scrivono tanti zeri quante sono le posizioni mancanti.
         </p>
       </div>
     </div>
-    <!-- Esercizi -->
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-600 mb-6">ESERCIZI</h2>
-      <!-- Esercizio 1 -->
-      <div class="p-4 p-6">         
-        <h3 class=" font-bold text-gray-700 mb-4">
-          <span class="bg-blue-500 text-white rounded-full   inline-flex items-center justify-center mr-2">1</span>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div class="p-4">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
           Calcola.
-        </h3>
-        <div class="grid grid-cols-1 grid-cols-3 gap-4  md:">  
-          <div class="space-y-2">             
-            <p>1 360 × 10 = <input type="text" data-correct-answer="13600" class=" px-2 py-1 border-2 border-yellow-300  focus:border-yellow-500 focus:outline-none text-center"></p>
-            <p>567 × 100 = <input type="text" data-correct-answer="56700" class=" px-2 py-1 border-2 border-yellow-300  focus:border-yellow-500 focus:outline-none text-center"></p>
-            <p>73 × 1 000 = <input type="text" data-correct-answer="73000" class=" px-2 py-1 border-2 border-yellow-300  focus:border-yellow-500 focus:outline-none text-center"></p>
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span>1 360 × 10 =</span>
+              <input type="text" data-correct-answer="13600" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>567 × 100 =</span>
+              <input type="text" data-correct-answer="56700" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>73 × 1 000 =</span>
+              <input type="text" data-correct-answer="73000" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
           </div>
-          <div class="space-y-2">             
-            <p>0,65 × 1 000 = <input type="text" data-correct-answer="650" class=" px-2 py-1 border-2 border-yellow-300  focus:border-yellow-500 focus:outline-none text-center"></p>
-            <p>1,43 × 100 = <input type="text" data-correct-answer="143" class=" px-2 py-1 border-2 border-yellow-300  focus:border-yellow-500 focus:outline-none text-center"></p>
-            <p>0,05 × 10 = <input type="text" data-correct-answer="0,5" class=" px-2 py-1 border-2 border-yellow-300  focus:border-yellow-500 focus:outline-none text-center"></p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span>0,65 × 1 000 =</span>
+              <input type="text" data-correct-answer="650" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>1,43 × 100 =</span>
+              <input type="text" data-correct-answer="143" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>0,05 × 10 =</span>
+              <input type="text" data-correct-answer="0,5" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
           </div>
-          <div class="space-y-2">             
-            <p>67,5 × 1 000 = <input type="text" data-correct-answer="67500" class=" px-2 py-1 border-2 border-yellow-300  focus:border-yellow-500 focus:outline-none text-center"></p>
-            <p>2,38 × 100 = <input type="text" data-correct-answer="238" class=" px-2 py-1 border-2 border-yellow-300  focus:border-yellow-500 focus:outline-none text-center"></p>
-            <p>137,21 × 10 = <input type="text" data-correct-answer="1372,1" class=" px-2 py-1 border-2 border-yellow-300  focus:border-yellow-500 focus:outline-none text-center"></p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span>67,5 × 1 000 =</span>
+              <input type="text" data-correct-answer="67500" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>2,38 × 100 =</span>
+              <input type="text" data-correct-answer="238" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>137,21 × 10 =</span>
+              <input type="text" data-correct-answer="1372,1" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- Footer con riferimento -->
-    <div class="mt-8 text-center">       
-      <p class="text-red-600 font-bold ">Quaderno esercizi p. 193</p>
+
+    <!-- Quaderno -->
+    <div class="p-4 text-right">
+      <span class="text-gray-600">Quaderno esercizi →</span>
+      <span class="text-<%= @pagina.base_color %>-600 font-bold">p. 193</span>
     </div>
+
+    <%= render 'shared/exercise_controls' %>
   </div>
-  <!-- Exercise controls -->
-  <%= render 'shared/exercise_controls', color: 'purple' %>
 </div>

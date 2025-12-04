@@ -1,145 +1,134 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
-  
-  <div class="space-y-6">     <!-- Problema introduttivo -->
-    <div class="p-4 p-6">       
-      <p class=" text-gray-800 leading-relaxed">
-        Il papà di Alessio compra per suo figlio uno skateboard che costa 79,85 euro. Se paga con una banconota da 100 euro, quanto riceve di resto il papà di Alessio?
-      </p>
-    </div>
-    <!-- Spiegazione -->
-    <div class="p-4 p-6">       
-      <p class=" text-gray-800 leading-relaxed mb-4">
-        Per rispondere alla domanda, devi eseguire una sottrazione.<br>
-        Ricordi? La sottrazione è l'operazione che serve per <strong class="text-blue-600">calcolare il resto</strong>,
-        <strong class="text-blue-600">calcolare quanto manca per completare una quantità</strong> o
-        <strong class="text-blue-600">calcolare la differenza tra due quantità</strong>.
-      </p>
-      <p class=" text-gray-800">
-        In questo caso devi eseguire <strong class="text-blue-600 ">100 – 79,85</strong>.
-      </p>
-    </div>
-    <!-- Osserva e leggi -->
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-600 mb-6">
-        • Osserva e leggi
-      </h2>
-      <div class="grid grid-cols-1 grid-cols-3 gap-4 gap-6">         <!-- Step 1 -->
-        <div class="p-4">  
-          <div class="mb-3">             <%= image_tag "nvi5_mat/p030/p030_01.jpg", alt: "Step 1" %>
+
+  <div class="space-y-6">
+    <!-- Problema introduttivo -->
+    <div class="p-4 md:p-6">
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="flex-1">
+          <div class="p-4 bg-cyan-50 rounded-lg mb-4">
+            <p class="text-gray-800">
+              Il papà di Alessio compra per suo figlio uno skateboard che costa 79,85 euro. Se paga con una banconota da 100 euro, quanto riceve di resto il papà di Alessio?
+            </p>
           </div>
-          <p class=" text-gray-700 text-center">
+
+          <p class="text-gray-800 mb-4">
+            Per rispondere alla domanda, devi eseguire una sottrazione.<br>
+            Ricordi? La sottrazione è l'operazione che serve per <strong class="text-<%= @pagina.base_color %>-600">calcolare il resto</strong>,
+            <strong class="text-<%= @pagina.base_color %>-600">calcolare quanto manca per completare una quantità</strong> o
+            <strong class="text-<%= @pagina.base_color %>-600">calcolare la differenza tra due quantità</strong>.
+          </p>
+          <p class="text-gray-800">
+            In questo caso devi eseguire <strong class="text-<%= @pagina.base_color %>-600">100 – 79,85</strong>.
+          </p>
+        </div>
+        <div class="flex-shrink-0">
+          <%= image_tag "nvi5_mat/p030/page.png", class: "max-w-xs rounded-lg", style: "clip-path: inset(5% 0 60% 60%);" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Osserva e leggi -->
+    <div class="p-4 md:p-6 bg-white border-3 border-<%= @pagina.base_color %>-400 rounded-2xl">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-6">
+        <span class="text-pink-600">•</span> Osserva e leggi
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Step 1 -->
+        <div class="p-4 text-center">
+          <%= image_tag "nvi5_mat/p030/p030_01.jpg", alt: "Step 1", class: "mx-auto mb-3" %>
+          <p class="text-gray-700 text-sm">
             Metti in colonna rispettando il valore posizionale delle cifre.<br>
-            <strong class="text-blue-600">Incolonna bene anche le virgole.</strong>
+            <strong class="text-<%= @pagina.base_color %>-600">Incolonna bene anche le virgole.</strong>
           </p>
         </div>
         <!-- Step 2 -->
-        <div class="p-4">  
-          <div class="mb-3">             <%= image_tag "nvi5_mat/p030/p030_02.jpg", alt: "Step 2" %>
-          </div>
-          <p class=" text-gray-700 text-center">
+        <div class="p-4 text-center">
+          <%= image_tag "nvi5_mat/p030/p030_02.jpg", alt: "Step 2", class: "mx-auto mb-3" %>
+          <p class="text-gray-700 text-sm">
             Pareggia le cifre decimali con gli zeri segnaposto.
           </p>
         </div>
         <!-- Step 3 -->
-        <div class="p-4">  
-          <div class="mb-3">             <%= image_tag "nvi5_mat/p030/p030_03.jpg", alt: "Step 3" %>
-          </div>
-          <p class=" text-gray-700 text-center">
+        <div class="p-4 text-center">
+          <%= image_tag "nvi5_mat/p030/p030_03.jpg", alt: "Step 3", class: "mx-auto mb-3" %>
+          <p class="text-gray-700 text-sm">
             Sottrai le cifre di ogni colonna partendo da destra. Quando il minuendo è minore del sottraendo, esegui il cambio.
           </p>
         </div>
       </div>
-      <div class="mt-6 p-4" data-controller="fill-blanks">         
-        <p class=" text-gray-800">
+
+      <div class="mt-6 p-4 bg-cyan-100 rounded-lg">
+        <p class="text-gray-800">
           Ora puoi rispondere: Il papà di Alessio riceve
-          <input type="text" class="border-b-2 border-purple-400 bg-transparent px-2 py-1 focus:outline-none focus:border-purple-600  text-center font-bold" data-fill-blanks-target="input" data-correct-answer="20,15">
+          <input type="text" data-correct-answer="20,15" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           euro di resto.
         </p>
       </div>
     </div>
-    <!-- Esercizi -->
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-600 mb-6">ESERCIZI</h2>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+
       <!-- Esercizio 1 -->
-      <div class="mb-6 p-4 p-6">         
-        <h3 class=" font-bold text-gray-700 mb-4">
-          <span class="bg-blue-500 text-white rounded-full   inline-flex items-center justify-center mr-2">1</span>
-          Calcola in colonna sul quaderno.
-        </h3>
-        <div class="grid grid-cols-1 grid-cols-2 gap-6">           <!-- Con i numeri interi -->
-          <div class="p-4">             
-            <h4 class="font-bold text-blue-600 mb-3">Con i numeri interi</h4>
-            <div class="space-y-2  md:">               
+      <div class="p-4 mb-6">
+        <div class="mb-4">
+          <p class="font-bold text-gray-700">
+            <%= numero_esercizio_badge(1) %>
+            Calcola in colonna sul quaderno.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x-2 divide-pink-400">
+          <div class="p-4">
+            <h4 class="font-bold text-<%= @pagina.base_color %>-600 mb-3">Con i numeri interi</h4>
+            <div class="grid grid-cols-2 gap-2">
               <p>795 – 352 =</p>
-              <p>6 284 – 2 736 =</p>
               <p>3 742 – 1 508 =</p>
+              <p>6 284 – 2 736 =</p>
               <p>7 000 – 2 546 =</p>
             </div>
           </div>
-          <!-- Con i numeri decimali -->
-          <div class="p-4">             
-            <h4 class="font-bold text-blue-600 mb-3">Con i numeri decimali</h4>
-            <div class="space-y-2  md:">               
+          <div class="p-4">
+            <h4 class="font-bold text-<%= @pagina.base_color %>-600 mb-3">Con i numeri decimali</h4>
+            <div class="grid grid-cols-2 gap-2">
               <p>127 – 6,34 =</p>
-              <p>156,03 – 3,07 =</p>
               <p>98,14 – 7,235 =</p>
+              <p>156,03 – 3,07 =</p>
               <p>2 – 1,755 =</p>
             </div>
           </div>
         </div>
       </div>
-      <!-- Esercizio 2 -->
-      <div class="mb-6 p-4 p-6" data-controller="fill-blanks">         
-        <h3 class=" font-bold text-gray-700 mb-4">
-          <span class="bg-blue-600 text-white rounded-full   inline-flex items-center justify-center mr-2">2</span>
-        </h3>
-        <p class=" text-gray-800 mb-4">
-          Lo scorso anno, per comprare le piante di pomodori, Carlo aveva pagato 153 euro. Quest'anno per lo stesso numero di piante ha pagato 189 euro. Quanto ha speso in più quest'anno?
-        </p>
-        <div class="p-4 mt-4">           
-          <p class=" text-gray-800">
-            <strong>Operazione:</strong> 189 – 153 =
-            <input type="text" class="border-b-2 border-blue-400 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-600  text-center font-bold" data-fill-blanks-target="input" data-correct-answer="36">
-          </p>
-          <p class=" text-gray-800 mt-3">
-            <strong>Risposta:</strong> Carlo ha speso in più
-            <input type="text" class="border-b-2 border-blue-400 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-600  text-center font-bold" data-fill-blanks-target="input" data-correct-answer="36">
-            euro.
+
+      <!-- Esercizi 2 e 3 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x-2 divide-pink-400">
+        <div class="p-4">
+          <p class="text-gray-700">
+            <%= numero_esercizio_badge(2) %>
+            Lo scorso anno, per comprare le piante di pomodori, Carlo aveva pagato 153 euro. Quest'anno per lo stesso numero di piante ha pagato 189 euro. Quanto ha speso in più quest'anno?
           </p>
         </div>
-      </div>
-      <!-- Esercizio 3 -->
-      <div class="p-4 p-6" data-controller="fill-blanks">         
-        <h3 class=" font-bold text-gray-700 mb-4">
-          <span class="bg-green-600 text-white rounded-full   inline-flex items-center justify-center mr-2">3</span>
-        </h3>
-        <p class=" text-gray-800 mb-4">
-          Un puzzle è composto da 300 pezzi. Se Lin ne ha già sistemati 198, quanti pezzi le mancano per terminare?
-        </p>
-        <div class="p-4 mt-4">           
-          <p class=" text-gray-800">
-            <strong>Operazione:</strong> 300 – 198 =
-            <input type="text" class="border-b-2 border-green-400 bg-transparent px-2 py-1 focus:outline-none focus:border-green-600  text-center font-bold" data-fill-blanks-target="input" data-correct-answer="102">
-          </p>
-          <p class=" text-gray-800 mt-3">
-            <strong>Risposta:</strong> A Lin mancano
-            <input type="text" class="border-b-2 border-green-400 bg-transparent px-2 py-1 focus:outline-none focus:border-green-600  text-center font-bold" data-fill-blanks-target="input" data-correct-answer="102">
-            pezzi.
+        <div class="p-4">
+          <p class="text-gray-700">
+            <%= numero_esercizio_badge(3) %>
+            Un puzzle è composto da 300 pezzi. Se Lin ne ha già sistemati 198, quanti pezzi le mancano per terminare?
           </p>
         </div>
       </div>
     </div>
-    <!-- Footer con riferimento -->
-    <div class="mt-8 text-center">       
-      <p class="text-red-600 font-bold ">Quaderno esercizi p. 186</p>
+
+    <!-- Quaderno -->
+    <div class="p-4 text-right">
+      <span class="text-gray-600">Quaderno esercizi →</span>
+      <span class="text-<%= @pagina.base_color %>-600 font-bold">p. 186</span>
     </div>
+
+    <%= render 'shared/exercise_controls' %>
   </div>
-  <!-- Exercise controls -->
-  <%= render 'shared/exercise_controls', color: 'purple' %>
 </div>

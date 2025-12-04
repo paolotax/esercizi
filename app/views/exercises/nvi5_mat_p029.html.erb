@@ -1,245 +1,179 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
-     data-font-controls-target="content">  
+     data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <div class="space-y-8">
-      <!-- Esercizio 1: Valore posizionale -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">1</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Per ogni numero scegli la cifra richiesta.</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 space-y-4">           <% [
-            {number: "48 213", prompt: "Cifra delle migliaia", options: {"8" => true, "4" => false, "2" => false}},
-            {number: "305 671", prompt: "Cifra delle centinaia", options: {"6" => true, "5" => false, "7" => false}},
-            {number: "9 140", prompt: "Cifra delle unità", options: {"0" => true, "9" => false, "4" => false}}
-          ].each_with_index do |item, idx| %>
-            <div class="p-4">               
-              <p class="text-gray-700 font-semibold">Numero: <span class="text-blue-600"><%= item[:number] %></span></p>
-              <p class="text-gray-700 mb-3"><%= item[:prompt] %></p>
-              <div class="flex flex-wrap gap-3">                 <% item[:options].each do |value, correct| %>
-                  <label class="flex items-center gap-2 bg-purple-100 hover:bg-purple-200 transition rounded-full px-4 py-2 cursor-pointer">
-                    <input type="radio"
-                           name="pos_<%= idx %>"
-                           value="<%= value %>"
-                           data-correct-answer="<%= correct ? 'true' : 'false' %>"
-                           class=" ">
-                    <span class=" text-gray-700"><%= value %></span>
-                  </label>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <!-- Esercizio 2: Dal testo al numero -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">2</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Scrivi in cifre.</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
-            {text: "trecentoquarantacinque", answer: "345"},
-            {text: "otto mila e dodici", answer: "8012"},
-            {text: "ventisette e cinque decimi", answer: "27,5"},
-            {text: "zero virgola centouno", answer: "0,101"}
-          ].each do |item| %>
-            <label class="bg-white  px-4 py-3 flex items-center gap-3 ">
-              <span class="text-gray-700 flex-1"><%= item[:text] %></span>
-              <input type="text"
-                     class=" border-2 border-purple-200  px-3 py-2 focus:border-purple-500 focus:outline-none text-right"
-                     data-correct-answer="<%= item[:answer] %>">
-            </label>
-          <% end %>
-        </div>
-      </div>
-      <!-- Esercizio 3: Potenze di 10 -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">3</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Seleziona tutte le uguaglianze corrette.</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
-            {text: "10³ = 1 000", correct: true},
-            {text: "10⁻¹ = 0,001", correct: false},
-            {text: "5 × 10² = 500", correct: true},
-            {text: "2 × 10⁴ = 200", correct: false},
-            {text: "10⁰ = 1", correct: true},
-            {text: "3 × 10¹ = 30", correct: true}
-          ].each_with_index do |item, idx| %>
-            <label class="bg-white  px-4 py-3 flex items-center gap-3  cursor-pointer hover:bg-purple-100 transition">
-              <input type="checkbox"
-                     class=" "
-                     data-correct-answer="<%= item[:correct] ? 'true' : 'false' %>"
-                     name="powers_<%= idx %>">
-              <span class="text-gray-700"><%= item[:text] %></span>
-            </label>
-          <% end %>
-        </div>
-      </div>
-      <!-- Esercizio 4: Ordina i numeri -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">4</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Scrivi i numeri in ordine crescente inserendoli nelle caselle.</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 space-y-3">           
-          <p class="text-gray-700">Numeri: 3,4 - 3,04 - 3,44 - 3,004 - 3,40</p>
-          <div class="grid grid-cols-1 grid-cols-5 gap-3">             <% ["1°", "2°", "3°", "4°", "5°"].each_with_index do |label, idx| %>
-              <div class="p-3 text-center">                 
-                <p class=" text-gray-500 mb-2"><%= label %></p>
-                <input type="text"
-                       class="full border-2 border-purple-200  px-2 py-2 focus:border-purple-500 focus:outline-none text-center"
-                       data-correct-answer="<%= ["3,004", "3,04", "3,4", "3,40", "3,44"][idx] %>">
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <!-- Esercizio 5: Confronti semplici -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">5</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Scegli il simbolo corretto (&lt;, =, &gt;).</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
-            {left: "-3", right: "+2", symbol: "<"},
-            {left: "|-5|", right: "5", symbol: "="},
-            {left: "0,7", right: "0,70", symbol: "="},
-            {left: "-8", right: "-12", symbol: ">"}
-          ].each do |item| %>
-            <div class="px-4 py-3 flex items-center justify-center gap-4">               <span class="text-gray-700 font-semibold"><%= item[:left] %></span>
-              <select class="px-3 py-2 border-2 border-purple-300  focus:border-purple-500 focus:outline-none  font-bold"
-                      data-correct-answer="<%= item[:symbol] %>">
-                <option value="">?</option>
-                <option value="<">&lt;</option>
-                <option value="=">=</option>
-                <option value=">">&gt;</option>
-              </select>
-              <span class="text-gray-700 font-semibold"><%= item[:right] %></span>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <!-- Esercizio 6: Operazioni guidate -->
-      <div class="p-4 p-6">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">6</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Completa le operazioni.</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 grid grid-cols-1 grid-cols-2 gap-3">           <% [
-            {expr: "7 + (-3)", answer: "4"},
-            {expr: "(-4) + (-5)", answer: "-9"},
-            {expr: "12 - 8", answer: "4"},
-            {expr: "6 × 5", answer: "30"}
-          ].each do |item| %>
-            <label class="bg-white  px-4 py-3 flex items-center justify-between gap-4 ">
-              <span class="font-semibold text-gray-700 whitespace-nowrap"><%= item[:expr] %> =</span>
-              <input type="text"
-                     class=" border-2 border-purple-200  px-3 py-2 focus:border-purple-500 focus:outline-none text-right"
-                     data-correct-answer="<%= item[:answer] %>">
-            </label>
-          <% end %>
-        </div>
-        <p class="text-blue-600 font-medium italic mt-4">→ Sul quaderno ripeti le operazioni scambiando il segno ai numeri.</p>
-      </div>
-      <!-- Esercizio 7: Collega i numeri -->
-      <div class="p-4 p-6" data-controller="flower-matcher">  
-        <div class="flex items-start gap-3 mb-4">  
-          <div class="   text-white flex items-center justify-center font-bold">7</div>
-  
-          <div class="flex-1">             
-            <p class="font-medium text-gray-800">Collega ogni forma del numero alla rappresentazione corretta.</p>
-          </div>
-        </div>
-        <div class="ml-0 ml-11 relative">           <svg class="absolute top-0 left-0 full full pointer-events-none z-10"
-               data-flower-matcher-target="canvas">
-          </svg>
-          <div class="flex flex-wrap justify-around gap-3 mb-12 relative z-20">  
-            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-              data-flower-matcher-target="flower"
-              data-flower-id="pow-27-5"
-              data-pair="pair-27">
-              27,5
-            </div>
-            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-              data-flower-matcher-target="flower"
-              data-flower-id="pow-345"
-              data-pair="pair-345">
-              345
-            </div>
-            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-              data-flower-matcher-target="flower"
-              data-flower-id="pow-8012"
-              data-pair="pair-8012">
-              8&nbsp;012
-            </div>
-            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-              data-flower-matcher-target="flower"
-              data-flower-id="pow-0101"
-              data-pair="pair-0101">
-              0,101
-            </div>
-          </div>
-          <div class="flex flex-wrap justify-around gap-3 relative z-20">  
-            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-              data-flower-matcher-target="flower"
-              data-flower-id="res-345"
-              data-pair="pair-345">
-              trecentoquarantacinque
-            </div>
-            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-              data-flower-matcher-target="flower"
-              data-flower-id="res-27"
-              data-pair="pair-27">
-              ventisette e cinque decimi
-            </div>
-            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-              data-flower-matcher-target="flower"
-              data-flower-id="res-0101"
-              data-pair="pair-0101">
-              zero virgola centouno
-            </div>
-            <div class="px-4 py-3 text-center font-bold cursor-pointer hover:transition"                  data-action="click->flower-matcher#selectFlower"
-              data-flower-matcher-target="flower"
-              data-flower-id="res-8012"
-              data-pair="pair-8012">
-              otto mila e dodici
-            </div>
-          </div>
-          <div class="mt-8 flex gap-3 items-center">             <button class="bg-blue-500 hover:bg-blue-500 text-white font-bold rounded-full  transition transform hover:scale-105 flex items-center justify-center  "
-                    data-action="click->flower-matcher#reset"
-              title="Ricomincia collegamenti">
-              <svg xmlns="http://www.w3.org/2000/svg" class=" " fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <%= render "shared/exercise_controls", color: 'purple', current_page: 'nvi5_mat_p029' %>
+  <div class="space-y-6">
+    <!-- Intro -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-800 mb-4">
+        L'addizione gode della proprietà commutativa e della proprietà associativa, che sono utili per <strong class="text-<%= @pagina.base_color %>-600">semplificare i calcoli</strong>.
+      </p>
+      <p class="font-bold text-gray-800">
+        <span class="text-pink-600">•</span> Leggi e completa.
+      </p>
     </div>
+
+    <!-- Proprietà commutativa -->
+    <div class="p-4 md:p-6 bg-pink-100 rounded-2xl">
+      <h3 class="font-bold text-pink-700 mb-3">Proprietà commutativa</h3>
+      <p class="text-gray-800 mb-4">
+        Se cambi l'ordine degli addendi, il risultato non cambia. Puoi usare questa proprietà per verificare la correttezza del risultato.
+      </p>
+
+      <div class="flex flex-col md:flex-row items-center gap-6">
+        <%= image_tag "nvi5_mat/p029/p029_01.jpg", class: "max-w-sm" %>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="text-cyan-500 font-bold">12,4</span>
+            <span class="text-pink-600 font-bold">+</span>
+            <span class="text-cyan-500 font-bold">25,3</span>
+            <span class="text-gray-700">=</span>
+            <input type="text" data-correct-answer="37,7" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-cyan-500 font-bold">25,3</span>
+            <span class="text-pink-600 font-bold">+</span>
+            <input type="text" data-correct-answer="12,4" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <span class="text-gray-700">=</span>
+            <input type="text" data-correct-answer="37,7" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Proprietà associativa -->
+    <div class="p-4 md:p-6 bg-pink-100 rounded-2xl">
+      <h3 class="font-bold text-pink-700 mb-3">Proprietà associativa</h3>
+      <p class="text-gray-800 mb-4">
+        Se sostituisci a due addendi la loro somma, il risultato non cambia.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">58 + 42 + 120 =</span>
+            <input type="text" data-correct-answer="220" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-400">↓</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <input type="text" data-correct-answer="100" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <span class="text-gray-700">+ 120 =</span>
+            <input type="text" data-correct-answer="220" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">(58 + 42) + 120 =</span>
+            <input type="text" data-correct-answer="220" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-400 invisible">↓</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <input type="text" data-correct-answer="100" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            <span class="text-gray-700">+ 120 =</span>
+            <input type="text" data-correct-answer="220" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lo zero e l'uno nell'addizione -->
+    <div class="p-4 md:p-6">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 text-xl mb-4">Lo zero e l'uno nell'addizione</h2>
+      <p class="font-bold text-gray-800 mb-4">
+        <span class="text-pink-600">•</span> Leggi e completa.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Lo zero -->
+        <div class="p-4 bg-cyan-50 rounded-lg">
+          <p class="text-gray-800 mb-4">
+            Se addizioni un <strong>qualsiasi numero a 0</strong> o se addizioni <strong>0 a qualsiasi numero</strong>, il risultato è il <strong>numero stesso</strong>.
+          </p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-cyan-500 font-bold">0</span>
+              <span class="text-gray-700">+ 638 =</span>
+              <input type="text" data-correct-answer="638" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">5,15 +</span>
+              <span class="text-cyan-500 font-bold">0</span>
+              <span class="text-gray-700">=</span>
+              <input type="text" data-correct-answer="5,15" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            </div>
+          </div>
+        </div>
+
+        <!-- L'uno -->
+        <div class="p-4 bg-cyan-50 rounded-lg">
+          <p class="text-gray-800 mb-4">
+            Se aggiungi <strong>1</strong> a un <strong>numero intero</strong> ottieni il <strong>numero successivo</strong>. Per questo motivo i numeri sono <strong>infiniti</strong>.<br>
+            Nei <strong>numeri decimali non esiste il successivo</strong> perché <strong>tra due numeri decimali ci sono infiniti numeri decimali</strong>.
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">37 +</span>
+            <span class="text-cyan-500 font-bold">1</span>
+            <span class="text-gray-700">=</span>
+            <input type="text" data-correct-answer="38" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-pink-400">
+        <!-- Esercizio 1 -->
+        <div class="p-4">
+          <p class="font-bold text-gray-700 mb-4">
+            <%= numero_esercizio_badge(1) %>
+            Applica la proprietà commutativa e la proprietà associativa nel modo più conveniente per semplificare i calcoli.<br>
+            <span class="font-normal">Segui l'esempio e calcola sul quaderno.</span>
+          </p>
+
+          <div class="p-3 bg-cyan-100 rounded-lg mb-4">
+            <p class="text-gray-700">
+              42 + 37 + 28 = <strong class="text-<%= @pagina.base_color %>-600">42 + 28 + 37 = (42 + 28) + 37 = 70 + 37 = 107</strong>
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <p class="text-gray-700">189 + 83 + 11 =</p>
+            <p class="text-gray-700">205 + 64 + 75 =</p>
+            <p class="text-gray-700">127 + 19 + 53 + 21 =</p>
+            <p class="text-gray-700">23,8 + 11,6 + 16,2 =</p>
+            <p class="text-gray-700">3,18 + 0,67 + 6,82 + 3,13 =</p>
+          </div>
+        </div>
+
+        <!-- AllenaMente -->
+        <div class="p-4">
+          <div class="p-4 bg-yellow-200 rounded-lg">
+            <p class="font-bold text-red-600 mb-3">AllenaMente!</p>
+            <p class="text-gray-800">
+              Luigi e Andrea hanno unito i loro risparmi per comprare un regalo al papà: hanno in tutto 80 euro.<br>
+              Luigi ha messo 8 euro più di Andrea.<br>
+              Quanti soldi ha messo Luigi?<br>
+              Come hai fatto a rispondere?
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quaderno -->
+    <div class="p-4 text-right">
+      <span class="text-gray-600">Quaderno esercizi →</span>
+      <span class="text-<%= @pagina.base_color %>-600 font-bold">pp. 185, 200</span>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

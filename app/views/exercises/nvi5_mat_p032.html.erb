@@ -1,175 +1,150 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
-  
-  <div class="space-y-6">     <!-- Problema introduttivo -->
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">  
-      <div class="lg:col-span-3 p-4 p-6">         
-        <p class=" text-gray-800 leading-relaxed mb-3">
-          Le galline della fattoria Colle Fiorito producono 185 uova al giorno.<br>
-          Quante uova vengono prodotte in 25 giorni?
-        </p>
-        <p class=" text-gray-800">
-          Per rispondere alla domanda, devi eseguire una moltiplicazione.<br>
-          Ricordi? La moltiplicazione è l'operazione che serve per <strong class="text-blue-600">aggiungere più volte la stessa quantità</strong> o per <strong class="text-blue-600">calcolare le combinazioni</strong>.
-        </p>
-        <p class=" text-blue-600 font-bold mt-4">
-          In questo caso devi eseguire <strong>185 × 25</strong>.
-        </p>
-      </div>
-      <div class="lg:col-span-2 p-6 flex items-center justify-center">  
-        <div class="text-center">           
-          <p class=" mb-2">🐔</p>
-          <p>🥚🥚🥚</p>
+
+  <div class="space-y-6">
+    <!-- Problema introduttivo -->
+    <div class="p-4 md:p-6">
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="flex-1">
+          <div class="p-4 bg-cyan-50 rounded-lg mb-4">
+            <p class="text-gray-800">
+              Le galline della fattoria Colle Fiorito producono 185 uova al giorno.<br>
+              Quante uova vengono prodotte in 25 giorni?
+            </p>
+          </div>
+
+          <p class="text-gray-800 mb-4">
+            Per rispondere alla domanda, devi eseguire una moltiplicazione.<br>
+            Ricordi? La moltiplicazione è l'operazione che serve per <strong class="text-<%= @pagina.base_color %>-600">aggiungere più volte la stessa quantità</strong> o per <strong class="text-<%= @pagina.base_color %>-600">calcolare le combinazioni</strong>.
+          </p>
+          <p class="text-gray-800">
+            In questo caso devi eseguire <strong class="text-<%= @pagina.base_color %>-600">185 × 25</strong>.
+          </p>
+        </div>
+        <div class="flex-shrink-0">
+          <%= image_tag "nvi5_mat/p032/page.png", class: "max-w-xs rounded-lg", style: "clip-path: inset(3% 0 70% 65%);" %>
         </div>
       </div>
     </div>
+
     <!-- Osserva e leggi -->
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-600 mb-6">
-        • Osserva e leggi.
+    <div class="p-4 md:p-6 bg-white border-3 border-<%= @pagina.base_color %>-400 rounded-2xl">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-6">
+        <span class="text-pink-600">•</span> Osserva e leggi.
       </h2>
-      <div class="grid grid-cols-1 grid-cols-3 gap-4 gap-6 mb-6">         <!-- Step 1 -->
-        <div class="p-4">  
-          <div class="mb-3 flex justify-center">             <%= image_tag "nvi5_mat/p032/p032_01.jpg", alt: "Step 1" %>
-          </div>
-          <p class=" text-gray-700 text-center">
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Step 1 -->
+        <div class="p-4 text-center">
+          <%= image_tag "nvi5_mat/p032/p032_01.jpg", alt: "Step 1", class: "mx-auto mb-3" %>
+          <p class="text-gray-700 text-sm">
             Moltiplica le unità del 2° fattore per tutte le cifre del 1° fattore.
           </p>
         </div>
         <!-- Step 2 -->
-        <div class="p-4">  
-          <div class="mb-3 flex justify-center">             <%= image_tag "nvi5_mat/p032/p032_02.jpg", alt: "Step 2" %>
-          </div>
-          <p class=" text-gray-700 text-center">
+        <div class="p-4 text-center">
+          <%= image_tag "nvi5_mat/p032/p032_02.jpg", alt: "Step 2", class: "mx-auto mb-3" %>
+          <p class="text-gray-700 text-sm">
             Moltiplica le decine del 2° fattore per tutte le cifre del 1° fattore.
           </p>
         </div>
         <!-- Step 3 -->
-        <div class="p-4">  
-          <div class="mb-3 flex justify-center">             <%= image_tag "nvi5_mat/p032/p032_03.jpg", alt: "Step 3" %>
-          </div>
-          <p class=" text-gray-700 text-center">
+        <div class="p-4 text-center">
+          <%= image_tag "nvi5_mat/p032/p032_03.jpg", alt: "Step 3", class: "mx-auto mb-3" %>
+          <p class="text-gray-700 text-sm">
             Addiziona i prodotti parziali.
           </p>
         </div>
       </div>
-      <div class="p-4" data-controller="fill-blanks">         
-        <p class=" text-gray-800">
+
+      <div class="mt-6 p-4 bg-cyan-100 rounded-lg">
+        <p class="text-gray-800">
           Ora puoi rispondere: In 25 giorni vengono prodotte
-          <input type="text" class="border-b-2 border-purple-400 bg-transparent px-2 py-1 focus:outline-none focus:border-purple-600  text-center font-bold" data-fill-blanks-target="input" data-correct-answer="4625">
+          <input type="text" data-correct-answer="4625" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
           uova.
         </p>
       </div>
     </div>
-    <!-- Esercizi -->
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-600 mb-6">ESERCIZI</h2>
-      <!-- Esercizio 1 -->
-      <div class="mb-6 p-4 p-6">         
-        <h3 class=" font-bold text-gray-700 mb-4">
-          <span class="bg-blue-500 text-white rounded-full   inline-flex items-center justify-center mr-2">1</span>
-          Calcola in colonna sul quaderno.
-        </h3>
-        <div class="grid grid-cols-2 grid-cols-4 gap-4  md:">  
-          <div class="space-y-2">             
-            <p class="font-bold text-blue-600">a)</p>
-            <p>42 × 15 =</p>
-            <p>88 × 22 =</p>
-            <p>263 × 34 =</p>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-pink-400">
+        <!-- Colonna sinistra -->
+        <div class="p-4 space-y-6">
+          <!-- Esercizio 1 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(1) %>
+              Calcola in colonna sul quaderno.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <p class="font-bold text-<%= @pagina.base_color %>-600">a)</p>
+                <p>42 × 15 =</p>
+                <p>88 × 22 =</p>
+                <p>263 × 34 =</p>
+              </div>
+              <div class="space-y-1">
+                <p class="font-bold text-<%= @pagina.base_color %>-600">b)</p>
+                <p>38 × 24 =</p>
+                <p>54 × 35 =</p>
+                <p>312 × 40 =</p>
+              </div>
+              <div class="space-y-1">
+                <p class="font-bold text-<%= @pagina.base_color %>-600">c)</p>
+                <p>92 × 36 =</p>
+                <p>79 × 32 =</p>
+                <p>106 × 78 =</p>
+              </div>
+              <div class="space-y-1">
+                <p class="font-bold text-<%= @pagina.base_color %>-600">d)</p>
+                <p>74 × 26 =</p>
+                <p>48 × 53 =</p>
+                <p>250 × 67 =</p>
+              </div>
+            </div>
           </div>
-          <div class="space-y-2">             
-            <p class="font-bold text-blue-600">b)</p>
-            <p>38 × 24 =</p>
-            <p>54 × 35 =</p>
-            <p>312 × 40 =</p>
+
+          <!-- Esercizio 2 -->
+          <div>
+            <p class="text-gray-700">
+              <%= numero_esercizio_badge(2) %>
+              Il biglietto del teatro costa a ognuno dei 23 alunni della 5ª C 8 euro. Quanto spendono complessivamente?
+            </p>
           </div>
-          <div class="space-y-2">             
-            <p class="font-bold text-blue-600">c)</p>
-            <p>92 × 36 =</p>
-            <p>79 × 32 =</p>
-            <p>106 × 78 =</p>
-          </div>
-          <div class="space-y-2">             
-            <p class="font-bold text-blue-600">d)</p>
-            <p>74 × 26 =</p>
-            <p>48 × 53 =</p>
-            <p>250 × 67 =</p>
+
+          <!-- Esercizio 3 -->
+          <div>
+            <p class="text-gray-700">
+              <%= numero_esercizio_badge(3) %>
+              Maura è in gelateria e può scegliere tra il cono e la coppetta e 4 gusti di gelato. Tra quante combinazioni può scegliere?
+            </p>
           </div>
         </div>
-      </div>
-      <!-- Esercizio 2 -->
-      <div class="mb-6 p-4 p-6" data-controller="fill-blanks">         
-        <h3 class=" font-bold text-gray-700 mb-4">
-          <span class="bg-blue-600 text-white rounded-full   inline-flex items-center justify-center mr-2">2</span>
-        </h3>
-        <p class=" text-gray-800 mb-4">
-          Il biglietto del teatro costa a ognuno dei 23 alunni della 5ª C 8 euro. Quanto spendono complessivamente?
-        </p>
-        <div class="p-4 mt-4">           
-          <p class=" text-gray-800">
-            <strong>Operazione:</strong> 23 × 8 =
-            <input type="text" class="border-b-2 border-blue-400 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-600  text-center font-bold" data-fill-blanks-target="input" data-correct-answer="184">
-          </p>
-          <p class=" text-gray-800 mt-3">
-            <strong>Risposta:</strong> Spendono complessivamente
-            <input type="text" class="border-b-2 border-blue-400 bg-transparent px-2 py-1 focus:outline-none focus:border-blue-600  text-center font-bold" data-fill-blanks-target="input" data-correct-answer="184">
-            euro.
-          </p>
-        </div>
-      </div>
-      <!-- Esercizio 3 -->
-      <div class="mb-6 p-4 p-6" data-controller="fill-blanks">         
-        <h3 class=" font-bold text-gray-700 mb-4">
-          <span class="bg-green-600 text-white rounded-full   inline-flex items-center justify-center mr-2">3</span>
-        </h3>
-        <p class=" text-gray-800 mb-4">
-          Maura è in gelateria e può scegliere tra il cono e la coppetta e 4 gusti di gelato. Tra quante combinazioni può scegliere?
-        </p>
-        <div class="p-4 mt-4">           
-          <p class=" text-gray-800">
-            <strong>Operazione:</strong> 2 × 4 =
-            <input type="text" class="border-b-2 border-green-400 bg-transparent px-2 py-1 focus:outline-none focus:border-green-600  text-center font-bold" data-fill-blanks-target="input" data-correct-answer="8">
-          </p>
-          <p class=" text-gray-800 mt-3">
-            <strong>Risposta:</strong> Può scegliere tra
-            <input type="text" class="border-b-2 border-green-400 bg-transparent px-2 py-1 focus:outline-none focus:border-green-600  text-center font-bold" data-fill-blanks-target="input" data-correct-answer="8">
-            combinazioni.
-          </p>
-        </div>
-      </div>
-      <!-- AllenaMente -->
-      <div class="p-4 p-6" data-controller="fill-blanks">         
-        <h3 class=" font-bold mb-4">
-          <span class="bg-orange-600 text-white px-4 py-2  mr-2">AllenaMente!</span>
-        </h3>
-        <p class=" text-gray-800 mb-4">
-          Luca deve comprare 6 confezioni di biscotti al prezzo di 3 euro l'una. Oggi c'è l'offerta "prendi 3 paghi 2". Quanto risparmia Luca?
-        </p>
-        <div class="p-4 mt-4">           
-          <p class=" text-gray-700 mb-2">
-            <strong>Senza offerta:</strong> 6 × 3 = 18 euro
-          </p>
-          <p class=" text-gray-700 mb-2">
-            <strong>Con offerta:</strong> (2 × 3) + (2 × 3) = 4 × 3 = 12 euro
-          </p>
-          <p class=" text-gray-800 mt-3">
-            <strong>Risparmio:</strong> Luca risparmia
-            <input type="text" class="border-b-2 border-orange-400 bg-transparent px-2 py-1 focus:outline-none focus:border-orange-600  text-center font-bold" data-fill-blanks-target="input" data-correct-answer="6">
-            euro.
-          </p>
+
+        <!-- Colonna destra - AllenaMente -->
+        <div class="p-4">
+          <div class="p-4 bg-yellow-200 rounded-lg">
+            <p class="font-bold text-red-600 mb-3">AllenaMente!</p>
+            <p class="text-gray-800">
+              Luca deve comprare 6 confezioni di biscotti al prezzo di 3 euro l'una. Oggi c'è l'offerta "prendi 3 paghi 2". Quanto risparmia Luca?<br><br>
+              Risolvi sul quaderno e spiega come hai fatto a rispondere.
+            </p>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Footer con riferimento -->
-    <div class="mt-8 text-center">       
-      <p class="text-red-600 font-bold ">Quaderno esercizi p. 188</p>
+
+    <!-- Quaderno -->
+    <div class="p-4 text-right">
+      <span class="text-gray-600">Quaderno esercizi →</span>
+      <span class="text-<%= @pagina.base_color %>-600 font-bold">p. 188</span>
     </div>
+
+    <%= render 'shared/exercise_controls' %>
   </div>
-  <!-- Exercise controls -->
-  <%= render 'shared/exercise_controls', color: 'purple' %>
 </div>

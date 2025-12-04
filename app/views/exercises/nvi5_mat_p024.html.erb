@@ -1,27 +1,24 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
     <!-- Sezione ESERCIZI -->
     <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
-      <h2 class="font-bold text-pink-600 mb-6">ESERCIZI</h2>
 
       <div class="space-y-6">
         <!-- Exercise 1: Cerchia i numeri decimali -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-            <div>
-              <span class="bg-cyan-100 text-cyan-700 px-3 py-1 rounded font-bold">IMPARARE TUTTI</span>
-              <p class="font-bold text-gray-700 mt-2">Cerchia in rosso i numeri decimali.</p>
-            </div>
+        <div class="p-4 bg-white rounded-2xl -mx-6 -mt-6 border-3 border-blue-500">
+          <div class="mb-6">
+            <p class="font-bold text-gray-700">
+              <%= imparare_tutti_badge(1) %>
+              Cerchia in rosso i numeri decimali.
+            </p>
           </div>
-          <div class="flex flex-wrap gap-4 justify-center ml-11">
+          <div class="flex flex-wrap gap-4 justify-center mb-4">
             <% [
               { num: "– 4", decimal: false },
               { num: "0,327", decimal: true },
@@ -38,263 +35,285 @@
           </div>
         </div>
 
-        <!-- Exercise 2: Vero o Falso -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
-            <p class="font-bold text-gray-700">Indica con una X se il confronto tra numeri decimali è vero (V) o falso (F).</p>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ml-11">
-            <% [
-              { expr: "3,6 < 3,58", v: false, f: true, name: "q2_1" },
-              { expr: "0,27 > 0,2", v: true, f: false, name: "q2_2" },
-              { expr: "56,3 > 56,20", v: true, f: false, name: "q2_3" },
-              { expr: "18,2 > 18,08", v: true, f: false, name: "q2_4" },
-              { expr: "0,8 = 0,80", v: true, f: false, name: "q2_5" },
-              { expr: "48,9 < 49", v: true, f: false, name: "q2_6" },
-              { expr: "4,09 = 4,9", v: false, f: true, name: "q2_7" },
-              { expr: "61,5 > 61,45", v: true, f: false, name: "q2_8" },
-              { expr: "72 > 72,3", v: false, f: true, name: "q2_9" },
-              { expr: "9,17 < 9,2", v: true, f: false, name: "q2_10" }
-            ].each do |item| %>
-              <div class="p-3 bg-white rounded-lg flex items-center justify-between">
-                <span class="font-bold text-gray-800"><%= item[:expr] %></span>
-                <div class="flex gap-4">
-                  <label class="cursor-pointer flex items-center gap-1">
-                    <input type="radio" name="<%= item[:name] %>" data-correct-answer="<%= item[:v] %>">
-                    <span class="font-semibold">V</span>
-                  </label>
-                  <label class="cursor-pointer flex items-center gap-1">
-                    <input type="radio" name="<%= item[:name] %>" data-correct-answer="<%= item[:f] %>">
-                    <span class="font-semibold">F</span>
-                  </label>
-                </div>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 divide-x-0 md:divide-x-2 divide-<%= @pagina.base_color %>-400">
+          
+          <div class="prima-colonna" >
+            <!-- Exercise 2: Vero o Falso -->
+            <div class="p-4 mb-6">
+              <div class="mb-4">
+                <p class="font-bold text-gray-700">
+                  <%= numero_esercizio_badge(2) %>
+                  Indica con una <span class="text-pink-600">X</span> se il confronto tra numeri decimali è vero (V) o falso (F).
+                </p>
               </div>
-            <% end %>
-          </div>
-        </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <% [
+                  { expr: "3,6 < 3,58", v: false, f: true, name: "q2_1" },
+                  { expr: "0,27 > 0,2", v: true, f: false, name: "q2_2" },
+                  { expr: "56,3 > 56,20", v: true, f: false, name: "q2_3" },
+                  { expr: "18,2 > 18,08", v: true, f: false, name: "q2_4" },
+                  { expr: "0,8 = 0,80", v: true, f: false, name: "q2_5" },
+                  { expr: "48,9 < 49", v: true, f: false, name: "q2_6" },
+                  { expr: "4,09 = 4,9", v: false, f: true, name: "q2_7" },
+                  { expr: "61,5 > 61,45", v: true, f: false, name: "q2_8" },
+                  { expr: "72 > 72,3", v: false, f: true, name: "q2_9" },
+                  { expr: "9,17 < 9,2", v: true, f: false, name: "q2_10" }
+                ].each do |item| %>
+                  <div class="p-3 rounded-lg flex items-center justify-between">
+                    <span class="text-gray-800"><%= item[:expr] %></span>
+                    <div class="flex gap-1">
+                      <label class="cursor-pointer flex items-center gap-1 bg-white border-2 px-2 py-1 border-pink-600 rounded-lg">
+                        <input type="radio" name="<%= item[:name] %>" data-correct-answer="<%= item[:v] %>">
+                        <span class="font-semibold">V</span>
+                      </label>
+                      <label class="cursor-pointer flex items-center gap-1 bg-white border-2 px-2 py-1 border-pink-600 rounded-lg">
+                        <input type="radio" name="<%= item[:name] %>" data-correct-answer="<%= item[:f] %>">
+                        <span class="font-semibold">F</span>
+                      </label>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
 
-        <!-- Exercise 3: Ordina dal maggiore al minore -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
-            <p class="font-bold text-gray-700">Ordina sul quaderno dal maggiore al minore.</p>
-          </div>
-          <div class="ml-11 p-4 bg-white rounded-lg">
-            <p class="font-bold text-center text-cyan-500">
-              <span class="whitespace-nowrap">3,2</span> <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">30,2</span> <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">3,5</span> <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">30,17</span> <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">3,55</span>
-            </p>
-          </div>
-        </div>
+            <!-- Exercise 3: Ordina dal maggiore al minore -->
+            <div class="p-4 mb-6">
+              <div class="mb-4">
+                <p class="font-bold text-gray-700">
+                  <%= numero_esercizio_badge(3) %>
+                  Ordina sul quaderno dal maggiore al minore.
+                </p>
+              </div>
+              <div class="p-4">
+                <p class="font-bold text-center text-gray-700">
+                  <span class="whitespace-nowrap">3,2</span> <span class="px-1 text-pink-600">&#8226;</span>
+                  <span class="whitespace-nowrap">30,2</span> <span class="px-1 text-pink-600">&#8226;</span>
+                  <span class="whitespace-nowrap">3,5</span> <span class="px-1 text-pink-600">&#8226;</span>
+                  <span class="whitespace-nowrap">30,17</span> <span class="px-1 text-pink-600">&#8226;</span>
+                  <span class="whitespace-nowrap">3,55</span> <span class="px-1 text-pink-600">
+              </div>
+            </div>
 
-        <!-- Exercise 4: Ordina dal minore al maggiore -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
-            <p class="font-bold text-gray-700">Ordina sul quaderno dal minore al maggiore.</p>
-          </div>
-          <div class="ml-11 p-4 bg-white rounded-lg">
-            <p class="font-bold text-center text-cyan-500">
-              <span class="whitespace-nowrap">2,18</span> <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">0,218</span> <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">210,8</span> <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">2,08</span> <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">21,18</span>
-            </p>
-          </div>
-        </div>
+            <!-- Exercise 4: Ordina dal minore al maggiore -->
+            <div class="p-4 mb-6">
+              <div class="mb-4">
+                <p class="font-bold text-gray-700">
+                  <%= numero_esercizio_badge(4) %>
+                  Ordina sul quaderno dal minore al maggiore.
+                </p>
+              </div>
+              <div class="p-4">
+                <p class="font-bold text-center text-gray-700">
+                  <span class="whitespace-nowrap">2,18</span> <span class="px-1 text-pink-600">&#8226;</span>
+                  <span class="whitespace-nowrap">0,218</span> <span class="px-1 text-pink-600">&#8226;</span>
+                  <span class="whitespace-nowrap">210,8</span> <span class="px-1 text-pink-600">&#8226;</span>
+                  <span class="whitespace-nowrap">2,08</span> <span class="px-1 text-pink-600">&#8226;</span>
+                  <span class="whitespace-nowrap">21,18</span> <span class="px-1 text-pink-600">
+                </p>
+              </div>
+            </div>
 
-        <!-- Exercise 5: Approssimazioni -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">5</div>
-            <p class="font-bold text-gray-700">Approssima i numeri decimali come indicato.</p>
-          </div>
-          <div class="ml-11 space-y-4">
-            <!-- Ai centesimi e alle unità -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="p-4 bg-white rounded-lg">
-                <p class="font-bold text-gray-700 mb-3">ai centesimi:</p>
-                <div class="space-y-2">
+            <!-- Exercise 5: Approssimazioni -->
+            <div class="p-4 mb-6">
+              <div class="mb-4">
+                <p class="font-bold text-gray-700">
+                  <%= numero_esercizio_badge(5) %>
+                  Approssima i numeri decimali come indicato.
+                </p>
+              </div>
+              
+              <div class="">
+                <!-- Ai centesimi -->
+                <div class="px-4 py-2 flex flex-wrap items-center gap-2 text-gray-700">
+                  <p>ai centesimi:</p>
                   <div class="flex items-center gap-2">
                     <span class="font-bold text-gray-800">8,735</span>
                     <span class="text-pink-600">→</span>
-                    <input type="text" data-correct-answer="8,74" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+                    <input type="text" data-correct-answer="8,74" class="w-20 px-2 py-1 bg-white border-2 border-pink-400 rounded text-center font-bold">
                   </div>
                   <div class="flex items-center gap-2">
                     <span class="font-bold text-gray-800">19,206</span>
                     <span class="text-pink-600">→</span>
-                    <input type="text" data-correct-answer="19,21" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+                    <input type="text" data-correct-answer="19,21" class="w-20 px-2 py-1 bg-white border-2 border-pink-400 rounded text-center font-bold">
                   </div>
                 </div>
-              </div>
-              <div class="p-4 bg-white rounded-lg">
-                <p class="font-bold text-gray-700 mb-3">alle unità:</p>
-                <div class="space-y-2">
+  
+                <!-- Alle unità -->
+                <div class="px-4 py-2 flex flex-wrap items-center gap-2 text-gray-700">
+                  <p>alle unità:</p>
                   <div class="flex items-center gap-2">
                     <span class="font-bold text-gray-800">349,11</span>
                     <span class="text-pink-600">→</span>
-                    <input type="text" data-correct-answer="349" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+                    <input type="text" data-correct-answer="349" class="w-20 px-2 py-1 bg-white border-2 border-pink-400 rounded text-center font-bold">
                   </div>
                   <div class="flex items-center gap-2">
                     <span class="font-bold text-gray-800">29,85</span>
                     <span class="text-pink-600">→</span>
-                    <input type="text" data-correct-answer="30" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+                    <input type="text" data-correct-answer="30" class="w-20 px-2 py-1 bg-white border-2 border-pink-400 rounded text-center font-bold">
+                  </div>
+
+                </div>
+                <!-- Ai decimi -->
+                <div class="px-4 py-2 flex flex-wrap items-center gap-4 text-gray-700">
+                  <p>ai decimi:</p>
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold text-gray-800">53,27</span>
+                    <span class="text-pink-600">→</span>
+                    <input type="text" data-correct-answer="53,3" class="w-16 px-2 py-1 bg-white border-2 border-pink-400 rounded text-center font-bold">
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold text-gray-800">6,83</span>
+                    <span class="text-pink-600">→</span>
+                    <input type="text" data-correct-answer="6,8" class="w-16 px-2 py-1 bg-white border-2 border-pink-400 rounded text-center font-bold">
                   </div>
                 </div>
               </div>
             </div>
-            <!-- Ai decimi -->
-            <div class="p-4 bg-white rounded-lg">
-              <p class="font-bold text-gray-700 mb-3">ai decimi:</p>
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="flex items-center gap-2">
-                  <span class="font-bold text-gray-800">53,27</span>
-                  <span class="text-pink-600">→</span>
-                  <input type="text" data-correct-answer="53,3" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="font-bold text-gray-800">6,83</span>
-                  <span class="text-pink-600">→</span>
-                  <input type="text" data-correct-answer="6,8" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                </div>
+
+            <!-- Exercise 6: Numeri negativi -->
+            <div class="p-4 mb-6">
+              <div class="mb-4">
+                <p class="font-bold text-gray-700">
+                  <%= numero_esercizio_badge(6) %>
+                  Confronta i numeri, inserisci il segno &gt; o &lt;. Poi completa la frase.
+                </p>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Exercise 6: Numeri negativi -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">6</div>
-            <p class="font-bold text-gray-700">Confronta i numeri, inserisci il segno &gt; o &lt;. Poi completa la frase.</p>
-          </div>
-          <div class="ml-11 space-y-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <% [
-                { left: "– 2", right: "+ 6", answer: "<", left_color: "red", right_color: "blue" },
-                { left: "– 3", right: "+ 1", answer: "<", left_color: "red", right_color: "blue" },
-                { left: "– 5", right: "0", answer: "<", left_color: "red", right_color: "gray" },
-                { left: "– 4", right: "3", answer: "<", left_color: "red", right_color: "gray" }
-              ].each do |item| %>
-                <div class="p-3 bg-white rounded-lg flex items-center justify-center gap-2">
-                  <span class="font-bold text-<%= item[:left_color] %>-600"><%= item[:left] %></span>
-                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-10 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold" maxlength="1">
-                  <span class="font-bold text-<%= item[:right_color] %>-600"><%= item[:right] %></span>
-                </div>
-              <% end %>
-            </div>
-            <div class="p-4 bg-white rounded-lg">
-              <p class="text-gray-800">
-                Un numero negativo è sempre
-                <input type="text" data-correct-answer="minore" class="w-24 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold mx-1">
-                di zero e di qualsiasi numero positivo.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Exercise 7: Numeri positivi -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">7</div>
-            <p class="font-bold text-gray-700">Confronta i numeri, inserisci il segno &gt; o &lt;. Poi completa la frase.</p>
-          </div>
-          <div class="ml-11 space-y-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <% [
-                { left: "+ 1", right: "– 4", answer: ">", left_color: "blue", right_color: "red" },
-                { left: "+ 5", right: "– 5", answer: ">", left_color: "blue", right_color: "red" },
-                { left: "+ 3", right: "0", answer: ">", left_color: "blue", right_color: "gray" },
-                { left: "+ 2", right: "– 1", answer: ">", left_color: "blue", right_color: "red" }
-              ].each do |item| %>
-                <div class="p-3 bg-white rounded-lg flex items-center justify-center gap-2">
-                  <span class="font-bold text-<%= item[:left_color] %>-600"><%= item[:left] %></span>
-                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-10 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold" maxlength="1">
-                  <span class="font-bold text-<%= item[:right_color] %>-600"><%= item[:right] %></span>
-                </div>
-              <% end %>
-            </div>
-            <div class="p-4 bg-white rounded-lg">
-              <p class="text-gray-800">
-                Un numero positivo è sempre
-                <input type="text" data-correct-answer="maggiore" class="w-24 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold mx-1">
-                di zero e di qualsiasi numero negativo.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Exercise 8: Completa con segni -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">8</div>
-            <p class="font-bold text-gray-700">Completa con i segni &gt; e &lt;.</p>
-          </div>
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ml-11">
-            <% [
-              { left: "– 7", right: "+ 5", answer: "<", left_color: "red", right_color: "blue" },
-              { left: "– 3", right: "– 4", answer: ">", left_color: "red", right_color: "red" },
-              { left: "– 9", right: "– 7", answer: "<", left_color: "red", right_color: "red" },
-              { left: "– 4", right: "– 1", answer: "<", left_color: "red", right_color: "red" },
-              { left: "0", right: "+ 5", answer: "<", left_color: "gray", right_color: "blue" },
-              { left: "+ 4", right: "– 8", answer: ">", left_color: "blue", right_color: "red" },
-              { left: "– 11", right: "+ 11", answer: "<", left_color: "red", right_color: "blue" },
-              { left: "+ 13", right: "– 8", answer: ">", left_color: "blue", right_color: "red" },
-              { left: "+ 13", right: "– 14", answer: ">", left_color: "blue", right_color: "red" },
-              { left: "+ 14", right: "+ 15", answer: "<", left_color: "blue", right_color: "blue" },
-              { left: "– 3", right: "+ 3", answer: "<", left_color: "red", right_color: "blue" },
-              { left: "0", right: "– 7", answer: ">", left_color: "gray", right_color: "red" }
-            ].each do |item| %>
-              <div class="p-3 bg-white rounded-lg flex items-center justify-center gap-2">
-                <span class="font-bold text-<%= item[:left_color] %>-600"><%= item[:left] %></span>
-                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-10 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold" maxlength="1">
-                <span class="font-bold text-<%= item[:right_color] %>-600"><%= item[:right] %></span>
-              </div>
-            <% end %>
-          </div>
-        </div>
-
-        <!-- Exercise 9: Indica con X la risposta corretta -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">9</div>
-            <p class="font-bold text-gray-700">Indica con una X la risposta corretta.</p>
-          </div>
-          <div class="ml-11 space-y-4">
-            <% [
-              { question: "– 5 è minore di", options: [{ val: "– 5", correct: false }, { val: "– 4", correct: true }, { val: "– 7", correct: false }], name: "q9_1" },
-              { question: "– 5 è maggiore di", options: [{ val: "0", correct: false }, { val: "– 8", correct: true }, { val: "+ 3", correct: false }], name: "q9_2" },
-              { question: "+ 3 è minore di", options: [{ val: "– 2", correct: false }, { val: "+ 2", correct: false }, { val: "+ 9", correct: true }], name: "q9_3" },
-              { question: "+ 3 è maggiore di", options: [{ val: "– 1", correct: true }, { val: "+ 5", correct: false }, { val: "+ 4", correct: false }], name: "q9_4" },
-              { question: "– 1 è maggiore di", options: [{ val: "0", correct: false }, { val: "– 3", correct: true }, { val: "+ 1", correct: false }], name: "q9_5" }
-            ].each do |item| %>
-              <div class="p-4 bg-white rounded-lg">
-                <p class="font-bold text-gray-800 mb-3"><%= item[:question] %></p>
-                <div class="flex flex-wrap gap-4">
-                  <% item[:options].each do |opt| %>
-                    <label class="cursor-pointer flex items-center gap-2 px-4 py-2 border-2 border-gray-200 rounded-lg hover:border-cyan-400 transition">
-                      <input type="radio" name="<%= item[:name] %>" data-correct-answer="<%= opt[:correct] %>">
-                      <span class="font-semibold"><%= opt[:val] %></span>
-                    </label>
+              <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4 text-gray-700">
+                  <% [
+                    { left: "– 2", right: "+ 6", answer: "<" },
+                    { left: "– 3", right: "+ 1", answer: "<" },
+                    { left: "– 5", right: "0", answer: "<" },
+                    { left: "– 4", right: "3", answer: "<" }
+                  ].each do |item| %>
+                    <div class="p-3 flex items-center justify-center gap-2">
+                      <span class="whitespace-nowrap"><%= item[:left] %></span>
+                      <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-10 px-2 py-1 border-2 border-pink-400 bg-white rounded text-center font-bold" maxlength="1">
+                      <span class="whitespace-nowrap"><%= item[:right] %></span>
+                    </div>
                   <% end %>
                 </div>
+                <div class="p-4">
+                  <p class="text-gray-800">
+                    Un numero negativo è sempre
+                    <input type="text" data-correct-answer="minore" class="bg-white w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold mx-1">
+                    di zero e di qualsiasi numero positivo.
+                  </p>
+                </div>
               </div>
-            <% end %>
+            </div>
           </div>
-        </div>
+          
+          <div class="seconda-colonna" >
+            <!-- Exercise 7: Numeri positivi -->
+            <div class="p-4 mb-6">
+              <div class="mb-4">
+                <p class="font-bold text-gray-700">
+                  <%= numero_esercizio_badge(7) %>
+                  Confronta i numeri, inserisci il segno &gt; o &lt;. Poi completa la frase.
+                </p>
+              </div>
+              <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4 text-gray-700">
+                  <% [
+                    { left: "+ 1", right: "– 4", answer: ">" },
+                    { left: "+ 5", right: "– 5", answer: ">" },
+                    { left: "+ 3", right: "0", answer: ">" },
+                    { left: "+ 2", right: "– 1", answer: ">" }
+                  ].each do |item| %>
+                    <div class="p-3 flex items-center justify-center gap-2">
+                      <span class="whitespace-nowrap"><%= item[:left] %></span>
+                      <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-10 px-2 py-1 bg-white border-2 border-pink-400 rounded text-center font-bold" maxlength="1">
+                      <span class="whitespace-nowrap"><%= item[:right] %></span>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="p-4">
+                  <p class="text-gray-800">
+                    Un numero positivo è sempre
+                    <input type="text" data-correct-answer="maggiore" class="bg-white w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold mx-1">
+                    di zero e di qualsiasi numero negativo.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-        <!-- Exercise 10: Ordine decrescente -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">10</div>
-            <p class="font-bold text-gray-700">Riscrivi i numeri in ordine decrescente.</p>
+            <!-- Exercise 8: Completa con segni -->
+            <div class="p-4 mb-6">
+              <div class="mb-4">
+                <p class="font-bold text-gray-700">
+                  <%= numero_esercizio_badge(8) %>
+                  Completa con i segni &gt; e &lt;.
+                </p>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <% [
+                  { left: "– 7", right: "+ 5", answer: "<" },
+                  { left: "– 3", right: "– 4", answer: ">" },
+                  { left: "– 9", right: "– 7", answer: "<" },
+                  { left: "– 4", right: "– 1", answer: "<" },
+                  { left: "0", right: "+ 5", answer: "<" },
+                  { left: "+ 4", right: "– 8", answer: ">" },
+                  { left: "– 11", right: "+ 11", answer: "<" },
+                  { left: "+ 13", right: "– 8", answer: ">" },
+                  { left: "+ 13", right: "– 14", answer: ">" },
+                  { left: "+ 14", right: "+ 15", answer: "<" },
+                  { left: "– 3", right: "+ 3", answer: "<" },
+                  { left: "0", right: "– 7", answer: ">" }
+                ].each do |item| %>
+                  <div class="p-3 flex items-center justify-center gap-2">
+                    <span class="whitespace-nowrap"><%= item[:left] %></span>
+                    <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-10 px-2 py-1 bg-white border-2 border-pink-400 rounded text-center font-bold" maxlength="1">
+                    <span class="whitespace-nowrap"><%= item[:right] %></span>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
+            <!-- Exercise 9: Indica con X la risposta corretta -->
+            <div class="p-4 mb-6">
+              <div class="mb-4">
+                <p class="font-bold text-gray-700">
+                  <%= numero_esercizio_badge(9) %>
+                  Indica con una X la risposta corretta.
+                </p>
+              </div>
+              <div class="space-y-4">
+                <% [
+                  { question: "– 5 è minore di", options: [{ val: "– 5", correct: false }, { val: "– 4", correct: true }, { val: "– 7", correct: false }], name: "q9_1" },
+                  { question: "– 5 è maggiore di", options: [{ val: "0", correct: false }, { val: "– 8", correct: true }, { val: "+ 3", correct: false }], name: "q9_2" },
+                  { question: "+ 3 è minore di", options: [{ val: "– 2", correct: false }, { val: "+ 2", correct: false }, { val: "+ 9", correct: true }], name: "q9_3" },
+                  { question: "+ 3 è maggiore di", options: [{ val: "– 1", correct: true }, { val: "+ 5", correct: false }, { val: "+ 4", correct: false }], name: "q9_4" },
+                  { question: "– 1 è maggiore di", options: [{ val: "0", correct: false }, { val: "– 3", correct: true }, { val: "+ 1", correct: false }], name: "q9_5" }
+                ].each do |item| %>
+                  <div class="p-4">
+                    <p class="font-bold text-gray-800 mb-3"><%= item[:question] %></p>
+                    <div class="flex flex-wrap gap-4">
+                      <% item[:options].each do |opt| %>
+                        <label class="cursor-pointer flex items-center gap-2 px-4 py-2 bg-white border-2 border-pink-400 rounded-lg hover:border-cyan-400 transition">
+                          <input type="radio" name="<%= item[:name] %>" data-correct-answer="<%= opt[:correct] %>">
+                          <span class="font-semibold"><%= opt[:val] %></span>
+                        </label>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
           </div>
-          <div class="ml-11">
+        
+        </div>
+        <!-- Exercise 10: Ordine decrescente -->
+        <div class="p-4">
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(10) %>
+              Riscrivi i numeri in ordine decrescente.
+            </p>
+          </div>
+          <div>
             <div class="flex flex-wrap gap-3 justify-center mb-4">
               <% ["– 20", "+ 1", "+ 17", "– 15", "+ 6", "– 8", "– 9", "0", "+ 11", "– 18", "– 2", "+ 5", "+ 7"].each_with_index do |num, i| %>
                 <% if num.start_with?("+") %>
@@ -307,10 +326,9 @@
                 <% unless i == 12 %><span class="text-pink-600">&#8226;</span><% end %>
               <% end %>
             </div>
-            <input type="text" data-correct-answer="+17, +11, +7, +6, +5, +1, 0, -2, -8, -9, -15, -18, -20" class="w-full px-4 py-3 border-2 border-cyan-300 rounded text-center" placeholder="Scrivi i numeri separati da virgola, dal maggiore al minore...">
-            <p class="text-gray-600 mt-2 italic">
-              Suggerimento: dal più grande al più piccolo (<span class="font-bold">ordine decrescente</span>)
-            </p>
+            <input type="text" data-correct-answer="+17, +11, +7, +6, +5, +1, 0, -2, -8, -9, -15, -18, -20" 
+              class="w-full px-4 py-3 bg-white border-2 border-pink-400 rounded text-center" 
+              placeholder="Scrivi i numeri separati da virgola, dal maggiore al minore...">
           </div>
         </div>
       </div>

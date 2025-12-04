@@ -1,149 +1,218 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->   
   <%= render 'shared/page_header', pagina: @pagina %>
-  
-  <div class="space-y-6">     <!-- Introduzione -->
-    <div class="p-4 p-6">       
-      <p class=" text-gray-800 leading-relaxed mb-3">
+
+  <div class="space-y-6">
+    <!-- Intro -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-800">
         Ecco alcune strategie per calcolare velocemente con i numeri interi e decimali.
       </p>
-      <div class="text-center">         
-        <p>➕➖✖️➗</p>
-      </div>
     </div>
+
     <!-- Addizioni e sottrazioni -->
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-600 mb-6">Addizioni e sottrazioni</h2>
-      <div class="overflow-x-">         
-        <table class="full border-collapse">
+    <div class="p-4 md:p-6">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 text-xl mb-4">Addizioni e sottrazioni</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse text-sm">
           <thead>
-            <tr class="bg-blue-100">
-              <th class="border-2 border-blue-300 p-3 text-left"></th>
-              <th class="border-2 border-blue-300 p-3">Strategia</th>
-              <th class="border-2 border-blue-300 p-3">Esempio</th>
+            <tr class="bg-<%= @pagina.base_color %>-100">
+              <th class="border-2 border-<%= @pagina.base_color %>-300 p-2"></th>
+              <th class="border-2 border-<%= @pagina.base_color %>-300 p-2">Strategia</th>
+              <th class="border-2 border-<%= @pagina.base_color %>-300 p-2">Esempio</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-pink-50 font-bold">+ 9<br>
-                + 99<br>
-                + 999</td>
-              <td class="border-2 border-gray-300 p-3">aggiungi <strong>10 • 100 • 1 000</strong><br>
-                e togli <strong>1</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">96 + 9 = 96 + <strong>10 – 1</strong> = 106 – .......... = ..........<br>
-                352 + <strong>99</strong> = .....................................................................<br>
-                2 478 + <strong>999</strong> = ....................................................................</td>
+              <td class="border-2 border-gray-300 p-2 bg-pink-50 font-bold text-center">+ 9<br>+ 99<br>+ 999</td>
+              <td class="border-2 border-gray-300 p-2">aggiungi <strong>10 • 100 • 1 000</strong> e togli <strong>1</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-1 flex-wrap">
+                    <span>96 + 9 = 96 + 10 – 1 = 106 –</span>
+                    <input type="text" data-correct-answer="1" class="w-12 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                    <span>=</span>
+                    <input type="text" data-correct-answer="105" class="w-16 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                  </div>
+                  <p>352 + 99 = ............................</p>
+                  <p>2 478 + 999 = ............................</p>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-purple-50 font-bold">+ 0,9<br>
-                + 0,99<br>
-                + 0,999</td>
-              <td class="border-2 border-gray-300 p-3">aggiungi <strong>1</strong> e togli rispettivamente<br>
-                <strong>0,1 • 0,01 • 0,001</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">14,4 + <strong>0,9</strong> = 14,4 + <strong>1 – 0,1</strong> = 15,4 – <strong>0,1</strong> = 15,3<br>
-                8,36 + <strong>0,99</strong> = .....................................................................<br>
-                2,468 + <strong>0,999</strong> = ....................................................................</td>
+              <td class="border-2 border-gray-300 p-2 bg-purple-50 font-bold text-center">+ 0,9<br>+ 0,99<br>+ 0,999</td>
+              <td class="border-2 border-gray-300 p-2">aggiungi <strong>1</strong> e togli rispettivamente<br><strong>0,1 • 0,01 • 0,001</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="space-y-1">
+                  <p>14,4 + 0,9 = 14,4 + 1 – 0,1 = 15,4 – 0,1 = 15,3</p>
+                  <p>8,36 + 0,99 = ............................</p>
+                  <p>2,468 + 0,999 = ............................</p>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-blue-50 font-bold">– 9<br>
-                – 99<br>
-                – 999</td>
-              <td class="border-2 border-gray-300 p-3">togli <strong>10 • 100 • 1 000</strong><br>
-                e aggiungi <strong>1</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">96 – 9 = 96 – <strong>10 + 1</strong> = 86 + .......... = ..........<br>
-                352 – <strong>99</strong> = .....................................................................<br>
-                2 478 – <strong>999</strong> = ....................................................................</td>
+              <td class="border-2 border-gray-300 p-2 bg-cyan-50 font-bold text-center">– 9<br>– 99<br>– 999</td>
+              <td class="border-2 border-gray-300 p-2">togli <strong>10 • 100 • 1 000</strong> e aggiungi <strong>1</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-1 flex-wrap">
+                    <span>96 – 9 = 96 – 10 + 1 = 86 +</span>
+                    <input type="text" data-correct-answer="1" class="w-12 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                    <span>=</span>
+                    <input type="text" data-correct-answer="87" class="w-16 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                  </div>
+                  <p>352 – 99 = ............................</p>
+                  <p>2 478 – 999 = ............................</p>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-green-50 font-bold">– 0,9<br>
-                – 0,99<br>
-                – 0,999</td>
-              <td class="border-2 border-gray-300 p-3">togli <strong>1</strong> e aggiungi rispettivamente<br>
-                <strong>0,1 • 0,01 • 0,001</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">14,4 – <strong>0,9</strong> = 14,4 – <strong>1 + 0,1</strong> = 13,4 + <strong>0,1</strong> = 13,5<br>
-                8,36 – <strong>0,99</strong> = .....................................................................<br>
-                2,468 – <strong>0,999</strong> = ....................................................................</td>
+              <td class="border-2 border-gray-300 p-2 bg-green-50 font-bold text-center">– 0,9<br>– 0,99<br>– 0,999</td>
+              <td class="border-2 border-gray-300 p-2">togli <strong>1</strong> e aggiungi rispettivamente<br><strong>0,1 • 0,01 • 0,001</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="space-y-1">
+                  <p>14,4 – 0,9 = 14,4 – 1 + 0,1 = 13,4 + 0,1 = 13,5</p>
+                  <p>8,36 – 0,99 = ............................</p>
+                  <p>2,468 – 0,999 = ............................</p>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+
     <!-- Moltiplicazioni e divisioni -->
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-700 mb-6">Moltiplicazioni e divisioni</h2>
-      <div class="overflow-x-">         
-        <table class="full border-collapse">
+    <div class="p-4 md:p-6">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 text-xl mb-4">Moltiplicazioni e divisioni</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse text-sm">
           <thead>
-            <tr class="bg-purple-100">
-              <th class="border-2 border-purple-300 p-3 text-left"></th>
-              <th class="border-2 border-purple-300 p-3">Strategia</th>
-              <th class="border-2 border-purple-300 p-3">Esempio</th>
+            <tr class="bg-<%= @pagina.base_color %>-100">
+              <th class="border-2 border-<%= @pagina.base_color %>-300 p-2"></th>
+              <th class="border-2 border-<%= @pagina.base_color %>-300 p-2">Strategia</th>
+              <th class="border-2 border-<%= @pagina.base_color %>-300 p-2">Esempio</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-orange-50 font-bold">× 0,1</td>
-              <td class="border-2 border-gray-300 p-3">dividi per <strong>10</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">250 × <strong>0,1</strong> = 250 : <strong>10</strong> = .................</td>
+              <td class="border-2 border-gray-300 p-2 bg-orange-50 font-bold text-center">× 0,1</td>
+              <td class="border-2 border-gray-300 p-2">dividi per <strong>10</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span>250 × 0,1 = 250 : 10 =</span>
+                  <input type="text" data-correct-answer="25" class="w-16 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              </td>
             </tr>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-pink-50 font-bold">× 5</td>
-              <td class="border-2 border-gray-300 p-3">moltiplica per <strong>10</strong> e dividi per <strong>2</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">75 × <strong>5</strong> = (75 × <strong>10</strong>) : <strong>2</strong> = ...................................</td>
+              <td class="border-2 border-gray-300 p-2 bg-pink-50 font-bold text-center">× 5</td>
+              <td class="border-2 border-gray-300 p-2">moltiplica per <strong>10</strong> e dividi per <strong>2</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span>75 × 5 = (75 × 10) : 2 =</span>
+                  <input type="text" data-correct-answer="375" class="w-16 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              </td>
             </tr>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-blue-50 font-bold">× 0,5</td>
-              <td class="border-2 border-gray-300 p-3">dividi per <strong>2</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">264 × <strong>0,5</strong> = 264 : .......... = .................</td>
+              <td class="border-2 border-gray-300 p-2 bg-cyan-50 font-bold text-center">× 0,5</td>
+              <td class="border-2 border-gray-300 p-2">dividi per <strong>2</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span>264 × 0,5 = 264 :</span>
+                  <input type="text" data-correct-answer="2" class="w-12 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                  <span>=</span>
+                  <input type="text" data-correct-answer="132" class="w-16 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              </td>
             </tr>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-green-50 font-bold">× 25</td>
-              <td class="border-2 border-gray-300 p-3">moltiplica per <strong>100</strong> e dividi per <strong>4</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">500 × <strong>25</strong> = (500 × <strong>100</strong>) : <strong>4</strong> = ...................................</td>
+              <td class="border-2 border-gray-300 p-2 bg-green-50 font-bold text-center">× 25</td>
+              <td class="border-2 border-gray-300 p-2">moltiplica per <strong>100</strong> e dividi per <strong>4</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span>500 × 25 = (500 × 100) : 4 =</span>
+                  <input type="text" data-correct-answer="12500" class="w-20 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              </td>
             </tr>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-purple-50 font-bold">× 0,25</td>
-              <td class="border-2 border-gray-300 p-3">dividi per <strong>4</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">48 × <strong>0,25</strong> = ................................................................................................</td>
+              <td class="border-2 border-gray-300 p-2 bg-purple-50 font-bold text-center">× 0,25</td>
+              <td class="border-2 border-gray-300 p-2">dividi per <strong>4</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span>48 × 0,25 =</span>
+                  <input type="text" data-correct-answer="12" class="w-16 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              </td>
             </tr>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-orange-50 font-bold">: 0,1</td>
-              <td class="border-2 border-gray-300 p-3">moltiplica per <strong>10</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">250 : <strong>0,1</strong> = 250 × <strong>10</strong> = .................</td>
+              <td class="border-2 border-gray-300 p-2 bg-orange-50 font-bold text-center">: 0,1</td>
+              <td class="border-2 border-gray-300 p-2">moltiplica per <strong>10</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span>250 : 0,1 = 250 × 10 =</span>
+                  <input type="text" data-correct-answer="2500" class="w-16 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              </td>
             </tr>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-pink-50 font-bold">: 5</td>
-              <td class="border-2 border-gray-300 p-3">moltiplica per <strong>2</strong> e dividi per <strong>10</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">75 : <strong>5</strong> = (75 × <strong>2</strong>) : <strong>10</strong> = ...................................</td>
+              <td class="border-2 border-gray-300 p-2 bg-pink-50 font-bold text-center">: 5</td>
+              <td class="border-2 border-gray-300 p-2">moltiplica per <strong>2</strong> e dividi per <strong>10</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span>75 : 5 = (75 × 2) : 10 =</span>
+                  <input type="text" data-correct-answer="15" class="w-16 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              </td>
             </tr>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-blue-50 font-bold">: 0,5</td>
-              <td class="border-2 border-gray-300 p-3">moltiplica per <strong>2</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">264 : <strong>0,5</strong> = ................................................................................................</td>
+              <td class="border-2 border-gray-300 p-2 bg-cyan-50 font-bold text-center">: 0,5</td>
+              <td class="border-2 border-gray-300 p-2">moltiplica per <strong>2</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span>264 : 0,5 =</span>
+                  <input type="text" data-correct-answer="528" class="w-16 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              </td>
             </tr>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-green-50 font-bold">: 25</td>
-              <td class="border-2 border-gray-300 p-3">moltiplica per <strong>4</strong> e dividi per <strong>100</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">500 : <strong>25</strong> = (500 × <strong>4</strong>) : .......... = ...................................</td>
+              <td class="border-2 border-gray-300 p-2 bg-green-50 font-bold text-center">: 25</td>
+              <td class="border-2 border-gray-300 p-2">moltiplica per <strong>4</strong> e dividi per <strong>100</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span>500 : 25 = (500 × 4) :</span>
+                  <input type="text" data-correct-answer="100" class="w-16 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                  <span>=</span>
+                  <input type="text" data-correct-answer="20" class="w-16 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              </td>
             </tr>
             <tr>
-              <td class="border-2 border-gray-300 p-3 bg-purple-50 font-bold">: 0,25</td>
-              <td class="border-2 border-gray-300 p-3">moltiplica per <strong>4</strong></td>
-              <td class="border-2 border-gray-300 p-3 bg-yellow-50">48 : <strong>0,25</strong> = ................................................................................................</td>
+              <td class="border-2 border-gray-300 p-2 bg-purple-50 font-bold text-center">: 0,25</td>
+              <td class="border-2 border-gray-300 p-2">moltiplica per <strong>4</strong></td>
+              <td class="border-2 border-gray-300 p-2 bg-yellow-50">
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span>48 : 0,25 =</span>
+                  <input type="text" data-correct-answer="192" class="w-16 px-1 py-0.5 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <!-- Footer con riferimento -->
-    <div class="mt-8 text-center">       
-      <p class="text-red-600 font-bold ">Quaderno esercizi pp. 184, 186</p>
+
+    <!-- Quaderno -->
+    <div class="p-4 text-right">
+      <span class="text-gray-600">Quaderno esercizi →</span>
+      <span class="text-<%= @pagina.base_color %>-600 font-bold">pp. 184, 186</span>
     </div>
+
+    <%= render 'shared/exercise_controls' %>
   </div>
-  <!-- Exercise controls -->
-  <%= render 'shared/exercise_controls', color: 'purple' %>
 </div>

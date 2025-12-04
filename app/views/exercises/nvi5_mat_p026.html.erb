@@ -1,406 +1,318 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
-     data-controller="exercise-checker text-toggle font-controls"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls flower-matcher"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
     <!-- Sezione ESERCIZI -->
     <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
-      <h2 class="font-bold text-pink-600 mb-6">ESERCIZI</h2>
 
-      <div class="space-y-6">
-        <!-- Exercise 1: Sul quaderno -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-            <p class="font-bold text-gray-700">Scrivi i numeri sul quaderno come somma di valori, somma di addendi e somma di prodotti.</p>
-          </div>
-          <div class="ml-11 p-4 bg-white rounded-lg">
-            <p class="text-cyan-500 font-bold flex flex-wrap gap-2">
-              <span class="whitespace-nowrap">2 834 657</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">82 372 630</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">3 645 732 198</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">483 200 574 120</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">24 734 700 371</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-pink-400">
+        <!-- COLONNA SINISTRA -->
+        <div class="p-4 space-y-6">
+          <!-- Exercise 1: Sul quaderno -->
+          <div>
+            <p class="font-bold text-gray-700 mb-3">
+              <%= numero_esercizio_badge(1) %>
+              Scrivi i numeri sul quaderno come somma di valori, somma di addendi e somma di prodotti.
             </p>
-            <p class="text-gray-600 italic mt-2">→ vedi p. seguente</p>
+            <div class="ml-10">
+              <p class="text-cyan-500 font-bold">
+                2 834 657 <span class="text-pink-600">&#8226;</span>
+                82 372 630 <span class="text-pink-600">&#8226;</span>
+                3 645 732 198
+              </p>
+              <p class="text-cyan-500 font-bold">
+                483 200 574 120 <span class="text-pink-600">&#8226;</span>
+                24 734 700 371
+              </p>
+              <p class="text-pink-500 italic mt-2">→ vedi p. seguente</p>
+            </div>
           </div>
-        </div>
 
-        <!-- Exercise 2: Collegamenti potenze -->
-        <div data-controller="flower-matcher">
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
-            <p class="font-bold text-gray-700">Collega ogni potenza al suo risultato. <span class="text-cyan-500">Attenzione: per due potenze c'è lo stesso risultato.</span></p>
+          <!-- Exercise 2: Collegamenti potenze -->
+          <div>
+            <p class="font-bold text-gray-700 mb-3">
+              <%= numero_esercizio_badge(2) %>
+              Collega ogni potenza al suo risultato. <span class="text-cyan-500">Attenzione: per due potenze c'è lo stesso risultato.</span>
+            </p>
+            <div class="ml-10 relative">
+              <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-30" data-flower-matcher-target="canvas"></svg>
+
+              <!-- Potenze -->
+              <div class="flex flex-wrap justify-around gap-3 mb-8 relative z-20">
+                <% [
+                  { id: "pow-2-5", pair: "p32", label: "2<sup>5</sup>" },
+                  { id: "pow-5-1", pair: "p5", label: "5<sup>1</sup>" },
+                  { id: "pow-9-0", pair: "p1", label: "9<sup>0</sup>" },
+                  { id: "pow-3-3", pair: "p27", label: "3<sup>3</sup>" },
+                  { id: "pow-4-2", pair: "p16", label: "4<sup>2</sup>" },
+                  { id: "pow-1-8", pair: "p1", label: "1<sup>9</sup>" }
+                ].each do |item| %>
+                  <div class="px-3 py-2 bg-cyan-100 rounded-lg text-center font-bold cursor-pointer hover:bg-cyan-200 transition"
+                       data-action="click->flower-matcher#selectFlower"
+                       data-flower-matcher-target="flower"
+                       data-flower-id="<%= item[:id] %>"
+                       data-pair="<%= item[:pair] %>"><%= item[:label].html_safe %></div>
+                <% end %>
+              </div>
+
+              <!-- Risultati -->
+              <div class="flex flex-wrap justify-around gap-3 relative z-20">
+                <% [
+                  { id: "res-5", pair: "p5", label: "5" },
+                  { id: "res-27", pair: "p27", label: "27" },
+                  { id: "res-32", pair: "p32", label: "32" },
+                  { id: "res-1", pair: "p1", label: "1" },
+                  { id: "res-16", pair: "p16", label: "16" }
+                ].each do |item| %>
+                  <div class="px-3 py-2 bg-pink-100 rounded-lg text-center font-bold cursor-pointer hover:bg-pink-200 transition"
+                       data-action="click->flower-matcher#selectFlower"
+                       data-flower-matcher-target="flower"
+                       data-flower-id="<%= item[:id] %>"
+                       data-pair="<%= item[:pair] %>"><%= item[:label] %></div>
+                <% end %>
+              </div>
+
+              <!-- Controlli -->
+              <div class="mt-4 flex gap-3 items-center">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full w-8 h-8 transition flex items-center justify-center"
+                        data-action="click->flower-matcher#reset" title="Ricomincia">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                </button>
+                <button class="bg-green-500 hover:bg-green-600 text-white font-bold rounded-full w-8 h-8 transition flex items-center justify-center"
+                        data-action="click->flower-matcher#showSolutions" title="Soluzioni">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="ml-11 relative p-4 bg-white rounded-lg">
-            <!-- SVG Canvas -->
-            <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-30" data-flower-matcher-target="canvas"></svg>
 
-            <!-- Potenze -->
-            <div class="flex flex-wrap justify-around gap-4 mb-12 relative z-20">
+          <!-- Exercise 3: Vero o Falso -->
+          <div>
+            <p class="font-bold text-gray-700 mb-3">
+              <%= numero_esercizio_badge(3) %>
+              Vero o falso? Indica con una X.
+            </p>
+            <div class="grid grid-cols-2 gap-2 ml-10">
               <% [
-                { id: "pow-2-5", pair: "p32", label: "2<sup>5</sup>" },
-                { id: "pow-5-1", pair: "p5", label: "5<sup>1</sup>" },
-                { id: "pow-9-0", pair: "p1", label: "9<sup>0</sup>" },
-                { id: "pow-3-3", pair: "p27", label: "3<sup>3</sup>" },
-                { id: "pow-4-2", pair: "p16", label: "4<sup>2</sup>" },
-                { id: "pow-1-8", pair: "p1", label: "1<sup>8</sup>" }
-              ].each do |item| %>
-                <div class="px-4 py-3 bg-cyan-100 rounded-lg text-center font-bold cursor-pointer hover:bg-cyan-200 transition"
-                     data-action="click->flower-matcher#selectFlower"
-                     data-flower-matcher-target="flower"
-                     data-flower-id="<%= item[:id] %>"
-                     data-pair="<%= item[:pair] %>"><%= item[:label].html_safe %></div>
-              <% end %>
-            </div>
-
-            <!-- Risultati -->
-            <div class="flex flex-wrap justify-around gap-4 relative z-20">
-              <% [
-                { id: "res-5", pair: "p5", label: "5" },
-                { id: "res-27", pair: "p27", label: "27" },
-                { id: "res-32", pair: "p32", label: "32" },
-                { id: "res-1", pair: "p1", label: "1" },
-                { id: "res-16", pair: "p16", label: "16" }
-              ].each do |item| %>
-                <div class="px-4 py-3 bg-pink-100 rounded-lg text-center font-bold cursor-pointer hover:bg-pink-200 transition"
-                     data-action="click->flower-matcher#selectFlower"
-                     data-flower-matcher-target="flower"
-                     data-flower-id="<%= item[:id] %>"
-                     data-pair="<%= item[:pair] %>"><%= item[:label] %></div>
-              <% end %>
-            </div>
-
-            <!-- Controlli -->
-            <div class="mt-6 flex gap-3 items-center">
-              <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full w-10 h-10 transition flex items-center justify-center"
-                      data-action="click->flower-matcher#reset" title="Ricomincia">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-              </button>
-              <button class="bg-green-500 hover:bg-green-600 text-white font-bold rounded-full w-10 h-10 transition flex items-center justify-center"
-                      data-action="click->flower-matcher#showSolutions" title="Soluzioni">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Exercise 3: Vero o Falso -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
-            <p class="font-bold text-gray-700">Vero o falso? Indica con una X.</p>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ml-11">
-            <% [
-              { text: "10² = 20", v: false },
-              { text: "10⁴ = 10 000", v: true },
-              { text: "4³ = 64", v: true },
-              { text: "10⁶ = 100 000", v: false },
-              { text: "5² = 50", v: false },
-              { text: "10⁰ = 0", v: false },
-              { text: "2⁷ = 128", v: true },
-              { text: "10³ = 1 000", v: true },
-              { text: "10¹ = 10", v: true },
-              { text: "3⁵ = 243", v: true }
-            ].each_with_index do |item, idx| %>
-              <div class="p-3 bg-white rounded-lg flex items-center justify-between">
-                <span class="font-bold text-gray-800"><%= item[:text].html_safe %></span>
-                <div class="flex gap-4">
-                  <label class="cursor-pointer flex items-center gap-1">
-                    <input type="radio" name="vf3_<%= idx %>" data-correct-answer="<%= item[:v] %>">
-                    <span class="font-semibold">V</span>
-                  </label>
-                  <label class="cursor-pointer flex items-center gap-1">
-                    <input type="radio" name="vf3_<%= idx %>" data-correct-answer="<%= !item[:v] %>">
-                    <span class="font-semibold">F</span>
-                  </label>
+                { text: "10² = 20", v: false },
+                { text: "10⁴ = 10 000", v: true },
+                { text: "4³ = 64", v: true },
+                { text: "10⁶ = 100 000", v: false },
+                { text: "5² = 50", v: false },
+                { text: "10⁰ = 0", v: false },
+                { text: "2⁷ = 128", v: true },
+                { text: "10³ = 1 000", v: true },
+                { text: "10¹ = 10", v: true },
+                { text: "3⁵ = 243", v: true }
+              ].each_with_index do |item, idx| %>
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-gray-800"><%= item[:text].html_safe %></span>
+                  <div class="flex gap-2">
+                    <label class="cursor-pointer flex items-center gap-1">
+                      <input type="radio" name="vf3_<%= idx %>" data-correct-answer="<%= item[:v] %>">
+                      <span class="font-semibold">V</span>
+                    </label>
+                    <label class="cursor-pointer flex items-center gap-1">
+                      <input type="radio" name="vf3_<%= idx %>" data-correct-answer="<%= !item[:v] %>">
+                      <span class="font-semibold">F</span>
+                    </label>
+                  </div>
                 </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-
-        <!-- Exercise 4: Polinomio numerico -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
-            <p class="font-bold text-gray-700">Scrivi i numeri sul quaderno come polinomio numerico.</p>
-          </div>
-          <div class="ml-11 p-4 bg-white rounded-lg">
-            <p class="text-cyan-500 font-bold flex flex-wrap gap-2">
-              <span class="whitespace-nowrap">63 253</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">832 904 368</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">3 729 456</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">27 349 900 473</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">273 480</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">17 238 004</span>
-            </p>
-            <p class="text-gray-600 italic mt-2">→ vedi p. seguente</p>
-          </div>
-        </div>
-
-        <!-- Exercise 5: Decimali in cifre -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">5</div>
-            <p class="font-bold text-gray-700">Scrivi in cifre i seguenti numeri decimali.</p>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ml-11">
-            <% [
-              { text: "trenta e otto decimi", answer: "30,8" },
-              { text: "quarantaquattro centesimi", answer: "0,44" },
-              { text: "due e ventisei centesimi", answer: "2,26" },
-              { text: "centosessantadue millesimi", answer: "0,162" },
-              { text: "uno e cinque centesimi", answer: "1,05" },
-              { text: "nove millesimi", answer: "0,009" }
-            ].each do |item| %>
-              <div class="p-3 bg-white rounded-lg flex items-center gap-2">
-                <span class="text-gray-700 flex-1"><%= item[:text] %></span>
-                <span class="text-pink-600">→</span>
-                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              </div>
-            <% end %>
-          </div>
-        </div>
-
-        <!-- Exercise 6: Scomposizione -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">6</div>
-            <p class="font-bold text-gray-700">Scomponi i numeri decimali come nell'esempio.</p>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ml-11">
-            <% [
-              { num: "13,26", dec: "1 da, 3 u, 2 d, 6 c" },
-              { num: "40,157", dec: "4 da, 1 d, 5 c, 7 m" },
-              { num: "0,945", dec: "9 d, 4 c, 5 m" },
-              { num: "81,03", dec: "8 da, 1 u, 3 c" },
-              { num: "27,108", dec: "2 da, 7 u, 1 d, 8 m" },
-              { num: "106,92", dec: "1 h, 6 u, 9 d, 2 c" }
-            ].each do |item| %>
-              <div class="p-3 bg-white rounded-lg">
-                <span class="font-bold text-cyan-500"><%= item[:num] %></span> =
-                <span class="text-gray-700"><%= item[:dec] %></span>
-              </div>
-            <% end %>
-          </div>
-        </div>
-
-        <!-- Exercise 7: Composizione -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">7</div>
-            <p class="font-bold text-gray-700">Componi i seguenti numeri decimali.</p>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ml-11">
-            <% [
-              { dec: "7 da, 8 u, 1 d, 4 c", num: "78,14" },
-              { dec: "6 u, 5 c, 4 m", num: "6,054" },
-              { dec: "2 da, 9 d, 3 m", num: "20,903" },
-              { dec: "3 da, 8 d, 9 c, 2 m", num: "30,892" },
-              { dec: "3 h, 5 u, 1 c, 6 m", num: "305,016" },
-              { dec: "4 u, 7 c, 1 m", num: "4,071" }
-            ].each do |item| %>
-              <div class="p-3 bg-white rounded-lg flex items-center gap-2">
-                <span class="text-gray-700"><%= item[:dec] %></span>
-                <span class="text-pink-600">=</span>
-                <input type="text" data-correct-answer="<%= item[:num] %>" class="w-24 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              </div>
-            <% end %>
-          </div>
-        </div>
-
-        <!-- Exercise 8: Ordine decrescente -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">8</div>
-            <p class="font-bold text-gray-700">Scrivi i numeri in ordine decrescente.</p>
-          </div>
-          <div class="ml-11 p-4 bg-white rounded-lg">
-            <p class="text-gray-600 mb-2 flex flex-wrap gap-2">
-              <span class="whitespace-nowrap">6,5</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">6,005</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">0,65</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">6,05</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">5,6</span>
-            </p>
-            <input type="text" data-correct-answer="6,5, 6,05, 6,005, 5,6, 0,65" class="w-full px-3 py-2 border-2 border-cyan-300 rounded text-center" placeholder="Scrivi i numeri separati da virgola...">
-          </div>
-        </div>
-
-        <!-- Exercise 9: Ordine crescente -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">9</div>
-            <p class="font-bold text-gray-700">Scrivi i numeri in ordine crescente.</p>
-          </div>
-          <div class="ml-11 p-4 bg-white rounded-lg">
-            <p class="text-gray-600 mb-2 flex flex-wrap gap-2">
-              <span class="whitespace-nowrap">1,07</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">10,7</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">0,17</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">1,7</span>
-              <span class="text-pink-600">&#8226;</span>
-              <span class="whitespace-nowrap">107</span>
-            </p>
-            <input type="text" data-correct-answer="0,17, 1,07, 1,7, 10,7, 107" class="w-full px-3 py-2 border-2 border-cyan-300 rounded text-center" placeholder="Scrivi i numeri separati da virgola...">
-          </div>
-        </div>
-
-        <!-- Exercise 10: Confronto numeri relativi -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">10</div>
-            <p class="font-bold text-gray-700">Confronta i numeri e inserisci i segni &lt; oppure &gt;.</p>
-          </div>
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 ml-11">
-            <% [
-              { a: "– 7", b: "+ 5", sign: "<", a_color: "red", b_color: "blue" },
-              { a: "+ 9", b: "– 10", sign: ">", a_color: "blue", b_color: "red" },
-              { a: "– 6", b: "– 4", sign: "<", a_color: "red", b_color: "red" },
-              { a: "– 9", b: "+ 3", sign: "<", a_color: "red", b_color: "blue" },
-              { a: "– 5", b: "– 8", sign: ">", a_color: "red", b_color: "red" },
-              { a: "– 17", b: "0", sign: "<", a_color: "red", b_color: "gray" }
-            ].each do |item| %>
-              <div class="p-3 bg-white rounded-lg flex items-center justify-center gap-2">
-                <span class="font-bold text-<%= item[:a_color] %>-600"><%= item[:a] %></span>
-                <input type="text" data-correct-answer="<%= item[:sign] %>" class="w-10 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold" maxlength="1">
-                <span class="font-bold text-<%= item[:b_color] %>-600"><%= item[:b] %></span>
-              </div>
-            <% end %>
-          </div>
-        </div>
-
-        <!-- Exercise 11: Operazioni -->
-        <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">11</div>
-            <p class="font-bold text-gray-700">Esegui le operazioni.</p>
-          </div>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ml-11">
-            <% [
-              { op: "– 7 – 15", result: "–22" },
-              { op: "– 6 + 20", result: "+14" },
-              { op: "+ 10 – 22", result: "–12" },
-              { op: "+ 5 – 7", result: "–2" }
-            ].each do |item| %>
-              <div class="p-3 bg-white rounded-lg flex items-center gap-2">
-                <span class="text-gray-800"><%= item[:op] %> =</span>
-                <input type="text" data-correct-answer="<%= item[:result] %>" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MODELLO INVALSI -->
-    <div class="p-4 md:p-6 bg-purple-100 rounded-lg">
-      <div class="flex items-center justify-between mb-6">
-        <span class="bg-purple-600 text-white px-4 py-2 rounded font-bold">MODELLO INVALSI</span>
-        <h2 class="font-bold text-purple-700">I NUMERI</h2>
-      </div>
-      <p class="text-gray-700 mb-6 font-bold">Segna con una X le risposte corrette.</p>
-
-      <div class="space-y-6">
-        <% [
-          { q: "Qual è la cifra delle decine di milioni nel numero 657 324 791?", opts: ["La cifra 6.", "La cifra 7.", "La cifra 5.", "La cifra 3."], correct: 2 },
-          { q: "Quale numero è formato da: 102 uM + 65 uk + 12 da + 15 u?", opts: ["102 065 153", "102 651 225", "12 065 135", "102 065 135"], correct: 3 },
-          { q: "Quale numero è formato da 60 unità e 74 millesimi?", opts: ["60,74", "600,74", "60,074", "6,074"], correct: 2 },
-          { q: "Quale delle seguenti uguaglianze non è corretta?", opts: ["50 decimi = 5 unità", "6 millesimi = 0,6 centesimi", "20 decine = 20 000 millesimi", "7 000 millesimi = 7 unità"], correct: 1 },
-          { q: "Quale delle seguenti potenze corrisponde a un milione?", opts: ["10⁵", "10⁶", "10⁷", "10⁸"], correct: 1 },
-          { q: "In quale caso il numero 130 000 000 è stato scritto in modo corretto?", opts: ["13 × 10⁵", "13 × 10⁷", "13 × 10⁶", "13 × 10⁸"], correct: 1 },
-          { q: "Quale tra i seguenti numeri rende vera l'uguaglianza: 5 × 100 000 < 5 × ...?", opts: ["10³", "10⁴", "10⁵", "10⁶"], correct: 3 },
-          { q: "Qual è il risultato di + 17 – 22?", opts: ["+ 5", "– 5", "+ 39", "– 39"], correct: 1 },
-          { q: "Se a + 5 togli 11 e poi aggiungi 2, quale numero ottieni?", opts: ["– 4", "+ 5", "– 6", "– 9"], correct: 0 },
-          { q: "In quale gruppo i numeri sono in ordine crescente?", opts: ["– 6 • – 4 • 0 • + 4 • + 3", "– 6 • – 7 • 0 • + 3 • + 8", "– 6 • – 4 • 0 • + 3 • + 8", "– 4 • – 6 • 0 • + 3 • + 8"], correct: 2 }
-        ].each_with_index do |item, idx| %>
-          <div class="p-4 bg-white rounded-lg">
-            <div class="flex items-start gap-3 mb-4">
-              <div class="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0"><%= idx + 1 %></div>
-              <p class="font-bold text-gray-800"><%= item[:q] %></p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 ml-11">
-              <% item[:opts].each_with_index do |opt, oidx| %>
-                <label class="cursor-pointer flex items-center gap-2 px-3 py-2 border-2 border-gray-200 rounded-lg hover:border-purple-400 transition">
-                  <input type="radio" name="invalsi_<%= idx %>" data-correct-answer="<%= oidx == item[:correct] %>">
-                  <span class="text-gray-700"><%= opt.html_safe %></span>
-                </label>
               <% end %>
             </div>
           </div>
-        <% end %>
 
-        <!-- Domanda 5 speciale con lista -->
-        <div class="p-4 bg-white rounded-lg">
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">5</div>
-            <div>
-              <p class="font-bold text-gray-800 mb-2">L'insegnante ha chiesto di arrotondare ai decimi il numero 12,28. Luca, Martina, Giorgio e Manuela danno quattro risposte diverse.</p>
-              <ul class="text-gray-600 space-y-1 mb-3">
-                <li><span class="text-pink-600">&#8226;</span> Luca ha scritto: 12,5.</li>
-                <li><span class="text-pink-600">&#8226;</span> Martina ha scritto: 12,2.</li>
-                <li><span class="text-pink-600">&#8226;</span> Giorgio ha scritto: 12,3.</li>
-                <li><span class="text-pink-600">&#8226;</span> Manuela ha scritto: 12.</li>
-              </ul>
-              <p class="font-bold text-gray-800">Chi ha dato la risposta corretta?</p>
+          <!-- Exercise 4: Polinomio numerico -->
+          <div>
+            <p class="font-bold text-gray-700 mb-3">
+              <%= numero_esercizio_badge(4) %>
+              Scrivi i numeri sul quaderno come polinomio numerico.
+            </p>
+            <div class="ml-10">
+              <p class="text-cyan-500 font-bold">
+                63 253 <span class="text-pink-600">&#8226;</span>
+                832 904 368 <span class="text-pink-600">&#8226;</span>
+                3 729 456
+              </p>
+              <p class="text-cyan-500 font-bold">
+                27 349 900 473 <span class="text-pink-600">&#8226;</span>
+                273 480 <span class="text-pink-600">&#8226;</span>
+                17 238 004
+              </p>
+              <p class="text-pink-500 italic mt-2">→ vedi p. seguente</p>
             </div>
           </div>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 ml-11">
-            <% ["Luca", "Martina", "Giorgio", "Manuela"].each_with_index do |name, idx| %>
-              <label class="cursor-pointer flex items-center gap-2 px-3 py-2 border-2 border-gray-200 rounded-lg hover:border-purple-400 transition">
-                <input type="radio" name="invalsi_special" data-correct-answer="<%= idx == 2 %>">
-                <span class="text-gray-700"><%= name %></span>
-              </label>
-            <% end %>
+
+          <!-- Exercise 5: Decimali in cifre -->
+          <div>
+            <p class="font-bold text-gray-700 mb-3">
+              <%= numero_esercizio_badge(5) %>
+              Scrivi in cifre i seguenti numeri decimali.
+            </p>
+            <div class="space-y-2 ml-10">
+              <% [
+                { text: "trenta e otto decimi", answer: "30,8" },
+                { text: "quarantaquattro centesimi", answer: "0,44" },
+                { text: "due e ventisei centesimi", answer: "2,26" },
+                { text: "centosessantadue millesimi", answer: "0,162" },
+                { text: "uno e cinque centesimi", answer: "1,05" },
+                { text: "nove millesimi", answer: "0,009" }
+              ].each do |item| %>
+                <div class="flex items-center gap-2">
+                  <span class="text-gray-700 flex-1"><%= item[:text] %></span>
+                  <span class="text-pink-600">→</span>
+                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
 
-        <!-- Domanda calzini -->
-        <div class="p-4 bg-white rounded-lg">
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">6</div>
-            <p class="font-bold text-gray-800">Nell'armadio di José ci sono 2 cassetti, ognuno dei quali ha 2 scomparti. Ogni scomparto contiene 2 paia di calzini. Quanti calzini in tutto?</p>
+        <!-- COLONNA DESTRA -->
+        <div class="p-4 space-y-6">
+          <!-- Exercise 6: Scomposizione -->
+          <div>
+            <p class="font-bold text-gray-700 mb-3">
+              <%= numero_esercizio_badge(6) %>
+              Scomponi i numeri decimali come nell'esempio.
+            </p>
+            <div class="space-y-2 ml-10">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-cyan-500">13,26</span> =
+                <span class="text-pink-600 font-bold">1 da, 3 u, 2 d, 6 c</span>
+              </div>
+              <% [
+                { num: "40,157", answer: "4 da, 1 d, 5 c, 7 m" },
+                { num: "0,945", answer: "9 d, 4 c, 5 m" },
+                { num: "81,03", answer: "8 da, 1 u, 3 c" },
+                { num: "27,108", answer: "2 da, 7 u, 1 d, 8 m" },
+                { num: "106,92", answer: "1 h, 6 u, 9 d, 2 c" }
+              ].each do |item| %>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-cyan-500"><%= item[:num] %></span> =
+                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="flex-1 px-2 py-1 border-2 border-pink-400 rounded font-bold bg-white">
+                </div>
+              <% end %>
+            </div>
           </div>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 ml-11">
-            <% ["6", "8", "12", "16"].each_with_index do |n, idx| %>
-              <label class="cursor-pointer flex items-center gap-2 px-3 py-2 border-2 border-gray-200 rounded-lg hover:border-purple-400 transition">
-                <input type="radio" name="invalsi_calzini" data-correct-answer="<%= idx == 3 %>">
-                <span class="text-gray-700"><%= n %></span>
-              </label>
-            <% end %>
+
+          <!-- Exercise 7: Composizione -->
+          <div>
+            <p class="font-bold text-gray-700 mb-3">
+              <%= numero_esercizio_badge(7) %>
+              Componi i seguenti numeri decimali.
+            </p>
+            <div class="space-y-2 ml-10">
+              <% [
+                { dec: "7 da, 8 u, 1 d, 4 c", num: "78,14" },
+                { dec: "6 u, 5 c, 4 m", num: "6,054" },
+                { dec: "2 da, 9 d, 3 m", num: "20,903" },
+                { dec: "3 da, 8 d, 9 c, 2 m", num: "30,892" },
+                { dec: "3 h, 5 u, 1 c, 6 m", num: "305,016" },
+                { dec: "4 u, 7 c, 1 m", num: "4,071" }
+              ].each do |item| %>
+                <div class="flex items-center gap-2">
+                  <span class="text-gray-700"><%= item[:dec] %></span>
+                  <span class="text-pink-600">=</span>
+                  <input type="text" data-correct-answer="<%= item[:num] %>" class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Exercise 8: Ordine decrescente -->
+          <div>
+            <p class="font-bold text-gray-700 mb-3">
+              <%= numero_esercizio_badge(8) %>
+              Scrivi i numeri in ordine decrescente.
+            </p>
+            <div class="ml-10">
+              <p class="text-gray-600 mb-2">
+                6,5 <span class="text-pink-600">&#8226;</span>
+                6,005 <span class="text-pink-600">&#8226;</span>
+                0,65 <span class="text-pink-600">&#8226;</span>
+                6,05 <span class="text-pink-600">&#8226;</span>
+                5,6
+              </p>
+              <input type="text" data-correct-answer="6,5, 6,05, 6,005, 5,6, 0,65" class="w-full px-3 py-2 border-2 border-pink-400 rounded text-center bg-white" placeholder="Scrivi i numeri separati da virgola...">
+            </div>
+          </div>
+
+          <!-- Exercise 9: Ordine crescente -->
+          <div>
+            <p class="font-bold text-gray-700 mb-3">
+              <%= numero_esercizio_badge(9) %>
+              Scrivi i numeri in ordine crescente.
+            </p>
+            <div class="ml-10">
+              <p class="text-gray-600 mb-2">
+                1,07 <span class="text-pink-600">&#8226;</span>
+                10,7 <span class="text-pink-600">&#8226;</span>
+                0,17 <span class="text-pink-600">&#8226;</span>
+                1,7 <span class="text-pink-600">&#8226;</span>
+                107
+              </p>
+              <input type="text" data-correct-answer="0,17, 1,07, 1,7, 10,7, 107" class="w-full px-3 py-2 border-2 border-pink-400 rounded text-center bg-white" placeholder="Scrivi i numeri separati da virgola...">
+            </div>
+          </div>
+
+          <!-- Exercise 10: Confronto numeri relativi -->
+          <div>
+            <p class="font-bold text-gray-700 mb-3">
+              <%= numero_esercizio_badge(10) %>
+              Confronta i numeri e inserisci i segni &lt; oppure &gt;.
+            </p>
+            <div class="grid grid-cols-2 gap-2 ml-10">
+              <% [
+                { a: "– 7", b: "+ 5", sign: "<", a_color: "red", b_color: "blue" },
+                { a: "– 6", b: "– 4", sign: "<", a_color: "red", b_color: "red" },
+                { a: "+ 9", b: "– 10", sign: ">", a_color: "blue", b_color: "red" },
+                { a: "– 5", b: "– 8", sign: ">", a_color: "red", b_color: "red" },
+                { a: "– 9", b: "+ 3", sign: "<", a_color: "red", b_color: "blue" },
+                { a: "– 17", b: "0", sign: "<", a_color: "red", b_color: "gray" }
+              ].each do |item| %>
+                <div class="flex items-center justify-center gap-2">
+                  <span class="font-bold text-<%= item[:a_color] %>-600"><%= item[:a] %></span>
+                  <input type="text" data-correct-answer="<%= item[:sign] %>" class="w-10 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white" maxlength="1">
+                  <span class="font-bold text-<%= item[:b_color] %>-600"><%= item[:b] %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Exercise 11: Operazioni -->
+          <div>
+            <p class="font-bold text-gray-700 mb-3">
+              <%= numero_esercizio_badge(11) %>
+              Esegui le operazioni.
+            </p>
+            <div class="grid grid-cols-2 gap-2 ml-10">
+              <% [
+                { op: "– 7 – 15", result: "–22" },
+                { op: "– 6 + 20", result: "+14" },
+                { op: "+ 10 – 22", result: "–12" },
+                { op: "+ 5 – 7", result: "–2" }
+              ].each do |item| %>
+                <div class="flex items-center gap-2">
+                  <span class="text-gray-800"><%= item[:op] %> =</span>
+                  <input type="text" data-correct-answer="<%= item[:result] %>" class="w-16 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

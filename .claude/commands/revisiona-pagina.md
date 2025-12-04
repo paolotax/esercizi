@@ -1,17 +1,18 @@
 # Revisione Pagine nvi5_mat
 
-Revisionare la pagina $ARGUMENTS seguendo i pattern stabiliti nelle pagine 56-59.
+Revisionare la pagina $ARGUMENTS seguendo i pattern delle pagine 68-71.
 
 ---
 
 ## PROCEDURA
 
-1. **Leggi page.png** - `assets/images/nvi5_mat/p0XX/page.png`
-2. **Analizza la struttura** - Identifica sezioni, colonne, box colorati
-3. **Identifica controller** - Quale tipo di interazione serve?
-4. **Verifica immagini** - Controlla quali immagini esistono nella cartella
-5. **Applica i pattern** - Usa i template sotto
-6. **Testa** - Verifica che la pagina funzioni
+1. **GUARDA page.png** - `assets/images/nvi5_mat/p0XX/page.png` - FONDAMENTALE per capire layout e struttura visiva!
+2. **Leggi HTML originale** - `assets/images/nvi5_mat/p0XX/*.html` - per estrarre testo e risposte
+3. **Leggi view esistente** - `app/views/exercises/nvi5_mat_p0XX.html.erb` - se esiste
+4. **Analizza la struttura** - Identifica sezioni, colonne, box colorati, tipi di esercizi
+5. **Identifica controller** - Quale tipo di interazione serve? (vedi sotto)
+6. **Applica i pattern** - Usa i template sotto
+7. **Testa** - Verifica che la pagina funzioni
 
 ---
 
@@ -34,23 +35,105 @@ Revisionare la pagina $ARGUMENTS seguendo i pattern stabiliti nelle pagine 56-59
 
 ---
 
-## PARTIAL FRAZIONE
+## BADGE ESERCIZI (IMPORTANTE!)
+
+**Helper disponibili (usano @pagina.base_color automaticamente):**
 
 ```erb
-<%= render 'shared/frazione', num: 2, den: 3, bold: true %>
-<%= render 'shared/frazione', num: nil, den: 3, num_answer: "2" %>
-<%= render 'shared/frazione', num: 3, den: nil, den_answer: "5" %>
-<%= render 'shared/frazione', num: nil, den: nil, num_answer: "2", den_answer: "3",
-    input_data: "equivalent-fractions-target=input" %>
+<%= numero_esercizio_badge(N) %>           <!-- colore da @pagina.base_color -->
+<%= imparare_tutti_badge(N) %>             <!-- colore da @pagina.base_color -->
+```
+
+**BADGE INLINE NEL PARAGRAFO (CORRETTO):**
+```erb
+<div class="mb-4">
+  <p class="font-bold text-gray-700">
+    <%= numero_esercizio_badge(2) %>
+    Calcola il valore delle percentuali come nell'esempio.
+  </p>
+</div>
+```
+
+**NON USARE wrapper flex attorno al badge:**
+```erb
+<!-- SBAGLIATO! -->
+<div class="flex items-start gap-3 mb-4">
+  <%= numero_esercizio_badge(2) %>
+  <p>Testo...</p>
+</div>
 ```
 
 ---
 
-## BADGE ESERCIZI
+## BOX ESERCIZI
+
+**Container ESERCIZI (sfondo arancione):**
+```erb
+<div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+```
+
+**Box IMPARARE TUTTI (primo esercizio evidenziato):**
+```erb
+<div class="p-4 bg-white rounded-2xl -mx-6 -mt-6 border-3 border-blue-500">
+  <div class="flex items-start lg:items-center gap-3 mb-4">
+    <p class="font-bold text-gray-700">
+      <%= imparare_tutti_badge(1) %>
+      Consegna esercizio...
+    </p>
+  </div>
+  <!-- contenuto -->
+</div>
+```
+
+**Singolo esercizio:**
+```erb
+<div class="p-4 mb-6">
+  <div class="mb-4">
+    <p class="font-bold text-gray-700">
+      <%= numero_esercizio_badge(N) %>
+      Consegna esercizio...
+    </p>
+  </div>
+  <!-- contenuto -->
+</div>
+```
+
+---
+
+## COLORI DINAMICI
+
+Usare `@pagina.base_color` per colori coerenti:
 
 ```erb
-<%= numero_esercizio_badge(1, colore: "cyan-500") %>
-<%= imparare_tutti_badge(1) %>
+<span class="text-<%= @pagina.base_color %>-700">testo esempio</span>
+<div class="divide-<%= @pagina.base_color %>-300">
+<div class="bg-<%= @pagina.base_color %>-50">
+```
+
+---
+
+## INPUT STANDARDIZZATI
+
+```erb
+<!-- Input numerico/testo -->
+<input type="text"
+       data-correct-answer="risposta"
+       class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+
+<!-- Input piccolo (simboli <, >, =) -->
+<input type="text"
+       data-correct-answer="<"
+       class="w-8 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+```
+
+---
+
+## PARTIAL FRAZIONE
+
+```erb
+<%= render 'shared/frazione', num: 3, den: 5 %>
+<%= render 'shared/frazione', num: nil, den: 100, num_answer: "45" %>
+<%= render 'shared/frazione', num: nil, den: nil, num_answer: "6", den_answer: "14" %>
 ```
 
 ---
@@ -59,7 +142,13 @@ Revisionare la pagina $ARGUMENTS seguendo i pattern stabiliti nelle pagine 56-59
 
 **Due colonne con divisore:**
 ```erb
-<div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-<%= @pagina.base_color %>-600">
+<div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-<%= @pagina.base_color %>-300">
+```
+
+**Griglia responsive:**
+```erb
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
 ```
 
 **Testo + immagine:**
@@ -72,20 +161,35 @@ Revisionare la pagina $ARGUMENTS seguendo i pattern stabiliti nelle pagine 56-59
 
 ---
 
-## BOX COLORATI
-
-- **Regola (rosa):** `bg-pink-100 rounded-2xl`
-- **Problema (celeste):** `bg-cyan-50`
-- **Risposta:** `bg-cyan-100 rounded-lg`
-- **Esercizi:** `bg-orange-100 rounded-lg`
-
----
-
 ## TITOLI
 
 ```erb
-<h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-4 italic">Titolo</h2>
+<h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-4 italic">Titolo sezione</h2>
 <p><strong><span class="text-pink-600">•</span> Istruzione</strong></p>
+```
+
+---
+
+## BOX COLORATI
+
+- **Teoria (celeste):** `bg-cyan-50 rounded-lg`
+- **Regola (bordo rosa):** `bg-white border-3 border-pink-700 rounded-2xl`
+- **Esercizi:** `bg-orange-100 rounded-lg`
+- **Esempio:** `p-3 mb-4` (senza background)
+
+---
+
+## PROBLEMI TESTUALI
+
+```erb
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="mb-2">
+    <p class="text-gray-700">
+      <%= numero_esercizio_badge(5) %>
+      Lucia ha un barattolo con 30 caramelle...
+    </p>
+  </div>
+</div>
 ```
 
 ---
@@ -99,12 +203,12 @@ Revisionare la pagina $ARGUMENTS seguendo i pattern stabiliti nelle pagine 56-59
 </div>
 ```
 
-**word-highlighter:** Per cerchiare elementi
+**word-highlighter:** Per cerchiare/sottolineare elementi
 ```erb
-<div data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
-  <span data-word-highlighter-target="word" data-correct="yellow"
-        data-action="click->word-highlighter#toggleHighlight">
-</div>
+<div data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+  <span data-word-highlighter-target="word" data-correct="green"
+        data-action="click->word-highlighter#toggleHighlight"
+        class="border-2 border-gray-300 rounded-lg px-3 py-2 cursor-pointer">
 ```
 
 **equivalent-fractions:** Per frazioni equivalenti
@@ -113,15 +217,28 @@ Revisionare la pagina $ARGUMENTS seguendo i pattern stabiliti nelle pagine 56-59
   <div data-equivalent-fractions-target="fractionGroup" data-original-num="4" data-original-den="9">
 ```
 
+**flower-matcher:** Per collegare elementi
+```erb
+<div data-controller="flower-matcher">
+  <div data-action="click->flower-matcher#selectFlower"
+       data-flower-matcher-target="flower"
+       data-flower-id="top-1"
+       data-pair="a">
+```
+
 ---
 
 ## CHECKLIST
 
+- [ ] GUARDATO page.png per capire la struttura
 - [ ] Container `bg-white` + data-controllers
-- [ ] Header `page_header`
-- [ ] Frazioni con partial `_frazione`
-- [ ] Badge con helper
+- [ ] Header `<%= render 'shared/page_header', pagina: @pagina %>`
+- [ ] Badge con `numero_esercizio_badge(N)` INLINE nel `<p>` (no wrapper flex!)
+- [ ] Badge IMPARARE TUTTI con `imparare_tutti_badge(N)` se presente
+- [ ] Colori dinamici con `@pagina.base_color`
+- [ ] Input con `border-2 border-pink-400`
+- [ ] Frazioni con partial `shared/frazione`
 - [ ] Layout responsive (md:)
-- [ ] Box colorati
-- [ ] Input con `data-correct-answer`
-- [ ] Footer `exercise_controls`
+- [ ] Box colorati corretti
+- [ ] Controller Stimulus appropriati
+- [ ] Footer `<%= render 'shared/exercise_controls' %>`

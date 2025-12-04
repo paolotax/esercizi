@@ -1,132 +1,128 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
-  
-  <p class="text-center  text-gray-700 mb-6">
-    Rivedi i concetti fondamentali sulle operazioni con i numeri decimali
-  </p>
-  <!-- Main Map Images -->
-  <div class="space-y-6">     <%= image_tag "p050_01.jpg", alt: "Mappa operazioni decimali parte 1" %>
-    <%= image_tag "p050_02.jpg", alt: "Mappa operazioni decimali parte 2" %>
-    <%= image_tag "p050_03.jpg", alt: "Mappa operazioni decimali parte 3" %>
+
+  <div class="space-y-6">
+    <!-- Tabella operazioni -->
+    <div class="p-4 md:p-6 overflow-x-auto">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="bg-<%= @pagina.base_color %>-100">
+            <th class="border-2 border-<%= @pagina.base_color %>-300 p-2 text-center">OPERAZIONE</th>
+            <th class="border-2 border-<%= @pagina.base_color %>-300 p-2">COME SI FA</th>
+            <th class="border-2 border-<%= @pagina.base_color %>-300 p-2">PROPRIETÀ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- ADDIZIONE -->
+          <tr>
+            <td class="border-2 border-gray-300 p-3 text-center align-middle">
+              <strong class="text-<%= @pagina.base_color %>-600 text-lg">ADDIZIONE</strong><br>
+              <span class="text-2xl font-bold text-<%= @pagina.base_color %>-600">+</span>
+            </td>
+            <td class="border-2 border-gray-300 p-3 align-top">
+              <%= image_tag "nvi5_mat/p050/p050_01.jpg", class: "mx-auto", alt: "Addizione con decimali" %>
+            </td>
+            <td class="border-2 border-gray-300 p-3 align-top">
+              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">PROPRIETÀ COMMUTATIVA:</p>
+              <p class="mb-3"><em class="font-bold">1,5</em> + <span class="underline font-bold">2</span> = <span class="underline font-bold">2</span> + <em class="font-bold">1,5</em> = 3,5</p>
+              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">PROPRIETÀ ASSOCIATIVA:</p>
+              <p><em class="font-bold">2,5</em> + <em class="font-bold">1,5</em> + <span class="underline font-bold">3</span> = <em class="font-bold">4</em> + <span class="underline font-bold">3</span> = 7</p>
+            </td>
+          </tr>
+          <!-- SOTTRAZIONE -->
+          <tr>
+            <td class="border-2 border-gray-300 p-3 text-center align-middle">
+              <strong class="text-<%= @pagina.base_color %>-600 text-lg">SOTTRAZIONE</strong><br>
+              <span class="text-2xl font-bold text-<%= @pagina.base_color %>-600">–</span>
+            </td>
+            <td class="border-2 border-gray-300 p-3 align-top">
+              <%= image_tag "nvi5_mat/p050/p050_02.jpg", class: "mx-auto", alt: "Sottrazione con decimali" %>
+            </td>
+            <td class="border-2 border-gray-300 p-3 align-top">
+              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">PROPRIETÀ INVARIANTIVA:</p>
+              <p class="mb-1">13,5 – 8,5 = 5</p>
+              <p class="mb-1">(13,5 – <em class="font-bold">0,5</em>) – (8,5 – <em class="font-bold">0,5</em>) = 13 – 8 = 5</p>
+              <p>(13,5 + <em class="font-bold">0,5</em>) – (8,5 + <em class="font-bold">0,5</em>) = 14 – 9 = 5</p>
+            </td>
+          </tr>
+          <!-- MOLTIPLICAZIONE -->
+          <tr>
+            <td class="border-2 border-gray-300 p-3 text-center align-middle">
+              <strong class="text-<%= @pagina.base_color %>-600 text-lg">MOLTIPLICAZIONE</strong><br>
+              <span class="text-2xl font-bold text-<%= @pagina.base_color %>-600">×</span>
+            </td>
+            <td class="border-2 border-gray-300 p-3 align-top">
+              <p class="mb-2">37,<strong class="underline">3</strong> × 3,<strong class="underline">5</strong> = 130,<strong class="underline">55</strong></p>
+              <p class="mb-2">3,<strong class="underline">73</strong> × 3,<strong class="underline">5</strong> = 13,<strong class="underline">055</strong></p>
+              <p class="mb-3">0,<strong class="underline">373</strong> × 3,<strong class="underline">5</strong> = 1,<strong class="underline">3055</strong></p>
+              <p class="text-sm text-gray-700">Esegui la moltiplicazione come con i numeri interi. Poi sposta la virgola di tanti posti quante sono le cifre decimali dei due fattori.</p>
+            </td>
+            <td class="border-2 border-gray-300 p-3 align-top">
+              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">PROPRIETÀ COMMUTATIVA:</p>
+              <p class="mb-3"><em class="font-bold">1,4</em> × <span class="underline font-bold">2</span> = <span class="underline font-bold">2</span> × <em class="font-bold">1,4</em> = 2,8</p>
+              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">PROPRIETÀ ASSOCIATIVA:</p>
+              <p class="mb-3"><em class="font-bold">2,2</em> × <em class="font-bold">3</em> × <span class="underline font-bold">2</span> = <em class="font-bold">6,6</em> × <span class="underline font-bold">2</span> = 13,2</p>
+              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">PROPRIETÀ DISTRIBUTIVA:</p>
+              <p class="mb-1">3 × 10,5 = 31,5</p>
+              <p>3 × (<span class="underline font-bold">10</span> + <em class="font-bold">0,5</em>) = (3 × <span class="underline font-bold">10</span>) + (3 × <em class="font-bold">0,5</em>) = 30 + 1,5 = 31,5</p>
+            </td>
+          </tr>
+          <!-- DIVISIONE -->
+          <tr>
+            <td class="border-2 border-gray-300 p-3 text-center align-middle">
+              <strong class="text-<%= @pagina.base_color %>-600 text-lg">DIVISIONE</strong><br>
+              <span class="text-2xl font-bold text-<%= @pagina.base_color %>-600">:</span>
+            </td>
+            <td class="border-2 border-gray-300 p-3 align-top">
+              <%= image_tag "nvi5_mat/p050/p050_03.jpg", class: "mx-auto mb-3", alt: "Divisione con decimali" %>
+              <p class="text-sm text-gray-700">Per eseguire la divisione devi fare in modo che il divisore sia un numero intero, applicando la proprietà invariantiva.</p>
+            </td>
+            <td class="border-2 border-gray-300 p-3 align-top">
+              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">PROPRIETÀ INVARIANTIVA:</p>
+              <p class="mb-1">29,4 : 14 = 2,1</p>
+              <p class="mb-1">(29,4 × <span class="underline font-bold">10</span>) : (14 × <span class="underline font-bold">10</span>) = 294 : 140 = 2,1</p>
+              <p>(29,4 : <em class="font-bold">2</em>) : (14 : <em class="font-bold">2</em>) = 14,7 : 7 = 2,1</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Operazioni inverse -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 md:p-6">
+      <div class="p-4 bg-cyan-50 rounded-lg">
+        <p class="text-gray-800 text-center mb-4">Addizione e sottrazione sono <strong class="text-<%= @pagina.base_color %>-600">operazioni inverse</strong>.</p>
+        <div class="flex flex-col items-center">
+          <span class="text-<%= @pagina.base_color %>-600 font-bold">+ 5</span>
+          <span class="text-2xl">→</span>
+          <div class="flex items-center gap-8">
+            <div class="w-12 h-12 bg-white border-2 border-<%= @pagina.base_color %>-400 rounded flex items-center justify-center font-bold">12</div>
+            <div class="w-12 h-12 bg-white border-2 border-<%= @pagina.base_color %>-400 rounded flex items-center justify-center font-bold">17</div>
+          </div>
+          <span class="text-2xl">←</span>
+          <span class="text-<%= @pagina.base_color %>-600 font-bold">– 5</span>
+        </div>
+      </div>
+
+      <div class="p-4 bg-cyan-50 rounded-lg">
+        <p class="text-gray-800 text-center mb-4">Moltiplicazione e divisione sono <strong class="text-<%= @pagina.base_color %>-600">operazioni inverse</strong>.</p>
+        <div class="flex flex-col items-center">
+          <span class="text-<%= @pagina.base_color %>-600 font-bold">× 3</span>
+          <span class="text-2xl">→</span>
+          <div class="flex items-center gap-8">
+            <div class="w-12 h-12 bg-white border-2 border-<%= @pagina.base_color %>-400 rounded flex items-center justify-center font-bold">12</div>
+            <div class="w-12 h-12 bg-white border-2 border-<%= @pagina.base_color %>-400 rounded flex items-center justify-center font-bold">36</div>
+          </div>
+          <span class="text-2xl">←</span>
+          <span class="text-<%= @pagina.base_color %>-600 font-bold">: 3</span>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
   </div>
-  <!-- Summary Cards -->
-  <div class="grid grid-cols-1 grid-cols-2 gap-6 mt-8">
-    <!-- Addizione e Sottrazione -->
-    <div class="p-6">       
-      <h3 class=" font-bold text-blue-600 mb-4 flex items-center gap-2">
-        <span>➕</span>
-        Addizione e Sottrazione
-      </h3>
-      <div class="space-y-2 text-gray-700">         
-        <p class="flex items-start gap-2">
-          <span class="text-blue-500">•</span>
-          <span>Incolonna i numeri allineando le virgole</span>
-        </p>
-        <p class="flex items-start gap-2">
-          <span class="text-blue-500">•</span>
-          <span>Aggiungi zeri se necessario</span>
-        </p>
-        <p class="flex items-start gap-2">
-          <span class="text-blue-500">•</span>
-          <span>Opera come con i numeri naturali</span>
-        </p>
-      </div>
-      <div class="mt-4 p-3">         
-        <p class="font-mono text-center">
-          13,25<br/>
-          + 4,8<br/>
-          <span class="border-t-2 border-blue-300 inline-block full text-center">18,05</span>
-        </p>
-      </div>
-    </div>
-    <!-- Moltiplicazione -->
-    <div class="p-6">       
-      <h3 class=" font-bold text-green-600 mb-4 flex items-center gap-2">
-        <span>✖️</span>
-        Moltiplicazione
-      </h3>
-      <div class="space-y-2 text-gray-700">         
-        <p class="flex items-start gap-2">
-          <span class="text-green-500">•</span>
-          <span>Esegui la moltiplicazione senza virgola</span>
-        </p>
-        <p class="flex items-start gap-2">
-          <span class="text-green-500">•</span>
-          <span>Conta le cifre decimali di entrambi i fattori</span>
-        </p>
-        <p class="flex items-start gap-2">
-          <span class="text-green-500">•</span>
-          <span>Metti la virgola nel risultato</span>
-        </p>
-      </div>
-      <div class="mt-4 p-3">         
-        <p class="font-mono text-center">
-          1,2 × 3,5 = 4,20<br/>
-          <span class=" text-gray-600">(1 + 1 = 2 cifre decimali)</span>
-        </p>
-      </div>
-    </div>
-    <!-- Divisione -->
-    <div class="p-6">       
-      <h3 class=" font-bold text-orange-600 mb-4 flex items-center gap-2">
-        <span>➗</span>
-        Divisione
-      </h3>
-      <div class="space-y-2 text-gray-700">         
-        <p class="flex items-start gap-2">
-          <span class="text-orange-500">•</span>
-          <span>Rendi il divisore un numero intero</span>
-        </p>
-        <p class="flex items-start gap-2">
-          <span class="text-orange-500">•</span>
-          <span>Sposta la virgola in entrambi i numeri</span>
-        </p>
-        <p class="flex items-start gap-2">
-          <span class="text-orange-500">•</span>
-          <span>Esegui la divisione normalmente</span>
-        </p>
-      </div>
-      <div class="mt-4 p-3">         
-        <p class="font-mono text-center ">
-          4,8 : 1,2 = 48 : 12 = 4
-        </p>
-      </div>
-    </div>
-    <!-- Proprietà -->
-    <div class="p-6">       
-      <h3 class=" font-bold text-blue-600 mb-4 flex items-center gap-2">
-        <span>⚡</span>
-        Proprietà
-      </h3>
-      <div class="space-y-2 text-gray-700">         
-        <p class="flex items-start gap-2">
-          <span class="text-purple-500">•</span>
-          <span><strong>Commutativa:</strong> a + b = b + a</span>
-        </p>
-        <p class="flex items-start gap-2">
-          <span class="text-purple-500">•</span>
-          <span><strong>Associativa:</strong> (a + b) + c = a + (b + c)</span>
-        </p>
-        <p class="flex items-start gap-2">
-          <span class="text-purple-500">•</span>
-          <span><strong>Distributiva:</strong> a × (b + c) = a×b + a×c</span>
-        </p>
-      </div>
-    </div>
-  </div>
-  <!-- Info Box -->
-  <div class="mt-8 p-6">     
-    <p class=" text-gray-800">
-      <span class="font-bold text-yellow-700">💡 Suggerimento:</span>
-      Usa questa mappa per ripassare prima di fare gli esercizi.
-      Ricorda sempre di allineare le virgole nelle operazioni in colonna!
-    </p>
-  </div>
-  <!-- Exercise Controls -->
-  <%= render 'shared/exercise_controls', color: 'purple', current_page: 'nvi5_mat_p050' %>
 </div>

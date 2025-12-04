@@ -1,64 +1,89 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
-     data-font-controls-target="content">  
+     data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
-  <div class="space-y-6">  
-    <div class="p-4 p-6">       
-      <p class=" mb-4">▶ I numeri naturali che hanno esattamente due divisori sono detti <strong class="text-blue-700">numeri primi</strong>. Questi divisori sono <strong>1</strong> e il numero stesso.</p>
-      <ul class="list-disc list-inside space-y-2 text-gray-800">
-        <li>• <strong>0</strong> NON è un numero primo perché ha tanti divisori;</li>
-        <li>• <strong>1</strong> NON è un numero primo perché ha solo un divisore, se stesso.</li>
+
+  <div class="space-y-6">
+    <!-- Numeri primi -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-800 mb-4">
+        <span class="text-pink-600">•</span> I numeri naturali che hanno esattamente due divisori sono detti <strong class="text-<%= @pagina.base_color %>-600">numeri primi</strong>.<br>
+        Questi divisori sono <strong>1</strong> e il numero stesso.
+      </p>
+      <ul class="list-disc list-inside space-y-2 text-gray-800 ml-4">
+        <li><strong class="text-red-600">0</strong> NON è un numero primo perché ha tanti divisori;</li>
+        <li><strong class="text-red-600">1</strong> NON è un numero primo perché ha solo un divisore, se stesso.</li>
       </ul>
     </div>
-    <div class="p-4 p-6">       
-      <h2 class=" font-bold text-blue-600 mb-4">Il crivello di Eratostene</h2>
-      <p class=" mb-4">Puoi trovare i numeri primi minori di 100 usando il "crivello (cioè setaccio) di Eratostene". Questo sistema fu infatti inventato da Eratostene di Cirene, un matematico, astronomo e poeta greco del periodo ellenistico (276 a.C.-194 a.C.).</p>
-      <p class="font-bold mb-2">Segui le indicazioni.</p>
-      <ul class="list-disc list-inside space-y-2 mb-4">
-        <li>• Cancella tutti i multipli di 2, tranne 2.</li>
-        <li>• Cancella tutti i multipli di 3, tranne 3.</li>
-        <li>• Cancella tutti i multipli di 5, tranne 5.</li>
-        <li>• Cancella tutti i multipli di 7, tranne 7.</li>
+
+    <!-- Il crivello di Eratostene -->
+    <div class="p-4 md:p-6 bg-white border-3 border-<%= @pagina.base_color %>-400 rounded-2xl">
+      <h2 class="font-bold text-<%= @pagina.base_color %>-600 mb-4">Il crivello di Eratostene</h2>
+      <p class="text-gray-800 mb-4">
+        Puoi trovare i numeri primi minori di 100 usando il "crivello (cioè setaccio) di Eratostene". Questo sistema fu infatti inventato da Eratostene di Cirene, un matematico, astronomo e poeta greco del periodo ellenistico (276 a.C.-194 a.C.).
+      </p>
+      <p class="font-bold text-gray-800 mb-2">Segui le indicazioni.</p>
+      <ul class="list-disc list-inside space-y-2 text-gray-800 mb-4 ml-4">
+        <li>Cancella tutti i multipli di <strong class="text-<%= @pagina.base_color %>-600">2</strong>, tranne <strong class="text-<%= @pagina.base_color %>-600">2</strong>.</li>
+        <li>Cancella tutti i multipli di <strong class="text-<%= @pagina.base_color %>-600">3</strong>, tranne <strong class="text-<%= @pagina.base_color %>-600">3</strong>.</li>
+        <li>Cancella tutti i multipli di <strong class="text-<%= @pagina.base_color %>-600">5</strong>, tranne <strong class="text-<%= @pagina.base_color %>-600">5</strong>.</li>
+        <li>Cancella tutti i multipli di <strong class="text-<%= @pagina.base_color %>-600">7</strong>, tranne <strong class="text-<%= @pagina.base_color %>-600">7</strong>.</li>
       </ul>
-      <%= image_tag "p048_01.jpg", alt: "Crivello di Eratostene" %>
-      <p class="mt-4">I numeri rimasti sono i <strong class="text-blue-600">numeri primi minori di 100</strong>.</p>
+      <p class="text-gray-800 mb-4">
+        I numeri rimasti sono i <strong class="text-<%= @pagina.base_color %>-600">numeri primi minori di 100</strong>.
+      </p>
+
+      <%= image_tag "nvi5_mat/p048/p048_01.jpg", class: "mx-auto my-4", alt: "Crivello di Eratostene" %>
     </div>
-    <div class="p-4 p-6">       
-      <p class="mb-4">▶ Tranne 0 e 1, i numeri che <strong class="text-green-700">non sono primi</strong> si chiamano <strong class="text-green-700">numeri composti</strong>. Ogni numero composto può essere scomposto come un prodotto di fattori che sono tutti <strong class="text-green-700">fattori primi</strong>.</p>
-      <p class="font-bold mb-3">Leggi e completa con i numeri mancanti.</p>
-      <div class="grid grid-cols-1 grid-cols-2 gap-6 ml-11">  
-        <div class="p-4">           
-          <p class="mb-2">• Per quale numero primo puoi dividere 54? Per 2: scrivi 2 nel cerchietto e il risultato 27 nel rettangolo.</p>
-          <p class="mb-2">• Per quale numero primo puoi dividere 27? Per 3: scrivi 3 nel cerchietto e il risultato
-            <input type="text"
-                   data-correct-answer="9"
-                   class=" px-2 py-1 border-2 border-green-300  focus:border-green-500 focus:outline-none text-center">
-            nell'altro cerchietto.</p>
-          <p>• Per quale numero primo puoi dividere
-            <input type="text"
-                   data-correct-answer="9"
-                   class=" px-2 py-1 border-2 border-green-300  focus:border-green-500 focus:outline-none text-center">?
+
+    <!-- Numeri composti -->
+    <div class="p-4 md:p-6 bg-pink-100 rounded-2xl">
+      <p class="text-gray-800 mb-4">
+        <span class="text-pink-600">•</span> Tranne <strong>0</strong> e <strong>1</strong>, i numeri che <strong class="text-green-700">non sono primi</strong> si chiamano <strong class="text-green-700">numeri composti</strong>.<br>
+        Ogni numero composto può essere scomposto come un prodotto di fattori che sono tutti <strong class="text-green-700">fattori primi</strong>.
+      </p>
+    </div>
+
+    <!-- Scomposizione guidata -->
+    <div class="p-4 md:p-6 bg-white border-3 border-green-400 rounded-2xl">
+      <p class="font-bold text-gray-800 mb-4">Leggi e completa con i numeri mancanti.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-3">
+          <p class="text-gray-800">
+            <span class="text-pink-600">•</span> Per quale numero primo puoi dividere 54? Per 2: scrivi 2 nel cerchietto e il risultato 27 nel rettangolo.
+          </p>
+          <p class="text-gray-800">
+            <span class="text-pink-600">•</span> Per quale numero primo puoi dividere 27? Per 3: scrivi 3 nel cerchietto e il risultato
+            <input type="text" data-correct-answer="9" class="w-12 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            nel rettangolo.
+          </p>
+          <p class="text-gray-800">
+            <span class="text-pink-600">•</span> Per quale numero primo puoi dividere
+            <input type="text" data-correct-answer="9" class="w-12 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">?
             Per 3: scrivi 3 nel cerchietto e il risultato
-            <input type="text"
-                   data-correct-answer="3"
-                   class=" px-2 py-1 border-2 border-green-300  focus:border-green-500 focus:outline-none text-center">
-            nell'altro cerchietto. La scomposizione è conclusa.</p>
+            <input type="text" data-correct-answer="3" class="w-12 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+            nell'altro cerchietto. La scomposizione è conclusa.
+          </p>
         </div>
-        <div class="p-4 flex items-center justify-center">  
-          <div class="text-center">  
-            <div class=" font-bold mb-4">54 = 2 × 3 × 3 × 3</div>
-             
-            <p>Con le <strong>potenze</strong>: 54 = 2 × 3³</p>
+        <div class="flex items-center justify-center">
+          <div class="text-center p-4 bg-green-50 rounded-lg">
+            <p class="text-gray-800 mb-2">Quindi:</p>
+            <p class="text-xl font-bold text-green-700 mb-3">54 = 2 × 3 × 3 × 3</p>
+            <p class="text-gray-800">Con le <strong>potenze</strong>:</p>
+            <p class="text-xl font-bold text-green-700">54 = 2 × 3³</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="mt-8 text-center">
-      <p class="text-red-600 font-bold ">Quaderno esercizi pp. 199, 201</p>
+
+    <!-- Quaderno -->
+    <div class="p-4 text-right">
+      <span class="text-gray-600">Quaderno esercizi →</span>
+      <span class="text-<%= @pagina.base_color %>-600 font-bold">pp. 199, 201</span>
     </div>
-   </div>
-  <%= render 'shared/exercise_controls', color: 'purple' %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
 </div>
