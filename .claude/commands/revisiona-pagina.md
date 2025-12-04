@@ -182,7 +182,7 @@ Per colorare i bullet delle liste usa `marker:`:
 ## INPUT STANDARDIZZATI
 
 ```erb
-<!-- Input numerico/testo -->
+<!-- Input numerico/testo con bordo -->
 <input type="text"
        data-correct-answer="risposta"
        class="w-24 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
@@ -191,7 +191,29 @@ Per colorare i bullet delle liste usa `marker:`:
 <input type="text"
        data-correct-answer="<"
        class="w-8 px-1 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
+
+<!-- Input dotted inline (per risposte in mezzo al testo) -->
+<input type="text"
+       data-correct-answer="120"
+       class="inline w-16 border-b-2 border-dotted border-pink-400 text-center font-bold bg-transparent">
+
+<!-- Input dotted grigio che riempie lo spazio (per righe di risposta) -->
+<div class="flex items-center gap-2">
+  <input type="text" data-correct-answer="800" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+  <span class="shrink-0">euro</span>
+</div>
+
+<!-- Input con freccia pink e spazio rimanente -->
+<div class="flex items-center gap-2">
+  <%= render 'shared/frazione', num: 3, den: 5 %>
+  <span class="shrink-0">di 250 <span class="text-custom-pink">→</span></span>
+  <input type="text" data-correct-answer="150" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+</div>
 ```
+
+**Note sugli input flex:**
+- `shrink-0` sugli span di testo per evitare che si restringano
+- `min-w-0 flex-1` sull'input per occupare lo spazio rimanente senza straripare
 
 ---
 

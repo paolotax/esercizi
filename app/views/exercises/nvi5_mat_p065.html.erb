@@ -7,7 +7,7 @@
 
   <div class="space-y-6">
     <!-- Introduzione -->
-    <div class="p-4 md:p-6">
+    <div class="p-4 bg-white border-4 border-custom-sky rounded-3xl">
       <p class="text-gray-700 mb-4">
         Le frazioni con <strong>denominatore 10, 100, 1000</strong>... si chiamano <strong class="text-<%= @pagina.base_color %>-600">frazioni decimali</strong>, ma anche le frazioni che hanno denominatori diversi possono essere trasformate in <strong>frazioni decimali equivalenti</strong>.
       </p>
@@ -16,8 +16,55 @@
         Trasformiamo la frazione <%= render 'shared/frazione', num: 3, den: 5 %> in una frazione decimale equivalente (<%= render 'shared/frazione', num: 6, den: 10 %>).
       </p>
 
+      <!-- Barre frazionate SVG -->
       <div class="flex flex-col md:flex-row gap-6 items-center mb-4">
-        <%= image_tag "nvi5_mat/p065/p065_01.jpg", alt: "Trasformazione 3/5 in 6/10", class: "max-w-lg" %>
+        <div class="flex flex-col gap-2">
+          <!-- Barra 3/5 -->
+          <div class="flex items-center gap-4">
+            <svg width="250" height="40" viewBox="0 0 250 40" data-controller="svg-colorable" data-svg-colorable-color-value="#D946EF">
+              <rect x="0" y="0" width="50" height="40" fill="#D946EF" stroke="#333" stroke-width="1"/>
+              <rect x="50" y="0" width="50" height="40" fill="#D946EF" stroke="#333" stroke-width="1"/>
+              <rect x="100" y="0" width="50" height="40" fill="#D946EF" stroke="#333" stroke-width="1"/>
+              <rect x="150" y="0" width="50" height="40" fill="white" stroke="#333" stroke-width="1"/>
+              <rect x="200" y="0" width="50" height="40" fill="white" stroke="#333" stroke-width="1"/>
+            </svg>
+            <%= render 'shared/frazione', num: 3, den: 5 %>
+          </div>
+          <!-- Barra 6/10 -->
+          <div class="flex items-center gap-4">
+            <svg width="250" height="40" viewBox="0 0 250 40" data-controller="svg-colorable" data-svg-colorable-color-value="#D946EF">
+              <rect x="0" y="0" width="25" height="40" fill="#D946EF" stroke="#333" stroke-width="1"/>
+              <rect x="25" y="0" width="25" height="40" fill="#D946EF" stroke="#333" stroke-width="1"/>
+              <rect x="50" y="0" width="25" height="40" fill="#D946EF" stroke="#333" stroke-width="1"/>
+              <rect x="75" y="0" width="25" height="40" fill="#D946EF" stroke="#333" stroke-width="1"/>
+              <rect x="100" y="0" width="25" height="40" fill="#D946EF" stroke="#333" stroke-width="1"/>
+              <rect x="125" y="0" width="25" height="40" fill="#D946EF" stroke="#333" stroke-width="1"/>
+              <rect x="150" y="0" width="25" height="40" fill="white" stroke="#333" stroke-width="1"/>
+              <rect x="175" y="0" width="25" height="40" fill="white" stroke="#333" stroke-width="1"/>
+              <rect x="200" y="0" width="25" height="40" fill="white" stroke="#333" stroke-width="1"/>
+              <rect x="225" y="0" width="25" height="40" fill="white" stroke="#333" stroke-width="1"/>
+            </svg>
+            <%= render 'shared/frazione', num: 6, den: 10 %>
+          </div>
+        </div>
+        <!-- Schema equivalenza -->
+        <div class="flex items-center gap-2">
+          <%= render 'shared/frazione', num: 3, den: 5 %>
+          <div class="flex flex-col items-center">
+            <span class="text-gray-500">× 2</span>
+            <svg width="60" height="50" viewBox="0 0 60 50">
+              <path d="M 5 25 Q 30 0 55 25" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+              <path d="M 5 25 Q 30 50 55 25" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+              <defs>
+                <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
+                </marker>
+              </defs>
+            </svg>
+            <span class="text-gray-500">× 2</span>
+          </div>
+          <%= render 'shared/frazione', num: 6, den: 10 %>
+        </div>
       </div>
 
       <p class="text-gray-700 mb-4">
@@ -27,7 +74,7 @@
         con una frazione decimale equivalente, a parole e con un numero decimale.
       </p>
 
-      <div class="flex items-center justify-center gap-8 p-4 bg-cyan-50 rounded-lg mb-4">
+      <div class="flex items-center justify-center gap-8 p-4">
         <div class="text-center">
           <span class="text-gray-500">↓</span><br>
           <%= render 'shared/frazione', num: 6, den: 10, bold: true %>
@@ -38,46 +85,47 @@
         </div>
         <div class="text-center">
           <span class="text-gray-500">↓</span><br>
-          <span class="font-bold text-<%= @pagina.base_color %>-600 text-xl">0,6</span>
+          <span class="font-bold text-<%= @pagina.base_color %>-600">0,6</span>
         </div>
-        <div class="text-gray-600 text-sm">
+        <div class="text-gray-600">
           I numeri "con la virgola", come sai,<br>si chiamano <strong>numeri decimali</strong>.
         </div>
       </div>
     </div>
 
     <!-- Prova tu -->
-    <div class="p-4 md:p-6">
-      <p class="mb-4"><strong><span class="text-pink-600">•</span> Prova tu.</strong></p>
-      <p class="text-gray-700 mb-4">
-        Trasforma la frazione <%= render 'shared/frazione', num: 4, den: 25 %> in una frazione decimale equivalente.
-      </p>
-
-      <div class="flex justify-center">
-        <%= image_tag "nvi5_mat/p065/p065_02.jpg", alt: "Esercizio trasformazione 4/25", class: "max-w-lg" %>
+    <div class="p-4">
+      <div class="flex flex-col md:flex-row gap-6 items-center">
+        <div class="md:w-1/3">
+          <p class="mb-4"><strong><span class="text-pink-600">•</span> Prova tu.</strong></p>
+          <p class="text-gray-700">
+            Trasforma la frazione <%= render 'shared/frazione', num: 4, den: 25 %> in una frazione decimale equivalente.
+          </p>
+        </div>
+        <div class="md:w-2/3">
+          <%= image_tag "nvi5_mat/p065/p065_02.jpg", alt: "Esercizio trasformazione 4/25", class: "w-full" %>
+        </div>
       </div>
     </div>
 
     <!-- ESERCIZI -->
-    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
-      <h2 class="inline-block px-3 py-1 bg-pink-600 text-white font-bold rounded mb-4">ESERCIZI</h2>
-
+    <div class="p-3 bg-orange-100 rounded-lg">
       <!-- Esercizio 1 -->
-      <div class="p-4 mb-6">
-        <div class="flex items-start gap-3 mb-4">
-          <%= numero_esercizio_badge(1, colore: "cyan-700") %>
-          <p class="font-bold text-gray-700">Trasforma le frazioni date in frazioni decimali equivalenti.</p>
+      <div class="p-4 mb-4">
+        <div class="mb-4">
+          <p class="font-bold text-gray-700">
+            <%= numero_esercizio_badge(1) %>
+            Trasforma le frazioni date in frazioni decimali equivalenti.
+          </p>
         </div>
-        <div class="flex justify-center">
-          <%= image_tag "nvi5_mat/p065/p065_03.jpg", alt: "Esercizio 1", class: "max-w-full" %>
-        </div>
+        <%= image_tag "nvi5_mat/p065/p065_03.jpg", alt: "Esercizio 1", class: "w-full max-w-2xl mx-auto" %>
       </div>
 
       <!-- Esercizio 2 -->
       <div class="p-4">
-        <div class="flex items-start gap-3 mb-4">
-          <%= numero_esercizio_badge(2, colore: "cyan-700") %>
+        <div class="mb-4">
           <p class="font-bold text-gray-700">
+            <%= numero_esercizio_badge(2) %>
             Trasforma le frazioni date in frazioni decimali equivalenti, poi esprimile a parole e con un numero decimale. Esegui sul quaderno.
           </p>
         </div>
@@ -95,7 +143,7 @@
     </div>
 
     <!-- Riferimento quaderno -->
-    <div class="text-right text-sm">
+    <div class="text-right">
       <span class="text-pink-600 font-bold">Quaderno esercizi</span> pp. 209, 213
     </div>
 

@@ -6,267 +6,275 @@
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
-    <p class="text-center text-gray-700 mb-4">
+    <p class="text-center text-gray-700">
       Segna con una <strong>X</strong> le risposte corrette.
     </p>
 
-    <!-- ESERCIZI -->
+    <!-- ESERCIZI - Layout a due colonne con divider -->
     <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
-      <!-- Esercizio 1 -->
-      <div class="p-4 mb-6">
-        <p class="font-bold text-gray-700 mb-3">
-          <%= numero_esercizio_badge(1) %>
-          Qual è il risultato di questa addizione?
-        </p>
-        <p class="font-mono text-lg mb-4 ml-8">6,54 + 6,1 =</p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 ml-8">
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q1" class="w-4 h-4">
-            <span class="font-bold">13,55</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q1" class="w-4 h-4">
-            <span class="font-bold">12,55</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q1" data-correct-answer="true" class="w-4 h-4">
-            <span class="font-bold">12,64</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q1" class="w-4 h-4">
-            <span class="font-bold">13,64</span>
-          </label>
-        </div>
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-custom-pink">
+        <!-- Colonna sinistra: esercizi 1-4 -->
+        <div class="pb-4 md:pb-0 md:pr-6 space-y-6">
+          <!-- Esercizio 1 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(1) %>
+              Qual è il risultato di questa addizione?
+            </p>
+            <p class="text-center mb-3">6,54 + 6,1 =</p>
+            <div class="grid grid-cols-4 gap-2">
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q1" class="w-4 h-4">
+                <span>13,55</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q1" class="w-4 h-4">
+                <span>12,55</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q1" data-correct-answer="true" class="w-4 h-4">
+                <span>13,64</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q1" class="w-4 h-4">
+                <span>12,64</span>
+              </label>
+            </div>
+          </div>
 
-      <!-- Esercizio 2 -->
-      <div class="p-4 mb-6">
-        <p class="font-bold text-gray-700 mb-3">
-          <%= numero_esercizio_badge(2) %>
-          Martina è in cartoleria per acquistare penne, matite e quaderni. Acquista 3 quaderni che costano 3,50 euro ognuno, 2 penne che costano 1,50 euro ognuna e 1 matita che costa 0,50 euro.<br>
-          Quale espressione permette di calcolare quanto ha speso Martina?
-        </p>
-        <div class="space-y-2 ml-8">
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q2" class="w-4 h-4">
-            <span>(3 × 3,50 + 2) × (1,50 + 0,50) =</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q2" data-correct-answer="true" class="w-4 h-4">
-            <span>(3 × 3,50) + (2 × 1,50) + 0,50 =</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q2" class="w-4 h-4">
-            <span>3 × (3,50 + 2) × 1,50 + 0,50 =</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q2" class="w-4 h-4">
-            <span>3 × 2 + (3,50 + 1,50) + 0,50 =</span>
-          </label>
-        </div>
-      </div>
+          <!-- Esercizio 2 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(2) %>
+              Martina è in cartoleria per acquistare penne, matite e quaderni. Acquista 3 quaderni che costano 3,50 euro ognuno, 2 penne che costano 1,50 euro ognuna e 1 matita che costa 0,50 euro.<br>
+              Quale espressione permette di calcolare quanto ha speso Martina?
+            </p>
+            <div class="space-y-1">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q2" class="w-4 h-4">
+                <span>(3 × 3,50 + 2) × (1,50 + 0,50) =</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q2" data-correct-answer="true" class="w-4 h-4">
+                <span>(3 × 3,50) + (2 × 1,50) + 0,50 =</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q2" class="w-4 h-4">
+                <span>3 × (3,50 + 2) × 1,50 + 0,50 =</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q2" class="w-4 h-4">
+                <span>3 × 2 + (3,50 + 1,50) + 0,50 =</span>
+              </label>
+            </div>
+          </div>
 
-      <!-- Esercizio 3 -->
-      <div class="p-4 mb-6">
-        <p class="font-bold text-gray-700 mb-3">
-          <%= numero_esercizio_badge(3) %>
-          Osserva le seguenti operazioni:
-        </p>
-        <div class="font-mono p-3 bg-white rounded-lg mb-3 ml-8">
-          1709,32 × 10 =<br>
-          170,932 × 0,01 =<br>
-          17 093,2 : 1 000 =
-        </div>
-        <p class="font-bold text-gray-700 mb-3 ml-8">Quale ha risultato maggiore?</p>
-        <div class="grid grid-cols-2 gap-3 ml-8">
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q3" class="w-4 h-4">
-            <span>Hanno tutte lo stesso risultato.</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q3" data-correct-answer="true" class="w-4 h-4">
-            <span>1 709,32 × 10</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q3" class="w-4 h-4">
-            <span>170,932 × 0,01</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q3" class="w-4 h-4">
-            <span>17 093,2 : 1 000</span>
-          </label>
-        </div>
-      </div>
+          <!-- Esercizio 3 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(3) %>
+              Osserva le seguenti operazioni:
+            </p>
+            <div class="text-center mb-2 space-y-1">
+              <p><span class="whitespace-nowrap">1 709,32</span> × 10 =</p>
+              <p>170,932 × 0,01 =</p>
+              <p><span class="whitespace-nowrap">17 093,2</span> : <span class="whitespace-nowrap">1 000</span> =</p>
+            </div>
+            <p class="font-bold text-gray-700 mb-2">Quale ha risultato maggiore?</p>
+            <div class="space-y-1">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q3" class="w-4 h-4">
+                <span>Hanno tutte lo stesso risultato.</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q3" data-correct-answer="true" class="w-4 h-4">
+                <span><span class="whitespace-nowrap">1 709,32</span> × 10</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q3" class="w-4 h-4">
+                <span>170,932 × 0,01</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q3" class="w-4 h-4">
+                <span><span class="whitespace-nowrap">17 093,2</span> : <span class="whitespace-nowrap">1 000</span></span>
+              </label>
+            </div>
+          </div>
 
-      <!-- Esercizio 4 -->
-      <div class="p-4 mb-6">
-        <p class="font-bold text-gray-700 mb-3">
-          <%= numero_esercizio_badge(4) %>
-          In quale delle seguenti divisioni è stata applicata in modo corretto la proprietà invariantiva?
-        </p>
-        <div class="grid grid-cols-2 gap-3 ml-8">
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q4" data-correct-answer="true" class="w-4 h-4">
-            <span>36 : 4 = 72 : 8</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q4" class="w-4 h-4">
-            <span>24 : 3 = 45 : 9</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q4" class="w-4 h-4">
-            <span>45 : 5 = 15 : 15</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q4" class="w-4 h-4">
-            <span>24 : 3 = 6 : 2</span>
-          </label>
+          <!-- Esercizio 4 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(4) %>
+              In quale delle seguenti divisioni è stata applicata in modo corretto la proprietà invariantiva?
+            </p>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q4" data-correct-answer="true" class="w-4 h-4">
+                <span>36 : 4 = 72 : 8</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q4" class="w-4 h-4">
+                <span>45 : 5 = 15 : 15</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q4" class="w-4 h-4">
+                <span>24 : 3 = 45 : 9</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q4" class="w-4 h-4">
+                <span>24 : 3 = 6 : 2</span>
+              </label>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <!-- Esercizio 5 -->
-      <div class="p-4 mb-6">
-        <p class="font-bold text-gray-700 mb-3">
-          <%= numero_esercizio_badge(5) %>
-          Qual è il numero, nascosto dalla faccina, che rende vera l'uguaglianza?
-        </p>
-        <p class="font-mono text-lg mb-4 ml-8 p-3 bg-white rounded-lg">180 : 4 = <span class="text-pink-600">?</span> : 2</p>
-        <div class="grid grid-cols-4 gap-3 ml-8">
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q5" class="w-4 h-4">
-            <span class="font-bold">80</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q5" data-correct-answer="true" class="w-4 h-4">
-            <span class="font-bold">90</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q5" class="w-4 h-4">
-            <span class="font-bold">120</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q5" class="w-4 h-4">
-            <span class="font-bold">45</span>
-          </label>
-        </div>
-      </div>
+        <!-- Colonna destra: esercizi 5-9 -->
+        <div class="pt-4 md:pt-0 md:pl-6 space-y-6">
+          <!-- Esercizio 5 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(5) %>
+              Qual è il numero, nascosto dalla faccina, che rende vera l'uguaglianza?
+            </p>
+            <p class="text-center mb-3">180 : 4 = <span class="text-pink-600">☺</span> : 2</p>
+            <div class="grid grid-cols-4 gap-2">
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q5" class="w-4 h-4">
+                <span>80</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q5" data-correct-answer="true" class="w-4 h-4">
+                <span>90</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q5" class="w-4 h-4">
+                <span>120</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q5" class="w-4 h-4">
+                <span>45</span>
+              </label>
+            </div>
+          </div>
 
-      <!-- Esercizio 6 -->
-      <div class="p-4 mb-6">
-        <p class="font-bold text-gray-700 mb-3">
-          <%= numero_esercizio_badge(6) %>
-          Qual è il valore di questa espressione?
-        </p>
-        <p class="font-mono text-lg mb-4 ml-8 p-3 bg-white rounded-lg">96 + (9 × 6) − (81 : 9) =</p>
-        <div class="grid grid-cols-4 gap-3 ml-8">
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q6" class="w-4 h-4">
-            <span class="font-bold">159</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q6" class="w-4 h-4">
-            <span class="font-bold">45</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q6" class="w-4 h-4">
-            <span class="font-bold">150</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q6" data-correct-answer="true" class="w-4 h-4">
-            <span class="font-bold">141</span>
-          </label>
-        </div>
-      </div>
+          <!-- Esercizio 6 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(6) %>
+              Qual è il valore di questa espressione?
+            </p>
+            <p class="text-center mb-3">96 + (9 × 6) − (81 : 9) =</p>
+            <div class="grid grid-cols-4 gap-2">
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q6" class="w-4 h-4">
+                <span>159</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q6" class="w-4 h-4">
+                <span>45</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q6" class="w-4 h-4">
+                <span>150</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q6" data-correct-answer="true" class="w-4 h-4">
+                <span>141</span>
+              </label>
+            </div>
+          </div>
 
-      <!-- Esercizio 7 -->
-      <div class="p-4 mb-6">
-        <p class="font-bold text-gray-700 mb-3">
-          <%= numero_esercizio_badge(7) %>
-          Osserva questa successione di numeri. Perché è stato tolto il numero 20?
-        </p>
-        <div class="flex flex-wrap gap-3 mb-4 ml-8 p-3 bg-white rounded-lg font-mono text-lg">
-          <span>63</span>
-          <span>60</span>
-          <span class="line-through text-red-500">20</span>
-          <span>45</span>
-          <span>24</span>
-          <span>36</span>
-        </div>
-        <div class="space-y-2 ml-8">
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q7" class="w-4 h-4">
-            <span>Perché termina per 0.</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q7" class="w-4 h-4">
-            <span>Perché non è divisibile per 2.</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q7" class="w-4 h-4">
-            <span>Perché non è divisibile per 4.</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q7" data-correct-answer="true" class="w-4 h-4">
-            <span>Perché non è divisibile per 3.</span>
-          </label>
-        </div>
-      </div>
+          <!-- Esercizio 7 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(7) %>
+              Osserva questa successione di numeri. Perché è stato tolto il numero 20?
+            </p>
+            <div class="flex gap-4 justify-center mb-3">
+              <span>63</span>
+              <span>60</span>
+              <span class="line-through text-red-500">20</span>
+              <span>45</span>
+              <span>24</span>
+              <span>36</span>
+            </div>
+            <div class="space-y-1">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q7" class="w-4 h-4">
+                <span>Perché termina per 0.</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q7" class="w-4 h-4">
+                <span>Perché non è divisibile per 2.</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q7" class="w-4 h-4">
+                <span>Perché non è divisibile per 4.</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="q7" data-correct-answer="true" class="w-4 h-4">
+                <span>Perché non è divisibile per 3.</span>
+              </label>
+            </div>
+          </div>
 
-      <!-- Esercizio 8 -->
-      <div class="p-4 mb-6">
-        <p class="font-bold text-gray-700 mb-3">
-          <%= numero_esercizio_badge(8) %>
-          Michela sta pensando a un numero multiplo di 2, multiplo di 3 e divisibile per 5.<br>
-          Quale fra i seguenti è il numero a cui sta pensando Michela?
-        </p>
-        <div class="grid grid-cols-4 gap-3 ml-8">
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q8" class="w-4 h-4">
-            <span class="font-bold">12</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q8" class="w-4 h-4">
-            <span class="font-bold">15</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q8" class="w-4 h-4">
-            <span class="font-bold">20</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q8" data-correct-answer="true" class="w-4 h-4">
-            <span class="font-bold">30</span>
-          </label>
-        </div>
-      </div>
+          <!-- Esercizio 8 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(8) %>
+              Michela sta pensando a un numero multiplo di 2, multiplo di 3 e divisibile per 5.<br>
+              Quale fra i seguenti è il numero a cui sta pensando Michela?
+            </p>
+            <div class="grid grid-cols-4 gap-2">
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q8" class="w-4 h-4">
+                <span>12</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q8" class="w-4 h-4">
+                <span>15</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q8" class="w-4 h-4">
+                <span>20</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q8" data-correct-answer="true" class="w-4 h-4">
+                <span>30</span>
+              </label>
+            </div>
+          </div>
 
-      <!-- Esercizio 9 -->
-      <div class="p-4">
-        <p class="font-bold text-gray-700 mb-3">
-          <%= numero_esercizio_badge(9) %>
-          Fra le seguenti affermazioni qual è quella vera?
-        </p>
-        <div class="p-3 bg-white rounded-lg mb-4 ml-8 space-y-1">
-          <p><strong>a)</strong> 24 è divisore di 50 e multiplo di 8.</p>
-          <p><strong>b)</strong> 24 è multiplo di 8 e divisore di 12.</p>
-          <p><strong>c)</strong> 8 è multiplo di 4 e di 8.</p>
-        </div>
-        <div class="grid grid-cols-4 gap-3 ml-8">
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q9" class="w-4 h-4">
-            <span class="font-bold">a)</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q9" class="w-4 h-4">
-            <span class="font-bold">b)</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q9" data-correct-answer="true" class="w-4 h-4">
-            <span class="font-bold">c)</span>
-          </label>
-          <label class="flex items-center gap-2 p-3 bg-white rounded-lg cursor-pointer hover:bg-<%= @pagina.base_color %>-50">
-            <input type="radio" name="q9" class="w-4 h-4">
-            <span class="font-bold">Nessuna</span>
-          </label>
+          <!-- Esercizio 9 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(9) %>
+              Fra le seguenti affermazioni qual è quella vera?
+            </p>
+            <div class="space-y-1 mb-3">
+              <p><strong>a)</strong> 24 è divisore di 50 e multiplo di 8.</p>
+              <p><strong>b)</strong> 24 è multiplo di 8 e divisore di 12.</p>
+              <p><strong>c)</strong> 8 è multiplo di 4 e di 8.</p>
+            </div>
+            <div class="grid grid-cols-4 gap-2">
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q9" class="w-4 h-4">
+                <span>a)</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q9" class="w-4 h-4">
+                <span>b)</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q9" data-correct-answer="true" class="w-4 h-4">
+                <span>c)</span>
+              </label>
+              <label class="flex items-center gap-1 cursor-pointer">
+                <input type="radio" name="q9" class="w-4 h-4">
+                <span>Nessuna</span>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </div>

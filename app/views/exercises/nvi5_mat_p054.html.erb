@@ -8,9 +8,11 @@
   <div class="space-y-6">
     <!-- Introduzione -->
     <div class="p-4 md:p-6">
-      <p class="text-gray-800 mb-4">
-        Per addobbare le pareti dell'aula, ogni alunno deve colorare con tre colori diversi una tessera di cartoncino. La tessera è a forma di esagono ed è stata divisa in 3 parti uguali: bisogna colorarne <%= render 'shared/frazione', numeratore: 1, denominatore: 3 %> con il rosso, <%= render 'shared/frazione', numeratore: 1, denominatore: 3 %> con il giallo e <%= render 'shared/frazione', numeratore: 1, denominatore: 3 %> con il blu.
-      </p>
+      <div class="p-4 bg-custom-blue rounded-lg mb-4">
+        <p class="text-gray-800">
+          Per addobbare le pareti dell'aula, ogni alunno deve colorare con tre colori diversi una tessera di cartoncino. La tessera è a forma di esagono ed è stata divisa in 3 parti uguali: bisogna colorarne <%= render 'shared/frazione', num: 1, den: 3 %> con il rosso, <%= render 'shared/frazione', num: 1, den: 3 %> con il giallo e <%= render 'shared/frazione', num: 1, den: 3 %> con il blu.
+        </p>
+      </div>
 
       <p class="text-gray-800 mb-4">
         <span class="text-pink-600">•</span> <strong>Colora tu l'esagono.</strong> Osserva che è già stato frazionato.
@@ -18,66 +20,81 @@
     </div>
 
     <!-- Definizione -->
-    <div class="p-4 md:p-6 bg-pink-100 rounded-2xl">
-      <p class="text-gray-800 mb-4">
-        <strong class="text-<%= @pagina.base_color %>-600">Frazionare</strong> significa dividere un intero in parti uguali.<br>
-        Ognuna delle parti in cui l'intero è diviso è un'<strong class="text-<%= @pagina.base_color %>-600">unità frazionaria</strong>.
+    <div class="p-4 bg-pink-light rounded-3xl mx-4 md:mx-6">
+      <p class="text-gray-800">
+        <strong class="text-custom-pink">Frazionare</strong> significa dividere un intero in parti uguali.<br>
+        Ognuna delle parti in cui l'intero è diviso è un'<strong class="text-custom-pink">unità frazionaria</strong>.
       </p>
     </div>
 
     <!-- Figure e quantità -->
     <div class="p-4 md:p-6">
       <p class="text-gray-800 mb-4">
-        L'intero da frazionare può essere una <strong class="text-<%= @pagina.base_color %>-600">figura</strong>, come nel problema precedente, ma anche una <strong class="text-<%= @pagina.base_color %>-600">quantità numerica</strong>. Leggi il seguente problema.
+        L'intero da frazionare può essere una <strong class="text-custom-pink">figura</strong>, come nel problema precedente, ma anche una <strong class="text-custom-pink">quantità numerica</strong>. Leggi il seguente problema.
       </p>
 
-      <div class="p-4 bg-cyan-100 rounded-lg mb-4">
+      <div class="flex flex-col md:flex-row gap-4 items-start mb-4">
+        <div class="flex-1">
+          <div class="p-4 bg-custom-blue rounded-lg mb-4">
+            <p class="text-gray-800">
+              Carlo, Lucia e Omar devono dividere in parti uguali le 12 caramelle che ha regalato loro la nonna. Quante caramelle spettano a ciascuno?
+            </p>
+          </div>
+          <p class="text-gray-800">
+            Possiamo indicare la richiesta del problema con una frazione: si tratta di calcolare <%= render 'shared/frazione', num: 1, den: 3 %> di 12 caramelle. Sai già come si fa:
+          </p>
+        </div>
+        <%= image_tag "nvi5_mat/p054/p054_02.jpg", class: "w-48 md:w-56", alt: "Divisione caramelle" %>
+      </div>
+
+      <div class="mb-4 text-left">
         <p class="text-gray-800">
-          Carlo, Lucia e Omar devono dividere in parti uguali le 12 caramelle che ha regalato loro la nonna. Quante caramelle spettano a ciascuno?
+          <%= render 'shared/frazione', num: 1, den: 3 %> di 12 → (12 : 3) × 1 = <strong class="text-custom-pink">4</strong>
         </p>
       </div>
 
-      <%= image_tag "nvi5_mat/p054/p054_02.jpg", class: "mx-auto my-4", alt: "Divisione caramelle" %>
-
-      <p class="text-gray-800 mb-4">
-        Possiamo indicare la richiesta del problema con una frazione: si tratta di calcolare <%= render 'shared/frazione', numeratore: 1, denominatore: 3 %> di 12 caramelle. Sai già come si fa:
-      </p>
-
-      <div class="p-4 bg-green-50 rounded-lg mb-4 text-center">
-        <p class="text-gray-800">
-          <%= render 'shared/frazione', numeratore: 1, denominatore: 3 %> di 12 → (12 : 3) × 1 = <strong class="text-<%= @pagina.base_color %>-600">4</strong>
-        </p>
-      </div>
-
-      <p class="text-gray-800 mb-4">
-        Ora puoi rispondere: A ciascuno spettano
-        <input type="text" data-correct-answer="4" class="w-12 px-2 py-1 border-2 border-pink-400 rounded text-center font-bold bg-white">
-        caramelle.
+      <p class="text-gray-800 mb-2">
+        Ora puoi rispondere:
+     
+        <span class="text-gray-800 bg-custom-blue p-2">
+          A ciascuno spettano
+          <input type="text" data-correct-answer="4" class="inline w-12 border-b-2 border-dotted text-center font-bold bg-transparent">
+          caramelle.
+        </span>
       </p>
     </div>
 
     <!-- Termini della frazione -->
-    <div class="p-4 md:p-6 bg-white border-3 border-<%= @pagina.base_color %>-400 rounded-2xl">
-      <p class="font-bold text-<%= @pagina.base_color %>-600 mb-4">Ripassiamo i termini della frazione.</p>
+    <div class="p-4 md:p-6 bg-white border-3 border-custom-pink rounded-2xl mx-4 md:mx-6">
+      <div class="flex flex-col md:flex-row items-center gap-6">
+        <!-- Testo introduttivo -->
+        <p class="md:w-24">Ripassiamo i <strong class="text-custom-pink">termini</strong> della frazione.</p>
 
-      <div class="flex flex-col items-center gap-4">
-        <div class="flex items-center gap-8">
-          <div class="text-center">
-            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center font-bold text-xl text-green-700 mb-2">1</div>
-            <p class="font-bold text-green-700">NUMERATORE</p>
-            <p class="text-gray-700 text-sm">Indica il numero delle parti uguali considerate.</p>
+        <!-- Frazione con frecce -->
+        <div class="flex items-center gap-2">
+          <div class="flex flex-col items-center font-bold">
+            <span class="text-green-600">1</span>
+            <div class="w-8 h-0.5 bg-custom-pink my-1"></div>
+            <span class="text-orange-500">3</span>
           </div>
         </div>
 
-        <div class="w-24 h-1 bg-<%= @pagina.base_color %>-400"></div>
-        <p class="font-bold text-<%= @pagina.base_color %>-600">LINEA DI FRAZIONE</p>
-        <p class="text-gray-700 text-sm">Indica che l'intero è stato diviso in parti uguali.</p>
-
-        <div class="flex items-center gap-8">
-          <div class="text-center">
-            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center font-bold text-xl text-orange-700 mb-2">3</div>
-            <p class="font-bold text-orange-700">DENOMINATORE</p>
-            <p class="text-gray-700 text-sm">Indica in quante parti uguali è stato diviso l'intero.</p>
+        <!-- Etichette e descrizioni -->
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2">
+            <span class="text-green-600">→</span>
+            <span class="font-bold text-green-600">NUMERATORE</span>
+            <span class="text-gray-600">Indica il numero delle parti uguali considerate.</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-custom-pink">→</span>
+            <span class="font-bold text-custom-pink">LINEA DI FRAZIONE</span>
+            <span class="text-gray-600">Indica che l'intero è stato diviso in parti uguali.</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-orange-500">→</span>
+            <span class="font-bold text-orange-500">DENOMINATORE</span>
+            <span class="text-gray-600">Indica in quante parti uguali è stato diviso l'intero.</span>
           </div>
         </div>
       </div>
@@ -85,34 +102,36 @@
 
     <!-- ESERCIZI -->
     <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
-      <!-- Esercizio 1 -->
-      <div class="p-4 mb-6">
-        <p class="font-bold text-gray-700 mb-4">
-          <%= numero_esercizio_badge(1) %>
-          Fraziona le figure e colora la parte indicata dalla frazione.
-        </p>
-        <%= image_tag "nvi5_mat/p054/p054_03.jpg", class: "mx-auto", alt: "Figure da frazionare" %>
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-custom-pink">
+        <!-- Colonna sinistra: esercizio 1 (2/3) -->
+        <div class="pb-4 md:pb-0 md:pr-6 md:col-span-2">
+          <p class="font-bold text-gray-700 mb-4">
+            <%= numero_esercizio_badge(1) %>
+            Fraziona le figure e colora la parte indicata dalla frazione.
+          </p>
+          <%= image_tag "nvi5_mat/p054/p054_03.jpg", class: "mx-auto", alt: "Figure da frazionare" %>
+        </div>
 
-      <!-- Esercizio 2 -->
-      <div class="p-4">
-        <p class="font-bold text-gray-700 mb-4">
-          <%= numero_esercizio_badge(2) %>
-          Sul quaderno rappresenta con il disegno:
-        </p>
-        <div class="space-y-3 ml-8">
-          <p class="flex items-center gap-2">
-            <span class="text-pink-600">•</span>
-            <%= render 'shared/frazione', numeratore: 2, denominatore: 3 %> di 15 fiori
+        <!-- Colonna destra: esercizio 2 (1/3) -->
+        <div class="pt-4 md:pt-0 md:pl-6">
+          <p class="font-bold text-gray-700 mb-4">
+            <%= numero_esercizio_badge(2) %>
+            Sul quaderno rappresenta con il disegno:
           </p>
-          <p class="flex items-center gap-2">
-            <span class="text-pink-600">•</span>
-            <%= render 'shared/frazione', numeratore: 1, denominatore: 4 %> di 12 biscotti
-          </p>
-          <p class="flex items-center gap-2">
-            <span class="text-pink-600">•</span>
-            <%= render 'shared/frazione', numeratore: 3, denominatore: 5 %> di 20 biglie
-          </p>
+          <div class="space-y-3">
+            <p class="flex items-center gap-2">
+              <span class="text-pink-600">•</span>
+              <%= render 'shared/frazione', num: 2, den: 3 %> di 15 fiori
+            </p>
+            <p class="flex items-center gap-2">
+              <span class="text-pink-600">•</span>
+              <%= render 'shared/frazione', num: 1, den: 4 %> di 12 biscotti
+            </p>
+            <p class="flex items-center gap-2">
+              <span class="text-pink-600">•</span>
+              <%= render 'shared/frazione', num: 3, den: 5 %> di 20 biglie
+            </p>
+          </div>
         </div>
       </div>
     </div>
