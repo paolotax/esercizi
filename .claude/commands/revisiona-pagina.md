@@ -112,6 +112,54 @@ Usare `@pagina.base_color` per colori coerenti:
 
 ---
 
+## COLORI CUSTOM (Tailwind 4)
+
+Colori personalizzati disponibili (definiti in `@theme`):
+
+| Classe | Colore | Uso |
+|--------|--------|-----|
+| `custom-pink` | #C657A0 | Rosa/fucsia per evidenziazioni |
+| `custom-blue` | #C7EAFB | Celeste chiaro per sfondi |
+| `custom-sky` | #0095DA | Azzurro vivace |
+| `sky-light` | #C7EAFB | Alias per celeste chiaro |
+| `custom-green` | #28A745 | Verde |
+| `custom-yellow` | #FFC107 | Giallo |
+| `custom-purple` | #6F42C1 | Viola |
+| `custom-orange` | #FD7E14 | Arancione |
+| `custom-red` | #DC3545 | Rosso |
+| `custom-gray` | #6C757D | Grigio |
+
+```erb
+<div class="bg-custom-blue">sfondo celeste</div>
+<span class="text-custom-pink">testo rosa</span>
+<div class="border-3 border-custom-pink">bordo rosa</div>
+```
+
+---
+
+## LISTE CON MARKER COLORATI
+
+Per colorare i bullet delle liste usa `marker:`:
+
+```erb
+<ul class="list-disc marker:text-pink-500 ml-5">
+  <li>Elemento con bullet rosa</li>
+</ul>
+
+<ul class="list-disc marker:text-custom-pink ml-5">
+  <li>Elemento con bullet custom pink</li>
+</ul>
+
+<!-- Marker diversi per ogni elemento -->
+<ul class="list-disc ml-5">
+  <li class="marker:text-orange-700">Parentesi tonde ( )</li>
+  <li class="marker:text-blue-700">Parentesi quadre [ ]</li>
+  <li class="marker:text-purple-600">Parentesi graffe { }</li>
+</ul>
+```
+
+---
+
 ## INPUT STANDARDIZZATI
 
 ```erb
@@ -172,9 +220,10 @@ Usare `@pagina.base_color` per colori coerenti:
 
 ## BOX COLORATI
 
-- **Teoria (celeste):** `bg-cyan-50 rounded-lg`
-- **Regola (bordo rosa):** `bg-white border-3 border-pink-700 rounded-2xl`
+- **Teoria/introduzione (celeste):** `bg-custom-blue` oppure `bg-custom-blue rounded-lg`
+- **Regola/evidenziazione (bordo rosa):** `bg-white rounded-2xl border-3 border-custom-pink`
 - **Esercizi:** `bg-orange-100 rounded-lg`
+- **Divisore esercizi:** `divide-custom-pink` o `divide-<%= @pagina.base_color %>-300`
 - **Esempio:** `p-3 mb-4` (senza background)
 
 ---
