@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -19,16 +19,16 @@
 
       <div class="flex flex-wrap justify-around items-center gap-6 my-6">
         <div class="text-center">
-          <span class="font-bold text-cyan-500 inline-block border-t-2 border-pink-600 pt-1">V</span>
-          <span class="font-bold text-cyan-500"> = <span class="whitespace-nowrap">5 000</span></span>
+          <span class="font-bold text-custom-sky inline-block border-t-2 border-pink-600 pt-1">V</span>
+          <span class="font-bold text-custom-sky"> = <span class="whitespace-nowrap">5 000</span></span>
         </div>
         <div class="text-center">
-          <span class="font-bold text-cyan-500 inline-block border-t-2 border-pink-600 pt-1">X</span>
-          <span class="font-bold text-cyan-500"> = <span class="whitespace-nowrap">10 000</span></span>
+          <span class="font-bold text-custom-sky inline-block border-t-2 border-pink-600 pt-1">X</span>
+          <span class="font-bold text-custom-sky"> = <span class="whitespace-nowrap">10 000</span></span>
         </div>
         <div class="text-center">
-          <span class="font-bold text-cyan-500 inline-block border-t-2 border-pink-600 pt-1">LXXIII</span>
-          <span class="font-bold text-cyan-500"> = <span class="whitespace-nowrap">73 000</span></span>
+          <span class="font-bold text-custom-sky inline-block border-t-2 border-pink-600 pt-1">LXXIII</span>
+          <span class="font-bold text-custom-sky"> = <span class="whitespace-nowrap">73 000</span></span>
         </div>
       </div>
 
@@ -61,7 +61,7 @@
           <!-- Esercizio 1 -->
           <div>
             <div class="flex items-start gap-3 mb-3">
-              <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+              <%= numero_esercizio_badge(1) %>
               <p class="text-gray-700 font-bold">Trasforma questi numeri in numeri romani.</p>
             </div>
             <div class="grid grid-cols-2 gap-3 ml-11">
@@ -78,7 +78,7 @@
               ].each do |item| %>
                 <div class="flex items-center gap-2">
                   <span class="text-gray-700"><%= item[:num] %> =</span>
-                  <input type="text" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center uppercase" data-correct-answer="<%= item[:answer] %>" placeholder="...">
+                  <input type="text" class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 bg-transparent text-center uppercase" data-correct-answer="<%= item[:answer] %>" placeholder="...">
                   <span class="text-gray-500"><%= item[:hint] %></span>
                 </div>
               <% end %>
@@ -88,7 +88,7 @@
           <!-- Esercizio 2 -->
           <div>
             <div class="flex items-start gap-3 mb-3">
-              <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
+              <%= numero_esercizio_badge(2) %>
               <p class="text-gray-700 font-bold">Riscrivi i numeri romani con le cifre arabe.</p>
             </div>
             <div class="grid grid-cols-2 gap-3 ml-11">
@@ -106,7 +106,7 @@
               ].each do |item| %>
                 <div class="flex items-center gap-2">
                   <span class="text-gray-700 font-bold"><%= item[:roman] %></span>
-                  <input type="text" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center" data-correct-answer="<%= item[:answer] %>" placeholder="...">
+                  <input type="text" class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 bg-transparent text-center" data-correct-answer="<%= item[:answer] %>" placeholder="...">
                 </div>
               <% end %>
             </div>
@@ -118,7 +118,7 @@
           <!-- Esercizio 3 -->
           <div>
             <div class="flex items-start gap-3 mb-3">
-              <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
+              <%= numero_esercizio_badge(3) %>
               <p class="text-gray-700 font-bold">Inserisci il simbolo &lt; o &gt;.</p>
             </div>
             <div class="grid grid-cols-2 gap-3 ml-11">
@@ -134,7 +134,7 @@
               ].each do |item| %>
                 <div class="flex items-center gap-2">
                   <span class="text-gray-700 font-bold"><%= item[:left] %></span>
-                  <select class="w-12 px-1 py-1 border-2 border-cyan-300 rounded text-center" data-correct-answer="<%= item[:answer] %>">
+                  <select class="w-12 px-1 py-1 border-b-2 border-dotted border-gray-400 bg-transparent text-center" data-correct-answer="<%= item[:answer] %>">
                     <option value="">?</option>
                     <option value="<">&lt;</option>
                     <option value=">">&gt;</option>
@@ -148,7 +148,7 @@
           <!-- Esercizio 4 -->
           <div>
             <div class="flex items-start gap-3 mb-3">
-              <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
+              <%= numero_esercizio_badge(4) %>
               <p class="text-gray-700 font-bold">Scrivi il numero precedente e il numero successivo.</p>
             </div>
             <div class="space-y-2 ml-11">
@@ -161,9 +161,9 @@
                 { prev: "CMXCIX", center: "M", next: "MI" }
               ].each do |item| %>
                 <div class="flex items-center gap-2">
-                  <input type="text" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center uppercase" data-correct-answer="<%= item[:prev] %>" placeholder="...">
+                  <input type="text" class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 bg-transparent text-center uppercase" data-correct-answer="<%= item[:prev] %>" placeholder="...">
                   <span class="text-gray-700 font-bold"><%= item[:center] %></span>
-                  <input type="text" class="w-20 px-2 py-1 border-2 border-cyan-300 rounded text-center uppercase" data-correct-answer="<%= item[:next] %>" placeholder="...">
+                  <input type="text" class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 bg-transparent text-center uppercase" data-correct-answer="<%= item[:next] %>" placeholder="...">
                 </div>
               <% end %>
             </div>
@@ -172,17 +172,17 @@
           <!-- Esercizio 5 -->
           <div>
             <div class="flex items-start gap-3 mb-3">
-              <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">5</div>
+              <%= numero_esercizio_badge(5) %>
               <p class="text-gray-700 font-bold">Scrivi la tua data di nascita e quella del compagno o della compagna di banco in numeri romani.</p>
             </div>
             <div class="space-y-3 ml-11">
               <div>
                 <label class="text-gray-700">Sono nato il</label>
-                <input type="text" class="w-full px-3 py-2 border-2 border-cyan-300 rounded mt-1" placeholder="Es: XV / VII / MMIX">
+                <input type="text" class="w-full px-3 py-2 border-b-2 border-dotted border-gray-400 bg-transparent mt-1" placeholder="Es: XV / VII / MMIX">
               </div>
               <div>
                 <label class="text-gray-700">.......................... è nata/o il</label>
-                <input type="text" class="w-full px-3 py-2 border-2 border-cyan-300 rounded mt-1" placeholder="Es: XX / III / MMX">
+                <input type="text" class="w-full px-3 py-2 border-b-2 border-dotted border-gray-400 bg-transparent mt-1" placeholder="Es: XX / III / MMX">
               </div>
             </div>
           </div>
@@ -191,6 +191,6 @@
     </div>
 
     <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

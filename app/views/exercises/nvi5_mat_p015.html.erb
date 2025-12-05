@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -11,7 +11,7 @@
     <div class="p-4 md:p-6 bg-cyan-50 rounded-lg">
       <p class="text-gray-800 leading-relaxed mb-3">
         Laura e Giulia hanno partecipato a una gara di ginnastica ritmica organizzata a scuola.
-        Il voto della gara è stato <span class="font-bold text-cyan-500">9,28</span> per Laura e <span class="font-bold text-cyan-500">9,73</span> per Giulia.
+        Il voto della gara è stato <span class="font-bold text-custom-sky">9,28</span> per Laura e <span class="font-bold text-custom-sky">9,73</span> per Giulia.
       </p>
       <p class="text-gray-800 leading-relaxed">
         L'insegnante vuole inserire i voti nel registro, ma può inserire solo numeri con una cifra
@@ -50,7 +50,7 @@
                 cioè aumentiamo di 1 l'ultima cifra considerata (nel nostro caso i decimi) e sostituiamo con zero le cifre successive.
               </p>
               <p class="text-gray-700 italic pl-4">
-                Laura ha ottenuto 9,2<span class="font-bold text-cyan-500">8</span> che arrotondiamo per eccesso a <span class="font-bold">9,3</span>.
+                Laura ha ottenuto 9,2<span class="font-bold text-custom-sky">8</span> che arrotondiamo per eccesso a <span class="font-bold">9,3</span>.
               </p>
 
               <p class="text-gray-700">
@@ -58,7 +58,7 @@
                 cioè sostituiamo con zero le cifre successive a quella considerata.
               </p>
               <p class="text-gray-700 italic pl-4">
-                Giulia ha ottenuto 9,7<span class="font-bold text-cyan-500">3</span> che arrotondiamo per difetto a <span class="font-bold">9,7</span>.
+                Giulia ha ottenuto 9,7<span class="font-bold text-custom-sky">3</span> che arrotondiamo per difetto a <span class="font-bold">9,7</span>.
               </p>
 
               <p class="text-gray-700">
@@ -94,7 +94,7 @@
         <!-- Exercise 1: Arrotonda ai decimi -->
         <div data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
           <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+            <%= numero_esercizio_badge(1) %>
             <p class="font-bold text-gray-700">
               Arrotonda ai decimi i seguenti numeri. Poi cerchia con il
               <span class="text-red-600">rosso<span class="inline-block w-4 h-4 bg-red-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span>
@@ -115,7 +115,7 @@
               <div class="flex items-center gap-2">
                 <span data-word-highlighter-target="word" data-correct="<%= item[:correct] %>" data-action="click->word-highlighter#toggleHighlight" class="text-gray-700 cursor-pointer transition px-1"><%= item[:num] %></span>
                 <span class="text-pink-600">→</span>
-                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 bg-transparent text-center" placeholder="...">
               </div>
             <% end %>
           </div>
@@ -124,7 +124,7 @@
         <!-- Exercise 2: Arrotonda all'unità -->
         <div data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
           <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
+            <%= numero_esercizio_badge(2) %>
             <p class="font-bold text-gray-700">
               Arrotonda all'unità i seguenti numeri. Poi cerchia con il
               <span class="text-red-600">rosso<span class="inline-block w-4 h-4 bg-red-300 rounded-full ml-1 align-middle cursor-pointer transition transform hover:scale-110" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span></span>
@@ -145,7 +145,7 @@
               <div class="flex items-center gap-2">
                 <span data-word-highlighter-target="word" data-correct="<%= item[:correct] %>" data-action="click->word-highlighter#toggleHighlight" class="text-gray-700 cursor-pointer transition px-1"><%= item[:num] %></span>
                 <span class="text-pink-600">→</span>
-                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 bg-transparent text-center" placeholder="...">
               </div>
             <% end %>
           </div>
@@ -154,6 +154,6 @@
     </div>
 
     <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

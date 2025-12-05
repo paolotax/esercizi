@@ -1,21 +1,14 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-blue-50 via-white to-blue-50 rounded-3xl shadow-xl"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
-
-  <div class="mb-6">
-    <p class="text-sm md:text-base text-blue-700">
-      Osserva lo schema delle potenze e tocca i cartellini per ascoltare la parola corretta.
-    </p>
-  </div>
 
   <div class="space-y-6">
 
     <!-- Interactive Image -->
-    <div class="relative rounded-2xl overflow-hidden border-4 border-blue-200 shadow-2xl"
+    <div class="relative rounded-2xl overflow-hidden"
          data-controller="hotspot-editor"
          data-hotspot-editor-target="container">
 
@@ -35,7 +28,7 @@
 
         <% hotspots.each do |hotspot| %>
           <button type="button"
-                  class="absolute rounded-xl bg-blue-500/10 hover:bg-blue-500/25 border-2 border-transparent hover:border-blue-500 focus:border-blue-600 focus:outline-none transition shadow-sm cursor-move"
+                  class="absolute rounded-xl bg-blue-500/10 hover:bg-blue-500/25 border-2 border-transparent hover:border-blue-500 focus:border-blue-600 focus:outline-none transition cursor-move"
                   style="top: <%= hotspot[:top] %>; left: <%= hotspot[:left] %>; width: <%= hotspot[:width] %>; height: <%= hotspot[:height] %>;"
                   aria-label="Leggi: <%= hotspot[:label] %>"
                   data-controller="image-speech"
@@ -50,95 +43,111 @@
     </div>
 
     <!-- Esercizio Collega -->
-    <div class="p-4 md:p-6 bg-white rounded-2xl border-2 border-pink-200">
-      <div class="flex items-start gap-3 mb-6">
-        <span class="text-pink-500 text-xl">&#9829;</span>
-        <h3 class="font-bold text-gray-700">Collega.</h3>
-      </div>
+    <div class="p-4 md:p-6">
+      <p class="text-gray-700 mb-6">
+        <span class="inline-block w-4 h-4 bg-pink-600 rounded-sm mr-2"></span>
+        <span class="font-bold">Collega.</span>
+      </p>
 
-      <div class="space-y-4">
-        <!-- L'ESPONENTE indica -->
-        <div class="flex flex-col md:flex-row items-start md:items-center gap-3">
-          <span class="text-gray-700">&#8226; L'<span class="font-bold text-blue-600">ESPONENTE</span> indica</span>
-          <select class="flex-1 px-4 py-2 border-2 border-pink-300 rounded-lg focus:border-pink-500 focus:outline-none text-gray-700"
-                  data-correct-answer="quante volte la base va moltiplicata per se stessa">
-            <option value="">Scegli...</option>
-            <option value="quante volte la base va moltiplicata per se stessa">quante volte la base va moltiplicata per se stessa.</option>
-            <option value="il numero da moltiplicare">il numero da moltiplicare.</option>
-            <option value="6 × 6 × 6">6 × 6 × 6.</option>
-          </select>
-        </div>
+      <div class="space-y-4" data-controller="flower-matcher">
+        <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-30"
+             data-flower-matcher-target="canvas">
+        </svg>
 
-        <!-- La BASE indica -->
-        <div class="flex flex-col md:flex-row items-start md:items-center gap-3">
-          <span class="text-gray-700">&#8226; La <span class="font-bold text-blue-600">BASE</span> indica</span>
-          <select class="flex-1 px-4 py-2 border-2 border-pink-300 rounded-lg focus:border-pink-500 focus:outline-none text-gray-700"
-                  data-correct-answer="il numero da moltiplicare">
-            <option value="">Scegli...</option>
-            <option value="quante volte la base va moltiplicata per se stessa">quante volte la base va moltiplicata per se stessa.</option>
-            <option value="il numero da moltiplicare">il numero da moltiplicare.</option>
-            <option value="6 × 6 × 6">6 × 6 × 6.</option>
-          </select>
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Colonna sinistra -->
+          <div class="space-y-3">
+            <div class="p-3 bg-custom-blue rounded-lg cursor-pointer hover:bg-blue-100 transition"
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="esponente"
+                 data-pair="quante-volte">
+              <span class="text-gray-700">L'<span class="font-bold text-custom-sky">ESPONENTE</span> indica</span>
+            </div>
+            <div class="p-3 bg-custom-blue rounded-lg cursor-pointer hover:bg-blue-100 transition"
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="base"
+                 data-pair="numero">
+              <span class="text-gray-700">La <span class="font-bold text-custom-sky">BASE</span> indica</span>
+            </div>
+            <div class="p-3 bg-custom-blue rounded-lg cursor-pointer hover:bg-blue-100 transition"
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="potenza"
+                 data-pair="sei-per-sei">
+              <span class="text-gray-700">La <span class="font-bold text-custom-sky">POTENZA</span> 6³ significa</span>
+            </div>
+          </div>
 
-        <!-- La POTENZA 6³ significa -->
-        <div class="flex flex-col md:flex-row items-start md:items-center gap-3">
-          <span class="text-gray-700">&#8226; La <span class="font-bold text-blue-600">POTENZA</span> 6³ significa</span>
-          <select class="flex-1 px-4 py-2 border-2 border-pink-300 rounded-lg focus:border-pink-500 focus:outline-none text-gray-700"
-                  data-correct-answer="6 × 6 × 6">
-            <option value="">Scegli...</option>
-            <option value="quante volte la base va moltiplicata per se stessa">quante volte la base va moltiplicata per se stessa.</option>
-            <option value="il numero da moltiplicare">il numero da moltiplicare.</option>
-            <option value="6 × 6 × 6">6 × 6 × 6.</option>
-          </select>
+          <!-- Colonna destra -->
+          <div class="space-y-3">
+            <div class="p-3 bg-pink-50 rounded-lg cursor-pointer hover:bg-pink-100 transition"
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="quante-volte"
+                 data-pair="esponente">
+              <span class="text-gray-700">quante volte la base va moltiplicata per se stessa.</span>
+            </div>
+            <div class="p-3 bg-pink-50 rounded-lg cursor-pointer hover:bg-pink-100 transition"
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="sei-per-sei"
+                 data-pair="potenza">
+              <span class="text-gray-700">6 × 6 × 6.</span>
+            </div>
+            <div class="p-3 bg-pink-50 rounded-lg cursor-pointer hover:bg-pink-100 transition"
+                 data-action="click->flower-matcher#selectFlower"
+                 data-flower-matcher-target="flower"
+                 data-flower-id="numero"
+                 data-pair="base">
+              <span class="text-gray-700">il numero da moltiplicare.</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Esercizio Scegli -->
-    <div class="p-4 md:p-6 bg-white rounded-2xl border-2 border-pink-200">
-      <div class="flex items-start gap-3 mb-6">
-        <span class="text-pink-500 text-xl">&#9829;</span>
-        <h3 class="font-bold text-gray-700">Scegli.</h3>
-      </div>
+    <div class="p-4 md:p-6">
+      <p class="text-gray-700 mb-6">
+        <span class="inline-block w-4 h-4 bg-pink-600 rounded-sm mr-2"></span>
+        <span class="font-bold">Scegli.</span>
+      </p>
 
-      <div class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- La POTENZA 5⁴ si legge -->
         <div class="space-y-3">
-          <p class="text-gray-700">&#8226; La <span class="font-bold text-blue-600">POTENZA</span> 5⁴ si legge:</p>
-          <div class="ml-6 space-y-3">
-            <label class="flex items-center gap-3 bg-pink-50 p-4 rounded-lg cursor-pointer hover:bg-pink-100 transition-colors">
-              <input type="radio" name="potenza_5_4" value="quattro alla quinta" class="w-5 h-5 text-blue-600">
-              <span class="font-bold text-blue-600">QUATTRO ALLA QUINTA.</span>
+          <p class="text-gray-700">La <span class="font-bold text-custom-sky">POTENZA</span> 5⁴ si legge:</p>
+          <div class="space-y-2 ml-4">
+            <label class="flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+              <input type="radio" name="potenza_5_4" value="quattro alla quinta" class="w-5 h-5 text-pink-600">
+              <span class="font-bold text-custom-sky">QUATTRO ALLA QUINTA.</span>
             </label>
-            <label class="flex items-center gap-3 bg-pink-50 p-4 rounded-lg cursor-pointer hover:bg-pink-100 transition-colors">
-              <input type="radio" name="potenza_5_4" value="cinque alla quarta" class="w-5 h-5 text-blue-600" data-correct-answer="true">
-              <span class="font-bold text-blue-600">CINQUE ALLA QUARTA.</span>
+            <label class="flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+              <input type="radio" name="potenza_5_4" value="cinque alla quarta" class="w-5 h-5 text-pink-600" data-correct-answer="true">
+              <span class="font-bold text-custom-sky">CINQUE ALLA QUARTA.</span>
             </label>
           </div>
         </div>
 
         <!-- OTTO ELEVATO ALLA SECONDA corrisponde -->
         <div class="space-y-3">
-          <p class="text-gray-700">&#8226; <span class="font-bold text-blue-600">OTTO ELEVATO ALLA SECONDA</span> corrisponde:</p>
-          <div class="ml-6 space-y-3">
-            <label class="flex items-center gap-3 bg-pink-50 p-4 rounded-lg cursor-pointer hover:bg-pink-100 transition-colors">
-              <input type="radio" name="otto_seconda" value="8²" class="w-5 h-5 text-blue-600" data-correct-answer="true">
-              <span class="text-gray-700">alla <span class="font-bold text-blue-600">POTENZA</span> 8².</span>
+          <p class="text-gray-700"><span class="font-bold text-custom-sky">OTTO ELEVATO ALLA SECONDA</span> corrisponde:</p>
+          <div class="space-y-2 ml-4">
+            <label class="flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+              <input type="radio" name="otto_seconda" value="8²" class="w-5 h-5 text-pink-600" data-correct-answer="true">
+              <span class="text-gray-700">alla <span class="font-bold text-custom-sky">POTENZA</span> 8².</span>
             </label>
-            <label class="flex items-center gap-3 bg-pink-50 p-4 rounded-lg cursor-pointer hover:bg-pink-100 transition-colors">
-              <input type="radio" name="otto_seconda" value="2⁸" class="w-5 h-5 text-blue-600">
-              <span class="text-gray-700">alla <span class="font-bold text-blue-600">POTENZA</span> 2⁸.</span>
+            <label class="flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+              <input type="radio" name="otto_seconda" value="28" class="w-5 h-5 text-pink-600">
+              <span class="text-gray-700">alla <span class="font-bold text-custom-sky">POTENZA</span> 28.</span>
             </label>
           </div>
         </div>
       </div>
     </div>
 
-  </div>
-
-  <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -64,11 +64,11 @@
           <div class="space-y-2">
             <div class="p-3 bg-blue-50 rounded-lg flex items-center gap-2">
               <span class="font-bold text-blue-600">+ 5 + 2 =</span>
-              <input type="text" data-correct-answer="+7" class="w-20 px-3 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+              <input type="text" data-correct-answer="+7" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
             </div>
             <div class="p-3 bg-red-50 rounded-lg flex items-center gap-2">
               <span class="font-bold text-red-600">– 4 – 5 =</span>
-              <input type="text" data-correct-answer="-9" class="w-20 px-3 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+              <input type="text" data-correct-answer="-9" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
             </div>
           </div>
         </div>
@@ -93,11 +93,11 @@
           <div class="space-y-2">
             <div class="p-3 bg-gray-50 rounded-lg flex items-center gap-2">
               <span class="font-bold text-gray-800">+ 3 – 9 =</span>
-              <input type="text" data-correct-answer="-6" class="w-20 px-3 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+              <input type="text" data-correct-answer="-6" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
             </div>
             <div class="p-3 bg-gray-50 rounded-lg flex items-center gap-2">
               <span class="font-bold text-gray-800">– 5 + 8 =</span>
-              <input type="text" data-correct-answer="+3" class="w-20 px-3 py-1 border-2 border-cyan-300 rounded text-center font-bold">
+              <input type="text" data-correct-answer="+3" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
             </div>
           </div>
         </div>
@@ -111,11 +111,13 @@
       <div class="space-y-6">
         <!-- Exercise 1: Con la linea dei numeri -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-            <p class="font-bold text-gray-700">Disegna sul quaderno una linea dei numeri da – 15 a + 15 e calcola.</p>
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(1) %>
+              Disegna sul quaderno una linea dei numeri da – 15 a + 15 e calcola.
+            </p>
           </div>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ml-11">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <% [
               { expr: "+ 5 – 8 =", answer: "-3" },
               { expr: "+ 10 – 15 =", answer: "-5" },
@@ -126,11 +128,9 @@
               { expr: "– 4 + 5 =", answer: "+1" },
               { expr: "+ 10 – 12 =", answer: "-2" }
             ].each do |item| %>
-              <div class="p-3 bg-white rounded-lg">
-                <div class="flex items-center gap-2">
-                  <span class="font-bold text-gray-800"><%= item[:expr] %></span>
-                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                </div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-gray-800"><%= item[:expr] %></span>
+                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
               </div>
             <% end %>
           </div>
@@ -138,22 +138,22 @@
 
         <!-- Exercise 2: Senza linea dei numeri -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
-            <p class="font-bold text-gray-700">Ora calcola senza utilizzare la linea dei numeri.</p>
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(2) %>
+              Ora calcola senza utilizzare la linea dei numeri.
+            </p>
           </div>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ml-11">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <% [
               { expr: "+ 7 – 9 =", answer: "-2" },
               { expr: "– 9 + 3 =", answer: "-6" },
               { expr: "– 10 + 13 =", answer: "+3" },
               { expr: "+ 8 – 11 =", answer: "-3" }
             ].each do |item| %>
-              <div class="p-3 bg-white rounded-lg">
-                <div class="flex items-center gap-2">
-                  <span class="font-bold text-gray-800"><%= item[:expr] %></span>
-                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center font-bold">
-                </div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-gray-800"><%= item[:expr] %></span>
+                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
               </div>
             <% end %>
           </div>
@@ -180,7 +180,7 @@
           <div class="flex flex-col md:flex-row items-start md:items-center gap-3">
             <span class="font-bold text-gray-800 flex-1"><span class="text-pink-600">&#8226;</span> Quanti anni aveva Ottaviano Augusto quando è diventato imperatore?</span>
             <div class="flex items-center gap-2">
-              <input type="text" data-correct-answer="36" class="w-20 px-3 py-2 border-2 border-cyan-300 rounded text-center font-bold">
+              <input type="text" data-correct-answer="36" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
               <span class="font-semibold text-gray-700">anni</span>
             </div>
           </div>
@@ -189,7 +189,7 @@
           <div class="flex flex-col md:flex-row items-start md:items-center gap-3">
             <span class="font-bold text-gray-800 flex-1"><span class="text-pink-600">&#8226;</span> Quanti anni aveva quando è morto?</span>
             <div class="flex items-center gap-2">
-              <input type="text" data-correct-answer="77" class="w-20 px-3 py-2 border-2 border-cyan-300 rounded text-center font-bold">
+              <input type="text" data-correct-answer="77" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
               <span class="font-semibold text-gray-700">anni</span>
             </div>
           </div>
@@ -197,19 +197,16 @@
       </div>
       <div class="mt-4 p-3 bg-yellow-50 border-2 border-yellow-300 rounded-lg">
         <p class="text-gray-700">
-          <span class="font-bold">💡 Suggerimento:</span> Per calcolare l'età, sottrai l'anno di nascita dall'anno dell'evento. Ricorda che gli anni a.C. sono numeri negativi!
+          <span class="font-bold">Suggerimento:</span> Per calcolare l'età, sottrai l'anno di nascita dall'anno dell'evento. Ricorda che gli anni a.C. sono numeri negativi!
         </p>
       </div>
     </div>
 
     <!-- Riferimento quaderno -->
-    <div class="p-4 text-right">
-      <p class="text-gray-700">
-        <span class="font-bold">Quaderno</span> p. <a href="#" class="text-red-600 font-bold hover:underline">182</a>
-      </p>
+    <div class="text-right">
+      <span class="text-pink-600 font-bold">Quaderno esercizi</span> p. 182
     </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

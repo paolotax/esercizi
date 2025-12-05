@@ -1,16 +1,15 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="space-y-6">
 
     <!-- Box Ricorda! -->
-    <div class="p-4 md:p-6 bg-[#CCEFFC] rounded-2xl">
-      <h3 class="font-bold text-pink-600 mb-4">Ricorda!</h3>
+    <div class="p-4 md:p-6 bg-custom-blue rounded-2xl">
+      <h3 class="font-bold text-pink-600 italic mb-4">Ricorda!</h3>
       <p class="text-gray-700 leading-relaxed mb-4">
         Il <span class="font-bold">poligono</span> è la parte di piano delimitata da una linea spezzata semplice chiusa.
       </p>
@@ -25,21 +24,19 @@
 
     <!-- Esercizio 1: Colora i poligoni -->
     <div class="p-4 md:p-6">
-      <div class="flex items-start gap-3 mb-6">
-        <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-        <p class="text-gray-700">
-          Colora di rosso i poligoni, poi indica il nome di ciascuno. Scrivi nel quadratino la lettera giusta.
-        </p>
-      </div>
+      <p class="text-gray-700 mb-6">
+        <%= numero_esercizio_badge(1) %>
+        Colora di rosso i poligoni, poi indica il nome di ciascuno. Scrivi nel quadratino la lettera giusta.
+      </p>
 
       <!-- Legenda nomi -->
       <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mb-6 text-gray-700">
-        <div><span class="font-bold text-blue-700">A</span> triangolo isoscele</div>
-        <div><span class="font-bold text-blue-700">B</span> rombo</div>
-        <div><span class="font-bold text-blue-700">C</span> quadrato</div>
-        <div><span class="font-bold text-blue-700">D</span> trapezio rettangolo</div>
-        <div><span class="font-bold text-blue-700">E</span> ottagono</div>
-        <div><span class="font-bold text-blue-700">F</span> parallelogramma</div>
+        <div><span class="font-bold text-custom-sky">A</span> triangolo isoscele</div>
+        <div><span class="font-bold text-custom-sky">B</span> rombo</div>
+        <div><span class="font-bold text-custom-sky">C</span> quadrato</div>
+        <div><span class="font-bold text-custom-sky">D</span> trapezio rettangolo</div>
+        <div><span class="font-bold text-custom-sky">E</span> ottagono</div>
+        <div><span class="font-bold text-custom-sky">F</span> parallelogramma</div>
       </div>
 
       <!-- Griglia figure -->
@@ -63,11 +60,14 @@
         ].each do |item| %>
           <div class="flex flex-col items-center">
             <span class="text-xs text-gray-500 mb-1"><%= item[:label] %></span>
-            <input type="text"
-                   class="w-10 h-10 text-center font-bold border-2 <%= item[:disabled] ? 'border-gray-300 bg-gray-100' : 'border-pink-300' %> rounded focus:border-pink-500 focus:outline-none uppercase"
-                   data-correct-answer="<%= item[:answer] %>"
-                   maxlength="1"
-                   <%= 'disabled' if item[:disabled] %>>
+            <% if item[:disabled] %>
+              <div class="w-10 h-10 bg-gray-100 rounded"></div>
+            <% else %>
+              <input type="text"
+                     class="w-10 h-10 text-center font-bold border-b-2 border-dotted border-gray-400 bg-transparent focus:border-pink-500 focus:outline-none uppercase"
+                     data-correct-answer="<%= item[:answer] %>"
+                     maxlength="1">
+            <% end %>
           </div>
         <% end %>
       </div>
@@ -75,21 +75,18 @@
 
     <!-- Esercizio 2: Poligoni regolari -->
     <div class="p-4 md:p-6">
-      <div class="flex items-start gap-3 mb-6">
-        <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
-        <p class="text-gray-700">
-          Quali dei poligoni dell'esercizio precedente sono poligoni regolari? Scrivi le lettere.
-        </p>
-      </div>
+      <p class="text-gray-700 mb-6">
+        <%= numero_esercizio_badge(2) %>
+        Quali dei poligoni dell'esercizio precedente sono poligoni regolari? Scrivi le lettere.
+      </p>
       <div class="flex items-center gap-4 p-4">
-        <span class="text-gray-700">............</span>
         <input type="text"
-               class="w-12 h-10 text-center font-bold border-2 border-pink-300 rounded focus:border-pink-500 focus:outline-none uppercase"
+               class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent focus:border-pink-500 focus:outline-none uppercase"
                data-correct-answer="C"
                maxlength="1">
         <span class="text-gray-700">e</span>
         <input type="text"
-               class="w-12 h-10 text-center font-bold border-2 border-pink-300 rounded focus:border-pink-500 focus:outline-none uppercase"
+               class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent focus:border-pink-500 focus:outline-none uppercase"
                data-correct-answer="E"
                maxlength="1">
       </div>
@@ -100,18 +97,16 @@
 
     <!-- Esercizio 3: Formule perimetro -->
     <div class="p-4 md:p-6">
-      <div class="flex items-start gap-3 mb-6">
-        <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
-        <p class="text-gray-700">
-          Associa a ogni poligono la formula per calcolare il suo perimetro.
-        </p>
-      </div>
+      <p class="text-gray-700 mb-6">
+        <%= numero_esercizio_badge(3) %>
+        Associa a ogni poligono la formula per calcolare il suo perimetro.
+      </p>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Trapezio -->
         <div class="flex flex-col items-center gap-4">
           <%= image_tag "nvi5_mat/p007/output-1715938802007_227_1031_99_98.png", alt: "Trapezio", class: "h-24" %>
-          <select class="w-full px-4 py-3 text-center border-2 border-blue-400 rounded focus:border-blue-600 focus:outline-none font-bold text-blue-700"
+          <select class="w-full px-4 py-3 text-center border-b-2 border-dotted border-gray-400 bg-white focus:border-pink-500 focus:outline-none font-bold cursor-pointer"
                   data-correct-answer="P = B + b + ℓ₁ + ℓ₂">
             <option value="">Scegli la formula...</option>
             <option value="P = ℓ × 4">P = ℓ × 4</option>
@@ -123,7 +118,7 @@
         <!-- Triangolo -->
         <div class="flex flex-col items-center gap-4">
           <%= image_tag "nvi5_mat/p007/output-1715938802007_453_1031_177_99.png", alt: "Triangolo", class: "h-24" %>
-          <select class="w-full px-4 py-3 text-center border-2 border-blue-400 rounded focus:border-blue-600 focus:outline-none font-bold text-blue-700"
+          <select class="w-full px-4 py-3 text-center border-b-2 border-dotted border-gray-400 bg-white focus:border-pink-500 focus:outline-none font-bold cursor-pointer"
                   data-correct-answer="P = ℓ₁ + ℓ₂ + ℓ₃">
             <option value="">Scegli la formula...</option>
             <option value="P = ℓ × 4">P = ℓ × 4</option>
@@ -135,7 +130,7 @@
         <!-- Quadrato -->
         <div class="flex flex-col items-center gap-4">
           <%= image_tag "nvi5_mat/p007/output-1715938802007_744_1032_186_99.png", alt: "Quadrato", class: "h-24" %>
-          <select class="w-full px-4 py-3 text-center border-2 border-blue-400 rounded focus:border-blue-600 focus:outline-none font-bold text-blue-700"
+          <select class="w-full px-4 py-3 text-center border-b-2 border-dotted border-gray-400 bg-white focus:border-pink-500 focus:outline-none font-bold cursor-pointer"
                   data-correct-answer="P = ℓ × 4">
             <option value="">Scegli la formula...</option>
             <option value="P = ℓ × 4">P = ℓ × 4</option>
@@ -146,8 +141,6 @@
       </div>
     </div>
 
+    <%= render 'shared/exercise_controls' %>
   </div>
-
-  <!-- Exercise Controls -->
-  <%= render 'shared/exercise_controls', color: 'blue' %>
 </div>

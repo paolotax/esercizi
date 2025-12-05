@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -29,7 +29,7 @@
           </div>
           <p class="text-gray-700">
             perché fra due <span class="font-bold">numeri interi relativi</span> che hanno segno diverso è
-            <input type="text" data-correct-answer="maggiore" class="w-28 px-3 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+            <input type="text" data-correct-answer="maggiore" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
             quello positivo.
           </p>
         </div>
@@ -43,9 +43,9 @@
           </div>
           <p class="text-gray-700">
             perché fra due <span class="font-bold">numeri interi relativi</span> che hanno segno – è
-            <input type="text" data-correct-answer="maggiore" class="w-28 px-3 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+            <input type="text" data-correct-answer="maggiore" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
             quello che sulla linea dei numeri è più
-            <input type="text" data-correct-answer="vicino" class="w-24 px-3 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+            <input type="text" data-correct-answer="vicino" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
             a 0.
           </p>
         </div>
@@ -59,9 +59,9 @@
           </div>
           <p class="text-gray-700">
             perché fra due <span class="font-bold">numeri interi relativi</span> che hanno segno + è
-            <input type="text" data-correct-answer="maggiore" class="w-28 px-3 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+            <input type="text" data-correct-answer="maggiore" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
             quello che sulla linea dei numeri è più
-            <input type="text" data-correct-answer="lontano" class="w-24 px-3 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+            <input type="text" data-correct-answer="lontano" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
             da 0.
           </p>
         </div>
@@ -81,7 +81,7 @@
           </p>
         </div>
         <div class="flex items-center justify-center">
-          <%= image_tag "nvi5_mat/p021/p021_01.png", alt: "Numeri cinesi in rosso", class: "max-w-[150px] rounded-lg" %>
+          <%= image_tag "nvi5_mat/p021/output-1715938802021_700_521_266_94.png", alt: "Numeri cinesi in rosso", class: "max-w-[150px] rounded-lg" %>
         </div>
       </div>
     </div>
@@ -93,11 +93,13 @@
       <div class="space-y-6">
         <!-- Exercise 1: Tabella precedente-numero-successivo -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-            <p class="font-bold text-gray-700">Completa la tabella.</p>
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(1) %>
+              Completa la tabella.
+            </p>
           </div>
-          <div class="ml-11 overflow-x-auto">
+          <div class="overflow-x-auto">
             <table class="w-full border-2 border-blue-300">
               <thead>
                 <tr class="bg-blue-100">
@@ -121,21 +123,21 @@
                       <% if row[:prec] %>
                         <span class="font-bold text-<%= row[:prec_color] %>-600"><%= row[:prec] %></span>
                       <% else %>
-                        <input type="text" data-correct-answer="<%= row[:prec_ans] %>" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center">
+                        <input type="text" data-correct-answer="<%= row[:prec_ans] %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                       <% end %>
                     </td>
                     <td class="border-2 border-blue-300 px-4 py-3 text-center">
                       <% if row[:num] %>
                         <span class="font-bold text-<%= row[:num_color] %>-600"><%= row[:num] %></span>
                       <% else %>
-                        <input type="text" data-correct-answer="<%= row[:num_ans] %>" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center">
+                        <input type="text" data-correct-answer="<%= row[:num_ans] %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                       <% end %>
                     </td>
                     <td class="border-2 border-blue-300 px-4 py-3 text-center">
                       <% if row[:succ] %>
                         <span class="font-bold text-<%= row[:succ_color] %>-600"><%= row[:succ] %></span>
                       <% else %>
-                        <input type="text" data-correct-answer="<%= row[:succ_ans] %>" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center">
+                        <input type="text" data-correct-answer="<%= row[:succ_ans] %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                       <% end %>
                     </td>
                   </tr>
@@ -147,11 +149,13 @@
 
         <!-- Exercise 2: Confronta con < o > -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
-            <p class="font-bold text-gray-700">Confronta i numeri e inserisci i segni &lt; oppure &gt;.</p>
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(2) %>
+              Confronta i numeri e inserisci i segni &lt; oppure &gt;.
+            </p>
           </div>
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ml-11">
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <% [
               { left: "+4", right: "–3", answer: ">", left_color: "blue", right_color: "red" },
               { left: "–7", right: "+1", answer: "<", left_color: "red", right_color: "blue" },
@@ -166,12 +170,10 @@
               { left: "0", right: "–21", answer: ">", left_color: "gray", right_color: "red" },
               { left: "–8", right: "–2", answer: "<", left_color: "red", right_color: "red" }
             ].each do |item| %>
-              <div class="p-3 bg-white rounded-lg">
-                <div class="flex items-center justify-center gap-2">
-                  <span class="font-bold text-<%= item[:left_color] %>-600"><%= item[:left] %></span>
-                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-10 px-2 py-1 border-2 border-cyan-300 rounded text-center" maxlength="1">
-                  <span class="font-bold text-<%= item[:right_color] %>-600"><%= item[:right] %></span>
-                </div>
+              <div class="flex items-center justify-center gap-2">
+                <span class="font-bold text-<%= item[:left_color] %>-600"><%= item[:left] %></span>
+                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" maxlength="1">
+                <span class="font-bold text-<%= item[:right_color] %>-600"><%= item[:right] %></span>
               </div>
             <% end %>
           </div>
@@ -179,11 +181,13 @@
 
         <!-- Exercise 3: Ordine crescente -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
-            <p class="font-bold text-gray-700">Riscrivi i numeri in ordine crescente.</p>
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(3) %>
+              Riscrivi i numeri in ordine crescente.
+            </p>
           </div>
-          <div class="ml-11">
+          <div>
             <div class="flex flex-wrap gap-3 justify-center mb-4">
               <% ["+4", "–5", "–8", "+6", "+12", "–15", "–18", "+9", "+3", "–1"].each_with_index do |num, i| %>
                 <% if num.start_with?("+") %>
@@ -194,23 +198,17 @@
                 <% unless i == 9 %><span class="text-pink-600">&#8226;</span><% end %>
               <% end %>
             </div>
-            <input type="text" data-correct-answer="-18, -15, -8, -5, -1, +3, +4, +6, +9, +12" class="w-full px-4 py-3 border-2 border-cyan-300 rounded text-center" placeholder="Scrivi i numeri separati da virgola...">
-            <p class="text-gray-600 mt-2 italic">
-              Suggerimento: dal più piccolo al più grande (<span class="font-bold">ordine crescente</span>)
-            </p>
+            <input type="text" data-correct-answer="-18, -15, -8, -5, -1, +3, +4, +6, +9, +12" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent py-2">
           </div>
         </div>
       </div>
     </div>
 
     <!-- Riferimento quaderno -->
-    <div class="p-4 text-right">
-      <p class="text-gray-700">
-        <span class="font-bold">Quaderno</span> pp. <a href="#" class="text-red-600 font-bold hover:underline">182</a>-<a href="#" class="text-red-600 font-bold hover:underline">183</a>
-      </p>
+    <div class="text-right">
+      <span class="text-pink-600 font-bold">Quaderno esercizi</span> pp. 182-183
     </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

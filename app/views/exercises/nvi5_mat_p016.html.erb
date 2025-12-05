@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -105,11 +105,13 @@
       <div class="space-y-6">
         <!-- Exercise 1: Scrivi sotto forma di potenza -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-            <p class="font-bold text-gray-700">Scrivi, quando è possibile, i seguenti numeri sotto forma di potenza.</p>
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(1) %>
+              Scrivi, quando è possibile, i seguenti numeri sotto forma di potenza.
+            </p>
           </div>
-          <div class="ml-11">
+          <div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
               <% [
                 { expr: "9 × 9 × 9", answer: "9^3" },
@@ -119,13 +121,13 @@
               ].each do |item| %>
                 <div class="flex items-center gap-2">
                   <span class="font-bold text-gray-700"><%= item[:expr] %> =</span>
-                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-28 px-2 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                 </div>
               <% end %>
             </div>
             <!-- Box spiegazione -->
             <div class="p-4 bg-yellow-50 border-2 border-yellow-300 rounded-lg">
-              <h4 class="font-bold text-yellow-800 mb-2">💡 Come scrivere le potenze con il computer</h4>
+              <h4 class="font-bold text-yellow-800 mb-2">Come scrivere le potenze con il computer</h4>
               <div class="text-gray-800 space-y-2">
                 <p>Sul computer non possiamo scrivere l'esponente in alto, quindi usiamo il simbolo <span class="font-bold text-yellow-700">^</span></p>
                 <p>Ad esempio: 5 × 5 × 5 = 5³ si scrive <span class="font-bold bg-white px-2 py-1 rounded">5^3</span></p>
@@ -137,11 +139,13 @@
 
         <!-- Exercise 2: Calcola le potenze -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
-            <p class="font-bold text-gray-700">Calcola sul quaderno le seguenti potenze.</p>
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(2) %>
+              Calcola sul quaderno le seguenti potenze.
+            </p>
           </div>
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 ml-11">
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <% [
               { pot: "4<sup>3</sup>", answer: "64" },
               { pot: "12<sup>2</sup>", answer: "144" },
@@ -152,7 +156,7 @@
             ].each do |item| %>
               <div class="text-center">
                 <div class="font-bold mb-2"><%= item[:pot].html_safe %></div>
-                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-24 px-2 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
               </div>
             <% end %>
           </div>
@@ -161,13 +165,10 @@
     </div>
 
     <!-- Riferimento quaderno -->
-    <div class="p-4 text-right">
-      <p class="text-gray-700">
-        <span class="font-bold">Quaderno</span> pp. <a href="#" class="text-red-600 font-bold hover:underline">181</a>, <a href="#" class="text-red-600 font-bold hover:underline">183</a>
-      </p>
+    <div class="text-right">
+      <span class="text-pink-600 font-bold">Quaderno esercizi</span> pp. 181, 183
     </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

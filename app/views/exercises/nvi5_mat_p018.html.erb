@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls word-highlighter"
      data-text-toggle-target="content"
      data-font-controls-target="content"
@@ -15,10 +15,9 @@
       <div class="space-y-6">
         <!-- Exercise 1: Cerchia le classi -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+          <div class="mb-4">
             <p class="text-gray-700">
-              <span class="bg-gradient-to-r from-orange-400 to-orange-500 text-white px-3 py-1 rounded font-bold mr-2">IMPARARE TUTTI</span>
+              <%= imparare_tutti_badge(1) %>
               In ogni numero cerchia di
               <span class="text-blue-600 font-semibold">blu<span class="inline-block w-4 h-4 bg-blue-300 rounded-full ml-1 align-middle cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span></span>
               la classe delle unità semplici, di
@@ -30,7 +29,7 @@
               quella dei miliardi.
             </p>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-11">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <% [
               { groups: ["30", "215", "987", "006"], colors: ["orange", "green", "purple", "blue"] },
               { groups: ["4", "056", "125", "003"], colors: ["orange", "green", "purple", "blue"] },
@@ -51,11 +50,13 @@
 
         <!-- Exercise 2: Inserisci in tabella -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
-            <p class="font-bold text-gray-700">Inserisci i numeri in tabella, poi scrivili in cifre. Segui l'esempio.</p>
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(2) %>
+              Inserisci i numeri in tabella, poi scrivili in cifre. Segui l'esempio.
+            </p>
           </div>
-          <div class="ml-11">
+          <div>
             <div class="mb-4">
               <p class="text-gray-700 mb-3"><span class="font-bold">Numeri da inserire:</span></p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -113,7 +114,7 @@
                       <td class="py-2 border">
                         <% if val.empty? %>
                         <% else %>
-                          <input type="text" data-correct-answer="<%= val %>" class="w-8 text-center border-0 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-300" maxlength="1">
+                          <input type="text" data-correct-answer="<%= val %>" class="w-8 text-center border-b-2 border-dotted border-gray-400 bg-transparent font-bold" maxlength="1">
                         <% end %>
                       </td>
                     <% end %>
@@ -122,7 +123,7 @@
                   <tr class="bg-gray-50">
                     <% ["2", "3", "0", "6", "0", "4", "8", "9", "0", "0", "6", "5"].each do |val| %>
                       <td class="py-2 border">
-                        <input type="text" data-correct-answer="<%= val %>" class="w-8 text-center border-0 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-300" maxlength="1">
+                        <input type="text" data-correct-answer="<%= val %>" class="w-8 text-center border-b-2 border-dotted border-gray-400 bg-transparent font-bold" maxlength="1">
                       </td>
                     <% end %>
                   </tr>
@@ -130,7 +131,7 @@
                   <tr>
                     <% ["1", "8", "4", "5", "6", "9", "0", "0", "0", "2", "4", "4"].each do |val| %>
                       <td class="py-2 border">
-                        <input type="text" data-correct-answer="<%= val %>" class="w-8 text-center border-0 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-300" maxlength="1">
+                        <input type="text" data-correct-answer="<%= val %>" class="w-8 text-center border-b-2 border-dotted border-gray-400 bg-transparent font-bold" maxlength="1">
                       </td>
                     <% end %>
                   </tr>
@@ -142,79 +143,53 @@
 
         <!-- Exercise 3: Scrivi in lettere -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
-            <p class="font-bold text-gray-700">Scrivi in lettere i seguenti numeri.</p>
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(3) %>
+              Scrivi in lettere sul quaderno i seguenti numeri.
+            </p>
           </div>
-          <div class="space-y-4 ml-11">
-            <% [
-              { num: "556 234", answer: "cinquecentocinquantaseimiladuecentotrentaquattro" },
-              { num: "12 354 098", answer: "dodici milioni trecentocinquantaquattromila novantotto" },
-              { num: "9 345 236 063", answer: "nove miliardi trecentoquarantacinque milioni duecentotrentaseimila sessantatré" },
-              { num: "1 075 355", answer: "un milione settantacinquemila trecentocinquantacinque" },
-              { num: "120 000 000", answer: "centoventi milioni" }
-            ].each do |item| %>
-              <div class="p-4 bg-white rounded-lg">
-                <div class="font-mono font-bold text-cyan-500 mb-3 text-center whitespace-nowrap"><%= item[:num] %></div>
-                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-full px-4 py-2 border-2 border-cyan-300 rounded" placeholder="Scrivi in lettere...">
-              </div>
+          <div class="flex flex-wrap gap-4">
+            <% ["556 234", "12 354 098", "9 345 236 063", "1 075 355", "120 000 000"].each do |num| %>
+              <span class="bg-white px-4 py-2 font-bold text-cyan-500 rounded border-2 border-cyan-300 whitespace-nowrap"><%= num %></span>
             <% end %>
           </div>
         </div>
 
         <!-- Exercise 4: Somma di valori -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
-            <p class="font-bold text-gray-700">Scrivi i numeri come somma di valori, somma di addendi e somma di prodotti. Segui l'esempio.</p>
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(4) %>
+              Scrivi i numeri come somma di valori, somma di addendi e somma di prodotti. Segui l'esempio.
+            </p>
           </div>
-          <div class="ml-11">
-            <!-- Esempio -->
-            <div class="p-4 bg-white rounded-lg mb-4">
-              <h4 class="font-bold mb-3">Esempio:</h4>
-              <div class="space-y-1">
-                <div class="flex items-start gap-2">
-                  <span class="font-bold text-cyan-500 whitespace-nowrap">7 135 024</span>
-                  <span class="text-pink-600">→</span>
-                  <span class="text-gray-800">7 uM + 1 hk + 3 dak + 5 uk + 2 da + 4 u</span>
-                </div>
-                <div class="pl-24 text-gray-800"><span class="whitespace-nowrap">7 000 000</span> + <span class="whitespace-nowrap">100 000</span> + <span class="whitespace-nowrap">30 000</span> + <span class="whitespace-nowrap">5 000</span> + 20 + 4</div>
-                <div class="pl-24 text-gray-800">7 × <span class="whitespace-nowrap">1 000 000</span> + 1 × <span class="whitespace-nowrap">100 000</span> + 3 × <span class="whitespace-nowrap">10 000</span> + 5 × <span class="whitespace-nowrap">1 000</span> + 2 × 10 + 4 × 1</div>
+          <!-- Esempio -->
+          <div class="p-4 bg-white rounded-lg mb-4">
+            <div class="space-y-1">
+              <div class="flex items-start gap-2">
+                <span class="font-bold text-cyan-500 whitespace-nowrap">7 135 024</span>
+                <span class="text-pink-600">→</span>
+                <span class="text-gray-800 font-bold text-cyan-600">7 uM + 1 hk + 3 dak + 5 uk + 2 da + 4 u</span>
               </div>
+              <div class="pl-24 text-gray-800 font-bold text-cyan-600"><span class="whitespace-nowrap">7 000 000</span> + <span class="whitespace-nowrap">100 000</span> + <span class="whitespace-nowrap">30 000</span> + <span class="whitespace-nowrap">5 000</span> + 20 + 4</div>
+              <div class="pl-24 text-gray-800 font-bold text-cyan-600">7 × <span class="whitespace-nowrap">1 000 000</span> + 1 × <span class="whitespace-nowrap">100 000</span> + 3 × <span class="whitespace-nowrap">10 000</span> + 5 × <span class="whitespace-nowrap">1 000</span> + 2 × 10 + 4 × 1</div>
             </div>
-
-            <!-- Esercizi -->
-            <div class="space-y-6">
-              <% [
-                { num: "67 083 105", val: "6 daM + 7 uM + 8 dak + 3 uk + 1 h + 5 u", add: "60000000+7000000+80000+3000+100+5", prod: "6×10000000+7×1000000+8×10000+3×1000+1×100+5×1" },
-                { num: "190 315 070", val: "1 hM + 9 daM + 3 hk + 1 dak + 5 uk + 7 da", add: "100000000+90000000+300000+10000+5000+70", prod: "1×100000000+9×10000000+3×100000+1×10000+5×1000+7×10" },
-                { num: "23 500 167 000", val: "2 daG + 3 uG + 5 hM + 1 hk + 6 dak + 7 uk", add: "20000000000+3000000000+500000000+100000+60000+7000", prod: "2×10000000000+3×1000000000+5×100000000+1×100000+6×10000+7×1000" }
-              ].each do |item| %>
-                <div class="p-4 bg-white rounded-lg">
-                  <div class="font-bold text-cyan-500 mb-4 whitespace-nowrap"><%= item[:num] %></div>
-                  <div class="space-y-3">
-                    <div>
-                      <label class="block font-semibold text-gray-700 mb-1">Somma di valori:</label>
-                      <input type="text" data-correct-answer="<%= item[:val] %>" class="w-full px-3 py-2 border-2 border-cyan-300 rounded" placeholder="es: 6 daM + 7 uM + ...">
-                    </div>
-                    <div>
-                      <label class="block font-semibold text-gray-700 mb-1">Somma di addendi:</label>
-                      <input type="text" data-correct-answer="<%= item[:add] %>" class="w-full px-3 py-2 border-2 border-cyan-300 rounded" placeholder="es: 60000000 + 7000000 + ...">
-                    </div>
-                    <div>
-                      <label class="block font-semibold text-gray-700 mb-1">Somma di prodotti:</label>
-                      <input type="text" data-correct-answer="<%= item[:prod] %>" class="w-full px-3 py-2 border-2 border-cyan-300 rounded" placeholder="es: 6 × 10000000 + 7 × 1000000 + ...">
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            </div>
+          </div>
+          <!-- Numeri da svolgere sul quaderno -->
+          <div class="space-y-4">
+            <% ["67 083 105", "190 315 070", "23 500 167 000"].each do |num| %>
+              <div class="flex items-center gap-3">
+                <span class="font-bold text-cyan-500 whitespace-nowrap"><%= num %></span>
+                <span class="text-pink-600">→</span>
+                <span class="text-gray-400">.................................................................</span>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>

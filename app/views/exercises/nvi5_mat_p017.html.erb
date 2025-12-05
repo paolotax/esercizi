@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -32,15 +32,15 @@
       <div class="grid grid-cols-[auto_auto_1fr] gap-x-3 gap-y-3 items-center">
         <label><span class="text-pink-600">&#8226;</span> come <span class="font-semibold">somma di addendi</span></label>
         <span class="text-pink-600">→</span>
-        <input type="text" data-correct-answer="20000+5000+100+40+9" class="px-4 py-2 border-2 border-cyan-300 rounded font-mono" placeholder="es: 20000+5000+100+40+9">
+        <input type="text" data-correct-answer="20000+5000+100+40+9" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent font-mono">
 
         <label><span class="text-pink-600">&#8226;</span> come <span class="font-semibold">somma di prodotti</span></label>
         <span class="text-pink-600">→</span>
-        <input type="text" data-correct-answer="2×10000+5×1000+1×100+4×10+9×1" class="px-4 py-2 border-2 border-cyan-300 rounded font-mono" placeholder="es: 2×10000+5×1000+1×100+4×10+9×1">
+        <input type="text" data-correct-answer="2×10000+5×1000+1×100+4×10+9×1" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent font-mono">
 
         <label><span class="text-pink-600">&#8226;</span> come <span class="font-semibold">polinomio numerico</span></label>
         <span class="text-pink-600">→</span>
-        <input type="text" data-correct-answer="2×10^4+5×10^3+1×10^2+4×10^1+9×10^0" class="px-4 py-2 border-2 border-cyan-300 rounded font-mono" placeholder="es: 2×10^4+5×10^3+1×10^2+4×10^1+9×10^0">
+        <input type="text" data-correct-answer="2×10^4+5×10^3+1×10^2+4×10^1+9×10^0" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent font-mono">
       </div>
       <p class="text-gray-500 mt-2 ml-4">Usa ^ per l'esponente (es: 10^4)</p>
     </div>
@@ -52,37 +52,43 @@
       <div class="space-y-6">
         <!-- Exercise 1: Scrivi il numero corrispondente -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
-            <p class="font-bold text-gray-700">Scrivi il numero corrispondente come nell'esempio.</p>
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(1) %>
+              Scrivi il numero corrispondente come nell'esempio.
+            </p>
           </div>
-          <div class="space-y-3 ml-11">
+          <div class="space-y-3">
             <!-- Esempio -->
             <div class="flex items-center gap-3 p-3 bg-white rounded-lg">
-              <span class="font-mono text-gray-700">8 × 10<sup>4</sup> + 2 × 10<sup>2</sup> =</span>
-              <span class="font-bold text-cyan-500 whitespace-nowrap">80 200</span>
+              <span class="font-mono text-gray-700">8 × 10<sup>5</sup> + 2 × 10<sup>2</sup> =</span>
+              <span class="font-bold text-cyan-500 whitespace-nowrap">800 200</span>
             </div>
-            <% [
-              { expr: "3 × 10<sup>4</sup> + 3 × 10<sup>3</sup> + 3 =", answer: "33003" },
-              { expr: "5 × 10<sup>8</sup> + 5 × 10<sup>4</sup> + 1 × 10<sup>1</sup> =", answer: "500050010" },
-              { expr: "6 × 10<sup>5</sup> + 7 × 10<sup>4</sup> + 4 × 10<sup>3</sup> + 5 × 10<sup>2</sup> =", answer: "674500" },
-              { expr: "9 × 10<sup>5</sup> + 8 × 10<sup>1</sup> + 6 × 10<sup>0</sup> =", answer: "900086" }
-            ].each do |item| %>
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-gray-700 flex-shrink-0"><%= item[:expr].html_safe %></span>
-                <input type="text" data-correct-answer="<%= item[:answer] %>" class="flex-1 min-w-0 px-2 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
-              </div>
-            <% end %>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <% [
+                { expr: "3 × 10<sup>6</sup> + 3 × 10<sup>5</sup> =", answer: "3300000" },
+                { expr: "6 × 10<sup>5</sup> + 7 × 10<sup>4</sup> + 4 × 10<sup>3</sup> + 5 × 10<sup>2</sup> =", answer: "674500" },
+                { expr: "5 × 10<sup>8</sup> + 5 × 10<sup>5</sup> + 1 × 10<sup>4</sup> =", answer: "500510000" },
+                { expr: "9 × 10<sup>3</sup> + 8 × 10<sup>1</sup> + 6 × 1<sup>0</sup> =", answer: "9086" }
+              ].each do |item| %>
+                <div class="flex items-center gap-3">
+                  <span class="font-mono text-gray-700 flex-shrink-0"><%= item[:expr].html_safe %></span>
+                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
 
         <!-- Exercise 2: Sul quaderno -->
         <div>
-          <div class="flex items-start gap-3 mb-4">
-            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
-            <p class="font-bold text-gray-700">Scrivi sul quaderno i seguenti numeri come polinomi numerici come nell'esempio.</p>
+          <div class="mb-4">
+            <p class="font-bold text-gray-700">
+              <%= numero_esercizio_badge(2) %>
+              Scrivi sul quaderno i seguenti numeri come polinomi numerici come nell'esempio.
+            </p>
           </div>
-          <div class="ml-11">
+          <div>
             <p class="text-gray-800 mb-3 font-semibold">Esempio:</p>
             <div class="p-3 bg-white rounded-lg mb-4">
               <p class="font-mono text-cyan-500"><span class="whitespace-nowrap">2 345</span> → 2 × 10<sup>3</sup> + 3 × 10<sup>2</sup> + 4 × 10<sup>1</sup> + 5 × 10<sup>0</sup></p>
@@ -133,21 +139,21 @@
                 <td class="border-2 border-blue-300 p-3 text-center">4<sup>1</sup></td>
                 <td class="border-2 border-blue-300 p-3 text-center">4<sup>2</sup></td>
                 <td class="border-2 border-blue-300 p-3 text-center">
-                  <input type="text" data-correct-answer="4^3" class="w-14 px-2 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+                  <input type="text" data-correct-answer="4^3" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                 </td>
                 <td class="border-2 border-blue-300 p-3 text-center">4<sup>4</sup></td>
                 <td class="border-2 border-blue-300 p-3 text-center">
-                  <input type="text" data-correct-answer="4^5" class="w-14 px-2 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+                  <input type="text" data-correct-answer="4^5" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                 </td>
               </tr>
               <tr class="bg-green-50">
                 <td class="border-2 border-green-300 p-3 font-bold">risultato</td>
                 <td class="border-2 border-green-300 p-3 text-center font-bold">4</td>
                 <td class="border-2 border-green-300 p-3 text-center">
-                  <input type="text" data-correct-answer="16" class="w-14 px-2 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+                  <input type="text" data-correct-answer="16" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                 </td>
                 <td class="border-2 border-green-300 p-3 text-center">
-                  <input type="text" data-correct-answer="64" class="w-14 px-2 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+                  <input type="text" data-correct-answer="64" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                 </td>
                 <td class="border-2 border-green-300 p-3 text-center font-bold">256</td>
                 <td class="border-2 border-green-300 p-3 text-center font-bold">1024</td>
@@ -160,11 +166,11 @@
           <p class="text-gray-800">Osserva la cifra delle unità nella riga dei risultati e immagina di continuare.</p>
           <div class="flex items-center gap-3">
             <span class="text-gray-700"><span class="text-pink-600">&#8226;</span> Quale sarà la cifra delle unità nel risultato di 4<sup>6</sup>?</span>
-            <input type="text" data-correct-answer="6" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+            <input type="text" data-correct-answer="6" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
           </div>
           <div class="flex items-center gap-3">
-            <span class="text-gray-700"><span class="text-pink-600">&#8226;</span> E quella del risultato di 4<sup>9</sup>?</span>
-            <input type="text" data-correct-answer="4" class="w-16 px-2 py-1 border-2 border-cyan-300 rounded text-center" placeholder="...">
+            <span class="text-gray-700"><span class="text-pink-600">&#8226;</span> E quella del risultato di 4<sup>7</sup>?</span>
+            <input type="text" data-correct-answer="4" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
           </div>
           <p class="text-gray-800 mt-4">
             Calcola con la calcolatrice (a pagina 23 puoi imparare come usarla) le potenze di 2 fino a 2<sup>8</sup>.
@@ -176,13 +182,10 @@
     </div>
 
     <!-- Riferimento quaderno -->
-    <div class="p-4 text-right">
-      <p class="text-gray-700">
-        <span class="font-bold">Quaderno</span> pp. <a href="#" class="text-red-600 font-bold hover:underline">181</a>, <a href="#" class="text-red-600 font-bold hover:underline">183</a>
-      </p>
+    <div class="text-right">
+      <span class="text-pink-600 font-bold">Quaderno esercizi</span> pp. 181, 183
     </div>
 
-    <!-- Exercise Controls -->
-    <%= render 'shared/exercise_controls', color: 'blue' %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>
