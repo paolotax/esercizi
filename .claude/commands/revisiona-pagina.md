@@ -269,6 +269,7 @@ Per colorare i bullet delle liste usa `marker:`:
 
 - **Teoria/introduzione (celeste):** `bg-custom-blue` oppure `bg-custom-blue rounded-lg`
 - **Regola/evidenziazione (bordo rosa):** `bg-white rounded-2xl border-3 border-custom-pink`
+- **Regola/evidenziazione (bordo blu):** `bg-white rounded-2xl border-3 border-blue-400`
 - **Regola/spiegazione (sfondo rosa chiaro):** `p-4 bg-pink-light rounded-3xl` (colore #EFD9E9)
 - **Esercizi:** `bg-orange-100 rounded-lg`
 - **Divisore esercizi:** `divide-custom-pink` o `divide-<%= @pagina.base_color %>-300`

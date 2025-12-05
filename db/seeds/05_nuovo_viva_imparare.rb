@@ -131,7 +131,11 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 74, titolo: "Riflettere sui Dati e sul Risultato", slug: "nvi5_mat_p074", view_template: "nvi5_mat_p074" },
   { numero: 75, titolo: "Problemi con Divisione", slug: "nvi5_mat_p075", view_template: "nvi5_mat_p075", sottotitolo: "RISOLVERE PROBLEMI", base_color: "orange" },
   { numero: 76, titolo: "TUTTOPROBLEMI", slug: "nvi5_mat_p076", view_template: "nvi5_mat_p076", sottotitolo: "RISOLVERE PROBLEMI", base_color: "green" },
-  { numero: 77, titolo: "TUTTOPROBLEMI", slug: "nvi5_mat_p077", view_template: "nvi5_mat_p077", sottotitolo: "RISOLVERE PROBLEMI", base_color: "indigo" }
+  { numero: 77, titolo: "TUTTOPROBLEMI", slug: "nvi5_mat_p077", view_template: "nvi5_mat_p077", sottotitolo: "RISOLVERE PROBLEMI", base_color: "indigo" },
+  { numero: 80, titolo: "LE MISURE DI LUNGHEZZA E DI CAPACITÀ", slug: "nvi5_mat_p080", view_template: "nvi5_mat_p080", sottotitolo: "MISURA", base_color: "pink" },
+  { numero: 81, titolo: "LE MISURE DI MASSA", slug: "nvi5_mat_p081", view_template: "nvi5_mat_p081", sottotitolo: "MISURA", base_color: "pink" },
+  { numero: 82, titolo: "LE EQUIVALENZE", slug: "nvi5_mat_p082", view_template: "nvi5_mat_p082", sottotitolo: "MISURA", base_color: "pink" },
+  { numero: 83, titolo: "LUNGHEZZA, CAPACITÀ E MASSA", slug: "nvi5_mat_p083", view_template: "nvi5_mat_p083", sottotitolo: "ESERCIZI", base_color: "orange" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end
