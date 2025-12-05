@@ -310,6 +310,53 @@ Per colorare i bullet delle liste usa `marker:`:
 
 ---
 
+## CHECKBOX E RADIO BUTTON (IMPORTANTE!)
+
+**IMPORTANTE:** `data-correct-answer` deve essere SEMPRE sull'`<input>`, MAI sulla `<label>`!
+
+**Checkbox (risposta multipla):**
+```erb
+<!-- Ogni checkbox deve avere data-correct-answer="true" o "false" -->
+<label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+  <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+  <span>Risposta corretta</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+  <input type="checkbox" class="w-5 h-5" data-correct-answer="false">
+  <span>Risposta sbagliata</span>
+</label>
+```
+
+**Radio button (scelta singola):**
+```erb
+<!-- Solo la risposta corretta ha data-correct-answer="true" -->
+<div class="inline-flex border border-gray-400 rounded overflow-hidden">
+  <label class="px-3 py-1 cursor-pointer hover:bg-gray-100 border-r border-gray-400">
+    <input type="radio" name="domanda1" value="si" class="mr-1">Sì
+  </label>
+  <label class="px-3 py-1 cursor-pointer hover:bg-gray-100">
+    <input type="radio" name="domanda1" value="no" data-correct-answer="true" class="mr-1">No
+  </label>
+</div>
+```
+
+**ERRORI COMUNI DA EVITARE:**
+```erb
+<!-- SBAGLIATO! data-correct sulla label -->
+<label data-correct="true">
+  <input type="checkbox">
+</label>
+
+<!-- SBAGLIATO! data-correct-answer="si" o "no" -->
+<input type="radio" data-correct-answer="si">
+
+<!-- CORRETTO -->
+<input type="checkbox" data-correct-answer="true">
+<input type="radio" data-correct-answer="true">
+```
+
+---
+
 ## STIMULUS CONTROLLERS
 
 **svg-colorable:** Per colorare figure
@@ -365,6 +412,7 @@ Per colorare i bullet delle liste usa `marker:`:
 - [ ] Badge IMPARARE TUTTI con `imparare_tutti_badge(N)` se presente
 - [ ] Colori dinamici con `@pagina.base_color`
 - [ ] Input con `border-2 border-pink-400`
+- [ ] Checkbox/Radio con `data-correct-answer` su `<input>` (mai su label!)
 - [ ] Frazioni con partial `shared/frazione`
 - [ ] Layout responsive (md:)
 - [ ] Box colorati corretti
