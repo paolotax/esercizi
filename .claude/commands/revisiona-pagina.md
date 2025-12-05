@@ -274,18 +274,44 @@ Per colorare i bullet delle liste usa `marker:`:
 - **Divisore esercizi:** `divide-custom-pink` o `divide-<%= @pagina.base_color %>-300`
 - **Esempio:** `p-3 mb-4` (senza background)
 
-**Layout spiegazione + regola (2 colonne):**
+**Layout operazioni + regola (allineati):**
 ```erb
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
-  <p class="text-gray-800">
-    Testo descrittivo a sinistra...
-  </p>
-  <div class="p-4 bg-pink-light rounded-3xl">
-    <p class="text-gray-800">
-      Per moltiplicare un <strong>numero naturale</strong> per 10, 100, <span class="whitespace-nowrap">1 000</span> basta <strong>aggiungere uno</strong>, <strong>due</strong>, <strong>tre zeri</strong> alla fine del numero.
+<div class="flex flex-col md:flex-row gap-4 items-start">
+  <div class="flex-1 space-y-2">
+    <p class="text-gray-700">
+      25% di 15 <span class="text-pink-600">→</span>
+      <%= render 'shared/frazione', num: 25, den: 100 %>
+      di 15
+    </p>
+    <p class="text-gray-700">(15 : 100) × 25 =</p>
+    <p class="text-gray-700">0,15 × 25 = 3,75 <span class="text-pink-600">← valore dello sconto</span></p>
+    <p class="text-gray-700">15 − 3,75 = 11,25 <span class="text-pink-600">← prezzo scontato</span></p>
+  </div>
+
+  <div class="p-4 bg-pink-light rounded-3xl max-w-xs">
+    <p class="text-gray-700">
+      Chi compra un oggetto con il prezzo ribassato riceve uno <strong>sconto</strong> sul prezzo iniziale.
     </p>
   </div>
 </div>
+```
+
+**Box risposta (bianco + azzurro):**
+```erb
+<div class="flex items-center gap-2 mt-4 flex-wrap">
+  <span class="text-gray-700">Ora puoi rispondere:</span>
+  <span class="p-2 bg-custom-blue rounded-lg">Stefano ha pagato il libro
+    <input type="text" data-correct-answer="11,25" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent mx-1">
+    euro e ha risparmiato
+    <input type="text" data-correct-answer="3,75" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent mx-1">
+    euro.</span>
+</div>
+```
+
+**Frecce e label pink negli esempi:**
+```erb
+<span class="text-pink-600">→</span>
+<span class="text-pink-600">← valore dello sconto</span>
 ```
 
 **Numeri grandi senza a capo:**
