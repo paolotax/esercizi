@@ -213,7 +213,26 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 157, titolo: "RELAZIONI, DATI E PREVISIONI", slug: "nvi5_mat_p157", view_template: "nvi5_mat_p157", sottotitolo: "PAROLE AL CENTRO", base_color: "pink" },
   { numero: 158, titolo: "CLASSIFICARE", slug: "nvi5_mat_p158", view_template: "nvi5_mat_p158", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "pink" },
   { numero: 159, titolo: "STABILIRE RELAZIONI", slug: "nvi5_mat_p159", view_template: "nvi5_mat_p159", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "pink" },
-  { numero: 160, titolo: "CLASSIFICAZIONI E RELAZIONI", slug: "nvi5_mat_p160", view_template: "nvi5_mat_p160", sottotitolo: "ESERCIZI", base_color: "orange" }
+  { numero: 160, titolo: "CLASSIFICAZIONI E RELAZIONI", slug: "nvi5_mat_p160", view_template: "nvi5_mat_p160", sottotitolo: "ESERCIZI", base_color: "orange" },
+  { numero: 161, titolo: "L'INDAGINE STATISTICA", slug: "nvi5_mat_p161", view_template: "nvi5_mat_p161", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "pink" },
+  { numero: 162, titolo: "INDAGINE STATISTICA", slug: "nvi5_mat_p162", view_template: "nvi5_mat_p162", sottotitolo: "AGNESE SONATO", base_color: "pink" },
+  { numero: 163, titolo: "INDAGINE STATISTICA", slug: "nvi5_mat_p163", view_template: "nvi5_mat_p163", sottotitolo: "AGNESE SONATO", base_color: "pink" },
+  { numero: 164, titolo: "AREOGRAMMI E PERCENTUALI", slug: "nvi5_mat_p164", view_template: "nvi5_mat_p164", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "pink" },
+  { numero: 165, titolo: "IL GRAFICO CARTESIANO", slug: "nvi5_mat_p165", view_template: "nvi5_mat_p165", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "pink" },
+  { numero: 166, titolo: "MODA, MEDIA E MEDIANA", slug: "nvi5_mat_p166", view_template: "nvi5_mat_p166", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "pink" },
+  { numero: 167, titolo: "COMBINAZIONI E PERMUTAZIONI", slug: "nvi5_mat_p167", view_template: "nvi5_mat_p167", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "pink" },
+  { numero: 168, titolo: "LA PROBABILITÀ", slug: "nvi5_mat_p168", view_template: "nvi5_mat_p168", sottotitolo: "RELAZIONI, DATI E PREVISIONI", base_color: "pink" },
+  { numero: 169, titolo: "STATISTICA E PROBABILITÀ", slug: "nvi5_mat_p169", view_template: "nvi5_mat_p169", sottotitolo: "ESERCIZI", base_color: "orange" },
+  { numero: 170, titolo: "RELAZIONI, DATI E PREVISIONI", slug: "nvi5_mat_p170", view_template: "nvi5_mat_p170", sottotitolo: "VERIFICA", base_color: "pink" },
+  { numero: 171, titolo: "RELAZIONI, DATI E PREVISIONI", slug: "nvi5_mat_p171", view_template: "nvi5_mat_p171", sottotitolo: "MODELLO INVALSI", base_color: "pink" },
+  { numero: 172, titolo: "LE CARTE ELETTRONICHE", slug: "nvi5_mat_p172", view_template: "nvi5_mat_p172", sottotitolo: "Educazione finanziaria", base_color: "pink" },
+  { numero: 173, titolo: "LA BANCA E IL CONTO CORRENTE", slug: "nvi5_mat_p173", view_template: "nvi5_mat_p173", sottotitolo: "Educazione finanziaria", base_color: "pink" },
+  { numero: 174, titolo: "FINANZIAMENTO E INTERESSI", slug: "nvi5_mat_p174", view_template: "nvi5_mat_p174", sottotitolo: "Educazione finanziaria", base_color: "pink" },
+  { numero: 176, titolo: "MILIONI E MILIARDI", slug: "nvi5_mat_p176", view_template: "nvi5_mat_p176", sottotitolo: "ESERCIZI", base_color: "blue" },
+  { numero: 177, titolo: "SCRITTURE DIVERSE DEI NUMERI", slug: "nvi5_mat_p177", view_template: "nvi5_mat_p177", sottotitolo: "ESERCIZI", base_color: "blue" },
+  { numero: 178, titolo: "CONFRONTARE E ORDINARE NUMERI GRANDI", slug: "nvi5_mat_p178", view_template: "nvi5_mat_p178", sottotitolo: "ESERCIZI", base_color: "blue" },
+  { numero: 179, titolo: "NUMERI DECIMALI (1)", slug: "nvi5_mat_p179", view_template: "nvi5_mat_p179", sottotitolo: "ESERCIZI", base_color: "blue" },
+  { numero: 180, titolo: "NUMERI DECIMALI (2)", slug: "nvi5_mat_p180", view_template: "nvi5_mat_p180", sottotitolo: "ESERCIZI", base_color: "blue" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end

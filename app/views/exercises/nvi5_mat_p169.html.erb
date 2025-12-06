@@ -1,0 +1,254 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <!-- Esercizio 1: IMPARARE TUTTI -->
+      <div class="p-4 bg-white rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Matteo ha registrato per un anno la temperatura il primo giorno di ogni mese alle 7:00 del mattino. Ecco il grafico che ha realizzato. Osservalo e rispondi alle domande.
+        </p>
+
+        <div class="flex justify-center mb-4">
+          <%= image_tag "nvi5_mat/p169/p169_01.jpg", class: "max-w-full rounded-lg", alt: "Grafico temperature" %>
+        </div>
+
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>In quale mese ha registrato la temperatura più bassa?</span>
+            <input type="text" data-correct-answer="gennaio" class="flex-1 min-w-[120px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </li>
+          <li class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>In quale la temperatura più alta?</span>
+            <input type="text" data-correct-answer="agosto" class="flex-1 min-w-[120px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </li>
+          <li class="flex items-start gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>In 3 mesi ha registrato la stessa temperatura: qual è e quali sono i mesi?</span>
+            <input type="text" data-correct-answer="+15°, aprile, giugno, ottobre" class="flex-1 min-w-[200px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </li>
+        </ul>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Il grafico a torta rappresenta il colore preferito dagli alunni delle classi quinte di una scuola. Osservalo e indica con una X se le affermazioni sono vere (V) o false (F).
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flex justify-center">
+            <%= image_tag "nvi5_mat/p169/p169_02.jpg", class: "max-w-xs", alt: "Grafico a torta colori" %>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex items-center gap-2"><span class="w-4 h-4 bg-yellow-400 rounded"></span><span>giallo</span></div>
+            <div class="flex items-center gap-2"><span class="w-4 h-4 bg-green-500 rounded"></span><span>verde</span></div>
+            <div class="flex items-center gap-2"><span class="w-4 h-4 bg-blue-400 rounded"></span><span>azzurro</span></div>
+            <div class="flex items-center gap-2"><span class="w-4 h-4 bg-purple-500 rounded"></span><span>viola</span></div>
+          </div>
+        </div>
+
+        <div class="space-y-3 mt-4">
+          <div class="flex items-center justify-between gap-4 flex-wrap">
+            <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Il 25% degli alunni preferisce il viola.</span>
+            <div class="flex gap-2">
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                <input type="radio" name="vf1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                <span>V</span>
+              </label>
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                <input type="radio" name="vf1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                <span>F</span>
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-4 flex-wrap">
+            <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Il 15% degli alunni preferisce l'azzurro.</span>
+            <div class="flex gap-2">
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                <input type="radio" name="vf2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                <span>V</span>
+              </label>
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                <input type="radio" name="vf2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                <span>F</span>
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-4 flex-wrap">
+            <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Il 50% degli alunni preferisce il verde.</span>
+            <div class="flex gap-2">
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                <input type="radio" name="vf3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                <span>V</span>
+              </label>
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                <input type="radio" name="vf3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                <span>F</span>
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-4 flex-wrap">
+            <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Il 10% degli alunni preferisce il giallo.</span>
+            <div class="flex gap-2">
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                <input type="radio" name="vf4" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                <span>V</span>
+              </label>
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                <input type="radio" name="vf4" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                <span>F</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 3 -->
+      <div class="mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Per una settimana, da lunedì a sabato, Laura ha annotato il tempo che ha dedicato ai compiti e allo sport. Osserva la tabella che ha compilato, calcola e scrivi le medie giornaliere; poi rispondi.
+        </p>
+
+        <div class="overflow-x-auto mb-4">
+          <table class="border-collapse border border-gray-300 mx-auto">
+            <thead>
+              <tr>
+                <th class="p-2 border border-gray-300 bg-white"></th>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">lun.</th>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">mar.</th>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">mer.</th>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">gio.</th>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">ven.</th>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">sab.</th>
+                <th class="p-2 border border-gray-300 bg-cyan-100 text-center font-bold">media</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-gray-300 bg-white text-center"><strong>compiti</strong><br>(in min)</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">130</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">140</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">90</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">120</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">90</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">150</td>
+                <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="120" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-gray-300 bg-white text-center"><strong>sport</strong><br>(in min)</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">90</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">75</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">90</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">45</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">120</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">120</td>
+                <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="90" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">Laura, in media al giorno, ha dedicato più tempo alla pratica sportiva o ai compiti?</span>
+          <input type="text" data-correct-answer="ai compiti" class="flex-1 min-w-[120px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+      </div>
+
+      <!-- Esercizio 4 -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(4) %>
+          Osserva i sacchetti e calcola per ognuno di essi la probabilità di pescare una pallina.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Gialla -->
+          <div class="flex items-center gap-4">
+            <%= image_tag "nvi5_mat/p169/output-1715938802169_154_989_78_89.png", class: "w-16", alt: "Sacchetto gialla" %>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700">gialla <span class="text-<%= @pagina.base_color %>-500">→</span></span>
+                <input type="text" data-correct-answer="3" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span>su</span>
+                <input type="text" data-correct-answer="10" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-1">
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "10" %> =
+                <input type="text" data-correct-answer="0,3" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> =
+                <input type="text" data-correct-answer="30" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">%
+              </div>
+            </div>
+          </div>
+
+          <!-- Rosa -->
+          <div class="flex items-center gap-4">
+            <%= image_tag "nvi5_mat/p169/output-1715938802169_603_990_74_90.png", class: "w-16", alt: "Sacchetto rosa" %>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700">rosa <span class="text-<%= @pagina.base_color %>-500">→</span></span>
+                <input type="text" data-correct-answer="4" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span>su</span>
+                <input type="text" data-correct-answer="10" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-1">
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "4", den_answer: "10" %> =
+                <input type="text" data-correct-answer="0,4" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> =
+                <input type="text" data-correct-answer="40" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">%
+              </div>
+            </div>
+          </div>
+
+          <!-- Blu -->
+          <div class="flex items-center gap-4">
+            <%= image_tag "nvi5_mat/p169/output-1715938802169_157_1084_73_91.png", class: "w-16", alt: "Sacchetto blu" %>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700">blu <span class="text-<%= @pagina.base_color %>-500">→</span></span>
+                <input type="text" data-correct-answer="2" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span>su</span>
+                <input type="text" data-correct-answer="10" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-1">
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "2", den_answer: "10" %> =
+                <input type="text" data-correct-answer="0,2" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> =
+                <input type="text" data-correct-answer="20" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">%
+              </div>
+            </div>
+          </div>
+
+          <!-- Verde -->
+          <div class="flex items-center gap-4">
+            <%= image_tag "nvi5_mat/p169/output-1715938802169_598_1086_80_88.png", class: "w-16", alt: "Sacchetto verde" %>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700">verde <span class="text-<%= @pagina.base_color %>-500">→</span></span>
+                <input type="text" data-correct-answer="1" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span>su</span>
+                <input type="text" data-correct-answer="10" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-1">
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "1", den_answer: "10" %> =
+                <input type="text" data-correct-answer="0,1" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> =
+                <input type="text" data-correct-answer="10" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">%
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

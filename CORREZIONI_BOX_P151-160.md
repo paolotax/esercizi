@@ -104,16 +104,23 @@ Quando eseguo le correzioni:
 **Sottotitolo:** RELAZIONI, DATI E PREVISIONI
 
 ### Box utilizzati:
-- **Box teoria**: `bg-custom-blue rounded-lg` - Introduzione classificazione
-- **Box regola**: `bg-white p-3 rounded-lg border border-pink-300` - Definizione "Classificare"
-- **Diagramma Eulero-Venn**: `bg-orange-100 rounded-lg` - Esercizio con immagine
-- **Diagramma Carroll**: `bg-orange-100 rounded-lg` - Tabella con input
-- **Box ESERCIZI**: `bg-orange-100 rounded-lg` - Esercizio quaderni cartoleria
-- **Tabella Carroll quaderni**: `border-collapse border border-gray-400` con header `bg-pink-100`
+- **Box teoria**: `bg-white border-3 border-blue-500 rounded-lg relative` - Con regola in posizione assoluta
+- **Box regola**: `absolute -top-4 right-4 bg-white px-4 py-2 rounded-3xl shadow-sm border border-gray-200` - Attaccato in alto a destra
+- **Diagramma Eulero-Venn + Carroll**: Grid 2 colonne con divider `md:divide-x-2 md:divide-<%= @pagina.base_color %>-300`
+- **Titoli con pallino**: `<span class="inline-block w-3 h-3 rounded-full bg-<%= @pagina.base_color %>-500 mr-2"></span>`
+- **Tabella Carroll**: Header MULTIPLI `bg-red-100 text-red-600`, Header NUMERI PARI/DISPARI `bg-cyan-100 text-cyan-600`
+- **Diagramma ad albero**: Sezione con legenda R/NR/Q/NQ/G/NG
+- **Box ESERCIZI**: `bg-orange-100 rounded-lg` (senza header ESERCIZI)
 - **Quaderno link**: Partial per collegamento p. 258
 
-### Correzioni da fare:
-
+### Correzioni fatte: ✅
+- Box teoria bg-white border-3 border-blue-500
+- Box regola rounded-3xl con margine negativo attaccato in alto a destra
+- Diagramma Eulero-Venn e Carroll affiancati con divider
+- Titoli con pallino span base_color
+- Tabella Carroll: header MULTIPLI rossi, righe NUMERI PARI/DISPARI azzurri
+- Aggiunto box diagramma ad albero con legenda
+- Rimosso header ESERCIZI
 
 ---
 
@@ -121,26 +128,35 @@ Quando eseguo le correzioni:
 **Sottotitolo:** RELAZIONI, DATI E PREVISIONI
 
 ### Box utilizzati:
-- **Box esercizio frecce**: `bg-orange-100 rounded-lg` - Metti in relazione le persone
-- **Box esercizio frecce doppio/metà**: `bg-orange-100 rounded-lg` - Freccia rossa e blu con radio
-- **Box esercizio cugina**: `bg-orange-100 rounded-lg` - Relazione simmetrica
-- **Box ESERCIZI**: `bg-orange-100 rounded-lg` - Relazioni con checkbox per simmetria
+- **Box esercizio 1**: Nessuno sfondo, no rounded, no padding - Solo titolo con pallino base_color
+- **Box esercizio 2**: Flex con immagine a sinistra (`md:flex-row`) e testo a destra
+- **Box esercizio 3**: Flex con immagine a destra (`md:flex-row-reverse`) e testo a sinistra
+- **Box ESERCIZI**: `bg-orange-100 rounded-lg` (senza header ESERCIZI) - Relazioni con checkbox per simmetria
 
-### Correzioni da fare:
-
+### Correzioni fatte: ✅
+- Box 1 senza bg, rounded, padding - titolo con pallino span base_color
+- Box 2 flex con immagine a sinistra e testo a destra
+- Box 3 flex con immagine a destra e testo a sinistra
+- Rimosso header ESERCIZI
 
 ---
 
-## p160 - CLASSIFICAZIONI E RELAZIONI (base_color: orange)
+## p160 - CLASSIFICAZIONI E RELAZIONI (base_color: pink)
 **Sottotitolo:** ESERCIZI
 
 ### Box utilizzati:
-- **Box IMPARARE TUTTI**: `bg-white rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500` - Es. 1 con diagramma Eulero-Venn
-- **Tabella vacanze**: `border-collapse border border-gray-400` con header `bg-pink-100`
-- **Box problema età**: `bg-white rounded-lg border border-gray-300` - Testo problema
-- **Area disegno schema**: `bg-gray-50 rounded-lg` con `border-2 border-dashed border-gray-300`
+- **Layout 2 colonne**: es 1-2 sinistra, es 3-4-5-6 destra con `md:divide-x-2 md:divide-orange-300`
+- **Box IMPARARE TUTTI**: `bg-white rounded-2xl border-3 border-blue-500` - Es. 1 con diagramma Eulero-Venn
+- **Numeri con pallini**: `text-<%= @pagina.base_color %>-500` per i separatori
+- **Tabella vacanze**: header "bambini" `bg-white`, header "mare/montagna" `bg-cyan-100`, celle `bg-white`, bordi `border-cyan-400`
+- **Esercizio 6**: testo senza box, risposte su grid 2 colonne `grid grid-cols-2 gap-2`
 
-### Correzioni da fare:
+### Correzioni fatte: ✅
+- Layout 2 colonne con divider
+- Pallini colorati nel box IMPARARE TUTTI
+- Tabella es.2 con header bambini bianco, altri azzurri, celle bianche
+- Immagine es.2 sotto la tabella centrata
+- Es.6 risposte su grid 2 colonne
 
 
 ---
@@ -150,13 +166,16 @@ Quando eseguo le correzioni:
 | Tipo Box | Classe Tailwind | Uso |
 |----------|-----------------|-----|
 | Teoria/Introduzione | `bg-custom-blue rounded-lg` | Spiegazioni iniziali |
-| Regola/Definizione | `bg-white p-3 rounded-lg border border-pink-300` | Box regole |
+| Teoria con bordo | `bg-white border-3 border-blue-500 rounded-lg` | Box teoria p158 |
+| Regola/Definizione | `bg-white rounded-3xl shadow-sm border border-gray-200` | Box regole |
 | Domanda principale | `bg-pink-light rounded-lg` | Domande da rispondere |
 | Esercizi | `bg-orange-100 rounded-lg` | Container esercizi |
 | IMPARARE TUTTI | `bg-white rounded-2xl border-3 border-blue-500` | Primo esercizio evidenziato |
 | Area risposta | `bg-gray-50 rounded-lg` | Textarea/input libero |
 | Tabella | `border-collapse border border-gray-400` | Tabelle dati |
-| Header tabella | `bg-pink-100 border border-gray-400` | Intestazioni tabelle |
+| Header tabella rosa | `bg-pink-100 border border-gray-400` | Intestazioni tabelle |
+| Header tabella rosso | `bg-red-100 text-red-600` | Header MULTIPLI |
+| Header tabella cyan | `bg-cyan-100 text-cyan-600` | Header NUMERI PARI/DISPARI |
 | Celle tabella | `bg-white border border-gray-400` | Celle dati |
 
 ---
@@ -166,5 +185,5 @@ Quando eseguo le correzioni:
 - Le pagine p151-p155 sono "PROBLEMI AL CENTRO" - problemi aperti senza risposta unica
 - Le pagine p156-p157 sono "PAROLE AL CENTRO" - teoria sui tipi di grafici
 - Le pagine p158-p159 sono "RELAZIONI, DATI E PREVISIONI" - classificazione e relazioni
-- La pagina p160 è "ESERCIZI" - esercizi con base_color orange
+- La pagina p160 è "ESERCIZI" - esercizi con base_color pink (non orange come le altre pagine ESERCIZI)
 - Solo p158 ha riferimento al Quaderno esercizi (p. 258)

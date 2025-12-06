@@ -1,0 +1,255 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Istruzioni -->
+    <p class="font-bold text-gray-700">Segna con una <span class="text-custom-sky">X</span> le risposte corrette.</p>
+
+    <!-- Layout 2 colonne -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Colonna sinistra -->
+      <div class="space-y-6">
+        <!-- Esercizio 1 -->
+        <div>
+          <p class="font-bold text-gray-700 mb-3">
+            <%= numero_esercizio_badge(1) %>
+            Osserva l'istogramma relativo alla misura delle scarpe degli alunni di una classe quinta.<br>
+            Quale informazione NON puoi ricavare dall'istogramma?
+          </p>
+
+          <!-- Istogramma -->
+          <div class="overflow-x-auto mb-4">
+            <table class="border-collapse">
+              <tbody>
+                <% [8,7,6,5,4,3,2,1].each do |row| %>
+                  <tr>
+                    <td class="p-1 text-right pr-2 text-gray-600"><%= row %></td>
+                    <% # misura 35: 2 celle, misura 36: 5 celle, misura 37: 8 celle, misura 38: 6 celle, misura 39: 3 celle %>
+                    <% [2, 5, 8, 6, 3].each_with_index do |height, i| %>
+                      <% colors = ['bg-blue-400', 'bg-green-400', 'bg-red-400', 'bg-orange-400', 'bg-cyan-400'] %>
+                      <td class="w-10 h-6 border border-gray-300 <%= row <= height ? colors[i] : 'bg-white' %>"></td>
+                    <% end %>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td class="p-1"></td>
+                  <td class="p-1 text-center text-gray-600">misura 35</td>
+                  <td class="p-1 text-center text-gray-600">misura 36</td>
+                  <td class="p-1 text-center text-gray-600">misura 37</td>
+                  <td class="p-1 text-center text-gray-600">misura 38</td>
+                  <td class="p-1 text-center text-gray-600">misura 39</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="space-y-2">
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es1" class="w-5 h-5" data-correct-answer="false">
+              <span>La moda, cioè la misura di scarpe più comune.</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es1" class="w-5 h-5" data-correct-answer="false">
+              <span>Il numero di alunni che calzano lo stesso numero.</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es1" class="w-5 h-5" data-correct-answer="true">
+              <span>L'età degli alunni della classe.</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es1" class="w-5 h-5" data-correct-answer="false">
+              <span>Il numero di alunni che ha partecipato all'indagine.</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Esercizio 2 -->
+        <div>
+          <p class="font-bold text-gray-700 mb-3">
+            <%= numero_esercizio_badge(2) %>
+            La maestra ha chiesto agli alunni di individuare la mediana delle temperature registrate nell'ultima settimana di marzo.<br>
+            Quale dei quattro alunni ha risposto in modo corretto?
+          </p>
+
+          <div class="overflow-x-auto mb-4">
+            <table class="border-collapse border border-gray-300">
+              <thead>
+                <tr>
+                  <th class="p-2 border border-gray-300 text-center font-bold bg-gray-50">lun.</th>
+                  <th class="p-2 border border-gray-300 text-center font-bold bg-gray-50">mar.</th>
+                  <th class="p-2 border border-gray-300 text-center font-bold bg-gray-50">mer.</th>
+                  <th class="p-2 border border-gray-300 text-center font-bold bg-gray-50">gio.</th>
+                  <th class="p-2 border border-gray-300 text-center font-bold bg-gray-50">ven.</th>
+                  <th class="p-2 border border-gray-300 text-center font-bold bg-gray-50">sab.</th>
+                  <th class="p-2 border border-gray-300 text-center font-bold bg-gray-50">dom.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">11 °C</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">12 °C</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">14 °C</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">15 °C</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">12 °C</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">14 °C</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">13 °C</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es2" class="w-5 h-5" data-correct-answer="false">
+              <span>Davide: 15 °C</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es2" class="w-5 h-5" data-correct-answer="false">
+              <span>Sara: 14 °C</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es2" class="w-5 h-5" data-correct-answer="false">
+              <span>Matteo: 12 °C</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es2" class="w-5 h-5" data-correct-answer="true">
+              <span>Alex: 13 °C</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonna destra -->
+      <div class="space-y-6">
+        <!-- Esercizio 3 -->
+        <div>
+          <p class="font-bold text-gray-700 mb-3">
+            <%= numero_esercizio_badge(3) %>
+            Qual è la media tra questa serie di numeri?
+          </p>
+
+          <p class="text-gray-700 mb-4">
+            5 <span class="text-<%= @pagina.base_color %>-500">•</span>
+            7 <span class="text-<%= @pagina.base_color %>-500">•</span>
+            9 <span class="text-<%= @pagina.base_color %>-500">•</span>
+            12 <span class="text-<%= @pagina.base_color %>-500">•</span>
+            15 <span class="text-<%= @pagina.base_color %>-500">•</span>
+            24 <span class="text-<%= @pagina.base_color %>-500">•</span>
+            30 <span class="text-<%= @pagina.base_color %>-500">•</span>
+            42 <span class="text-<%= @pagina.base_color %>-500">•</span>
+            54
+          </p>
+
+          <div class="grid grid-cols-4 gap-2">
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es3" class="w-5 h-5" data-correct-answer="false">
+              <span>12</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es3" class="w-5 h-5" data-correct-answer="true">
+              <span>22</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es3" class="w-5 h-5" data-correct-answer="false">
+              <span>32</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es3" class="w-5 h-5" data-correct-answer="false">
+              <span>42</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Esercizio 4 -->
+        <div>
+          <p class="font-bold text-gray-700 mb-3">
+            <%= numero_esercizio_badge(4) %>
+            La maestra ha scritto alla lavagna le seguenti cifre: 3 <span class="text-<%= @pagina.base_color %>-500">•</span> 5 <span class="text-<%= @pagina.base_color %>-500">•</span> 5 <span class="text-<%= @pagina.base_color %>-500">•</span> 0 <span class="text-<%= @pagina.base_color %>-500">•</span> 8 <span class="text-<%= @pagina.base_color %>-500">•</span> 1. Poi ha invitato gli alunni a combinarle in modo da formare, usandole tutte una sola volta, il numero minore.<br>
+            Chi tra i quattro alunni ha scritto il numero giusto?
+          </p>
+
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es4" class="w-5 h-5" data-correct-answer="false">
+              <span>Sara: 13558</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es4" class="w-5 h-5" data-correct-answer="false">
+              <span>Giacomo: 013558</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es4" class="w-5 h-5" data-correct-answer="true">
+              <span>Alessia: 103558</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es4" class="w-5 h-5" data-correct-answer="false">
+              <span>José: 855310</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Esercizio 5 -->
+        <div>
+          <p class="font-bold text-gray-700 mb-3">
+            <%= numero_esercizio_badge(5) %>
+            Alcuni amici stanno giocando con un dado. Dopo 20 lanci vince chi ha scommesso sul numero che è uscito più volte.<br>
+            Dopo 17 lanci la situazione è quella riportata in tabella.<br>
+            Quale dei bambini NON afferma una cosa corretta?
+          </p>
+
+          <div class="overflow-x-auto mb-4">
+            <table class="border-collapse border border-gray-300">
+              <thead>
+                <tr>
+                  <th class="p-2 border border-gray-300 text-center font-bold bg-gray-50">numero</th>
+                  <th class="p-2 border border-gray-300 text-center bg-gray-50">&#9856;</th>
+                  <th class="p-2 border border-gray-300 text-center bg-gray-50">&#9857;</th>
+                  <th class="p-2 border border-gray-300 text-center bg-gray-50">&#9858;</th>
+                  <th class="p-2 border border-gray-300 text-center bg-gray-50">&#9859;</th>
+                  <th class="p-2 border border-gray-300 text-center bg-gray-50">&#9860;</th>
+                  <th class="p-2 border border-gray-300 text-center bg-gray-50">&#9861;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center font-bold bg-gray-50">uscite</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">X X X</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">X X</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">X X X</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">X</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">X X X X X</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">X X X</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="space-y-2">
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es5" class="w-5 h-5" data-correct-answer="true">
+              <span>Chiara dice: "È inutile continuare a tirare. Ha vinto chi ha puntato sul 5".</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es5" class="w-5 h-5" data-correct-answer="false">
+              <span>Sergio ribatte: "No, potrebbe anche vincere chi ha puntato su 1, 3 o 6".</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es5" class="w-5 h-5" data-correct-answer="false">
+              <span>Nicola aggiunge: "Negli ultimi tre tiri tutti i numeri hanno la stessa probabilità di uscire".</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" name="es5" class="w-5 h-5" data-correct-answer="false">
+              <span>Miriana conferma: "Potrebbe anche uscire tre volte consecutive lo stesso numero".</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

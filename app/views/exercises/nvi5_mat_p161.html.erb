@@ -1,0 +1,142 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione teorica -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <p class="text-gray-700 mb-4">
+        L'<strong>indagine statistica</strong> è una modalità di <strong>ricerca</strong> per conoscere l'andamento o le caratteristiche di un fenomeno.
+      </p>
+      <ol class="list-decimal pl-6 space-y-2 text-gray-700">
+        <li>Per condurla, occorre individuare un <strong>campione statistico</strong>, cioè un gruppo di soggetti, e procedere alla <strong>raccolta dei dati</strong> attraverso interviste, questionari, misurazioni...</li>
+        <li>I dati vengono poi riordinati in base alla loro <strong>frequenza</strong>, cioè in base al numero di volte in cui ciascuno di essi si presenta. Si stilano perciò delle <strong>tabelle di frequenza</strong>.</li>
+        <li>Si passa poi alla <strong>rappresentazione</strong> visiva di dati mediante <strong>grafici e diagrammi</strong>.</li>
+      </ol>
+    </div>
+
+    <!-- Esempio -->
+    <div class="space-y-4">
+      <p class="text-gray-700">Vediamo un esempio.</p>
+
+      <!-- Punto 1 -->
+      <div class="p-4 bg-<%= @pagina.base_color %>-50 rounded-lg">
+        <p class="text-gray-700 mb-4">
+          <span class="inline-flex items-center justify-center w-6 h-6 bg-<%= @pagina.base_color %>-500 text-white font-bold rounded-full mr-2">1</span>
+          <strong>Per un'indagine ciascuno dei 20 alunni della 5ª C ha indicato il suo passatempo preferito.</strong>
+        </p>
+        <ul class="space-y-2 text-gray-700 ml-8">
+          <li class="flex items-center gap-2">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>Qual è il tema dell'indagine statistica?</span>
+            <input type="text" data-correct-answer="il passatempo preferito" class="flex-1 max-w-xs border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>Da chi è formato il campione statistico?</span>
+            <input type="text" data-correct-answer="20 alunni della 5ª C" class="flex-1 max-w-xs border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </li>
+        </ul>
+      </div>
+
+      <!-- Punto 2 -->
+      <div class="p-4 bg-<%= @pagina.base_color %>-50 rounded-lg">
+        <p class="text-gray-700 mb-4">
+          <span class="inline-flex items-center justify-center w-6 h-6 bg-<%= @pagina.base_color %>-500 text-white font-bold rounded-full mr-2">2</span>
+          <strong>Con le risposte è stata compilata questa tabella di frequenza.</strong>
+        </p>
+        <div class="overflow-x-auto">
+          <table class="border-collapse border border-gray-300 mx-auto">
+            <thead>
+              <tr>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold text-gray-700">passatempo preferito</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">leggere</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">usare il tablet</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">guardare la TV</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">uscire con gli amici</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold text-gray-700">numero di alunni</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">4</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">8</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">3</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Punto 3 -->
+      <div class="p-4 bg-<%= @pagina.base_color %>-50 rounded-lg">
+        <p class="text-gray-700 mb-4">
+          <span class="inline-flex items-center justify-center w-6 h-6 bg-<%= @pagina.base_color %>-500 text-white font-bold rounded-full mr-2">3</span>
+          <strong>I dati sono poi stati rappresentati con un istogramma e con un ideogramma.</strong>
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Istogramma -->
+          <div class="text-center">
+            <%= image_tag "nvi5_mat/p161/p161_01.jpg", class: "max-w-full mx-auto rounded-lg", alt: "Istogramma passatempi" %>
+            <p class="text-gray-700 mt-2">
+              Nell'<strong>ISTOGRAMMA</strong> i dati sono rappresentati mediante <strong>colonne</strong> la cui altezza corrisponde alla frequenza.
+            </p>
+          </div>
+
+          <!-- Ideogramma -->
+          <div class="text-center">
+            <p class="text-gray-600 mb-2"><span class="text-<%= @pagina.base_color %>-500">👤</span> = 1 preferenza (un alunno)</p>
+            <%= image_tag "nvi5_mat/p161/p161_02.jpg", class: "max-w-full mx-auto rounded-lg", alt: "Ideogramma passatempi" %>
+            <p class="text-gray-700 mt-2">
+              Nell'<strong>IDEOGRAMMA</strong> la frequenza è rappresentata da <strong>figure simboliche</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div class="p-4 bg-white rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Osserva la tabella di frequenza di un'indagine sul cibo preferito da alcune bambine. Poi costruisci sul quaderno l'istogramma corrispondente.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="border-collapse border border-gray-300 mx-auto">
+            <thead>
+              <tr>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold text-gray-700">cibo preferito</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">pasta</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">pizza</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">pollo</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">pesce</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">verdura</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold text-gray-700">n. di bambine</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">7</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">8</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">3</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">2</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [259, 263] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,180 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <p class="text-gray-700">
+          Nella vita ci troviamo spesso in situazioni di incertezza che richiedono da parte nostra scelte o decisioni.<br>
+          Ci viene in aiuto la "<strong>matematica del caso</strong>", o "matematica dell'incerto", che ha sviluppato il concetto di probabilità e il <strong>calcolo delle probabilità</strong>.
+        </p>
+      </div>
+
+      <div class="p-4 bg-cyan-100 rounded-lg">
+        <p class="text-gray-700 mb-2">Un <strong>evento</strong> è:</p>
+        <ul class="space-y-1 text-gray-700">
+          <li><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>possibile</strong> se può verificarsi;</li>
+          <li><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>impossibile</strong> se non può verificarsi;</li>
+          <li><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>certo</strong> se si verificherà sicuramente.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Esempio moneta -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <p class="text-gray-700">
+          Immagina di dover lanciare una moneta.<br>
+          Ogni faccia ha 1 possibilità su 2 di uscire, dunque <%= render 'shared/frazione', num: 1, den: 2 %>.<br>
+          Trasformiamo in percentuale:
+        </p>
+        <p class="font-bold text-<%= @pagina.base_color %>-600">
+          <%= render 'shared/frazione', num: 1, den: 2 %> = 1 : 2 = 0,5 = <%= render 'shared/frazione', num: 50, den: 100 %> = 50%
+        </p>
+        <%= image_tag "nvi5_mat/p168/output-1715938802168_431_449_172_85.png", class: "w-40 mx-auto", alt: "Moneta" %>
+      </div>
+
+      <div class="p-4 bg-<%= @pagina.base_color %>-50 rounded-lg">
+        <p class="text-gray-700 mb-2">
+          La <strong>probabilità</strong> che un evento si verifichi dipende dal numero dei <strong>casi favorevoli</strong> rispetto a tutti i <strong>casi possibili</strong>.
+        </p>
+        <div class="p-3 bg-white rounded-lg">
+          <p class="text-center text-gray-700">
+            <strong>probabilità</strong> = <span class="inline-block border-b-2 border-gray-700"><strong>numero casi favorevoli</strong></span> / <strong>numero casi possibili</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esempio dadi -->
+    <div class="space-y-4">
+      <p class="text-gray-700">Immagina ora di dover lanciare due dadi.</p>
+
+      <p class="font-bold text-gray-700">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Osserva, completa la tabella e rispondi.
+      </p>
+
+      <!-- Tabella dadi -->
+      <div class="overflow-x-auto">
+        <table class="border-collapse border border-gray-300 mx-auto">
+          <thead>
+            <tr>
+              <th class="p-2 border border-gray-300 bg-white"></th>
+              <th class="p-2 border border-gray-300 bg-white text-center">⚀</th>
+              <th class="p-2 border border-gray-300 bg-white text-center">⚁</th>
+              <th class="p-2 border border-gray-300 bg-white text-center">⚂</th>
+              <th class="p-2 border border-gray-300 bg-white text-center">⚃</th>
+              <th class="p-2 border border-gray-300 bg-white text-center">⚄</th>
+              <th class="p-2 border border-gray-300 bg-white text-center">⚅</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border border-gray-300 bg-white text-center">⚀</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">2</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">3</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">4</td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="5" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="6" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="7" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-gray-300 bg-white text-center">⚁</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">3</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">4</td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="5" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="6" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="7" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="8" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-gray-300 bg-white text-center">⚂</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">4</td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="5" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="6" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="7" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="8" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="9" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-gray-300 bg-white text-center">⚃</td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="5" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="6" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="7" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="8" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="9" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="10" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-gray-300 bg-white text-center">⚄</td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="6" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="7" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="8" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="9" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="10" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="11" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-gray-300 bg-white text-center">⚅</td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="7" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="8" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="9" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="10" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="11" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><input type="text" data-correct-answer="12" class="w-8 border-b border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Domanda sul 7 -->
+      <div class="space-y-2">
+        <p class="text-gray-700">– Qual è la frazione di probabilità che esca il 7? E la percentuale di probabilità?</p>
+        <p class="text-gray-700 ml-4">
+          Le uscite possibili sono in tutto 36; il 7 ha <input type="text" data-correct-answer="6" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> possibilità di uscire, cioè 6 su 36, <%= render 'shared/frazione', num: 6, den: 36 %>.
+        </p>
+        <p class="text-gray-700 ml-4">Trasformiamo in percentuale:</p>
+        <p class="font-bold text-<%= @pagina.base_color %>-600 ml-4">
+          <%= render 'shared/frazione', num: 6, den: 36 %> = 6 : 36 = 0,17 (approssimato per eccesso)
+        </p>
+        <p class="font-bold text-<%= @pagina.base_color %>-600 ml-4">
+          <%= render 'shared/frazione', num: 17, den: 100 %> = 17% (approssimato per eccesso)
+        </p>
+      </div>
+
+      <!-- Domanda sul 12 -->
+      <div class="space-y-2">
+        <p class="text-gray-700">– Qual è la frazione di probabilità che esca il 12? E la percentuale di probabilità?</p>
+        <p class="text-gray-700 ml-4">
+          Il 12 ha solo <input type="text" data-correct-answer="1" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> possibilità di uscire, cioè <%= render 'shared/frazione', num: 1, den: 36 %>. Trasformiamo in percentuale:
+        </p>
+        <p class="font-bold text-<%= @pagina.base_color %>-600 ml-4">
+          <%= render 'shared/frazione', num: 1, den: 36 %> = 1 : 36 = 0,03 (approssimato per eccesso)
+        </p>
+        <p class="font-bold text-<%= @pagina.base_color %>-600 ml-4">
+          <%= render 'shared/frazione', num: 3, den: 100 %> = 3% (approssimato per eccesso)
+        </p>
+      </div>
+
+      <div class="p-4 bg-<%= @pagina.base_color %>-50 rounded-lg">
+        <p class="text-gray-700">
+          Ricorda che avere più probabilità non significa avere la certezza.<br>
+          Per esempio, se lanci 2 dadi e tu scommetti sull'uscita del 7 e un tuo amico su quella del 12, tu hai più probabilità del tuo avversario di vincere, ma non è certo che ciò avvenga!
+        </p>
+      </div>
+
+      <div class="flex justify-center">
+        <%= image_tag "nvi5_mat/p168/output-1715938802168_715_980_247_128.png", class: "max-w-xs", alt: "Dadi" %>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [262, 263] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

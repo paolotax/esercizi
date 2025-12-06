@@ -1,0 +1,131 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <p class="text-gray-700">
+        Un altro tipo di grafico utilizzato per rappresentare i dati di un'indagine è il <strong>grafico cartesiano</strong>.<br>
+        Si usa soprattutto per visualizzare l'<strong>andamento dei dati</strong>.
+      </p>
+    </div>
+
+    <!-- Esempio grafico -->
+    <div class="space-y-4">
+      <p class="text-gray-700">Questo grafico rappresenta la media mensile delle temperature minime rilevate a Milano.</p>
+
+      <div class="flex justify-center">
+        <%= image_tag "nvi5_mat/p165/p165_01.jpg", class: "max-w-full rounded-lg", alt: "Grafico cartesiano temperature Milano" %>
+      </div>
+    </div>
+
+    <!-- Esercizio completamento -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg space-y-6">
+      <div class="p-4 bg-white rounded-2xl border-3 border-blue-500">
+        <p class="font-bold text-gray-700 mb-4">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> Completa il grafico rappresentando la media mensile delle temperature massime, che trovi indicate qui sotto. Il lavoro è già avviato.
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="space-y-1">
+            <p class="text-gray-700">Gennaio: 4°</p>
+            <p class="text-gray-700">Febbraio: 8°</p>
+            <p class="text-gray-700">Marzo: 13°</p>
+          </div>
+          <div class="space-y-1">
+            <p class="text-gray-700">Aprile: 17°</p>
+            <p class="text-gray-700">Maggio: 21°</p>
+            <p class="text-gray-700">Giugno: 26°</p>
+          </div>
+          <div class="space-y-1">
+            <p class="text-gray-700">Luglio: 29°</p>
+            <p class="text-gray-700">Agosto: 28°</p>
+            <p class="text-gray-700">Settembre: 24°</p>
+          </div>
+          <div class="space-y-1">
+            <p class="text-gray-700">Ottobre: 17°</p>
+            <p class="text-gray-700">Novembre: 10°</p>
+            <p class="text-gray-700">Dicembre: 5°</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domande -->
+      <div class="space-y-4">
+        <p class="font-bold text-gray-700">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> Osserva il grafico e rispondi.
+        </p>
+
+        <!-- Domanda temperatura Milano -->
+        <div class="space-y-2">
+          <p class="text-gray-700">– Dal grafico si comprende che la temperatura di Milano è:</p>
+          <div class="space-y-2 ml-4">
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+              <input type="checkbox" class="w-5 h-5" data-correct-answer="false">
+              <span>fredda tutto l'anno.</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+              <input type="checkbox" class="w-5 h-5" data-correct-answer="false">
+              <span>calda tutto l'anno.</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
+              <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+              <span>variabile a seconda dei mesi.</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Mese più freddo e caldo -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">– Qual è il mese più freddo?</span>
+            <input type="text" data-correct-answer="gennaio" class="flex-1 min-w-[100px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">E il più caldo?</span>
+            <input type="text" data-correct-answer="luglio" class="flex-1 min-w-[100px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+
+        <!-- Stessa temperatura -->
+        <div class="space-y-2">
+          <p class="text-gray-700">– Osserva le temperature massime: ci sono dei mesi che hanno la stessa temperatura?</p>
+          <div class="flex gap-4 ml-4">
+            <label class="relative flex items-center justify-center w-10 h-10 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+              <input type="radio" name="stessa_temp" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+              <span>Sì</span>
+            </label>
+            <label class="relative flex items-center justify-center w-10 h-10 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+              <input type="radio" name="stessa_temp" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span>No</span>
+            </label>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap ml-4">
+            <span class="text-gray-700">Quali?</span>
+            <input type="text" data-correct-answer="aprile e ottobre" class="flex-1 min-w-[150px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+
+        <!-- Differenza maggiore e minore -->
+        <div class="space-y-2">
+          <div class="flex items-start gap-2 flex-wrap">
+            <span class="text-gray-700">– Quali sono i mesi in cui la differenza fra temperatura massima e temperatura minima è maggiore?</span>
+            <input type="text" data-correct-answer="luglio, agosto" class="flex-1 min-w-[150px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">– E quali sono i mesi nei quali è minore?</span>
+            <input type="text" data-correct-answer="dicembre, gennaio, febbraio" class="flex-1 min-w-[200px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [259] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,204 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Tabella classi posizionali -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse border border-gray-300">
+        <thead>
+          <tr>
+            <th class="p-2 border border-gray-300 bg-gray-50">CLASSE</th>
+            <th colspan="3" class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">MILIARDI</th>
+            <th colspan="3" class="p-2 border border-gray-300 bg-green-100 text-center font-bold">MILIONI</th>
+            <th colspan="3" class="p-2 border border-gray-300 bg-yellow-100 text-center font-bold">MIGLIAIA</th>
+            <th colspan="3" class="p-2 border border-gray-300 bg-orange-100 text-center font-bold">UNITÀ SEMPLICI</th>
+          </tr>
+          <tr>
+            <th class="p-2 border border-gray-300 bg-gray-50">ORDINE</th>
+            <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-50 text-center">h<span class="font-bold text-<%= @pagina.base_color %>-600">G</span></th>
+            <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-50 text-center">da<span class="font-bold text-<%= @pagina.base_color %>-600">G</span></th>
+            <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-50 text-center">u<span class="font-bold text-<%= @pagina.base_color %>-600">G</span></th>
+            <th class="p-2 border border-gray-300 bg-green-50 text-center">h<span class="font-bold text-green-600">M</span></th>
+            <th class="p-2 border border-gray-300 bg-green-50 text-center">da<span class="font-bold text-green-600">M</span></th>
+            <th class="p-2 border border-gray-300 bg-green-50 text-center">u<span class="font-bold text-green-600">M</span></th>
+            <th class="p-2 border border-gray-300 bg-yellow-50 text-center">h<span class="font-bold text-yellow-600">k</span></th>
+            <th class="p-2 border border-gray-300 bg-yellow-50 text-center">da<span class="font-bold text-yellow-600">k</span></th>
+            <th class="p-2 border border-gray-300 bg-yellow-50 text-center">u<span class="font-bold text-yellow-600">k</span></th>
+            <th class="p-2 border border-gray-300 bg-orange-50 text-center">h</th>
+            <th class="p-2 border border-gray-300 bg-orange-50 text-center">da</th>
+            <th class="p-2 border border-gray-300 bg-orange-50 text-center">u</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <!-- Esercizio 1: IMPARARE TUTTI -->
+    <div class="p-4 md:p-6 bg-<%= @pagina.base_color %>-100 rounded-lg">
+      <div class="p-4 bg-white rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Inserisci i numeri in tabella, come nell'esempio. Poi leggi ad alta voce.
+        </p>
+
+        <p class="text-gray-700 mb-4">
+          <span class="whitespace-nowrap">35 670 004</span>
+          <span class="text-<%= @pagina.base_color %>-500 mx-1">•</span>
+          <span class="whitespace-nowrap">6 002 390 000</span>
+          <span class="text-<%= @pagina.base_color %>-500 mx-1">•</span>
+          <span class="whitespace-nowrap">250 820 070</span>
+          <span class="text-<%= @pagina.base_color %>-500 mx-1">•</span>
+          <span class="whitespace-nowrap">126 004 000 330</span>
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-gray-300">
+            <thead>
+              <tr>
+                <th colspan="3" class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center">Classe dei miliardi (<span class="font-bold">G</span>)</th>
+                <th colspan="3" class="p-2 border border-gray-300 bg-green-100 text-center">Classe dei milioni (<span class="font-bold">M</span>)</th>
+                <th colspan="3" class="p-2 border border-gray-300 bg-yellow-100 text-center">Classe delle migliaia (<span class="font-bold">k</span>)</th>
+                <th colspan="3" class="p-2 border border-gray-300 bg-orange-100 text-center">Classe delle unità semplici</th>
+              </tr>
+              <tr>
+                <th class="p-1 border border-gray-300 bg-<%= @pagina.base_color %>-50 text-center">h</th>
+                <th class="p-1 border border-gray-300 bg-<%= @pagina.base_color %>-50 text-center">da</th>
+                <th class="p-1 border border-gray-300 bg-<%= @pagina.base_color %>-50 text-center">u</th>
+                <th class="p-1 border border-gray-300 bg-green-50 text-center">h</th>
+                <th class="p-1 border border-gray-300 bg-green-50 text-center">da</th>
+                <th class="p-1 border border-gray-300 bg-green-50 text-center">u</th>
+                <th class="p-1 border border-gray-300 bg-yellow-50 text-center">h</th>
+                <th class="p-1 border border-gray-300 bg-yellow-50 text-center">da</th>
+                <th class="p-1 border border-gray-300 bg-yellow-50 text-center">u</th>
+                <th class="p-1 border border-gray-300 bg-orange-50 text-center">h</th>
+                <th class="p-1 border border-gray-300 bg-orange-50 text-center">da</th>
+                <th class="p-1 border border-gray-300 bg-orange-50 text-center">u</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Esempio: 35 670 004 -->
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-white"></td>
+                <td class="p-2 border border-gray-300 text-center bg-white"></td>
+                <td class="p-2 border border-gray-300 text-center bg-white"></td>
+                <td class="p-2 border border-gray-300 text-center bg-white"></td>
+                <td class="p-2 border border-gray-300 text-center bg-white font-bold text-<%= @pagina.base_color %>-600">3</td>
+                <td class="p-2 border border-gray-300 text-center bg-white font-bold text-<%= @pagina.base_color %>-600">5</td>
+                <td class="p-2 border border-gray-300 text-center bg-white font-bold text-<%= @pagina.base_color %>-600">6</td>
+                <td class="p-2 border border-gray-300 text-center bg-white font-bold text-<%= @pagina.base_color %>-600">7</td>
+                <td class="p-2 border border-gray-300 text-center bg-white font-bold text-<%= @pagina.base_color %>-600">0</td>
+                <td class="p-2 border border-gray-300 text-center bg-white font-bold text-<%= @pagina.base_color %>-600">0</td>
+                <td class="p-2 border border-gray-300 text-center bg-white font-bold text-<%= @pagina.base_color %>-600">0</td>
+                <td class="p-2 border border-gray-300 text-center bg-white font-bold text-<%= @pagina.base_color %>-600">4</td>
+              </tr>
+              <!-- 6 002 390 000 -->
+              <tr>
+                <% 12.times do %>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" class="w-6 text-center border-b border-dotted border-gray-400 bg-transparent">
+                  </td>
+                <% end %>
+              </tr>
+              <!-- 250 820 070 -->
+              <tr>
+                <% 12.times do %>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" class="w-6 text-center border-b border-dotted border-gray-400 bg-transparent">
+                  </td>
+                <% end %>
+              </tr>
+              <!-- 126 004 000 330 -->
+              <tr>
+                <% 12.times do %>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" class="w-6 text-center border-b border-dotted border-gray-400 bg-transparent">
+                  </td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="mb-6" data-controller="word-highlighter">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          In ogni numero cerchia di azzurro la classe delle unità semplici, di viola quella delle migliaia, di verde quella dei milioni e di arancione quella dei miliardi.
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <% ["20 146 792 088", "731 560 449 102", "4 090 654 912", "13 589 827 710", "385 703 541 008", "100 001 465 927", "652 504 826", "70 136 980 300"].each do |num| %>
+            <div class="p-2 bg-white rounded border border-gray-200 text-center font-mono">
+              <%= num %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Esercizio 3 -->
+      <div class="mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Completa per formare un miliardo.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <% [
+            ["780 000 000", "220000000"],
+            ["500 000", "999500000"],
+            ["999 999 999", "1"],
+            ["10", "999999990"],
+            ["100 000", "999900000"],
+            ["600 000 000", "400000000"]
+          ].each do |start_num, answer| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="whitespace-nowrap"><%= start_num %></span>
+              <span>+</span>
+              <input type="text" data-correct-answer="<%= answer %>" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span>= 1 uG</span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Esercizio 4 -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(4) %>
+          Nei seguenti numeri dividi le cifre che si riferiscono alle classi, poi scrivi il numero in cifre. Segui l'esempio.
+        </p>
+
+        <div class="p-4 bg-white rounded-lg mb-4">
+          <p class="text-gray-700 mb-2">
+            ventiseimilioni<span class="font-bold text-<%= @pagina.base_color %>-600">|</span>centotremila<span class="font-bold text-<%= @pagina.base_color %>-600">|</span>seicentodue
+            <span class="text-<%= @pagina.base_color %>-500 mx-2">→</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600"><span class="whitespace-nowrap">26 103 602</span></span>
+          </p>
+        </div>
+
+        <p class="text-gray-500 italic mb-4">Per scrivere i numeri grandi suddividi le cifre in gruppi di tre, partendo da destra.</p>
+
+        <div class="space-y-4">
+          <% [
+            ["settemiliardiottantamilionitrecentomila", "7080300000"],
+            ["seicentotrentamiliardinovecentomilaquaranta", "630000900040"],
+            ["cinquecentomilionitrentaseimilacentoventuno", "500036121"],
+            ["novantamiliarditrecentomilaseicentotré", "90000300603"]
+          ].each do |word, answer| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700"><%= word %></span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="<%= answer %>" class="w-40 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

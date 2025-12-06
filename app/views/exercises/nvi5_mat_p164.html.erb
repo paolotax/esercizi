@@ -1,0 +1,207 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <p class="text-gray-700">
+        A volte è utile tradurre i <strong>dati</strong> raccolti in <strong>percentuali</strong> e rappresentarli con <strong>areogrammi quadrati</strong> o <strong>areogrammi circolari</strong> (detti anche <strong>grafici a torta</strong>).
+      </p>
+    </div>
+
+    <!-- Tabella di frequenza -->
+    <div class="space-y-4">
+      <div class="flex items-start gap-4 flex-wrap">
+        <div class="flex-1 min-w-[200px]">
+          <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-<%= @pagina.base_color %>-500">
+            <li>La tabella di frequenza a lato riguarda un'indagine sul genere di film preferito da un campione di 100 bambine e bambini.</li>
+          </ul>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="border-collapse border border-gray-300">
+            <thead>
+              <tr>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">genere</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">fantascienza</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">storia</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">avventura</th>
+                <th class="p-2 border border-gray-300 bg-white text-center">giallo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">n. di bambini</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">40</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">15</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">25</td>
+                <td class="p-2 border border-gray-300 bg-white text-center">20</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabella percentuali -->
+    <div class="space-y-4">
+      <div class="flex items-start gap-4">
+        <div>
+          <ul class="list-disc pl-6 text-gray-700 marker:text-<%= @pagina.base_color %>-500 mb-2">
+            <li>Esprimiamo ora le frequenze con le percentuali.</li>
+          </ul>
+          <%= image_tag "nvi5_mat/p164/p164_01.jpg", class: "w-20 mx-auto", alt: "Libri" %>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="border-collapse border border-gray-300 w-full">
+          <thead>
+            <tr>
+              <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">genere di film</th>
+              <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">frequenza in numero</th>
+              <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">frequenza in frazione</th>
+              <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">frequenza in numero decimale</th>
+              <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center font-bold">frequenza in percentuale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border border-gray-300 bg-white text-center">fantascienza</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">40</td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><%= render 'shared/frazione', num: 40, den: 100 %></td>
+              <td class="p-2 border border-gray-300 bg-white text-center">40 : 100 = 0,40</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">40%</td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-gray-300 bg-white text-center">storia</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">15</td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><%= render 'shared/frazione', num: 15, den: 100 %></td>
+              <td class="p-2 border border-gray-300 bg-white text-center">15 : 100 = 0,15</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">15%</td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-gray-300 bg-white text-center">avventura</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">25</td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><%= render 'shared/frazione', num: 25, den: 100 %></td>
+              <td class="p-2 border border-gray-300 bg-white text-center">25 : 100 = 0,25</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">25%</td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-gray-300 bg-white text-center">giallo</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">20</td>
+              <td class="p-2 border border-gray-300 bg-white text-center"><%= render 'shared/frazione', num: 20, den: 100 %></td>
+              <td class="p-2 border border-gray-300 bg-white text-center">20 : 100 = 0,20</td>
+              <td class="p-2 border border-gray-300 bg-white text-center">20%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Areogramma quadrato -->
+    <div class="space-y-4">
+      <p class="text-gray-700">Rappresentiamo le percentuali con un areogramma quadrato.</p>
+
+      <div class="p-4 bg-<%= @pagina.base_color %>-50 rounded-lg">
+        <p class="text-gray-700">
+          L'<strong>areogramma quadrato</strong> è un grafico formato da un quadrato suddiviso in <strong>100 quadratini</strong> colorati in base alle <strong>percentuali</strong>.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-6 flex-wrap justify-center">
+        <%= image_tag "nvi5_mat/p164/output-1715938802164_658_624_176_176.png", class: "w-40", alt: "Areogramma quadrato" %>
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="w-4 h-4 bg-purple-500 rounded"></span>
+            <span class="text-gray-700">fantascienza</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-4 h-4 bg-pink-300 rounded"></span>
+            <span class="text-gray-700">storia</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-4 h-4 bg-green-400 rounded"></span>
+            <span class="text-gray-700">avventura</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-4 h-4 bg-yellow-400 rounded"></span>
+            <span class="text-gray-700">giallo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Areogramma circolare -->
+    <div class="space-y-4">
+      <p class="text-gray-700">Gli stessi dati possono essere rappresentati con un areogramma circolare.</p>
+
+      <ul class="list-disc pl-6 space-y-2 text-gray-700 marker:text-<%= @pagina.base_color %>-500">
+        <li>Dividiamo l'angolo giro (360°) in 100 parti uguali, in modo da ottenere i gradi che corrispondono all'unità percentuale, cioè all'1% <span class="text-<%= @pagina.base_color %>-500">→</span> <strong>360° : 100 = 3,6°</strong> (unità percentuale)</li>
+        <li>Moltiplicando 3,6° per il valore di ogni percentuale, otteniamo l'ampiezza del settore circolare corrispondente.</li>
+      </ul>
+    </div>
+
+    <!-- Calcola l'areogramma circolare -->
+    <div class="p-4 bg-orange-100 rounded-lg">
+      <p class="font-bold text-gray-700 mb-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Calcola e colora l'areogramma circolare.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="w-4 h-4 bg-purple-500 rounded"></span>
+            <span>fantascienza <strong>40%</strong></span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span><strong>3,6° × 40 = 144°</strong></span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="w-4 h-4 bg-pink-300 rounded"></span>
+            <span>storia <strong>15%</strong></span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>3,6° × 15 =</span>
+            <input type="text" data-correct-answer="54" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>°</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="w-4 h-4 bg-green-400 rounded"></span>
+            <span>avventura <strong>25%</strong></span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>3,6° × 25 =</span>
+            <input type="text" data-correct-answer="90" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>°</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="w-4 h-4 bg-yellow-400 rounded"></span>
+            <span>giallo <strong>20%</strong></span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>3,6° × 20 =</span>
+            <input type="text" data-correct-answer="72" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>°</span>
+          </div>
+        </div>
+
+        <div class="flex justify-center items-center">
+          <div class="relative w-48 h-48">
+            <svg viewBox="0 0 100 100" class="w-full h-full">
+              <!-- Areogramma circolare precompilato con 144° per fantascienza -->
+              <circle cx="50" cy="50" r="45" fill="#ddd" stroke="#999" stroke-width="0.5"/>
+              <!-- Settore fantascienza (144°) - già colorato -->
+              <path d="M50,50 L50,5 A45,45 0 0,1 95,50 L50,50" fill="#8B5CF6"/>
+              <!-- Linea con 144° -->
+              <text x="75" y="30" font-size="6" fill="#333">144°</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [260, 263] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
