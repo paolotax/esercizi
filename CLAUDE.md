@@ -7,8 +7,34 @@ This project uses ClaudeOnRails to create an intelligent swarm of AI agents spec
 - **Application**: Esercizi
 - **Rails Version**: 8.1.0
 - **Ruby Version**: 3.2.2
+- **Tailwind CSS**: 4.x (via tailwindcss-rails)
 - **Type**: Full-stack Rails application
 - **Test Framework**: Minitest
+
+## IMPORTANTE: Tailwind CSS 4
+
+Questo progetto usa **Tailwind CSS 4**. NON usare il vecchio `tailwind.config.js`.
+
+- Colori custom: definire in `@theme` in `app/assets/tailwind/application.css`
+- Animazioni: usare `--animate-*` in `@theme` + `@keyframes` standard
+- Content detection: automatica (non serve configurare)
+- Plugin forms/typography/aspect-ratio: built-in
+
+Esempio:
+```css
+@import "tailwindcss";
+
+@theme {
+  --animate-shake: shake 0.5s ease-in-out;
+  --color-custom-pink: #C657A0;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+  20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+```
 
 ## How to Use
 
