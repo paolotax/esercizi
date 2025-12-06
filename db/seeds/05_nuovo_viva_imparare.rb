@@ -162,7 +162,10 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 107, titolo: "I QUADRILATERI", slug: "nvi5_mat_p107", view_template: "nvi5_mat_p107", sottotitolo: "GEOMETRIA", base_color: "pink" },
   { numero: 108, titolo: "GLI ANGOLI INTERNI DEI POLIGONI", slug: "nvi5_mat_p108", view_template: "nvi5_mat_p108", sottotitolo: "LABORATORIO", base_color: "yellow" },
   { numero: 109, titolo: "I POLIGONI", slug: "nvi5_mat_p109", view_template: "nvi5_mat_p109", sottotitolo: "ESERCIZI", base_color: "orange" },
-  { numero: 110, titolo: "IL PERIMETRO DEI POLIGONI", slug: "nvi5_mat_p110", view_template: "nvi5_mat_p110", sottotitolo: "GEOMETRIA", base_color: "pink" }
+  { numero: 110, titolo: "IL PERIMETRO DEI POLIGONI", slug: "nvi5_mat_p110", view_template: "nvi5_mat_p110", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 111, titolo: "IL PERIMETRO", slug: "nvi5_mat_p111", view_template: "nvi5_mat_p111", sottotitolo: "ESERCIZI", base_color: "orange" },
+  { numero: 112, titolo: "DISEGNO GEOMETRICO", slug: "nvi5_mat_p112", view_template: "nvi5_mat_p112", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 113, titolo: "DISEGNO GEOMETRICO", slug: "nvi5_mat_p113", view_template: "nvi5_mat_p113", sottotitolo: "GEOMETRIA", base_color: "pink" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end
