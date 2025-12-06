@@ -57,7 +57,8 @@ nvi5_matematica = nvi_volume5.discipline.create!(
 
 [
   { numero: 1, titolo: "Copertina", slug: "nvi5_mat_p001", view_template: "nvi5_mat_p001", sottotitolo: "", base_color: "pink" },
-  { numero: 2, titolo: "Indice", slug: "nvi5_mat_p002", view_template: "nvi5_mat_p002", sottotitolo: "", base_color: "pink" },
+  { numero: 2, titolo: "", slug: "nvi5_mat_p002", view_template: "nvi5_mat_p002", sottotitolo: "INDICE", base_color: "pink" },
+  { numero: 3, titolo: "", slug: "nvi5_mat_p003", view_template: "nvi5_mat_p003", sottotitolo: "INDICE", base_color: "pink" },
   { numero: 4, titolo: "Numeri - Misura - Geometria", slug: "nvi5_mat_p004", view_template: "nvi5_mat_p004", sottotitolo: "PER RICOMINCIARE", base_color: "pink" },
   { numero: 5, titolo: "Le frazioni", slug: "nvi5_mat_p005", view_template: "nvi5_mat_p005", sottotitolo: "PER RICOMINCIARE", base_color: "pink" },
   { numero: 6, titolo: "Misura", slug: "nvi5_mat_p006", view_template: "nvi5_mat_p006", sottotitolo: "PER RICOMINCIARE", base_color: "pink" },
