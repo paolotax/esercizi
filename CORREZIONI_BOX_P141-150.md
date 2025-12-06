@@ -1,11 +1,16 @@
 # CORREZIONI BOX P141-P150
 
-Elenco dei box e componenti utilizzati per ogni pagina.
+## Procedura
+
+Quando eseguo le correzioni:
+- Se modifico **titolo** o **sottotitolo** → aggiorno anche il seed
+- Se modifico **base_color** → aggiorno anche il seed
+- Alla fine delle correzioni → riscrivo questo file con le modifiche fatte
 
 ---
 
-## p141 - IL VOLUME DEL PARALLELEPIPEDO E DEL CUBO
-**Sottotitolo:** GEOMETRIA | **Base color:** pink
+## p141 - IL VOLUME DEL PARALLELEPIPEDO E DEL CUBO (base_color: pink)
+**Sottotitolo:** GEOMETRIA
 
 ### Box utilizzati:
 - **Grid 3 colonne** - Introduzione con immagine a destra
@@ -20,10 +25,13 @@ Elenco dei box e componenti utilizzati per ogni pagina.
 
 ### Link Quaderno: p. 257
 
+### Correzioni da fare:
+
+
 ---
 
-## p142 - SUPERFICI E VOLUMI DEI SOLIDI
-**Sottotitolo:** ESERCIZI | **Base color:** orange
+## p142 - SUPERFICI E VOLUMI DEI SOLIDI (base_color: orange)
+**Sottotitolo:** ESERCIZI
 
 ### Box utilizzati:
 - **Box arancione esercizi** (`bg-orange-100 rounded-lg`) - Container principale
@@ -38,10 +46,13 @@ Elenco dei box e componenti utilizzati per ogni pagina.
 - 8 input per superfici dei solidi
 - Radio button per volume
 
+### Correzioni da fare:
+
+
 ---
 
-## p143 - LA SUPERFICIE DEI SOLIDI
-**Sottotitolo:** MAPPA | **Base color:** cyan
+## p143 - LA SUPERFICIE DEI SOLIDI (base_color: cyan)
+**Sottotitolo:** MAPPA
 
 ### Box utilizzati:
 - **Box celeste** (`bg-custom-blue rounded-lg`) - Container mappa
@@ -51,10 +62,13 @@ Elenco dei box e componenti utilizzati per ogni pagina.
 ### Elementi interattivi:
 - Nessuno (pagina di consultazione)
 
+### Correzioni da fare:
+
+
 ---
 
-## p144 - FIGURE PIANE E SOLIDE
-**Sottotitolo:** VERIFICA | **Base color:** pink
+## p144 - FIGURE PIANE E SOLIDE (base_color: pink)
+**Sottotitolo:** VERIFICA
 
 ### Box utilizzati:
 - **Box arancione esercizi** (`bg-orange-100 rounded-lg`) - Container principale
@@ -68,10 +82,13 @@ Elenco dei box e componenti utilizzati per ogni pagina.
 - Input per tabella circonferenza/area
 - Input per problema parco
 
+### Correzioni da fare:
+
+
 ---
 
-## p145 - FIGURE PIANE E SOLIDE
-**Sottotitolo:** MODELLO INVALSI | **Base color:** pink
+## p145 - FIGURE PIANE E SOLIDE (base_color: pink)
+**Sottotitolo:** MODELLO INVALSI
 
 ### Box utilizzati:
 - **Box arancione esercizi** (`bg-orange-100 rounded-lg`) - Container principale
@@ -82,10 +99,13 @@ Elenco dei box e componenti utilizzati per ogni pagina.
 ### Elementi interattivi:
 - 6 gruppi di radio button (q1-q6)
 
+### Correzioni da fare:
+
+
 ---
 
-## p146 - RISPARMI SETTIMANALI
-**Sottotitolo:** PROBLEMI AL CENTRO | **Base color:** pink
+## p146 - RISPARMI SETTIMANALI (base_color: pink)
+**Sottotitolo:** PROBLEMI AL CENTRO
 
 ### Box utilizzati:
 - **Immagine** - Elena e Giulia al bar
@@ -95,10 +115,13 @@ Elenco dei box e componenti utilizzati per ogni pagina.
 ### Elementi interattivi:
 - Textarea per risposta libera
 
+### Correzioni da fare:
+
+
 ---
 
-## p147 - VITTORIA IN BLU
-**Sottotitolo:** PROBLEMI AL CENTRO | **Base color:** pink
+## p147 - VITTORIA IN BLU (base_color: pink)
+**Sottotitolo:** PROBLEMI AL CENTRO
 
 ### Box utilizzati:
 - **Immagine** - Festa di compleanno
@@ -108,10 +131,13 @@ Elenco dei box e componenti utilizzati per ogni pagina.
 ### Elementi interattivi:
 - Textarea per risposta libera
 
+### Correzioni da fare:
+
+
 ---
 
-## p148 - LA VACANZA
-**Sottotitolo:** PROBLEMI AL CENTRO | **Base color:** pink
+## p148 - LA VACANZA (base_color: pink)
+**Sottotitolo:** PROBLEMI AL CENTRO
 
 ### Box utilizzati:
 - **Immagine** - Paola e Giorgio in moto
@@ -121,10 +147,13 @@ Elenco dei box e componenti utilizzati per ogni pagina.
 ### Elementi interattivi:
 - Nessuno (risposta libera su quaderno)
 
+### Correzioni da fare:
+
+
 ---
 
-## p149 - GLI ASSISTENTI DI VOLO
-**Sottotitolo:** PROBLEMI AL CENTRO | **Base color:** pink
+## p149 - GLI ASSISTENTI DI VOLO (base_color: pink)
+**Sottotitolo:** PROBLEMI AL CENTRO
 
 ### Box utilizzati:
 - **Immagine** - Maria e Vincenzo al ristorante
@@ -133,10 +162,13 @@ Elenco dei box e componenti utilizzati per ogni pagina.
 ### Elementi interattivi:
 - Nessuno (risposta libera su quaderno)
 
+### Correzioni da fare:
+
+
 ---
 
-## p150 - LO SCONTO
-**Sottotitolo:** PROBLEMI AL CENTRO | **Base color:** pink
+## p150 - LO SCONTO (base_color: pink)
+**Sottotitolo:** PROBLEMI AL CENTRO
 
 ### Box utilizzati:
 - **Immagine** - Divano in offerta
@@ -145,6 +177,9 @@ Elenco dei box e componenti utilizzati per ogni pagina.
 
 ### Elementi interattivi:
 - Textarea per risposta libera
+
+### Correzioni da fare:
+
 
 ---
 
