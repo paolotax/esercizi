@@ -173,7 +173,27 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 117, titolo: "I POLIGONI REGOLARI", slug: "nvi5_mat_p117", view_template: "nvi5_mat_p117", sottotitolo: "GEOMETRIA", base_color: "pink" },
   { numero: 118, titolo: "APOTEMA E NUMERO FISSO DEI POLIGONI REGOLARI", slug: "nvi5_mat_p118", view_template: "nvi5_mat_p118", sottotitolo: "GEOMETRIA", base_color: "pink" },
   { numero: 119, titolo: "CERCHIO, CIRCONFERENZA E POLIGONI REGOLARI", slug: "nvi5_mat_p119", view_template: "nvi5_mat_p119", sottotitolo: "ESERCIZI", base_color: "orange" },
-  { numero: 120, titolo: "POLIGONI REGOLARI CON IL COMPASSO", slug: "nvi5_mat_p120", view_template: "nvi5_mat_p120", sottotitolo: "LABORATORIO", base_color: "green" }
+  { numero: 120, titolo: "POLIGONI REGOLARI CON IL COMPASSO", slug: "nvi5_mat_p120", view_template: "nvi5_mat_p120", sottotitolo: "LABORATORIO", base_color: "green" },
+  { numero: 121, titolo: "ESAGONO E OTTAGONO REGOLARI", slug: "nvi5_mat_p121", view_template: "nvi5_mat_p121", sottotitolo: "LABORATORIO", base_color: "green" },
+  { numero: 122, titolo: "LE MISURE DI SUPERFICIE", slug: "nvi5_mat_p122", view_template: "nvi5_mat_p122", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 123, titolo: "L'AREA DEI PARALLELOGRAMMI", slug: "nvi5_mat_p123", view_template: "nvi5_mat_p123", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 124, titolo: "L'AREA DEL TRAPEZIO E DEL TRIANGOLO", slug: "nvi5_mat_p124", view_template: "nvi5_mat_p124", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 125, titolo: "L'AREA DEI POLIGONI REGOLARI", slug: "nvi5_mat_p125", view_template: "nvi5_mat_p125", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 126, titolo: "L'AREA DI POLIGONI IRREGOLARI", slug: "nvi5_mat_p126", view_template: "nvi5_mat_p126", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 127, titolo: "L'AREA DEL CERCHIO", slug: "nvi5_mat_p127", view_template: "nvi5_mat_p127", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 128, titolo: "L'AREA DELLE FIGURE IRREGOLARI", slug: "nvi5_mat_p128", view_template: "nvi5_mat_p128", sottotitolo: "LABORATORIO", base_color: "green" },
+  { numero: 129, titolo: "L'AREA", slug: "nvi5_mat_p129", view_template: "nvi5_mat_p129", sottotitolo: "ESERCIZI", base_color: "orange" },
+  { numero: 130, titolo: "PERIMETRI E AREE NEL QUOTIDIANO", slug: "nvi5_mat_p130", view_template: "nvi5_mat_p130", sottotitolo: "LABORATORIO", base_color: "green" },
+  { numero: 131, titolo: "PERIMETRI E AREE NEL QUOTIDIANO", slug: "nvi5_mat_p131", view_template: "nvi5_mat_p131", sottotitolo: "LABORATORIO", base_color: "yellow" },
+  { numero: 132, titolo: "PERIMETRO E AREA DEI POLIGONI", slug: "nvi5_mat_p132", view_template: "nvi5_mat_p132", sottotitolo: "MAPPA", base_color: "cyan" },
+  { numero: 133, titolo: "CIRCONFERENZA E CERCHIO", slug: "nvi5_mat_p133", view_template: "nvi5_mat_p133", sottotitolo: "MAPPA", base_color: "cyan" },
+  { numero: 134, titolo: "I SOLIDI", slug: "nvi5_mat_p134", view_template: "nvi5_mat_p134", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 135, titolo: "I SOLIDI DI ROTAZIONE", slug: "nvi5_mat_p135", view_template: "nvi5_mat_p135", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 136, titolo: "I SOLIDI", slug: "nvi5_mat_p136", view_template: "nvi5_mat_p136", sottotitolo: "ESERCIZI", base_color: "orange" },
+  { numero: 137, titolo: "LO SVILUPPO SUL PIANO DEI SOLIDI", slug: "nvi5_mat_p137", view_template: "nvi5_mat_p137", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 138, titolo: "LA SUPERFICIE DEI SOLIDI", slug: "nvi5_mat_p138", view_template: "nvi5_mat_p138", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 139, titolo: "LA SUPERFICIE DEI SOLIDI", slug: "nvi5_mat_p139", view_template: "nvi5_mat_p139", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 140, titolo: "LE MISURE DI VOLUME", slug: "nvi5_mat_p140", view_template: "nvi5_mat_p140", sottotitolo: "GEOMETRIA", base_color: "pink" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end

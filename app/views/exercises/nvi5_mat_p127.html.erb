@@ -1,0 +1,114 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Spiegazione teorica -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <p class="text-gray-700 mb-4">
+        <span class="text-<%= @pagina.base_color %>-500">▶</span> Abbiamo già visto che i poligoni regolari si possono inscrivere in una circonferenza.
+      </p>
+
+      <div class="flex justify-center mb-4">
+        <%= image_tag "nvi5_mat/p127/p127_01.jpg", class: "max-w-full", alt: "Poligoni regolari inscritti" %>
+      </div>
+
+      <p class="text-gray-700 mb-4">
+        Osserva. Più aumenta il numero dei lati del poligono, più si avvicinano:
+      </p>
+
+      <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-<%= @pagina.base_color %>-500 mb-4">
+        <li>il poligono e il cerchio;</li>
+        <li>il contorno del poligono e la circonferenza;</li>
+        <li>l'apotema del poligono e il raggio della circonferenza.</li>
+      </ul>
+
+      <p class="text-gray-700 mb-4">
+        <span class="text-<%= @pagina.base_color %>-500">▶</span> Possiamo dunque pensare al cerchio come a un poligono regolare con infiniti lati.<br>
+        Quindi, per calcolare la sua area, possiamo usare la formula dei poligoni regolari, sostituendo al perimetro la circonferenza e all'apotema il raggio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <p class="text-gray-700">
+            <strong class="text-pink-600">Area poligono regolare = (P × a) : 2</strong><br>
+            <strong class="text-pink-600">Area cerchio = (C × r) : 2</strong>
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <%= image_tag "nvi5_mat/p127/p127_02.jpg", class: "max-w-[200px]", alt: "Cerchio con raggio" %>
+        </div>
+      </div>
+
+      <p class="text-gray-700 mb-4">
+        Sostituendo a C la sua formula, otteniamo poi:
+      </p>
+
+      <div class="flex justify-center mb-4">
+        <%= image_tag "nvi5_mat/p127/p127_03.jpg", class: "max-w-full md:max-w-md", alt: "Formula area cerchio" %>
+      </div>
+
+      <p class="text-gray-700 font-bold mb-4">formula dell'area del cerchio</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-3 bg-white rounded-lg">
+          <p class="text-gray-700">Dunque: <strong>A = (C × r) : 2</strong></p>
+        </div>
+        <div class="p-3 bg-white rounded-lg">
+          <p class="text-gray-700">oppure <strong>A = r × r × 3,14</strong></p>
+        </div>
+        <div class="p-3 bg-white rounded-lg">
+          <p class="text-gray-700">oppure <strong>A = r<sup>2</sup> × π</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(1) %>
+        Completa la tabella. Aiutati con la calcolatrice.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr>
+              <th class="p-2 border border-gray-300 text-center bg-pink-100 font-bold">raggio</th>
+              <th class="p-2 border border-gray-300 text-center bg-pink-100 font-bold">diametro</th>
+              <th class="p-2 border border-gray-300 text-center bg-pink-100 font-bold">circonferenza</th>
+              <th class="p-2 border border-gray-300 text-center bg-pink-100 font-bold">Area</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border border-gray-300 text-center bg-white">5 m</td>
+              <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 text-center bg-white">50,24 cm</td>
+              <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 text-center bg-white">12 dm</td>
+              <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+              <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [248, 249, 250, 251] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,299 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="md:col-span-2">
+        <p class="text-gray-700 mb-3">
+          Lo spazio occupato da un solido geometrico o da un corpo qualsiasi si chiama <span class="font-bold">volume</span>. Il volume è una grandezza, quindi è misurabile.
+        </p>
+        <p class="text-gray-700 mb-3">
+          L'unità di misura fondamentale del volume è il <span class="font-bold">metro cubo (m³)</span>, che corrisponde a un cubo i cui spigoli misurano 1 m.
+        </p>
+        <p class="text-gray-700 mb-3">
+          L'<span class="font-bold">esponente ³</span> indica che il volume ha <span class="font-bold">tre dimensioni</span>: lunghezza, larghezza e altezza. Per questo le misure di volume si scrivono con tre cifre: centinaia, decine e unità.
+        </p>
+        <p class="text-gray-700">
+          Anche il metro cubo ha multipli e sottomultipli.
+        </p>
+      </div>
+      <div class="flex justify-center items-center">
+        <%= image_tag "nvi5_mat/p140/p140_01.jpg", class: "max-w-[180px]", alt: "Metro cubo" %>
+      </div>
+    </div>
+
+    <!-- Tabella conversioni -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr>
+            <th colspan="3" class="p-2 bg-blue-500 text-white text-center">MULTIPLI</th>
+            <th class="p-2 bg-green-500 text-white text-center">UNITÀ FONDAMENTALE</th>
+            <th colspan="3" class="p-2 bg-orange-500 text-white text-center">SOTTOMULTIPLI</th>
+          </tr>
+          <tr class="bg-gray-100">
+            <th class="p-2 border border-gray-300 text-blue-600">km³</th>
+            <th class="p-2 border border-gray-300 text-blue-600">hm³</th>
+            <th class="p-2 border border-gray-300 text-blue-600">dam³</th>
+            <th class="p-2 border border-gray-300 text-green-600">m³</th>
+            <th class="p-2 border border-gray-300 text-orange-600">dm³</th>
+            <th class="p-2 border border-gray-300 text-orange-600">cm³</th>
+            <th class="p-2 border border-gray-300 text-orange-600">mm³</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-2 border border-gray-300 text-center bg-white">chilometro cubo</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">ettometro cubo</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">decametro cubo</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">metro cubo</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">decimetro cubo</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">centimetro cubo</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">millimetro cubo</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="p-1 border border-gray-300 text-center" colspan="3">
+              <div class="grid grid-cols-3 gap-0">
+                <span class="border-r border-gray-300 p-1">h</span>
+                <span class="border-r border-gray-300 p-1">da</span>
+                <span class="p-1">u</span>
+              </div>
+            </td>
+            <td class="p-1 border border-gray-300 text-center">
+              <div class="grid grid-cols-3 gap-0">
+                <span class="border-r border-gray-300 p-1">h</span>
+                <span class="border-r border-gray-300 p-1">da</span>
+                <span class="p-1">u</span>
+              </div>
+            </td>
+            <td class="p-1 border border-gray-300 text-center" colspan="3">
+              <div class="grid grid-cols-3 gap-0">
+                <span class="border-r border-gray-300 p-1">h</span>
+                <span class="border-r border-gray-300 p-1">da</span>
+                <span class="p-1">u</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="p-2 border border-gray-300 text-center bg-white"><span class="whitespace-nowrap">1 000 000 000</span> m³</td>
+            <td class="p-2 border border-gray-300 text-center bg-white"><span class="whitespace-nowrap">1 000 000</span> m³</td>
+            <td class="p-2 border border-gray-300 text-center bg-white"><span class="whitespace-nowrap">1 000</span> m³</td>
+            <td class="p-2 border border-gray-300 text-center bg-white font-bold">1 m³</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">0,001 m³</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">0,000001 m³</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">0,000000001 m³</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Regole -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-4 bg-pink-light rounded-lg w-fit">
+        <p class="text-gray-700">
+          Per passare da un'unità di misura di volume al sottomultiplo o al multiplo immediatamente vicino <span class="font-bold">si moltiplica o si divide per 1000</span>.
+        </p>
+      </div>
+      <div class="p-4 bg-white rounded-lg border border-gray-200">
+        <p class="text-gray-700">
+          <span class="text-<%= @pagina.base_color %>-500">▶</span> La <span class="font-bold">marca</span> va scritta dopo il numero e si riferisce alla cifra delle unità, a quella delle decine e a quella delle centinaia.
+        </p>
+        <p class="text-gray-700 mt-2">
+          <span class="font-bold text-blue-600">9<span class="text-red-500">362</span> mm³</span> &nbsp;&nbsp;&nbsp; <span class="font-bold text-blue-600">32<span class="text-red-500">584</span>,971 dm³</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 bg-orange-100 rounded-lg">
+      <!-- Esercizio 1 -->
+      <div class="mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Scrivi le misure di volume in tabella.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="p-1 border border-gray-300"></th>
+                <th class="p-1 border border-gray-300 text-blue-600" colspan="3">km³</th>
+                <th class="p-1 border border-gray-300 text-blue-600" colspan="3">hm³</th>
+                <th class="p-1 border border-gray-300 text-blue-600" colspan="3">dam³</th>
+                <th class="p-1 border border-gray-300 text-green-600" colspan="3">m³</th>
+                <th class="p-1 border border-gray-300 text-orange-600" colspan="3">dm³</th>
+                <th class="p-1 border border-gray-300 text-orange-600" colspan="3">cm³</th>
+                <th class="p-1 border border-gray-300 text-orange-600" colspan="3">mm³</th>
+              </tr>
+              <tr class="bg-gray-50">
+                <th class="p-1 border border-gray-300"></th>
+                <th class="p-1 border border-gray-300">h</th>
+                <th class="p-1 border border-gray-300">da</th>
+                <th class="p-1 border border-gray-300">u</th>
+                <th class="p-1 border border-gray-300">h</th>
+                <th class="p-1 border border-gray-300">da</th>
+                <th class="p-1 border border-gray-300">u</th>
+                <th class="p-1 border border-gray-300">h</th>
+                <th class="p-1 border border-gray-300">da</th>
+                <th class="p-1 border border-gray-300">u</th>
+                <th class="p-1 border border-gray-300">h</th>
+                <th class="p-1 border border-gray-300">da</th>
+                <th class="p-1 border border-gray-300">u</th>
+                <th class="p-1 border border-gray-300">h</th>
+                <th class="p-1 border border-gray-300">da</th>
+                <th class="p-1 border border-gray-300">u</th>
+                <th class="p-1 border border-gray-300">h</th>
+                <th class="p-1 border border-gray-300">da</th>
+                <th class="p-1 border border-gray-300">u</th>
+                <th class="p-1 border border-gray-300">h</th>
+                <th class="p-1 border border-gray-300">da</th>
+                <th class="p-1 border border-gray-300">u</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 32,5 m³ = 32 m³ 500 dm³ -->
+              <tr>
+                <td class="p-1 border border-gray-300 bg-white">32,5 m³</td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-green-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-green-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="3" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-green-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="2" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="5" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+              </tr>
+              <!-- 0,245 km³ = 245 hm³ -->
+              <tr>
+                <td class="p-1 border border-gray-300 bg-white">0,245 km³</td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="2" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="4" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="5" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-green-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-green-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-green-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+              </tr>
+              <!-- 43 000 000 cm³ = 43 m³ -->
+              <tr>
+                <td class="p-1 border border-gray-300 bg-white whitespace-nowrap">43 000 000 cm³</td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-blue-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-green-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-green-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="4" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-green-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="3" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" data-correct-answer="0" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+                <td class="p-1 border border-gray-300 bg-orange-50"><input type="text" data-exercise-checker-target="input" class="w-4 text-center bg-transparent"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 e 3 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Esercizio 2 -->
+        <div>
+          <p class="font-bold text-gray-700 mb-4">
+            <%= numero_esercizio_badge(2) %>
+            Completa.
+          </p>
+
+          <div class="space-y-3">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span>1 m³ = 10 dm³ +</span>
+              <input type="text" data-correct-answer="990" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span>dm³</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span>1 dm³ = 999 cm³ +</span>
+              <input type="text" data-correct-answer="1" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span>cm³</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span>1 cm³ = 1 mm³ +</span>
+              <input type="text" data-correct-answer="999" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span>mm³</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Esercizio 3 -->
+        <div>
+          <p class="font-bold text-gray-700 mb-4">
+            <%= numero_esercizio_badge(3) %>
+            Scomponi le misure di volume come nell'esempio.
+          </p>
+
+          <div class="space-y-3">
+            <div class="flex items-center gap-2 flex-wrap text-gray-600 italic">
+              <span>9 832,350 dm³ =</span>
+              <span class="font-bold not-italic text-custom-sky">9 m³</span>
+              <span class="font-bold not-italic text-custom-sky">832 dm³</span>
+              <span class="font-bold not-italic text-custom-sky">350 cm³</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span>407 600 cm³ =</span>
+              <input type="text" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span>75 240,001 dam³ =</span>
+              <input type="text" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [256] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

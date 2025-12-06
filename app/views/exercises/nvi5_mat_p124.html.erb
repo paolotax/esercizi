@@ -1,0 +1,134 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Tabella formule -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="p-3 border border-gray-300 text-center bg-gray-100 font-bold">poligono</th>
+            <th class="p-3 border border-gray-300 text-center bg-gray-100 font-bold">da dove partire</th>
+            <th class="p-3 border border-gray-300 text-center bg-gray-100 font-bold">formule</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Trapezio -->
+          <tr>
+            <td class="p-3 border border-gray-300 bg-white align-top">
+              <p class="font-bold text-pink-600 mb-2">TRAPEZIO</p>
+              <%= image_tag "nvi5_mat/p124/p124_01.jpg", class: "max-w-[180px]", alt: "Trapezio" %>
+            </td>
+            <td class="p-3 border border-gray-300 bg-white align-top">
+              <p class="text-gray-700">
+                Se disegni un trapezio congruente e lo affianchi al primo come nel disegno, ottieni un parallelogramma con la base che misura quanto la somma delle due basi del trapezio e l'altezza uguale a quella del trapezio.<br>
+                Trovando l'area del parallelogramma e dividendola per due, trovi l'area del trapezio.
+              </p>
+            </td>
+            <td class="p-3 border border-gray-300 bg-white align-top">
+              <p class="text-gray-700 mb-2"><strong>A = [(B + b) × h] : 2</strong></p>
+              <p class="text-pink-600 font-bold mb-1">Formule inverse</p>
+              <p class="text-gray-700">(B + b) = (A × 2) : h<br>h = (A × 2) : (B + b)</p>
+            </td>
+          </tr>
+          <!-- Triangolo -->
+          <tr>
+            <td class="p-3 border border-gray-300 bg-white align-top">
+              <p class="font-bold text-pink-600 mb-2">TRIANGOLO</p>
+              <%= image_tag "nvi5_mat/p124/p124_02.jpg", class: "max-w-[180px]", alt: "Triangolo" %>
+            </td>
+            <td class="p-3 border border-gray-300 bg-white align-top">
+              <p class="text-gray-700">
+                Se disegni un triangolo congruente e lo affianchi al primo come nel disegno, ottieni un parallelogramma che ha la base e l'altezza uguali a quelle del triangolo.<br>
+                Trovando l'area del parallelogramma e dividendola per due, trovi l'area del triangolo.
+              </p>
+            </td>
+            <td class="p-3 border border-gray-300 bg-white align-top">
+              <p class="text-gray-700 mb-2"><strong>A = (b × h) : 2</strong></p>
+              <p class="text-pink-600 font-bold mb-1">Formule inverse</p>
+              <p class="text-gray-700">b = (A × 2) : h<br>h = (A × 2) : b</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(1) %>
+        Ricava, misurandoli con una riga, i dati necessari per calcolare l'area dei seguenti poligoni.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <!-- Rombo -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p124/output-1715938802124_121_847_227_132.png", class: "mx-auto mb-2", alt: "Rombo" %>
+          <div class="flex items-center justify-center gap-2">
+            <span class="shrink-0">A =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">cm<sup>2</sup></span>
+          </div>
+        </div>
+
+        <!-- Triangolo -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p124/output-1715938802124_468_862_137_135.png", class: "mx-auto mb-2", alt: "Triangolo" %>
+          <div class="flex items-center justify-center gap-2">
+            <span class="shrink-0">A =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">cm<sup>2</sup></span>
+          </div>
+        </div>
+
+        <!-- Quadrato -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p124/output-1715938802124_708_850_136_137.png", class: "mx-auto mb-2", alt: "Quadrato" %>
+          <div class="flex items-center justify-center gap-2">
+            <span class="shrink-0">A =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">cm<sup>2</sup></span>
+          </div>
+        </div>
+
+        <!-- Rettangolo -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p124/output-1715938802124_119_1038_202_93.png", class: "mx-auto mb-2", alt: "Rettangolo" %>
+          <div class="flex items-center justify-center gap-2">
+            <span class="shrink-0">A =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">cm<sup>2</sup></span>
+          </div>
+        </div>
+
+        <!-- Parallelogramma -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p124/output-1715938802124_361_1050_222_117.png", class: "mx-auto mb-2", alt: "Parallelogramma" %>
+          <div class="flex items-center justify-center gap-2">
+            <span class="shrink-0">A =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">cm<sup>2</sup></span>
+          </div>
+        </div>
+
+        <!-- Trapezio -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p124/output-1715938802124_796_1035_180_100.png", class: "mx-auto mb-2", alt: "Trapezio" %>
+          <div class="flex items-center justify-center gap-2">
+            <span class="shrink-0">A =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">cm<sup>2</sup></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [245, 246, 249, 250, 251] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

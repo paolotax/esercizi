@@ -1,0 +1,216 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Parte teorica -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="md:col-span-2">
+        <p class="text-gray-700 mb-4">
+          La misura di una superficie si chiama <strong>area</strong>.<br>
+          L'unità di misura fondamentale delle aree è il <strong>metro quadrato</strong> (<strong>m<sup>2</sup></strong>), cioè un quadrato con i lati che misurano 1 m.
+        </p>
+
+        <p class="text-gray-700 mb-4">
+          L'<strong>esponente <sup>2</sup></strong> indica che le superfici hanno <strong>due dimensioni</strong>: lunghezza e larghezza.<br>
+          Per questo le misure di superficie si scrivono con due cifre: <strong>decine</strong> e <strong>unità</strong>.
+        </p>
+
+        <p class="text-gray-700">
+          Per misurare aree più grandi o più piccole si usano multipli (dam<sup>2</sup>, hm<sup>2</sup>, km<sup>2</sup>) e sottomultipli (dm<sup>2</sup>, cm<sup>2</sup>, mm<sup>2</sup>) che sono 100, <span class="whitespace-nowrap">10 000</span> o <span class="whitespace-nowrap">1 000 000</span> di volte più grandi o più piccoli del m<sup>2</sup>.
+        </p>
+      </div>
+      <div class="flex justify-center items-start">
+        <%= image_tag "nvi5_mat/p122/p122_01.jpg", class: "max-w-full", alt: "Metro quadrato" %>
+      </div>
+    </div>
+
+    <!-- Tabella misure di superficie -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr>
+            <th colspan="3" class="p-2 border border-gray-300 text-center bg-blue-100 font-bold">MULTIPLI</th>
+            <th class="p-2 border border-gray-300 text-center bg-pink-200 font-bold">UNITÀ<br>FONDAMENTALE</th>
+            <th colspan="3" class="p-2 border border-gray-300 text-center bg-gray-100 font-bold">SOTTOMULTIPLI</th>
+          </tr>
+          <tr>
+            <th class="p-2 border border-gray-300 text-center bg-blue-50 font-bold">km<sup>2</sup></th>
+            <th class="p-2 border border-gray-300 text-center bg-blue-50 font-bold">hm<sup>2</sup></th>
+            <th class="p-2 border border-gray-300 text-center bg-blue-50 font-bold">dam<sup>2</sup></th>
+            <th class="p-2 border border-gray-300 text-center bg-pink-100 font-bold">m<sup>2</sup></th>
+            <th class="p-2 border border-gray-300 text-center bg-gray-50 font-bold">dm<sup>2</sup></th>
+            <th class="p-2 border border-gray-300 text-center bg-gray-50 font-bold">cm<sup>2</sup></th>
+            <th class="p-2 border border-gray-300 text-center bg-gray-50 font-bold">mm<sup>2</sup></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-2 border border-gray-300 text-center bg-white">chilometro<br>quadrato</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">ettometro<br>quadrato</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">decametro<br>quadrato</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">metro<br>quadrato</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">decimetro<br>quadrato</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">centimetro<br>quadrato</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">millimetro<br>quadrato</td>
+          </tr>
+          <tr>
+            <td class="p-2 border border-gray-300 text-center bg-white"><span class="whitespace-nowrap">1 000 000</span> m<sup>2</sup></td>
+            <td class="p-2 border border-gray-300 text-center bg-white"><span class="whitespace-nowrap">10 000</span> m<sup>2</sup></td>
+            <td class="p-2 border border-gray-300 text-center bg-white">100 m<sup>2</sup></td>
+            <td class="p-2 border border-gray-300 text-center bg-white">1 m<sup>2</sup></td>
+            <td class="p-2 border border-gray-300 text-center bg-white">0,01 m<sup>2</sup></td>
+            <td class="p-2 border border-gray-300 text-center bg-white">0,0001 m<sup>2</sup></td>
+            <td class="p-2 border border-gray-300 text-center bg-white">0,000001 m<sup>2</sup></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Regole di conversione -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <p class="text-gray-700">
+          Per passare da un'unità di misura di superficie al sottomultiplo o al multiplo immediatamente vicino <strong>si moltiplica o si divide per 100</strong>.
+        </p>
+      </div>
+      <div>
+        <p class="text-gray-700">
+          <span class="text-<%= @pagina.base_color %>-500">▶</span> La <strong>marca</strong> va scritta dopo il numero e si riferisce alla cifra delle unità e a quella delle decine.<br>
+          <span class="text-custom-sky font-bold">7 4</span><strong>95 cm<sup>2</sup></strong><br>
+          <span class="text-custom-sky font-bold">2</span><strong>35</strong>,12 <strong>m<sup>2</sup></strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Le misure agrarie -->
+    <div>
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-4">Le misure agrarie</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <p class="text-gray-700 mb-4">
+            Per misurare l'estensione dei terreni agricoli si usano le unità di misura agrarie:
+          </p>
+          <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-<%= @pagina.base_color %>-500">
+            <li>la <strong>centiara</strong> (<strong>ca</strong>) equivale a 1 m<sup>2</sup>;</li>
+            <li>l'<strong>ara</strong> (<strong>a</strong>) equivale a 1 dam<sup>2</sup>, dunque a 100 m<sup>2</sup>;</li>
+            <li>l'<strong>ettaro</strong> (<strong>ha</strong>) equivale a 1 hm<sup>2</sup>, dunque a <span class="whitespace-nowrap">10 000</span> m<sup>2</sup>.</li>
+          </ul>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="border-collapse">
+            <thead>
+              <tr>
+                <th class="p-2 border border-gray-300 text-center bg-pink-200 font-bold">ettometro<br>quadrato</th>
+                <th class="p-2 border border-gray-300 text-center bg-pink-200 font-bold">decametro<br>quadrato</th>
+                <th class="p-2 border border-gray-300 text-center bg-pink-200 font-bold">metro<br>quadrato</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-white font-bold text-pink-600">ha</td>
+                <td class="p-2 border border-gray-300 text-center bg-white font-bold text-pink-600">a</td>
+                <td class="p-2 border border-gray-300 text-center bg-white font-bold text-pink-600">ca</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-white">ettaro</td>
+                <td class="p-2 border border-gray-300 text-center bg-white">ara</td>
+                <td class="p-2 border border-gray-300 text-center bg-white">centiara</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x-2 md:divide-orange-300">
+        <!-- Esercizio 1 -->
+        <div class="md:pr-4">
+          <p class="font-bold text-gray-700 mb-4">
+            <%= numero_esercizio_badge(1) %>
+            Inserisci le misure di superficie in tabella.
+          </p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr>
+                  <th class="p-2 border border-gray-300 text-center bg-white"></th>
+                  <th colspan="2" class="p-2 border border-gray-300 text-center bg-blue-100 font-bold">dm<sup>2</sup></th>
+                  <th colspan="2" class="p-2 border border-gray-300 text-center bg-blue-100 font-bold">cm<sup>2</sup></th>
+                  <th colspan="2" class="p-2 border border-gray-300 text-center bg-blue-100 font-bold">mm<sup>2</sup></th>
+                </tr>
+                <tr>
+                  <th class="p-2 border border-gray-300 text-center bg-white"></th>
+                  <th class="p-2 border border-gray-300 text-center bg-white">da</th>
+                  <th class="p-2 border border-gray-300 text-center bg-white">u</th>
+                  <th class="p-2 border border-gray-300 text-center bg-white">da</th>
+                  <th class="p-2 border border-gray-300 text-center bg-white">u</th>
+                  <th class="p-2 border border-gray-300 text-center bg-white">da</th>
+                  <th class="p-2 border border-gray-300 text-center bg-white">u</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="p-2 border border-gray-300 bg-white">9,67 dm<sup>2</sup></td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" data-correct-answer="9" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" data-correct-answer="6" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" data-correct-answer="7" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" data-correct-answer="0" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"></td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"></td>
+                </tr>
+                <tr>
+                  <td class="p-2 border border-gray-300 bg-white">23,68 cm<sup>2</sup></td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"></td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"></td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" data-correct-answer="2" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" data-correct-answer="3" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" data-correct-answer="6" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"><input type="text" data-correct-answer="8" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Esercizio 2 -->
+        <div class="md:pl-4">
+          <p class="font-bold text-gray-700 mb-4">
+            <%= numero_esercizio_badge(2) %>
+            Scomponi le misure di superficie come nell'esempio.
+          </p>
+
+          <div class="space-y-3">
+            <p class="text-gray-700">24,56 m<sup>2</sup> = <strong>24 m<sup>2</sup> e 56 dm<sup>2</sup></strong></p>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="shrink-0">3 056,66 dm<sup>2</sup> =</span>
+              <input type="text" data-correct-answer="3 056 dm² e 66 cm²" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="shrink-0">4 002 dam<sup>2</sup> =</span>
+              <input type="text" data-correct-answer="40 hm² e 2 dam²" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="shrink-0">1 239,78 cm<sup>2</sup> =</span>
+              <input type="text" data-correct-answer="12 dm² e 39 cm² e 78 mm²" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [240] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

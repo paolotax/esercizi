@@ -1,0 +1,122 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="md:col-span-2">
+        <p class="text-gray-700 mb-3">
+          I <span class="font-bold">solidi</span> sono figure geometriche <span class="font-bold">tridimensionali</span>. Hanno cioè tre dimensioni: lunghezza, larghezza e altezza.
+        </p>
+        <p class="text-gray-700">
+          Possiamo distinguerli in <span class="font-bold">poliedri</span> e <span class="font-bold">non poliedri</span>.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi5_mat/p134/p134_01.jpg", class: "max-w-[180px]", alt: "Solido con dimensioni" %>
+      </div>
+    </div>
+
+    <!-- I poliedri -->
+    <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">I poliedri</h2>
+    <div class="p-4 bg-white border-2 border-blue-500 rounded-2xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 bg-white rounded-lg">
+          <p class="text-gray-700 mb-2">
+            I <span class="font-bold">poliedri</span> sono i solidi che sono delimitati da poligoni.
+          </p>
+          <p class="text-gray-700 mb-2">
+            Gli elementi principali dei poliedri sono:
+          </p>
+          <ul class="list-disc pl-5 space-y-1 text-gray-700 marker:text-<%= @pagina.base_color %>-500">
+            <li>le <span class="font-bold">facce</span>, cioè i poligoni che delimitano il poliedro;</li>
+            <li>gli <span class="font-bold">spigoli</span>, cioè i segmenti che delimitano le facce;</li>
+            <li>i <span class="font-bold">vertici</span>, cioè i punti d'incontro degli spigoli.</li>
+          </ul>
+        </div>
+        <div class="flex justify-center items-center">
+          <%= image_tag "nvi5_mat/p134/p134_02.jpg", class: "max-w-[200px]", alt: "Poliedro con vertice, faccia, spigolo" %>
+        </div>
+      </div>
+
+      <p class="text-gray-700 mt-4 mb-4">
+        Esistono tanti poliedri, ma noi prenderemo in esame in particolare due gruppi: i <span class="font-bold">prismi</span> e le <span class="font-bold">piramidi</span>.
+      </p>
+
+      <!-- Prismi e Piramidi -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Prismi -->
+        <div class="p-4 bg-white rounded-lg">
+          <h3 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-2">Prismi</h3>
+          <p class="text-gray-700 mb-2">
+            Hanno almeno <span class="font-bold">due</span> facce congruenti e parallele, chiamate <span class="font-bold">basi</span>.
+          </p>
+          <p class="text-gray-700 mb-2">
+            Le <span class="font-bold">facce laterali</span> sono <span class="font-bold">parallelogrammi</span> e sono in numero uguale ai lati dei poligoni di base.
+          </p>
+          <p class="text-gray-700 mb-3">
+            Tra i prismi, in particolare, si distinguono i <span class="font-bold">parallelepipedi</span>, che hanno facce rettangolari, e i <span class="font-bold">cubi</span>, che hanno facce quadrate.
+          </p>
+          <div class="flex justify-center">
+            <%= image_tag "nvi5_mat/p134/p134_prismi.png", class: "max-w-full", alt: "Prismi: prisma a base triangolare, prisma a base esagonale, parallelepipedo, cubo" %>
+          </div>
+          <div class="grid grid-cols-4 text-center text-sm text-gray-600 mt-2">
+            <span>prisma a base<br>triangolare</span>
+            <span>prisma a base<br>esagonale</span>
+            <span>parallelepipedo</span>
+            <span>cubo</span>
+          </div>
+        </div>
+
+        <!-- Piramidi -->
+        <div class="p-4 bg-white rounded-lg">
+          <h3 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-2">Piramidi</h3>
+          <p class="text-gray-700 mb-2">
+            Non hanno facce parallele.
+          </p>
+          <p class="text-gray-700 mb-2">
+            La <span class="font-bold">base</span> è un poligono e le <span class="font-bold">facce laterali</span> sono dei <span class="font-bold">triangoli</span>; essi sono tanti quanti i lati del poligono di base e hanno tutti un vertice in comune.
+          </p>
+          <div class="flex justify-center mt-4">
+            <%= image_tag "nvi5_mat/p134/p134_piramidi.png", class: "max-w-[200px]", alt: "Piramidi: piramide a base quadrata, piramide a base esagonale" %>
+          </div>
+          <div class="flex flex-wrap justify-center gap-8 text-center text-sm text-gray-600 mt-2">
+            <span>piramide a base<br>quadrata</span>
+            <span>piramide a base<br>esagonale</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 bg-orange-100 rounded-lg">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(1) %>
+        Scrivi vicino a ciascun solido un oggetto che conosci che abbia la stessa forma.
+      </p>
+
+      <div class="grid grid-cols-3 gap-4 max-w-md mx-auto">
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p134/p134_es_parallelepipedo.png", class: "mx-auto mb-2 max-h-[70px]", alt: "Parallelepipedo" %>
+          <input type="text" class="w-full border-b-2 border-dotted border-gray-400 text-center bg-transparent">
+        </div>
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p134/p134_es_cubo.png", class: "mx-auto mb-2 max-h-[70px]", alt: "Cubo" %>
+          <input type="text" class="w-full border-b-2 border-dotted border-gray-400 text-center bg-transparent">
+        </div>
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p134/p134_es_piramide.png", class: "mx-auto mb-2 max-h-[70px]", alt: "Piramide" %>
+          <input type="text" class="w-full border-b-2 border-dotted border-gray-400 text-center bg-transparent">
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [252] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,292 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Piramide regolare -->
+    <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">Piramide regolare</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <p class="text-gray-700 mb-2">
+          Una piramide si dice regolare se ha per base un poligono regolare.
+        </p>
+        <p class="text-gray-700 mb-2">
+          La superficie laterale è formata da <input type="text" data-correct-answer="triangoli" data-exercise-checker-target="input" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"> tutti uguali che hanno per base il lato del poligono di base e per altezza l'<span class="font-bold">apotema (a) della piramide</span>, cioè l'altezza di ciascuno dei triangoli che formano la superficie laterale.
+        </p>
+
+        <div class="p-3 bg-pink-light rounded-lg space-y-2 mt-3 w-fit">
+          <p class="text-gray-700">S<span class="italic">l</span> = [(<span class="italic">l</span> × a) : 2] × numero dei lati</p>
+          <p class="text-gray-700">St = S<span class="italic">l</span> + area di base</p>
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+        <%= image_tag "nvi5_mat/p139/p139_01.jpg", class: "max-w-[280px]", alt: "Piramide regolare e suo sviluppo" %>
+      </div>
+    </div>
+
+    <!-- Cilindro -->
+    <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">Cilindro</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <p class="text-gray-700 mb-3">
+          La superficie laterale è un <input type="text" data-correct-answer="rettangolo" data-exercise-checker-target="input" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"> che ha per base la circonferenza di base e per altezza l'altezza del cilindro.
+        </p>
+
+        <div class="p-3 bg-pink-light rounded-lg space-y-2 w-fit">
+          <p class="text-gray-700">S<span class="italic">l</span> = circonferenza di base × altezza</p>
+          <p class="text-gray-700">St = S<span class="italic">l</span> + (area di base × 2)</p>
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+        <%= image_tag "nvi5_mat/p139/p139_02.jpg", class: "max-w-[420px]", alt: "Cilindro e suo sviluppo" %>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 bg-orange-100 rounded-lg">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(1) %>
+        Completa le tabelle.
+      </p>
+
+      <!-- Prima riga: CUBI (stretta) e PARALLELEPIPEDI (larga) affiancati -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+        <!-- Tabella CUBI -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr>
+                <th colspan="3" class="p-2 bg-cyan-500 text-white font-bold text-center">CUBI</th>
+              </tr>
+              <tr class="bg-cyan-100">
+                <th class="p-2 border border-gray-300">spigolo</th>
+                <th class="p-2 border border-gray-300">S<span class="italic">l</span></th>
+                <th class="p-2 border border-gray-300">St</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-cyan-50">3 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-cyan-50">
+                  <input type="text" data-correct-answer="36 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-cyan-50">
+                  <input type="text" data-correct-answer="54 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-cyan-50">10 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-cyan-50">
+                  <input type="text" data-correct-answer="400 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-cyan-50">
+                  <input type="text" data-correct-answer="600 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-cyan-50">7 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-cyan-50">
+                  <input type="text" data-correct-answer="196 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-cyan-50">
+                  <input type="text" data-correct-answer="294 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tabella PARALLELEPIPEDI -->
+        <div class="overflow-x-auto lg:col-span-2">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr>
+                <th colspan="6" class="p-2 bg-green-500 text-white font-bold text-center">PARALLELEPIPEDI</th>
+              </tr>
+              <tr class="bg-green-100">
+                <th class="p-2 border border-gray-300">dimensioni base</th>
+                <th class="p-2 border border-gray-300">Perimetro</th>
+                <th class="p-2 border border-gray-300">altezza</th>
+                <th class="p-2 border border-gray-300">S<span class="italic">l</span></th>
+                <th class="p-2 border border-gray-300">Area base</th>
+                <th class="p-2 border border-gray-300">St</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">4 cm; 8 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">
+                  <input type="text" data-correct-answer="24 cm" data-exercise-checker-target="input" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">12 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">
+                  <input type="text" data-correct-answer="288 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">
+                  <input type="text" data-correct-answer="32 cm²" data-exercise-checker-target="input" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">
+                  <input type="text" data-correct-answer="352 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">6 cm; 3 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">
+                  <input type="text" data-correct-answer="18 cm" data-exercise-checker-target="input" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">10 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">
+                  <input type="text" data-correct-answer="180 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">
+                  <input type="text" data-correct-answer="18 cm²" data-exercise-checker-target="input" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">
+                  <input type="text" data-correct-answer="216 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">50 cm; 60 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">
+                  <input type="text" data-correct-answer="220 cm" data-exercise-checker-target="input" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">70 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">
+                  <input type="text" data-correct-answer="15400 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">
+                  <input type="text" data-correct-answer="3000 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-green-50">
+                  <input type="text" data-correct-answer="21400 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Seconda riga: PRISMI -->
+      <div class="mb-4">
+        <!-- Tabella PRISMI -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr>
+                <th colspan="7" class="p-2 bg-pink-500 text-white font-bold text-center">PRISMI</th>
+              </tr>
+              <tr class="bg-pink-100">
+                <th class="p-2 border border-gray-300"></th>
+                <th class="p-2 border border-gray-300">lato</th>
+                <th class="p-2 border border-gray-300">Perimetro</th>
+                <th class="p-2 border border-gray-300">altezza</th>
+                <th class="p-2 border border-gray-300">Area base</th>
+                <th class="p-2 border border-gray-300">S<span class="italic">l</span></th>
+                <th class="p-2 border border-gray-300">St</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">base quadrata</td>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">6 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">
+                  <input type="text" data-correct-answer="24 cm" data-exercise-checker-target="input" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">15 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">
+                  <input type="text" data-correct-answer="36 cm²" data-exercise-checker-target="input" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">
+                  <input type="text" data-correct-answer="360 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">
+                  <input type="text" data-correct-answer="432 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">base pentagonale</td>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">5 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">
+                  <input type="text" data-correct-answer="25 cm" data-exercise-checker-target="input" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">12 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">
+                  <input type="text" data-exercise-checker-target="input" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">
+                  <input type="text" data-correct-answer="300 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-pink-50">
+                  <input type="text" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Terza riga: CILINDRI -->
+      <div>
+        <!-- Tabella CILINDRI -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr>
+                <th colspan="6" class="p-2 bg-orange-500 text-white font-bold text-center">CILINDRI</th>
+              </tr>
+              <tr class="bg-orange-100">
+                <th class="p-2 border border-gray-300">raggio</th>
+                <th class="p-2 border border-gray-300">Circonferenza</th>
+                <th class="p-2 border border-gray-300">altezza</th>
+                <th class="p-2 border border-gray-300">Area base</th>
+                <th class="p-2 border border-gray-300">S<span class="italic">l</span></th>
+                <th class="p-2 border border-gray-300">St</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-orange-50">5 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-orange-50">
+                  <input type="text" data-correct-answer="31,4 cm" data-exercise-checker-target="input" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-orange-50">10 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-orange-50">
+                  <input type="text" data-correct-answer="78,5 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-orange-50">
+                  <input type="text" data-correct-answer="314 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-orange-50">
+                  <input type="text" data-correct-answer="471 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-gray-300 text-center bg-orange-50">10 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-orange-50">
+                  <input type="text" data-correct-answer="62,8 cm" data-exercise-checker-target="input" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-orange-50">12 cm</td>
+                <td class="p-2 border border-gray-300 text-center bg-orange-50">
+                  <input type="text" data-correct-answer="314 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-orange-50">
+                  <input type="text" data-correct-answer="753,6 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-gray-300 text-center bg-orange-50">
+                  <input type="text" data-correct-answer="1381,6 cm²" data-exercise-checker-target="input" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [253, 254, 255] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

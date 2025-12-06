@@ -1,0 +1,85 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <p class="text-gray-700">
+      Osserva come si calcolano la <span class="font-bold text-<%= @pagina.base_color %>-600">superficie laterale (S<span class="italic">l</span>)</span> e la <span class="font-bold text-<%= @pagina.base_color %>-600">superficie totale (St)</span> di alcuni solidi considerando per ciascuno di essi il suo sviluppo.
+    </p>
+
+    <!-- Parallelepipedo rettangolo -->
+    <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">Parallelepipedo rettangolo</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <p class="text-gray-700 mb-3">
+          Lo sviluppo della superficie laterale è un rettangolo che ha per base il perimetro di base e per altezza l'altezza del parallelepipedo.
+        </p>
+
+        <div class="p-3 bg-pink-light rounded-lg space-y-2 w-fit">
+          <p class="text-gray-700">S<span class="italic">l</span> = perimetro di base × altezza</p>
+          <p class="text-gray-700">St = S<span class="italic">l</span> + (area di base × 2)</p>
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+        <%= image_tag "nvi5_mat/p138/p138_01.jpg", class: "max-w-[250px]", alt: "Parallelepipedo e suo sviluppo" %>
+      </div>
+    </div>
+
+    <!-- Cubo -->
+    <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">Cubo</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <p class="text-gray-700 mb-2">
+          Il cubo ha <input type="text" data-correct-answer="6" data-exercise-checker-target="input" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"> facce quadrate.
+        </p>
+        <p class="text-gray-700 mb-2">
+          La superficie laterale è formata da 4 facce.
+        </p>
+        <p class="text-gray-700 mb-3">
+          La superficie totale è formata da <input type="text" data-correct-answer="6" data-exercise-checker-target="input" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"> facce.
+        </p>
+
+        <div class="p-3 bg-pink-light rounded-lg space-y-2 w-fit">
+          <p class="text-gray-700">
+            S<span class="italic">l</span> = (<span class="italic">l</span> × <span class="italic">l</span>) × <input type="text" data-correct-answer="4" data-exercise-checker-target="input" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </p>
+          <p class="text-gray-700">
+            St = (<span class="italic">l</span> × <span class="italic">l</span>) × <input type="text" data-correct-answer="6" data-exercise-checker-target="input" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </p>
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+        <%= image_tag "nvi5_mat/p138/p138_02.jpg", class: "max-w-[200px]", alt: "Cubo e suo sviluppo" %>
+      </div>
+    </div>
+
+    <!-- Prisma regolare -->
+    <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">Prisma regolare</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <p class="text-gray-700 mb-3">
+          Un prisma si dice regolare se ha per base un poligono regolare.
+        </p>
+        <p class="text-gray-700 mb-3">
+          Lo sviluppo della superficie laterale è un <input type="text" data-correct-answer="rettangolo" data-exercise-checker-target="input" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-white"> che ha per base il perimetro di base e per altezza l'altezza del prisma.
+        </p>
+
+        <div class="p-3 bg-pink-light rounded-lg space-y-2 w-fit">
+          <p class="text-gray-700">S<span class="italic">l</span> = perimetro di base × altezza</p>
+          <p class="text-gray-700">St = S<span class="italic">l</span> + (area di base × 2)</p>
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+        <%= image_tag "nvi5_mat/p138/p138_03.jpg", class: "max-w-[280px]", alt: "Prisma regolare e suo sviluppo" %>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [253, 254, 255] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

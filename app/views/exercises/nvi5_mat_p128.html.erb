@@ -1,0 +1,83 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <p class="text-gray-700 mb-4">
+          Può capitare di dover stabilire l'area di figure irregolari, come questa.<br>
+          In casi simili effettuare un calcolo esatto è molto complicato, ma possiamo procedere con <strong>approssimazioni progressive</strong> per ottenere una misura sempre più precisa, anche se non esatta.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi5_mat/p128/output-1715938802128_683_203_255_218.png", class: "max-w-[200px]", alt: "Figura irregolare" %>
+      </div>
+    </div>
+
+    <!-- Prima approssimazione -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="flex justify-center">
+        <%= image_tag "nvi5_mat/p128/p128_01.jpg", class: "max-w-full", alt: "Approssimazione con quadrati grandi" %>
+      </div>
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <div class="border border-gray-400 w-6 h-6 flex items-center justify-center font-bold">Q</div>
+          <span class="text-gray-700">1 cm<sup>2</sup></span>
+        </div>
+
+        <p class="text-gray-700 mb-4">
+          Usiamo come unità di misura il quadrato Q da 1 cm<sup>2</sup>.<br>
+          Il poligono rosso misura la superficie della figura per difetto, poiché alcune parti "restano fuori".<br>
+          Il poligono verde la misura per eccesso, perché "va oltre" la figura, "sborda" rispetto a essa.<br>
+          L'area della figura, dunque, è compresa tra quella del poligono rosso (pari a 15 Q, cioè 15 cm<sup>2</sup>) e quella del poligono verde (pari a 36 Q, cioè 36 cm<sup>2</sup>).
+        </p>
+
+        <p class="text-gray-700">
+          Più precisamente:
+        </p>
+
+        <p class="font-bold text-gray-800 mt-2">
+          15 cm<sup>2</sup> &lt; area della figura &lt; 36 cm<sup>2</sup>
+        </p>
+      </div>
+    </div>
+
+    <!-- Seconda approssimazione -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <div class="border border-gray-400 w-4 h-4 flex items-center justify-center text-xs font-bold">q</div>
+          <span class="text-gray-700">0,25 cm<sup>2</sup></span>
+        </div>
+
+        <p class="text-gray-700 mb-4">
+          Usiamo ora un quadrettato più piccolo, in cui ogni quadretto q ha un'area pari a 0,25 cm<sup>2</sup>.<br>
+          L'area del poligono rosso è pari a 75 q, cioè a 18,75 cm<sup>2</sup>.<br>
+          L'area del poligono verde è pari a 116 q, cioè a 29 cm<sup>2</sup>.
+        </p>
+
+        <p class="text-gray-700">
+          Dunque: <strong>18,75 cm<sup>2</sup> &lt; area della figura &lt; 29 cm<sup>2</sup></strong>
+        </p>
+
+        <p class="text-gray-700 mt-4">
+          Come vedi, l'approssimazione è migliorata, infatti:
+        </p>
+
+        <p class="font-bold text-gray-800 mt-2">
+          15 cm<sup>2</sup> &lt; 18,75 cm<sup>2</sup> &lt; area della figura &lt; 29 cm<sup>2</sup> &lt; 36 cm<sup>2</sup>
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi5_mat/p128/p128_02.jpg", class: "max-w-full", alt: "Approssimazione con quadrati piccoli" %>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
