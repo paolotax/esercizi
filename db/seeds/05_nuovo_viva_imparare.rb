@@ -228,6 +228,7 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 172, titolo: "LE CARTE ELETTRONICHE", slug: "nvi5_mat_p172", view_template: "nvi5_mat_p172", sottotitolo: "Educazione finanziaria", base_color: "pink" },
   { numero: 173, titolo: "LA BANCA E IL CONTO CORRENTE", slug: "nvi5_mat_p173", view_template: "nvi5_mat_p173", sottotitolo: "Educazione finanziaria", base_color: "pink" },
   { numero: 174, titolo: "FINANZIAMENTO E INTERESSI", slug: "nvi5_mat_p174", view_template: "nvi5_mat_p174", sottotitolo: "Educazione finanziaria", base_color: "pink" },
+  { numero: 175, titolo: "IL MIO QUADERNO DEGLI ESERCIZI", slug: "nvi5_mat_p175", view_template: "nvi5_mat_p175", sottotitolo: "INDICE", base_color: "cyan" },
   { numero: 176, titolo: "MILIONI E MILIARDI", slug: "nvi5_mat_p176", view_template: "nvi5_mat_p176", sottotitolo: "ESERCIZI", base_color: "blue" },
   { numero: 177, titolo: "SCRITTURE DIVERSE DEI NUMERI", slug: "nvi5_mat_p177", view_template: "nvi5_mat_p177", sottotitolo: "ESERCIZI", base_color: "blue" },
   { numero: 178, titolo: "CONFRONTARE E ORDINARE NUMERI GRANDI", slug: "nvi5_mat_p178", view_template: "nvi5_mat_p178", sottotitolo: "ESERCIZI", base_color: "blue" },
