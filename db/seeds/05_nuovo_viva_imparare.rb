@@ -165,7 +165,14 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 110, titolo: "IL PERIMETRO DEI POLIGONI", slug: "nvi5_mat_p110", view_template: "nvi5_mat_p110", sottotitolo: "GEOMETRIA", base_color: "pink" },
   { numero: 111, titolo: "IL PERIMETRO", slug: "nvi5_mat_p111", view_template: "nvi5_mat_p111", sottotitolo: "ESERCIZI", base_color: "orange" },
   { numero: 112, titolo: "DISEGNO GEOMETRICO", slug: "nvi5_mat_p112", view_template: "nvi5_mat_p112", sottotitolo: "GEOMETRIA", base_color: "pink" },
-  { numero: 113, titolo: "DISEGNO GEOMETRICO", slug: "nvi5_mat_p113", view_template: "nvi5_mat_p113", sottotitolo: "GEOMETRIA", base_color: "pink" }
+  { numero: 113, titolo: "DISEGNO GEOMETRICO", slug: "nvi5_mat_p113", view_template: "nvi5_mat_p113", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 114, titolo: "CIRCONFERENZA E CERCHIO", slug: "nvi5_mat_p114", view_template: "nvi5_mat_p114", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 115, titolo: "GLI ELEMENTI DELLA CIRCONFERENZA E DEL CERCHIO", slug: "nvi5_mat_p115", view_template: "nvi5_mat_p115", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 116, titolo: "LA MISURA DELLA CIRCONFERENZA", slug: "nvi5_mat_p116", view_template: "nvi5_mat_p116", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 117, titolo: "I POLIGONI REGOLARI", slug: "nvi5_mat_p117", view_template: "nvi5_mat_p117", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 118, titolo: "APOTEMA E NUMERO FISSO DEI POLIGONI REGOLARI", slug: "nvi5_mat_p118", view_template: "nvi5_mat_p118", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 119, titolo: "CERCHIO, CIRCONFERENZA E POLIGONI REGOLARI", slug: "nvi5_mat_p119", view_template: "nvi5_mat_p119", sottotitolo: "ESERCIZI", base_color: "orange" },
+  { numero: 120, titolo: "POLIGONI REGOLARI CON IL COMPASSO", slug: "nvi5_mat_p120", view_template: "nvi5_mat_p120", sottotitolo: "LABORATORIO", base_color: "green" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end

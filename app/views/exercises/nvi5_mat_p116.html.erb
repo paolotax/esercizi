@@ -1,0 +1,118 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Laboratorio -->
+    <div class="p-4 bg-green-100 rounded-2xl">
+      <h2 class="font-bold text-green-600 mb-2">Laboratorio</h2>
+      <p class="text-gray-700 mb-4">
+        Procurati: alcuni barattoli cilindrici, forbici, nastro, alcuni fogli, nastro adesivo e una matita.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="space-y-3">
+          <p class="text-gray-700">
+            <span class="inline-flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full font-bold mr-2">1</span>
+            Circonda il barattolo con il nastro e taglia quando hai chiuso il cerchio: hai preso la <strong>misura della circonferenza</strong> del barattolo.
+          </p>
+          <p class="text-gray-700">
+            <span class="inline-flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full font-bold mr-2">2</span>
+            Stendi il nastro e fissalo su un piano con il nastro adesivo: hai <strong>rettificato la circonferenza</strong>, cioè l'hai trasformata in un <strong>tratto di retta</strong> o <strong>segmento</strong>.
+          </p>
+          <p class="text-gray-700">
+            <span class="inline-flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full font-bold mr-2">3</span>
+            Traccia su un foglio il contorno del barattolo, ritaglia il cerchio ottenuto e piegalo a metà per individuare un <strong>diametro</strong>.
+          </p>
+          <p class="text-gray-700">
+            <span class="inline-flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full font-bold mr-2">4</span>
+            Confronta il diametro con la circonferenza rettificata: ti accorgerai che la circonferenza è <strong>3 volte "e un pezzetto"</strong> il diametro.
+          </p>
+          <p class="text-gray-700">
+            <span class="inline-flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full font-bold mr-2">5</span>
+            Ripeti con altri barattoli e confronta il tuo lavoro con quello dei compagni e delle compagne. Che cosa noti?
+          </p>
+        </div>
+        <div class="flex justify-center items-center">
+          <%= image_tag "nvi5_mat/p116/p116_01.jpg", class: "max-w-full", alt: "Laboratorio circonferenza" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Box pi greco -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-blue-400">
+      <p class="text-gray-700 mb-4">
+        Tra la misura di una circonferenza e il suo diametro c'è un rapporto costante. Esso è rappresentato dal simbolo <strong>π</strong> (<strong>pi greco</strong>), il cui valore approssimato è <strong>3,14</strong>.
+      </p>
+      <p class="text-center text-<%= @pagina.base_color %>-600 font-bold mb-4">
+        circonferenza : diametro = 3,14 circa
+      </p>
+    </div>
+
+    <!-- Formula diretta -->
+    <div class="space-y-4">
+      <p class="text-gray-700">
+        <span class="text-<%= @pagina.base_color %>-500">▶</span> Allora, se conosci la lunghezza del diametro, puoi calcolare la lunghezza della circonferenza:<br>
+        <strong>circonferenza = diametro × 3,14</strong><br>
+        Siccome il diametro è uguale a due volte il raggio puoi anche scrivere:<br>
+        <strong>circonferenza = raggio × 2 × 3,14</strong> cioè <strong>circonferenza = raggio × 6,28</strong>
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        <div class="p-3 bg-pink-light rounded-xl">
+          <p class="font-bold text-center">C = d × 3,14</p>
+        </div>
+        <p class="self-center">oppure</p>
+        <div class="p-3 bg-pink-light rounded-xl">
+          <p class="font-bold text-center">C = r × 6,28</p>
+        </div>
+      </div>
+
+      <!-- Schema diametro-circonferenza -->
+      <div class="flex justify-center">
+        <div class="flex items-center gap-2">
+          <div class="p-2 border border-gray-400 rounded text-center font-bold">diametro</div>
+          <div class="text-center">
+            <p class="text-<%= @pagina.base_color %>-500">→ × 3,14 →</p>
+            <p class="text-<%= @pagina.base_color %>-500">← : 3,14 ←</p>
+          </div>
+          <div class="p-2 border border-gray-400 rounded text-center font-bold">circonferenza</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formula inversa -->
+    <div class="space-y-4">
+      <p class="text-gray-700">
+        <span class="text-<%= @pagina.base_color %>-500">▶</span> Se invece conosci la misura della circonferenza e vuoi trovare la lunghezza del diametro o del raggio, devi usare le formule inverse:
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        <div class="p-3 bg-pink-light rounded-xl">
+          <p class="font-bold text-center">d = C : 3,14</p>
+        </div>
+        <p class="self-center">oppure</p>
+        <div class="p-3 bg-pink-light rounded-xl">
+          <p class="font-bold text-center">r = C : 6,28</p>
+        </div>
+      </div>
+
+      <!-- Schema raggio-circonferenza -->
+      <div class="flex justify-center">
+        <div class="flex items-center gap-2">
+          <div class="p-2 border border-gray-400 rounded text-center font-bold">raggio</div>
+          <div class="text-center">
+            <p class="text-<%= @pagina.base_color %>-500">→ × 6,28 →</p>
+            <p class="text-<%= @pagina.base_color %>-500">← : 6,28 ←</p>
+          </div>
+          <div class="p-2 border border-gray-400 rounded text-center font-bold">circonferenza</div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
