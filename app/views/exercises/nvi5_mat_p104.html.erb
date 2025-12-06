@@ -1,0 +1,165 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      <div class="p-4 bg-white rounded-2xl border-3 border-blue-400">
+        <p class="text-gray-700">
+          I <strong class="text-<%= @pagina.base_color %>-600">poligoni</strong> sono figure piane delimitate da una linea spezzata semplice chiusa.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi5_mat/p104/p104_01.jpg", class: "max-w-full", alt: "Poligono con elementi" %>
+      </div>
+    </div>
+
+    <!-- Esercizio completamento -->
+    <div class="p-4 bg-gray-50 rounded-lg">
+      <p class="text-gray-700 mb-3">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> <strong>Osserva la figura e completa le frasi con il nome degli elementi principali di un poligono:</strong>
+      </p>
+      <p class="text-gray-700 font-bold mb-4 text-center">
+        superficie interna – angoli interni – lati – diagonali – altezze – vertici
+      </p>
+
+      <div class="space-y-3">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="shrink-0">– I segmenti AB, BC, CD, DE e EA, che uniscono due punti consecutivi, si chiamano</span>
+          <input type="text" data-correct-answer="lati" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="shrink-0">. L'insieme di tutti i lati costituisce il <strong>contorno</strong> del poligono.</span>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="shrink-0">– I punti A, B, C, D ed E sono i punti in cui si incontrano due lati consecutivi e si chiamano</span>
+          <input type="text" data-correct-answer="vertici" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="shrink-0">– I segmenti che uniscono due punti non consecutivi, come CE, si chiamano</span>
+          <input type="text" data-correct-answer="diagonali" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="shrink-0">– Le parti di piano comprese tra una coppia di lati consecutivi si chiamano</span>
+          <input type="text" data-correct-answer="angoli interni" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="shrink-0">– La zona di piano racchiusa dai lati si chiama</span>
+          <input type="text" data-correct-answer="superficie interna" class="w-40 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="shrink-0">– I segmenti perpendicolari che congiungono un vertice al lato opposto o al suo prolungamento si chiamano</span>
+          <input type="text" data-correct-answer="altezze" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="shrink-0">. Le altezze possono essere interne, come CH, o esterne, come EK.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gli assi di simmetria dei poligoni -->
+    <div>
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-4">Gli assi di simmetria dei poligoni</h2>
+
+      <p class="text-gray-700 mb-3">
+        Alcuni poligoni hanno uno o più <strong>assi di simmetria</strong>.
+      </p>
+
+      <p class="text-gray-700 mb-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> <strong>Osserva e scrivi tu il numero di assi di simmetria come nell'esempio.</strong>
+      </p>
+
+      <!-- Tabella assi di simmetria -->
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <tbody>
+            <!-- Riga 1: Triangoli -->
+            <tr>
+              <td class="p-2 border border-gray-300 text-center bg-white">
+                <p class="mb-2">triangolo scaleno: <strong class="text-<%= @pagina.base_color %>-600">0</strong> assi</p>
+                <%= image_tag "nvi5_mat/p104/output-1715938802104_190_831_146_77.png", class: "mx-auto", alt: "Triangolo scaleno" %>
+              </td>
+              <td class="p-2 border border-gray-300 text-center bg-white">
+                <div class="flex items-center justify-center gap-1 mb-2">
+                  <span>triangolo isoscele:</span>
+                  <input type="text" data-correct-answer="1" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  <span>asse</span>
+                </div>
+                <%= image_tag "nvi5_mat/p104/output-1715938802104_492_830_115_78.png", class: "mx-auto", alt: "Triangolo isoscele" %>
+              </td>
+              <td class="p-2 border border-gray-300 text-center bg-white">
+                <div class="flex items-center justify-center gap-1 mb-2">
+                  <span>triangolo equilatero:</span>
+                  <input type="text" data-correct-answer="3" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  <span>assi</span>
+                </div>
+                <%= image_tag "nvi5_mat/p104/output-1715938802104_791_829_91_80.png", class: "mx-auto", alt: "Triangolo equilatero" %>
+              </td>
+            </tr>
+            <!-- Riga 2: Trapezi e parallelogramma -->
+            <tr>
+              <td class="p-2 border border-gray-300 text-center bg-white">
+                <div class="flex items-center justify-center gap-1 mb-2">
+                  <span>trapezio scaleno:</span>
+                  <input type="text" data-correct-answer="0" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  <span>assi</span>
+                </div>
+                <%= image_tag "nvi5_mat/p104/output-1715938802104_190_967_138_73.png", class: "mx-auto", alt: "Trapezio scaleno" %>
+              </td>
+              <td class="p-2 border border-gray-300 text-center bg-white">
+                <div class="flex items-center justify-center gap-1 mb-2">
+                  <span>trapezio isoscele:</span>
+                  <input type="text" data-correct-answer="1" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  <span>asse</span>
+                </div>
+                <%= image_tag "nvi5_mat/p104/output-1715938802104_481_965_136_82.png", class: "mx-auto", alt: "Trapezio isoscele" %>
+              </td>
+              <td class="p-2 border border-gray-300 text-center bg-white">
+                <div class="flex items-center justify-center gap-1 mb-2">
+                  <span>parallelogramma:</span>
+                  <input type="text" data-correct-answer="0" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  <span>assi</span>
+                </div>
+                <%= image_tag "nvi5_mat/p104/output-1715938802104_754_967_152_74.png", class: "mx-auto", alt: "Parallelogramma" %>
+              </td>
+            </tr>
+            <!-- Riga 3: Rettangolo, rombo, quadrato -->
+            <tr>
+              <td class="p-2 border border-gray-300 text-center bg-white">
+                <div class="flex items-center justify-center gap-1 mb-2">
+                  <span>rettangolo:</span>
+                  <input type="text" data-correct-answer="2" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  <span>assi</span>
+                </div>
+                <%= image_tag "nvi5_mat/p104/output-1715938802104_174_1090_160_84.png", class: "mx-auto", alt: "Rettangolo" %>
+              </td>
+              <td class="p-2 border border-gray-300 text-center bg-white">
+                <div class="flex items-center justify-center gap-1 mb-2">
+                  <span>rombo:</span>
+                  <input type="text" data-correct-answer="2" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  <span>assi</span>
+                </div>
+                <%= image_tag "nvi5_mat/p104/output-1715938802104_477_1090_138_84.png", class: "mx-auto", alt: "Rombo" %>
+              </td>
+              <td class="p-2 border border-gray-300 text-center bg-white">
+                <div class="flex items-center justify-center gap-1 mb-2">
+                  <span>quadrato:</span>
+                  <input type="text" data-correct-answer="4" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  <span>assi</span>
+                </div>
+                <%= image_tag "nvi5_mat/p104/output-1715938802104_787_1090_100_85.png", class: "mx-auto", alt: "Quadrato" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

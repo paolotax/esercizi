@@ -1,0 +1,217 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div>
+      <p class="text-gray-700 mb-2">
+        I triangoli sono i poligoni con <strong>3 lati</strong>, <strong>3 angoli</strong> e <strong>3 vertici</strong>.
+      </p>
+      <p class="text-gray-700 mb-4">
+        I triangoli vengono classificati in base alla <strong>lunghezza dei lati</strong> e all'<strong>ampiezza degli angoli</strong>.
+      </p>
+      <p class="text-gray-700 font-bold">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Completa le classificazioni.
+      </p>
+    </div>
+
+    <!-- IN BASE AI LATI -->
+    <div>
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-4">IN BASE AI LATI</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Triangolo scaleno -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p106/output-1715938802106_167_358_215_110.png", class: "mx-auto mb-2", alt: "Triangolo scaleno" %>
+          <p class="text-gray-700">
+            Se ha tutti i lati <input type="text" data-correct-answer="diversi" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            è un <strong>triangolo scaleno</strong>.
+          </p>
+        </div>
+
+        <!-- Triangolo isoscele -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p106/output-1715938802106_480_318_133_151.png", class: "mx-auto mb-2", alt: "Triangolo isoscele" %>
+          <p class="text-gray-700">
+            Se ha <input type="text" data-correct-answer="2" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> lati <input type="text" data-correct-answer="uguali" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            è un <strong>triangolo isoscele</strong>.
+          </p>
+        </div>
+
+        <!-- Triangolo equilatero -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p106/output-1715938802106_773_334_148_134.png", class: "mx-auto mb-2", alt: "Triangolo equilatero" %>
+          <p class="text-gray-700">
+            Se ha tutti i lati <input type="text" data-correct-answer="uguali" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            è un <strong>triangolo equilatero</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- IN BASE AGLI ANGOLI -->
+    <div>
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-4">IN BASE AGLI ANGOLI</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Triangolo acutangolo -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p106/output-1715938802106_188_581_139_136.png", class: "mx-auto mb-2", alt: "Triangolo acutangolo" %>
+          <p class="text-gray-700">
+            Se ha tutti gli angoli <input type="text" data-correct-answer="acuti" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            è un <strong>triangolo acutangolo</strong>.
+          </p>
+        </div>
+
+        <!-- Triangolo ottusangolo -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p106/output-1715938802106_454_611_200_108.png", class: "mx-auto mb-2", alt: "Triangolo ottusangolo" %>
+          <p class="text-gray-700">
+            Se ha un angolo <input type="text" data-correct-answer="ottuso" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            è un <strong>triangolo ottusangolo</strong>.
+          </p>
+        </div>
+
+        <!-- Triangolo rettangolo -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p106/output-1715938802106_777_577_122_140.png", class: "mx-auto mb-2", alt: "Triangolo rettangolo" %>
+          <p class="text-gray-700">
+            Se ha un angolo <input type="text" data-correct-answer="retto" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            è un <strong>triangolo rettangolo</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Regola sulla somma dei lati -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div>
+        <p class="text-gray-700 mb-4">
+          In ogni triangolo <strong>la lunghezza di ciascun lato è sempre minore della somma degli altri due</strong>. Osserva la figura e completa.
+        </p>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-16 text-center font-bold">5 cm</span>
+            <span class="text-<%= @pagina.base_color %>-500 font-bold">&lt;</span>
+            <span class="w-32 text-center">3 cm + 4 cm</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="3 cm" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-<%= @pagina.base_color %>-500 font-bold">&lt;</span>
+            <input type="text" data-correct-answer="4 cm + 5 cm" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="4 cm" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-<%= @pagina.base_color %>-500 font-bold">&lt;</span>
+            <input type="text" data-correct-answer="3 cm + 5 cm" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <svg viewBox="0 0 200 150" class="w-48 h-36">
+          <!-- Triangolo rettangolo 3-4-5 -->
+          <polygon points="20,130 180,130 20,30" fill="none" stroke="#6B7280" stroke-width="2"/>
+          <!-- Quadratino angolo retto -->
+          <rect x="20" y="110" width="20" height="20" fill="none" stroke="#6B7280" stroke-width="1"/>
+          <text x="90" y="148" class="fill-gray-600" style="font-size: 12px;">4 cm</text>
+          <text x="100" y="75" class="fill-gray-600" style="font-size: 12px;">5 cm</text>
+          <text x="2" y="85" class="fill-gray-600" style="font-size: 12px;">3 cm</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Vero (V) o falso (F)? Segna con una <strong>X</strong> la risposta corretta.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Colonna sinistra -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Un triangolo scaleno può essere equilatero.</span>
+              <div class="flex gap-2 shrink-0">
+                <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                  <input type="radio" name="vf1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                  <span>V</span>
+                </label>
+                <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                  <input type="radio" name="vf1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                  <span>F</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Un triangolo equilatero è sempre acutangolo.</span>
+              <div class="flex gap-2 shrink-0">
+                <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                  <input type="radio" name="vf2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                  <span>V</span>
+                </label>
+                <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                  <input type="radio" name="vf2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                  <span>F</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Un triangolo isoscele può essere rettangolo.</span>
+              <div class="flex gap-2 shrink-0">
+                <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                  <input type="radio" name="vf3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                  <span>V</span>
+                </label>
+                <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                  <input type="radio" name="vf3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                  <span>F</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Colonna destra -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Un triangolo equilatero non può mai essere rettangolo.</span>
+              <div class="flex gap-2 shrink-0">
+                <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                  <input type="radio" name="vf4" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                  <span>V</span>
+                </label>
+                <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                  <input type="radio" name="vf4" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                  <span>F</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Un triangolo ottusangolo può essere equilatero.</span>
+              <div class="flex gap-2 shrink-0">
+                <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                  <input type="radio" name="vf5" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                  <span>V</span>
+                </label>
+                <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                  <input type="radio" name="vf5" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                  <span>F</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

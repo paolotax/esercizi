@@ -1,0 +1,115 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div class="p-4 bg-white rounded-lg">
+      <p class="text-gray-700 font-bold">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Leggi, osserva e completa.
+      </p>
+    </div>
+
+    <!-- TRIANGOLI -->
+    <div>
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-4">Triangoli</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p108/p108_01.jpg", class: "mx-auto mb-2", alt: "Triangolo con angoli colorati" %>
+          <p class="text-gray-700">Disegna su un foglio un triangolo e colora gli angoli con tre colori diversi.</p>
+        </div>
+
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p108/p108_02.jpg", class: "mx-auto mb-2", alt: "Triangolo ritagliato" %>
+          <p class="text-gray-700">Ritaglialo lungo le linee tratteggiate come indicato nel disegno qui sopra.</p>
+        </div>
+
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p108/p108_03.jpg", class: "mx-auto mb-2", alt: "Angoli del triangolo" %>
+          <p class="text-gray-700">
+            Avvicina gli angoli come vedi nel disegno qui sopra: ottieni un angolo
+            <input type="text" data-correct-answer="piatto" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">, cioè di 180°.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-4 bg-pink-light rounded-3xl">
+        <p class="text-gray-700 text-center font-bold">
+          La <strong>somma</strong> degli <strong>angoli interni</strong> di qualunque <strong>triangolo</strong> è sempre <strong>180°</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- QUADRILATERI -->
+    <div>
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-4">Quadrilateri</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p108/p108_04.jpg", class: "mx-auto mb-2", alt: "Quadrilatero con angoli colorati" %>
+          <p class="text-gray-700">Disegna su un foglio un quadrilatero e colora gli angoli con quattro colori diversi.</p>
+        </div>
+
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p108/p108_05.jpg", class: "mx-auto mb-2", alt: "Quadrilatero ritagliato" %>
+          <p class="text-gray-700">Ritaglialo lungo le linee tratteggiate come indicato nel disegno qui sopra.</p>
+        </div>
+
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p108/p108_06.jpg", class: "mx-auto mb-2", alt: "Angoli del quadrilatero" %>
+          <p class="text-gray-700">
+            Avvicina gli angoli come vedi nel disegno qui sopra: ottieni un angolo
+            <input type="text" data-correct-answer="giro" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">, cioè di 360°.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-4 bg-pink-light rounded-3xl">
+        <p class="text-gray-700 text-center font-bold">
+          La <strong>somma</strong> degli <strong>angoli interni</strong> di qualunque <strong>quadrilatero</strong> è sempre <strong>360°</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- PENTAGONO -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start p-4 bg-gray-50 rounded-lg">
+      <div class="flex justify-center">
+        <%= image_tag "nvi5_mat/p108/output-1715938802108_128_897_138_139.png", class: "max-w-full", alt: "Pentagono con diagonali" %>
+      </div>
+
+      <div class="md:col-span-2 space-y-4">
+        <p class="text-gray-700">
+          Disegna su un foglio un <strong>pentagono</strong>, traccia tutte le diagonali possibili partendo da un solo vertice e colora gli angoli come nella figura. Quanti triangoli hai ottenuto?
+          <input type="text" data-correct-answer="3" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </p>
+        <p class="text-gray-700">
+          La somma degli angoli interni di un triangolo è 180°, quindi la somma degli angoli interni del pentagono è 180° × il numero dei triangoli: <strong>180° × 3 = 540°</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Esercizio finale -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <p class="text-gray-700">
+          Disegna su un foglio un quadrato, un esagono e un ottagono, traccia le diagonali possibili partendo da un solo vertice, poi confronta il numero dei lati di ogni poligono con il numero di triangoli che puoi trovare in ognuno di essi. Che cosa noti?
+        </p>
+      </div>
+
+      <div class="p-4 bg-white rounded-2xl border-3 border-blue-400">
+        <p class="text-gray-700">
+          Per calcolare la <strong>somma degli angoli</strong> interni di un poligono procedi così:
+        </p>
+        <p class="text-center mt-2">
+          <strong>180° × (numero lati – 2)</strong>
+        </p>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

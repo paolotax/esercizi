@@ -1,0 +1,151 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione con esercizio calcolo perimetro -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      <div>
+        <p class="text-gray-700 font-bold mb-4">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> Calcola il perimetro del poligono raffigurato.
+        </p>
+        <div class="flex justify-center mb-4">
+          <%= image_tag "nvi5_mat/p110/p110_01.jpg", class: "max-w-full", alt: "Quadrilatero ABCD" %>
+        </div>
+        <div class="space-y-2">
+          <p class="text-gray-700">P = AB + BC + CD + DA</p>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span class="shrink-0">2,4 cm +</span>
+            <input type="text" data-correct-answer="2,7" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">cm +</span>
+            <input type="text" data-correct-answer="3,2" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">cm +</span>
+            <input type="text" data-correct-answer="1,7" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">cm =</span>
+            <input type="text" data-correct-answer="10" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>cm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 bg-pink-light rounded-3xl">
+        <p class="text-gray-700 mb-2">
+          Il <strong>perimetro</strong> di un poligono è la <strong>misura</strong> del suo <strong>contorno</strong>.
+        </p>
+        <p class="text-gray-700">
+          Per <strong>calcolare il perimetro</strong> di un poligono basta <strong>addizionare</strong> le misure della lunghezza dei suoi <strong>lati</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Semplificazione formule -->
+    <div>
+      <p class="text-gray-700 mb-4">
+        La formula del perimetro si può <strong>semplificare</strong> per i poligoni che hanno alcuni o tutti i lati congruenti.
+      </p>
+
+      <!-- Rombo e quadrato -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start mb-6">
+        <div>
+          <p class="text-gray-700 mb-2">
+            <span class="text-<%= @pagina.base_color %>-500">•</span> Il <strong>rombo</strong> e il <strong>quadrato</strong> hanno <strong>tutti i lati congruenti</strong>.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Per calcolare il loro perimetro, invece di sommare le misure dei lati, possiamo moltiplicare la misura del lato per 4.
+          </p>
+          <div class="p-3 bg-pink-light rounded-2xl inline-block">
+            <p class="font-bold">P = ℓ × 4</p>
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <%= image_tag "nvi5_mat/p110/p110_02.jpg", class: "max-w-full", alt: "Rombo e quadrato con lati" %>
+        </div>
+      </div>
+
+      <!-- Poligono equilatero o regolare -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start mb-6">
+        <div>
+          <p class="text-gray-700 mb-2">
+            <span class="text-<%= @pagina.base_color %>-500">•</span> Se un <strong>poligono</strong> è <strong>equilatero o regolare</strong>, per calcolare il perimetro basta <strong>moltiplicare la misura di un lato per il numero dei lati</strong>.
+          </p>
+          <p class="text-gray-700 mb-4">
+            Viceversa: se si conosce il perimetro, per trovare la misura di un lato basta dividere il perimetro per il numero dei lati (<strong>formula inversa</strong>).
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <%= image_tag "nvi5_mat/p110/p110_03.jpg", class: "max-w-full", alt: "Schema formula perimetro" %>
+        </div>
+      </div>
+
+      <!-- Rettangolo e parallelogramma -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div>
+          <p class="text-gray-700 mb-2">
+            <span class="text-<%= @pagina.base_color %>-500">•</span> Il <strong>rettangolo</strong> e il <strong>parallelogramma</strong> hanno <strong>i lati a due a due uguali</strong>. Pertanto possiamo moltiplicare per 2 la somma dei due lati di lunghezza diversa.
+          </p>
+          <div class="p-3 bg-pink-light rounded-2xl inline-block mt-2">
+            <p class="font-bold">P = (ℓ<sub>1</sub> + ℓ<sub>2</sub>) × 2</p>
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <%= image_tag "nvi5_mat/p110/p110_04.jpg", class: "max-w-full", alt: "Rettangolo e parallelogramma" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Esercizio 1 -->
+        <div>
+          <p class="text-gray-700 mb-4">
+            <%= numero_esercizio_badge(1) %>
+            Per decorare una tovaglia rettangolare, un sarto vuole usare un merletto antico. Se i lati della tovaglia misurano 95 cm e 170 cm, gli basteranno i 600 cm di cui dispone?
+          </p>
+          <div class="text-gray-700">
+            Risposta: Il merletto
+            <select class="border-2 border-gray-400 rounded px-2 py-1 font-bold bg-transparent" data-correct-answer="basterà">
+              <option value="">...</option>
+              <option value="basterà">basterà</option>
+              <option value="non basterà">non basterà</option>
+            </select>
+            perché
+            <input type="text" data-correct-answer="530" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            cm
+            <select class="border-2 border-gray-400 rounded px-2 py-1 font-bold bg-transparent" data-correct-answer="<">
+              <option value="">...</option>
+              <option value="<">&lt;</option>
+              <option value=">">&gt;</option>
+            </select>
+            600 cm
+          </div>
+        </div>
+
+        <!-- Esercizio 2 -->
+        <div>
+          <p class="text-gray-700 mb-4">
+            <%= numero_esercizio_badge(2) %>
+            Il signor Gino deve recintare un'aiuola che ha la forma di un esagono regolare. Se il lato dell'aiuola misura 34 dm, quanto misura la recinzione? Quanto misurerà la recinzione per 10 aiuole uguali?
+          </p>
+          <div class="space-y-3">
+            <div class="text-gray-700">
+              Recinzione 1 aiuola:
+              <input type="text" data-correct-answer="204" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              dm
+            </div>
+            <div class="text-gray-700">
+              Recinzione 10 aiuole:
+              <input type="text" data-correct-answer="2040" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              dm
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

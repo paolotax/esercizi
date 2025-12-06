@@ -1,0 +1,109 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div>
+      <p class="text-gray-700">
+        Le <strong>rette</strong>, come tutte le linee, hanno una sola dimensione: la <strong>lunghezza</strong>.
+        Inoltre mantengono sempre la stessa <strong>direzione</strong>.
+      </p>
+    </div>
+
+    <!-- Le tre definizioni: Linea Retta, Semiretta, Segmento -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Linea Retta -->
+      <div class="text-center">
+        <%= image_tag "nvi5_mat/p096/p096_01.jpg", class: "mx-auto mb-2", alt: "Linea retta" %>
+        <p class="text-gray-700">
+          <span class="text-<%= @pagina.base_color %>-500">▶</span> La <strong class="text-<%= @pagina.base_color %>-600">LINEA RETTA</strong> è <strong>illimitata</strong>: non ha inizio né fine.
+        </p>
+      </div>
+
+      <!-- Semiretta -->
+      <div class="text-center">
+        <%= image_tag "nvi5_mat/p096/p096_02.jpg", class: "mx-auto mb-2", alt: "Semiretta" %>
+        <p class="text-gray-700">
+          <span class="text-<%= @pagina.base_color %>-500">▶</span> La <strong class="text-<%= @pagina.base_color %>-600">SEMIRETTA</strong> ha un <strong>punto di origine</strong>, ma è illimitata.
+        </p>
+      </div>
+
+      <!-- Segmento -->
+      <div class="text-center">
+        <%= image_tag "nvi5_mat/p096/p096_03.jpg", class: "mx-auto mb-2", alt: "Segmento" %>
+        <p class="text-gray-700">
+          <span class="text-<%= @pagina.base_color %>-500">▶</span> Il <strong class="text-<%= @pagina.base_color %>-600">SEGMENTO</strong> è <strong>limitato</strong>: ha un inizio e una fine.
+        </p>
+      </div>
+    </div>
+
+    <!-- Posizione delle rette sul piano -->
+    <div class="p-4 bg-gray-50 rounded-lg">
+      <p class="text-gray-700 mb-4">
+        Le strade di una città, viste dall'alto, possono dare l'idea di tante rette.
+        Osserva le linee blu: rappresentano la <strong>posizione</strong> di coppie di rette <strong>sul piano</strong>.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p096/output-1715938802096_108_473_281_183.png", class: "mx-auto rounded-lg", alt: "Figura A - rette parallele" %>
+          <p class="text-gray-600 mt-1">figura A</p>
+        </div>
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p096/output-1715938802096_408_474_283_184.png", class: "mx-auto rounded-lg", alt: "Figura B - rette incidenti" %>
+          <p class="text-gray-600 mt-1">figura B</p>
+        </div>
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p096/output-1715938802096_706_474_282_183.png", class: "mx-auto rounded-lg", alt: "Figura C - rette perpendicolari" %>
+          <p class="text-gray-600 mt-1">figura C</p>
+        </div>
+      </div>
+
+      <p class="text-gray-700 mb-2">Le rette si dicono:</p>
+      <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-<%= @pagina.base_color %>-500">
+        <li><strong class="text-<%= @pagina.base_color %>-600">parallele</strong> se non si incrociano mai, come nella figura A;</li>
+        <li><strong class="text-<%= @pagina.base_color %>-600">incidenti</strong> se si incontrano in un punto, come nella figura B;</li>
+        <li><strong class="text-<%= @pagina.base_color %>-600">perpendicolari</strong> se, incrociandosi, formano quattro angoli retti, come nella figura C.</li>
+      </ul>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Osserva e completa.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-3">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="shrink-0">• Le rette della coppia A sono</span>
+              <input type="text" data-correct-answer="parallele" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="shrink-0">• Le rette della coppia B sono</span>
+              <input type="text" data-correct-answer="perpendicolari" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="shrink-0">• Le rette della coppia C sono</span>
+              <input type="text" data-correct-answer="incidenti" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+
+          <div class="flex justify-center">
+            <%= image_tag "nvi5_mat/p096/p096_04.jpg", class: "max-w-full rounded-lg", alt: "Mappa con rette A, B, C" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,127 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione con immagine angolo -->
+    <div class="p-4 bg-pink-light rounded-3xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div class="flex justify-center">
+          <%= image_tag "nvi5_mat/p097/p097_01.jpg", class: "max-w-full", alt: "Angolo con semirette e vertice" %>
+        </div>
+        <div class="md:col-span-2 space-y-3">
+          <p class="text-gray-700">
+            L'<strong class="text-<%= @pagina.base_color %>-600">angolo</strong> è ciascuna delle parti di piano comprese tra due semirette che hanno la stessa origine.
+          </p>
+          <p class="text-gray-700">
+            Le due semirette sono i <strong>lati</strong> dell'angolo, mentre il punto di origine (O) è il <strong>vertice</strong> dell'angolo. L'"apertura" tra le due semirette è l'<strong>ampiezza</strong> dell'angolo e si misura in <strong>gradi</strong> (°). Come vedi, una <strong>coppia di semirette con l'origine in comune</strong> individua <strong>due angoli</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Classificazione degli angoli -->
+    <div>
+      <p class="text-gray-700 mb-4">Gli angoli si classificano in base alla loro ampiezza.</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <!-- Angolo retto -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p097/p097_02.jpg", class: "mx-auto mb-2", alt: "Angolo retto" %>
+          <p class="text-gray-700"><strong class="text-<%= @pagina.base_color %>-600">angolo retto</strong>:</p>
+          <p class="text-gray-700">misura <strong>90°</strong></p>
+        </div>
+
+        <!-- Angolo acuto -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p097/p097_03.jpg", class: "mx-auto mb-2", alt: "Angolo acuto" %>
+          <p class="text-gray-700"><strong class="text-<%= @pagina.base_color %>-600">angolo acuto</strong>:</p>
+          <p class="text-gray-700">misura <strong>meno</strong> di <strong>90°</strong></p>
+        </div>
+
+        <!-- Angolo ottuso -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p097/p097_04.jpg", class: "mx-auto mb-2", alt: "Angolo ottuso" %>
+          <p class="text-gray-700"><strong class="text-<%= @pagina.base_color %>-600">angolo ottuso</strong>:</p>
+          <p class="text-gray-700">misura <strong>più di 90°</strong> ma <strong>meno di 180°</strong></p>
+        </div>
+
+        <!-- Angolo piatto -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p097/p097_05.jpg", class: "mx-auto mb-2", alt: "Angolo piatto" %>
+          <p class="text-gray-700"><strong class="text-<%= @pagina.base_color %>-600">angolo piatto</strong>:</p>
+          <p class="text-gray-700">misura <strong>180°</strong></p>
+        </div>
+
+        <!-- Angolo giro -->
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p097/p097_06.jpg", class: "mx-auto mb-2", alt: "Angolo giro" %>
+          <p class="text-gray-700"><strong class="text-<%= @pagina.base_color %>-600">angolo giro</strong>:</p>
+          <p class="text-gray-700">misura <strong>360°</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Angoli concavi e convessi -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="text-center">
+        <p class="text-gray-700 mb-2">Se un angolo contiene i prolungamenti dei suoi lati, l'angolo si dice <strong class="text-<%= @pagina.base_color %>-600">concavo</strong>.</p>
+        <%= image_tag "nvi5_mat/p097/p097_07.jpg", class: "mx-auto", alt: "Angolo concavo" %>
+      </div>
+
+      <div class="text-center">
+        <p class="text-gray-700 mb-2">Se un angolo non contiene i prolungamenti dei suoi lati, l'angolo si dice <strong class="text-<%= @pagina.base_color %>-600">convesso</strong>.</p>
+        <%= image_tag "nvi5_mat/p097/p097_08.jpg", class: "mx-auto", alt: "Angolo convesso" %>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Leggi e completa.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-3">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="shrink-0">• Un angolo con un'ampiezza di</span>
+              <input type="text" data-correct-answer="90°" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">è retto.</span>
+            </div>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="shrink-0">• Un angolo retto è anche un angolo</span>
+              <input type="text" data-correct-answer="convesso" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="shrink-0">• L'angolo</span>
+              <input type="text" data-correct-answer="giro" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">ha l'ampiezza massima.</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="shrink-0">• Un angolo</span>
+              <input type="text" data-correct-answer="convesso" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">non contiene i prolungamenti dei suoi lati;</span>
+            </div>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="shrink-0">un angolo che contiene i prolungamenti dei suoi lati si dice</span>
+              <input type="text" data-correct-answer="concavo" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

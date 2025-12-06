@@ -1,0 +1,74 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Immagine principale con i 4 concetti: Centro, Raggio, Diametro, Corda -->
+    <div class="flex justify-center">
+      <%= image_tag "nvi5_mat/p095/p095_01.jpg", class: "max-w-full", alt: "Centro, Raggio, Diametro, Corda" %>
+    </div>
+
+    <!-- Esercizio 1: Osserva e completa -->
+    <div class="p-4 md:p-6 bg-<%= @pagina.base_color %>-50 rounded-lg space-y-6">
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <span class="text-<%= @pagina.base_color %>-500">◆</span> Osserva e completa.
+        </p>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="shrink-0">• Il punto <strong>O</strong> è il</span>
+            <input type="text" data-correct-answer="centro" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">della CIRCONFERENZA.</span>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="shrink-0">• La</span>
+            <input type="text" data-correct-answer="corda" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">unisce i punti C e D.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2: Scegli -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <span class="text-<%= @pagina.base_color %>-500">◆</span> Scegli.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Raggio -->
+          <div class="space-y-2">
+            <p class="font-bold text-<%= @pagina.base_color %>-600">• Il RAGGIO:</p>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+              <span>unisce il <strong class="text-<%= @pagina.base_color %>-600">CENTRO</strong> e la circonferenza.</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" class="w-5 h-5">
+              <span>unisce il <strong class="text-<%= @pagina.base_color %>-600">CENTRO</strong> e la corda.</span>
+            </label>
+          </div>
+
+          <!-- Diametro -->
+          <div class="space-y-2">
+            <p class="font-bold text-<%= @pagina.base_color %>-600">• Il DIAMETRO:</p>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+              <span>passa per il <strong class="text-<%= @pagina.base_color %>-600">CENTRO</strong>.</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="checkbox" class="w-5 h-5">
+              <span>non passa per il <strong class="text-<%= @pagina.base_color %>-600">CENTRO</strong>.</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

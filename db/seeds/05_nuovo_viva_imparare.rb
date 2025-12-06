@@ -142,7 +142,27 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 87, titolo: "CALCOLARE CON LE MISURE DI TEMPO", slug: "nvi5_mat_p087", view_template: "nvi5_mat_p087", sottotitolo: "MISURA", base_color: "pink" },
   { numero: 88, titolo: "EURO, COMMERCIO E TEMPO", slug: "nvi5_mat_p088", view_template: "nvi5_mat_p088", sottotitolo: "ESERCIZI", base_color: "orange" },
   { numero: 89, titolo: "EURO, COMMERCIO E TEMPO", slug: "nvi5_mat_p089", view_template: "nvi5_mat_p089", sottotitolo: "ESERCIZI", base_color: "orange" },
-  { numero: 90, titolo: "MISURE DI LUNGHEZZA, CAPACITÀ E MASSA", slug: "nvi5_mat_p090", view_template: "nvi5_mat_p090", sottotitolo: "MAPPA", base_color: "cyan" }
+  { numero: 90, titolo: "MISURE DI LUNGHEZZA, CAPACITÀ E MASSA", slug: "nvi5_mat_p090", view_template: "nvi5_mat_p090", sottotitolo: "MAPPA", base_color: "cyan" },
+  { numero: 91, titolo: "MISURE DI VALORE E DI TEMPO", slug: "nvi5_mat_p091", view_template: "nvi5_mat_p091", sottotitolo: "MAPPA", base_color: "cyan" },
+  { numero: 92, titolo: "MISURA", slug: "nvi5_mat_p092", view_template: "nvi5_mat_p092", sottotitolo: "VERIFICA", base_color: "pink" },
+  { numero: 93, titolo: "MISURA", slug: "nvi5_mat_p093", view_template: "nvi5_mat_p093", sottotitolo: "MODELLO INVALSI", base_color: "pink" },
+  { numero: 94, titolo: "GEOMETRIA", slug: "nvi5_mat_p094", view_template: "nvi5_mat_p094", sottotitolo: "PAROLE AL CENTRO", base_color: "pink" },
+  { numero: 95, titolo: "GEOMETRIA", slug: "nvi5_mat_p095", view_template: "nvi5_mat_p095", sottotitolo: "PAROLE AL CENTRO", base_color: "pink" },
+  { numero: 96, titolo: "LE RETTE", slug: "nvi5_mat_p096", view_template: "nvi5_mat_p096", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 97, titolo: "GLI ANGOLI", slug: "nvi5_mat_p097", view_template: "nvi5_mat_p097", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 98, titolo: "IL PIANO CARTESIANO", slug: "nvi5_mat_p098", view_template: "nvi5_mat_p098", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 99, titolo: "ISOMETRIE: LA SIMMETRIA", slug: "nvi5_mat_p099", view_template: "nvi5_mat_p099", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 100, titolo: "LA ROTAZIONE", slug: "nvi5_mat_p100", view_template: "nvi5_mat_p100", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 101, titolo: "LA TRASLAZIONE", slug: "nvi5_mat_p101", view_template: "nvi5_mat_p101", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 102, titolo: "LA SIMILITUDINE", slug: "nvi5_mat_p102", view_template: "nvi5_mat_p102", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 103, titolo: "ISOMETRIE E SIMILITUDINE", slug: "nvi5_mat_p103", view_template: "nvi5_mat_p103", sottotitolo: "ESERCIZI", base_color: "orange" },
+  { numero: 104, titolo: "I POLIGONI", slug: "nvi5_mat_p104", view_template: "nvi5_mat_p104", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 105, titolo: "CLASSIFICARE I POLIGONI", slug: "nvi5_mat_p105", view_template: "nvi5_mat_p105", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 106, titolo: "I TRIANGOLI", slug: "nvi5_mat_p106", view_template: "nvi5_mat_p106", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 107, titolo: "I QUADRILATERI", slug: "nvi5_mat_p107", view_template: "nvi5_mat_p107", sottotitolo: "GEOMETRIA", base_color: "pink" },
+  { numero: 108, titolo: "GLI ANGOLI INTERNI DEI POLIGONI", slug: "nvi5_mat_p108", view_template: "nvi5_mat_p108", sottotitolo: "LABORATORIO", base_color: "yellow" },
+  { numero: 109, titolo: "I POLIGONI", slug: "nvi5_mat_p109", view_template: "nvi5_mat_p109", sottotitolo: "ESERCIZI", base_color: "orange" },
+  { numero: 110, titolo: "IL PERIMETRO DEI POLIGONI", slug: "nvi5_mat_p110", view_template: "nvi5_mat_p110", sottotitolo: "GEOMETRIA", base_color: "pink" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end

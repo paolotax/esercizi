@@ -8,12 +8,12 @@ Creare la/e pagina/e $ARGUMENTS per il libro nvi5_mat.
 
 1. **GUARDA page.png** - `assets/images/nvi5_mat/p0XX/page.png` - FONDAMENTALE per capire layout e struttura visiva!
 2. **Leggi HTML originale** - `assets/images/nvi5_mat/p0XX/*.html` - per estrarre testo e risposte
-3. **Analizza la struttura** - Identifica sezioni, colonne, box colorati, tipi di esercizi
-4. **Identifica controller** - Quale tipo di interazione serve? (vedi sotto)
-5. **Applica i pattern** - Usa i template sotto
-6. **Aggiorna seed** - Con la nuova pagina
-7. **Crea la view** - `app/views/exercises/nvi5_mat_p0XX.html.erb`
-8. **Rigenera database** - Per applicare le modifiche
+3. **Aggiorna seed** - Con la nuova pagina
+4. **Rigenera database** - Per applicare le modifiche
+5. **Analizza la struttura** - Identifica sezioni, colonne, box colorati, tipi di esercizi. CONTROLLA ANCHE le immagini jpg/png nella cartella asset della pagina per usarle nella view
+6. **Identifica controller** - Quale tipo di interazione serve? (vedi sotto)
+7. **Applica i pattern** - Usa i template sotto
+8. **Crea la view** - `app/views/exercises/nvi5_mat_p0XX.html.erb`
 
 ---
 
@@ -263,6 +263,62 @@ Usare `@pagina.base_color` per colori coerenti:
   <span>Risposta corretta</span>
 </label>
 ```
+
+---
+
+## ESERCIZI VERO/FALSO O SÌ/NO
+
+**Pattern per domande V/F con box cliccabili e cambio colore:**
+
+```erb
+<div class="space-y-3">
+  <div class="flex items-center justify-between gap-4 flex-wrap">
+    <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Testo della domanda.</span>
+    <div class="flex gap-2">
+      <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+        <input type="radio" name="vf1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+        <span>V</span>
+      </label>
+      <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+        <input type="radio" name="vf1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+        <span>F</span>
+      </label>
+    </div>
+  </div>
+</div>
+```
+
+**Caratteristiche:**
+- `name="vfN"` - Ogni domanda ha un name diverso (vf1, vf2, vf3...)
+- `data-correct-answer="true"` sulla risposta corretta
+- Radio invisibile (`opacity-0`) ma cliccabile (`absolute inset-0`)
+- Box con bordo colorato, sfondo bianco
+- Hover con sfondo leggero (`hover:bg-<%= @pagina.base_color %>-100`)
+- Selezione con sfondo colorato (`has-checked:bg-pink-300`)
+- Bullet `•` del colore base della pagina
+
+**Per Sì/No:** sostituire V/F con Sì/No
+
+---
+
+## BOX ALLENAMENTE
+
+```erb
+<div class="p-4 bg-white rounded-2xl border-3 border-blue-400">
+  <p class="font-bold text-gray-800 mb-2">
+    <span class="bg-yellow-400 px-2 py-1 rounded">AllenaMente!</span>
+  </p>
+  <p class="text-gray-700">
+    Testo della consegna...
+  </p>
+  <!-- contenuto/immagine dentro il box -->
+</div>
+```
+
+**Caratteristiche:**
+- Sfondo bianco con bordo blu arrotondato
+- Badge giallo per "AllenaMente!"
+- Contenuto (testo e immagini) tutto dentro il box
 
 ---
 
