@@ -1,0 +1,179 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div class="space-y-4">
+      <p class="text-gray-700">Ricordi come funziona il lavoro del commerciante?</p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700 marker:text-<%= @pagina.base_color %>-500">
+        <li>Il commerciante, per rifornire il suo negozio, acquista la merce dai fornitori, cioè sostiene una <strong>spesa</strong>.</li>
+        <li>Il denaro che il commerciante incassa quando rivende la merce è il <strong>ricavo</strong>.</li>
+        <li>Solitamente il ricavo è superiore alla spesa; la differenza fra ricavo e spesa è il <strong>guadagno</strong> del commerciante.</li>
+        <li>Se una merce rimane invenduta, il commerciante può decidere di metterla in offerta a un prezzo inferiore alla spesa che ha sostenuto, in modo da recuperare almeno qualcosa; in questo caso la differenza fra spesa e ricavo costituisce la <strong>perdita</strong> del commerciante.</li>
+      </ul>
+    </div>
+
+    <!-- Schema guadagno/perdita -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Se ricavo > spesa (guadagno) -->
+      <div class="p-4 bg-white rounded-lg border-2 border-green-500">
+        <p class="text-center px-3 py-1 bg-green-200 rounded-lg mb-3">se il <span class="text-green-700 font-bold">ricavo</span> è maggiore della <span class="text-orange-600 font-bold">spesa</span></p>
+        <div class="space-y-2">
+          <div class="flex items-center justify-center gap-2">
+            <div class="px-3 py-1 bg-orange-200 rounded font-bold">spesa</div>
+            <span class="font-bold">+</span>
+            <div class="px-3 py-1 bg-green-200 rounded font-bold">guadagno</div>
+            <span class="font-bold">=</span>
+            <div class="px-3 py-1 bg-green-200 rounded font-bold">ricavo</div>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <div class="px-3 py-1 bg-green-200 rounded font-bold">ricavo</div>
+            <span class="font-bold">−</span>
+            <div class="px-3 py-1 bg-orange-200 rounded font-bold">spesa</div>
+            <span class="font-bold">=</span>
+            <div class="px-3 py-1 bg-green-200 rounded font-bold">guadagno</div>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <div class="px-3 py-1 bg-green-200 rounded font-bold">ricavo</div>
+            <span class="font-bold">−</span>
+            <div class="px-3 py-1 bg-green-200 rounded font-bold">guadagno</div>
+            <span class="font-bold">=</span>
+            <div class="px-3 py-1 bg-orange-200 rounded font-bold">spesa</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Se spesa > ricavo (perdita) -->
+      <div class="p-4 bg-pink-light rounded-lg">
+        <p class="text-center text-gray-600 mb-3">se la <span class="text-orange-600 font-bold">spesa</span> è maggiore del <span class="text-cyan-600 font-bold">ricavo</span></p>
+        <div class="flex items-center justify-center gap-2 mb-2">
+          <div class="px-3 py-1 bg-orange-200 rounded font-bold">spesa</div>
+          <span class="font-bold">−</span>
+          <div class="px-3 py-1 bg-cyan-200 rounded font-bold">ricavo</div>
+          <span class="font-bold">=</span>
+          <div class="px-3 py-1 bg-red-200 rounded font-bold">perdita</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Costo totale e unitario -->
+    <div class="p-4 bg-gray-50 rounded-lg">
+      <p class="text-gray-700 mb-4">
+        Ricorda di distinguere tra il <span class="text-cyan-600 font-bold underline">costo totale</span> (per esempio, una confezione di 10 vasetti di yogurt)
+        e il <span class="text-orange-600 font-bold underline italic">costo unitario</span> dei prodotti dentro la confezione (il prezzo del singolo vasetto).
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Costo totale : quantità = costo unitario -->
+        <div class="flex items-center justify-center gap-3">
+          <div class="text-center">
+            <div class="px-3 py-1 bg-cyan-200 rounded font-bold underline">costo totale</div>
+          </div>
+          <span class="font-bold">:</span>
+          <div class="px-3 py-1 bg-gray-200 rounded">quantità</div>
+          <span class="font-bold">=</span>
+          <div class="px-3 py-1 bg-orange-200 rounded font-bold underline italic">costo unitario</div>
+        </div>
+
+        <!-- Costo unitario × quantità = costo totale -->
+        <div class="flex items-center justify-center gap-3">
+          <div class="px-3 py-1 bg-orange-200 rounded font-bold underline italic">costo unitario</div>
+          <span class="font-bold">×</span>
+          <div class="px-3 py-1 bg-gray-200 rounded">quantità</div>
+          <span class="font-bold">=</span>
+          <div class="px-3 py-1 bg-cyan-200 rounded font-bold underline">costo totale</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x-2 md:divide-orange-300">
+        <!-- Colonna sinistra: Esercizio 1 -->
+        <div class="md:pr-4">
+          <div>
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(1) %>
+              Osserva i dati della tabella e indica se c'è stato un guadagno o una perdita.
+            </p>
+
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr>
+                    <th class="p-2 bg-orange-200 border border-gray-300 font-bold">spesa</th>
+                    <th class="p-2 bg-cyan-200 border border-gray-300 font-bold">ricavo</th>
+                    <th class="p-2 bg-green-200 border border-gray-300 font-bold">guadagno o perdita?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="p-2 border border-gray-300 text-center bg-white">€ 344</td>
+                    <td class="p-2 border border-gray-300 text-center bg-white">€ 433</td>
+                    <td class="p-2 border border-gray-300 text-center bg-white">
+                      <input type="text" data-correct-answer="guadagno € 89" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border border-gray-300 text-center bg-white">€ <span class="whitespace-nowrap">1 540</span></td>
+                    <td class="p-2 border border-gray-300 text-center bg-white">€ <span class="whitespace-nowrap">1 300,50</span></td>
+                    <td class="p-2 border border-gray-300 text-center bg-white">
+                      <input type="text" data-correct-answer="perdita € 239,50" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border border-gray-300 text-center bg-white">€ 175,50</td>
+                    <td class="p-2 border border-gray-300 text-center bg-white">€ 189</td>
+                    <td class="p-2 border border-gray-300 text-center bg-white">
+                      <input type="text" data-correct-answer="guadagno € 13,50" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border border-gray-300 text-center bg-white">€ 857</td>
+                    <td class="p-2 border border-gray-300 text-center bg-white">€ 758</td>
+                    <td class="p-2 border border-gray-300 text-center bg-white">
+                      <input type="text" data-correct-answer="perdita € 99" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonna destra: Esercizi 2 e 3 -->
+        <div class="md:pl-4 space-y-6">
+          <!-- Esercizio 2 -->
+          <div>
+            <p class="text-gray-700 mb-3">
+              <%= numero_esercizio_badge(2) %>
+              Un cartolaio ha comprato 25 astucci pagandoli € 5,80 ciascuno. Se li rivende tutti guadagnando € 3,20 per ciascun astuccio, quanto ricava dalla vendita?
+            </p>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="225" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">euro</span>
+            </div>
+          </div>
+
+          <!-- Esercizio 3 -->
+          <div>
+            <p class="text-gray-700 mb-3">
+              <%= numero_esercizio_badge(3) %>
+              Un fioraio ha comprato 75 orchidee pagandole complessivamente € 300. Le confeziona una a una per poi venderle. Se vuole guadagnare € 2,50 per ciascuna orchidea, a quanto dovrà vendere ogni confezione?
+            </p>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="6,50" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">euro</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

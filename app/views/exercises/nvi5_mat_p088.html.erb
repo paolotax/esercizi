@@ -1,0 +1,254 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <!-- Box IMPARARE TUTTI -->
+      <div class="p-4 bg-white rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Scrivi in cifre i seguenti prezzi come nell'esempio.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Colonna sinistra -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="shrink-0">sessanta euro e trenta centesimi</span>
+              <span class="shrink-0">→</span>
+              <span class="text-<%= @pagina.base_color %>-700 font-bold shrink-0">€ 60,30</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="shrink-0">centoventi euro e otto centesimi</span>
+              <span class="shrink-0">→</span>
+              <span class="shrink-0">€</span>
+              <input type="text" data-correct-answer="120,08" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="shrink-0">tredici euro e dodici centesimi</span>
+              <span class="shrink-0">→</span>
+              <span class="shrink-0">€</span>
+              <input type="text" data-correct-answer="13,12" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+
+          <!-- Colonna destra -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="shrink-0">ottocento euro e otto centesimi</span>
+              <span class="shrink-0">→</span>
+              <span class="shrink-0">€</span>
+              <input type="text" data-correct-answer="800,08" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="shrink-0">duemilaseicentotrentuno euro</span>
+              <span class="shrink-0">→</span>
+              <span class="shrink-0">€</span>
+              <input type="text" data-correct-answer="2631" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="shrink-0">cinquecento euro e sette centesimi</span>
+              <span class="shrink-0">→</span>
+              <span class="shrink-0">€</span>
+              <input type="text" data-correct-answer="500,07" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Calcola il totale delle seguenti somme di denaro.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Prima somma di denaro -->
+          <div class="flex items-center gap-2">
+            <div class="flex gap-1 items-end">
+              <%= image_tag "nvi5_mat/p088/output-1715938802088_118_428_407_123.png", class: "h-16" %>
+            </div>
+            <span class="shrink-0">€</span>
+            <input type="text" data-correct-answer="265" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+
+          <!-- Seconda somma di denaro -->
+          <div class="flex items-center gap-2">
+            <div class="flex gap-1 items-end">
+              <%= image_tag "nvi5_mat/p088/output-1715938802088_565_427_379_124.png", class: "h-16" %>
+            </div>
+            <span class="shrink-0">€</span>
+            <input type="text" data-correct-answer="127" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 3 - Cambi valuta -->
+      <div class="mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Leggi su un giornale o cerca su Internet i cambi alla data di oggi, poi calcola e completa la tabella.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="shrink-0 w-32">Sterlina</span>
+              <span class="shrink-0">→</span>
+              <span class="shrink-0">€</span>
+              <input type="text" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="shrink-0 w-32">Dollaro USA</span>
+              <span class="shrink-0">→</span>
+              <span class="shrink-0">€</span>
+              <input type="text" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="shrink-0 w-32">Franco svizzero</span>
+              <span class="shrink-0">→</span>
+              <span class="shrink-0">€</span>
+              <input type="text" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+
+          <!-- Tabella cambi -->
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-300">
+              <thead>
+                <tr class="bg-<%= @pagina.base_color %>-200">
+                  <th class="border border-gray-300 px-2 py-1 font-bold">Euro</th>
+                  <th class="border border-gray-300 px-2 py-1 font-bold">Sterlina</th>
+                  <th class="border border-gray-300 px-2 py-1 font-bold">Dollaro USA</th>
+                  <th class="border border-gray-300 px-2 py-1 font-bold">Franco svizzero</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="border border-gray-300 px-2 py-1 text-center font-bold">80</td>
+                  <td class="border border-gray-300 px-2 py-1"><input type="text" class="w-full border-none text-center font-bold bg-transparent"></td>
+                  <td class="border border-gray-300 px-2 py-1"><input type="text" class="w-full border-none text-center font-bold bg-transparent"></td>
+                  <td class="border border-gray-300 px-2 py-1"><input type="text" class="w-full border-none text-center font-bold bg-transparent"></td>
+                </tr>
+                <tr>
+                  <td class="border border-gray-300 px-2 py-1 text-center font-bold">500</td>
+                  <td class="border border-gray-300 px-2 py-1"><input type="text" class="w-full border-none text-center font-bold bg-transparent"></td>
+                  <td class="border border-gray-300 px-2 py-1"><input type="text" class="w-full border-none text-center font-bold bg-transparent"></td>
+                  <td class="border border-gray-300 px-2 py-1"><input type="text" class="w-full border-none text-center font-bold bg-transparent"></td>
+                </tr>
+                <tr>
+                  <td class="border border-gray-300 px-2 py-1 text-center font-bold whitespace-nowrap">1 200</td>
+                  <td class="border border-gray-300 px-2 py-1"><input type="text" class="w-full border-none text-center font-bold bg-transparent"></td>
+                  <td class="border border-gray-300 px-2 py-1"><input type="text" class="w-full border-none text-center font-bold bg-transparent"></td>
+                  <td class="border border-gray-300 px-2 py-1"><input type="text" class="w-full border-none text-center font-bold bg-transparent"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 4 - Tabella costi -->
+      <div class="mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(4) %>
+          Completa la tabella come nell'esempio.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-gray-300">
+            <thead>
+              <tr class="bg-<%= @pagina.base_color %>-200">
+                <th class="border border-gray-300 px-3 py-2 font-bold">quantità</th>
+                <th class="border border-gray-300 px-3 py-2 font-bold">costo unitario</th>
+                <th class="border border-gray-300 px-3 py-2 font-bold">operazione</th>
+                <th class="border border-gray-300 px-3 py-2 font-bold">costo totale</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-gray-300 px-3 py-2 text-center">5 lattine di aranciata</td>
+                <td class="border border-gray-300 px-3 py-2 text-center">€ 0,85</td>
+                <td class="border border-gray-300 px-3 py-2 text-center font-bold text-<%= @pagina.base_color %>-700">0,85 × 5 = 4,25 euro</td>
+                <td class="border border-gray-300 px-3 py-2 text-center font-bold text-<%= @pagina.base_color %>-700">€ 4,25</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 px-3 py-2 text-center">12 piantine</td>
+                <td class="border border-gray-300 px-3 py-2 text-center">€ 2,35</td>
+                <td class="border border-gray-300 px-3 py-2"><input type="text" data-correct-answer="2,35 × 12 = 28,20 euro" class="w-full border-none text-center font-bold bg-transparent"></td>
+                <td class="border border-gray-300 px-3 py-2"><input type="text" data-correct-answer="28,20" class="w-full border-none text-center font-bold bg-transparent"></td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 px-3 py-2 text-center">5 pacchetti di caramelle</td>
+                <td class="border border-gray-300 px-3 py-2"><input type="text" data-correct-answer="0,90" class="w-full border-none text-center font-bold bg-transparent"></td>
+                <td class="border border-gray-300 px-3 py-2"><input type="text" data-correct-answer="4,50 : 5 = 0,90 euro" class="w-full border-none text-center font-bold bg-transparent"></td>
+                <td class="border border-gray-300 px-3 py-2 text-center">€ 4,50</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 px-3 py-2 text-center">8 quadernoni</td>
+                <td class="border border-gray-300 px-3 py-2"><input type="text" data-correct-answer="1,30" class="w-full border-none text-center font-bold bg-transparent"></td>
+                <td class="border border-gray-300 px-3 py-2"><input type="text" data-correct-answer="10,40 : 8 = 1,30 euro" class="w-full border-none text-center font-bold bg-transparent"></td>
+                <td class="border border-gray-300 px-3 py-2 text-center">€ 10,40</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Esercizio 5 - Tabella ricavo/spesa/guadagno/perdita -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(5) %>
+          Completa la tabella. Ricorda che in ogni riga una casella rimane vuota.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-gray-300">
+            <thead>
+              <tr class="bg-<%= @pagina.base_color %>-200">
+                <th class="border border-gray-300 px-3 py-2 font-bold">ricavo</th>
+                <th class="border border-gray-300 px-3 py-2 font-bold">spesa</th>
+                <th class="border border-gray-300 px-3 py-2 font-bold">guadagno</th>
+                <th class="border border-gray-300 px-3 py-2 font-bold">perdita</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-gray-300 px-3 py-2"><input type="text" data-correct-answer="11,90" class="w-full border-none text-center font-bold bg-transparent"></td>
+                <td class="border border-gray-300 px-3 py-2 text-center">€ 9,60</td>
+                <td class="border border-gray-300 px-3 py-2 text-center">€ 2,30</td>
+                <td class="border border-gray-300 px-3 py-2 text-center bg-gray-100"></td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 px-3 py-2 text-center">€ 64,75</td>
+                <td class="border border-gray-300 px-3 py-2"><input type="text" data-correct-answer="57,25" class="w-full border-none text-center font-bold bg-transparent"></td>
+                <td class="border border-gray-300 px-3 py-2 text-center">€ 7,50</td>
+                <td class="border border-gray-300 px-3 py-2 text-center bg-gray-100"></td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 px-3 py-2 text-center">€ 32,50</td>
+                <td class="border border-gray-300 px-3 py-2 text-center">€ 36,45</td>
+                <td class="border border-gray-300 px-3 py-2 text-center bg-gray-100"></td>
+                <td class="border border-gray-300 px-3 py-2"><input type="text" data-correct-answer="3,95" class="w-full border-none text-center font-bold bg-transparent"></td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 px-3 py-2 text-center">€ 1,48</td>
+                <td class="border border-gray-300 px-3 py-2 text-center">€ 0,85</td>
+                <td class="border border-gray-300 px-3 py-2"><input type="text" data-correct-answer="0,63" class="w-full border-none text-center font-bold bg-transparent"></td>
+                <td class="border border-gray-300 px-3 py-2 text-center bg-gray-100"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

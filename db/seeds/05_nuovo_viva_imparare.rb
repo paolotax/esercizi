@@ -135,7 +135,14 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 80, titolo: "LE MISURE DI LUNGHEZZA E DI CAPACITÀ", slug: "nvi5_mat_p080", view_template: "nvi5_mat_p080", sottotitolo: "MISURA", base_color: "pink" },
   { numero: 81, titolo: "LE MISURE DI MASSA", slug: "nvi5_mat_p081", view_template: "nvi5_mat_p081", sottotitolo: "MISURA", base_color: "pink" },
   { numero: 82, titolo: "LE EQUIVALENZE", slug: "nvi5_mat_p082", view_template: "nvi5_mat_p082", sottotitolo: "MISURA", base_color: "pink" },
-  { numero: 83, titolo: "LUNGHEZZA, CAPACITÀ E MASSA", slug: "nvi5_mat_p083", view_template: "nvi5_mat_p083", sottotitolo: "ESERCIZI", base_color: "orange" }
+  { numero: 83, titolo: "LUNGHEZZA, CAPACITÀ E MASSA", slug: "nvi5_mat_p083", view_template: "nvi5_mat_p083", sottotitolo: "ESERCIZI", base_color: "orange" },
+  { numero: 84, titolo: "LE MISURE DI VALORE", slug: "nvi5_mat_p084", view_template: "nvi5_mat_p084", sottotitolo: "MISURA", base_color: "pink" },
+  { numero: 85, titolo: "IL COMMERCIO", slug: "nvi5_mat_p085", view_template: "nvi5_mat_p085", sottotitolo: "MISURA", base_color: "pink" },
+  { numero: 86, titolo: "LE MISURE DI TEMPO", slug: "nvi5_mat_p086", view_template: "nvi5_mat_p086", sottotitolo: "MISURA", base_color: "pink" },
+  { numero: 87, titolo: "CALCOLARE CON LE MISURE DI TEMPO", slug: "nvi5_mat_p087", view_template: "nvi5_mat_p087", sottotitolo: "MISURA", base_color: "pink" },
+  { numero: 88, titolo: "EURO, COMMERCIO E TEMPO", slug: "nvi5_mat_p088", view_template: "nvi5_mat_p088", sottotitolo: "ESERCIZI", base_color: "orange" },
+  { numero: 89, titolo: "EURO, COMMERCIO E TEMPO", slug: "nvi5_mat_p089", view_template: "nvi5_mat_p089", sottotitolo: "ESERCIZI", base_color: "orange" },
+  { numero: 90, titolo: "MISURE DI LUNGHEZZA, CAPACITÀ E MASSA", slug: "nvi5_mat_p090", view_template: "nvi5_mat_p090", sottotitolo: "MAPPA", base_color: "cyan" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end

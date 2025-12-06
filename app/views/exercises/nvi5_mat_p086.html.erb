@@ -1,0 +1,288 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione -->
+    <div class="space-y-4">
+      <p class="text-gray-700">
+        Anche il tempo è una grandezza misurabile.<br>
+        La sua unità di misura fondamentale è il <strong>secondo</strong> (<strong>s</strong>). I <strong>sottomultipli</strong> del secondo seguono il <strong>sistema decimale</strong>.
+        I <strong>multipli</strong>, invece, <strong>fino all'ora</strong> seguono il sistema sessagesimale (1 min = 60 secondi; 1 h = 60 minuti), cioè raggruppamenti in <strong>base 60</strong>;
+        gli altri multipli seguono raggruppamenti diversi.
+      </p>
+    </div>
+
+    <!-- Tabella unità di misura del tempo -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="p-2 bg-cyan-500 text-white font-bold border border-gray-300" colspan="6">MULTIPLI</th>
+            <th class="p-2 bg-orange-500 text-white font-bold border border-gray-300">UNITÀ FONDAMENTALE</th>
+            <th class="p-2 bg-<%= @pagina.base_color %>-500 text-white font-bold border border-gray-300" colspan="3">SOTTOMULTIPLI</th>
+          </tr>
+          <tr>
+            <th class="p-2 bg-gray-100 border border-gray-300"></th>
+            <th class="p-2 bg-gray-100 border border-gray-300"></th>
+            <th class="p-2 bg-gray-100 border border-gray-300"></th>
+            <th class="p-2 bg-cyan-100 border border-gray-300 font-bold">d</th>
+            <th class="p-2 bg-cyan-100 border border-gray-300 font-bold">h</th>
+            <th class="p-2 bg-cyan-100 border border-gray-300 font-bold">min</th>
+            <th class="p-2 bg-orange-100 border border-gray-300 font-bold">s</th>
+            <th class="p-2 bg-gray-100 border border-gray-300"></th>
+            <th class="p-2 bg-gray-100 border border-gray-300"></th>
+            <th class="p-2 bg-gray-100 border border-gray-300"></th>
+          </tr>
+          <tr>
+            <th class="p-2 bg-gray-50 border border-gray-300">anno</th>
+            <th class="p-2 bg-gray-50 border border-gray-300">mese</th>
+            <th class="p-2 bg-gray-50 border border-gray-300">settimana</th>
+            <th class="p-2 bg-gray-50 border border-gray-300">giorno</th>
+            <th class="p-2 bg-gray-50 border border-gray-300">ora</th>
+            <th class="p-2 bg-gray-50 border border-gray-300">minuto</th>
+            <th class="p-2 bg-gray-50 border border-gray-300">secondo</th>
+            <th class="p-2 bg-gray-50 border border-gray-300">decimo di secondo</th>
+            <th class="p-2 bg-gray-50 border border-gray-300">centesimo di secondo</th>
+            <th class="p-2 bg-gray-50 border border-gray-300">millesimo di secondo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-2 border border-gray-300 text-center">12 mesi<br>365* d</td>
+            <td class="p-2 border border-gray-300 text-center">30* d</td>
+            <td class="p-2 border border-gray-300 text-center">7 d<br>168 h</td>
+            <td class="p-2 border border-gray-300 text-center">24 h</td>
+            <td class="p-2 border border-gray-300 text-center">60 min<br><span class="whitespace-nowrap">3 600</span> s</td>
+            <td class="p-2 border border-gray-300 text-center">60 s</td>
+            <td class="p-2 border border-gray-300 text-center">1 s</td>
+            <td class="p-2 border border-gray-300 text-center"><%= render 'shared/frazione', num: 1, den: 10 %> s</td>
+            <td class="p-2 border border-gray-300 text-center"><%= render 'shared/frazione', num: 1, den: 100 %> s</td>
+            <td class="p-2 border border-gray-300 text-center"><%= render 'shared/frazione', num: 1, den: 1000 %> s</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-gray-600 italic">
+      * Per convenzione il mese e l'anno si indicano rispettivamente di 30 e 365 giorni, a meno che non siano indicati un mese o un anno precisi, come maggio (31 giorni) o il 2024 (anno bisestile di 366 giorni).
+    </p>
+
+    <!-- Scrivere ore e durate -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Colonna sinistra -->
+      <div class="space-y-4">
+        <h2 class="font-bold italic text-<%= @pagina.base_color %>-600">Scrivere ore e durate</h2>
+        <p class="text-gray-700">L'ora esatta si può indicare in vari modi:</p>
+        <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-<%= @pagina.base_color %>-500">
+          <li>si lascia uno spazio <span class="text-<%= @pagina.base_color %>-500">→</span> <span class="font-bold text-custom-sky">11 15</span></li>
+          <li>si mette un puntino in basso <span class="text-<%= @pagina.base_color %>-500">→</span> <span class="font-bold text-custom-sky">11.15</span></li>
+          <li>si mettono due puntini <span class="text-<%= @pagina.base_color %>-500">→</span> <span class="font-bold text-custom-sky">11:15</span></li>
+          <li>si scrive <span class="text-<%= @pagina.base_color %>-500">→</span> <span class="font-bold text-custom-sky">11 h 15 min</span> o <span class="font-bold text-custom-sky">11<sub>15</sub></span></li>
+        </ul>
+
+        <p class="text-gray-700 mt-4">Per scrivere in modo veloce le misure di tempo (durate), poi, si possono usare i simboli:</p>
+        <p class="text-gray-700"><strong class="text-red-500">h</strong> = ora &nbsp;&nbsp;&nbsp; <strong class="text-red-500">'</strong> = minuto &nbsp;&nbsp;&nbsp; <strong class="text-red-500">''</strong> = secondo</p>
+        <p class="text-gray-700 mt-2">
+          <span class="font-bold text-custom-sky">2</span> ore <span class="font-bold text-custom-sky">5</span> minuti <span class="font-bold text-custom-sky">9</span> secondi <span class="text-<%= @pagina.base_color %>-500">→</span>
+          <span class="font-bold text-custom-sky">2</span><span class="text-red-500 font-bold">h</span> <span class="font-bold text-custom-sky">5</span><span class="text-red-500 font-bold">'</span> <span class="font-bold text-custom-sky">9</span><span class="text-red-500 font-bold">''</span>
+        </p>
+      </div>
+
+      <!-- Colonna destra: periodi di tempo -->
+      <div class="p-4 bg-white rounded-lg border-2 border-blue-400 h-fit">
+        <p class="font-bold text-gray-700 mb-3">Per indicare particolari periodi di tempo si usano termini specifici:</p>
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="font-bold">bimestre</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>2 mesi</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold">trimestre</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>3 mesi</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold">quadrimestre</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>4 mesi</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold">lustro</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>5 anni</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold">decennio</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>10 anni</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold">secolo</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>100 anni</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold">millennio</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span><span class="whitespace-nowrap">1 000</span> anni</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Completa le tabelle.
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <!-- Tabella anni-mesi -->
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr>
+                  <th class="p-2 bg-cyan-500 text-white font-bold border border-gray-300">anni</th>
+                  <th class="p-2 bg-cyan-500 text-white font-bold border border-gray-300">mesi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">3</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="36" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="4" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">48</td>
+                </tr>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">7</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="84" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Tabella mesi-giorni -->
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr>
+                  <th class="p-2 bg-cyan-500 text-white font-bold border border-gray-300">mesi</th>
+                  <th class="p-2 bg-cyan-500 text-white font-bold border border-gray-300">giorni</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">2</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">60</td>
+                </tr>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="3" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">90</td>
+                </tr>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">8</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="240" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Tabella giorni-ore -->
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr>
+                  <th class="p-2 bg-cyan-500 text-white font-bold border border-gray-300">giorni</th>
+                  <th class="p-2 bg-cyan-500 text-white font-bold border border-gray-300">ore</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">2</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="48" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">7</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="168" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="11" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">264</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Tabella ore-minuti-secondi -->
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr>
+                  <th class="p-2 bg-cyan-500 text-white font-bold border border-gray-300">ore</th>
+                  <th class="p-2 bg-cyan-500 text-white font-bold border border-gray-300">minuti</th>
+                  <th class="p-2 bg-cyan-500 text-white font-bold border border-gray-300">secondi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">2</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="120" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="7200" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="3" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="180" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-2 border border-gray-300 text-center bg-white"><span class="whitespace-nowrap">10 800</span></td>
+                </tr>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="4" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">240</td>
+                  <td class="p-2 border border-gray-300 text-center bg-white">
+                    <input type="text" data-correct-answer="14400" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
