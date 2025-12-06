@@ -1,0 +1,12 @@
+<%# Parametri: pagine (array di numeri), libro (opzionale, default usa slug della pagina) %>
+<% if local_assigns[:pagine].present? %>
+  <% libro_prefix = local_assigns[:libro] || @pagina.slug.gsub(/_p\d+$/, '') %>
+  <div class="p-4 mb-8 text-right">
+    <span class="text-gray-600">Quaderno →</span>
+    <% pagine.each_with_index do |num, index| %>
+      <%= link_to index == 0 ? "p. #{num}" : num.to_s,
+          pagina_path("#{libro_prefix}_p#{num.to_s.rjust(3, '0')}"),
+          class: "text-#{@pagina.base_color}-600 font-bold hover:underline" %><%= ", " unless index == pagine.length - 1 %>
+    <% end %>
+  </div>
+<% end %>
