@@ -1,0 +1,225 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <p class="text-center text-gray-700">
+      Segna con una <strong>X</strong> le risposte corrette.
+    </p>
+
+    <!-- ESERCIZI - Layout a due colonne -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x-2 md:divide-<%= @pagina.base_color %>-300">
+        <!-- Colonna sinistra: esercizi 1-3 -->
+        <div class="space-y-6 md:pr-4">
+          <!-- Esercizio 1 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(1) %>
+              Licia ha ritagliato 4 triangoli uguali e ha costruito la figura qui sotto.
+              <br>Indica l'espressione che permette di calcolarne l'area.
+            </p>
+            <div class="flex justify-center my-4">
+              <%= image_tag "nvi5_mat/p145/p145_01.jpg", class: "max-w-[250px]", alt: "Figura con 4 triangoli" %>
+            </div>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q1" class="w-5 h-5">
+                <span>4 × (6 × 9)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q1" class="w-5 h-5">
+                <span>4 + (6 × 9)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q1" data-correct-answer="true" class="w-5 h-5">
+                <span>(6 × 9) × 2</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q1" class="w-5 h-5">
+                <span>(6 × 9) : 2</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Esercizio 2 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(2) %>
+              In quale dei seguenti poligoni regolari NON è stato tracciato l'apotema?
+            </p>
+            <div class="grid grid-cols-2 gap-4 my-4">
+              <div class="text-center">
+                <span class="font-bold">A</span>
+                <%= image_tag "nvi5_mat/p145/output-1715938802145_145_655_114_98.png", class: "max-w-[100px] mx-auto", alt: "Poligono A" %>
+              </div>
+              <div class="text-center">
+                <span class="font-bold">B</span>
+                <%= image_tag "nvi5_mat/p145/output-1715938802145_306_656_96_97.png", class: "max-w-[90px] mx-auto", alt: "Poligono B" %>
+              </div>
+              <div class="text-center">
+                <span class="font-bold">C</span>
+                <%= image_tag "nvi5_mat/p145/output-1715938802145_155_758_102_104.png", class: "max-w-[100px] mx-auto", alt: "Poligono C" %>
+              </div>
+              <div class="text-center">
+                <span class="font-bold">D</span>
+                <%= image_tag "nvi5_mat/p145/output-1715938802145_312_756_115_101.png", class: "max-w-[100px] mx-auto", alt: "Poligono D" %>
+              </div>
+            </div>
+            <div class="grid grid-cols-4 gap-2">
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q2" class="w-5 h-5">
+                <span>A</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q2" data-correct-answer="true" class="w-5 h-5">
+                <span>B</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q2" class="w-5 h-5">
+                <span>C</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q2" class="w-5 h-5">
+                <span>D</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Esercizio 3 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(3) %>
+              Paolo ed Ettore devono calcolare l'area di un cerchio il cui raggio misura 18 cm.
+              <br>Paolo calcola: (C × r) : 2
+              <br>Ettore calcola: r² × 3,14
+              <br>Chi dei due ha calcolato correttamente?
+            </p>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q3" class="w-5 h-5">
+                <span>Paolo</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q3" class="w-5 h-5">
+                <span>Ettore</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q3" data-correct-answer="true" class="w-5 h-5">
+                <span>Tutti e due</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q3" class="w-5 h-5">
+                <span>Nessuno dei due</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonna destra: esercizi 4-6 -->
+        <div class="space-y-6 md:pl-4">
+          <!-- Esercizio 4 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(4) %>
+              Quanti metri cubi corrispondono a 46,578 decametri cubi?
+            </p>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q4" class="w-5 h-5">
+                <span><span class="whitespace-nowrap">465 780</span> m³</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q4" class="w-5 h-5">
+                <span>0,46578 m³</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q4" data-correct-answer="true" class="w-5 h-5">
+                <span><span class="whitespace-nowrap">46 578</span> m³</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q4" class="w-5 h-5">
+                <span><span class="whitespace-nowrap">465 780 000</span> m³</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Esercizio 5 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(5) %>
+              Per completare una vetrata quadrata si usano delle tessere anch'esse di forma quadrata con il lato di 1 cm.
+              <br>Nella figura è stata disegnata una tessera. Quante tessere occorrono in tutto?
+            </p>
+            <div class="flex justify-center my-4">
+              <%= image_tag "nvi5_mat/p145/output-1715938802145_699_538_114_112.png", class: "max-w-[100px]", alt: "Vetrata" %>
+            </div>
+            <div class="grid grid-cols-4 gap-2">
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q5" class="w-5 h-5">
+                <span>3</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q5" data-correct-answer="true" class="w-5 h-5">
+                <span>9</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q5" class="w-5 h-5">
+                <span>18</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q5" class="w-5 h-5">
+                <span>12</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Esercizio 6 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-2">
+              <%= numero_esercizio_badge(6) %>
+              Osserva il seguente parallelepipedo: la metà a sinistra è verde, la metà a destra è viola.
+              <br>Quale fra i seguenti è il suo sviluppo?
+            </p>
+            <div class="flex justify-center my-2">
+              <%= image_tag "nvi5_mat/p145/output-1715938802145_707_806_91_55.png", class: "max-w-[100px]", alt: "Parallelepipedo" %>
+            </div>
+            <div class="grid grid-cols-2 gap-4 my-4">
+              <div class="text-center">
+                <span>Fig. 1</span>
+                <%= image_tag "nvi5_mat/p145/output-1715938802145_605_869_145_145.png", class: "max-w-[120px] mx-auto", alt: "Sviluppo 1" %>
+              </div>
+              <div class="text-center">
+                <span>Fig. 2</span>
+                <%= image_tag "nvi5_mat/p145/output-1715938802145_818_869_144_147.png", class: "max-w-[120px] mx-auto", alt: "Sviluppo 2" %>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q6" data-correct-answer="true" class="w-5 h-5">
+                <span>Fig. 1</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q6" class="w-5 h-5">
+                <span>Fig. 2</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q6" class="w-5 h-5">
+                <span>Tutti e due</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+                <input type="radio" name="q6" class="w-5 h-5">
+                <span>Nessuno dei due</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

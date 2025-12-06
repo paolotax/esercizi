@@ -1,0 +1,195 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+      <!-- Esercizio 1 - IMPARARE TUTTI con box -->
+      <div class="p-4 bg-white rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Colonna sinistra: Esercizio 1 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-4">
+              <%= imparare_tutti_badge(1) %>
+              Calcola la superficie laterale e totale di questi cubi. Segui l'esempio.
+            </p>
+
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="p-2 border border-gray-300 text-left">spigolo</th>
+                    <th class="p-2 border border-gray-300 text-center">Sℓ (ℓ × ℓ) × 4</th>
+                    <th class="p-2 border border-gray-300 text-center">St (ℓ × ℓ) × 6</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="p-2 border border-gray-300 bg-white">4 cm</td>
+                    <td class="p-2 border border-gray-300 bg-white text-center font-bold text-custom-sky">64</td>
+                    <td class="p-2 border border-gray-300 bg-white text-center font-bold text-custom-sky">96</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border border-gray-300 bg-white">6 cm</td>
+                    <td class="p-2 border border-gray-300 bg-white text-center">
+                      <input type="text" data-correct-answer="144" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    </td>
+                    <td class="p-2 border border-gray-300 bg-white text-center">
+                      <input type="text" data-correct-answer="216" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border border-gray-300 bg-white">10 cm</td>
+                    <td class="p-2 border border-gray-300 bg-white text-center">
+                      <input type="text" data-correct-answer="400" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    </td>
+                    <td class="p-2 border border-gray-300 bg-white text-center">
+                      <input type="text" data-correct-answer="600" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Colonna destra: Esercizio 2 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-4">
+              <%= imparare_tutti_badge(2) %>
+              Calcola l'area di questo cubo.
+            </p>
+            <div class="flex justify-center mb-4">
+              <%= image_tag "nvi5_mat/p142/p142_05.jpg", class: "max-w-[180px]", alt: "Cubo con spigolo 7,5 cm" %>
+            </div>
+            <div class="flex items-center gap-2 justify-center">
+              <span>St =</span>
+              <input type="text" data-correct-answer="337,5" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span>cm²</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 3 -->
+      <div class="mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Calcola la superficie laterale e totale di ciascun solido.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Cubo -->
+          <div class="flex items-start gap-4">
+            <%= image_tag "nvi5_mat/p142/p142_01.jpg", class: "max-w-[100px]", alt: "Cubo" %>
+            <div class="space-y-2">
+              <p><span class="font-bold">ℓ</span> = 7,3 cm</p>
+              <div class="flex items-center gap-2">
+                <span>Sℓ =</span>
+                <input type="text" data-correct-answer="213,16" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span class="shrink-0">cm²</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span>St =</span>
+                <input type="text" data-correct-answer="319,74" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span class="shrink-0">cm²</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cono -->
+          <div class="flex items-start gap-4">
+            <%= image_tag "nvi5_mat/p142/p142_02.jpg", class: "max-w-[120px]", alt: "Cono" %>
+            <div class="space-y-2">
+              <p>AB = BO' = 34 cm</p>
+              <div class="flex items-center gap-2">
+                <span>Sℓ =</span>
+                <input type="text" data-correct-answer="3631,68" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span class="shrink-0">cm²</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span>St =</span>
+                <input type="text" data-correct-answer="7263,36" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span class="shrink-0">cm²</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prisma triangolare -->
+          <div class="flex items-start gap-4">
+            <%= image_tag "nvi5_mat/p142/p142_03.jpg", class: "max-w-[120px]", alt: "Prisma triangolare" %>
+            <div class="space-y-2">
+              <p>AB = BC = CA = 7,6 cm<br>AD = 28,6 cm<br>FG = 6,3 cm</p>
+              <div class="flex items-center gap-2">
+                <span>Sℓ =</span>
+                <input type="text" data-correct-answer="652,08" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span class="shrink-0">cm²</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span>St =</span>
+                <input type="text" data-correct-answer="700" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span class="shrink-0">cm²</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Piramide -->
+          <div class="flex items-start gap-4">
+            <%= image_tag "nvi5_mat/p142/p142_04.jpg", class: "max-w-[140px]", alt: "Piramide" %>
+            <div class="space-y-2">
+              <p>AB = BC = 25,5 cm<br>EH = 36 cm</p>
+              <div class="flex items-center gap-2">
+                <span>Sℓ =</span>
+                <input type="text" data-correct-answer="1836" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span class="shrink-0">cm²</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span>St =</span>
+                <input type="text" data-correct-answer="2486,25" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span class="shrink-0">cm²</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 4 -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(4) %>
+          Lo spigolo di ciascun cubetto che compone questo solido è 1 cm.
+          <br>Qual è il volume del solido? Segna con una <strong>X</strong> la risposta corretta.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div class="space-y-2">
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="radio" name="q4" class="w-5 h-5">
+              <span>6 cm³</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="radio" name="q4" class="w-5 h-5">
+              <span>5 cm³</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="radio" name="q4" data-correct-answer="true" class="w-5 h-5">
+              <span>9 cm³</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+              <input type="radio" name="q4" class="w-5 h-5">
+              <span>7 cm³</span>
+            </label>
+          </div>
+          <div class="flex justify-center">
+            <%= image_tag "nvi5_mat/p142/output-1715938802142_724_943_206_224.png", class: "max-w-[180px]", alt: "Solido di cubetti" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

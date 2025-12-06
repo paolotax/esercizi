@@ -1,0 +1,45 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Istruzioni -->
+    <div class="space-y-4 text-gray-700">
+      <p>
+        Disegnate un quadrato con il lato di 3 cm e seguite queste istruzioni:
+      </p>
+      <ul class="list-disc pl-6 space-y-1 marker:text-<%= @pagina.base_color %>-500">
+        <li>scomponete il quadrato in 9 quadratini tutti uguali;</li>
+        <li>segnate i punti medi dei lati del quadratino centrale;</li>
+        <li>unite ogni vertice del quadrato grande con i due punti medi del quadratino centrale a lui più vicini.</li>
+      </ul>
+      <p>
+        Dovreste aver ottenuto una stella a quattro punte. Se non è così, provate a riguardare se avete seguito bene tutte le istruzioni.
+      </p>
+    </div>
+
+    <!-- Domanda -->
+    <div class="p-4 bg-pink-light rounded-lg">
+      <p class="font-bold text-gray-700">
+        <span class="text-<%= @pagina.base_color %>-500">●</span>
+        Qual è l'area della stella?
+      </p>
+    </div>
+
+    <!-- Griglia per disegnare -->
+    <div class="flex justify-center">
+      <%= image_tag "nvi5_mat/p155/output-1715938802155_273_501_401_396.png", class: "max-w-md border border-gray-300 rounded-lg", alt: "Griglia quadrettata" %>
+    </div>
+
+    <!-- Area risposta -->
+    <div class="p-4 bg-gray-50 rounded-lg">
+      <p class="text-gray-600 mb-2 italic">Calcola l'area della stella e spiega il tuo ragionamento:</p>
+      <textarea class="w-full h-32 p-3 border-2 border-gray-300 rounded-lg resize-none" placeholder="Scrivi qui la tua risposta..."></textarea>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

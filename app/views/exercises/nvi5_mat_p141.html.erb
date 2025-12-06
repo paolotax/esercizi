@@ -1,0 +1,83 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Introduzione parallelpipedo -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="md:col-span-2">
+        <p class="text-gray-700 mb-3">
+          Osserva il <span class="font-bold">parallelepipedo</span>: il cubetto azzurro rappresenta <span class="font-bold">1 cm<sup>3</sup></span>.
+          <br>Per trovare il volume del parallelepipedo devi calcolare quanti cubetti da 1 cm<sup>3</sup> contiene.
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700 marker:text-<%= @pagina.base_color %>-500">
+          <li>Lo strato inferiore è formato da <input type="text" data-correct-answer="5" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> cubetti che rappresentano la lunghezza e da <input type="text" data-correct-answer="3" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> cubetti che rappresentano la larghezza, quindi è formato complessivamente da 5 × 3 = 15 cubetti = 15 cm<sup>3</sup></li>
+          <li>Lungo l'altezza ci sono poi <input type="text" data-correct-answer="4" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> cubetti, quindi gli strati sono <input type="text" data-correct-answer="4" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"></li>
+          <li>Il parallelepipedo è formato da 4 strati di 15 cubetti ciascuno.</li>
+        </ul>
+        <p class="text-gray-700 mt-3">
+          Dunque complessivamente il volume del parallelepipedo è formato da 15 × 4 = 60 cubetti = 60 cm<sup>3</sup>
+        </p>
+      </div>
+      <div class="flex justify-center items-center">
+        <%= image_tag "nvi5_mat/p141/p141_01.jpg", class: "max-w-[250px]", alt: "Parallelepipedo" %>
+      </div>
+    </div>
+
+    <!-- Formula parallelepipedo -->
+    <p class="text-gray-700">La formula generale è:</p>
+    <div class="p-4 bg-pink-light rounded-lg w-fit">
+      <p class="font-bold text-center">Volume del parallelepipedo = Area di base × altezza</p>
+      <p class="font-bold text-center">V = A<sub>b</sub> × h</p>
+    </div>
+
+    <!-- Cubo -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="md:col-span-2">
+        <p class="text-gray-700">
+          Il <span class="font-bold">cubo</span> è un parallelepipedo in cui lunghezza, larghezza e altezza coincidono, poiché gli spigoli hanno tutti la stessa misura, pari al lato delle facce quadrate.
+          <br>Pertanto:
+        </p>
+        <div class="p-4 bg-pink-light rounded-lg w-fit mt-3">
+          <p class="font-bold text-center">Volume del cubo = lato × lato × lato</p>
+          <p class="font-bold text-center">V = ℓ<sup>3</sup></p>
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+        <%= image_tag "nvi5_mat/p141/output-1715938802141_750_665_195_177.png", class: "max-w-[180px]", alt: "Cubo" %>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 bg-orange-100 rounded-lg">
+      <div class="mb-4">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Indica il volume dei tre solidi raffigurati usando come unità di misura il cubetto da 1 cm<sup>3</sup>.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="text-center">
+            <%= image_tag "nvi5_mat/p141/output-1715938802141_160_954_219_182.png", class: "max-w-[180px] mx-auto mb-2", alt: "Solido 1" %>
+            <input type="text" data-correct-answer="36 cm³" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="text-center">
+            <%= image_tag "nvi5_mat/p141/output-1715938802141_460_1009_161_127.png", class: "max-w-[140px] mx-auto mb-2", alt: "Solido 2" %>
+            <input type="text" data-correct-answer="20 cm³" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="text-center">
+            <%= image_tag "nvi5_mat/p141/output-1715938802141_700_979_222_154.png", class: "max-w-[180px] mx-auto mb-2", alt: "Solido 3" %>
+            <input type="text" data-correct-answer="12 cm³" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [257] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
