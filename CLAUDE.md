@@ -83,6 +83,7 @@ The following specialized agents work together to implement your requests:
 - Descriptive commit messages
 - PR reviews before merging
 - Keep main branch deployable
+- **IMPORTANTE**: Chiedere sempre conferma prima di fare commit, a meno che l'utente non dica "committatutto"
 
 ## Custom Patterns
 
