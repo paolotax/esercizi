@@ -263,7 +263,17 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 207, titolo: "PROBLEMI CON LE FRAZIONI", slug: "nvi5_mat_p207", view_template: "nvi5_mat_p207", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 208, titolo: "LE FRAZIONI", slug: "nvi5_mat_p208", view_template: "nvi5_mat_p208", sottotitolo: "RIPASSO", base_color: "cyan" },
   { numero: 209, titolo: "FRAZIONI E NUMERI DECIMALI", slug: "nvi5_mat_p209", view_template: "nvi5_mat_p209", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 210, titolo: "LA PERCENTUALE", slug: "nvi5_mat_p210", view_template: "nvi5_mat_p210", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 210, titolo: "LA PERCENTUALE", slug: "nvi5_mat_p210", view_template: "nvi5_mat_p210", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 211, titolo: "LO SCONTO", slug: "nvi5_mat_p211", view_template: "nvi5_mat_p211", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 212, titolo: "PROBLEMI CON I DECIMALI E LA PERCENTUALE", slug: "nvi5_mat_p212", view_template: "nvi5_mat_p212", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 213, titolo: "FRAZIONI DECIMALI E NUMERI DECIMALI", slug: "nvi5_mat_p213", view_template: "nvi5_mat_p213", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 214, titolo: "LA PERCENTUALE E LO SCONTO", slug: "nvi5_mat_p214", view_template: "nvi5_mat_p214", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 215, titolo: "I DATI E LA DOMANDA", slug: "nvi5_mat_p215", view_template: "nvi5_mat_p215", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 216, titolo: "IL DIAGRAMMA A STRISCIA E I SEGMENTI", slug: "nvi5_mat_p216", view_template: "nvi5_mat_p216", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 217, titolo: "DALLA STRUTTURA DEL PROBLEMA ALL'ESPRESSIONE", slug: "nvi5_mat_p217", view_template: "nvi5_mat_p217", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 218, titolo: "I PROBLEMI", slug: "nvi5_mat_p218", view_template: "nvi5_mat_p218", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 219, titolo: "MISURE DI LUNGHEZZA", slug: "nvi5_mat_p219", view_template: "nvi5_mat_p219", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 220, titolo: "MISURE DI CAPACITÀ", slug: "nvi5_mat_p220", view_template: "nvi5_mat_p220", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end

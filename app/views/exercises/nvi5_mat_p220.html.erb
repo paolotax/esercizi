@@ -1,0 +1,348 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Box teoria: Tabella misure di capacità -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-cyan-400">
+          <thead>
+            <tr>
+              <th colspan="2" class="p-2 border border-cyan-400 bg-cyan-100 text-center text-cyan-700 font-bold">MULTIPLI</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-200 text-center text-cyan-700 font-bold">UNITÀ FONDAMENTALE</th>
+              <th colspan="3" class="p-2 border border-cyan-400 bg-cyan-100 text-center text-cyan-700 font-bold">SOTTOMULTIPLI</th>
+            </tr>
+            <tr>
+              <td class="p-2 border border-cyan-400 bg-white text-center">ettolitro<br><span class="font-bold">hℓ</span></td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">decalitro<br><span class="font-bold">daℓ</span></td>
+              <td class="p-2 border border-cyan-400 bg-cyan-50 text-center"><span class="font-bold">litro</span><br><span class="font-bold">ℓ</span></td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">decilitro<br><span class="font-bold">dℓ</span></td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">centilitro<br><span class="font-bold">cℓ</span></td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">millilitro<br><span class="font-bold">mℓ</span></td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-cyan-400 bg-white text-center">100 ℓ</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">10 ℓ</td>
+              <td class="p-2 border border-cyan-400 bg-cyan-50 text-center font-bold">1 ℓ</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">0,1 ℓ</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">0,01 ℓ</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">0,001 ℓ</td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+
+    <!-- Grid due colonne per esercizi 1 e 2 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Esercizio 1: IMPARARE TUTTI -->
+      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Scomponi: scrivi il valore di ciascuna cifra.
+        </p>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 bg-cyan-50 p-2 rounded">
+            <span class="text-gray-700">3,965 hℓ =</span>
+            <span class="font-bold text-cyan-600">3 hℓ 9 daℓ 6 ℓ 5 dℓ</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">43,287 daℓ =</span>
+            <input type="text" data-correct-answer="4 hℓ 3 daℓ 2 ℓ 8 dℓ 7 cℓ" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">573,8 cℓ =</span>
+            <input type="text" data-correct-answer="5 ℓ 7 dℓ 3 cℓ 8 mℓ" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">4,19 dℓ =</span>
+            <input type="text" data-correct-answer="4 dℓ 1 cℓ 9 mℓ" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2: IMPARARE TUTTI -->
+      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(2) %>
+          Componi ed esprimi nell'unità di misura indicata.
+        </p>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 bg-cyan-50 p-2 rounded">
+            <span class="text-gray-700">8 hℓ 6 daℓ 4 ℓ =</span>
+            <span class="font-bold text-cyan-600">864</span>
+            <span class="text-gray-700">ℓ</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">3 hℓ 8 daℓ 1 ℓ =</span>
+            <input type="text" data-correct-answer="3810" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">dℓ</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">4 daℓ 5 ℓ 2 dℓ =</span>
+            <input type="text" data-correct-answer="4520" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">cℓ</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">9 daℓ 3 ℓ 4 cℓ =</span>
+            <input type="text" data-correct-answer="93040" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">mℓ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Esegui le equivalenze.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700"><span class="whitespace-nowrap">7 400</span> dℓ =</span>
+          <input type="text" data-correct-answer="74" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">daℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">0,045 hℓ =</span>
+          <input type="text" data-correct-answer="45" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">dℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">9,42 hℓ =</span>
+          <input type="text" data-correct-answer="942" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">ℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">0,986 daℓ =</span>
+          <input type="text" data-correct-answer="98,6" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">dℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">0,003 ℓ =</span>
+          <input type="text" data-correct-answer="0,3" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">cℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">0,03 dℓ =</span>
+          <input type="text" data-correct-answer="3" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">mℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">7,8195 daℓ =</span>
+          <input type="text" data-correct-answer="78195" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">mℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">748,6 dℓ =</span>
+          <input type="text" data-correct-answer="7,486" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">daℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700"><span class="whitespace-nowrap">1 672</span> ℓ =</span>
+          <input type="text" data-correct-answer="16,72" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">hℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700"><span class="whitespace-nowrap">54 006</span> ℓ =</span>
+          <input type="text" data-correct-answer="540,06" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">hℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">38,5 ℓ =</span>
+          <input type="text" data-correct-answer="38500" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">mℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">392,801 daℓ =</span>
+          <input type="text" data-correct-answer="3928,01" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">ℓ</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Completa la tabella come nell'esempio.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-cyan-400">
+          <thead>
+            <tr>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center font-bold">hℓ</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center font-bold">daℓ</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center font-bold">ℓ</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center font-bold">dℓ</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center font-bold">cℓ</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center font-bold">mℓ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border border-cyan-400 bg-cyan-50 text-center font-bold">0,07</td>
+              <td class="p-2 border border-cyan-400 bg-cyan-50 text-center font-bold">0,7</td>
+              <td class="p-2 border border-cyan-400 bg-cyan-50 text-center">7</td>
+              <td class="p-2 border border-cyan-400 bg-cyan-50 text-center font-bold">70</td>
+              <td class="p-2 border border-cyan-400 bg-cyan-50 text-center font-bold">700</td>
+              <td class="p-2 border border-cyan-400 bg-cyan-50 text-center font-bold"><span class="whitespace-nowrap">7 000</span></td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="0,0035" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="0,035" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="0,35" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="3,5" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">35</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="350" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="0,095" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="0,95" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="9,5" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="95" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="950" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center"><span class="whitespace-nowrap">9 500</span></td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="0,02" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="0,2" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">2</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="20" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="200" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="2000" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Esercizio 5 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(5) %>
+        Esprimi nell'unità di misura indicata.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">un litro e mezzo =</span>
+          <input type="text" data-correct-answer="1,5" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">ℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">mezzo litro =</span>
+          <input type="text" data-correct-answer="0,5" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">ℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">un quarto di litro =</span>
+          <input type="text" data-correct-answer="0,25" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">ℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">un litro e tre quarti =</span>
+          <input type="text" data-correct-answer="1,75" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">ℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">tre quarti di litro =</span>
+          <input type="text" data-correct-answer="0,75" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">ℓ</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 6 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(6) %>
+        Quanto manca? Completa.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">3,8 dℓ +</span>
+          <input type="text" data-correct-answer="6,2" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">dℓ = 1 ℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">52 dℓ +</span>
+          <input type="text" data-correct-answer="948" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">dℓ = 1 hℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">45 mℓ +</span>
+          <input type="text" data-correct-answer="955" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">mℓ = 1 ℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">6,4 daℓ +</span>
+          <input type="text" data-correct-answer="3,6" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">daℓ = 1 hℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">2 cℓ +</span>
+          <input type="text" data-correct-answer="98" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">cℓ = 1 ℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">76 ℓ +</span>
+          <input type="text" data-correct-answer="24" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">ℓ = 1 hℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">790 mℓ +</span>
+          <input type="text" data-correct-answer="210" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">mℓ = 1 ℓ</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">439 dℓ +</span>
+          <input type="text" data-correct-answer="561" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">dℓ = 1 hℓ</span>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
