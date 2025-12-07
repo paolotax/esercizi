@@ -1,0 +1,160 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Box teoria: Formule dei triangoli -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Triangolo equilatero -->
+        <div class="text-center">
+          <p class="font-bold text-cyan-600 mb-2">Triangolo equilatero</p>
+          <%= image_tag "nvi5_mat/p245/p245_01.jpg", alt: "Triangolo equilatero", class: "mx-auto max-w-[100px] mb-2" %>
+          <p class="text-gray-700"><span class="font-bold">Perimetro</span></p>
+          <p class="text-gray-700">P = ℓ × 3</p>
+          <p class="text-gray-700">Formula inversa:</p>
+          <p class="text-gray-700">ℓ = P : 3</p>
+        </div>
+
+        <!-- Triangolo isoscele -->
+        <div class="text-center">
+          <p class="font-bold text-cyan-600 mb-2">Triangolo isoscele</p>
+          <%= image_tag "nvi5_mat/p245/p245_02.jpg", alt: "Triangolo isoscele", class: "mx-auto max-w-[100px] mb-2" %>
+          <p class="text-gray-700"><span class="font-bold">Perimetro</span></p>
+          <p class="text-gray-700">ℓ<sub>1</sub> + (ℓ<sub>2</sub> × 2)</p>
+        </div>
+
+        <!-- Triangolo scaleno -->
+        <div class="text-center">
+          <p class="font-bold text-cyan-600 mb-2">Triangolo scaleno</p>
+          <%= image_tag "nvi5_mat/p245/p245_03.jpg", alt: "Triangolo scaleno", class: "mx-auto max-w-[100px] mb-2" %>
+          <p class="text-gray-700"><span class="font-bold">Perimetro</span></p>
+          <p class="text-gray-700">P = ℓ<sub>1</sub> + ℓ<sub>2</sub> + ℓ<sub>3</sub></p>
+        </div>
+      </div>
+
+      <div class="mt-4 text-center border-t border-cyan-300 pt-4">
+        <p class="text-gray-700"><span class="font-bold text-cyan-600">Area</span> (tutti i triangoli)</p>
+        <p class="text-gray-700">A = (b × h) : 2</p>
+        <p class="text-gray-700">Formule inverse: b = (A × 2) : h &nbsp;&nbsp;&nbsp; h = (A × 2) : b</p>
+      </div>
+    </div>
+
+    <!-- Esercizio 1: IMPARARE TUTTI -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Traccia le altezze.
+      </p>
+
+      <div class="flex justify-center">
+        <%= image_tag "nvi5_mat/p245/output-1715938802245_257_556_579_132.png", alt: "Triangoli", class: "max-w-full" %>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Utilizza le formule dirette e inverse e completa.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Triangolo scaleno -->
+        <div class="text-center space-y-3 p-3 border border-gray-200 rounded-lg">
+          <%= image_tag "nvi5_mat/p245/p245_04.jpg", alt: "Triangolo scaleno", class: "mx-auto max-w-[120px]" %>
+          <div class="space-y-1">
+            <p class="text-gray-700">AB = 17,77 m</p>
+            <p class="text-gray-700">CA = 11,58 m</p>
+            <p class="text-gray-700">BC = 10,86 m</p>
+            <div class="flex items-center justify-center gap-1">
+              <span class="text-gray-700">P =</span>
+              <input type="text" data-correct-answer="40,21" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">m</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Triangolo isoscele -->
+        <div class="text-center space-y-3 p-3 border border-gray-200 rounded-lg">
+          <%= image_tag "nvi5_mat/p245/p245_05.jpg", alt: "Triangolo isoscele", class: "mx-auto max-w-[100px]" %>
+          <div class="space-y-1">
+            <p class="text-gray-700">AB = 24,6 dam</p>
+            <p class="text-gray-700">CA = 27,9 dam</p>
+            <p class="text-gray-700">BC = CA</p>
+            <div class="flex items-center justify-center gap-1">
+              <span class="text-gray-700">P =</span>
+              <input type="text" data-correct-answer="80,4" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">dam</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Triangolo equilatero -->
+        <div class="text-center space-y-3 p-3 border border-gray-200 rounded-lg">
+          <%= image_tag "nvi5_mat/p245/p245_06.jpg", alt: "Triangolo equilatero", class: "mx-auto max-w-[100px]" %>
+          <div class="space-y-1">
+            <p class="text-gray-700">P = 82,8 cm</p>
+            <p class="text-gray-700">AB = BC = CA</p>
+            <div class="flex items-center justify-center gap-1">
+              <span class="text-gray-700">ℓ =</span>
+              <input type="text" data-correct-answer="27,6" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">cm</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Triangolo rettangolo -->
+        <div class="text-center space-y-3 p-3 border border-gray-200 rounded-lg">
+          <%= image_tag "nvi5_mat/p245/p245_07.jpg", alt: "Triangolo rettangolo", class: "mx-auto max-w-[100px]" %>
+          <div class="space-y-1">
+            <p class="text-gray-700">BC = 32,4 m</p>
+            <p class="text-gray-700">h = 21,6 m</p>
+            <div class="flex items-center justify-center gap-1">
+              <span class="text-gray-700">A =</span>
+              <input type="text" data-correct-answer="349,92" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">m²</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Risolvi sul quaderno.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Problema a -->
+        <div class="p-4 border border-gray-200 rounded-lg space-y-3">
+          <p class="text-gray-700">
+            <span class="font-bold text-cyan-600">a.</span> Calcola la misura della base di un triangolo che ha l'area di 31,36 cm² e l'altezza di 6,4 cm.
+          </p>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="9,8" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">cm</span>
+          </div>
+        </div>
+
+        <!-- Problema b -->
+        <div class="p-4 border border-gray-200 rounded-lg space-y-3">
+          <p class="text-gray-700">
+            <span class="font-bold text-cyan-600">b.</span> Calcola la misura dell'altezza di un triangolo che ha l'area di 30,1 cm² e la base di 3,5 cm.
+          </p>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="17,2" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">cm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
