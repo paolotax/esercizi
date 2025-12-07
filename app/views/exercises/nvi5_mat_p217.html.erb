@@ -1,0 +1,157 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Esercizio 1: IMPARARE TUTTI -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Leggi il problema e risolvi con lo schema.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="md:col-span-2">
+          <p class="text-gray-700">
+            La mamma esce di casa con € 60 nel portafoglio.<br>
+            Dal giornalaio compra 2 riviste a € 1,50 l'una.<br>
+            Dal tappezziere acquista 4 cuscini a € 12 l'uno.<br>
+            Quanti euro restano nel portafoglio della mamma?
+          </p>
+        </div>
+        <div class="p-3 bg-cyan-50 rounded border border-cyan-300">
+          <p class="text-gray-600 italic">
+            Inserisci i dati del problema nello schema partendo dal basso.
+          </p>
+        </div>
+      </div>
+
+      <!-- Schema grafico -->
+      <div class="flex justify-center mb-6">
+        <%= image_tag "nvi5_mat/p217/p217_01.jpg", class: "max-w-full", alt: "Schema problema" %>
+      </div>
+
+      <!-- Input per lo schema -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div class="space-y-1">
+          <p class="text-gray-600">Spesa 1 rivista</p>
+          <p class="font-bold text-cyan-600">1,50</p>
+        </div>
+        <div class="space-y-1">
+          <p class="text-gray-600">Numero riviste</p>
+          <input type="text" data-correct-answer="2" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="space-y-1">
+          <p class="text-gray-600">Spesa 1 cuscino</p>
+          <input type="text" data-correct-answer="12" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="space-y-1">
+          <p class="text-gray-600">Numero cuscini</p>
+          <p class="font-bold text-cyan-600">4</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 mt-4 text-center">
+        <div class="space-y-1">
+          <p class="text-gray-600">Spesa per le riviste</p>
+          <input type="text" data-correct-answer="3" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="space-y-1">
+          <p class="text-gray-600">Spesa per i cuscini</p>
+          <p class="font-bold text-cyan-600">48</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 mt-4 text-center">
+        <div class="space-y-1">
+          <p class="text-gray-600">Somma iniziale</p>
+          <input type="text" data-correct-answer="60" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="space-y-1">
+          <p class="text-gray-600">Spesa complessiva</p>
+          <input type="text" data-correct-answer="51" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <p class="text-gray-600">Somma che resta</p>
+        <p class="font-bold text-cyan-600">?</p>
+        <input type="text" data-correct-answer="9" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Osserva lo schema e completa l'espressione che risolve il problema dell'esercizio 1.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <tbody>
+            <tr>
+              <td class="p-3 border border-cyan-400 text-center bg-white">60 – [(1,50 × 2) + (12 × 4)] =</td>
+              <td class="p-3 border border-cyan-400 bg-cyan-50">Esegui le operazioni nelle parentesi tonde e trovi la spesa per le riviste e la spesa per i cuscini.</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-cyan-400 text-center bg-white">
+                <div class="flex items-center justify-center gap-2">
+                  60 – [<input type="text" data-correct-answer="3 + 48" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">] =
+                </div>
+              </td>
+              <td class="p-3 border border-cyan-400 bg-cyan-50">
+                <div class="flex items-center gap-2">
+                  Esegui l'operazione nelle parentesi quadre e trovi
+                  <input type="text" data-correct-answer="la spesa complessiva" class="flex-1 border-b-2 border-dotted border-gray-400 bg-transparent">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-cyan-400 text-center bg-white">
+                <div class="flex items-center justify-center gap-2">
+                  60 – <input type="text" data-correct-answer="51" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> =
+                  <input type="text" data-correct-answer="9" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </div>
+              </td>
+              <td class="p-3 border border-cyan-400 bg-cyan-50">
+                <div class="flex items-center gap-2">
+                  Esegui l'operazione finale e trovi
+                  <input type="text" data-correct-answer="la somma che resta" class="flex-1 border-b-2 border-dotted border-gray-400 bg-transparent">
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Per ciascun problema costruisci uno schema sul quaderno e risolvi con un'espressione.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-3 border border-gray-200 rounded">
+          <p class="text-gray-700">
+            <span class="font-bold text-cyan-600">a.</span> Con la sua paghetta mensile Jacopo acquista il suo fumetto preferito che costa € 2,50 e 2 pantaloncini da basket a € 8,15 l'uno. Gli restano € 1,20.<br>
+            Qual è la sua paghetta mensile?
+          </p>
+        </div>
+        <div class="p-3 border border-gray-200 rounded">
+          <p class="text-gray-700">
+            <span class="font-bold text-cyan-600">b.</span> Per recintare il giardino, lo zio ha acquistato 60 m di rete metallica, che costa € 3,10 al metro.<br>
+            Poi ha chiamato un operaio che ha lavorato 4 ore con una paga oraria di € 18. Quanto ha speso complessivamente lo zio per la recinzione?
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,146 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Box teoria -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <p class="text-gray-700 mb-3">
+        Per risolvere un problema è necessario individuare i <span class="font-bold text-cyan-600">dati</span> e la <span class="font-bold text-cyan-600">domanda</span>.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <p class="text-gray-700 mb-2">I dati possono essere:</p>
+          <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-cyan-500">
+            <li><span class="font-bold text-cyan-600">utili</span>, cioè necessari per la soluzione;</li>
+            <li><span class="font-bold text-cyan-600">nascosti</span>, cioè non espressi da numeri;</li>
+            <li><span class="font-bold text-cyan-600">inutili</span>, cioè non necessari per la soluzione;</li>
+            <li><span class="font-bold text-cyan-600">mancanti</span>, cioè non presenti nel testo.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-gray-700 mb-2">La domanda può essere:</p>
+          <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-cyan-500">
+            <li><span class="font-bold text-cyan-600">esplicita</span>, cioè espressa chiaramente nel testo;</li>
+            <li><span class="font-bold text-cyan-600">intermedia</span> o <span class="font-bold text-cyan-600">implicita</span>, cioè non espressa nel testo, ma necessaria per risolvere il problema.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1: IMPARARE TUTTI -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Nei seguenti problemi sottolinea di rosso la domanda, di verde i dati utili e cancella i dati inutili. Poi risolvi sul quaderno.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2 p-3 border border-gray-200 rounded">
+          <p class="text-gray-700">
+            <span class="font-bold text-cyan-600">a.</span> In un grande magazzino ci sono 120 camicie blu e 97 camicie bianche. Ogni camicia costa € 35. Quante camicie blu ci sono in più di quelle bianche?
+          </p>
+        </div>
+        <div class="space-y-2 p-3 border border-gray-200 rounded">
+          <p class="text-gray-700">
+            <span class="font-bold text-cyan-600">b.</span> Laura ha 10 anni ed è alta 132 cm.<br>
+            Compra 3 magliette a € 9,90 l'una e un cappello a € 12,90. Quanto ha speso in tutto?
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Leggi il seguente problema e rispondi.
+      </p>
+
+      <div class="p-4 bg-gray-50 rounded-lg mb-4">
+        <p class="text-gray-700">
+          Per il suo compleanno Andrea riceve in regalo un libro di avventure.<br>
+          Impiega 11 giorni per leggerlo tutto. Se legge un numero uguale di pagine ogni giorno, quante pagine legge in un giorno?
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="flex items-center gap-4 flex-wrap">
+          <span class="text-gray-700"><span class="text-cyan-500">•</span> È possibile risolvere il problema?</span>
+          <div class="flex gap-2">
+            <label class="relative flex items-center justify-center px-4 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="possibile" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span>SÌ</span>
+            </label>
+            <label class="relative flex items-center justify-center px-4 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="possibile" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+              <span>NO</span>
+            </label>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700"><span class="text-cyan-500">•</span> Perché?</span>
+          <input type="text" class="flex-1 border-b-2 border-dotted border-gray-400 bg-transparent" placeholder="Manca il dato del numero di pagine del libro">
+        </div>
+        <p class="font-bold text-gray-700">
+          Scrivi tu il dato mancante e risolvi sul quaderno.
+        </p>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Leggi i problemi, trova il dato nascosto e scrivilo sotto forma di dato numerico. Poi risolvi sul quaderno.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-3 p-3 border border-gray-200 rounded">
+          <p class="text-gray-700">
+            <span class="font-bold text-cyan-600">a.</span> Il dottore ha prescritto a Francesco 2 bustine al giorno di vitamina C per una settimana. Quante bustine deve prendere in tutto Francesco?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700"><span class="text-cyan-500">•</span> <span class="font-bold">Dato nascosto:</span></span>
+            <input type="text" data-correct-answer="7 giorni" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+        <div class="space-y-3 p-3 border border-gray-200 rounded">
+          <p class="text-gray-700">
+            <span class="font-bold text-cyan-600">b.</span> Un gruppo di 14 amici decide di fare una passeggiata nel bosco. Ognuno di loro indossa un paio di stivali. Quanti stivali ci sono in tutto?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700"><span class="text-cyan-500">•</span> <span class="font-bold">Dato nascosto:</span></span>
+            <input type="text" data-correct-answer="2 stivali" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Copia sul quaderno i problemi e al posto dell'asterisco (<span class="font-bold">*</span>) scrivi la domanda intermedia. Poi risolvi.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2 p-3 border border-gray-200 rounded">
+          <p class="text-gray-700">
+            <span class="font-bold text-cyan-600">a.</span> In pizzeria 3 amici hanno speso € 9 per le bibite, € 19,50 per le pizze ed € 6 per i dolci. (<span class="font-bold">*</span>) Se dividono la spesa totale in parti uguali, quanto paga ciascuno di loro?
+          </p>
+        </div>
+        <div class="space-y-2 p-3 border border-gray-200 rounded">
+          <p class="text-gray-700">
+            <span class="font-bold text-cyan-600">b.</span> Un fruttivendolo vende 12 kg di mele al mattino e 15 kg nel pomeriggio. (<span class="font-bold">*</span>) Se le mele costano € 1,49 al kg, quanto incassa il fruttivendolo dalla vendita delle mele?
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,174 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Esercizio 1: IMPARARE TUTTI -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Osserva i diagrammi a striscia e risolvi i problemi.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Problema a -->
+        <div class="space-y-4">
+          <p class="text-gray-700">
+            <span class="font-bold text-cyan-600">a.</span> Una cassa piena di libri pesa <span class="whitespace-nowrap">3 150</span> g.<br>
+            La cassa vuota pesa 350 g.<br>
+            Quanto pesano i libri?
+          </p>
+
+          <!-- Diagramma a striscia semplificato -->
+          <div class="overflow-x-auto">
+            <table class="border-collapse border border-cyan-400">
+              <tbody>
+                <tr>
+                  <td class="p-2 border border-cyan-400 bg-cyan-100 text-center font-bold text-cyan-600">peso netto</td>
+                  <td class="p-2 border border-cyan-400 bg-cyan-100 text-center font-bold text-cyan-600">tara</td>
+                </tr>
+                <tr>
+                  <td class="p-2 border border-cyan-400 bg-white text-center">?</td>
+                  <td class="p-2 border border-cyan-400 bg-white text-center">350 g</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="text-center text-gray-600 mt-1"><span class="whitespace-nowrap">3 150</span> g <span class="font-bold">peso lordo</span></p>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700"><span class="whitespace-nowrap">3 150</span> g – 350 g =</span>
+            <input type="text" data-correct-answer="2800" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">g (peso netto)</span>
+          </div>
+        </div>
+
+        <!-- Problema b -->
+        <div class="space-y-4">
+          <p class="text-gray-700">
+            <span class="font-bold text-cyan-600">b.</span> Claudio ha speso 24 euro, cioè i <%= render 'shared/frazione', num: 3, den: 4 %> della somma che aveva nel salvadanaio per comprare una felpa nuova.<br>
+            Quanti euro aveva Claudio nel salvadanaio?
+          </p>
+
+          <!-- Diagramma a striscia con frazioni -->
+          <div class="flex justify-center">
+            <div class="border-2 border-cyan-400 rounded p-2">
+              <p class="text-center mb-2">24</p>
+              <div class="flex">
+                <div class="border border-cyan-400 p-2 text-center"><%= render 'shared/frazione', num: 1, den: 4 %></div>
+                <div class="border border-cyan-400 p-2 text-center"><%= render 'shared/frazione', num: 1, den: 4 %></div>
+                <div class="border border-cyan-400 p-2 text-center"><%= render 'shared/frazione', num: 1, den: 4 %></div>
+                <div class="border border-cyan-400 p-2 text-center bg-gray-100"><%= render 'shared/frazione', num: 1, den: 4 %></div>
+              </div>
+              <p class="text-center mt-1">?</p>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700">24 : 3 =</span>
+              <input type="text" data-correct-answer="8" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">(<%= render 'shared/frazione', num: 1, den: 4 %> della somma nel salvadanaio)</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <input type="text" data-correct-answer="8" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">× 4 =</span>
+              <input type="text" data-correct-answer="32" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">(<%= render 'shared/frazione', num: 4, den: 4 %>, cioè l'intera somma del salvadanaio)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Osserva i segmenti e risolvi il problema.
+      </p>
+
+      <div class="p-4 bg-gray-50 rounded-lg mb-4">
+        <p class="text-gray-700">
+          Isabella divide un foglio di carta lungo 25 cm in due parti. Una parte è più lunga dell'altra di 5 cm.<br>
+          Quanto misura ogni parte?
+        </p>
+      </div>
+
+      <!-- Diagramma segmenti -->
+      <div class="space-y-3 mb-4">
+        <div class="flex items-center gap-4">
+          <span class="text-gray-700 font-bold text-cyan-600 w-48">parte più corta</span>
+          <div class="flex-1 h-6 bg-cyan-200 border border-cyan-400 flex items-center justify-center">a</div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-gray-700 font-bold text-cyan-600 w-48">lunghezza totale del foglio</span>
+          <div class="flex-1 flex">
+            <div class="flex-1 h-6 bg-cyan-200 border border-cyan-400 flex items-center justify-center">a</div>
+            <div class="flex-1 h-6 bg-cyan-200 border border-cyan-400 flex items-center justify-center">a</div>
+            <div class="w-16 h-6 bg-cyan-100 border border-cyan-400 flex items-center justify-center">5 cm</div>
+          </div>
+        </div>
+        <p class="text-center text-gray-600">25 cm</p>
+      </div>
+
+      <div class="space-y-3">
+        <div class="flex items-center gap-4">
+          <span class="text-gray-700">25 – 5 = 20 cm</span>
+          <span class="text-gray-600">lunghezza di due parti corte</span>
+        </div>
+        <div class="flex items-center gap-4 flex-wrap">
+          <span class="text-gray-700">20 : 2 =</span>
+          <input type="text" data-correct-answer="10" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">cm</span>
+          <span class="text-gray-600">lunghezza della parte corta</span>
+        </div>
+        <div class="flex items-center gap-4 flex-wrap">
+          <input type="text" data-correct-answer="10" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">+ 5 =</span>
+          <input type="text" data-correct-answer="15" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">cm</span>
+          <span class="text-gray-600">lunghezza della parte lunga</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizi 3 e 4 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Esercizio 3 -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Rappresenta sul quaderno con il diagramma a striscia e risolvi.
+        </p>
+
+        <div class="p-3 border border-gray-200 rounded">
+          <p class="text-gray-700">
+            Antonio deve fare un viaggio di lavoro da Roma a Napoli. Ha già percorso 135 km, cioè i <%= render 'shared/frazione', num: 3, den: 5 %> della distanza totale.<br>
+            Quanti km deve ancora percorrere?
+          </p>
+        </div>
+      </div>
+
+      <!-- Esercizio 4 -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(4) %>
+          Rappresenta sul quaderno con i segmenti e risolvi.
+        </p>
+
+        <div class="p-3 border border-gray-200 rounded">
+          <p class="text-gray-700">
+            In pizzeria Edoardo ordina una pizza e una bibita. Spende in tutto € 12. La pizza costa € 3 in più della bibita. Quanto costa la pizza?<br>
+            Quanto costa la bibita?
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
