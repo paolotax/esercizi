@@ -293,7 +293,30 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 237, titolo: "CLASSIFICARE I QUADRILATERI", slug: "nvi5_mat_p237", view_template: "nvi5_mat_p237", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 238, titolo: "GLI ANGOLI E I POLIGONI", slug: "nvi5_mat_p238", view_template: "nvi5_mat_p238", sottotitolo: "RIPASSO", base_color: "cyan" },
   { numero: 239, titolo: "LA CIRCONFERENZA E IL CERCHIO", slug: "nvi5_mat_p239", view_template: "nvi5_mat_p239", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 240, titolo: "MISURE DI SUPERFICIE", slug: "nvi5_mat_p240", view_template: "nvi5_mat_p240", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 240, titolo: "MISURE DI SUPERFICIE", slug: "nvi5_mat_p240", view_template: "nvi5_mat_p240", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 241, titolo: "IL PERIMETRO", slug: "nvi5_mat_p241", view_template: "nvi5_mat_p241", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 242, titolo: "L'AREA DEI PARALLELOGRAMMI", slug: "nvi5_mat_p242", view_template: "nvi5_mat_p242", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 243, titolo: "L'AREA DEL TRIANGOLO E DEL TRAPEZIO", slug: "nvi5_mat_p243", view_template: "nvi5_mat_p243", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 244, titolo: "L'AREA DEI POLIGONI REGOLARI", slug: "nvi5_mat_p244", view_template: "nvi5_mat_p244", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 245, titolo: "L'AREA DEL CERCHIO", slug: "nvi5_mat_p245", view_template: "nvi5_mat_p245", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 246, titolo: "PROBLEMI DI PERIMETRO E DI AREA (1)", slug: "nvi5_mat_p246", view_template: "nvi5_mat_p246", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 247, titolo: "PROBLEMI DI PERIMETRO E DI AREA (2)", slug: "nvi5_mat_p247", view_template: "nvi5_mat_p247", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 248, titolo: "I PERIMETRI E LE AREE", slug: "nvi5_mat_p248", view_template: "nvi5_mat_p248", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 249, titolo: "PROBLEMI CON I POLIGONI E IL CERCHIO", slug: "nvi5_mat_p249", view_template: "nvi5_mat_p249", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 250, titolo: "PROBLEMI CON IL PESO E LE FIGURE", slug: "nvi5_mat_p250", view_template: "nvi5_mat_p250", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 251, titolo: "IL PERIMETRO E L'AREA", slug: "nvi5_mat_p251", view_template: "nvi5_mat_p251", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 252, titolo: "I SOLIDI", slug: "nvi5_mat_p252", view_template: "nvi5_mat_p252", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 253, titolo: "CUBO E PARALLELEPIPEDO", slug: "nvi5_mat_p253", view_template: "nvi5_mat_p253", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 254, titolo: "PRISMA E PIRAMIDE", slug: "nvi5_mat_p254", view_template: "nvi5_mat_p254", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 255, titolo: "IL CILINDRO", slug: "nvi5_mat_p255", view_template: "nvi5_mat_p255", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 256, titolo: "MISURE DI VOLUME", slug: "nvi5_mat_p256", view_template: "nvi5_mat_p256", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 257, titolo: "IL VOLUME DEL PARALLELEPIPEDO E DEL CUBO", slug: "nvi5_mat_p257", view_template: "nvi5_mat_p257", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 258, titolo: "CLASSIFICARE", slug: "nvi5_mat_p258", view_template: "nvi5_mat_p258", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 259, titolo: "RAPPRESENTARE DATI", slug: "nvi5_mat_p259", view_template: "nvi5_mat_p259", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 260, titolo: "AREOGRAMMI E PERCENTUALI", slug: "nvi5_mat_p260", view_template: "nvi5_mat_p260", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 261, titolo: "MODA, MEDIA E MEDIANA", slug: "nvi5_mat_p261", view_template: "nvi5_mat_p261", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 262, titolo: "PROBABILITÀ", slug: "nvi5_mat_p262", view_template: "nvi5_mat_p262", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 263, titolo: "LA STATISTICA E LA PROBABILITÀ", slug: "nvi5_mat_p263", view_template: "nvi5_mat_p263", sottotitolo: "RIPASSO", base_color: "cyan" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end

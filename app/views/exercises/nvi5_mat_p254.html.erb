@@ -1,0 +1,135 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Box teoria -->
+    <div class="p-4 bg-cyan-50 rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <p class="font-bold text-cyan-600 mb-2">Prisma regolare</p>
+          <%= image_tag "nvi5_mat/p254/p254_01.jpg", class: "max-w-xs h-auto mb-3", alt: "Prisma regolare" %>
+          <p class="text-gray-700"><span class="font-bold text-cyan-600">Superficie laterale (Sℓ)</span><br>Sℓ = perimetro di base × h</p>
+          <p class="text-gray-700 mt-2"><span class="font-bold text-cyan-600">Superficie totale (St)</span><br>St = Sℓ + (area di base × 2)</p>
+        </div>
+        <div>
+          <p class="font-bold text-cyan-600 mb-2">Piramide</p>
+          <%= image_tag "nvi5_mat/p254/p254_02.jpg", class: "max-w-xs h-auto mb-3", alt: "Piramide" %>
+          <p class="text-gray-700"><span class="font-bold text-cyan-600">Superficie laterale (Sℓ)</span><br>Sℓ = [(ℓ × a) : 2] × numero dei lati di base</p>
+          <p class="text-gray-700 mt-2"><span class="font-bold text-cyan-600">Superficie totale (St)</span><br>St = Sℓ + area di base</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1: IMPARARE TUTTI -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Quale poligono hanno per base i seguenti solidi? Quante facce laterali hanno? Completa.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p254/output-1715938802254_197_577_116_127.png", class: "max-w-full h-auto mx-auto mb-3", alt: "Prisma ottagonale" %>
+          <p class="text-gray-700">base: <span class="font-bold">ottagono</span></p>
+          <p class="text-gray-700">n° facce: <span class="font-bold">8</span></p>
+        </div>
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p254/output-1715938802254_494_571_98_134.png", class: "max-w-full h-auto mx-auto mb-3", alt: "Prisma" %>
+          <p class="text-gray-700">base:
+            <input type="text" data-correct-answer="pentagono" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </p>
+          <p class="text-gray-700">n° facce:
+            <input type="text" data-correct-answer="5" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </p>
+        </div>
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p254/output-1715938802254_780_575_98_129.png", class: "max-w-full h-auto mx-auto mb-3", alt: "Piramide" %>
+          <p class="text-gray-700">base:
+            <input type="text" data-correct-answer="esagono" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </p>
+          <p class="text-gray-700">n° facce:
+            <input type="text" data-correct-answer="6" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Calcola la superficie laterale e totale di questi solidi.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Solido 1: Prisma a base quadrata -->
+        <div class="p-3 border border-gray-200 rounded-lg">
+          <%= image_tag "nvi5_mat/p254/p254_03.jpg", class: "max-w-[148px] h-auto mx-auto mb-3", alt: "Prisma quadrato" %>
+          <p class="text-gray-700 mb-2">AB = BC = 27,4 cm</p>
+          <p class="text-gray-700 mb-2">EH = 34,6 cm</p>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-gray-700">Sℓ =</span>
+            <input type="text" data-correct-answer="3791,36 cm²" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">St =</span>
+            <input type="text" data-correct-answer="5292,88 cm²" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+
+        <!-- Solido 2: Piramide triangolare -->
+        <div class="p-3 border border-gray-200 rounded-lg">
+          <%= image_tag "nvi5_mat/p254/p254_04.jpg", class: "max-w-[140px] h-auto mx-auto mb-3", alt: "Piramide triangolare" %>
+          <p class="text-gray-700 mb-2">AB = BC = CA = 9,8 m</p>
+          <p class="text-gray-700 mb-2">AD = 24,9 m</p>
+          <p class="text-gray-700 mb-2">FG = 7,2 m</p>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-gray-700">Sℓ =</span>
+            <input type="text" data-correct-answer="105,84 m²" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">St =</span>
+            <input type="text" data-correct-answer="141,12 m²" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+
+        <!-- Solido 3: Prisma a base quadrata -->
+        <div class="p-3 border border-gray-200 rounded-lg">
+          <%= image_tag "nvi5_mat/p254/p254_05.jpg", class: "max-w-[140px] h-auto mx-auto mb-3", alt: "Prisma quadrato" %>
+          <p class="text-gray-700 mb-2">AB = BC = 6,9 cm</p>
+          <p class="text-gray-700 mb-2">EH = 15,3 cm</p>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-gray-700">Sℓ =</span>
+            <input type="text" data-correct-answer="422,28 cm²" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">St =</span>
+            <input type="text" data-correct-answer="517,5 cm²" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+
+        <!-- Solido 4: Piramide triangolare -->
+        <div class="p-3 border border-gray-200 rounded-lg">
+          <%= image_tag "nvi5_mat/p254/p254_06.jpg", class: "max-w-[140px] h-auto mx-auto mb-3", alt: "Piramide triangolare" %>
+          <p class="text-gray-700 mb-2">AB = BC = CA = 2,4 dam</p>
+          <p class="text-gray-700 mb-2">AD = 7 dam</p>
+          <p class="text-gray-700 mb-2">FG = 1,5 dam</p>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-gray-700">Sℓ =</span>
+            <input type="text" data-correct-answer="5,4 dam²" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">St =</span>
+            <input type="text" data-correct-answer="7,2 dam²" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,160 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Esercizio 1 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(1) %>
+        Leggi il testo e trasforma le frequenze in percentuali. Segui l'esempio.
+      </p>
+
+      <p class="text-gray-700 mb-4">Il direttore di una scuola vuole organizzare dei corsi di approfondimento su alcune materie per i 60 alunni delle classi quinte. Per sapere qual è la materia preferita organizza un'indagine tra gli alunni. La tabella di frequenza riporta i dati raccolti.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <table class="w-full border-collapse border border-cyan-400">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">Materia</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">Frequenza</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white">Italiano</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">24</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white">Matematica</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">18</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white">Inglese</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">12</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white">Storia</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">6</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">24 su 60</span>
+            <span class="text-cyan-500">→</span>
+            <span class="font-bold">24 : 60 = 0,4 =</span>
+            <%= render 'shared/frazione', num: 40, den: 100 %>
+            <span class="text-cyan-500">→</span>
+            <span class="font-bold">40%</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">18 su 60</span>
+            <span class="text-cyan-500">→</span>
+            <input type="text" data-correct-answer="18 : 60 = 0,3 = 30%" class="flex-1 min-w-[200px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">12 su 60</span>
+            <span class="text-cyan-500">→</span>
+            <input type="text" data-correct-answer="12 : 60 = 0,2 = 20%" class="flex-1 min-w-[200px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">6 su 60</span>
+            <span class="text-cyan-500">→</span>
+            <input type="text" data-correct-answer="6 : 60 = 0,1 = 10%" class="flex-1 min-w-[200px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 bg-cyan-50 rounded-lg">
+        <p class="text-gray-700 mb-4"><span class="text-cyan-500">•</span> Adesso attribuisci un colore a ogni materia e rappresenta i dati raccolti nell'areogramma quadrato.</p>
+
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 border border-gray-400 bg-white"></div>
+            <span>Italiano</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 border border-gray-400 bg-white"></div>
+            <span>Matematica</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 border border-gray-400 bg-white"></div>
+            <span>Inglese</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 border border-gray-400 bg-white"></div>
+            <span>Storia</span>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <%= image_tag "nvi5_mat/p260/output-1715938802260_727_492_238_237.png", class: "max-w-[200px] h-auto mx-auto", alt: "Areogramma quadrato" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Leggi i risultati di un'indagine sui generi di film preferiti da 300 ragazzi. Inserisci in ogni settore dell'areogramma la percentuale giusta e colora con colori diversi.
+      </p>
+
+      <div class="mb-4">
+        <%= image_tag "nvi5_mat/p260/p260_02.jpg", class: "max-w-full h-auto mx-auto", alt: "Areogramma circolare film" %>
+      </div>
+
+      <table class="w-full border-collapse border border-cyan-400 mb-6">
+        <thead>
+          <tr>
+            <th colspan="5" class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">Film</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-2 border border-cyan-400 text-center bg-white">di fantascienza<br><span class="font-bold">40%</span></td>
+            <td class="p-2 border border-cyan-400 text-center bg-white">polizieschi<br><span class="font-bold">25%</span></td>
+            <td class="p-2 border border-cyan-400 text-center bg-white">d'avventura<br><span class="font-bold">17%</span></td>
+            <td class="p-2 border border-cyan-400 text-center bg-white">storici<br><span class="font-bold">10%</span></td>
+            <td class="p-2 border border-cyan-400 text-center bg-white">romantici<br><span class="font-bold">8%</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="text-gray-700 mb-4"><span class="text-cyan-500">•</span> Adesso calcola a quanti ragazzi corrisponde ogni percentuale. Segui l'esempio.</p>
+
+      <div class="space-y-3">
+        <p class="text-gray-700">40% → <span class="font-bold">(300 : 100) × 40 = 3 × 40 = 120</span></p>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">25%</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" data-correct-answer="(300 : 100) × 25 = 75" class="flex-1 min-w-[200px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">17%</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" data-correct-answer="(300 : 100) × 17 = 51" class="flex-1 min-w-[200px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">10%</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" data-correct-answer="(300 : 100) × 10 = 30" class="flex-1 min-w-[200px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">8%</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" data-correct-answer="(300 : 100) × 8 = 24" class="flex-1 min-w-[200px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

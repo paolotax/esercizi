@@ -1,0 +1,209 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Esercizio 1: IMPARARE TUTTI -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Osserva la Ruota della Gallina e completa la tabella a fianco: scrivi la probabilità che esca ogni numero elencato. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <p class="font-bold text-cyan-600 mb-2">LA RUOTA DELLA GALLINA</p>
+          <%= image_tag "nvi5_mat/p262/p262_01.jpg", class: "max-w-full h-auto mx-auto", alt: "Ruota della Gallina" %>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">Numero</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">Casi favorevoli / Casi possibili</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white">1</td>
+                <td class="p-2 border border-cyan-400 text-center bg-cyan-50">
+                  <%= render 'shared/frazione', num: 3, den: 8 %>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white">3</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <%= render 'shared/frazione', num: nil, den: 8, num_answer: "1" %>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white">7</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <%= render 'shared/frazione', num: nil, den: 8, num_answer: "1" %>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white">10</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <%= render 'shared/frazione', num: nil, den: 8, num_answer: "1" %>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white">15</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <%= render 'shared/frazione', num: nil, den: 8, num_answer: "1" %>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white">50</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <%= render 'shared/frazione', num: nil, den: 8, num_answer: "1" %>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white">100</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <%= render 'shared/frazione', num: nil, den: 8, num_answer: "0" %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Procurati un mazzo da 40 carte. Calcola in frazione e in percentuale quante probabilità hai, pescando a caso, di estrarre...
+      </p>
+
+      <div class="space-y-4">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-cyan-500">•</span>
+          <span class="text-gray-700">una figura:</span>
+          <%= render 'shared/frazione', num: nil, den: 40, num_answer: "12" %>
+          <span class="text-gray-700">=</span>
+          <input type="text" data-correct-answer="0,3" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">=</span>
+          <%= render 'shared/frazione', num: nil, den: 100, num_answer: "30" %>
+          <span class="text-gray-700">=</span>
+          <input type="text" data-correct-answer="30" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">%</span>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-cyan-500">•</span>
+          <span class="text-gray-700">una carta di denari:</span>
+          <%= render 'shared/frazione', num: nil, den: 40, num_answer: "10" %>
+          <span class="text-gray-700">=</span>
+          <input type="text" data-correct-answer="0,25" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">=</span>
+          <%= render 'shared/frazione', num: nil, den: 100, num_answer: "25" %>
+          <span class="text-gray-700">=</span>
+          <input type="text" data-correct-answer="25" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">%</span>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-cyan-500">•</span>
+          <span class="text-gray-700">una carta di valore minore o uguale a 5:</span>
+          <%= render 'shared/frazione', num: nil, den: 40, num_answer: "20" %>
+          <span class="text-gray-700">=</span>
+          <input type="text" data-correct-answer="0,5" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">=</span>
+          <%= render 'shared/frazione', num: nil, den: 100, num_answer: "50" %>
+          <span class="text-gray-700">=</span>
+          <input type="text" data-correct-answer="50" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">%</span>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-cyan-500">•</span>
+          <span class="text-gray-700">un asso:</span>
+          <%= render 'shared/frazione', num: nil, den: 40, num_answer: "4" %>
+          <span class="text-gray-700">=</span>
+          <input type="text" data-correct-answer="0,1" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">=</span>
+          <%= render 'shared/frazione', num: nil, den: 100, num_answer: "10" %>
+          <span class="text-gray-700">=</span>
+          <input type="text" data-correct-answer="10" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Pensa al lancio di un dado a sei facce e indica con una X se le affermazioni sono vere (V) o false (F).
+      </p>
+
+      <div class="space-y-3">
+        <div class="flex items-center justify-between gap-4 flex-wrap">
+          <span class="text-gray-700"><span class="text-cyan-500">•</span> Un numero pari ha la stessa probabilità di uscire di uno dispari.</span>
+          <div class="flex gap-2">
+            <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="vf1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+              <span>V</span>
+            </label>
+            <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="vf1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span>F</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between gap-4 flex-wrap">
+          <span class="text-gray-700"><span class="text-cyan-500">•</span> È certo che uscirà un numero da 1 a 6.</span>
+          <div class="flex gap-2">
+            <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="vf2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+              <span>V</span>
+            </label>
+            <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="vf2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span>F</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between gap-4 flex-wrap">
+          <span class="text-gray-700"><span class="text-cyan-500">•</span> Il numero 1 ha maggior probabilità di uscire degli altri.</span>
+          <div class="flex gap-2">
+            <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="vf3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span>V</span>
+            </label>
+            <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="vf3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+              <span>F</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between gap-4 flex-wrap">
+          <span class="text-gray-700"><span class="text-cyan-500">•</span> La probabilità che non esca un numero da 1 a 6 è dello 0%.</span>
+          <div class="flex gap-2">
+            <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="vf4" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+              <span>V</span>
+            </label>
+            <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="vf4" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span>F</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
