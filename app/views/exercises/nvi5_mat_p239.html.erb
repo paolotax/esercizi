@@ -5,10 +5,10 @@
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <div class="space-y-6">
+  <div class="space-y-6"
     <!-- Box teoria: circonferenza e cerchio -->
-    <div class="p-4 bg-custom-blue rounded-lg">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+    <div class="p-4 bg-custom-blue-light rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start md:divide-x-2 md:divide-<%= @pagina.base_color %>-300">
         <!-- Circonferenza -->
         <div>
           <p class="font-bold text-cyan-600 mb-2">La circonferenza</p>
@@ -16,27 +16,21 @@
         </div>
 
         <!-- Il cerchio -->
-        <div>
-          <p class="font-bold text-cyan-600 mb-2">Il cerchio</p>
-          <p class="text-gray-700">Il <span class="font-bold text-cyan-600">cerchio</span> è la parte di piano delimitata da una circonferenza.</p>
-          <%= image_tag "nvi5_mat/p239/p239_02.jpg", alt: "Parti del cerchio", class: "w-full max-w-[300px] mx-auto mt-2" %>
-        </div>
-
-        <!-- Legenda parti -->
-        <div class="text-center">
-          <div class="space-y-2 text-gray-700">
-            <p><span class="font-bold text-cyan-600">settore circolare</span></p>
-            <p><span class="font-bold text-cyan-600">segmento circolare</span></p>
-            <p><span class="font-bold text-cyan-600">corona circolare</span></p>
+        <div class="col-span-2">
+          <div class="flex items-center gap-12 w-full justify-center">
+            <p class="font-bold text-cyan-600">Il cerchio</p>
+            <p class="text-gray-700">Il <span class="font-bold text-cyan-600">cerchio</span> è la parte di piano delimitata da una circonferenza.</p>
           </div>
+          <%= image_tag "nvi5_mat/p239/p239_02.jpg", alt: "Parti del cerchio", class: "w-full mx-auto mt-2" %>
         </div>
       </div>
     </div>
 
     <!-- Grid due colonne per esercizi 1 e 2 -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white rounded-2xl border-3 
+    md:col-span-2 border-yellow-400 md:divide-x-2 md:divide-<%= @pagina.base_color %>-300"">
       <!-- Esercizio 1: IMPARARE TUTTI -->
-      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <div class="p-4 >
         <p class="font-bold text-gray-700 mb-4">
           <%= imparare_tutti_badge(1) %>
           Disegna una circonferenza con il raggio di 2 cm. Poi ripassa di blu la circonferenza e colora di giallo il cerchio.
@@ -48,13 +42,13 @@
       </div>
 
       <!-- Esercizio 2: IMPARARE TUTTI -->
-      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <div class="p-4">
         <p class="font-bold text-gray-700 mb-4">
           <%= imparare_tutti_badge(2) %>
           Completa inserendo i nomi al posto giusto.
         </p>
 
-        <div class="p-3 bg-cyan-50 rounded-lg mb-4 text-center">
+        <div class="p-3 rounded-lg mb-4 text-center">
           <span class="font-bold text-cyan-600">diametro</span>
           <span class="text-cyan-500 mx-2">•</span>
           <span class="font-bold text-cyan-600">arco</span>
@@ -63,18 +57,8 @@
         </div>
 
         <div class="flex items-start gap-4">
-          <%= image_tag "nvi5_mat/p239/p239_03.jpg", alt: "Circonferenza con elementi da identificare", class: "w-40" %>
-          <div class="space-y-3 flex-1">
-            <div class="flex items-center gap-2">
-              <input type="text" data-correct-answer="arco" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-            </div>
-            <div class="flex items-center gap-2">
-              <input type="text" data-correct-answer="diametro" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-            </div>
-            <div class="flex items-center gap-2">
-              <input type="text" data-correct-answer="corda" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-            </div>
-          </div>
+          <%= image_tag "nvi5_mat/p239/p239_03.jpg", alt: "Circonferenza con elementi da identificare", class: "w-full" %>
+
         </div>
       </div>
     </div>
