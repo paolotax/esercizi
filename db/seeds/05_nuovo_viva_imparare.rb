@@ -273,7 +273,17 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 217, titolo: "DALLA STRUTTURA DEL PROBLEMA ALL'ESPRESSIONE", slug: "nvi5_mat_p217", view_template: "nvi5_mat_p217", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 218, titolo: "I PROBLEMI", slug: "nvi5_mat_p218", view_template: "nvi5_mat_p218", sottotitolo: "RIPASSO", base_color: "cyan" },
   { numero: 219, titolo: "MISURE DI LUNGHEZZA", slug: "nvi5_mat_p219", view_template: "nvi5_mat_p219", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 220, titolo: "MISURE DI CAPACITÀ", slug: "nvi5_mat_p220", view_template: "nvi5_mat_p220", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 220, titolo: "MISURE DI CAPACITÀ", slug: "nvi5_mat_p220", view_template: "nvi5_mat_p220", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 221, titolo: "MISURE DI MASSA", slug: "nvi5_mat_p221", view_template: "nvi5_mat_p221", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 222, titolo: "LUNGHEZZA, CAPACITÀ E MASSA", slug: "nvi5_mat_p222", view_template: "nvi5_mat_p222", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 223, titolo: "L'EURO", slug: "nvi5_mat_p223", view_template: "nvi5_mat_p223", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 224, titolo: "IL COMMERCIO", slug: "nvi5_mat_p224", view_template: "nvi5_mat_p224", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 225, titolo: "MISURE DI TEMPO", slug: "nvi5_mat_p225", view_template: "nvi5_mat_p225", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 226, titolo: "PROBLEMI DI MISURA E DI COMPRAVENDITA", slug: "nvi5_mat_p226", view_template: "nvi5_mat_p226", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 227, titolo: "LE MISURE", slug: "nvi5_mat_p227", view_template: "nvi5_mat_p227", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 228, titolo: "RETTE, SEMIRETTE E SEGMENTI", slug: "nvi5_mat_p228", view_template: "nvi5_mat_p228", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 229, titolo: "ANGOLI", slug: "nvi5_mat_p229", view_template: "nvi5_mat_p229", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 230, titolo: "SIMMETRIA", slug: "nvi5_mat_p230", view_template: "nvi5_mat_p230", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end

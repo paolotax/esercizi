@@ -1,0 +1,264 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Box teoria: Tabella misure di massa -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-cyan-400">
+          <thead>
+            <tr>
+              <th colspan="3" class="p-2 border border-cyan-400 bg-cyan-100 text-center text-cyan-700 font-bold">MULTIPLI</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-200 text-center text-cyan-700 font-bold">UNITÀ FONDAMENTALE</th>
+              <th colspan="3" class="p-2 border border-cyan-400 bg-cyan-100 text-center text-cyan-700 font-bold">SOTTOMULTIPLI</th>
+            </tr>
+            <tr>
+              <td class="p-2 border border-cyan-400 bg-white text-center">megagrammo<br><span class="font-bold">Mg</span></td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">centinaio<br>di kg</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">decina<br>di kg</td>
+              <td class="p-2 border border-cyan-400 bg-cyan-50 text-center"><span class="font-bold">chilogrammo</span><br><span class="font-bold">kg</span></td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">ettogrammo<br><span class="font-bold">hg</span></td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">decagrammo<br><span class="font-bold">dag</span></td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">grammo<br><span class="font-bold">g</span></td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-cyan-400 bg-white text-center"><span class="whitespace-nowrap">1 000</span> kg</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">100 kg</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">10 kg</td>
+              <td class="p-2 border border-cyan-400 bg-cyan-50 text-center font-bold">1 kg</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">0,1 kg</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">0,01 kg</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">0,001 kg</td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <!-- Tabella sottomultipli del grammo -->
+      <div class="overflow-x-auto mt-4">
+        <table class="border-collapse border border-cyan-400">
+          <thead>
+            <tr>
+              <th colspan="4" class="p-2 border border-cyan-400 bg-cyan-100 text-center text-cyan-700 font-bold">SOTTOMULTIPLI DEL GRAMMO</th>
+            </tr>
+            <tr>
+              <td class="p-2 border border-cyan-400 bg-cyan-50 text-center"><span class="font-bold">grammo</span><br><span class="font-bold">g</span></td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">decigrammo<br><span class="font-bold">dg</span></td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">centigrammo<br><span class="font-bold">cg</span></td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">milligrammo<br><span class="font-bold">mg</span></td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-cyan-400 bg-cyan-50 text-center font-bold">1 g</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">0,1 g</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">0,01 g</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">0,001 g</td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+
+    <!-- Grid due colonne per esercizi 1 e 2 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Esercizio 1: IMPARARE TUTTI -->
+      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Scomponi: scrivi il valore di ciascuna cifra. Segui l'esempio.
+        </p>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 bg-cyan-50 p-2 rounded">
+            <span class="text-gray-700">0,458 hg =</span>
+            <span class="font-bold text-cyan-600">0 hg 4 dag 5 g 8 dg</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">98,2 g =</span>
+            <input type="text" data-correct-answer="9 dag 8 g 2 dg" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700"><span class="whitespace-nowrap">3 470</span> mg =</span>
+            <input type="text" data-correct-answer="3 g 4 dg 7 cg 0 mg" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">4,319 kg =</span>
+            <input type="text" data-correct-answer="4 kg 3 hg 1 dag 9 g" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">45,87 dag =</span>
+            <input type="text" data-correct-answer="4 hg 5 dag 8 g 7 dg" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">300,1 dg =</span>
+            <input type="text" data-correct-answer="3 dag 0 g 0 dg 1 cg" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">225,906 g =</span>
+            <input type="text" data-correct-answer="2 hg 2 dag 5 g 9 dg 0 cg 6 mg" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700"><span class="whitespace-nowrap">45 003</span> mg =</span>
+            <input type="text" data-correct-answer="4 dag 5 g 0 dg 0 cg 3 mg" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2: IMPARARE TUTTI -->
+      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(2) %>
+          Componi ed esprimi nell'unità di misura indicata.
+        </p>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 bg-cyan-50 p-2 rounded">
+            <span class="text-gray-700">5 kg 8 hg 9 dag =</span>
+            <span class="font-bold text-cyan-600">5,89</span>
+            <span class="text-gray-700">kg</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">7 dag 2 dg 9 cg =</span>
+            <input type="text" data-correct-answer="70,29" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">g</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">4 kg 3 hg =</span>
+            <input type="text" data-correct-answer="43" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">dag</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">2 g 6 cg 8 mg =</span>
+            <input type="text" data-correct-answer="206,8" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">cg</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">5 Mg 4 hg =</span>
+            <input type="text" data-correct-answer="5000,4" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">kg</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">43 dag 7 cg 8 mg =</span>
+            <input type="text" data-correct-answer="430,078" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">g</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Esegui le equivalenze.
+      </p>
+
+      <div class="space-y-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700"><span class="whitespace-nowrap">68 000</span> g =</span>
+          <input type="text" data-correct-answer="680" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">hg =</span>
+          <input type="text" data-correct-answer="6800" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">dag</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">904 mg =</span>
+          <input type="text" data-correct-answer="0,904" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">g =</span>
+          <input type="text" data-correct-answer="9,04" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">dg</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">325 dag =</span>
+          <input type="text" data-correct-answer="3,25" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">kg =</span>
+          <input type="text" data-correct-answer="3250" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">g</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">701,36 dg =</span>
+          <input type="text" data-correct-answer="70,136" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">g =</span>
+          <input type="text" data-correct-answer="70136" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">mg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Colora nello stesso modo le misure equivalenti.
+      </p>
+
+      <div class="grid grid-cols-3 md:grid-cols-5 gap-3">
+        <div class="p-3 border-2 border-cyan-400 rounded-lg text-center bg-red-100">45 hg</div>
+        <div class="p-3 border-2 border-cyan-400 rounded-lg text-center bg-green-100">4,5 dag</div>
+        <div class="p-3 border-2 border-cyan-400 rounded-lg text-center bg-green-100">0,045 hg</div>
+        <div class="p-3 border-2 border-cyan-400 rounded-lg text-center bg-green-100"><span class="whitespace-nowrap">4 500</span> cg</div>
+        <div class="p-3 border-2 border-cyan-400 rounded-lg text-center bg-green-100">45 g</div>
+        <div class="p-3 border-2 border-cyan-400 rounded-lg text-center bg-red-100"><span class="whitespace-nowrap">4 500</span> g</div>
+        <div class="p-3 border-2 border-cyan-400 rounded-lg text-center bg-blue-100">4,5 g</div>
+        <div class="p-3 border-2 border-cyan-400 rounded-lg text-center bg-blue-100">45 dg</div>
+        <div class="p-3 border-2 border-cyan-400 rounded-lg text-center bg-red-100">4,5 kg</div>
+      </div>
+
+      <p class="text-gray-600 italic mt-2">
+        Suggerimento: ci sono 3 gruppi di misure equivalenti (45 hg = 4500 g = 4,5 kg; 4,5 dag = 0,045 hg = 4500 cg = 45 g; 4,5 g = 45 dg)
+      </p>
+    </div>
+
+    <!-- Esercizio 5 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(5) %>
+        Esegui le seguenti operazioni.
+      </p>
+
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">6 kg + 500 g =</span>
+          <input type="text" data-correct-answer="60" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">+</span>
+          <input type="text" data-correct-answer="5" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">=</span>
+          <input type="text" data-correct-answer="65" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">dag</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">45 dag + 7,9 hg =</span>
+          <input type="text" data-correct-answer="0,45" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">+</span>
+          <input type="text" data-correct-answer="0,79" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">=</span>
+          <input type="text" data-correct-answer="1,24" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">kg</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">9 Mg - 380 kg =</span>
+          <input type="text" data-correct-answer="9000" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">-</span>
+          <input type="text" data-correct-answer="380" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">=</span>
+          <input type="text" data-correct-answer="8620" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">kg</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-gray-700">6,5 hg - 2,3 dag =</span>
+          <input type="text" data-correct-answer="650" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">-</span>
+          <input type="text" data-correct-answer="23" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">=</span>
+          <input type="text" data-correct-answer="627" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span class="text-gray-700">dg</span>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
