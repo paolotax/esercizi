@@ -1,0 +1,111 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Box teoria: poligoni -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <p class="text-gray-700 text-center mb-4">Il <span class="font-bold text-cyan-600">poligono</span> è la parte di piano delimitata da una linea spezzata chiusa.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <p class="font-bold text-cyan-600 mb-2">Poligono concavo</p>
+          <p class="text-gray-700">Quando almeno uno dei prolungamenti dei suoi lati attraversa la regione interna.</p>
+          <div class="mt-2 flex justify-center">
+            <%= image_tag "nvi5_mat/p235/p235_01.jpg", alt: "Poligono concavo", class: "max-w-[200px]" %>
+          </div>
+        </div>
+        <div>
+          <p class="font-bold text-cyan-600 mb-2">Poligono convesso</p>
+          <p class="text-gray-700">Quando i prolungamenti dei suoi lati sono tutti nella regione esterna.</p>
+          <div class="mt-2 flex justify-center">
+            <%= image_tag "nvi5_mat/p235/p235_02.jpg", alt: "Poligono convesso", class: "max-w-[200px]" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1: IMPARARE TUTTI -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Osserva e colora solo i poligoni.
+      </p>
+
+      <div class="p-4 bg-gray-50 rounded-lg">
+        <%= image_tag "nvi5_mat/p235/p235_03.jpg", alt: "Figure da identificare", class: "w-full max-w-xl mx-auto" %>
+        <p class="text-gray-600 italic mt-2 text-center">Colora solo le figure che sono poligoni (A e D sono poligoni)</p>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Osserva i poligoni e colora di rosso i vertici, di blu i lati, di giallo l'ampiezza degli angoli interni. Poi traccia tutte le diagonali possibili.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+        <div class="p-4 bg-gray-50 rounded-lg">
+          <%= image_tag "nvi5_mat/p235/output-1715938802235_152_796_562_112.png", alt: "Poligoni da analizzare", class: "w-full" %>
+        </div>
+        <div class="p-3 bg-cyan-50 border-2 border-dashed border-cyan-400 rounded-lg">
+          <p class="text-gray-700">Le <span class="font-bold text-cyan-600">diagonali</span> sono i segmenti che congiungono due vertici non consecutivi.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Osserva i poligoni e completa la tabella.
+      </p>
+
+      <div class="mb-4">
+        <%= image_tag "nvi5_mat/p235/p235_04.jpg", alt: "Poligoni da classificare", class: "w-full max-w-2xl mx-auto" %>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-cyan-400 max-w-lg mx-auto">
+          <thead>
+            <tr>
+              <th class="p-2 border border-cyan-400 bg-white text-center text-gray-800"></th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 font-bold">Con assi di simmetria</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 font-bold">Senza assi di simmetria</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border border-cyan-400 bg-white text-center font-bold">Concavo</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="E" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="G" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-cyan-400 bg-white text-center font-bold">Convesso</td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="A, B, C, F, H" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+              <td class="p-2 border border-cyan-400 bg-white text-center">
+                <input type="text" data-correct-answer="D" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-4 p-3 bg-cyan-50 border-2 border-dashed border-cyan-400 rounded-lg">
+        <p class="text-gray-700">Gli <span class="font-bold text-cyan-600">assi di simmetria</span> dividono una figura in due parti simmetriche.</p>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

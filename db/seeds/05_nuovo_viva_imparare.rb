@@ -283,7 +283,17 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 227, titolo: "LE MISURE", slug: "nvi5_mat_p227", view_template: "nvi5_mat_p227", sottotitolo: "RIPASSO", base_color: "cyan" },
   { numero: 228, titolo: "RETTE, SEMIRETTE E SEGMENTI", slug: "nvi5_mat_p228", view_template: "nvi5_mat_p228", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 229, titolo: "ANGOLI", slug: "nvi5_mat_p229", view_template: "nvi5_mat_p229", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 230, titolo: "SIMMETRIA", slug: "nvi5_mat_p230", view_template: "nvi5_mat_p230", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 230, titolo: "SIMMETRIA", slug: "nvi5_mat_p230", view_template: "nvi5_mat_p230", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 231, titolo: "ROTAZIONE", slug: "nvi5_mat_p231", view_template: "nvi5_mat_p231", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 232, titolo: "TRASLAZIONE", slug: "nvi5_mat_p232", view_template: "nvi5_mat_p232", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 233, titolo: "RIDUZIONI E INGRANDIMENTI IN SCALA", slug: "nvi5_mat_p233", view_template: "nvi5_mat_p233", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 234, titolo: "LE ISOMETRIE", slug: "nvi5_mat_p234", view_template: "nvi5_mat_p234", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 235, titolo: "POLIGONI", slug: "nvi5_mat_p235", view_template: "nvi5_mat_p235", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 236, titolo: "CLASSIFICARE I POLIGONI", slug: "nvi5_mat_p236", view_template: "nvi5_mat_p236", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 237, titolo: "CLASSIFICARE I QUADRILATERI", slug: "nvi5_mat_p237", view_template: "nvi5_mat_p237", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 238, titolo: "GLI ANGOLI E I POLIGONI", slug: "nvi5_mat_p238", view_template: "nvi5_mat_p238", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 239, titolo: "LA CIRCONFERENZA E IL CERCHIO", slug: "nvi5_mat_p239", view_template: "nvi5_mat_p239", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 240, titolo: "MISURE DI SUPERFICIE", slug: "nvi5_mat_p240", view_template: "nvi5_mat_p240", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end

@@ -1,0 +1,168 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Box teoria: circonferenza e cerchio -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+        <!-- Circonferenza -->
+        <div>
+          <p class="font-bold text-cyan-600 mb-2">La circonferenza</p>
+          <%= image_tag "nvi5_mat/p239/p239_01.jpg", alt: "Elementi della circonferenza", class: "w-full max-w-[200px] mx-auto" %>
+        </div>
+
+        <!-- Il cerchio -->
+        <div>
+          <p class="font-bold text-cyan-600 mb-2">Il cerchio</p>
+          <p class="text-gray-700">Il <span class="font-bold text-cyan-600">cerchio</span> è la parte di piano delimitata da una circonferenza.</p>
+          <%= image_tag "nvi5_mat/p239/p239_02.jpg", alt: "Parti del cerchio", class: "w-full max-w-[300px] mx-auto mt-2" %>
+        </div>
+
+        <!-- Legenda parti -->
+        <div class="text-center">
+          <div class="space-y-2 text-gray-700">
+            <p><span class="font-bold text-cyan-600">settore circolare</span></p>
+            <p><span class="font-bold text-cyan-600">segmento circolare</span></p>
+            <p><span class="font-bold text-cyan-600">corona circolare</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid due colonne per esercizi 1 e 2 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Esercizio 1: IMPARARE TUTTI -->
+      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Disegna una circonferenza con il raggio di 2 cm. Poi ripassa di blu la circonferenza e colora di giallo il cerchio.
+        </p>
+
+        <div class="p-4 bg-gray-50 rounded-lg">
+          <%= image_tag "nvi5_mat/p239/output-1715938802239_159_607_364_238.png", alt: "Griglia per disegnare circonferenza", class: "w-full" %>
+        </div>
+      </div>
+
+      <!-- Esercizio 2: IMPARARE TUTTI -->
+      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(2) %>
+          Completa inserendo i nomi al posto giusto.
+        </p>
+
+        <div class="p-3 bg-cyan-50 rounded-lg mb-4 text-center">
+          <span class="font-bold text-cyan-600">diametro</span>
+          <span class="text-cyan-500 mx-2">•</span>
+          <span class="font-bold text-cyan-600">arco</span>
+          <span class="text-cyan-500 mx-2">•</span>
+          <span class="font-bold text-cyan-600">corda</span>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <%= image_tag "nvi5_mat/p239/p239_03.jpg", alt: "Circonferenza con elementi da identificare", class: "w-40" %>
+          <div class="space-y-3 flex-1">
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="arco" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="diametro" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="corda" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid due colonne per esercizi 3 e 4 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Esercizio 3 -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Vero (<span class="font-bold text-cyan-600">V</span>) o falso (<span class="font-bold text-cyan-600">F</span>)? Scegli con una X.
+        </p>
+
+        <div class="space-y-3">
+          <div class="flex items-center justify-between gap-4 flex-wrap">
+            <span class="text-gray-700 flex-1">La corda unisce due punti della circonferenza.</span>
+            <div class="flex gap-2">
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                <input type="radio" name="vf1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                <span>V</span>
+              </label>
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                <input type="radio" name="vf1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                <span>F</span>
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-4 flex-wrap">
+            <span class="text-gray-700 flex-1">Il diametro unisce due punti della circonferenza passando per il centro.</span>
+            <div class="flex gap-2">
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                <input type="radio" name="vf2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                <span>V</span>
+              </label>
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                <input type="radio" name="vf2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                <span>F</span>
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-4 flex-wrap">
+            <span class="text-gray-700 flex-1">Il diametro è la metà del raggio.</span>
+            <div class="flex gap-2">
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                <input type="radio" name="vf3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                <span>V</span>
+              </label>
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                <input type="radio" name="vf3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                <span>F</span>
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-4 flex-wrap">
+            <span class="text-gray-700 flex-1">L'arco è una parte del cerchio.</span>
+            <div class="flex gap-2">
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                <input type="radio" name="vf4" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                <span>V</span>
+              </label>
+              <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                <input type="radio" name="vf4" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                <span>F</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 4 -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(4) %>
+          Colora come indicato:
+        </p>
+
+        <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-cyan-500 mb-4">
+          <li>di <span class="font-bold text-red-500">rosso</span> la corona circolare;</li>
+          <li>di <span class="font-bold text-blue-500">blu</span> un settore circolare;</li>
+          <li>di <span class="font-bold text-yellow-500">giallo</span> un segmento circolare.</li>
+        </ul>
+
+        <div class="p-4 bg-gray-50 rounded-lg">
+          <%= image_tag "nvi5_mat/p239/p239_04.jpg", alt: "Cerchi da colorare", class: "w-full max-w-sm mx-auto" %>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
