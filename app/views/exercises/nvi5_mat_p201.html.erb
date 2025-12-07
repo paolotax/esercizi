@@ -1,0 +1,327 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls word-highlighter"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Esercizio 1: Completa le tabelle -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Completa le tabelle. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Tabella sinistra: divisibilità per 2, 3, 4 -->
+        <div>
+          <table class="w-full border-collapse border border-cyan-400">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-white text-center text-gray-800" rowspan="2"></th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800" colspan="3">È divisibile per</th>
+              </tr>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">2</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">3</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Esempio: 60 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">60</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">x</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">x</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">x</td>
+              </tr>
+              <!-- 200: divisibile per 2 e 4, non per 3 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">200</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- 45: divisibile per 3, non per 2 e 4 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">45</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- 120: divisibile per 2, 3, 4 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">120</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- 100: divisibile per 2 e 4, non per 3 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">100</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tabella destra: divisibilità per 5, 9, 10 -->
+        <div>
+          <table class="w-full border-collapse border border-cyan-400">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-white text-center text-gray-800" rowspan="2"></th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800" colspan="3">È divisibile per</th>
+              </tr>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">5</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">9</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">10</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- 108: divisibile per 9, non per 5 e 10 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">108</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- 160: divisibile per 5 e 10, non per 9 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">160</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- 90: divisibile per 5, 9, 10 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">90</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- 175: divisibile per 5, non per 9 e 10 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">175</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- 240: divisibile per 5 e 10, non per 9 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">240</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="x" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Scrivi i multipli e divisori -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <span class="font-bold text-cyan-600">2</span>
+        Scrivi:
+      </p>
+
+      <div class="space-y-4">
+        <!-- i multipli di 6 compresi tra 40 e 100: 42, 48, 54, 60, 66, 72, 78, 84, 90, 96 -->
+        <div>
+          <p class="text-gray-700 mb-2"><span class="text-cyan-500">•</span> i multipli di 6 compresi tra 40 e 100</p>
+          <div class="flex flex-wrap gap-2">
+            <input type="text" data-correct-answer="42" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="48" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="54" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="60" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="66" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="72" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="78" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="84" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="90" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="96" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+          </div>
+        </div>
+
+        <!-- tutti i divisori di 112: 1, 2, 4, 7, 8, 14, 16, 28, 56, 112 -->
+        <div>
+          <p class="text-gray-700 mb-2"><span class="text-cyan-500">•</span> tutti i divisori di 112</p>
+          <div class="flex flex-wrap gap-2">
+            <input type="text" data-correct-answer="1" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="2" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="4" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="7" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="8" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="14" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="16" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="28" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="56" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="112" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+          </div>
+        </div>
+
+        <!-- i multipli di 7 compresi tra 25 e 95: 28, 35, 42, 49, 56, 63, 70, 77, 84, 91 -->
+        <div>
+          <p class="text-gray-700 mb-2"><span class="text-cyan-500">•</span> i multipli di 7 compresi tra 25 e 95</p>
+          <div class="flex flex-wrap gap-2">
+            <input type="text" data-correct-answer="28" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="35" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="42" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="49" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="56" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="63" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="70" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="77" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="84" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="91" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+          </div>
+        </div>
+
+        <!-- tutti i divisori di 225: 1, 3, 5, 9, 15, 25, 45, 75, 225 -->
+        <div>
+          <p class="text-gray-700 mb-2"><span class="text-cyan-500">•</span> tutti i divisori di 225</p>
+          <div class="flex flex-wrap gap-2">
+            <input type="text" data-correct-answer="1" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="3" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="5" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="9" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="15" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="25" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="45" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="75" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+            <input type="text" data-correct-answer="225" class="w-12 border border-cyan-400 text-center font-bold bg-white p-1">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Cerchia i numeri primi -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <span class="font-bold text-cyan-600">3</span>
+        In ciascun gruppo di numeri cerchia i numeri primi.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Gruppo a: numeri primi: 23, 37, 41 -->
+        <div class="border border-cyan-400 p-4 rounded">
+          <p class="font-bold text-cyan-600 mb-2">a.</p>
+          <div class="grid grid-cols-4 gap-2 text-center">
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">12</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">21</span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">23</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">26</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">35</span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">37</span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">41</span>
+            <span></span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">48</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">49</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">51</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">55</span>
+          </div>
+        </div>
+
+        <!-- Gruppo b: numeri primi: 73, 67, 59 -->
+        <div class="border border-cyan-400 p-4 rounded">
+          <p class="font-bold text-cyan-600 mb-2">b.</p>
+          <div class="grid grid-cols-4 gap-2 text-center">
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">99</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">91</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">85</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">88</span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">73</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">77</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">69</span>
+            <span></span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">67</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">63</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">60</span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">59</span>
+          </div>
+        </div>
+
+        <!-- Gruppo c: numeri primi: 53, 19, 13, 61, 79, 47, 2, 7, 11 -->
+        <div class="border border-cyan-400 p-4 rounded">
+          <p class="font-bold text-cyan-600 mb-2">c.</p>
+          <div class="grid grid-cols-4 gap-2 text-center">
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">53</span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">19</span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">13</span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">61</span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">79</span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">47</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">81</span>
+            <span></span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">2</span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">7</span>
+            <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">100</span>
+            <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80 p-1">11</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

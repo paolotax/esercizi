@@ -243,7 +243,27 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 187, titolo: "LA PROPRIETÀ DELLA SOTTRAZIONE", slug: "nvi5_mat_p187", view_template: "nvi5_mat_p187", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 188, titolo: "MOLTIPLICAZIONI E DIVISIONI", slug: "nvi5_mat_p188", view_template: "nvi5_mat_p188", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 189, titolo: "MOLTIPLICAZIONI CON I NUMERI DECIMALI", slug: "nvi5_mat_p189", view_template: "nvi5_mat_p189", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 190, titolo: "LE PROPRIETÀ DELLA MOLTIPLICAZIONE", slug: "nvi5_mat_p190", view_template: "nvi5_mat_p190", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 190, titolo: "LE PROPRIETÀ DELLA MOLTIPLICAZIONE", slug: "nvi5_mat_p190", view_template: "nvi5_mat_p190", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 191, titolo: "DIVISIONI CON I NUMERI DECIMALI", slug: "nvi5_mat_p191", view_template: "nvi5_mat_p191", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 192, titolo: "LA PROPRIETÀ DELLA DIVISIONE", slug: "nvi5_mat_p192", view_template: "nvi5_mat_p192", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 193, titolo: "MOLTIPLICARE E DIVIDERE PER 10, 100, 1000", slug: "nvi5_mat_p193", view_template: "nvi5_mat_p193", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 194, titolo: "PROBLEMI CON LE QUATTRO OPERAZIONI (1)", slug: "nvi5_mat_p194", view_template: "nvi5_mat_p194", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 195, titolo: "PROBLEMI CON LE QUATTRO OPERAZIONI (2)", slug: "nvi5_mat_p195", view_template: "nvi5_mat_p195", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 196, titolo: "LE QUATTRO OPERAZIONI, PROBLEMI", slug: "nvi5_mat_p196", view_template: "nvi5_mat_p196", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 197, titolo: "MULTIPLI E DIVISORI", slug: "nvi5_mat_p197", view_template: "nvi5_mat_p197", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 198, titolo: "CRITERI DI DIVISIBILITÀ", slug: "nvi5_mat_p198", view_template: "nvi5_mat_p198", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 199, titolo: "NUMERI PRIMI", slug: "nvi5_mat_p199", view_template: "nvi5_mat_p199", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 200, titolo: "LE OPERAZIONI E LE ESPRESSIONI", slug: "nvi5_mat_p200", view_template: "nvi5_mat_p200", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 201, titolo: "I CRITERI DI DIVISIBILITÀ, I MULTIPLI, I DIVISORI E I NUMERI PRIMI", slug: "nvi5_mat_p201", view_template: "nvi5_mat_p201", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 202, titolo: "LE FRAZIONI", slug: "nvi5_mat_p202", view_template: "nvi5_mat_p202", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 203, titolo: "FRAZIONI COMPLEMENTARI", slug: "nvi5_mat_p203", view_template: "nvi5_mat_p203", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 204, titolo: "FRAZIONI EQUIVALENTI", slug: "nvi5_mat_p204", view_template: "nvi5_mat_p204", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 205, titolo: "CONFRONTARE FRAZIONI", slug: "nvi5_mat_p205", view_template: "nvi5_mat_p205", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 206, titolo: "DALL'INTERO ALLA FRAZIONE, DALLA FRAZIONE ALL'INTERO", slug: "nvi5_mat_p206", view_template: "nvi5_mat_p206", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 207, titolo: "PROBLEMI CON LE FRAZIONI", slug: "nvi5_mat_p207", view_template: "nvi5_mat_p207", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 208, titolo: "LE FRAZIONI", slug: "nvi5_mat_p208", view_template: "nvi5_mat_p208", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 209, titolo: "FRAZIONI E NUMERI DECIMALI", slug: "nvi5_mat_p209", view_template: "nvi5_mat_p209", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 210, titolo: "LA PERCENTUALE", slug: "nvi5_mat_p210", view_template: "nvi5_mat_p210", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end

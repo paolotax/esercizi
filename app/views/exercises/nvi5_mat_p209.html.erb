@@ -1,0 +1,264 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Box teoria -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <p class="text-gray-700 mb-2">
+            Dalla <span class="font-bold text-cyan-600">frazione decimale</span> al <span class="font-bold text-cyan-600">numero decimale</span>.
+          </p>
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 35, den: 10, border: nil %>
+            <span>= 35 : 10 = 3,<span class="font-bold text-cyan-600">5</span></span>
+          </div>
+        </div>
+        <div>
+          <p class="text-gray-700 mb-2">
+            Dal <span class="font-bold text-cyan-600">numero decimale</span> alla <span class="font-bold text-cyan-600">frazione decimale</span>.
+          </p>
+          <div class="flex items-center gap-2">
+            <span>6,<span class="font-bold text-cyan-600">7</span></span>
+            <span>=</span>
+            <%= render 'shared/frazione', num: 67, den: 10, border: nil %>
+          </div>
+          <p class="text-gray-500 mt-1">↑ 1 cifra decimale → 1 zero</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1 e 2 su due colonne -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Esercizio 1: IMPARARE TUTTI - Trasforma frazioni decimali in numeri decimali -->
+      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Trasforma le frazioni decimali in numeri decimali. Segui l'esempio.
+        </p>
+
+        <div class="space-y-3">
+          <!-- Esempio: 15/10 = 1,5 -->
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 15, den: 10, border: nil %>
+            <span>=</span>
+            <span class="font-bold text-cyan-600">1,5</span>
+          </div>
+          <!-- 7/10 = 0,7 -->
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 7, den: 10, border: nil %>
+            <span>=</span>
+            <input type="text" data-correct-answer="0,7" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <!-- 28/100 = 0,28 -->
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 28, den: 100, border: nil %>
+            <span>=</span>
+            <input type="text" data-correct-answer="0,28" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <!-- 9/1000 = 0,009 -->
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 9, den: 1000, border: nil %>
+            <span>=</span>
+            <input type="text" data-correct-answer="0,009" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <!-- 416/100 = 4,16 -->
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 416, den: 100, border: nil %>
+            <span>=</span>
+            <input type="text" data-correct-answer="4,16" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <!-- 305/1000 = 0,305 -->
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 305, den: 1000, border: nil %>
+            <span>=</span>
+            <input type="text" data-correct-answer="0,305" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <!-- 649/10 = 64,9 -->
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 649, den: 10, border: nil %>
+            <span>=</span>
+            <input type="text" data-correct-answer="64,9" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <!-- 783/1000 = 0,783 -->
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 783, den: 1000, border: nil %>
+            <span>=</span>
+            <input type="text" data-correct-answer="0,783" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <!-- 54/100 = 0,54 -->
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 54, den: 100, border: nil %>
+            <span>=</span>
+            <input type="text" data-correct-answer="0,54" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <!-- 15/1000 = 0,015 -->
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 15, den: 1000, border: nil %>
+            <span>=</span>
+            <input type="text" data-correct-answer="0,015" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2: IMPARARE TUTTI - Trasforma numeri decimali in frazioni decimali -->
+      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(2) %>
+          Trasforma i numeri decimali in frazioni decimali. Segui l'esempio.
+        </p>
+
+        <div class="space-y-3">
+          <!-- Esempio: 0,2 = 2/10 -->
+          <div class="flex items-center gap-2">
+            <span>0,2</span>
+            <span>=</span>
+            <span class="font-bold text-cyan-600"><%= render 'shared/frazione', num: 2, den: 10, border: nil %></span>
+          </div>
+          <!-- 0,41 = 41/100 -->
+          <div class="flex items-center gap-2">
+            <span>0,41</span>
+            <span>=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "41", den_answer: "100" %>
+          </div>
+          <!-- 0,763 = 763/1000 -->
+          <div class="flex items-center gap-2">
+            <span>0,763</span>
+            <span>=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "763", den_answer: "1000" %>
+          </div>
+          <!-- 1,23 = 123/100 -->
+          <div class="flex items-center gap-2">
+            <span>1,23</span>
+            <span>=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "123", den_answer: "100" %>
+          </div>
+          <!-- 3,04 = 304/100 -->
+          <div class="flex items-center gap-2">
+            <span>3,04</span>
+            <span>=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "304", den_answer: "100" %>
+          </div>
+          <!-- 18,065 = 18065/1000 -->
+          <div class="flex items-center gap-2">
+            <span>18,065</span>
+            <span>=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "18065", den_answer: "1000" %>
+          </div>
+          <!-- 29,7 = 297/10 -->
+          <div class="flex items-center gap-2">
+            <span>29,7</span>
+            <span>=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "297", den_answer: "10" %>
+          </div>
+          <!-- 0,095 = 95/1000 -->
+          <div class="flex items-center gap-2">
+            <span>0,095</span>
+            <span>=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "95", den_answer: "1000" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Trasforma frazioni qualunque -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <span class="font-bold text-cyan-600">3</span>
+        Trasforma le frazioni in numeri decimali e poi in frazioni decimali. Segui l'esempio.
+      </p>
+
+      <div class="p-3 bg-cyan-50 rounded-lg mb-4">
+        <p class="text-gray-700 mb-2">Da una <span class="font-bold">frazione qualunque</span> al <span class="font-bold">numero decimale</span>.</p>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 flex-wrap">
+            <%= render 'shared/frazione', num: 2, den: 5, border: nil %>
+            <span>= 2 : <span class="font-bold">5</span> = 0,4</span>
+            <span class="text-cyan-500">→</span>
+            <%= render 'shared/frazione', num: 4, den: 10, border: nil %>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <%= render 'shared/frazione', num: 4, den: 9, border: nil %>
+            <span>= 4 : <span class="font-bold">9</span> = 0,44444...</span>
+          </div>
+          <p class="text-gray-600 ml-4">• in questo caso puoi approssimare ai millesimi: 0,444 → <%= render 'shared/frazione', num: 444, den: 1000, border: nil %></p>
+        </div>
+      </div>
+
+      <div class="p-3 bg-cyan-50 rounded-lg mb-4">
+        <div class="flex items-center gap-2 flex-wrap">
+          <%= render 'shared/frazione', num: 9, den: 25, border: nil %>
+          <span>= 9 : 25 =</span>
+          <span class="font-bold text-cyan-600">0,36</span>
+          <span>=</span>
+          <span class="font-bold text-cyan-600"><%= render 'shared/frazione', num: 36, den: 100, border: nil %></span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- 3/15 = 0,2 = 2/10 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <%= render 'shared/frazione', num: 3, den: 15, border: nil %>
+          <span>=</span>
+          <input type="text" data-correct-answer="0,2" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span>=</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "2", den_answer: "10" %>
+        </div>
+        <!-- 3/24 = 0,125 = 125/1000 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <%= render 'shared/frazione', num: 3, den: 24, border: nil %>
+          <span>=</span>
+          <input type="text" data-correct-answer="0,125" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span>=</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "125", den_answer: "1000" %>
+        </div>
+        <!-- 6/12 = 0,5 = 5/10 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <%= render 'shared/frazione', num: 6, den: 12, border: nil %>
+          <span>=</span>
+          <input type="text" data-correct-answer="0,5" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span>=</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "5", den_answer: "10" %>
+        </div>
+        <!-- 6/4 = 1,5 = 15/10 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <%= render 'shared/frazione', num: 6, den: 4, border: nil %>
+          <span>=</span>
+          <input type="text" data-correct-answer="1,5" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span>=</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "15", den_answer: "10" %>
+        </div>
+        <!-- 6/16 = 0,375 = 375/1000 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <%= render 'shared/frazione', num: 6, den: 16, border: nil %>
+          <span>=</span>
+          <input type="text" data-correct-answer="0,375" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span>=</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "375", den_answer: "1000" %>
+        </div>
+        <!-- 4/7 ≈ 0,571 = 571/1000 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <%= render 'shared/frazione', num: 4, den: 7, border: nil %>
+          <span>≈</span>
+          <input type="text" data-correct-answer="0,571" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span>=</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "571", den_answer: "1000" %>
+        </div>
+        <!-- 12/17 ≈ 0,706 = 706/1000 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <%= render 'shared/frazione', num: 12, den: 17, border: nil %>
+          <span>≈</span>
+          <input type="text" data-correct-answer="0,706" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          <span>=</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "706", den_answer: "1000" %>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

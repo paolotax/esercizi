@@ -1,0 +1,742 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls word-highlighter"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Esercizio 1: IMPARARE TUTTI -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-3">
+        <%= imparare_tutti_badge(1) %>
+        Indica con una <span class="font-bold text-cyan-600">X</span> i divisori dei numeri della prima colonna. Poi rispondi con Sì o No alla domanda dell'ultima colonna. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4">
+        <!-- Tabella divisori -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 w-12"></th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 w-10">1</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 w-10">2</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 w-10">3</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 w-10">4</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 w-10">5</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 w-10">6</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 w-10">7</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 w-10">8</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 w-10">9</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 w-10">10</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">È un numero primo?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Riga 2 - Esempio -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-cyan-100 font-bold">2</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">X</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">X</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">Sì</td>
+              </tr>
+              <!-- Riga 3 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-cyan-100 font-bold">3</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="Sì" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- Riga 4 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-cyan-100 font-bold">4</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="No" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- Riga 5 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-cyan-100 font-bold">5</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="Sì" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- Riga 6 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-cyan-100 font-bold">6</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="No" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- Riga 7 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-cyan-100 font-bold">7</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="Sì" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- Riga 8 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-cyan-100 font-bold">8</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="No" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- Riga 9 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-cyan-100 font-bold">9</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="No" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- Riga 10 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-cyan-100 font-bold">10</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <label class="relative flex items-center justify-center w-6 h-6 mx-auto bg-white border-2 border-cyan-400 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+                    <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="hidden peer-checked:block">X</span>
+                  </label>
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="No" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Box informativo con immagine -->
+        <div class="flex flex-col items-center gap-2 p-3 bg-cyan-50 rounded-lg">
+          <%= image_tag "nvi5_mat/p199/output-1715938802199_547_837_19_21.png", class: "w-24 h-auto", alt: "Bambino" %>
+          <div class="text-gray-700">
+            <p class="mb-1">I <span class="font-bold text-cyan-600">numeri primi</span> hanno come divisori solo <span class="font-bold text-cyan-600">1</span> e <span class="font-bold text-cyan-600">se stessi</span>.</p>
+            <p class="mb-1">Tutti i numeri primi sono dispari, a eccezione del <span class="font-bold text-cyan-600">2</span>.</p>
+            <p>Lo <span class="font-bold text-cyan-600">0</span> e l'<span class="font-bold text-cyan-600">1</span> non sono considerati numeri primi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Crivello di Eratostene -->
+    <div>
+      <p class="font-bold text-gray-700 mb-3">
+        <span class="font-bold text-cyan-600">2</span>
+        Completa la griglia scrivendo i numeri fino a 100. Poi esegui quanto richiesto dal procedimento detto "Crivello di Eratostene".
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Griglia numeri 1-100 -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400">
+            <tbody>
+              <!-- Riga 1-10 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white"><span class="line-through text-gray-400">1</span></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">2</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">3</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">4</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">5</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">6</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">7</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">8</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">9</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">10</td>
+              </tr>
+              <!-- Riga 11-20 -->
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">11</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">12</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="13" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="14" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="15" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="16" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="17" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="18" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="19" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="20" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <!-- Riga 21-30 -->
+              <tr>
+                <% (21..30).each do |n| %>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <% end %>
+              </tr>
+              <!-- Riga 31-40 -->
+              <tr>
+                <% (31..40).each do |n| %>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <% end %>
+              </tr>
+              <!-- Riga 41-50 -->
+              <tr>
+                <% (41..50).each do |n| %>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <% end %>
+              </tr>
+              <!-- Riga 51-60 -->
+              <tr>
+                <% (51..60).each do |n| %>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <% end %>
+              </tr>
+              <!-- Riga 61-70 -->
+              <tr>
+                <% (61..70).each do |n| %>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <% end %>
+              </tr>
+              <!-- Riga 71-80 -->
+              <tr>
+                <% (71..80).each do |n| %>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <% end %>
+              </tr>
+              <!-- Riga 81-90 -->
+              <tr>
+                <% (81..90).each do |n| %>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <% end %>
+              </tr>
+              <!-- Riga 91-100 -->
+              <tr>
+                <% (91..100).each do |n| %>
+                <td class="p-2 border border-cyan-400 text-center bg-white">
+                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Box Crivello di Eratostene -->
+        <div class="p-4 bg-white border-3 border-cyan-400 rounded-lg">
+          <p class="font-bold text-cyan-600 mb-3">Crivello di Eratostene</p>
+          <ul class="list-disc pl-6 space-y-2 text-gray-700 marker:text-cyan-500">
+            <li>Colora di <span class="font-bold text-yellow-500">giallo</span> tutti i multipli di 2, escluso il 2.</li>
+            <li>Colora di <span class="font-bold text-red-500">rosso</span> tutti i multipli di 3, escluso il 3.</li>
+            <li>Colora di <span class="font-bold text-blue-500">azzurro</span> tutti i multipli di 5, escluso il 5.</li>
+            <li>Colora di <span class="font-bold text-green-500">verde</span> tutti i multipli di 7, escluso il 7.</li>
+          </ul>
+          <p class="mt-4 text-gray-700">I numeri che non hai colorato sono tutti i <span class="font-bold text-cyan-600">numeri primi minori di 100</span>.</p>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
