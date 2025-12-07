@@ -249,7 +249,7 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 193, titolo: "MOLTIPLICARE E DIVIDERE PER 10, 100, 1000", slug: "nvi5_mat_p193", view_template: "nvi5_mat_p193", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 194, titolo: "PROBLEMI CON LE QUATTRO OPERAZIONI (1)", slug: "nvi5_mat_p194", view_template: "nvi5_mat_p194", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 195, titolo: "PROBLEMI CON LE QUATTRO OPERAZIONI (2)", slug: "nvi5_mat_p195", view_template: "nvi5_mat_p195", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 196, titolo: "LE QUATTRO OPERAZIONI, PROBLEMI", slug: "nvi5_mat_p196", view_template: "nvi5_mat_p196", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 196, titolo: "ESPRESSIONI ARITMETICHE", slug: "nvi5_mat_p196", view_template: "nvi5_mat_p196", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 197, titolo: "MULTIPLI E DIVISORI", slug: "nvi5_mat_p197", view_template: "nvi5_mat_p197", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 198, titolo: "CRITERI DI DIVISIBILITÀ", slug: "nvi5_mat_p198", view_template: "nvi5_mat_p198", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 199, titolo: "NUMERI PRIMI", slug: "nvi5_mat_p199", view_template: "nvi5_mat_p199", sottotitolo: "ESERCIZI", base_color: "cyan" },

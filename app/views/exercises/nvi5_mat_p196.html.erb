@@ -1,0 +1,196 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls word-highlighter"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Box teoria: espressioni senza parentesi -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div>
+          <p class="text-gray-700 mb-3">
+            Per calcolare correttamente il <span class="font-bold text-cyan-600">valore di un'espressione senza parentesi</span> è necessario eseguire:
+          </p>
+          <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-cyan-500">
+            <li>prima <span class="font-bold text-cyan-600">le moltiplicazioni e le divisioni</span> nell'ordine in cui sono scritte;</li>
+            <li>poi <span class="font-bold text-cyan-600">le addizioni e le sottrazioni</span>, sempre nell'ordine in cui sono scritte.</li>
+          </ul>
+        </div>
+        <div class="flex justify-center">
+          <%= image_tag "nvi5_mat/p196/p196_01.jpg", class: "max-w-full", alt: "esempio espressione senza parentesi" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1: IMPARARE TUTTI -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Calcola il valore delle seguenti espressioni. Sottolinea le operazioni che devi eseguire prima, come nell'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Esempio: 10 × 4 − 56 : 7 + 8 × 8 − 20 = 76 -->
+        <div class="space-y-2">
+          <p class="text-gray-700">
+            <span class="underline decoration-2 font-bold">10 × 4</span> − <span class="underline decoration-2 font-bold">56 : 7</span> + <span class="underline decoration-2 font-bold">8 × 8</span> − 20 =
+          </p>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="76" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="...">
+          </div>
+        </div>
+
+        <!-- 12 × 3 − 64 : 8 + 20 − 3 × 5 = 33 -->
+        <div class="space-y-2">
+          <p class="text-gray-700" data-word-highlighter-target="container">
+            <span data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">12 × 3</span> −
+            <span data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">64 : 8</span> + 20 −
+            <span data-word-highlighter-target="word" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:opacity-80">3 × 5</span> =
+          </p>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="33" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="...">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Quiz scelta multipla -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Calcola sul quaderno il valore delle espressioni. Poi indica con una X il risultato.
+      </p>
+
+      <div class="space-y-4">
+        <!-- 27 : 3 − 5 + 4 × 7 − 6 × 5 + 8 + 15 : 5 = 13 -->
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <span class="text-gray-700 flex-1">27 : 3 − 5 + 4 × 7 − 6 × 5 + 8 + 15 : 5 =</span>
+          <div class="flex gap-3">
+            <label class="relative flex items-center justify-center px-3 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="quiz1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span>15</span>
+            </label>
+            <label class="relative flex items-center justify-center px-3 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="quiz1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+              <span>13</span>
+            </label>
+            <label class="relative flex items-center justify-center px-3 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="quiz1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span>12</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 5 + 3 × 5 − 32 : 4 + 4 × 9 − 2 × 17 − 16 : 8 = 12 -->
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <span class="text-gray-700 flex-1">5 + 3 × 5 − 32 : 4 + 4 × 9 − 2 × 17 − 16 : 8 =</span>
+          <div class="flex gap-3">
+            <label class="relative flex items-center justify-center px-3 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="quiz2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+              <span>12</span>
+            </label>
+            <label class="relative flex items-center justify-center px-3 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="quiz2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span>10</span>
+            </label>
+            <label class="relative flex items-center justify-center px-3 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="quiz2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span>11</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 25 × 2 : 5 + 7 + 3 × 6 − 7 × 5 = 0 -->
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <span class="text-gray-700 flex-1">25 × 2 : 5 + 7 + 3 × 6 − 7 × 5 =</span>
+          <div class="flex gap-3">
+            <label class="relative flex items-center justify-center px-3 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="quiz3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span>2</span>
+            </label>
+            <label class="relative flex items-center justify-center px-3 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="quiz3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span>1</span>
+            </label>
+            <label class="relative flex items-center justify-center px-3 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100 has-checked:bg-cyan-300">
+              <input type="radio" name="quiz3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+              <span>0</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Box teoria: espressioni con parentesi -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div>
+          <p class="text-gray-700 mb-3">
+            Per calcolare correttamente il <span class="font-bold text-cyan-600">valore di un'espressione con le parentesi</span> è necessario risolvere:
+          </p>
+          <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-cyan-500">
+            <li>prima le operazioni nelle <span class="font-bold text-cyan-600">parentesi tonde</span>;</li>
+            <li>poi quelle nelle <span class="font-bold text-cyan-600">parentesi quadre</span>;</li>
+            <li>infine quelle nelle <span class="font-bold text-cyan-600">parentesi graffe</span>.</li>
+          </ul>
+          <p class="text-gray-700 mt-3">
+            Eliminate le parentesi, si eseguono le operazioni rimaste: prima moltiplicazioni e divisioni, poi addizioni e sottrazioni sempre nell'ordine in cui sono scritte.
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <%= image_tag "nvi5_mat/p196/p196_02.jpg", class: "max-w-full", alt: "esempio espressione con parentesi" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Espressioni con parentesi -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Calcola sul quaderno il valore delle espressioni con le parentesi e scrivi qui il risultato.
+      </p>
+
+      <div class="space-y-3">
+        <!-- (4 − 9 : 3) × 3 + 10 − (12 : 4 + 16 : 8) = 8 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">(4 − 9 : 3) × 3 + 10 − (12 : 4 + 16 : 8) =</span>
+          <input type="text" data-correct-answer="8" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <!-- 40 : 8 + [6 + (3 × 6 − 4 × 4) : 2] − (64 − 7 × 8) = 4 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">40 : 8 + [6 + (3 × 6 − 4 × 4) : 2] − (64 − 7 × 8) =</span>
+          <input type="text" data-correct-answer="4" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <!-- {[(2 × 5 + 2) : 6 + 4] : 3 + 8} × 3 − 10 = 20 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">{[(2 × 5 + 2) : 6 + 4] : 3 + 8} × 3 − 10 =</span>
+          <input type="text" data-correct-answer="20" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <!-- (11 − 3 + 36 : 6) − (6 × 9 − 4 − 7 × 7) − 2 × 4 = 5 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">(11 − 3 + 36 : 6) − (6 × 9 − 4 − 7 × 7) − 2 × 4 =</span>
+          <input type="text" data-correct-answer="5" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <!-- [(66 : 11 + 72 : 9 + 5) : 19] + [5 × 8 − (63 : 9 + 23)] × 10 + 5 = 106 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">[(66 : 11 + 72 : 9 + 5) : 19] + [5 × 8 − (63 : 9 + 23)] × 10 + 5 =</span>
+          <input type="text" data-correct-answer="106" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <!-- 6 − {27 : [6 × 4 − (17 − 12 : 6)] + 2} = 1 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">6 − {27 : [6 × 4 − (17 − 12 : 6)] + 2} =</span>
+          <input type="text" data-correct-answer="1" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

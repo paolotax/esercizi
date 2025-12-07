@@ -82,15 +82,19 @@ NESSUNA
 
 ---
 
-## p196 - (base_color: cyan)
+## p196 - ESPRESSIONI ARITMETICHE (base_color: cyan)
 **Sottotitolo:** ESERCIZI
 
 ### Box utilizzati:
-- [ ] ASSET NON TROVATI durante batch 2
-- [ ] Pagina da ricreare manualmente
+- Box teoria espressioni senza parentesi (`p-4 bg-custom-blue rounded-lg`)
+- Box IMPARARE TUTTI (`border-3 border-yellow-400`) con word-highlighter per sottolineare
+- Quiz scelta multipla con radio button (`border-cyan-500`, `has-checked:bg-cyan-300`)
+- Box teoria espressioni con parentesi (`bg-custom-blue`)
+- Input per risultati espressioni
+- Immagini: `p196_01.jpg`, `p196_02.jpg`
 
 ### Correzioni da fare:
-RICREARE PAGINA - asset mancanti durante elaborazione batch
+NESSUNA - Pagina ricreata manualmente
 
 ---
 
@@ -162,9 +166,8 @@ NESSUNA
 - Stile tabelle: `border-cyan-400`, `bg-cyan-100`
 - Box IMPARARE TUTTI: `border-3 border-yellow-400`
 - NO wrapper `bg-orange-100` per esercizi
-- **p196**: asset non trovati, da ricreare
+- **p196**: ricreata manualmente (ESPRESSIONI ARITMETICHE)
 
 ## Riepilogo correzioni
 
-- p191-p195, p197-p200: Create correttamente, nessuna correzione necessaria
-- p196: DA RICREARE (asset mancanti)
+- p191-p200: Create correttamente, nessuna correzione necessaria
