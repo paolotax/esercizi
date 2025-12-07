@@ -336,6 +336,57 @@ Usare `@pagina.base_color` per colori coerenti:
 
 ---
 
+## PAGINE ESERCIZI (Quaderno p176+)
+
+**IMPORTANTE:** Per le pagine del Quaderno Esercizi (p176 in poi) usare queste varianti:
+
+### Box IMPARARE TUTTI (bordo GIALLO):
+```erb
+<div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+  <p class="font-bold text-gray-700 mb-4">
+    <%= imparare_tutti_badge(1) %>
+    Consegna esercizio...
+  </p>
+  <!-- contenuto -->
+</div>
+```
+
+### NO wrapper sfondo esercizi
+Gli esercizi sono direttamente dentro `<div class="space-y-6">`, senza il wrapper `bg-orange-100`.
+
+### Tabelle stile CYAN:
+```erb
+<table class="w-full border-collapse border border-cyan-400">
+  <thead>
+    <tr>
+      <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">Header</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="p-2 border border-cyan-400 text-center bg-white">Cella</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+### Colori CYAN fissi (non @pagina.base_color):
+```erb
+<span class="text-cyan-500">→</span>
+<span class="text-cyan-500">•</span>
+<div class="bg-cyan-50">sfondo evidenziato</div>
+<span class="font-bold text-cyan-600">testo esempio</span>
+```
+
+### Box regole (bordo cyan, no rounded):
+```erb
+<div class="p-3 bg-white border-3 border-cyan-400">
+  <p class="text-gray-600 italic">Per scrivere i numeri grandi suddividi le cifre in gruppi di tre, partendo da destra.</p>
+</div>
+```
+
+---
+
 ## LINK AL QUADERNO (IMPORTANTE!)
 
 **Controllare SEMPRE l'HTML originale** per la presenza di "Quaderno esercizi pp. XXX".
@@ -370,3 +421,7 @@ Se presente, aggiungere il partial **PRIMA** di `exercise_controls`:
 - [ ] Seed aggiornato con la nuova pagina
 - [ ] Database rigenerato
 - [ ] Controllare se ci sono jpg nella cartella della pagina da usare
+- [ ] **Se pagina ESERCIZI (p176+):** Box IMPARARE TUTTI con `border-yellow-400`
+- [ ] **Se pagina ESERCIZI:** Tabelle con stile cyan (`border-cyan-400`, `bg-cyan-100`)
+- [ ] **Se pagina ESERCIZI:** Colori cyan fissi invece di `@pagina.base_color`
+- [ ] **Se pagina ESERCIZI:** NO wrapper `bg-orange-100` per esercizi

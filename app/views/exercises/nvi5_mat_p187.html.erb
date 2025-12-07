@@ -1,0 +1,208 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Box introduttivo: Proprietà invariantiva -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <p class="font-bold text-gray-800 mb-4">Proprietà invariantiva</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Esempio 1: sottrarre lo stesso numero -->
+        <div class="flex flex-col items-center">
+          <div class="grid grid-cols-5 gap-1 text-center">
+            <span>73</span>
+            <span>–</span>
+            <span>14</span>
+            <span>=</span>
+            <span>59</span>
+          </div>
+          <div class="grid grid-cols-5 gap-1 text-center text-cyan-600 font-bold">
+            <span>↓– 3</span>
+            <span></span>
+            <span>↓– 3</span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="grid grid-cols-5 gap-1 text-center">
+            <span>70</span>
+            <span>–</span>
+            <span>11</span>
+            <span>=</span>
+            <span>59</span>
+          </div>
+        </div>
+
+        <!-- Esempio 2: aggiungere lo stesso numero -->
+        <div class="flex flex-col items-center">
+          <div class="grid grid-cols-5 gap-1 text-center">
+            <span>73</span>
+            <span>–</span>
+            <span>14</span>
+            <span>=</span>
+            <span>59</span>
+          </div>
+          <div class="grid grid-cols-5 gap-1 text-center text-cyan-600 font-bold">
+            <span>↓+ 6</span>
+            <span></span>
+            <span>↓+ 6</span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="grid grid-cols-5 gap-1 text-center">
+            <span>79</span>
+            <span>–</span>
+            <span>20</span>
+            <span>=</span>
+            <span>59</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1: IMPARARE TUTTI - Proprietà invariantiva (aggiungendo) -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Applica la proprietà invariantiva (aggiungi il numero indicato tra parentesi) ed esegui i calcoli. Segui l'esempio.
+      </p>
+
+      <div class="space-y-3">
+        <!-- Esempio -->
+        <div class="p-2 bg-cyan-50 rounded">
+          <p class="text-gray-700 font-bold">387 – 45 <span class="text-cyan-500">→</span> (+ 5) <span class="text-cyan-600">(387 + 5) – (45 + 5) = 392 – 50 = 342</span></p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0">270 – 148 <span class="text-cyan-500">→</span> (+ 2)</span>
+          <input type="text" data-correct-answer="(270 + 2) – (148 + 2) = 272 – 150 = 122" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0">287,3 – 29,6 <span class="text-cyan-500">→</span> (+ 0,4)</span>
+          <input type="text" data-correct-answer="(287,3 + 0,4) – (29,6 + 0,4) = 287,7 – 30 = 257,7" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0"><span class="whitespace-nowrap">4 648</span> – <span class="whitespace-nowrap">1 590</span> <span class="text-cyan-500">→</span> (+ 10)</span>
+          <input type="text" data-correct-answer="(4 648 + 10) – (1 590 + 10) = 4 658 – 1 600 = 3 058" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Proprietà invariantiva (sottraendo) -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Applica la proprietà invariantiva (sottrai il numero indicato tra parentesi) ed esegui i calcoli.
+      </p>
+
+      <div class="space-y-3">
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0">998 – 345 <span class="text-cyan-500">→</span> (– 5)</span>
+          <input type="text" data-correct-answer="(998 – 5) – (345 – 5) = 993 – 340 = 653" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0">283,9 – 10,6 <span class="text-cyan-500">→</span> (– 0,6)</span>
+          <input type="text" data-correct-answer="(283,9 – 0,6) – (10,6 – 0,6) = 283,3 – 10 = 273,3" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0"><span class="whitespace-nowrap">4 573</span> – 211 <span class="text-cyan-500">→</span> (– 11)</span>
+          <input type="text" data-correct-answer="(4 573 – 11) – (211 – 11) = 4 562 – 200 = 4 362" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0">14,96 – 4,45 <span class="text-cyan-500">→</span> (– 0,45)</span>
+          <input type="text" data-correct-answer="(14,96 – 0,45) – (4,45 – 0,45) = 14,51 – 4 = 10,51" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Semplificare i calcoli -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Colonna sinistra: consegna + tip box -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Applica la proprietà invariantiva per semplificare i calcoli ed esegui in riga.
+        </p>
+
+        <div class="p-3 bg-white border-3 border-cyan-400">
+          <p class="text-gray-600">Per rendere più semplici i calcoli fai in modo che le unità, le centinaia o le migliaia del sottraendo diventino 0.</p>
+          <p class="text-gray-700 font-bold mt-2">748 – 215 = (748 – 15) – (215 – 15) = 733 – 200 = 533</p>
+        </div>
+      </div>
+
+      <!-- Colonna destra: vuota per layout -->
+      <div></div>
+    </div>
+
+    <!-- Esercizio 3: esercizi in 3 colonne -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Colonna a -->
+      <div class="space-y-3">
+        <p class="font-bold text-cyan-600">a.</p>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0">374 – 152 =</span>
+          <input type="text" data-correct-answer="222" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0">825 – 205 =</span>
+          <input type="text" data-correct-answer="620" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0">800 – 499 =</span>
+          <input type="text" data-correct-answer="301" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0">744 – 306 =</span>
+          <input type="text" data-correct-answer="438" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+      </div>
+
+      <!-- Colonna b -->
+      <div class="space-y-3">
+        <p class="font-bold text-cyan-600">b.</p>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0">596 – 163 =</span>
+          <input type="text" data-correct-answer="433" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0">923 – 397 =</span>
+          <input type="text" data-correct-answer="526" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0"><span class="whitespace-nowrap">1 567</span> – 425 =</span>
+          <input type="text" data-correct-answer="1142" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0"><span class="whitespace-nowrap">1 600</span> – 408 =</span>
+          <input type="text" data-correct-answer="1192" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+      </div>
+
+      <!-- Colonna c -->
+      <div class="space-y-3">
+        <p class="font-bold text-cyan-600">c.</p>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0"><span class="whitespace-nowrap">1 476</span> – 534 =</span>
+          <input type="text" data-correct-answer="942" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0"><span class="whitespace-nowrap">3 664</span> – 977 =</span>
+          <input type="text" data-correct-answer="2687" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0"><span class="whitespace-nowrap">2 675</span> – 208 =</span>
+          <input type="text" data-correct-answer="2467" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 shrink-0"><span class="whitespace-nowrap">1 540</span> – 299 =</span>
+          <input type="text" data-correct-answer="1241" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

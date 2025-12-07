@@ -229,11 +229,21 @@ nvi5_matematica = nvi_volume5.discipline.create!(
   { numero: 173, titolo: "LA BANCA E IL CONTO CORRENTE", slug: "nvi5_mat_p173", view_template: "nvi5_mat_p173", sottotitolo: "Educazione finanziaria", base_color: "pink" },
   { numero: 174, titolo: "FINANZIAMENTO E INTERESSI", slug: "nvi5_mat_p174", view_template: "nvi5_mat_p174", sottotitolo: "Educazione finanziaria", base_color: "pink" },
   { numero: 175, titolo: "IL MIO QUADERNO DEGLI ESERCIZI", slug: "nvi5_mat_p175", view_template: "nvi5_mat_p175", sottotitolo: "INDICE", base_color: "cyan" },
-  { numero: 176, titolo: "MILIONI E MILIARDI", slug: "nvi5_mat_p176", view_template: "nvi5_mat_p176", sottotitolo: "ESERCIZI", base_color: "blue" },
-  { numero: 177, titolo: "SCRITTURE DIVERSE DEI NUMERI", slug: "nvi5_mat_p177", view_template: "nvi5_mat_p177", sottotitolo: "ESERCIZI", base_color: "blue" },
-  { numero: 178, titolo: "CONFRONTARE E ORDINARE NUMERI GRANDI", slug: "nvi5_mat_p178", view_template: "nvi5_mat_p178", sottotitolo: "ESERCIZI", base_color: "blue" },
-  { numero: 179, titolo: "NUMERI DECIMALI (1)", slug: "nvi5_mat_p179", view_template: "nvi5_mat_p179", sottotitolo: "ESERCIZI", base_color: "blue" },
-  { numero: 180, titolo: "NUMERI DECIMALI (2)", slug: "nvi5_mat_p180", view_template: "nvi5_mat_p180", sottotitolo: "ESERCIZI", base_color: "blue" }
+  { numero: 176, titolo: "MILIONI E MILIARDI", slug: "nvi5_mat_p176", view_template: "nvi5_mat_p176", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 177, titolo: "SCRITTURE DIVERSE DEI NUMERI", slug: "nvi5_mat_p177", view_template: "nvi5_mat_p177", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 178, titolo: "CONFRONTARE E ORDINARE NUMERI GRANDI", slug: "nvi5_mat_p178", view_template: "nvi5_mat_p178", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 179, titolo: "NUMERI DECIMALI (1)", slug: "nvi5_mat_p179", view_template: "nvi5_mat_p179", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 180, titolo: "NUMERI DECIMALI (2)", slug: "nvi5_mat_p180", view_template: "nvi5_mat_p180", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 181, titolo: "LE POTENZE", slug: "nvi5_mat_p181", view_template: "nvi5_mat_p181", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 182, titolo: "I NUMERI INTERI RELATIVI", slug: "nvi5_mat_p182", view_template: "nvi5_mat_p182", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 183, titolo: "I NUMERI FINO AI MILIARDI, LE POTENZE, I NUMERI INTERI RELATIVI", slug: "nvi5_mat_p183", view_template: "nvi5_mat_p183", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 184, titolo: "L'ADDIZIONE", slug: "nvi5_mat_p184", view_template: "nvi5_mat_p184", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 185, titolo: "LE PROPRIETÀ DELL'ADDIZIONE", slug: "nvi5_mat_p185", view_template: "nvi5_mat_p185", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 186, titolo: "LA SOTTRAZIONE", slug: "nvi5_mat_p186", view_template: "nvi5_mat_p186", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 187, titolo: "LA PROPRIETÀ DELLA SOTTRAZIONE", slug: "nvi5_mat_p187", view_template: "nvi5_mat_p187", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 188, titolo: "MOLTIPLICAZIONI E DIVISIONI", slug: "nvi5_mat_p188", view_template: "nvi5_mat_p188", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 189, titolo: "MOLTIPLICAZIONI CON I NUMERI DECIMALI", slug: "nvi5_mat_p189", view_template: "nvi5_mat_p189", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 190, titolo: "LE PROPRIETÀ DELLA MOLTIPLICAZIONE", slug: "nvi5_mat_p190", view_template: "nvi5_mat_p190", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi5_matematica.pagine.create!(pagina_data)
 end

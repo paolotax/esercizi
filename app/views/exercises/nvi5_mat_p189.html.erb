@@ -1,0 +1,179 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Esercizio 1: IMPARARE TUTTI - Metti la virgola nei prodotti -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Metti la virgola nei prodotti al posto giusto. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Colonna sinistra: esercizi -->
+        <div class="space-y-3">
+          <!-- Esempio -->
+          <div class="p-2 bg-cyan-50 rounded">
+            <p class="text-gray-700">
+              <span class="whitespace-nowrap">5 124<span class="font-bold text-cyan-600">,8</span></span> ×
+              <span class="whitespace-nowrap">3<span class="font-bold text-cyan-600">,76</span></span> =
+              <span class="whitespace-nowrap">19 269<span class="font-bold text-cyan-600">,</span>248</span>
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 shrink-0"><span class="whitespace-nowrap">5 124,8</span> × 37,6 =</span>
+            <input type="text" data-correct-answer="192692,48" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 shrink-0">51,248 × 376 =</span>
+            <input type="text" data-correct-answer="19269,248" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 shrink-0"><span class="whitespace-nowrap">5 124,8</span> × 376 =</span>
+            <input type="text" data-correct-answer="1926924,8" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 shrink-0">512,48 × 37,6 =</span>
+            <input type="text" data-correct-answer="19269,248" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 shrink-0"><span class="whitespace-nowrap">51 248</span> × 0,376 =</span>
+            <input type="text" data-correct-answer="19269,248" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+
+        <!-- Colonna destra: box regola -->
+        <div class="p-3 bg-white border-3 border-cyan-400 rounded-lg">
+          <p class="font-bold text-cyan-600 mb-2">Moltiplicazioni con i decimali</p>
+          <p class="text-gray-700 mb-3">
+            Esegui come con i numeri interi. Nel prodotto finale inserisci la virgola spostandola verso sinistra di tanti posti quante sono le cifre decimali dei fattori.
+          </p>
+          <p class="text-gray-700">
+            23<span class="font-bold text-cyan-600">,2</span> ×
+            12<span class="font-bold text-cyan-600">,46</span> =
+            289<span class="font-bold text-cyan-600">,072</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Collega moltiplicazione al prodotto -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Senza fare i calcoli, collega ogni moltiplicazione al prodotto corrispondente.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <table class="w-full">
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 bg-white text-center">72,43 × 8,22 =</td>
+                <td class="p-2 border-none w-16"></td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">14 947,13</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 bg-white text-center">120,8 × 76,16 =</td>
+                <td class="p-2 border-none w-16"></td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">595,3746</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 bg-white text-center"><span class="whitespace-nowrap">1 235,3</span> × 12,1 =</td>
+                <td class="p-2 border-none w-16"></td>
+                <td class="p-2 border border-cyan-400 bg-white text-center"><span class="whitespace-nowrap">9 200,128</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Suggerimento -->
+        <div class="p-3 bg-cyan-50 rounded-lg border-2 border-dashed border-cyan-300">
+          <p class="text-gray-700 italic">
+            Aiutati confrontando le cifre decimali dei fattori con quelle del prodotto.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Calcola in colonna sul quaderno -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Calcola in colonna sul quaderno.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Colonna a -->
+        <div class="space-y-2">
+          <p class="font-bold text-cyan-600">a.</p>
+          <p class="text-gray-700">753,82 × 14,6 =</p>
+          <p class="text-gray-700">591 × 2,78 =</p>
+          <p class="text-gray-700">33,97 × 6,54 =</p>
+          <p class="text-gray-700"><span class="whitespace-nowrap">4 086</span> × 2,543 =</p>
+        </div>
+
+        <!-- Colonna b -->
+        <div class="space-y-2">
+          <p class="font-bold text-cyan-600">b.</p>
+          <p class="text-gray-700">118,035 × 7,2 =</p>
+          <p class="text-gray-700">674 × 5,7 =</p>
+          <p class="text-gray-700">36,58 × 58,2 =</p>
+          <p class="text-gray-700"><span class="whitespace-nowrap">8 705</span> × 14,45 =</p>
+        </div>
+
+        <!-- Colonna c -->
+        <div class="space-y-2">
+          <p class="font-bold text-cyan-600">c.</p>
+          <p class="text-gray-700"><span class="whitespace-nowrap">6 035,8</span> × 46,7 =</p>
+          <p class="text-gray-700">890,432 × 6,5 =</p>
+          <p class="text-gray-700"><span class="whitespace-nowrap">2 587,69</span> × 34 =</p>
+          <p class="text-gray-700">117,5 × 8,98 =</p>
+        </div>
+
+        <!-- Colonna d -->
+        <div class="space-y-2">
+          <p class="font-bold text-cyan-600">d.</p>
+          <p class="text-gray-700">951,53 × 6,8 =</p>
+          <p class="text-gray-700">753,906 × 54 =</p>
+          <p class="text-gray-700">86,5 × 89,8 =</p>
+          <p class="text-gray-700"><span class="whitespace-nowrap">9 456,85</span> × 7,2 =</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4: Esegui le moltiplicazioni -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Esegui le moltiplicazioni. Poi rispondi alle domande.
+      </p>
+
+      <!-- Immagine quadretto con moltiplicazioni -->
+      <div class="mb-4">
+        <%= image_tag "nvi5_mat/p189/p189_01.jpg", alt: "Moltiplicazioni con decimali", class: "max-w-full h-auto" %>
+      </div>
+
+      <!-- Domande -->
+      <div class="space-y-3">
+        <div class="flex items-center gap-2">
+          <span class="text-cyan-500">•</span>
+          <span class="text-gray-700 shrink-0">Com'è il prodotto rispetto al moltiplicando?</span>
+          <input type="text" data-correct-answer="minore" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-cyan-500">•</span>
+          <span class="text-gray-700 shrink-0">Perché?</span>
+          <input type="text" data-correct-answer="perché il moltiplicatore è minore di 1" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

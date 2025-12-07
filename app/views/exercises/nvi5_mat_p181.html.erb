@@ -1,0 +1,298 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+    <!-- Esercizio 1: IMPARARE TUTTI -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Completa la tabella. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Spiegazione potenza a sinistra -->
+        <div class="p-4 bg-cyan-50 rounded-lg">
+          <p class="font-bold text-gray-700 mb-2">2 × 2 × 2 = 2<sup>3</sup></p>
+          <div class="flex items-center gap-4 mb-2">
+            <span class="font-bold">2<sup>3</sup></span>
+            <div class="flex flex-col">
+              <span class="text-cyan-600"><span class="text-cyan-500">→</span> esponente</span>
+              <span class="text-cyan-600"><span class="text-cyan-500">→</span> base</span>
+            </div>
+          </div>
+          <p class="text-gray-700 italic">si legge "due alla terza"</p>
+        </div>
+
+        <!-- Tabella a destra -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-white text-gray-800"></th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">Potenza</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">Moltiplicazione</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800">Prodotto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Esempio -->
+              <tr>
+                <td class="p-2 border border-cyan-400 bg-cyan-100 text-gray-800 font-bold">tre alla quinta</td>
+                <td class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 font-bold">3<sup>5</sup></td>
+                <td class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 font-bold">3 × 3 × 3 × 3 × 3</td>
+                <td class="p-2 border border-cyan-400 bg-cyan-100 text-center text-gray-800 font-bold">243</td>
+              </tr>
+              <!-- cinque alla terza -->
+              <tr>
+                <td class="p-2 border border-cyan-400 bg-white text-gray-700">cinque alla terza</td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">
+                  <input type="text" data-correct-answer="5³" class="w-12 text-center border-b border-dotted border-gray-400 bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">
+                  <input type="text" data-correct-answer="5 × 5 × 5" class="w-24 text-center border-b border-dotted border-gray-400 bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">
+                  <input type="text" data-correct-answer="125" class="w-12 text-center border-b border-dotted border-gray-400 bg-transparent">
+                </td>
+              </tr>
+              <!-- sei alla seconda -->
+              <tr>
+                <td class="p-2 border border-cyan-400 bg-white text-gray-700">sei alla seconda</td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">
+                  <input type="text" data-correct-answer="6²" class="w-12 text-center border-b border-dotted border-gray-400 bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">
+                  <input type="text" data-correct-answer="6 × 6" class="w-24 text-center border-b border-dotted border-gray-400 bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">
+                  <input type="text" data-correct-answer="36" class="w-12 text-center border-b border-dotted border-gray-400 bg-transparent">
+                </td>
+              </tr>
+              <!-- quattro alla quarta -->
+              <tr>
+                <td class="p-2 border border-cyan-400 bg-white text-gray-700">quattro alla quarta</td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">
+                  <input type="text" data-correct-answer="4⁴" class="w-12 text-center border-b border-dotted border-gray-400 bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">
+                  <input type="text" data-correct-answer="4 × 4 × 4 × 4" class="w-24 text-center border-b border-dotted border-gray-400 bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">
+                  <input type="text" data-correct-answer="256" class="w-12 text-center border-b border-dotted border-gray-400 bg-transparent">
+                </td>
+              </tr>
+              <!-- nove alla terza -->
+              <tr>
+                <td class="p-2 border border-cyan-400 bg-white text-gray-700">nove alla terza</td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">
+                  <input type="text" data-correct-answer="9³" class="w-12 text-center border-b border-dotted border-gray-400 bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">
+                  <input type="text" data-correct-answer="9 × 9 × 9" class="w-24 text-center border-b border-dotted border-gray-400 bg-transparent">
+                </td>
+                <td class="p-2 border border-cyan-400 bg-white text-center">
+                  <input type="text" data-correct-answer="729" class="w-12 text-center border-b border-dotted border-gray-400 bg-transparent">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Quando è possibile, scrivi le moltiplicazioni sotto forma di potenza e calcola. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Esempio -->
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700">4 × 4 × 4 =</span>
+          <span class="font-bold text-cyan-600">4<sup>3</sup></span>
+          <span>=</span>
+          <span class="font-bold text-cyan-600">64</span>
+        </div>
+
+        <!-- 3 × 3 × 3 × 5 - non possibile -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">3 × 3 × 3 × 5 =</span>
+          <input type="text" data-correct-answer="non possibile" class="w-24 border-b-2 border-dotted border-gray-400 text-center bg-transparent">
+          <span>=</span>
+          <input type="text" data-correct-answer="135" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <!-- 5 × 5 × 5 × 5 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">5 × 5 × 5 × 5 =</span>
+          <input type="text" data-correct-answer="5⁴" class="w-16 border-b-2 border-dotted border-gray-400 text-center bg-transparent">
+          <span>=</span>
+          <input type="text" data-correct-answer="625" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <!-- 9 × 9 × 9 × 9 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">9 × 9 × 9 × 9 =</span>
+          <input type="text" data-correct-answer="9⁴" class="w-16 border-b-2 border-dotted border-gray-400 text-center bg-transparent">
+          <span>=</span>
+          <input type="text" data-correct-answer="6561" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <!-- 7 × 6 × 7 - non possibile -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">7 × 6 × 7 =</span>
+          <input type="text" data-correct-answer="non possibile" class="w-24 border-b-2 border-dotted border-gray-400 text-center bg-transparent">
+          <span>=</span>
+          <input type="text" data-correct-answer="294" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <!-- 2 × 2 × 2 × 2 × 2 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">2 × 2 × 2 × 2 × 2 =</span>
+          <input type="text" data-correct-answer="2⁵" class="w-16 border-b-2 border-dotted border-gray-400 text-center bg-transparent">
+          <span>=</span>
+          <input type="text" data-correct-answer="32" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <!-- 1 × 1 × 1 × 1 × 1 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">1 × 1 × 1 × 1 × 1 =</span>
+          <input type="text" data-correct-answer="1⁵" class="w-16 border-b-2 border-dotted border-gray-400 text-center bg-transparent">
+          <span>=</span>
+          <input type="text" data-correct-answer="1" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+
+        <!-- 11 × 11 -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700">11 × 11 =</span>
+          <input type="text" data-correct-answer="11²" class="w-16 border-b-2 border-dotted border-gray-400 text-center bg-transparent">
+          <span>=</span>
+          <input type="text" data-correct-answer="121" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Calcola le potenze di 10 e leggi i numeri. Segui gli esempi.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Colonna 1 -->
+        <div class="space-y-3">
+          <!-- Esempio -->
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">10<sup>0</sup> =</span>
+            <span class="font-bold text-cyan-600">1</span>
+          </div>
+          <!-- Esempio -->
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">10<sup>1</sup> =</span>
+            <span class="font-bold text-cyan-600">10</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">10<sup>2</sup> =</span>
+            <input type="text" data-correct-answer="100" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">10<sup>3</sup> =</span>
+            <input type="text" data-correct-answer="1000" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">10<sup>4</sup> =</span>
+            <input type="text" data-correct-answer="10000" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+
+        <!-- Colonna 2 -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">10<sup>5</sup> =</span>
+            <input type="text" data-correct-answer="100000" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">10<sup>6</sup> =</span>
+            <input type="text" data-correct-answer="1000000" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">10<sup>7</sup> =</span>
+            <input type="text" data-correct-answer="10000000" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">10<sup>8</sup> =</span>
+            <input type="text" data-correct-answer="100000000" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">10<sup>9</sup> =</span>
+            <input type="text" data-correct-answer="1000000000" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+
+        <!-- Colonna 3: box regola -->
+        <div class="p-3 bg-white border-3 border-cyan-400 h-fit">
+          <p class="text-gray-600">Per calcolare le <span class="font-bold">potenze di 10</span> scrivi il numero <span class="font-bold">1</span> seguito da tanti zeri quanti ne indica l'esponente.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spiegazione polinomio numerico -->
+    <div class="p-4 bg-cyan-50 rounded-lg">
+      <p class="text-gray-700 mb-3">Le potenze di 10 sono utili per scrivere i numeri grandi:</p>
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <div class="flex items-center gap-2">
+          <span class="font-bold">1 2 4 8 5</span>
+        </div>
+        <div class="flex flex-col">
+          <span><span class="text-cyan-500">→</span> 5 × 10<sup>0</sup></span>
+          <span><span class="text-cyan-500">→</span> 8 × 10<sup>1</sup></span>
+          <span><span class="text-cyan-500">→</span> 4 × 10<sup>2</sup></span>
+          <span><span class="text-cyan-500">→</span> 2 × 10<sup>3</sup></span>
+          <span><span class="text-cyan-500">→</span> 1 × 10<sup>4</sup></span>
+        </div>
+        <div class="p-3 bg-white rounded-lg">
+          <p class="text-gray-700">Questa scrittura si chiama <span class="font-bold">polinomio numerico</span>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Scrivi sul quaderno i numeri come polinomio numerico. Segui l'esempio.
+      </p>
+
+      <div class="space-y-4">
+        <p class="text-gray-700">
+          <span class="whitespace-nowrap">1 783 093</span>
+          <span class="text-cyan-500 mx-1">•</span>
+          <span class="whitespace-nowrap">43 287 660</span>
+          <span class="text-cyan-500 mx-1">•</span>
+          <span class="whitespace-nowrap">2 783 510 462</span>
+          <span class="text-cyan-500 mx-1">•</span>
+          <span class="whitespace-nowrap">71 093 558 421</span>
+          <span class="text-cyan-500 mx-1">•</span>
+          <span class="whitespace-nowrap">289 165 300 245</span>
+        </p>
+
+        <!-- Esempio -->
+        <div class="p-3 bg-cyan-100 rounded-lg">
+          <p class="text-gray-700">
+            <span class="font-bold"><span class="whitespace-nowrap">1 289 358</span></span> =
+            <span class="font-bold text-cyan-700">1 × 10<sup>6</sup> + 2 × 10<sup>5</sup> + 8 × 10<sup>4</sup> + 9 × 10<sup>3</sup> + 3 × 10<sup>2</sup> + 5 × 10<sup>1</sup> + 8 × 10<sup>0</sup></span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
