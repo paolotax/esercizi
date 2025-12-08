@@ -1,175 +1,54 @@
-# CORREZIONI BOX P251-P264
+# Correzioni Box P251-P264
 
-## Procedura
+## Correzioni applicate
 
-Quando eseguo le correzioni:
-- Se modifico **titolo** o **sottotitolo** → aggiorno anche il seed
-- Se modifico **base_color** → aggiorno anche il seed
-- Alla fine delle correzioni → riscrivo questo file con le modifiche fatte
+### Bug corretto
+- `bg-custom-blue-light-light` → `bg-custom-blue-light` (doppio -light rimosso)
 
 ---
 
-## p251 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
+## Pattern utilizzati (Pagine ESERCIZI)
 
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
+### Box Teoria/Introduzione
+- `bg-custom-blue-light rounded-2xl` - sfondo celeste chiaro
 
-### Correzioni da fare:
-DA VERIFICARE
+### Box IMPARARE TUTTI
+- `bg-white rounded-2xl border-3 border-yellow-400` - bordo giallo
 
----
+### Tabelle
+- Header: `bg-custom-blue-light` con `border-cyan-400`
+- Celle: `bg-white` con `border-cyan-400`
 
-## p252 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
+### Colori
+- Testo evidenziato: `text-cyan-600`
+- Bordi tabelle: `border-cyan-400`
+- Bullet: `text-cyan-500`
 
 ---
 
-## p253 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
+## Riepilogo Box
 
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
-
----
-
-## p254 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
-
----
-
-## p255 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
-
----
-
-## p256 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
-
----
-
-## p257 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
-
----
-
-## p258 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
-
----
-
-## p259 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
-
----
-
-## p260 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
-
----
-
-## p261 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
-
----
-
-## p262 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
-
----
-
-## p263 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
-
----
-
-## p264 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
+| Pagina | bg-custom-blue-light | IMPARARE TUTTI |
+|--------|:--------------------:|:--------------:|
+| p250   | 1                    | -              |
+| p251   | 20                   | -              |
+| p252   | 7                    | 1              |
+| p253   | 13                   | 1              |
+| p254   | 1                    | 1              |
+| p255   | 1                    | -              |
+| p256   | 13                   | 1              |
+| p257   | 11                   | -              |
+| p258   | 4                    | 1              |
+| p259   | 4                    | 1              |
+| p260   | 4                    | -              |
+| p261   | 10                   | -              |
+| p262   | 11                   | 1              |
+| p263   | 9                    | 1              |
 
 ---
 
 ## Note
 
-- p251-p264 sono pagine ESERCIZI del Quaderno con base_color cyan
-- Stile tabelle: `border-cyan-400`, `bg-cyan-100`
-- Box IMPARARE TUTTI: `border-3 border-yellow-400`
-- NO wrapper `bg-orange-100` per esercizi
-
-## Riepilogo correzioni
-
-Da compilare dopo la creazione delle pagine.
+- Tutte le pagine sono del Quaderno Esercizi (stile cyan)
+- p264 non esiste (conteneva solo crediti)
+- Corretti 14 file con bug `bg-custom-blue-light-light`
