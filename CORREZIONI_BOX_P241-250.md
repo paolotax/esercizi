@@ -6,9 +6,10 @@
 - Box teoria: `rounded-lg` → `rounded-2xl`
 - Box teoria: aggiunto `w-fit mx-auto` per centrare
 - Immagini box teoria: `max-w-[150px]` → `max-w-sm`
-- Tabelle: rimosso `w-full`
+- Tabelle: rimosso `w-full`, aggiunto `flex justify-center` per centrare
 - Esercizi: rimosso `border border-gray-200 rounded-lg`
 - Risposte: aggiunto `justify-end` per allineamento a destra
+- Divider verticale: `md:divide-x-2 divide-cyan-300`
 
 ---
 
@@ -37,7 +38,7 @@
 ### Correzioni applicate:
 - [x] Box teoria: `rounded-2xl w-fit mx-auto`
 - [x] Immagine: `max-w-sm`
-- [x] Tabella: rimosso `w-full`
+- [x] Tabella: rimosso `w-full`, centrata con `flex justify-center`
 
 ### Note:
 - Es. 1 IMPARARE TUTTI: input senza `data-correct-answer` (misurazione con riga)
@@ -54,7 +55,7 @@
 ### Correzioni applicate:
 - [x] Box teoria: `rounded-2xl w-fit mx-auto`
 - [x] Immagine: `max-w-sm`
-- [x] Tabella: rimosso `w-full`
+- [x] Tabella: rimosso `w-full`, centrata con `flex justify-center`
 - [x] Rimossi bordi grigi problemi Es. 3
 
 ---
@@ -69,7 +70,7 @@
 ### Correzioni applicate:
 - [x] Box teoria: `rounded-2xl w-fit mx-auto`
 - [x] Immagine: `max-w-sm`
-- [x] Tabella: rimosso `w-full`
+- [x] Tabella: rimosso `w-full`, centrata con `flex justify-center`
 - [x] Rimossi bordi grigi esercizi
 
 ### Note:
@@ -100,7 +101,7 @@
 ### Correzioni applicate:
 - [x] Box teoria: `rounded-2xl w-fit mx-auto`
 - [x] Immagine: `max-w-sm`
-- [x] Tabella: rimosso `w-full`
+- [x] Tabella: rimosso `w-full`, centrata con `flex justify-center`
 - [x] Rimossi bordi grigi esercizi
 
 ---
@@ -115,7 +116,7 @@
 ### Correzioni applicate:
 - [x] Box teoria: `rounded-2xl w-fit mx-auto`
 - [x] Immagine: `max-w-sm`
-- [x] Tabella: rimosso `w-full`
+- [x] Tabella: rimosso `w-full`, centrata con `flex justify-center`
 - [x] Rimossi bordi grigi esercizi
 
 ---
@@ -131,7 +132,7 @@
 - [x] Box teoria: `rounded-2xl w-fit mx-auto`
 - [x] Aggiunto `md:divide-x-2 divide-cyan-300` per divider
 - [x] Aggiunto `md:pl-6` alla seconda colonna
-- [x] Tabella: rimosso `w-full`
+- [x] Tabella: rimosso `w-full`, centrata con `flex justify-center`
 - [x] Rimossi bordi grigi esercizi
 
 ---
@@ -139,11 +140,14 @@
 ## p249 - PROBLEMI (base_color: cyan)
 
 ### Box utilizzati:
-- **Introduzione** (`bg-custom-blue-light rounded-2xl`)
+- **Introduzione** - testo semplice (no box azzurro)
 - **IMPARARE TUTTI** (`border-3 border-yellow-400`) - Es. 1
-- **Problemi 2-14** in grid 2 colonne
+- **Problemi 2-14** in grid 2 colonne con divider
 
 ### Correzioni applicate:
+- [x] Rimossa box azzurro da introduzione "Risolvi i problemi sul quaderno"
+- [x] Layout 2 colonne con divider: problemi 2-7 | 8-14
+- [x] Aggiunto `md:divide-x-2 divide-cyan-300` per divider
 - [x] Rimossi bordi grigi problemi
 - [x] Risposte allineate a destra (`justify-end`)
 
@@ -162,14 +166,14 @@
 | Pagina | Titolo | Box teoria | IMPARARE TUTTI | Tabelle | Divider |
 |--------|--------|:----------:|:--------------:|:-------:|:-------:|
 | p241 | Quadrato | w-fit | Es. 1 | - | - |
-| p242 | Rettangolo | w-fit | Es. 1 (no ans) | 1 | - |
-| p243 | Parallelogramma | w-fit | - | 1 | - |
-| p244 | Rombo | w-fit | Es. 1 (no ans) | 1 | - |
+| p242 | Rettangolo | w-fit | Es. 1 (no ans) | centrata | - |
+| p243 | Parallelogramma | w-fit | - | centrata | - |
+| p244 | Rombo | w-fit | Es. 1 (no ans) | centrata | - |
 | p245 | Triangoli | w-fit | Es. 1 | - | - |
-| p246 | Trapezio | w-fit | - | 1 | - |
-| p247 | Poligoni regolari | w-fit | - | 1 | - |
-| p248 | Cerchio | w-fit | - | 1 | ✓ |
-| p249 | Problemi | intro | Es. 1 | - | - |
+| p246 | Trapezio | w-fit | - | centrata | - |
+| p247 | Poligoni regolari | w-fit | - | centrata | - |
+| p248 | Cerchio | w-fit | - | centrata | ✓ (box) |
+| p249 | Problemi | - | Es. 1 | - | ✓ (2 col) |
 | p250 | Problemi geometria | - | - | - | ✓ |
 
 ---
