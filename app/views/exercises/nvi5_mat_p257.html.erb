@@ -7,17 +7,21 @@
 
   <div class="space-y-6">
     <!-- Box teoria -->
-    <div class="p-4 bg-custom-blue-light rounded-2xl">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
+    <div class="p-4 bg-custom-blue-light rounded-2xl w-fit mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 md:divide-x-2 divide-cyan-300 gap-6">
+        <div class="px-4">
           <p class="font-bold text-cyan-600 mb-2">Volume del parallelepipedo</p>
-          <%= image_tag "nvi5_mat/p257/p257_01.jpg", class: "max-w-[200px] h-auto mb-3", alt: "Parallelepipedo" %>
-          <p class="text-gray-700">V = area di base × h</p>
+          <div class="flex flex-col md:flex-row items-center gap-4">
+            <%= image_tag "nvi5_mat/p257/p257_01.jpg", class: "max-w-[200px] h-auto", alt: "Parallelepipedo" %>
+            <p class="text-gray-700">V = area di base × h</p>
+          </div>
         </div>
-        <div>
+        <div class="px-4 mt-6 md:mt-0 md:pl-6">
           <p class="font-bold text-cyan-600 mb-2">Volume del cubo</p>
-          <%= image_tag "nvi5_mat/p257/p257_02.jpg", class: "max-w-[150px] h-auto mb-3", alt: "Cubo" %>
-          <p class="text-gray-700">V = ℓ × ℓ × ℓ</p>
+          <div class="flex flex-col md:flex-row items-center gap-4">
+            <%= image_tag "nvi5_mat/p257/p257_02.jpg", class: "max-w-[150px] h-auto", alt: "Cubo" %>
+            <p class="text-gray-700">V = ℓ × ℓ × ℓ</p>
+          </div>
         </div>
       </div>
     </div>
@@ -30,19 +34,21 @@
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="p-3 border border-gray-200 rounded-lg text-center">
+        <div class="p-3 text-center">
           <%= image_tag "nvi5_mat/p257/p257_03.jpg", class: "max-w-[300px] h-auto mx-auto mb-3", alt: "Parallelepipedo" %>
-          <div class="flex items-center justify-center gap-2">
+          <div class="flex items-center justify-center gap-1 border-2 border-<%= @pagina.base_color %>-300 rounded-lg p-2 w-fit mx-auto">
             <span class="text-gray-700">V =</span>
-            <input type="text" data-correct-answer="3600 cm³" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <input type="text" data-correct-answer="3600" class="w-20 border-b-2 border-dotted border-gray-400 text-right font-bold bg-transparent">
+            <span class="text-gray-700">cm³</span>
           </div>
         </div>
 
-        <div class="p-3 border border-gray-200 rounded-lg text-center">
+        <div class="p-3 text-center">
           <%= image_tag "nvi5_mat/p257/p257_04.jpg", class: "max-w-[150px] h-auto mx-auto mb-3", alt: "Cubo" %>
-          <div class="flex items-center justify-center gap-2">
+          <div class="flex items-center justify-center gap-1 border-2 border-<%= @pagina.base_color %>-300 rounded-lg p-2 w-fit mx-auto">
             <span class="text-gray-700">V =</span>
-            <input type="text" data-correct-answer="125 cm³" class="w-28 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <input type="text" data-correct-answer="125" class="w-20 border-b-2 border-dotted border-gray-400 text-right font-bold bg-transparent">
+            <span class="text-gray-700">cm³</span>
           </div>
         </div>
       </div>
@@ -56,70 +62,82 @@
       </p>
 
       <div class="overflow-x-auto">
-        <table class="w-full border-collapse border border-cyan-400">
+        <table class="border-collapse border border-cyan-400 mx-auto">
           <thead>
             <tr>
-              <th class="p-2 border border-cyan-400 bg-custom-blue-light text-center text-gray-800">Figura</th>
-              <th class="p-2 border border-cyan-400 bg-custom-blue-light text-center text-gray-800">Spigolo di un cubo</th>
-              <th class="p-2 border border-cyan-400 bg-custom-blue-light text-center text-gray-800">Volume di un cubo</th>
-              <th class="p-2 border border-cyan-400 bg-custom-blue-light text-center text-gray-800">Numero dei cubi</th>
-              <th class="p-2 border border-cyan-400 bg-custom-blue-light text-center text-gray-800">Volume del solido</th>
+              <th class="p-2 bg-white w-28"></th>
+              <th class="px-2 py-1 border border-cyan-400 bg-custom-blue-light text-center text-gray-800">Spigolo<br>di un cubo</th>
+              <th class="px-2 py-1 border border-cyan-400 bg-custom-blue-light text-center text-gray-800">Volume<br>di un cubo</th>
+              <th class="px-2 py-1 border border-cyan-400 bg-custom-blue-light text-center text-gray-800">Numero<br>dei cubi</th>
+              <th class="px-2 py-1 border border-cyan-400 bg-custom-blue-light text-center text-gray-800">Volume<br>del solido</th>
             </tr>
           </thead>
           <tbody>
             <!-- Esempio -->
             <tr>
-              <td class="p-2 border border-cyan-400 text-center bg-custom-blue-light">
-                <%= image_tag "nvi5_mat/p257/output-1715938802257_218_720_90_97.png", class: "max-w-[60px] h-auto mx-auto", alt: "Figura 1" %>
+              <td class="p-2 border border-cyan-400 text-center bg-white">
+                <%= image_tag "nvi5_mat/p257/output-1715938802257_218_720_90_97.png", class: "max-w-[80px] h-auto mx-auto", alt: "Figura 1" %>
               </td>
-              <td class="p-2 border border-cyan-400 text-center bg-custom-blue-light font-bold">5 cm</td>
-              <td class="p-2 border border-cyan-400 text-center bg-custom-blue-light font-bold">125 cm³</td>
-              <td class="p-2 border border-cyan-400 text-center bg-custom-blue-light font-bold">6</td>
-              <td class="p-2 border border-cyan-400 text-center bg-custom-blue-light font-bold">750 cm³</td>
+              <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">5 cm</td>
+              <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">125 cm³</td>
+              <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">6</td>
+              <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">750 cm³</td>
             </tr>
             <tr>
               <td class="p-2 border border-cyan-400 text-center bg-white">
-                <%= image_tag "nvi5_mat/p257/output-1715938802257_216_835_89_98.png", class: "max-w-[60px] h-auto mx-auto", alt: "Figura 2" %>
+                <%= image_tag "nvi5_mat/p257/output-1715938802257_216_835_89_98.png", class: "max-w-[80px] h-auto mx-auto", alt: "Figura 2" %>
               </td>
               <td class="p-2 border border-cyan-400 text-center bg-white">3 cm</td>
-              <td class="p-2 border border-cyan-400 text-center bg-white">
-                <input type="text" data-correct-answer="27 cm³" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <td class="p-2 border border-cyan-400 bg-white">
+                <div class="flex items-center justify-end gap-1">
+                  <input type="text" data-correct-answer="27" class="w-12 border-b-2 border-dotted border-gray-400 text-right font-bold bg-transparent"> cm³
+                </div>
               </td>
               <td class="p-2 border border-cyan-400 text-center bg-white">
                 <input type="text" data-correct-answer="5" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
               </td>
-              <td class="p-2 border border-cyan-400 text-center bg-white">
-                <input type="text" data-correct-answer="135 cm³" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <td class="p-2 border border-cyan-400 bg-white">
+                <div class="flex items-center justify-end gap-1">
+                  <input type="text" data-correct-answer="135" class="w-12 border-b-2 border-dotted border-gray-400 text-right font-bold bg-transparent"> cm³
+                </div>
               </td>
             </tr>
             <tr>
               <td class="p-2 border border-cyan-400 text-center bg-white">
-                <%= image_tag "nvi5_mat/p257/output-1715938802257_219_953_87_97.png", class: "max-w-[60px] h-auto mx-auto", alt: "Figura 3" %>
+                <%= image_tag "nvi5_mat/p257/output-1715938802257_219_953_87_97.png", class: "max-w-[80px] h-auto mx-auto", alt: "Figura 3" %>
               </td>
               <td class="p-2 border border-cyan-400 text-center bg-white">4 cm</td>
-              <td class="p-2 border border-cyan-400 text-center bg-white">
-                <input type="text" data-correct-answer="64 cm³" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <td class="p-2 border border-cyan-400 bg-white">
+                <div class="flex items-center justify-end gap-1">
+                  <input type="text" data-correct-answer="64" class="w-12 border-b-2 border-dotted border-gray-400 text-right font-bold bg-transparent"> cm³
+                </div>
               </td>
               <td class="p-2 border border-cyan-400 text-center bg-white">
                 <input type="text" data-correct-answer="7" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
               </td>
-              <td class="p-2 border border-cyan-400 text-center bg-white">
-                <input type="text" data-correct-answer="448 cm³" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <td class="p-2 border border-cyan-400 bg-white">
+                <div class="flex items-center justify-end gap-1">
+                  <input type="text" data-correct-answer="448" class="w-12 border-b-2 border-dotted border-gray-400 text-right font-bold bg-transparent"> cm³
+                </div>
               </td>
             </tr>
             <tr>
               <td class="p-2 border border-cyan-400 text-center bg-white">
-                <%= image_tag "nvi5_mat/p257/output-1715938802257_215_1076_91_85.png", class: "max-w-[60px] h-auto mx-auto", alt: "Figura 4" %>
+                <%= image_tag "nvi5_mat/p257/output-1715938802257_215_1076_91_85.png", class: "max-w-[80px] h-auto mx-auto", alt: "Figura 4" %>
               </td>
               <td class="p-2 border border-cyan-400 text-center bg-white">2 cm</td>
-              <td class="p-2 border border-cyan-400 text-center bg-white">
-                <input type="text" data-correct-answer="8 cm³" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <td class="p-2 border border-cyan-400 bg-white">
+                <div class="flex items-center justify-end gap-1">
+                  <input type="text" data-correct-answer="8" class="w-12 border-b-2 border-dotted border-gray-400 text-right font-bold bg-transparent"> cm³
+                </div>
               </td>
               <td class="p-2 border border-cyan-400 text-center bg-white">
                 <input type="text" data-correct-answer="8" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
               </td>
-              <td class="p-2 border border-cyan-400 text-center bg-white">
-                <input type="text" data-correct-answer="64 cm³" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <td class="p-2 border border-cyan-400 bg-white">
+                <div class="flex items-center justify-end gap-1">
+                  <input type="text" data-correct-answer="64" class="w-12 border-b-2 border-dotted border-gray-400 text-right font-bold bg-transparent"> cm³
+                </div>
               </td>
             </tr>
           </tbody>
