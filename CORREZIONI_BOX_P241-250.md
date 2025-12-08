@@ -1,131 +1,183 @@
-# CORREZIONI BOX P241-P250
+# Correzioni Box P241-P250
 
-## Procedura
+## Correzioni applicate
 
-Quando eseguo le correzioni:
-- Se modifico **titolo** o **sottotitolo** → aggiorno anche il seed
-- Se modifico **base_color** → aggiorno anche il seed
-- Alla fine delle correzioni → riscrivo questo file con le modifiche fatte
+### Pattern uniformati (come p251-264)
+- Box teoria: `rounded-lg` → `rounded-2xl`
+- Box teoria: aggiunto `w-fit mx-auto` per centrare
+- Immagini box teoria: `max-w-[150px]` → `max-w-sm`
+- Tabelle: rimosso `w-full`
+- Esercizi: rimosso `border border-gray-200 rounded-lg`
+- Risposte: aggiunto `justify-end` per allineamento a destra
 
 ---
 
-## p241 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
+## p241 - QUADRATO (base_color: cyan)
 
 ### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
+- **Box teoria** (`bg-custom-blue-light rounded-2xl w-fit mx-auto`) - Formule quadrato
+- **IMPARARE TUTTI** (`border-3 border-yellow-400`) - Es. 1: misura lati
+- **Esercizi** - Es. 2: formule inverse, Es. 3: problemi
 
-### Correzioni da fare:
-DA VERIFICARE
+### Correzioni applicate:
+- [x] Box teoria: `rounded-2xl w-fit mx-auto`
+- [x] Immagine: `max-w-sm`
+- [x] Rimossi bordi grigi esercizi
+- [x] Risposte allineate a destra
 
 ---
 
-## p242 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
+## p242 - RETTANGOLO (base_color: cyan)
 
 ### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
+- **Box teoria** (`bg-custom-blue-light rounded-2xl w-fit mx-auto`) - Formule rettangolo
+- **IMPARARE TUTTI** (`border-3 border-yellow-400`) - Es. 1: misura rettangoli (input senza risposta - misurazione con riga)
+- **Tabella** - Es. 2
 
-### Correzioni da fare:
-DA VERIFICARE
+### Correzioni applicate:
+- [x] Box teoria: `rounded-2xl w-fit mx-auto`
+- [x] Immagine: `max-w-sm`
+- [x] Tabella: rimosso `w-full`
+
+### Note:
+- Es. 1 IMPARARE TUTTI: input senza `data-correct-answer` (misurazione con riga)
 
 ---
 
-## p243 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
+## p243 - PARALLELOGRAMMA (base_color: cyan)
 
 ### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
+- **Box teoria** (`bg-custom-blue-light rounded-2xl w-fit mx-auto`) - Formule parallelogramma
+- **Tabella** - Es. 2
+- **Quiz radio** - Es. 3
 
-### Correzioni da fare:
-DA VERIFICARE
+### Correzioni applicate:
+- [x] Box teoria: `rounded-2xl w-fit mx-auto`
+- [x] Immagine: `max-w-sm`
+- [x] Tabella: rimosso `w-full`
+- [x] Rimossi bordi grigi problemi Es. 3
 
 ---
 
-## p244 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
+## p244 - ROMBO (base_color: cyan)
 
 ### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
+- **Box teoria** (`bg-custom-blue-light rounded-2xl w-fit mx-auto`) - Formule rombo
+- **IMPARARE TUTTI** (`border-3 border-yellow-400`) - Es. 1: misura rombi (input senza risposta)
+- **Tabella** - Es. 3
 
-### Correzioni da fare:
-DA VERIFICARE
+### Correzioni applicate:
+- [x] Box teoria: `rounded-2xl w-fit mx-auto`
+- [x] Immagine: `max-w-sm`
+- [x] Tabella: rimosso `w-full`
+- [x] Rimossi bordi grigi esercizi
+
+### Note:
+- Es. 1 IMPARARE TUTTI: input senza `data-correct-answer` (misurazione con riga)
 
 ---
 
-## p245 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
+## p245 - TRIANGOLI (base_color: cyan)
 
 ### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
+- **Box teoria** (`bg-custom-blue-light rounded-2xl w-fit mx-auto`) - Formule triangoli (3 tipi)
+- **IMPARARE TUTTI** (`border-3 border-yellow-400`) - Es. 1: traccia altezze (solo immagine)
+- **Esercizi** - Es. 2: calcola P/A, Es. 3: problemi
 
-### Correzioni da fare:
-DA VERIFICARE
+### Correzioni applicate:
+- [x] Box teoria: `rounded-2xl w-fit mx-auto`
+- [x] Rimossi bordi grigi esercizi
 
 ---
 
-## p246 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
+## p246 - TRAPEZIO (base_color: cyan)
 
 ### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
+- **Box teoria** (`bg-custom-blue-light rounded-2xl w-fit mx-auto`) - Formule trapezio
+- **Esercizi** - Es. 1: 6 trapezi
+- **Tabella** - Es. 2
 
-### Correzioni da fare:
-DA VERIFICARE
+### Correzioni applicate:
+- [x] Box teoria: `rounded-2xl w-fit mx-auto`
+- [x] Immagine: `max-w-sm`
+- [x] Tabella: rimosso `w-full`
+- [x] Rimossi bordi grigi esercizi
 
 ---
 
-## p247 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
+## p247 - POLIGONI REGOLARI (base_color: cyan)
 
 ### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
+- **Box teoria** (`bg-custom-blue-light rounded-2xl w-fit mx-auto`) - Formule poligoni regolari
+- **Tabella numeri fissi** - Es. 1
+- **Esercizi** - Es. 2: calcola P/A, Es. 3: figure composte
 
-### Correzioni da fare:
-DA VERIFICARE
+### Correzioni applicate:
+- [x] Box teoria: `rounded-2xl w-fit mx-auto`
+- [x] Immagine: `max-w-sm`
+- [x] Tabella: rimosso `w-full`
+- [x] Rimossi bordi grigi esercizi
 
 ---
 
-## p248 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
+## p248 - CIRCONFERENZA E CERCHIO (base_color: cyan)
 
 ### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
+- **Box teoria** (`bg-custom-blue-light rounded-2xl w-fit mx-auto`) - Formule cerchio (2 colonne con divider)
+- **Esercizi** - Es. 1: 6 cerchi
+- **Tabella** - Es. 2
 
-### Correzioni da fare:
-DA VERIFICARE
+### Correzioni applicate:
+- [x] Box teoria: `rounded-2xl w-fit mx-auto`
+- [x] Aggiunto `md:divide-x-2 divide-cyan-300` per divider
+- [x] Aggiunto `md:pl-6` alla seconda colonna
+- [x] Tabella: rimosso `w-full`
+- [x] Rimossi bordi grigi esercizi
 
 ---
 
-## p249 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
+## p249 - PROBLEMI (base_color: cyan)
 
 ### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
+- **Introduzione** (`bg-custom-blue-light rounded-2xl`)
+- **IMPARARE TUTTI** (`border-3 border-yellow-400`) - Es. 1
+- **Problemi 2-14** in grid 2 colonne
 
-### Correzioni da fare:
-DA VERIFICARE
-
----
-
-## p250 - (base_color: cyan)
-**Sottotitolo:** ESERCIZI
-
-### Box utilizzati:
-- [ ] Da analizzare dopo creazione pagina
-
-### Correzioni da fare:
-DA VERIFICARE
+### Correzioni applicate:
+- [x] Rimossi bordi grigi problemi
+- [x] Risposte allineate a destra (`justify-end`)
 
 ---
 
-## Note
+## p250 - PROBLEMI DI GEOMETRIA (base_color: cyan)
 
-- p241-p250 sono pagine ESERCIZI del Quaderno con base_color cyan
-- Stile tabelle: `border-cyan-400`, `bg-cyan-100`
-- Box IMPARARE TUTTI: `border-3 border-yellow-400`
-- NO wrapper `bg-orange-100` per esercizi
+### Note:
+- Già corretto con pattern p251-264
+- Nessuna correzione necessaria
 
-## Riepilogo correzioni
+---
 
-Da compilare dopo la creazione delle pagine.
+## Riepilogo Box
+
+| Pagina | Titolo | Box teoria | IMPARARE TUTTI | Tabelle | Divider |
+|--------|--------|:----------:|:--------------:|:-------:|:-------:|
+| p241 | Quadrato | w-fit | Es. 1 | - | - |
+| p242 | Rettangolo | w-fit | Es. 1 (no ans) | 1 | - |
+| p243 | Parallelogramma | w-fit | - | 1 | - |
+| p244 | Rombo | w-fit | Es. 1 (no ans) | 1 | - |
+| p245 | Triangoli | w-fit | Es. 1 | - | - |
+| p246 | Trapezio | w-fit | - | 1 | - |
+| p247 | Poligoni regolari | w-fit | - | 1 | - |
+| p248 | Cerchio | w-fit | - | 1 | ✓ |
+| p249 | Problemi | intro | Es. 1 | - | - |
+| p250 | Problemi geometria | - | - | - | ✓ |
+
+---
+
+## Note generali
+
+- Tutte le pagine sono del **Quaderno Esercizi** (stile cyan)
+- Pattern box teoria: `bg-custom-blue-light rounded-2xl w-fit mx-auto`
+- Pattern IMPARARE TUTTI: `bg-white rounded-2xl border-3 border-yellow-400`
+- Testo evidenziato: `text-cyan-600`
+- Divider verticale: `md:divide-x-2 divide-cyan-300` + `md:pl-6` sulla seconda colonna
