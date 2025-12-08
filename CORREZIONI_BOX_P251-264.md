@@ -2,8 +2,9 @@
 
 ## Correzioni applicate
 
-### Bug corretto
+### Bug corretto (commit ea3fb65)
 - `bg-custom-blue-light-light` → `bg-custom-blue-light` (doppio -light rimosso)
+- Correzione applicata globalmente a 105 file
 
 ---
 
@@ -51,4 +52,4 @@
 
 - Tutte le pagine sono del Quaderno Esercizi (stile cyan)
 - p264 non esiste (conteneva solo crediti)
-- Corretti 14 file con bug `bg-custom-blue-light-light`
+- Bug `bg-custom-blue-light-light` corretto globalmente in 105 file (commit ea3fb65)
