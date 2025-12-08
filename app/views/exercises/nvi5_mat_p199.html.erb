@@ -589,9 +589,8 @@
           </table>
         </div>
 
-        <!-- Box informativo con immagine -->
-        <div class="flex flex-col items-center gap-2 p-3 bg-custom-blue-light rounded-2xl">
-          <%= image_tag "nvi5_mat/p199/output-1715938802199_547_837_19_21.png", class: "w-24 h-auto", alt: "Bambino" %>
+        <!-- Box informativo -->
+        <div class="p-3 bg-custom-blue-light rounded-2xl my-auto w-fit mx-auto">
           <div class="text-gray-700">
             <p class="mb-1">I <span class="font-bold text-cyan-600">numeri primi</span> hanno come divisori solo <span class="font-bold text-cyan-600">1</span> e <span class="font-bold text-cyan-600">se stessi</span>.</p>
             <p class="mb-1">Tutti i numeri primi sono dispari, a eccezione del <span class="font-bold text-cyan-600">2</span>.</p>
@@ -602,135 +601,70 @@
     </div>
 
     <!-- Esercizio 2: Crivello di Eratostene -->
-    <div>
+    <div data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
       <p class="font-bold text-gray-700 mb-3">
         <%= numero_esercizio_badge(2) %>
-        Completa la griglia scrivendo i numeri fino a 100. Poi esegui quanto richiesto dal procedimento detto "Crivello di Eratostene".
+        Colora i numeri seguendo il procedimento del "Crivello di Eratostene". Seleziona un colore, poi clicca sui numeri.
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Griglia numeri 1-100 -->
         <div class="overflow-x-auto">
-          <table class="w-full border-collapse border border-cyan-400">
+          <table class="border-collapse border border-cyan-400">
             <tbody>
-              <!-- Riga 1-10 -->
+              <% (1..100).each_slice(10) do |row| %>
               <tr>
-                <td class="p-2 border border-cyan-400 text-center bg-white"><span class="line-through text-gray-400">1</span></td>
-                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">2</td>
-                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">3</td>
-                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">4</td>
-                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">5</td>
-                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">6</td>
-                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">7</td>
-                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">8</td>
-                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">9</td>
-                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">10</td>
-              </tr>
-              <!-- Riga 11-20 -->
-              <tr>
-                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">11</td>
-                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">12</td>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="13" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="14" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="15" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="16" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="17" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="18" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="19" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="20" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-              </tr>
-              <!-- Riga 21-30 -->
-              <tr>
-                <% (21..30).each do |n| %>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <% row.each do |n| %>
+                <td class="p-1 border border-cyan-400 text-center bg-white">
+                  <% if n == 1 %>
+                    <span class="line-through text-gray-400 w-8 h-8 inline-flex items-center justify-center">1</span>
+                  <% else %>
+                    <span data-word-highlighter-target="word"
+                          data-action="click->word-highlighter#toggleHighlight"
+                          class="cursor-pointer hover:opacity-80 w-8 h-8 inline-flex items-center justify-center font-bold">
+                      <%= n %>
+                    </span>
+                  <% end %>
                 </td>
                 <% end %>
               </tr>
-              <!-- Riga 31-40 -->
-              <tr>
-                <% (31..40).each do |n| %>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <% end %>
-              </tr>
-              <!-- Riga 41-50 -->
-              <tr>
-                <% (41..50).each do |n| %>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <% end %>
-              </tr>
-              <!-- Riga 51-60 -->
-              <tr>
-                <% (51..60).each do |n| %>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <% end %>
-              </tr>
-              <!-- Riga 61-70 -->
-              <tr>
-                <% (61..70).each do |n| %>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <% end %>
-              </tr>
-              <!-- Riga 71-80 -->
-              <tr>
-                <% (71..80).each do |n| %>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <% end %>
-              </tr>
-              <!-- Riga 81-90 -->
-              <tr>
-                <% (81..90).each do |n| %>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <% end %>
-              </tr>
-              <!-- Riga 91-100 -->
-              <tr>
-                <% (91..100).each do |n| %>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="<%= n %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </td>
-                <% end %>
-              </tr>
+              <% end %>
             </tbody>
           </table>
         </div>
 
-        <!-- Box Crivello di Eratostene -->
-        <div class="p-4 bg-white border-3 border-cyan-400 rounded-lg">
+        <!-- Box Crivello di Eratostene con selettori colore -->
+        <div class="p-4 bg-white border-3 border-cyan-400 rounded-2xl my-auto w-fit mx-auto">
           <p class="font-bold text-cyan-600 mb-3">Crivello di Eratostene</p>
-          <ul class="list-disc pl-6 space-y-2 text-gray-700 marker:text-cyan-500">
-            <li>Colora di <span class="font-bold text-yellow-500">giallo</span> tutti i multipli di 2, escluso il 2.</li>
-            <li>Colora di <span class="font-bold text-red-500">rosso</span> tutti i multipli di 3, escluso il 3.</li>
-            <li>Colora di <span class="font-bold text-blue-500">azzurro</span> tutti i multipli di 5, escluso il 5.</li>
-            <li>Colora di <span class="font-bold text-green-500">verde</span> tutti i multipli di 7, escluso il 7.</li>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-center gap-2">
+              <span data-word-highlighter-target="colorBox"
+                    data-color="yellow"
+                    data-action="click->word-highlighter#selectColor"
+                    class="w-6 h-6 bg-yellow-300 rounded cursor-pointer ring-2 ring-gray-300 hover:scale-110 transition"></span>
+              <span>Colora di <span class="font-bold text-yellow-500">giallo</span> i multipli di 2 (escluso il 2)</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span data-word-highlighter-target="colorBox"
+                    data-color="red"
+                    data-action="click->word-highlighter#selectColor"
+                    class="w-6 h-6 bg-red-300 rounded cursor-pointer ring-2 ring-gray-300 hover:scale-110 transition"></span>
+              <span>Colora di <span class="font-bold text-red-500">rosso</span> i multipli di 3 (escluso il 3)</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span data-word-highlighter-target="colorBox"
+                    data-color="blue"
+                    data-action="click->word-highlighter#selectColor"
+                    class="w-6 h-6 bg-blue-300 rounded cursor-pointer ring-2 ring-gray-300 hover:scale-110 transition"></span>
+              <span>Colora di <span class="font-bold text-blue-500">azzurro</span> i multipli di 5 (escluso il 5)</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span data-word-highlighter-target="colorBox"
+                    data-color="green"
+                    data-action="click->word-highlighter#selectColor"
+                    class="w-6 h-6 bg-green-300 rounded cursor-pointer ring-2 ring-gray-300 hover:scale-110 transition"></span>
+              <span>Colora di <span class="font-bold text-green-500">verde</span> i multipli di 7 (escluso il 7)</span>
+            </li>
           </ul>
           <p class="mt-4 text-gray-700">I numeri che non hai colorato sono tutti i <span class="font-bold text-cyan-600">numeri primi minori di 100</span>.</p>
         </div>
