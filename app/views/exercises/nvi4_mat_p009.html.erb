@@ -1,0 +1,92 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls word-highlighter"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Box Ricorda! -->
+    <div class="p-4 md:p-6 bg-custom-blue rounded-2xl">
+      <h3 class="font-bold text-<%= @pagina.base_color %>-600 italic mb-4">Ricorda!</h3>
+      <p class="text-gray-700 mb-3">Fai attenzione e scegli bene i dati.</p>
+      <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-<%= @pagina.base_color %>-500">
+        <li>I <span class="font-bold">dati inutili</span> sono quelli che non servono.</li>
+        <li>I <span class="font-bold">dati nascosti</span> sono quelli che nascondono numeri o operazioni.</li>
+      </ul>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+
+      <!-- Esercizio 1: Dato inutile -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Trova il dato inutile nel problema e cancellalo. Poi risolvi.
+        </p>
+
+        <div class="bg-white p-4 rounded-lg border border-gray-200">
+          <p class="text-gray-700 mb-4" data-controller="word-highlighter">
+            Le maestre delle classi quinte organizzano una gita a Barcellona. Il viaggio dura
+            <span data-word-highlighter-target="word" data-correct="true"
+                  data-action="click->word-highlighter#toggleHighlight"
+                  class="cursor-pointer hover:opacity-80 px-1 rounded">12 ore</span>.
+            I bambini sono 116 e riempiono due pullman uguali.<br>
+            Quanti bambini ci sono su un pullman?
+          </p>
+
+          <!-- Spazio per operazioni -->
+          <div class="bg-blue-50 border border-blue-200 rounded p-4 mb-4 min-h-24">
+            <p class="text-gray-500 italic">Spazio per i calcoli...</p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="font-bold">Risposta:</span>
+            <input type="text" data-correct-answer="58" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">bambini</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2: Dato nascosto -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Sottolinea il dato nascosto nel problema e scrivilo sotto forma di dato numerico. Poi risolvi.
+        </p>
+
+        <div class="bg-white p-4 rounded-lg border border-gray-200">
+          <p class="text-gray-700 mb-4" data-controller="word-highlighter">
+            Mia zia Teresa ama camminare e ogni giorno percorre 3 chilometri.<br>
+            Quanti chilometri percorre in
+            <span data-word-highlighter-target="word" data-correct="true"
+                  data-action="click->word-highlighter#toggleHighlight"
+                  class="cursor-pointer hover:opacity-80 px-1 rounded">una settimana</span>?
+          </p>
+
+          <div class="flex items-center gap-2 mb-4">
+            <span class="font-bold">Dato nascosto:</span>
+            <input type="text" data-correct-answer="7" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">giorni</span>
+          </div>
+
+          <!-- Spazio per operazioni -->
+          <div class="bg-blue-50 border border-blue-200 rounded p-4 mb-4 min-h-24">
+            <p class="text-gray-500 italic">Spazio per i calcoli...</p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="font-bold">Risposta:</span>
+            <input type="text" data-correct-answer="21" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="shrink-0">chilometri</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

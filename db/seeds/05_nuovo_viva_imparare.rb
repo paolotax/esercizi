@@ -21,7 +21,20 @@ nvi_matematica = nvi_volume4.discipline.create!(
 
 [
   { numero: 5, titolo: "La Linea dei Numeri", slug: "sussi_pag_5", view_template: "sussi_pag_5" },
-  { numero: 14, titolo: "Sistema di Numerazione", slug: "sussi_pag_14", view_template: "sussi_pag_14" }
+  { numero: 7, titolo: "Moltiplicazione e Divisione", slug: "nvi4_mat_p007", view_template: "nvi4_mat_p007", sottotitolo: "PER RICOMINCIARE...", base_color: "pink" },
+  { numero: 8, titolo: "Problemi", slug: "nvi4_mat_p008", view_template: "nvi4_mat_p008", sottotitolo: "PER RICOMINCIARE...", base_color: "pink" },
+  { numero: 9, titolo: "Problemi con Dati Inutili e Nascosti", slug: "nvi4_mat_p009", view_template: "nvi4_mat_p009", sottotitolo: "PER RICOMINCIARE...", base_color: "pink" },
+  { numero: 10, titolo: "Classe delle Migliaia", slug: "nvi4_mat_p010", view_template: "nvi4_mat_p010", sottotitolo: "PAROLE AL CENTRO", base_color: "pink" },
+  { numero: 11, titolo: "Classe delle Unità Semplici", slug: "nvi4_mat_p011", view_template: "nvi4_mat_p011", sottotitolo: "NUMERI", base_color: "pink" },
+  { numero: 12, titolo: "Il Nostro Sistema di Numerazione", slug: "nvi4_mat_p012", view_template: "nvi4_mat_p012", sottotitolo: "NUMERI", base_color: "pink" },
+  { numero: 13, titolo: "Cifre e Numeri", slug: "nvi4_mat_p013", view_template: "nvi4_mat_p013", sottotitolo: "NUMERI", base_color: "pink" },
+  { numero: 14, titolo: "Il Nostro Sistema di Numerazione", slug: "nvi4_mat_p014", view_template: "nvi4_mat_p014", sottotitolo: "ESERCIZI", base_color: "pink" },
+  { numero: 15, titolo: "I Numeri con le Migliaia", slug: "nvi4_mat_p015", view_template: "nvi4_mat_p015", sottotitolo: "NUMERI", base_color: "pink" },
+  { numero: 172, titolo: "Numeri fino alle Migliaia e Operazioni", slug: "nvi4_mat_p172", view_template: "nvi4_mat_p172", sottotitolo: "ESERCIZI - RIPASSO", base_color: "cyan" },
+  { numero: 173, titolo: "I Numeri Grandi", slug: "nvi4_mat_p173", view_template: "nvi4_mat_p173", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 174, titolo: "Comporre e Scomporre (1)", slug: "nvi4_mat_p174", view_template: "nvi4_mat_p174", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 175, titolo: "Comporre e Scomporre (2)", slug: "nvi4_mat_p175", view_template: "nvi4_mat_p175", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 176, titolo: "Ordinare i Numeri", slug: "nvi4_mat_p176", view_template: "nvi4_mat_p176", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi_matematica.pagine.create!(pagina_data)
 end

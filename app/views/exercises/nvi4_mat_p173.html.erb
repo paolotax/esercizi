@@ -1,0 +1,239 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Tabella classi -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse border border-cyan-400">
+        <thead>
+          <tr>
+            <th class="p-2 border border-cyan-400 bg-white"></th>
+            <th colspan="3" class="p-2 border border-cyan-400 bg-cyan-100 text-center font-bold">CLASSE DELLE MIGLIAIA</th>
+            <th colspan="3" class="p-2 border border-cyan-400 bg-cyan-100 text-center font-bold">CLASSE DELLE UNITÀ SEMPLICI</th>
+          </tr>
+          <tr>
+            <td class="p-2 border border-cyan-400 text-center bg-white">ORDINE</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white font-bold">hk</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white font-bold">dak</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white font-bold">uk</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white font-bold">h</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white font-bold">da</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white font-bold">u</td>
+          </tr>
+          <tr>
+            <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+            <td class="p-2 border border-cyan-400 text-center bg-white">centinaia di migliaia</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white">decine di migliaia</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white">unità di migliaia</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white">centinaia</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white">decine</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white">unità</td>
+          </tr>
+          <tr>
+            <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+            <td class="p-2 border border-cyan-400 text-center bg-white font-bold"><span class="whitespace-nowrap">100 000</span></td>
+            <td class="p-2 border border-cyan-400 text-center bg-white font-bold"><span class="whitespace-nowrap">10 000</span></td>
+            <td class="p-2 border border-cyan-400 text-center bg-white font-bold"><span class="whitespace-nowrap">1 000</span></td>
+            <td class="p-2 border border-cyan-400 text-center bg-white font-bold">100</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white font-bold">10</td>
+            <td class="p-2 border border-cyan-400 text-center bg-white font-bold">1</td>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <!-- Esercizio 1: IMPARARE TUTTI - Inserisci in tabella -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Inserisci i numeri in tabella. Poi leggi a voce alta.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-cyan-400">
+          <thead>
+            <tr>
+              <th class="p-2 border border-cyan-400 bg-white"></th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">hk</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">dak</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">uk</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">h</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">da</th>
+              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">u</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Esempio -->
+            <tr class="bg-cyan-50">
+              <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">63 871</td>
+              <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+              <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">6</td>
+              <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">3</td>
+              <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">8</td>
+              <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">7</td>
+              <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">1</td>
+            </tr>
+            <% [
+              { num: "74 305", answers: ["", "7", "4", "3", "0", "5"] },
+              { num: "67 906", answers: ["", "6", "7", "9", "0", "6"] },
+              { num: "880 352", answers: ["8", "8", "0", "3", "5", "2"] },
+              { num: "409 149", answers: ["4", "0", "9", "1", "4", "9"] },
+              { num: "981 045", answers: ["9", "8", "1", "0", "4", "5"] }
+            ].each do |row| %>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap"><%= row[:num] %></td>
+                <% row[:answers].each do |ans| %>
+                  <td class="p-2 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="<%= ans %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: IMPARARE TUTTI - Scrivi in cifre -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
+      <p class="font-bold text-gray-700 mb-4">
+        <%= imparare_tutti_badge(2) %>
+        Scrivi in cifre i seguenti numeri.
+      </p>
+
+      <div class="space-y-3">
+        <div class="flex items-center gap-2 p-2 bg-cyan-50 rounded">
+          <span>quattrocentoventitremila</span>
+          <span class="text-cyan-500">→</span>
+          <span class="font-bold text-cyan-600 whitespace-nowrap">423 000</span>
+        </div>
+        <% [
+          { text: "centododicimilacentotrentuno", answer: "112131" },
+          { text: "trentaquattromilatrecentodue", answer: "34302" },
+          { text: "cinquantaseimilatrentatré", answer: "56033" },
+          { text: "settantamiladuecentoventidue", answer: "70222" },
+          { text: "ottocentocinquemila", answer: "805000" },
+          { text: "centoventisettemilaventicinque", answer: "127025" }
+        ].each do |item| %>
+          <div class="flex items-center gap-2">
+            <span><%= item[:text] %></span>
+            <span class="text-cyan-500">→</span>
+            <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Inserisci numeri nelle tabelle -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Inserisci i numeri nelle tabelle aggiungendo gli zeri necessari. Poi leggi a voce alta. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Prima tabella -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-white"></th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">hk</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">dak</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">uk</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">h</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">da</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">u</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-cyan-50">
+                <td class="p-2 border border-cyan-400 text-center font-bold">4 hk 9 uk 6 da</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">4</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">0</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">9</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">0</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">6</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-cyan-600">0</td>
+              </tr>
+              <% [
+                { text: "8 dak 8 h 5 u", answers: ["0", "8", "0", "8", "0", "5"] },
+                { text: "9 dak 4 uk 2 u", answers: ["0", "9", "4", "0", "0", "2"] }
+              ].each do |row| %>
+                <tr>
+                  <td class="p-2 border border-cyan-400 text-center font-bold"><%= row[:text] %></td>
+                  <% row[:answers].each do |ans| %>
+                    <td class="p-2 border border-cyan-400 text-center bg-white">
+                      <input type="text" data-correct-answer="<%= ans %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Seconda tabella -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-white"></th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">hk</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">dak</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">uk</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">h</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">da</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">u</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% [
+                { text: "9 hk 3 uk 5 h 5 u", answers: ["9", "0", "3", "5", "0", "5"] },
+                { text: "3 dak 3 da", answers: ["0", "3", "0", "0", "3", "0"] },
+                { text: "9 uk 8 da 7 u", answers: ["0", "0", "9", "0", "8", "7"] }
+              ].each do |row| %>
+                <tr>
+                  <td class="p-2 border border-cyan-400 text-center font-bold"><%= row[:text] %></td>
+                  <% row[:answers].each do |ans| %>
+                    <td class="p-2 border border-cyan-400 text-center bg-white">
+                      <input type="text" data-correct-answer="<%= ans %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4: Componi numeri (senza risposte predefinite) -->
+    <div>
+      <p class="font-bold text-gray-700 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Utilizza tutte le cifre qui a fianco per comporre alcuni numeri. Poi trascrivili accanto in lettere.
+      </p>
+
+      <div class="flex items-center gap-4 mb-4">
+        <span class="text-gray-600">Cifre disponibili:</span>
+        <div class="flex gap-2">
+          <% ["1", "4", "0", "7", "3", "9"].each do |digit| %>
+            <span class="w-10 h-10 flex items-center justify-center border-2 border-cyan-400 rounded font-bold"><%= digit %></span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="bg-blue-50 border border-blue-200 rounded p-4">
+        <p class="text-gray-500 italic">Componi 5 numeri diversi usando tutte le cifre e scrivili in lettere sul quaderno.</p>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

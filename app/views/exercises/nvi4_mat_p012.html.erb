@@ -1,0 +1,149 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione -->
+    <div class="text-gray-700">
+      <p class="mb-4">
+        Un <span class="font-bold">sistema di numerazione</span> è l'insieme dei simboli e delle regole usati per scrivere e leggere i numeri ed eseguire i calcoli. Quello che usiamo noi è utilizzato in quasi tutto il mondo ed è fatto così.
+      </p>
+    </div>
+
+    <!-- Box regole -->
+    <div class="p-4 md:p-6 bg-custom-blue rounded-2xl space-y-4">
+      <!-- Dieci cifre -->
+      <div>
+        <p class="text-gray-700">
+          <span class="text-<%= @pagina.base_color %>-500">●</span>
+          Per scrivere tutti i numeri usiamo <span class="font-bold">dieci cifre</span>:
+        </p>
+        <p class="text-center font-bold text-gray-800 mt-2 tracking-widest">
+          0 1 2 3 4 5 6 7 8 9
+        </p>
+      </div>
+
+      <!-- Posizionale -->
+      <div>
+        <p class="text-gray-700 mb-3">
+          <span class="text-<%= @pagina.base_color %>-500">●</span>
+          Il nostro sistema di numerazione è <span class="font-bold">posizionale</span>, perché ogni cifra assume un valore diverso a seconda della posizione che occupa nel numero:
+        </p>
+
+        <div class="bg-white rounded-lg p-4 space-y-3">
+          <!-- Esempio 42 -->
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="font-bold text-<%= @pagina.base_color %>-600">42</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="text-gray-700">la cifra <span class="font-bold text-<%= @pagina.base_color %>-600">4</span> occupa la posizione delle decine</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="text-gray-700">vale <span class="font-bold text-<%= @pagina.base_color %>-600">4 da</span> = <span class="font-bold text-custom-sky">40 u</span></span>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 pl-8">
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="text-gray-700">la cifra <span class="font-bold text-custom-sky">2</span> occupa la posizione delle unità</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="text-gray-700">vale <span class="font-bold text-custom-sky">2 u</span></span>
+          </div>
+
+          <!-- Esempio 24 -->
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="font-bold text-<%= @pagina.base_color %>-600">24</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="text-gray-700">la cifra <span class="font-bold text-<%= @pagina.base_color %>-600">2</span> occupa la posizione delle decine</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="text-gray-700">vale <span class="font-bold text-<%= @pagina.base_color %>-600">2 da</span> = <span class="font-bold text-custom-sky">20 u</span></span>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 pl-8">
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="text-gray-700">la cifra <span class="font-bold text-custom-sky">4</span> occupa la posizione delle unità</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="text-gray-700">vale <span class="font-bold text-custom-sky">4 u</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decimale -->
+      <div>
+        <p class="text-gray-700">
+          <span class="text-<%= @pagina.base_color %>-500">●</span>
+          Il nostro sistema di numerazione è <span class="font-bold">decimale</span>, perché per contare usiamo la "base 10", cioè raggruppiamo per 10.
+        </p>
+      </div>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+
+      <!-- Esercizio: Raggruppa per 10 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 mb-4">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          Raggruppa per 10 i pennarelli e completa.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div>
+            <%= image_tag "nvi4_mat/p012/output-1715932804012_126_758_450_213.png", alt: "Pennarelli", class: "w-full max-w-md" %>
+          </div>
+          <div class="bg-white p-4 rounded-lg border border-gray-200 space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">Ho formato</span>
+              <input type="text" data-correct-answer="2" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">gruppi di 10;</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">restano</span>
+              <input type="text" data-correct-answer="3" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">pennarelli non raggruppati.</span>
+            </div>
+            <p class="text-gray-700">I pennarelli sono <span class="font-bold">23</span>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabella significato 23 -->
+      <div class="bg-white rounded-lg overflow-hidden">
+        <table class="w-full border-collapse">
+          <tbody>
+            <tr class="border-b border-gray-200">
+              <td class="p-3 text-gray-700 border-r border-gray-200"><span class="font-bold text-<%= @pagina.base_color %>-600">23</span> significa</td>
+              <td class="p-3 text-center border-r border-gray-200"><span class="font-bold text-<%= @pagina.base_color %>-600">2</span> volte <span class="font-bold text-<%= @pagina.base_color %>-600">dieci</span></td>
+              <td class="p-3 text-center border-r border-gray-200">+</td>
+              <td class="p-3 text-center border-r border-gray-200"><span class="font-bold text-<%= @pagina.base_color %>-600">3</span> volte <span class="font-bold text-<%= @pagina.base_color %>-600">uno</span></td>
+              <td class="p-3 text-gray-500"></td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="p-3 text-gray-700 border-r border-gray-200">si può scrivere</td>
+              <td class="p-3 text-center border-r border-gray-200 font-bold text-<%= @pagina.base_color %>-600">2 × 10</td>
+              <td class="p-3 text-center border-r border-gray-200">+</td>
+              <td class="p-3 text-center border-r border-gray-200 font-bold text-<%= @pagina.base_color %>-600">3 × 1</td>
+              <td class="p-3 text-gray-500">somma di prodotti</td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="p-3 text-gray-700 border-r border-gray-200">si può anche scrivere</td>
+              <td class="p-3 text-center border-r border-gray-200 font-bold text-<%= @pagina.base_color %>-600">2 da</td>
+              <td class="p-3 text-center border-r border-gray-200">+</td>
+              <td class="p-3 text-center border-r border-gray-200 font-bold text-<%= @pagina.base_color %>-600">3 u</td>
+              <td class="p-3 text-gray-500">somma di valori</td>
+            </tr>
+            <tr>
+              <td class="p-3 text-gray-700 border-r border-gray-200">si può anche scrivere</td>
+              <td class="p-3 text-center border-r border-gray-200 font-bold text-<%= @pagina.base_color %>-600">20</td>
+              <td class="p-3 text-center border-r border-gray-200">+</td>
+              <td class="p-3 text-center border-r border-gray-200 font-bold text-<%= @pagina.base_color %>-600">3</td>
+              <td class="p-3 text-gray-500">somma di addendi</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
