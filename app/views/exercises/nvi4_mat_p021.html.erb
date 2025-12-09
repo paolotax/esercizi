@@ -1,0 +1,268 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Prima regola: confrontare cifre -->
+    <div class="text-gray-700 space-y-4">
+      <p>
+        <span class="text-<%= @pagina.base_color %>-500">●</span>
+        Per confrontare due numeri interi e stabilire qual è il maggiore o il minore, osserva da quante cifre è costituito ciascun numero: tra due numeri <span class="font-bold">è maggiore il numero che ha più cifre</span>.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div class="flex flex-col items-center gap-2">
+          <div class="flex gap-8">
+            <div class="text-center">
+              <span class="font-bold">34 876</span>
+              <p>↓</p>
+              <p>5 <span class="font-bold">cifre</span></p>
+            </div>
+            <div class="text-center">
+              <span class="font-bold">9 879</span>
+              <p>↓</p>
+              <p>4 <span class="font-bold">cifre</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="p-3 border-2 border-gray-300 rounded">
+          <p class="text-center">34 876 <span class="font-bold text-<%= @pagina.base_color %>-600">&gt;</span> 9 879</p>
+          <p class="text-center">9 879 <span class="font-bold text-<%= @pagina.base_color %>-600">&lt;</span> 34 876</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seconda regola: stesso numero di cifre -->
+    <div class="text-gray-700 space-y-4">
+      <p>
+        <span class="text-<%= @pagina.base_color %>-500">●</span>
+        Se due numeri hanno lo stesso numero di cifre, confronta la prima cifra: è maggiore il numero con la cifra più alta.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="overflow-x-auto">
+          <table class="border-collapse">
+            <tr>
+              <td class="p-2 border border-gray-300 font-bold text-<%= @pagina.base_color %>-600">5</td>
+              <td class="p-2 border border-gray-300">4</td>
+              <td class="p-2 border border-gray-300">6</td>
+              <td class="p-2 border border-gray-300">7</td>
+              <td class="p-2 border border-gray-300">3</td>
+              <td class="p-2 border-none" rowspan="2">
+                <span class="font-bold text-<%= @pagina.base_color %>-600">5 &lt; 7</span>
+              </td>
+              <td class="p-2 border-none">54 673 <span class="font-bold">&lt;</span> 78 978</td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-gray-300 font-bold text-<%= @pagina.base_color %>-600">7</td>
+              <td class="p-2 border border-gray-300">8</td>
+              <td class="p-2 border border-gray-300">9</td>
+              <td class="p-2 border border-gray-300">7</td>
+              <td class="p-2 border border-gray-300">8</td>
+              <td class="p-2 border-none">78 978 <span class="font-bold">&gt;</span> 54 673</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terza regola: confrontare la seconda cifra -->
+    <div class="text-gray-700 space-y-4">
+      <p>
+        <span class="text-<%= @pagina.base_color %>-500">●</span>
+        Se la prima cifra è uguale devi confrontare la seconda cifra.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="overflow-x-auto">
+          <table class="border-collapse">
+            <tr>
+              <td class="p-2 border border-gray-300">7</td>
+              <td class="p-2 border border-gray-300 font-bold text-<%= @pagina.base_color %>-600">8</td>
+              <td class="p-2 border border-gray-300">9</td>
+              <td class="p-2 border border-gray-300">7</td>
+              <td class="p-2 border border-gray-300">8</td>
+              <td class="p-2 border-none" rowspan="2">
+                <span class="font-bold text-<%= @pagina.base_color %>-600">8 &gt; 6</span>
+              </td>
+              <td class="p-2 border-none">78 978 <span class="font-bold">&gt;</span> 76 432</td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-gray-300">7</td>
+              <td class="p-2 border border-gray-300 font-bold text-<%= @pagina.base_color %>-600">6</td>
+              <td class="p-2 border border-gray-300">4</td>
+              <td class="p-2 border border-gray-300">3</td>
+              <td class="p-2 border border-gray-300">2</td>
+              <td class="p-2 border-none">76 432 <span class="font-bold">&lt;</span> 78 978</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domanda interattiva -->
+    <div class="p-4 bg-<%= @pagina.base_color %>-50 rounded-lg space-y-4">
+      <p class="font-bold text-gray-700">
+        <span class="text-<%= @pagina.base_color %>-500">•</span>
+        Come puoi procedere per confrontare 65 836 e 65 543?
+      </p>
+      <div class="overflow-x-auto">
+        <table class="border-collapse">
+          <tr>
+            <td class="p-2 border border-gray-300 bg-white">
+              <input type="text" data-correct-answer="6" class="w-8 border-none text-center font-bold bg-transparent">
+            </td>
+            <td class="p-2 border border-gray-300 bg-white">
+              <input type="text" data-correct-answer="5" class="w-8 border-none text-center font-bold bg-transparent">
+            </td>
+            <td class="p-2 border border-gray-300 bg-white">
+              <input type="text" data-correct-answer="8" class="w-8 border-none text-center font-bold bg-transparent">
+            </td>
+            <td class="p-2 border border-gray-300 bg-white">
+              <input type="text" data-correct-answer="3" class="w-8 border-none text-center font-bold bg-transparent">
+            </td>
+            <td class="p-2 border border-gray-300 bg-white">
+              <input type="text" data-correct-answer="6" class="w-8 border-none text-center font-bold bg-transparent">
+            </td>
+            <td class="p-2 border-none" rowspan="2">
+              <input type="text" data-correct-answer="8 > 5" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </td>
+            <td class="p-2 border-none">
+              <input type="text" data-correct-answer="65836 > 65543" class="w-40 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </td>
+          </tr>
+          <tr>
+            <td class="p-2 border border-gray-300 bg-white">
+              <input type="text" data-correct-answer="6" class="w-8 border-none text-center font-bold bg-transparent">
+            </td>
+            <td class="p-2 border border-gray-300 bg-white">
+              <input type="text" data-correct-answer="5" class="w-8 border-none text-center font-bold bg-transparent">
+            </td>
+            <td class="p-2 border border-gray-300 bg-white">
+              <input type="text" data-correct-answer="5" class="w-8 border-none text-center font-bold bg-transparent">
+            </td>
+            <td class="p-2 border border-gray-300 bg-white">
+              <input type="text" data-correct-answer="4" class="w-8 border-none text-center font-bold bg-transparent">
+            </td>
+            <td class="p-2 border border-gray-300 bg-white">
+              <input type="text" data-correct-answer="3" class="w-8 border-none text-center font-bold bg-transparent">
+            </td>
+            <td class="p-2 border-none">
+              <input type="text" data-correct-answer="65543 < 65836" class="w-40 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Ordine crescente e decrescente -->
+    <div class="text-gray-700 space-y-4">
+      <p>I numeri possono essere ordinati in <span class="font-bold">ordine crescente</span> o <span class="font-bold">decrescente</span>.</p>
+
+      <div class="overflow-x-auto">
+        <div class="flex flex-col items-center py-4 min-w-max">
+          <p class="text-<%= @pagina.base_color %>-600 font-bold mb-2">ordine crescente</p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-400">- - -</span>
+            <span>1982</span>
+            <span>1992</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">2002</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">2012</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">2022</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">2032</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">2042</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">2052</span>
+            <span class="text-gray-400">- - -</span>
+          </div>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="text-cyan-500">←</span>
+            <span class="text-cyan-500">←</span>
+            <span class="text-cyan-500">←</span>
+            <span class="text-cyan-500">←</span>
+          </div>
+          <p class="text-cyan-600 font-bold mt-2">ordine decrescente</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+
+      <div class="bg-<%= @pagina.base_color %>-600 text-white px-4 py-2 rounded-lg inline-block font-bold mb-4">
+        ESERCIZI
+      </div>
+
+      <!-- Esercizio 1 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Confronta i numeri e inserisci tra le coppie i segni <span class="text-<%= @pagina.base_color %>-600">&lt;</span> oppure <span class="text-<%= @pagina.base_color %>-600">&gt;</span>.
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="flex items-center gap-2">
+            <span class="whitespace-nowrap">23 567</span>
+            <input type="text" data-correct-answer=">" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="whitespace-nowrap">2 356</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="whitespace-nowrap">45 899</span>
+            <input type="text" data-correct-answer="<" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="whitespace-nowrap">45 999</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="whitespace-nowrap">265 000</span>
+            <input type="text" data-correct-answer="<" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="whitespace-nowrap">265 001</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="whitespace-nowrap">69 999</span>
+            <input type="text" data-correct-answer=">" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="whitespace-nowrap">7 000</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="whitespace-nowrap">247 800</span>
+            <input type="text" data-correct-answer="<" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="whitespace-nowrap">267 800</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Riscrivi sul quaderno i numeri in ordine crescente.
+        </p>
+        <p class="text-gray-700">
+          39 608 • 39 860 • 139 608 • 93 608 • 390 680 • 309 608 • 193 608 • 193 086 • 319 086
+        </p>
+      </div>
+
+      <!-- Esercizio 3 -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Riscrivi sul quaderno i numeri in ordine decrescente.
+        </p>
+        <p class="text-gray-700">
+          15 702 • 15 072 • 150 720 • 105 720 • 150 270 • 250 710 • 105 702 • 10 752 • 510 720
+        </p>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [177] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

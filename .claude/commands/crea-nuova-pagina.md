@@ -237,17 +237,238 @@ Usare `@pagina.base_color` per colori coerenti:
 
 ---
 
+## BOX TEORIA IMPORTANTE (REGOLE FONDAMENTALI)
+
+Per box che contengono regole importanti, definizioni fondamentali o concetti chiave:
+
+```erb
+<div class="p-4 md:p-6 bg-white rounded-3xl border-4 border-blue-800 space-y-4">
+  <!-- contenuti SENZA bg/border/rounded -->
+  <div>
+    <p class="text-gray-700">
+      <span class="text-<%= @pagina.base_color %>-500">●</span>
+      Prima regola o concetto...
+    </p>
+  </div>
+  <div>
+    <p class="text-gray-700">
+      <span class="text-<%= @pagina.base_color %>-500">●</span>
+      Seconda regola...
+    </p>
+  </div>
+</div>
+```
+
+**Caratteristiche:**
+- Sfondo bianco con bordo blu scuro spesso (`border-4 border-blue-800`)
+- Bordi molto arrotondati (`rounded-3xl`)
+- I contenuti interni NON hanno bg/border/rounded
+
+---
+
+## TABELLE "SIGNIFICA..." (SCOMPOSIZIONE NUMERI)
+
+Per tabelle che spiegano il significato/scomposizione dei numeri (es. "23 significa...", "386 significa..."):
+
+```erb
+<div class="bg-white overflow-hidden border-2 border-cyan-400">
+  <table class="w-full border-collapse">
+    <tbody>
+      <tr class="border-b-2 border-cyan-400">
+        <td class="p-3 text-gray-700 border-r-2 border-cyan-400">
+          <span class="font-bold text-cyan-600">23</span> significa
+        </td>
+        <td class="p-3 text-center border-r-2 border-cyan-400">
+          <span class="font-bold text-cyan-600">2</span> volte <span class="font-bold text-cyan-600">dieci</span>
+        </td>
+        <td class="p-3 text-center border-r-2 border-cyan-400">+</td>
+        <td class="p-3 text-center border-r-2 border-cyan-400">
+          <span class="font-bold text-cyan-600">3</span> volte <span class="font-bold text-cyan-600">uno</span>
+        </td>
+        <td class="p-3 text-gray-500"></td>
+      </tr>
+      <tr class="border-b-2 border-cyan-400">
+        <td class="p-3 text-gray-700 border-r-2 border-cyan-400">si può scrivere</td>
+        <td class="p-3 text-center border-r-2 border-cyan-400 font-bold text-cyan-600">2 × 10</td>
+        <td class="p-3 text-center border-r-2 border-cyan-400">+</td>
+        <td class="p-3 text-center border-r-2 border-cyan-400 font-bold text-cyan-600">3 × 1</td>
+        <td class="p-3 text-gray-500">somma di prodotti</td>
+      </tr>
+      <!-- altre righe... -->
+    </tbody>
+  </table>
+</div>
+```
+
+**Caratteristiche:**
+- Bordo esterno e celle: `border-2 border-cyan-400`
+- Testo evidenziato: `text-cyan-600` (NON base_color)
+- Nessun rounded sul container
+
+---
+
+## CONTENUTI DENTRO CONTAINER ESERCIZI
+
+**IMPORTANTE:** I div interni al container esercizi (`bg-orange-100` o `bg-white`) NON devono avere:
+- `bg-white` o altri sfondi
+- `border` o `border-gray-200`
+- `rounded-lg` o altri rounded
+
+```erb
+<!-- CORRETTO -->
+<div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+  <div class="mb-8">
+    <p class="font-bold text-gray-700 mb-4">...</p>
+    <div class="space-y-3">
+      <!-- contenuti senza styling box -->
+    </div>
+  </div>
+</div>
+
+<!-- SBAGLIATO -->
+<div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+  <div class="bg-white p-4 rounded-lg border border-gray-200">
+    <!-- NO! I contenuti non devono avere bg/border/rounded -->
+  </div>
+</div>
+```
+
+---
+
+## TABELLA CLASSI/ORDINI (BICOLORE)
+
+Per tabelle con due sezioni colorate (es. Classe delle Migliaia vs Classe delle Unità):
+
+```erb
+<table class="w-full border-collapse">
+  <!-- Header classi -->
+  <tr>
+    <th colspan="3" class="p-2 bg-<%= @pagina.base_color %>-500 text-white border-2 border-<%= @pagina.base_color %>-500 font-bold">
+      CLASSE DELLE MIGLIAIA
+    </th>
+    <th colspan="3" class="p-2 bg-cyan-500 text-white border-2 border-cyan-500 font-bold">
+      CLASSE DELLE UNITÀ SEMPLICI
+    </th>
+  </tr>
+  <!-- Sottotitoli ordini (bg-XXX-100) -->
+  <tr>
+    <td class="p-2 border-2 border-<%= @pagina.base_color %>-400 text-center bg-<%= @pagina.base_color %>-100">
+      ordine delle centinaia di migliaia
+    </td>
+    <!-- ... altre celle base_color ... -->
+    <td class="p-2 border-2 border-cyan-400 text-center bg-cyan-100">
+      ordine delle centinaia
+    </td>
+    <!-- ... altre celle cyan ... -->
+  </tr>
+  <!-- Abbreviazioni (bg-XXX-50, colori bicolore per unità) -->
+  <tr>
+    <td class="p-2 border-2 border-<%= @pagina.base_color %>-400 text-center bg-<%= @pagina.base_color %>-50 font-bold text-red-600">hk</td>
+    <td class="p-2 border-2 border-<%= @pagina.base_color %>-400 text-center bg-<%= @pagina.base_color %>-50 font-bold text-blue-600">dak</td>
+    <td class="p-2 border-2 border-<%= @pagina.base_color %>-400 text-center bg-<%= @pagina.base_color %>-50 font-bold text-green-600">uk</td>
+    <td class="p-2 border-2 border-cyan-400 text-center bg-cyan-50 font-bold text-red-600">h</td>
+    <td class="p-2 border-2 border-cyan-400 text-center bg-cyan-50 font-bold text-blue-600">da</td>
+    <td class="p-2 border-2 border-cyan-400 text-center bg-cyan-50 font-bold text-green-600">u</td>
+  </tr>
+  <!-- Valori (bg-white) -->
+  <tr>
+    <td class="p-2 border-2 border-<%= @pagina.base_color %>-400 text-center bg-white">100 000</td>
+    <!-- ... -->
+  </tr>
+</table>
+```
+
+**Pattern sfondi graduali:**
+- Header: `bg-XXX-500 text-white`
+- Sottotitoli: `bg-XXX-100`
+- Abbreviazioni: `bg-XXX-50`
+- Valori: `bg-white`
+
+**Colori unità di misura (BICOLORE):**
+- Centinaia (h, hk): `text-red-600`
+- Decine (da, dak): `text-blue-600`
+- Unità (u, uk): `text-green-600`
+
+---
+
+## ABACO PARTIAL
+
+Per visualizzare numeri su abaco (non modificabile):
+
+```erb
+<div class="flex justify-center">
+  <%= render 'strumenti/abaco/abaco',
+      **Abaco.new(
+        number: 386,
+        h: 3,
+        da: 8,
+        u: 6,
+        editable: false,
+        show_value: false
+      ).to_partial_params %>
+</div>
+```
+
+**Parametri:**
+- `number`: il numero da rappresentare
+- `h`, `da`, `u`: cifre per centinaia, decine, unità
+- `editable: false`: non modificabile dall'utente
+- `show_value: false`: nasconde il valore numerico sotto l'abaco
+
+---
+
+## RIEPILOGO BOX E CONTAINER
+
+| Tipo | Sfondo | Bordo | Rounded | Uso |
+|------|--------|-------|---------|-----|
+| **Box Teoria Importante** | bg-white | border-4 border-blue-800 | rounded-3xl | Regole fondamentali |
+| **Tabelle Significato Numeri** | bg-white | border-2 border-cyan-400 | nessuno | "23 significa..." |
+| **Container Esercizi** | bg-orange-100 | nessuno | rounded-lg | Wrapper esercizi |
+| **Contenuti Esercizi** | nessuno | nessuno | nessuno | Dentro container |
+| **Sezioni Teoria** | nessuno | nessuno | nessuno | Testo/spiegazioni |
+| **Box IMPARARE TUTTI** | bg-white | border-3 border-blue-500 | rounded-2xl | Primo esercizio |
+| **Box AllenaMente** | bg-white | border-3 border-blue-400 | rounded-2xl | Sfida finale |
+
+---
+
 ## PROBLEMI TESTUALI
 
+**IMPORTANTE:** I problemi devono essere RISOLTI. Inserisci sempre il `data-correct-answer` con la risposta corretta calcolata.
+
+**Input allineato a destra:**
 ```erb
 <div class="space-y-2">
   <p class="text-gray-700">
     <%= numero_esercizio_badge(5) %>
-    Lucia ha un barattolo con 30 caramelle...
+    Lucia ha un barattolo con 30 caramelle. Ne mangia la metà. Quante caramelle restano?
   </p>
-  <div class="flex items-center gap-2">
+  <div class="flex items-center justify-end gap-2">
     <input type="text" data-correct-answer="15" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
     <span class="shrink-0">caramelle</span>
+  </div>
+</div>
+```
+
+**Caratteristiche:**
+- `justify-end` allinea input e unità a destra
+- `min-w-0 flex-1` input che si adatta allo spazio disponibile
+- `data-correct-answer="15"` con la risposta CALCOLATA (30 ÷ 2 = 15)
+- `shrink-0` sull'unità di misura per evitare che si comprima
+
+**Problema con più risposte (più righe):**
+```erb
+<div class="space-y-2">
+  <p class="text-gray-700">
+    <%= numero_esercizio_badge(6) %>
+    Marco ha 24 figurine e le divide in 4 album uguali. Quante figurine mette in ogni album? Quante ne restano?
+  </p>
+  <div class="flex items-center justify-end gap-2">
+    <span class="shrink-0">Figurine per album:</span>
+    <input type="text" data-correct-answer="6" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+  </div>
+  <div class="flex items-center justify-end gap-2">
+    <span class="shrink-0">Figurine restanti:</span>
+    <input type="text" data-correct-answer="0" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
   </div>
 </div>
 ```

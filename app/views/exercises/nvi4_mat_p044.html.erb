@@ -1,0 +1,292 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Box teoria principale -->
+    <div class="p-4 md:p-6 bg-custom-blue rounded-lg">
+      <p class="font-bold text-gray-700 mb-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Leggi e osserva.
+      </p>
+
+      <!-- Proprieta' invariantiva -->
+      <div class="mb-6">
+        <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-4">Propriet&agrave; invariantiva</h2>
+
+        <div class="p-4 bg-white rounded-lg mb-4">
+          <p class="text-gray-700">Per la propriet&agrave; invariantiva, se <span class="font-bold">moltiplichi o dividi per uno stesso numero diverso da zero il dividendo e il divisore</span>, il risultato non cambia.</p>
+        </div>
+
+        <!-- Con le frecce -->
+        <div class="mb-6">
+          <p class="font-bold text-<%= @pagina.base_color %>-600 mb-3">Con le frecce</p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <!-- Esempio 48:8 diviso per 2 -->
+            <div class="text-center">
+              <p class="font-bold">48 : 8 = 6</p>
+              <p class="text-<%= @pagina.base_color %>-600 font-bold">&#8595; : 2 &nbsp; &#8595; : 2</p>
+              <p class="font-bold">24 : 4 = 6</p>
+            </div>
+            <!-- Spazio -->
+            <div></div>
+            <!-- Esempio 24:3 moltiplicato per 2 -->
+            <div class="text-center">
+              <p class="font-bold">24 : 3 = 8</p>
+              <p class="text-<%= @pagina.base_color %>-600 font-bold">&#8595; &times; 2 &nbsp; &#8595; &times; 2</p>
+              <p class="font-bold">48 : 6 = 8</p>
+            </div>
+            <!-- Spazio -->
+            <div></div>
+          </div>
+        </div>
+
+        <!-- Con le parentesi -->
+        <div>
+          <p class="font-bold text-<%= @pagina.base_color %>-600 mb-3">Con le parentesi</p>
+          <div class="flex justify-center">
+            <%= image_tag "nvi4_mat/p044/p044_01.jpg", alt: "Proprieta invariantiva con parentesi", class: "max-w-full h-auto" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- La prova della divisione -->
+      <div>
+        <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-4">La prova della divisione</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-4">
+            <p class="text-gray-700">
+              <span class="font-bold text-cyan-600">42 : 7 = 6</span> perch&eacute; <span class="font-bold text-cyan-600">6 &times; 7 = 42</span>
+            </p>
+            <p class="text-gray-700">
+              Per verificare se hai eseguito correttamente una divisione basta moltiplicare il <span class="font-bold text-<%= @pagina.base_color %>-600">quoziente</span> per il <span class="font-bold text-<%= @pagina.base_color %>-600">divisore</span>: devi ottenere il <span class="font-bold text-<%= @pagina.base_color %>-600">dividendo</span>.
+            </p>
+            <p class="text-gray-700">
+              Per verificare una divisione con il <span class="font-bold text-<%= @pagina.base_color %>-600">resto</span> procedi cos&igrave;:
+            </p>
+            <p class="text-gray-700">
+              <span class="font-bold text-cyan-600">45 : 7 = 6</span> resto <span class="font-bold text-cyan-600">3</span> &nbsp; e &nbsp; <span class="font-bold">(6 &times; 7) + 3</span> (resto) <span class="font-bold">= 45</span>
+            </p>
+            <p class="text-gray-700">
+              Moltiplica il <span class="font-bold text-<%= @pagina.base_color %>-600">quoziente</span> per il <span class="font-bold text-<%= @pagina.base_color %>-600">divisore</span> e aggiungi il <span class="font-bold text-<%= @pagina.base_color %>-600">resto</span>.
+            </p>
+          </div>
+          <div class="p-3 bg-white rounded-lg border-3 border-<%= @pagina.base_color %>-400 flex items-center justify-center">
+            <p class="text-gray-700 font-bold">La divisione &egrave; l'<span class="text-<%= @pagina.base_color %>-600">operazione inversa</span> della moltiplicazione.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+
+      <!-- Esercizio 1 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Calcola applicando la propriet&agrave; invariantiva.
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <!-- 400:20 -->
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">400 : 20 =</span>
+              <input type="text" data-correct-answer="20" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <p class="text-<%= @pagina.base_color %>-600 font-bold text-center">&#8595; : 10 &nbsp; &#8595; : 10</p>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="40" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">:</span>
+              <input type="text" data-correct-answer="2" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">=</span>
+              <input type="text" data-correct-answer="20" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+
+          <!-- 150:30 -->
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">150 : 30 =</span>
+              <input type="text" data-correct-answer="5" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2 justify-center">
+              <span class="text-<%= @pagina.base_color %>-600 font-bold">&#8595;</span>
+              <input type="text" data-correct-answer=":10" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-<%= @pagina.base_color %>-600 font-bold">&#8595;</span>
+              <input type="text" data-correct-answer=":10" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="15" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">:</span>
+              <input type="text" data-correct-answer="3" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">=</span>
+              <input type="text" data-correct-answer="5" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+
+          <!-- 275:25 -->
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">275 : 25 =</span>
+              <input type="text" data-correct-answer="11" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2 justify-center">
+              <span class="text-<%= @pagina.base_color %>-600 font-bold">&#8595;</span>
+              <input type="text" data-correct-answer=":5" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-<%= @pagina.base_color %>-600 font-bold">&#8595;</span>
+              <input type="text" data-correct-answer=":5" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="55" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">:</span>
+              <input type="text" data-correct-answer="5" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">=</span>
+              <input type="text" data-correct-answer="11" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+
+          <!-- 900:15 -->
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">900 : 15 =</span>
+              <input type="text" data-correct-answer="60" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2 justify-center">
+              <span class="text-<%= @pagina.base_color %>-600 font-bold">&#8595;</span>
+              <input type="text" data-correct-answer=":3" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-<%= @pagina.base_color %>-600 font-bold">&#8595;</span>
+              <input type="text" data-correct-answer=":3" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="300" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">:</span>
+              <input type="text" data-correct-answer="5" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">=</span>
+              <input type="text" data-correct-answer="60" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+
+          <!-- 45:5 -->
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">45 : 5 =</span>
+              <input type="text" data-correct-answer="9" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <p class="text-<%= @pagina.base_color %>-600 font-bold text-center">&#8595; &times; 2 &nbsp; &#8595; &times; 2</p>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="90" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">:</span>
+              <input type="text" data-correct-answer="10" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">=</span>
+              <input type="text" data-correct-answer="9" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+
+          <!-- 46:2 -->
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">46 : 2 =</span>
+              <input type="text" data-correct-answer="23" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2 justify-center">
+              <span class="text-<%= @pagina.base_color %>-600 font-bold">&#8595;</span>
+              <input type="text" data-correct-answer="x5" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-<%= @pagina.base_color %>-600 font-bold">&#8595;</span>
+              <input type="text" data-correct-answer="x5" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="230" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">:</span>
+              <input type="text" data-correct-answer="10" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">=</span>
+              <input type="text" data-correct-answer="23" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+
+          <!-- 192:24 -->
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">192 : 24 =</span>
+              <input type="text" data-correct-answer="8" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2 justify-center">
+              <span class="text-<%= @pagina.base_color %>-600 font-bold">&#8595;</span>
+              <input type="text" data-correct-answer=":4" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-<%= @pagina.base_color %>-600 font-bold">&#8595;</span>
+              <input type="text" data-correct-answer=":4" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="48" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">:</span>
+              <input type="text" data-correct-answer="6" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">=</span>
+              <input type="text" data-correct-answer="8" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+
+          <!-- 144:12 -->
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">144 : 12 =</span>
+              <input type="text" data-correct-answer="12" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2 justify-center">
+              <span class="text-<%= @pagina.base_color %>-600 font-bold">&#8595;</span>
+              <input type="text" data-correct-answer=":4" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-<%= @pagina.base_color %>-600 font-bold">&#8595;</span>
+              <input type="text" data-correct-answer=":4" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="36" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">:</span>
+              <input type="text" data-correct-answer="3" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">=</span>
+              <input type="text" data-correct-answer="12" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Scrivi il divisore.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">36 :</span>
+            <input type="text" data-correct-answer="9" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">= 4</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">75 :</span>
+            <input type="text" data-correct-answer="5" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">= 15</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">128 :</span>
+            <input type="text" data-correct-answer="8" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">= 16</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">441 :</span>
+            <input type="text" data-correct-answer="63" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">= 7</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [192, 193] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

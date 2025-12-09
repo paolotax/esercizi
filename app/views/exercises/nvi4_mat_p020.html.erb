@@ -1,0 +1,229 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="md:col-span-2 text-gray-700">
+        <p class="mb-4">
+          I numeri naturali possono essere <span class="font-bold">ordinati</span> dal minore al maggiore in una successione <span class="font-bold">infinita</span> che parte dal numero zero, il minore.
+        </p>
+
+        <div class="space-y-4">
+          <div class="p-3 bg-<%= @pagina.base_color %>-50 rounded-lg">
+            <p class="font-bold text-gray-700 mb-2">
+              <span class="text-<%= @pagina.base_color %>-500">•</span>
+              Secondo te perché si parla di una successione infinita?
+            </p>
+            <div class="space-y-2 pl-4">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span>Scrivi il numero naturale maggiore che ti viene in mente:</span>
+                <input type="text" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <p>
+                Secondo te è veramente il maggiore fra tutti i numeri naturali?
+              </p>
+              <div class="flex gap-4">
+                <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                  <input type="radio" name="maggiore" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                  <span>Sì</span>
+                </label>
+                <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+                  <input type="radio" name="maggiore" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                  <span>No</span>
+                </label>
+              </div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span>Perché?</span>
+                <input type="text" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box laterale numeri naturali -->
+      <div class="p-4 bg-<%= @pagina.base_color %>-100 rounded-lg">
+        <p class="text-gray-700">
+          I <span class="font-bold">numeri naturali</span> sono i numeri che usiamo di solito per contare<br>
+          (1, 2, 3 ...)
+        </p>
+      </div>
+    </div>
+
+    <!-- Box regola -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-<%= @pagina.base_color %>-400">
+      <p class="text-gray-700">
+        <span class="font-bold">Non esiste un numero naturale maggiore in assoluto</span>, perché basta aggiungere 1 a qualunque numero e si ha sempre un numero maggiore.
+      </p>
+    </div>
+
+    <!-- Sezione Pensa a un numero -->
+    <div class="p-3 bg-<%= @pagina.base_color %>-50 rounded-lg space-y-4">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-<%= @pagina.base_color %>-500">•</span>
+        <span class="font-bold">Pensa a un numero naturale qualunque e scrivilo:</span>
+        <input type="text" class="w-32 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+      </div>
+      <div class="pl-4 space-y-2">
+        <p>Potresti scrivere il numero precedente e il numero successivo di quello che hai scritto?</p>
+        <div class="flex gap-4">
+          <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+            <input type="radio" name="prec_succ" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+            <span>Sì</span>
+          </label>
+          <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+            <input type="radio" name="prec_succ" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+            <span>No</span>
+          </label>
+        </div>
+        <p class="text-gray-700">
+          Il numero <span class="font-bold">minore</span> precede il numero considerato, mentre il numero <span class="font-bold">maggiore</span> è il successivo.
+        </p>
+      </div>
+    </div>
+
+    <!-- Linea dei numeri -->
+    <div class="overflow-x-auto">
+      <div class="flex items-center justify-center gap-2 py-4 min-w-max">
+        <span class="text-gray-400">- - - -</span>
+        <span>1597</span>
+        <span>1598</span>
+        <span class="px-3 py-1 bg-cyan-200 rounded font-bold">1599</span>
+        <span class="px-3 py-1 bg-<%= @pagina.base_color %>-300 rounded font-bold">1600</span>
+        <span class="px-3 py-1 bg-cyan-200 rounded font-bold">1601</span>
+        <span>1602</span>
+        <span>1603</span>
+        <span>1604</span>
+        <span class="text-gray-400">- - - -</span>
+      </div>
+      <div class="flex justify-center gap-16">
+        <div class="text-center">
+          <span class="text-<%= @pagina.base_color %>-600 font-bold">- 1</span>
+          <p class="text-gray-600">precedente</p>
+        </div>
+        <div class="text-center">
+          <span class="text-<%= @pagina.base_color %>-600 font-bold">+ 1</span>
+          <p class="text-gray-600">successivo</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domanda V/F -->
+    <div class="p-3 bg-<%= @pagina.base_color %>-50 rounded-lg">
+      <div class="flex items-center justify-between gap-4 flex-wrap">
+        <p class="text-gray-700">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <span class="font-bold">Secondo te tutti i numeri naturali sono sempre preceduti e seguiti da un numero?</span>
+        </p>
+        <div class="flex gap-2">
+          <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+            <input type="radio" name="sempre" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+            <span>Sì</span>
+          </label>
+          <label class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 has-checked:bg-pink-300">
+            <input type="radio" name="sempre" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+            <span>No</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Box regola precedente/successivo -->
+    <div class="p-4 bg-white rounded-2xl border-3 border-<%= @pagina.base_color %>-400">
+      <p class="text-gray-700">
+        <span class="font-bold">Tutti</span> i numeri naturali <span class="font-bold">hanno</span> un <span class="font-bold">precedente</span>, <span class="font-bold">tranne</span> lo <span class="font-bold">zero</span>.<br>
+        <span class="font-bold">Tutti</span> i numeri naturali <span class="font-bold">hanno</span> un <span class="font-bold">successivo</span>.
+      </p>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+
+      <!-- Badge ESERCIZI -->
+      <div class="bg-<%= @pagina.base_color %>-600 text-white px-4 py-2 rounded-lg inline-block font-bold mb-4">
+        ESERCIZI
+      </div>
+
+      <!-- Esercizio 1: Completa la linea -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Completa la linea con i numeri mancanti.
+        </p>
+
+        <div class="overflow-x-auto">
+          <div class="flex items-center justify-center gap-1 md:gap-2 py-4 min-w-max">
+            <span class="text-gray-400">- - -</span>
+            <span class="px-2 py-1">4993</span>
+            <input type="text" data-correct-answer="4994" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <input type="text" data-correct-answer="4995" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="px-2 py-1">4996</span>
+            <input type="text" data-correct-answer="4997" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <input type="text" data-correct-answer="4998" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="px-2 py-1">4999</span>
+            <input type="text" data-correct-answer="5000" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <input type="text" data-correct-answer="5001" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="px-2 py-1">5002</span>
+            <span class="text-gray-400">- - -</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2: Precedente e Successivo -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Scrivi il precedente e il successivo di ogni numero.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-4">
+            <div class="grid grid-cols-3 gap-2 text-center">
+              <span class="text-gray-600">precedente</span>
+              <span></span>
+              <span class="text-gray-600">successivo</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2 items-center">
+              <input type="text" data-correct-answer="1749" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-center font-bold whitespace-nowrap">1 750</span>
+              <input type="text" data-correct-answer="1751" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="grid grid-cols-3 gap-2 items-center">
+              <input type="text" data-correct-answer="23577" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-center font-bold whitespace-nowrap">23 578</span>
+              <input type="text" data-correct-answer="23579" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+          <div class="space-y-4">
+            <div class="grid grid-cols-3 gap-2 text-center">
+              <span class="text-gray-600">precedente</span>
+              <span></span>
+              <span class="text-gray-600">successivo</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2 items-center">
+              <input type="text" data-correct-answer="569999" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-center font-bold whitespace-nowrap">570 000</span>
+              <input type="text" data-correct-answer="570001" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="grid grid-cols-3 gap-2 items-center">
+              <input type="text" data-correct-answer="134098" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-center font-bold whitespace-nowrap">134 099</span>
+              <input type="text" data-correct-answer="134100" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [176, 178] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

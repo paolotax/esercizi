@@ -1,0 +1,138 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione -->
+    <div class="text-gray-700">
+      <p class="mb-4">
+        La sottrazione è l'operazione che serve per <span class="font-bold">calcolare il resto</span>, per <span class="font-bold">calcolare quanto manca per completare una quantità</span> o per <span class="font-bold">calcolare la differenza tra due quantità</span>.
+      </p>
+    </div>
+
+    <!-- CALCOLARE IL RESTO -->
+    <div class="mb-6">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">CALCOLARE IL RESTO</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+        <div>
+          <div class="p-4 bg-pink-light rounded-lg mb-4">
+            <p class="text-gray-700">
+              Un pasticciere ha preparato 186 bignè. Questa mattina ne ha venduti 73.<br>
+              Quanti bignè restano al pasticciere?
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="font-bold text-gray-700">Scrivi la sottrazione e calcola:</span>
+            <input type="text" data-correct-answer="186 - 73 = 113" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <%= image_tag "nvi4_mat/p030/p030_01.jpg", alt: "Pasticciere con bignè", class: "max-w-[200px]" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALCOLARE "QUANTO MANCA" -->
+    <div class="mb-6">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">CALCOLARE "QUANTO MANCA"</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+        <div class="flex justify-center order-2 md:order-1">
+          <!-- immagine pasticciera -->
+        </div>
+        <div class="order-1 md:order-2">
+          <div class="p-4 bg-pink-light rounded-lg mb-4">
+            <p class="text-gray-700">
+              Una pasticciera deve preparare 186 bignè per una festa. Ne ha preparati 55.<br>
+              Quanti bignè deve ancora preparare?
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="font-bold text-gray-700">Scrivi la sottrazione e calcola:</span>
+            <input type="text" data-correct-answer="186 - 55 = 131" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALCOLARE LA DIFFERENZA -->
+    <div class="mb-6">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">CALCOLARE LA DIFFERENZA</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+        <div>
+          <div class="p-4 bg-pink-light rounded-lg mb-4">
+            <p class="text-gray-700">
+              Una pasticciera ha preparato 76 bignè alla crema e 110 al cioccolato.<br>
+              Qual è la differenza tra il numero dei due tipi di bignè?
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="font-bold text-gray-700">Scrivi la sottrazione e calcola:</span>
+            <input type="text" data-correct-answer="110 - 76 = 34" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <!-- immagine bignè -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Box termini e comportamento zero -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- I termini della sottrazione -->
+      <div class="p-4 bg-pink-light rounded-lg">
+        <h3 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">I termini della sottrazione</h3>
+        <div class="space-y-1">
+          <div class="flex items-center gap-4">
+            <span class="text-gray-700">minuendo</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="font-bold">
+              <span class="text-red-600">1</span> <span class="text-blue-600">8</span> <span class="text-green-600">6</span> −
+            </span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-gray-700">sottraendo</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="font-bold">  <span class="text-blue-600">7</span> <span class="text-green-600">3</span> =</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-gray-700">resto o differenza</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="font-bold">
+              <span class="text-red-600">1</span> <span class="text-blue-600">1</span> <span class="text-green-600">3</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Il comportamento dello zero -->
+      <div class="p-4 bg-custom-blue rounded-lg">
+        <h3 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">Il comportamento dello zero nella sottrazione</h3>
+        <div class="space-y-2 mb-4">
+          <p class="text-gray-800 font-bold">58 − <span class="text-<%= @pagina.base_color %>-600">0</span> = 58</p>
+          <p class="text-gray-800 font-bold"><span class="text-<%= @pagina.base_color %>-600">0</span> − 58 = <span class="text-red-600 font-bold">non si può fare</span></p>
+        </div>
+        <p class="text-gray-700">
+          Se da un numero togli 0, ottieni il numero stesso.<br>
+          La sottrazione con 0 al minuendo, fra numeri naturali, si può fare solo in un caso: <span class="font-bold">0 − 0 = 0</span>.
+        </p>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [182] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

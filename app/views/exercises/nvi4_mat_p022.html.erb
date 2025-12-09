@@ -1,0 +1,81 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione con immagine -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p022/p022_01.jpg", alt: "Concerto con spettatori", class: "max-w-full h-auto rounded-lg" %>
+      </div>
+      <div class="text-gray-700 space-y-4">
+        <p>
+          Giulia è la responsabile vendite dei biglietti per il concerto e sa che, in realtà, i biglietti venduti non sono 10 000 ma 9 895.
+        </p>
+        <p>
+          Che cosa è successo? Il giornalista televisivo si è sbagliato? No, ha solo riportato un <span class="font-bold">valore approssimato</span> di 10 000 spettatori.
+        </p>
+        <p>
+          A volte, come in questo caso, non è necessario conoscere il numero esatto degli spettatori, ma basta fare un <span class="font-bold">arrotondamento</span> o <span class="font-bold">approssimazione</span> che sostituisce il numero 9 895 con 10 000, un numero più "facile" da ricordare.
+        </p>
+      </div>
+    </div>
+
+    <!-- Box definizione -->
+    <div class="p-4 bg-<%= @pagina.base_color %>-50 rounded-lg">
+      <p class="text-gray-700 text-center">
+        <span class="font-bold">Arrotondare</span> o <span class="font-bold">approssimare</span> un numero significa trovare un numero che abbia quello stesso ordine di grandezza, ma scritto nel modo più semplice possibile, facile da leggere (per esempio, con molti zeri come cifre).
+      </p>
+    </div>
+
+    <!-- Osserva sulla linea dei numeri -->
+    <div class="text-gray-700 space-y-4">
+      <p class="font-bold">
+        <span class="text-<%= @pagina.base_color %>-500">•</span>
+        Osserva sulla linea dei numeri come arrotondare alle centinaia i numeri 205 e 798.
+      </p>
+
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p022/p022_02.jpg", alt: "Linea dei numeri da 0 a 1000", class: "max-w-full h-auto" %>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-4 bg-cyan-50 rounded-lg">
+          <p class="text-gray-700">
+            Si arrotonda 205 a <span class="font-bold">200</span> perché è il centinaio più vicino. In questo caso il numero di partenza diminuisce, per cui si parla di <span class="font-bold">arrotondamento per difetto</span>.
+          </p>
+        </div>
+        <div class="p-4 bg-cyan-50 rounded-lg">
+          <p class="text-gray-700">
+            Si arrotonda 798 a <span class="font-bold">800</span> perché è il centinaio più vicino. In questo caso il numero di partenza aumenta, per cui si parla di <span class="font-bold">arrotondamento per eccesso</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prova tu -->
+    <div class="text-gray-700 space-y-4">
+      <p class="font-bold">
+        <span class="text-<%= @pagina.base_color %>-500">•</span>
+        Prova tu ad arrotondare il numero 2 875 alle unità di migliaia. Collocalo sulla linea e completa.
+      </p>
+
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p022/p022_03.jpg", alt: "Linea dei numeri da 2000 a 3000", class: "max-w-full h-auto" %>
+      </div>
+
+      <div class="flex items-center justify-center gap-2 flex-wrap">
+        <span>Ho approssimato il numero 2 875 per</span>
+        <input type="text" data-correct-answer="eccesso" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        <span>al numero</span>
+        <input type="text" data-correct-answer="3000" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

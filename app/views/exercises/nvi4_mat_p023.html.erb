@@ -1,0 +1,311 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione -->
+    <div class="text-gray-700">
+      <p>
+        Come hai visto, puoi fare degli arrotondamenti sia <span class="font-bold">per difetto</span>, sia <span class="font-bold">per eccesso</span>.<br>
+        <span class="font-bold">Stabilisci l'ordine di grandezza</span>, cioè la cifra da approssimare; se è…
+      </p>
+    </div>
+
+    <!-- Due colonne: per difetto e per eccesso -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Per difetto -->
+      <div class="space-y-4">
+        <p class="text-gray-700">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          … <span class="font-bold">minore di 5</span>, arrotonda <span class="font-bold">per difetto</span>: sostituisci con zero questa cifra e tutte quelle alla sua destra.
+        </p>
+
+        <div class="p-4 bg-cyan-50 rounded-lg space-y-2">
+          <div class="flex items-center gap-4">
+            <span>52<span class="font-bold text-cyan-600">3</span></span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>52<span class="font-bold text-cyan-600">0</span></span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span>1<span class="font-bold text-cyan-600">2</span>9</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>1<span class="font-bold text-cyan-600">00</span></span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span>2 <span class="font-bold text-cyan-600">2</span>71</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>2 <span class="font-bold text-cyan-600">000</span></span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span>5<span class="font-bold text-cyan-600">1</span> 378</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>5<span class="font-bold text-cyan-600">0 000</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Per eccesso -->
+      <div class="space-y-4">
+        <p class="text-gray-700">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          … <span class="font-bold">maggiore di 5</span>, arrotonda <span class="font-bold">per eccesso</span>: sostituisci con zero questa cifra e tutte quelle alla sua destra e aumenta di 1 la cifra che si trova subito alla sua sinistra.
+        </p>
+
+        <div class="p-4 bg-cyan-50 rounded-lg space-y-2">
+          <div class="flex items-center gap-4">
+            <span>5<span class="border-b border-gray-600">4</span><span class="font-bold text-cyan-600">7</span></span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>5<span class="border-b border-gray-600">5</span><span class="font-bold text-cyan-600">0</span></span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span><span class="border-b border-gray-600">1</span><span class="font-bold text-cyan-600">9</span>7</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span><span class="border-b border-gray-600">2</span><span class="font-bold text-cyan-600">00</span></span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span>3 <span class="border-b border-gray-600">6</span><span class="font-bold text-cyan-600">8</span>9</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>3 <span class="border-b border-gray-600">7</span><span class="font-bold text-cyan-600">00</span></span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span>1<span class="border-b border-gray-600">4</span> <span class="font-bold text-cyan-600">6</span>17</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>1<span class="border-b border-gray-600">5</span> <span class="font-bold text-cyan-600">000</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Caso speciale: cifra 5 -->
+    <div class="text-gray-700 space-y-4">
+      <p>
+        <span class="text-<%= @pagina.base_color %>-500">•</span>
+        … <span class="font-bold">5</span>, puoi arrotondare per difetto o per eccesso.
+      </p>
+
+      <div class="p-4 bg-<%= @pagina.base_color %>-50 rounded-lg">
+        <div class="flex flex-col md:flex-row justify-around gap-4">
+          <div class="flex items-center gap-4">
+            <span>23<span class="font-bold text-<%= @pagina.base_color %>-600">5</span></span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>23<span class="font-bold text-<%= @pagina.base_color %>-600">0</span></span>
+            <span>oppure</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">240</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span>6<span class="font-bold text-<%= @pagina.base_color %>-600">5</span>38</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span>6 <span class="font-bold text-<%= @pagina.base_color %>-600">000</span></span>
+            <span>oppure</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">7 000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+
+      <div class="bg-<%= @pagina.base_color %>-600 text-white px-4 py-2 rounded-lg inline-block font-bold mb-4">
+        ESERCIZI
+      </div>
+
+      <!-- Esercizio 1 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Approssima per eccesso o per difetto alla cifra indicata.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Decine -->
+          <div class="space-y-3">
+            <p class="font-bold text-center text-gray-700">decine</p>
+            <div class="flex items-center gap-2">
+              <span>167</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="170" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>352</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="350" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>4 831</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="4830" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>1 679</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="1680" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>373</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="370" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>521</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="520" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>1 364</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="1360" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>2 593</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="2590" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+
+          <!-- Centinaia -->
+          <div class="space-y-3">
+            <p class="font-bold text-center text-gray-700">centinaia</p>
+            <div class="flex items-center gap-2">
+              <span>3 724</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="3700" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>1 258</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="1300" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>4 937</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="4900" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>21 376</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="21400" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+
+          <!-- Unità di migliaia -->
+          <div class="space-y-3">
+            <p class="font-bold text-center text-gray-700">unità di migliaia</p>
+            <div class="flex items-center gap-2">
+              <span>15 436</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="15000" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>28 365</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="28000" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>39 478</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="39000" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span>12 487</span>
+              <span class="text-<%= @pagina.base_color %>-500">→</span>
+              <input type="text" data-correct-answer="12000" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div>
+        <p class="font-bold text-gray-700 mb-2">
+          <%= numero_esercizio_badge(2) %>
+          La tabella riproduce le quote mensili che un'azienda deve versare per il consumo di energia elettrica in un semestre.
+        </p>
+        <p class="text-gray-700 mb-2">
+          Completa la tabella e approssima alle decine per difetto o per eccesso.
+        </p>
+        <p class="text-gray-700 mb-4">
+          Poi rispondi sul quaderno alle seguenti domande.
+        </p>
+        <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-<%= @pagina.base_color %>-500 mb-4">
+          <li>A quanto ammonta la spesa approssimata dell'intero semestre?</li>
+          <li>E quella reale?</li>
+          <li>Quanti euro di differenza ci sono tra la spesa arrotondata e quella reale?</li>
+        </ul>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-<%= @pagina.base_color %>-400">
+            <thead>
+              <tr>
+                <th class="p-2 border border-<%= @pagina.base_color %>-400 bg-<%= @pagina.base_color %>-100 text-center text-gray-800">Numero</th>
+                <th class="p-2 border border-<%= @pagina.base_color %>-400 bg-<%= @pagina.base_color %>-100 text-center text-gray-800">Approssimazione per difetto</th>
+                <th class="p-2 border border-<%= @pagina.base_color %>-400 bg-<%= @pagina.base_color %>-100 text-center text-gray-800">Approssimazione per eccesso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">€ 2 852</td>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white font-bold text-<%= @pagina.base_color %>-600">€ 2 850</td>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">
+                  <input type="text" data-correct-answer="2860" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">€ 1 638</td>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">
+                  <input type="text" data-correct-answer="1630" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">
+                  <input type="text" data-correct-answer="1640" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">€ 2 325</td>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">
+                  <input type="text" data-correct-answer="2320" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">
+                  <input type="text" data-correct-answer="2330" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">€ 3 629</td>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">
+                  <input type="text" data-correct-answer="3620" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">
+                  <input type="text" data-correct-answer="3630" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">€ 2 781</td>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">
+                  <input type="text" data-correct-answer="2780" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">
+                  <input type="text" data-correct-answer="2790" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">€ 2 506</td>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">
+                  <input type="text" data-correct-answer="2500" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+                <td class="p-2 border border-<%= @pagina.base_color %>-400 text-center bg-white">
+                  <input type="text" data-correct-answer="2510" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

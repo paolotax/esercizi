@@ -1,0 +1,207 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione -->
+    <div class="p-4 bg-custom-blue rounded-lg">
+      <p class="text-gray-700 mb-4">
+        Puoi calcolare le sottrazioni velocemente senza metterle in colonna.
+      </p>
+      <ul class="list-disc pl-6 space-y-1 text-gray-700 marker:text-<%= @pagina.base_color %>-500 mb-4">
+        <li>Scomponi sia il minuendo sia il sottraendo.</li>
+        <li>Sottrai le decine alle decine e le unità alle unità.</li>
+        <li>Addiziona i risultati.</li>
+      </ul>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p033/p033_01.jpg", alt: "Strategia di calcolo", class: "max-h-32" %>
+      </div>
+    </div>
+
+    <!-- Strategie -->
+    <div class="text-gray-700 mb-4">
+      <p>Ecco altre strategie che puoi usare per calcolare velocemente le sottrazioni.</p>
+    </div>
+
+    <!-- Tabella strategie -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <!-- Strategia 1: Togliere 10 -->
+      <div class="p-4 bg-pink-light rounded-lg">
+        <p class="text-gray-700 mb-2">
+          Per togliere 10 (<span class="font-bold text-<%= @pagina.base_color %>-600">− 10</span>) è sufficiente sottrarre <span class="font-bold text-<%= @pagina.base_color %>-600">1</span> alla cifra delle <span class="font-bold text-<%= @pagina.base_color %>-600">decine</span>!
+        </p>
+        <p class="font-bold text-<%= @pagina.base_color %>-600">
+          1 4<span class="underline">5</span>6 − 10 = 1 4<span class="underline">4</span>6
+        </p>
+      </div>
+
+      <!-- Rispondi: sottrarre 100 e 1000 -->
+      <div class="p-4 bg-white rounded-lg border-2 border-<%= @pagina.base_color %>-300">
+        <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> Rispondi.
+        </p>
+        <div class="space-y-3">
+          <div>
+            <p class="text-gray-700 mb-1">E se devi sottrarre 100 a un numero, come procedi?</p>
+            <input type="text" data-correct-answer="Sottrai 1 alla cifra delle centinaia" class="w-full border-b-2 border-dotted border-gray-400 font-bold bg-transparent" placeholder="Sottrai 1 alla cifra delle...">
+          </div>
+          <div>
+            <p class="text-gray-700 mb-1">E se devi sottrarre 1 000?</p>
+            <input type="text" data-correct-answer="Sottrai 1 alla cifra delle migliaia" class="w-full border-b-2 border-dotted border-gray-400 font-bold bg-transparent" placeholder="Sottrai 1 alla cifra delle...">
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategia 2: -9 = -10 + 1 e -11 = -10 - 1 -->
+      <div class="p-4 bg-pink-light rounded-lg">
+        <p class="text-gray-700 mb-2">Ricorda che:</p>
+        <p class="font-bold text-<%= @pagina.base_color %>-600">
+          <span class="underline">− 9</span> = − 10 + 1
+        </p>
+        <p class="font-bold text-<%= @pagina.base_color %>-600">
+          <span class="underline">− 11</span> = − 10 − 1
+        </p>
+      </div>
+
+      <!-- Calcola velocemente -->
+      <div class="p-4 bg-white rounded-lg border-2 border-<%= @pagina.base_color %>-300">
+        <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> Calcola velocemente.
+        </p>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex items-center gap-2">
+            <span class="shrink-0">657 − 9 =</span>
+            <input type="text" data-correct-answer="648" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="shrink-0 whitespace-nowrap">3 650 − 9 =</span>
+            <input type="text" data-correct-answer="3641" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="shrink-0">581 − 11 =</span>
+            <input type="text" data-correct-answer="570" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="shrink-0 whitespace-nowrap">4 347 − 11 =</span>
+            <input type="text" data-correct-answer="4336" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+
+      <!-- Rispondi: togliere 99, 8, 19 -->
+      <div class="md:col-span-2 p-4 bg-white rounded-lg border-2 border-<%= @pagina.base_color %>-300">
+        <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> Rispondi: per togliere <span class="text-<%= @pagina.base_color %>-600">99</span>, <span class="text-<%= @pagina.base_color %>-600">8</span> e <span class="text-<%= @pagina.base_color %>-600">19</span> come puoi fare?
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="flex items-center gap-2">
+            <span class="shrink-0">687 − 99 =</span>
+            <input type="text" data-correct-answer="588" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="shrink-0 whitespace-nowrap">2 143 − 8 =</span>
+            <input type="text" data-correct-answer="2135" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="shrink-0 whitespace-nowrap">2 000 − 19 =</span>
+            <input type="text" data-correct-answer="1981" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategia 3: Tappa alla decina -->
+      <div class="p-4 bg-pink-light rounded-lg">
+        <p class="text-gray-700 mb-2">
+          Fai "<span class="font-bold">tappa alla decina</span>"!
+        </p>
+        <p class="text-gray-700">
+          Per <span class="font-bold">togliere un numero qualsiasi</span> raggiungi la decina precedente.
+        </p>
+      </div>
+
+      <!-- Prova tu con tappa alla decina -->
+      <div class="p-4 bg-white rounded-lg border-2 border-<%= @pagina.base_color %>-300">
+        <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
+          56 − 29 = (56 − <span class="underline">6</span>) − 23 = 50 − 23 = 27
+        </p>
+        <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> Prova tu.
+        </p>
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="shrink-0">95 − 24 =</span>
+            <input type="text" data-correct-answer="71" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="shrink-0">79 − 34 =</span>
+            <input type="text" data-correct-answer="45" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="shrink-0">63 − 15 =</span>
+            <input type="text" data-correct-answer="48" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Calcola in riga sul quaderno utilizzando la strategia che ritieni più opportuna.
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+          <div class="flex items-center gap-1">
+            <span class="shrink-0">457 − 99 =</span>
+            <input type="text" data-correct-answer="358" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="shrink-0">174 − 38 =</span>
+            <input type="text" data-correct-answer="136" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="shrink-0">138 − 11 =</span>
+            <input type="text" data-correct-answer="127" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="shrink-0 whitespace-nowrap">2 586 − 999 =</span>
+            <input type="text" data-correct-answer="1587" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="shrink-0">84 − 19 =</span>
+            <input type="text" data-correct-answer="65" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="shrink-0">328 − 75 =</span>
+            <input type="text" data-correct-answer="253" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span class="shrink-0">106 − 8 =</span>
+            <input type="text" data-correct-answer="98" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [184, 200] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

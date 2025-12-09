@@ -1,0 +1,410 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione -->
+    <p class="text-gray-700">
+      Che cosa succede quando dividi un numero naturale per <span class="font-bold">10</span>, <span class="font-bold">100</span> o <span class="font-bold whitespace-nowrap">1 000</span>?
+    </p>
+
+    <!-- Osserva e completa -->
+    <div class="p-4 md:p-6 bg-custom-blue rounded-lg">
+      <p class="font-bold text-gray-700 mb-6">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Osserva e completa.
+      </p>
+
+      <!-- Tre esempi con tabelle -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <!-- 290 : 10 -->
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="font-bold">290 : <span class="text-<%= @pagina.base_color %>-600">10</span> =</span>
+            <input type="text" data-correct-answer="29" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <table class="w-full border-collapse border border-cyan-400">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-red-600 font-bold">dak</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-blue-600 font-bold">uk</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-red-600 font-bold">h</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-blue-600 font-bold">da</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-green-600 font-bold">u</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">2</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">9</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-gray-400">0</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">2</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">9</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-center text-<%= @pagina.base_color %>-600 font-bold mt-2">: 10</p>
+        </div>
+
+        <!-- 2900 : 100 -->
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="font-bold"><span class="whitespace-nowrap">2 900</span> : <span class="text-<%= @pagina.base_color %>-600">100</span> =</span>
+            <input type="text" data-correct-answer="29" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <table class="w-full border-collapse border border-cyan-400">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-red-600 font-bold">dak</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-blue-600 font-bold">uk</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-red-600 font-bold">h</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-blue-600 font-bold">da</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-green-600 font-bold">u</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">2</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">9</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-gray-400">0</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-gray-400">0</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">2</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">9</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-center text-<%= @pagina.base_color %>-600 font-bold mt-2">: 100</p>
+        </div>
+
+        <!-- 29000 : 1000 -->
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="font-bold"><span class="whitespace-nowrap">29 000</span> : <span class="text-<%= @pagina.base_color %>-600 whitespace-nowrap">1 000</span> =</span>
+            <input type="text" data-correct-answer="29" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <table class="w-full border-collapse border border-cyan-400">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-red-600 font-bold">dak</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-blue-600 font-bold">uk</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-red-600 font-bold">h</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-blue-600 font-bold">da</th>
+                <th class="p-2 border border-cyan-400 bg-cyan-100 text-center text-green-600 font-bold">u</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">2</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">9</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-gray-400">0</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-gray-400">0</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold text-gray-400">0</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white"></td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">2</td>
+                <td class="p-2 border border-cyan-400 text-center bg-white font-bold">9</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-center text-<%= @pagina.base_color %>-600 font-bold mt-2">: <span class="whitespace-nowrap">1 000</span></p>
+        </div>
+      </div>
+
+      <!-- Spiegazioni -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="text-gray-700">
+          <p>Quando divido un numero naturale per 10, 100, <span class="whitespace-nowrap">1 000</span>, ogni sua cifra diventa <span class="font-bold">10</span>, <span class="font-bold">100</span>, <span class="font-bold whitespace-nowrap">1 000</span> <span class="font-bold">volte pi&ugrave; piccola</span>.</p>
+        </div>
+        <div class="p-3 bg-white rounded-lg border-3 border-<%= @pagina.base_color %>-400">
+          <p class="text-gray-700">Per dividere un <span class="font-bold">numero naturale</span> che termina rispettivamente con uno, due o tre zeri, per 10, 100, <span class="whitespace-nowrap">1 000</span>, basta <span class="font-bold">togliere uno, due o tre zeri</span> alla fine del numero.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Strategie di calcolo -->
+    <div class="p-4 md:p-6 bg-custom-blue rounded-lg">
+      <p class="text-gray-700 mb-4">
+        Ecco alcune strategie per calcolare velocemente le divisioni. Per <span class="font-bold">dividere</span> per...
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-cyan-400">
+          <tbody>
+            <!-- Dividere per 5 -->
+            <tr>
+              <td class="p-3 border border-cyan-400 bg-cyan-100 text-center font-bold w-16">5</td>
+              <td class="p-3 border border-cyan-400 bg-white">moltiplica per <span class="font-bold">2</span> e dividi per <span class="font-bold">10</span></td>
+              <td class="p-3 border border-cyan-400 bg-white">
+                <div class="space-y-1">
+                  <p class="text-gray-700">55 : 5 =</p>
+                  <div class="flex items-center gap-1 flex-wrap">
+                    <span class="text-gray-700">(55 &times; <span class="font-bold">2</span>) : <span class="font-bold">10</span> =</span>
+                    <input type="text" data-correct-answer="11" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!-- Dividere per 20 -->
+            <tr>
+              <td class="p-3 border border-cyan-400 bg-cyan-100 text-center font-bold">20</td>
+              <td class="p-3 border border-cyan-400 bg-white">dividi <span class="font-bold text-<%= @pagina.base_color %>-600">entrambi i termini</span> per <span class="font-bold">10</span> e poi per <span class="font-bold">2</span></td>
+              <td class="p-3 border border-cyan-400 bg-white">
+                <div class="space-y-1">
+                  <p class="text-gray-700">400 : 20 =</p>
+                  <div class="flex items-center gap-1 flex-wrap">
+                    <span class="text-gray-700">(400 :</span>
+                    <input type="text" data-correct-answer="10" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    <span class="text-gray-700">) : (20 :</span>
+                    <input type="text" data-correct-answer="10" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    <span class="text-gray-700">) =</span>
+                    <input type="text" data-correct-answer="20" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!-- Dividere per 25 -->
+            <tr>
+              <td class="p-3 border border-cyan-400 bg-cyan-100 text-center font-bold">25</td>
+              <td class="p-3 border border-cyan-400 bg-white">moltiplica per <span class="font-bold">4</span> e dividi per <span class="font-bold">100</span></td>
+              <td class="p-3 border border-cyan-400 bg-white">
+                <div class="space-y-1">
+                  <p class="text-gray-700">500 : 25 =</p>
+                  <div class="flex items-center gap-1 flex-wrap">
+                    <span class="text-gray-700">(500 &times;</span>
+                    <input type="text" data-correct-answer="4" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    <span class="text-gray-700">) :</span>
+                    <input type="text" data-correct-answer="100" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    <span class="text-gray-700">=</span>
+                    <input type="text" data-correct-answer="20" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+
+      <!-- Esercizio 1 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Registra le divisioni in tabella e calcola.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- 150 : 10 -->
+          <div>
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-gray-700">150 : 10 =</span>
+              <input type="text" data-correct-answer="15" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <table class="w-full border-collapse border border-cyan-400">
+              <thead>
+                <tr>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-red-600 font-bold">dak</th>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-blue-600 font-bold">uk</th>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-red-600 font-bold">h</th>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-blue-600 font-bold">da</th>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-green-600 font-bold">u</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="1" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="5" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="0" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="1" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="5" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="text-center text-<%= @pagina.base_color %>-600 font-bold mt-1">: 10</p>
+          </div>
+
+          <!-- 9500 : 100 -->
+          <div>
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-gray-700"><span class="whitespace-nowrap">9 500</span> : 100 =</span>
+              <input type="text" data-correct-answer="95" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <table class="w-full border-collapse border border-cyan-400">
+              <thead>
+                <tr>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-red-600 font-bold">dak</th>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-blue-600 font-bold">uk</th>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-red-600 font-bold">h</th>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-blue-600 font-bold">da</th>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-green-600 font-bold">u</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="9" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="5" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="0" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="0" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="9" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="5" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="text-center text-<%= @pagina.base_color %>-600 font-bold mt-1">: 100</p>
+          </div>
+
+          <!-- 48000 : 1000 -->
+          <div>
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-gray-700"><span class="whitespace-nowrap">48 000</span> : <span class="whitespace-nowrap">1 000</span> =</span>
+              <input type="text" data-correct-answer="48" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <table class="w-full border-collapse border border-cyan-400">
+              <thead>
+                <tr>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-red-600 font-bold">dak</th>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-blue-600 font-bold">uk</th>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-red-600 font-bold">h</th>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-blue-600 font-bold">da</th>
+                  <th class="p-1 border border-cyan-400 bg-cyan-100 text-center text-green-600 font-bold">u</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="4" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="8" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="0" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="0" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="0" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="4" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                  <td class="p-1 border border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="8" class="w-full border-none text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="text-center text-<%= @pagina.base_color %>-600 font-bold mt-1">: <span class="whitespace-nowrap">1 000</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Usa le strategie che hai imparato e calcola sul quaderno.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <p class="text-gray-700">640 : 20 =</p>
+          <p class="text-gray-700">80 : 5 =</p>
+          <p class="text-gray-700">150 : 25 =</p>
+          <p class="text-gray-700">240 : 5 =</p>
+          <p class="text-gray-700">740 : 20 =</p>
+          <p class="text-gray-700">450 : 5 =</p>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [200] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

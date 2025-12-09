@@ -1,0 +1,165 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione - Ricorda! -->
+    <div class="p-4 md:p-6 bg-custom-blue rounded-2xl">
+      <h3 class="font-bold text-<%= @pagina.base_color %>-600 italic mb-4">Ricorda!</h3>
+      <p class="text-gray-700">
+        I numeri possono essere scritti sulla <span class="font-bold">linea dei numeri</span> in <span class="font-bold">ordine crescente</span>, cioè dal minore al maggiore.
+      </p>
+    </div>
+
+    <!-- Immagine linea numeri esempio -->
+    <div class="flex justify-center">
+      <%= image_tag "nvi4_mat/p005/p005_01.jpg", alt: "Linea dei numeri esempio", class: "max-w-full h-auto" rescue nil %>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6">
+
+      <!-- Esercizio 1: Completa le linee -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Completa le linee: scrivi i numeri al posto giusto.
+        </p>
+
+        <div class="space-y-6">
+          <!-- Prima linea: 400 • 350 • 300 • 450 • 100 -->
+          <div>
+            <p class="font-bold mb-2">400 • 350 • 300 • 450 • 100</p>
+            <div class="flex items-center gap-2 overflow-x-auto py-2">
+              <span class="font-bold">0</span>
+              <div class="flex-1 h-1 bg-<%= @pagina.base_color %>-400 relative min-w-[400px]">
+                <% [50, 100, 150, 200, 250, 300, 350, 400, 450, 500].each_with_index do |num, idx| %>
+                  <div class="absolute top-1/2 -translate-y-1/2" style="left: <%= (idx + 1) * 10 - 1 %>%">
+                    <div class="w-0.5 h-3 bg-<%= @pagina.base_color %>-600"></div>
+                  </div>
+                <% end %>
+              </div>
+              <span class="font-bold">500</span>
+            </div>
+            <div class="grid grid-cols-5 gap-2 mt-2">
+              <% [100, 300, 350, 400, 450].each do |answer| %>
+                <input type="text" data-correct-answer="<%= answer %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="...">
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Seconda linea: 2 300 • 2 700 • 2 000 • 2 400 • 2 600 -->
+          <div>
+            <p class="font-bold mb-2 whitespace-nowrap">2 300 • 2 700 • 2 000 • 2 400 • 2 600</p>
+            <div class="flex items-center gap-2 overflow-x-auto py-2">
+              <span class="font-bold whitespace-nowrap">1 900</span>
+              <div class="flex-1 h-1 bg-<%= @pagina.base_color %>-400 relative min-w-[400px]">
+              </div>
+              <span class="font-bold whitespace-nowrap">2 800</span>
+            </div>
+            <div class="grid grid-cols-5 gap-2 mt-2">
+              <% [2000, 2300, 2400, 2600, 2700].each do |answer| %>
+                <input type="text" data-correct-answer="<%= answer %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="...">
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2: Precedente e successivo -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Per ogni numero scrivi il <span class="underline">precedente</span> e il <span class="underline">successivo</span>. Segui l'esempio.
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <!-- Esempio -->
+          <div class="flex items-center gap-2 p-2 bg-<%= @pagina.base_color %>-50 rounded">
+            <span class="font-bold">88</span>
+            <span>89</span>
+            <span class="font-bold">90</span>
+          </div>
+
+          <% [
+            { prec: "198", num: "199", succ: "200" },
+            { prec: "3722", num: "3723", succ: "3724" },
+            { prec: "1262", num: "1263", succ: "1264" },
+            { prec: "323", num: "324", succ: "325" },
+            { prec: "1898", num: "1899", succ: "1900" },
+            { prec: "561", num: "562", succ: "563" },
+            { prec: "3715", num: "3716", succ: "3717" },
+            { prec: "6040", num: "6041", succ: "6042" }
+          ].each do |item| %>
+            <div class="flex items-center gap-1">
+              <input type="text" data-correct-answer="<%= item[:prec] %>" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span><%= item[:num] %></span>
+              <input type="text" data-correct-answer="<%= item[:succ] %>" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Esercizio 3: Ordine crescente -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Riscrivi i numeri in <span class="underline">ordine crescente</span>, dal minore al maggiore.
+        </p>
+
+        <div class="p-4 bg-white rounded-lg">
+          <p class="font-bold mb-3">152 • 367 • 456 • 898 • 52 • <span class="line-through">36</span> • 107</p>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-<%= @pagina.base_color %>-600">36</span>
+            <span>&lt;</span>
+            <input type="text" data-correct-answer="52" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>&lt;</span>
+            <input type="text" data-correct-answer="107" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>&lt;</span>
+            <input type="text" data-correct-answer="152" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>&lt;</span>
+            <input type="text" data-correct-answer="367" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>&lt;</span>
+            <input type="text" data-correct-answer="456" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>&lt;</span>
+            <input type="text" data-correct-answer="898" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 4: Ordine decrescente -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(4) %>
+          Riscrivi i numeri in <span class="underline">ordine decrescente</span>, dal maggiore al minore.
+        </p>
+
+        <div class="p-4 bg-white rounded-lg">
+          <p class="font-bold mb-3">91 • 115 • 732 • <span class="line-through">962</span> • 891 • 542 • 563</p>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-<%= @pagina.base_color %>-600">962</span>
+            <span>&gt;</span>
+            <input type="text" data-correct-answer="891" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>&gt;</span>
+            <input type="text" data-correct-answer="732" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>&gt;</span>
+            <input type="text" data-correct-answer="563" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>&gt;</span>
+            <input type="text" data-correct-answer="542" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>&gt;</span>
+            <input type="text" data-correct-answer="115" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span>&gt;</span>
+            <input type="text" data-correct-answer="91" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

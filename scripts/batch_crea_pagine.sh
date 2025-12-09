@@ -1,114 +1,103 @@
 #!/bin/bash
 
-# Script per creare pagine nvi5_mat in batch con Claude Code
-# Uso: ./scripts/batch_crea_pagine.sh [batch_number]
-# batch_number: 1-8 per eseguire un batch specifico, oppure "all" per tutti
+# Script per creare pagine nvi4_mat in batch con Claude Code
+# Uso: ./scripts/batch_crea_pagine.sh
+# Crea pagine di teoria (016-169) in gruppi di 5, chiedendo conferma tra un batch e l'altro
 
-BATCH=$1
+# Directory del progetto
+PROJECT_DIR="/home/paolotax/rails_2023/esercizi"
+cd "$PROJECT_DIR"
 
-run_batch_1() {
-    echo "=== BATCH 1: p181-p190 ==="
-    for page in 181 182 183 184 185 186 187 188 189 190; do
-        echo "Creando pagina $page..."
-        claude --dangerously-skip-permissions "/crea-nuova-pagina $page"
-        echo "Pagina $page completata."
-        echo ""
+# Colori per output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+# Pagine di teoria nvi4_mat (016-169)
+PAGINE=(016 017 018 019 020 021 022 023 024 025 026 027 028 029 030 031 032 033 034 035 036 037 038 039 040 041 042 043 044 045 046 047 048 049 050 051 052 053 054 055 056 057 058 059 060 061 062 063 064 065 066 067 068 069 070 071 072 073 074 075 076 077 078 079 080 081 082 083 084 085 086 087 088 089 090 091 092 093 094 095 096 097 098 099 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169)
+
+# Dimensione del batch
+BATCH_SIZE=5
+
+echo -e "${BLUE}========================================${NC}"
+echo -e "${BLUE}  Batch Creazione Pagine nvi4_mat${NC}"
+echo -e "${BLUE}  Pagine di teoria: 016-169${NC}"
+echo -e "${BLUE}========================================${NC}"
+echo ""
+echo -e "Pagine totali: ${GREEN}${#PAGINE[@]}${NC}"
+echo -e "Batch size: ${GREEN}${BATCH_SIZE}${NC}"
+echo ""
+
+# Indice corrente
+i=0
+total=${#PAGINE[@]}
+batch_num=1
+
+while [ $i -lt $total ]; do
+    # Calcola le pagine per questo batch
+    batch_pages=""
+    batch_end=$((i + BATCH_SIZE))
+    if [ $batch_end -gt $total ]; then
+        batch_end=$total
+    fi
+
+    for ((j=i; j<batch_end; j++)); do
+        if [ -n "$batch_pages" ]; then
+            batch_pages="$batch_pages ${PAGINE[$j]}"
+        else
+            batch_pages="${PAGINE[$j]}"
+        fi
     done
-    echo "Batch 1 completato. Verifica CORREZIONI_BOX_P181-190.md"
-}
 
-run_batch_2() {
-    echo "=== BATCH 2: p191-p200 ==="
-    for page in 191 192 193 194 195 196 197 198 199 200; do
-        echo "Creando pagina $page..."
-        claude --dangerously-skip-permissions "/crea-nuova-pagina $page"
-        echo "Pagina $page completata."
+    # Mostra info batch
+    echo -e "${YELLOW}----------------------------------------${NC}"
+    echo -e "${YELLOW}BATCH ${batch_num}: Pagine ${batch_pages}${NC}"
+    echo -e "${YELLOW}Progresso: $i/${total} completate${NC}"
+    echo -e "${YELLOW}----------------------------------------${NC}"
+    echo ""
+
+    # Esegui claude con le pagine
+    echo -e "${GREEN}Eseguo: claude --dangerously-skip-permissions \"/crea-nuova-pagina ${batch_pages}\"${NC}"
+    echo ""
+
+    claude --dangerously-skip-permissions "/crea-nuova-pagina ${batch_pages}"
+
+    # Incrementa indice
+    i=$batch_end
+    batch_num=$((batch_num + 1))
+
+    # Se non siamo alla fine, chiedi se continuare
+    if [ $i -lt $total ]; then
         echo ""
-    done
-    echo "Batch 2 completato. Verifica CORREZIONI_BOX_P191-200.md"
-}
-
-run_batch_3() {
-    echo "=== BATCH 3: p201-p210 ==="
-    echo "Creando pagine 201-210..."
-    claude --dangerously-skip-permissions "/crea-nuova-pagina 201 202 203 204 205 206 207 208 209 210"
-    echo "Batch 3 completato. Verifica CORREZIONI_BOX_P201-210.md"
-}
-
-run_batch_4() {
-    echo "=== BATCH 4: p211-p220 ==="
-    echo "Creando pagine 211-220..."
-    claude --dangerously-skip-permissions "/crea-nuova-pagina 211 212 213 214 215 216 217 218 219 220"
-    echo "Batch 4 completato. Verifica CORREZIONI_BOX_P211-220.md"
-}
-
-run_batch_5() {
-    echo "=== BATCH 5: p221-p230 ==="
-    echo "Creando pagine 221-230..."
-    claude --dangerously-skip-permissions "/crea-nuova-pagina 221 222 223 224 225 226 227 228 229 230"
-    echo "Batch 5 completato. Verifica CORREZIONI_BOX_P221-230.md"
-}
-
-run_batch_6() {
-    echo "=== BATCH 6: p231-p240 ==="
-    echo "Creando pagine 231-240..."
-    claude --dangerously-skip-permissions "/crea-nuova-pagina 231 232 233 234 235 236 237 238 239 240"
-    echo "Batch 6 completato. Verifica CORREZIONI_BOX_P231-240.md"
-}
-
-run_batch_7() {
-    echo "=== BATCH 7: p241-p250 ==="
-    echo "Creando pagine 241-250..."
-    claude --dangerously-skip-permissions "/crea-nuova-pagina 241 242 243 244 245 246 247 248 249 250"
-    echo "Batch 7 completato. Verifica CORREZIONI_BOX_P241-250.md"
-}
-
-run_batch_8() {
-    echo "=== BATCH 8: p251-p264 ==="
-    echo "Creando pagine 251-264..."
-    claude --dangerously-skip-permissions "/crea-nuova-pagina 251 252 253 254 255 256 257 258 259 260 261 262 263 264"
-    echo "Batch 8 completato. Verifica CORREZIONI_BOX_P251-264.md"
-}
-
-case $BATCH in
-    1) run_batch_1 ;;
-    2) run_batch_2 ;;
-    3) run_batch_3 ;;
-    4) run_batch_4 ;;
-    5) run_batch_5 ;;
-    6) run_batch_6 ;;
-    7) run_batch_7 ;;
-    8) run_batch_8 ;;
-    all)
-        run_batch_1
-        run_batch_2
-        run_batch_3
-        run_batch_4
-        run_batch_5
-        run_batch_6
-        run_batch_7
-        run_batch_8
-        ;;
-    *)
-        echo "Uso: $0 [1-8|all]"
+        echo -e "${BLUE}========================================${NC}"
+        echo -e "Completate ${GREEN}$i${NC} di ${GREEN}$total${NC} pagine"
+        remaining=$((total - i))
+        echo -e "Rimanenti: ${YELLOW}$remaining${NC} pagine"
+        echo -e "${BLUE}========================================${NC}"
         echo ""
-        echo "Batch disponibili:"
-        echo "  1: p181-p190"
-        echo "  2: p191-p200"
-        echo "  3: p201-p210"
-        echo "  4: p211-p220"
-        echo "  5: p221-p230"
-        echo "  6: p231-p240"
-        echo "  7: p241-p250"
-        echo "  8: p251-p264"
-        echo "  all: Tutti i batch"
-        exit 1
-        ;;
-esac
+        read -p "Continuare con il prossimo batch? (s/n) [s]: " risposta
+        risposta=${risposta:-s}
+        if [ "$risposta" != "s" ] && [ "$risposta" != "S" ]; then
+            echo ""
+            echo -e "${YELLOW}Batch interrotto dall'utente.${NC}"
+            echo -e "Prossima pagina: ${RED}${PAGINE[$i]}${NC}"
+            echo ""
+            echo -e "Per riprendere, modifica l'array PAGINE nello script"
+            echo -e "partendo da ${PAGINE[$i]}"
+            exit 0
+        fi
+        echo ""
+    fi
+done
 
 echo ""
-echo "=== RIEPILOGO ==="
-echo "Pagine create. Ricorda di:"
-echo "1. Verificare il file CORREZIONI_BOX appropriato"
-echo "2. Eseguire: bin/rails tailwindcss:build"
-echo "3. Controllare le pagine nel browser"
+echo -e "${GREEN}========================================${NC}"
+echo -e "${GREEN}  Tutte le ${total} pagine sono state create!${NC}"
+echo -e "${GREEN}========================================${NC}"
+echo ""
+echo "Ricorda di:"
+echo "1. Eseguire: bin/rails tailwindcss:build"
+echo "2. Controllare le pagine nel browser"
+echo "3. Aggiornare il seed se necessario"

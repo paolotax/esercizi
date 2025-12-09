@@ -1,0 +1,192 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione - Ricorda! -->
+    <div class="p-4 md:p-6 bg-custom-blue rounded-2xl">
+      <h3 class="font-bold text-<%= @pagina.base_color %>-600 italic mb-4">Ricorda!</h3>
+      <p class="text-gray-700">
+        Le <span class="font-bold">cifre</span> di un numero hanno un <span class="font-bold">valore</span> diverso in base al posto che occupano.
+      </p>
+    </div>
+
+    <!-- Tabella valori posizionali -->
+    <div class="overflow-x-auto">
+      <table class="border-collapse border border-gray-300">
+        <thead>
+          <tr>
+            <th class="p-2 border border-gray-300 bg-white"></th>
+            <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center">
+              <span class="font-bold">Migliaia</span><br><span class="font-bold">k</span>
+            </th>
+            <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center">
+              <span class="font-bold">Centinaia</span><br><span class="font-bold">h</span>
+            </th>
+            <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center">
+              <span class="font-bold">Decine</span><br><span class="font-bold">da</span>
+            </th>
+            <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center">
+              <span class="font-bold">Unità</span><br><span class="font-bold">u</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-2 border border-gray-300 text-center bg-white">76<span class="font-bold">2</span> → 2 sono le <span class="font-bold">unità</span> → 2 vale 2</td>
+            <td class="p-2 border border-gray-300 text-center bg-white"></td>
+            <td class="p-2 border border-gray-300 text-center bg-white">7</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">6</td>
+            <td class="p-2 border border-gray-300 text-center bg-white font-bold">2</td>
+          </tr>
+          <tr>
+            <td class="p-2 border border-gray-300 text-center bg-white">4<span class="font-bold">2</span>9 → 2 sono le <span class="font-bold">decine</span> → 2 vale 20</td>
+            <td class="p-2 border border-gray-300 text-center bg-white"></td>
+            <td class="p-2 border border-gray-300 text-center bg-white">4</td>
+            <td class="p-2 border border-gray-300 text-center bg-white font-bold">2</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">9</td>
+          </tr>
+          <tr>
+            <td class="p-2 border border-gray-300 text-center bg-white"><span class="font-bold">2</span>38 → 2 sono le <span class="font-bold">centinaia</span> → 2 vale 200</td>
+            <td class="p-2 border border-gray-300 text-center bg-white"></td>
+            <td class="p-2 border border-gray-300 text-center bg-white font-bold">2</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">3</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">8</td>
+          </tr>
+          <tr>
+            <td class="p-2 border border-gray-300 text-center bg-white"><span class="font-bold">2</span>541 → 2 sono le <span class="font-bold">migliaia</span> → 2 vale <span class="whitespace-nowrap">2 000</span></td>
+            <td class="p-2 border border-gray-300 text-center bg-white font-bold">2</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">5</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">4</td>
+            <td class="p-2 border border-gray-300 text-center bg-white">1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6">
+
+      <!-- Esercizio 1: Inserisci numeri in tabella -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Inserisci i numeri in tabella e scrivi ogni volta quanto vale la cifra 3. Segui l'esempio.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="border-collapse border border-gray-300 bg-white">
+            <thead>
+              <tr>
+                <th class="p-2 border border-gray-300 bg-white"></th>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center">
+                  <span class="font-bold">Migliaia</span><br><span class="font-bold">k</span>
+                </th>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center">
+                  <span class="font-bold">Centinaia</span><br><span class="font-bold">h</span>
+                </th>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center">
+                  <span class="font-bold">Decine</span><br><span class="font-bold">da</span>
+                </th>
+                <th class="p-2 border border-gray-300 bg-<%= @pagina.base_color %>-100 text-center">
+                  <span class="font-bold">Unità</span><br><span class="font-bold">u</span>
+                </th>
+                <th class="p-2 border border-gray-300 bg-white"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Esempio -->
+              <tr class="bg-<%= @pagina.base_color %>-50">
+                <td class="p-2 border border-gray-300 text-center font-bold">21<span class="font-bold">3</span>7</td>
+                <td class="p-2 border border-gray-300 text-center font-bold text-<%= @pagina.base_color %>-600">2</td>
+                <td class="p-2 border border-gray-300 text-center font-bold text-<%= @pagina.base_color %>-600">1</td>
+                <td class="p-2 border border-gray-300 text-center font-bold text-<%= @pagina.base_color %>-600">3</td>
+                <td class="p-2 border border-gray-300 text-center font-bold text-<%= @pagina.base_color %>-600">7</td>
+                <td class="p-2 border border-gray-300 text-left bg-white">3 vale <span class="font-bold">30</span></td>
+              </tr>
+              <% [
+                { num: "309", digits: ["", "", "3", "0", "9"], value: "300" },
+                { num: "53", digits: ["", "", "", "5", "3"], value: "3" },
+                { num: "3421", digits: ["3", "4", "2", "1", ""], value: "3000" }
+              ].each do |row| %>
+                <tr>
+                  <td class="p-2 border border-gray-300 text-center font-bold"><%= row[:num] %></td>
+                  <% row[:digits].each do |digit| %>
+                    <td class="p-2 border border-gray-300 text-center bg-white">
+                      <% if digit.present? %>
+                        <input type="text" data-correct-answer="<%= digit %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                      <% end %>
+                    </td>
+                  <% end %>
+                  <td class="p-2 border border-gray-300 text-left bg-white">
+                    3 vale <input type="text" data-correct-answer="<%= row[:value] %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Esercizio 2: Componi e scomponi -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Componi e scomponi come negli esempi.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Composizione -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-2 p-2 bg-<%= @pagina.base_color %>-50 rounded">
+              <span>2 h, 3 da, 2 u</span>
+              <span class="text-<%= @pagina.base_color %>-500">=</span>
+              <span class="font-bold text-<%= @pagina.base_color %>-600">232</span>
+            </div>
+            <% [
+              { text: "8 u, 7 da", answer: "78" },
+              { text: "7 k, 6 u, 9 da", answer: "7096" },
+              { text: "1 h, 4 da, 5 u", answer: "145" }
+            ].each do |item| %>
+              <div class="flex items-center gap-2">
+                <span><%= item[:text] %></span>
+                <span class="text-<%= @pagina.base_color %>-500">=</span>
+                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Scomposizione -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-2 p-2 bg-<%= @pagina.base_color %>-50 rounded">
+              <span class="whitespace-nowrap">7 783</span>
+              <span class="text-<%= @pagina.base_color %>-500">=</span>
+              <span class="font-bold text-<%= @pagina.base_color %>-600">7 k, 7 h, 8 da, 3 u</span>
+            </div>
+            <% [
+              { num: "369", answers: ["", "3", "6", "9"] },
+              { num: "541", answers: ["", "5", "4", "1"] },
+              { num: "2632", answers: ["2", "6", "3", "2"] }
+            ].each do |item| %>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span><%= item[:num] %></span>
+                <span class="text-<%= @pagina.base_color %>-500">=</span>
+                <input type="text" data-correct-answer="<%= item[:answers][0] %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> k,
+                <input type="text" data-correct-answer="<%= item[:answers][1] %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> h,
+                <input type="text" data-correct-answer="<%= item[:answers][2] %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> da,
+                <input type="text" data-correct-answer="<%= item[:answers][3] %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> u
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

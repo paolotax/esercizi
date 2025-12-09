@@ -1,0 +1,177 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls word-highlighter"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Box Teoria -->
+    <div class="p-4 md:p-6 bg-pink-light rounded-3xl space-y-4">
+      <p class="font-bold text-gray-700">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Leggi e osserva.
+      </p>
+
+      <!-- Proprietà commutativa -->
+      <div>
+        <h3 class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Proprietà commutativa</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+          <div>
+            <p class="text-gray-700 mb-3">
+              Per la proprietà commutativa, se <span class="font-bold">cambi l'ordine degli addendi</span> il risultato non cambia.
+            </p>
+            <div class="flex items-center gap-2">
+              <%= image_tag "nvi4_mat/p028/p028_01.jpg", alt: "Proprietà commutativa", class: "max-w-[120px]" %>
+            </div>
+          </div>
+          <div>
+            <p class="text-gray-700">
+              Puoi usare la proprietà commutativa per controllare se il risultato è corretto.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proprietà associativa -->
+      <div>
+        <h3 class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Proprietà associativa</h3>
+
+        <p class="text-gray-700 mb-3">
+          Per la proprietà associativa, se <span class="font-bold">a due o più addendi sostituisci la loro somma</span> il risultato non cambia.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Con le frecce -->
+          <div class="text-center">
+            <p class="font-bold text-<%= @pagina.base_color %>-600 mb-3">Con le frecce</p>
+            <div class="flex justify-center gap-8">
+              <%= image_tag "nvi4_mat/p028/p028_02.jpg", alt: "Associativa frecce 1", class: "max-w-[80px]" %>
+              <%= image_tag "nvi4_mat/p028/p028_03.jpg", alt: "Associativa frecce 2", class: "max-w-[80px]" %>
+            </div>
+          </div>
+
+          <!-- Con le parentesi -->
+          <div>
+            <p class="font-bold text-<%= @pagina.base_color %>-600 mb-3 text-center">Con le parentesi</p>
+            <div class="space-y-3">
+              <div>
+                <p class="text-gray-700">3 + (4 + 2) =</p>
+                <p class="text-gray-700">3 + <span class="font-bold text-<%= @pagina.base_color %>-600">6</span> = 9</p>
+              </div>
+              <div>
+                <p class="text-gray-700">(3 + 4) + 2 =</p>
+                <p class="text-gray-700"><span class="font-bold text-<%= @pagina.base_color %>-600">7</span> + 2 = 9</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x-2 md:divide-orange-300">
+        <!-- Colonna sinistra -->
+        <div class="md:pr-4">
+          <!-- Esercizio 1 -->
+          <div class="mb-6">
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(1) %>
+              Applica la proprietà commutativa e calcola.
+            </p>
+
+            <div class="space-y-3">
+              <p class="text-gray-700">41 + 25 = <span class="font-bold text-<%= @pagina.base_color %>-600">25 + 41 = 66</span></p>
+
+              <div class="flex items-center gap-2">
+                <span>6 + 187 =</span>
+                <input type="text" data-correct-answer="187 + 6 = 193" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span>278 + 391 =</span>
+                <input type="text" data-correct-answer="391 + 278 = 669" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span>175 + 423 =</span>
+                <input type="text" data-correct-answer="423 + 175 = 598" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span>4 126 + 3 563 =</span>
+                <input type="text" data-correct-answer="3563 + 4126 = 7689" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span>8 104 + 1 799 =</span>
+                <input type="text" data-correct-answer="1799 + 8104 = 9903" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonna destra -->
+        <div class="md:pl-4">
+          <!-- Esercizio 2 -->
+          <div class="mb-6">
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(2) %>
+              Sottolinea i numeri che ti conviene associare per semplificare il calcolo ed esegui.
+            </p>
+
+            <div class="space-y-3">
+              <p class="text-gray-700">
+                <span class="underline decoration-<%= @pagina.base_color %>-500">27</span> + <span class="underline decoration-<%= @pagina.base_color %>-500">33</span> + 48 = <span class="font-bold text-<%= @pagina.base_color %>-600">60 + 48 = 108</span>
+              </p>
+
+              <div class="flex items-center gap-2">
+                <span>24 + 36 + 15 =</span>
+                <input type="text" data-correct-answer="60 + 15 = 75" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span>37 + 29 + 51 =</span>
+                <input type="text" data-correct-answer="37 + 80 = 117" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span>152 + 48 + 237 =</span>
+                <input type="text" data-correct-answer="200 + 237 = 437" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span>500 + 239 + 261 =</span>
+                <input type="text" data-correct-answer="500 + 500 = 1000" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 3 (piena larghezza) -->
+      <div class="mt-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Applica le proprietà commutativa e associativa e calcola come nell'esempio.
+        </p>
+
+        <div class="space-y-4">
+          <p class="text-gray-700">
+            152 + 47 + 208 + 73 = <span class="font-bold text-<%= @pagina.base_color %>-600">152 + 208 + 47 + 73 = 360 + 120 = 480</span>
+          </p>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <span>21 + 355 + 79 + 145 =</span>
+            <input type="text" data-correct-answer="21 + 79 + 355 + 145 = 100 + 500 = 600" class="flex-1 min-w-[200px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span>1 576 + 933 + 2 424 + 67 =</span>
+            <input type="text" data-correct-answer="1576 + 2424 + 933 + 67 = 4000 + 1000 = 5000" class="flex-1 min-w-[200px] border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [180] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
