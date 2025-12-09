@@ -1,20 +1,20 @@
-# Crea Nuova Pagina nvi5_mat
+# Crea Nuova Pagina nvi4_mat
 
-Creare la/e pagina/e $ARGUMENTS per il libro nvi5_mat.
+Creare la/e pagina/e $ARGUMENTS per il libro nvi4_mat.
 
 ---
 
 ## PROCEDURA
 
-1. **GUARDA page.png** - `assets/images/nvi5_mat/p0XX/page.png` - FONDAMENTALE per capire layout e struttura visiva!
-2. **Leggi HTML originale** - `assets/images/nvi5_mat/p0XX/*.html` - per estrarre testo e risposte
+1. **GUARDA page.png** - `assets/images/nvi4_mat/p0XX/page.png` - FONDAMENTALE per capire layout e struttura visiva!
+2. **Leggi HTML originale** - `assets/images/nvi4_mat/p0XX/*.html` - per estrarre testo e risposte
 3. **Cerca "Quaderno esercizi"** - Se presente nell'HTML, annota i numeri di pagina per il partial!
 4. **Aggiorna seed** - Con la nuova pagina
 5. **Rigenera database** - Per applicare le modifiche
 6. **Analizza la struttura** - Identifica sezioni, colonne, box colorati, tipi di esercizi. CONTROLLA ANCHE le immagini jpg/png nella cartella asset della pagina per usarle nella view
 7. **Identifica controller** - Quale tipo di interazione serve? (vedi sotto)
 8. **Applica i pattern** - Usa i template sotto
-9. **Crea la view** - `app/views/exercises/nvi5_mat_p0XX.html.erb`
+9. **Crea la view** - `app/views/exercises/nvi4_mat_p0XX.html.erb`
 
 ---
 
@@ -336,9 +336,9 @@ Usare `@pagina.base_color` per colori coerenti:
 
 ---
 
-## PAGINE ESERCIZI (Quaderno p176+)
+## PAGINE ESERCIZI (Quaderno p170+)
 
-**IMPORTANTE:** Per le pagine del Quaderno Esercizi (p176 in poi) usare queste varianti:
+**IMPORTANTE:** Per le pagine del Quaderno Esercizi (p170 in poi) usare queste varianti:
 
 ### Box IMPARARE TUTTI (bordo GIALLO):
 ```erb
@@ -421,7 +421,7 @@ Se presente, aggiungere il partial **PRIMA** di `exercise_controls`:
 - [ ] Seed aggiornato con la nuova pagina
 - [ ] Database rigenerato
 - [ ] Controllare se ci sono jpg nella cartella della pagina da usare
-- [ ] **Se pagina ESERCIZI (p176+):** Box IMPARARE TUTTI con `border-yellow-400`
+- [ ] **Se pagina ESERCIZI (p170+):** Box IMPARARE TUTTI con `border-yellow-400`
 - [ ] **Se pagina ESERCIZI:** Tabelle con stile cyan (`border-cyan-400`, `bg-cyan-100`)
 - [ ] **Se pagina ESERCIZI:** Colori cyan fissi invece di `@pagina.base_color`
 - [ ] **Se pagina ESERCIZI:** NO wrapper `bg-orange-100` per esercizi
