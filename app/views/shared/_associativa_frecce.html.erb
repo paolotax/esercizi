@@ -1,0 +1,126 @@
+<%#
+  Partial per diagrammi della proprietà associativa con frecce SVG
+
+  Parametri:
+  - a: primo termine
+  - b: secondo termine
+  - c: terzo termine
+  - op: operatore ("×" o "+", default: "×")
+  - group: quale coppia raggruppare ("left" per a,b oppure "right" per b,c)
+  - color: colore del risultato parziale (default: "blue")
+
+  Esempio:
+  render 'shared/associativa_frecce', a: 6, b: 5, c: 2, op: "×", group: "right"
+  render 'shared/associativa_frecce', a: 6, b: 5, c: 2, op: "×", group: "left"
+%>
+
+<%
+  a = local_assigns[:a]
+  b = local_assigns[:b]
+  c = local_assigns[:c]
+  op = local_assigns.fetch(:op, "×")
+  group = local_assigns.fetch(:group, "right")
+  color = local_assigns.fetch(:color, "blue")
+
+  # Calcolo risultati
+  if op == "+"
+    partial_result = group == "left" ? a + b : b + c
+    remaining = group == "left" ? c : a
+    final_result = a + b + c
+  else
+    partial_result = group == "left" ? a * b : b * c
+    remaining = group == "left" ? c : a
+    final_result = a * b * c
+  end
+
+  # Mappatura colori
+  color_classes = {
+    "blue" => "text-blue-600",
+    "pink" => "text-pink-500",
+    "orange" => "text-orange-500",
+    "green" => "text-green-500",
+    "cyan" => "text-cyan-500"
+  }
+
+  result_class = color_classes[color] || "text-blue-600"
+
+  # ID unico per i marker SVG
+  marker_id = "arrow-assoc-#{SecureRandom.hex(4)}"
+%>
+
+<div class="inline-block font-sans">
+  <table class="border-collapse">
+    <% if group == "right" %>
+      <!-- Raggruppa b e c (destra): a × b × c -->
+      <tr class="font-bold text-gray-700">
+        <td class="text-right pr-0.5"><%= a %></td>
+        <td class="text-center px-0.5"><%= op %></td>
+        <td class="text-center px-0.5"><%= b %></td>
+        <td class="text-center px-0.5"><%= op %></td>
+        <td class="text-left pl-0.5"><%= c %></td>
+      </tr>
+      <!-- Riga parentesi: sotto b op c -->
+      <tr>
+        <td></td>
+        <td></td>
+        <td colspan="3" class="text-center">
+          <svg width="100%" height="20" viewBox="0 0 50 20" preserveAspectRatio="xMidYMid meet" class="text-gray-700">
+            <defs>
+              <marker id="<%= marker_id %>" markerWidth="4" markerHeight="4" refX="2" refY="2" orient="auto">
+                <path d="M0,0 L4,2 L0,4 Z" fill="currentColor"/>
+              </marker>
+            </defs>
+            <path d="M 5 2 L 5 8 L 45 8 L 45 2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M 25 8 L 25 18" stroke="currentColor" stroke-width="1.5" fill="none" marker-end="url(#<%= marker_id %>)"/>
+          </svg>
+        </td>
+      </tr>
+      <!-- Riga risultato parziale -->
+      <tr class="font-bold">
+        <td class="text-right pr-0.5 text-gray-700"><%= a %></td>
+        <td class="text-center px-0.5 text-gray-700"><%= op %></td>
+        <td colspan="3" class="text-center <%= result_class %>"><%= partial_result %></td>
+      </tr>
+    <% else %>
+      <!-- Raggruppa a e b (sinistra): a × b × c -->
+      <tr class="font-bold text-gray-700">
+        <td class="text-center px-0.5"><%= a %></td>
+        <td class="text-center px-0.5"><%= op %></td>
+        <td class="text-center px-0.5"><%= b %></td>
+        <td class="text-center px-0.5"><%= op %></td>
+        <td class="text-left pl-0.5"><%= c %></td>
+      </tr>
+      <!-- Riga parentesi: sotto a op b -->
+      <tr>
+        <td colspan="3" class="text-center">
+          <svg width="100%" height="20" viewBox="0 0 50 20" preserveAspectRatio="xMidYMid meet" class="text-gray-700">
+            <defs>
+              <marker id="<%= marker_id %>" markerWidth="4" markerHeight="4" refX="2" refY="2" orient="auto">
+                <path d="M0,0 L4,2 L0,4 Z" fill="currentColor"/>
+              </marker>
+            </defs>
+            <path d="M 5 2 L 5 8 L 45 8 L 45 2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M 25 8 L 25 18" stroke="currentColor" stroke-width="1.5" fill="none" marker-end="url(#<%= marker_id %>)"/>
+          </svg>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+      <!-- Riga risultato parziale -->
+      <tr class="font-bold">
+        <td colspan="3" class="text-center <%= result_class %>"><%= partial_result %></td>
+        <td class="text-center px-0.5 text-gray-700"><%= op %></td>
+        <td class="text-left pl-0.5 text-gray-700"><%= c %></td>
+      </tr>
+    <% end %>
+    <!-- Linea e risultato finale -->
+    <tr>
+      <td colspan="5" class="text-center pt-1">
+        <div class="border-t border-gray-700 mx-auto" style="width: 40px;"></div>
+      </td>
+    </tr>
+    <tr class="font-bold text-gray-700">
+      <td colspan="5" class="text-center"><%= final_result %></td>
+    </tr>
+  </table>
+</div>

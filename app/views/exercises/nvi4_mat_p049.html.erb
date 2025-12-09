@@ -8,36 +8,26 @@
   <div class="space-y-6">
 
     <!-- Esempio con bottiglia -->
-    <div class="p-4 md:p-6 bg-custom-blue rounded-lg">
+    <div class="p-4 md:p-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <div class="p-3 bg-white rounded-lg mb-4">
+          <div class="p-3 bg-custom-blue-light mb-4">
             <p class="text-gray-700">
               Al supermercato una confezione di 6 bottiglie di aranciata costa 12 euro. Quanto costa ciascuna bottiglia?
             </p>
           </div>
 
           <!-- Diagramma -->
-          <div class="flex flex-col items-center">
-            <div class="text-center mb-2">
-              <span class="font-bold text-orange-500">: 6</span>
-            </div>
-            <div class="flex items-center gap-4">
-              <div class="w-16 h-12 border-2 border-<%= @pagina.base_color %>-500 rounded flex items-center justify-center font-bold">12</div>
-              <div class="flex flex-col items-center">
-                <span class="text-orange-500">→</span>
-                <span class="text-blue-600">←</span>
-              </div>
-              <div class="w-16 h-12 border-2 border-<%= @pagina.base_color %>-500 rounded flex items-center justify-center font-bold text-gray-400">.....</div>
-            </div>
-            <div class="text-center mt-2">
-              <span class="font-bold text-blue-600">× 6</span>
-            </div>
+          <div class="flex justify-center">
+            <%= render 'shared/operazioni_inverse',
+                left: 12, right: nil, right_answer: "2",
+                op_direct: ":", op_direct_num: 6,
+                op_inverse: "×", op_inverse_num: 6 %>
           </div>
         </div>
 
-        <div class="flex flex-col justify-center">
-          <div class="p-3 bg-white rounded-lg border-3 border-<%= @pagina.base_color %>-400">
+        <div class="flex flex-col justify-end">
+          <div class="p-3">
             <p class="text-gray-700 font-bold">12 : 6 = 2</p>
             <p class="text-gray-700">Ogni bottiglia costa 2 euro.</p>
           </div>
@@ -46,36 +36,26 @@
     </div>
 
     <!-- Esempio con figurine -->
-    <div class="p-4 md:p-6 bg-custom-blue rounded-lg">
+    <div class="p-4 md:p-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <div class="p-3 bg-white rounded-lg mb-4">
+          <div class="p-3 bg-custom-blue-light mb-4">
             <p class="text-gray-700">
               Luca ha regalato a Giulio la metà delle sue figurine. Ora Luca ha 18 figurine. Quante figurine aveva prima Luca?
             </p>
           </div>
 
           <!-- Diagramma -->
-          <div class="flex flex-col items-center">
-            <div class="text-center mb-2">
-              <span class="font-bold text-orange-500">: 2</span>
-            </div>
-            <div class="flex items-center gap-4">
-              <div class="w-16 h-12 border-2 border-<%= @pagina.base_color %>-500 rounded flex items-center justify-center font-bold text-gray-400">.....</div>
-              <div class="flex flex-col items-center">
-                <span class="text-orange-500">→</span>
-                <span class="text-blue-600">←</span>
-              </div>
-              <div class="w-16 h-12 border-2 border-<%= @pagina.base_color %>-500 rounded flex items-center justify-center font-bold">18</div>
-            </div>
-            <div class="text-center mt-2">
-              <span class="font-bold text-blue-600">× 2</span>
-            </div>
+          <div class="flex justify-center">
+            <%= render 'shared/operazioni_inverse',
+                left: nil, left_answer: "36", right: 18,
+                op_direct: ":", op_direct_num: 2,
+                op_inverse: "×", op_inverse_num: 2 %>
           </div>
         </div>
 
-        <div class="flex flex-col justify-center">
-          <div class="p-3 bg-white rounded-lg border-3 border-<%= @pagina.base_color %>-400">
+        <div class="flex flex-col justify-end">
+          <div class="p-3">
             <p class="text-gray-700 font-bold">18 × 2 = 36</p>
             <p class="text-gray-700">Luca aveva 36 figurine.</p>
           </div>
@@ -84,7 +64,7 @@
     </div>
 
     <!-- ESERCIZI -->
-    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+    <div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
 
       <p class="font-bold text-gray-700 mb-6">
         Risolvi i problemi proposti. Traduci nel linguaggio matematico e usa le frecce quando ti servono.

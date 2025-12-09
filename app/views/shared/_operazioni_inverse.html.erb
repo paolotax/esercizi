@@ -1,0 +1,175 @@
+<%#
+  Partial per diagrammi di operazioni inverse con frecce SVG
+
+  Parametri:
+  - left: numero sinistro (o nil per input)
+  - right: numero destro (o nil per input)
+  - left_answer: risposta corretta se left è nil
+  - right_answer: risposta corretta se right è nil
+
+  - op_direct: operatore diretto (×, :, +, -)
+  - op_direct_num: numero operazione diretta (o nil per input)
+  - op_direct_answer: risposta se op_direct_num è nil
+
+  - op_inverse: operatore inverso
+  - op_inverse_num: numero operazione inversa (o nil per input)
+  - op_inverse_answer: risposta se op_inverse_num è nil
+
+  - color_direct: colore freccia diretta (default: blue per ×/+, orange per :/-)
+  - color_inverse: colore freccia inversa (default: blue per ×/+, orange per :/-)
+  - box_color: colore bordo box (default: green)
+
+  Note: freccia sopra sempre → (destra), freccia sotto sempre ← (sinistra)
+
+  Esempio:
+  render 'shared/operazioni_inverse',
+    left: 12, right: 36,
+    op_direct: "×", op_direct_num: 3,
+    op_inverse: ":", op_inverse_num: 3
+%>
+
+<%
+  # Estrazione parametri con default
+  left = local_assigns[:left]
+  right = local_assigns[:right]
+  left_answer = local_assigns[:left_answer].to_s
+  right_answer = local_assigns[:right_answer].to_s
+
+  op_direct = local_assigns.fetch(:op_direct, "×")
+  op_direct_num = local_assigns[:op_direct_num]
+  op_direct_answer = local_assigns[:op_direct_answer].to_s
+
+  op_inverse = local_assigns.fetch(:op_inverse, ":")
+  op_inverse_num = local_assigns[:op_inverse_num]
+  op_inverse_answer = local_assigns[:op_inverse_answer].to_s
+
+  # Colori default basati sull'operazione
+  default_direct_color = %w[× +].include?(op_direct) ? "blue" : "orange"
+  default_inverse_color = %w[× +].include?(op_inverse) ? "blue" : "orange"
+
+  color_direct = local_assigns.fetch(:color_direct, default_direct_color)
+  color_inverse = local_assigns.fetch(:color_inverse, default_inverse_color)
+  box_color = local_assigns.fetch(:box_color, "green")
+
+  # Calcolo larghezza input
+  def input_width_calc(answer_str)
+    case answer_str.length
+    when 0..1 then "w-10"
+    when 2 then "w-12"
+    else "w-14"
+    end
+  end
+
+  # ID unici per i marker SVG
+  marker_id_direct = "arrow-#{SecureRandom.hex(4)}-direct"
+  marker_id_inverse = "arrow-#{SecureRandom.hex(4)}-inverse"
+
+  # Mappatura colori per classi statiche
+  color_classes = {
+    "blue" => { text: "text-blue-600", border: "border-blue-600" },
+    "orange" => { text: "text-orange-500", border: "border-orange-500" },
+    "green" => { text: "text-green-500", border: "border-green-500" },
+    "pink" => { text: "text-pink-500", border: "border-pink-500" },
+    "cyan" => { text: "text-cyan-500", border: "border-cyan-500" }
+  }
+
+  direct_text_class = color_classes.dig(color_direct, :text) || "text-blue-600"
+  inverse_text_class = color_classes.dig(color_inverse, :text) || "text-orange-500"
+  box_border_class = color_classes.dig(box_color, :border) || "border-green-500"
+%>
+
+<div class="inline-flex flex-col items-center gap-1">
+  <!-- Operazione diretta (sopra) -->
+  <div class="flex items-center justify-center <%= direct_text_class %> font-bold text-sm">
+    <% if op_direct_num.nil? %>
+      <span><%= op_direct %></span>
+      <input type="text"
+             data-correct-answer="<%= op_direct_answer %>"
+             class="<%= input_width_calc(op_direct_answer) %> mx-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent <%= direct_text_class %>"
+             placeholder="..."
+             aria-label="operazione diretta">
+    <% else %>
+      <span><%= op_direct %> <%= op_direct_num %></span>
+    <% end %>
+  </div>
+
+  <!-- Container principale -->
+  <div class="relative flex items-center gap-2">
+
+    <!-- Freccia superiore SVG (sempre da sinistra a destra) -->
+    <div class="absolute -top-2 left-1/2 -translate-x-1/2 z-20 <%= direct_text_class %>">
+      <svg width="72" height="20" viewBox="0 0 72 20" fill="none">
+        <defs>
+          <marker id="<%= marker_id_direct %>" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="currentColor"/>
+          </marker>
+        </defs>
+        <path d="M 2 16 Q 36 -4 70 16"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+              marker-end="url(#<%= marker_id_direct %>)"/>
+      </svg>
+    </div>
+
+    <!-- Box sinistro -->
+    <div class="w-14 h-10 border-2 <%= box_border_class %> rounded flex items-center justify-center font-bold bg-white z-10">
+      <% if left.nil? %>
+        <input type="text"
+               data-correct-answer="<%= left_answer %>"
+               class="w-full h-full text-center font-bold bg-transparent"
+               placeholder="..."
+               aria-label="numero sinistro">
+      <% else %>
+        <span><%= left %></span>
+      <% end %>
+    </div>
+
+    <!-- Spazio tra i box -->
+    <div class="w-14"></div>
+
+    <!-- Box destro -->
+    <div class="w-14 h-10 border-2 <%= box_border_class %> rounded flex items-center justify-center font-bold bg-white z-10">
+      <% if right.nil? %>
+        <input type="text"
+               data-correct-answer="<%= right_answer %>"
+               class="w-full h-full text-center font-bold bg-transparent"
+               placeholder="..."
+               aria-label="numero destro">
+      <% else %>
+        <span><%= right %></span>
+      <% end %>
+    </div>
+
+    <!-- Freccia inferiore SVG (sempre da destra a sinistra) -->
+    <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20 <%= inverse_text_class %>">
+      <svg width="72" height="20" viewBox="0 0 72 20" fill="none">
+        <defs>
+          <marker id="<%= marker_id_inverse %>" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="currentColor"/>
+          </marker>
+        </defs>
+        <path d="M 70 4 Q 36 24 2 4"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+              marker-end="url(#<%= marker_id_inverse %>)"/>
+      </svg>
+    </div>
+
+  </div>
+
+  <!-- Operazione inversa (sotto) -->
+  <div class="flex items-center justify-center <%= inverse_text_class %> font-bold text-sm">
+    <% if op_inverse_num.nil? %>
+      <span><%= op_inverse %></span>
+      <input type="text"
+             data-correct-answer="<%= op_inverse_answer %>"
+             class="<%= input_width_calc(op_inverse_answer) %> mx-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent <%= inverse_text_class %>"
+             placeholder="..."
+             aria-label="operazione inversa">
+    <% else %>
+      <span><%= op_inverse %> <%= op_inverse_num %></span>
+    <% end %>
+  </div>
+</div>

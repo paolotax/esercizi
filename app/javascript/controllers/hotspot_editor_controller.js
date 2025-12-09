@@ -40,8 +40,8 @@ export default class extends Controller {
   createEditButton() {
     // Crea pulsante Edit dentro il container (non globale)
     const editBtn = document.createElement('button')
-    editBtn.className = "absolute top-2 right-2 bg-yellow-500 hover:bg-yellow-600 text-white font-bold px-3 py-1 rounded-lg shadow-lg z-40 transition text-sm opacity-50 hover:opacity-100"
-    editBtn.textContent = "✏️ Edit"
+    editBtn.className = "absolute bottom-2 left-2 bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-full shadow-lg z-40 transition opacity-50 hover:opacity-100"
+    editBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>'
     editBtn.addEventListener('click', (e) => {
       e.preventDefault()
       e.stopPropagation()
@@ -59,7 +59,7 @@ export default class extends Controller {
 
     const info = document.createElement('div')
     info.dataset.hotspotEditorTarget = "info"
-    info.className = "fixed top-4 right-4 bg-white border-4 border-blue-500 rounded-lg shadow-2xl z-50 hidden"
+    info.className = "fixed bottom-4 left-4 bg-white border-4 border-blue-500 rounded-lg shadow-2xl z-50 hidden"
     info.style.width = "600px"
     info.innerHTML = `
       <div class="bg-blue-500 text-white px-3 py-2 font-bold text-sm flex items-center justify-between cursor-move" data-panel-header>
@@ -111,6 +111,7 @@ export default class extends Controller {
           info.style.left = currentX + 'px'
           info.style.top = currentY + 'px'
           info.style.right = 'auto'
+          info.style.bottom = 'auto'
         }
       })
 
@@ -401,7 +402,7 @@ export default class extends Controller {
     if (this.editMode) {
       // Attiva modalità edit
       info.classList.remove('hidden')
-      this.editButton.textContent = "👁️ View"
+      this.editButton.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>'
       this.editButton.classList.remove('bg-yellow-500', 'hover:bg-yellow-600')
       this.editButton.classList.add('bg-green-500', 'hover:bg-green-600')
 
@@ -439,7 +440,7 @@ export default class extends Controller {
     } else {
       // Disattiva modalità edit
       info.classList.add('hidden')
-      this.editButton.textContent = "✏️ Edit"
+      this.editButton.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>'
       this.editButton.classList.remove('bg-green-500', 'hover:bg-green-600')
       this.editButton.classList.add('bg-yellow-500', 'hover:bg-yellow-600')
 

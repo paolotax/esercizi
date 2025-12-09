@@ -1,0 +1,84 @@
+<%#
+  Partial per diagrammi della proprietà associativa con parentesi
+
+  Parametri:
+  - a: primo termine
+  - b: secondo termine
+  - c: terzo termine
+  - op: operatore ("×" o "+", default: "×")
+  - group: quale coppia raggruppare ("left" per a,b oppure "right" per b,c)
+  - color: colore del risultato parziale (default: "blue")
+
+  Esempio:
+  render 'shared/associativa_parentesi', a: 6, b: 5, c: 2, op: "×", group: "right"
+  render 'shared/associativa_parentesi', a: 3, b: 4, c: 2, op: "+", group: "left"
+%>
+
+<%
+  a = local_assigns[:a]
+  b = local_assigns[:b]
+  c = local_assigns[:c]
+  op = local_assigns.fetch(:op, "×")
+  group = local_assigns.fetch(:group, "right")
+  color = local_assigns.fetch(:color, "blue")
+
+  # Calcolo risultati
+  if op == "+"
+    partial_result = group == "left" ? a + b : b + c
+    remaining = group == "left" ? c : a
+    final_result = a + b + c
+  else
+    partial_result = group == "left" ? a * b : b * c
+    remaining = group == "left" ? c : a
+    final_result = a * b * c
+  end
+
+  # Mappatura colori
+  color_classes = {
+    "blue" => "text-blue-600",
+    "pink" => "text-pink-500",
+    "orange" => "text-orange-500",
+    "green" => "text-green-500",
+    "cyan" => "text-cyan-500"
+  }
+
+  result_class = color_classes[color] || "text-blue-600"
+%>
+
+<div class="inline-block font-sans">
+  <table class="border-collapse">
+    <% if group == "right" %>
+      <!-- Raggruppa b e c: a × (b × c) = -->
+      <tr class="font-bold text-gray-700">
+        <td class="text-right pr-0.5"><%= a %></td>
+        <td class="text-center px-0.5"><%= op %></td>
+        <td class="text-center px-0.5">(<%= b %> <%= op %> <%= c %>)</td>
+        <td class="text-center px-0.5">=</td>
+        <td></td>
+      </tr>
+      <tr class="font-bold">
+        <td class="text-right pr-0.5 text-gray-700"><%= a %></td>
+        <td class="text-center px-0.5 text-gray-700"><%= op %></td>
+        <td class="text-center px-0.5 <%= result_class %>"><%= partial_result %></td>
+        <td class="text-center px-0.5 text-gray-700">=</td>
+        <td class="text-left pl-0.5 text-gray-700"><%= final_result %></td>
+      </tr>
+    <% else %>
+      <!-- Raggruppa a e b: (a × b) × c = -->
+      <tr class="font-bold text-gray-700">
+        <td class="text-center px-0.5">(<%= a %> <%= op %> <%= b %>)</td>
+        <td class="text-center px-0.5"><%= op %></td>
+        <td class="text-left pl-0.5"><%= c %></td>
+        <td class="text-center px-0.5">=</td>
+        <td></td>
+      </tr>
+      <tr class="font-bold">
+        <td class="text-center px-0.5 <%= result_class %>"><%= partial_result %></td>
+        <td class="text-center px-0.5 text-gray-700"><%= op %></td>
+        <td class="text-left pl-0.5 text-gray-700"><%= c %></td>
+        <td class="text-center px-0.5 text-gray-700">=</td>
+        <td class="text-left pl-0.5 text-gray-700"><%= final_result %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

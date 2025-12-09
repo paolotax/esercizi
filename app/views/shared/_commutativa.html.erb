@@ -1,0 +1,151 @@
+<%#
+  Partial per diagrammi della proprietà commutativa con frecce SVG
+
+  Parametri:
+  - a: primo termine (o nil per input)
+  - b: secondo termine (o nil per input)
+  - result: risultato (o nil per input, o :auto per calcolo automatico)
+  - a_answer: risposta se a è nil
+  - b_answer: risposta se b è nil
+  - result_answer: risposta se result è nil
+
+  - op: operatore ("×" o "+", default: "×")
+  - color_a: colore primo termine (default: orange)
+  - color_b: colore secondo termine (default: cyan)
+  - color_result: colore risultato (default: green)
+
+  Esempio:
+  render 'shared/commutativa', a: 8, b: 2, result: 16
+  render 'shared/commutativa', a: 8, b: 2, result: :auto
+  render 'shared/commutativa', a: 8, b: 2, result: :auto, op: "+"
+%>
+
+<%
+  a = local_assigns[:a]
+  b = local_assigns[:b]
+  result_param = local_assigns[:result]
+  op = local_assigns.fetch(:op, "×")
+
+  a_answer = local_assigns[:a_answer].to_s
+  b_answer = local_assigns[:b_answer].to_s
+  result_answer = local_assigns[:result_answer].to_s
+
+  # Calcolo automatico del risultato se :auto
+  if result_param == :auto && a && b
+    result = op == "+" ? a + b : a * b
+  else
+    result = result_param
+  end
+
+  color_a = local_assigns.fetch(:color_a, "orange")
+  color_b = local_assigns.fetch(:color_b, "cyan")
+  color_result = local_assigns.fetch(:color_result, "green")
+
+  # Mappatura colori
+  color_classes = {
+    "orange" => "text-orange-500",
+    "cyan" => "text-cyan-500",
+    "green" => "text-green-500",
+    "blue" => "text-blue-600",
+    "pink" => "text-pink-500",
+    "red" => "text-red-500"
+  }
+
+  a_class = color_classes[color_a] || "text-orange-500"
+  b_class = color_classes[color_b] || "text-cyan-500"
+  result_class = color_classes[color_result] || "text-green-500"
+
+  # ID unico per i marker SVG
+  marker_id = "arrow-comm-#{SecureRandom.hex(4)}"
+%>
+
+<div class="inline-block font-sans">
+  <table class="border-collapse">
+    <!-- Prima riga: a op b = result -->
+    <tr class="font-bold">
+      <td class="text-right px-0.5 <%= a_class %>">
+        <% if a.nil? %>
+          <input type="text" data-correct-answer="<%= a_answer %>"
+                 class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent <%= a_class %>"
+                 placeholder="...">
+        <% else %>
+          <%= a %>
+        <% end %>
+      </td>
+      <td class="text-center px-0.5 text-gray-700"><%= op %></td>
+      <td class="text-left px-0.5 <%= b_class %>">
+        <% if b.nil? %>
+          <input type="text" data-correct-answer="<%= b_answer %>"
+                 class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent <%= b_class %>"
+                 placeholder="...">
+        <% else %>
+          <%= b %>
+        <% end %>
+      </td>
+      <td class="text-center px-0.5 text-gray-700">=</td>
+      <td class="text-left px-0.5 <%= result_class %>">
+        <% if result.nil? %>
+          <input type="text" data-correct-answer="<%= result_answer %>"
+                 class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent <%= result_class %>"
+                 placeholder="...">
+        <% else %>
+          <%= result %>
+        <% end %>
+      </td>
+    </tr>
+
+    <!-- Riga frecce -->
+    <tr>
+      <td></td>
+      <td class="h-7">
+        <!-- Frecce incrociate al centro -->
+        <svg class="text-gray-800 mx-auto" width="28" height="28" viewBox="0 0 28 28">
+          <defs>
+            <marker id="<%= marker_id %>" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+              <path d="M0,0 L5,2.5 L0,5 Z" fill="currentColor"/>
+            </marker>
+          </defs>
+          <!-- X incrociata -->
+          <path d="M 2 2 L 26 26" stroke="currentColor" stroke-width="2" fill="none" marker-end="url(#<%= marker_id %>)"/>
+          <path d="M 26 2 L 2 26" stroke="currentColor" stroke-width="2" fill="none" marker-end="url(#<%= marker_id %>)"/>
+        </svg>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <!-- Seconda riga: b op a = result -->
+    <tr class="font-bold">
+      <td class="text-right px-0.5 <%= b_class %>">
+        <% if b.nil? %>
+          <input type="text" data-correct-answer="<%= b_answer %>"
+                 class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent <%= b_class %>"
+                 placeholder="...">
+        <% else %>
+          <%= b %>
+        <% end %>
+      </td>
+      <td class="text-center px-0.5 text-gray-700"><%= op %></td>
+      <td class="text-left px-0.5 <%= a_class %>">
+        <% if a.nil? %>
+          <input type="text" data-correct-answer="<%= a_answer %>"
+                 class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent <%= a_class %>"
+                 placeholder="...">
+        <% else %>
+          <%= a %>
+        <% end %>
+      </td>
+      <td class="text-center px-0.5 text-gray-700">=</td>
+      <td class="text-left px-0.5 <%= result_class %>">
+        <% if result.nil? %>
+          <input type="text" data-correct-answer="<%= result_answer %>"
+                 class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent <%= result_class %>"
+                 placeholder="...">
+        <% else %>
+          <%= result %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+</div>

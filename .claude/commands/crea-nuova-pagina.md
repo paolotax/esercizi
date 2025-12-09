@@ -120,7 +120,7 @@ Il controller `font-controls` gestisce la dimensione del testo dinamicamente. Se
 
 **Container ESERCIZI (sfondo arancione):**
 ```erb
-<div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+<div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
 ```
 
 **Box IMPARARE TUTTI (primo esercizio evidenziato):**
@@ -204,6 +204,44 @@ Usare `@pagina.base_color` per colori coerenti:
 
 ---
 
+## PARTIAL OPERAZIONI INVERSE
+
+Per diagrammi con frecce che mostrano operazioni inverse (moltiplicazione/divisione):
+
+```erb
+<%= render 'shared/operazioni_inverse',
+    left: 12, right: 36,
+    op_direct: "×", op_direct_num: 3,
+    op_inverse: ":", op_inverse_num: 3 %>
+```
+
+**Con input (numero da trovare):**
+```erb
+<%= render 'shared/operazioni_inverse',
+    left: nil, left_answer: "9", right: 45,
+    op_direct: "×", op_direct_num: 5,
+    op_inverse: ":", op_inverse_num: 5 %>
+```
+
+**Parametri:**
+- `left`, `right`: numeri nei box (nil per input)
+- `left_answer`, `right_answer`: risposta se il numero è nil
+- `op_direct`: operatore diretto (×, :, +, -)
+- `op_direct_num`: numero operazione (o nil per input)
+- `op_inverse`: operatore inverso
+- `op_inverse_num`: numero operazione inversa
+
+**Colori automatici:** × e + = blu, : e - = arancione
+
+**Centrare il partial:**
+```erb
+<div class="flex justify-center">
+  <%= render 'shared/operazioni_inverse', ... %>
+</div>
+```
+
+---
+
 ## LAYOUT
 
 **Due colonne con divisore:**
@@ -220,15 +258,82 @@ Usare `@pagina.base_color` per colori coerenti:
 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
 ```
 
+**Layout problema + diagramma (risposta allineata in basso):**
+```erb
+<div class="p-4 md:p-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <div class="p-3 bg-custom-blue-light mb-4">
+        <p class="text-gray-700">Testo del problema...</p>
+      </div>
+      <div class="flex justify-center">
+        <%= render 'shared/operazioni_inverse', ... %>
+      </div>
+    </div>
+    <div class="flex flex-col justify-end">
+      <div class="p-3">
+        <p class="text-gray-700 font-bold">45 : 5 = 9</p>
+        <p class="text-gray-700">Risposta al problema.</p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+**Caratteristiche:**
+- Problema in box azzurro (bg-custom-blue-light, NO rounded)
+- Diagramma centrato sotto il problema
+- Risposta allineata in basso (`justify-end`) senza bordo
+
 ---
 
 ## BOX COLORATI
 
-- **Teoria/introduzione (celeste):** `bg-custom-blue rounded-lg`
-- **Regola/evidenziazione (bordo rosa):** `bg-white rounded-2xl border-3 border-custom-pink`
-- **Regola/evidenziazione (bordo blu):** `bg-white rounded-2xl border-3 border-blue-400`
-- **Regola/spiegazione (sfondo rosa chiaro):** `p-4 bg-pink-light rounded-3xl`
-- **Esercizi:** `bg-orange-100 rounded-lg`
+### Sezioni teoria (contenitori generici)
+Sfondo BIANCO (nessun bg), solo padding:
+```erb
+<div class="p-4 md:p-6">
+  <!-- contenuto teoria -->
+</div>
+```
+
+### Problema/quesito testuale (azzurro, NO rounded)
+Per problemi da risolvere, quesiti:
+```erb
+<div class="p-3 bg-custom-blue-light">
+  <p class="text-gray-700">Testo del problema...</p>
+</div>
+```
+
+### Regola breve (rosa chiaro, arrotondato)
+Per regole e definizioni brevi:
+```erb
+<div class="p-3 bg-pink-50 rounded-2xl">
+  <p class="text-gray-700">Regola o definizione...</p>
+</div>
+```
+
+Variante più scura per regole comportamento:
+```erb
+<div class="p-3 bg-pink-100 rounded-xl">
+  <p class="text-gray-600">Regola comportamento...</p>
+</div>
+```
+
+### Box teoria importante (bordo blu, arrotondato)
+Per concetti fondamentali con bordo:
+```erb
+<div class="p-4 md:p-6 bg-white rounded-2xl border-3 border-blue-800">
+  <!-- contenuto importante -->
+</div>
+```
+
+### Container esercizi (arancione, arrotondato)
+```erb
+<div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
+  <!-- esercizi -->
+</div>
+```
 
 **Numeri grandi senza a capo:**
 ```erb
@@ -242,7 +347,7 @@ Usare `@pagina.base_color` per colori coerenti:
 Per box che contengono regole importanti, definizioni fondamentali o concetti chiave:
 
 ```erb
-<div class="p-4 md:p-6 bg-white rounded-3xl border-4 border-blue-800 space-y-4">
+<div class="p-4 md:p-6 bg-white rounded-2xl border-3 border-blue-800 space-y-4">
   <!-- contenuti SENZA bg/border/rounded -->
   <div>
     <p class="text-gray-700">
@@ -260,8 +365,8 @@ Per box che contengono regole importanti, definizioni fondamentali o concetti ch
 ```
 
 **Caratteristiche:**
-- Sfondo bianco con bordo blu scuro spesso (`border-4 border-blue-800`)
-- Bordi molto arrotondati (`rounded-3xl`)
+- Sfondo bianco con bordo blu scuro (`border-3 border-blue-800`)
+- Bordi arrotondati (`rounded-2xl`)
 - I contenuti interni NON hanno bg/border/rounded
 
 ---
@@ -421,11 +526,13 @@ Per visualizzare numeri su abaco (non modificabile):
 
 | Tipo | Sfondo | Bordo | Rounded | Uso |
 |------|--------|-------|---------|-----|
-| **Box Teoria Importante** | bg-white | border-4 border-blue-800 | rounded-3xl | Regole fondamentali |
+| **Sezioni Teoria** | nessuno | nessuno | nessuno | Contenitore generico (sfondo bianco pagina) |
+| **Problema/quesito** | bg-custom-blue-light | nessuno | nessuno | Problemi da risolvere |
+| **Regola breve** | bg-pink-50 | nessuno | rounded-2xl | Regole/definizioni |
+| **Box Teoria Importante** | bg-white | border-3 border-blue-800 | rounded-2xl | Regole fondamentali |
 | **Tabelle Significato Numeri** | bg-white | border-2 border-cyan-400 | nessuno | "23 significa..." |
-| **Container Esercizi** | bg-orange-100 | nessuno | rounded-lg | Wrapper esercizi |
+| **Container Esercizi** | bg-orange-100 | nessuno | rounded-2xl | Wrapper esercizi |
 | **Contenuti Esercizi** | nessuno | nessuno | nessuno | Dentro container |
-| **Sezioni Teoria** | nessuno | nessuno | nessuno | Testo/spiegazioni |
 | **Box IMPARARE TUTTI** | bg-white | border-3 border-blue-500 | rounded-2xl | Primo esercizio |
 | **Box AllenaMente** | bg-white | border-3 border-blue-400 | rounded-2xl | Sfida finale |
 
