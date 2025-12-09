@@ -1,0 +1,175 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione -->
+    <div>
+      <p class="text-gray-700">
+        Prima di usare la <span class="font-bold">moltiplicazione</span> e la <span class="font-bold">divisione</span> per risolvere problemi, ricorda che sono <span class="font-bold">operazioni inverse</span>.
+      </p>
+      <p class="text-gray-700 mt-2">
+        Osserva: le frecce blu indicano una moltiplicazione, le frecce arancioni una divisione.
+      </p>
+    </div>
+
+    <!-- Diagrammi operazioni inverse -->
+    <div class="p-4 md:p-6 bg-custom-blue rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Primo diagramma: 12 × 3 = 36 -->
+        <div class="flex flex-col items-center">
+          <div class="text-center mb-2">
+            <span class="font-bold text-blue-600">× 3</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-12 border-2 border-<%= @pagina.base_color %>-500 rounded flex items-center justify-center font-bold">12</div>
+            <div class="flex flex-col items-center">
+              <span class="text-blue-600">→</span>
+              <span class="text-orange-500">←</span>
+            </div>
+            <div class="w-16 h-12 border-2 border-<%= @pagina.base_color %>-500 rounded flex items-center justify-center font-bold">36</div>
+          </div>
+          <div class="text-center mt-2">
+            <span class="font-bold text-orange-500">: 3</span>
+          </div>
+        </div>
+
+        <!-- Secondo diagramma: 32 : 4 = 8 -->
+        <div class="flex flex-col items-center">
+          <div class="text-center mb-2">
+            <span class="font-bold text-orange-500">: 4</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-12 border-2 border-<%= @pagina.base_color %>-500 rounded flex items-center justify-center font-bold">32</div>
+            <div class="flex flex-col items-center">
+              <span class="text-orange-500">→</span>
+              <span class="text-blue-600">←</span>
+            </div>
+            <div class="w-16 h-12 border-2 border-<%= @pagina.base_color %>-500 rounded flex items-center justify-center font-bold">8</div>
+          </div>
+          <div class="text-center mt-2">
+            <span class="font-bold text-blue-600">× 4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrivi quale operazione serve -->
+    <div class="p-4 md:p-6 bg-custom-blue rounded-lg">
+      <p class="font-bold text-gray-700 mb-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Scrivi quale operazione serve per risolvere i due problemi proposti.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Problema 1 -->
+        <div class="p-3 bg-white rounded-lg">
+          <p class="text-gray-700 mb-3">
+            Adam ha 5 scatole contenenti 4 libri ciascuna. Quanti libri ha Adam?
+          </p>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="5 × 4 = 20" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="operazione">
+          </div>
+        </div>
+
+        <!-- Problema 2 -->
+        <div class="p-3 bg-white rounded-lg">
+          <p class="text-gray-700 mb-3">
+            Adam ha 20 libri suddivisi in 5 scatole. Quanti libri ci sono in ogni scatola?
+          </p>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="20 : 5 = 4" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="operazione">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tradurre in linguaggio matematico -->
+    <div>
+      <p class="text-gray-700">
+        Puoi tradurre un problema in linguaggio matematico indicando con un quadratino vuoto ciò che stai cercando. Facciamolo insieme.
+      </p>
+    </div>
+
+    <!-- Esempio 1: Paolo -->
+    <div class="p-4 md:p-6 bg-custom-blue rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <div class="p-3 bg-white rounded-lg mb-4">
+            <p class="text-gray-700">
+              Paolo pensa un numero, lo moltiplica per 5 e ottiene 45. Che numero ha pensato Paolo?
+            </p>
+          </div>
+
+          <!-- Diagramma -->
+          <div class="flex flex-col items-center">
+            <div class="text-center mb-2">
+              <span class="font-bold text-blue-600">× 5</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-12 border-2 border-<%= @pagina.base_color %>-500 rounded flex items-center justify-center font-bold text-gray-400">.....</div>
+              <div class="flex flex-col items-center">
+                <span class="text-blue-600">→</span>
+                <span class="text-orange-500">←</span>
+              </div>
+              <div class="w-16 h-12 border-2 border-<%= @pagina.base_color %>-500 rounded flex items-center justify-center font-bold">45</div>
+            </div>
+            <div class="text-center mt-2">
+              <span class="font-bold text-orange-500">: 5</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-center">
+          <div class="p-3 bg-white rounded-lg border-3 border-<%= @pagina.base_color %>-400">
+            <p class="text-gray-700 font-bold">45 : 5 = 9</p>
+            <p class="text-gray-700">Paolo ha pensato il numero 9.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esempio 2: Amina -->
+    <div class="p-4 md:p-6 bg-custom-blue rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <div class="p-3 bg-white rounded-lg mb-4">
+            <p class="text-gray-700">
+              Amina pensa un numero, lo divide per 6 e ottiene 8. Che numero ha pensato Amina?
+            </p>
+          </div>
+
+          <!-- Diagramma -->
+          <div class="flex flex-col items-center">
+            <div class="text-center mb-2">
+              <span class="font-bold text-orange-500">: 6</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-12 border-2 border-<%= @pagina.base_color %>-500 rounded flex items-center justify-center font-bold text-gray-400">.....</div>
+              <div class="flex flex-col items-center">
+                <span class="text-orange-500">→</span>
+                <span class="text-blue-600">←</span>
+              </div>
+              <div class="w-16 h-12 border-2 border-<%= @pagina.base_color %>-500 rounded flex items-center justify-center font-bold">8</div>
+            </div>
+            <div class="text-center mt-2">
+              <span class="font-bold text-blue-600">× 6</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-center">
+          <div class="p-3 bg-white rounded-lg border-3 border-<%= @pagina.base_color %>-400">
+            <p class="text-gray-700 font-bold">8 × 6 = 48</p>
+            <p class="text-gray-700">Amina ha pensato il numero 48.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
