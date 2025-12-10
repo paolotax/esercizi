@@ -1,0 +1,67 @@
+<%#
+  Partial per diagrammi della proprietà invariantiva con frecce
+
+  Parametri:
+  - a: minuendo
+  - b: sottraendo
+  - n: numero da aggiungere/sottrarre (positivo = aggiungi, negativo = sottrai)
+  - color: colore delle frecce e del modificatore (default: "cyan")
+
+  Esempio:
+  render 'shared/invariantiva_frecce', a: 25, b: 18, n: 2
+  render 'shared/invariantiva_frecce', a: 25, b: 18, n: -5
+%>
+
+<%
+  a = local_assigns[:a]
+  b = local_assigns[:b]
+  n = local_assigns[:n]
+  color = local_assigns.fetch(:color, "cyan")
+
+  risultato = a - b
+  nuovo_a = a + n
+  nuovo_b = b + n
+
+  # Formato del modificatore
+  modificatore = n >= 0 ? "+#{n}" : "#{n}"
+
+  # Mappatura colori
+  color_classes = {
+    "blue" => "text-blue-600",
+    "pink" => "text-pink-500",
+    "orange" => "text-orange-500",
+    "green" => "text-green-500",
+    "cyan" => "text-cyan-600"
+  }
+
+  text_class = color_classes[color] || "text-cyan-600"
+%>
+
+<div class="inline-block font-sans">
+  <table class="border-collapse text-center">
+    <!-- Prima riga: operazione originale -->
+    <tr class="font-bold text-gray-700">
+      <td class="px-1"><%= a %></td>
+      <td class="px-1">−</td>
+      <td class="px-1"><%= b %></td>
+      <td class="px-1">=</td>
+      <td class="px-1"><%= risultato %></td>
+    </tr>
+    <!-- Frecce -->
+    <tr class="<%= text_class %> font-bold">
+      <td>↓<%= modificatore %></td>
+      <td></td>
+      <td>↓<%= modificatore %></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <!-- Seconda riga: operazione trasformata -->
+    <tr class="font-bold text-gray-700">
+      <td class="px-1"><%= nuovo_a %></td>
+      <td class="px-1">−</td>
+      <td class="px-1"><%= nuovo_b %></td>
+      <td class="px-1">=</td>
+      <td class="px-1"><%= risultato %></td>
+    </tr>
+  </table>
+</div>

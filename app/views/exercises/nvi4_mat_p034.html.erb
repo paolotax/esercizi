@@ -8,80 +8,60 @@
   <div class="space-y-6">
 
     <!-- Introduzione -->
-    <div class="p-4 bg-custom-blue rounded-2xl">
-      <p class="text-gray-700 mb-4">
+    <div>
+      <p class="text-gray-700">
         Prima di usare l'<span class="font-bold">addizione</span> e la <span class="font-bold">sottrazione</span> per risolvere problemi, ricorda che sono <span class="font-bold">operazioni inverse</span>.
       </p>
-      <p class="text-gray-700 mb-4">
-        Osserva: le frecce viola indicano un'addizione, le frecce verdi una sottrazione.
+      <p class="text-gray-700 mt-2">
+        Osserva: le frecce blu indicano un'addizione, le frecce arancioni una sottrazione.
       </p>
+    </div>
 
-      <!-- Diagrammi operazioni inverse -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- +20 / -20 -->
-        <div class="flex flex-col items-center">
-          <div class="text-center mb-2">
-            <span class="font-bold text-purple-600">+ 20</span>
-          </div>
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 border-2 border-gray-400 rounded-full flex items-center justify-center font-bold">30</div>
-            <div class="flex flex-col items-center">
-              <span class="text-purple-600">→</span>
-              <span class="text-green-600">←</span>
-            </div>
-            <div class="w-12 h-12 border-2 border-gray-400 rounded-full flex items-center justify-center font-bold">50</div>
-          </div>
-          <div class="text-center mt-2">
-            <span class="font-bold text-green-600">− 20</span>
-          </div>
-        </div>
+    <!-- Diagrammi operazioni inverse -->
+    <div class="p-4 md:p-6">
+      <div class="flex flex-wrap justify-center gap-12">
+        <!-- Primo diagramma: 30 + 20 = 50 -->
+        <%= render 'shared/operazioni_inverse',
+            left: 30, right: 50,
+            op_direct: "+", op_direct_num: 20,
+            op_inverse: "-", op_inverse_num: 20 %>
 
-        <!-- -5 / +5 -->
-        <div class="flex flex-col items-center">
-          <div class="text-center mb-2">
-            <span class="font-bold text-green-600">− 5</span>
-          </div>
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 border-2 border-gray-400 rounded-full flex items-center justify-center font-bold">17</div>
-            <div class="flex flex-col items-center">
-              <span class="text-green-600">→</span>
-              <span class="text-purple-600">←</span>
-            </div>
-            <div class="w-12 h-12 border-2 border-gray-400 rounded-full flex items-center justify-center font-bold">12</div>
-          </div>
-          <div class="text-center mt-2">
-            <span class="font-bold text-purple-600">+ 5</span>
-          </div>
-        </div>
+        <!-- Secondo diagramma: 17 - 5 = 12 -->
+        <%= render 'shared/operazioni_inverse',
+            left: 17, right: 12,
+            op_direct: "-", op_direct_num: 5,
+            op_inverse: "+", op_inverse_num: 5 %>
       </div>
     </div>
 
     <!-- Scrivi quale operazione serve -->
-    <div class="p-4 bg-pink-light rounded-2xl">
-      <p class="font-bold text-<%= @pagina.base_color %>-600 mb-4">
+    <div class="p-4 md:p-6">
+      <p class="font-bold text-gray-700 mb-4">
         <span class="text-<%= @pagina.base_color %>-500">•</span> Scrivi quale operazione serve per risolvere i due problemi proposti.
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Problema 1: Filippo riceve caramelle -->
-        <div class="space-y-3">
-          <p class="text-gray-700">
-            Filippo ha 8 caramelle. Giacomo gliene regala 5.<br>
-            Quante caramelle ha ora Filippo?
-          </p>
-          <div class="flex items-center gap-2">
-            <input type="text" data-correct-answer="8 + 5 = 13" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="Operazione e risultato">
+        <div>
+          <div class="p-3 bg-custom-blue-light">
+            <p class="text-gray-700">
+              Filippo ha 8 caramelle. Giacomo gliene regala 5. Quante caramelle ha ora Filippo?
+            </p>
+          </div>
+          <div class="flex items-center gap-2 mt-2">
+            <input type="text" data-correct-answer="8 + 5 = 13" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="operazione">
           </div>
         </div>
 
         <!-- Problema 2: Filippo regala caramelle -->
-        <div class="space-y-3">
-          <p class="text-gray-700">
-            Filippo ha 13 caramelle. Ne regala 5 a Giacomo.<br>
-            Quante caramelle ha ora Filippo?
-          </p>
-          <div class="flex items-center gap-2">
-            <input type="text" data-correct-answer="13 - 5 = 8" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="Operazione e risultato">
+        <div>
+          <div class="p-3 bg-custom-blue-light">
+            <p class="text-gray-700">
+              Filippo ha 13 caramelle. Ne regala 5 a Giacomo. Quante caramelle ha ora Filippo?
+            </p>
+          </div>
+          <div class="flex items-center gap-2 mt-2">
+            <input type="text" data-correct-answer="13 - 5 = 8" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="operazione">
           </div>
         </div>
       </div>
@@ -89,75 +69,63 @@
 
     <!-- Tradurre in linguaggio matematico -->
     <div>
-      <p class="text-gray-700 mb-4">
+      <p class="text-gray-700">
         Puoi tradurre un problema in linguaggio matematico indicando con un quadratino vuoto ciò che stai cercando. Facciamolo insieme.
       </p>
     </div>
 
-    <!-- Problema Karima -->
-    <div class="p-4 bg-white rounded-lg border-2 border-<%= @pagina.base_color %>-300">
-      <p class="text-gray-700 mb-4">
-        Karima pensa un numero, aggiunge 8 e ottiene 20.<br>
-        Che numero ha pensato Karima?
-      </p>
+    <!-- Esempio 1: Karima -->
+    <div class="p-4 md:p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <div class="p-3 bg-custom-blue-light mb-4">
+            <p class="text-gray-700">
+              Karima pensa un numero, aggiunge 8 e ottiene 20. Che numero ha pensato Karima?
+            </p>
+          </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-        <!-- Diagramma -->
-        <div class="flex flex-col items-center">
-          <div class="text-center mb-2">
-            <span class="font-bold text-purple-600">+ 8</span>
-          </div>
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 border-2 border-gray-400 rounded flex items-center justify-center font-bold">□</div>
-            <div class="flex flex-col items-center">
-              <span class="text-purple-600">→</span>
-              <span class="text-green-600">←</span>
-            </div>
-            <div class="w-12 h-12 border-2 border-gray-400 rounded flex items-center justify-center font-bold">20</div>
-          </div>
-          <div class="text-center mt-2">
-            <span class="font-bold text-green-600">− 8</span>
+          <!-- Diagramma -->
+          <div class="flex justify-center">
+            <%= render 'shared/operazioni_inverse',
+                left: nil, left_answer: "12", right: 20,
+                op_direct: "+", op_direct_num: 8,
+                op_inverse: "-", op_inverse_num: 8 %>
           </div>
         </div>
 
-        <!-- Soluzione -->
-        <div>
-          <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">20 − 8 = 12</p>
-          <p class="text-gray-700">Karima ha pensato il numero 12.</p>
+        <div class="flex flex-col justify-end">
+          <div class="p-3">
+            <p class="text-gray-700 font-bold">20 − 8 = 12</p>
+            <p class="text-gray-700">Karima ha pensato il numero 12.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Problema Alessandro -->
-    <div class="p-4 bg-white rounded-lg border-2 border-<%= @pagina.base_color %>-300">
-      <p class="text-gray-700 mb-4">
-        Alessandro aveva dei cioccolatini. Ne ha mangiati 4.<br>
-        Ora i cioccolatini sono 16. Quanti erano all'inizio?
-      </p>
+    <!-- Esempio 2: Alessandro -->
+    <div class="p-4 md:p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <div class="p-3 bg-custom-blue-light mb-4">
+            <p class="text-gray-700">
+              Alessandro aveva dei cioccolatini. Ne ha mangiati 4. Ora i cioccolatini sono 16. Quanti erano all'inizio?
+            </p>
+          </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-        <!-- Diagramma -->
-        <div class="flex flex-col items-center">
-          <div class="text-center mb-2">
-            <span class="font-bold text-green-600">− 4</span>
-          </div>
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 border-2 border-gray-400 rounded flex items-center justify-center font-bold">□</div>
-            <div class="flex flex-col items-center">
-              <span class="text-green-600">→</span>
-              <span class="text-purple-600">←</span>
-            </div>
-            <div class="w-12 h-12 border-2 border-gray-400 rounded flex items-center justify-center font-bold">16</div>
-          </div>
-          <div class="text-center mt-2">
-            <span class="font-bold text-purple-600">+ 4</span>
+          <!-- Diagramma -->
+          <div class="flex justify-center">
+            <%= render 'shared/operazioni_inverse',
+                left: nil, left_answer: "20", right: 16,
+                op_direct: "-", op_direct_num: 4,
+                op_inverse: "+", op_inverse_num: 4 %>
           </div>
         </div>
 
-        <!-- Soluzione -->
-        <div>
-          <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">16 + 4 = 20</p>
-          <p class="text-gray-700">All'inizio c'erano 20 cioccolatini.</p>
+        <div class="flex flex-col justify-end">
+          <div class="p-3">
+            <p class="text-gray-700 font-bold">16 + 4 = 20</p>
+            <p class="text-gray-700">All'inizio c'erano 20 cioccolatini.</p>
+          </div>
         </div>
       </div>
     </div>

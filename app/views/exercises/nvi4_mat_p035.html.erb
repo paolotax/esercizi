@@ -7,71 +7,58 @@
 
   <div class="space-y-6">
 
-    <!-- Problema Sara - Palloncini -->
-    <div class="p-4 bg-pink-light rounded-2xl">
-      <p class="text-gray-700 mb-4">
-        Sara ha comprato 18 palloncini colorati: alcuni sono gialli, altri sono viola.<br>
-        I palloncini viola sono 6. Quanti sono i palloncini gialli?
-      </p>
+    <!-- Esempio Sara - Palloncini -->
+    <div class="p-4 md:p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <div class="p-3 bg-custom-blue-light mb-4">
+            <p class="text-gray-700">
+              Sara ha comprato 18 palloncini colorati: alcuni sono gialli, altri sono viola. I palloncini viola sono 6. Quanti sono i palloncini gialli?
+            </p>
+          </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-        <!-- Diagramma -->
-        <div class="flex flex-col items-center">
-          <div class="text-center mb-2">
-            <span class="font-bold text-green-600">− 6</span>
-          </div>
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 border-2 border-gray-400 rounded flex items-center justify-center font-bold">18</div>
-            <div class="flex flex-col items-center">
-              <span class="text-green-600">→</span>
-              <span class="text-purple-600">←</span>
-            </div>
-            <div class="w-12 h-12 border-2 border-gray-400 rounded flex items-center justify-center font-bold">□</div>
-          </div>
-          <div class="text-center mt-2">
-            <span class="font-bold text-purple-600">+ □</span>
+          <!-- Diagramma -->
+          <div class="flex justify-center">
+            <%= render 'shared/operazioni_inverse',
+                left: 18, right: nil, right_answer: "12",
+                op_direct: "-", op_direct_num: 6,
+                op_inverse: "+", op_inverse_num: 6 %>
           </div>
         </div>
 
-        <!-- Soluzione -->
-        <div>
-          <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">18 − 6 = 12</p>
-          <p class="text-gray-700">I palloncini gialli sono 12.</p>
+        <div class="flex flex-col justify-end">
+          <div class="p-3">
+            <p class="text-gray-700 font-bold">18 − 6 = 12</p>
+            <p class="text-gray-700">I palloncini gialli sono 12.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Problema Pietro - Figurine -->
-    <div class="p-4 bg-pink-light rounded-2xl">
-      <p class="text-gray-700 mb-4">
-        Pietro ha 14 figurine di calciatori. Biko gliene regala alcune.<br>
-        Ora Pietro ha 22 figurine.<br>
-        Quante sono le figurine che Biko ha regalato a Pietro?
-      </p>
+    <!-- Esempio Pietro - Figurine -->
+    <div class="p-4 md:p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <div class="p-3 bg-custom-blue-light mb-4">
+            <p class="text-gray-700">
+              Pietro ha 14 figurine di calciatori. Biko gliene regala alcune. Ora Pietro ha 22 figurine. Quante sono le figurine che Biko ha regalato a Pietro?
+            </p>
+          </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-        <!-- Diagramma -->
-        <div class="flex flex-col items-center">
-          <div class="text-center mb-2">
-            <span class="font-bold text-purple-600">+ □</span>
-          </div>
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 border-2 border-gray-400 rounded flex items-center justify-center font-bold">14</div>
-            <div class="flex flex-col items-center">
-              <span class="text-purple-600">→</span>
-              <span class="text-green-600">←</span>
-            </div>
-            <div class="w-12 h-12 border-2 border-gray-400 rounded flex items-center justify-center font-bold">22</div>
-          </div>
-          <div class="text-center mt-2">
-            <span class="font-bold text-green-600">− □</span>
+          <!-- Diagramma -->
+          <div class="flex justify-center">
+            <%= render 'shared/operazioni_inverse',
+                left: 14, right: 22,
+                op_direct: "+", op_direct_num: nil, op_direct_answer: "8",
+                op_inverse: "-", op_inverse_num: nil, op_inverse_answer: "8" %>
           </div>
         </div>
 
-        <!-- Soluzione -->
-        <div>
-          <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">22 − 14 = 8</p>
-          <p class="text-gray-700">Biko ha regalato a Pietro 8 figurine.</p>
+        <div class="flex flex-col justify-end">
+          <div class="p-3">
+            <p class="text-gray-700 font-bold">22 − 14 = 8</p>
+            <p class="text-gray-700">Biko ha regalato a Pietro 8 figurine.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -83,114 +70,124 @@
         Risolvi i problemi proposti. Traduci nel linguaggio matematico e usa le frecce quando ti servono.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x-2 md:divide-orange-300">
 
-        <!-- Problema 1: Paola e Sara biglie -->
-        <div class="space-y-3">
-          <p class="text-gray-700">
-            <%= numero_esercizio_badge(1) %>
-            Paola ha 245 biglie. Sara gliene regala alcune. Ora Paola ha 280 biglie. Quante ne ha avute da Sara?
-          </p>
-          <div class="flex items-center justify-end gap-2">
-            <input type="text" data-correct-answer="35" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-            <span class="shrink-0">biglie</span>
+        <!-- Colonna sinistra -->
+        <div class="md:pr-4 space-y-6">
+
+          <!-- Problema 1 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(1) %>
+              Paola ha 245 biglie. Sara gliene regala alcune. Ora Paola ha 280 biglie. Quante ne ha avute da Sara?
+            </p>
+            <div class="flex items-center justify-end gap-2">
+              <input type="text" data-correct-answer="35" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">biglie</span>
+            </div>
           </div>
+
+          <!-- Problema 2 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(2) %>
+              Filippo ha messo da parte 1 275 euro, ma per comprare il televisore ne servono 2 350. Quanti euro gli mancano?
+            </p>
+            <div class="flex items-center justify-end gap-2">
+              <input type="text" data-correct-answer="1075" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">euro</span>
+            </div>
+          </div>
+
+          <!-- Problema 3 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(3) %>
+              Elena esce di casa con degli euro nel borsellino e va a fare acquisti. Spende 235 euro. Nel borsellino ora ci sono 25 euro. Quanti euro aveva Elena quando è uscita di casa?
+            </p>
+            <div class="flex items-center justify-end gap-2">
+              <input type="text" data-correct-answer="260" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">euro</span>
+            </div>
+          </div>
+
+          <!-- Problema 4 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(4) %>
+              Emma ha 24 caramelle: alcune al limone, le altre alla fragola. 8 caramelle sono al limone; quante caramelle sono al gusto di fragola?
+            </p>
+            <div class="flex items-center justify-end gap-2">
+              <input type="text" data-correct-answer="16" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">caramelle</span>
+            </div>
+          </div>
+
+          <!-- Problema 5 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(5) %>
+              Luca e Thomas mettono le loro biglie in un sacchetto: ce ne sono 135. Luca ha messo 48 biglie. Quante biglie ha messo Thomas?
+            </p>
+            <div class="flex items-center justify-end gap-2">
+              <input type="text" data-correct-answer="87" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">biglie</span>
+            </div>
+          </div>
+
         </div>
 
-        <!-- Problema 6: Angelica e Claudia anni -->
-        <div class="space-y-3">
-          <p class="text-gray-700">
-            <%= numero_esercizio_badge(6) %>
-            Angelica ha 11 anni; sua sorella Claudia ne ha 6. Claudia quanti anni di meno ha?
-          </p>
-          <div class="flex items-center justify-end gap-2">
-            <input type="text" data-correct-answer="5" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-            <span class="shrink-0">anni</span>
-          </div>
-        </div>
+        <!-- Colonna destra -->
+        <div class="md:pl-4 space-y-6">
 
-        <!-- Problema 2: Filippo televisore -->
-        <div class="space-y-3">
-          <p class="text-gray-700">
-            <%= numero_esercizio_badge(2) %>
-            Filippo ha messo da parte 1 275 euro, ma per comprare il televisore ne servono 2 350. Quanti euro gli mancano?
-          </p>
-          <div class="flex items-center justify-end gap-2">
-            <input type="text" data-correct-answer="1075" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-            <span class="shrink-0">euro</span>
+          <!-- Problema 6 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(6) %>
+              Angelica ha 11 anni; sua sorella Claudia ne ha 6. Claudia quanti anni di meno ha?
+            </p>
+            <div class="flex items-center justify-end gap-2">
+              <input type="text" data-correct-answer="5" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">anni</span>
+            </div>
           </div>
-        </div>
 
-        <!-- Problema 7: Ivo fragole -->
-        <div class="space-y-3">
-          <p class="text-gray-700">
-            <%= numero_esercizio_badge(7) %>
-            Ivo ha delle fragole e ne regala 8 a Giulia. La nonna porta a Ivo altre 10 fragole. Ora Ivo ha 24 fragole in tutto. Quante ne aveva all'inizio?
-          </p>
-          <div class="flex items-center justify-end gap-2">
-            <input type="text" data-correct-answer="22" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-            <span class="shrink-0">fragole</span>
+          <!-- Problema 7 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(7) %>
+              Ivo ha delle fragole e ne regala 8 a Giulia. La nonna porta a Ivo altre 10 fragole. Ora Ivo ha 24 fragole in tutto. Quante ne aveva all'inizio?
+            </p>
+            <div class="flex items-center justify-end gap-2">
+              <input type="text" data-correct-answer="22" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">fragole</span>
+            </div>
           </div>
-        </div>
 
-        <!-- Problema 3: Elena borsellino -->
-        <div class="space-y-3">
-          <p class="text-gray-700">
-            <%= numero_esercizio_badge(3) %>
-            Elena esce di casa con degli euro nel borsellino e va a fare acquisti. Spende 235 euro. Nel borsellino ora ci sono 25 euro. Quanti euro aveva Elena quando è uscita di casa?
-          </p>
-          <div class="flex items-center justify-end gap-2">
-            <input type="text" data-correct-answer="260" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-            <span class="shrink-0">euro</span>
+          <!-- Problema 8 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(8) %>
+              Agnese compra 3 libri che costano 65 euro in tutto e 4 quaderni che costano 12 euro in tutto. Paga con una banconota da 100 euro. Quanto riceve di resto?
+            </p>
+            <div class="flex items-center justify-end gap-2">
+              <input type="text" data-correct-answer="23" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">euro</span>
+            </div>
           </div>
-        </div>
 
-        <!-- Problema 8: Agnese libri e quaderni -->
-        <div class="space-y-3">
-          <p class="text-gray-700">
-            <%= numero_esercizio_badge(8) %>
-            Agnese compra 3 libri che costano 65 euro in tutto e 4 quaderni che costano 12 euro in tutto. Paga con una banconota da 100 euro. Quanto riceve di resto?
-          </p>
-          <div class="flex items-center justify-end gap-2">
-            <input type="text" data-correct-answer="23" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-            <span class="shrink-0">euro</span>
+          <!-- Problema 9 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(9) %>
+              Linda ha a disposizione 700 euro per arredare il suo nuovo salotto in un mese. Nella prima settimana spende 138 euro, nella seconda settimana 24 euro in più rispetto alla prima, nella terza settimana 27 euro in più rispetto alla seconda. Quanto le resta?
+            </p>
+            <div class="flex items-center justify-end gap-2">
+              <input type="text" data-correct-answer="184" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="shrink-0">euro</span>
+            </div>
           </div>
-        </div>
 
-        <!-- Problema 4: Emma caramelle -->
-        <div class="space-y-3">
-          <p class="text-gray-700">
-            <%= numero_esercizio_badge(4) %>
-            Emma ha 24 caramelle: alcune al limone, le altre alla fragola. 8 caramelle sono al limone; quante caramelle sono al gusto di fragola?
-          </p>
-          <div class="flex items-center justify-end gap-2">
-            <input type="text" data-correct-answer="16" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-            <span class="shrink-0">caramelle</span>
-          </div>
-        </div>
-
-        <!-- Problema 9: Linda salotto -->
-        <div class="space-y-3">
-          <p class="text-gray-700">
-            <%= numero_esercizio_badge(9) %>
-            Linda ha a disposizione 700 euro per arredare il suo nuovo salotto in un mese. Nella prima settimana spende 138 euro, nella seconda settimana 24 euro in più rispetto alla prima, nella terza settimana 27 euro in più rispetto alla seconda. Quanto le resta?
-          </p>
-          <div class="flex items-center justify-end gap-2">
-            <input type="text" data-correct-answer="184" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-            <span class="shrink-0">euro</span>
-          </div>
-        </div>
-
-        <!-- Problema 5: Luca e Thomas biglie -->
-        <div class="space-y-3">
-          <p class="text-gray-700">
-            <%= numero_esercizio_badge(5) %>
-            Luca e Thomas mettono le loro biglie in un sacchetto: ce ne sono 135. Luca ha messo 48 biglie. Quante biglie ha messo Thomas?
-          </p>
-          <div class="flex items-center justify-end gap-2">
-            <input type="text" data-correct-answer="87" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-            <span class="shrink-0">biglie</span>
-          </div>
         </div>
 
       </div>

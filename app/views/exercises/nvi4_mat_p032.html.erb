@@ -7,75 +7,53 @@
 
   <div class="space-y-6">
 
-    <!-- Leggi e osserva -->
-    <div class="p-4 bg-custom-blue rounded-2xl">
-      <p class="font-bold text-gray-700 mb-4">
+    <!-- Box Teoria -->
+    <div class="p-4 md:p-6 space-y-4 border-3 border-blue-500 rounded-2xl">
+      <p class="font-bold text-gray-700">
         <span class="text-<%= @pagina.base_color %>-500">•</span> Leggi e osserva.
       </p>
 
       <!-- Proprietà invariantiva -->
-      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">Proprietà invariantiva</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div class="text-gray-700">
-          <p>Per la proprietà invariantiva, se <span class="font-bold">aggiungi</span> o <span class="font-bold">togli uno stesso numero al minuendo e al sottraendo</span> il risultato non cambia.</p>
-        </div>
-
-        <!-- Con le frecce -->
-        <div class="col-span-2">
-          <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Con le frecce</p>
-          <div class="grid grid-cols-2 gap-4">
-            <!-- Esempio +2 -->
-            <div class="space-y-1">
-              <p class="text-center">25 − 18 = 7</p>
-              <div class="flex justify-center gap-4">
-                <span class="text-<%= @pagina.base_color %>-600 font-bold">↓+2</span>
-                <span class="text-<%= @pagina.base_color %>-600 font-bold">↓+2</span>
-              </div>
-              <p class="text-center">27 − 20 = 7</p>
-            </div>
-            <!-- Esempio -5 -->
-            <div class="space-y-1">
-              <p class="text-center">25 − 18 = 7</p>
-              <div class="flex justify-center gap-4">
-                <span class="text-<%= @pagina.base_color %>-600 font-bold">↓−5</span>
-                <span class="text-<%= @pagina.base_color %>-600 font-bold">↓−5</span>
-              </div>
-              <p class="text-center">20 − 13 = 7</p>
-            </div>
+      <div>
+        <h3 class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Proprietà invariantiva</h3>
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <div class="p-3 bg-pink-light rounded-2xl md:max-w-[200px]">
+            <p class="text-gray-700">
+              Per la proprietà invariantiva, se <span class="font-bold">aggiungi</span> o <span class="font-bold">togli uno stesso numero al minuendo e al sottraendo</span> il risultato non cambia.
+            </p>
           </div>
-        </div>
-      </div>
-
-      <!-- Con le parentesi -->
-      <div class="mb-6">
-        <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Con le parentesi</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <!-- Esempio +2 -->
-          <div class="space-y-1 text-center">
-            <p>25 − 18 = 7</p>
-            <p>(25 <span class="font-bold text-<%= @pagina.base_color %>-600">+ 2</span>) − (18 <span class="font-bold text-<%= @pagina.base_color %>-600">+ 2</span>) =</p>
-            <p>27 − 20 = 7</p>
-          </div>
-          <!-- Esempio -5 -->
-          <div class="space-y-1 text-center">
-            <p>25 − 18 = 7</p>
-            <p>(25 <span class="font-bold text-<%= @pagina.base_color %>-600">− 5</span>) − (18 <span class="font-bold text-<%= @pagina.base_color %>-600">− 5</span>) =</p>
-            <p>20 − 13 = 7</p>
+          <div class="flex-1 space-y-4">
+            <!-- Con le frecce -->
+            <div class="text-center">
+              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Con le frecce</p>
+              <div class="flex justify-center gap-6">
+                <%= render 'shared/invariantiva_frecce', a: 25, b: 18, n: 2 %>
+                <%= render 'shared/invariantiva_frecce', a: 25, b: 18, n: -5 %>
+              </div>
+            </div>
+            <!-- Con le parentesi -->
+            <div class="text-center">
+              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Con le parentesi</p>
+              <div class="flex justify-center gap-6">
+                <%= render 'shared/invariantiva_parentesi', a: 25, b: 18, n: 2 %>
+                <%= render 'shared/invariantiva_parentesi', a: 25, b: 18, n: -5 %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- La prova della sottrazione -->
-      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-3">La prova della sottrazione</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-        <div class="flex justify-center">
-          <%= image_tag "nvi4_mat/p032/p032_01.jpg", alt: "La prova della sottrazione", class: "max-h-20" %>
-        </div>
-        <div class="text-gray-700">
-          <p class="mb-2">La sottrazione è l'<span class="font-bold">operazione inversa</span> dell'addizione.</p>
-          <p>Per eseguire la prova di una sottrazione aggiungi al <span class="font-bold">resto</span> il <span class="font-bold">sottraendo</span> e ottieni il <span class="font-bold">minuendo</span>.</p>
+      <div>
+        <h3 class="font-bold text-<%= @pagina.base_color %>-600 mb-2">La prova della sottrazione</h3>
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <div class="shrink-0">
+            <%= image_tag "nvi4_mat/p032/p032_01.jpg", alt: "La prova della sottrazione", class: "min-w-72" %>
+          </div>
+          <div>
+            <p class="text-gray-700 mb-2">La sottrazione è l'<span class="font-bold">operazione inversa</span> dell'addizione.</p>
+            <p class="text-gray-700">Per eseguire la prova di una sottrazione aggiungi al <span class="font-bold text-red-600">resto</span> il <span class="font-bold text-green-600">sottraendo</span> e ottieni il <span class="font-bold text-cyan-600">minuendo</span>.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -83,119 +61,81 @@
     <!-- ESERCIZI -->
     <div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
 
-      <!-- Esercizio 1 -->
-      <div class="mb-8">
-        <p class="font-bold text-gray-700 mb-4">
-          <%= numero_esercizio_badge(1) %>
-          Calcola applicando la proprietà invariantiva come nell'esempio.
-        </p>
-
-        <div class="space-y-4">
-          <!-- Esempio -->
-          <div class="p-3 bg-white rounded-lg">
-            <p class="text-gray-700">
-              57 − 43 = <span class="font-bold text-<%= @pagina.base_color %>-600">(57 − 3) − (43 − 3) = 54 − 40 = 14</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x-2 md:divide-orange-300">
+        <!-- Colonna sinistra -->
+        <div class="md:pr-4">
+          <!-- Esercizio 1 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(1) %>
+              Calcola applicando la proprietà invariantiva come nell'esempio.
             </p>
-          </div>
 
-          <!-- Esercizi da completare -->
-          <div class="space-y-3">
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="shrink-0">65 − 38 =</span>
-              <input type="text" data-correct-answer="(65 + 2) - (38 + 2) = 67 - 40 = 27" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="(65 + 2) − (38 + 2) = ...">
-            </div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="shrink-0">94 − 72 =</span>
-              <input type="text" data-correct-answer="(94 - 2) - (72 - 2) = 92 - 70 = 22" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="(94 − 2) − (72 − 2) = ...">
-            </div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="shrink-0">178 − 25 =</span>
-              <input type="text" data-correct-answer="(178 + 5) - (25 + 5) = 183 - 30 = 153" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="(178 + 5) − (25 + 5) = ...">
-            </div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="shrink-0">286 − 39 =</span>
-              <input type="text" data-correct-answer="(286 + 1) - (39 + 1) = 287 - 40 = 247" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" placeholder="(286 + 1) − (39 + 1) = ...">
+            <div class="space-y-3">
+              <p class="text-gray-700">
+                57 − 43 = <span class="font-bold text-<%= @pagina.base_color %>-600">(57 − 3) − (43 − 3) = 54 − 40 = 14</span>
+              </p>
+
+              <div class="flex items-center gap-2">
+                <span>65 − 38 =</span>
+                <input type="text" data-correct-answer="(65 + 2) - (38 + 2) = 67 - 40 = 27" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span>94 − 72 =</span>
+                <input type="text" data-correct-answer="(94 - 2) - (72 - 2) = 92 - 70 = 22" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span>178 − 25 =</span>
+                <input type="text" data-correct-answer="(178 + 5) - (25 + 5) = 183 - 30 = 153" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span>286 − 39 =</span>
+                <input type="text" data-correct-answer="(286 + 1) - (39 + 1) = 287 - 40 = 247" class="flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Esercizio 2 -->
-      <div>
-        <p class="font-bold text-gray-700 mb-4">
-          <%= numero_esercizio_badge(2) %>
-          Trova il minuendo. Per calcolarlo esegui l'operazione inversa come nell'esempio.
-        </p>
-
-        <div class="space-y-4">
-          <!-- Esempio -->
-          <div class="p-3 bg-white rounded-lg">
-            <p class="text-gray-700">
-              88 − 10 = 78 <span class="text-<%= @pagina.base_color %>-500">→</span> <span class="font-bold text-<%= @pagina.base_color %>-600">78 + 10 = 88</span>
+        <!-- Colonna destra -->
+        <div class="md:pl-4">
+          <!-- Esercizio 2 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(2) %>
+              Trova il minuendo. Per calcolarlo esegui l'operazione inversa come nell'esempio.
             </p>
-          </div>
 
-          <!-- Esercizi da completare -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- ......... – 50 = 345 -->
-            <div class="space-y-2">
+            <div class="space-y-3">
+              <p class="text-gray-700">
+                88 − 10 = 78 <span class="text-<%= @pagina.base_color %>-500">→</span> <span class="font-bold text-<%= @pagina.base_color %>-600">78 + 10 = 88</span>
+              </p>
+
               <div class="flex items-center gap-2 flex-wrap">
                 <input type="text" data-correct-answer="395" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                <span class="shrink-0">− 50 = 345</span>
+                <span>− 50 = 345</span>
                 <span class="text-<%= @pagina.base_color %>-500">→</span>
-              </div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="shrink-0">345 +</span>
-                <input type="text" data-correct-answer="50" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                <span class="shrink-0">=</span>
+                <span>345 + 50 =</span>
                 <input type="text" data-correct-answer="395" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
               </div>
-            </div>
-
-            <!-- ......... – 73 = 872 -->
-            <div class="space-y-2">
               <div class="flex items-center gap-2 flex-wrap">
                 <input type="text" data-correct-answer="945" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                <span class="shrink-0">− 73 = 872</span>
+                <span>− 73 = 872</span>
                 <span class="text-<%= @pagina.base_color %>-500">→</span>
-              </div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <input type="text" data-correct-answer="872" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                <span class="shrink-0">+</span>
-                <input type="text" data-correct-answer="73" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                <span class="shrink-0">=</span>
+                <span>872 + 73 =</span>
                 <input type="text" data-correct-answer="945" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
               </div>
-            </div>
-
-            <!-- ......... – 57 = 632 -->
-            <div class="space-y-2">
               <div class="flex items-center gap-2 flex-wrap">
                 <input type="text" data-correct-answer="689" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                <span class="shrink-0">− 57 = 632</span>
+                <span>− 57 = 632</span>
                 <span class="text-<%= @pagina.base_color %>-500">→</span>
-              </div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <input type="text" data-correct-answer="632" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                <span class="shrink-0">+</span>
-                <input type="text" data-correct-answer="57" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                <span class="shrink-0">=</span>
+                <span>632 + 57 =</span>
                 <input type="text" data-correct-answer="689" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
               </div>
-            </div>
-
-            <!-- ......... – 39 = 641 -->
-            <div class="space-y-2">
               <div class="flex items-center gap-2 flex-wrap">
                 <input type="text" data-correct-answer="680" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                <span class="shrink-0">− 39 = 641</span>
+                <span>− 39 = 641</span>
                 <span class="text-<%= @pagina.base_color %>-500">→</span>
-              </div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <input type="text" data-correct-answer="641" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                <span class="shrink-0">+</span>
-                <input type="text" data-correct-answer="39" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                <span class="shrink-0">=</span>
+                <span>641 + 39 =</span>
                 <input type="text" data-correct-answer="680" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
               </div>
             </div>

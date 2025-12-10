@@ -1,0 +1,53 @@
+<%#
+  Partial per diagrammi della proprietà invariantiva con parentesi
+
+  Parametri:
+  - a: minuendo
+  - b: sottraendo
+  - n: numero da aggiungere/sottrarre (positivo = aggiungi, negativo = sottrai)
+  - color: colore del modificatore (default: "cyan")
+
+  Esempio:
+  render 'shared/invariantiva_parentesi', a: 25, b: 18, n: 2
+  render 'shared/invariantiva_parentesi', a: 25, b: 18, n: -5
+%>
+
+<%
+  a = local_assigns[:a]
+  b = local_assigns[:b]
+  n = local_assigns[:n]
+  color = local_assigns.fetch(:color, "cyan")
+
+  risultato = a - b
+  nuovo_a = a + n
+  nuovo_b = b + n
+
+  # Formato del modificatore
+  op_symbol = n >= 0 ? "+" : "−"
+  abs_n = n.abs
+
+  # Mappatura colori
+  color_classes = {
+    "blue" => "text-blue-600",
+    "pink" => "text-pink-500",
+    "orange" => "text-orange-500",
+    "green" => "text-green-500",
+    "cyan" => "text-cyan-600"
+  }
+
+  text_class = color_classes[color] || "text-cyan-600"
+%>
+
+<div class="inline-block font-sans text-center space-y-1">
+  <!-- Prima riga: operazione originale -->
+  <p class="text-gray-700"><%= a %> − <%= b %> = <%= risultato %></p>
+
+  <!-- Seconda riga: con parentesi -->
+  <p class="text-gray-700">
+    (<%= a %> <span class="font-bold <%= text_class %>"><%= op_symbol %> <%= abs_n %></span>) −
+    (<%= b %> <span class="font-bold <%= text_class %>"><%= op_symbol %> <%= abs_n %></span>) =
+  </p>
+
+  <!-- Terza riga: risultato -->
+  <p class="text-gray-700"><%= nuovo_a %> − <%= nuovo_b %> = <%= risultato %></p>
+</div>
