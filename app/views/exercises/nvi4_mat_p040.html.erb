@@ -1,5 +1,5 @@
 <div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
-     data-controller="exercise-checker text-toggle font-controls"
+     data-controller="exercise-checker text-toggle font-controls word-highlighter"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
@@ -7,106 +7,89 @@
 
   <div class="space-y-6">
 
-    <!-- Box teoria principale -->
-    <div class="p-4 md:p-6 bg-custom-blue rounded-lg">
-      <p class="font-bold text-gray-700 mb-6">
+    <!-- Box Teoria -->
+    <div class="p-4 md:p-6 space-y-4 border-3 border-blue-500 rounded-2xl">
+      <p class="font-bold text-gray-700">
         <span class="text-<%= @pagina.base_color %>-500">•</span> Leggi e osserva.
       </p>
 
-      <!-- Proprieta' commutativa -->
-      <div class="mb-6">
-        <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-4">Propriet&agrave; commutativa</h2>
-        <div class="p-4 bg-white rounded-lg">
-          <p class="text-gray-700 mb-4">Per la propriet&agrave; commutativa, se <span class="font-bold">cambi l'ordine dei fattori</span>, il risultato non cambia.</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div class="flex justify-center">
-              <div class="text-center">
-                <p class="font-bold"><span class="text-orange-500">8</span> &times; <span class="text-cyan-500">2</span> = <span class="text-<%= @pagina.base_color %>-600">16</span></p>
-                <p class="text-gray-500">&times;</p>
-                <p class="font-bold"><span class="text-cyan-500">2</span> &times; <span class="text-orange-500">8</span> = <span class="text-<%= @pagina.base_color %>-600">16</span></p>
-              </div>
-            </div>
-            <div class="p-3 bg-gray-100 rounded">
-              <p class="text-gray-600">Puoi usare la propriet&agrave; commutativa per controllare se il risultato &egrave; corretto.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Proprieta' associativa -->
-      <div class="mb-6">
-        <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-4">Propriet&agrave; associativa</h2>
-        <div class="p-4 bg-white rounded-lg">
-          <p class="text-gray-700 mb-4">Per la propriet&agrave; associativa, se <span class="font-bold">a due o pi&ugrave; fattori sostituisci il loro prodotto</span>, il risultato non cambia.</p>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Con le frecce -->
-            <div>
-              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Con le frecce</p>
-              <div class="flex gap-8 justify-center">
-                <div class="text-center">
-                  <p class="font-bold">6 &times; <span class="text-cyan-500 underline">5</span> &times; <span class="text-cyan-500 underline">2</span></p>
-                  <p class="text-gray-500">&#8595;</p>
-                  <p class="font-bold">6 &times; <span class="text-orange-500">10</span></p>
-                  <p class="text-gray-500">&#8595;</p>
-                  <p class="font-bold text-<%= @pagina.base_color %>-600">60</p>
-                </div>
-                <div class="text-center">
-                  <p class="font-bold"><span class="text-orange-500 underline">6</span> &times; <span class="text-orange-500 underline">5</span> &times; 2</p>
-                  <p class="text-gray-500">&#8595;</p>
-                  <p class="font-bold"><span class="text-cyan-500">30</span> &times; 2</p>
-                  <p class="text-gray-500">&#8595;</p>
-                  <p class="font-bold text-<%= @pagina.base_color %>-600">60</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Con le parentesi -->
-            <div>
-              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Con le parentesi</p>
-              <div class="space-y-2">
-                <div class="flex gap-8">
-                  <div class="text-center">
-                    <p class="font-bold">6 &times; (5 &times; 2) =</p>
-                    <p class="font-bold">6 &times; <span class="text-cyan-500">10</span> = 60</p>
-                  </div>
-                  <div class="text-center">
-                    <p class="font-bold">(6 &times; 5) &times; 2 =</p>
-                    <p class="font-bold"><span class="text-orange-500">30</span> &times; 2 = 60</p>
-                  </div>
-                </div>
-                <div class="p-3 bg-gray-100 rounded mt-4">
-                  <p class="text-gray-600 mb-2">Puoi usare la propriet&agrave; associativa anche "alla rovescia":</p>
-                  <div class="text-center">
-                    <p class="font-bold">40 &times; 10 = 400</p>
-                    <p class="text-gray-500">&#8593; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#8593;</p>
-                    <p class="font-bold">5 &times; <span class="text-orange-500">8</span> &times; <span class="text-orange-500">2</span> &times; 5 = 400</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Proprieta' distributiva -->
+      <!-- Proprietà commutativa -->
       <div>
-        <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-4">Propriet&agrave; distributiva</h2>
-        <div class="p-4 bg-white rounded-lg">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div>
-              <p class="text-gray-700">Per la propriet&agrave; distributiva, se <span class="font-bold">a un fattore sostituisci due numeri la cui somma &egrave; uguale al fattore considerato</span>, il risultato non cambia.</p>
-            </div>
-            <div class="flex justify-center">
-              <div class="text-center">
-                <p class="font-bold">4 &times; 32</p>
-                <p class="text-gray-500">&#8595;</p>
-                <p class="font-bold">4 &times; (<span class="text-orange-500">30</span> + <span class="text-cyan-500">2</span>)</p>
-                <p class="text-gray-500">&#8595;</p>
-                <p class="font-bold">(4 &times; <span class="text-orange-500">30</span>) + (4 &times; <span class="text-cyan-500">2</span>)</p>
-                <p class="text-gray-500">&#8595; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#8595;</p>
-                <p class="font-bold"><span class="text-orange-500">120</span> &nbsp;&nbsp;&nbsp; + &nbsp;&nbsp;&nbsp; <span class="text-cyan-500">8</span> &nbsp;&nbsp; = <span class="text-<%= @pagina.base_color %>-600">128</span></p>
+        <h3 class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Proprietà commutativa</h3>
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <div class="p-3 bg-pink-light rounded-2xl w-full md:w-auto">
+            <p class="text-gray-700">
+              Per la proprietà commutativa, se <span class="font-bold">cambi l'ordine dei fattori</span> il risultato non cambia.
+            </p>
+          </div>
+          <div class="flex items-center justify-center">
+            <%= render 'shared/commutativa', a: 8, b: 2, result: :auto, op: "×" %>
+          </div>
+          <div>
+            <p class="text-gray-700">
+              Puoi usare la proprietà commutativa per controllare se il risultato è corretto.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proprietà associativa -->
+      <div>
+        <h3 class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Proprietà associativa</h3>
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <div class="p-3 bg-pink-light rounded-2xl md:max-w-[200px]">
+            <p class="text-gray-700">
+              Per la proprietà associativa, se <span class="font-bold">a due o più fattori sostituisci il loro prodotto</span> il risultato non cambia.
+            </p>
+          </div>
+          <div class="flex-1 space-y-4">
+            <!-- Con le frecce -->
+            <div class="text-center">
+              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Con le frecce</p>
+              <div class="flex justify-center gap-6">
+                <%= render 'shared/associativa_frecce', a: 6, b: 5, c: 2, op: "×", group: "right", color: "cyan" %>
+                <%= render 'shared/associativa_frecce', a: 6, b: 5, c: 2, op: "×", group: "left", color: "orange" %>
               </div>
+            </div>
+            <!-- Con le parentesi -->
+            <div class="text-center">
+              <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Con le parentesi</p>
+              <div class="flex justify-center gap-6">
+                <%= render 'shared/associativa_parentesi', a: 6, b: 5, c: 2, op: "×", group: "right", color: "cyan" %>
+                <%= render 'shared/associativa_parentesi', a: 6, b: 5, c: 2, op: "×", group: "left", color: "orange" %>
+              </div>
+            </div>
+            <!-- Nota "alla rovescia" -->
+            <div class="p-3 bg-pink-light rounded-2xl">
+              <p class="text-gray-700 mb-2">Puoi usare la proprietà associativa anche "alla rovescia":</p>
+              <div class="text-center font-bold">
+                <p>5 × <span class="text-orange-500">8</span> × <span class="text-orange-500">2</span> × 5 = 400</p>
+                <p class="text-gray-500">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</p>
+                <p>40 × 10 = 400</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proprietà distributiva -->
+      <div>
+        <h3 class="font-bold text-<%= @pagina.base_color %>-600 mb-2">Proprietà distributiva</h3>
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <div class="p-3 bg-pink-light rounded-2xl md:max-w-[250px]">
+            <p class="text-gray-700">
+              Per la proprietà distributiva, se <span class="font-bold">a un fattore sostituisci due numeri la cui somma è uguale al fattore considerato</span>, il risultato non cambia.
+            </p>
+          </div>
+          <div class="flex items-center justify-center">
+            <div class="text-center font-bold">
+              <p>4 × 32</p>
+              <p class="text-gray-500">↓</p>
+              <p>4 × (<span class="text-orange-500">30</span> + <span class="text-cyan-500">2</span>)</p>
+              <p class="text-gray-500">↓</p>
+              <p>(4 × <span class="text-orange-500">30</span>) + (4 × <span class="text-cyan-500">2</span>)</p>
+              <p class="text-gray-500">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</p>
+              <p><span class="text-orange-500">120</span> &nbsp;&nbsp; + &nbsp;&nbsp; <span class="text-cyan-500">8</span> &nbsp; = <span class="text-<%= @pagina.base_color %>-600">128</span></p>
             </div>
           </div>
         </div>
@@ -114,33 +97,40 @@
     </div>
 
     <!-- ESERCIZI -->
-    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+    <div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x-2 md:divide-orange-300">
-
-        <!-- Esercizio 1 -->
+        <!-- Colonna sinistra -->
         <div class="md:pr-4">
-          <p class="font-bold text-gray-700 mb-4">
-            <%= numero_esercizio_badge(1) %>
-            Calcola sul quaderno applicando la propriet&agrave; associativa nel modo che ritieni pi&ugrave; opportuno.
-          </p>
-          <div class="space-y-2">
-            <p class="text-gray-700">8 &times; 4 &times; 5 =</p>
-            <p class="text-gray-700">3 &times; 7 &times; 4 =</p>
-            <p class="text-gray-700">2 &times; 5 &times; 9 =</p>
+          <!-- Esercizio 1 -->
+          <div class="mb-6">
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(1) %>
+              Calcola sul quaderno applicando la proprietà associativa nel modo che ritieni più opportuno.
+            </p>
+
+            <div class="space-y-3">
+              <p class="text-gray-700">8 × 4 × 5 =</p>
+              <p class="text-gray-700">3 × 7 × 4 =</p>
+              <p class="text-gray-700">2 × 5 × 9 =</p>
+            </div>
           </div>
         </div>
 
-        <!-- Esercizio 2 -->
+        <!-- Colonna destra -->
         <div class="md:pl-4">
-          <p class="font-bold text-gray-700 mb-4">
-            <%= numero_esercizio_badge(2) %>
-            Calcola sul quaderno applicando la propriet&agrave; distributiva.
-          </p>
-          <div class="space-y-2">
-            <p class="text-gray-700">(5 + 6) &times; 4 =</p>
-            <p class="text-gray-700">(12 + 5) &times; 3 =</p>
-            <p class="text-gray-700">(23 + 2) &times; 5 =</p>
+          <!-- Esercizio 2 -->
+          <div class="mb-6">
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(2) %>
+              Calcola sul quaderno applicando la proprietà distributiva.
+            </p>
+
+            <div class="space-y-3">
+              <p class="text-gray-700">(5 + 6) × 4 =</p>
+              <p class="text-gray-700">(12 + 5) × 3 =</p>
+              <p class="text-gray-700">(23 + 2) × 5 =</p>
+            </div>
           </div>
         </div>
       </div>
