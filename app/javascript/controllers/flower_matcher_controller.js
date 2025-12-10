@@ -3,11 +3,20 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="flower-matcher"
 export default class extends Controller {
   static targets = ["flower", "canvas"]
+  static values = {
+    solved: { type: Boolean, default: false }
+  }
 
   connect() {
     console.log("Flower matcher controller connected")
     this.firstFlower = null
     this.lines = []
+
+    // Auto-show solutions if solved value is true
+    if (this.solvedValue) {
+      // Use setTimeout to ensure DOM is fully rendered
+      setTimeout(() => this.showSolutions(), 100)
+    }
   }
 
   selectFlower(event) {

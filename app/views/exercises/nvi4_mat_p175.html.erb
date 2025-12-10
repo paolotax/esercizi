@@ -7,70 +7,73 @@
 
   <div class="space-y-6">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Esercizio 1: IMPARARE TUTTI - Completa la tabella -->
-      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
-        <p class="font-bold text-gray-700 mb-4">
-          <%= imparare_tutti_badge(1) %>
-          Completa la tabella indicando in modi diversi il valore della cifra sottolineata. Segui l'esempio.
-        </p>
+    <!-- Esercizi IMPARARE TUTTI (1 e 2) -->
+    <div class="p-5 bg-white rounded-2xl border-3 border-yellow-400">
+      <div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-<%= @pagina.base_color %>-300">
+        <!-- Esercizio 1: Completa la tabella -->
+        <div class="md:pr-6">
+          <p class="font-bold text-gray-700 mb-4">
+            <%= imparare_tutti_badge(1) %>
+            Completa la tabella indicando in modi diversi il valore della cifra sottolineata. Segui l'esempio.
+          </p>
 
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse border border-cyan-400">
-            <tbody>
-              <!-- Esempio -->
-              <tr class="bg-cyan-50">
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">4<span class="underline">5</span> 701</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold text-cyan-600">5 uk</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold text-cyan-600">5 × 1 000</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">5 000</td>
-              </tr>
-              <% [
-                { num: "2<span class=\"underline\">8</span>8 940", answers: ["8 dak", "8 × 10 000", "80000"] },
-                { num: "<span class=\"underline\">4</span>53 107", answers: ["4 hk", "4 × 100 000", "400000"] },
-                { num: "19<span class=\"underline\">8</span> 540", answers: ["8 uk", "8 × 1 000", "8000"] }
-              ].each do |row| %>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse border-2 border-cyan-400">
+              <tbody>
+                <!-- Esempio -->
                 <tr>
-                  <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap"><%= row[:num].html_safe %></td>
-                  <% row[:answers].each do |ans| %>
-                    <td class="p-2 border border-cyan-400 text-center bg-white">
-                      <input type="text" data-correct-answer="<%= ans %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                    </td>
-                  <% end %>
+                  <td class="p-2 border-2 border-cyan-400 text-center font-bold whitespace-nowrap">4<span class="underline">5</span> 701</td>
+                  <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600">5 uk</td>
+                  <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600">5 × 1 000</td>
+                  <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">5 000</td>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+                <% [
+                  { num: "2<span class=\"underline\">8</span>8 940", answers: ["8 dak", "8 × 10 000", "80000"] },
+                  { num: "<span class=\"underline\">4</span>53 107", answers: ["4 hk", "4 × 100 000", "400000"] },
+                  { num: "19<span class=\"underline\">8</span> 540", answers: ["8 uk", "8 × 1 000", "8000"] }
+                ].each do |row| %>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 text-center font-bold whitespace-nowrap"><%= row[:num].html_safe %></td>
+                    <% row[:answers].each do |ans| %>
+                      <td class="p-2 border-2 border-cyan-400 text-center bg-white">
+                        <input type="text" data-correct-answer="<%= ans %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
 
-      <!-- Esercizio 2: IMPARARE TUTTI - Segna con X -->
-      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
-        <p class="font-bold text-gray-700 mb-4">
-          <%= imparare_tutti_badge(2) %>
-          Segna con una <span class="underline">X</span> le uguaglianze corrette. Sono tre in tutto.
-        </p>
+        <!-- Esercizio 2: Segna con X -->
+        <div class="pt-6 md:pt-0 md:pl-6">
+          <p class="font-bold text-gray-700 mb-4">
+            <%= imparare_tutti_badge(2) %>
+            Segna con una <span class="underline">X</span> le uguaglianze corrette. Sono tre in tutto.
+          </p>
 
-        <div class="space-y-3">
-          <% [
-            { text: "3 hk = 300 000", correct: true },
-            { text: "6 uk 5 h 2 da 8 u = 60 528", correct: false },
-            { text: "7 hk 9 dak 4 h = 790 400", correct: true },
-            { text: "1 uk 5 da 8 hk 8 u = 1 588", correct: false },
-            { text: "2 dak 7 uk 7 u = 27 007", correct: true }
-          ].each_with_index do |item, idx| %>
-            <div class="flex items-center gap-3">
-              <span class="flex-1 <%= item[:correct] && idx == 0 ? 'font-bold' : '' %>"><%= item[:text] %></span>
-              <% if item[:correct] && idx == 0 %>
-                <span class="w-8 h-8 flex items-center justify-center border-2 border-cyan-400 font-bold text-cyan-600">X</span>
-              <% else %>
-                <label class="w-8 h-8 flex items-center justify-center border-2 border-gray-300 cursor-pointer has-[:checked]:bg-cyan-300 has-[:checked]:border-cyan-500">
-                  <input type="checkbox" data-correct-answer="<%= item[:correct] %>" class="sr-only">
-                  <span class="hidden [:checked+&]:block font-bold">X</span>
-                </label>
-              <% end %>
-            </div>
-          <% end %>
+          <div class="space-y-3">
+            <% [
+              { text: "3 hk = 300 000", correct: true },
+              { text: "6 uk 5 h 2 da 8 u = 60 528", correct: false },
+              { text: "7 hk 9 dak 4 h = 790 400", correct: true },
+              { text: "1 uk 5 da 8 hk 8 u = 1 588", correct: false },
+              { text: "2 dak 7 uk 7 u = 27 007", correct: true }
+            ].each_with_index do |item, idx| %>
+              <div class="flex items-center gap-3">
+                <span class="flex-1 <%= item[:correct] && idx == 0 ? 'font-bold' : '' %>"><%= item[:text] %></span>
+                <% if item[:correct] && idx == 0 %>
+                  <span class="w-8 h-8 flex items-center justify-center border-2 border-cyan-400 font-bold text-cyan-600">X</span>
+                <% else %>
+                  <label class="relative w-8 h-8 flex items-center justify-center border-2 border-gray-300 cursor-pointer has-[:checked]:bg-cyan-300 has-[:checked]:border-cyan-500">
+                    <input type="checkbox" data-correct-answer="<%= item[:correct] %>" class="absolute opacity-0">
+                    <span class="hidden [:checked+&]:block font-bold">X</span>
+                  </label>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
@@ -82,69 +85,121 @@
         Collega come nell'esempio.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <!-- Gruppo 23 - Esempio -->
-        <div class="space-y-2">
-          <div class="flex items-center gap-2 p-2 bg-cyan-50 rounded">
-            <span class="font-bold">23 decine di migliaia</span>
-            <span class="text-cyan-500">→</span>
-            <span class="font-bold text-cyan-600 whitespace-nowrap">230 000</span>
-          </div>
-          <div class="flex items-center gap-2 p-2 bg-cyan-50 rounded">
-            <span class="font-bold">23 centinaia</span>
-            <span class="text-cyan-500">→</span>
-            <span class="font-bold text-cyan-600 whitespace-nowrap">2 300</span>
-          </div>
-          <div class="flex items-center gap-2 p-2 bg-cyan-50 rounded">
-            <span class="font-bold">23 unità di migliaia</span>
-            <span class="text-cyan-500">→</span>
-            <span class="font-bold text-cyan-600 whitespace-nowrap">23 000</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <!-- Gruppo 23 - Esempio (già risolto) -->
+        <div data-controller="flower-matcher" data-flower-matcher-solved-value="true" class="relative">
+          <svg data-flower-matcher-target="canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></svg>
+          <div class="flex justify-between">
+            <div class="space-y-3">
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower"
+                   data-flower-id="23-dak" data-pair="230000">23 decine di migliaia</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower"
+                   data-flower-id="23-cent" data-pair="2300">23 centinaia</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower"
+                   data-flower-id="23-uk" data-pair="23000">23 unità di migliaia</div>
+            </div>
+            <div class="space-y-3">
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 text-center font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower"
+                   data-flower-id="ans-2300" data-pair="2300">2 300</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 text-center font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower"
+                   data-flower-id="ans-23000" data-pair="23000">23 000</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 text-center font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower"
+                   data-flower-id="ans-230000" data-pair="230000">230 000</div>
+            </div>
           </div>
         </div>
 
         <!-- Gruppo 66 -->
-        <div class="space-y-2">
-          <% [
-            { text: "66 centinaia", options: ["660 000", "6 600", "660"], answer: "6600" },
-            { text: "66 decine di migliaia", options: ["660 000", "6 600", "660"], answer: "660000" },
-            { text: "66 decine", options: ["660 000", "6 600", "660"], answer: "660" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2">
-              <span><%= item[:text] %></span>
-              <span class="text-cyan-500">→</span>
-              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        <div data-controller="flower-matcher" class="relative">
+          <svg data-flower-matcher-target="canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></svg>
+          <div class="flex justify-between">
+            <div class="space-y-3">
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="66-cent" data-pair="6600">66 centinaia</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="66-dak" data-pair="660000">66 decine di migliaia</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="66-dec" data-pair="660">66 decine</div>
             </div>
-          <% end %>
+            <div class="space-y-3">
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors text-center font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="ans-660000" data-pair="660000">660 000</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors text-center font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="ans-6600" data-pair="6600">6 600</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors text-center font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="ans-660" data-pair="660">660</div>
+            </div>
+          </div>
         </div>
 
         <!-- Gruppo 84 -->
-        <div class="space-y-2">
-          <% [
-            { text: "84 centinaia", options: ["84", "8 400", "840 000"], answer: "8400" },
-            { text: "84 decine di migliaia", options: ["84", "8 400", "840 000"], answer: "840000" },
-            { text: "84 unità", options: ["84", "8 400", "840 000"], answer: "84" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2">
-              <span><%= item[:text] %></span>
-              <span class="text-cyan-500">→</span>
-              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        <div data-controller="flower-matcher" class="relative">
+          <svg data-flower-matcher-target="canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></svg>
+          <div class="flex justify-between">
+            <div class="space-y-3">
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="84-cent" data-pair="8400">84 centinaia</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="84-dak" data-pair="840000">84 decine di migliaia</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="84-u" data-pair="84">84 unità</div>
             </div>
-          <% end %>
+            <div class="space-y-3">
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors text-center font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="ans-84" data-pair="84">84</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors text-center font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="ans-8400" data-pair="8400">8 400</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors text-center font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="ans-840000" data-pair="840000">840 000</div>
+            </div>
+          </div>
         </div>
 
         <!-- Gruppo 125 -->
-        <div class="space-y-2">
-          <% [
-            { text: "125 decine", options: ["125 000", "1 250", "12 500"], answer: "1250" },
-            { text: "125 unità di migliaia", options: ["125 000", "1 250", "12 500"], answer: "125000" },
-            { text: "125 centinaia", options: ["125 000", "1 250", "12 500"], answer: "12500" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2">
-              <span><%= item[:text] %></span>
-              <span class="text-cyan-500">→</span>
-              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+        <div data-controller="flower-matcher" class="relative">
+          <svg data-flower-matcher-target="canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></svg>
+          <div class="flex justify-between">
+            <div class="space-y-3">
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="125-dec" data-pair="1250">125 decine</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="125-uk" data-pair="125000">125 unità di migliaia</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="125-cent" data-pair="12500">125 centinaia</div>
             </div>
-          <% end %>
+            <div class="space-y-3">
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors text-center font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="ans-125000" data-pair="125000">125 000</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors text-center font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="ans-1250" data-pair="1250">1 250</div>
+              <div class="px-2 py-1 bg-white border-2 border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors text-center font-bold whitespace-nowrap"
+                   data-flower-matcher-target="flower" data-action="click->flower-matcher#selectFlower"
+                   data-flower-id="ans-12500" data-pair="12500">12 500</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -163,10 +218,10 @@
             <span class="text-cyan-500">•</span>
             La cifra delle decine di migliaia è 6. Le cifre che lo compongono sono tutte diverse.
           </p>
-          <div class="flex flex-wrap gap-3">
+          <div class="flex flex-wrap gap-3 justify-center">
             <% ["65096", "65769", "56078", "65721", "66788"].each do |num| %>
-              <label class="px-4 py-2 border-2 border-cyan-200 rounded-full cursor-pointer has-[:checked]:bg-cyan-300 has-[:checked]:border-cyan-500 font-bold">
-                <input type="radio" name="mystery1" data-correct-answer="<%= num == "65721" %>" class="sr-only">
+              <label class="relative px-4 py-2 border-2 border-cyan-200 rounded-full cursor-pointer has-[:checked]:bg-cyan-300 has-[:checked]:border-cyan-500 font-bold">
+                <input type="radio" name="mystery1" data-correct-answer="<%= num == "65721" %>" class="absolute opacity-0">
                 <span class="whitespace-nowrap"><%= num.to_i.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1 ').reverse %></span>
               </label>
             <% end %>
@@ -179,10 +234,10 @@
             <span class="text-cyan-500">•</span>
             La cifra delle centinaia è 3. La somma di tutte le sue cifre è uguale a 18.
           </p>
-          <div class="flex flex-wrap gap-3">
+          <div class="flex flex-wrap gap-3 justify-center">
             <% ["701380", "112356", "31355", "343162", "65370"].each do |num| %>
-              <label class="px-4 py-2 border-2 border-cyan-200 rounded-full cursor-pointer has-[:checked]:bg-cyan-300 has-[:checked]:border-cyan-500 font-bold">
-                <input type="radio" name="mystery2" data-correct-answer="<%= num == "31355" %>" class="sr-only">
+              <label class="relative px-4 py-2 border-2 border-cyan-200 rounded-full cursor-pointer has-[:checked]:bg-cyan-300 has-[:checked]:border-cyan-500 font-bold">
+                <input type="radio" name="mystery2" data-correct-answer="<%= num == "31355" %>" class="absolute opacity-0">
                 <span class="whitespace-nowrap"><%= num.to_i.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1 ').reverse %></span>
               </label>
             <% end %>
@@ -195,10 +250,10 @@
             <span class="text-cyan-500">•</span>
             La cifra delle centinaia di migliaia è 5. La cifra delle centinaia è uguale a quella delle unità.
           </p>
-          <div class="flex flex-wrap gap-3">
+          <div class="flex flex-wrap gap-3 justify-center">
             <% ["59474", "595447", "595744", "955474", "595474"].each do |num| %>
-              <label class="px-4 py-2 border-2 border-cyan-200 rounded-full cursor-pointer has-[:checked]:bg-cyan-300 has-[:checked]:border-cyan-500 font-bold">
-                <input type="radio" name="mystery3" data-correct-answer="<%= num == "595474" %>" class="sr-only">
+              <label class="relative px-4 py-2 border-2 border-cyan-200 rounded-full cursor-pointer has-[:checked]:bg-cyan-300 has-[:checked]:border-cyan-500 font-bold">
+                <input type="radio" name="mystery3" data-correct-answer="<%= num == "595474" %>" class="absolute opacity-0">
                 <span class="whitespace-nowrap"><%= num.to_i.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1 ').reverse %></span>
               </label>
             <% end %>
@@ -211,10 +266,10 @@
             <span class="text-cyan-500">•</span>
             La cifra delle unità di migliaia è 7. La differenza tra le cifre delle centinaia e delle decine è uguale a 4.
           </p>
-          <div class="flex flex-wrap gap-3">
+          <div class="flex flex-wrap gap-3 justify-center">
             <% ["157943", "175953", "157953", "157853", "715733"].each do |num| %>
-              <label class="px-4 py-2 border-2 border-cyan-200 rounded-full cursor-pointer has-[:checked]:bg-cyan-300 has-[:checked]:border-cyan-500 font-bold">
-                <input type="radio" name="mystery4" data-correct-answer="<%= num == "175953" %>" class="sr-only">
+              <label class="relative px-4 py-2 border-2 border-cyan-200 rounded-full cursor-pointer has-[:checked]:bg-cyan-300 has-[:checked]:border-cyan-500 font-bold">
+                <input type="radio" name="mystery4" data-correct-answer="<%= num == "175953" %>" class="absolute opacity-0">
                 <span class="whitespace-nowrap"><%= num.to_i.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1 ').reverse %></span>
               </label>
             <% end %>

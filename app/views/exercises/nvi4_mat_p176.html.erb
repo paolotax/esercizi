@@ -7,76 +7,79 @@
 
   <div class="space-y-6">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Esercizio 1: IMPARARE TUTTI - Numeri successivi -->
-      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
-        <p class="font-bold text-gray-700 mb-4">
-          <%= imparare_tutti_badge(1) %>
-          Scrivi i numeri <span class="underline">successivi</span> ai numeri dati. Segui l'esempio.
-        </p>
+    <!-- Esercizi IMPARARE TUTTI (1 e 2) -->
+    <div class="p-5 bg-white rounded-2xl border-3 border-yellow-400">
+      <div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-<%= @pagina.base_color %>-300">
+        <!-- Esercizio 1: Numeri successivi -->
+        <div class="md:pr-6">
+          <p class="font-bold text-gray-700 mb-4">
+            <%= imparare_tutti_badge(1) %>
+            Scrivi i numeri <span class="text-cyan-600">successivi</span> ai numeri dati. Segui l'esempio.
+          </p>
 
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse border border-cyan-400">
-            <tbody>
-              <!-- Esempio -->
-              <tr class="bg-cyan-50">
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">23 709</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">23 710</td>
-              </tr>
-              <% [
-                { num: "66 199", answer: "66200" },
-                { num: "88 700", answer: "88701" },
-                { num: "151 999", answer: "152000" },
-                { num: "836 539", answer: "836540" },
-                { num: "300 009", answer: "300010" },
-                { num: "347 921", answer: "347922" },
-                { num: "459 999", answer: "460000" }
-              ].each do |row| %>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse border-2 border-cyan-400">
+              <tbody>
+                <!-- Esempio -->
                 <tr>
-                  <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap"><%= row[:num] %></td>
-                  <td class="p-2 border border-cyan-400 text-center bg-white">
-                    <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                  </td>
+                  <td class="p-2 border-2 border-cyan-400 text-center font-bold whitespace-nowrap">23 709</td>
+                  <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">23 710</td>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+                <% [
+                  { num: "66 199", answer: "66200" },
+                  { num: "88 700", answer: "88701" },
+                  { num: "151 999", answer: "152000" },
+                  { num: "836 539", answer: "836540" },
+                  { num: "300 009", answer: "300010" },
+                  { num: "347 921", answer: "347922" },
+                  { num: "459 999", answer: "460000" }
+                ].each do |row| %>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 text-center font-bold whitespace-nowrap"><%= row[:num] %></td>
+                    <td class="p-2 border-2 border-cyan-400 text-center bg-white">
+                      <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
 
-      <!-- Esercizio 2: IMPARARE TUTTI - Numeri precedenti -->
-      <div class="p-4 bg-white rounded-2xl border-3 border-yellow-400">
-        <p class="font-bold text-gray-700 mb-4">
-          <%= imparare_tutti_badge(2) %>
-          Scrivi i numeri <span class="underline">precedenti</span> ai numeri dati. Segui l'esempio.
-        </p>
+        <!-- Esercizio 2: Numeri precedenti -->
+        <div class="pt-6 md:pt-0 md:pl-6">
+          <p class="font-bold text-gray-700 mb-4">
+            <%= imparare_tutti_badge(2) %>
+            Scrivi i numeri <span class="text-cyan-600">precedenti</span> ai numeri dati. Segui l'esempio.
+          </p>
 
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse border border-cyan-400">
-            <tbody>
-              <!-- Esempio -->
-              <tr class="bg-cyan-50">
-                <td class="p-2 border border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">65 349</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">65 350</td>
-              </tr>
-              <% [
-                { num: "127 819", answer: "127818" },
-                { num: "80 030", answer: "80029" },
-                { num: "581 500", answer: "581499" },
-                { num: "77 000", answer: "76999" },
-                { num: "74 010", answer: "74009" },
-                { num: "270 400", answer: "270399" },
-                { num: "780 000", answer: "779999" }
-              ].each do |row| %>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse border-2 border-cyan-400">
+              <tbody>
+                <!-- Esempio -->
                 <tr>
-                  <td class="p-2 border border-cyan-400 text-center bg-white">
-                    <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                  </td>
-                  <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap"><%= row[:num] %></td>
+                  <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">65 349</td>
+                  <td class="p-2 border-2 border-cyan-400 text-center font-bold whitespace-nowrap">65 350</td>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+                <% [
+                  { num: "127 819", answer: "127818" },
+                  { num: "80 030", answer: "80029" },
+                  { num: "581 500", answer: "581499" },
+                  { num: "77 000", answer: "76999" },
+                  { num: "74 010", answer: "74009" },
+                  { num: "270 400", answer: "270399" },
+                  { num: "780 000", answer: "779999" }
+                ].each do |row| %>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 text-center bg-white">
+                      <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    </td>
+                    <td class="p-2 border-2 border-cyan-400 text-center font-bold whitespace-nowrap"><%= row[:num] %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -91,24 +94,24 @@
       <div class="space-y-4">
         <!-- Tabella +1 -->
         <div class="overflow-x-auto">
-          <table class="border-collapse border border-cyan-400">
+          <table class="border-collapse border-2 border-cyan-400">
             <tbody>
               <tr>
-                <td rowspan="2" class="p-2 border border-cyan-400 text-center font-bold bg-cyan-100">+ 1</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold">199</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold">309</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">4 009</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">5 099</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">80 009</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">70 499</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">90 999</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">145 999</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">600 099</td>
+                <td rowspan="2" class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light">+ 1</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light">199</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light">309</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">4 009</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">5 099</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">80 009</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">70 499</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">90 999</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">145 999</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">600 099</td>
               </tr>
               <tr>
                 <% ["200", "310", "4010", "5100", "80010", "70500", "91000", "146000", "600100"].each do |ans| %>
-                  <td class="p-2 border border-cyan-400 text-center bg-white">
-                    <input type="text" data-correct-answer="<%= ans %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  <td class="p-4 border-2 border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="<%= ans %>" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                   </td>
                 <% end %>
               </tr>
@@ -118,24 +121,24 @@
 
         <!-- Tabella -1 -->
         <div class="overflow-x-auto">
-          <table class="border-collapse border border-cyan-400">
+          <table class="border-collapse border-2 border-cyan-400">
             <tbody>
               <tr>
-                <td rowspan="2" class="p-2 border border-cyan-400 text-center font-bold bg-cyan-100">– 1</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold">600</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold">701</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">1 100</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">1 810</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">45 110</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">81 001</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">12 100</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">700 010</td>
-                <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">936 000</td>
+                <td rowspan="2" class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light">– 1</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light">600</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light">701</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">1 100</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">1 810</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">45 110</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">81 001</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">12 100</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">700 010</td>
+                <td class="p-2 border-2 border-cyan-400 text-center font-bold bg-custom-blue-light whitespace-nowrap">936 000</td>
               </tr>
               <tr>
                 <% ["599", "700", "1099", "1809", "45109", "81000", "12099", "700009", "935999"].each do |ans| %>
-                  <td class="p-2 border border-cyan-400 text-center bg-white">
-                    <input type="text" data-correct-answer="<%= ans %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  <td class="p-4 border-2 border-cyan-400 text-center bg-white">
+                    <input type="text" data-correct-answer="<%= ans %>" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                   </td>
                 <% end %>
               </tr>
@@ -153,24 +156,24 @@
       </p>
 
       <div class="overflow-x-auto">
-        <table class="w-full border-collapse border border-cyan-400">
+        <table class="w-full border-collapse border-2 border-cyan-400">
           <thead>
             <tr>
-              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">Precedente che termina con 0</th>
-              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">Precedente</th>
-              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">NUMERO</th>
-              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">Successivo</th>
-              <th class="p-2 border border-cyan-400 bg-cyan-100 text-center">Successivo che termina con 0</th>
+              <th class="p-2 border-2 border-cyan-400 bg-custom-blue-light text-center">Precedente che termina con 0</th>
+              <th class="p-2 border-2 border-cyan-400 bg-custom-blue-light text-center">Precedente</th>
+              <th class="p-2 border-2 border-cyan-400 bg-custom-blue-light text-center">NUMERO</th>
+              <th class="p-2 border-2 border-cyan-400 bg-custom-blue-light text-center">Successivo</th>
+              <th class="p-2 border-2 border-cyan-400 bg-custom-blue-light text-center">Successivo che termina con 0</th>
             </tr>
           </thead>
           <tbody>
             <!-- Esempio -->
-            <tr class="bg-cyan-50">
-              <td class="p-2 border border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">66 230</td>
-              <td class="p-2 border border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">66 236</td>
-              <td class="p-2 border border-cyan-400 text-center font-bold whitespace-nowrap">66 237</td>
-              <td class="p-2 border border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">66 238</td>
-              <td class="p-2 border border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">66 240</td>
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">66 230</td>
+              <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">66 236</td>
+              <td class="p-2 border-2 border-cyan-400 text-center font-bold whitespace-nowrap">66 237</td>
+              <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">66 238</td>
+              <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">66 240</td>
             </tr>
             <% [
               { numero: "65 400", prec0: "65400", prec: "65399", succ: "65401", succ0: "65410", given: "numero" },
@@ -181,31 +184,31 @@
               { numero: "138 511", prec0: "138510", prec: "138510", succ: "138512", succ0: "138520", given: "numero" }
             ].each do |row| %>
               <tr>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
+                <td class="p-2 border-2 border-cyan-400 text-center bg-white">
                   <input type="text" data-correct-answer="<%= row[:prec0] %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                 </td>
-                <td class="p-2 border border-cyan-400 text-center <%= row[:given] == 'prec' ? 'font-bold' : 'bg-white' %>">
+                <td class="p-2 border-2 border-cyan-400 text-center <%= row[:given] == 'prec' ? 'font-bold' : 'bg-white' %>">
                   <% if row[:given] == 'prec' %>
                     <%= row[:prec].to_i.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1 ').reverse %>
                   <% else %>
                     <input type="text" data-correct-answer="<%= row[:prec] %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                   <% end %>
                 </td>
-                <td class="p-2 border border-cyan-400 text-center <%= row[:given] == 'numero' ? 'font-bold' : 'bg-white' %>">
+                <td class="p-2 border-2 border-cyan-400 text-center <%= row[:given] == 'numero' ? 'font-bold' : 'bg-white' %>">
                   <% if row[:given] == 'numero' %>
                     <%= row[:numero] %>
                   <% else %>
                     <input type="text" data-correct-answer="<%= row[:numero].gsub(' ', '') %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                   <% end %>
                 </td>
-                <td class="p-2 border border-cyan-400 text-center <%= row[:given] == 'succ' ? 'font-bold' : 'bg-white' %>">
+                <td class="p-2 border-2 border-cyan-400 text-center <%= row[:given] == 'succ' ? 'font-bold' : 'bg-white' %>">
                   <% if row[:given] == 'succ' %>
                     <%= row[:succ].to_i.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1 ').reverse %>
                   <% else %>
                     <input type="text" data-correct-answer="<%= row[:succ] %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                   <% end %>
                 </td>
-                <td class="p-2 border border-cyan-400 text-center bg-white">
+                <td class="p-2 border-2 border-cyan-400 text-center bg-white">
                   <input type="text" data-correct-answer="<%= row[:succ0] %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
                 </td>
               </tr>
