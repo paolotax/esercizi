@@ -8,7 +8,7 @@
   <div class="space-y-6">
 
     <!-- Introduzione -->
-    <div class="p-4 bg-custom-blue rounded-lg">
+    <div class="p-4 bg-custom-blue rounded-2xl">
       <p class="text-gray-700 mb-4">
         Puoi calcolare le sottrazioni velocemente senza metterle in colonna.
       </p>
@@ -28,127 +28,129 @@
     </div>
 
     <!-- Tabella strategie -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <table class="w-full border-2 border-cyan-500 bg-orange-100">
+      <tbody>
+        <!-- Riga 1: Togliere 10 / Rispondi -->
+        <tr>
+          <td class="p-4 align-top w-1/2 border border-cyan-500">
+            <p class="text-gray-700 mb-2">
+              Per togliere 10 (<span class="font-bold text-<%= @pagina.base_color %>-600">− 10</span>) è sufficiente sottrarre <span class="font-bold text-<%= @pagina.base_color %>-600">1</span> alla cifra delle <span class="font-bold text-<%= @pagina.base_color %>-600">decine</span>!
+            </p>
+            <p class="font-bold text-<%= @pagina.base_color %>-600">
+              1 4<span class="underline">5</span>6 − 10 = 1 4<span class="underline">4</span>6
+            </p>
+          </td>
+          <td class="p-4 align-top w-1/2 border border-cyan-500">
+            <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
+              <span class="text-<%= @pagina.base_color %>-500">•</span> Rispondi.
+            </p>
+            <div class="space-y-3">
+              <div>
+                <p class="text-gray-700 mb-1">E se devi sottrarre 100 a un numero, come procedi?</p>
+                <input type="text" data-correct-answer="Sottrai 1 alla cifra delle centinaia" class="w-full border-b-2 border-dotted border-gray-400 font-bold bg-transparent" placeholder="Sottrai 1 alla cifra delle...">
+              </div>
+              <div>
+                <p class="text-gray-700 mb-1">E se devi sottrarre 1 000?</p>
+                <input type="text" data-correct-answer="Sottrai 1 alla cifra delle migliaia" class="w-full border-b-2 border-dotted border-gray-400 font-bold bg-transparent" placeholder="Sottrai 1 alla cifra delle...">
+              </div>
+            </div>
+          </td>
+        </tr>
 
-      <!-- Strategia 1: Togliere 10 -->
-      <div class="p-4 bg-pink-light rounded-2xl">
-        <p class="text-gray-700 mb-2">
-          Per togliere 10 (<span class="font-bold text-<%= @pagina.base_color %>-600">− 10</span>) è sufficiente sottrarre <span class="font-bold text-<%= @pagina.base_color %>-600">1</span> alla cifra delle <span class="font-bold text-<%= @pagina.base_color %>-600">decine</span>!
-        </p>
-        <p class="font-bold text-<%= @pagina.base_color %>-600">
-          1 4<span class="underline">5</span>6 − 10 = 1 4<span class="underline">4</span>6
-        </p>
-      </div>
+        <!-- Riga 2: -9 e -11 / Calcola velocemente -->
+        <tr>
+          <td class="p-4 align-top border border-cyan-500">
+            <p class="text-gray-700 mb-2">Ricorda che:</p>
+            <p class="font-bold text-<%= @pagina.base_color %>-600">
+              <span class="underline">− 9</span> = − 10 + 1
+            </p>
+            <p class="font-bold text-<%= @pagina.base_color %>-600">
+              <span class="underline">− 11</span> = − 10 − 1
+            </p>
+          </td>
+          <td class="p-4 align-top border border-cyan-500">
+            <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
+              <span class="text-<%= @pagina.base_color %>-500">•</span> Calcola velocemente.
+            </p>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="flex items-center gap-2">
+                <span class="shrink-0">657 − 9 =</span>
+                <input type="text" data-correct-answer="648" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="shrink-0 whitespace-nowrap">3 650 − 9 =</span>
+                <input type="text" data-correct-answer="3641" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="shrink-0">581 − 11 =</span>
+                <input type="text" data-correct-answer="570" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="shrink-0 whitespace-nowrap">4 347 − 11 =</span>
+                <input type="text" data-correct-answer="4336" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+            </div>
+          </td>
+        </tr>
 
-      <!-- Rispondi: sottrarre 100 e 1000 -->
-      <div class="p-4 bg-white rounded-lg border-2 border-<%= @pagina.base_color %>-300">
-        <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
-          <span class="text-<%= @pagina.base_color %>-500">•</span> Rispondi.
-        </p>
-        <div class="space-y-3">
-          <div>
-            <p class="text-gray-700 mb-1">E se devi sottrarre 100 a un numero, come procedi?</p>
-            <input type="text" data-correct-answer="Sottrai 1 alla cifra delle centinaia" class="w-full border-b-2 border-dotted border-gray-400 font-bold bg-transparent" placeholder="Sottrai 1 alla cifra delle...">
-          </div>
-          <div>
-            <p class="text-gray-700 mb-1">E se devi sottrarre 1 000?</p>
-            <input type="text" data-correct-answer="Sottrai 1 alla cifra delle migliaia" class="w-full border-b-2 border-dotted border-gray-400 font-bold bg-transparent" placeholder="Sottrai 1 alla cifra delle...">
-          </div>
-        </div>
-      </div>
+        <!-- Riga 3: Rispondi per 99, 8, 19 (colspan 2) -->
+        <tr>
+          <td colspan="2" class="p-4 border border-cyan-500">
+            <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
+              <span class="text-<%= @pagina.base_color %>-500">•</span> Rispondi: per togliere <span class="text-<%= @pagina.base_color %>-600">99</span>, <span class="text-<%= @pagina.base_color %>-600">8</span> e <span class="text-<%= @pagina.base_color %>-600">19</span> come puoi fare?
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="flex items-center gap-2">
+                <span class="shrink-0">687 − 99 =</span>
+                <input type="text" data-correct-answer="588" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="shrink-0 whitespace-nowrap">2 143 − 8 =</span>
+                <input type="text" data-correct-answer="2135" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="shrink-0 whitespace-nowrap">2 000 − 19 =</span>
+                <input type="text" data-correct-answer="1981" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+            </div>
+          </td>
+        </tr>
 
-      <!-- Strategia 2: -9 = -10 + 1 e -11 = -10 - 1 -->
-      <div class="p-4 bg-pink-light rounded-2xl">
-        <p class="text-gray-700 mb-2">Ricorda che:</p>
-        <p class="font-bold text-<%= @pagina.base_color %>-600">
-          <span class="underline">− 9</span> = − 10 + 1
-        </p>
-        <p class="font-bold text-<%= @pagina.base_color %>-600">
-          <span class="underline">− 11</span> = − 10 − 1
-        </p>
-      </div>
-
-      <!-- Calcola velocemente -->
-      <div class="p-4 bg-white rounded-lg border-2 border-<%= @pagina.base_color %>-300">
-        <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
-          <span class="text-<%= @pagina.base_color %>-500">•</span> Calcola velocemente.
-        </p>
-        <div class="grid grid-cols-2 gap-3">
-          <div class="flex items-center gap-2">
-            <span class="shrink-0">657 − 9 =</span>
-            <input type="text" data-correct-answer="648" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="shrink-0 whitespace-nowrap">3 650 − 9 =</span>
-            <input type="text" data-correct-answer="3641" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="shrink-0">581 − 11 =</span>
-            <input type="text" data-correct-answer="570" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="shrink-0 whitespace-nowrap">4 347 − 11 =</span>
-            <input type="text" data-correct-answer="4336" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-          </div>
-        </div>
-      </div>
-
-      <!-- Rispondi: togliere 99, 8, 19 -->
-      <div class="md:col-span-2 p-4 bg-white rounded-lg border-2 border-<%= @pagina.base_color %>-300">
-        <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
-          <span class="text-<%= @pagina.base_color %>-500">•</span> Rispondi: per togliere <span class="text-<%= @pagina.base_color %>-600">99</span>, <span class="text-<%= @pagina.base_color %>-600">8</span> e <span class="text-<%= @pagina.base_color %>-600">19</span> come puoi fare?
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="flex items-center gap-2">
-            <span class="shrink-0">687 − 99 =</span>
-            <input type="text" data-correct-answer="588" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="shrink-0 whitespace-nowrap">2 143 − 8 =</span>
-            <input type="text" data-correct-answer="2135" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="shrink-0 whitespace-nowrap">2 000 − 19 =</span>
-            <input type="text" data-correct-answer="1981" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-          </div>
-        </div>
-      </div>
-
-      <!-- Strategia 3: Tappa alla decina -->
-      <div class="p-4 bg-pink-light rounded-2xl">
-        <p class="text-gray-700 mb-2">
-          Fai "<span class="font-bold">tappa alla decina</span>"!
-        </p>
-        <p class="text-gray-700">
-          Per <span class="font-bold">togliere un numero qualsiasi</span> raggiungi la decina precedente.
-        </p>
-      </div>
-
-      <!-- Prova tu con tappa alla decina -->
-      <div class="p-4 bg-white rounded-lg border-2 border-<%= @pagina.base_color %>-300">
-        <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
-          56 − 29 = (56 − <span class="underline">6</span>) − 23 = 50 − 23 = 27
-        </p>
-        <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
-          <span class="text-<%= @pagina.base_color %>-500">•</span> Prova tu.
-        </p>
-        <div class="space-y-3">
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="shrink-0">95 − 24 =</span>
-            <input type="text" data-correct-answer="71" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-          </div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="shrink-0">79 − 34 =</span>
-            <input type="text" data-correct-answer="45" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-          </div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="shrink-0">63 − 15 =</span>
-            <input type="text" data-correct-answer="48" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-          </div>
-        </div>
-      </div>
-
-    </div>
+        <!-- Riga 4: Tappa alla decina -->
+        <tr>
+          <td class="p-4 align-top border border-cyan-500">
+            <p class="text-gray-700 mb-2">
+              Fai "<span class="font-bold">tappa alla decina</span>"!
+            </p>
+            <p class="text-gray-700">
+              Per <span class="font-bold">togliere un numero qualsiasi</span> raggiungi la decina precedente.
+            </p>
+          </td>
+          <td class="p-4 align-top border border-cyan-500">
+            <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
+              56 − 29 = (56 − <span class="underline">6</span>) − 23 = 50 − 23 = 27
+            </p>
+            <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2">
+              <span class="text-<%= @pagina.base_color %>-500">•</span> Prova tu.
+            </p>
+            <div class="space-y-3">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="shrink-0">95 − 24 =</span>
+                <input type="text" data-correct-answer="71" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="shrink-0">79 − 34 =</span>
+                <input type="text" data-correct-answer="45" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="shrink-0">63 − 15 =</span>
+                <input type="text" data-correct-answer="48" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- ESERCIZI -->
     <div class="p-4 md:p-6 bg-orange-100 rounded-2xl">

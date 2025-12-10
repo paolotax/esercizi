@@ -10,135 +10,153 @@
     <!-- Introduzione - Ricorda! -->
     <div class="p-4 md:p-6 bg-custom-blue rounded-2xl">
       <h3 class="font-bold text-<%= @pagina.base_color %>-600 italic mb-4">Ricorda!</h3>
-      <p class="text-gray-700 mb-3">I termini dell'<span class="font-bold">addizione</span>:</p>
 
-      <!-- Schema addizione -->
-      <div class="flex items-center justify-center gap-2 mb-4">
-        <div class="text-center">
-          <span class="font-bold">addendo</span><br>
-          <span>↓</span><br>
-          <span class="font-bold">4</span>
+      <div class="flex flex-col md:flex-row md:items-stretch">
+        <!-- Box Addizione -->
+        <div class="flex-1 pb-4 md:pb-0 md:pr-4">
+          <p class="text-gray-700 mb-3">I termini dell'<span class="font-bold">addizione</span>:</p>
+          <div class="flex items-end justify-center gap-4">
+            <div class="text-center">
+              <span class="font-bold text-cyan-600">addendo</span><br>
+              <span class="text-cyan-600">↓</span><br>
+              <span class="font-bold text-cyan-600">4</span>
+            </div>
+            <span class="font-bold">+</span>
+            <div class="text-center">
+              <span class="font-bold text-cyan-600">addendo</span><br>
+              <span class="text-cyan-600">↓</span><br>
+              <span class="font-bold text-cyan-600">6</span>
+            </div>
+            <span class="font-bold">=</span>
+            <div class="text-center">
+              <span class="font-bold text-green-600">somma o totale</span><br>
+              <span class="text-green-600">↓</span><br>
+              <span class="font-bold text-green-600">10</span>
+            </div>
+          </div>
         </div>
-        <span class="font-bold">+</span>
-        <div class="text-center">
-          <span class="font-bold">addendo</span><br>
-          <span>↓</span><br>
-          <span class="font-bold">6</span>
-        </div>
-        <span class="font-bold">=</span>
-        <span class="font-bold">10</span>
-        <span>→</span>
-        <span class="font-bold">somma o totale</span>
-      </div>
 
-      <p class="text-gray-700 mb-3">I termini della <span class="font-bold">sottrazione</span>:</p>
+        <!-- Divider -->
+        <div class="border-b-2 md:border-b-0 md:border-r-2 border-blue-400"></div>
 
-      <!-- Schema sottrazione -->
-      <div class="flex items-center justify-center gap-2">
-        <div class="text-center">
-          <span class="font-bold">minuendo</span><br>
-          <span>↓</span><br>
-          <span class="font-bold">4</span>
+        <!-- Box Sottrazione -->
+        <div class="flex-1 pt-4 md:pt-0 md:pl-4">
+          <p class="text-gray-700 mb-3">I termini della <span class="font-bold">sottrazione</span>:</p>
+          <div class="flex items-end justify-center gap-4">
+            <div class="text-center">
+              <span class="font-bold text-cyan-600">minuendo</span><br>
+              <span class="text-cyan-600">↓</span><br>
+              <span class="font-bold text-cyan-600">4</span>
+            </div>
+            <span class="font-bold">–</span>
+            <div class="text-center">
+              <span class="font-bold text-red-500">sottraendo</span><br>
+              <span class="text-red-500">↓</span><br>
+              <span class="font-bold text-red-500">3</span>
+            </div>
+            <span class="font-bold">=</span>
+            <div class="text-center">
+              <span class="font-bold text-green-600">resto o differenza</span><br>
+              <span class="text-green-600">↓</span><br>
+              <span class="font-bold text-green-600">1</span>
+            </div>
+          </div>
         </div>
-        <span class="font-bold">–</span>
-        <div class="text-center">
-          <span class="font-bold">sottraendo</span><br>
-          <span>↓</span><br>
-          <span class="font-bold">3</span>
-        </div>
-        <span class="font-bold">=</span>
-        <span class="font-bold">1</span>
-        <span>→</span>
-        <span class="font-bold">resto o differenza</span>
       </div>
     </div>
 
     <!-- Container ESERCIZI -->
-    <div class="p-4 md:p-6">
+    <div class="space-y-6">
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Colonna sinistra -->
-        <div class="space-y-6">
-          <!-- Esercizio 1: Addizioni in riga -->
-          <div>
-            <p class="font-bold text-gray-700 mb-4">
-              <%= numero_esercizio_badge(1) %>
-              Calcola le addizioni in riga.
-            </p>
+      <!-- Esercizio 1: Addizioni in riga -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Calcola le addizioni in riga.
+        </p>
 
-            <div class="space-y-2 bg-white p-3 rounded-lg">
-              <div class="flex items-center gap-2 p-2 bg-<%= @pagina.base_color %>-50 rounded">
-                <span>200 + 23 =</span>
-                <span class="font-bold text-<%= @pagina.base_color %>-600">223</span>
-              </div>
-              <% [
-                { expr: "220 + 20 + 100", answer: "340" },
-                { expr: "10 + 60 + 32", answer: "102" },
-                { expr: "830 + 23", answer: "853" },
-                { expr: "75 + 102", answer: "177" },
-                { expr: "450 + 25 + 25", answer: "500" }
-              ].each do |item| %>
-                <div class="flex items-center gap-2">
-                  <span><%= item[:expr] %> =</span>
-                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </div>
-              <% end %>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 bg-white p-3 rounded-lg">
+          <div class="flex items-center gap-2 p-2 bg-<%= @pagina.base_color %>-50 rounded">
+            <span>200 + 23 =</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">223</span>
           </div>
-
-          <!-- Esercizio 2: Addizioni in colonna (placeholder per immagine) -->
-          <div>
-            <p class="font-bold text-gray-700 mb-4">
-              <%= numero_esercizio_badge(2) %>
-              Calcola le addizioni in colonna.
-            </p>
-
-            <div class="bg-blue-50 rounded p-4">
-              <p class="text-gray-500 italic">Esegui le addizioni in colonna sul quaderno.</p>
+          <% [
+            { expr: "220 + 20 + 100", answer: "340" },
+            { expr: "10 + 60 + 32", answer: "102" },
+            { expr: "830 + 23", answer: "853" },
+            { expr: "75 + 102", answer: "177" },
+            { expr: "450 + 25 + 25", answer: "500" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2">
+              <span><%= item[:expr] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
             </div>
-          </div>
+          <% end %>
         </div>
+      </div>
 
-        <!-- Colonna destra -->
-        <div class="space-y-6">
-          <!-- Esercizio 3: Sottrazioni in riga -->
-          <div>
-            <p class="font-bold text-gray-700 mb-4">
-              <%= numero_esercizio_badge(3) %>
-              Calcola le sottrazioni in riga.
-            </p>
+      <!-- Esercizio 2: Addizioni in colonna -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Calcola le addizioni in colonna.
+        </p>
 
-            <div class="space-y-2 bg-white p-3 rounded-lg">
-              <div class="flex items-center gap-2 p-2 bg-<%= @pagina.base_color %>-50 rounded">
-                <span>125 – 15 =</span>
-                <span class="font-bold text-<%= @pagina.base_color %>-600">110</span>
-              </div>
-              <% [
-                { expr: "390 – 40", answer: "350" },
-                { expr: "650 – 40", answer: "610" },
-                { expr: "744 – 244", answer: "500" },
-                { expr: "956 – 56", answer: "900" },
-                { expr: "582 – 32", answer: "550" }
-              ].each do |item| %>
-                <div class="flex items-center gap-2">
-                  <span><%= item[:expr] %> =</span>
-                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </div>
-              <% end %>
-            </div>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <%= render 'strumenti/addizioni/column_addition',
+              addizione: Addizione.new(addends: [151, 235], show_addends: true, show_solution: true, show_carry: false, show_toolbar: false) %>
+          <%= render 'strumenti/addizioni/column_addition',
+              addizione: Addizione.new(addends: [361, 234], show_addends: true, show_carry: false, show_toolbar: false) %>
+          <%= render 'strumenti/addizioni/column_addition',
+              addizione: Addizione.new(addends: [820, 60], show_addends: true, show_carry: false, show_toolbar: false) %>
+          <%= render 'strumenti/addizioni/column_addition',
+              addizione: Addizione.new(addends: [632, 167], show_addends: true, show_carry: false, show_toolbar: false) %>
+        </div>
+      </div>
+
+      <!-- Esercizio 3: Sottrazioni in riga -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Calcola le sottrazioni in riga.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 bg-white p-3 rounded-lg">
+          <div class="flex items-center gap-2 p-2 bg-<%= @pagina.base_color %>-50 rounded">
+            <span>125 – 15 =</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">110</span>
           </div>
-
-          <!-- Esercizio 4: Sottrazioni in colonna (placeholder per immagine) -->
-          <div>
-            <p class="font-bold text-gray-700 mb-4">
-              <%= numero_esercizio_badge(4) %>
-              Calcola le sottrazioni in colonna.
-            </p>
-
-            <div class="bg-blue-50 rounded p-4">
-              <p class="text-gray-500 italic">Esegui le sottrazioni in colonna sul quaderno.</p>
+          <% [
+            { expr: "390 – 40", answer: "350" },
+            { expr: "650 – 40", answer: "610" },
+            { expr: "744 – 244", answer: "500" },
+            { expr: "956 – 56", answer: "900" },
+            { expr: "582 – 32", answer: "550" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2">
+              <span><%= item[:expr] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
             </div>
-          </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Esercizio 4: Sottrazioni in colonna -->
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(4) %>
+          Calcola le sottrazioni in colonna.
+        </p>
+
+        <div class="flex flex-wrap gap-4 justify-center">
+          <%= render 'strumenti/sottrazioni/column_subtraction',
+              sottrazione: Sottrazione.new(minuend: 398, subtrahend: 145, show_minuend_subtrahend: true, show_solution: true, show_borrow: false, show_toolbar: false) %>
+          <%= render 'strumenti/sottrazioni/column_subtraction',
+              sottrazione: Sottrazione.new(minuend: 296, subtrahend: 134, show_minuend_subtrahend: true, show_borrow: false, show_toolbar: false) %>
+          <%= render 'strumenti/sottrazioni/column_subtraction',
+              sottrazione: Sottrazione.new(minuend: 582, subtrahend: 121, show_minuend_subtrahend: true, show_borrow: false, show_toolbar: false) %>
+          <%= render 'strumenti/sottrazioni/column_subtraction',
+              sottrazione: Sottrazione.new(minuend: 864, subtrahend: 622, show_minuend_subtrahend: true, show_borrow: false, show_toolbar: false) %>
         </div>
       </div>
 

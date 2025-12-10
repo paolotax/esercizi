@@ -17,7 +17,7 @@
   <% end %>
   
   <% if defined?(operation_title) && operation_title.present? %>
-    <div class="text-xl font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= operation_title %></div>
+    <div class="font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= operation_title %></div>
   <% end %>
 
   <!-- Griglia moltiplicazione -->
@@ -28,7 +28,7 @@
       <% if moltiplicazione.show_multiplicand_multiplier %>
         <div class="flex justify-end gap-1 mb-2">
           <% moltiplicazione.multiplicand_digits.each do |digit| %>
-            <div class="w-12 text-center text-2xl font-bold text-gray-700">
+            <div class="w-12 text-center font-bold text-gray-700">
               <%= digit %>
             </div>
           <% end %>
@@ -37,7 +37,7 @@
         <div class="flex justify-end gap-1 mb-2">
           <% moltiplicazione.multiplicand_digits.each do |digit| %>
             <input type="text"
-                  class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-green-500 focus:outline-none"
+                  class="w-12 text-center font-bold border-2 border-gray-300 rounded focus:border-green-500 focus:outline-none"
                   data-column-multiplication-target="multiplicandInput"
                   data-correct-answer="<%= digit %>"
                   maxlength="1"
@@ -49,17 +49,17 @@
 
       <!-- Simbolo × e Moltiplicatore -->
       <div class="flex justify-end gap-1 mb-2 border-b-2 border-gray-800 pb-2">
-        <div class="w-12 text-center text-2xl font-bold text-green-600">×</div>
+        <div class="w-12 text-center font-bold text-green-600">×</div>
         <% if moltiplicazione.show_multiplicand_multiplier %>
           <% moltiplicazione.multiplier_digits.each do |digit| %>
-            <div class="w-12 text-center text-2xl font-bold text-gray-700">
+            <div class="w-12 text-center font-bold text-gray-700">
               <%= digit %>
             </div>
           <% end %>
         <% else %>
           <% moltiplicazione.multiplier_digits.each do |digit| %>
             <input type="text"
-                  class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-green-500 focus:outline-none"
+                  class="w-12 text-center font-bold border-2 border-gray-300 rounded focus:border-green-500 focus:outline-none"
                   data-column-multiplication-target="multiplierInput"
                   data-correct-answer="<%= digit %>"
                   maxlength="1"
@@ -99,7 +99,7 @@
             <% partial_data[:digits].each_with_index do |digit, i| %>
               <% col = partial_data[:num_inputs] - 1 - i + partial_data[:row_index] %>
               <input type="text"
-                    class="w-12 text-center text-2xl font-bold border-2 border-gray-300 rounded focus:border-green-500 focus:outline-none"
+                    class="w-12 text-center font-bold border-2 border-gray-300 rounded focus:border-green-500 focus:outline-none"
                     data-column-multiplication-target="partialInput"
                     data-correct-answer="<%= digit %>"
                     data-column="<%= col %>"
@@ -111,7 +111,7 @@
             <% end %>
             <!-- Zeri segnaposto a destra -->
             <% partial_data[:row_index].times do %>
-              <div class="w-12 text-center text-2xl font-bold text-gray-400">0</div>
+              <div class="w-12 text-center font-bold text-gray-400">0</div>
             <% end %>
           </div>
         <% end %>
@@ -145,7 +145,7 @@
           <% col = moltiplicazione.result_digits_array.length - 1 - i %>
           <input type="text"
                 <% if defined?(operation_id) %>name="results[<%= operation_id %>][result][<%= i %>]"<% end %>
-                class="w-12 text-center text-2xl font-bold border-2 border-green-300 rounded focus:border-green-600 focus:outline-none bg-green-50"
+                class="w-12 text-center font-bold border-2 border-green-300 rounded focus:border-green-600 focus:outline-none bg-green-50"
                 data-column-multiplication-target="resultInput"
                 data-correct-answer="<%= digit %>"
                 data-column="<%= col %>"

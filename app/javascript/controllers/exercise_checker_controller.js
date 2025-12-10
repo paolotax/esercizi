@@ -88,6 +88,26 @@ export default class extends Controller {
       })
     }
 
+    // Check sortable exercises
+    const sortableControllers = this.element.querySelectorAll("[data-controller*=\"sortable\"]")
+    if (sortableControllers.length > 0) {
+      sortableControllers.forEach((sortableElement, index) => {
+        const sortableController = this.application.getControllerForElementAndIdentifier(sortableElement, "sortable")
+        if (sortableController && sortableController.checkAnswers) {
+          const result = sortableController.checkAnswers()
+          if (!result.allCorrect) {
+            allCorrect = false
+          }
+          if (result.correctCount > 0) {
+            feedback.push(`Ordinamento ${index + 1}: ${result.correctCount}/${result.total} corretti ✅`)
+          }
+          if (result.incorrectCount > 0) {
+            feedback.push(`Ordinamento ${index + 1}: ${result.incorrectCount} errati ❌`)
+          }
+        }
+      })
+    }
+
     // Check checkboxes (for exercises like "cerchia i numeri decimali")
     const checkboxes = this.element.querySelectorAll('input[type="checkbox"][data-correct-answer]')
     if (checkboxes.length > 0) {
@@ -851,6 +871,15 @@ export default class extends Controller {
       })
     })
 
+    // Show sortable solutions if present
+    const sortableControllers = this.element.querySelectorAll("[data-controller*=\"sortable\"]")
+    sortableControllers.forEach(sortableElement => {
+      const sortableController = this.application.getControllerForElementAndIdentifier(sortableElement, "sortable")
+      if (sortableController && sortableController.showSolution) {
+        sortableController.showSolution()
+      }
+    })
+
     // Show flower matcher solutions if present
     const flowerMatcher = this.element.querySelector("[data-controller=\"flower-matcher\"]")
     if (flowerMatcher) {
@@ -999,6 +1028,15 @@ export default class extends Controller {
       const dividerController = this.application.getControllerForElementAndIdentifier(divider, "syntagm-divider")
       if (dividerController && dividerController.clearAll) {
         dividerController.clearAll()
+      }
+    })
+
+    // Reset sortable exercises
+    const sortableControllers = this.element.querySelectorAll("[data-controller*=\"sortable\"]")
+    sortableControllers.forEach(sortableElement => {
+      const sortableController = this.application.getControllerForElementAndIdentifier(sortableElement, "sortable")
+      if (sortableController && sortableController.reset) {
+        sortableController.reset()
       }
     })
 
