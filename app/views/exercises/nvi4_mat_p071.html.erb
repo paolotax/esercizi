@@ -1,0 +1,260 @@
+<div class="page-viewer bg-white"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-8 p-3 md:p-6">
+
+    <!-- Titolo principale - Livello 1 -->
+    <div class="flex justify-center">
+      <div class="bg-blue-500 text-white font-bold px-8 py-3 rounded-2xl shadow">
+        LA FRAZIONE
+      </div>
+    </div>
+
+    <!-- Freccia -->
+    <div class="flex justify-center">
+      <span class="text-cyan-500 text-2xl">&#8595;</span>
+    </div>
+
+    <!-- Tre colonne principali -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Colonna 1: I TERMINI -->
+      <div class="flex flex-col items-center gap-3">
+        <!-- Sottotitolo Livello 2 -->
+        <div class="bg-cyan-500 text-white font-bold px-6 py-2 rounded-2xl text-center">
+          I TERMINI
+        </div>
+        <!-- Freccia -->
+        <span class="text-cyan-500 text-xl">&#8595;</span>
+        <!-- Contenuto -->
+        <div class="bg-white rounded-2xl p-3 shadow border border-cyan-500 text-gray-700 text-left w-full">
+          <div class="flex items-start gap-4">
+            <!-- Frazione visiva -->
+            <div class="flex flex-col items-center">
+              <span class="font-bold text-2xl text-cyan-600">1</span>
+              <div class="w-8 h-0.5 bg-cyan-600"></div>
+              <span class="font-bold text-2xl text-cyan-600">3</span>
+            </div>
+            <!-- Descrizioni -->
+            <div class="flex-1 space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="text-cyan-500">→</span>
+                <p><strong class="text-<%= @pagina.base_color %>-600">numeratore</strong>: indica quante parti uguali considerare.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-cyan-500">→</span>
+                <p><strong class="text-<%= @pagina.base_color %>-600">linea di frazione</strong>: significa diviso in parti uguali.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-cyan-500">→</span>
+                <p><strong class="text-<%= @pagina.base_color %>-600">denominatore</strong>: indica in quante parti uguali è diviso l'intero.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonna 2: COME SI SCRIVE E COME SI LEGGE -->
+      <div class="flex flex-col items-center gap-3">
+        <!-- Sottotitolo Livello 2 -->
+        <div class="bg-cyan-500 text-white font-bold px-6 py-2 rounded-2xl text-center">
+          COME SI SCRIVE<br>E COME SI LEGGE
+        </div>
+        <!-- Freccia -->
+        <span class="text-cyan-500 text-xl">&#8595;</span>
+        <!-- Contenuto -->
+        <div class="bg-white rounded-2xl p-3 shadow border border-cyan-500 text-gray-700 text-left w-full">
+          <div class="flex items-center gap-4">
+            <!-- Immagine rettangolo frazionato -->
+            <div class="flex">
+              <div class="w-6 h-8 bg-orange-300 border border-gray-400"></div>
+              <div class="w-6 h-8 bg-white border border-l-0 border-gray-400"></div>
+              <div class="w-6 h-8 bg-white border border-l-0 border-gray-400"></div>
+              <div class="w-6 h-8 bg-white border border-l-0 border-gray-400"></div>
+              <div class="w-6 h-8 bg-white border border-l-0 border-gray-400"></div>
+            </div>
+            <div>
+              <p>Si scrive <%= render 'shared/frazione', num: 1, den: 5 %></p>
+              <p>si legge <strong>un quinto</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonna 3: LA FRAZIONE DI UN NUMERO -->
+      <div class="flex flex-col items-center gap-3">
+        <!-- Sottotitolo Livello 2 -->
+        <div class="bg-cyan-500 text-white font-bold px-6 py-2 rounded-2xl text-center">
+          LA FRAZIONE<br>DI UN NUMERO
+        </div>
+        <!-- Freccia -->
+        <span class="text-cyan-500 text-xl">&#8595;</span>
+        <!-- Contenuto -->
+        <div class="bg-white rounded-2xl p-3 shadow border border-cyan-500 text-gray-700 text-left w-full">
+          <p class="mb-2">Per calcolare la frazione di un numero si divide quel numero per il <strong class="text-<%= @pagina.base_color %>-600">denominatore</strong> e si moltiplica il risultato per il <strong class="text-<%= @pagina.base_color %>-600">numeratore</strong>.</p>
+          <div class="flex items-center gap-4 mt-3">
+            <div class="flex items-center gap-1">
+              <%= render 'shared/frazione', num: 3, den: 4 %>
+              <span>di 28</span>
+            </div>
+            <div class="text-right">
+              <p>28 : 4 = 7</p>
+              <p>7 × 3 = 21</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sezione TIPI -->
+    <div class="flex justify-center">
+      <span class="text-cyan-500 text-2xl">&#8595;</span>
+    </div>
+
+    <div class="flex justify-center">
+      <div class="bg-orange-400 text-white font-bold px-8 py-2 rounded-2xl">
+        TIPI
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <span class="text-cyan-500 text-2xl">&#8595;</span>
+    </div>
+
+    <!-- Tre tipi di frazioni -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- COMPLEMENTARI -->
+      <div class="flex flex-col items-center gap-3">
+        <div class="bg-custom-blue-light border border-cyan-600 text-cyan-600 font-bold px-4 py-2 rounded-2xl">
+          COMPLEMENTARI
+        </div>
+        <div class="bg-white rounded-2xl p-3 shadow border border-cyan-500 text-gray-700 text-left w-full">
+          <p class="mb-2">Sommate insieme formano un <strong class="text-<%= @pagina.base_color %>-600">intero</strong>.</p>
+          <!-- Visualizzazione frazioni complementari -->
+          <div class="flex flex-col items-center gap-2 mt-3">
+            <div class="flex">
+              <div class="w-8 h-12 bg-green-400 border border-gray-400"></div>
+              <div class="w-8 h-12 bg-green-400 border border-l-0 border-gray-400"></div>
+              <div class="w-8 h-12 bg-green-400 border border-l-0 border-gray-400"></div>
+              <div class="w-8 h-12 bg-white border border-l-0 border-gray-400"></div>
+              <div class="w-8 h-12 bg-white border border-l-0 border-gray-400"></div>
+            </div>
+            <div class="flex items-center gap-2">
+              <%= render 'shared/frazione', num: 3, den: 5 %>
+              <span class="text-cyan-500">+</span>
+              <%= render 'shared/frazione', num: 2, den: 5 %>
+              <span class="text-cyan-500">=</span>
+              <%= render 'shared/frazione', num: 5, den: 5 %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EQUIVALENTI -->
+      <div class="flex flex-col items-center gap-3">
+        <div class="bg-custom-blue-light border border-cyan-600 text-cyan-600 font-bold px-4 py-2 rounded-2xl">
+          EQUIVALENTI
+        </div>
+        <div class="bg-white rounded-2xl p-3 shadow border border-cyan-500 text-gray-700 text-left w-full">
+          <p class="mb-2">Indicano la <strong class="text-<%= @pagina.base_color %>-600">stessa quantità</strong> anche se sono espresse con diverse scritture.</p>
+          <!-- Visualizzazione frazioni equivalenti -->
+          <div class="space-y-2 mt-3">
+            <div class="flex items-center gap-2">
+              <div class="flex">
+                <div class="w-6 h-8 bg-orange-300 border border-gray-400"></div>
+                <div class="w-6 h-8 bg-orange-300 border border-l-0 border-gray-400"></div>
+                <div class="w-6 h-8 bg-orange-300 border border-l-0 border-gray-400"></div>
+                <div class="w-6 h-8 bg-orange-300 border border-l-0 border-gray-400"></div>
+                <div class="w-6 h-8 bg-white border border-l-0 border-gray-400"></div>
+                <div class="w-6 h-8 bg-white border border-l-0 border-gray-400"></div>
+                <div class="w-6 h-8 bg-white border border-l-0 border-gray-400"></div>
+                <div class="w-6 h-8 bg-white border border-l-0 border-gray-400"></div>
+              </div>
+              <%= render 'shared/frazione', num: 4, den: 8 %>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="flex">
+                <div class="w-12 h-8 bg-orange-300 border border-gray-400"></div>
+                <div class="w-12 h-8 bg-white border border-l-0 border-gray-400"></div>
+              </div>
+              <%= render 'shared/frazione', num: 1, den: 2 %>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="flex">
+                <div class="w-8 h-8 bg-orange-300 border border-gray-400"></div>
+                <div class="w-8 h-8 bg-orange-300 border border-l-0 border-gray-400"></div>
+                <div class="w-8 h-8 bg-white border border-l-0 border-gray-400"></div>
+                <div class="w-8 h-8 bg-white border border-l-0 border-gray-400"></div>
+              </div>
+              <%= render 'shared/frazione', num: 2, den: 4 %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROPRIE, IMPROPRIE, APPARENTI -->
+      <div class="flex flex-col items-center gap-3">
+        <div class="flex flex-col items-center gap-1">
+          <div class="bg-custom-blue-light border border-cyan-600 text-cyan-600 font-bold px-4 py-1 rounded-2xl">
+            PROPRIE / IMPROPRIE
+          </div>
+          <div class="bg-custom-blue-light border border-cyan-600 text-cyan-600 font-bold px-4 py-1 rounded-2xl">
+            APPARENTI
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-3 shadow border border-cyan-500 text-gray-700 text-left w-full">
+          <div class="space-y-2">
+            <p><strong class="text-<%= @pagina.base_color %>-600">PROPRIE</strong>: minori dell'intero (numeratore &lt; denominatore).</p>
+            <p><strong class="text-<%= @pagina.base_color %>-600">IMPROPRIE</strong>: maggiori dell'intero (numeratore &gt; denominatore).</p>
+            <p><strong class="text-<%= @pagina.base_color %>-600">APPARENTI</strong>: uguali a uno o più interi (numeratore uguale o multiplo del denominatore).</p>
+          </div>
+          <!-- Visualizzazione -->
+          <div class="space-y-2 mt-3">
+            <div class="flex items-center gap-2">
+              <div class="flex">
+                <div class="w-4 h-8 bg-orange-300 border border-gray-400"></div>
+                <div class="w-4 h-8 bg-orange-300 border border-l-0 border-gray-400"></div>
+                <div class="w-4 h-8 bg-orange-300 border border-l-0 border-gray-400"></div>
+                <div class="w-4 h-8 bg-white border border-l-0 border-gray-400"></div>
+                <div class="w-4 h-8 bg-white border border-l-0 border-gray-400"></div>
+                <div class="w-4 h-8 bg-white border border-l-0 border-gray-400"></div>
+                <div class="w-4 h-8 bg-white border border-l-0 border-gray-400"></div>
+                <div class="w-4 h-8 bg-white border border-l-0 border-gray-400"></div>
+              </div>
+              <%= render 'shared/frazione', num: 3, den: 8 %>
+              <span class="text-gray-600">propria</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="flex">
+                <% 8.times do %>
+                  <div class="w-4 h-8 bg-orange-300 border border-gray-400 first:border-l"></div>
+                <% end %>
+                <% 4.times do %>
+                  <div class="w-4 h-8 bg-orange-300 border border-l-0 border-gray-400"></div>
+                <% end %>
+              </div>
+              <%= render 'shared/frazione', num: 12, den: 8 %>
+              <span class="text-gray-600">impropria</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="flex">
+                <% 8.times do %>
+                  <div class="w-4 h-8 bg-orange-300 border border-gray-400 first:border-l"></div>
+                <% end %>
+              </div>
+              <%= render 'shared/frazione', num: 8, den: 8 %>
+              <span class="text-gray-600">apparente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

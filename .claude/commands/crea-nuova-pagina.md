@@ -176,6 +176,30 @@ Usare `@pagina.base_color` per colori coerenti:
 
 ---
 
+## STILI CORRETTI (IMPORTANTE!)
+
+**Rosa per box regole/spiegazioni:**
+- ✅ CORRETTO: `bg-pink-light` (#EFD9E9)
+- ❌ SBAGLIATO: `bg-pink-50`, `bg-pink-100`
+
+**Header tabelle valori posizionali:**
+- ✅ CORRETTO: `bg-custom-blue-light` con testo colorato (text-red-600, text-blue-600, text-green-600)
+- ❌ SBAGLIATO: `bg-cyan-100`
+
+**Tabelle standard:**
+- Bordi tabella e celle: `border-2 border-cyan-400`
+- Header celle: `bg-custom-blue-light`
+
+**Box teoria importante:**
+- ✅ CORRETTO: `bg-white rounded-3xl border-4 border-blue-800`
+
+**Tabelle combinazioni (es. astucci/colori):**
+- Celle: `border-2 border-cyan-400`
+- Header colorati: `bg-pink-400`, `bg-green-500`, `bg-cyan-500` con `text-white`
+- Prima cella angolo: `border-t-transparent border-l-transparent`
+
+---
+
 ## INPUT STANDARDIZZATI
 
 ```erb
@@ -308,14 +332,14 @@ Per problemi da risolvere, quesiti:
 ### Regola breve (rosa chiaro, arrotondato)
 Per regole e definizioni brevi:
 ```erb
-<div class="p-3 bg-pink-50 rounded-2xl">
+<div class="p-3 bg-pink-light rounded-2xl w-fit">
   <p class="text-gray-700">Regola o definizione...</p>
 </div>
 ```
 
-Variante più scura per regole comportamento:
+Variante per regole comportamento:
 ```erb
-<div class="p-3 bg-pink-100 rounded-xl">
+<div class="p-3 bg-pink-light rounded-xl w-fit">
   <p class="text-gray-600">Regola comportamento...</p>
 </div>
 ```
@@ -528,7 +552,7 @@ Per visualizzare numeri su abaco (non modificabile):
 |------|--------|-------|---------|-----|
 | **Sezioni Teoria** | nessuno | nessuno | nessuno | Contenitore generico (sfondo bianco pagina) |
 | **Problema/quesito** | bg-custom-blue-light | nessuno | nessuno | Problemi da risolvere |
-| **Regola breve** | bg-pink-50 | nessuno | rounded-2xl | Regole/definizioni |
+| **Regola breve** | bg-pink-light w-fit | nessuno | rounded-2xl | Regole/definizioni |
 | **Box Teoria Importante** | bg-white | border-3 border-blue-800 | rounded-2xl | Regole fondamentali |
 | **Tabelle Significato Numeri** | bg-white | border-2 border-cyan-400 | nessuno | "23 significa..." |
 | **Container Esercizi** | bg-orange-100 | nessuno | rounded-2xl | Wrapper esercizi |
@@ -664,6 +688,62 @@ Per visualizzare numeri su abaco (non modificabile):
 
 ---
 
+## CONTROLLER MATEMATICA
+
+**Operazioni in colonna:**
+```erb
+data-controller="column-addition"      <!-- Addizioni in colonna -->
+data-controller="column-subtraction"   <!-- Sottrazioni in colonna -->
+data-controller="column-multiplication" <!-- Moltiplicazioni in colonna -->
+```
+
+**Partial operazioni:**
+```erb
+<%= render 'strumenti/sottrazioni/column_subtraction',
+    sottrazione: Sottrazione.new(minuend: 532, subtrahend: 175,
+      show_minuend_subtrahend: true, show_solution: false,
+      show_borrow: true, show_toolbar: false) %>
+
+<%= render 'strumenti/addizioni/column_addition',
+    addizione: Addizione.new(addends: [234, 567],
+      show_addends: true, show_solution: false,
+      show_carry: true, show_toolbar: false) %>
+```
+
+**Abaco:**
+```erb
+data-controller="abaco"
+<%= render 'strumenti/abaco/abaco', **Abaco.new(number: 386, editable: false).to_partial_params %>
+```
+
+**Frazioni:**
+```erb
+data-controller="fraction-coloring"    <!-- Colorare parti di figura -->
+data-controller="fraction-circles"     <!-- Cerchi frazionati -->
+data-controller="fraction-grids"       <!-- Griglie frazionate -->
+data-controller="equivalent-fractions" <!-- Frazioni equivalenti -->
+```
+
+**Selezione/evidenziazione:**
+```erb
+data-controller="word-highlighter"     <!-- Cerchiare/sottolineare parole -->
+data-controller="clickable-choice"     <!-- Scelte cliccabili -->
+```
+
+**Linea dei numeri:**
+```erb
+data-controller="number-line"
+```
+
+**Proprietà operazioni:**
+```erb
+<%= render 'shared/commutativa', a: 8, b: 2, result: :auto, op: "×" %>
+<%= render 'shared/associativa_frecce', a: 6, b: 5, c: 2, op: "×", group: "right" %>
+<%= render 'shared/associativa_parentesi', a: 6, b: 5, c: 2, op: "×", group: "left" %>
+```
+
+---
+
 ## PAGINE ESERCIZI (Quaderno p170+)
 
 **IMPORTANTE:** Per le pagine del Quaderno Esercizi (p170 in poi) usare queste varianti:
@@ -730,6 +810,96 @@ Se presente, aggiungere il partial **PRIMA** di `exercise_controls`:
 **Formato:**
 - Array di numeri di pagina: `[176, 177, 178]`
 - Il partial genera automaticamente i link con il colore `@pagina.base_color`
+
+---
+
+## PAGINE MAPPA (Schema visivo gerarchico)
+
+Per pagine che mostrano schemi/mappe concettuali con struttura gerarchica (es. p037 Addizione/Sottrazione):
+
+### Struttura base MAPPA:
+```erb
+<div class="page-viewer bg-white"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-8">
+    <!-- Contenuto mappa -->
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
+```
+
+### Tre livelli di colori:
+
+**Livello 1 - Titoli principali:**
+```erb
+<div class="flex justify-center">
+  <div class="bg-blue-500 text-white font-bold text-xl px-8 py-3 rounded-2xl shadow">
+    TITOLO PRINCIPALE
+  </div>
+</div>
+```
+
+**Livello 2 - Sottotitoli:**
+```erb
+<div class="bg-cyan-500 text-white font-bold px-6 py-2 rounded-2xl text-center">
+  STRUTTURA<br>DELL'OPERAZIONE
+</div>
+```
+
+**Livello 3 - Proprietà/dettagli:**
+```erb
+<div class="bg-custom-blue-light border border-cyan-600 text-cyan-600 font-bold px-4 py-2 rounded-2xl">
+  COMMUTATIVA
+</div>
+```
+
+### Frecce (sempre cyan):
+```erb
+<span class="text-cyan-500 text-2xl">&#8595;</span>  <!-- freccia grande -->
+<span class="text-cyan-500 text-xl">&#8595;</span>   <!-- freccia media -->
+<span class="text-cyan-500 text-lg">&#8595;</span>   <!-- freccia piccola -->
+```
+
+### Box contenuto (testi/immagini):
+```erb
+<div class="bg-white rounded-2xl p-3 shadow border border-cyan-500 text-gray-700 text-left">
+  Testo descrittivo...
+</div>
+```
+
+### Layout con righe flex (NON grid/colonne):
+```erb
+<!-- Riga orizzontale -->
+<div class="flex flex-row justify-center gap-8">
+  <!-- Colonna sinistra -->
+  <div class="flex flex-col items-center gap-3">
+    <!-- livello 2 + freccia + contenuto -->
+  </div>
+  <!-- Colonna destra -->
+  <div class="flex flex-col items-center gap-3">
+    <!-- livello 2 + freccia + sotto-livelli -->
+  </div>
+</div>
+```
+
+### Immagini con dimensioni custom:
+```erb
+<%= image_tag "nvi4_mat/p037/p037_03.jpg", class: "w-[212px] h-auto" %>
+```
+
+### Caratteristiche MAPPE:
+- ✅ `page-viewer bg-white` (sfondo bianco)
+- ✅ Righe flex orizzontali (`flex flex-row`)
+- ✅ Box `rounded-2xl` con `shadow` e `border-cyan-500`
+- ✅ Testi `text-left` (allineati a sinistra)
+- ✅ **NESSUNA dimensione testo fissa** (no text-sm, text-lg, ecc.)
+- ✅ Frecce `text-cyan-500`
+- ✅ Immagini per i contenuti dove disponibili
 
 ---
 

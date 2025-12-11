@@ -1,0 +1,371 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls fraction-coloring"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
+
+      <!-- Due colonne -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x-2 md:divide-orange-300">
+
+        <!-- Colonna sinistra -->
+        <div class="space-y-6 md:pr-4">
+
+          <!-- Esercizio 1: IMPARARE TUTTI -->
+          <div class="p-4 bg-white rounded-2xl border-3 border-blue-500 -ml-4 md:-ml-6 -mt-4 md:-mt-6">
+            <p class="font-bold text-gray-700 mb-4">
+              <%= imparare_tutti_badge(1) %>
+              Segna con una <strong>X</strong> i quadrati in cui è stato colorato <%= render 'shared/frazione', num: 1, den: 4 %> della superficie.
+            </p>
+
+            <div class="flex flex-wrap gap-4 justify-center">
+              <!-- Quadrato 1: diagonale (corretto) -->
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 border-2 border-gray-400 relative">
+                  <div class="absolute inset-0">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                      <line x1="0" y1="0" x2="100" y2="100" stroke="gray" stroke-width="2"/>
+                      <line x1="100" y1="0" x2="0" y2="100" stroke="gray" stroke-width="2"/>
+                      <polygon points="50,0 100,50 50,50" fill="#F9A8D4"/>
+                    </svg>
+                  </div>
+                </div>
+                <label class="mt-1 cursor-pointer">
+                  <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+                </label>
+              </div>
+
+              <!-- Quadrato 2: verticale 4 parti (non corretto - 2 colorati) -->
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 border-2 border-gray-400 grid grid-cols-4">
+                  <div class="border-r border-gray-300"></div>
+                  <div class="border-r border-gray-300"></div>
+                  <div class="border-r border-gray-300 bg-pink-300"></div>
+                  <div class="bg-pink-300"></div>
+                </div>
+                <label class="mt-1 cursor-pointer">
+                  <input type="checkbox" class="w-5 h-5" data-correct-answer="false">
+                </label>
+              </div>
+
+              <!-- Quadrato 3: 2x2 (corretto) -->
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 border-2 border-gray-400 grid grid-cols-2 grid-rows-2">
+                  <div class="border-r border-b border-gray-300 bg-pink-300"></div>
+                  <div class="border-b border-gray-300"></div>
+                  <div class="border-r border-gray-300"></div>
+                  <div></div>
+                </div>
+                <label class="mt-1 cursor-pointer">
+                  <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+                </label>
+              </div>
+
+              <!-- Quadrato 4: orizzontale 4 parti (corretto) -->
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 border-2 border-gray-400 grid grid-rows-4">
+                  <div class="border-b border-gray-300 bg-pink-300"></div>
+                  <div class="border-b border-gray-300"></div>
+                  <div class="border-b border-gray-300"></div>
+                  <div></div>
+                </div>
+                <label class="mt-1 cursor-pointer">
+                  <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+                </label>
+              </div>
+
+              <!-- Quadrato 5: 4x4 (corretto - 4 su 16 colorati) -->
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 border-2 border-gray-400 grid grid-cols-4 grid-rows-4">
+                  <% 16.times do |i| %>
+                    <div class="border border-gray-200 <%= [0,1,4,5].include?(i) ? 'bg-pink-300' : '' %>"></div>
+                  <% end %>
+                </div>
+                <label class="mt-1 cursor-pointer">
+                  <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Esercizio 2 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(2) %>
+              Completa le frazioni indicate.
+            </p>
+
+            <div class="space-y-3">
+              <div class="flex items-center gap-4">
+                <span class="w-32 text-gray-700">frazioni proprie</span>
+                <div class="flex gap-2">
+                  <%= render 'shared/frazione', num: nil, den: 4, num_answer: "1" %>
+                  <%= render 'shared/frazione', num: nil, den: 9, num_answer: "1" %>
+                  <%= render 'shared/frazione', num: nil, den: 7, num_answer: "1" %>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="w-32 text-gray-700">frazioni improprie</span>
+                <div class="flex gap-2">
+                  <%= render 'shared/frazione', num: nil, den: 4, num_answer: "5" %>
+                  <%= render 'shared/frazione', num: nil, den: 9, num_answer: "10" %>
+                  <%= render 'shared/frazione', num: nil, den: 7, num_answer: "8" %>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="w-32 text-gray-700">frazioni apparenti</span>
+                <div class="flex gap-2">
+                  <%= render 'shared/frazione', num: nil, den: 4, num_answer: "4" %>
+                  <%= render 'shared/frazione', num: nil, den: 9, num_answer: "9" %>
+                  <%= render 'shared/frazione', num: nil, den: 7, num_answer: "7" %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Esercizio 3 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(3) %>
+              Completa le uguaglianze trovando le frazioni complementari e ricostruisci l'intero.
+            </p>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="flex items-center gap-1 flex-wrap">
+                <%= render 'shared/frazione', num: 3, den: 8 %>
+                <span>+</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "5", den_answer: "8" %>
+                <span>=</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "8", den_answer: "8" %>
+                <span>= 1</span>
+              </div>
+              <div class="flex items-center gap-1 flex-wrap">
+                <%= render 'shared/frazione', num: 12, den: 17 %>
+                <span>+</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "5", den_answer: "17" %>
+                <span>=</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "17", den_answer: "17" %>
+                <span>= 1</span>
+              </div>
+              <div class="flex items-center gap-1 flex-wrap">
+                <%= render 'shared/frazione', num: 2, den: 5 %>
+                <span>+</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "5" %>
+                <span>=</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "5", den_answer: "5" %>
+                <span>= 1</span>
+              </div>
+              <div class="flex items-center gap-1 flex-wrap">
+                <%= render 'shared/frazione', num: 4, den: 11 %>
+                <span>+</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "7", den_answer: "11" %>
+                <span>=</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "11", den_answer: "11" %>
+                <span>= 1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Esercizio 4 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(4) %>
+              Scrivi tre frazioni equivalenti a quella data.
+            </p>
+
+            <div class="space-y-3">
+              <div class="flex items-center gap-2 flex-wrap">
+                <%= render 'shared/frazione', num: 1, den: 2 %>
+                <span class="text-gray-400">=</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "2", den_answer: "4" %>
+                <span class="text-gray-400">=</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "4", den_answer: "8" %>
+                <span class="text-gray-400">=</span>
+                <%= render 'shared/frazione', num: nil, den: 16, num_answer: "8" %>
+              </div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <%= render 'shared/frazione', num: 144, den: 168 %>
+                <span class="text-gray-400">=</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "72", den_answer: "84" %>
+                <span class="text-gray-400">=</span>
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "36", den_answer: "42" %>
+                <span class="text-gray-400">=</span>
+                <%= render 'shared/frazione', num: nil, den: 21, num_answer: "18" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonna destra -->
+        <div class="space-y-6 md:pl-4">
+
+          <!-- Esercizio 5 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(5) %>
+              Calcola sul quaderno il valore delle frazioni.
+            </p>
+
+            <div class="grid grid-cols-2 gap-3">
+              <% [
+                [[3,8], 72, 27],
+                [[2,5], 25, 10],
+                [[3,12], 60, 15],
+                [[5,13], 39, 15],
+                [[4,15], 75, 20],
+                [[6,11], 99, 54]
+              ].each do |frac, total, answer| %>
+                <div class="flex items-center gap-2">
+                  <%= render 'shared/frazione', num: frac[0], den: frac[1] %>
+                  <span class="text-gray-700">di <%= total %> =</span>
+                  <input type="text" data-correct-answer="<%= answer %>" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Esercizio 6 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(6) %>
+              Segna con una <strong>X</strong> la risposta corretta.
+            </p>
+
+            <p class="text-gray-700 mb-2">
+              Daniele ha 168 bandierine colorate.<br>
+              Di queste, <%= render 'shared/frazione', num: 2, den: 7 %> sono rosse.<br>
+              Quante sono le bandierine rosse?
+            </p>
+
+            <div class="flex flex-wrap gap-3">
+              <% [42, 48, 186, 16].each do |val| %>
+                <label class="flex items-center gap-2 cursor-pointer hover:bg-orange-200 p-2 rounded">
+                  <input type="checkbox" class="w-5 h-5" data-correct-answer="<%= val == 48 ? 'true' : 'false' %>">
+                  <span class="text-gray-700"><%= val %></span>
+                </label>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Esercizio 7 -->
+          <div>
+            <p class="font-bold text-gray-700 mb-4">
+              <%= numero_esercizio_badge(7) %>
+              Confronta le frazioni: inserisci <strong>&gt;</strong> oppure <strong>&lt;</strong>.
+            </p>
+
+            <div class="grid grid-cols-2 gap-3">
+              <% [
+                [[8,9], [8,13]],
+                [[2,3], [2,5]],
+                [[2,4], [3,4]],
+                [[17,19], [15,19]],
+                [[3,7], [3,10]],
+                [[4,5], [4,9]]
+              ].each do |pair| %>
+                <div class="flex items-center gap-1">
+                  <%= render 'shared/frazione', num: pair[0][0], den: pair[0][1] %>
+                  <%
+                    left_val = pair[0][0].to_f / pair[0][1]
+                    right_val = pair[1][0].to_f / pair[1][1]
+                    correct = left_val > right_val ? ">" : "<"
+                  %>
+                  <input type="text" data-correct-answer="<%= correct %>" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                  <%= render 'shared/frazione', num: pair[1][0], den: pair[1][1] %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- RISOLVI I PROBLEMI - h2 sotto esercizio 7 -->
+          <h2 class="font-bold text-<%= @pagina.base_color %>-600 italic">RISOLVI I PROBLEMI</h2>
+
+          <!-- Problema 8 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(8) %>
+              La classe 4<sup>a</sup> A della scuola "G. Pascoli" è composta da 24 alunni. Di questi, <%= render 'shared/frazione', num: 2, den: 8 %>
+              hanno gli occhiali. Quanti alunni della 4<sup>a</sup> A hanno gli occhiali?
+            </p>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">Risposta:</span>
+              <input type="text" data-correct-answer="6" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              <span class="text-gray-700">alunni</span>
+            </div>
+          </div>
+
+          <!-- Problema 9 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(9) %>
+              Alex e Paolo hanno ricevuto in regalo un sacchetto con 15 caramelle. Le dividono in modo che Alex abbia i <%= render 'shared/frazione', num: 3, den: 5 %> delle caramelle.<br>
+              Quante caramelle avrà Alex? E Paolo?
+            </p>
+            <div class="flex items-center gap-4 flex-wrap">
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700">Alex:</span>
+                <input type="text" data-correct-answer="9" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700">Paolo:</span>
+                <input type="text" data-correct-answer="6" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+            </div>
+          </div>
+
+          <!-- Problema 10 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(10) %>
+              In un barattolo ci sono 42 biscotti; <%= render 'shared/frazione', num: 2, den: 7 %> sono al cioccolato,
+              <%= render 'shared/frazione', num: 3, den: 7 %> alla nocciola e gli altri alla crema.<br>
+              Quanti sono i biscotti alla crema?
+            </p>
+            <div class="flex items-center gap-4 flex-wrap">
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700">Cioccolato:</span>
+                <input type="text" data-correct-answer="12" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700">Nocciola:</span>
+                <input type="text" data-correct-answer="18" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700">Crema:</span>
+                <input type="text" data-correct-answer="12" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+              </div>
+            </div>
+          </div>
+
+          <!-- Problema 11 -->
+          <div>
+            <p class="text-gray-700 mb-2">
+              <%= numero_esercizio_badge(11) %>
+              Valeria deve percorrere 1 245 metri per andare a casa della nonna. Ne ha percorsi <%= render 'shared/frazione', num: 2, den: 5 %>.<br>
+              Quanti metri deve ancora percorrere?
+            </p>
+            <div class="flex items-center gap-4 flex-wrap">
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700">Percorsi:</span>
+                <input type="text" data-correct-answer="498" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span class="text-gray-700">m</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700">Da percorrere:</span>
+                <input type="text" data-correct-answer="747" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <span class="text-gray-700">m</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

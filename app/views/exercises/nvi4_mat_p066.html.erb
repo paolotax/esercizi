@@ -1,0 +1,223 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls fraction-coloring word-highlighter"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione: Frazioni con numeratore uguale -->
+    <div class="p-4 md:p-6">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 mb-4">Frazioni con numeratore uguale</h2>
+
+      <!-- Osserva come sono stati divisi e colorati i due rettangoli -->
+      <p class="text-gray-700 mb-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span>
+        <strong>Osserva come sono stati divisi e colorati i due rettangoli. Poi rispondi e completa.</strong>
+      </p>
+
+      <!-- Due rettangoli con frazioni -->
+      <div class="flex flex-col md:flex-row gap-6 mb-6">
+        <div class="flex items-center gap-4">
+          <!-- Rettangolo 1/2 colorato -->
+          <div class="flex">
+            <div class="w-16 h-12 bg-purple-400 border-2 border-gray-400"></div>
+            <div class="w-16 h-12 bg-white border-2 border-l-0 border-gray-400"></div>
+          </div>
+          <%= render 'shared/frazione', num: 1, den: 2 %>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <!-- Rettangolo 1/4 colorato -->
+          <div class="flex">
+            <div class="w-8 h-12 bg-purple-400 border-2 border-gray-400"></div>
+            <div class="w-8 h-12 bg-white border-2 border-l-0 border-gray-400"></div>
+            <div class="w-8 h-12 bg-white border-2 border-l-0 border-gray-400"></div>
+            <div class="w-8 h-12 bg-white border-2 border-l-0 border-gray-400"></div>
+          </div>
+          <%= render 'shared/frazione', num: 1, den: 4 %>
+        </div>
+
+        <div class="flex-1">
+          <p class="text-gray-700 mb-2">
+            Quale delle due frazioni rappresenta una quantità maggiore?
+          </p>
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "1", den_answer: "2" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <p class="text-gray-700 mb-2">
+          Scrivi il segno &gt; oppure &lt; fra le due frazioni:
+          <span class="inline-flex items-center gap-2">
+            <%= render 'shared/frazione', num: 1, den: 2 %>
+            <input type="text" data-correct-answer=">" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <%= render 'shared/frazione', num: 1, den: 4 %>
+          </span>
+        </p>
+      </div>
+
+      <!-- Linea dei numeri con 1/2 e 1/4 -->
+      <p class="text-gray-700 mb-2">
+        Collochiamo la frazione <%= render 'shared/frazione', num: 1, den: 2 %> e la frazione <%= render 'shared/frazione', num: 1, den: 4 %> sulla linea dei numeri tra 0 e 1.
+      </p>
+
+      <div class="mb-6">
+        <!-- Prima linea: con 1/2 -->
+        <div class="relative mb-6">
+          <div class="absolute -top-6 left-1/2 -translate-x-1/2 text-center">
+            <%= render 'shared/frazione', num: 1, den: 2 %>
+          </div>
+          <div class="flex items-center">
+            <span class="text-cyan-600 font-bold mr-2">0</span>
+            <div class="flex-1 h-1 bg-cyan-400 relative">
+              <div class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 bg-cyan-600"></div>
+              <div class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-0.5 h-4 bg-cyan-600"></div>
+              <div class="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-4 bg-cyan-600"></div>
+            </div>
+            <span class="text-cyan-600 font-bold ml-2">1</span>
+          </div>
+        </div>
+
+        <!-- Seconda linea: con 1/4 -->
+        <div class="relative">
+          <div class="absolute -top-6 left-1/4 -translate-x-1/2 text-center">
+            <%= render 'shared/frazione', num: 1, den: 4 %>
+          </div>
+          <div class="flex items-center">
+            <span class="text-cyan-600 font-bold mr-2">0</span>
+            <div class="flex-1 h-1 bg-cyan-400 relative">
+              <div class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 bg-cyan-600"></div>
+              <div class="absolute left-1/4 top-1/2 -translate-y-1/2 -translate-x-1/2 w-0.5 h-4 bg-cyan-600"></div>
+              <div class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-0.5 h-4 bg-cyan-600"></div>
+              <div class="absolute left-3/4 top-1/2 -translate-y-1/2 -translate-x-1/2 w-0.5 h-4 bg-cyan-600"></div>
+              <div class="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-4 bg-cyan-600"></div>
+            </div>
+            <span class="text-cyan-600 font-bold ml-2">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prova tu -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-700 mb-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span>
+        <strong>Prova tu.</strong>
+      </p>
+
+      <div class="p-3 bg-custom-blue-light mb-4">
+        <p class="text-gray-700">
+          Giulia, Riccardo, Nicol e Mattia devono colorare un quadrato ciascuno; Giulia ne colora <%= render 'shared/frazione', num: 1, den: 16 %>,
+          Riccardo <%= render 'shared/frazione', num: 1, den: 4 %>, Nicol <%= render 'shared/frazione', num: 1, den: 2 %> e Mattia <%= render 'shared/frazione', num: 1, den: 8 %>.
+          Chi ha colorato la parte maggiore di superficie?
+        </p>
+      </div>
+
+      <p class="text-gray-700 mb-4">
+        Per rispondere rappresentiamo le frazioni con un quadrato che dividiamo in due, quattro, otto, sedici parti uguali. Completa e colora.
+      </p>
+
+      <!-- Quattro quadrati da colorare -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+        <!-- Giulia 1/16 -->
+        <div class="flex flex-col items-center gap-2">
+          <div class="w-20 h-20 border-2 border-gray-400 grid grid-cols-4 grid-rows-4">
+            <% 16.times do |i| %>
+              <div class="border border-gray-300 cursor-pointer hover:bg-cyan-100 <%= 'bg-pink-300' if i == 0 %>" data-action="click->fraction-coloring#toggleColor"></div>
+            <% end %>
+          </div>
+          <div class="text-center">
+            <p class="text-gray-700">Giulia: <%= render 'shared/frazione', num: 1, den: 16 %></p>
+          </div>
+        </div>
+
+        <!-- Riccardo 1/4 -->
+        <div class="flex flex-col items-center gap-2">
+          <div class="w-20 h-20 border-2 border-gray-400 grid grid-cols-2 grid-rows-2">
+            <% 4.times do |i| %>
+              <div class="border border-gray-300 cursor-pointer hover:bg-cyan-100" data-action="click->fraction-coloring#toggleColor"></div>
+            <% end %>
+          </div>
+          <div class="text-center">
+            <p class="text-gray-700">Riccardo: <%= render 'shared/frazione', num: 1, den: 4 %></p>
+          </div>
+        </div>
+
+        <!-- Nicol 1/2 -->
+        <div class="flex flex-col items-center gap-2">
+          <div class="w-20 h-20 border-2 border-gray-400 grid grid-cols-2">
+            <% 2.times do |i| %>
+              <div class="border border-gray-300 cursor-pointer hover:bg-cyan-100" data-action="click->fraction-coloring#toggleColor"></div>
+            <% end %>
+          </div>
+          <div class="text-center">
+            <p class="text-gray-700">Nicol: <%= render 'shared/frazione', num: 1, den: 2 %></p>
+          </div>
+        </div>
+
+        <!-- Mattia 1/8 -->
+        <div class="flex flex-col items-center gap-2">
+          <div class="w-20 h-20 border-2 border-gray-400 grid grid-cols-4 grid-rows-2">
+            <% 8.times do |i| %>
+              <div class="border border-gray-300 cursor-pointer hover:bg-cyan-100" data-action="click->fraction-coloring#toggleColor"></div>
+            <% end %>
+          </div>
+          <div class="text-center">
+            <p class="text-gray-700">Mattia: <%= render 'shared/frazione', num: 1, den: 8 %></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linea dei numeri con 1/2, 1/4, 1/8, 1/16 -->
+      <p class="text-gray-700 mb-2">
+        Colloca <%= render 'shared/frazione', num: 1, den: 2 %>, <%= render 'shared/frazione', num: 1, den: 4 %>, <%= render 'shared/frazione', num: 1, den: 8 %> e <%= render 'shared/frazione', num: 1, den: 16 %> sulla linea dei numeri tra 0 e 1.
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-4 mb-4">
+        <div class="flex-1">
+          <!-- Linea dei numeri divisa in 16 parti -->
+          <div class="relative pt-8">
+            <div class="flex items-center">
+              <span class="text-cyan-600 font-bold mr-2">0</span>
+              <div class="flex-1 h-1 bg-cyan-400 relative">
+                <% 17.times do |i| %>
+                  <div class="absolute top-1/2 -translate-y-1/2 w-0.5 h-3 bg-cyan-600" style="left: <%= (i * 100.0 / 16).round(2) %>%"></div>
+                <% end %>
+              </div>
+              <span class="text-cyan-600 font-bold ml-2">1</span>
+            </div>
+            <!-- Input per le posizioni -->
+            <div class="flex justify-between mt-2 px-6">
+              <div class="flex flex-col items-center">
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "1", den_answer: "16" %>
+              </div>
+              <div class="flex flex-col items-center">
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "1", den_answer: "8" %>
+              </div>
+              <div class="flex flex-col items-center">
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "1", den_answer: "4" %>
+              </div>
+              <div class="flex flex-col items-center">
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "1", den_answer: "2" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Box regola -->
+        <div class="p-3 bg-pink-light rounded-2xl w-fit">
+          <p class="text-gray-700">
+            Tra due o più frazioni che hanno lo <strong>stesso numeratore</strong>
+            è <strong>maggiore</strong> (&gt;) la frazione che ha il <strong>denominatore minore</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

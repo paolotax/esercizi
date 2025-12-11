@@ -1,0 +1,213 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls fraction-coloring"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione teoria -->
+    <div class="py-4">
+      <p class="text-gray-700 mb-4">
+        Il nastro disegnato qui sotto è stato diviso in 7 parti uguali; di queste, 4 sono state colorate di azzurro. Per poter colorare l'intero nastro occorre colorarne ancora 3.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div class="space-y-4">
+          <div class="flex items-center gap-2 flex-wrap">
+            <%= render 'shared/frazione', num: 4, den: 7 %>
+            <span class="text-gray-700">+</span>
+            <%= render 'shared/frazione', num: 3, den: 7 %>
+            <span class="text-gray-700">formano l'<span class="font-bold">intero</span>.</span>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            <%= render 'shared/frazione', num: 4, den: 7 %>
+            <span class="text-gray-700">e</span>
+            <%= render 'shared/frazione', num: 3, den: 7 %>
+            <span class="text-gray-700">sono <span class="font-bold">frazioni complementari</span>.</span>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700">Infatti:</span>
+            <%= render 'shared/frazione', num: 4, den: 7 %>
+            <span class="text-gray-700">+</span>
+            <%= render 'shared/frazione', num: 3, den: 7 %>
+            <span class="text-gray-700">=</span>
+            <%= render 'shared/frazione', num: 7, den: 7 %>
+            <span class="text-gray-700">= 1</span>
+          </div>
+        </div>
+
+        <!-- Nastro visivo -->
+        <div class="space-y-2">
+          <div class="w-full h-10 border-2 border-gray-400 grid grid-cols-7">
+            <% 7.times do |i| %>
+              <div class="<%= i < 6 ? 'border-r border-gray-400' : '' %> <%= i < 4 ? 'bg-cyan-400' : '' %>"></div>
+            <% end %>
+          </div>
+          <div class="flex justify-between px-2">
+            <div class="flex items-center gap-1">
+              <span class="text-<%= @pagina.base_color %>-500">↓</span>
+              <%= render 'shared/frazione', num: 4, den: 7 %>
+            </div>
+            <div class="flex items-center gap-1">
+              <span class="text-<%= @pagina.base_color %>-500">↓</span>
+              <%= render 'shared/frazione', num: 3, den: 7 %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Box regola -->
+    <div class="p-3 bg-pink-light rounded-2xl w-fit">
+      <p class="text-gray-700">
+        Le frazioni che addizionate formano l'intero si chiamano <span class="font-bold">frazioni complementari</span>.
+      </p>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
+
+      <!-- Esercizio 1 -->
+      <div class="p-4 bg-white rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Colora la parte indicata dalla frazione e scrivi la frazione che indica la parte non colorata, cioè la frazione complementare.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Prima figura: rettangolo 7 parti -->
+          <div class="space-y-2">
+            <div class="w-full h-12 border-2 border-gray-400 grid grid-cols-7">
+              <% 7.times do |i| %>
+                <div class="<%= i < 6 ? 'border-r border-gray-400' : '' %> cursor-pointer hover:bg-orange-100" data-action="click->fraction-coloring#toggleColor"></div>
+              <% end %>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <%= render 'shared/frazione', num: 2, den: 7 %>
+              <span class="text-gray-700">+</span>
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "5", den_answer: "7" %>
+              <span class="text-gray-700">=</span>
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "7", den_answer: "7" %>
+              <span class="text-gray-700">= 1</span>
+            </div>
+          </div>
+
+          <!-- Seconda figura: ovali 15 -->
+          <div class="space-y-2">
+            <div class="grid grid-cols-5 gap-1">
+              <% 15.times do |i| %>
+                <div class="w-8 h-6 rounded-full border-2 border-gray-400 cursor-pointer hover:bg-orange-100" data-action="click->fraction-coloring#toggleColor"></div>
+              <% end %>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <%= render 'shared/frazione', num: 6, den: 15 %>
+              <span class="text-gray-700">+</span>
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "9", den_answer: "15" %>
+              <span class="text-gray-700">=</span>
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "15", den_answer: "15" %>
+              <span class="text-gray-700">= 1</span>
+            </div>
+          </div>
+
+          <!-- Terza figura: triangoli 11 -->
+          <div class="space-y-2">
+            <div class="flex gap-1 flex-wrap">
+              <% 11.times do |i| %>
+                <div class="w-0 h-0 border-l-[12px] border-r-[12px] border-b-[21px] border-l-transparent border-r-transparent border-b-gray-300 cursor-pointer hover:border-b-orange-200" data-action="click->fraction-coloring#toggleColor"></div>
+              <% end %>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <%= render 'shared/frazione', num: 5, den: 11 %>
+              <span class="text-gray-700">+</span>
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "6", den_answer: "11" %>
+              <span class="text-gray-700">=</span>
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "11", den_answer: "11" %>
+              <span class="text-gray-700">= 1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="mb-6">
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Collega le coppie di frazioni complementari e ricopiale sul quaderno per formare l'intero.
+        </p>
+
+        <div class="grid grid-cols-7 gap-2 text-center">
+          <!-- Prima riga -->
+          <%= render 'shared/frazione', num: 4, den: 5 %>
+          <%= render 'shared/frazione', num: 2, den: 6 %>
+          <%= render 'shared/frazione', num: 5, den: 9 %>
+          <%= render 'shared/frazione', num: 1, den: 6 %>
+          <%= render 'shared/frazione', num: 7, den: 12 %>
+          <%= render 'shared/frazione', num: 6, den: 9 %>
+          <%= render 'shared/frazione', num: 17, den: 50 %>
+
+          <!-- Seconda riga -->
+          <%= render 'shared/frazione', num: 4, den: 9 %>
+          <%= render 'shared/frazione', num: 1, den: 5 %>
+          <%= render 'shared/frazione', num: 4, den: 6 %>
+          <%= render 'shared/frazione', num: 3, den: 9 %>
+          <%= render 'shared/frazione', num: 33, den: 50 %>
+          <%= render 'shared/frazione', num: 5, den: 6 %>
+          <%= render 'shared/frazione', num: 5, den: 12 %>
+        </div>
+      </div>
+
+      <!-- AllenaMente -->
+      <div class="p-4 bg-white rounded-2xl border-3 border-blue-400">
+        <p class="font-bold text-gray-800 mb-2">
+          <span class="bg-yellow-400 px-2 py-1 rounded">AllenaMente!</span>
+        </p>
+        <p class="text-gray-700 mb-4">
+          Scrivi le frazioni che rappresentano le parti colorate di questa figura.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Figura griglia colorata -->
+          <div class="flex justify-center">
+            <div class="grid grid-cols-3 gap-0 border-2 border-gray-400">
+              <div class="w-12 h-12 bg-white border border-gray-300"></div>
+              <div class="w-12 h-12 bg-white border border-gray-300"></div>
+              <div class="w-12 h-12 bg-cyan-400 border border-gray-300"></div>
+              <div class="w-12 h-12 bg-white border border-gray-300"></div>
+              <div class="w-12 h-12 bg-pink-300 border border-gray-300"></div>
+              <div class="w-12 h-12 bg-cyan-400 border border-gray-300"></div>
+              <div class="w-12 h-12 bg-pink-300 border border-gray-300"></div>
+              <div class="w-12 h-12 bg-pink-300 border border-gray-300"></div>
+              <div class="w-12 h-12 bg-cyan-400 border border-gray-300"></div>
+            </div>
+          </div>
+
+          <!-- Risposte -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 bg-cyan-400 border border-gray-400"></div>
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "9" %>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 bg-pink-300 border border-gray-400"></div>
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "9" %>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 bg-white border border-gray-400"></div>
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "9" %>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-gray-600 mt-4">Scrivi sul quaderno il ragionamento che hai fatto.</p>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [202, 208] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

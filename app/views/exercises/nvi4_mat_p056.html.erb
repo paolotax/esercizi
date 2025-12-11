@@ -1,0 +1,174 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls fraction-coloring"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione con immagine -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <%= image_tag "nvi4_mat/p056/p056_01.jpg", class: "w-full h-auto rounded-lg" %>
+      </div>
+      <div class="space-y-4">
+        <p class="text-gray-700">
+          Nel linguaggio di tutti i giorni si usano spesso frasi che contengono le parole <span class="font-bold">metà</span>, <span class="font-bold">un mezzo</span>, <span class="font-bold">un terzo</span>, <span class="font-bold">un quarto</span>.
+        </p>
+        <p class="text-gray-700">
+          <span class="font-bold">La metà</span>, <span class="font-bold">un terzo</span>, <span class="font-bold">un quarto</span> indicano una <span class="font-bold">frazione</span>. Sai fare altri esempi?
+        </p>
+        <div class="p-3 bg-pink-light rounded-2xl">
+          <p class="text-gray-700">
+            Utilizzi le <span class="font-bold">frazioni</span> quando <span class="font-bold">dividi un intero in parti uguali</span> e <span class="font-bold">consideri una o più di quelle parti</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sezione 1: Un mezzo -->
+    <div class="py-4 border-t border-gray-200">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div>
+          <p class="text-gray-700 mb-3">
+            <span class="text-<%= @pagina.base_color %>-500">•</span> Dividi un foglio intero in due parti uguali; ogni parte è <span class="font-bold">un mezzo</span>.<br>
+            Colora ogni parte come preferisci.
+          </p>
+        </div>
+        <div class="flex items-center justify-center gap-4">
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 1, den: 2 %>
+            <div class="w-24 h-16 border-2 border-gray-400 grid grid-cols-2"
+                 data-fraction-coloring-target="colorable"
+                 data-parts="2">
+              <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+              <div class="cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 1, den: 2 %>
+            <div class="w-24 h-16 border-2 border-gray-400 grid grid-cols-2"
+                 data-fraction-coloring-target="colorable"
+                 data-parts="2">
+              <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+              <div class="cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sezione 2: Un terzo -->
+    <div class="py-4 border-t border-gray-200">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div>
+          <p class="text-gray-700 mb-3">
+            <span class="text-<%= @pagina.base_color %>-500">•</span> Dividi l'intera quantità di mele in tre parti uguali; ogni parte è <span class="font-bold">un terzo</span>.<br>
+            Colora ogni parte come preferisci.
+          </p>
+        </div>
+        <div class="flex items-center justify-center gap-4">
+          <%= image_tag "nvi4_mat/p056/p056_03.jpg", class: "max-w-full h-auto" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sezione 3: Un quarto -->
+    <div class="py-4 border-t border-gray-200">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div>
+          <p class="text-gray-700 mb-3">
+            <span class="text-<%= @pagina.base_color %>-500">•</span> Dividi l'intera quantità di palline in quattro parti uguali; ogni parte è <span class="font-bold">un quarto</span>.<br>
+            Colora ogni parte come preferisci.
+          </p>
+        </div>
+        <div class="flex items-center justify-center gap-4">
+          <%= image_tag "nvi4_mat/p056/p056_04.jpg", class: "max-w-full h-auto" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
+      <div>
+        <p class="font-bold text-gray-700 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Queste strisce sono state divise in parti uguali. Collega e colora come nell'esempio.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Strisce a sinistra -->
+          <div class="space-y-3">
+            <!-- Striscia 1: 3 parti (es. un terzo) -->
+            <div class="flex items-center gap-2">
+              <div class="flex-1 h-8 border-2 border-gray-400 grid grid-cols-3">
+                <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+                <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+                <div class="cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+              </div>
+            </div>
+            <!-- Striscia 2: 2 parti (es. un mezzo) - colorata come esempio -->
+            <div class="flex items-center gap-2">
+              <div class="flex-1 h-8 border-2 border-gray-400 grid grid-cols-2">
+                <div class="border-r border-gray-400 bg-orange-400"></div>
+                <div></div>
+              </div>
+            </div>
+            <!-- Striscia 3: 5 parti (es. due quinti) -->
+            <div class="flex items-center gap-2">
+              <div class="flex-1 h-8 border-2 border-gray-400 grid grid-cols-5">
+                <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+                <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+                <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+                <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+                <div class="cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+              </div>
+            </div>
+            <!-- Striscia 4: 4 parti (es. tre quarti) -->
+            <div class="flex items-center gap-2">
+              <div class="flex-1 h-8 border-2 border-gray-400 grid grid-cols-4">
+                <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+                <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+                <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+                <div class="cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Descrizioni a destra -->
+          <div class="space-y-3">
+            <div class="flex items-center h-8">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="w-4 h-4" data-correct-answer="true">
+                <span class="text-gray-700">un terzo o una parte su tre</span>
+              </label>
+            </div>
+            <div class="flex items-center h-8">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="w-4 h-4" data-correct-answer="true">
+                <span class="text-gray-700">un mezzo o una parte su due</span>
+              </label>
+            </div>
+            <div class="flex items-center h-8">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="w-4 h-4" data-correct-answer="true">
+                <span class="text-gray-700">due quinti o due parti su cinque</span>
+              </label>
+            </div>
+            <div class="flex items-center h-8">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="w-4 h-4" data-correct-answer="true">
+                <span class="text-gray-700">tre quarti o tre parti su quattro</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [201] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

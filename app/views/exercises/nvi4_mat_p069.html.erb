@@ -1,0 +1,259 @@
+<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Continuazione del procedimento -->
+    <div class="p-4 md:p-6">
+      <!-- Step 4: 3 unità frazionarie -->
+      <div class="mb-6">
+        <p class="text-gray-700 mb-2">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          <strong>3 unità frazionarie</strong> corrispondono ai quaderni con la copertina rossa: calcola il valore.
+        </p>
+
+        <div class="flex flex-col md:flex-row gap-4 items-start">
+          <div class="flex items-center gap-4 mb-4">
+            <span class="text-gray-700">3 × 3 =</span>
+            <input type="text" data-correct-answer="9" class="w-12 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700">Dunque</span>
+            <%= render 'shared/frazione', num: 3, den: 5 %>
+            <span class="text-gray-700">di <strong>15</strong> è <strong>9</strong>.</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <!-- Etichette frazioni sopra -->
+          <div class="flex w-full max-w-xl justify-around mb-1">
+            <%= render 'shared/frazione', num: 1, den: 5 %>
+            <%= render 'shared/frazione', num: 1, den: 5 %>
+            <%= render 'shared/frazione', num: 1, den: 5 %>
+            <div class="flex flex-col items-center">
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "1", den_answer: "5" %>
+            </div>
+            <div class="flex flex-col items-center">
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "1", den_answer: "5" %>
+            </div>
+          </div>
+          <!-- Frecce -->
+          <div class="flex w-full max-w-xl justify-around mb-1">
+            <% 5.times do %>
+              <span class="text-gray-400">↓</span>
+            <% end %>
+          </div>
+          <!-- Segmento con 3 gruppi rossi e 2 blu -->
+          <div class="flex border-2 border-green-500 rounded overflow-hidden">
+            <% 3.times do |group| %>
+              <div class="flex border-r-2 border-green-600 bg-red-100">
+                <% 3.times do |i| %>
+                  <div class="w-8 h-12 border-r border-red-300 last:border-r-0 flex items-center justify-center">
+                    <%= image_tag "nvi4_mat/p069/p069_01.jpg", class: "w-6 h-8 object-contain" %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+            <% 2.times do |group| %>
+              <div class="flex <%= group < 1 ? 'border-r-2 border-green-600' : '' %>">
+                <% 3.times do |i| %>
+                  <div class="w-8 h-12 border-r border-green-400 last:border-r-0 flex items-center justify-center">
+                    <%= image_tag "nvi4_mat/p068/p068_01.jpg", class: "w-6 h-8 object-contain" %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <!-- Valori sotto ogni gruppo -->
+          <div class="flex w-full max-w-xl justify-around mt-2">
+            <span class="font-bold text-<%= @pagina.base_color %>-600">3</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">3</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">3</span>
+            <input type="text" data-correct-answer="3" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <input type="text" data-correct-answer="3" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <!-- Parentesi e risultato -->
+          <div class="flex w-full max-w-xl mt-2">
+            <div class="w-3/5 border-b-2 border-<%= @pagina.base_color %>-500 relative">
+              <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                <%= render 'shared/frazione', num: 3, den: 5 %>
+                <span class="text-gray-700">(9 quaderni)</span>
+              </div>
+            </div>
+            <div class="w-2/5 border-b-2 border-gray-400 relative">
+              <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                <%= render 'shared/frazione', num: nil, den: nil, num_answer: "2", den_answer: "5" %>
+                <span class="text-gray-700">(<input type="text" data-correct-answer="6" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> quaderni)</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-center text-<%= @pagina.base_color %>-600 font-bold mt-8">intero (15 quaderni)</p>
+        </div>
+      </div>
+
+      <!-- Step 5: Frazione complementare -->
+      <div class="mb-6">
+        <p class="text-gray-700 mb-2">
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          Ora, per rispondere alla seconda domanda puoi considerare la <strong>frazione complementare</strong>.<br>
+          Completa e trovane il valore.
+        </p>
+
+        <div class="flex flex-col items-center">
+          <!-- Etichette frazioni sopra -->
+          <div class="flex w-full max-w-xl justify-around mb-1">
+            <%= render 'shared/frazione', num: 1, den: 5 %>
+            <%= render 'shared/frazione', num: 1, den: 5 %>
+            <%= render 'shared/frazione', num: 1, den: 5 %>
+            <div class="flex flex-col items-center">
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "1", den_answer: "5" %>
+            </div>
+            <div class="flex flex-col items-center">
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: "1", den_answer: "5" %>
+            </div>
+          </div>
+          <!-- Frecce -->
+          <div class="flex w-full max-w-xl justify-around mb-1">
+            <% 5.times do %>
+              <span class="text-gray-400">↓</span>
+            <% end %>
+          </div>
+          <!-- Segmento con 3 gruppi rossi e 2 blu -->
+          <div class="flex border-2 border-green-500 rounded overflow-hidden">
+            <% 3.times do |group| %>
+              <div class="flex border-r-2 border-green-600 bg-red-100">
+                <% 3.times do |i| %>
+                  <div class="w-8 h-12 border-r border-red-300 last:border-r-0 flex items-center justify-center">
+                    <%= image_tag "nvi4_mat/p069/p069_01.jpg", class: "w-6 h-8 object-contain" %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+            <% 2.times do |group| %>
+              <div class="flex bg-blue-100 <%= group < 1 ? 'border-r-2 border-green-600' : '' %>">
+                <% 3.times do |i| %>
+                  <div class="w-8 h-12 border-r border-blue-300 last:border-r-0 flex items-center justify-center">
+                    <%= image_tag "nvi4_mat/p068/p068_01.jpg", class: "w-6 h-8 object-contain" %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <!-- Valori sotto ogni gruppo -->
+          <div class="flex w-full max-w-xl justify-around mt-2">
+            <span class="font-bold text-<%= @pagina.base_color %>-600">3</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">3</span>
+            <span class="font-bold text-<%= @pagina.base_color %>-600">3</span>
+            <input type="text" data-correct-answer="3" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <input type="text" data-correct-answer="3" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <!-- Parentesi e risultato -->
+          <div class="flex w-full max-w-xl mt-2">
+            <div class="w-3/5 border-b-2 border-<%= @pagina.base_color %>-500 relative">
+              <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                <%= render 'shared/frazione', num: 3, den: 5 %>
+                <span class="text-gray-700">(9 quaderni)</span>
+              </div>
+            </div>
+            <div class="w-2/5 border-b-2 border-blue-400 relative">
+              <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                <%= render 'shared/frazione', num: 2, den: 5 %>
+                <span class="text-gray-700">(<input type="text" data-correct-answer="6" class="w-8 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent"> quaderni)</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-center text-<%= @pagina.base_color %>-600 font-bold mt-8">intero (15 quaderni)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
+      <p class="font-bold text-gray-700 mb-4">Risolvi i problemi.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Problema 1 -->
+        <div>
+          <p class="font-bold text-gray-700 mb-2">
+            <%= numero_esercizio_badge(1) %>
+            Emma ha un libro di 75 pagine. Ne ha già lette <%= render 'shared/frazione', num: 2, den: 3 %>.<br>
+            Quante ne deve leggere ancora per completare la lettura?
+          </p>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="text-gray-700">Pagine lette:</span>
+            <input type="text" data-correct-answer="50" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="text-gray-700">Pagine da leggere:</span>
+            <input type="text" data-correct-answer="25" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+          </div>
+        </div>
+
+        <!-- Problema 3 -->
+        <div>
+          <p class="font-bold text-gray-700 mb-2">
+            <%= numero_esercizio_badge(3) %>
+            Il percorso di una gara automobilistica è lungo 210 chilometri. Carlo ha percorso i <%= render 'shared/frazione', num: 3, den: 5 %>,
+            poi, dopo una sosta per il carburante, ha percorso i <%= render 'shared/frazione', num: 2, den: 3 %> dei chilometri rimasti
+            e si è fermato. Quanti chilometri ha percorso in tutto?
+          </p>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="text-gray-700">Prima parte:</span>
+            <input type="text" data-correct-answer="126" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">km</span>
+          </div>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="text-gray-700">Chilometri rimasti:</span>
+            <input type="text" data-correct-answer="84" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">km</span>
+          </div>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="text-gray-700">Seconda parte:</span>
+            <input type="text" data-correct-answer="56" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">km</span>
+          </div>
+          <div class="flex items-center gap-2 mt-2">
+            <span class="text-gray-700">Totale percorso:</span>
+            <input type="text" data-correct-answer="182" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            <span class="text-gray-700">km</span>
+          </div>
+        </div>
+
+        <!-- Problema 2 -->
+        <div class="md:col-span-2">
+          <p class="font-bold text-gray-700 mb-2">
+            <%= numero_esercizio_badge(2) %>
+            In una pasticceria c'è un vassoio con 80 cornetti; per colazione ne vengono venduti i <%= render 'shared/frazione', num: 3, den: 5 %> e, prima di pranzo,
+            i <%= render 'shared/frazione', num: 3, den: 4 %> di quelli rimasti. Quanti cornetti sono stati venduti in tutto?
+          </p>
+          <div class="flex flex-wrap items-center gap-4 mt-2">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">Colazione:</span>
+              <input type="text" data-correct-answer="48" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">Rimasti:</span>
+              <input type="text" data-correct-answer="32" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">Prima di pranzo:</span>
+              <input type="text" data-correct-answer="24" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700">Totale venduti:</span>
+              <input type="text" data-correct-answer="72" class="w-14 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [206, 207] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
