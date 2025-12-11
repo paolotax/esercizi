@@ -5,20 +5,20 @@
      data-action="click->sidebar#close"></div>
 
 <aside id="sidebar-nav"
-       class="print-hidden w-80 bg-white border-r border-gray-200 overflow-y-auto transition-all duration-300 fixed md:static inset-y-0 left-0 z-50 md:z-auto"
+       class="print-hidden w-80 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-y-auto transition-all duration-300 fixed md:static inset-y-0 left-0 z-50 md:z-auto"
        data-sidebar-target="sidebar"
        data-controller="sidebar-breadcrumb"
        data-turbo-permanent
        data-turbo-permanent-scroll>
 
   <!-- Header -->
-  <div class="p-4 border-b border-gray-200">
+  <div class="p-4 border-b border-gray-200 dark:border-gray-700">
     <div class="flex items-center justify-center mb-4">
       <!-- Home button -->
       <%= link_to root_path,
           data: { turbo_frame: "_top" },
           class: "flex items-center justify-center hover:opacity-80 transition" do %>
-        <%= image_tag "giunti_scuola.svg", alt: "Giunti Scuola", class: "h-12 w-auto" %>
+        <%= image_tag "giunti_scuola.svg", alt: "Giunti Scuola", class: "h-12 w-auto dark:brightness-200" %>
       <% end %>
     </div>
   </div>
@@ -26,12 +26,12 @@
   <!-- Menu Content -->
   <nav class="p-4">
     <!-- LIBRI DI TESTO -->
-    <div class="px-4 py-2 mb-3 bg-gray-50 rounded-lg flex items-center justify-between gap-2">
-      <div class="flex items-center gap-2 flex-1 min-w-0 cursor-pointer hover:bg-gray-100 rounded transition px-2 py-1 -mx-2 -my-1"
+    <div class="px-4 py-2 mb-3 bg-gray-50 dark:bg-gray-700 rounded-lg flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 flex-1 min-w-0 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 rounded transition px-2 py-1 -mx-2 -my-1"
            data-action="click->sidebar-breadcrumb#goBack">
         <!-- Bottone Indietro (nascosto se siamo a livello corsi) -->
         <div data-sidebar-breadcrumb-target="backButton"
-             class="hidden flex-shrink-0 w-7 h-7 flex items-center justify-center text-gray-600">
+             class="hidden flex-shrink-0 w-7 h-7 flex items-center justify-center text-gray-600 dark:text-gray-300">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
           </svg>
@@ -39,7 +39,7 @@
 
         <!-- Titolo dinamico -->
         <h3 data-sidebar-breadcrumb-target="title"
-            class="text-sm font-semibold text-gray-700 uppercase tracking-wide truncate">
+            class="text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wide truncate">
           Libri di Testo
         </h3>
       </div>
@@ -79,64 +79,64 @@
     </div>
 
     <!-- Sezione Strumenti -->
-    <div class="border-t border-gray-200 mt-6 pt-4">
-      <div class="px-4 py-2 mb-4 bg-gray-50 rounded-lg">
-        <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Strumenti</h3>
+    <div class="border-t border-gray-200 dark:border-gray-700 mt-6 pt-4">
+      <div class="px-4 py-2 mb-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+        <h3 class="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wide">Strumenti</h3>
       </div>
       <div class="space-y-1">
 
         <%= link_to strumenti_abaco_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-orange-50 transition group" do %>
-          <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/30 transition group" do %>
+          <svg class="w-5 h-5 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
           </svg>
-          <span class="text-sm font-medium text-gray-700">Abaco</span>
+          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Abaco</span>
         <% end %>
 
         <%= link_to strumenti_addizioni_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-green-50 transition group" do %>
-          <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/30 transition group" do %>
+          <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
-          <span class="text-sm font-medium text-gray-700">Addizioni in colonna</span>
+          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Addizioni in colonna</span>
         <% end %>
 
         <%= link_to strumenti_sottrazioni_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-cyan-50 transition group" do %>
-          <svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-cyan-50 dark:hover:bg-cyan-900/30 transition group" do %>
+          <svg class="w-5 h-5 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
           </svg>
-          <span class="text-sm font-medium text-gray-700">Sottrazioni in colonna</span>
+          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Sottrazioni in colonna</span>
         <% end %>
 
         <%= link_to strumenti_moltiplicazioni_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-purple-50 transition group" do %>
-          <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition group" do %>
+          <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
-          <span class="text-sm font-medium text-gray-700">Moltiplicazioni in colonna</span>
+          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Moltiplicazioni in colonna</span>
         <% end %>
 
         <%= link_to strumenti_le_rime_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-purple-50 transition group" do %>
-          <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition group" do %>
+          <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
-          <span class="text-sm font-medium text-gray-700">Le rime</span>
+          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Le rime</span>
         <% end %>
 
         <%= link_to dashboard_esercizi_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-purple-50 transition group" do %>
-          <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition group" do %>
+          <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
-          <span class="text-sm font-medium text-gray-700">Dashboard</span>
+          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Dashboard</span>
         <% end %>
 
       </div>

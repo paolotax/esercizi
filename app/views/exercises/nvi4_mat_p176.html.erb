@@ -150,30 +150,30 @@
 
     <!-- Esercizio 4: Completa la tabella Precedente/NUMERO/Successivo -->
     <div>
-      <p class="font-bold text-gray-700 mb-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
         <%= numero_esercizio_badge(4) %>
         Completa la tabella come nell'esempio. Riempi sempre per prima la colonna del numero.
       </p>
 
       <div class="overflow-x-auto">
-        <table class="w-full border-collapse border-2 border-cyan-400">
+        <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
           <thead>
             <tr>
-              <th class="p-2 border-2 border-cyan-400 bg-custom-blue-light text-center">Precedente che termina con 0</th>
-              <th class="p-2 border-2 border-cyan-400 bg-custom-blue-light text-center">Precedente</th>
-              <th class="p-2 border-2 border-cyan-400 bg-custom-blue-light text-center">NUMERO</th>
-              <th class="p-2 border-2 border-cyan-400 bg-custom-blue-light text-center">Successivo</th>
-              <th class="p-2 border-2 border-cyan-400 bg-custom-blue-light text-center">Successivo che termina con 0</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-custom-blue-light dark:bg-cyan-900 dark:text-gray-200 text-center">Precedente che termina con 0</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-custom-blue-light dark:bg-cyan-900 dark:text-gray-200 text-center">Precedente</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-custom-blue-light dark:bg-cyan-900 dark:text-gray-200 text-center">NUMERO</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-custom-blue-light dark:bg-cyan-900 dark:text-gray-200 text-center">Successivo</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-custom-blue-light dark:bg-cyan-900 dark:text-gray-200 text-center">Successivo che termina con 0</th>
             </tr>
           </thead>
           <tbody>
             <!-- Esempio -->
             <tr>
-              <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">66 230</td>
-              <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">66 236</td>
-              <td class="p-2 border-2 border-cyan-400 text-center font-bold whitespace-nowrap">66 237</td>
-              <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">66 238</td>
-              <td class="p-2 border-2 border-cyan-400 text-center font-bold text-cyan-600 whitespace-nowrap">66 240</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400 whitespace-nowrap">66 230</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400 whitespace-nowrap">66 236</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200">66 237</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400 whitespace-nowrap">66 238</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400 whitespace-nowrap">66 240</td>
             </tr>
             <% [
               { numero: "65 400", prec0: "65400", prec: "65399", succ: "65401", succ0: "65410", given: "numero" },
@@ -184,32 +184,32 @@
               { numero: "138 511", prec0: "138510", prec: "138510", succ: "138512", succ0: "138520", given: "numero" }
             ].each do |row| %>
               <tr>
-                <td class="p-2 border-2 border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="<%= row[:prec0] %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="<%= row[:prec0] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
                 </td>
-                <td class="p-2 border-2 border-cyan-400 text-center <%= row[:given] == 'prec' ? 'font-bold' : 'bg-white' %>">
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center <%= row[:given] == 'prec' ? 'font-bold dark:text-gray-200' : 'bg-white dark:bg-gray-700' %>">
                   <% if row[:given] == 'prec' %>
                     <%= row[:prec].to_i.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1 ').reverse %>
                   <% else %>
-                    <input type="text" data-correct-answer="<%= row[:prec] %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    <input type="text" data-correct-answer="<%= row[:prec] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
                   <% end %>
                 </td>
-                <td class="p-2 border-2 border-cyan-400 text-center <%= row[:given] == 'numero' ? 'font-bold' : 'bg-white' %>">
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center <%= row[:given] == 'numero' ? 'font-bold dark:text-gray-200' : 'bg-white dark:bg-gray-700' %>">
                   <% if row[:given] == 'numero' %>
                     <%= row[:numero] %>
                   <% else %>
-                    <input type="text" data-correct-answer="<%= row[:numero].gsub(' ', '') %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    <input type="text" data-correct-answer="<%= row[:numero].gsub(' ', '') %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
                   <% end %>
                 </td>
-                <td class="p-2 border-2 border-cyan-400 text-center <%= row[:given] == 'succ' ? 'font-bold' : 'bg-white' %>">
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center <%= row[:given] == 'succ' ? 'font-bold dark:text-gray-200' : 'bg-white dark:bg-gray-700' %>">
                   <% if row[:given] == 'succ' %>
                     <%= row[:succ].to_i.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1 ').reverse %>
                   <% else %>
-                    <input type="text" data-correct-answer="<%= row[:succ] %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                    <input type="text" data-correct-answer="<%= row[:succ] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
                   <% end %>
                 </td>
-                <td class="p-2 border-2 border-cyan-400 text-center bg-white">
-                  <input type="text" data-correct-answer="<%= row[:succ0] %>" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="<%= row[:succ0] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
                 </td>
               </tr>
             <% end %>
