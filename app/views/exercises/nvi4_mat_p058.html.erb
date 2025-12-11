@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
      data-controller="exercise-checker text-toggle font-controls fraction-coloring"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -8,15 +8,15 @@
   <div class="space-y-6">
 
     <!-- Introduzione -->
-    <p class="text-gray-700">
+    <p class="text-gray-700 dark:text-gray-200">
       L'<span class="font-bold">intero</span> da frazionare può essere una <span class="font-bold">figura</span>, un <span class="font-bold">segmento</span>, un gruppo di <span class="font-bold">oggetti</span>.
     </p>
 
     <!-- Sezione 1: Rettangolo -->
-    <div class="py-4 border-t border-gray-200">
+    <div class="py-4 border-t border-gray-200 dark:border-gray-700">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
         <div>
-          <p class="text-gray-700 mb-3">
+          <p class="text-gray-700 dark:text-gray-200 mb-3">
             <span class="text-<%= @pagina.base_color %>-500">•</span> Prendiamo un rettangolo e dividiamolo in 4 parti uguali.<br>
             Ciascuna parte rappresenta un quarto (<%= render 'shared/frazione', num: 1, den: 4 %>) del rettangolo, cioè una sola delle quattro parti uguali in cui è stato diviso; ogni parte si chiama <span class="font-bold">unità frazionaria</span>.<br>
             Colora un'unità frazionaria come preferisci.
@@ -24,20 +24,20 @@
         </div>
         <div class="flex justify-center">
           <div class="w-48 h-32 border-2 border-gray-400 grid grid-cols-2 grid-rows-2">
-            <div class="border-r border-b border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
-            <div class="border-b border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
-            <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
-            <div class="cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+            <div class="border-r border-b border-gray-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700" data-action="click->fraction-coloring#toggleColor"></div>
+            <div class="border-b border-gray-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700" data-action="click->fraction-coloring#toggleColor"></div>
+            <div class="border-r border-gray-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700" data-action="click->fraction-coloring#toggleColor"></div>
+            <div class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700" data-action="click->fraction-coloring#toggleColor"></div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Sezione 2: Segmento -->
-    <div class="py-4 border-t border-gray-200">
+    <div class="py-4 border-t border-gray-200 dark:border-gray-700">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
         <div>
-          <p class="text-gray-700 mb-3">
+          <p class="text-gray-700 dark:text-gray-200 mb-3">
             <span class="text-<%= @pagina.base_color %>-500">•</span> Prendiamo un segmento e dividiamolo in 8 parti uguali.<br>
             L'unità frazionaria che rappresenta ciascuna parte è <%= render 'shared/frazione', num: 1, den: 8 %>.<br>
             Colora un'unità frazionaria come preferisci.
@@ -46,7 +46,7 @@
         <div class="flex justify-center">
           <div class="w-64 h-8 border-2 border-gray-400 grid grid-cols-8">
             <% 8.times do |i| %>
-              <div class="<%= i < 7 ? 'border-r border-gray-400' : '' %> cursor-pointer hover:bg-gray-100" data-action="click->fraction-coloring#toggleColor"></div>
+              <div class="<%= i < 7 ? 'border-r border-gray-400' : '' %> cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700" data-action="click->fraction-coloring#toggleColor"></div>
             <% end %>
           </div>
         </div>
@@ -54,10 +54,10 @@
     </div>
 
     <!-- Sezione 3: Gelati -->
-    <div class="py-4 border-t border-gray-200">
+    <div class="py-4 border-t border-gray-200 dark:border-gray-700">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
         <div>
-          <p class="text-gray-700 mb-3">
+          <p class="text-gray-700 dark:text-gray-200 mb-3">
             <span class="text-<%= @pagina.base_color %>-500">•</span> Prendiamo 12 gelati e dividiamo l'intera quantità in 3 parti uguali.<br>
             L'unità frazionaria che rappresenta ciascuna parte è <%= render 'shared/frazione', num: 1, den: 3 %>.<br>
             Colora un'unità frazionaria come preferisci.
@@ -70,18 +70,18 @@
     </div>
 
     <!-- Box regola -->
-    <div class="p-3 bg-pink-light rounded-2xl w-fit">
-      <p class="text-gray-700">
+    <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+      <p class="text-gray-700 dark:text-gray-200">
         L'<span class="font-bold">unità frazionaria</span> indica ognuna delle parti in cui è diviso l'intero. È una frazione con numeratore <span class="font-bold">1</span>.
       </p>
     </div>
 
     <!-- ESERCIZI -->
-    <div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
 
       <!-- Esercizio 1 -->
-      <div class="p-4 bg-white rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
-        <p class="font-bold text-gray-700 mb-4">
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
           <%= imparare_tutti_badge(1) %>
           Scrivi l'unità frazionaria che rappresenta la parte colorata di ogni figura.
         </p>
@@ -146,7 +146,7 @@
 
       <!-- Esercizio 2 -->
       <div class="mb-6">
-        <p class="font-bold text-gray-700 mb-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
           <%= numero_esercizio_badge(2) %>
           Scrivi l'unità frazionaria che rappresenta la parte colorata di ogni segmento.
         </p>
@@ -197,7 +197,7 @@
 
       <!-- Esercizio 3 -->
       <div>
-        <p class="font-bold text-gray-700 mb-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
           <%= numero_esercizio_badge(3) %>
           Scrivi l'unità frazionaria che rappresenta la parte colorata di ogni gruppo di oggetti.
         </p>

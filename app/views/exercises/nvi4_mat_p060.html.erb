@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
      data-controller="exercise-checker text-toggle font-controls fraction-coloring"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -9,7 +9,7 @@
 
     <!-- Introduzione teoria -->
     <div class="py-4">
-      <p class="text-gray-700 mb-4">
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
         Il nastro disegnato qui sotto è stato diviso in 7 parti uguali; di queste, 4 sono state colorate di azzurro. Per poter colorare l'intero nastro occorre colorarne ancora 3.
       </p>
 
@@ -17,26 +17,26 @@
         <div class="space-y-4">
           <div class="flex items-center gap-2 flex-wrap">
             <%= render 'shared/frazione', num: 4, den: 7 %>
-            <span class="text-gray-700">+</span>
+            <span class="text-gray-700 dark:text-gray-200">+</span>
             <%= render 'shared/frazione', num: 3, den: 7 %>
-            <span class="text-gray-700">formano l'<span class="font-bold">intero</span>.</span>
+            <span class="text-gray-700 dark:text-gray-200">formano l'<span class="font-bold">intero</span>.</span>
           </div>
 
           <div class="flex items-center gap-2 flex-wrap">
             <%= render 'shared/frazione', num: 4, den: 7 %>
-            <span class="text-gray-700">e</span>
+            <span class="text-gray-700 dark:text-gray-200">e</span>
             <%= render 'shared/frazione', num: 3, den: 7 %>
-            <span class="text-gray-700">sono <span class="font-bold">frazioni complementari</span>.</span>
+            <span class="text-gray-700 dark:text-gray-200">sono <span class="font-bold">frazioni complementari</span>.</span>
           </div>
 
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="text-gray-700">Infatti:</span>
+            <span class="text-gray-700 dark:text-gray-200">Infatti:</span>
             <%= render 'shared/frazione', num: 4, den: 7 %>
-            <span class="text-gray-700">+</span>
+            <span class="text-gray-700 dark:text-gray-200">+</span>
             <%= render 'shared/frazione', num: 3, den: 7 %>
-            <span class="text-gray-700">=</span>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
             <%= render 'shared/frazione', num: 7, den: 7 %>
-            <span class="text-gray-700">= 1</span>
+            <span class="text-gray-700 dark:text-gray-200">= 1</span>
           </div>
         </div>
 
@@ -62,18 +62,18 @@
     </div>
 
     <!-- Box regola -->
-    <div class="p-3 bg-pink-light rounded-2xl w-fit">
-      <p class="text-gray-700">
+    <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+      <p class="text-gray-700 dark:text-gray-200">
         Le frazioni che addizionate formano l'intero si chiamano <span class="font-bold">frazioni complementari</span>.
       </p>
     </div>
 
     <!-- ESERCIZI -->
-    <div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
 
       <!-- Esercizio 1 -->
-      <div class="p-4 bg-white rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
-        <p class="font-bold text-gray-700 mb-4">
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
           <%= imparare_tutti_badge(1) %>
           Colora la parte indicata dalla frazione e scrivi la frazione che indica la parte non colorata, cioè la frazione complementare.
         </p>
@@ -83,16 +83,16 @@
           <div class="space-y-2">
             <div class="w-full h-12 border-2 border-gray-400 grid grid-cols-7">
               <% 7.times do |i| %>
-                <div class="<%= i < 6 ? 'border-r border-gray-400' : '' %> cursor-pointer hover:bg-orange-100" data-action="click->fraction-coloring#toggleColor"></div>
+                <div class="<%= i < 6 ? 'border-r border-gray-400' : '' %> cursor-pointer hover:bg-orange-100 dark:hover:bg-orange-800/50" data-action="click->fraction-coloring#toggleColor"></div>
               <% end %>
             </div>
             <div class="flex items-center gap-2 flex-wrap">
               <%= render 'shared/frazione', num: 2, den: 7 %>
-              <span class="text-gray-700">+</span>
+              <span class="text-gray-700 dark:text-gray-200">+</span>
               <%= render 'shared/frazione', num: nil, den: nil, num_answer: "5", den_answer: "7" %>
-              <span class="text-gray-700">=</span>
+              <span class="text-gray-700 dark:text-gray-200">=</span>
               <%= render 'shared/frazione', num: nil, den: nil, num_answer: "7", den_answer: "7" %>
-              <span class="text-gray-700">= 1</span>
+              <span class="text-gray-700 dark:text-gray-200">= 1</span>
             </div>
           </div>
 
@@ -100,16 +100,16 @@
           <div class="space-y-2">
             <div class="grid grid-cols-5 gap-1">
               <% 15.times do |i| %>
-                <div class="w-8 h-6 rounded-full border-2 border-gray-400 cursor-pointer hover:bg-orange-100" data-action="click->fraction-coloring#toggleColor"></div>
+                <div class="w-8 h-6 rounded-full border-2 border-gray-400 cursor-pointer hover:bg-orange-100 dark:hover:bg-orange-800/50" data-action="click->fraction-coloring#toggleColor"></div>
               <% end %>
             </div>
             <div class="flex items-center gap-2 flex-wrap">
               <%= render 'shared/frazione', num: 6, den: 15 %>
-              <span class="text-gray-700">+</span>
+              <span class="text-gray-700 dark:text-gray-200">+</span>
               <%= render 'shared/frazione', num: nil, den: nil, num_answer: "9", den_answer: "15" %>
-              <span class="text-gray-700">=</span>
+              <span class="text-gray-700 dark:text-gray-200">=</span>
               <%= render 'shared/frazione', num: nil, den: nil, num_answer: "15", den_answer: "15" %>
-              <span class="text-gray-700">= 1</span>
+              <span class="text-gray-700 dark:text-gray-200">= 1</span>
             </div>
           </div>
 
@@ -122,11 +122,11 @@
             </div>
             <div class="flex items-center gap-2 flex-wrap">
               <%= render 'shared/frazione', num: 5, den: 11 %>
-              <span class="text-gray-700">+</span>
+              <span class="text-gray-700 dark:text-gray-200">+</span>
               <%= render 'shared/frazione', num: nil, den: nil, num_answer: "6", den_answer: "11" %>
-              <span class="text-gray-700">=</span>
+              <span class="text-gray-700 dark:text-gray-200">=</span>
               <%= render 'shared/frazione', num: nil, den: nil, num_answer: "11", den_answer: "11" %>
-              <span class="text-gray-700">= 1</span>
+              <span class="text-gray-700 dark:text-gray-200">= 1</span>
             </div>
           </div>
         </div>
@@ -134,7 +134,7 @@
 
       <!-- Esercizio 2 -->
       <div class="mb-6">
-        <p class="font-bold text-gray-700 mb-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
           <%= numero_esercizio_badge(2) %>
           Collega le coppie di frazioni complementari e ricopiale sul quaderno per formare l'intero.
         </p>
@@ -161,11 +161,11 @@
       </div>
 
       <!-- AllenaMente -->
-      <div class="p-4 bg-white rounded-2xl border-3 border-blue-400">
-        <p class="font-bold text-gray-800 mb-2">
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-2xl border-3 border-blue-400">
+        <p class="font-bold text-gray-800 dark:text-gray-200 mb-2">
           <span class="bg-yellow-400 px-2 py-1 rounded">AllenaMente!</span>
         </p>
-        <p class="text-gray-700 mb-4">
+        <p class="text-gray-700 dark:text-gray-200 mb-4">
           Scrivi le frazioni che rappresentano le parti colorate di questa figura.
         </p>
 
@@ -173,15 +173,15 @@
           <!-- Figura griglia colorata -->
           <div class="flex justify-center">
             <div class="grid grid-cols-3 gap-0 border-2 border-gray-400">
-              <div class="w-12 h-12 bg-white border border-gray-300"></div>
-              <div class="w-12 h-12 bg-white border border-gray-300"></div>
-              <div class="w-12 h-12 bg-cyan-400 border border-gray-300"></div>
-              <div class="w-12 h-12 bg-white border border-gray-300"></div>
-              <div class="w-12 h-12 bg-pink-300 border border-gray-300"></div>
-              <div class="w-12 h-12 bg-cyan-400 border border-gray-300"></div>
-              <div class="w-12 h-12 bg-pink-300 border border-gray-300"></div>
-              <div class="w-12 h-12 bg-pink-300 border border-gray-300"></div>
-              <div class="w-12 h-12 bg-cyan-400 border border-gray-300"></div>
+              <div class="w-12 h-12 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600"></div>
+              <div class="w-12 h-12 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600"></div>
+              <div class="w-12 h-12 bg-cyan-400 border border-gray-300 dark:border-gray-600"></div>
+              <div class="w-12 h-12 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600"></div>
+              <div class="w-12 h-12 bg-pink-300 border border-gray-300 dark:border-gray-600"></div>
+              <div class="w-12 h-12 bg-cyan-400 border border-gray-300 dark:border-gray-600"></div>
+              <div class="w-12 h-12 bg-pink-300 border border-gray-300 dark:border-gray-600"></div>
+              <div class="w-12 h-12 bg-pink-300 border border-gray-300 dark:border-gray-600"></div>
+              <div class="w-12 h-12 bg-cyan-400 border border-gray-300 dark:border-gray-600"></div>
             </div>
           </div>
 
@@ -202,7 +202,7 @@
           </div>
         </div>
 
-        <p class="text-gray-600 mt-4">Scrivi sul quaderno il ragionamento che hai fatto.</p>
+        <p class="text-gray-600 dark:text-gray-300 mt-4">Scrivi sul quaderno il ragionamento che hai fatto.</p>
       </div>
     </div>
 
