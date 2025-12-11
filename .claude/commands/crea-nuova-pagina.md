@@ -120,13 +120,13 @@ Il controller `font-controls` gestisce la dimensione del testo dinamicamente. Se
 
 **Container ESERCIZI (sfondo arancione):**
 ```erb
-<div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
+<div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
 ```
 
 **Box IMPARARE TUTTI (primo esercizio evidenziato):**
 ```erb
-<div class="p-4 bg-white rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
-  <p class="font-bold text-gray-700 mb-4">
+<div class="p-4 bg-white dark:bg-gray-800 rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+  <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
     <%= imparare_tutti_badge(1) %>
     Consegna esercizio...
   </p>
@@ -137,7 +137,7 @@ Il controller `font-controls` gestisce la dimensione del testo dinamicamente. Se
 **Singolo esercizio:**
 ```erb
 <div>
-  <p class="font-bold text-gray-700 mb-4">
+  <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
     <%= numero_esercizio_badge(N) %>
     Consegna esercizio...
   </p>
@@ -205,17 +205,21 @@ Usare `@pagina.base_color` per colori coerenti:
 ```erb
 <!-- Input dotted grigio che riempie lo spazio (per righe di risposta) -->
 <div class="flex items-center gap-2">
-  <input type="text" data-correct-answer="800" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+  <input type="text" data-correct-answer="800" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
   <span class="shrink-0">euro</span>
 </div>
 
 <!-- Input inline piccolo -->
-<input type="text" data-correct-answer="120" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
+<input type="text" data-correct-answer="120" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+
+<!-- Input box (per sequenze numeriche) -->
+<input type="text" data-correct-answer="342" class="w-16 px-2 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-center font-bold dark:text-white">
 ```
 
 **Note sugli input flex:**
 - `shrink-0` sugli span di testo per evitare che si restringano
 - `min-w-0 flex-1` sull'input per occupare lo spazio rimanente senza straripare
+- **Dark mode:** `dark:border-gray-500` per bordi, `dark:text-white` per testo, `bg-transparent` o `dark:bg-gray-700`
 
 ---
 
@@ -332,29 +336,29 @@ Per problemi da risolvere, quesiti:
 ### Regola breve (rosa chiaro, arrotondato)
 Per regole e definizioni brevi:
 ```erb
-<div class="p-3 bg-pink-light rounded-2xl w-fit">
-  <p class="text-gray-700">Regola o definizione...</p>
+<div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+  <p class="text-gray-700 dark:text-gray-200">Regola o definizione...</p>
 </div>
 ```
 
 Variante per regole comportamento:
 ```erb
-<div class="p-3 bg-pink-light rounded-xl w-fit">
-  <p class="text-gray-600">Regola comportamento...</p>
+<div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-xl w-fit">
+  <p class="text-gray-600 dark:text-gray-300">Regola comportamento...</p>
 </div>
 ```
 
 ### Box teoria importante (bordo blu, arrotondato)
 Per concetti fondamentali con bordo:
 ```erb
-<div class="p-4 md:p-6 bg-white rounded-2xl border-3 border-blue-800">
+<div class="p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl border-3 border-blue-800 dark:border-blue-600">
   <!-- contenuto importante -->
 </div>
 ```
 
 ### Container esercizi (arancione, arrotondato)
 ```erb
-<div class="p-4 md:p-6 bg-orange-100 rounded-2xl">
+<div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
   <!-- esercizi -->
 </div>
 ```
@@ -611,11 +615,16 @@ Per visualizzare numeri su abaco (non modificabile):
 **IMPORTANTE:** `data-correct-answer` deve essere SEMPRE sull'`<input>`, MAI sulla `<label>`!
 
 ```erb
-<label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded border border-gray-200">
+<label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
   <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
   <span>Risposta corretta</span>
 </label>
 ```
+
+**Dark Mode:**
+- Hover: `dark:hover:bg-gray-700`
+- Bordo: `dark:border-gray-600`
+- Testo: `dark:text-gray-200`
 
 ---
 
@@ -657,11 +666,11 @@ Per visualizzare numeri su abaco (non modificabile):
 ## BOX ALLENAMENTE
 
 ```erb
-<div class="p-4 bg-white rounded-2xl border-3 border-blue-400">
-  <p class="font-bold text-gray-800 mb-2">
-    <span class="bg-yellow-400 px-2 py-1 rounded">AllenaMente!</span>
+<div class="p-4 bg-white dark:bg-blue-900/40 rounded-2xl border-3 border-blue-400 dark:border-blue-600">
+  <p class="font-bold text-gray-800 dark:text-blue-300 mb-2">
+    <span class="bg-yellow-400 text-gray-800 px-2 py-1 rounded">AllenaMente!</span>
   </p>
-  <p class="text-gray-700">
+  <p class="text-gray-700 dark:text-gray-200">
     Testo della consegna...
   </p>
   <!-- contenuto/immagine dentro il box -->
@@ -672,6 +681,12 @@ Per visualizzare numeri su abaco (non modificabile):
 - Sfondo bianco con bordo blu arrotondato
 - Badge giallo per "AllenaMente!"
 - Contenuto (testo e immagini) tutto dentro il box
+
+**Dark Mode:**
+- Sfondo: `dark:bg-blue-900/40` (blu scuro trasparente)
+- Testo label: `dark:text-blue-300` (blu chiaro)
+- Badge giallo: `text-gray-800` (rimane scuro sul giallo)
+- Bordo: `dark:border-blue-600`
 
 ---
 
@@ -908,10 +923,52 @@ Per pagine che mostrano schemi/mappe concettuali con struttura gerarchica (es. p
 
 ---
 
+## DARK MODE (IMPORTANTE!)
+
+Ogni elemento deve avere le classi dark mode corrispondenti:
+
+### Testi
+| Light | Dark |
+|-------|------|
+| `text-gray-700` | `dark:text-gray-200` |
+| `text-gray-800` | `dark:text-gray-200` |
+| `text-gray-600` | `dark:text-gray-300` |
+| `text-gray-500` | `dark:text-gray-400` |
+
+### Sfondi
+| Light | Dark |
+|-------|------|
+| `bg-white` (box) | `dark:bg-gray-800` |
+| `bg-white` (celle) | `dark:bg-gray-700` |
+| `bg-orange-100` | `dark:bg-orange-900/30` |
+| `bg-pink-light` | `dark:bg-pink-900/40` |
+| `bg-custom-blue` | `dark:bg-cyan-900` |
+
+### Bordi
+| Light | Dark |
+|-------|------|
+| `border-blue-800` | `dark:border-blue-600` |
+| `border-cyan-400` | `dark:border-cyan-600` |
+| `border-gray-200` | `dark:border-gray-600` |
+| `border-gray-300` | `dark:border-gray-600` |
+| `border-gray-400` (input) | `dark:border-gray-500` |
+
+### Hover
+| Light | Dark |
+|-------|------|
+| `hover:bg-gray-50` | `dark:hover:bg-gray-700` |
+
+### Immagini
+```erb
+<%= image_tag "...", class: "dark:bg-white dark:rounded-lg dark:p-1" %>
+```
+
+---
+
 ## CHECKLIST FINALE
 
 - [ ] GUARDATO page.png per capire la struttura
-- [ ] Container `bg-white` + data-controllers
+- [ ] Container `bg-white dark:bg-gray-900` + data-controllers
 - [ ] Header `<%= render 'shared/page_header', pagina: @pagina %>`
 - [ ] **NESSUN TITOLO h2** - Il titolo è già nel `shared/page_header`, NON duplicarlo!
 - [ ] **NESSUNA classe font size** (`text-xs`, `text-sm`, `text-lg`, `text-xl`)
@@ -928,3 +985,15 @@ Per pagine che mostrano schemi/mappe concettuali con struttura gerarchica (es. p
 - [ ] **Se pagina ESERCIZI:** Tabelle con stile cyan (`border-cyan-400`, `bg-cyan-100`)
 - [ ] **Se pagina ESERCIZI:** Colori cyan fissi invece di `@pagina.base_color`
 - [ ] **Se pagina ESERCIZI:** NO wrapper `bg-orange-100` per esercizi
+
+### CHECKLIST DARK MODE
+- [ ] Tutti i `text-gray-700` hanno `dark:text-gray-200`
+- [ ] Tutti i `text-gray-800` hanno `dark:text-gray-200`
+- [ ] Tutti i `bg-white` (box) hanno `dark:bg-gray-800`
+- [ ] Tutti i `bg-orange-100` hanno `dark:bg-orange-900/30`
+- [ ] Tutti i `bg-pink-light` hanno `dark:bg-pink-900/40`
+- [ ] Tutti i `border-blue-800` hanno `dark:border-blue-600`
+- [ ] Tutti i `border-gray-200/300` hanno `dark:border-gray-600`
+- [ ] Input hanno `dark:border-gray-500` e `dark:text-white`
+- [ ] Immagini hanno `dark:bg-white dark:rounded-lg dark:p-1`
+- [ ] Box AllenaMente ha `dark:bg-blue-900/40` e `dark:text-blue-300`

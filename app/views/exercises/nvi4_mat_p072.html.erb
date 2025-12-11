@@ -1,0 +1,173 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls fraction-coloring"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione 1: Un decimo -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-700 dark:text-gray-200 mb-2">Il rettangolo è stato diviso in 10 parti uguali.</p>
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        Ognuna delle 10 parti rappresenta <%= render 'shared/frazione', num: 1, den: 10 %> (<strong>un decimo</strong>) del rettangolo.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div>
+          <p class="text-gray-700 dark:text-gray-200 mb-4">
+            <span class="text-<%= @pagina.base_color %>-500">•</span> <strong>Colora <%= render 'shared/frazione', num: 1, den: 10 %> come preferisci.</strong>
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <!-- Griglia 2x5 per un decimo -->
+          <div class="grid grid-cols-5 gap-0 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600"
+               data-fraction-coloring-target="grid"
+               data-grid-id="decimo">
+            <% 10.times do |i| %>
+              <div class="w-10 h-10 md:w-12 md:h-12 border border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-800 transition-colors"
+                   data-action="click->fraction-coloring#toggleCell"
+                   data-fraction-coloring-target="cell"></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600">
+
+    <!-- Sezione 2: Un centesimo -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-700 dark:text-gray-200 mb-2">Ognuna delle 10 parti precedenti è stata divisa in 10 parti uguali.</p>
+      <p class="text-gray-700 dark:text-gray-200 mb-2">Abbiamo 100 parti uguali.</p>
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        Ogni parte è la decima parte di un decimo: è <%= render 'shared/frazione', num: 1, den: 100 %> (<strong>un centesimo</strong>) del rettangolo di partenza.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div>
+          <p class="text-gray-700 dark:text-gray-200 mb-4">
+            <span class="text-<%= @pagina.base_color %>-500">•</span> <strong>Colora <%= render 'shared/frazione', num: 1, den: 100 %> come preferisci.</strong>
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <!-- Griglia 10x10 per un centesimo -->
+          <div class="grid grid-cols-10 gap-0 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600"
+               data-fraction-coloring-target="grid"
+               data-grid-id="centesimo">
+            <% 100.times do |i| %>
+              <div class="w-4 h-4 md:w-5 md:h-5 border border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-800 transition-colors"
+                   data-action="click->fraction-coloring#toggleCell"
+                   data-fraction-coloring-target="cell"></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600">
+
+    <!-- Sezione 3: Un millesimo -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-700 dark:text-gray-200 mb-2">Ognuna delle 100 parti precedenti è stata divisa in 10 parti uguali.</p>
+      <p class="text-gray-700 dark:text-gray-200 mb-2">Abbiamo <span class="whitespace-nowrap">1 000</span> parti uguali.</p>
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        Ogni parte è la decima parte di un centesimo: è <%= render 'shared/frazione', num: 1, den: 1000 %> (<strong>un millesimo</strong>) del rettangolo di partenza.
+      </p>
+
+      <div class="flex justify-center">
+        <!-- Immagine del millesimo con lente di ingrandimento -->
+        <%= image_tag "nvi4_mat/p072/output-1715932804072_515_684_524_214.png",
+            class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1",
+            alt: "Griglia che mostra un millesimo" %>
+      </div>
+    </div>
+
+    <!-- Box regola frazioni decimali -->
+    <div class="p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl">
+      <p class="text-gray-700 dark:text-gray-200">
+        Le frazioni che hanno al <strong>denominatore 10</strong>, <strong>100</strong>, <strong><span class="whitespace-nowrap">1 000</span></strong>... si chiamano <strong>frazioni decimali</strong>.
+      </p>
+    </div>
+
+    <!-- Sezione Osserva e completa -->
+    <div class="p-4 md:p-6">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-6">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Osserva e completa.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Prima parte: 2/5 = 4/10 -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-center gap-6">
+            <!-- Rettangolo 2/5 -->
+            <div class="flex">
+              <div class="w-8 h-16 bg-orange-400 border border-gray-400 dark:border-gray-500"></div>
+              <div class="w-8 h-16 bg-orange-400 border border-l-0 border-gray-400 dark:border-gray-500"></div>
+              <div class="w-8 h-16 bg-white dark:bg-gray-700 border border-l-0 border-gray-400 dark:border-gray-500"></div>
+              <div class="w-8 h-16 bg-white dark:bg-gray-700 border border-l-0 border-gray-400 dark:border-gray-500"></div>
+              <div class="w-8 h-16 bg-white dark:bg-gray-700 border border-l-0 border-gray-400 dark:border-gray-500"></div>
+            </div>
+            <!-- Rettangolo 4/10 -->
+            <div class="flex">
+              <% 10.times do |i| %>
+                <div class="w-4 h-16 <%= i < 4 ? 'bg-orange-400' : 'bg-white dark:bg-gray-700' %> border <%= i > 0 ? 'border-l-0' : '' %> border-gray-400 dark:border-gray-500"></div>
+              <% end %>
+            </div>
+          </div>
+          <!-- Frazioni con frecce -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 2, den: 5 %>
+            <div class="flex flex-col items-center">
+              <span class="text-blue-500 font-bold">× 2</span>
+              <span class="text-blue-500">→</span>
+              <span class="text-blue-500 font-bold">× 2</span>
+            </div>
+            <%= render 'shared/frazione', num: 4, den: 10 %>
+          </div>
+        </div>
+
+        <!-- Seconda parte: 12/20 = ?/? -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-center gap-6">
+            <!-- Griglia 4x5 per 12/20 -->
+            <div class="grid grid-cols-5 gap-0 border border-gray-400 dark:border-gray-500">
+              <% 20.times do |i| %>
+                <div class="w-4 h-4 <%= i < 12 ? 'bg-pink-400' : 'bg-white dark:bg-gray-700' %> border border-gray-300 dark:border-gray-500"></div>
+              <% end %>
+            </div>
+            <!-- Box vuoto per risposta -->
+            <div class="w-20 h-20 border-2 border-dashed border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+            </div>
+          </div>
+          <!-- Frazioni con frecce e input -->
+          <div class="flex items-center justify-center gap-2">
+            <%= render 'shared/frazione', num: 12, den: 20 %>
+            <div class="flex flex-col items-center">
+              <span class="text-blue-500 font-bold">: 2</span>
+              <span class="text-blue-500">→</span>
+              <span class="text-blue-500 font-bold">: <input type="text" data-correct-answer="2" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></span>
+            </div>
+            <%= render 'shared/frazione',
+                num: nil,
+                den: nil,
+                num_answer: "6",
+                den_answer: "10" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testo esplicativo -->
+      <div class="mt-6 p-3 bg-custom-blue dark:bg-cyan-900 rounded-lg">
+        <p class="text-gray-700 dark:text-gray-200">
+          Le frazioni <%= render 'shared/frazione', num: 2, den: 5 %> e <%= render 'shared/frazione', num: 12, den: 20 %> non hanno al denominatore né 10, né 100, né <span class="whitespace-nowrap">1 000</span>, ma sono equivalenti rispettivamente a <%= render 'shared/frazione', num: 4, den: 10 %> e a <%= render 'shared/frazione', num: 6, den: 10 %>, perciò sono considerate frazioni decimali anch'esse.
+        </p>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [209, 214] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

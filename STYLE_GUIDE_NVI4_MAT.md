@@ -1,16 +1,15 @@
-# Guida Stili NVI4_MAT - Pagine 4-22
+# Guida Stili NVI4_MAT - Dark Mode Completo
 
 ## Box Container Principali
 
-| Pattern | Pagine | Uso |
-|---------|--------|-----|
-| `p-4 md:p-6 bg-custom-blue dark:bg-cyan-900/50 rounded-2xl` | p004-p009 | Box Ricorda |
-| `p-4 bg-custom-blue dark:bg-cyan-900/50 rounded-2xl` | p018, p019 | Box Ricorda |
-| `p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl` | p014-p017, p020, p021 | Box Esercizi |
-| `p-4 md:p-6 bg-gradient-to-b from-blue-100 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 rounded-2xl` | p010, p011 | Box Gradiente |
-| `p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl` | p022 | Box rosa |
-| `p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit` | p020 | Box rosa compatto |
-| `bg-white dark:bg-gray-800 rounded-3xl border-4 border-blue-800 dark:border-blue-600 p-4` | p012, p013 | Box bianco bordo blu |
+| Pattern | Uso |
+|---------|-----|
+| `p-4 md:p-6 bg-custom-blue dark:bg-cyan-900 rounded-2xl` | Box Ricorda (celeste) |
+| `p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl` | Box Esercizi |
+| `p-4 md:p-6 bg-gradient-to-b from-blue-100 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 rounded-2xl` | Box Gradiente |
+| `p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl` | Box rosa |
+| `p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit` | Box rosa compatto |
+| `bg-white dark:bg-gray-800 rounded-3xl border-4 border-blue-800 dark:border-blue-600 p-4` | Box bianco bordo blu |
 
 ## Tabelle
 
@@ -74,16 +73,100 @@
 |---------|-----|
 | `dark:bg-white dark:rounded-lg dark:p-2` | Immagini con sfondo bianco in dark mode |
 
-## Riepilogo Colori
+## Riepilogo Colori Dark Mode
 
 | Colore Light | Colore Dark | Uso |
 |--------------|-------------|-----|
-| `bg-custom-blue` | `dark:bg-cyan-900/50` | Box Ricorda |
+| `bg-custom-blue` | `dark:bg-cyan-900` | Box Ricorda |
 | `bg-custom-blue-light` | `dark:bg-cyan-900/50` | Header tabelle |
 | `bg-orange-100` | `dark:bg-orange-900/30` | Box Esercizi |
 | `bg-pink-light` | `dark:bg-pink-900/40` | Box rosa (#EFD9E9) |
 | `border-cyan-400` | `dark:border-cyan-600` | Bordi tabelle/celle |
+| `border-blue-800` | `dark:border-blue-600` | Bordi box teoria |
+| `border-gray-200` | `dark:border-gray-600` | Bordi radio/checkbox |
+| `border-gray-300` | `dark:border-gray-600` | Bordi celle/sequence |
 | `text-cyan-600` | `dark:text-cyan-400` | Testo evidenziato |
+| `text-gray-700` | `dark:text-gray-200` | Testo principale |
+| `text-gray-800` | `dark:text-gray-200` | Testo bold |
+| `text-gray-600` | `dark:text-gray-300` | Testo secondario |
+| `text-gray-500` | `dark:text-gray-400` | Testo terziario |
 | `bg-white` | `dark:bg-gray-800` | Box bianchi |
-| `bg-white` | `dark:bg-gray-700` | Celle tabella |
+| `bg-white` | `dark:bg-gray-700` | Celle tabella/sequence |
 | `bg-white` | `dark:bg-gray-900` | Sfondo pagina |
+| `hover:bg-gray-50` | `dark:hover:bg-gray-700` | Hover elementi |
+
+## Box AllenaMente (IMPORTANTE!)
+
+```erb
+<div class="p-3 bg-white dark:bg-blue-900/40 rounded-2xl border-3 border-blue-400 dark:border-blue-600">
+  <p class="font-bold text-gray-800 dark:text-blue-300 mb-2">
+    <span class="bg-yellow-400 text-gray-800 px-2 py-1 rounded">AllenaMente!</span>
+  </p>
+  <p class="text-gray-700 dark:text-gray-200 mb-4">
+    Testo della consegna...
+  </p>
+</div>
+```
+
+**Caratteristiche Dark Mode:**
+- Sfondo: `dark:bg-blue-900/40` (blu scuro trasparente)
+- Testo label: `dark:text-blue-300` (blu chiaro)
+- Badge giallo: `text-gray-800` (rimane scuro sul giallo)
+- Bordo: `dark:border-blue-600`
+
+## Immagini in Dark Mode
+
+```erb
+<%= image_tag "nvi4_mat/pXXX/image.jpg", class: "dark:bg-white dark:rounded-lg dark:p-1" %>
+```
+
+Le immagini con sfondo bianco necessitano di un wrapper bianco in dark mode.
+
+## Input in Dark Mode
+
+```erb
+<!-- Input dotted standard -->
+<input type="text" data-correct-answer="123"
+       class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+
+<!-- Input box sequenze -->
+<input type="text" data-correct-answer="342"
+       class="w-16 px-2 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-center font-bold dark:text-white">
+```
+
+## Radio Button e Checkbox in Dark Mode
+
+```erb
+<label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+  <input type="radio" name="vf1" class="w-5 h-5" data-correct-answer="true">
+  <span>Risposta</span>
+</label>
+```
+
+## Sequenze Numeriche in Dark Mode
+
+```erb
+<!-- Numero fisso -->
+<span class="px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 font-bold dark:text-white">327</span>
+
+<!-- Freccia -->
+<span class="text-<%= @pagina.base_color %>-500">→</span>
+
+<!-- Input -->
+<input type="text" data-correct-answer="342" class="w-16 px-2 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-center font-bold dark:text-white">
+```
+
+## SVG e Stroke in Dark Mode
+
+Per SVG con stroke che devono cambiare colore:
+```erb
+<svg class="text-gray-700 dark:text-gray-300" ...>
+  <path stroke="currentColor" .../>
+</svg>
+```
+
+## Partial Scomposizione Calcolo
+
+Il partial `_scomposizione_calcolo.html.erb` usa:
+- `text-gray-400` per il segno `+` (visibile in entrambi i modi)
+- `stroke="currentColor"` con classe `text-gray-700 dark:text-gray-300` per le frecce SVG
