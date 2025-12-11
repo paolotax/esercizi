@@ -1,0 +1,141 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls word-highlighter"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione teoria -->
+    <div class="p-4 md:p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Colonna sinistra - Testo teoria -->
+        <div>
+          <p class="text-gray-700 dark:text-gray-200 mb-4">
+            In Matematica, tutto ciò che può essere misurato è una <strong>grandezza</strong>. Puoi misurare molte grandezze: per esempio la lunghezza di un pennarello, la capacità di una lattina di aranciata, il peso di uno zaino...
+          </p>
+
+          <p class="text-gray-700 dark:text-gray-200 mb-2">Per misurare una grandezza è necessario:</p>
+          <ul class="list-disc pl-6 space-y-1 text-gray-700 dark:text-gray-200 marker:text-<%= @pagina.base_color %>-500 mb-4">
+            <li>scegliere un'unità di misura adatta;</li>
+            <li>contare quante volte l'unità di misura scelta è contenuta nella grandezza da misurare.</li>
+          </ul>
+
+          <!-- Esempio temperamatite -->
+          <div class="bg-custom-blue dark:bg-cyan-900/30 p-4 rounded-lg mb-4">
+            <div class="flex items-center gap-4">
+              <div>
+                <p class="text-gray-700 dark:text-gray-200"><strong>unità di misura</strong>:</p>
+                <p class="text-gray-700 dark:text-gray-200">1 temperamatite</p>
+              </div>
+              <div class="text-gray-700 dark:text-gray-200">
+                <span class="text-<%= @pagina.base_color %>-500">→</span>
+              </div>
+              <div>
+                <p class="text-gray-700 dark:text-gray-200"><strong>misura del pennarello</strong>:</p>
+                <p class="text-gray-700 dark:text-gray-200">4 temperamatite</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonna destra - Immagini -->
+        <div class="flex justify-center">
+          <%= image_tag "nvi4_mat/p094/p094_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Box teoria importante -->
+    <div class="p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl border-3 border-blue-800 dark:border-blue-600">
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        <span class="text-<%= @pagina.base_color %>-500">▶</span>
+        Tra le unità di misura fondamentali di cui approfondiremo la conoscenza quest'anno ci sono:
+      </p>
+      <ul class="list-disc pl-6 space-y-1 text-gray-700 dark:text-gray-200 marker:text-<%= @pagina.base_color %>-500 mb-4">
+        <li>il <strong>metro</strong> (<strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">m</strong>) per la lunghezza;</li>
+        <li>il <strong>litro</strong> (<strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">ℓ</strong>) per la capacità;</li>
+        <li>il <strong>chilogrammo</strong> (<strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">kg</strong>) per la massa (peso).</li>
+      </ul>
+
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        Per ogni unità di misura esistono misure 10, 100, <span class="whitespace-nowrap">1 000</span> volte maggiori dell'unità fondamentale, i <strong>multipli</strong>, e misure 10, 100, <span class="whitespace-nowrap">1 000</span> volte minori dell'unità fondamentale, i <strong>sottomultipli</strong>.
+      </p>
+
+      <p class="text-gray-700 dark:text-gray-200 mb-2">
+        <span class="text-<%= @pagina.base_color %>-500">▶</span>
+        Il simbolo che rappresenta l'unità di misura si chiama <strong>marca</strong> e si scrive dopo il numero.<br>
+        La marca si riferisce sempre alla <strong>cifra delle unità</strong>.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-xl">
+          <p class="text-gray-700 dark:text-gray-200 mb-2">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            Se il numero è scritto senza virgola, è l'ultima cifra a destra.
+          </p>
+          <p class="text-center font-bold text-gray-700 dark:text-gray-200">
+            35<span class="text-red-600 dark:text-red-400 border-2 border-red-500 rounded px-1">9</span> <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">m</span>
+          </p>
+        </div>
+        <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-xl">
+          <p class="text-gray-700 dark:text-gray-200 mb-2">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            Se il numero è scritto con la virgola, è la cifra prima della virgola.
+          </p>
+          <p class="text-center font-bold text-gray-700 dark:text-gray-200">
+            <span class="text-red-600 dark:text-red-400 border-2 border-red-500 rounded px-1">8</span>,75 <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">kg</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container esercizi -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+
+      <!-- Box IMPARARE TUTTI -->
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Per ogni misura, cerchia in rosso la cifra delle unità. Segui l'esempio.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 text-gray-700 dark:text-gray-200">
+          <!-- Esempio già fatto -->
+          <span class="font-bold">1<span class="text-red-600 dark:text-red-400 border-2 border-red-500 rounded px-1">3</span>,4 m</span>
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+
+          <!-- Da completare -->
+          <span class="font-bold" data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" data-highlight-class="text-red-600 dark:text-red-400 border-2 border-red-500 rounded px-1">
+            23<span class="cursor-pointer hover:bg-red-100 dark:hover:bg-red-900/30 px-1 rounded">8</span> kg
+          </span>
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+
+          <span class="font-bold">2<span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-red-100 dark:hover:bg-red-900/30 px-1 rounded">5</span>,89 ℓ</span>
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+
+          <span class="font-bold">6<span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-red-100 dark:hover:bg-red-900/30 px-1 rounded">4</span> m</span>
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+
+          <span class="font-bold"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-red-100 dark:hover:bg-red-900/30 px-1 rounded">0</span>,8 kg</span>
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+
+          <span class="font-bold">7<span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-red-100 dark:hover:bg-red-900/30 px-1 rounded">5</span>,2 m</span>
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+
+          <span class="font-bold"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-red-100 dark:hover:bg-red-900/30 px-1 rounded">2</span>,458 ℓ</span>
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+
+          <span class="font-bold"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-red-100 dark:hover:bg-red-900/30 px-1 rounded">8</span> kg</span>
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+
+          <span class="font-bold"><span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="cursor-pointer hover:bg-red-100 dark:hover:bg-red-900/30 px-1 rounded">3</span>,09 ℓ</span>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

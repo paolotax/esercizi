@@ -1,0 +1,158 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Container esercizi -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-6">
+        <span class="text-<%= @pagina.base_color %>-500">•</span>
+        Risolvi i problemi. Poi confronta le tue soluzioni con le compagne e i compagni.
+      </p>
+
+      <!-- Problema 1 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          In un negozio di animali ci sono 20 gattini: alcuni sono di razza certosina, altri sono di razza siamese; 3 non sono né dell'una, né dell'altra razza.<br>
+          Quanti possono essere i gatti certosini? E i siamesi?
+        </p>
+
+        <div class="space-y-3 mb-4">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">– Quante soluzioni hai trovato?</span>
+            <input type="text" class="flex-1 max-w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">– I compagni hanno trovato soluzioni diverse?</span>
+            <input type="text" class="flex-1 max-w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Griglia per le soluzioni -->
+        <div class="overflow-x-auto">
+          <table class="border-collapse border-2 border-gray-400 dark:border-gray-600">
+            <tbody>
+              <% 8.times do %>
+                <tr>
+                  <% 18.times do %>
+                    <td class="w-6 h-6 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700"></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Problema 2 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          José guarda fuori dalla finestra e si diverte a contare le ruote dei veicoli in un parcheggio.<br>
+          In tutto conta 24 ruote, che appartengono sia a motociclette sia ad automobili.
+        </p>
+
+        <p class="text-gray-700 dark:text-gray-200 mb-4">
+          Sapresti dire quante sono le automobili e quante le motociclette? Per risolvere il problema puoi aiutarti con una tabella.
+        </p>
+
+        <!-- Tabella 24 ruote -->
+        <div class="overflow-x-auto mb-4">
+          <table class="border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th colspan="2" class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-gray-800 dark:text-gray-200">24 ruote</th>
+              </tr>
+              <tr>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-gray-800 dark:text-gray-200">auto (4 ruote)</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-gray-800 dark:text-gray-200">moto (2 ruote)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">5</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">2</td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">4</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="4" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="3" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="6" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="2" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="8" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="1" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="10" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="0" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="12" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-gray-700 dark:text-gray-200">Quante soluzioni hai trovato?</span>
+          <input type="text" data-correct-answer="6" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+      </div>
+
+      <!-- Problema 3 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Marta ha a disposizione 134 euro e vuole acquistare alcuni capi di abbigliamento.<br>
+          Osserva la vetrina del negozio: quali altri capi di abbigliamento può acquistare Marta tenendo presente che deve acquistare gli stivali perché quelli vecchi sono rotti?
+        </p>
+
+        <div class="space-y-3 mb-4">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">– Quante e quali soluzioni hai trovato?</span>
+            <input type="text" class="flex-1 min-w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Immagine vetrina -->
+        <div class="flex justify-center">
+          <%= image_tag "nvi4_mat/p091/p091_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

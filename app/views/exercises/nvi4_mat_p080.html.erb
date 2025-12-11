@@ -1,0 +1,329 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+
+      <!-- Esercizio 1 - IMPARARE TUTTI -->
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Scrivi con le frazioni e con i numeri decimali i numeri scritti a parole.
+        </p>
+
+        <div class="space-y-4">
+          <!-- Esempio -->
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200 w-40">quattro centesimi</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <%= render 'shared/frazione', num: 4, den: 100 %>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <span class="font-bold text-gray-700 dark:text-gray-200">0,04</span>
+          </div>
+
+          <!-- otto decimi -->
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200 w-40">otto decimi</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <%= render 'shared/frazione', num: nil, den: 10, num_answer: "8" %>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <input type="text" data-correct-answer="0,8" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+
+          <!-- centonove millesimi -->
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200 w-40">centonove millesimi</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <%= render 'shared/frazione', num: nil, den: 1000, num_answer: "109" %>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <input type="text" data-correct-answer="0,109" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+
+          <!-- sedici centesimi -->
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200 w-40">sedici centesimi</span>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <%= render 'shared/frazione', num: nil, den: 100, num_answer: "16" %>
+            <span class="text-<%= @pagina.base_color %>-500">→</span>
+            <input type="text" data-correct-answer="0,16" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+
+      <!-- Due colonne con divisore -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x-2 md:divide-orange-300">
+        <!-- Colonna sinistra -->
+        <div class="md:pr-4 space-y-8">
+
+          <!-- Esercizio 2 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(2) %>
+              Calcola le moltiplicazioni.
+            </p>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">2,4 × 100 =</span>
+                <input type="text" data-correct-answer="240" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">7,03 × <span class="whitespace-nowrap">1 000</span> =</span>
+                <input type="text" data-correct-answer="7030" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">6,3 × 10 =</span>
+                <input type="text" data-correct-answer="63" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">0,18 × 100 =</span>
+                <input type="text" data-correct-answer="18" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">0,4 × <span class="whitespace-nowrap">1 000</span> =</span>
+                <input type="text" data-correct-answer="400" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">0,98 × 10 =</span>
+                <input type="text" data-correct-answer="9,8" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">12,9 × 100 =</span>
+                <input type="text" data-correct-answer="1290" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">8,09 × <span class="whitespace-nowrap">1 000</span> =</span>
+                <input type="text" data-correct-answer="8090" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+            </div>
+          </div>
+
+          <!-- Esercizio 3 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(3) %>
+              Completa le divisioni.
+            </p>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="flex items-center gap-1">
+                <span class="text-gray-700 dark:text-gray-200">3,5 :</span>
+                <input type="text" data-correct-answer="10" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">= 0,35</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-gray-700 dark:text-gray-200">70,3 : 10 =</span>
+                <input type="text" data-correct-answer="7,03" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-1">
+                <input type="text" data-correct-answer="2690" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">: 100 = 26,9</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-gray-700 dark:text-gray-200"><span class="whitespace-nowrap">3 800</span> :</span>
+                <input type="text" data-correct-answer="1000" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">= 3,8</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-gray-700 dark:text-gray-200">12,3 : 100 =</span>
+                <input type="text" data-correct-answer="0,123" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-gray-700 dark:text-gray-200">54,06 : 10 =</span>
+                <input type="text" data-correct-answer="5,406" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-gray-700 dark:text-gray-200">143 :</span>
+                <input type="text" data-correct-answer="1000" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">= 0,143</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <input type="text" data-correct-answer="35,7" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">: 100 = 0,357</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Esercizio 4 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(4) %>
+              Sottolinea le cifre decimali dei fattori e posiziona correttamente la virgola nei prodotti.
+            </p>
+            <div class="space-y-2">
+              <p class="text-gray-700 dark:text-gray-200">21,<span class="underline">5</span> × 3,<span class="underline">1</span> = <strong>66,65</strong></p>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">1,48 × 1,7 =</span>
+                <input type="text" data-correct-answer="2,516" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">0,619 × 23 =</span>
+                <input type="text" data-correct-answer="14,237" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">18,3 × 2,7 =</span>
+                <input type="text" data-correct-answer="49,41" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">3,24 × 2 =</span>
+                <input type="text" data-correct-answer="6,48" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">0,81 × 12 =</span>
+                <input type="text" data-correct-answer="9,72" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">43,85 × 6,7 =</span>
+                <input type="text" data-correct-answer="293,795" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+            </div>
+          </div>
+
+          <!-- Esercizio 5 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(5) %>
+              Rendi intero il divisore, poi esegui le divisioni. Segui l'esempio.
+            </p>
+            <div class="space-y-3">
+              <p class="text-gray-700 dark:text-gray-200">35 : 1,2 = <strong>350 : 12 = 29 resto 2</strong></p>
+              <div class="flex items-center gap-1 flex-wrap">
+                <span class="text-gray-700 dark:text-gray-200">58 : 0,3 =</span>
+                <input type="text" data-correct-answer="580" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">:</span>
+                <input type="text" data-correct-answer="3" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">=</span>
+                <input type="text" data-correct-answer="193 resto 1" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-1 flex-wrap">
+                <span class="text-gray-700 dark:text-gray-200">70 : 3,5 =</span>
+                <input type="text" data-correct-answer="700" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">:</span>
+                <input type="text" data-correct-answer="35" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">=</span>
+                <input type="text" data-correct-answer="20" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-1 flex-wrap">
+                <span class="text-gray-700 dark:text-gray-200">8,22 : 0,41 =</span>
+                <input type="text" data-correct-answer="822" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">:</span>
+                <input type="text" data-correct-answer="41" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">=</span>
+                <input type="text" data-correct-answer="20 resto 2" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Colonna destra -->
+        <div class="md:pl-4 space-y-8">
+
+          <!-- Esercizio 6 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(6) %>
+              Calcola in colonna sul quaderno.
+            </p>
+            <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+              <div>
+                <p class="font-bold text-gray-700 dark:text-gray-200">a)</p>
+                <p class="text-gray-700 dark:text-gray-200">2,14 + 3,5 + 0,12 =</p>
+                <p class="text-gray-700 dark:text-gray-200">6,4 + 1,76 + 0,5 =</p>
+                <p class="text-gray-700 dark:text-gray-200">65,09 + 2,8 + 1,05 =</p>
+              </div>
+              <div>
+                <p class="font-bold text-gray-700 dark:text-gray-200">b)</p>
+                <p class="text-gray-700 dark:text-gray-200">5,3 − 2,34 =</p>
+                <p class="text-gray-700 dark:text-gray-200">159 − 5,28 =</p>
+                <p class="text-gray-700 dark:text-gray-200">904 − 48,32 =</p>
+              </div>
+              <div class="mt-2">
+                <p class="font-bold text-gray-700 dark:text-gray-200">c)</p>
+                <p class="text-gray-700 dark:text-gray-200">683 × 4,7 =</p>
+                <p class="text-gray-700 dark:text-gray-200">204 × 4,8 =</p>
+                <p class="text-gray-700 dark:text-gray-200">5,9 × 6,2 =</p>
+              </div>
+              <div class="mt-2">
+                <p class="font-bold text-gray-700 dark:text-gray-200">d)</p>
+                <p class="text-gray-700 dark:text-gray-200">7,82 : 3,4 =</p>
+                <p class="text-gray-700 dark:text-gray-200">123 : 7,7 =</p>
+                <p class="text-gray-700 dark:text-gray-200">764 : 3,6 =</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- RISOLVI I PROBLEMI -->
+          <div>
+            <p class="font-bold text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-300 mb-4">RISOLVI I PROBLEMI</p>
+
+            <!-- Problema 7 -->
+            <div class="mb-4">
+              <p class="text-gray-700 dark:text-gray-200 mb-2">
+                <%= numero_esercizio_badge(7) %>
+                Giulia vuole comprare un libro che costa 12,50 euro. Nel borsellino ha 13 monete da 0,50 euro e 28 monete da 0,20 euro. Può comprarlo?
+              </p>
+              <div class="flex items-center gap-2">
+                <label class="flex items-center gap-1 cursor-pointer">
+                  <input type="radio" name="p7" data-correct-answer="true" class="w-4 h-4">
+                  <span class="text-gray-700 dark:text-gray-200">Sì</span>
+                </label>
+                <label class="flex items-center gap-1 cursor-pointer">
+                  <input type="radio" name="p7" data-correct-answer="false" class="w-4 h-4">
+                  <span class="text-gray-700 dark:text-gray-200">No</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Problema 8 -->
+            <div class="mb-4">
+              <p class="text-gray-700 dark:text-gray-200 mb-2">
+                <%= numero_esercizio_badge(8) %>
+                Angelo deve dividere un nastro lungo 15 m in pezzi lunghi 0,50 m. Quanti pezzi ottiene?
+              </p>
+              <div class="flex items-center justify-end gap-2">
+                <input type="text" data-correct-answer="30" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="shrink-0 text-gray-700 dark:text-gray-200">pezzi</span>
+              </div>
+            </div>
+
+            <!-- Problema 9 -->
+            <div class="mb-4">
+              <p class="text-gray-700 dark:text-gray-200 mb-2">
+                <%= numero_esercizio_badge(9) %>
+                15 amici comprano delle biglie; ognuno paga 0,50 euro. Quanto costano in tutto le biglie?
+              </p>
+              <div class="flex items-center justify-end gap-2">
+                <input type="text" data-correct-answer="7,50" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="shrink-0 text-gray-700 dark:text-gray-200">euro</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AllenaMente -->
+          <div class="p-4 bg-white dark:bg-blue-900/40 rounded-2xl border-3 border-blue-400 dark:border-blue-600">
+            <p class="font-bold text-gray-800 dark:text-blue-300 mb-2">
+              <span class="bg-yellow-400 text-gray-800 px-2 py-1 rounded">AllenaMente!</span>
+            </p>
+            <p class="text-gray-700 dark:text-gray-200 mb-3">
+              Roberto vuole comprare delle bibite. Ha a disposizione tre monete da 1 euro, una da 10 centesimi e due da 20 centesimi.
+            </p>
+            <p class="text-gray-700 dark:text-gray-200 mb-3">
+              Può scegliere tra: acqua (€ 0,80), tè (€ 1,20), succo d'ananas (€ 1,90), cola (€ 2,10) e succo di frutta (€ 1,80).
+            </p>
+            <p class="text-gray-700 dark:text-gray-200 mb-3">Che cosa può bere Roberto?</p>
+            <p class="text-gray-600 dark:text-gray-400 italic">Scrivi le possibili soluzioni sul quaderno.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

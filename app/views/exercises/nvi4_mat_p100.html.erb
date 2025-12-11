@@ -1,0 +1,250 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione teoria -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        Quando vai a fare la spesa con un adulto, noti che i prodotti sono confezionati in scatole, vasetti, sacchetti, barattoli...
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <!-- Peso Lordo -->
+        <div class="p-4 bg-cyan-50 dark:bg-cyan-900/30 rounded-2xl border-3 border-cyan-400 dark:border-cyan-600">
+          <h3 class="font-bold text-cyan-600 dark:text-cyan-400 text-center mb-3">PESO LORDO</h3>
+          <p class="text-gray-700 dark:text-gray-200 text-center mb-3">
+            È il peso <strong>totale</strong> del contenuto più il contenitore.
+          </p>
+          <div class="flex justify-center">
+            <div class="w-24 h-24 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center border-2 border-cyan-400 dark:border-cyan-600">
+              <span class="text-4xl">📦</span>
+            </div>
+          </div>
+          <p class="text-center font-bold text-cyan-600 dark:text-cyan-400 mt-2">PL</p>
+        </div>
+
+        <!-- Peso Netto -->
+        <div class="p-4 bg-green-50 dark:bg-green-900/30 rounded-2xl border-3 border-green-400 dark:border-green-600">
+          <h3 class="font-bold text-green-600 dark:text-green-400 text-center mb-3">PESO NETTO</h3>
+          <p class="text-gray-700 dark:text-gray-200 text-center mb-3">
+            È il peso del solo <strong>contenuto</strong>, senza il contenitore.
+          </p>
+          <div class="flex justify-center">
+            <div class="w-24 h-24 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center border-2 border-green-400 dark:border-green-600">
+              <span class="text-4xl">🍎</span>
+            </div>
+          </div>
+          <p class="text-center font-bold text-green-600 dark:text-green-400 mt-2">PN</p>
+        </div>
+
+        <!-- Tara -->
+        <div class="p-4 bg-orange-50 dark:bg-orange-900/30 rounded-2xl border-3 border-orange-400 dark:border-orange-600">
+          <h3 class="font-bold text-orange-600 dark:text-orange-400 text-center mb-3">TARA</h3>
+          <p class="text-gray-700 dark:text-gray-200 text-center mb-3">
+            È il peso del solo <strong>contenitore</strong>, senza il contenuto.
+          </p>
+          <div class="flex justify-center">
+            <div class="w-24 h-24 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center border-2 border-orange-400 dark:border-orange-600">
+              <span class="text-4xl">🫙</span>
+            </div>
+          </div>
+          <p class="text-center font-bold text-orange-600 dark:text-orange-400 mt-2">T</p>
+        </div>
+      </div>
+
+      <!-- Formula principale -->
+      <div class="p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl mb-6">
+        <p class="text-gray-700 dark:text-gray-200 text-center font-bold text-lg">
+          <span class="text-cyan-600 dark:text-cyan-400">PESO LORDO</span> =
+          <span class="text-green-600 dark:text-green-400">PESO NETTO</span> +
+          <span class="text-orange-600 dark:text-orange-400">TARA</span>
+        </p>
+        <p class="text-gray-700 dark:text-gray-200 text-center font-bold text-lg mt-2">
+          <span class="text-cyan-600 dark:text-cyan-400">PL</span> =
+          <span class="text-green-600 dark:text-green-400">PN</span> +
+          <span class="text-orange-600 dark:text-orange-400">T</span>
+        </p>
+      </div>
+
+      <!-- Formule inverse -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="p-3 bg-white dark:bg-gray-800 rounded-xl border-2 border-gray-200 dark:border-gray-600">
+          <p class="text-gray-700 dark:text-gray-200 text-center">
+            <span class="font-bold text-green-600 dark:text-green-400">PN</span> =
+            <span class="font-bold text-cyan-600 dark:text-cyan-400">PL</span> -
+            <span class="font-bold text-orange-600 dark:text-orange-400">T</span>
+          </p>
+        </div>
+        <div class="p-3 bg-white dark:bg-gray-800 rounded-xl border-2 border-gray-200 dark:border-gray-600">
+          <p class="text-gray-700 dark:text-gray-200 text-center">
+            <span class="font-bold text-orange-600 dark:text-orange-400">T</span> =
+            <span class="font-bold text-cyan-600 dark:text-cyan-400">PL</span> -
+            <span class="font-bold text-green-600 dark:text-green-400">PN</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container esercizi -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+
+      <!-- Box IMPARARE TUTTI -->
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Completa la tabella.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-cyan-600 dark:text-cyan-400">Peso Lordo</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-green-100 dark:bg-green-900 text-center font-bold text-green-600 dark:text-green-400">Peso Netto</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-orange-100 dark:bg-orange-900 text-center font-bold text-orange-600 dark:text-orange-400">Tara</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">350 g</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">300 g</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="50 g" class="w-full border-none text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">1,2 kg</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="1 kg" class="w-full border-none text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">200 g</td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="750 g" class="w-full border-none text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">680 g</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">70 g</td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">5 kg</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="4,5 kg" class="w-full border-none text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">500 g</td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="280 g" class="w-full border-none text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">250 g</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">30 g</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="mb-6">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Risolvi i problemi.
+        </p>
+
+        <div class="space-y-4">
+          <!-- Problema a -->
+          <div class="p-3 bg-white dark:bg-gray-800 rounded-xl">
+            <p class="text-gray-700 dark:text-gray-200 mb-3">
+              <strong>a.</strong> Una cassetta di mele pesa 12 kg (peso lordo). Se la cassetta vuota pesa 800 g, qual è il peso netto delle mele?
+            </p>
+            <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span>Peso netto:</span>
+              <input type="text" data-correct-answer="11,2" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span>kg</span>
+            </div>
+          </div>
+
+          <!-- Problema b -->
+          <div class="p-3 bg-white dark:bg-gray-800 rounded-xl">
+            <p class="text-gray-700 dark:text-gray-200 mb-3">
+              <strong>b.</strong> Un barattolo di marmellata contiene 450 g di prodotto (peso netto). Il barattolo vuoto pesa 120 g. Qual è il peso lordo?
+            </p>
+            <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span>Peso lordo:</span>
+              <input type="text" data-correct-answer="570" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span>g</span>
+            </div>
+          </div>
+
+          <!-- Problema c -->
+          <div class="p-3 bg-white dark:bg-gray-800 rounded-xl">
+            <p class="text-gray-700 dark:text-gray-200 mb-3">
+              <strong>c.</strong> Una bottiglia d'olio pesa 1,1 kg (peso lordo). L'olio contenuto pesa 900 g. Quanto pesa la bottiglia vuota?
+            </p>
+            <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span>Tara:</span>
+              <input type="text" data-correct-answer="200" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span>g</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 3 -->
+      <div class="mb-6">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Segna con una <span class="border-b-2 border-gray-700 dark:border-gray-300">X</span> la risposta corretta.
+        </p>
+
+        <div class="space-y-4">
+          <div class="p-3 bg-white dark:bg-gray-800 rounded-xl">
+            <p class="text-gray-700 dark:text-gray-200 mb-3">
+              Un pacco di pasta ha peso lordo 520 g e peso netto 500 g. Quanto pesa la confezione?
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+                <input type="radio" name="es3" class="w-5 h-5" data-correct-answer="false">
+                <span>1020 g</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+                <input type="radio" name="es3" class="w-5 h-5" data-correct-answer="true">
+                <span>20 g</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+                <input type="radio" name="es3" class="w-5 h-5" data-correct-answer="false">
+                <span>520 g</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AllenaMente -->
+      <div class="p-4 bg-white dark:bg-blue-900/40 rounded-2xl border-3 border-blue-400 dark:border-blue-600">
+        <p class="font-bold text-gray-800 dark:text-blue-300 mb-2">
+          <span class="bg-yellow-400 text-gray-800 px-2 py-1 rounded">AllenaMente!</span>
+        </p>
+        <p class="text-gray-700 dark:text-gray-200 mb-4">
+          Mamma compra al supermercato 3 scatolette di tonno uguali. Ogni scatoletta pesa 90 g (peso lordo) e contiene 80 g di tonno. Qual è la tara totale delle 3 scatolette?
+        </p>
+        <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+          <span>Tara totale:</span>
+          <input type="text" data-correct-answer="30" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span>g</span>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [230, 231, 233] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

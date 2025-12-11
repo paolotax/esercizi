@@ -1,0 +1,145 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Problema 1: Il libro di Eloisa -->
+    <div class="p-4 md:p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <div class="p-4 bg-custom-blue dark:bg-cyan-900/30 mb-4">
+            <p class="text-gray-700 dark:text-gray-200">
+              <strong class="text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-400">Il libro di Eloisa</strong>
+              <span class="text-<%= @pagina.base_color %>-500">•</span>
+              Eloisa vorrebbe completare in due settimane la lettura di un libro. Legge un certo numero di pagine al giorno. Alla fine delle due settimane non è riuscita a finirlo.
+              Continuando a leggere con lo stesso ritmo, quanti giorni occorreranno ancora?
+            </p>
+          </div>
+        </div>
+        <div>
+          <p class="text-gray-700 dark:text-gray-200 mb-2">Scegli bene i dati.</p>
+          <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-xl">
+            <p class="text-gray-700 dark:text-gray-200">
+              <strong>Dati utili</strong>: sono quelli necessari per risolvere il problema.<br>
+              <strong>Dati inutili</strong>: sono quelli che non servono.<br>
+              <strong>Dati nascosti</strong>: sono quelli che nascondono numeri o operazioni.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <p class="font-bold text-gray-700 dark:text-gray-200 my-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span>
+        Leggi le informazioni che seguono e segna con una <span class="text-custom-sky font-bold">X</span> quelle che ti permettono di risolvere il problema.
+      </p>
+
+      <div class="space-y-2 mb-6">
+        <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+          <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+          <span>Il libro ha 144 pagine.</span>
+        </label>
+        <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+          <input type="checkbox" class="w-5 h-5" data-correct-answer="false">
+          <span>Il libro costa 7,50 euro.</span>
+        </label>
+        <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+          <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+          <span>Eloisa ha deciso di leggere 8 pagine al giorno.</span>
+        </label>
+        <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+          <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+          <span>Dopo due settimane deve ancora leggere 32 pagine.</span>
+        </label>
+        <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+          <input type="checkbox" class="w-5 h-5" data-correct-answer="false">
+          <span>Il titolo del libro è "20 racconti di avventura".</span>
+        </label>
+        <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+          <input type="checkbox" class="w-5 h-5" data-correct-answer="false">
+          <span>Dopo due settimane Eloisa ha letto 112 pagine.</span>
+        </label>
+      </div>
+
+      <div class="space-y-3">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">– Adesso rileggi il testo del problema e scrivi la domanda:</span>
+          <input type="text" data-correct-answer="Quanti giorni occorreranno ancora?" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">– Scrivi quali sono i dati necessari per rispondere alla domanda:</span>
+          <input type="text" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">– Esegui i calcoli:</span>
+          <input type="text" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">– Rispondi alla domanda:</span>
+          <input type="text" data-correct-answer="4 giorni" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white">
+        </div>
+      </div>
+    </div>
+
+    <!-- Problema 2: I libri di una scuola -->
+    <div class="p-4 md:p-6">
+      <div class="p-4 bg-custom-blue dark:bg-cyan-900/30 mb-4">
+        <p class="text-gray-700 dark:text-gray-200">
+          <strong class="text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-400">I libri di una scuola</strong>
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
+          In una scuola primaria sono arrivati alcuni pacchi contenenti dei libri. Il pacco più voluminoso contiene lo stesso numero di libri contenuti negli altri pacchi messi insieme. Tutti i libri hanno lo stesso prezzo: qual è il loro costo complessivo?
+        </p>
+      </div>
+
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span>
+        Leggi il testo del problema e scegli le informazioni che ti servono per risolverlo.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="space-y-2">
+          <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+            <input type="checkbox" class="w-5 h-5" data-correct-answer="false">
+            <span>I pacchi sono 3.</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+            <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+            <span>Nel pacco più grande ci sono 32 libri.</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+            <input type="checkbox" class="w-5 h-5" data-correct-answer="false">
+            <span>Nel pacco più piccolo ci sono 13 libri.</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+            <input type="checkbox" class="w-5 h-5" data-correct-answer="false">
+            <span>Nel terzo pacco ci sono 19 libri.</span>
+          </label>
+        </div>
+        <div class="space-y-2">
+          <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+            <input type="checkbox" class="w-5 h-5" data-correct-answer="true">
+            <span>Un libro costa 14 euro.</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+            <input type="checkbox" class="w-5 h-5" data-correct-answer="false">
+            <span>I libri contenuti nel pacco più piccolo costano complessivamente 182 euro.</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+            <input type="checkbox" class="w-5 h-5" data-correct-answer="false">
+            <span>I libri contenuti nel pacco più grande costano complessivamente 448 euro.</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-gray-700 dark:text-gray-200">– Risolvi il problema sul quaderno e rispondi alla domanda:</span>
+        <input type="text" data-correct-answer="896 euro" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white">
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

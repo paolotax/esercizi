@@ -1,0 +1,286 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <p class="font-bold text-gray-700 dark:text-gray-200">
+      <span class="text-<%= @pagina.base_color %>-500">•</span>
+      Risolvi i problemi, aiutati con un disegno o una tabella.
+    </p>
+
+    <!-- Problema 1: Luca e famiglia -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(1) %>
+        Luca ha 9 anni e i suoi genitori sono nati entrambi nel 1979.
+      </p>
+      <p class="text-gray-700 dark:text-gray-200 mb-2">
+        Nel 2015 hanno festeggiato il loro 10° anniversario di matrimonio e il 7° compleanno di Marco, fratello di Luca.
+      </p>
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        Quanti anni hanno i genitori di Luca? A quanti anni si sono sposati? In che anno è nato Marco?
+      </p>
+
+      <!-- Linea temporale -->
+      <div class="flex justify-center mb-4">
+        <%= image_tag "nvi4_mat/p089/p089_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">Anni genitori:</span>
+          <input type="text" data-correct-answer="45" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="text-gray-700 dark:text-gray-200">– Si sono sposati a:</span>
+          <input type="text" data-correct-answer="26 anni" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="text-gray-700 dark:text-gray-200">– Marco è nato nel:</span>
+          <input type="text" data-correct-answer="2008" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+      </div>
+    </div>
+
+    <!-- Problema 2: Giuseppe Torino-Venezia -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Giuseppe è partito da Torino per andare a Venezia. L'intero percorso è lungo 365 km. Ha già fatto 120 km per arrivare a Milano e altri 50 km per Bergamo.
+      </p>
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        Quanti chilometri deve ancora percorrere?
+      </p>
+
+      <!-- Diagramma percorso -->
+      <div class="flex justify-center mb-4">
+        <%= image_tag "nvi4_mat/p089/p089_02.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-bold text-gray-700 dark:text-gray-200">Risposta:</span>
+        <input type="text" data-correct-answer="195" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        <span class="text-gray-700 dark:text-gray-200">km</span>
+      </div>
+    </div>
+
+    <!-- Problema 3: Torta di Maria -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Per il suo compleanno Maria vuole fare una torta. Sul suo libro di cucina trova le dosi per 4 persone.
+      </p>
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        Quali saranno le dosi per 8 persone? E per 12? E per 20?
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+          <thead>
+            <tr>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-custom-blue dark:bg-cyan-900/30 text-gray-700 dark:text-gray-200 text-center font-bold">dosi per 4 persone</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-custom-blue dark:bg-cyan-900/30 text-gray-700 dark:text-gray-200 text-center font-bold">dosi per 8 persone</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-custom-blue dark:bg-cyan-900/30 text-gray-700 dark:text-gray-200 text-center font-bold">dosi per 12 persone</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-custom-blue dark:bg-cyan-900/30 text-gray-700 dark:text-gray-200 text-center font-bold">dosi per 20 persone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">farina 200 g</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">farina</span>
+                  <input type="text" data-correct-answer="400" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span class="text-gray-700 dark:text-gray-200">g</span>
+                </div>
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">farina</span>
+                  <input type="text" data-correct-answer="600" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span class="text-gray-700 dark:text-gray-200">g</span>
+                </div>
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">farina</span>
+                  <input type="text" data-correct-answer="1000" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span class="text-gray-700 dark:text-gray-200">g</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">zucchero 180 g</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">zucchero</span>
+                  <input type="text" data-correct-answer="360" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span class="text-gray-700 dark:text-gray-200">g</span>
+                </div>
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">zucchero</span>
+                  <input type="text" data-correct-answer="540" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span class="text-gray-700 dark:text-gray-200">g</span>
+                </div>
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">zucchero</span>
+                  <input type="text" data-correct-answer="900" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span class="text-gray-700 dark:text-gray-200">g</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">uova 2</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">uova</span>
+                  <input type="text" data-correct-answer="4" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </div>
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">uova</span>
+                  <input type="text" data-correct-answer="6" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </div>
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">uova</span>
+                  <input type="text" data-correct-answer="10" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">burro 150 g</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">burro</span>
+                  <input type="text" data-correct-answer="300" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span class="text-gray-700 dark:text-gray-200">g</span>
+                </div>
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">burro</span>
+                  <input type="text" data-correct-answer="450" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span class="text-gray-700 dark:text-gray-200">g</span>
+                </div>
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">burro</span>
+                  <input type="text" data-correct-answer="750" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span class="text-gray-700 dark:text-gray-200">g</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">cacao 30 g</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">cacao</span>
+                  <input type="text" data-correct-answer="60" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span class="text-gray-700 dark:text-gray-200">g</span>
+                </div>
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">cacao</span>
+                  <input type="text" data-correct-answer="90" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span class="text-gray-700 dark:text-gray-200">g</span>
+                </div>
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-700 dark:text-gray-200">cacao</span>
+                  <input type="text" data-correct-answer="150" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span class="text-gray-700 dark:text-gray-200">g</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Problemi 4-8 in due colonne -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Colonna sinistra -->
+      <div class="space-y-6">
+        <!-- Problema 4: Giulia altezza -->
+        <div class="p-4 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+          <p class="font-bold text-gray-700 dark:text-gray-200 mb-2">
+            <%= numero_esercizio_badge(4) %>
+            Giulia ha nove anni ed è alta 140 cm. A sette anni misurava 123 cm; tra i sette e gli otto anni è cresciuta altri 8 cm. Di quanti cm è cresciuta quest'anno?
+          </p>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-gray-700 dark:text-gray-200">Risposta:</span>
+            <input type="text" data-correct-answer="9" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">cm</span>
+          </div>
+        </div>
+
+        <!-- Problema 5: Triplo salto -->
+        <div class="p-4 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+          <p class="font-bold text-gray-700 dark:text-gray-200 mb-2">
+            <%= numero_esercizio_badge(5) %>
+            Luca ha eseguito un triplo salto in lungo di 9 m. Il primo salto era lungo 3 m; il secondo 2 m. Quanti metri ha saltato con il terzo?
+          </p>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-gray-700 dark:text-gray-200">Risposta:</span>
+            <input type="text" data-correct-answer="4" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">m</span>
+          </div>
+        </div>
+
+        <!-- Problema 6: Milano-Parigi-Londra -->
+        <div class="p-4 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+          <p class="font-bold text-gray-700 dark:text-gray-200 mb-2">
+            <%= numero_esercizio_badge(6) %>
+            La distanza tra Milano e Parigi è di 970 km. Se Parigi dista 230 km da Londra, qual è la distanza tra Milano e Londra?
+          </p>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-gray-700 dark:text-gray-200">Risposta:</span>
+            <input type="text" data-correct-answer="1200" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">km</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonna destra -->
+      <div class="space-y-6">
+        <!-- Problema 7: Lucia cartolaio -->
+        <div class="p-4 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+          <p class="font-bold text-gray-700 dark:text-gray-200 mb-2">
+            <%= numero_esercizio_badge(7) %>
+            Lucia paga con una banconota da 50 euro i suoi acquisti dal cartolaio: un diario da 8 euro, un astuccio da 12 euro e una scatola di pennarelli da 7 euro. Quanto riceverà di resto?
+          </p>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-gray-700 dark:text-gray-200">Risposta:</span>
+            <input type="text" data-correct-answer="23" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">euro</span>
+          </div>
+        </div>
+
+        <!-- Problema 8: Annalisa libro -->
+        <div class="p-4 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+          <p class="font-bold text-gray-700 dark:text-gray-200 mb-2">
+            <%= numero_esercizio_badge(8) %>
+            Annalisa sta leggendo un libro di 124 pagine. La scorsa settimana ha letto 63 pagine e oggi ne ha lette 27. Quante pagine deve ancora leggere per finirlo?
+          </p>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-gray-700 dark:text-gray-200">Risposta:</span>
+            <input type="text" data-correct-answer="34" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">pagine</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

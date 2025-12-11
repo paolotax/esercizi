@@ -1,0 +1,312 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Container esercizi -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+
+      <!-- Box IMPARARE TUTTI -->
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Scrivi l'unità di misura più adatta per misurare:
+        </p>
+        <div class="space-y-3 text-gray-700 dark:text-gray-200">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>la distanza tra Bari e Bologna</span>
+            <span class="ml-auto">700</span>
+            <input type="text" data-correct-answer="km" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>la lunghezza di una penna</span>
+            <span class="ml-auto">16</span>
+            <input type="text" data-correct-answer="cm" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>la capacità di una bottiglia d'acqua</span>
+            <span class="ml-auto">1,5</span>
+            <input type="text" data-correct-answer="ℓ" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>il peso di un cane</span>
+            <span class="ml-auto">18</span>
+            <input type="text" data-correct-answer="kg" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>il peso di un cucchiaio di zucchero</span>
+            <span class="ml-auto">25</span>
+            <input type="text" data-correct-answer="g" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Colonna sinistra -->
+        <div class="space-y-6">
+          <!-- Esercizio 2 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(2) %>
+              Inserisci in tabella le misure di lunghezza.
+            </p>
+            <p class="text-gray-700 dark:text-gray-200 mb-3">34,5 dm • 618 m • 132,6 dam • 1,78 dm • 8 hm</p>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+                <thead>
+                  <tr>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">km</th>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">hm</th>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">dam</th>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">m</th>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">dm</th>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">cm</th>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">mm</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% 5.times do %>
+                    <tr>
+                      <% 7.times do %>
+                        <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                          <input type="text" class="w-full border-none text-center font-bold bg-transparent dark:text-white">
+                        </td>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Esercizio 3 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(3) %>
+              Completa le equivalenze con le misure di lunghezza.
+            </p>
+            <div class="space-y-2 text-gray-700 dark:text-gray-200">
+              <div class="flex items-center gap-2">
+                <span>3,36 m = 33,6</span>
+                <input type="text" data-correct-answer="dm" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+              <div class="flex items-center gap-2">
+                <span>7 km =</span>
+                <input type="text" data-correct-answer="7000" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>m</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span>87 m =</span>
+                <input type="text" data-correct-answer="8,7" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>dam</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="text" data-correct-answer="45,8" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>dam = 458 m</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span>3,44 hm =</span>
+                <input type="text" data-correct-answer="344" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>m</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span>576 cm = 57,6</span>
+                <input type="text" data-correct-answer="dm" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+            </div>
+          </div>
+
+          <!-- Esercizio 4 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(4) %>
+              Collega ciascun palazzo alla possibile misura della sua altezza: scrivi le lettere nei quadratini.
+            </p>
+            <div class="flex justify-center mb-4">
+              <%= image_tag "nvi4_mat/p098/p098_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+                <input type="text" data-correct-answer="A" class="w-10 h-10 border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-center font-bold dark:text-white">
+                <span>12 m</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+                <input type="text" data-correct-answer="B" class="w-10 h-10 border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-center font-bold dark:text-white">
+                <span>1,8 dam</span>
+              </div>
+              <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+                <input type="text" data-correct-answer="C" class="w-10 h-10 border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-center font-bold dark:text-white">
+                <span>220 dm</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonna destra -->
+        <div class="space-y-6">
+          <!-- Esercizio 5 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(5) %>
+              Esegui le equivalenze con le misure di capacità.
+            </p>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+                <thead>
+                  <tr>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">ℓ</th>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">dℓ</th>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">cℓ</th>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">mℓ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">3,4</td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center font-bold text-cyan-600 dark:text-cyan-400">34</td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="340" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="3400" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">7</td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="70" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="700" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="7000" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">0,4</td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="4" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="40" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="400" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">9,77</td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="97,7" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="977" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="9770" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">0,08</td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="0,8" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="8" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="80" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Esercizio 6 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(6) %>
+              Esegui le equivalenze con le misure di massa.
+            </p>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+                <thead>
+                  <tr>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">kg</th>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">hg</th>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">dag</th>
+                    <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900/50 text-center font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">g</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">236</td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center font-bold text-cyan-600 dark:text-cyan-400"><span class="whitespace-nowrap">2 360</span></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="23600" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="236000" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">9,5</td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="95" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="950" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="9500" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">1,347</td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="13,47" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="134,7" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="1347" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">0,7</td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="7" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="70" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="700" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">0,05</td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="0,5" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="5" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                    <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"><input type="text" data-correct-answer="50" class="w-full border-none text-center font-bold bg-transparent dark:text-white"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Problema 7 -->
+          <div>
+            <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-2">RISOLVI IL PROBLEMA</p>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(7) %>
+              Davide lavora a 37 km da casa. Tenendo presente che il fine settimana non lavora, quanti chilometri percorre ogni settimana per recarsi al lavoro e tornare a casa la sera?
+            </p>
+            <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <input type="text" data-correct-answer="370" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span>km</span>
+            </div>
+          </div>
+
+          <!-- AllenaMente -->
+          <div class="p-4 bg-white dark:bg-blue-900/40 rounded-2xl border-3 border-blue-400 dark:border-blue-600">
+            <p class="font-bold text-gray-800 dark:text-blue-300 mb-2">
+              <span class="bg-yellow-400 text-gray-800 px-2 py-1 rounded">AllenaMente!</span>
+            </p>
+            <p class="text-gray-700 dark:text-gray-200 mb-4">
+              Osserva le bilance e scrivi il peso di ogni pallina.
+            </p>
+            <div class="flex justify-center mb-4">
+              <%= image_tag "nvi4_mat/p098/p098_02.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8 text-gray-700 dark:text-gray-200">
+              <div class="flex items-center gap-2">
+                <span class="w-4 h-4 rounded-full bg-green-500"></span>
+                <span>=</span>
+                <input type="text" data-correct-answer="60" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>g</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-4 h-4 rounded-full bg-cyan-400"></span>
+                <span>=</span>
+                <input type="text" data-correct-answer="120" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>g</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-4 h-4 rounded-full bg-white border-2 border-gray-400"></span>
+                <span>=</span>
+                <input type="text" data-correct-answer="180" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

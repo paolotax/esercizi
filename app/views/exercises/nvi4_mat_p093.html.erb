@@ -1,0 +1,132 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Schema UNITÀ DI MISURA e SOTTOMULTIPLI -->
+    <div class="p-4 md:p-6">
+      <!-- Tabella visiva unità di misura e sottomultipli -->
+      <div class="overflow-x-auto mb-6">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr>
+              <th class="p-3 bg-gray-700 text-white font-bold rounded-tl-lg">UNITÀ di MISURA</th>
+              <th colspan="3" class="p-3 bg-<%= @pagina.base_color %>-500 text-white font-bold rounded-tr-lg">SOTTOMULTIPLI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- METRO -->
+            <tr class="bg-pink-50 dark:bg-pink-900/20">
+              <td class="p-3 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600">
+                <div class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">METRO</div>
+                <%= image_tag "nvi4_mat/p093/metro.png", class: "w-20 h-auto mt-2", alt: "Metro" if File.exist?(Rails.root.join('app/assets/images/nvi4_mat/p093/metro.png')) rescue nil %>
+              </td>
+              <td class="p-3 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600 text-center bg-white dark:bg-gray-800">
+                <div class="font-bold text-gray-700 dark:text-gray-200">decimetro</div>
+              </td>
+              <td class="p-3 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600 text-center bg-white dark:bg-gray-800">
+                <div class="font-bold text-gray-700 dark:text-gray-200">centimetro</div>
+              </td>
+              <td class="p-3 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600 text-center bg-white dark:bg-gray-800">
+                <div class="font-bold text-gray-700 dark:text-gray-200">millimetro</div>
+              </td>
+            </tr>
+            <!-- LITRO -->
+            <tr class="bg-pink-50 dark:bg-pink-900/20">
+              <td class="p-3 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600">
+                <div class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">LITRO</div>
+              </td>
+              <td class="p-3 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600 text-center bg-white dark:bg-gray-800">
+                <div class="font-bold text-gray-700 dark:text-gray-200">decilitro</div>
+              </td>
+              <td class="p-3 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600 text-center bg-white dark:bg-gray-800">
+                <div class="font-bold text-gray-700 dark:text-gray-200">centilitro</div>
+              </td>
+              <td class="p-3 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600 text-center bg-white dark:bg-gray-800">
+                <div class="font-bold text-gray-700 dark:text-gray-200">millilitro</div>
+              </td>
+            </tr>
+            <!-- CHILOGRAMMO -->
+            <tr class="bg-pink-50 dark:bg-pink-900/20">
+              <td class="p-3 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600 rounded-bl-lg">
+                <div class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">CHILOGRAMMO</div>
+              </td>
+              <td class="p-3 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600 text-center bg-white dark:bg-gray-800">
+                <div class="font-bold text-gray-700 dark:text-gray-200">ettogrammo</div>
+              </td>
+              <td class="p-3 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600 text-center bg-white dark:bg-gray-800">
+                <div class="font-bold text-gray-700 dark:text-gray-200">decagrammo</div>
+              </td>
+              <td class="p-3 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600 text-center bg-white dark:bg-gray-800 rounded-br-lg">
+                <div class="font-bold text-gray-700 dark:text-gray-200">grammo</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Container esercizi -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+
+      <!-- Esercizio Completa -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <span class="text-<%= @pagina.base_color %>-500">▼</span>
+          Completa.
+        </p>
+
+        <ul class="space-y-4 text-gray-700 dark:text-gray-200">
+          <li class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">ETTOLITRO</strong> e <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">DECALITRO</strong> sono i multipli del
+            <input type="text" data-correct-answer="litro" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">.
+          </li>
+
+          <li class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            I sottomultipli del <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">LITRO</strong> sono
+            <input type="text" data-correct-answer="decilitro" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">,
+            <input type="text" data-correct-answer="centilitro" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">,
+            <input type="text" data-correct-answer="millilitro" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">.
+          </li>
+
+          <li class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">MEGAGRAMMO</strong>, <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">CENTINAIO DI KG</strong> e <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">DECINA DI KG</strong> sono i multipli del
+            <input type="text" data-correct-answer="chilogrammo" class="w-28 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">.
+          </li>
+
+          <li class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            I sottomultipli del <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">CHILOGRAMMO</strong> sono
+            <input type="text" data-correct-answer="ettogrammo" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">,
+            <input type="text" data-correct-answer="decagrammo" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">,
+            <input type="text" data-correct-answer="grammo" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">.
+          </li>
+
+          <li class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">CHILOMETRO</strong>, <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">ETTOMETRO</strong> e <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">DECAMETRO</strong> sono i multipli del
+            <input type="text" data-correct-answer="metro" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">.
+          </li>
+
+          <li class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            I sottomultipli del <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">METRO</strong> sono
+            <input type="text" data-correct-answer="decimetro" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">,
+            <input type="text" data-correct-answer="centimetro" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">,
+            <input type="text" data-correct-answer="millimetro" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">.
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

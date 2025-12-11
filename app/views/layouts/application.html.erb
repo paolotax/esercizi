@@ -24,6 +24,14 @@
     <%= stylesheet_link_tag "print", media: "print", "data-turbo-track": "reload" %>
 
     <%= javascript_importmap_tags %>
+
+    <script>
+      // Prevent dark mode flash - apply theme before render
+      if (localStorage.getItem('darkMode') === 'true' ||
+          (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      }
+    </script>
   </head>
 
   <body class="print text-black dark:text-white bg-gray-50 dark:bg-gray-900 h-screen flex flex-col transition-colors duration-300" data-controller="sidebar">

@@ -1,0 +1,269 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Teoria: Dividere per 10, 100, 1000 -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        Che cosa succede quando dividi un <strong>numero decimale</strong> per <strong class="text-cyan-600 dark:text-cyan-400">10</strong>, <strong class="text-cyan-600 dark:text-cyan-400">100</strong> o <strong class="text-cyan-600 dark:text-cyan-400"><span class="whitespace-nowrap">1 000</span></strong>?
+      </p>
+
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Osserva e completa.
+      </p>
+
+      <!-- Tre esempi con tabelle posizionali -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <!-- : 10 -->
+        <div class="space-y-3">
+          <p class="text-gray-700 dark:text-gray-200">
+            6,3 : <strong class="text-cyan-600 dark:text-cyan-400">10</strong> =
+            <input type="text" data-correct-answer="0,63" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </p>
+          <%= image_tag "nvi4_mat/p077/p077_01.jpg",
+              class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1",
+              alt: "Tabella : 10" %>
+          <p class="text-gray-600 dark:text-gray-300">
+            Ogni cifra diventa 10 volte più piccola e "slitta" di un posto verso destra.
+          </p>
+        </div>
+
+        <!-- : 100 -->
+        <div class="space-y-3">
+          <p class="text-gray-700 dark:text-gray-200">
+            6,3 : <strong class="text-cyan-600 dark:text-cyan-400">100</strong> =
+            <input type="text" data-correct-answer="0,063" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </p>
+          <%= image_tag "nvi4_mat/p077/p077_02.jpg",
+              class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1",
+              alt: "Tabella : 100" %>
+          <p class="text-gray-600 dark:text-gray-300">
+            Ogni cifra diventa 100 volte più piccola e "slitta" di due posti verso destra.
+          </p>
+        </div>
+
+        <!-- : 1000 -->
+        <div class="space-y-3">
+          <p class="text-gray-700 dark:text-gray-200">
+            6,3 : <strong class="text-cyan-600 dark:text-cyan-400"><span class="whitespace-nowrap">1 000</span></strong> =
+            <input type="text" data-correct-answer="0,0063" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </p>
+          <%= image_tag "nvi4_mat/p077/p077_03.jpg",
+              class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1",
+              alt: "Tabella : 1000" %>
+          <p class="text-gray-600 dark:text-gray-300">
+            Ogni cifra diventa <span class="whitespace-nowrap">1 000</span> volte più piccola e "slitta" di tre posti verso destra.
+          </p>
+        </div>
+      </div>
+
+      <!-- Box regola -->
+      <div class="p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl">
+        <p class="text-gray-700 dark:text-gray-200">
+          Per dividere un <strong>numero decimale</strong> per 10, 100, <span class="whitespace-nowrap">1 000</span> basta <strong>spostare la virgola verso sinistra di uno, due o tre posti</strong>.<br>
+          Se mancano delle cifre a sinistra, si scrivono tanti zeri quante sono le posizioni mancanti.
+        </p>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+
+      <!-- Esercizio 1 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Completa la tabella.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="border-collapse border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600">
+            <thead>
+              <tr>
+                <th class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 text-gray-700 dark:text-gray-200">:</th>
+                <th class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/50 font-bold text-cyan-600 dark:text-cyan-400">10</th>
+                <th class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/50 font-bold text-cyan-600 dark:text-cyan-400">100</th>
+                <th class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/50 font-bold text-cyan-600 dark:text-cyan-400"><span class="whitespace-nowrap">1 000</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-bold">22</td>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="2,2" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="0,22" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="0,022" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-bold">5,3</td>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="0,53" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="0,053" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="0,0053" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-bold">150</td>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="15" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="1,5" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="0,15" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-bold">9,7</td>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="0,97" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="0,097" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-3 border-2 border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-600 bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="0,0097" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Collega ogni divisione al risultato corretto.
+        </p>
+
+        <!-- Prima serie -->
+        <div class="mb-4">
+          <div class="flex flex-wrap justify-center gap-4 mb-2">
+            <span class="p-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-200">15 : <span class="whitespace-nowrap">1 000</span> =</span>
+            <span class="p-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-200">15 : 100 =</span>
+            <span class="p-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-200">15 : 10 =</span>
+          </div>
+          <div class="flex flex-wrap justify-center gap-4 mb-2">
+            <span class="p-2 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 rounded text-gray-700 dark:text-gray-200 font-bold">0,15</span>
+            <span class="p-2 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 rounded text-gray-700 dark:text-gray-200 font-bold">0,05</span>
+            <span class="p-2 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 rounded text-gray-700 dark:text-gray-200 font-bold">0,0005</span>
+            <span class="p-2 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 rounded text-gray-700 dark:text-gray-200 font-bold">0,015</span>
+            <span class="p-2 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 rounded text-gray-700 dark:text-gray-200 font-bold">0,005</span>
+            <span class="p-2 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 rounded text-gray-700 dark:text-gray-200 font-bold">1,5</span>
+          </div>
+          <div class="flex flex-wrap justify-center gap-4">
+            <span class="p-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-200">0,5 : 100 =</span>
+            <span class="p-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-200">0,5 : 10 =</span>
+            <span class="p-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-200">0,5 : <span class="whitespace-nowrap">1 000</span> =</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 3 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Calcola le seguenti divisioni.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">3,5 : 10 =</span>
+            <input type="text" data-correct-answer="0,35" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">0,09 : 10 =</span>
+            <input type="text" data-correct-answer="0,009" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">760 : 100 =</span>
+            <input type="text" data-correct-answer="7,6" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200"><span class="whitespace-nowrap">1 240</span> : 100 =</span>
+            <input type="text" data-correct-answer="12,4" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">687 : <span class="whitespace-nowrap">1 000</span> =</span>
+            <input type="text" data-correct-answer="0,687" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">51 : <span class="whitespace-nowrap">1 000</span> =</span>
+            <input type="text" data-correct-answer="0,051" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">2,48 : 10 =</span>
+            <input type="text" data-correct-answer="0,248" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">2,7 : 100 =</span>
+            <input type="text" data-correct-answer="0,027" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 4 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(4) %>
+          Completa.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="365" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">: 100 = 3,65</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="3,01" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">: 10 = 0,301</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="94" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">: <span class="whitespace-nowrap">1 000</span> = 0,094</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="467,8" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">: 100 = 4,678</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="1,5" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">: 10 = 0,15</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="7000" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">: <span class="whitespace-nowrap">1 000</span> = 7</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="1460" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">: 100 = 14,6</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" data-correct-answer="91,5" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">: 10 = 9,15</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [212] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

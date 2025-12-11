@@ -1,0 +1,175 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Teoria: Addizioni e sottrazioni con i decimali -->
+    <div class="p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl border-3 border-blue-800 dark:border-blue-600">
+      <p class="text-gray-700 dark:text-gray-200 mb-4">Per eseguire addizioni e sottrazioni con i decimali, procedi così:</p>
+      <ul class="list-disc pl-6 space-y-1 text-gray-700 dark:text-gray-200 marker:text-<%= @pagina.base_color %>-500">
+        <li>incolonna con attenzione i numeri, rispettando il <strong>valore posizionale</strong> delle cifre;</li>
+        <li>per facilitare il calcolo, puoi pareggiare le parti decimali scrivendo uno o più <strong>zeri segnaposto</strong> (<span class="text-<%= @pagina.base_color %>-600 font-bold">0</span>);</li>
+        <li>partendo da destra, esegui il calcolo colonna per colonna;</li>
+        <li>ricorda di scrivere la <strong>virgola</strong> nel risultato.</li>
+      </ul>
+    </div>
+
+    <!-- Esempi con immagini -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Addizione -->
+      <div class="text-center">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">23,1 + 457,3 + 35 =</p>
+        <%= image_tag "nvi4_mat/p078/p078_01.jpg", alt: "Addizione in colonna", class: "mx-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+      </div>
+
+      <!-- Sottrazione -->
+      <div class="text-center">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">237 − 42,27 =</p>
+        <%= image_tag "nvi4_mat/p078/p078_02.jpg", alt: "Sottrazione in colonna", class: "mx-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+      </div>
+
+      <!-- Regola unità -->
+      <div>
+        <p class="text-gray-700 dark:text-gray-200 mb-2">Individua la cifra delle unità:</p>
+        <ul class="list-disc pl-6 space-y-1 text-gray-700 dark:text-gray-200 marker:text-<%= @pagina.base_color %>-500">
+          <li>è la cifra più a destra quando il numero non ha la virgola: <span class="font-bold text-custom-sky">237</span>;</li>
+          <li>è la prima cifra a sinistra della virgola: <span class="font-bold text-custom-sky">42,27</span>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+
+      <!-- Esercizio 1 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Calcola in colonna sul quaderno.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200">3,7 + 8,4 =</p>
+            <p class="text-gray-700 dark:text-gray-200">36,7 − 25,4 =</p>
+            <p class="text-gray-700 dark:text-gray-200">3,2 + 0,4 + 2,15 =</p>
+            <p class="text-gray-700 dark:text-gray-200">24,3 − 12 =</p>
+          </div>
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200">12,23 + 5,6 =</p>
+            <p class="text-gray-700 dark:text-gray-200">138,56 − 24,7 =</p>
+            <p class="text-gray-700 dark:text-gray-200">5,1 + 12 + 4,6 =</p>
+            <p class="text-gray-700 dark:text-gray-200">3 − 2,45 =</p>
+          </div>
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200">1,345 + 0,284 =</p>
+            <p class="text-gray-700 dark:text-gray-200">98,457 − 25,438 =</p>
+            <p class="text-gray-700 dark:text-gray-200">12,4 + 236 =</p>
+            <p class="text-gray-700 dark:text-gray-200">54,6 − 8,19 =</p>
+          </div>
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200">27 + 3,25 =</p>
+            <p class="text-gray-700 dark:text-gray-200">45 − 23,6 =</p>
+            <p class="text-gray-700 dark:text-gray-200">45,5 + 23,98 =</p>
+            <p class="text-gray-700 dark:text-gray-200">70 − 13,78 =</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Che numero ottieni se...
+        </p>
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">... a 5 togli un decimo?</span>
+            <input type="text" data-correct-answer="4,9" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">... a 5 togli quindici centesimi?</span>
+            <input type="text" data-correct-answer="4,85" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">... a 5 togli due centesimi?</span>
+            <input type="text" data-correct-answer="4,98" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">... a 5 togli cento millesimi?</span>
+            <input type="text" data-correct-answer="4,9" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 3 - Problema -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Alessandro compra 3 pezzi di pizza che costano 1,50 euro ognuno e un panino che costa 2,50 euro. Paga con una banconota da 10 euro. Quanto riceve di resto?
+        </p>
+        <div class="flex items-center justify-end gap-2">
+          <input type="text" data-correct-answer="3" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="shrink-0 text-gray-700 dark:text-gray-200">euro</span>
+        </div>
+      </div>
+
+      <!-- AllenaMente -->
+      <div class="p-4 bg-white dark:bg-blue-900/40 rounded-2xl border-3 border-blue-400 dark:border-blue-600">
+        <p class="font-bold text-gray-800 dark:text-blue-300 mb-3">
+          <span class="bg-yellow-400 text-gray-800 px-2 py-1 rounded">AllenaMente!</span>
+        </p>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">Quale numero corrisponde a ogni lettera?</p>
+
+        <!-- Numeri disponibili -->
+        <div class="flex flex-wrap gap-3 mb-4 justify-center">
+          <span class="px-3 py-1 border-2 border-<%= @pagina.base_color %>-400 rounded text-gray-700 dark:text-gray-200 font-bold">5,5</span>
+          <span class="px-3 py-1 border-2 border-<%= @pagina.base_color %>-400 rounded text-gray-700 dark:text-gray-200 font-bold">1,5</span>
+          <span class="px-3 py-1 border-2 border-<%= @pagina.base_color %>-400 rounded text-gray-700 dark:text-gray-200 font-bold">3</span>
+          <span class="px-3 py-1 border-2 border-<%= @pagina.base_color %>-400 rounded text-gray-700 dark:text-gray-200 font-bold">3,5</span>
+          <span class="px-3 py-1 border-2 border-<%= @pagina.base_color %>-400 rounded text-gray-700 dark:text-gray-200 font-bold">2</span>
+        </div>
+
+        <!-- Equazioni -->
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div class="text-gray-700 dark:text-gray-200">A + A = B</div>
+          <div class="text-gray-700 dark:text-gray-200">D + A = C</div>
+          <div class="text-gray-700 dark:text-gray-200">C − D = A</div>
+          <div class="text-gray-700 dark:text-gray-200">E − C = D</div>
+        </div>
+
+        <!-- Risposte -->
+        <div class="grid grid-cols-3 md:grid-cols-5 gap-4">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200 font-bold">A =</span>
+            <input type="text" data-correct-answer="1,5" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200 font-bold">B =</span>
+            <input type="text" data-correct-answer="3" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200 font-bold">C =</span>
+            <input type="text" data-correct-answer="3,5" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200 font-bold">D =</span>
+            <input type="text" data-correct-answer="2" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200 font-bold">E =</span>
+            <input type="text" data-correct-answer="5,5" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [213, 214] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
