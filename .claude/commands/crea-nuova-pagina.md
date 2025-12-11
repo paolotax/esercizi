@@ -21,7 +21,7 @@ Creare la/e pagina/e $ARGUMENTS per il libro nvi4_mat.
 ## STRUTTURA BASE
 
 ```erb
-<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -819,7 +819,7 @@ Per pagine che mostrano schemi/mappe concettuali con struttura gerarchica (es. p
 
 ### Struttura base MAPPA:
 ```erb
-<div class="page-viewer bg-white"
+<div class="page-viewer bg-white dark:bg-gray-900 transition-colors duration-300"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -853,7 +853,7 @@ Per pagine che mostrano schemi/mappe concettuali con struttura gerarchica (es. p
 
 **Livello 3 - Proprietà/dettagli:**
 ```erb
-<div class="bg-custom-blue-light border border-cyan-600 text-cyan-600 font-bold px-4 py-2 rounded-2xl">
+<div class="bg-custom-blue-light dark:bg-cyan-900 border border-cyan-600 text-cyan-600 font-bold px-4 py-2 rounded-2xl">
   COMMUTATIVA
 </div>
 ```
@@ -867,9 +867,14 @@ Per pagine che mostrano schemi/mappe concettuali con struttura gerarchica (es. p
 
 ### Box contenuto (testi/immagini):
 ```erb
-<div class="bg-white rounded-2xl p-3 shadow border border-cyan-500 text-gray-700 text-left">
+<div class="bg-white dark:bg-gray-800 rounded-2xl p-3 shadow border border-cyan-500 dark:border-cyan-600 text-gray-700 dark:text-gray-200 text-left">
   Testo descrittivo...
 </div>
+```
+
+### Immagini in dark mode:
+```erb
+<%= image_tag "nvi4_mat/p037/p037_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1" %>
 ```
 
 ### Layout con righe flex (NON grid/colonne):
@@ -893,13 +898,13 @@ Per pagine che mostrano schemi/mappe concettuali con struttura gerarchica (es. p
 ```
 
 ### Caratteristiche MAPPE:
-- ✅ `page-viewer bg-white` (sfondo bianco)
+- ✅ `page-viewer bg-white dark:bg-gray-900` (sfondo bianco/scuro)
 - ✅ Righe flex orizzontali (`flex flex-row`)
-- ✅ Box `rounded-2xl` con `shadow` e `border-cyan-500`
-- ✅ Testi `text-left` (allineati a sinistra)
+- ✅ Box `rounded-2xl` con `shadow` e `border-cyan-500 dark:border-cyan-600`
+- ✅ Testi `text-left text-gray-700 dark:text-gray-200` (allineati a sinistra)
 - ✅ **NESSUNA dimensione testo fissa** (no text-sm, text-lg, ecc.)
 - ✅ Frecce `text-cyan-500`
-- ✅ Immagini per i contenuti dove disponibili
+- ✅ Immagini con `dark:bg-white dark:rounded-lg dark:p-1` per sfondo bianco in dark mode
 
 ---
 

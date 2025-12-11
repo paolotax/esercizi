@@ -223,15 +223,15 @@ export default class extends Controller {
       const volumiCount = corso.querySelectorAll('[data-volume-id]').length
 
       return `
-        <button class="w-full flex items-center justify-between gap-2 p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 transition text-left group border border-purple-200"
+        <button class="w-full flex items-center justify-between gap-2 p-3 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 dark:hover:from-purple-800/40 dark:hover:to-pink-800/40 transition text-left group border border-purple-200 dark:border-purple-700"
                 data-action="click->sidebar-breadcrumb#selectCorso"
                 data-corso-id="${corsoId}"
                 data-corso-nome="${corsoNome}">
           <div class="flex-1">
-            <div class="font-bold text-gray-900">${corsoNome}</div>
-            <div class="text-xs text-gray-600">${volumiCount} ${volumiCount === 1 ? 'volume' : 'volumi'}</div>
+            <div class="font-bold text-gray-900 dark:text-gray-100">${corsoNome}</div>
+            <div class="text-xs text-gray-600 dark:text-gray-400">${volumiCount} ${volumiCount === 1 ? 'volume' : 'volumi'}</div>
           </div>
-          <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
         </button>
@@ -252,16 +252,16 @@ export default class extends Controller {
       const disciplineCount = volume.querySelectorAll('[data-disciplina-id]').length
 
       return `
-        <button class="w-full flex items-center justify-between gap-2 p-3 rounded-lg bg-gradient-to-r from-indigo-50 to-blue-50 hover:from-indigo-100 hover:to-blue-100 transition text-left group border border-indigo-200"
+        <button class="w-full flex items-center justify-between gap-2 p-3 rounded-lg bg-gradient-to-r from-indigo-50 to-blue-50 hover:from-indigo-100 hover:to-blue-100 dark:from-indigo-900/30 dark:to-blue-900/30 dark:hover:from-indigo-800/40 dark:hover:to-blue-800/40 transition text-left group border border-indigo-200 dark:border-indigo-700"
                 data-action="click->sidebar-breadcrumb#selectVolume"
                 data-volume-id="${volumeId}"
                 data-volume-nome="${volumeNome}">
           <div class="flex-1">
-            <div class="font-semibold text-gray-900">${volumeNome}</div>
-            ${volumeClasse ? `<div class="text-xs text-gray-600">Classe ${volumeClasse}</div>` : ''}
-            <div class="text-xs text-gray-500">${disciplineCount} ${disciplineCount === 1 ? 'disciplina' : 'discipline'}</div>
+            <div class="font-semibold text-gray-900 dark:text-gray-100">${volumeNome}</div>
+            ${volumeClasse ? `<div class="text-xs text-gray-600 dark:text-gray-400">Classe ${volumeClasse}</div>` : ''}
+            <div class="text-xs text-gray-500 dark:text-gray-400">${disciplineCount} ${disciplineCount === 1 ? 'disciplina' : 'discipline'}</div>
           </div>
-          <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
         </button>
@@ -282,16 +282,16 @@ export default class extends Controller {
       const pagineCount = disciplina.querySelectorAll('[data-pagina-id]').length
 
       return `
-        <button class="w-full flex items-center justify-between gap-2 p-3 rounded-lg hover:bg-blue-50 transition text-left group border-l-4"
+        <button class="w-full flex items-center justify-between gap-2 p-3 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/30 transition text-left group border-l-4"
                 style="border-color: ${disciplinaColore}"
                 data-action="click->sidebar-breadcrumb#selectDisciplina"
                 data-disciplina-id="${disciplinaId}"
                 data-disciplina-nome="${disciplinaNome}">
           <div class="flex-1">
-            <div class="font-semibold text-gray-900" style="color: ${disciplinaColore}">${disciplinaNome}</div>
-            <div class="text-xs text-gray-500">${pagineCount} ${pagineCount === 1 ? 'pagina' : 'pagine'}</div>
+            <div class="font-semibold" style="color: ${disciplinaColore}">${disciplinaNome}</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">${pagineCount} ${pagineCount === 1 ? 'pagina' : 'pagine'}</div>
           </div>
-          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
         </button>
@@ -346,8 +346,8 @@ export default class extends Controller {
       // Verifica se questa è la pagina corrente
       const isActive = currentPath === paginaPath
       const activeClasses = isActive
-        ? 'bg-gray-100 ring-2 ring-offset-2'
-        : 'hover:bg-gray-100'
+        ? 'bg-gray-100 dark:bg-gray-700 ring-2 ring-offset-2 dark:ring-offset-gray-800'
+        : 'hover:bg-gray-100 dark:hover:bg-gray-700'
 
       return `
         <a href="${paginaPath}"
@@ -360,8 +360,8 @@ export default class extends Controller {
             ${paginaNumero}
           </div>
           <div class="flex-1 min-w-0">
-            <div class="text-sm ${isActive ? 'font-bold' : 'font-medium'} text-gray-800 truncate">${paginaTitolo}</div>
-            <div class="text-xs text-gray-500">${paginaSottotitolo || 'Pag. ' + paginaNumero}</div>
+            <div class="text-sm ${isActive ? 'font-bold' : 'font-medium'} text-gray-800 dark:text-gray-200 truncate">${paginaTitolo}</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">${paginaSottotitolo || 'Pag. ' + paginaNumero}</div>
           </div>
         </a>
       `
