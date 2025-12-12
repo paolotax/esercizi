@@ -1,0 +1,231 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1: IMPARARE TUTTI - Tabelle divisioni -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Completa le tabelle come nell'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Tabella 1: ÷5, ÷6 -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">÷</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">5</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">6</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-gray-700 dark:text-gray-200 bg-cyan-50 dark:bg-cyan-900">49</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400">9 resto 4</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400">8 resto 1</td>
+              </tr>
+              <% [
+                { num: "36", div5: "7 resto 1", div6: "6" },
+                { num: "28", div5: "5 resto 3", div6: "4 resto 4" },
+                { num: "50", div5: "10", div6: "8 resto 2" },
+                { num: "18", div5: "3 resto 3", div6: "3" }
+              ].each do |row| %>
+                <tr>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-cyan-50 dark:bg-cyan-900"><%= row[:num] %></td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                    <input type="text" data-correct-answer="<%= row[:div5] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                    <input type="text" data-correct-answer="<%= row[:div6] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tabella 2: ÷8, ÷9 -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">÷</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">8</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">9</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-gray-700 dark:text-gray-200 bg-cyan-50 dark:bg-cyan-900">63</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400">7 resto 7</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400">7</td>
+              </tr>
+              <% [
+                { num: "84", div8: "10 resto 4", div9: "9 resto 3" },
+                { num: "91", div8: "11 resto 3", div9: "10 resto 1" },
+                { num: "56", div8: "7", div9: "6 resto 2" },
+                { num: "48", div8: "6", div9: "5 resto 3" }
+              ].each do |row| %>
+                <tr>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-cyan-50 dark:bg-cyan-900"><%= row[:num] %></td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                    <input type="text" data-correct-answer="<%= row[:div8] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                    <input type="text" data-correct-answer="<%= row[:div9] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tabella 3: ÷4, ÷7 -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">÷</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">4</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">7</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-gray-700 dark:text-gray-200 bg-cyan-50 dark:bg-cyan-900">56</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400">14</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400">8</td>
+              </tr>
+              <% [
+                { num: "32", div4: "8", div7: "4 resto 4" },
+                { num: "39", div4: "9 resto 3", div7: "5 resto 4" },
+                { num: "42", div4: "10 resto 2", div7: "6" },
+                { num: "48", div4: "12", div7: "6 resto 6" }
+              ].each do |row| %>
+                <tr>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-cyan-50 dark:bg-cyan-900"><%= row[:num] %></td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                    <input type="text" data-correct-answer="<%= row[:div4] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                    <input type="text" data-correct-answer="<%= row[:div7] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Calcola in colonna -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Calcola in colonna.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-3">
+          <% [
+            { op: "864 : 4", result: "216" },
+            { op: "945 : 5", result: "189" },
+            { op: "756 : 6", result: "126" },
+            { op: "952 : 7", result: "136" },
+            { op: "936 : 8", result: "117" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+
+        <div class="space-y-3">
+          <% [
+            { op: "729 : 9", result: "81" },
+            { op: "1 248 : 3", result: "416" },
+            { op: "2 576 : 4", result: "644" },
+            { op: "3 654 : 6", result: "609" },
+            { op: "4 935 : 5", result: "987" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Calcola in colonna sul quaderno -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Calcola in colonna sul quaderno. Poi fai la prova.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Colonna a -->
+        <div class="space-y-3">
+          <p class="font-bold text-gray-700 dark:text-gray-200">a.</p>
+          <% [
+            { op: "648 : 4", result: "162" },
+            { op: "567 : 3", result: "189" },
+            { op: "1 332 : 6", result: "222" },
+            { op: "2 324 : 7", result: "332" },
+            { op: "7 488 : 9", result: "832" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Colonna b -->
+        <div class="space-y-3">
+          <p class="font-bold text-gray-700 dark:text-gray-200">b.</p>
+          <% [
+            { op: "5 076 : 3", result: "1692" },
+            { op: "9 870 : 7", result: "1410" },
+            { op: "11 781 : 9", result: "1309" },
+            { op: "37 609 : 8", result: "4701 resto 1" },
+            { op: "54 712 : 5", result: "10942 resto 2" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Box prova della divisione -->
+      <div class="mt-6 p-4 bg-cyan-50 dark:bg-cyan-900 rounded-lg border-2 border-cyan-400 dark:border-cyan-600">
+        <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-3">Prova della divisione</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-2">senza resto</p>
+            <p class="text-gray-700 dark:text-gray-200">128 : 8 = <span class="font-bold">16</span></p>
+            <p class="text-gray-700 dark:text-gray-200"><span class="font-bold">16</span> × 8 = 128</p>
+          </div>
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-2">con resto</p>
+            <p class="text-gray-700 dark:text-gray-200">132 : 8 = <span class="font-bold">16</span> resto 4</p>
+            <p class="text-gray-700 dark:text-gray-200">(<span class="font-bold">16</span> × 8) + 4 = 132</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

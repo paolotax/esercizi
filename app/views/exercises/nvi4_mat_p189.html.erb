@@ -1,0 +1,197 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1: IMPARARE TUTTI - Proprietà commutativa -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Calcola in riga applicando la proprietà commutativa. Segui l'esempio.
+      </p>
+
+      <!-- Box teoria -->
+      <div class="p-3 bg-cyan-50 dark:bg-cyan-900 rounded-lg mb-4">
+        <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Proprietà commutativa</p>
+        <p class="text-gray-700 dark:text-gray-200">
+          <span class="font-bold">12</span> × 2 = 2 × <span class="font-bold">12</span> = 24
+        </p>
+      </div>
+
+      <!-- Esempio -->
+      <div class="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg mb-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          8 × 90 = <span class="text-cyan-600 dark:text-cyan-400 underline">90 × 8 = 720</span>
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <% [
+          { op: "8 × 110", result: "880" },
+          { op: "5 × 440", result: "2200" },
+          { op: "3 × 2 100", result: "6300" },
+          { op: "2 × 230", result: "460" },
+          { op: "7 × 320", result: "2240" },
+          { op: "6 × 710", result: "4260" },
+          { op: "4 × 2 200", result: "8800" },
+          { op: "9 × 2 100", result: "18900" },
+          { op: "3 × 6 200", result: "18600" }
+        ].each do |item| %>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+            <input type="text" data-correct-answer="<%= item[:result] %>" class="flex-1 min-w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: IMPARARE TUTTI - Proprietà associativa -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(2) %>
+        Calcola in riga applicando la proprietà associativa. Segui l'esempio.
+      </p>
+
+      <!-- Box teoria -->
+      <div class="p-3 bg-cyan-50 dark:bg-cyan-900 rounded-lg mb-4">
+        <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Proprietà associativa</p>
+        <div class="text-gray-700 dark:text-gray-200 text-center space-y-1">
+          <p>5 × <span class="text-cyan-600 dark:text-cyan-400">4</span> × <span class="text-cyan-600 dark:text-cyan-400">6</span> = 120</p>
+          <p class="text-cyan-600 dark:text-cyan-400">↓ ↓</p>
+          <p>5 × <span class="font-bold text-cyan-600 dark:text-cyan-400">24</span> = 120</p>
+        </div>
+      </div>
+
+      <!-- Esempio -->
+      <div class="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg mb-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          60 × 5 × 4 = <span class="text-cyan-600 dark:text-cyan-400 underline">60 × (5 × 4) = 60 × 20 = 1 200</span>
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <% [
+          { op: "15 × 4 × 2", result: "120" },
+          { op: "5 × 20 × 9", result: "900" },
+          { op: "400 × 7 × 10", result: "28000" },
+          { op: "68 × 2 × 5", result: "680" },
+          { op: "25 × 2 × 300", result: "15000" },
+          { op: "25 × 4 × 6", result: "600" },
+          { op: "50 × 2 × 6 × 4", result: "2400" },
+          { op: "7 × 3 × 20 × 5", result: "2100" }
+        ].each do |item| %>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+            <input type="text" data-correct-answer="<%= item[:result] %>" class="flex-1 min-w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Proprietà distributiva -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Calcola in riga applicando la proprietà distributiva. Segui l'esempio.
+      </p>
+
+      <!-- Box teoria -->
+      <div class="p-3 bg-cyan-50 dark:bg-cyan-900 rounded-lg mb-4">
+        <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Proprietà distributiva</p>
+        <div class="text-gray-700 dark:text-gray-200 space-y-1">
+          <p><span class="font-bold">15</span> × 3 =</p>
+          <p>(<span class="font-bold">10</span> + <span class="font-bold">5</span>) × 3 =</p>
+          <p>(<span class="font-bold">10</span> × 3) + (<span class="font-bold">5</span> × 3) =</p>
+          <p><span class="font-bold">30</span> + <span class="font-bold">15</span> = 45</p>
+        </div>
+      </div>
+
+      <!-- Esempio -->
+      <div class="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg mb-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          62 × 5 = (60 + 2) × 5 = (60 × 5) + (2 × 5) = 300 + 10 = <span class="text-cyan-600 dark:text-cyan-400">310</span>
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <% [
+          { op: "25 × 9", result: "225" },
+          { op: "63 × 7", result: "441" },
+          { op: "124 × 6", result: "744" },
+          { op: "420 × 7", result: "2940" },
+          { op: "135 × 8", result: "1080" }
+        ].each do |item| %>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+            <input type="text" data-correct-answer="<%= item[:result] %>" class="flex-1 min-w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 4: Identifica la proprietà -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Segna con una X la proprietà applicata.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200 text-left">Operazione</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200 text-center">Commutativa</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200 text-center">Associativa</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200 text-center">Distributiva</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-gray-700 dark:text-gray-200">34 × 5 = (30 × 5) + (4 × 5)</td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="false" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="false" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="true" class="w-5 h-5">
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-gray-700 dark:text-gray-200">73 × 45 = 45 × 73</td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="true" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="false" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="false" class="w-5 h-5">
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-gray-700 dark:text-gray-200">56 × 4 × 6 = 56 × 24</td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="false" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="true" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="false" class="w-5 h-5">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

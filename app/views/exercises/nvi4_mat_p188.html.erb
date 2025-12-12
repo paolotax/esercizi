@@ -1,0 +1,187 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1: IMPARARE TUTTI - Moltiplicazioni in riga -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Calcola in riga le moltiplicazioni.
+      </p>
+
+      <p class="text-gray-700 dark:text-gray-200 mb-3">
+        Togli gli zeri dai fattori, moltiplica le cifre rimaste e aggiungi gli zeri al risultato.
+      </p>
+
+      <!-- Esempio -->
+      <div class="p-3 bg-cyan-50 dark:bg-cyan-900 rounded-lg mb-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          3<span class="text-cyan-600 dark:text-cyan-400">0</span> × 3<span class="text-cyan-600 dark:text-cyan-400">0</span> → 3 × 3 = 9 → 9<span class="text-cyan-600 dark:text-cyan-400">00</span>
+        </p>
+      </div>
+
+      <!-- Parte a: moltiplicazioni semplici -->
+      <div class="mb-6">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">a.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <% [
+            { op: "4 × 9", result: "36" },
+            { op: "11 × 5", result: "55" },
+            { op: "12 × 7", result: "84" },
+            { op: "7 × 8", result: "56" },
+            { op: "10 × 8", result: "80" },
+            { op: "23 × 4", result: "92" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Parte b: moltiplicazioni con zeri -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">b.</p>
+        <div class="space-y-3">
+          <% [
+            { mult: "40 × 40", simplified: "4 × 4", simple_result: "16", final_result: "1600" },
+            { mult: "110 × 50", simplified: "11 × 5", simple_result: "55", final_result: "5500" },
+            { mult: "120 × 60", simplified: "12 × 6", simple_result: "72", final_result: "7200" },
+            { mult: "180 × 300", simplified: "18 × 3", simple_result: "54", final_result: "54000" },
+            { mult: "1 200 × 50", simplified: "12 × 5", simple_result: "60", final_result: "60000" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200 w-28"><%= item[:mult] %></span>
+              <span class="text-cyan-500">→</span>
+              <input type="text" data-correct-answer="<%= item[:simplified] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">=</span>
+              <input type="text" data-correct-answer="<%= item[:simple_result] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-cyan-500">→</span>
+              <input type="text" data-correct-answer="<%= item[:final_result] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Calcola in colonna -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Calcola in colonna.
+      </p>
+
+      <!-- Con 2 cifre al moltiplicatore -->
+      <div class="mb-6">
+        <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-3">Con 2 cifre al moltiplicatore</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <% [
+            { op: "748 × 36", result: "26928" },
+            { op: "591 × 47", result: "27777" },
+            { op: "856 × 72", result: "61632" },
+            { op: "974 × 85", result: "82790" },
+            { op: "638 × 93", result: "59334" },
+            { op: "487 × 68", result: "33116" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Con 3 cifre al moltiplicatore -->
+      <div class="mb-6">
+        <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-3">Con 3 cifre al moltiplicatore</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <% [
+            { op: "527 × 348", result: "183396" },
+            { op: "614 × 275", result: "168850" },
+            { op: "836 × 469", result: "392084" },
+            { op: "759 × 586", result: "444774" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Con zeri intermedi -->
+      <div>
+        <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-3">Con zeri intermedi</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <% [
+            { op: "375 × 204", result: "76500" },
+            { op: "648 × 305", result: "197640" },
+            { op: "592 × 407", result: "240944" },
+            { op: "831 × 506", result: "420486" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Confronta i risultati -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Esegui i calcoli sul quaderno, confronta i risultati e inserisci i segni &gt; oppure &lt;.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Colonna sinistra -->
+        <div class="space-y-3">
+          <% [
+            { left: "374 × 28", right: "415 × 36", answer: "<" },
+            { left: "298 × 37", right: "372 × 54", answer: "<" },
+            { left: "556 × 79", right: "309 × 81", answer: ">" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:left] %></span>
+              <select data-correct-answer="<%= item[:answer] %>" class="w-14 border-2 border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:bg-gray-700 dark:text-white rounded">
+                <option value="">?</option>
+                <option value="<">&lt;</option>
+                <option value=">">&gt;</option>
+              </select>
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:right] %></span>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Colonna destra -->
+        <div class="space-y-3">
+          <% [
+            { left: "565 × 354", right: "256 × 238", answer: ">" },
+            { left: "248 × 329", right: "573 × 642", answer: "<" },
+            { left: "525 × 724", right: "364 × 237", answer: ">" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:left] %></span>
+              <select data-correct-answer="<%= item[:answer] %>" class="w-14 border-2 border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:bg-gray-700 dark:text-white rounded">
+                <option value="">?</option>
+                <option value="<">&lt;</option>
+                <option value=">">&gt;</option>
+              </select>
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:right] %></span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

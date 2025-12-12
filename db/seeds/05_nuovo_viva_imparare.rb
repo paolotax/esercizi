@@ -124,7 +124,21 @@ nvi_matematica = nvi_volume4.discipline.create!(
   { numero: 173, titolo: "I Numeri Grandi", slug: "nvi4_mat_p173", view_template: "nvi4_mat_p173", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 174, titolo: "Comporre e Scomporre (1)", slug: "nvi4_mat_p174", view_template: "nvi4_mat_p174", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 175, titolo: "Comporre e Scomporre (2)", slug: "nvi4_mat_p175", view_template: "nvi4_mat_p175", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 176, titolo: "Ordinare i Numeri", slug: "nvi4_mat_p176", view_template: "nvi4_mat_p176", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 176, titolo: "Ordinare i Numeri", slug: "nvi4_mat_p176", view_template: "nvi4_mat_p176", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 177, titolo: "Confrontare i Numeri", slug: "nvi4_mat_p177", view_template: "nvi4_mat_p177", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 178, titolo: "I Numeri Grandi", slug: "nvi4_mat_p178", view_template: "nvi4_mat_p178", sottotitolo: "ESERCIZI - RIPASSO", base_color: "cyan" },
+  { numero: 179, titolo: "L'Addizione in Riga e in Colonna", slug: "nvi4_mat_p179", view_template: "nvi4_mat_p179", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 180, titolo: "Le Proprietà dell'Addizione", slug: "nvi4_mat_p180", view_template: "nvi4_mat_p180", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 181, titolo: "Addizione: Calcoli Veloci", slug: "nvi4_mat_p181", view_template: "nvi4_mat_p181", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 182, titolo: "La Sottrazione in Riga e in Colonna", slug: "nvi4_mat_p182", view_template: "nvi4_mat_p182", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 183, titolo: "La Proprietà della Sottrazione", slug: "nvi4_mat_p183", view_template: "nvi4_mat_p183", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 184, titolo: "Sottrazione: Calcoli Veloci", slug: "nvi4_mat_p184", view_template: "nvi4_mat_p184", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 185, titolo: "Addizioni e Sottrazioni", slug: "nvi4_mat_p185", view_template: "nvi4_mat_p185", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 186, titolo: "Problemi con Addizioni e Sottrazioni", slug: "nvi4_mat_p186", view_template: "nvi4_mat_p186", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 187, titolo: "Addizione e Sottrazione", slug: "nvi4_mat_p187", view_template: "nvi4_mat_p187", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 188, titolo: "La Moltiplicazione in Riga e in Colonna", slug: "nvi4_mat_p188", view_template: "nvi4_mat_p188", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 189, titolo: "Le Proprietà della Moltiplicazione", slug: "nvi4_mat_p189", view_template: "nvi4_mat_p189", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 190, titolo: "La Divisione in Riga e in Colonna", slug: "nvi4_mat_p190", view_template: "nvi4_mat_p190", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi_matematica.pagine.create!(pagina_data)
 end
