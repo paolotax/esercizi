@@ -1,0 +1,203 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1: IMPARARE TUTTI - Calcola in riga -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Calcola in riga. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <div class="p-3 bg-cyan-50 dark:bg-cyan-900 rounded-lg mb-4">
+            <p class="text-gray-600 dark:text-gray-300">Somma <span class="font-bold">u</span> con <span class="font-bold">u</span>,<br><span class="font-bold">da</span> con <span class="font-bold">da</span>,<br><span class="font-bold">h</span> con <span class="font-bold">h</span>...</p>
+          </div>
+          <!-- Esempio con immagine -->
+          <div class="mb-4">
+            <%= image_tag "nvi4_mat/p179/p179_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Esempio: 25 + 32 = 57" %>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <!-- Colonna addizioni -->
+          <% [
+            { op: "53 + 46", answer: "99" },
+            { op: "254 + 343", answer: "597" },
+            { op: "1 350 + 3 126", answer: "4476" }
+          ].each do |row| %>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200 font-bold"><%= row[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+        <div class="space-y-3">
+          <% [
+            { op: "37 + 62", answer: "99" },
+            { op: "136 + 252", answer: "388" },
+            { op: "326 + 513", answer: "839" },
+            { op: "3 571 + 128", answer: "3699" }
+          ].each do |row| %>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200"><%= row[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+        <div class="space-y-3">
+          <% [
+            { op: "47 + 33", answer: "80" },
+            { op: "169 + 11", answer: "180" },
+            { op: "425 + 14", answer: "439" },
+            { op: "2 133 + 3 211", answer: "5344" }
+          ].each do |row| %>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200"><%= row[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Addizioni in colonna con griglia -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Esegui le addizioni in colonna e trascrivi i risultati.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200"><span class="font-bold">a.</span> 906 + 3 524 = <input type="text" data-correct-answer="4430" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></p>
+          <p class="text-gray-700 dark:text-gray-200 ml-4">3 652 + 8 574 = <input type="text" data-correct-answer="12226" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></p>
+        </div>
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200"><span class="font-bold">b.</span> 4 560 + 457 = <input type="text" data-correct-answer="5017" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></p>
+          <p class="text-gray-700 dark:text-gray-200 ml-4">8 297 + 125 + 703 = <input type="text" data-correct-answer="9125" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></p>
+        </div>
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200"><span class="font-bold">c.</span> 782 + 4 625 + 1 066 = <input type="text" data-correct-answer="6473" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></p>
+          <p class="text-gray-700 dark:text-gray-200 ml-4">1 430 + 789 + 5 601 = <input type="text" data-correct-answer="7820" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></p>
+        </div>
+      </div>
+
+      <!-- Griglia quadrettata per operazioni in colonna -->
+      <div class="overflow-x-auto">
+        <div class="inline-block border border-cyan-400 dark:border-cyan-600">
+          <table class="border-collapse">
+            <tbody>
+              <% 12.times do %>
+                <tr>
+                  <% 24.times do %>
+                    <td class="w-6 h-6 border border-cyan-200 dark:border-cyan-700"></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Calcola in colonna sul quaderno -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Calcola in colonna sul quaderno.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="space-y-2">
+          <p class="font-bold text-gray-700 dark:text-gray-200">a.</p>
+          <% [
+            "38 565 + 25 380 =",
+            "4 756 + 32 580 =",
+            "25 360 + 1 321 =",
+            "2 315 + 307 640 ="
+          ].each do |op| %>
+            <p class="text-gray-700 dark:text-gray-200"><%= op %></p>
+          <% end %>
+        </div>
+        <div class="space-y-2">
+          <p class="font-bold text-gray-700 dark:text-gray-200">b.</p>
+          <% [
+            "24 720 + 39 =",
+            "54 970 + 234 =",
+            "318 725 + 456 893 =",
+            "756 432 + 35 734 ="
+          ].each do |op| %>
+            <p class="text-gray-700 dark:text-gray-200"><%= op %></p>
+          <% end %>
+        </div>
+        <div class="space-y-2">
+          <p class="font-bold text-gray-700 dark:text-gray-200">c.</p>
+          <% [
+            "795 743 + 187 964 =",
+            "1 585 + 338 976 =",
+            "387 + 753 654 =",
+            "99 243 + 325 768 ="
+          ].each do |op| %>
+            <p class="text-gray-700 dark:text-gray-200"><%= op %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4: Calcola e indica con X il risultato corretto -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Calcola in colonna sul quaderno. Poi indica con una <span class="font-bold text-cyan-600 dark:text-cyan-400">X</span> il risultato corretto.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <% [
+          { op: "25 672 + 934 + 1 278", options: ["28 874", "27 894", "27 884"], correct: "27 884" },
+          { op: "69 085 + 888 + 321 202", options: ["391 175", "390 165", "391 715"], correct: "391 175" }
+        ].each_with_index do |item, idx| %>
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200"><span class="text-cyan-500">•</span> <%= item[:op] %> =</p>
+            <div class="flex flex-wrap gap-2 ml-4">
+              <% item[:options].each do |opt| %>
+                <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+                  <input type="checkbox" class="w-5 h-5" data-correct-answer="<%= opt == item[:correct] %>">
+                  <span class="whitespace-nowrap"><%= opt %></span>
+                </label>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <% [
+          { op: "46 701 + 223 071 + 649", options: ["271 411", "270 421", "270 241"], correct: "270 421" },
+          { op: "13 728 + 504 + 127 099", options: ["141 342", "141 341", "141 331"], correct: "141 331" }
+        ].each_with_index do |item, idx| %>
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200"><span class="text-cyan-500">•</span> <%= item[:op] %> =</p>
+            <div class="flex flex-wrap gap-2 ml-4">
+              <% item[:options].each do |opt| %>
+                <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200">
+                  <input type="checkbox" class="w-5 h-5" data-correct-answer="<%= opt == item[:correct] %>">
+                  <span class="whitespace-nowrap"><%= opt %></span>
+                </label>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,219 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1: IMPARARE TUTTI - Proprietà commutativa -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Calcola applicando la proprietà commutativa. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-3">
+          <!-- Esempio -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-gray-700 dark:text-gray-200">37 + 122</span>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <span class="font-bold text-cyan-600 dark:text-cyan-400">122 + 37</span>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <span class="font-bold text-cyan-600 dark:text-cyan-400">159</span>
+          </div>
+
+          <% [
+            { op: "53 + 245", commutativa: "245+53", result: "298" },
+            { op: "516 + 73", commutativa: "73+516", result: "589" },
+            { op: "425 + 54", commutativa: "54+425", result: "479" },
+            { op: "73 + 124", commutativa: "124+73", result: "197" },
+            { op: "80 + 410", commutativa: "410+80", result: "490" }
+          ].each do |row| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= row[:op] %></span>
+              <span class="text-gray-700 dark:text-gray-200">=</span>
+              <input type="text" data-correct-answer="<%= row[:commutativa] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">=</span>
+              <input type="text" data-correct-answer="<%= row[:result] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Box proprietà commutativa -->
+        <div class="flex items-start justify-center">
+          <div class="p-4 bg-cyan-50 dark:bg-cyan-900 rounded-lg border-2 border-cyan-400 dark:border-cyan-600">
+            <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Proprietà commutativa</p>
+            <p class="text-gray-700 dark:text-gray-200"><span class="font-bold">120</span> + 60 = 60 + <span class="font-bold">120</span> = 180</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Proprietà associativa -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Cerchia gli addendi che ti conviene associare e calcola. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <!-- Esempio con immagine -->
+          <div class="flex items-center gap-2 flex-wrap mb-2">
+            <%= image_tag "nvi4_mat/p180/p180_01.jpg", class: "h-8 dark:bg-white dark:rounded dark:p-1", alt: "(700) + (300) + 40" %>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <span class="font-bold text-cyan-600 dark:text-cyan-400">1 000</span>
+            <span class="text-gray-700 dark:text-gray-200">+</span>
+            <span class="font-bold text-cyan-600 dark:text-cyan-400">40</span>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <span class="font-bold text-cyan-600 dark:text-cyan-400">1 040</span>
+          </div>
+
+          <% [
+            { op: "15 + 23 + 17", sum1: "32", sum2: "23", result: "55" },
+            { op: "25 + 35 + 44", sum1: "60", sum2: "44", result: "104" },
+            { op: "600 + 1 370 + 30", sum1: "630", sum2: "1370", result: "2000" },
+            { op: "160 + 40 + 220", sum1: "200", sum2: "220", result: "420" }
+          ].each do |row| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= row[:op] %></span>
+              <span class="text-gray-700 dark:text-gray-200">=</span>
+              <input type="text" data-correct-answer="<%= row[:sum1] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">+</span>
+              <input type="text" data-correct-answer="<%= row[:sum2] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">=</span>
+              <input type="text" data-correct-answer="<%= row[:result] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Box proprietà associativa -->
+        <div class="flex items-start justify-center">
+          <div class="p-4 bg-cyan-50 dark:bg-cyan-900 rounded-lg border-2 border-cyan-400 dark:border-cyan-600">
+            <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Proprietà associativa</p>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-gray-700 dark:text-gray-200">150</span>
+                <span class="text-gray-700 dark:text-gray-200">+</span>
+                <span class="text-gray-700 dark:text-gray-200">50</span>
+                <span class="text-gray-700 dark:text-gray-200">+</span>
+                <span class="text-gray-700 dark:text-gray-200">80</span>
+                <span class="text-gray-700 dark:text-gray-200">=</span>
+                <span class="text-gray-700 dark:text-gray-200">280</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-cyan-500">↓</span>
+                <span class="invisible">+</span>
+                <span class="text-cyan-500">↓</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-gray-700 dark:text-gray-200">200</span>
+                <span class="text-gray-700 dark:text-gray-200">+</span>
+                <span class="text-gray-700 dark:text-gray-200">80</span>
+                <span class="text-gray-700 dark:text-gray-200">=</span>
+                <span class="text-gray-700 dark:text-gray-200">280</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Commutativa + Associativa -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Applica prima la proprietà commutativa, poi la proprietà associativa e calcola. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <% [
+          { op: "46 + 11 + 24 + 29", sum1: "70", sum2: "40", result: "110", is_example: true },
+          { op: "65 + 43 + 35 + 27", sum1: "100", sum2: "70", result: "170", is_example: false },
+          { op: "32 + 20 + 58 + 50", sum1: "90", sum2: "70", result: "160", is_example: false }
+        ].each do |item| %>
+          <div class="space-y-2">
+            <p class="font-bold text-gray-700 dark:text-gray-200"><%= item[:op] %> =</p>
+            <% if item[:is_example] %>
+              <p class="text-cyan-600 dark:text-cyan-400 font-bold"><%= item[:sum1] %> + <%= item[:sum2] %> = <%= item[:result] %></p>
+            <% else %>
+              <div class="flex items-center gap-2">
+                <input type="text" data-correct-answer="<%= item[:sum1] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">+</span>
+                <input type="text" data-correct-answer="<%= item[:sum2] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span class="text-gray-700 dark:text-gray-200">=</span>
+                <input type="text" data-correct-answer="<%= item[:result] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+        <% [
+          { op: "79 + 55 + 21 + 45", sum1: "100", sum2: "100", result: "200" },
+          { op: "73 + 18 + 53 + 22", sum1: "126", sum2: "40", result: "166" },
+          { op: "70 + 56 + 30 + 84", sum1: "100", sum2: "140", result: "240" }
+        ].each do |item| %>
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</p>
+            <div class="flex items-center gap-2">
+              <input type="text" data-correct-answer="<%= item[:sum1] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">+</span>
+              <input type="text" data-correct-answer="<%= item[:sum2] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">=</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 4: Scrivi risultato e proprietà -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Scrivi il risultato di ogni addizione e quale o quali proprietà sono state applicate.
+      </p>
+
+      <div class="space-y-4">
+        <!-- Prima operazione -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-cyan-500">•</span>
+          <span class="text-gray-700 dark:text-gray-200">85 + 15 + 100 = (85 + 15) + 100 = 100 + 100 =</span>
+          <input type="text" data-correct-answer="200" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="text-gray-700 dark:text-gray-200 ml-4">Proprietà</span>
+          <input type="text" data-correct-answer="associativa" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+
+        <!-- Seconda operazione -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-cyan-500">•</span>
+          <span class="text-gray-700 dark:text-gray-200">21 + 138 = 138 + 21 =</span>
+          <input type="text" data-correct-answer="159" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="text-gray-700 dark:text-gray-200 ml-4">Proprietà</span>
+          <input type="text" data-correct-answer="commutativa" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+
+        <!-- Terza operazione -->
+        <div class="space-y-2">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-cyan-500">•</span>
+            <span class="text-gray-700 dark:text-gray-200">151 + 84 + 116 + 29 = (151 + 29) + (84 + 116) =</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 ml-4">
+            <span class="text-gray-700 dark:text-gray-200">180 + 200 =</span>
+            <input type="text" data-correct-answer="380" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200 ml-4">Proprietà</span>
+            <input type="text" data-correct-answer="commutativa e associativa" class="w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,236 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1: IMPARARE TUTTI - Proprietà commutativa e associativa -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Applica la proprietà commutativa e la proprietà associativa dell'addizione per semplificare i calcoli. Segui l'esempio.
+      </p>
+
+      <div class="space-y-4">
+        <!-- Esempio -->
+        <div class="p-3 bg-cyan-50 dark:bg-cyan-900 rounded-lg">
+          <p class="font-bold text-gray-700 dark:text-gray-200">
+            250 + 4 100 + 750 = <span class="text-cyan-600 dark:text-cyan-400">250 + 750 + 4 100 = (250 + 750) + 4 100 = 1 000 + 4 100 = 5 100</span>
+          </p>
+        </div>
+
+        <!-- Esercizi -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">2 650 + 12 000 + 350 =</span>
+            <input type="text" data-correct-answer="15000" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">670 + 3 290 + 330 + 110 =</span>
+            <input type="text" data-correct-answer="4400" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">21 000 + 420 + 9 000 + 80 =</span>
+            <input type="text" data-correct-answer="30500" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Strategie di calcolo veloce -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Esegui le addizioni applicando le strategie di calcolo veloce.
+      </p>
+
+      <div class="space-y-3">
+        <% [
+          { op: "85 + 9", result: "94" },
+          { op: "160 + 9", result: "169" },
+          { op: "5 147 + 99", result: "5246" },
+          { op: "7 048 + 299", result: "7347" },
+          { op: "318 + 599", result: "917" },
+          { op: "5 408 + 999", result: "6407" },
+          { op: "52 614 + 9 999", result: "62613" }
+        ].each do |item| %>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+            <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Calcola in colonna sul quaderno -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Calcola in colonna sul quaderno.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Colonna a (addizioni) -->
+        <div class="space-y-3">
+          <p class="font-bold text-gray-700 dark:text-gray-200">a.</p>
+          <% [
+            { op: "196 702 + 57 384", result: "254086" },
+            { op: "120 506 + 97 838", result: "218344" },
+            { op: "34 685 + 501 792", result: "536477" },
+            { op: "94 731 + 127 389", result: "222120" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Colonna b (sottrazioni) -->
+        <div class="space-y-3">
+          <p class="font-bold text-gray-700 dark:text-gray-200">b.</p>
+          <% [
+            { op: "23 330 – 12 674", result: "10656" },
+            { op: "403 500 – 231 756", result: "171744" },
+            { op: "281 040 – 164 335", result: "116705" },
+            { op: "812 004 – 540 305", result: "271699" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4: Completa con il minuendo -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Completa con il <span class="italic">minuendo</span> (per calcolarlo devi usare l'operazione inversa). Segui l'esempio.
+      </p>
+
+      <div class="space-y-3">
+        <!-- Esempio -->
+        <div class="flex items-center gap-2 flex-wrap p-3 bg-cyan-50 dark:bg-cyan-900 rounded-lg">
+          <span class="font-bold text-cyan-600 dark:text-cyan-400">91</span>
+          <span class="text-gray-700 dark:text-gray-200">– 15 = 76</span>
+          <span class="text-cyan-500">→</span>
+          <span class="font-bold text-cyan-600 dark:text-cyan-400">76</span>
+          <span class="text-gray-700 dark:text-gray-200">+</span>
+          <span class="font-bold text-cyan-600 dark:text-cyan-400">15</span>
+          <span class="text-gray-700 dark:text-gray-200">=</span>
+          <span class="font-bold text-cyan-600 dark:text-cyan-400">91</span>
+        </div>
+
+        <% [
+          { sub: "25", diff: "92", minuend: "117", addend1: "92", addend2: "25" },
+          { sub: "58", diff: "42", minuend: "100", addend1: "42", addend2: "58" },
+          { sub: "82", diff: "134", minuend: "216", addend1: "134", addend2: "82" },
+          { sub: "91", diff: "148", minuend: "239", addend1: "148", addend2: "91" }
+        ].each do |item| %>
+          <div class="flex items-center gap-2 flex-wrap">
+            <input type="text" data-correct-answer="<%= item[:minuend] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">– <%= item[:sub] %> = <%= item[:diff] %></span>
+            <span class="text-cyan-500">→</span>
+            <input type="text" data-correct-answer="<%= item[:addend1] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">+</span>
+            <input type="text" data-correct-answer="<%= item[:addend2] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <input type="text" data-correct-answer="<%= item[:minuend] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 5: Completa con il sottraendo -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(5) %>
+        Completa con il <span class="italic">sottraendo</span>. Segui l'esempio.
+      </p>
+
+      <div class="space-y-3">
+        <!-- Esempio -->
+        <div class="flex items-center gap-2 flex-wrap p-3 bg-cyan-50 dark:bg-cyan-900 rounded-lg">
+          <span class="text-gray-700 dark:text-gray-200">95 –</span>
+          <span class="font-bold text-cyan-600 dark:text-cyan-400">74</span>
+          <span class="text-gray-700 dark:text-gray-200">= 21</span>
+          <span class="text-cyan-500">→</span>
+          <span class="font-bold text-cyan-600 dark:text-cyan-400">95</span>
+          <span class="text-gray-700 dark:text-gray-200">–</span>
+          <span class="font-bold text-cyan-600 dark:text-cyan-400">21</span>
+          <span class="text-gray-700 dark:text-gray-200">=</span>
+          <span class="font-bold text-cyan-600 dark:text-cyan-400">74</span>
+        </div>
+
+        <% [
+          { min: "79", diff: "34", sub: "45", sub2: "79", sub3: "34" },
+          { min: "185", diff: "142", sub: "43", sub2: "185", sub3: "142" },
+          { min: "176", diff: "34", sub: "142", sub2: "176", sub3: "34" },
+          { min: "234", diff: "98", sub: "136", sub2: "234", sub3: "98" }
+        ].each do |item| %>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:min] %> –</span>
+            <input type="text" data-correct-answer="<%= item[:sub] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">= <%= item[:diff] %></span>
+            <span class="text-cyan-500">→</span>
+            <input type="text" data-correct-answer="<%= item[:sub2] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">–</span>
+            <input type="text" data-correct-answer="<%= item[:sub3] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <input type="text" data-correct-answer="<%= item[:sub] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 6: Completa -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(6) %>
+        Completa.
+      </p>
+
+      <div class="space-y-4">
+        <!-- Prima catena: 85 – 3 da -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">85 – 3 da</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" data-correct-answer="55" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="text-gray-700 dark:text-gray-200">+ 1 uk</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" data-correct-answer="1055" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="text-gray-700 dark:text-gray-200">– 1 h</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" data-correct-answer="955" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="text-gray-700 dark:text-gray-200">+ 3 dak</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" data-correct-answer="30955" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+
+        <!-- Seconda catena: 78 + 2 da -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">78 + 2 da</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" data-correct-answer="98" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="text-gray-700 dark:text-gray-200">+ 4 uk</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" data-correct-answer="4098" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="text-gray-700 dark:text-gray-200">+ 2 u</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" data-correct-answer="4100" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="text-gray-700 dark:text-gray-200">– 3 h</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" data-correct-answer="3800" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

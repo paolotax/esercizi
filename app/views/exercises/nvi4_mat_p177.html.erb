@@ -1,0 +1,200 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls word-highlighter"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1: IMPARARE TUTTI - Inserisci segni >, < oppure = -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Inserisci i segni <span class="font-bold text-cyan-600 dark:text-cyan-400">&gt;</span>, <span class="font-bold text-cyan-600 dark:text-cyan-400">&lt;</span> oppure <span class="font-bold text-cyan-600 dark:text-cyan-400">=</span>.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+          <tbody>
+            <!-- Esempio -->
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200">32 232</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-900">&gt;</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200">23 332</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200">940 049</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-900">&lt;</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200">940 050</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200">12 880</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                <input type="text" data-correct-answer=">" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200">12 088</td>
+            </tr>
+            <% [
+              { left: "87 950", right: "87 959", answer: "<" },
+              { left: "91 000", right: "910 000", answer: "<" },
+              { left: "43 216", right: "43 261", answer: "<" }
+            ].each do |row| %>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200"><%= row[:left] %></td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200"><%= row[:right] %></td>
+                <%
+                  row2 = [
+                    { left: "86 341", right: "86 431", answer: "<" },
+                    { left: "60 000", right: "60 000", answer: "=" },
+                    { left: "836 250", right: "836 502", answer: "<" }
+                  ][[ { left: "87 950", right: "87 959", answer: "<" }, { left: "91 000", right: "910 000", answer: "<" }, { left: "43 216", right: "43 261", answer: "<" } ].index(row)]
+                %>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200"><%= row2[:left] %></td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="<%= row2[:answer] %>" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200"><%= row2[:right] %></td>
+                <%
+                  row3 = [
+                    { left: "145 541", right: "145 541", answer: "=" },
+                    { left: "707 001", right: "707 100", answer: "<" },
+                    { left: "8 769", right: "81 000", answer: "<" }
+                  ][[ { left: "87 950", right: "87 959", answer: "<" }, { left: "91 000", right: "910 000", answer: "<" }, { left: "43 216", right: "43 261", answer: "<" } ].index(row)]
+                %>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200"><%= row3[:left] %></td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="<%= row3[:answer] %>" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold whitespace-nowrap dark:text-gray-200"><%= row3[:right] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Sottolinea in rosso il maggiore e in blu il minore -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        In ogni foglietto sottolinea in <span class="text-red-500">rosso</span> il numero maggiore e in <span class="text-blue-500">blu</span> il numero minore.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <% [
+          { nums: ["62 303", "60 233", "606 001", "60 323", "601 006"], max: "606 001", min: "60 233" },
+          { nums: ["654 445", "678 543", "725 665", "726 565", "650 445"], max: "726 565", min: "650 445" },
+          { nums: ["900 101", "900 110", "900 011", "901 000", "910 000"], max: "910 000", min: "900 011" },
+          { nums: ["800 008", "880 000", "808 800", "800 080", "800 000"], max: "880 000", min: "800 000" }
+        ].each do |group| %>
+          <div class="p-4 bg-white dark:bg-gray-800 rounded-lg border-2 border-cyan-400 dark:border-cyan-600">
+            <div class="space-y-1">
+              <% group[:nums].each do |num| %>
+                <p class="text-center font-bold text-gray-700 dark:text-gray-200 cursor-pointer hover:opacity-80"
+                   data-word-highlighter-target="word"
+                   data-correct-max="<%= num == group[:max] %>"
+                   data-correct-min="<%= num == group[:min] %>"
+                   data-action="click->word-highlighter#toggleHighlight"><%= num %></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Confronta con unità di misura -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Confronta e inserisci i segni <span class="font-bold text-cyan-600 dark:text-cyan-400">&gt;</span>, <span class="font-bold text-cyan-600 dark:text-cyan-400">&lt;</span> oppure <span class="font-bold text-cyan-600 dark:text-cyan-400">=</span>.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="space-y-3">
+          <% [
+            { left: "2 dak", right: "7 000 u", answer: "<" },
+            { left: "3 000 u", right: "3 uk", answer: "=" },
+            { left: "18 uk", right: "61 h", answer: ">" },
+            { left: "6 hk", right: "60 000 u", answer: ">" }
+          ].each do |row| %>
+            <div class="flex items-center justify-center gap-2">
+              <span class="font-bold text-gray-700 dark:text-gray-200 w-24 text-right"><%= row[:left] %></span>
+              <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-10 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold bg-white dark:bg-gray-700 dark:text-white">
+              <span class="font-bold text-gray-700 dark:text-gray-200 w-24"><%= row[:right] %></span>
+            </div>
+          <% end %>
+        </div>
+        <div class="space-y-3">
+          <% [
+            { left: "2 300 u", right: "23 h", answer: "=" },
+            { left: "407 000 u", right: "47 uk", answer: ">" },
+            { left: "6 dak", right: "5 000 u", answer: ">" },
+            { left: "66 uk", right: "6 600 u", answer: ">" }
+          ].each do |row| %>
+            <div class="flex items-center justify-center gap-2">
+              <span class="font-bold text-gray-700 dark:text-gray-200 w-24 text-right"><%= row[:left] %></span>
+              <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-10 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold bg-white dark:bg-gray-700 dark:text-white">
+              <span class="font-bold text-gray-700 dark:text-gray-200 w-24"><%= row[:right] %></span>
+            </div>
+          <% end %>
+        </div>
+        <div class="space-y-3">
+          <% [
+            { left: "20 h", right: "12 uk", answer: "<" },
+            { left: "80 h", right: "8 000 u", answer: "=" },
+            { left: "9 hk", right: "990 uk", answer: "<" },
+            { left: "70 uk", right: "750 da", answer: ">" }
+          ].each do |row| %>
+            <div class="flex items-center justify-center gap-2">
+              <span class="font-bold text-gray-700 dark:text-gray-200 w-24 text-right"><%= row[:left] %></span>
+              <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-10 border-2 border-cyan-400 dark:border-cyan-600 text-center font-bold bg-white dark:bg-gray-700 dark:text-white">
+              <span class="font-bold text-gray-700 dark:text-gray-200 w-24"><%= row[:right] %></span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4: Ordine crescente -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Scrivi i seguenti numeri in ordine crescente.
+      </p>
+
+      <div class="space-y-4">
+        <p class="text-gray-700 dark:text-gray-200">
+          547 898 <span class="text-cyan-500">•</span> 567 212 <span class="text-cyan-500">•</span> 509 233 <span class="text-cyan-500">•</span> 59 367 <span class="text-cyan-500">•</span> 838 900 <span class="text-cyan-500">•</span> 838 090 <span class="text-cyan-500">•</span> 83 890 <span class="text-cyan-500">•</span> 838 899
+        </p>
+        <div class="flex flex-wrap items-center gap-2">
+          <% 8.times do |i| %>
+            <input type="text" data-correct-answer="<%= ["59367", "83890", "509233", "547898", "567212", "838090", "838899", "838900"][i] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <% if i < 7 %><span class="text-cyan-500">&lt;</span><% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 5: Ordine decrescente -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(5) %>
+        Scrivi i seguenti numeri in ordine decrescente.
+      </p>
+
+      <div class="space-y-4">
+        <p class="text-gray-700 dark:text-gray-200">
+          98 267 <span class="text-cyan-500">•</span> 909 456 <span class="text-cyan-500">•</span> 909 056 <span class="text-cyan-500">•</span> 99 009 <span class="text-cyan-500">•</span> 982 677 <span class="text-cyan-500">•</span> 909 605 <span class="text-cyan-500">•</span> 112 678 <span class="text-cyan-500">•</span> 112 909
+        </p>
+        <div class="flex flex-wrap items-center gap-2">
+          <% 8.times do |i| %>
+            <input type="text" data-correct-answer="<%= ["982677", "909605", "909456", "909056", "112909", "112678", "99009", "98267"][i] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <% if i < 7 %><span class="text-cyan-500">&gt;</span><% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
