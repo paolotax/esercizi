@@ -1,0 +1,160 @@
+import { Controller } from "@hotwired/stimulus"
+
+/**
+ * Controller per la sidebar overlay delle operazioni in quaderno
+ * Permette di aprire una sidebar laterale con l'operazione in formato quaderno
+ * e salvare il risultato nell'input principale
+ */
+export default class extends Controller {
+  static targets = ["sidebar", "backdrop", "title", "content"]
+
+  connect() {
+    // Chiudi con Escape
+    this.boundHandleEscape = this.handleEscape.bind(this)
+    document.addEventListener('keydown', this.boundHandleEscape)
+  }
+
+  disconnect() {
+    document.removeEventListener('keydown', this.boundHandleEscape)
+  }
+
+  handleEscape(event) {
+    if (event.key === 'Escape' && !this.sidebarTarget.classList.contains('translate-x-full')) {
+      this.close()
+    }
+  }
+
+  async open(event) {
+    event.preventDefault()
+    const button = event.currentTarget
+
+    // Memorizza i dati per il salvataggio
+    this.targetInputId = button.dataset.targetInput
+    this.operation = button.dataset.operation
+    this.operationType = button.dataset.type || 'addizione'
+
+    // Aggiorna il titolo
+    const titles = {
+      'addizione': 'Addizione in colonna',
+      'sottrazione': 'Sottrazione in colonna',
+      'moltiplicazione': 'Moltiplicazione in colonna',
+      'divisione': 'Divisione in colonna'
+    }
+    if (this.hasTitleTarget) {
+      this.titleTarget.textContent = titles[this.operationType] || 'Operazione in colonna'
+    }
+
+    // Mostra loading
+    this.contentTarget.innerHTML = '<div class="text-center py-8 text-gray-500">Caricamento...</div>'
+
+    // Mostra sidebar con animazione
+    this.backdropTarget.classList.remove('hidden')
+    // Piccolo delay per permettere la transizione
+    requestAnimationFrame(() => {
+      this.sidebarTarget.classList.remove('translate-x-full')
+    })
+
+    // Fetch del partial quaderno
+    try {
+      const url = `/exercises/quaderno_grid?operation=${encodeURIComponent(this.operation)}&type=${this.operationType}`
+      const response = await fetch(url)
+
+      if (!response.ok) {
+        throw new Error('Errore nel caricamento')
+      }
+
+      this.contentTarget.innerHTML = await response.text()
+
+      // Focus sul primo input dopo un breve delay
+      setTimeout(() => {
+        const firstInput = this.contentTarget.querySelector('input:not([readonly]):not([disabled])')
+        if (firstInput) {
+          firstInput.focus()
+          firstInput.select()
+        }
+      }, 150)
+
+    } catch (error) {
+      console.error('Errore nel caricamento del quaderno:', error)
+      this.contentTarget.innerHTML = '<div class="text-center py-8 text-red-500">Errore nel caricamento</div>'
+    }
+  }
+
+  close() {
+    // Nascondi sidebar con animazione
+    this.sidebarTarget.classList.add('translate-x-full')
+
+    // Nascondi backdrop dopo la transizione
+    setTimeout(() => {
+      this.backdropTarget.classList.add('hidden')
+      // Pulisci il contenuto
+      this.contentTarget.innerHTML = ''
+    }, 300) // Stesso tempo della transizione CSS
+  }
+
+  save() {
+    // Estrae il risultato dal quaderno in base al tipo
+    let resultInputs
+    let commaSelector = null
+
+    switch (this.operationType) {
+      case 'addizione':
+        resultInputs = this.contentTarget.querySelectorAll('input[data-quaderno-addition-target="result"]')
+        break
+      case 'sottrazione':
+        resultInputs = this.contentTarget.querySelectorAll('input[data-quaderno-subtraction-target="result"]')
+        break
+      case 'moltiplicazione':
+        resultInputs = this.contentTarget.querySelectorAll('input[data-quaderno-multiplication-target="result"]')
+        commaSelector = '[data-quaderno-multiplication-target="commaSpot"].active'
+        break
+      case 'divisione':
+        resultInputs = this.contentTarget.querySelectorAll('input[data-quaderno-division-target="quotient"]')
+        break
+      default:
+        resultInputs = []
+    }
+
+    // Concatena i valori degli input del risultato
+    let result = ''
+    resultInputs.forEach(input => {
+      result += input.value || ''
+    })
+
+    // Trova la posizione della virgola (se presente)
+    if (commaSelector) {
+      const activeComma = this.contentTarget.querySelector(commaSelector)
+      if (activeComma) {
+        const decimalPlaces = parseInt(activeComma.dataset.position) || 0
+        if (decimalPlaces > 0 && result.length > decimalPlaces) {
+          // Inserisci la virgola nella posizione corretta
+          const integerPart = result.slice(0, result.length - decimalPlaces)
+          const decimalPart = result.slice(result.length - decimalPlaces)
+          result = integerPart + ',' + decimalPart
+        }
+      }
+    }
+
+    // Rimuovi spazi e zeri iniziali (celle vuote a sinistra)
+    result = result.replace(/^\s+/, '').replace(/^0+(?=\d)/, '')
+
+    // Inserisce nell'input target
+    if (this.targetInputId && result) {
+      const targetInput = document.querySelector(`[data-operation-id="${this.targetInputId}"]`)
+      if (targetInput) {
+        targetInput.value = result
+        // Trigger evento input per eventuali listener (es. exercise-checker)
+        targetInput.dispatchEvent(new Event('input', { bubbles: true }))
+        targetInput.dispatchEvent(new Event('change', { bubbles: true }))
+
+        // Evidenzia brevemente l'input aggiornato
+        targetInput.classList.add('ring-2', 'ring-green-500')
+        setTimeout(() => {
+          targetInput.classList.remove('ring-2', 'ring-green-500')
+        }, 1000)
+      }
+    }
+
+    this.close()
+  }
+}

@@ -53,4 +53,64 @@ class ExercisesController < ApplicationController
     render partial: "exercises/column_operations_grid",
            locals: { operations: @operations, with_proof: with_proof }
   end
+
+  # GET /exercises/quaderno_grid
+  # Endpoint per caricare un singolo partial quaderno (per la sidebar)
+  # Parametri:
+  # - operation: l'operazione (es. "234+567", "500-123", "45x12", "144:12")
+  # - type: tipo di operazione (addizione, sottrazione, moltiplicazione, divisione)
+  def quaderno_grid
+    operation = params[:operation]
+    type = params[:type] || "addizione"
+
+    case type
+    when "addizione"
+      numbers = parse_operation(operation, "+")
+      return render_error("Operazione non valida") unless numbers&.length == 2
+      addizione = Addizione.new(addends: numbers, show_toolbar: true)
+      render partial: "strumenti/addizioni/quaderno_addizione", locals: { addizione: addizione }
+
+    when "sottrazione"
+      numbers = parse_operation(operation, "-")
+      return render_error("Operazione non valida") unless numbers&.length == 2
+      sottrazione = Sottrazione.new(minuendo: numbers[0], sottraendo: numbers[1], show_toolbar: true)
+      render partial: "strumenti/sottrazioni/quaderno_sottrazione", locals: { sottrazione: sottrazione }
+
+    when "moltiplicazione"
+      numbers = parse_operation_strings(operation, /[x×*]/i)
+      return render_error("Operazione non valida") unless numbers&.length == 2
+      moltiplicazione = Moltiplicazione.new(multiplicand: numbers[0], multiplier: numbers[1], show_toolbar: true)
+      render partial: "strumenti/moltiplicazioni/quaderno_moltiplicazione", locals: { moltiplicazione: moltiplicazione }
+
+    when "divisione"
+      numbers = parse_operation(operation, /[÷:\/]/i)
+      return render_error("Operazione non valida") unless numbers&.length == 2
+      divisione = Divisione.new(dividendo: numbers[0], divisore: numbers[1], show_toolbar: true)
+      render partial: "strumenti/divisioni/quaderno_divisione", locals: { divisione: divisione }
+
+    else
+      render_error("Tipo di operazione non supportato")
+    end
+  end
+
+  private
+
+  def parse_operation(operation, separator)
+    return nil unless operation.present?
+    parts = operation.split(separator)
+    return nil unless parts.length == 2
+    parts.map { |p| p.strip.to_i }
+  end
+
+  # Versione che mantiene le stringhe (per decimali con virgola)
+  def parse_operation_strings(operation, separator)
+    return nil unless operation.present?
+    parts = operation.split(separator)
+    return nil unless parts.length == 2
+    parts.map(&:strip)
+  end
+
+  def render_error(message)
+    render plain: "<div class='text-center py-8 text-red-500'>#{message}</div>", status: :unprocessable_entity
+  end
 end

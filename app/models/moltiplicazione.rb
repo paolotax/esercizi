@@ -220,8 +220,15 @@ class Moltiplicazione
       padding = cols_for_digits - digits.length
       padded_digits = ([""] * padding) + digits
 
+      # Calcola i riporti per questo prodotto parziale
+      carries = calculate_partial_carries(digit)
+      # Padding dei carries per allinearli alla griglia (stessa lunghezza delle cifre - 1)
+      carries_length = cols_for_digits - 1
+      padded_carries = ([""] * (carries_length - carries.length)) + carries.map { |c| c || "" }
+
       {
         digits: padded_digits,
+        carries: padded_carries,
         zeros: zeros,
         row_index: row_index
       }

@@ -1,5 +1,5 @@
 <div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
-     data-controller="exercise-checker text-toggle font-controls"
+     data-controller="exercise-checker text-toggle font-controls quaderno-sidebar"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
@@ -86,26 +86,73 @@
         Calcola in colonna.
       </p>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <!-- Prima riga: 3 operazioni -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <% [
           { op1: "49,7", op2: "8,6", answer: "427,42" },
           { op1: "1,89", op2: "74", answer: "139,86" },
-          { op1: "56,7", op2: "3,9", answer: "221,13" },
+          { op1: "56,7", op2: "3,9", answer: "221,13" }
+        ].each do |item| %>
+          <div class="flex flex-col items-center gap-2">
+            <div class="p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg text-center flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200 font-bold"><%= item[:op1] %> × <%= item[:op2] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+            <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
+                moltiplicazione: Moltiplicazione.new(
+                  multiplicand: item[:op1],
+                  multiplier: item[:op2],
+                  show_multiplicand_multiplier: true,
+                  show_solution: false,
+                  show_toolbar: false
+                ) %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Seconda riga: 3 operazioni -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <% [
           { op1: "4,75", op2: "8,7", answer: "41,325" },
           { op1: "3,79", op2: "45", answer: "170,55" },
-          { op1: "5,72", op2: "2,6", answer: "14,872" },
+          { op1: "5,72", op2: "2,6", answer: "14,872" }
+        ].each do |item| %>
+          <div class="flex flex-col items-center gap-2">
+            <div class="p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg text-center flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200 font-bold"><%= item[:op1] %> × <%= item[:op2] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+            <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
+                moltiplicazione: Moltiplicazione.new(
+                  multiplicand: item[:op1],
+                  multiplier: item[:op2],
+                  show_multiplicand_multiplier: true,
+                  show_solution: false,
+                  show_toolbar: false
+                ) %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Terza riga: 2 operazioni -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <% [
           { op1: "263", op2: "5,8", answer: "1525,4" },
           { op1: "29,7", op2: "3,6", answer: "106,92" }
         ].each do |item| %>
-          <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
-            <div class="font-mono text-right text-gray-700 dark:text-gray-200">
-              <div><%= item[:op1] %> ×</div>
-              <div class="border-b border-gray-400 dark:border-gray-500"><%= item[:op2] %> =</div>
-              <div class="mt-1">+</div>
-              <div class="border-t border-gray-400 dark:border-gray-500 mt-1">
-                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-right font-bold bg-transparent dark:text-white">
-              </div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg text-center flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200 font-bold"><%= item[:op1] %> × <%= item[:op2] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
             </div>
+            <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
+                moltiplicazione: Moltiplicazione.new(
+                  multiplicand: item[:op1],
+                  multiplier: item[:op2],
+                  show_multiplicand_multiplier: true,
+                  show_solution: false,
+                  show_toolbar: false
+                ) %>
           </div>
         <% end %>
       </div>
@@ -115,55 +162,77 @@
     <div>
       <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
         <%= numero_esercizio_badge(4) %>
-        Calcola in colonna sul quaderno.
+        Calcola in colonna sul quaderno (o clicca l'icona calcolatrice).
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
-          <p class="text-gray-700 dark:text-gray-200 font-bold mb-2">a.</p>
-          <ul class="space-y-1 text-gray-700 dark:text-gray-200">
-            <li>38 × 6,9 =</li>
-            <li>74 × 3,5 =</li>
-            <li>4,92 × 27 =</li>
-            <li>8,05 × 36 =</li>
-            <li>7,32 × 4,5 =</li>
-          </ul>
-        </div>
+        <%
+          esercizio4_gruppi = [
+            { lettera: "a", operazioni: [
+              { op1: "38", op2: "6,9", answer: "262,2" },
+              { op1: "74", op2: "3,5", answer: "259" },
+              { op1: "4,92", op2: "27", answer: "132,84" },
+              { op1: "8,05", op2: "36", answer: "289,8" },
+              { op1: "7,32", op2: "4,5", answer: "32,94" }
+            ]},
+            { lettera: "b", operazioni: [
+              { op1: "672", op2: "8,3", answer: "5577,6" },
+              { op1: "3,59", op2: "2,6", answer: "9,334" },
+              { op1: "47,53", op2: "6,8", answer: "323,204" },
+              { op1: "7,401", op2: "39", answer: "288,639" },
+              { op1: "823", op2: "7,6", answer: "6254,8" }
+            ]},
+            { lettera: "c", operazioni: [
+              { op1: "35", op2: "2,93", answer: "102,55" },
+              { op1: "2,8", op2: "7,25", answer: "20,3" },
+              { op1: "5,6", op2: "4,76", answer: "26,656" },
+              { op1: "5,8", op2: "39,7", answer: "230,26" },
+              { op1: "8,6", op2: "4,28", answer: "36,808" }
+            ]},
+            { lettera: "d", operazioni: [
+              { op1: "324", op2: "5,81", answer: "1882,44" },
+              { op1: "4,07", op2: "3,29", answer: "13,3903" },
+              { op1: "963", op2: "6,07", answer: "5845,41" },
+              { op1: "3,52", op2: "7,30", answer: "25,696" },
+              { op1: "0,34", op2: "8,07", answer: "2,7438" }
+            ]}
+          ]
+        %>
 
-        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
-          <p class="text-gray-700 dark:text-gray-200 font-bold mb-2">b.</p>
-          <ul class="space-y-1 text-gray-700 dark:text-gray-200">
-            <li>672 × 8,3 =</li>
-            <li>3,59 × 2,6 =</li>
-            <li>47,53 × 6,8 =</li>
-            <li>7,401 × 39 =</li>
-            <li>823 × 7,6 =</li>
-          </ul>
-        </div>
-
-        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
-          <p class="text-gray-700 dark:text-gray-200 font-bold mb-2">c.</p>
-          <ul class="space-y-1 text-gray-700 dark:text-gray-200">
-            <li>35 × 2,93 =</li>
-            <li>2,8 × 7,25 =</li>
-            <li>5,6 × 4,76 =</li>
-            <li>5,8 × 39,7 =</li>
-            <li>8,6 × 4,28 =</li>
-          </ul>
-        </div>
-
-        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
-          <p class="text-gray-700 dark:text-gray-200 font-bold mb-2">d.</p>
-          <ul class="space-y-1 text-gray-700 dark:text-gray-200">
-            <li>324 × 5,81 =</li>
-            <li>4,07 × 3,29 =</li>
-            <li>963 × 6,07 =</li>
-            <li>3,52 × 7,30 =</li>
-            <li>0,34 × 8,07 =</li>
-          </ul>
-        </div>
+        <% esercizio4_gruppi.each_with_index do |gruppo, g_idx| %>
+          <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <p class="text-gray-700 dark:text-gray-200 font-bold mb-2"><%= gruppo[:lettera] %>.</p>
+            <ul class="space-y-2">
+              <% gruppo[:operazioni].each_with_index do |item, i_idx| %>
+                <% op_id = "es4-#{gruppo[:lettera]}-#{i_idx}" %>
+                <li class="flex items-center gap-1 flex-wrap">
+                  <span class="text-gray-700 dark:text-gray-200"><%= item[:op1] %> × <%= item[:op2] %> =</span>
+                  <input type="text"
+                         data-operation-id="<%= op_id %>"
+                         data-correct-answer="<%= item[:answer] %>"
+                         class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <button type="button"
+                          data-action="click->quaderno-sidebar#open"
+                          data-operation="<%= item[:op1] %>x<%= item[:op2] %>"
+                          data-type="moltiplicazione"
+                          data-target-input="<%= op_id %>"
+                          class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
+                          title="Apri calcolatrice">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                  </button>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
       </div>
     </div>
+
+    <!-- Sidebar per operazioni in quaderno -->
+    <%= render 'shared/quaderno_sidebar' %>
 
     <%= render 'shared/exercise_controls' %>
   </div>

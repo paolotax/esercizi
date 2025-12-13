@@ -198,17 +198,74 @@
     <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
 
     <% if has_partials %>
-      <!-- Prodotti parziali -->
+      <!-- Prodotti parziali con riporti -->
       <% moltiplicazione.quaderno_partial_products.each_with_index do |partial, p_idx| %>
+        <%
+          # I riporti sono per le colonne delle cifre (non per gli zeri a destra)
+          # partial[:carries] ha lunghezza = numero cifre del prodotto parziale - 1
+          # Dobbiamo allineare i riporti sotto le cifre corrispondenti
+          zeros = partial[:zeros]
+          carries = partial[:carries]
+          # Numero di colonne per i dati di questo prodotto (esclusi zeri)
+          cols_with_data = data_cols - zeros
+        %>
+
+        <%# Riga riporti per questo prodotto parziale %>
+        <%#
+          Struttura: la griglia ha data_cols colonne per le cifre.
+          Per ogni prodotto parziale:
+          - Le ultime 'zeros' colonne sono placeholder (zeri) - niente riporti
+          - Le prime 'cols_with_data' colonne contengono le cifre del prodotto
+          - I riporti vanno sopra le cifre TRANNE l'ultima cifra delle data (quindi cols_with_data - 1 riporti)
+          - Il carries array è già paddato a sinistra con lunghezza cols_with_data - 1
+          - Il bordo spesso va sul primo prodotto parziale (p_idx == 0) per separare dal moltiplicatore
+        %>
+        <% first_partial_top_border = p_idx == 0 ? 'border-t-2 border-t-gray-700 dark:border-t-gray-300' : '' %>
+        <%# Prima cella (vuota) - bordo sottile %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+        <% data_cols.times do |col_idx| %>
+          <%
+            col_from_right = data_cols - 1 - col_idx
+            is_zero_column = col_from_right < zeros
+            # Indice nelle colonne dati (0 = prima colonna dati da sinistra)
+            data_col_idx = col_idx
+            # L'ultima colonna dati (prima degli zeri) non ha riporto sopra
+            is_last_data_col = data_col_idx == cols_with_data - 1
+            # Indice nel carries array (che ha lunghezza cols_with_data - 1)
+            carry_idx = data_col_idx
+            carry_value = (carries && carry_idx < carries.length) ? carries[carry_idx] : nil
+          %>
+          <% if is_zero_column %>
+            <%# Colonne degli zeri placeholder - celle vuote %>
+            <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= first_partial_top_border %>" style="height: <%= carry_height %>;"></div>
+          <% elsif is_last_data_col %>
+            <%# Ultima colonna dati - niente riporto sopra l'ultima cifra %>
+            <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= first_partial_top_border %>" style="height: <%= carry_height %>;"></div>
+          <% else %>
+            <%# Colonne con riporti %>
+            <div class="border-r border-b border-gray-300 dark:border-gray-600 bg-orange-50 dark:bg-orange-900/30 <%= first_partial_top_border %>" style="height: <%= carry_height %>;">
+              <input type="text" class="quaderno-input-carry-mul bg-transparent focus:bg-orange-100/20 dark:focus:bg-orange-500/20 text-orange-600 dark:text-orange-400"
+                     data-quaderno-multiplication-target="partialCarry"
+                     <% if carry_value.present? %>data-correct-answer="<%= carry_value %>"<% end %>
+                     maxlength="1"
+                     <% if moltiplicazione.show_partial_products && carry_value.present? %>value="<%= carry_value %>"<% end %>>
+            </div>
+          <% end %>
+        <% end %>
+        <%# Penultima cella (segno ×) - bordo spesso, ultima cella - bordo sottile %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= first_partial_top_border %>" style="height: <%= carry_height %>;"></div>
+        <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+
+        <%# Riga cifre del prodotto parziale %>
         <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
         <% data_cols.times do |digit_idx| %>
           <% digit = partial[:digits][digit_idx] %>
-          <% is_zero_placeholder = digit_idx >= partial[:digits].length %>
-          <% zero_idx = digit_idx - partial[:digits].length %>
-          <% if is_zero_placeholder && zero_idx < partial[:zeros] %>
-            <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 <%= p_idx == 0 ? 'border-t-2 border-t-gray-700 dark:border-t-gray-300' : '' %>" style="height: <%= cell_size %>;">0</div>
+          <% col_from_right = data_cols - 1 - digit_idx %>
+          <% is_zero_placeholder = col_from_right < partial[:zeros] %>
+          <% if is_zero_placeholder %>
+            <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500" style="height: <%= cell_size %>;">0</div>
           <% else %>
-            <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= p_idx == 0 ? 'border-t-2 border-t-gray-700 dark:border-t-gray-300' : '' %>" style="height: <%= cell_size %>;">
+            <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;">
               <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
                      data-quaderno-multiplication-target="partial" data-correct-answer="<%= digit %>" maxlength="1"
                      <% if moltiplicazione.show_partial_products && digit.present? %>value="<%= digit %>"<% end %>>
@@ -216,7 +273,7 @@
           <% end %>
         <% end %>
         <!-- Cella segno (= solo sull'ultimo prodotto parziale) -->
-        <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-green-600 dark:text-green-400 font-bold <%= p_idx == 0 ? 'border-t-2 border-t-gray-700 dark:border-t-gray-300' : '' %>" style="height: <%= cell_size %>;"><%= p_idx == moltiplicazione.quaderno_partial_products.length - 1 ? '=' : '' %></div>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-green-600 dark:text-green-400 font-bold" style="height: <%= cell_size %>;"><%= p_idx == moltiplicazione.quaderno_partial_products.length - 1 ? '=' : '' %></div>
         <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
       <% end %>
 

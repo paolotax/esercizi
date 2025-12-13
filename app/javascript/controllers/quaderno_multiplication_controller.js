@@ -6,7 +6,7 @@ import JSConfetti from "js-confetti"
  * Gestisce la navigazione tra celle, verifica delle risposte e feedback visivo
  */
 export default class extends Controller {
-  static targets = ["multiplicand", "multiplier", "result", "carry", "partial", "sumCarry", "commaSpot"]
+  static targets = ["multiplicand", "multiplier", "result", "carry", "partial", "partialCarry", "sumCarry", "commaSpot"]
 
   connect() {
     this.jsConfetti = new JSConfetti()
@@ -336,6 +336,16 @@ export default class extends Controller {
       })
     }
 
+    // Mostra i riporti dei prodotti parziali
+    if (this.hasPartialCarryTarget) {
+      this.partialCarryTargets.forEach(input => {
+        const correctAnswer = input.getAttribute('data-correct-answer')
+        if (correctAnswer) {
+          input.value = correctAnswer
+        }
+      })
+    }
+
     // Mostra i prodotti parziali
     if (this.hasPartialTarget) {
       this.partialTargets.forEach(input => {
@@ -379,8 +389,9 @@ export default class extends Controller {
     // Raccogli tutti gli input
     const carries = this.hasCarryTarget ? Array.from(this.carryTargets) : []
     const partials = this.hasPartialTarget ? Array.from(this.partialTargets) : []
+    const partialCarries = this.hasPartialCarryTarget ? Array.from(this.partialCarryTargets) : []
     const sumCarries = this.hasSumCarryTarget ? Array.from(this.sumCarryTargets) : []
-    const allInputs = [...carries, ...this.multiplicandTargets, ...this.multiplierTargets, ...partials, ...sumCarries, ...this.resultTargets]
+    const allInputs = [...carries, ...partialCarries, ...this.multiplicandTargets, ...this.multiplierTargets, ...partials, ...sumCarries, ...this.resultTargets]
 
     let correct = 0
     let total = 0
