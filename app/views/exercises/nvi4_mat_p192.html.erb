@@ -1,0 +1,281 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Box teoria: Proprietà invariantiva -->
+    <div class="p-4 bg-cyan-50 dark:bg-cyan-900 rounded-lg border-2 border-cyan-400 dark:border-cyan-600">
+      <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-3">Proprietà invariantiva</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Esempio divisione -->
+        <div class="text-center space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">400 : 80 = 5</p>
+          <p class="text-cyan-600 dark:text-cyan-400 font-bold">↓ : 4 &nbsp;&nbsp; ↓ : 4</p>
+          <p class="text-gray-700 dark:text-gray-200">100 : 20 = 5</p>
+        </div>
+        <!-- Esempio moltiplicazione -->
+        <div class="text-center space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">400 : 80 = 5</p>
+          <p class="text-cyan-600 dark:text-cyan-400 font-bold">↓ × 4 &nbsp;&nbsp; ↓ × 4</p>
+          <p class="text-gray-700 dark:text-gray-200">1 600 : 320 = 5</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1: IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Calcola applicando la proprietà invariantiva.
+      </p>
+
+      <!-- Prima riga di esempi -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <!-- Esempio 1 (completato) -->
+        <div class="text-center space-y-2 p-3 bg-cyan-50 dark:bg-cyan-900 rounded-lg">
+          <p class="text-gray-700 dark:text-gray-200">18 : 6 = <span class="font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-800 px-1 rounded">3</span></p>
+          <p class="text-cyan-600 dark:text-cyan-400 font-bold">↓ : 3 &nbsp;&nbsp; ↓ : 3</p>
+          <p class="text-gray-700 dark:text-gray-200"><span class="font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-800 px-1 rounded">6</span> : <span class="font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-800 px-1 rounded">2</span> = <span class="font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-800 px-1 rounded">3</span></p>
+        </div>
+
+        <!-- Esempio 2 -->
+        <div class="text-center space-y-2">
+          <div class="flex items-center justify-center gap-1">
+            <span class="text-gray-700 dark:text-gray-200">163 : 43 =</span>
+            <input type="text" data-correct-answer="3 resto 34" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <p class="text-cyan-600 dark:text-cyan-400 font-bold">↓ × 2 &nbsp;&nbsp; ↓ × 2</p>
+          <div class="flex items-center justify-center gap-1">
+            <span class="font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-800 px-1 rounded">326</span>
+            <span class="text-gray-700 dark:text-gray-200">:</span>
+            <input type="text" data-correct-answer="86" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <input type="text" data-correct-answer="3 resto 68" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Esempio 3 -->
+        <div class="text-center space-y-2">
+          <div class="flex items-center justify-center gap-1">
+            <span class="text-gray-700 dark:text-gray-200">48 : 12 =</span>
+            <input type="text" data-correct-answer="4" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <p class="text-cyan-600 dark:text-cyan-400 font-bold">↓ : 4 &nbsp;&nbsp; ↓ : 4</p>
+          <div class="flex items-center justify-center gap-1">
+            <input type="text" data-correct-answer="12" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">:</span>
+            <input type="text" data-correct-answer="3" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <input type="text" data-correct-answer="4" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+
+      <!-- Seconda riga -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Esercizio 1 -->
+        <div class="text-center space-y-2">
+          <div class="flex items-center justify-center gap-1">
+            <span class="text-gray-700 dark:text-gray-200">120 : 5 =</span>
+            <input type="text" data-correct-answer="24" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center justify-center gap-1">
+            <span class="text-cyan-600 dark:text-cyan-400 font-bold">↓ × 2</span>
+            <input type="text" data-correct-answer="× 2" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center justify-center gap-1">
+            <input type="text" data-correct-answer="240" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">:</span>
+            <input type="text" data-correct-answer="10" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <input type="text" data-correct-answer="24" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Esercizio 2 -->
+        <div class="text-center space-y-2">
+          <div class="flex items-center justify-center gap-1">
+            <span class="text-gray-700 dark:text-gray-200">950 : 50 =</span>
+            <input type="text" data-correct-answer="19" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center justify-center gap-1">
+            <input type="text" data-correct-answer=": 10" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <input type="text" data-correct-answer=": 10" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center justify-center gap-1">
+            <input type="text" data-correct-answer="95" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">:</span>
+            <input type="text" data-correct-answer="5" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <input type="text" data-correct-answer="19" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Esercizio 3 -->
+        <div class="text-center space-y-2">
+          <div class="flex items-center justify-center gap-1">
+            <span class="text-gray-700 dark:text-gray-200">480 : 30 =</span>
+            <input type="text" data-correct-answer="16" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center justify-center gap-1">
+            <input type="text" data-correct-answer=": 10" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <input type="text" data-correct-answer=": 10" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center justify-center gap-1">
+            <input type="text" data-correct-answer="48" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">:</span>
+            <input type="text" data-correct-answer="3" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <input type="text" data-correct-answer="16" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Dividi per 10, 100, 1000 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Calcola in riga applicando la proprietà invariantiva: dividi per 10, 100, 1 000 entrambi i termini della divisione. Segui l'esempio.
+      </p>
+
+      <!-- Esempio -->
+      <div class="p-3 bg-cyan-50 dark:bg-cyan-900 rounded-lg mb-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          350 : 50 = <span class="text-cyan-600 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-800 px-1 rounded">(350 : 10) : (50 : 10) = 35 : 5 = 7</span>
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">880 : 20 =</span>
+          <input type="text" data-correct-answer="44" class="flex-1 min-w-40 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">8 400 : 200 =</span>
+          <input type="text" data-correct-answer="42" class="flex-1 min-w-40 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">32 000 : 8 000 =</span>
+          <input type="text" data-correct-answer="4" class="flex-1 min-w-40 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Moltiplica per 4 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Applica la proprietà invariantiva come nell'esempio.
+      </p>
+
+      <!-- Esempio -->
+      <div class="p-3 bg-cyan-50 dark:bg-cyan-900 rounded-lg mb-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          750 : 25 = <span class="text-cyan-600 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-800 px-1 rounded">(750 × 4) : (25 × 4) = 3 000 : 100 = 30</span>
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">1 400 : 25 =</span>
+          <input type="text" data-correct-answer="56" class="flex-1 min-w-40 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">1 100 : 25 =</span>
+          <input type="text" data-correct-answer="44" class="flex-1 min-w-40 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200">2 200 : 25 =</span>
+          <input type="text" data-correct-answer="88" class="flex-1 min-w-40 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4: Scegli l'operatore -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Applica la proprietà invariantiva: scegli con una X l'operatore giusto per semplificare il calcolo ed esegui. Osserva l'esempio.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">Divisione</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">: 2</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">: 3</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">× 2</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-700 dark:text-gray-200">Calcolo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Esempio -->
+            <tr>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-gray-700 dark:text-gray-200">24 : 8</td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-800">×</td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center"></td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center"></td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-100 dark:bg-cyan-800">(24 : 2) : (8 : 2) = 12 : 4 = 3</td>
+            </tr>
+            <!-- 75 : 5 -->
+            <tr>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200">75 : 5</td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="false" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="false" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="true" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="text" data-correct-answer="15" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </td>
+            </tr>
+            <!-- 56 : 14 -->
+            <tr>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200">56 : 14</td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="true" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="false" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="false" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="text" data-correct-answer="4" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </td>
+            </tr>
+            <!-- 81 : 27 -->
+            <tr>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200">81 : 27</td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="false" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="true" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="checkbox" data-correct-answer="false" class="w-5 h-5">
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <input type="text" data-correct-answer="3" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

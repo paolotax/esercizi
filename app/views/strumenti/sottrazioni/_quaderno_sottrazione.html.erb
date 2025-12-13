@@ -1,0 +1,295 @@
+<%#
+  Partial per sottrazione in colonna con stile quaderno a quadretti
+  Supporta sia numeri interi che decimali (con virgola)
+
+  Parametri:
+    - sottrazione: oggetto Sottrazione con minuendo e sottraendo
+    - operation_title: (opzionale) titolo da mostrare sopra l'operazione
+    - title: (opzionale) titolo alternativo
+    - operation_id: (opzionale) ID per i campi del form
+%>
+
+<style>
+  /* Input dentro le celle */
+  .quaderno-input-sub {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1.25em;
+  }
+
+  /* Input prestiti - più piccoli */
+  .quaderno-input-borrow {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.875em;
+  }
+</style>
+
+<div class="inline-block" data-controller="quaderno-subtraction">
+
+  <% if defined?(operation_title) && operation_title.present? %>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= operation_title %></div>
+  <% elsif defined?(title) && title.present? %>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= title %></div>
+  <% elsif sottrazione.title.present? %>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= sottrazione.title %></div>
+  <% end %>
+
+  <%
+    # Calcola le colonne usando i tipi di colonna
+    column_types = sottrazione.quaderno_column_types
+    total_cols = column_types.length + 2  # +2 per colonne vuote ai lati
+    cell_size = "2.5em"
+    borrow_height = "1.5em"
+  %>
+
+  <!-- Griglia quaderno -->
+  <div class="inline-grid border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900"
+       style="grid-template-columns: repeat(<%= total_cols %>, <%= cell_size %>);">
+
+    <!-- Riga etichette o vuota sopra -->
+    <% if sottrazione.show_labels %>
+      <% labels = sottrazione.quaderno_labels %>
+      <% label_colors = sottrazione.quaderno_label_colors %>
+      <% label_idx = 0 %>
+      <!-- Cella vuota sinistra -->
+      <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+      <% column_types.each do |col_type| %>
+        <% if col_type == :sign %>
+          <!-- Cella vuota per il segno -->
+          <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+        <% elsif col_type == :comma %>
+          <!-- Cella virgola -->
+          <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center" style="height: <%= cell_size %>;">,</div>
+        <% else %>
+          <!-- Cella etichetta -->
+          <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center <%= label_colors[label_idx] %>" style="height: <%= cell_size %>;"><%= labels[label_idx] %></div>
+          <% label_idx += 1 %>
+        <% end %>
+      <% end %>
+      <!-- Cella vuota destra -->
+      <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% else %>
+      <% total_cols.times do |i| %>
+        <div class="<%= i < total_cols - 1 ? 'border-r' : '' %> border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+      <% end %>
+    <% end %>
+
+    <!-- Riga dei prestiti -->
+    <% if sottrazione.show_borrow %>
+      <% borrows = sottrazione.borrows %>
+      <% borrow_counter = 0 %>
+      <!-- Cella vuota sinistra -->
+      <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= borrow_height %>;"></div>
+      <% column_types.each do |col_type| %>
+        <% if col_type == :sign %>
+          <!-- Cella vuota per la colonna del segno -->
+          <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= borrow_height %>;"></div>
+        <% elsif col_type == :comma %>
+          <!-- Cella virgola nei prestiti (vuota, non richiede input) -->
+          <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= borrow_height %>;"></div>
+        <% else %>
+          <!-- Cella prestito -->
+          <% borrow = borrows[borrow_counter] || "" %>
+          <% is_last_digit_col = sottrazione.has_decimals? ? (borrow_counter == borrows.length - 1) : (borrow_counter == sottrazione.max_integer_digits - 1) %>
+          <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= is_last_digit_col ? '' : 'bg-red-50 dark:bg-red-900/30' %>"
+               style="height: <%= borrow_height %>;">
+            <input type="text"
+                   class="quaderno-input-borrow bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-red-600 dark:text-red-400"
+                   data-quaderno-subtraction-target="borrow"
+                   <% unless is_last_digit_col %>data-correct-answer="<%= borrow.to_s %>"<% end %>
+                   maxlength="1"
+                   <% if sottrazione.show_solution && borrow.present? %>value="<%= borrow %>"<% end %>
+                   <% if is_last_digit_col %>disabled<% end %>>
+          </div>
+          <% borrow_counter += 1 %>
+        <% end %>
+      <% end %>
+      <!-- Cella vuota destra -->
+      <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= borrow_height %>;"></div>
+    <% end %>
+
+    <!-- Riga del minuendo -->
+    <% minuend_digits = sottrazione.minuend_digits %>
+    <% digit_counter = 0 %>
+    <!-- Cella vuota sinistra -->
+    <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% column_types.each do |col_type| %>
+      <% if col_type == :sign %>
+        <!-- Cella segno - -->
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-red-600 dark:text-red-400 font-bold"
+             style="height: <%= cell_size %>;">-</div>
+      <% elsif col_type == :comma %>
+        <!-- Cella della virgola (input modificabile) -->
+        <div class="border-r border-b border-gray-300 dark:border-gray-600"
+             style="height: <%= cell_size %>;">
+          <input type="text"
+                 class="quaderno-input-sub bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-gray-700 dark:text-gray-300"
+                 data-quaderno-subtraction-target="comma"
+                 data-row-type="minuend"
+                 data-correct-answer=","
+                 maxlength="1"
+                 <% if sottrazione.show_minuend_subtrahend %>value=","<% end %>>
+        </div>
+      <% else %>
+        <!-- Cella cifra -->
+        <% digit = minuend_digits[digit_counter] || "" %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600"
+             style="height: <%= cell_size %>;">
+          <input type="text"
+                 class="quaderno-input-sub bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-gray-800 dark:text-gray-100"
+                 data-quaderno-subtraction-target="minuend"
+                 data-correct-answer="<%= digit %>"
+                 data-crossed-out="<%= sottrazione.crossed_out[digit_counter] %>"
+                 maxlength="1"
+                 <% if sottrazione.show_minuend_subtrahend && digit.present? %>value="<%= digit %>"<% end %>>
+        </div>
+        <% digit_counter += 1 %>
+      <% end %>
+    <% end %>
+    <!-- Cella vuota destra -->
+    <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+
+    <!-- Riga del sottraendo -->
+    <% subtrahend_digits = sottrazione.subtrahend_digits %>
+    <% digit_counter = 0 %>
+    <!-- Cella vuota sinistra -->
+    <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% column_types.each do |col_type| %>
+      <% if col_type == :sign %>
+        <!-- Cella = -->
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-red-600 dark:text-red-400 font-bold"
+             style="height: <%= cell_size %>;">=</div>
+      <% elsif col_type == :comma %>
+        <!-- Cella della virgola (input modificabile) -->
+        <div class="border-r border-b border-gray-300 dark:border-gray-600"
+             style="height: <%= cell_size %>;">
+          <input type="text"
+                 class="quaderno-input-sub bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-gray-700 dark:text-gray-300"
+                 data-quaderno-subtraction-target="comma"
+                 data-row-type="subtrahend"
+                 data-correct-answer=","
+                 maxlength="1"
+                 <% if sottrazione.show_minuend_subtrahend %>value=","<% end %>>
+        </div>
+      <% else %>
+        <!-- Cella cifra -->
+        <% digit = subtrahend_digits[digit_counter] || "" %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600"
+             style="height: <%= cell_size %>;">
+          <input type="text"
+                 class="quaderno-input-sub bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-gray-800 dark:text-gray-100"
+                 data-quaderno-subtraction-target="subtrahend"
+                 data-correct-answer="<%= digit %>"
+                 maxlength="1"
+                 <% if sottrazione.show_minuend_subtrahend && digit.present? %>value="<%= digit %>"<% end %>>
+        </div>
+        <% digit_counter += 1 %>
+      <% end %>
+    <% end %>
+    <!-- Cella vuota destra -->
+    <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+
+    <!-- Riga del risultato (con bordo superiore più spesso) -->
+    <% result_digits = sottrazione.result_digits %>
+    <% digit_counter = 0 %>
+    <!-- Cella vuota sinistra (senza bordo superiore spesso) -->
+    <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% column_types.each_with_index do |col_type, idx| %>
+      <% if col_type == :sign %>
+        <!-- Cella vuota (= è sul sottraendo) -->
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300"
+             style="height: <%= cell_size %>;"></div>
+      <% elsif col_type == :comma %>
+        <!-- Cella della virgola nel risultato (input modificabile) -->
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300"
+             style="height: <%= cell_size %>;">
+          <input type="text"
+                 class="quaderno-input-sub bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-gray-700 dark:text-gray-300"
+                 data-quaderno-subtraction-target="comma"
+                 data-row-type="result"
+                 data-correct-answer=","
+                 maxlength="1"
+                 <% if sottrazione.show_solution %>value=","<% end %>>
+        </div>
+      <% else %>
+        <!-- Cella cifra risultato -->
+        <% digit = result_digits[digit_counter] || "" %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300"
+             style="height: <%= cell_size %>;">
+          <input type="text"
+                 <% if defined?(operation_id) %>name="results[<%= operation_id %>][result][<%= idx %>]"<% end %>
+                 class="quaderno-input-sub bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-gray-800 dark:text-gray-100"
+                 data-quaderno-subtraction-target="result"
+                 data-correct-answer="<%= digit %>"
+                 maxlength="1"
+                 <% if sottrazione.show_solution && digit.present? %>value="<%= digit %>"<% end %>>
+        </div>
+        <% digit_counter += 1 %>
+      <% end %>
+    <% end %>
+    <!-- Cella vuota destra (senza bordo superiore spesso) -->
+    <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+
+    <!-- Riga vuota sotto -->
+    <% total_cols.times do |i| %>
+      <div class="<%= i < total_cols - 1 ? 'border-r' : '' %> border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% end %>
+
+  </div>
+
+  <!-- Toolbar con pulsanti -->
+  <% if sottrazione.show_toolbar %>
+    <div class="print-hidden flex justify-center gap-4 mt-6">
+      <!-- Cancella -->
+      <button type="button"
+              data-action="click->quaderno-subtraction#clearGrid"
+              class="w-14 h-14 rounded-full bg-gray-500 hover:bg-gray-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              title="Cancella">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+      </button>
+
+      <!-- Mostra Numeri -->
+      <button type="button"
+              data-action="click->quaderno-subtraction#showNumbers"
+              class="w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              title="Mostra Numeri">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      </button>
+
+      <!-- Mostra Risultato -->
+      <button type="button"
+              data-action="click->quaderno-subtraction#showResult"
+              class="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              title="Mostra Risultato">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </button>
+
+      <!-- Verifica -->
+      <button type="button"
+              data-action="click->quaderno-subtraction#verifyAnswers"
+              class="w-14 h-14 rounded-full bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              title="Verifica">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+        </svg>
+      </button>
+    </div>
+  <% end %>
+</div>

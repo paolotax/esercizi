@@ -124,7 +124,8 @@ export default class extends Controller {
           const span = label.querySelector('span')
           if (span) {
             span.classList.remove("border-red-500", "border-green-500", "border-yellow-500",
-                                  "bg-red-100", "bg-green-100", "bg-yellow-50")
+                                  "bg-red-100", "bg-green-100", "bg-yellow-50",
+                                  "dark:bg-red-900/60", "dark:bg-green-900/60", "dark:bg-yellow-900/50")
           }
         }
 
@@ -135,7 +136,7 @@ export default class extends Controller {
           if (isChecked && label) {
             const span = label.querySelector('span')
             if (span) {
-              span.classList.add("border-green-500", "bg-green-100")
+              span.classList.add("border-green-500", "bg-green-100", "dark:bg-green-900/60")
             }
           }
         } else {
@@ -147,12 +148,12 @@ export default class extends Controller {
             if (span) {
               if (isChecked) {
                 // Checked but shouldn't be
-                span.classList.add("border-red-500", "bg-red-100")
+                span.classList.add("border-red-500", "bg-red-100", "dark:bg-red-900/60")
                 span.classList.add("animate-shake")
                 setTimeout(() => span.classList.remove("animate-shake"), 500)
               } else if (shouldBeChecked) {
                 // Should be checked but isn't
-                span.classList.add("border-yellow-500", "bg-yellow-50")
+                span.classList.add("border-yellow-500", "bg-yellow-50", "dark:bg-yellow-900/50")
               }
             }
           }
@@ -212,11 +213,13 @@ export default class extends Controller {
             const label = item.closest('label')
             if (label) {
               label.classList.remove("bg-yellow-50", "bg-green-50", "bg-red-50",
+                                   "dark:bg-yellow-900/50", "dark:bg-green-900/50", "dark:bg-red-900/50",
                                    "border-2", "border-yellow-500", "border-green-500", "border-red-500",
                                    "rounded-lg", "px-2", "py-1")
             }
           } else if (group.type === 'button') {
             item.classList.remove("bg-yellow-50", "bg-green-50", "bg-red-50",
+                                 "dark:bg-yellow-900/50", "dark:bg-green-900/50", "dark:bg-red-900/50",
                                  "border-yellow-500", "border-green-500", "border-red-500",
                                  "bg-blue-500", "border-blue-500", "text-white")
           }
@@ -230,10 +233,10 @@ export default class extends Controller {
             if (group.type === 'radio') {
               const label = item.closest('label')
               if (label) {
-                label.classList.add("bg-yellow-50", "border-2", "border-yellow-500", "rounded-lg", "px-2", "py-1")
+                label.classList.add("bg-yellow-50", "dark:bg-yellow-900/50", "border-2", "border-yellow-500", "rounded-lg", "px-2", "py-1")
               }
             } else if (group.type === 'button') {
-              item.classList.add("bg-yellow-50", "border-yellow-500")
+              item.classList.add("bg-yellow-50", "dark:bg-yellow-900/50", "border-yellow-500")
             }
           })
         } else {
@@ -244,11 +247,11 @@ export default class extends Controller {
             if (group.type === 'radio') {
               const label = selectedItem.closest('label')
               if (label) {
-                label.classList.add("bg-green-50", "border-2", "border-green-500", "rounded-lg", "px-2", "py-1")
+                label.classList.add("bg-green-50", "dark:bg-green-900/50", "border-2", "border-green-500", "rounded-lg", "px-2", "py-1")
               }
             } else if (group.type === 'button') {
               selectedItem.classList.remove('bg-blue-500', 'border-blue-500', 'text-white')
-              selectedItem.classList.add("bg-green-50", "border-green-500")
+              selectedItem.classList.add("bg-green-50", "dark:bg-green-900/50", "border-green-500")
             }
           } else {
             radioIncorrect++
@@ -257,13 +260,13 @@ export default class extends Controller {
             if (group.type === 'radio') {
               const label = selectedItem.closest('label')
               if (label) {
-                label.classList.add("bg-red-50", "border-2", "border-red-500", "rounded-lg", "px-2", "py-1")
+                label.classList.add("bg-red-50", "dark:bg-red-900/50", "border-2", "border-red-500", "rounded-lg", "px-2", "py-1")
                 label.classList.add("animate-shake")
                 setTimeout(() => label.classList.remove("animate-shake"), 500)
               }
             } else if (group.type === 'button') {
               selectedItem.classList.remove('bg-blue-500', 'border-blue-500', 'text-white')
-              selectedItem.classList.add("bg-red-50", "border-red-500")
+              selectedItem.classList.add("bg-red-50", "dark:bg-red-900/50", "border-red-500")
               selectedItem.classList.add("animate-shake")
               setTimeout(() => selectedItem.classList.remove("animate-shake"), 500)
             }
@@ -274,10 +277,10 @@ export default class extends Controller {
                 if (group.type === 'radio') {
                   const correctLabel = item.closest('label')
                   if (correctLabel) {
-                    correctLabel.classList.add("bg-yellow-50", "border-2", "border-yellow-500", "rounded-lg", "px-2", "py-1")
+                    correctLabel.classList.add("bg-yellow-50", "dark:bg-yellow-900/50", "border-2", "border-yellow-500", "rounded-lg", "px-2", "py-1")
                   }
                 } else if (group.type === 'button') {
-                  item.classList.add("bg-yellow-50", "border-yellow-500")
+                  item.classList.add("bg-yellow-50", "dark:bg-yellow-900/50", "border-yellow-500")
                 }
               }
             })
@@ -310,18 +313,19 @@ export default class extends Controller {
         // Remove all previous styling
         select.classList.remove("border-yellow-500", "border-green-500", "border-red-500",
                                "border-2", "border-4",
-                               "bg-yellow-50", "bg-green-50", "bg-red-50")
+                               "bg-yellow-50", "bg-green-50", "bg-red-50",
+                               "dark:bg-yellow-900/50", "dark:bg-green-900/50", "dark:bg-red-900/50")
 
         if (userAnswer === "" || userAnswer === "?") {
           selectEmpty++
-          select.classList.add("border-yellow-500", "border-4", "bg-yellow-50")
+          select.classList.add("border-yellow-500", "border-4", "bg-yellow-50", "dark:bg-yellow-900/50")
         } else if (userAnswer === correctAnswer) {
           selectCorrect++
-          select.classList.add("border-green-500", "border-4", "bg-green-50")
+          select.classList.add("border-green-500", "border-4", "bg-green-50", "dark:bg-green-900/50")
         } else {
           selectIncorrect++
           allCorrect = false
-          select.classList.add("border-red-500", "border-4", "bg-red-50")
+          select.classList.add("border-red-500", "border-4", "bg-red-50", "dark:bg-red-900/50")
 
           // Show shake animation
           select.classList.add("animate-shake")
@@ -442,6 +446,7 @@ export default class extends Controller {
           // Remove previous styling (keep line-through from user selection)
           groupWords.forEach(w => {
             w.classList.remove('bg-green-100', 'bg-red-100', 'bg-yellow-100',
+                              'dark:bg-green-900/60', 'dark:bg-red-900/60', 'dark:bg-yellow-900/60',
                               'border-2', 'border-green-500', 'border-red-500', 'border-yellow-500')
             // Don't remove line-through here - it's part of the user's selection state
           })
@@ -451,7 +456,7 @@ export default class extends Controller {
             allCorrect = false
             // Highlight all words in group to show selection needed
             groupWords.forEach(w => {
-              w.classList.add('bg-yellow-100', 'border-2', 'border-yellow-500')
+              w.classList.add('bg-yellow-100', 'dark:bg-yellow-900/60', 'border-2', 'border-yellow-500')
             })
           } else {
             const isCorrect = selectedWord.dataset.correct === "true"
@@ -459,7 +464,7 @@ export default class extends Controller {
             if (isCorrect) {
               wordChoiceCorrect++
               selectedWord.classList.remove('bg-pink-200')
-              selectedWord.classList.add('bg-green-100', 'border-2', 'border-green-500')
+              selectedWord.classList.add('bg-green-100', 'dark:bg-green-900/60', 'border-2', 'border-green-500')
 
               // Remove line-through from non-selected words in correct answer groups
               groupWords.forEach(w => {
@@ -471,7 +476,7 @@ export default class extends Controller {
               wordChoiceIncorrect++
               allCorrect = false
               selectedWord.classList.remove('bg-pink-200')
-              selectedWord.classList.add('bg-red-100', 'border-2', 'border-red-500')
+              selectedWord.classList.add('bg-red-100', 'dark:bg-red-900/60', 'border-2', 'border-red-500')
               selectedWord.classList.add('animate-shake')
               setTimeout(() => selectedWord.classList.remove('animate-shake'), 500)
 
@@ -479,7 +484,7 @@ export default class extends Controller {
               const correctWord = groupWords.find(w => w.dataset.correct === "true")
               if (correctWord) {
                 correctWord.classList.remove('line-through', 'opacity-40', 'text-gray-500', 'cursor-not-allowed')
-                correctWord.classList.add('bg-yellow-100', 'border-2', 'border-yellow-500')
+                correctWord.classList.add('bg-yellow-100', 'dark:bg-yellow-900/60', 'border-2', 'border-yellow-500')
               }
             }
           }
@@ -509,24 +514,65 @@ export default class extends Controller {
         const correctAnswer = input.dataset.correctAnswer.trim().replace(/\s+/g, '')
         const userAnswer = input.value.trim().replace(/\s+/g, '')
 
+        // Check if this is a quaderno input
+        const isQuadernoInput = input.hasAttribute('data-quaderno-addition-target') ||
+            input.hasAttribute('data-quaderno-subtraction-target') ||
+            input.hasAttribute('data-quaderno-multiplication-target')
+
+        // For quaderno inputs: use simpler styling and handle empty cells correctly
+        if (isQuadernoInput) {
+          input.classList.remove('bg-transparent', 'bg-green-100', 'bg-red-100', 'bg-yellow-100',
+                                 'dark:bg-green-900/50', 'dark:bg-red-900/50', 'dark:bg-yellow-900/50')
+
+          // Cell should be empty
+          if (correctAnswer === '') {
+            if (userAnswer === '') {
+              // Correct: cell is empty as expected
+              input.classList.add('bg-transparent')
+            } else {
+              // Error: user entered something in a cell that should be empty
+              input.classList.add('bg-red-100', 'dark:bg-red-900/50')
+              inputsIncorrect++
+              allCorrect = false
+            }
+            return
+          }
+
+          // Cell has a value
+          if (userAnswer === '') {
+            inputsEmpty++
+            input.classList.add('bg-yellow-100', 'dark:bg-yellow-900/50')
+          } else if (userAnswer === correctAnswer) {
+            inputsCorrect++
+            input.classList.add('bg-green-100', 'dark:bg-green-900/50')
+          } else {
+            inputsIncorrect++
+            allCorrect = false
+            input.classList.add('bg-red-100', 'dark:bg-red-900/50')
+          }
+          return
+        }
+
+        // Regular inputs (non-quaderno)
         // Remove all previous styling (including transparent backgrounds and borders)
         input.classList.remove("border-yellow-500", "border-green-500", "border-red-500",
                                "border-gray-300", "border-2", "border-4", "border-transparent",
                                "bg-yellow-50", "bg-green-50", "bg-red-50",
                                "bg-yellow-100", "bg-green-100", "bg-red-100",
+                               "dark:bg-yellow-900/50", "dark:bg-green-900/50", "dark:bg-red-900/50",
                                "bg-white", "bg-white/60", "bg-white/80",
                                "text-black", "text-gray-900")
 
         if (userAnswer === "") {
           inputsEmpty++
-          input.classList.add("border-yellow-500", "border-4", "bg-yellow-50")
+          input.classList.add("border-yellow-500", "border-4", "bg-yellow-50", "dark:bg-yellow-900/50")
         } else if (userAnswer === correctAnswer) {
           inputsCorrect++
-          input.classList.add("border-green-500", "border-4", "bg-green-50")
+          input.classList.add("border-green-500", "border-4", "bg-green-50", "dark:bg-green-900/50")
         } else {
           inputsIncorrect++
           allCorrect = false
-          input.classList.add("border-red-500", "border-4", "bg-red-50")
+          input.classList.add("border-red-500", "border-4", "bg-red-50", "dark:bg-red-900/50")
 
           // Show shake animation
           input.classList.add("animate-shake")
@@ -586,8 +632,8 @@ export default class extends Controller {
           if (!isCorrect) {
             groupCorrect = false
             // Highlight incorrect answer
-            option.classList.add("bg-red-100", "border-2", "border-red-500", "rounded-lg")
-            
+            option.classList.add("bg-red-100", "dark:bg-red-900/60", "border-2", "border-red-500", "rounded-lg")
+
             // Show shake animation
             option.classList.add("animate-shake")
             setTimeout(() => {
@@ -595,16 +641,16 @@ export default class extends Controller {
             }, 500)
           } else {
             // Highlight correct answer
-            option.classList.add("bg-green-100", "border-2", "border-green-500", "rounded-lg")
+            option.classList.add("bg-green-100", "dark:bg-green-900/60", "border-2", "border-green-500", "rounded-lg")
           }
         } else if (isCorrect) {
           // Show the correct answer if not selected
           groupCorrect = false
-          option.classList.add("bg-yellow-100", "border-2", "border-yellow-500", "rounded-lg")
+          option.classList.add("bg-yellow-100", "dark:bg-yellow-900/60", "border-2", "border-yellow-500", "rounded-lg")
           const correctHint = option.querySelector(".correct-hint")
           if (!correctHint) {
             const hint = document.createElement("span")
-            hint.className = "correct-hint text-sm text-yellow-700 ml-2 block mt-1"
+            hint.className = "correct-hint text-sm text-yellow-700 dark:text-yellow-300 ml-2 block mt-1"
             // hint.textContent = "(Risposta corretta)"
             // Try to find a container element (div or span), otherwise append to option
             const container = option.querySelector("div") || option.querySelector("span") || option
@@ -643,19 +689,19 @@ export default class extends Controller {
     }
 
     const feedbackDiv = document.createElement("div")
-    feedbackDiv.className = "exercise-feedback my-6 p-6 rounded-lg shadow-lg " + 
-                            (allCorrect ? "bg-green-100 border-4 border-green-500" : "bg-orange-100 border-4 border-orange-500")
-    
+    feedbackDiv.className = "exercise-feedback my-6 p-6 rounded-lg shadow-lg " +
+                            (allCorrect ? "bg-green-100 dark:bg-green-900/40 border-4 border-green-500" : "bg-orange-100 dark:bg-orange-900/40 border-4 border-orange-500")
+
     const title = document.createElement("h2")
-    title.className = "text-2xl font-bold mb-4 " + (allCorrect ? "text-green-800" : "text-orange-800")
+    title.className = "text-2xl font-bold mb-4 " + (allCorrect ? "text-green-800 dark:text-green-200" : "text-orange-800 dark:text-orange-200")
     title.textContent = allCorrect ? "🎉 Eccellente! Tutte le risposte sono corrette!" : "📝 Controlla le risposte evidenziate"
-    
+
     const messageList = document.createElement("ul")
     messageList.className = "space-y-2"
-    
+
     messages.forEach(msg => {
       const li = document.createElement("li")
-      li.className = "text-lg " + (allCorrect ? "text-green-700" : "text-orange-700")
+      li.className = "text-lg " + (allCorrect ? "text-green-700 dark:text-green-300" : "text-orange-700 dark:text-orange-300")
       li.textContent = msg
       messageList.appendChild(li)
     })
@@ -717,11 +763,11 @@ export default class extends Controller {
 
       options.forEach(option => {
         const isCorrect = option.dataset.correct === "true"
-        
+
         if (isCorrect) {
           // Highlight correct answers in green
-          option.classList.add("bg-green-100", "border-2", "border-green-500", "rounded-lg")
-          
+          option.classList.add("bg-green-100", "dark:bg-green-900/60", "border-2", "border-green-500", "rounded-lg")
+
           // For exercise-group, show the checkmark
           if (!isCardGroup) {
             const checkmark = option.querySelector("[data-exercise-group-target=\"checkmark\"]")
@@ -730,7 +776,7 @@ export default class extends Controller {
             }
           } else {
             // For card-selector, add the selection class
-            option.classList.add("bg-orange-100")
+            option.classList.add("bg-orange-100", "dark:bg-orange-900/60")
           }
         }
       })
@@ -747,7 +793,7 @@ export default class extends Controller {
         if (label) {
           const span = label.querySelector('span')
           if (span) {
-            span.classList.add("border-green-500", "bg-green-100")
+            span.classList.add("border-green-500", "bg-green-100", "dark:bg-green-900/60")
           }
         }
       } else {
@@ -777,7 +823,7 @@ export default class extends Controller {
           if (isCorrect) {
             radio.checked = true
             if (label) {
-              label.classList.add("bg-green-50", "border-2", "border-green-500", "rounded-lg", "px-2", "py-1")
+              label.classList.add("bg-green-50", "dark:bg-green-900/50", "border-2", "border-green-500", "rounded-lg", "px-2", "py-1")
             }
           }
         })
@@ -800,7 +846,7 @@ export default class extends Controller {
 
           if (isCorrect) {
             button.classList.remove('bg-transparent', 'border-gray-300', 'bg-blue-500', 'border-blue-500', 'text-white')
-            button.classList.add("bg-green-50", "border-green-500")
+            button.classList.add("bg-green-50", "dark:bg-green-900/50", "border-green-500")
           }
         })
       })
@@ -811,7 +857,7 @@ export default class extends Controller {
     selectElements.forEach(select => {
       const correctAnswer = select.dataset.correctAnswer.trim()
       select.value = correctAnswer
-      select.classList.add("border-green-500", "border-4", "bg-green-50")
+      select.classList.add("border-green-500", "border-4", "bg-green-50", "dark:bg-green-900/50")
     })
 
     // Fill in correct answers for text input fields
@@ -819,6 +865,21 @@ export default class extends Controller {
 
     textInputFields.forEach(input => {
       const correctAnswer = input.dataset.correctAnswer.trim()
+
+      // Check if this is a quaderno input
+      const isQuadernoInput = input.hasAttribute('data-quaderno-addition-target') ||
+          input.hasAttribute('data-quaderno-subtraction-target') ||
+          input.hasAttribute('data-quaderno-multiplication-target')
+
+      // For quaderno inputs: only fill non-empty values and use simpler styling
+      if (isQuadernoInput) {
+        if (correctAnswer !== '') {
+          input.value = correctAnswer
+          input.classList.remove('bg-transparent', 'bg-yellow-100', 'bg-red-100', 'dark:bg-yellow-900/50', 'dark:bg-red-900/50')
+          input.classList.add('bg-green-100', 'dark:bg-green-900/50')
+        }
+        return
+      }
 
       // Remove ALL background classes
       input.classList.remove("bg-transparent", "bg-white/60", "bg-white/80", "bg-white")
@@ -830,7 +891,7 @@ export default class extends Controller {
         input.textContent = correctAnswer
       }
 
-      input.classList.add("border-green-500", "border-4", "bg-green-50", "text-gray-900", "font-bold")
+      input.classList.add("border-green-500", "border-4", "bg-green-50", "dark:bg-green-900/50", "text-gray-900", "dark:text-white", "font-bold")
     })
 
     // Show correct answers for word-highlighter
@@ -862,11 +923,11 @@ export default class extends Controller {
         if (isCorrect) {
           word.classList.remove('hover:bg-pink-100', 'line-through', 'opacity-40', 'text-gray-500', 'cursor-not-allowed')
           // Add both bg-pink-200 (for selection detection) and green styling (for visual feedback)
-          word.classList.add('bg-pink-200', 'bg-green-100', 'border-2', 'border-green-500', 'font-bold', 'underline')
+          word.classList.add('bg-pink-200', 'bg-green-100', 'dark:bg-green-900/60', 'border-2', 'border-green-500', 'font-bold', 'underline')
         } else {
           // Strike through incorrect words
           word.classList.remove('hover:bg-pink-100', 'bg-pink-200')
-          word.classList.add('line-through', 'opacity-40', 'text-gray-500', 'cursor-not-allowed')
+          word.classList.add('line-through', 'opacity-40', 'text-gray-500', 'dark:text-gray-400', 'cursor-not-allowed')
         }
       })
     })
@@ -916,14 +977,14 @@ export default class extends Controller {
     }
 
     const feedbackDiv = document.createElement("div")
-    feedbackDiv.className = "exercise-feedback my-6 p-6 rounded-lg shadow-lg bg-blue-100 border-4 border-blue-500"
-    
+    feedbackDiv.className = "exercise-feedback my-6 p-6 rounded-lg shadow-lg bg-blue-100 dark:bg-blue-900/40 border-4 border-blue-500"
+
     const title = document.createElement("h2")
-    title.className = "text-2xl font-bold mb-4 text-blue-800"
+    title.className = "text-2xl font-bold mb-4 text-blue-800 dark:text-blue-200"
     title.textContent = "💡 Soluzioni mostrate!"
-    
+
     const message = document.createElement("p")
-    message.className = "text-lg text-blue-700"
+    message.className = "text-lg text-blue-700 dark:text-blue-300"
     message.textContent = "Tutte le risposte corrette sono evidenziate in verde."
     
     feedbackDiv.appendChild(title)
@@ -941,11 +1002,12 @@ export default class extends Controller {
     const options = this.element.querySelectorAll("[data-exercise-group-target=\"option\"]")
     options.forEach(option => {
       option.classList.remove("bg-red-100", "bg-green-100", "bg-yellow-100",
+                              "dark:bg-red-900/60", "dark:bg-green-900/60", "dark:bg-yellow-900/60",
                               "border-2", "border-red-500", "border-green-500",
                               "border-yellow-500", "rounded-lg")
       const hint = option.querySelector(".correct-hint")
       if (hint) hint.remove()
-      
+
       // Hide checkmarks
       const checkmark = option.querySelector("[data-exercise-group-target=\"checkmark\"]")
       if (checkmark) {
@@ -957,8 +1019,9 @@ export default class extends Controller {
     const cards = this.element.querySelectorAll("[data-card-selector-target=\"card\"]")
     cards.forEach(card => {
       card.classList.remove("bg-red-100", "bg-green-100", "bg-yellow-100",
+                            "dark:bg-red-900/60", "dark:bg-green-900/60", "dark:bg-yellow-900/60",
                             "border-2", "border-red-500", "border-green-500",
-                            "border-yellow-500", "bg-orange-100")
+                            "border-yellow-500", "bg-orange-100", "dark:bg-orange-900/60")
     })
 
     // Remove highlights from checkboxes and uncheck them
@@ -970,7 +1033,8 @@ export default class extends Controller {
         const span = label.querySelector('span')
         if (span) {
           span.classList.remove("border-red-500", "border-green-500", "border-yellow-500",
-                                "bg-red-100", "bg-green-100", "bg-yellow-50")
+                                "bg-red-100", "bg-green-100", "bg-yellow-50",
+                                "dark:bg-red-900/60", "dark:bg-green-900/60", "dark:bg-yellow-900/50")
         }
       }
     })
@@ -982,6 +1046,7 @@ export default class extends Controller {
       const label = radio.closest('label')
       if (label) {
         label.classList.remove("bg-yellow-50", "bg-green-50", "bg-red-50",
+                              "dark:bg-yellow-900/50", "dark:bg-green-900/50", "dark:bg-red-900/50",
                               "border-2", "border-yellow-500", "border-green-500", "border-red-500",
                               "rounded-lg", "px-2", "py-1")
       }
@@ -991,6 +1056,7 @@ export default class extends Controller {
     const buttonAnswers = this.element.querySelectorAll('button[data-question][data-correct-answer]')
     buttonAnswers.forEach(button => {
       button.classList.remove("bg-blue-500", "bg-yellow-50", "bg-green-50", "bg-red-50",
+                             "dark:bg-yellow-900/50", "dark:bg-green-900/50", "dark:bg-red-900/50",
                              "border-blue-500", "border-yellow-500", "border-green-500", "border-red-500", "text-white")
       button.classList.add("bg-transparent", "border-gray-300")
     })
@@ -1000,6 +1066,7 @@ export default class extends Controller {
     selectElements.forEach(select => {
       select.classList.remove("border-yellow-500", "border-green-500", "border-red-500",
                              "border-4", "bg-yellow-50", "bg-green-50", "bg-red-50",
+                             "dark:bg-yellow-900/50", "dark:bg-green-900/50", "dark:bg-red-900/50",
                              "border-2")
       select.value = ""
     })
@@ -1007,9 +1074,18 @@ export default class extends Controller {
     // Remove highlights from text input fields and restore original styling
     const textInputFields = this.element.querySelectorAll("input[type='text'][data-correct-answer], textarea[data-correct-answer]")
     textInputFields.forEach(input => {
+      // Skip inputs that belong to quaderno controllers (they have their own reset)
+      if (input.hasAttribute('data-quaderno-addition-target') ||
+          input.hasAttribute('data-quaderno-subtraction-target') ||
+          input.hasAttribute('data-quaderno-multiplication-target')) {
+        return
+      }
+
       input.classList.remove("border-yellow-500", "border-green-500", "border-red-500",
                              "border-4", "bg-yellow-50", "bg-green-50", "bg-red-50",
-                             "border-gray-300", "border-gray-500", "border-2")
+                             "dark:bg-yellow-900/50", "dark:bg-green-900/50", "dark:bg-red-900/50",
+                             "border-gray-300", "border-gray-500", "border-2",
+                             "text-gray-900", "dark:text-white", "font-bold")
       input.value = ""
     })
 
@@ -1044,8 +1120,9 @@ export default class extends Controller {
     const wordChoiceWords = this.element.querySelectorAll("[data-word-choice-target=\"word\"]")
     wordChoiceWords.forEach(word => {
       word.classList.remove('bg-pink-200', 'bg-green-100', 'bg-red-100', 'bg-yellow-100',
+                            'dark:bg-green-900/60', 'dark:bg-red-900/60', 'dark:bg-yellow-900/60',
                             'border-2', 'border-green-500', 'border-red-500', 'border-yellow-500',
-                            'font-bold', 'underline', 'line-through', 'opacity-40', 'text-gray-500', 'cursor-not-allowed')
+                            'font-bold', 'underline', 'line-through', 'opacity-40', 'text-gray-500', 'dark:text-gray-400', 'cursor-not-allowed')
       word.classList.add('cursor-pointer', 'hover:bg-pink-100')
     })
 

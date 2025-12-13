@@ -1,0 +1,184 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione teoria -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        Sai come funziona il lavoro del commerciante? Vediamolo insieme.
+      </p>
+
+      <!-- Box teoria con i tre concetti -->
+      <div class="p-4 bg-cyan-50 dark:bg-cyan-900/30 rounded-2xl">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Spesa -->
+          <div class="text-center">
+            <%= image_tag "nvi4_mat/p103/p103_01.jpg", class: "max-w-full h-auto mx-auto mb-4 rounded-lg dark:bg-white dark:rounded-lg dark:p-1", alt: "Spesa - acquisto zaino" %>
+            <p class="text-gray-700 dark:text-gray-200 mb-3">
+              <strong class="text-cyan-600 dark:text-cyan-400">Spesa</strong>: ciò che il commerciante spende acquistando uno zaino all'ingrosso.
+            </p>
+            <!-- Diagramma spesa -->
+            <div class="inline-block">
+              <div class="flex gap-4 mb-2">
+                <div class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">ricavo</div>
+                <div class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">guadagno</div>
+              </div>
+              <div class="text-gray-700 dark:text-gray-200 mb-2">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+              <div class="text-2xl text-orange-500 font-bold mb-2">–</div>
+              <div class="text-gray-700 dark:text-gray-200 mb-2">↓</div>
+              <div class="px-4 py-2 bg-cyan-500 text-white rounded font-bold">spesa</div>
+            </div>
+          </div>
+
+          <!-- Ricavo -->
+          <div class="text-center">
+            <%= image_tag "nvi4_mat/p103/p103_02.jpg", class: "max-w-full h-auto mx-auto mb-4 rounded-lg dark:bg-white dark:rounded-lg dark:p-1", alt: "Ricavo - vendita zaino" %>
+            <p class="text-gray-700 dark:text-gray-200 mb-3">
+              <strong class="text-green-600 dark:text-green-400">Ricavo</strong>: ciò che il commerciante incassa quando vende uno zaino.
+            </p>
+            <!-- Diagramma ricavo -->
+            <div class="inline-block">
+              <div class="flex gap-4 mb-2">
+                <div class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">spesa</div>
+                <div class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">guadagno</div>
+              </div>
+              <div class="text-gray-700 dark:text-gray-200 mb-2">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+              <div class="text-2xl text-blue-500 font-bold mb-2">+</div>
+              <div class="text-gray-700 dark:text-gray-200 mb-2">↓</div>
+              <div class="px-4 py-2 bg-green-500 text-white rounded font-bold">ricavo</div>
+            </div>
+          </div>
+
+          <!-- Guadagno -->
+          <div class="text-center">
+            <%= image_tag "nvi4_mat/p103/p103_03.jpg", class: "max-w-full h-auto mx-auto mb-4 rounded-lg dark:bg-white dark:rounded-lg dark:p-1", alt: "Guadagno - differenza" %>
+            <p class="text-gray-700 dark:text-gray-200 mb-3">
+              <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">Guadagno</strong>: differenza tra il ricavo e la spesa, cioè quanti soldi restano al commerciante.
+            </p>
+            <!-- Diagramma guadagno -->
+            <div class="inline-block">
+              <div class="flex gap-4 mb-2">
+                <div class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">ricavo</div>
+                <div class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">spesa</div>
+              </div>
+              <div class="text-gray-700 dark:text-gray-200 mb-2">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+              <div class="text-2xl text-orange-500 font-bold mb-2">–</div>
+              <div class="text-gray-700 dark:text-gray-200 mb-2">↓</div>
+              <div class="px-4 py-2 bg-<%= @pagina.base_color %>-500 text-white rounded font-bold">guadagno</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Container esercizi -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+
+      <!-- Esercizio 1 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Completa la tabella.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-3 bg-cyan-500 text-white border-2 border-cyan-400 dark:border-cyan-600 font-bold">spesa</th>
+                <th class="p-3 bg-cyan-500 text-white border-2 border-cyan-400 dark:border-cyan-600 font-bold">guadagno</th>
+                <th class="p-3 bg-cyan-500 text-white border-2 border-cyan-400 dark:border-cyan-600 font-bold">ricavo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">€ 15</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">€ 4</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <div class="flex items-center justify-center gap-1">
+                    <span class="text-gray-700 dark:text-gray-200">€</span>
+                    <input type="text" data-correct-answer="19" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <div class="flex items-center justify-center gap-1">
+                    <span class="text-gray-700 dark:text-gray-200">€</span>
+                    <input type="text" data-correct-answer="175" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </div>
+                </td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">€ 25</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">€ 200</td>
+              </tr>
+              <tr>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">€ 39</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <div class="flex items-center justify-center gap-1">
+                    <span class="text-gray-700 dark:text-gray-200">€</span>
+                    <input type="text" data-correct-answer="11" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </div>
+                </td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">€ 50</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Un negoziante vuole guadagnare € 17 su una maglia che gli è costata € 35. A che prezzo dovrà rivenderla?
+        </p>
+        <div class="flex items-center justify-end gap-2">
+          <span class="shrink-0 text-gray-700 dark:text-gray-200">€</span>
+          <input type="text" data-correct-answer="52" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+      </div>
+
+      <!-- Esercizio 3 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Un negoziante compra 25 felpe e spende € 475. Dalla loro vendita ricava in tutto € 700. Quanto guadagna in tutto? E su ogni felpa?
+        </p>
+        <div class="space-y-2">
+          <div class="flex items-center justify-end gap-2">
+            <span class="shrink-0 text-gray-700 dark:text-gray-200">Guadagno totale: €</span>
+            <input type="text" data-correct-answer="225" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center justify-end gap-2">
+            <span class="shrink-0 text-gray-700 dark:text-gray-200">Guadagno per felpa: €</span>
+            <input type="text" data-correct-answer="9" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+
+      <!-- AllenaMente -->
+      <div class="p-4 bg-white dark:bg-blue-900/40 rounded-2xl border-3 border-blue-400 dark:border-blue-600">
+        <p class="font-bold text-gray-800 dark:text-blue-300 mb-2">
+          <span class="bg-yellow-400 text-gray-800 px-2 py-1 rounded">AllenaMente!</span>
+        </p>
+        <p class="text-gray-700 dark:text-gray-200">
+          Una commerciante compra 50 confezioni di biscotti a € 125. Le rivende a € 2 ciascuna e finisce subito tutte le confezioni.<br>
+          Dovrebbe essere contenta, ma qualcosa non va.<br>
+          Prova a spiegare che cosa è successo.
+        </p>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [231, 232] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

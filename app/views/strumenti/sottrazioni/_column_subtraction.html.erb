@@ -28,26 +28,33 @@
     background-position: center;
     background-repeat: no-repeat;
   }
+
+  /* Dark mode: linee bianche per la barratura */
+  .dark [data-column-subtraction-target="input"].line-through {
+    background-image:
+      linear-gradient(to bottom right, transparent calc(50% - 1px), #ffffff calc(50% - 1px), #ffffff calc(50% + 1px), transparent calc(50% + 1px)),
+      linear-gradient(to bottom left, transparent calc(50% - 1px), #ffffff calc(50% - 1px), #ffffff calc(50% + 1px), transparent calc(50% + 1px));
+  }
 </style>
 
 <div class="text-center" data-controller="column-subtraction">
   <% if defined?(operation_title) && operation_title.present? %>
-    <div class="font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= operation_title %></div>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= operation_title %></div>
   <% elsif defined?(title) && title.present? %>
-    <div class="font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= title %></div>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= title %></div>
   <% elsif sottrazione.title.present? %>
-    <div class="font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= sottrazione.title %></div>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= sottrazione.title %></div>
   <% end %>
 
   <div class="flex items-start justify-center gap-2">
-    <div class="inline-block border-4 border-red-400 rounded-lg bg-white" >
+    <div class="inline-block border-4 border-red-400 rounded-lg bg-white dark:bg-gray-800">
 
       <!-- Header con le etichette delle colonne -->
-      <div class="border-b-2 border-gray-300 flex">
+      <div class="border-b-2 border-gray-300 dark:border-gray-600 flex">
         <div class="w-8"></div>
         <div style="<%= sottrazione.grid_style %>">
           <% sottrazione.column_labels.each_with_index do |label, idx| %>
-            <div class="text-center <%= sottrazione.column_colors[idx] %> font-bold <%= 'border-r-2 border-gray-300' unless idx == sottrazione.column_labels.length - 1 %> py-2">
+            <div class="text-center <%= sottrazione.column_colors[idx] %> font-bold <%= 'border-r-2 border-gray-300 dark:border-gray-600' unless idx == sottrazione.column_labels.length - 1 %> py-2">
               <%= label %>
             </div>
           <% end %>
@@ -56,12 +63,12 @@
 
       <!-- Riga dei prestiti -->
       <% if sottrazione.show_borrow %>
-      <div class="border-b border-gray-200 flex">
+      <div class="border-b border-gray-200 dark:border-gray-700 flex">
         <div class="w-8"></div>
         <div style="<%= sottrazione.grid_style %>">
           <% sottrazione.borrows.each_with_index do |borrow, idx| %>
             <input type="text"
-                   class="text-center font-bold <%= sottrazione.column_colors[idx] %> <%= idx == sottrazione.max_digits - 1 ? 'bg-white' : 'bg-red-100' %> <%= 'border-r-2 border-gray-300' unless idx == sottrazione.max_digits - 1 %>"
+                   class="text-center font-bold <%= sottrazione.column_colors[idx] %> <%= idx == sottrazione.max_digits - 1 ? 'bg-white dark:bg-gray-800' : 'bg-red-100 dark:bg-red-900/50' %> <%= 'border-r-2 border-gray-300 dark:border-gray-600' unless idx == sottrazione.max_digits - 1 %>"
                    data-column-subtraction-target="carry"
                    data-correct-answer="<%= borrow %>"
                    maxlength="1"
@@ -75,12 +82,12 @@
       <% end %>
 
       <!-- Riga del minuendo -->
-      <div class="border-b border-gray-200 flex" style="height: 4rem;">
+      <div class="border-b border-gray-200 dark:border-gray-700 flex" style="height: 4rem;">
         <div class="w-8 flex items-center justify-center"></div>
         <div style="<%= sottrazione.grid_style %>">
           <% sottrazione.minuend_digits.each_with_index do |digit, idx| %>
             <input type="text"
-                   class="text-center font-bold <%= 'border-r-2 border-gray-300' unless idx == sottrazione.minuend_digits.length - 1 %> <%= 'line-through' if sottrazione.show_solution && sottrazione.show_borrow && sottrazione.crossed_out[idx] %>"
+                   class="text-center font-bold border-0 border-b border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white <%= 'border-r-2 border-gray-300 dark:border-gray-600' unless idx == sottrazione.minuend_digits.length - 1 %> <%= 'line-through' if sottrazione.show_solution && sottrazione.show_borrow && sottrazione.crossed_out[idx] %>"
                    data-column-subtraction-target="input"
                    data-correct-answer="<%= digit %>"
                    data-crossed-out="<%= sottrazione.crossed_out[idx] %>"
@@ -92,12 +99,12 @@
       </div>
 
       <!-- Riga del sottraendo -->
-      <div class="border-b border-gray-200 flex" style="height: 4rem;">
+      <div class="border-b border-gray-200 dark:border-gray-700 flex" style="height: 4rem;">
         <div class="w-8 flex items-center justify-center font-bold text-red-600">-</div>
         <div style="<%= sottrazione.grid_style %>">
           <% sottrazione.subtrahend_digits.each_with_index do |digit, idx| %>
             <input type="text"
-                   class="text-center font-bold <%= 'border-r-2 border-gray-300' unless idx == sottrazione.subtrahend_digits.length - 1 %>"
+                   class="text-center font-bold border-0 border-b border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white <%= 'border-r-2 border-gray-300 dark:border-gray-600' unless idx == sottrazione.subtrahend_digits.length - 1 %>"
                    data-column-subtraction-target="input"
                    data-correct-answer="<%= digit %>"
                    maxlength="1"
@@ -108,13 +115,13 @@
       </div>
 
       <!-- Riga del risultato -->
-      <div class="border-t-4 border-gray-500 flex" style="height: 4rem;">
+      <div class="border-t-4 border-gray-500 dark:border-gray-400 flex" style="height: 4rem;">
         <div class="w-8 flex items-center justify-center font-bold text-red-600">=</div>
         <div style="<%= sottrazione.grid_style %>">
           <% sottrazione.result_digits.each_with_index do |digit, idx| %>
             <input type="text"
                    <% if defined?(operation_id) %>name="results[<%= operation_id %>][result][<%= idx %>]"<% end %>
-                   class="text-center font-bold <%= 'border-r-2 border-gray-300' unless idx == sottrazione.result_digits.length - 1 %>"
+                   class="text-center font-bold border-0 border-b-4 border-red-500 dark:border-red-400 dark:bg-gray-800 dark:text-white <%= 'border-r-2 border-gray-300 dark:border-gray-600' unless idx == sottrazione.result_digits.length - 1 %>"
                    data-column-subtraction-target="result"
                    data-correct-answer="<%= digit %>"
                    maxlength="1"

@@ -1,0 +1,252 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Colora nello stesso modo le frazioni complementari.
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-6">
+        <!-- Tabella frazioni -->
+        <div class="flex-1">
+          <div class="grid grid-cols-5 gap-2">
+            <% [
+              { f1_num: 5, f1_den: 12, f2_num: 6, f2_den: 14 },
+              { f1_num: 9, f1_den: 11, f2_num: 7, f2_den: 8 },
+              { f1_num: 3, f1_den: 6, f2_num: 5, f2_den: 9 },
+              { f1_num: 1, f1_den: 8, f2_num: 8, f2_den: 14 },
+              { f1_num: 3, f1_den: 6, f2_num: 5, f2_den: 9 },
+              { f1_num: 7, f1_den: 12, f2_num: 2, f2_den: 11 },
+              { f1_num: 10, f1_den: 13, f2_num: 3, f2_den: 13 },
+              { f1_num: 4, f1_den: 9, f2_num: nil, f2_den: nil }
+            ].each do |row| %>
+              <div class="p-2 border border-cyan-400 dark:border-cyan-600 text-center">
+                <%= render 'shared/frazione', num: row[:f1_num], den: row[:f1_den] %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Box regola -->
+        <div class="p-4 bg-custom-blue-light dark:bg-cyan-900 rounded-2xl">
+          <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Frazioni complementari:</p>
+          <p class="text-gray-700 dark:text-gray-200 mb-3">sommate formano l'intero.</p>
+          <%= image_tag "nvi4_mat/p202/p202_02.jpg", class: "max-w-full" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Completa le uguaglianze scrivendo le frazioni complementari. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Esempio con figure -->
+        <div class="flex items-center gap-4">
+          <div class="flex gap-1">
+            <% 10.times do |i| %>
+              <div class="w-4 h-8 border border-cyan-400 dark:border-cyan-600 <%= i < 7 ? 'bg-cyan-300 dark:bg-cyan-700' : 'bg-white dark:bg-gray-700' %>"></div>
+            <% end %>
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="font-bold text-cyan-600 dark:text-cyan-400"><%= render 'shared/frazione', num: 7, den: 10 %></span>
+            <span class="text-gray-700 dark:text-gray-200">+</span>
+            <span class="font-bold text-cyan-600 dark:text-cyan-400"><%= render 'shared/frazione', num: 3, den: 10 %></span>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <span class="font-bold text-cyan-600 dark:text-cyan-400"><%= render 'shared/frazione', num: 10, den: 10 %></span>
+            <span class="text-gray-700 dark:text-gray-200">= 1</span>
+          </div>
+        </div>
+
+        <!-- Esercizi da completare -->
+        <div class="flex items-center gap-4">
+          <div class="flex gap-1">
+            <% 8.times do |i| %>
+              <div class="w-4 h-8 border border-cyan-400 dark:border-cyan-600 <%= i < 5 ? 'bg-orange-300 dark:bg-orange-700' : 'bg-white dark:bg-gray-700' %>"></div>
+            <% end %>
+          </div>
+          <div class="flex items-center gap-1">
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "5", den_answer: "8" %>
+            <span class="text-gray-700 dark:text-gray-200">+</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "8" %>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "8", den_answer: "8" %>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <input type="text" data-correct-answer="1" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="flex gap-1">
+            <% 6.times do |i| %>
+              <div class="w-4 h-8 border border-cyan-400 dark:border-cyan-600 <%= i < 4 ? 'bg-green-300 dark:bg-green-700' : 'bg-white dark:bg-gray-700' %>"></div>
+            <% end %>
+          </div>
+          <div class="flex items-center gap-1">
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "4", den_answer: "6" %>
+            <span class="text-gray-700 dark:text-gray-200">+</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "2", den_answer: "6" %>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "6", den_answer: "6" %>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <input type="text" data-correct-answer="1" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="flex gap-1">
+            <% 12.times do |i| %>
+              <div class="w-3 h-8 border border-cyan-400 dark:border-cyan-600 <%= i < 9 ? 'bg-purple-300 dark:bg-purple-700' : 'bg-white dark:bg-gray-700' %>"></div>
+            <% end %>
+          </div>
+          <div class="flex items-center gap-1">
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "9", den_answer: "12" %>
+            <span class="text-gray-700 dark:text-gray-200">+</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "12" %>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "12", den_answer: "12" %>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <input type="text" data-correct-answer="1" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Colora nel disegno la parte indicata dalla frazione. Poi scrivi sotto il disegno la frazione complementare. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <!-- Esempio 6/8 -->
+        <div class="flex flex-col items-center gap-2">
+          <%= render 'shared/frazione', num: 6, den: 8 %>
+          <div class="flex gap-0.5">
+            <% 8.times do |i| %>
+              <div class="w-4 h-12 border border-cyan-400 dark:border-cyan-600 <%= i < 6 ? 'bg-cyan-300 dark:bg-cyan-700' : 'bg-white dark:bg-gray-700' %>"></div>
+            <% end %>
+          </div>
+          <span class="font-bold text-cyan-600 dark:text-cyan-400"><%= render 'shared/frazione', num: 2, den: 8 %></span>
+        </div>
+
+        <!-- 2/9 -->
+        <div class="flex flex-col items-center gap-2">
+          <%= render 'shared/frazione', num: 2, den: 9 %>
+          <div class="grid grid-cols-3 gap-0.5 w-12 h-12">
+            <% 9.times do %>
+              <div class="border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></div>
+            <% end %>
+          </div>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "7", den_answer: "9" %>
+        </div>
+
+        <!-- 3/6 -->
+        <div class="flex flex-col items-center gap-2">
+          <%= render 'shared/frazione', num: 3, den: 6 %>
+          <div class="w-16 h-16" style="clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);">
+            <div class="w-full h-full border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></div>
+          </div>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "6" %>
+        </div>
+
+        <!-- 1/4 -->
+        <div class="flex flex-col items-center gap-2">
+          <%= render 'shared/frazione', num: 1, den: 4 %>
+          <div class="w-16 h-16 rounded-full border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></div>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "4" %>
+        </div>
+
+        <!-- 7/16 -->
+        <div class="flex flex-col items-center gap-2">
+          <%= render 'shared/frazione', num: 7, den: 16 %>
+          <div class="grid grid-cols-4 gap-0.5 w-16 h-16">
+            <% 16.times do %>
+              <div class="border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></div>
+            <% end %>
+          </div>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "9", den_answer: "16" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Scrivi le frazioni complementari e completa le uguaglianze. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Esempio -->
+        <div class="flex items-center gap-1 flex-wrap">
+          <span class="font-bold text-cyan-600 dark:text-cyan-400"><%= render 'shared/frazione', num: 5, den: 7 %></span>
+          <span class="text-gray-700 dark:text-gray-200">+</span>
+          <span class="font-bold text-cyan-600 dark:text-cyan-400"><%= render 'shared/frazione', num: 2, den: 7 %></span>
+          <span class="text-gray-700 dark:text-gray-200">=</span>
+          <span class="font-bold text-cyan-600 dark:text-cyan-400"><%= render 'shared/frazione', num: 7, den: 7 %></span>
+          <span class="text-gray-700 dark:text-gray-200">= 1</span>
+        </div>
+
+        <div class="flex items-center gap-1 flex-wrap">
+          <%= render 'shared/frazione', num: 7, den: 13 %>
+          <span class="text-gray-700 dark:text-gray-200">+</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "6", den_answer: "13" %>
+          <span class="text-gray-700 dark:text-gray-200">=</span>
+          <%= render 'shared/frazione', num: 13, den: 13 %>
+          <span class="text-gray-700 dark:text-gray-200">= 1</span>
+        </div>
+
+        <div class="flex items-center gap-1 flex-wrap">
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "15", den_answer: "70" %>
+          <span class="text-gray-700 dark:text-gray-200">+</span>
+          <%= render 'shared/frazione', num: 55, den: 70 %>
+          <span class="text-gray-700 dark:text-gray-200">=</span>
+          <%= render 'shared/frazione', num: 70, den: 70 %>
+          <span class="text-gray-700 dark:text-gray-200">= 1</span>
+        </div>
+
+        <div class="flex items-center gap-1 flex-wrap">
+          <%= render 'shared/frazione', num: 8, den: 11 %>
+          <span class="text-gray-700 dark:text-gray-200">+</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "11" %>
+          <span class="text-gray-700 dark:text-gray-200">=</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "11", den_answer: "11" %>
+          <span class="text-gray-700 dark:text-gray-200">= 1</span>
+        </div>
+
+        <div class="flex items-center gap-1 flex-wrap">
+          <%= render 'shared/frazione', num: 7, den: 10 %>
+          <span class="text-gray-700 dark:text-gray-200">+</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "10" %>
+          <span class="text-gray-700 dark:text-gray-200">=</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "10", den_answer: "10" %>
+          <span class="text-gray-700 dark:text-gray-200">= 1</span>
+        </div>
+
+        <div class="flex items-center gap-1 flex-wrap">
+          <%= render 'shared/frazione', num: 25, den: 100 %>
+          <span class="text-gray-700 dark:text-gray-200">+</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "75", den_answer: "100" %>
+          <span class="text-gray-700 dark:text-gray-200">=</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "100", den_answer: "100" %>
+          <span class="text-gray-700 dark:text-gray-200">= 1</span>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

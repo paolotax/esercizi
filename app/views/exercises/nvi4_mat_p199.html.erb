@@ -1,0 +1,155 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(1) %>
+        Esegui le operazioni in colonna.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Addizioni e sottrazioni -->
+        <div class="">
+          <%# <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">178 021 + 82 466 =</span>
+            <input type="text" data-correct-answer="260487" class="w-28 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div> %>
+
+          <%= render 'strumenti/addizioni/quaderno_addizione',
+              addizione: Addizione.new(addends: [178021, 82466], show_addends: true, show_solution: false, show_carry: true, show_toolbar: false) %>
+
+          <%= render 'strumenti/addizioni/quaderno_addizione',
+              addizione: Addizione.new(addends: [305119, 160204], show_addends: true, show_solution: false, show_carry: true, show_toolbar: false) %>
+
+          <%= render 'strumenti/sottrazioni/quaderno_sottrazione',
+              sottrazione: Sottrazione.new(minuend: 523821, subtrahend: 38331, show_minuend_subtrahend: true, show_solution: false, show_borrow: true, show_toolbar: false) %>
+
+          <%= render 'strumenti/sottrazioni/quaderno_sottrazione',
+              sottrazione: Sottrazione.new(minuend: 478632, subtrahend: 270518, show_minuend_subtrahend: true, show_solution: false, show_borrow: true, show_toolbar: false) %>
+
+        </div>
+
+        <!-- Moltiplicazioni e divisioni -->
+        <div class="">
+          <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
+              moltiplicazione: Moltiplicazione.new(multiplier: 13, multiplicand: 157, show_multiplier_multiplicand: true, show_solution: false, show_toolbar: false) %>
+
+          <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
+              moltiplicazione: Moltiplicazione.new(multiplier: 11.2, multiplicand: 116.8, show_multiplier_multiplicand: true, show_solution: false, show_toolbar: false) %>
+
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">5 520 : 46 =</span>
+            <input type="text" data-correct-answer="120" class="w-28 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">17 234 : 14 =</span>
+            <input type="text" data-correct-answer="1231" class="w-28 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Esegui i calcoli sul quaderno, confronta i risultati, poi inserisci i segni &gt; o &lt;.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <% [
+          { left: "218 + 1 609", right: "1 521 + 309", l_result: 1827, r_result: 1830 },
+          { left: "729 − 196", right: "655 − 128", l_result: 533, r_result: 527 },
+          { left: "1 027 + 216", right: "1 380 − 125", l_result: 1243, r_result: 1255 },
+          { left: "97 402 − 989", right: "2 068 × 37", l_result: 96413, r_result: 76516 },
+          { left: "361 × 45", right: "430 × 21", l_result: 16245, r_result: 9030 },
+          { left: "199 × 12", right: "122 × 19", l_result: 2388, r_result: 2318 },
+          { left: "744 : 6", right: "124 × 4", l_result: 124, r_result: 496 },
+          { left: "3 200 : 50", right: "1 260 : 42", l_result: 64, r_result: 30 },
+          { left: "274 × 16", right: "65 984 : 16", l_result: 4384, r_result: 4124 }
+        ].each do |item| %>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:left] %></span>
+            <select data-correct-answer="<%= item[:l_result] < item[:r_result] ? '<' : '>' %>" class="w-12 border-2 border-gray-300 dark:border-gray-600 rounded text-center bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+              <option value="">?</option>
+              <option value="<">&lt;</option>
+              <option value=">">&gt;</option>
+            </select>
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:right] %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Scrivi alcuni multipli dei seguenti numeri.
+      </p>
+
+      <div class="space-y-3">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200 w-12">4</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" placeholder="es: 4, 8, 12, 16, 20, 24..." class="flex-1 min-w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200 w-12">6</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" placeholder="es: 6, 12, 18, 24, 30, 36..." class="flex-1 min-w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200 w-12">13</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" placeholder="es: 13, 26, 39, 52, 65..." class="flex-1 min-w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200 w-12">21</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" placeholder="es: 21, 42, 63, 84, 105..." class="flex-1 min-w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white">
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Scrivi tutti i divisori dei seguenti numeri.
+      </p>
+
+      <div class="space-y-3">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200 w-12">4</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" placeholder="1, 2, 4" class="flex-1 min-w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200 w-12">21</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" placeholder="1, 3, 7, 21" class="flex-1 min-w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200 w-12">28</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" placeholder="1, 2, 4, 7, 14, 28" class="flex-1 min-w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-gray-700 dark:text-gray-200 w-12">32</span>
+          <span class="text-cyan-500">→</span>
+          <input type="text" placeholder="1, 2, 4, 8, 16, 32" class="flex-1 min-w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white">
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

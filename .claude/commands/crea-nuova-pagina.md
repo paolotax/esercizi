@@ -134,6 +134,35 @@ Il controller `font-controls` gestisce la dimensione del testo dinamicamente. Se
 </div>
 ```
 
+**IMPORTANTE: IMPARARE TUTTI multipli in UN SOLO box:**
+Se ci sono più esercizi IMPARARE TUTTI consecutivi (badge 1, 2, ecc.), devono essere in UN UNICO contenitore giallo con `space-y-6`:
+```erb
+<!-- CORRETTO: Un solo box con space-y-6 -->
+<div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500 space-y-6">
+  <!-- Esercizio 1 -->
+  <div>
+    <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+      <%= imparare_tutti_badge(1) %>
+      Consegna primo esercizio...
+    </p>
+    <!-- contenuto -->
+  </div>
+
+  <!-- Esercizio 2 -->
+  <div>
+    <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+      <%= imparare_tutti_badge(2) %>
+      Consegna secondo esercizio...
+    </p>
+    <!-- contenuto -->
+  </div>
+</div>
+
+<!-- SBAGLIATO: Due box separati -->
+<div class="... border-yellow-400">esercizio 1</div>
+<div class="... border-yellow-400">esercizio 2</div>
+```
+
 **Singolo esercizio:**
 ```erb
 <div>
@@ -272,9 +301,9 @@ Per diagrammi con frecce che mostrano operazioni inverse (moltiplicazione/divisi
 
 ## LAYOUT
 
-**Due colonne con divisore:**
+**Due colonne con divisore (usa base_color):**
 ```erb
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x-2 md:divide-orange-300">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:divide-x-2 md:divide-<%= @pagina.base_color %>-300">
   <div class="md:pr-4"><!-- Colonna sinistra --></div>
   <div class="md:pl-4"><!-- Colonna destra --></div>
 </div>

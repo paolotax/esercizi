@@ -1,15 +1,23 @@
 # frozen_string_literal: true
 
+require "bigdecimal"
+
 # Modello per rappresentare una sottrazione in colonna
+# Supporta sia numeri interi che decimali (con virgola)
 class Sottrazione
   attr_reader :minuend, :subtrahend, :result, :max_digits,
-              :title, :show_exercise, :show_minuend_subtrahend, :show_solution, :show_toolbar, :show_borrow
+              :title, :show_exercise, :show_minuend_subtrahend, :show_solution, :show_toolbar, :show_borrow, :show_labels,
+              :decimal_places, :max_integer_digits, :raw_minuend, :raw_subtrahend
 
   def initialize(minuend:, subtrahend:, **options)
-    @minuend = minuend
-    @subtrahend = subtrahend
+    @raw_minuend = normalize_number_string(minuend)
+    @raw_subtrahend = normalize_number_string(subtrahend)
+    @decimal_places = calculate_decimal_places
+    @minuend = parse_to_number(@raw_minuend)
+    @subtrahend = parse_to_number(@raw_subtrahend)
     @result = calculate_result
-    @max_digits = [ @minuend, @subtrahend, @result ].compact.max.to_s.length
+    @max_integer_digits = calculate_max_integer_digits
+    @max_digits = @max_integer_digits # Per compatibilità con il codice esistente
 
     # Opzioni di visualizzazione
     @title = options[:title]
@@ -18,29 +26,132 @@ class Sottrazione
     @show_solution = options.fetch(:show_solution, false)
     @show_toolbar = options.fetch(:show_toolbar, false)
     @show_borrow = options.fetch(:show_borrow, true)
+    @show_labels = options.fetch(:show_labels, false)
   end
 
-  # Parsing di una stringa come "487 - 258"
+  # Normalizza una stringa numerica: accetta virgola o punto come separatore
+  def normalize_number_string(value)
+    return value.to_s if value.is_a?(Integer)
+    str = value.to_s.strip
+    # Converti virgola in punto per parsing interno
+    str.gsub(",", ".")
+  end
+
+  # Converte stringa in numero (Integer o BigDecimal per precisione)
+  def parse_to_number(str)
+    str.include?(".") ? BigDecimal(str) : str.to_i
+  end
+
+  # Calcola il numero massimo di cifre decimali
+  def calculate_decimal_places
+    [ @raw_minuend, @raw_subtrahend ].map do |str|
+      if str.include?(".")
+        str.split(".").last.length
+      else
+        0
+      end
+    end.max
+  end
+
+  # Calcola il numero massimo di cifre intere
+  def calculate_max_integer_digits
+    all_numbers = [ @minuend, @subtrahend, @result ]
+    all_numbers.map { |n| n.abs.to_i.to_s.length }.max
+  end
+
+  # Verifica se l'operazione ha decimali
+  def has_decimals?
+    @decimal_places > 0
+  end
+
+  # Tipi di colonna per il layout quaderno: :digit, :comma, :sign
+  def quaderno_column_types
+    types = Array.new(@max_integer_digits, :digit)
+    if has_decimals?
+      types << :comma
+      types += Array.new(@decimal_places, :digit)
+    end
+    types << :sign
+    types
+  end
+
+  # Etichette per il quaderno (include decimali)
+  def quaderno_labels
+    labels = []
+
+    # Multipli (parte intera)
+    labels << "M" if @max_integer_digits >= 7    # Milioni
+    labels << "hk" if @max_integer_digits >= 6   # Centinaia di migliaia
+    labels << "dak" if @max_integer_digits >= 5  # Decine di migliaia
+    labels << "uk" if @max_integer_digits >= 4   # Unità di migliaia
+    labels << "h" if @max_integer_digits >= 3    # Centinaia
+    labels << "da" if @max_integer_digits >= 2   # Decine
+    labels << "u"                                 # Unità (sempre presente)
+
+    # Padding per avere sempre max_integer_digits etichette
+    while labels.length < @max_integer_digits
+      labels.unshift("")
+    end
+
+    # Sottomultipli (parte decimale)
+    if has_decimals?
+      labels << "d" if @decimal_places >= 1   # Decimi
+      labels << "c" if @decimal_places >= 2   # Centesimi
+      labels << "m" if @decimal_places >= 3   # Millesimi
+    end
+
+    labels
+  end
+
+  # Colori per le etichette del quaderno (con dark mode)
+  def quaderno_label_colors
+    colors = []
+
+    # Colori multipli (parte intera)
+    colors << "text-purple-600 dark:text-purple-400" if @max_integer_digits >= 7
+    colors << "text-orange-600 dark:text-orange-400" if @max_integer_digits >= 6
+    colors << "text-yellow-600 dark:text-yellow-400" if @max_integer_digits >= 5
+    colors << "text-pink-600 dark:text-pink-400" if @max_integer_digits >= 4
+    colors << "text-green-600 dark:text-green-400" if @max_integer_digits >= 3
+    colors << "text-red-500 dark:text-red-400" if @max_integer_digits >= 2
+    colors << "text-blue-600 dark:text-blue-400"
+
+    while colors.length < @max_integer_digits
+      colors.unshift("text-gray-400 dark:text-gray-500")
+    end
+
+    # Colori sottomultipli (parte decimale)
+    if has_decimals?
+      colors << "text-cyan-600 dark:text-cyan-400" if @decimal_places >= 1   # Decimi
+      colors << "text-teal-600 dark:text-teal-400" if @decimal_places >= 2   # Centesimi
+      colors << "text-emerald-600 dark:text-emerald-400" if @decimal_places >= 3 # Millesimi
+    end
+
+    colors
+  end
+
+  # Parsing di una stringa come "487 - 258" o "12,34 - 5,67"
   def self.parse(operation_string)
     return nil if operation_string.blank?
 
     # Rimuovi spazi e split per operatore meno
     parts = operation_string.gsub(/\s+/, "").split(/[-=]/)
 
-    # Estrai i due numeri
-    numbers = parts.map { |p| p.to_i if p.match?(/^\d+$/) }.compact
+    # Estrai i due numeri (supporta decimali con virgola o punto)
+    numbers = parts.map { |p| p if p.match?(/^\d+([.,]\d+)?$/) }.compact
 
     return nil if numbers.length < 2
 
     new(minuend: numbers[0], subtrahend: numbers[1])
   end
 
-  # Parsing di più operazioni separate da virgola, punto e virgola o newline
+  # Parsing di più operazioni separate da punto e virgola o newline
+  # NOTA: la virgola NON è più un separatore perché usata per i decimali
   def self.parse_multiple(operations_string)
     return [] if operations_string.blank?
 
     operations_string
-      .split(/[,;\n]/)
+      .split(/[;\n]/)
       .map(&:strip)
       .reject(&:blank?)
       .map { |op| parse(op) }
@@ -52,24 +163,73 @@ class Sottrazione
     @minuend - @subtrahend
   end
 
+  # Cifre del minuendo per il layout quaderno (include virgola)
+  def minuend_digits
+    format_number_digits(@raw_minuend)
+  end
+
+  # Cifre del sottraendo per il layout quaderno (include virgola)
+  def subtrahend_digits
+    format_number_digits(@raw_subtrahend)
+  end
+
+  # Cifre del risultato per il layout quaderno
+  def result_digits
+    if has_decimals?
+      result_str = format("%.#{@decimal_places}f", @result)
+      format_number_digits(result_str)
+    else
+      result_str = @result.to_s
+      result_padding = @max_integer_digits - result_str.length
+      ([ "" ] * result_padding) + result_str.chars
+    end
+  end
+
+  # Formatta un numero in array di cifre per il quaderno
+  def format_number_digits(raw_str)
+    if has_decimals?
+      if raw_str.include?(".")
+        int_part, dec_part = raw_str.split(".")
+      else
+        int_part = raw_str
+        dec_part = "0" * @decimal_places
+      end
+
+      # Padding parte intera a sinistra
+      int_digits = int_part.chars
+      int_padding = @max_integer_digits - int_digits.length
+      int_cells = ([ "" ] * int_padding) + int_digits
+
+      # Padding parte decimale a destra
+      dec_digits = dec_part.chars
+      dec_padding = @decimal_places - dec_digits.length
+      dec_cells = dec_digits + ([ "0" ] * dec_padding)
+
+      int_cells + dec_cells
+    else
+      num_str = raw_str.to_s
+      padding = @max_integer_digits - num_str.length
+      ([ "" ] * padding) + num_str.chars
+    end
+  end
+
   # Calcola i prestiti per ogni colonna (da destra a sinistra)
   def borrows
-    borrows_array = Array.new(@max_digits, "")
-    crossed_out_array = Array.new(@max_digits, false)
-    borrowed_minuend = minuend_digits.map { |d| d.present? ? d.to_i : 0 }
+    total_cols = @max_integer_digits + @decimal_places
+    borrows_array = Array.new(total_cols, "")
 
-    (@max_digits - 1).downto(0) do |col_idx|
+    minuend_digs = minuend_digits.reject { |d| d == "," }.map { |d| d.present? ? d.to_i : 0 }
+    subtrahend_digs = subtrahend_digits.reject { |d| d == "," }.map { |d| d.present? ? d.to_i : 0 }
+    borrowed_minuend = minuend_digs.dup
+
+    (total_cols - 1).downto(0) do |col_idx|
       minuend_digit = borrowed_minuend[col_idx]
-      subtrahend_digit = subtrahend_digits[col_idx].present? ? subtrahend_digits[col_idx].to_i : 0
+      subtrahend_digit = subtrahend_digs[col_idx]
 
       # Se minuendo < sottraendo, serve un prestito
       if minuend_digit < subtrahend_digit && col_idx > 0
-        # Prendi in prestito dalla colonna precedente (a sinistra)
         borrowed_minuend[col_idx] += 10
         borrowed_minuend[col_idx - 1] -= 1
-        # Marca la cifra che presta come barrata
-        crossed_out_array[col_idx - 1] = true
-        # Sopra la cifra che presta, scrivo il nuovo valore
         borrows_array[col_idx - 1] = borrowed_minuend[col_idx - 1].to_s
       end
     end
@@ -79,12 +239,16 @@ class Sottrazione
 
   # Indica quali cifre del minuendo sono state barrate (hanno prestato)
   def crossed_out
-    crossed_out_array = Array.new(@max_digits, false)
-    borrowed_minuend = minuend_digits.map { |d| d.present? ? d.to_i : 0 }
+    total_cols = @max_integer_digits + @decimal_places
+    crossed_out_array = Array.new(total_cols, false)
 
-    (@max_digits - 1).downto(0) do |col_idx|
+    minuend_digs = minuend_digits.reject { |d| d == "," }.map { |d| d.present? ? d.to_i : 0 }
+    subtrahend_digs = subtrahend_digits.reject { |d| d == "," }.map { |d| d.present? ? d.to_i : 0 }
+    borrowed_minuend = minuend_digs.dup
+
+    (total_cols - 1).downto(0) do |col_idx|
       minuend_digit = borrowed_minuend[col_idx]
-      subtrahend_digit = subtrahend_digits[col_idx].present? ? subtrahend_digits[col_idx].to_i : 0
+      subtrahend_digit = subtrahend_digs[col_idx]
 
       if minuend_digit < subtrahend_digit && col_idx > 0
         borrowed_minuend[col_idx] += 10
@@ -96,48 +260,12 @@ class Sottrazione
     crossed_out_array
   end
 
-  # Converti minuendo in array di cifre (da sinistra a destra)
-  def minuend_digits
-    num_str = @minuend.to_s
-    padding = @max_digits - num_str.length
-    ([ "" ] * padding) + num_str.chars
-  end
-
-  # Converti sottraendo in array di cifre (da sinistra a destra)
-  def subtrahend_digits
-    num_str = @subtrahend.to_s
-    padding = @max_digits - num_str.length
-    ([ "" ] * padding) + num_str.chars
-  end
-
-  # Array di cifre del risultato
-  def result_digits
-    result_str = @result.to_s
-    result_padding = @max_digits - result_str.length
-    ([ "" ] * result_padding) + result_str.chars
-  end
-
-  # Etichette delle colonne (da sinistra a destra: più significativo a meno significativo)
+  # Etichette delle colonne (compatibilità)
   def column_labels
-    labels = []
-
-    labels << "M" if @max_digits >= 7    # Milioni
-    labels << "hk" if @max_digits >= 6   # Centinaia di migliaia
-    labels << "dak" if @max_digits >= 5  # Decine di migliaia
-    labels << "uk" if @max_digits >= 4   # Unità di migliaia
-    labels << "h" if @max_digits >= 3    # Centinaia
-    labels << "da" if @max_digits >= 2   # Decine
-    labels << "u"                         # Unità (sempre presente)
-
-    # Padding per avere sempre max_digits etichette
-    while labels.length < @max_digits
-      labels.unshift("")
-    end
-
-    labels
+    quaderno_labels
   end
 
-  # Colori per le etichette delle colonne
+  # Colori per le etichette delle colonne (compatibilità)
   def column_colors
     colors = []
 

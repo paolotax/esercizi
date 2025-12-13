@@ -1,16 +1,24 @@
 # frozen_string_literal: true
 
+require "bigdecimal"
+
 # Modello per rappresentare un'operazione in colonna (addizione o sottrazione)
+# Supporta sia numeri interi che decimali (con virgola)
 class Addizione
   attr_reader :addends, :operator, :result, :max_digits,
               :title, :show_exercise, :show_addends, :show_solution, :show_toolbar, :show_carry,
-              :show_addend_indices
+              :show_addend_indices, :decimal_places, :max_integer_digits,
+              :raw_addends, :show_labels # Memorizza gli addendi originali come stringhe
 
   def initialize(addends:, operator: "+", **options)
-    @addends = addends
+    # Normalizza gli addendi: converte stringhe con virgola in float
+    @raw_addends = addends.map { |a| normalize_number_string(a) }
+    @decimal_places = calculate_decimal_places
+    @addends = @raw_addends.map { |s| parse_to_number(s) }
     @operator = operator
     @result = calculate_result
-    @max_digits = [ @addends.max, @result ].compact.max.to_s.length
+    @max_integer_digits = calculate_max_integer_digits
+    @max_digits = @max_integer_digits # Per compatibilità con il codice esistente
 
     # Opzioni di visualizzazione
     @title = options[:title]
@@ -22,6 +30,159 @@ class Addizione
     # Array di indici degli addendi da mostrare (es: [0] per mostrare solo il primo)
     # Se nil, usa show_addends per tutti
     @show_addend_indices = options[:show_addend_indices]
+    @show_labels = options.fetch(:show_labels, false)
+  end
+
+  # Normalizza una stringa numerica: accetta virgola o punto come separatore
+  def normalize_number_string(value)
+    return value.to_s if value.is_a?(Integer)
+    str = value.to_s.strip
+    # Converti virgola in punto per parsing interno, ma mantieni la stringa originale
+    str.gsub(",", ".")
+  end
+
+  # Converte stringa in numero (Integer o BigDecimal per precisione)
+  def parse_to_number(str)
+    str.include?(".") ? BigDecimal(str) : str.to_i
+  end
+
+  # Calcola il numero massimo di cifre decimali tra tutti gli addendi e il risultato
+  def calculate_decimal_places
+    max_decimals = @raw_addends.map do |str|
+      if str.include?(".")
+        str.split(".").last.length
+      else
+        0
+      end
+    end.max
+    max_decimals || 0
+  end
+
+  # Calcola il numero massimo di cifre intere
+  def calculate_max_integer_digits
+    all_numbers = @addends + [ @result ]
+    all_numbers.map { |n| n.abs.to_i.to_s.length }.max
+  end
+
+  # Verifica se l'operazione ha decimali
+  def has_decimals?
+    @decimal_places > 0
+  end
+
+  # Numero totale di colonne per il layout quaderno (cifre intere + virgola + cifre decimali + segno)
+  def quaderno_columns
+    cols = @max_integer_digits
+    cols += 1 + @decimal_places if has_decimals? # +1 per la virgola
+    cols += 1 # colonna per il segno
+    cols
+  end
+
+  # Tipi di colonna per il layout quaderno: :digit, :comma, :sign
+  def quaderno_column_types
+    types = Array.new(@max_integer_digits, :digit)
+    if has_decimals?
+      types << :comma
+      types += Array.new(@decimal_places, :digit)
+    end
+    types << :sign
+    types
+  end
+
+  # Cifre di un addendo per il layout quaderno (include virgola come ",")
+  def quaderno_addend_digits(addend_index)
+    num = @addends[addend_index]
+    raw = @raw_addends[addend_index]
+
+    if has_decimals?
+      # Separa parte intera e decimale
+      if raw.include?(".")
+        int_part, dec_part = raw.split(".")
+      else
+        int_part = raw
+        dec_part = "0" * @decimal_places
+      end
+
+      # Padding parte intera a sinistra
+      int_digits = int_part.chars
+      int_padding = @max_integer_digits - int_digits.length
+      int_cells = ([ "" ] * int_padding) + int_digits
+
+      # Virgola
+      comma_cell = [ "," ]
+
+      # Padding parte decimale a destra
+      dec_digits = dec_part.chars
+      dec_padding = @decimal_places - dec_digits.length
+      dec_cells = dec_digits + ([ "0" ] * dec_padding)
+
+      int_cells + comma_cell + dec_cells
+    else
+      # Solo numeri interi
+      num_str = num.to_s
+      padding = @max_integer_digits - num_str.length
+      ([ "" ] * padding) + num_str.chars
+    end
+  end
+
+  # Cifre del risultato per il layout quaderno
+  def quaderno_result_digits
+    if has_decimals?
+      # Formatta il risultato con le cifre decimali corrette
+      result_str = format("%.#{@decimal_places}f", @result)
+      int_part, dec_part = result_str.split(".")
+
+      # Padding parte intera a sinistra
+      int_digits = int_part.chars
+      int_padding = @max_integer_digits - int_digits.length
+      int_cells = ([ "" ] * int_padding) + int_digits
+
+      # Virgola
+      comma_cell = [ "," ]
+
+      # Parte decimale (già della lunghezza giusta)
+      dec_cells = dec_part.chars
+
+      int_cells + comma_cell + dec_cells
+    else
+      # Solo numeri interi
+      result_str = @result.to_s
+      result_padding = @max_integer_digits - result_str.length
+      ([ "" ] * result_padding) + result_str.chars
+    end
+  end
+
+  # Riporti per il layout quaderno (esclude la colonna virgola)
+  def quaderno_carries
+    total_digit_cols = @max_integer_digits + @decimal_places
+    carries_array = Array.new(total_digit_cols, "")
+    carry = 0
+
+    # Calcola i riporti da destra a sinistra (partendo dai decimali)
+    (total_digit_cols - 1).downto(0) do |col_idx|
+      column_sum = carry
+
+      @addends.each_with_index do |_, addend_idx|
+        digits = quaderno_addend_digits(addend_idx)
+        # Salta la virgola nel calcolo
+        digit_idx = col_idx < @max_integer_digits ? col_idx : col_idx + 1
+        digit_val = digits[digit_idx].to_i
+        column_sum += digit_val
+      end
+
+      if column_sum >= 10
+        carry = column_sum / 10
+        carries_array[col_idx - 1] = carry.to_s if col_idx > 0
+      else
+        carry = 0
+      end
+    end
+
+    # Inserisci cella vuota per la virgola
+    if has_decimals?
+      carries_array.insert(@max_integer_digits, "")
+    end
+
+    carries_array
   end
 
   # Verifica se un addendo specifico deve essere mostrato
@@ -33,20 +194,21 @@ class Addizione
     end
   end
 
-  # Parsing di una stringa come "234 + 1234" o "500 - 123"
+  # Parsing di una stringa come "234 + 1234" o "12,34 + 5,67"
   def self.parse(operation_string)
     return nil if operation_string.blank?
 
     # Rimuovi spazi e split per operatori
     parts = operation_string.gsub(/\s+/, "").split(/([+\-=])/)
 
-    # Estrai numeri e operatore
+    # Estrai numeri e operatore (supporta decimali con virgola o punto)
     numbers = []
     operator = "+"
 
     parts.each do |part|
-      if part.match?(/^\d+$/)
-        numbers << part.to_i
+      if part.match?(/^\d+([.,]\d+)?$/)
+        # Mantieni come stringa per preservare i decimali
+        numbers << part
       elsif part.match?(/^[+\-]$/)
         operator = part
       end
@@ -57,12 +219,13 @@ class Addizione
     new(addends: numbers, operator: operator)
   end
 
-  # Parsing di più operazioni separate da virgola, punto e virgola o newline
+  # Parsing di più operazioni separate da punto e virgola o newline
+  # NOTA: la virgola NON è più un separatore perché usata per i decimali (es: 12,34)
   def self.parse_multiple(operations_string)
     return [] if operations_string.blank?
 
     operations_string
-      .split(/[,;\n]/)
+      .split(/[;\n]/)
       .map(&:strip)
       .reject(&:blank?)
       .map { |op| parse(op) }
@@ -159,6 +322,61 @@ class Addizione
 
     while colors.length < @max_digits
       colors.unshift("text-gray-400")
+    end
+
+    colors
+  end
+
+  # Etichette per il quaderno (include decimali)
+  def quaderno_labels
+    labels = []
+
+    # Multipli (parte intera)
+    labels << "M" if @max_integer_digits >= 7    # Milioni
+    labels << "hk" if @max_integer_digits >= 6   # Centinaia di migliaia
+    labels << "dak" if @max_integer_digits >= 5  # Decine di migliaia
+    labels << "uk" if @max_integer_digits >= 4   # Unità di migliaia
+    labels << "h" if @max_integer_digits >= 3    # Centinaia
+    labels << "da" if @max_integer_digits >= 2   # Decine
+    labels << "u"                                 # Unità (sempre presente)
+
+    # Padding per avere sempre max_integer_digits etichette
+    while labels.length < @max_integer_digits
+      labels.unshift("")
+    end
+
+    # Sottomultipli (parte decimale)
+    if has_decimals?
+      labels << "d" if @decimal_places >= 1   # Decimi
+      labels << "c" if @decimal_places >= 2   # Centesimi
+      labels << "m" if @decimal_places >= 3   # Millesimi
+    end
+
+    labels
+  end
+
+  # Colori per le etichette del quaderno (include decimali)
+  def quaderno_label_colors
+    colors = []
+
+    # Colori multipli (parte intera)
+    colors << "text-purple-600 dark:text-purple-400" if @max_integer_digits >= 7
+    colors << "text-orange-600 dark:text-orange-400" if @max_integer_digits >= 6
+    colors << "text-yellow-600 dark:text-yellow-400" if @max_integer_digits >= 5
+    colors << "text-pink-600 dark:text-pink-400" if @max_integer_digits >= 4
+    colors << "text-green-600 dark:text-green-400" if @max_integer_digits >= 3
+    colors << "text-red-500 dark:text-red-400" if @max_integer_digits >= 2
+    colors << "text-blue-600 dark:text-blue-400"
+
+    while colors.length < @max_integer_digits
+      colors.unshift("text-gray-400 dark:text-gray-500")
+    end
+
+    # Colori sottomultipli (parte decimale)
+    if has_decimals?
+      colors << "text-cyan-600 dark:text-cyan-400" if @decimal_places >= 1   # Decimi
+      colors << "text-teal-600 dark:text-teal-400" if @decimal_places >= 2   # Centesimi
+      colors << "text-emerald-600 dark:text-emerald-400" if @decimal_places >= 3 # Millesimi
     end
 
     colors

@@ -1,0 +1,267 @@
+<%#
+  Partial per addizione in colonna con stile quaderno a quadretti
+
+  Parametri:
+    - addizione: oggetto Addizione con gli addendi
+    - operation_title: (opzionale) titolo da mostrare sopra l'operazione
+    - title: (opzionale) titolo alternativo
+    - operation_id: (opzionale) ID per i campi del form
+%>
+
+<style>
+  /* Input dentro le celle */
+  .quaderno-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1.25em;
+  }
+
+  /* Input riporti - più piccoli */
+  .quaderno-input-carry {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.875em;
+  }
+</style>
+
+<div class="inline-block" data-controller="quaderno-addition">
+
+  <% if defined?(operation_title) && operation_title.present? %>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= operation_title %></div>
+  <% elsif defined?(title) && title.present? %>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= title %></div>
+  <% elsif addizione.title.present? %>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= addizione.title %></div>
+  <% end %>
+
+  <%
+    # Calcola le colonne: cifre + virgola (se presente) + segno
+    column_types = addizione.quaderno_column_types
+    total_cols = column_types.length + 2  # +2 per colonne vuote ai lati
+    cell_size = "2.5em"
+    carry_height = "1.5em"
+  %>
+
+  <!-- Griglia quaderno -->
+  <div class="inline-grid border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900"
+       style="grid-template-columns: repeat(<%= total_cols %>, <%= cell_size %>);">
+
+    <!-- Riga etichette o vuota sopra -->
+    <% if addizione.show_labels %>
+      <% labels = addizione.quaderno_labels %>
+      <% label_colors = addizione.quaderno_label_colors %>
+      <% label_idx = 0 %>
+      <!-- Cella vuota sinistra -->
+      <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+      <% column_types.each_with_index do |col_type, idx| %>
+        <% if col_type == :sign %>
+          <!-- Cella vuota per il segno -->
+          <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+        <% elsif col_type == :comma %>
+          <!-- Cella virgola -->
+          <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center" style="height: <%= cell_size %>;">,</div>
+        <% else %>
+          <!-- Cella etichetta -->
+          <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center <%= label_colors[label_idx] %>" style="height: <%= cell_size %>;"><%= labels[label_idx] %></div>
+          <% label_idx += 1 %>
+        <% end %>
+      <% end %>
+      <!-- Cella vuota destra -->
+      <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% else %>
+      <% total_cols.times do |i| %>
+        <div class="<%= i < total_cols - 1 ? 'border-r' : '' %> border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+      <% end %>
+    <% end %>
+
+    <!-- Riga dei riporti -->
+    <% if addizione.show_carry %>
+      <% carries = addizione.quaderno_carries %>
+      <% carry_counter = 0 %>
+      <!-- Cella vuota sinistra -->
+      <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+      <% column_types.each_with_index do |col_type, idx| %>
+        <% if col_type == :sign %>
+          <!-- Cella vuota per la colonna del segno -->
+          <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+        <% elsif col_type == :comma %>
+          <!-- Cella virgola nei riporti (vuota, non richiede input) -->
+          <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;">
+          </div>
+          <% carry_counter += 1 %>
+        <% else %>
+          <!-- Cella riporto -->
+          <% carry_value = carries[carry_counter] || "" %>
+          <% is_last_digit_col = addizione.has_decimals? ? (carry_counter == carries.length - 1) : (carry_counter == addizione.max_integer_digits - 1) %>
+          <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= is_last_digit_col ? '' : 'bg-blue-50 dark:bg-blue-900/30' %>"
+               style="height: <%= carry_height %>;">
+            <input type="text"
+                   class="quaderno-input-carry bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-blue-600 dark:text-blue-400"
+                   data-quaderno-addition-target="carry"
+                   <% unless is_last_digit_col %>data-correct-answer="<%= carry_value.to_s %>"<% end %>
+                   maxlength="1"
+                   <% if addizione.show_solution && carry_value.present? %>value="<%= carry_value %>"<% end %>
+                   <% if is_last_digit_col %>disabled<% end %>>
+          </div>
+          <% carry_counter += 1 %>
+        <% end %>
+      <% end %>
+      <!-- Cella vuota destra -->
+      <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+    <% end %>
+
+    <!-- Righe degli addendi -->
+    <% addizione.addends.each_with_index do |_, addend_idx| %>
+      <% digits = addizione.quaderno_addend_digits(addend_idx) %>
+      <% digit_counter = 0 %>
+      <!-- Cella vuota sinistra -->
+      <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+      <% column_types.each_with_index do |col_type, idx| %>
+        <% if col_type == :sign %>
+          <!-- Cella del segno (+ per il primo addendo, = per l'ultimo) -->
+          <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold"
+               style="height: <%= cell_size %>;">
+            <% if addend_idx == 0 %>
+              <%= addizione.operator %>
+            <% elsif addend_idx == addizione.addends.length - 1 %>
+              =
+            <% end %>
+          </div>
+        <% elsif col_type == :comma %>
+          <!-- Cella della virgola (input modificabile) -->
+          <div class="border-r border-b border-gray-300 dark:border-gray-600"
+               style="height: <%= cell_size %>;">
+            <input type="text"
+                   class="quaderno-input bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-gray-700 dark:text-gray-300"
+                   data-quaderno-addition-target="comma"
+                   data-row-type="addend"
+                   data-correct-answer=","
+                   maxlength="1"
+                   <% if addizione.show_addend?(addend_idx) %>value=","<% end %>>
+          </div>
+          <% digit_counter += 1 %>
+        <% else %>
+          <!-- Cella cifra -->
+          <% digit = digits[digit_counter] || "" %>
+          <% digit = "" if digit == "," %>
+          <div class="border-r border-b border-gray-300 dark:border-gray-600"
+               style="height: <%= cell_size %>;">
+            <input type="text"
+                   class="quaderno-input bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-gray-800 dark:text-gray-100"
+                   data-quaderno-addition-target="input"
+                   data-correct-answer="<%= digit %>"
+                   maxlength="1"
+                   <% if addizione.show_addend?(addend_idx) && digit.present? %>value="<%= digit %>"<% end %>>
+          </div>
+          <% digit_counter += 1 %>
+        <% end %>
+      <% end %>
+      <!-- Cella vuota destra -->
+      <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% end %>
+
+    <!-- Riga del risultato (con bordo superiore più spesso) -->
+    <% result_digits = addizione.quaderno_result_digits %>
+    <% result_counter = 0 %>
+    <!-- Cella vuota sinistra (senza bordo superiore spesso) -->
+    <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% column_types.each_with_index do |col_type, idx| %>
+      <% if col_type == :sign %>
+        <!-- Cella vuota per la colonna del segno (= è sull'ultimo addendo) -->
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300"
+             style="height: <%= cell_size %>;"></div>
+      <% elsif col_type == :comma %>
+        <!-- Cella della virgola nel risultato (input modificabile) -->
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300"
+             style="height: <%= cell_size %>;">
+          <input type="text"
+                 class="quaderno-input bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-gray-700 dark:text-gray-300"
+                 data-quaderno-addition-target="comma"
+                 data-row-type="result"
+                 data-correct-answer=","
+                 maxlength="1"
+                 <% if addizione.show_solution %>value=","<% end %>>
+        </div>
+        <% result_counter += 1 %>
+      <% else %>
+        <!-- Cella cifra risultato -->
+        <% digit = result_digits[result_counter] || "" %>
+        <% digit = "" if digit == "," %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300"
+             style="height: <%= cell_size %>;">
+          <input type="text"
+                 <% if defined?(operation_id) %>name="results[<%= operation_id %>][result][<%= idx %>]"<% end %>
+                 class="quaderno-input bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-gray-800 dark:text-gray-100"
+                 data-quaderno-addition-target="result"
+                 data-correct-answer="<%= digit %>"
+                 maxlength="1"
+                 <% if addizione.show_solution && digit.present? %>value="<%= digit %>"<% end %>>
+        </div>
+        <% result_counter += 1 %>
+      <% end %>
+    <% end %>
+    <!-- Cella vuota destra (senza bordo superiore spesso) -->
+    <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+
+    <!-- Riga vuota sotto -->
+    <% total_cols.times do |i| %>
+      <div class="<%= i < total_cols - 1 ? 'border-r' : '' %> border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% end %>
+
+  </div>
+
+  <!-- Toolbar con pulsanti -->
+  <% if addizione.show_toolbar %>
+    <div class="print-hidden flex justify-center gap-4 mt-6">
+      <!-- Cancella -->
+      <button type="button"
+              data-action="click->quaderno-addition#clearGrid"
+              class="w-14 h-14 rounded-full bg-gray-500 hover:bg-gray-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              title="Cancella">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+      </button>
+
+      <!-- Mostra Addendi -->
+      <button type="button"
+              data-action="click->quaderno-addition#showAddends"
+              class="w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              title="Mostra Addendi">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      </button>
+
+      <!-- Mostra Risultato -->
+      <button type="button"
+              data-action="click->quaderno-addition#showResult"
+              class="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              title="Mostra Risultato">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </button>
+
+      <!-- Verifica -->
+      <button type="button"
+              data-action="click->quaderno-addition#verifyAnswers"
+              class="w-14 h-14 rounded-full bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
+              title="Verifica">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+        </svg>
+      </button>
+    </div>
+  <% end %>
+</div>

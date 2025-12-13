@@ -1,0 +1,168 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Box teoria: Definizione frazione -->
+    <div class="p-4 bg-custom-blue-light dark:bg-cyan-900 rounded-2xl">
+      <div class="flex flex-col md:flex-row gap-4 items-center">
+        <div class="flex-1">
+          <p class="text-gray-700 dark:text-gray-200">
+            <span class="text-cyan-600 dark:text-cyan-400 font-bold">Frazionare</span> significa dividere un intero <span class="text-cyan-600 dark:text-cyan-400 font-bold">in parti uguali</span>.
+          </p>
+          <p class="text-gray-700 dark:text-gray-200">
+            Ogni parte ottenuta si chiama <span class="text-cyan-600 dark:text-cyan-400 font-bold">unità frazionaria</span>.
+          </p>
+        </div>
+        <%= image_tag "nvi4_mat/p201/p201_01.jpg", class: "h-20 dark:bg-white dark:rounded dark:p-1" %>
+      </div>
+    </div>
+
+    <!-- Esercizi IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500 space-y-6">
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Cerchia le figure che sono state frazionate, cioè divise in parti uguali. Poi in ciascuna colora l'unità frazionaria. Segui l'esempio.
+        </p>
+
+        <div class="flex justify-center">
+          <%= image_tag "nvi4_mat/p201/output-1715932804201_128_394_841_124.png", class: "max-w-full dark:bg-white dark:rounded dark:p-2" %>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= imparare_tutti_badge(2) %>
+          Scrivi sotto forma di frazione. Segui l'esempio.
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <!-- Esempio -->
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200 font-bold">un nono</span>
+            <span class="font-bold text-cyan-600 dark:text-cyan-400"><%= render 'shared/frazione', num: 1, den: 9 %></span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">sei ottavi</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "6", den_answer: "8" %>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">tre quinti</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "5" %>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">cinque decimi</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "5", den_answer: "10" %>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">quattro settimi</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "4", den_answer: "7" %>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">due dodicesimi</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "2", den_answer: "12" %>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">sette ventesimi</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "7", den_answer: "20" %>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">un quindicesimo</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "1", den_answer: "15" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <div class="flex flex-col md:flex-row gap-4 mb-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          <%= numero_esercizio_badge(3) %>
+          Osserva le figure e scrivi la frazione corrispondente alla parte colorata, sia in cifre sia in lettere.
+        </p>
+
+        <!-- Box spiegazione numeratore/denominatore -->
+        <div class="p-3 bg-custom-blue-light dark:bg-cyan-900 rounded-2xl">
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 6, den: 10 %>
+            <div class="flex flex-col justify-between h-full">
+              <p class="text-gray-700 dark:text-gray-200 text-sm">
+                <span class="text-cyan-500">←</span> <span class="font-bold text-cyan-600 dark:text-cyan-400">numeratore</span>: parti prese in considerazione
+              </p>
+              <p class="text-gray-700 dark:text-gray-200 text-sm">
+                <span class="text-cyan-500">←</span> <span class="font-bold text-cyan-600 dark:text-cyan-400">denominatore</span>: parti in cui è stato diviso l'intero
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Figura 1: Esagono con 2/6 colorati -->
+        <div class="flex flex-col items-center gap-2">
+          <%= image_tag "nvi4_mat/p201/output-1715932804201_230_857_96_92.png", class: "w-20 h-20 dark:bg-white dark:rounded dark:p-1" %>
+          <div class="flex items-center gap-1">
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "2", den_answer: "4" %>
+          </div>
+          <input type="text" data-correct-answer="due quarti" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center bg-transparent dark:text-white">
+        </div>
+
+        <!-- Figura 2: Quadrato con X -->
+        <div class="flex flex-col items-center gap-2">
+          <%= image_tag "nvi4_mat/p201/output-1715932804201_441_858_91_91.png", class: "w-20 h-20 dark:bg-white dark:rounded dark:p-1" %>
+          <div class="flex items-center gap-1">
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "4", den_answer: "6" %>
+          </div>
+          <input type="text" data-correct-answer="quattro sesti" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center bg-transparent dark:text-white">
+        </div>
+
+        <!-- Figura 3: Pentagono -->
+        <div class="flex flex-col items-center gap-2">
+          <%= image_tag "nvi4_mat/p201/output-1715932804201_634_856_124_94.png", class: "w-20 h-20 dark:bg-white dark:rounded dark:p-1" %>
+          <div class="flex items-center gap-1">
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "3", den_answer: "5" %>
+          </div>
+          <input type="text" data-correct-answer="tre quinti" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center bg-transparent dark:text-white">
+        </div>
+
+        <!-- Figura 4: Rettangolo diviso -->
+        <div class="flex flex-col items-center gap-2">
+          <%= image_tag "nvi4_mat/p201/output-1715932804201_839_857_132_90.png", class: "w-20 h-20 dark:bg-white dark:rounded dark:p-1" %>
+          <div class="flex items-center gap-1">
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: "5", den_answer: "8" %>
+          </div>
+          <input type="text" data-correct-answer="cinque ottavi" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center bg-transparent dark:text-white">
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Dividi l'intero come indicato dal denominatore, poi colora la parte indicata dal numeratore.
+      </p>
+
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p201/p201_05.jpg", class: "max-w-full dark:bg-white dark:rounded dark:p-2" %>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

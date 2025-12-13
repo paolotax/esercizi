@@ -1,0 +1,282 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Colora la parte indicata dalle frazioni. Poi inserisci i segni &gt; oppure &lt;.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Colonna sinistra: confronti -->
+        <div class="space-y-6">
+          <!-- Confronto 3/9 vs 2/9 -->
+          <div class="flex items-center gap-4">
+            <div class="flex gap-1">
+              <% 9.times do |i| %>
+                <div class="w-4 h-16 border border-cyan-400 dark:border-cyan-600 <%= i < 3 ? 'bg-cyan-300 dark:bg-cyan-600' : 'bg-white dark:bg-gray-700' %>" style="transform: skewX(-15deg);"></div>
+              <% end %>
+            </div>
+            <div class="flex items-center gap-2">
+              <%= render 'shared/frazione', num: 3, den: 9 %>
+              <input type="text" data-correct-answer=">" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <%= render 'shared/frazione', num: 2, den: 9 %>
+            </div>
+            <div class="flex gap-1">
+              <% 9.times do |i| %>
+                <div class="w-4 h-16 border border-cyan-400 dark:border-cyan-600 <%= i < 2 ? 'bg-cyan-300 dark:bg-cyan-600' : 'bg-white dark:bg-gray-700' %>" style="transform: skewX(-15deg);"></div>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Confronto 3/7 vs 5/7 -->
+          <div class="flex items-center gap-4">
+            <div class="grid grid-cols-7 gap-0.5 w-28 h-14">
+              <% 7.times do |i| %>
+                <div class="border border-cyan-400 dark:border-cyan-600 <%= i < 3 ? 'bg-cyan-300 dark:bg-cyan-600' : 'bg-white dark:bg-gray-700' %>"></div>
+              <% end %>
+            </div>
+            <div class="flex items-center gap-2">
+              <%= render 'shared/frazione', num: 3, den: 7 %>
+              <input type="text" data-correct-answer="<" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <%= render 'shared/frazione', num: 5, den: 7 %>
+            </div>
+            <div class="grid grid-cols-7 gap-0.5 w-28 h-14">
+              <% 7.times do |i| %>
+                <div class="border border-cyan-400 dark:border-cyan-600 <%= i < 5 ? 'bg-cyan-300 dark:bg-cyan-600' : 'bg-white dark:bg-gray-700' %>"></div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonna destra: box regola -->
+        <div class="p-4 bg-cyan-50 dark:bg-cyan-900 rounded-lg">
+          <p class="text-gray-700 dark:text-gray-200 mb-3">
+            Tra due o più frazioni con <span class="font-bold text-cyan-600 dark:text-cyan-400">denominatore uguale</span>, è maggiore quella con numeratore maggiore.
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="flex gap-1">
+              <% 5.times do |i| %>
+                <div class="w-6 h-8 border border-cyan-400 dark:border-cyan-600 <%= i < 4 ? 'bg-cyan-300 dark:bg-cyan-600' : 'bg-white dark:bg-gray-700' %>"></div>
+              <% end %>
+            </div>
+            <%= render 'shared/frazione', num: 4, den: 5 %>
+          </div>
+          <div class="flex items-center gap-4 mt-2">
+            <div class="flex gap-1">
+              <% 5.times do |i| %>
+                <div class="w-6 h-8 border border-cyan-400 dark:border-cyan-600 <%= i < 2 ? 'bg-cyan-300 dark:bg-cyan-600' : 'bg-white dark:bg-gray-700' %>"></div>
+              <% end %>
+            </div>
+            <%= render 'shared/frazione', num: 2, den: 5 %>
+          </div>
+          <div class="flex items-center gap-2 mt-3">
+            <%= render 'shared/frazione', num: 4, den: 5 %>
+            <span class="font-bold text-cyan-600 dark:text-cyan-400">&gt;</span>
+            <%= render 'shared/frazione', num: 2, den: 5 %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Inserisci i segni &gt; oppure &lt;, oppure completa con un numeratore adatto.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <% [
+          { f1_num: 10, f1_den: 12, f2_num: 6, f2_den: 12, answer: ">" },
+          { f1_num: 8, f1_den: 15, f2_num: 12, f2_den: 15, answer: "<" },
+          { f1_num: 11, f1_den: 20, f2_num: 7, f2_den: 20, answer: ">" },
+          { f1_num: 13, f1_den: 40, f2_num: nil, f2_den: 40, answer: nil, num_answer: "12" },
+          { f1_num: 5, f1_den: 5, f2_num: 2, f2_den: 5, answer: ">" },
+          { f1_num: 21, f1_den: 43, f2_num: 33, f2_den: 43, answer: "<" },
+          { f1_num: nil, f1_den: 27, f2_num: 14, f2_den: 27, answer: nil, num_answer: "15" },
+          { f1_num: 4, f1_den: 30, f2_num: 1, f2_den: 30, answer: ">" },
+          { f1_num: 23, f1_den: 50, f2_num: 30, f2_den: 50, answer: "<" },
+          { f1_num: nil, f1_den: 25, f2_num: 6, f2_den: 25, answer: nil, num_answer: "5" }
+        ].each do |item| %>
+          <div class="flex items-center justify-center gap-2 p-3 border border-cyan-400 dark:border-cyan-600 rounded-lg">
+            <% if item[:f1_num].nil? %>
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: item[:num_answer], den_answer: item[:f1_den].to_s %>
+            <% else %>
+              <%= render 'shared/frazione', num: item[:f1_num], den: item[:f1_den] %>
+            <% end %>
+            <% if item[:answer] %>
+              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <% else %>
+              <span class="text-cyan-600 dark:text-cyan-400 font-bold">&gt;</span>
+            <% end %>
+            <% if item[:f2_num].nil? %>
+              <%= render 'shared/frazione', num: nil, den: nil, num_answer: item[:num_answer], den_answer: item[:f2_den].to_s %>
+            <% else %>
+              <%= render 'shared/frazione', num: item[:f2_num], den: item[:f2_den] %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        In ogni intero colora l'unità frazionaria. Poi confronta le frazioni e inserisci i segni &gt; oppure &lt;.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- 1/8 vs 1/4 -->
+        <div class="flex flex-col items-center gap-4">
+          <div class="flex gap-4">
+            <div>
+              <div class="flex gap-0.5">
+                <% 8.times do |i| %>
+                  <div class="w-4 h-12 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></div>
+                <% end %>
+              </div>
+              <div class="text-center mt-1"><%= render 'shared/frazione', num: 1, den: 8 %></div>
+            </div>
+            <div>
+              <div class="flex gap-0.5">
+                <% 4.times do |i| %>
+                  <div class="w-8 h-12 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></div>
+                <% end %>
+              </div>
+              <div class="text-center mt-1"><%= render 'shared/frazione', num: 1, den: 4 %></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 1, den: 8 %>
+            <input type="text" data-correct-answer="<" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <%= render 'shared/frazione', num: 1, den: 4 %>
+          </div>
+        </div>
+
+        <!-- 1/2 vs 1/16 -->
+        <div class="flex flex-col items-center gap-4">
+          <div class="flex gap-4">
+            <div>
+              <div class="flex gap-0.5">
+                <% 2.times do |i| %>
+                  <div class="w-16 h-12 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></div>
+                <% end %>
+              </div>
+              <div class="text-center mt-1"><%= render 'shared/frazione', num: 1, den: 2 %></div>
+            </div>
+            <div>
+              <div class="flex gap-0.5">
+                <% 16.times do |i| %>
+                  <div class="w-2 h-12 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></div>
+                <% end %>
+              </div>
+              <div class="text-center mt-1"><%= render 'shared/frazione', num: 1, den: 16 %></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 1, den: 2 %>
+            <input type="text" data-correct-answer=">" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <%= render 'shared/frazione', num: 1, den: 16 %>
+          </div>
+        </div>
+
+        <!-- 1/4 vs 1/12 -->
+        <div class="flex flex-col items-center gap-4">
+          <div class="flex gap-4">
+            <div>
+              <div class="flex gap-0.5">
+                <% 4.times do |i| %>
+                  <div class="w-8 h-12 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></div>
+                <% end %>
+              </div>
+              <div class="text-center mt-1"><%= render 'shared/frazione', num: 1, den: 4 %></div>
+            </div>
+            <div>
+              <div class="flex gap-0.5">
+                <% 12.times do |i| %>
+                  <div class="w-2.5 h-12 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></div>
+                <% end %>
+              </div>
+              <div class="text-center mt-1"><%= render 'shared/frazione', num: 1, den: 12 %></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 1, den: 4 %>
+            <input type="text" data-correct-answer=">" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <%= render 'shared/frazione', num: 1, den: 12 %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Inserisci i segni &gt; oppure &lt;.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Colonna sinistra: esercizi -->
+        <div class="grid grid-cols-3 gap-4">
+          <% [
+            { f1_num: 6, f1_den: 13, f2_num: 6, f2_den: 17, answer: ">" },
+            { f1_num: 8, f1_den: 54, f2_num: 8, f2_den: 34, answer: "<" },
+            { f1_num: 5, f1_den: 13, f2_num: 5, f2_den: 10, answer: "<" },
+            { f1_num: 9, f1_den: 19, f2_num: 9, f2_den: 23, answer: ">" },
+            { f1_num: 4, f1_den: 7, f2_num: 4, f2_den: 5, answer: "<" },
+            { f1_num: 1, f1_den: 20, f2_num: 1, f2_den: 30, answer: ">" },
+            { f1_num: 3, f1_den: 5, f2_num: 3, f2_den: 10, answer: ">" },
+            { f1_num: 11, f1_den: 21, f2_num: 11, f2_den: 12, answer: "<" },
+            { f1_num: 19, f1_den: 31, f2_num: 19, f2_den: 29, answer: "<" }
+          ].each do |item| %>
+            <div class="flex items-center justify-center gap-2 p-2 border border-cyan-400 dark:border-cyan-600 rounded-lg">
+              <%= render 'shared/frazione', num: item[:f1_num], den: item[:f1_den] %>
+              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <%= render 'shared/frazione', num: item[:f2_num], den: item[:f2_den] %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Colonna destra: box regola -->
+        <div class="p-4 bg-cyan-50 dark:bg-cyan-900 rounded-lg">
+          <p class="text-gray-700 dark:text-gray-200 mb-3">
+            Tra due o più frazioni con <span class="font-bold text-cyan-600 dark:text-cyan-400">numeratore uguale</span>, è maggiore quella con denominatore minore.
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="flex gap-1">
+              <% 4.times do |i| %>
+                <div class="w-6 h-8 border border-cyan-400 dark:border-cyan-600 <%= i < 2 ? 'bg-cyan-300 dark:bg-cyan-600' : 'bg-white dark:bg-gray-700' %>"></div>
+              <% end %>
+            </div>
+            <%= render 'shared/frazione', num: 2, den: 4 %>
+          </div>
+          <div class="flex items-center gap-4 mt-2">
+            <div class="flex gap-1">
+              <% 5.times do |i| %>
+                <div class="w-5 h-8 border border-cyan-400 dark:border-cyan-600 <%= i < 2 ? 'bg-cyan-300 dark:bg-cyan-600' : 'bg-white dark:bg-gray-700' %>"></div>
+              <% end %>
+            </div>
+            <%= render 'shared/frazione', num: 2, den: 5 %>
+          </div>
+          <div class="flex items-center gap-2 mt-3">
+            <%= render 'shared/frazione', num: 2, den: 4 %>
+            <span class="font-bold text-cyan-600 dark:text-cyan-400">&gt;</span>
+            <%= render 'shared/frazione', num: 2, den: 5 %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,231 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione teoria -->
+    <div class="p-4 md:p-6">
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        Quando fai degli acquisti, oltre a conoscere il valore delle monete e delle banconote, devi saper individuare i costi e le quantità di ciò che vuoi acquistare.
+      </p>
+
+      <p class="text-gray-700 dark:text-gray-200 font-bold mb-4">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Leggi questi tre esempi di situazioni che possono presentarsi.
+      </p>
+
+      <!-- Box teoria con i tre esempi -->
+      <div class="p-4 bg-cyan-50 dark:bg-cyan-900/30 rounded-2xl mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Primo esempio: Costo Totale -->
+          <div>
+            <div class="flex items-start gap-4 mb-4">
+              <div class="flex-1">
+                <p class="text-gray-700 dark:text-gray-200 mb-2">
+                  Se in un negozio vedi che un robot costa € 10, quanto costeranno 5 robot uguali?
+                </p>
+                <%= image_tag "nvi4_mat/p102/p102_01.jpg", class: "max-w-[150px] h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Robot € 10" %>
+              </div>
+            </div>
+            <p class="text-gray-700 dark:text-gray-200 mb-3">
+              <span class="text-<%= @pagina.base_color %>-500">▸</span> Per acquistare una certa quantità di uno stesso prodotto, devi calcolare il <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">costo totale</strong>.
+            </p>
+            <!-- Diagramma costo totale -->
+            <div class="flex justify-center">
+              <div class="text-center">
+                <div class="flex gap-4 mb-2">
+                  <div class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">costo unitario</div>
+                  <div class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">quantità</div>
+                </div>
+                <div class="text-gray-700 dark:text-gray-200 mb-2">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+                <div class="text-2xl text-<%= @pagina.base_color %>-500 font-bold mb-2">×</div>
+                <div class="text-gray-700 dark:text-gray-200 mb-2">↓</div>
+                <div class="px-4 py-2 bg-<%= @pagina.base_color %>-500 text-white rounded font-bold">costo totale</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondo esempio: Costo Unitario -->
+          <div>
+            <div class="flex items-start gap-4 mb-4">
+              <div class="flex-1">
+                <p class="text-gray-700 dark:text-gray-200 mb-2">
+                  Se una confezione che contiene 6 trottole uguali costa € 18, qual è il prezzo di ogni trottola?
+                </p>
+                <%= image_tag "nvi4_mat/p102/p102_02.jpg", class: "max-w-[150px] h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Trottole € 18" %>
+              </div>
+            </div>
+            <p class="text-gray-700 dark:text-gray-200 mb-3">
+              <span class="text-<%= @pagina.base_color %>-500">▸</span> Per conoscere il prezzo di uno solo dei prodotti di una confezione che contiene un certo numero di prodotti uguali, devi calcolare il <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">costo unitario</strong>.
+            </p>
+            <!-- Diagramma costo unitario -->
+            <div class="flex justify-center">
+              <div class="text-center">
+                <div class="flex gap-4 mb-2">
+                  <div class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">costo totale</div>
+                  <div class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">quantità</div>
+                </div>
+                <div class="text-gray-700 dark:text-gray-200 mb-2">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+                <div class="text-2xl text-orange-500 font-bold mb-2">:</div>
+                <div class="text-gray-700 dark:text-gray-200 mb-2">↓</div>
+                <div class="px-4 py-2 bg-<%= @pagina.base_color %>-500 text-white rounded font-bold">costo unitario</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terzo esempio: Quantità -->
+        <div class="mt-6 pt-6 border-t-2 border-cyan-300 dark:border-cyan-600">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div class="flex items-start gap-4 mb-4">
+                <div class="flex-1">
+                  <p class="text-gray-700 dark:text-gray-200 mb-2">
+                    Se spendi € 16 per acquistare delle palline che costano € 2 l'una, quante palline hai acquistato?
+                  </p>
+                  <%= image_tag "nvi4_mat/p102/p102_03.jpg", class: "max-w-[150px] h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Palline € 2" %>
+                </div>
+              </div>
+              <p class="text-gray-700 dark:text-gray-200">
+                <span class="text-<%= @pagina.base_color %>-500">▸</span> Se conosci il costo complessivo di un gruppo di prodotti uguali e sai il loro costo unitario, puoi calcolare la <strong class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">quantità</strong> di prodotti.
+              </p>
+            </div>
+            <!-- Diagramma quantità -->
+            <div class="flex justify-center items-center">
+              <div class="text-center">
+                <div class="flex gap-4 mb-2">
+                  <div class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">costo totale</div>
+                  <div class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">costo unitario</div>
+                </div>
+                <div class="text-gray-700 dark:text-gray-200 mb-2">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+                <div class="text-2xl text-orange-500 font-bold mb-2">:</div>
+                <div class="text-gray-700 dark:text-gray-200 mb-2">↓</div>
+                <div class="px-4 py-2 bg-<%= @pagina.base_color %>-500 text-white rounded font-bold">quantità</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container esercizi -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+
+      <!-- Esercizio 1 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Completa la tabella.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-3 bg-cyan-500 text-white border-2 border-cyan-400 dark:border-cyan-600 font-bold">costo unitario</th>
+                <th class="p-3 bg-cyan-500 text-white border-2 border-cyan-400 dark:border-cyan-600 font-bold">quantità</th>
+                <th class="p-3 bg-cyan-500 text-white border-2 border-cyan-400 dark:border-cyan-600 font-bold">costo totale</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">giacca di lana € 31,25</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">3</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <div class="flex items-center gap-1">
+                    <span class="text-gray-700 dark:text-gray-200">€</span>
+                    <input type="text" data-correct-answer="93,75" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">jeans € 24,12</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">5</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <div class="flex items-center gap-1">
+                    <span class="text-gray-700 dark:text-gray-200">€</span>
+                    <input type="text" data-correct-answer="120,60" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">canotta € 19,99</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">7</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <div class="flex items-center gap-1">
+                    <span class="text-gray-700 dark:text-gray-200">€</span>
+                    <input type="text" data-correct-answer="139,93" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">calzini (paio) € 4,50</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">10</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <div class="flex items-center gap-1">
+                    <span class="text-gray-700 dark:text-gray-200">€</span>
+                    <input type="text" data-correct-answer="45" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">cintura € 9,38</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">20</td>
+                <td class="p-3 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <div class="flex items-center gap-1">
+                    <span class="text-gray-700 dark:text-gray-200">€</span>
+                    <input type="text" data-correct-answer="187,60" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Un cartolaio ha acquistato delle confezioni di pennarelli e ha speso € 320. Ogni pennarello costa € 4. Quanti pennarelli ha comprato?
+        </p>
+        <div class="flex items-center justify-end gap-2">
+          <input type="text" data-correct-answer="80" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="shrink-0 text-gray-700 dark:text-gray-200">pennarelli</span>
+        </div>
+      </div>
+
+      <!-- Esercizio 3 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Per comprare 9 evidenziatori Isa spende € 19,80. Quanto costa un evidenziatore?
+        </p>
+        <div class="flex items-center justify-end gap-2">
+          <span class="shrink-0 text-gray-700 dark:text-gray-200">€</span>
+          <input type="text" data-correct-answer="2,20" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+      </div>
+
+      <!-- Esercizio 4 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(4) %>
+          La maestra ha acquistato un quaderno per ognuno dei suoi 25 alunni. Ogni quaderno costa € 1,30. Quanto ha speso la maestra?
+        </p>
+        <div class="flex items-center justify-end gap-2">
+          <span class="shrink-0 text-gray-700 dark:text-gray-200">€</span>
+          <input type="text" data-correct-answer="32,50" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [230] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

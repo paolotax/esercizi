@@ -1,0 +1,270 @@
+<%#
+  Partial per moltiplicazione in colonna con stile quaderno a quadretti
+  Supporta moltiplicatori a più cifre con prodotti parziali
+
+  Parametri:
+    - moltiplicazione: oggetto Moltiplicazione con moltiplicando e moltiplicatore
+    - operation_title: (opzionale) titolo da mostrare sopra l'operazione
+    - title: (opzionale) titolo alternativo
+    - operation_id: (opzionale) ID per i campi del form
+%>
+
+<style>
+  .quaderno-input-mul {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1.25em;
+  }
+  .quaderno-input-carry-mul {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.875em;
+  }
+</style>
+
+<div class="inline-block" data-controller="quaderno-multiplication">
+
+  <% if defined?(operation_title) && operation_title.present? %>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= operation_title %></div>
+  <% elsif defined?(title) && title.present? %>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= title %></div>
+  <% end %>
+
+  <%
+    # Numero di colonne per i dati (include colonna virgola se decimali)
+    data_cols = moltiplicazione.has_decimals? ? moltiplicazione.max_digits + 1 : moltiplicazione.max_digits
+    total_cols = data_cols + 3
+    cell_size = "2.5em"
+    carry_height = "1.5em"
+    has_partials = moltiplicazione.multiplier_length > 1
+    column_types = moltiplicazione.quaderno_column_types
+  %>
+
+  <div class="inline-grid border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900"
+       style="grid-template-columns: repeat(<%= total_cols %>, <%= cell_size %>);">
+
+    <!-- Riga etichette -->
+    <% if moltiplicazione.show_labels %>
+      <% labels = moltiplicazione.quaderno_labels %>
+      <% label_colors = moltiplicazione.quaderno_label_colors %>
+      <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+      <% column_types.each_with_index do |col_type, idx| %>
+        <% if col_type == :comma %>
+          <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-gray-500 dark:text-gray-400 font-bold" style="height: <%= cell_size %>;">,</div>
+        <% else %>
+          <% label_idx = idx > moltiplicazione.max_integer_digits ? idx - 1 : idx %>
+          <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center <%= label_colors[label_idx] %>" style="height: <%= cell_size %>;"><%= labels[label_idx] %></div>
+        <% end %>
+      <% end %>
+      <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+      <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% else %>
+      <% total_cols.times do |i| %>
+        <div class="<%= i < total_cols - 1 ? 'border-r' : '' %> border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+      <% end %>
+    <% end %>
+
+    <% unless has_partials %>
+      <!-- Riga riporti (solo per moltiplicatore a 1 cifra) -->
+      <% carries = moltiplicazione.result_carries %>
+      <% carry_idx_offset = moltiplicazione.max_digits - carries.length %>
+      <% digit_idx = 0 %>
+      <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+      <% column_types.each do |col_type| %>
+        <% if col_type == :comma %>
+          <%# Colonna virgola vuota per i riporti %>
+          <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+        <% else %>
+          <% carry_data_idx = digit_idx - carry_idx_offset %>
+          <% carry_value = carry_data_idx >= 0 ? carries[carry_data_idx] : nil %>
+          <% is_last = digit_idx == moltiplicazione.max_digits - 1 %>
+          <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= is_last ? '' : 'bg-green-50 dark:bg-green-900/30' %>" style="height: <%= carry_height %>;">
+            <input type="text" class="quaderno-input-carry-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-green-600 dark:text-green-400"
+                   data-quaderno-multiplication-target="carry" <% unless is_last %>data-correct-answer="<%= carry_value.to_s %>"<% end %> maxlength="1"
+                   <% if moltiplicazione.show_solution && carry_value.present? %>value="<%= carry_value %>"<% end %>
+                   <% if is_last %>disabled<% end %>>
+          </div>
+          <% digit_idx += 1 %>
+        <% end %>
+      <% end %>
+      <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+      <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+    <% end %>
+
+    <!-- Riga moltiplicando -->
+    <% multiplicand_digits = moltiplicazione.quaderno_multiplicand_digits %>
+    <% digit_idx = 0 %>
+    <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% column_types.each do |col_type| %>
+      <% if col_type == :comma %>
+        <%# Mostra virgola se il moltiplicando ha decimali %>
+        <% comma_value = moltiplicazione.multiplicand_decimals > 0 ? "," : "" %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center" style="height: <%= cell_size %>;">
+          <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
+                 data-quaderno-multiplication-target="comma" data-row-type="multiplicand" data-correct-answer="<%= comma_value %>" maxlength="1"
+                 <% if moltiplicazione.show_multiplicand_multiplier && comma_value.present? %>value="<%= comma_value %>"<% end %>>
+        </div>
+      <% else %>
+        <% digit = multiplicand_digits[digit_idx] %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;">
+          <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
+                 data-quaderno-multiplication-target="multiplicand" data-correct-answer="<%= digit %>" maxlength="1"
+                 <% if moltiplicazione.show_multiplicand_multiplier && digit.present? %>value="<%= digit %>"<% end %>>
+        </div>
+        <% digit_idx += 1 %>
+      <% end %>
+    <% end %>
+    <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-green-600 dark:text-green-400 font-bold" style="height: <%= cell_size %>;">×</div>
+    <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+
+    <!-- Riga moltiplicatore -->
+    <% multiplier_digits = moltiplicazione.quaderno_multiplier_digits %>
+    <% digit_idx = 0 %>
+    <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% column_types.each do |col_type| %>
+      <% if col_type == :comma %>
+        <%# Mostra virgola se il moltiplicatore ha decimali %>
+        <% comma_value = moltiplicazione.multiplier_decimals > 0 ? "," : "" %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center" style="height: <%= cell_size %>;">
+          <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
+                 data-quaderno-multiplication-target="comma" data-row-type="multiplier" data-correct-answer="<%= comma_value %>" maxlength="1"
+                 <% if moltiplicazione.show_multiplicand_multiplier && comma_value.present? %>value="<%= comma_value %>"<% end %>>
+        </div>
+      <% else %>
+        <% digit = multiplier_digits[digit_idx] %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;">
+          <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
+                 data-quaderno-multiplication-target="multiplier" data-correct-answer="<%= digit %>" maxlength="1"
+                 <% if moltiplicazione.show_multiplicand_multiplier && digit.present? %>value="<%= digit %>"<% end %>>
+        </div>
+        <% digit_idx += 1 %>
+      <% end %>
+    <% end %>
+    <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-green-600 dark:text-green-400 font-bold" style="height: <%= cell_size %>;"><%= has_partials ? '' : '=' %></div>
+    <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+
+    <% if has_partials %>
+      <!-- Prodotti parziali -->
+      <% moltiplicazione.quaderno_partial_products.each_with_index do |partial, p_idx| %>
+        <% digit_idx = 0 %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+        <% column_types.each_with_index do |col_type, col_idx| %>
+          <% if col_type == :comma %>
+            <%# Colonna virgola vuota per i prodotti parziali %>
+            <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= p_idx == 0 ? 'border-t-2 border-t-gray-700 dark:border-t-gray-300' : '' %>" style="height: <%= cell_size %>;"></div>
+          <% else %>
+            <% digit = partial[:digits][digit_idx] %>
+            <% is_zero_placeholder = digit_idx >= partial[:digits].length %>
+            <% zero_idx = digit_idx - partial[:digits].length %>
+            <% if is_zero_placeholder && zero_idx < partial[:zeros] %>
+              <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 <%= p_idx == 0 ? 'border-t-2 border-t-gray-700 dark:border-t-gray-300' : '' %>" style="height: <%= cell_size %>;">0</div>
+            <% else %>
+              <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= p_idx == 0 ? 'border-t-2 border-t-gray-700 dark:border-t-gray-300' : '' %>" style="height: <%= cell_size %>;">
+                <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
+                       data-quaderno-multiplication-target="partial" data-correct-answer="<%= digit %>" maxlength="1"
+                       <% if moltiplicazione.show_partial_products && digit.present? %>value="<%= digit %>"<% end %>>
+              </div>
+            <% end %>
+            <% digit_idx += 1 %>
+          <% end %>
+        <% end %>
+        <!-- Cella segno (= solo sull'ultimo prodotto parziale) -->
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-green-600 dark:text-green-400 font-bold <%= p_idx == 0 ? 'border-t-2 border-t-gray-700 dark:border-t-gray-300' : '' %>" style="height: <%= cell_size %>;"><%= p_idx == moltiplicazione.quaderno_partial_products.length - 1 ? '=' : '' %></div>
+        <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+      <% end %>
+
+      <!-- Riga riporti somma -->
+      <% sum_carries = moltiplicazione.quaderno_sum_carries %>
+      <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+      <% carry_idx = 0 %>
+      <% column_types.each do |col_type| %>
+        <% if col_type == :comma %>
+          <%# Colonna virgola vuota per i riporti %>
+          <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+        <% else %>
+          <% carry = sum_carries[carry_idx] %>
+          <% is_last = carry_idx == sum_carries.length - 1 %>
+          <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= is_last ? '' : 'bg-green-50 dark:bg-green-900/30' %>" style="height: <%= carry_height %>;">
+            <input type="text" class="quaderno-input-carry-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-green-600 dark:text-green-400"
+                   data-quaderno-multiplication-target="sumCarry" <% unless is_last %>data-correct-answer="<%= carry.to_s %>"<% end %> maxlength="1"
+                   <% if moltiplicazione.show_solution && carry.present? %>value="<%= carry %>"<% end %>
+                   <% if is_last %>disabled<% end %>>
+          </div>
+          <% carry_idx += 1 %>
+        <% end %>
+      <% end %>
+      <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+      <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
+    <% end %>
+
+    <!-- Riga risultato -->
+    <% result_digits = moltiplicazione.quaderno_result_digits %>
+    <% digit_idx = 0 %>
+    <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% column_types.each do |col_type| %>
+      <% if col_type == :comma %>
+        <%# Mostra virgola nel risultato se ci sono decimali %>
+        <% comma_value = moltiplicazione.has_decimals? ? "," : "" %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300 flex items-center justify-center" style="height: <%= cell_size %>;">
+          <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
+                 data-quaderno-multiplication-target="comma" data-row-type="result" data-correct-answer="<%= comma_value %>" maxlength="1"
+                 <% if moltiplicazione.show_solution && comma_value.present? %>value="<%= comma_value %>"<% end %>>
+        </div>
+      <% else %>
+        <% digit = result_digits[digit_idx] %>
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300" style="height: <%= cell_size %>;">
+          <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
+                 data-quaderno-multiplication-target="result" data-correct-answer="<%= digit %>" maxlength="1"
+                 <% if moltiplicazione.show_solution && digit.present? %>value="<%= digit %>"<% end %>>
+        </div>
+        <% digit_idx += 1 %>
+      <% end %>
+    <% end %>
+    <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300" style="height: <%= cell_size %>;"></div>
+    <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+
+    <!-- Riga vuota sotto -->
+    <% total_cols.times do |i| %>
+      <div class="<%= i < total_cols - 1 ? 'border-r' : '' %> border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <% end %>
+  </div>
+
+  <% if moltiplicazione.show_toolbar %>
+    <div class="print-hidden flex justify-center gap-4 mt-6">
+      <button type="button" data-action="click->quaderno-multiplication#clearGrid"
+              class="w-14 h-14 rounded-full bg-gray-500 hover:bg-gray-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center" title="Cancella">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+      </button>
+      <button type="button" data-action="click->quaderno-multiplication#showNumbers"
+              class="w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center" title="Mostra Numeri">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      </button>
+      <button type="button" data-action="click->quaderno-multiplication#showResult"
+              class="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center" title="Mostra Risultato">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </button>
+      <button type="button" data-action="click->quaderno-multiplication#verifyAnswers"
+              class="w-14 h-14 rounded-full bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center" title="Verifica">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+        </svg>
+      </button>
+    </div>
+  <% end %>
+</div>

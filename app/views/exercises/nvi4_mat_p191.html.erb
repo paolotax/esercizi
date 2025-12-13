@@ -1,0 +1,141 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1: Calcola in colonna e trascrivi i risultati -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(1) %>
+        Calcola in colonna e trascrivi i risultati.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Parte a: Prendi due cifre -->
+        <div class="space-y-3">
+          <p class="font-bold text-gray-700 dark:text-gray-200">a. Prendi due cifre.</p>
+          <% [
+            { op: "2 291 : 19", q: "120", r: "11" },
+            { op: "2 990 : 13", q: "230", r: "0" },
+            { op: "6 895 : 63", q: "109", r: "28" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:q] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">resto</span>
+              <input type="text" data-correct-answer="<%= item[:r] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Parte b: Prendi tre cifre -->
+        <div class="space-y-3">
+          <p class="font-bold text-gray-700 dark:text-gray-200">b. Prendi tre cifre.</p>
+          <% [
+            { op: "1 158 : 35", q: "33", r: "3" },
+            { op: "1 239 : 25", q: "49", r: "14" },
+            { op: "2 789 : 34", q: "82", r: "1" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:q] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">resto</span>
+              <input type="text" data-correct-answer="<%= item[:r] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Immagine esplicativa -->
+      <div class="mt-4 flex justify-center">
+        <%= image_tag "nvi4_mat/p191/p191_01.jpg", class: "max-w-md h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Esempio divisione" %>
+      </div>
+    </div>
+
+    <!-- Esercizio 2: Calcola in colonna sul quaderno -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Calcola in colonna sul quaderno e trascrivi i risultati. Poi fai la prova.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Parte a -->
+        <div class="space-y-3">
+          <p class="font-bold text-gray-700 dark:text-gray-200">a.</p>
+          <% [
+            { op: "3 962 : 14", result: "283" },
+            { op: "8 850 : 25", result: "354" },
+            { op: "1 725 : 82", result: "21 resto 3" },
+            { op: "1 768 : 34", result: "52" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="flex-1 min-w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Parte b -->
+        <div class="space-y-3">
+          <p class="font-bold text-gray-700 dark:text-gray-200">b.</p>
+          <% [
+            { op: "14 612 : 26", result: "562" },
+            { op: "22 855 : 35", result: "653" },
+            { op: "89 752 : 42", result: "2137 resto 6" },
+            { op: "13 923 : 39", result: "357" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
+              <input type="text" data-correct-answer="<%= item[:result] %>" class="flex-1 min-w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3: Trova la parola nascosta -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-2">
+        <%= numero_esercizio_badge(3) %>
+        Calcola e colora le lettere accanto alle divisioni con <span class="bg-cyan-100 dark:bg-cyan-800 px-1 rounded">resto 0</span>.
+      </p>
+      <p class="text-gray-700 dark:text-gray-200 mb-4">
+        Quale parola appare? Scrivila nel riquadro in basso.
+      </p>
+
+      <div class="space-y-3">
+        <% [
+          { op: "1 143 : 9", q: "127", r: "0", letter: "A" },
+          { op: "1 347 : 6", q: "224", r: "3", letter: "F" },
+          { op: "3 048 : 12", q: "254", r: "0", letter: "M" },
+          { op: "3 538 : 58", q: "61", r: "0", letter: "I" },
+          { op: "7 564 : 23", q: "328", r: "20", letter: "A" },
+          { op: "44 603 : 73", q: "611", r: "0", letter: "C" },
+          { op: "64 578 : 62", q: "1041", r: "36", letter: "S" },
+          { op: "59 943 : 87", q: "689", r: "0", letter: "I" }
+        ].each do |item| %>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200 w-36"><%= item[:op] %> =</span>
+            <input type="text" data-correct-answer="<%= item[:q] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">resto</span>
+            <input type="text" data-correct-answer="<%= item[:r] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="px-2 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded font-bold text-gray-700 dark:text-gray-200">[<%= item[:letter] %>]</span>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Parola finale -->
+      <div class="mt-6 flex items-center gap-2">
+        <span class="font-bold text-gray-700 dark:text-gray-200">Parola:</span>
+        <input type="text" data-correct-answer="AMICI" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

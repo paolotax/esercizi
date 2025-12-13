@@ -1,0 +1,276 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizi IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500 space-y-6">
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Collega i numeri che sommati danno come risultato 100. Segui l'esempio.
+        </p>
+
+        <div class="flex flex-col items-center gap-4">
+          <!-- Riga superiore -->
+          <div class="flex flex-wrap justify-center gap-4">
+            <% [30, 25, 80, 10, 50].each do |n| %>
+              <div class="w-12 h-12 flex items-center justify-center border-2 border-cyan-400 dark:border-cyan-600 rounded text-gray-700 dark:text-gray-200 font-bold <%= n == 30 ? 'bg-cyan-100 dark:bg-cyan-800' : 'bg-white dark:bg-gray-700' %>">
+                <%= n %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="text-cyan-500 text-2xl">↓</div>
+
+          <!-- Riga inferiore -->
+          <div class="flex flex-wrap justify-center gap-4">
+            <% [70, 75, 20, 50, 90].each do |n| %>
+              <div class="w-12 h-12 flex items-center justify-center border-2 border-cyan-400 dark:border-cyan-600 rounded text-gray-700 dark:text-gray-200 font-bold <%= n == 70 ? 'bg-cyan-100 dark:bg-cyan-800' : 'bg-white dark:bg-gray-700' %>">
+                <%= n %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <p class="text-gray-600 dark:text-gray-400 mt-4 text-center italic">
+          30 + 70 = 100 (esempio); 25 + 75 = 100; 80 + 20 = 100; 10 + 90 = 100; 50 + 50 = 100
+        </p>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(2) %>
+        Calcola a mente le seguenti operazioni. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Tabella moltiplicazioni -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">×</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">× 10</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">× 100</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">× 1 000</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700">6</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">60</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="600" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="6000" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700">51</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="510" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="5100" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="51000" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700">120</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="1200" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="12000" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="120000" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tabella divisioni -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">:</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">: 10</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">: 100</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">: 1 000</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700">2 000</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center font-bold text-cyan-600 dark:text-cyan-400 bg-white dark:bg-gray-700">200</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="20" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="2" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700">78 000</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="7800" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="780" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="78" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700">305 000</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="30500" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="3050" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                  <input type="text" data-correct-answer="305" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Calcola a mente e completa le tabelle.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Tabella +9 / -9 -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">+ 9</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">n</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">− 9</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% [16, 72, 112, 257, 395, 651, 5342].each do |n| %>
+                <tr>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                    <input type="text" data-correct-answer="<%= n + 9 %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700"><%= n %></td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                    <input type="text" data-correct-answer="<%= n - 9 %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tabella +11 / -11 -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">+ 11</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">n</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">− 11</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% [12, 27, 49, 139, 381, 1368, 3486].each do |n| %>
+                <tr>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                    <input type="text" data-correct-answer="<%= n + 11 %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700"><%= n %></td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                    <input type="text" data-correct-answer="<%= n - 11 %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tabelle ×10/×5 e :10/:20 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <!-- Tabella ×10 / ×5 -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">× 10</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">n</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">× 5</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% [8, 22, 63, 100, 175, 1850, 4100].each do |n| %>
+                <tr>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                    <input type="text" data-correct-answer="<%= n * 10 %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700"><%= n %></td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                    <input type="text" data-correct-answer="<%= n * 5 %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tabella :10 / :20 -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">: 10</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">n</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center text-gray-700 dark:text-gray-200">: 20</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% [40, 180, 300, 940, 1200, 4060, 36000].each do |n| %>
+                <tr>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                    <input type="text" data-correct-answer="<%= n / 10 %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700"><%= n %></td>
+                  <td class="p-2 border border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-700">
+                    <input type="text" data-correct-answer="<%= n / 20 %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

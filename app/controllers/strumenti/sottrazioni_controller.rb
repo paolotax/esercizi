@@ -15,6 +15,20 @@ class Strumenti::SottrazioniController < ApplicationController
     render :show
   end
 
+  def quaderno
+    @sottrazioni = []
+    @options = default_options
+  end
+
+  def quaderno_generate
+    @operations = params[:operations] || ""
+    @options = parse_options
+
+    @sottrazioni = parse_sottrazioni_with_options(@operations, @options) if @operations.present?
+
+    render :quaderno
+  end
+
   private
 
   def default_options
@@ -22,7 +36,8 @@ class Strumenti::SottrazioniController < ApplicationController
       show_minuend_subtrahend: false,
       show_toolbar: true,
       show_borrow: true,
-      show_solution: false
+      show_solution: false,
+      show_labels: false
     }
   end
 
@@ -31,7 +46,8 @@ class Strumenti::SottrazioniController < ApplicationController
       show_minuend_subtrahend: params[:show_minuend_subtrahend] == "true",
       show_toolbar: params[:show_toolbar] == "true",
       show_borrow: params[:show_borrow] == "true",
-      show_solution: params[:show_solution] == "true"
+      show_solution: params[:show_solution] == "true",
+      show_labels: params[:show_labels] == "true"
     }
   end
 

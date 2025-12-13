@@ -23,20 +23,20 @@
 <div class="text-center" data-controller="column-addition">
   
   <% if defined?(operation_title) && operation_title.present? %>
-    <div class="font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= operation_title %></div>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= operation_title %></div>
   <% elsif defined?(title) && title.present? %>
-    <div class="font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= title %></div>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= title %></div>
   <% elsif addizione.title.present? %>
-    <div class="font-mono font-bold mb-4 text-gray-700 bg-gray-100 px-4 py-2 rounded inline-block"><%= addizione.title %></div>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= addizione.title %></div>
   <% end %>
 
   <div class="flex items-start justify-center gap-2">
-    <div class="inline-block border-4 border-blue-400 rounded-lg bg-white" >
+    <div class="inline-block border-4 border-blue-400 rounded-lg bg-white dark:bg-gray-800">
 
       <!-- Header con le etichette delle colonne -->
-      <div class="border-b-2 border-gray-300" style="<%= addizione.grid_style %>">
+      <div class="border-b-2 border-gray-300 dark:border-gray-600" style="<%= addizione.grid_style %>">
         <% addizione.column_labels.each_with_index do |label, idx| %>
-          <div class="text-center <%= addizione.column_colors[idx] %> font-bold <%= 'border-r-2 border-gray-300' unless idx == addizione.column_labels.length - 1 %> py-2">
+          <div class="text-center <%= addizione.column_colors[idx] %> font-bold <%= 'border-r-2 border-gray-300 dark:border-gray-600' unless idx == addizione.column_labels.length - 1 %> py-2">
             <%= label %>
           </div>
         <% end %>
@@ -44,10 +44,10 @@
 
       <!-- Riga dei riporti (cambi) -->
       <% if addizione.show_carry %>
-      <div class="border-b border-gray-200" style="<%= addizione.grid_style %>">
+      <div class="border-b border-gray-200 dark:border-gray-700" style="<%= addizione.grid_style %>">
         <% addizione.carries.each_with_index do |carry, idx| %>
           <input type="text"
-                 class="text-center font-bold <%= addizione.column_colors[idx] %> <%= idx == addizione.max_digits - 1 ? 'bg-white' : 'bg-blue-200' %> <%= 'border-r-2 border-gray-300' unless idx == addizione.max_digits - 1 %>"
+                 class="text-center font-bold <%= addizione.column_colors[idx] %> <%= idx == addizione.max_digits - 1 ? 'bg-white dark:bg-gray-800' : 'bg-blue-200 dark:bg-blue-900/50' %> <%= 'border-r-2 border-gray-300 dark:border-gray-600' unless idx == addizione.max_digits - 1 %>"
                  data-column-addition-target="carry"
                  data-correct-answer="<%= carry %>"
                  maxlength="1"
@@ -61,10 +61,10 @@
 
       <!-- Righe degli addendi -->
       <% addizione.addends_digits.each_with_index do |digits, addend_idx| %>
-        <div class="border-b border-gray-200" style="<%= addizione.grid_style %>">
+        <div class="border-b border-gray-200 dark:border-gray-700" style="<%= addizione.grid_style %>">
           <% digits.each_with_index do |digit, idx| %>
             <input type="text"
-                   class="text-center font-bold <%= 'border-r-2 border-gray-300' unless idx == digits.length - 1 %>"
+                   class="text-center font-bold border-0 border-b border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white <%= 'border-r-2 border-gray-300 dark:border-gray-600' unless idx == digits.length - 1 %>"
                    data-column-addition-target="input"
                    data-correct-answer="<%= digit %>"
                    maxlength="1"
@@ -75,12 +75,12 @@
       <% end %>
 
       <!-- Riga del risultato -->
-      <div class="border-t-4 border-gray-500">
+      <div class="border-t-4 border-gray-500 dark:border-gray-400">
         <div style="<%= addizione.grid_style %>">
           <% addizione.result_digits.each_with_index do |digit, idx| %>
             <input type="text"
                    <% if defined?(operation_id) %>name="results[<%= operation_id %>][result][<%= idx %>]"<% end %>
-                   class="text-center font-bold <%= 'border-r-2 border-gray-300' unless idx == addizione.result_digits.length - 1 %>"
+                   class="text-center font-bold border-0 border-b border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white <%= 'border-r-2 border-gray-300 dark:border-gray-600' unless idx == addizione.result_digits.length - 1 %>"
                    data-column-addition-target="result"
                    data-correct-answer="<%= digit %>"
                    maxlength="1"

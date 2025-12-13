@@ -15,6 +15,20 @@ class Strumenti::AddizioniController < ApplicationController
     render :show
   end
 
+  def quaderno
+    @addizioni = []
+    @options = default_options
+  end
+
+  def quaderno_generate
+    @operations = params[:operations] || ""
+    @options = parse_options
+
+    @addizioni = parse_addizioni_with_options(@operations, @options) if @operations.present?
+
+    render :quaderno
+  end
+
   private
 
   def default_options
@@ -22,7 +36,8 @@ class Strumenti::AddizioniController < ApplicationController
       show_addends: false,
       show_toolbar: true,
       show_carry: true,
-      show_solution: false
+      show_solution: false,
+      show_labels: false
     }
   end
 
@@ -31,7 +46,8 @@ class Strumenti::AddizioniController < ApplicationController
       show_addends: params[:show_addends] == "true",
       show_toolbar: params[:show_toolbar] == "true",
       show_carry: params[:show_carry] == "true",
-      show_solution: params[:show_solution] == "true"
+      show_solution: params[:show_solution] == "true",
+      show_labels: params[:show_labels] == "true"
     }
   end
 
