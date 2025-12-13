@@ -6,7 +6,7 @@ import JSConfetti from "js-confetti"
  * Gestisce la navigazione tra celle, verifica delle risposte e feedback visivo
  */
 export default class extends Controller {
-  static targets = ["dividend", "divisor", "quotient", "product", "remainder", "bringdown"]
+  static targets = ["dividend", "divisor", "quotient", "product", "remainder", "bringdown", "cell"]
 
   connect() {
     this.jsConfetti = new JSConfetti()
