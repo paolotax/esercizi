@@ -517,7 +517,8 @@ export default class extends Controller {
         // Check if this is a quaderno input
         const isQuadernoInput = input.hasAttribute('data-quaderno-addition-target') ||
             input.hasAttribute('data-quaderno-subtraction-target') ||
-            input.hasAttribute('data-quaderno-multiplication-target')
+            input.hasAttribute('data-quaderno-multiplication-target') ||
+            input.hasAttribute('data-quaderno-division-target')
 
         // For quaderno inputs: use simpler styling and handle empty cells correctly
         if (isQuadernoInput) {
@@ -869,7 +870,8 @@ export default class extends Controller {
       // Check if this is a quaderno input
       const isQuadernoInput = input.hasAttribute('data-quaderno-addition-target') ||
           input.hasAttribute('data-quaderno-subtraction-target') ||
-          input.hasAttribute('data-quaderno-multiplication-target')
+          input.hasAttribute('data-quaderno-multiplication-target') ||
+          input.hasAttribute('data-quaderno-division-target')
 
       // For quaderno inputs: only fill non-empty values and use simpler styling
       if (isQuadernoInput) {
@@ -1077,7 +1079,8 @@ export default class extends Controller {
       // Skip inputs that belong to quaderno controllers (they have their own reset)
       if (input.hasAttribute('data-quaderno-addition-target') ||
           input.hasAttribute('data-quaderno-subtraction-target') ||
-          input.hasAttribute('data-quaderno-multiplication-target')) {
+          input.hasAttribute('data-quaderno-multiplication-target') ||
+          input.hasAttribute('data-quaderno-division-target')) {
         return
       }
 
