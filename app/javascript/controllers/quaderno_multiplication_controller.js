@@ -44,6 +44,13 @@ export default class extends Controller {
       })
     }
 
+    if (this.hasPartialCarryTarget) {
+      this.partialCarryTargets.forEach((cell, index) => {
+        cell.addEventListener('input', (e) => this.handleCellInput(e, index, 'partialCarry'))
+        cell.addEventListener('keydown', (e) => this.handleCellKeydown(e, index, 'partialCarry'))
+      })
+    }
+
     if (this.hasSumCarryTarget) {
       this.sumCarryTargets.forEach((cell, index) => {
         cell.addEventListener('input', (e) => this.handleCarryInput(e, index))
@@ -62,7 +69,7 @@ export default class extends Controller {
 
     // Raccogli tutte le celle input in ordine DOM
     const allCells = grid.querySelectorAll(
-      '[data-quaderno-multiplication-target="multiplicand"], [data-quaderno-multiplication-target="multiplier"], [data-quaderno-multiplication-target="result"], [data-quaderno-multiplication-target="carry"], [data-quaderno-multiplication-target="partial"], [data-quaderno-multiplication-target="sumCarry"]'
+      '[data-quaderno-multiplication-target="multiplicand"], [data-quaderno-multiplication-target="multiplier"], [data-quaderno-multiplication-target="result"], [data-quaderno-multiplication-target="carry"], [data-quaderno-multiplication-target="partial"], [data-quaderno-multiplication-target="partialCarry"], [data-quaderno-multiplication-target="sumCarry"]'
     )
 
     // Mappa colonne: per ogni colonna, lista di celle dall'alto al basso
@@ -101,10 +108,11 @@ export default class extends Controller {
       if (type === 'multiplicand') cells = this.multiplicandTargets
       else if (type === 'multiplier') cells = this.multiplierTargets
       else if (type === 'partial') cells = this.partialTargets
+      else if (type === 'partialCarry') cells = this.partialCarryTargets
       else cells = this.resultTargets
 
-      if (type === 'result' || type === 'partial') {
-        // Nel risultato, naviga da destra a sinistra
+      if (type === 'result' || type === 'partial' || type === 'partialCarry') {
+        // Nel risultato/partial/partialCarry, naviga da destra a sinistra
         if (currentIndex > 0) {
           cells[currentIndex - 1].focus()
           cells[currentIndex - 1].select()
@@ -138,14 +146,15 @@ export default class extends Controller {
     if (type === 'multiplicand') cells = this.multiplicandTargets
     else if (type === 'multiplier') cells = this.multiplierTargets
     else if (type === 'partial') cells = this.partialTargets
+    else if (type === 'partialCarry') cells = this.partialCarryTargets
     else cells = this.resultTargets
 
     switch (event.key) {
       case 'Backspace':
         if (input.value === '') {
           event.preventDefault()
-          if (type === 'result' || type === 'partial') {
-            // Nel risultato, backspace va a destra
+          if (type === 'result' || type === 'partial' || type === 'partialCarry') {
+            // Nel risultato/partial/partialCarry, backspace va a destra
             if (currentIndex < cells.length - 1) {
               cells[currentIndex + 1].focus()
               cells[currentIndex + 1].select()

@@ -6,7 +6,7 @@ require "bigdecimal"
 # Supporta sia numeri interi che decimali (con virgola)
 class Moltiplicazione
   attr_reader :multiplicand, :multiplier, :show_multiplicand_multiplier, :show_toolbar,
-              :show_partial_products, :editable, :show_exercise, :show_solution, :show_labels,
+              :show_partial_products, :show_partial_carries, :editable, :show_exercise, :show_solution, :show_labels,
               :decimal_places, :multiplicand_decimals, :multiplier_decimals,
               :max_integer_digits, :raw_multiplicand, :raw_multiplier
 
@@ -23,6 +23,7 @@ class Moltiplicazione
     @show_multiplicand_multiplier = options.fetch(:show_multiplicand_multiplier, true)
     @show_toolbar = options.fetch(:show_toolbar, true)
     @show_partial_products = options.fetch(:show_partial_products, false)
+    @show_partial_carries = options.fetch(:show_partial_carries, false)
     @editable = options.fetch(:editable, true)
     @show_exercise = options.fetch(:show_exercise, false)
     @show_solution = options.fetch(:show_solution, false)
@@ -369,6 +370,8 @@ class Moltiplicazione
           options[:show_toolbar] = parsed_value
         when "show_partial_products", "show_partials"
           options[:show_partial_products] = parsed_value
+        when "show_partial_carries"
+          options[:show_partial_carries] = parsed_value
         when "editable"
           options[:editable] = parsed_value
         when "show_exercise"

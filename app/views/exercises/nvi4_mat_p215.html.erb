@@ -86,73 +86,36 @@
         Calcola in colonna.
       </p>
 
-      <!-- Prima riga: 3 operazioni -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         <% [
           { op1: "49,7", op2: "8,6", answer: "427,42" },
           { op1: "1,89", op2: "74", answer: "139,86" },
-          { op1: "56,7", op2: "3,9", answer: "221,13" }
-        ].each do |item| %>
-          <div class="flex flex-col items-center gap-2">
-            <div class="p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg text-center flex items-center gap-2">
-              <span class="text-gray-700 dark:text-gray-200 font-bold"><%= item[:op1] %> × <%= item[:op2] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-            <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
-                moltiplicazione: Moltiplicazione.new(
-                  multiplicand: item[:op1],
-                  multiplier: item[:op2],
-                  show_multiplicand_multiplier: true,
-                  show_solution: false,
-                  show_toolbar: false
-                ) %>
-          </div>
-        <% end %>
-      </div>
-
-      <!-- Seconda riga: 3 operazioni -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <% [
+          { op1: "56,7", op2: "3,9", answer: "221,13" },
           { op1: "4,75", op2: "8,7", answer: "41,325" },
           { op1: "3,79", op2: "45", answer: "170,55" },
-          { op1: "5,72", op2: "2,6", answer: "14,872" }
-        ].each do |item| %>
-          <div class="flex flex-col items-center gap-2">
-            <div class="p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg text-center flex items-center gap-2">
-              <span class="text-gray-700 dark:text-gray-200 font-bold"><%= item[:op1] %> × <%= item[:op2] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-            <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
-                moltiplicazione: Moltiplicazione.new(
-                  multiplicand: item[:op1],
-                  multiplier: item[:op2],
-                  show_multiplicand_multiplier: true,
-                  show_solution: false,
-                  show_toolbar: false
-                ) %>
-          </div>
-        <% end %>
-      </div>
-
-      <!-- Terza riga: 2 operazioni -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <% [
+          { op1: "5,72", op2: "2,6", answer: "14,872" },
           { op1: "263", op2: "5,8", answer: "1525,4" },
           { op1: "29,7", op2: "3,6", answer: "106,92" }
-        ].each do |item| %>
-          <div class="flex flex-col items-center gap-2">
-            <div class="p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg text-center flex items-center gap-2">
-              <span class="text-gray-700 dark:text-gray-200 font-bold"><%= item[:op1] %> × <%= item[:op2] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-            <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
-                moltiplicazione: Moltiplicazione.new(
-                  multiplicand: item[:op1],
-                  multiplier: item[:op2],
-                  show_multiplicand_multiplier: true,
-                  show_solution: false,
-                  show_toolbar: false
-                ) %>
+        ].each_with_index do |item, idx| %>
+          <% op_id = "es3-#{idx}" %>
+          <div class="flex items-center gap-1 p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:op1] %> × <%= item[:op2] %> =</span>
+            <input type="text"
+                   data-operation-id="<%= op_id %>"
+                   data-correct-answer="<%= item[:answer] %>"
+                   class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <button type="button"
+                    data-action="click->quaderno-sidebar#open"
+                    data-operation="<%= item[:op1] %>x<%= item[:op2] %>"
+                    data-type="moltiplicazione"
+                    data-target-input="<%= op_id %>"
+                    class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
+                    title="Apri calcolatrice">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </button>
           </div>
         <% end %>
       </div>
@@ -162,10 +125,10 @@
     <div>
       <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
         <%= numero_esercizio_badge(4) %>
-        Calcola in colonna sul quaderno (o clicca l'icona calcolatrice).
+        Calcola in colonna sul quaderno (o clicca sul gruppo per aprire la calcolatrice).
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <%
           esercizio4_gruppi = [
             { lettera: "a", operazioni: [
@@ -200,8 +163,28 @@
         %>
 
         <% esercizio4_gruppi.each_with_index do |gruppo, g_idx| %>
+          <%
+            # Prepara i dati JSON per il gruppo
+            operations_data = gruppo[:operazioni].each_with_index.map { |item, i_idx|
+              { operation: "#{item[:op1]}x#{item[:op2]}", targetId: "es4-#{gruppo[:lettera]}-#{i_idx}" }
+            }
+          %>
           <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
-            <p class="text-gray-700 dark:text-gray-200 font-bold mb-2"><%= gruppo[:lettera] %>.</p>
+            <p class="text-gray-700 dark:text-gray-200 font-bold mb-2 flex items-center gap-2">
+              <%= gruppo[:lettera] %>.
+              <button type="button"
+                      data-action="click->quaderno-sidebar#openGroup"
+                      data-operations='<%= operations_data.to_json %>'
+                      data-type="moltiplicazione"
+                      data-group="<%= gruppo[:lettera] %>"
+                      class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
+                      title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </p>
             <ul class="space-y-2">
               <% gruppo[:operazioni].each_with_index do |item, i_idx| %>
                 <% op_id = "es4-#{gruppo[:lettera]}-#{i_idx}" %>
@@ -210,19 +193,7 @@
                   <input type="text"
                          data-operation-id="<%= op_id %>"
                          data-correct-answer="<%= item[:answer] %>"
-                         class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-                  <button type="button"
-                          data-action="click->quaderno-sidebar#open"
-                          data-operation="<%= item[:op1] %>x<%= item[:op2] %>"
-                          data-type="moltiplicazione"
-                          data-target-input="<%= op_id %>"
-                          class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
-                          title="Apri calcolatrice">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                    </svg>
-                  </button>
+                         class="w-28 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
                 </li>
               <% end %>
             </ul>
