@@ -103,6 +103,7 @@ export default class extends Controller {
       }
       input.classList.remove('bg-green-100', 'bg-red-100', 'bg-yellow-100',
                             'dark:bg-green-900/50', 'dark:bg-red-900/50', 'dark:bg-yellow-900/50')
+      input.classList.add('bg-transparent')
     })
   }
 
@@ -197,12 +198,13 @@ export default class extends Controller {
       }
 
       // Rimuovi colori precedenti
-      input.classList.remove('bg-green-100', 'bg-red-100', 'bg-yellow-100',
+      input.classList.remove('bg-transparent', 'bg-green-100', 'bg-red-100', 'bg-yellow-100',
                             'dark:bg-green-900/50', 'dark:bg-red-900/50', 'dark:bg-yellow-900/50')
 
       // Caso: cella deve essere vuota
       if (correctAnswer === '') {
         if (userAnswer === '') {
+          input.classList.add('bg-transparent')
           return // OK, lascia trasparente
         } else {
           input.classList.add('bg-red-100', 'dark:bg-red-900/50')
