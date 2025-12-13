@@ -1,0 +1,347 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls word-highlighter"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Cerchia le frazioni decimali, cioè quelle che hanno per denominatore 10, 100, 1 000.
+      </p>
+
+      <div class="flex flex-wrap gap-4 justify-center">
+        <% [
+          { num: 54, den: 100, correct: true },
+          { num: 5, den: 250, correct: false },
+          { num: 7, den: 1000, correct: true },
+          { num: 17, den: 30, correct: false },
+          { num: 9, den: 10, correct: true },
+          { num: 45, den: 100, correct: true }
+        ].each do |item| %>
+          <div data-word-highlighter-target="word"
+               data-correct="<%= item[:correct] %>"
+               data-action="click->word-highlighter#toggleHighlight"
+               class="p-3 border-2 border-cyan-400 dark:border-cyan-600 rounded-lg cursor-pointer hover:bg-cyan-50 dark:hover:bg-cyan-900">
+            <%= render 'shared/frazione', num: item[:num], den: item[:den] %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Completa le tabelle. Segui l'esempio.
+      </p>
+
+      <!-- Spiegazione -->
+      <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl mb-4">
+        <p class="text-gray-700 dark:text-gray-200 mb-2">Per trasformare una frazione decimale in numero decimale:</p>
+        <div class="flex flex-wrap gap-6 justify-center">
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 32, den: 10 %>
+            <span class="text-gray-700 dark:text-gray-200">= 32 : 10 = 3,<span class="font-bold text-cyan-600 dark:text-cyan-400">2</span></span>
+          </div>
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 32, den: 100 %>
+            <span class="text-gray-700 dark:text-gray-200">= 32 : 100 = 0,<span class="font-bold text-cyan-600 dark:text-cyan-400">32</span></span>
+          </div>
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 32, den: 1000 %>
+            <span class="text-gray-700 dark:text-gray-200">= 32 : 1 000 = 0,<span class="font-bold text-cyan-600 dark:text-cyan-400">032</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabelle -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- DECIMI -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th colspan="2" class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center font-bold text-gray-800 dark:text-gray-200">DECIMI</th>
+              </tr>
+              <tr>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900 text-center text-gray-700 dark:text-gray-200">Frazione</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900 text-center text-gray-700 dark:text-gray-200">Numero</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <%= render 'shared/frazione', num: 4, den: 10 %>
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center font-bold text-gray-700 dark:text-gray-200">0,4</td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <%= render 'shared/frazione', num: 15, den: 10 %>
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="1,5" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <%= render 'shared/frazione', num: 8, den: 10 %>
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="0,8" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CENTESIMI -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th colspan="2" class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center font-bold text-gray-800 dark:text-gray-200">CENTESIMI</th>
+              </tr>
+              <tr>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900 text-center text-gray-700 dark:text-gray-200">Frazione</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900 text-center text-gray-700 dark:text-gray-200">Numero</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <%= render 'shared/frazione', num: 78, den: 100 %>
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="0,78" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <%= render 'shared/frazione', num: 99, den: 100 %>
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="0,99" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <%= render 'shared/frazione', num: 5, den: 100 %>
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="0,05" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- MILLESIMI -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th colspan="2" class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-center font-bold text-gray-800 dark:text-gray-200">MILLESIMI</th>
+              </tr>
+              <tr>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900 text-center text-gray-700 dark:text-gray-200">Frazione</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900 text-center text-gray-700 dark:text-gray-200">Numero</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <%= render 'shared/frazione', num: 966, den: 1000 %>
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="0,966" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <%= render 'shared/frazione', num: 45, den: 1000 %>
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="0,045" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <%= render 'shared/frazione', num: 7, den: 1000 %>
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="0,007" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Trasforma i seguenti numeri decimali in frazioni decimali.
+      </p>
+
+      <!-- Spiegazione -->
+      <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl mb-4">
+        <p class="text-gray-700 dark:text-gray-200 mb-2">Per trasformare un numero decimale in frazione decimale:</p>
+        <div class="flex flex-wrap gap-6 justify-center">
+          <div class="flex flex-col items-center">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200">2,<span class="font-bold text-cyan-600 dark:text-cyan-400">4</span></span>
+              <span class="text-gray-700 dark:text-gray-200">=</span>
+              <%= render 'shared/frazione', num: 24, den: 10 %>
+            </div>
+            <span class="text-gray-500 dark:text-gray-400">↑ 1 cifra decimale → 1 zero</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200">2,<span class="font-bold text-cyan-600 dark:text-cyan-400">41</span></span>
+              <span class="text-gray-700 dark:text-gray-200">=</span>
+              <%= render 'shared/frazione', num: 241, den: 100 %>
+            </div>
+            <span class="text-gray-500 dark:text-gray-400">↑ 2 cifre decimali → 2 zeri</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200">2,<span class="font-bold text-cyan-600 dark:text-cyan-400">413</span></span>
+              <span class="text-gray-700 dark:text-gray-200">=</span>
+              <%= render 'shared/frazione', num: 2413, den: 1000 %>
+            </div>
+            <span class="text-gray-500 dark:text-gray-400">↑ 3 cifre decimali → 3 zeri</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <% [
+          { num: "39,2", answer_num: "392", answer_den: "10" },
+          { num: "7,05", answer_num: "705", answer_den: "100" },
+          { num: "0,128", answer_num: "128", answer_den: "1000" },
+          { num: "46,31", answer_num: "4631", answer_den: "100" },
+          { num: "12,7", answer_num: "127", answer_den: "10" },
+          { num: "32,45", answer_num: "3245", answer_den: "100" },
+          { num: "12,1", answer_num: "121", answer_den: "10" },
+          { num: "7,135", answer_num: "7135", answer_den: "1000" }
+        ].each do |item| %>
+          <div class="flex items-center gap-2 p-2 border border-cyan-400 dark:border-cyan-600 rounded-lg">
+            <span class="text-gray-700 dark:text-gray-200 font-bold"><%= item[:num] %></span>
+            <span class="text-gray-700 dark:text-gray-200">=</span>
+            <%= render 'shared/frazione', num: nil, den: nil, num_answer: item[:answer_num], den_answer: item[:answer_den] %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Cerchia la frazione decimale che corrisponde al numero.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- 0,6 -->
+        <div class="space-y-2">
+          <p class="text-center font-bold text-gray-700 dark:text-gray-200">0,6</p>
+          <div class="flex justify-center gap-3">
+            <% [
+              { num: 6, den: 100, correct: false },
+              { num: 6, den: 10, correct: true },
+              { num: 6, den: 1000, correct: false }
+            ].each do |item| %>
+              <div data-word-highlighter-target="word"
+                   data-correct="<%= item[:correct] %>"
+                   data-action="click->word-highlighter#toggleHighlight"
+                   class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded-lg cursor-pointer hover:bg-cyan-50 dark:hover:bg-cyan-900">
+                <%= render 'shared/frazione', num: item[:num], den: item[:den] %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- 8,149 -->
+        <div class="space-y-2">
+          <p class="text-center font-bold text-gray-700 dark:text-gray-200">8,149</p>
+          <div class="flex justify-center gap-3">
+            <% [
+              { num: 8149, den: 100, correct: false },
+              { num: 8149, den: 10, correct: false },
+              { num: 8149, den: 1000, correct: true }
+            ].each do |item| %>
+              <div data-word-highlighter-target="word"
+                   data-correct="<%= item[:correct] %>"
+                   data-action="click->word-highlighter#toggleHighlight"
+                   class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded-lg cursor-pointer hover:bg-cyan-50 dark:hover:bg-cyan-900">
+                <%= render 'shared/frazione', num: item[:num], den: item[:den] %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 5 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(5) %>
+        Cerchia il numero decimale che corrisponde alla frazione.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- 35/10 -->
+        <div class="space-y-2">
+          <div class="flex justify-center">
+            <%= render 'shared/frazione', num: 35, den: 10 %>
+          </div>
+          <div class="flex justify-center gap-4">
+            <% [
+              { num: "3,5", correct: true },
+              { num: "3,05", correct: false },
+              { num: "3,005", correct: false }
+            ].each do |item| %>
+              <div data-word-highlighter-target="word"
+                   data-correct="<%= item[:correct] %>"
+                   data-action="click->word-highlighter#toggleHighlight"
+                   class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded-lg cursor-pointer hover:bg-cyan-50 dark:hover:bg-cyan-900 font-bold text-gray-700 dark:text-gray-200">
+                <%= item[:num] %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- 18/100 -->
+        <div class="space-y-2">
+          <div class="flex justify-center">
+            <%= render 'shared/frazione', num: 18, den: 100 %>
+          </div>
+          <div class="flex justify-center gap-4">
+            <% [
+              { num: "0,018", correct: false },
+              { num: "0,18", correct: true },
+              { num: "1,8", correct: false }
+            ].each do |item| %>
+              <div data-word-highlighter-target="word"
+                   data-correct="<%= item[:correct] %>"
+                   data-action="click->word-highlighter#toggleHighlight"
+                   class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded-lg cursor-pointer hover:bg-cyan-50 dark:hover:bg-cyan-900 font-bold text-gray-700 dark:text-gray-200">
+                <%= item[:num] %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

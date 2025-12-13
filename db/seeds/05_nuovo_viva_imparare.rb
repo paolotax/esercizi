@@ -163,7 +163,12 @@ nvi_matematica = nvi_volume4.discipline.create!(
   { numero: 202, titolo: "Frazioni Complementari", slug: "nvi4_mat_p202", view_template: "nvi4_mat_p202", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 203, titolo: "Frazioni Equivalenti", slug: "nvi4_mat_p203", view_template: "nvi4_mat_p203", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 204, titolo: "La Frazione di un Numero", slug: "nvi4_mat_p204", view_template: "nvi4_mat_p204", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 205, titolo: "Confrontare Frazioni", slug: "nvi4_mat_p205", view_template: "nvi4_mat_p205", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 205, titolo: "Confrontare Frazioni", slug: "nvi4_mat_p205", view_template: "nvi4_mat_p205", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 206, titolo: "Problemi con le Frazioni (1)", slug: "nvi4_mat_p206", view_template: "nvi4_mat_p206", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 207, titolo: "Problemi con le Frazioni (2)", slug: "nvi4_mat_p207", view_template: "nvi4_mat_p207", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 208, titolo: "Frazioni", slug: "nvi4_mat_p208", view_template: "nvi4_mat_p208", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 209, titolo: "Frazioni e Numeri Decimali", slug: "nvi4_mat_p209", view_template: "nvi4_mat_p209", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 210, titolo: "I Numeri Decimali", slug: "nvi4_mat_p210", view_template: "nvi4_mat_p210", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi_matematica.pagine.create!(pagina_data)
 end
