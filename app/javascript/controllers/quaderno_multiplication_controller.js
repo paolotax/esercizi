@@ -6,7 +6,7 @@ import JSConfetti from "js-confetti"
  * Gestisce la navigazione tra celle, verifica delle risposte e feedback visivo
  */
 export default class extends Controller {
-  static targets = ["multiplicand", "multiplier", "result", "carry", "partial", "sumCarry", "comma"]
+  static targets = ["multiplicand", "multiplier", "result", "carry", "partial", "sumCarry", "commaSpot"]
 
   connect() {
     this.jsConfetti = new JSConfetti()
@@ -60,9 +60,9 @@ export default class extends Controller {
       return
     }
 
-    // Raccogli tutte le celle input in ordine DOM (inclusa la virgola)
+    // Raccogli tutte le celle input in ordine DOM
     const allCells = grid.querySelectorAll(
-      '[data-quaderno-multiplication-target="multiplicand"], [data-quaderno-multiplication-target="multiplier"], [data-quaderno-multiplication-target="result"], [data-quaderno-multiplication-target="carry"], [data-quaderno-multiplication-target="partial"], [data-quaderno-multiplication-target="sumCarry"], [data-quaderno-multiplication-target="comma"]'
+      '[data-quaderno-multiplication-target="multiplicand"], [data-quaderno-multiplication-target="multiplier"], [data-quaderno-multiplication-target="result"], [data-quaderno-multiplication-target="carry"], [data-quaderno-multiplication-target="partial"], [data-quaderno-multiplication-target="sumCarry"]'
     )
 
     // Mappa colonne: per ogni colonna, lista di celle dall'alto al basso
@@ -267,6 +267,28 @@ export default class extends Controller {
     }
   }
 
+  // === Comma Spot Actions ===
+
+  toggleComma(event) {
+    const spot = event.currentTarget
+
+    // Se questo spot è già attivo, disattivalo
+    if (spot.classList.contains('active')) {
+      spot.classList.remove('active')
+      return
+    }
+
+    // Disattiva tutti gli altri spot (solo una virgola alla volta)
+    if (this.hasCommaSpotTarget) {
+      this.commaSpotTargets.forEach(s => {
+        s.classList.remove('active', 'correct', 'incorrect', 'missing')
+      })
+    }
+
+    // Attiva questo spot
+    spot.classList.add('active')
+  }
+
   // === Toolbar Actions ===
 
   clearGrid() {
@@ -276,6 +298,13 @@ export default class extends Controller {
       input.classList.remove('bg-green-100', 'bg-red-100', 'bg-yellow-100', 'dark:bg-green-900/50', 'dark:bg-red-900/50', 'dark:bg-yellow-900/50')
       input.classList.add('bg-transparent')
     })
+
+    // Pulisci anche gli spot virgola
+    if (this.hasCommaSpotTarget) {
+      this.commaSpotTargets.forEach(spot => {
+        spot.classList.remove('active', 'correct', 'incorrect', 'missing')
+      })
+    }
   }
 
   showNumbers() {
@@ -294,19 +323,6 @@ export default class extends Controller {
         input.value = correctAnswer
       }
     })
-
-    // Mostra virgole (solo quelle di moltiplicando e moltiplicatore)
-    if (this.hasCommaTarget) {
-      this.commaTargets.forEach(input => {
-        const rowType = input.getAttribute('data-row-type')
-        if (rowType === 'multiplicand' || rowType === 'multiplier') {
-          const correctAnswer = input.getAttribute('data-correct-answer')
-          if (correctAnswer) {
-            input.value = correctAnswer
-          }
-        }
-      })
-    }
   }
 
   showResult() {
@@ -348,15 +364,12 @@ export default class extends Controller {
       }
     })
 
-    // Mostra virgola nel risultato
-    if (this.hasCommaTarget) {
-      this.commaTargets.forEach(input => {
-        const rowType = input.getAttribute('data-row-type')
-        if (rowType === 'result') {
-          const correctAnswer = input.getAttribute('data-correct-answer')
-          if (correctAnswer) {
-            input.value = correctAnswer
-          }
+    // Mostra la virgola nella posizione corretta
+    if (this.hasCommaSpotTarget) {
+      this.commaSpotTargets.forEach(spot => {
+        spot.classList.remove('active', 'correct', 'incorrect', 'missing')
+        if (spot.getAttribute('data-correct-position') === 'true') {
+          spot.classList.add('active')
         }
       })
     }
@@ -367,8 +380,7 @@ export default class extends Controller {
     const carries = this.hasCarryTarget ? Array.from(this.carryTargets) : []
     const partials = this.hasPartialTarget ? Array.from(this.partialTargets) : []
     const sumCarries = this.hasSumCarryTarget ? Array.from(this.sumCarryTargets) : []
-    const commas = this.hasCommaTarget ? Array.from(this.commaTargets) : []
-    const allInputs = [...carries, ...this.multiplicandTargets, ...this.multiplierTargets, ...commas, ...partials, ...sumCarries, ...this.resultTargets]
+    const allInputs = [...carries, ...this.multiplicandTargets, ...this.multiplierTargets, ...partials, ...sumCarries, ...this.resultTargets]
 
     let correct = 0
     let total = 0
@@ -414,6 +426,53 @@ export default class extends Controller {
         input.classList.add('bg-yellow-100', 'dark:bg-yellow-900/50')
       }
     })
+
+    // Verifica posizione virgola nel risultato
+    if (this.hasCommaSpotTarget) {
+      let commaCorrect = false
+      let commaPlaced = false
+      let hasCorrectPosition = false
+
+      this.commaSpotTargets.forEach(spot => {
+        const isCorrectPosition = spot.getAttribute('data-correct-position') === 'true'
+        const isActive = spot.classList.contains('active')
+
+        // Rimuovi classi precedenti
+        spot.classList.remove('correct', 'incorrect', 'missing')
+
+        if (isCorrectPosition) {
+          hasCorrectPosition = true
+        }
+
+        if (isActive) {
+          commaPlaced = true
+          if (isCorrectPosition) {
+            // Virgola nella posizione corretta
+            spot.classList.add('correct')
+            commaCorrect = true
+          } else {
+            // Virgola nella posizione sbagliata
+            spot.classList.add('incorrect')
+            hasErrors = true
+          }
+        } else if (isCorrectPosition) {
+          // La posizione corretta non è stata selezionata
+          spot.classList.add('missing')
+        }
+      })
+
+      // Conta la virgola come elemento da verificare se ci sono decimali
+      if (hasCorrectPosition) {
+        total++
+        if (commaCorrect) {
+          correct++
+        } else if (!commaPlaced) {
+          // Virgola non inserita - non è un errore grave, solo mancante
+        } else {
+          // Virgola inserita ma in posizione sbagliata - già segnato come errore sopra
+        }
+      }
+    }
 
     // Lancia confetti se tutte le risposte sono corrette e non ci sono errori
     if (correct === total && total > 0 && !hasErrors) {

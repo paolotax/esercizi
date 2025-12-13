@@ -66,14 +66,15 @@ class Moltiplicazione
     @max_integer_digits + @decimal_places
   end
 
-  # Tipi di colonna per il layout quaderno: :digit, :comma, :sign
-  def quaderno_column_types
-    types = Array.new(@max_integer_digits, :digit)
-    if has_decimals?
-      types << :comma
-      types += Array.new(@decimal_places, :digit)
-    end
-    types
+  # Numero totale di colonne per le cifre (senza colonna virgola separata)
+  def total_digit_columns
+    max_digits
+  end
+
+  # Posizione della virgola nel risultato (da destra, 0-indexed)
+  # Se decimal_places = 2, virgola va dopo la seconda cifra da destra
+  def comma_position_from_right
+    @decimal_places
   end
 
   # Etichette per il quaderno (include decimali)
@@ -153,28 +154,21 @@ class Moltiplicazione
     end
   end
 
-  # Formatta un numero per la griglia (allineato alla virgola)
+  # Formatta un numero per la griglia (allineato a destra, senza virgola)
+  # Restituisce solo le cifre, la virgola sarà renderizzata separatamente
   def format_number_for_grid(raw_str)
-    if raw_str.include?(".")
-      # Numero decimale: separa parte intera e decimale
-      int_part, dec_part = raw_str.split(".")
-      # Padding a sinistra per la parte intera
-      int_digits = int_part.chars
-      int_padding = @max_integer_digits - int_digits.length
-      padded_int = ([""] * int_padding) + int_digits
-      # Padding a destra per la parte decimale
-      dec_digits = dec_part.chars
-      dec_padding = @decimal_places - dec_digits.length
-      padded_dec = dec_digits + ([""] * dec_padding)
-      # Combina
-      padded_int + padded_dec
-    else
-      # Numero intero: padding a sinistra
-      digits_only = raw_str
-      total_digits = max_digits
-      padding = total_digits - digits_only.length
-      ([""] * padding) + digits_only.chars
-    end
+    # Rimuovi il punto decimale e allinea a destra
+    digits_only = raw_str.gsub(".", "")
+    total_digits = max_digits
+    padding = total_digits - digits_only.length
+    ([""] * padding) + digits_only.chars
+  end
+
+  # Posizione della virgola per un numero specifico (da destra, 0-indexed)
+  # Restituisce nil se non ha decimali
+  def comma_position_for_number(raw_str)
+    return nil unless raw_str.include?(".")
+    raw_str.split(".").last.length
   end
 
   # Prodotto finale
