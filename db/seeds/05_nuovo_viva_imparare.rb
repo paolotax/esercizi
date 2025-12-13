@@ -173,7 +173,12 @@ nvi_matematica = nvi_volume4.discipline.create!(
   { numero: 212, titolo: "Moltiplicare e Dividere per 10, 100, 1 000", slug: "nvi4_mat_p212", view_template: "nvi4_mat_p212", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 213, titolo: "Addizioni e Sottrazioni con i Decimali", slug: "nvi4_mat_p213", view_template: "nvi4_mat_p213", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 214, titolo: "Frazioni e Numeri Decimali", slug: "nvi4_mat_p214", view_template: "nvi4_mat_p214", sottotitolo: "RIPASSO", base_color: "cyan" },
-  { numero: 215, titolo: "Moltiplicazioni con i Decimali", slug: "nvi4_mat_p215", view_template: "nvi4_mat_p215", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 215, titolo: "Moltiplicazioni con i Decimali", slug: "nvi4_mat_p215", view_template: "nvi4_mat_p215", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 216, titolo: "Divisioni con i Decimali", slug: "nvi4_mat_p216", view_template: "nvi4_mat_p216", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 217, titolo: "Moltiplicazioni e Divisioni con i Numeri Decimali", slug: "nvi4_mat_p217", view_template: "nvi4_mat_p217", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 218, titolo: "La Domanda e i Dati (1)", slug: "nvi4_mat_p218", view_template: "nvi4_mat_p218", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 219, titolo: "La Domanda e i Dati (2)", slug: "nvi4_mat_p219", view_template: "nvi4_mat_p219", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 220, titolo: "La Domanda Nascosta", slug: "nvi4_mat_p220", view_template: "nvi4_mat_p220", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi_matematica.pagine.create!(pagina_data)
 end

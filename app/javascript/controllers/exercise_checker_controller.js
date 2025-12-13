@@ -595,6 +595,75 @@ export default class extends Controller {
       }
     }
 
+    // Check quaderno multiplication comma positions
+    const multiplicationControllers = this.element.querySelectorAll("[data-controller*=\"quaderno-multiplication\"]")
+    if (multiplicationControllers.length > 0) {
+      let commaCorrect = 0
+      let commaIncorrect = 0
+      let commaMissing = 0
+
+      multiplicationControllers.forEach(mulElement => {
+        const mulController = this.application.getControllerForElementAndIdentifier(mulElement, "quaderno-multiplication")
+        if (mulController && mulController.hasCommaSpotTarget) {
+          const commaSpots = mulController.commaSpotTargets
+          let hasCorrectPosition = false
+          let commaPlaced = false
+          let placedInCorrectPosition = false
+
+          commaSpots.forEach(spot => {
+            const isCorrectPosition = spot.getAttribute('data-correct-position') === 'true'
+            const isActive = spot.classList.contains('active')
+
+            if (isCorrectPosition) {
+              hasCorrectPosition = true
+            }
+
+            // Remove previous styling
+            spot.classList.remove('correct', 'incorrect', 'missing')
+
+            if (isActive) {
+              commaPlaced = true
+              if (isCorrectPosition) {
+                spot.classList.add('correct')
+                placedInCorrectPosition = true
+              } else {
+                spot.classList.add('incorrect')
+              }
+            }
+          })
+
+          // Count results for this controller
+          if (hasCorrectPosition) {
+            if (placedInCorrectPosition) {
+              commaCorrect++
+            } else if (commaPlaced) {
+              commaIncorrect++
+              allCorrect = false
+            } else {
+              commaMissing++
+              allCorrect = false
+              // Mark the correct position as missing
+              commaSpots.forEach(spot => {
+                if (spot.getAttribute('data-correct-position') === 'true') {
+                  spot.classList.add('missing')
+                }
+              })
+            }
+          }
+        }
+      })
+
+      if (commaMissing > 0) {
+        feedback.push(`Virgole mancanti: ${commaMissing} ⚠️`)
+      }
+      if (commaCorrect > 0) {
+        feedback.push(`Virgole corrette: ${commaCorrect} ✅`)
+      }
+      if (commaIncorrect > 0) {
+        feedback.push(`Virgole errate: ${commaIncorrect} ❌`)
+      }
+    }
+
     allGroups.forEach((group, index) => {
       // Determine if this is a card-selector group
       const isCardGroup = group.hasAttribute("data-controller") &&
@@ -943,6 +1012,15 @@ export default class extends Controller {
       }
     })
 
+    // Show quaderno multiplication solutions (including comma position)
+    const multiplicationControllers = this.element.querySelectorAll("[data-controller*=\"quaderno-multiplication\"]")
+    multiplicationControllers.forEach(mulElement => {
+      const mulController = this.application.getControllerForElementAndIdentifier(mulElement, "quaderno-multiplication")
+      if (mulController && mulController.showResult) {
+        mulController.showResult()
+      }
+    })
+
     // Show flower matcher solutions if present
     const flowerMatcher = this.element.querySelector("[data-controller=\"flower-matcher\"]")
     if (flowerMatcher) {
@@ -1127,6 +1205,17 @@ export default class extends Controller {
                             'border-2', 'border-green-500', 'border-red-500', 'border-yellow-500',
                             'font-bold', 'underline', 'line-through', 'opacity-40', 'text-gray-500', 'dark:text-gray-400', 'cursor-not-allowed')
       word.classList.add('cursor-pointer', 'hover:bg-pink-100')
+    })
+
+    // Reset quaderno multiplication comma spots
+    const multiplicationControllers = this.element.querySelectorAll("[data-controller*=\"quaderno-multiplication\"]")
+    multiplicationControllers.forEach(mulElement => {
+      const mulController = this.application.getControllerForElementAndIdentifier(mulElement, "quaderno-multiplication")
+      if (mulController && mulController.hasCommaSpotTarget) {
+        mulController.commaSpotTargets.forEach(spot => {
+          spot.classList.remove('active', 'correct', 'incorrect', 'missing')
+        })
+      }
     })
 
     const feedback = this.element.querySelector(".exercise-feedback")

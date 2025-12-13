@@ -1,0 +1,192 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione Ripasso Teoria -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Colonna sinistra: Moltiplicazioni -->
+      <div class="space-y-4">
+        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+          <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Moltiplicazioni con numeri decimali</p>
+          <p class="text-gray-700 dark:text-gray-200">
+            Esegui e metti la virgola al risultato contando le cifre decimali dei fattori.
+          </p>
+        </div>
+
+        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+          <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Moltiplicazioni per 10, 100, 1 000</p>
+          <p class="text-gray-700 dark:text-gray-200">
+            Sposta la virgola verso destra di 1, 2, 3 posti.
+          </p>
+        </div>
+      </div>
+
+      <!-- Colonna destra: Divisioni -->
+      <div class="space-y-4">
+        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+          <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Divisioni con dividendo decimale</p>
+          <p class="text-gray-700 dark:text-gray-200">
+            Metti la virgola al quoziente quando abbassi la prima cifra decimale.
+          </p>
+        </div>
+
+        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+          <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Divisioni con divisore decimale</p>
+          <p class="text-gray-700 dark:text-gray-200">
+            Trasforma il divisore in un numero intero moltiplicando per 10, 100, 1 000. Moltiplica anche il dividendo.
+          </p>
+        </div>
+
+        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+          <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Divisioni per 10, 100, 1 000</p>
+          <p class="text-gray-700 dark:text-gray-200">
+            Sposta la virgola verso sinistra di 1, 2, 3 posti.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Scrivi gli operatori corretti. Segui gli esempi.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Moltiplicazioni -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 flex-wrap p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <span class="text-gray-700 dark:text-gray-200 font-bold">0,9</span>
+            <span class="text-cyan-600 dark:text-cyan-400 font-bold">× 1 000</span>
+            <span class="text-gray-700 dark:text-gray-200 font-bold">= 900</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">5,68</span>
+            <input type="text" data-correct-answer="× 10" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">= 56,8</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">6,6</span>
+            <input type="text" data-correct-answer="× 1000" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">= 6 600</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">9,01</span>
+            <input type="text" data-correct-answer="× 100" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">= 901</span>
+          </div>
+        </div>
+
+        <!-- Divisioni -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 flex-wrap p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <span class="text-gray-700 dark:text-gray-200 font-bold">17</span>
+            <span class="text-cyan-600 dark:text-cyan-400 font-bold">: 100</span>
+            <span class="text-gray-700 dark:text-gray-200 font-bold">= 0,17</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">3 200</span>
+            <input type="text" data-correct-answer=": 1000" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">= 3,2</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">10,9</span>
+            <input type="text" data-correct-answer=": 10" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">= 1,09</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">4,8</span>
+            <input type="text" data-correct-answer=": 100" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">= 0,048</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Calcola in colonna sul quaderno.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <% [
+          "58,9 × 0,42 =",
+          "4,27 × 6,5 =",
+          "199,7 × 0,23 =",
+          "48,36 × 5,9 =",
+          "105,09 × 7,7 =",
+          "55,8 × 3,67 =",
+          "6 240 × 1,08 =",
+          "395,2 × 4,38 =",
+          "2 047 × 5,06 =",
+          "1 846 × 3,4 ="
+        ].each do |op| %>
+          <div class="p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <span class="text-gray-700 dark:text-gray-200"><%= op %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Calcola in colonna sul quaderno. Poi fai la prova.
+        </p>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div class="space-y-1 text-gray-700 dark:text-gray-200">
+            <p>90,6 : 24 =</p>
+            <p>27,86 : 14 =</p>
+            <p>45,06 : 12 =</p>
+          </div>
+          <div class="space-y-1 text-gray-700 dark:text-gray-200">
+            <p>558 : 2,5 =</p>
+            <p>9 214 : 0,17 =</p>
+            <p>1 482 : 15,6 =</p>
+          </div>
+          <div class="space-y-1 text-gray-700 dark:text-gray-200">
+            <p>82,878 : 3,8 =</p>
+            <p>982,7 : 0,32 =</p>
+            <p>752,02 : 3,8 =</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nota -->
+      <div class="flex items-center">
+        <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-lg">
+          <p class="text-gray-700 dark:text-gray-200">
+            Fai la prova della divisione con la moltiplicazione. Ricorda di aggiungere il resto!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Calcola in colonna.
+      </p>
+
+      <div class="space-y-1 text-gray-700 dark:text-gray-200">
+        <p>1 370,6 × 4,1 =</p>
+        <p>607,89 × 5,3 =</p>
+        <p>32,568 : 4,6 =</p>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
