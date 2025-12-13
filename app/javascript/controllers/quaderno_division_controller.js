@@ -97,7 +97,10 @@ export default class extends Controller {
   clearGrid() {
     const inputs = this.element.querySelectorAll('input')
     inputs.forEach(input => {
-      input.value = ''
+      // Non cancellare gli input readonly (come il segno −)
+      if (!input.hasAttribute('readonly')) {
+        input.value = ''
+      }
       input.classList.remove('bg-green-100', 'bg-red-100', 'bg-yellow-100',
                             'dark:bg-green-900/50', 'dark:bg-red-900/50', 'dark:bg-yellow-900/50')
     })
@@ -185,6 +188,11 @@ export default class extends Controller {
 
       // Salta celle senza risposta corretta definita
       if (correctAnswer === null || correctAnswer === undefined) {
+        return
+      }
+
+      // Salta celle readonly (come il segno −) - sono sempre corrette se hanno il valore
+      if (input.hasAttribute('readonly')) {
         return
       }
 

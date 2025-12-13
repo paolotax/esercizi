@@ -24,17 +24,19 @@
 
 <%
   cell = "2.5em"
-  small_cell = "2em"
 
-  # Colonne: sinistra (dividendo + 1 per −) | destra (max divisore/quoziente)
+  # Colonne: sinistra (dividendo + 1 per −) | destra (max divisore/quoziente) + 1 colonna vuota
   left_cols = divisione.dividend_length + 1
   right_cols = [divisione.divisor_length, divisione.quotient_length].max
-  total_cols = left_cols + right_cols
+  total_cols = left_cols + right_cols + 1  # +1 per colonna vuota a destra
 
   steps = divisione.division_steps
 
-  # Filtra step significativi (quotient_digit > 0)
-  significant_steps = steps.select { |s| s[:quotient_digit] > 0 }
+  # Prepara gli step per la visualizzazione
+  # - Step con q>0: mostrano prodotto e resto
+  # - Step con q=0: mostrano solo resto (cifra abbassata senza sottrazione)
+  # Salta il primo step se q=0 (non c'è ancora niente da mostrare)
+  display_steps = steps.reject.with_index { |s, i| i == 0 && s[:quotient_digit] == 0 }
 
   # Classi comuni
   cell_border = "border-r border-b border-gray-300 dark:border-gray-600"
@@ -58,18 +60,27 @@
   # Riga Dividendo | Divisore
   rows << { type: :dividend_divisor }
 
-  # Righe step
-  significant_steps.each_with_index do |step, idx|
-    if idx == 0
-      # Prima riga step: Prodotto | Quoziente
-      rows << { type: :product_quotient, step: step, step_idx: idx }
-    else
-      # Righe successive: Prodotto | vuoto
-      rows << { type: :product, step: step, step_idx: idx }
-    end
+  # Righe step - usa display_steps che include anche step con q=0
+  first_significant_shown = false
+  display_steps.each_with_index do |step, idx|
+    is_last_step = (idx == display_steps.length - 1)
+    is_significant = step[:quotient_digit] > 0
 
-    # Riga resto (se c'è bring_down o resto > 0)
-    if step[:bring_down] || step[:remainder] > 0
+    if is_significant
+      # Step con q>0: mostra prodotto
+      if !first_significant_shown
+        # Prima riga step significativo: Prodotto | Quoziente
+        rows << { type: :product_quotient, step: step, step_idx: idx }
+        first_significant_shown = true
+      else
+        # Righe successive: Prodotto | vuoto
+        rows << { type: :product, step: step, step_idx: idx }
+      end
+    end
+    # Step con q=0: NON mostra prodotto, solo la riga resto sotto
+
+    # Riga resto (se c'è bring_down, resto > 0, oppure è l'ultimo step per mostrare resto finale)
+    if step[:bring_down] || step[:remainder] > 0 || is_last_step
       rows << { type: :remainder, step: step, step_idx: idx }
     end
   end
@@ -77,10 +88,13 @@
   # Riga footer vuota
   rows << { type: :footer }
 
+  # Riga toolbar (se abilitata)
+  rows << { type: :toolbar } if divisione.show_toolbar
+
   # Helper per calcolare il valore di una cella
-  def cell_value(row_data, col, left_cols, divisione, significant_steps)
+  def cell_value(row_data, col, left_cols, divisione)
     case row_data[:type]
-    when :header, :footer
+    when :header, :footer, :toolbar
       { value: nil, type: :empty }
 
     when :dividend_divisor
@@ -106,7 +120,9 @@
     when :product_quotient
       step = row_data[:step]
       product_str = step[:product].to_s
-      product_end = step[:step_index] + product_str.length
+      # Il prodotto si allinea a destra con il partial_dividend che termina alla posizione step_index
+      padding = left_cols - divisione.dividend_length
+      product_end = padding + step[:step_index] + 1
       product_start = product_end - product_str.length
 
       if col < left_cols
@@ -134,7 +150,9 @@
     when :product
       step = row_data[:step]
       product_str = step[:product].to_s
-      product_end = step[:step_index] + product_str.length
+      # Il prodotto si allinea a destra con il partial_dividend che termina alla posizione step_index
+      padding = left_cols - divisione.dividend_length
+      product_end = padding + step[:step_index] + 1
       product_start = product_end - product_str.length
 
       if col < left_cols
@@ -155,14 +173,26 @@
     when :remainder
       step = row_data[:step]
       remainder_str = step[:remainder].to_s
-      remainder_with_next = step[:bring_down] ? remainder_str + step[:bring_down] : remainder_str
-      remainder_end = step[:step_index] + 1 + remainder_with_next.length
+      # Mostra il resto + la cifra abbassata (se presente)
+      bring_down_str = step[:bring_down] || ""
+      remainder_with_next = bring_down_str.present? ? remainder_str + bring_down_str : remainder_str
+      # Posizione: il resto si allinea a destra con la cifra abbassata (o step_index se non c'è bring_down)
+      # padding = left_cols - dividend_length
+      # La cifra abbassata è in posizione step_index + 1 (colonna padding + step_index + 1)
+      padding = left_cols - divisione.dividend_length
+      if bring_down_str.present?
+        # bring_down è alla posizione step_index + 1
+        remainder_end = padding + step[:step_index] + 2
+      else
+        # senza bring_down, il resto finisce alla posizione step_index
+        remainder_end = padding + step[:step_index] + 1
+      end
       remainder_start = remainder_end - remainder_with_next.length
 
       if col < left_cols
         digit_idx = col - remainder_start
         if digit_idx >= 0 && digit_idx < remainder_with_next.length
-          is_bringdown = step[:bring_down] && digit_idx == remainder_str.length
+          is_bringdown = bring_down_str.present? && digit_idx >= remainder_str.length
           if is_bringdown
             { value: remainder_with_next[digit_idx], type: :bringdown, step: row_data[:step_idx] }
           else
@@ -197,40 +227,51 @@
       <%
         is_header_row = (row_data[:type] == :header)
         is_footer_row = (row_data[:type] == :footer)
+        is_toolbar_row = (row_data[:type] == :toolbar)
         is_dividend_row = (row_data[:type] == :dividend_divisor)
         is_product_quotient_row = (row_data[:type] == :product_quotient)
         is_remainder_row = (row_data[:type] == :remainder)
 
-        # Altezza cella
-        row_height = (is_header_row || is_dividend_row || is_footer_row) ? cell : small_cell
-        cell_class = (is_header_row || is_dividend_row || is_footer_row) ? "div-cell div-cell-lg" : "div-cell div-cell-sm"
+        # Altezza cella (tutte uguali)
+        row_height = cell
+        cell_class = "div-cell div-cell-lg"
 
         # Per la linea sopra il resto (sotto il prodotto)
         prev_row = row_idx > 0 ? rows[row_idx - 1] : nil
         prev_step = prev_row && (prev_row[:type] == :product || prev_row[:type] == :product_quotient) ? prev_row[:step] : nil
+
+        # Pulsanti toolbar (partono dalla prima colonna)
+        toolbar_buttons = [:clear, :numbers, :steps, :result, :verify]
       %>
 
       <% total_cols.times do |col| %>
         <%
-          cell_data = cell_value(row_data, col, left_cols, divisione, significant_steps)
+          cell_data = cell_value(row_data, col, left_cols, divisione)
           is_right_side = (col >= left_cols)
           is_first_right_col = (col == left_cols)
+          is_last_col = (col == total_cols - 1)
+          is_last_row = (row_idx == rows.length - 1)
+          next_row = row_idx < rows.length - 1 ? rows[row_idx + 1] : nil
+          next_is_toolbar = next_row && next_row[:type] == :toolbar
 
-          # Classi bordo
-          border_classes = "border-r border-gray-300 dark:border-gray-600"
-          border_classes += " border-b" unless is_footer_row
-          # Bordo spesso solo nelle righe centrali (non header/footer)
-          border_classes += " #{separator_border}" if is_first_right_col && !is_header_row && !is_footer_row
+          # Classi bordo (evita doppi bordi su ultima colonna e ultima riga)
+          border_classes = ""
+          border_classes += " border-r border-gray-300 dark:border-gray-600" unless is_last_col
+          border_classes += " border-b border-gray-300 dark:border-gray-600" unless is_last_row || next_is_toolbar
+          border_classes += " border-t border-gray-300 dark:border-gray-600" if is_toolbar_row
+          # Bordo spesso solo nelle righe centrali (non header/footer/toolbar)
+          border_classes += " #{separator_border}" if is_first_right_col && !is_header_row && !is_footer_row && !is_toolbar_row
 
-          # Bordo top spesso per quoziente
-          if is_product_quotient_row && is_right_side
+          # Bordo top spesso per quoziente (esclusa ultima colonna vuota)
+          if is_product_quotient_row && is_right_side && !is_last_col
             border_classes += " border-t-2 border-t-gray-700 dark:border-t-gray-300"
           end
 
           # Linea sottrazione sopra il resto
           if is_remainder_row && prev_step && !is_right_side
             product_str = prev_step[:product].to_s
-            product_end = prev_step[:step_index] + product_str.length
+            padding = left_cols - divisione.dividend_length
+            product_end = padding + prev_step[:step_index] + 1
             product_start = product_end - product_str.length
             if col >= product_start && col < product_end
               border_classes += " border-t border-t-gray-500 dark:border-t-gray-400"
@@ -247,6 +288,9 @@
                        when :minus then "text-gray-500 dark:text-gray-400"
                        else "text-gray-800 dark:text-gray-100"
                        end
+
+          # Sfondo per celle risultato (quoziente)
+          bg_color = cell_data[:type] == :quotient ? "bg-gray-50 dark:bg-gray-800" : ""
 
           # Determina se mostrare il valore
           show_value = case cell_data[:type]
@@ -269,17 +313,43 @@
                    end
         %>
 
-        <div class="<%= border_classes %>" style="height: <%= row_height %>;">
-          <input type="text"
-                 class="<%= cell_class %> <%= text_color %>"
-                 data-row="<%= row_idx %>"
-                 data-col="<%= col %>"
-                 <% if target %>data-quaderno-division-target="<%= target %>"<% end %>
-                 <% if cell_data[:step] %>data-step="<%= cell_data[:step] %>"<% end %>
-                 data-correct-answer="<%= cell_data[:value] || '' %>"
-                 maxlength="1"
-                 <% if cell_data[:readonly] %>readonly<% end %>
-                 <% if show_value && cell_data[:value] %>value="<%= cell_data[:value] %>"<% end %>>
+        <div class="<%= border_classes %> <%= bg_color %>" style="height: <%= row_height %>;">
+          <% if is_toolbar_row %>
+            <%# Toolbar row: renderizza pulsanti tondi centrati nelle celle %>
+            <% if col < toolbar_buttons.length %>
+              <%
+                btn = toolbar_buttons[col]
+                btn_config = {
+                  clear: { action: "clearGrid", color: "bg-gray-400/40 hover:bg-gray-400/70", icon: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16", title: "Cancella" },
+                  numbers: { action: "showNumbers", color: "bg-blue-400/40 hover:bg-blue-400/70", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", title: "Mostra Numeri" },
+                  steps: { action: "showSteps", color: "bg-orange-400/40 hover:bg-orange-400/70", icon: "M13 5l7 7-7 7M5 5l7 7-7 7", title: "Mostra Passi" },
+                  result: { action: "showResult", color: "bg-green-400/40 hover:bg-green-400/70", icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z", title: "Mostra Risultato" },
+                  verify: { action: "verifyAnswers", color: "bg-purple-400/40 hover:bg-purple-400/70", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4", title: "Verifica" }
+                }[btn]
+              %>
+              <div class="w-full h-full flex items-center justify-center">
+                <button type="button"
+                        data-action="click->quaderno-division#<%= btn_config[:action] %>"
+                        class="w-9 h-9 rounded-full flex items-center justify-center <%= btn_config[:color] %> text-white/80 hover:text-white transition-all print-hidden"
+                        title="<%= btn_config[:title] %>">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="<%= btn_config[:icon] %>" />
+                  </svg>
+                </button>
+              </div>
+            <% end %>
+          <% else %>
+            <input type="text"
+                   class="<%= cell_class %> <%= text_color %>"
+                   data-row="<%= row_idx %>"
+                   data-col="<%= col %>"
+                   <% if target %>data-quaderno-division-target="<%= target %>"<% end %>
+                   <% if cell_data[:step] %>data-step="<%= cell_data[:step] %>"<% end %>
+                   data-correct-answer="<%= cell_data[:value] || '' %>"
+                   maxlength="1"
+                   <% if cell_data[:readonly] %>readonly<% end %>
+                   <% if show_value && cell_data[:value] %>value="<%= cell_data[:value] %>"<% end %>>
+          <% end %>
         </div>
       <% end %>
     <% end %>
@@ -293,44 +363,4 @@
     </div>
   <% end %>
 
-  <%# Toolbar %>
-  <% if divisione.show_toolbar %>
-    <div class="print-hidden flex justify-center gap-4 mt-6">
-      <button type="button" data-action="click->quaderno-division#clearGrid"
-              class="w-14 h-14 rounded-full bg-gray-500 hover:bg-gray-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
-              title="Cancella">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-        </svg>
-      </button>
-      <button type="button" data-action="click->quaderno-division#showNumbers"
-              class="w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
-              title="Mostra Numeri">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-      </button>
-      <button type="button" data-action="click->quaderno-division#showSteps"
-              class="w-14 h-14 rounded-full bg-orange-500 hover:bg-orange-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
-              title="Mostra Passi">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-        </svg>
-      </button>
-      <button type="button" data-action="click->quaderno-division#showResult"
-              class="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
-              title="Mostra Risultato">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      </button>
-      <button type="button" data-action="click->quaderno-division#verifyAnswers"
-              class="w-14 h-14 rounded-full bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
-              title="Verifica">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-        </svg>
-      </button>
-    </div>
-  <% end %>
 </div>
