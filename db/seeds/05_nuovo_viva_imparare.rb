@@ -168,7 +168,12 @@ nvi_matematica = nvi_volume4.discipline.create!(
   { numero: 207, titolo: "Problemi con le Frazioni (2)", slug: "nvi4_mat_p207", view_template: "nvi4_mat_p207", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 208, titolo: "Frazioni", slug: "nvi4_mat_p208", view_template: "nvi4_mat_p208", sottotitolo: "RIPASSO", base_color: "cyan" },
   { numero: 209, titolo: "Frazioni e Numeri Decimali", slug: "nvi4_mat_p209", view_template: "nvi4_mat_p209", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 210, titolo: "I Numeri Decimali", slug: "nvi4_mat_p210", view_template: "nvi4_mat_p210", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 210, titolo: "I Numeri Decimali", slug: "nvi4_mat_p210", view_template: "nvi4_mat_p210", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 211, titolo: "Numeri Decimali a Confronto", slug: "nvi4_mat_p211", view_template: "nvi4_mat_p211", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 212, titolo: "Moltiplicare e Dividere per 10, 100, 1 000", slug: "nvi4_mat_p212", view_template: "nvi4_mat_p212", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 213, titolo: "Addizioni e Sottrazioni con i Decimali", slug: "nvi4_mat_p213", view_template: "nvi4_mat_p213", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 214, titolo: "Frazioni e Numeri Decimali", slug: "nvi4_mat_p214", view_template: "nvi4_mat_p214", sottotitolo: "RIPASSO", base_color: "cyan" },
+  { numero: 215, titolo: "Moltiplicazioni con i Decimali", slug: "nvi4_mat_p215", view_template: "nvi4_mat_p215", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi_matematica.pagine.create!(pagina_data)
 end

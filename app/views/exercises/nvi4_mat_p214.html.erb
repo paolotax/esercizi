@@ -1,0 +1,240 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione Teoria -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="p-4 bg-cyan-50 dark:bg-cyan-900/30 rounded-2xl">
+        <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Dalla frazione decimale al numero decimale</p>
+        <div class="flex items-center gap-2">
+          <%= render 'shared/frazione', num: 3, den: 10 %>
+          <span class="text-gray-700 dark:text-gray-200">= 3 : 10 = 0,<span class="font-bold text-cyan-600 dark:text-cyan-400">3</span></span>
+        </div>
+      </div>
+      <div class="p-4 bg-cyan-50 dark:bg-cyan-900/30 rounded-2xl">
+        <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Dal numero decimale alla frazione decimale</p>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 dark:text-gray-200">3,<span class="font-bold text-cyan-600 dark:text-cyan-400">15</span> =</span>
+          <%= render 'shared/frazione', num: 315, den: 100 %>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl">
+      <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Numeri decimali</p>
+      <div class="overflow-x-auto">
+        <table class="border-collapse border border-cyan-400 dark:border-cyan-600 mx-auto">
+          <thead>
+            <tr>
+              <th class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 font-bold text-gray-700 dark:text-gray-200">h</th>
+              <th class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 font-bold text-gray-700 dark:text-gray-200">da</th>
+              <th class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 font-bold text-gray-700 dark:text-gray-200">u</th>
+              <th class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200"></th>
+              <th class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 font-bold text-gray-700 dark:text-gray-200">d</th>
+              <th class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 font-bold text-gray-700 dark:text-gray-200">c</th>
+              <th class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 font-bold text-gray-700 dark:text-gray-200">m</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"></td>
+              <td class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"></td>
+              <td class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">0</td>
+              <td class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">,</td>
+              <td class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center font-bold text-cyan-600 dark:text-cyan-400">8</td>
+              <td class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center font-bold text-cyan-600 dark:text-cyan-400">9</td>
+              <td class="p-1 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-center text-gray-700 dark:text-gray-200 mt-2">0 u 8 d 9 c <span class="text-cyan-500">→</span> 89 centesimi</p>
+    </div>
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Trasforma le frazioni in numeri decimali e i numeri in frazioni decimali. Segui gli esempi.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <!-- Esempi -->
+        <div class="flex items-center gap-2 p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+          <%= render 'shared/frazione', num: 15, den: 10 %>
+          <span class="text-gray-700 dark:text-gray-200">=</span>
+          <span class="font-bold text-cyan-600 dark:text-cyan-400 underline">1,5</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+          <span class="font-bold text-gray-700 dark:text-gray-200">3,5 =</span>
+          <%= render 'shared/frazione', num: 35, den: 10 %>
+        </div>
+
+        <!-- Da completare -->
+        <div class="flex items-center gap-2 p-2 border border-cyan-400 dark:border-cyan-600 rounded-lg">
+          <%= render 'shared/frazione', num: 123, den: 100 %>
+          <span class="text-gray-700 dark:text-gray-200">=</span>
+          <input type="text" data-correct-answer="1,23" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 p-2 border border-cyan-400 dark:border-cyan-600 rounded-lg">
+          <%= render 'shared/frazione', num: 325, den: 1000 %>
+          <span class="text-gray-700 dark:text-gray-200">=</span>
+          <input type="text" data-correct-answer="0,325" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 p-2 border border-cyan-400 dark:border-cyan-600 rounded-lg">
+          <span class="text-gray-700 dark:text-gray-200">1,85 =</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "185", den_answer: "100" %>
+        </div>
+        <div class="flex items-center gap-2 p-2 border border-cyan-400 dark:border-cyan-600 rounded-lg">
+          <span class="text-gray-700 dark:text-gray-200">0,136 =</span>
+          <%= render 'shared/frazione', num: nil, den: nil, num_answer: "136", den_answer: "1000" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Scrivi il valore di ogni cifra evidenziata.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <% [
+          { num: "845,<b>0</b>7", answer: "0 decimi" },
+          { num: "4<b>3</b> 709,5", answer: "3 migliaia" },
+          { num: "6,32<b>8</b>", answer: "8 millesimi" },
+          { num: "5<b>3</b>,809", answer: "3 unità" },
+          { num: "9<b>8</b>3,106", answer: "8 decine" },
+          { num: "211,5<b>4</b>8", answer: "4 centesimi" },
+          { num: "2 507,6<b>5</b>1", answer: "5 centesimi" },
+          { num: "47,<b>3</b>", answer: "3 decimi" },
+          { num: "<b>6</b>0 542,1", answer: "6 decine di migliaia" },
+          { num: "659,50<b>3</b>", answer: "3 millesimi" },
+          { num: "17 <b>8</b>06,3", answer: "8 centinaia" },
+          { num: "55,67<b>2</b>", answer: "2 millesimi" }
+        ].each do |item| %>
+          <div class="flex flex-col gap-1 p-2 border border-cyan-400 dark:border-cyan-600 rounded-lg">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:num].html_safe %></span>
+            <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Scrivi il numero decimale corrispondente aggiungendo gli zeri necessari.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <% [
+          { scomp: "6 u 4 d 9 c =", answer: "6,49" },
+          { scomp: "4 da 2 u 7 m =", answer: "42,007" },
+          { scomp: "3 h 6 da 7 d 5 c =", answer: "360,75" },
+          { scomp: "8 h 5 u 4 c =", answer: "805,04" },
+          { scomp: "6 da 3 d 9 m =", answer: "60,309" }
+        ].each do |item| %>
+          <div class="flex items-center gap-2 p-2 border border-cyan-400 dark:border-cyan-600 rounded-lg">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:scomp] %></span>
+            <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Inserisci i segni &gt;, &lt; oppure =.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <% [
+          { n1: "2,5", n2: "2,48", answer: ">" },
+          { n1: "5,09", n2: "5,90", answer: "<" },
+          { n1: "1,07", n2: "1,011", answer: ">" },
+          { n1: "43,7", n2: "4,37", answer: ">" },
+          { n1: "3,08", n2: "3,080", answer: "=" },
+          { n1: "10,05", n2: "10,5", answer: "<" },
+          { n1: "16,58", n2: "16,6", answer: "<" },
+          { n1: "0,49", n2: "0,100", answer: ">" }
+        ].each do |item| %>
+          <div class="flex items-center justify-center gap-2 p-2 border border-cyan-400 dark:border-cyan-600 rounded-lg">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:n1] %></span>
+            <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:n2] %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 5 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(5) %>
+        Calcola in colonna sul quaderno.
+      </p>
+
+      <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+        <ul class="space-y-1 text-gray-700 dark:text-gray-200">
+          <li>358 + 3,685 + 1 295,07 =</li>
+          <li>66 + 11 000,32 + 439,025 =</li>
+          <li>4 635 − 60,421 =</li>
+          <li>479,63 − 29,803 =</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Esercizio 6 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(6) %>
+        Completa la tabella.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+          <thead>
+            <tr>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 font-bold text-gray-800 dark:text-gray-200">−</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 font-bold text-gray-800 dark:text-gray-200">1 d</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 font-bold text-gray-800 dark:text-gray-200">1 c</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 font-bold text-gray-800 dark:text-gray-200">1 m</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% [
+              { num: "2,593", d: "2,493", c: "2,583", m: "2,592" },
+              { num: "4,815", d: "4,715", c: "4,805", m: "4,814" },
+              { num: "3,976", d: "3,876", c: "3,966", m: "3,975" }
+            ].each do |row| %>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-50 dark:bg-cyan-900 text-center text-gray-700 dark:text-gray-200"><%= row[:num] %></td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="<%= row[:d] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="<%= row[:c] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="<%= row[:m] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

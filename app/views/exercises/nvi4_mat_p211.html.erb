@@ -1,0 +1,136 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls word-highlighter"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione Teoria -->
+    <div class="p-4 bg-cyan-50 dark:bg-cyan-900/30 rounded-2xl">
+      <p class="text-gray-700 dark:text-gray-200 mb-2">
+        Tra due numeri decimali è maggiore quello con la parte intera maggiore
+      </p>
+      <p class="text-center text-gray-700 dark:text-gray-200 font-bold mb-3">
+        <span class="text-cyan-500">→</span> <span class="font-bold">4</span>,5 <span class="font-bold text-cyan-600 dark:text-cyan-400">&gt;</span> <span class="font-bold">3</span>,7
+      </p>
+      <p class="text-gray-700 dark:text-gray-200 mb-2">
+        Se la parte intera è uguale, è maggiore il numero che ha la cifra dei decimi maggiore; se anche la cifra dei decimi è uguale, confrontiamo i centesimi e così di seguito.
+      </p>
+      <p class="text-center text-gray-700 dark:text-gray-200 font-bold">
+        3,<span class="font-bold text-cyan-600 dark:text-cyan-400">6</span> &gt; 3,<span class="font-bold text-cyan-600 dark:text-cyan-400">4</span>
+        <span class="mx-4"></span>
+        3,5<span class="font-bold text-cyan-600 dark:text-cyan-400">2</span> &lt; 3,5<span class="font-bold text-cyan-600 dark:text-cyan-400">6</span>
+      </p>
+    </div>
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Inserisci i segni &gt;, &lt; oppure =. Segui gli esempi.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <% [
+          # Prima riga - esempi
+          { n1: "9,68", n2: "9,7", answer: "<", example: true },
+          { n1: "3,70", n2: "3,7", answer: "=", example: true },
+          { n1: "5,21", n2: "5,12", answer: ">", example: false },
+          { n1: "24,7", n2: "2,47", answer: ">", example: false },
+          # Seconda riga
+          { n1: "1,52", n2: "15,2", answer: "<", example: false },
+          { n1: "0,06", n2: "0,006", answer: ">", example: false },
+          { n1: "8,4", n2: "8,40", answer: "=", example: false },
+          { n1: "0,50", n2: "0,05", answer: ">", example: false },
+          # Terza riga
+          { n1: "9,03", n2: "9,30", answer: "<", example: false },
+          { n1: "39,00", n2: "39", answer: "=", example: false },
+          { n1: "7,25", n2: "7,27", answer: "<", example: false },
+          { n1: "9,01", n2: "9,03", answer: "<", example: false },
+          # Quarta riga
+          { n1: "28,08", n2: "28,8", answer: "<", example: false },
+          { n1: "107,3", n2: "107,9", answer: "<", example: false },
+          { n1: "4,50", n2: "5", answer: "<", example: false },
+          { n1: "38,7", n2: "38,70", answer: "=", example: false }
+        ].each do |item| %>
+          <div class="flex items-center justify-center gap-2 p-2 border border-cyan-400 dark:border-cyan-600 rounded-lg <%= item[:example] ? 'bg-cyan-100 dark:bg-cyan-800' : '' %>">
+            <span class="text-gray-700 dark:text-gray-200 <%= item[:example] ? 'font-bold' : '' %>"><%= item[:n1] %></span>
+            <% if item[:example] %>
+              <span class="w-8 text-center font-bold text-cyan-600 dark:text-cyan-400"><%= item[:answer] %></span>
+            <% else %>
+              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <% end %>
+            <span class="text-gray-700 dark:text-gray-200 <%= item[:example] ? 'font-bold' : '' %>"><%= item[:n2] %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        In ogni serie di numeri cerchia di blu il numero minore e di rosso il maggiore.
+      </p>
+
+      <div class="space-y-4">
+        <% [
+          { nums: ["9,6", "9,3", "9,1", "9,2", "9,8", "9,7"], min: "9,1", max: "9,8" },
+          { nums: ["4,7", "8,15", "4,08", "7,95", "4,18", "4,58"], min: "4,08", max: "8,15" },
+          { nums: ["3,059", "7,150", "3,507", "3,035", "9,202", "3,950"], min: "3,035", max: "9,202" },
+          { nums: ["66,06", "66,606", "66,66", "66,066", "66,666", "66,600"], min: "66,06", max: "66,666" },
+          { nums: ["405,391", "405,48", "415,391", "405,301", "451,301", "415,301"], min: "405,301", max: "451,301" }
+        ].each_with_index do |row, idx| %>
+          <div class="flex flex-wrap gap-3 p-3 border-b border-cyan-300 dark:border-cyan-700">
+            <% row[:nums].each do |num| %>
+              <% is_min = num == row[:min] %>
+              <% is_max = num == row[:max] %>
+              <div data-word-highlighter-target="word"
+                   data-correct="<%= is_min || is_max %>"
+                   data-min="<%= is_min %>"
+                   data-max="<%= is_max %>"
+                   data-action="click->word-highlighter#toggleHighlight"
+                   class="px-3 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded-lg cursor-pointer hover:bg-cyan-50 dark:hover:bg-cyan-900 text-gray-700 dark:text-gray-200">
+                <%= num %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Scrivi i numeri in ordine crescente.
+      </p>
+
+      <div class="p-4 bg-cyan-50 dark:bg-cyan-900/30 rounded-2xl mb-4">
+        <p class="text-gray-700 dark:text-gray-200 text-center mb-2">
+          Numeri: 5 • 5,38 • 4,9 • 5,39 • 4,99 • 4,09 • 5,381
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        <input type="text" data-correct-answer="4,09" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        <span class="text-cyan-500">&lt;</span>
+        <input type="text" data-correct-answer="4,9" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        <span class="text-cyan-500">&lt;</span>
+        <input type="text" data-correct-answer="4,99" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        <span class="text-cyan-500">&lt;</span>
+        <input type="text" data-correct-answer="5" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        <span class="text-cyan-500">&lt;</span>
+        <input type="text" data-correct-answer="5,38" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        <span class="text-cyan-500">&lt;</span>
+        <input type="text" data-correct-answer="5,381" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        <span class="text-cyan-500">&lt;</span>
+        <input type="text" data-correct-answer="5,39" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

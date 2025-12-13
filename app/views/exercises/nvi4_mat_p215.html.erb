@@ -1,0 +1,170 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1 IMPARARE TUTTI + Regola -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Metti la virgola nei prodotti al posto giusto. Segui l'esempio.
+        </p>
+
+        <div class="space-y-3">
+          <!-- Esempio -->
+          <div class="flex items-center gap-2 flex-wrap p-2 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <span class="text-gray-700 dark:text-gray-200 font-bold">85,<span class="underline">3</span> × 6,<span class="underline">5</span> = 554<span class="font-bold text-cyan-600 dark:text-cyan-400">,</span><span class="underline">45</span></span>
+          </div>
+
+          <% [
+            { expr: "9,58 × 29 = ", num: "27782", answer: "277,82" },
+            { expr: "7,63 × 43,5 = ", num: "331905", answer: "331,905" },
+            { expr: "57,3 × 14,7 = ", num: "84231", answer: "842,31" },
+            { expr: "837 × 0,68 = ", num: "56916", answer: "569,16" },
+            { expr: "32,4 × 7,32 = ", num: "237168", answer: "237,168" },
+            { expr: "5,368 × 12 = ", num: "64416", answer: "64,416" },
+            { expr: "5,28 × 7,36 = ", num: "388608", answer: "38,8608" }
+          ].each do |item| %>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200"><%= item[:expr] %><%= item[:num] %></span>
+              <span class="text-cyan-500">→</span>
+              <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Regola -->
+      <div class="p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl">
+        <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Moltiplicazioni con i decimali</p>
+        <p class="text-gray-700 dark:text-gray-200">
+          Esegui come con i numeri interi.<br>
+          Nel prodotto finale inserisci la virgola, partendo da destra, dopo tante cifre quante sono in tutto le cifre decimali dei due fattori.
+        </p>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Esegui in riga le seguenti moltiplicazioni.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <% [
+          { expr: "0,5 × 3 =", answer: "1,5" },
+          { expr: "6,7 × 8 =", answer: "53,6" },
+          { expr: "0,6 × 0,7 =", answer: "0,42" },
+          { expr: "12 × 0,5 =", answer: "6" },
+          { expr: "1,24 × 6 =", answer: "7,44" },
+          { expr: "163 × 0,5 =", answer: "81,5" },
+          { expr: "3,25 × 6 =", answer: "19,5" },
+          { expr: "49 × 0,8 =", answer: "39,2" },
+          { expr: "13 × 0,2 =", answer: "2,6" },
+          { expr: "3,5 × 4 =", answer: "14" },
+          { expr: "32,4 × 0,6 =", answer: "19,44" },
+          { expr: "3,4 × 9 =", answer: "30,6" }
+        ].each do |item| %>
+          <div class="flex items-center gap-1 p-2 border border-cyan-400 dark:border-cyan-600 rounded-lg">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:expr] %></span>
+            <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Calcola in colonna.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <% [
+          { op1: "49,7", op2: "8,6", answer: "427,42" },
+          { op1: "1,89", op2: "74", answer: "139,86" },
+          { op1: "56,7", op2: "3,9", answer: "221,13" },
+          { op1: "4,75", op2: "8,7", answer: "41,325" },
+          { op1: "3,79", op2: "45", answer: "170,55" },
+          { op1: "5,72", op2: "2,6", answer: "14,872" },
+          { op1: "263", op2: "5,8", answer: "1525,4" },
+          { op1: "29,7", op2: "3,6", answer: "106,92" }
+        ].each do |item| %>
+          <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <div class="font-mono text-right text-gray-700 dark:text-gray-200">
+              <div><%= item[:op1] %> ×</div>
+              <div class="border-b border-gray-400 dark:border-gray-500"><%= item[:op2] %> =</div>
+              <div class="mt-1">+</div>
+              <div class="border-t border-gray-400 dark:border-gray-500 mt-1">
+                <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-right font-bold bg-transparent dark:text-white">
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Calcola in colonna sul quaderno.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+          <p class="text-gray-700 dark:text-gray-200 font-bold mb-2">a.</p>
+          <ul class="space-y-1 text-gray-700 dark:text-gray-200">
+            <li>38 × 6,9 =</li>
+            <li>74 × 3,5 =</li>
+            <li>4,92 × 27 =</li>
+            <li>8,05 × 36 =</li>
+            <li>7,32 × 4,5 =</li>
+          </ul>
+        </div>
+
+        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+          <p class="text-gray-700 dark:text-gray-200 font-bold mb-2">b.</p>
+          <ul class="space-y-1 text-gray-700 dark:text-gray-200">
+            <li>672 × 8,3 =</li>
+            <li>3,59 × 2,6 =</li>
+            <li>47,53 × 6,8 =</li>
+            <li>7,401 × 39 =</li>
+            <li>823 × 7,6 =</li>
+          </ul>
+        </div>
+
+        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+          <p class="text-gray-700 dark:text-gray-200 font-bold mb-2">c.</p>
+          <ul class="space-y-1 text-gray-700 dark:text-gray-200">
+            <li>35 × 2,93 =</li>
+            <li>2,8 × 7,25 =</li>
+            <li>5,6 × 4,76 =</li>
+            <li>5,8 × 39,7 =</li>
+            <li>8,6 × 4,28 =</li>
+          </ul>
+        </div>
+
+        <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+          <p class="text-gray-700 dark:text-gray-200 font-bold mb-2">d.</p>
+          <ul class="space-y-1 text-gray-700 dark:text-gray-200">
+            <li>324 × 5,81 =</li>
+            <li>4,07 × 3,29 =</li>
+            <li>963 × 6,07 =</li>
+            <li>3,52 × 7,30 =</li>
+            <li>0,34 × 8,07 =</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

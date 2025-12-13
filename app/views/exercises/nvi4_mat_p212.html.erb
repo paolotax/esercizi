@@ -1,0 +1,265 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Colonna Moltiplicazioni -->
+      <div class="space-y-6">
+        <!-- Esercizio 1 IMPARARE TUTTI -->
+        <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+          <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+            <%= imparare_tutti_badge(1) %>
+            Esegui le moltiplicazioni in riga.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Colonna ×10 -->
+            <div class="space-y-2">
+              <div class="flex items-center gap-1 flex-wrap">
+                <span class="text-gray-700 dark:text-gray-200 font-bold">73,1 × 10 =</span>
+                <span class="font-bold text-cyan-600 dark:text-cyan-400 underline">731</span>
+              </div>
+              <% [
+                { expr: "9,94 × 10 =", answer: "99,4" },
+                { expr: "0,7 × 10 =", answer: "7" },
+                { expr: "2,84 × 10 =", answer: "28,4" },
+                { expr: "75,3 × 100 =", answer: "7530" },
+                { expr: "0,046 × 100 =", answer: "4,6" }
+              ].each do |item| %>
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span class="text-gray-700 dark:text-gray-200"><%= item[:expr] %></span>
+                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </div>
+              <% end %>
+            </div>
+
+            <!-- Colonna ×100, ×1000 -->
+            <div class="space-y-2">
+              <div class="flex items-center gap-1 flex-wrap">
+                <span class="text-gray-700 dark:text-gray-200 font-bold">4 023,5 × 100 =</span>
+                <span class="font-bold text-cyan-600 dark:text-cyan-400 underline">402 350</span>
+              </div>
+              <% [
+                { expr: "5,6 × 100 =", answer: "560" },
+                { expr: "9,513 × 100 =", answer: "951,3" },
+                { expr: "41,86 × 1 000 =", answer: "41860" },
+                { expr: "35,902 × 1 000 =", answer: "35902" },
+                { expr: "0,5 × 1 000 =", answer: "500" }
+              ].each do |item| %>
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span class="text-gray-700 dark:text-gray-200"><%= item[:expr] %></span>
+                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Regola moltiplicazione -->
+        <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl">
+          <p class="text-gray-700 dark:text-gray-200 mb-2">
+            <span class="font-bold">Per moltiplicare un numero decimale per 10, 100, 1 000:</span> sposta la virgola verso destra di 1, 2 o 3 posti. Se mancano le cifre, aggiungi gli zeri.
+          </p>
+          <div class="text-gray-700 dark:text-gray-200">
+            2,84 <span class="font-bold text-cyan-600 dark:text-cyan-400">× 10</span> = 28,4<br>
+            2,84 <span class="font-bold text-cyan-600 dark:text-cyan-400">× 100</span> = 284<br>
+            2,84 <span class="font-bold text-cyan-600 dark:text-cyan-400">× 1 000</span> = 2 840
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonna Divisioni -->
+      <div class="space-y-6">
+        <!-- Esercizio 2 IMPARARE TUTTI -->
+        <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+          <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+            <%= imparare_tutti_badge(2) %>
+            Esegui le divisioni in riga.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Colonna :10 -->
+            <div class="space-y-2">
+              <div class="flex items-center gap-1 flex-wrap">
+                <span class="text-gray-700 dark:text-gray-200 font-bold">79,2 : 10 =</span>
+                <span class="font-bold text-cyan-600 dark:text-cyan-400 underline">7,92</span>
+              </div>
+              <% [
+                { expr: "2 640,9 : 10 =", answer: "264,09" },
+                { expr: "23,4 : 10 =", answer: "2,34" },
+                { expr: "30 : 100 =", answer: "0,3" },
+                { expr: "5,8 : 100 =", answer: "0,058" },
+                { expr: "81,9 : 100 =", answer: "0,819" }
+              ].each do |item| %>
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span class="text-gray-700 dark:text-gray-200"><%= item[:expr] %></span>
+                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </div>
+              <% end %>
+            </div>
+
+            <!-- Colonna :100, :1000 -->
+            <div class="space-y-2">
+              <div class="flex items-center gap-1 flex-wrap">
+                <span class="text-gray-700 dark:text-gray-200 font-bold">87,4 : 100 =</span>
+                <span class="font-bold text-cyan-600 dark:text-cyan-400 underline">0,874</span>
+              </div>
+              <% [
+                { expr: "4,3 : 100 =", answer: "0,043" },
+                { expr: "145 : 1 000 =", answer: "0,145" },
+                { expr: "7 625 : 1 000 =", answer: "7,625" },
+                { expr: "3 792 : 1 000 =", answer: "3,792" },
+                { expr: "122 : 1 000 =", answer: "0,122" }
+              ].each do |item| %>
+                <div class="flex items-center gap-1 flex-wrap">
+                  <span class="text-gray-700 dark:text-gray-200"><%= item[:expr] %></span>
+                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Regola divisione -->
+        <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl">
+          <p class="text-gray-700 dark:text-gray-200 mb-2">
+            <span class="font-bold">Per dividere un numero decimale per 10, 100, 1 000:</span> sposta la virgola verso sinistra di 1, 2 o 3 posti. Se mancano le cifre, aggiungi gli zeri.
+          </p>
+          <div class="text-gray-700 dark:text-gray-200">
+            96,3 <span class="font-bold text-cyan-600 dark:text-cyan-400">: 10</span> = 9,63<br>
+            96,3 <span class="font-bold text-cyan-600 dark:text-cyan-400">: 100</span> = 0,963<br>
+            96,3 <span class="font-bold text-cyan-600 dark:text-cyan-400">: 1 000</span> = 0,0963
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Completa le tabelle come nell'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Tabella moltiplicazioni -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 font-bold text-gray-800 dark:text-gray-200">× 10</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 font-bold text-gray-800 dark:text-gray-200">× 100</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 font-bold text-gray-800 dark:text-gray-200">× 1 000</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center font-bold text-gray-700 dark:text-gray-200">7,5</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center font-bold text-cyan-600 dark:text-cyan-400 underline">75</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="750" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                  <input type="text" data-correct-answer="7500" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <% [
+                { num: "9,036", x10: "90,36", x100: "903,6", x1000: "9036" },
+                { num: "58,324", x10: "583,24", x100: "5832,4", x1000: "58324" },
+                { num: "0,72", x10: "7,2", x100: "72", x1000: "720" },
+                { num: "8,1", x10: "81", x100: "810", x1000: "8100" }
+              ].each do |row| %>
+                <tr>
+                  <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200"><%= row[:num] %></td>
+                  <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                    <input type="text" data-correct-answer="<%= row[:x10] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                  <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                    <input type="text" data-correct-answer="<%= row[:x100] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                  <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                    <input type="text" data-correct-answer="<%= row[:x1000] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tabella divisioni -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border-2 border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 font-bold text-gray-800 dark:text-gray-200">: 10</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 font-bold text-gray-800 dark:text-gray-200">: 100</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 font-bold text-gray-800 dark:text-gray-200">: 1 000</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% [
+                { num: "205,3", d10: "20,53", d100: "2,053", d1000: "0,2053" },
+                { num: "6 071", d10: "607,1", d100: "60,71", d1000: "6,071" },
+                { num: "2,8", d10: "0,28", d100: "0,028", d1000: "0,0028" },
+                { num: "49,1", d10: "4,91", d100: "0,491", d1000: "0,0491" },
+                { num: "2 530", d10: "253", d100: "25,3", d1000: "2,53" }
+              ].each do |row| %>
+                <tr>
+                  <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200"><%= row[:num] %></td>
+                  <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                    <input type="text" data-correct-answer="<%= row[:d10] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                  <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                    <input type="text" data-correct-answer="<%= row[:d100] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                  <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                    <input type="text" data-correct-answer="<%= row[:d1000] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(4) %>
+        Completa con il numero mancante.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <% [
+          { expr: "34,7 × .......... = 34 700", answer: "1000" },
+          { expr: ".......... × 100 = 458", answer: "4,58" },
+          { expr: "43,81 × .......... = 438,1", answer: "10" },
+          { expr: ".......... × 10 = 42,9", answer: "4,29" },
+          { expr: "3,75 × .......... = 3 750", answer: "1000" },
+          { expr: "7,51 × .......... = 75,1", answer: "10" },
+          { expr: "46 : .......... = 0,046", answer: "1000" },
+          { expr: ".......... : 10 = 58,2", answer: "582" },
+          { expr: "0,7 : .......... = 0,007", answer: "100" },
+          { expr: "8,4 : .......... = 0,84", answer: "10" },
+          { expr: "92 : .......... = 0,092", answer: "1000" },
+          { expr: ".......... : 100 = 0,045", answer: "4,5" }
+        ].each do |item| %>
+          <div class="flex items-center gap-2 p-2 border border-cyan-400 dark:border-cyan-600 rounded-lg">
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:expr].gsub('..........', '') %></span>
+            <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
