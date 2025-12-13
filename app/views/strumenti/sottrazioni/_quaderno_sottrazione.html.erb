@@ -204,15 +204,15 @@
     <% result_digits = sottrazione.result_digits %>
     <% digit_counter = 0 %>
     <!-- Cella vuota sinistra (senza bordo superiore spesso) -->
-    <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <div class="border-r border-b border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800" style="height: <%= cell_size %>;"></div>
     <% column_types.each_with_index do |col_type, idx| %>
       <% if col_type == :sign %>
         <!-- Cella vuota (= è sul sottraendo) -->
-        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300"
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300 bg-gray-50 dark:bg-gray-800"
              style="height: <%= cell_size %>;"></div>
       <% elsif col_type == :comma %>
         <!-- Cella della virgola nel risultato (input modificabile) -->
-        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300"
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300 bg-gray-50 dark:bg-gray-800"
              style="height: <%= cell_size %>;">
           <input type="text"
                  class="quaderno-input-sub bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 text-gray-700 dark:text-gray-300"
@@ -225,7 +225,7 @@
       <% else %>
         <!-- Cella cifra risultato -->
         <% digit = result_digits[digit_counter] || "" %>
-        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300"
+        <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300 bg-gray-50 dark:bg-gray-800"
              style="height: <%= cell_size %>;">
           <input type="text"
                  <% if defined?(operation_id) %>name="results[<%= operation_id %>][result][<%= idx %>]"<% end %>
@@ -239,57 +239,41 @@
       <% end %>
     <% end %>
     <!-- Cella vuota destra (senza bordo superiore spesso) -->
-    <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <div class="border-b border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800" style="height: <%= cell_size %>;"></div>
 
     <!-- Riga vuota sotto -->
     <% total_cols.times do |i| %>
-      <div class="<%= i < total_cols - 1 ? 'border-r' : '' %> border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+      <div class="<%= i < total_cols - 1 ? 'border-r border-gray-300 dark:border-gray-600' : '' %>" style="height: <%= cell_size %>;"></div>
+    <% end %>
+
+    <!-- Riga toolbar nella griglia -->
+    <% if sottrazione.show_toolbar %>
+      <%
+        toolbar_buttons = [
+          { action: "clearGrid", color: "bg-gray-400/40 hover:bg-gray-400/70", icon: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16", title: "Cancella" },
+          { action: "showNumbers", color: "bg-blue-400/40 hover:bg-blue-400/70", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", title: "Mostra Numeri" },
+          { action: "showResult", color: "bg-green-400/40 hover:bg-green-400/70", icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z", title: "Mostra Risultato" },
+          { action: "verifyAnswers", color: "bg-purple-400/40 hover:bg-purple-400/70", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4", title: "Verifica" }
+        ]
+      %>
+      <% total_cols.times do |i| %>
+        <div class="<%= i < total_cols - 1 ? 'border-r border-gray-300 dark:border-gray-600' : '' %> border-t border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;">
+          <% if i < toolbar_buttons.length %>
+            <% btn = toolbar_buttons[i] %>
+            <div class="w-full h-full flex items-center justify-center">
+              <button type="button"
+                      data-action="click->quaderno-subtraction#<%= btn[:action] %>"
+                      class="w-9 h-9 rounded-full flex items-center justify-center <%= btn[:color] %> text-white/80 hover:text-white transition-all print-hidden"
+                      title="<%= btn[:title] %>">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="<%= btn[:icon] %>" />
+                </svg>
+              </button>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
 
   </div>
-
-  <!-- Toolbar con pulsanti -->
-  <% if sottrazione.show_toolbar %>
-    <div class="print-hidden flex justify-center gap-4 mt-6">
-      <!-- Cancella -->
-      <button type="button"
-              data-action="click->quaderno-subtraction#clearGrid"
-              class="w-14 h-14 rounded-full bg-gray-500 hover:bg-gray-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
-              title="Cancella">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-        </svg>
-      </button>
-
-      <!-- Mostra Numeri -->
-      <button type="button"
-              data-action="click->quaderno-subtraction#showNumbers"
-              class="w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
-              title="Mostra Numeri">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-      </button>
-
-      <!-- Mostra Risultato -->
-      <button type="button"
-              data-action="click->quaderno-subtraction#showResult"
-              class="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
-              title="Mostra Risultato">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      </button>
-
-      <!-- Verifica -->
-      <button type="button"
-              data-action="click->quaderno-subtraction#verifyAnswers"
-              class="w-14 h-14 rounded-full bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center"
-              title="Verifica">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-        </svg>
-      </button>
-    </div>
-  <% end %>
 </div>

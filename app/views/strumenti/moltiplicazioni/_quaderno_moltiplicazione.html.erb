@@ -217,7 +217,7 @@
         <% end %>
         <!-- Cella segno (= solo sull'ultimo prodotto parziale) -->
         <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-green-600 dark:text-green-400 font-bold <%= p_idx == 0 ? 'border-t-2 border-t-gray-700 dark:border-t-gray-300' : '' %>" style="height: <%= cell_size %>;"><%= p_idx == moltiplicazione.quaderno_partial_products.length - 1 ? '=' : '' %></div>
-        <div class="border-b border-gray-300 dark:border-gray-600 <%= p_idx == 0 ? 'border-t-2 border-t-gray-700 dark:border-t-gray-300' : '' %>" style="height: <%= cell_size %>;"></div>
+        <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
       <% end %>
 
       <!-- Riga riporti somma -->
@@ -238,12 +238,12 @@
 
     <!-- Riga risultato -->
     <% result_digits = moltiplicazione.quaderno_result_digits %>
-    <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+    <div class="border-r border-b border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800" style="height: <%= cell_size %>;"></div>
     <% result_digits.each_with_index do |digit, idx| %>
       <% pos_from_right = data_cols - 1 - idx %>
       <% is_correct_comma_position = decimal_places > 0 && pos_from_right == decimal_places %>
       <% can_have_comma_spot = has_decimals && pos_from_right > 0 && pos_from_right < data_cols %>
-      <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300 relative" style="height: <%= cell_size %>;">
+      <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300 bg-gray-50 dark:bg-gray-800 relative" style="height: <%= cell_size %>;">
         <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
                data-quaderno-multiplication-target="result" data-correct-answer="<%= digit %>" maxlength="1"
                <% if moltiplicazione.show_solution && digit.present? %>value="<%= digit %>"<% end %>>
@@ -259,41 +259,41 @@
         <% end %>
       </div>
     <% end %>
-    <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300" style="height: <%= cell_size %>;"></div>
+    <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300 bg-gray-50 dark:bg-gray-800" style="height: <%= cell_size %>;"></div>
     <div class="border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
 
     <!-- Riga vuota sotto -->
     <% total_cols.times do |i| %>
-      <div class="<%= i < total_cols - 1 ? 'border-r' : '' %> border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
+      <div class="<%= i < total_cols - 1 ? 'border-r border-gray-300 dark:border-gray-600' : '' %>" style="height: <%= cell_size %>;"></div>
+    <% end %>
+
+    <!-- Riga toolbar nella griglia -->
+    <% if moltiplicazione.show_toolbar %>
+      <%
+        toolbar_buttons = [
+          { action: "clearGrid", color: "bg-gray-400/40 hover:bg-gray-400/70", icon: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16", title: "Cancella" },
+          { action: "showNumbers", color: "bg-blue-400/40 hover:bg-blue-400/70", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", title: "Mostra Numeri" },
+          { action: "showResult", color: "bg-green-400/40 hover:bg-green-400/70", icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z", title: "Mostra Risultato" },
+          { action: "verifyAnswers", color: "bg-purple-400/40 hover:bg-purple-400/70", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4", title: "Verifica" }
+        ]
+      %>
+      <% total_cols.times do |i| %>
+        <div class="<%= i < total_cols - 1 ? 'border-r border-gray-300 dark:border-gray-600' : '' %> border-t border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;">
+          <% if i < toolbar_buttons.length %>
+            <% btn = toolbar_buttons[i] %>
+            <div class="w-full h-full flex items-center justify-center">
+              <button type="button"
+                      data-action="click->quaderno-multiplication#<%= btn[:action] %>"
+                      class="w-9 h-9 rounded-full flex items-center justify-center <%= btn[:color] %> text-white/80 hover:text-white transition-all print-hidden"
+                      title="<%= btn[:title] %>">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="<%= btn[:icon] %>" />
+                </svg>
+              </button>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
-
-  <% if moltiplicazione.show_toolbar %>
-    <div class="print-hidden flex justify-center gap-4 mt-6">
-      <button type="button" data-action="click->quaderno-multiplication#clearGrid"
-              class="w-14 h-14 rounded-full bg-gray-500 hover:bg-gray-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center" title="Cancella">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-        </svg>
-      </button>
-      <button type="button" data-action="click->quaderno-multiplication#showNumbers"
-              class="w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center" title="Mostra Numeri">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-      </button>
-      <button type="button" data-action="click->quaderno-multiplication#showResult"
-              class="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center" title="Mostra Risultato">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      </button>
-      <button type="button" data-action="click->quaderno-multiplication#verifyAnswers"
-              class="w-14 h-14 rounded-full bg-purple-500 hover:bg-purple-600 text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center" title="Verifica">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-        </svg>
-      </button>
-    </div>
-  <% end %>
 </div>
