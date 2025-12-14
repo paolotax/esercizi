@@ -115,7 +115,11 @@ export default class extends Controller {
     try {
       const htmlParts = []
       for (const op of this.operationsData) {
-        const url = `/exercises/quaderno_grid?operation=${encodeURIComponent(op.operation)}&type=${this.operationType}`
+        let url = `/exercises/quaderno_grid?operation=${encodeURIComponent(op.operation)}&type=${this.operationType}`
+        // Aggiungi show_partial_carries se specificato nell'operazione
+        if (op.showPartialCarries) {
+          url += '&show_partial_carries=true'
+        }
         const response = await fetch(url)
         if (!response.ok) {
           throw new Error('Errore nel caricamento')

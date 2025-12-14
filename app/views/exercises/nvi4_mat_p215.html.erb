@@ -9,6 +9,8 @@
 
     <!-- Esercizio 1 IMPARARE TUTTI + Regola -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      
       <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
         <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
           <%= imparare_tutti_badge(1) %>
@@ -37,15 +39,15 @@
             </div>
           <% end %>
         </div>
-      </div>
 
-      <!-- Regola -->
-      <div class="p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl">
-        <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Moltiplicazioni con i decimali</p>
-        <p class="text-gray-700 dark:text-gray-200">
-          Esegui come con i numeri interi.<br>
-          Nel prodotto finale inserisci la virgola, partendo da destra, dopo tante cifre quante sono in tutto le cifre decimali dei due fattori.
-        </p>
+        <!-- Regola -->
+        <div class="h-fit p-4 bg-custom-blue-light dark:bg-custom-blue-900/40 rounded-2xl">
+          <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Moltiplicazioni con i decimali</p>
+          <p class="text-gray-700 dark:text-gray-200">
+            Esegui come con i numeri interi.<br>
+            Nel prodotto finale inserisci la virgola, partendo da destra, dopo tante cifre quante sono in tutto le cifre decimali dei due fattori.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -131,7 +133,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <%
           esercizio4_gruppi = [
-            { lettera: "a", operazioni: [
+            { lettera: "a", show_partial_carries: true, operazioni: [
               { op1: "38", op2: "6,9", answer: "262,2" },
               { op1: "74", op2: "3,5", answer: "259" },
               { op1: "4,92", op2: "27", answer: "132,84" },
@@ -166,7 +168,9 @@
           <%
             # Prepara i dati JSON per il gruppo
             operations_data = gruppo[:operazioni].each_with_index.map { |item, i_idx|
-              { operation: "#{item[:op1]}x#{item[:op2]}", targetId: "es4-#{gruppo[:lettera]}-#{i_idx}" }
+              op_data = { operation: "#{item[:op1]}x#{item[:op2]}", targetId: "es4-#{gruppo[:lettera]}-#{i_idx}" }
+              op_data[:showPartialCarries] = true if gruppo[:show_partial_carries]
+              op_data
             }
           %>
           <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">

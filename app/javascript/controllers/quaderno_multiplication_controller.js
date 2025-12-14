@@ -27,8 +27,15 @@ export default class extends Controller {
 
     this.resultTargets.forEach((cell, index) => {
       cell.addEventListener('input', (e) => this.handleCellInput(e, index, 'result'))
-      cell.addEventListener('keydown', (e) => this.handleCellKeydown(e, index, 'result'))
+      cell.addEventListener('keydown', (e) => this.handleResultKeydown(e, index))
     })
+
+    // Aggiungi navigazione keyboard ai commaSpot
+    if (this.hasCommaSpotTarget) {
+      this.commaSpotTargets.forEach((spot) => {
+        spot.addEventListener('keydown', (e) => this.handleCommaSpotKeydown(e, spot))
+      })
+    }
 
     if (this.hasCarryTarget) {
       this.carryTargets.forEach((cell, index) => {
@@ -54,7 +61,7 @@ export default class extends Controller {
     if (this.hasSumCarryTarget) {
       this.sumCarryTargets.forEach((cell, index) => {
         cell.addEventListener('input', (e) => this.handleCarryInput(e, index))
-        cell.addEventListener('keydown', (e) => this.handleCarryKeydown(e, index))
+        cell.addEventListener('keydown', (e) => this.handleCarryKeydown(e, index, 'sumCarry'))
       })
     }
   }
@@ -64,6 +71,7 @@ export default class extends Controller {
 
     if (!grid) {
       this.columnMap = {}
+      this.allCellsOrdered = []
       return
     }
 
@@ -72,12 +80,15 @@ export default class extends Controller {
       '[data-quaderno-multiplication-target="multiplicand"], [data-quaderno-multiplication-target="multiplier"], [data-quaderno-multiplication-target="result"], [data-quaderno-multiplication-target="carry"], [data-quaderno-multiplication-target="partial"], [data-quaderno-multiplication-target="partialCarry"], [data-quaderno-multiplication-target="sumCarry"]'
     )
 
-    // Mappa colonne: per ogni colonna, lista di celle dall'alto al basso
+    // Mappa colonne per navigazione verticale
     this.columnMap = {}
 
     // Calcola il numero di colonne dalla griglia CSS
     const gridStyle = window.getComputedStyle(grid)
     const cols = gridStyle.gridTemplateColumns.split(' ').length
+
+    // Array con tutte le celle e le loro posizioni per ordinamento
+    const cellsWithPositions = []
 
     // Organizza celle per posizione nella griglia
     allCells.forEach(cell => {
@@ -91,10 +102,15 @@ export default class extends Controller {
       if (!this.columnMap[col]) {
         this.columnMap[col] = []
       }
-
-      // Aggiungi cella alla mappa colonne
       this.columnMap[col].push(cell)
+
+      // Salva per ordinamento globale
+      cellsWithPositions.push({ cell, gridIndex })
     })
+
+    // Crea lista ordinata di tutte le celle (riga per riga, da sinistra a destra)
+    cellsWithPositions.sort((a, b) => a.gridIndex - b.gridIndex)
+    this.allCellsOrdered = cellsWithPositions.map(item => item.cell)
   }
 
   // === Gestione Input Celle ===
@@ -142,29 +158,53 @@ export default class extends Controller {
 
   handleCellKeydown(event, currentIndex, type) {
     const input = event.target
-    let cells
-    if (type === 'multiplicand') cells = this.multiplicandTargets
-    else if (type === 'multiplier') cells = this.multiplierTargets
-    else if (type === 'partial') cells = this.partialTargets
-    else if (type === 'partialCarry') cells = this.partialCarryTargets
-    else cells = this.resultTargets
+
+    // Per partial e partialCarry usa sempre navigazione globale
+    // perché i target sono concatenati da più righe
+    if (type === 'partial' || type === 'partialCarry') {
+      switch (event.key) {
+        case 'Backspace':
+          if (input.value === '') {
+            event.preventDefault()
+            // Backspace va a destra (direzione inversa)
+            this.navigateGlobal(input, 1)
+          }
+          break
+
+        case 'ArrowLeft':
+          event.preventDefault()
+          this.navigateGlobal(input, -1)
+          break
+
+        case 'ArrowRight':
+          event.preventDefault()
+          this.navigateGlobal(input, 1)
+          break
+
+        case 'ArrowUp':
+          event.preventDefault()
+          this.navigateVertical(input, -1)
+          break
+
+        case 'ArrowDown':
+          event.preventDefault()
+          this.navigateVertical(input, 1)
+          break
+      }
+      return
+    }
+
+    // Per multiplicand e multiplier, usa navigazione per array di tipo
+    const cells = type === 'multiplicand' ? this.multiplicandTargets : this.multiplierTargets
 
     switch (event.key) {
       case 'Backspace':
         if (input.value === '') {
           event.preventDefault()
-          if (type === 'result' || type === 'partial' || type === 'partialCarry') {
-            // Nel risultato/partial/partialCarry, backspace va a destra
-            if (currentIndex < cells.length - 1) {
-              cells[currentIndex + 1].focus()
-              cells[currentIndex + 1].select()
-            }
-          } else {
-            // Nel moltiplicando/moltiplicatore, backspace va a sinistra
-            if (currentIndex > 0) {
-              cells[currentIndex - 1].focus()
-              cells[currentIndex - 1].select()
-            }
+          // Nel moltiplicando/moltiplicatore, backspace va a sinistra
+          if (currentIndex > 0) {
+            cells[currentIndex - 1].focus()
+            cells[currentIndex - 1].select()
           }
         }
         break
@@ -174,6 +214,9 @@ export default class extends Controller {
         if (currentIndex > 0) {
           cells[currentIndex - 1].focus()
           cells[currentIndex - 1].select()
+        } else {
+          // Prima cella della riga, vai alla riga precedente
+          this.navigateGlobal(input, -1)
         }
         break
 
@@ -182,6 +225,9 @@ export default class extends Controller {
         if (currentIndex < cells.length - 1) {
           cells[currentIndex + 1].focus()
           cells[currentIndex + 1].select()
+        } else {
+          // Ultima cella della riga, vai alla riga successiva
+          this.navigateGlobal(input, 1)
         }
         break
 
@@ -197,7 +243,129 @@ export default class extends Controller {
     }
   }
 
+  // Costruisce la sequenza ordinata di elementi nella riga risultato (input + commaSpot)
+  // Ordine: da sinistra a destra nella griglia
+  getResultRowElements() {
+    const elements = []
+
+    this.resultTargets.forEach((input, idx) => {
+      elements.push({ type: 'result', element: input, index: idx })
+
+      // Cerca il commaSpot associato a questa cella (è dentro lo stesso parent div)
+      if (this.hasCommaSpotTarget) {
+        const parentDiv = input.parentElement
+        const spot = parentDiv.querySelector('[data-quaderno-multiplication-target="commaSpot"]')
+        if (spot) {
+          elements.push({ type: 'commaSpot', element: spot, index: idx })
+        }
+      }
+    })
+
+    return elements
+  }
+
+  // Gestione keydown specifica per la riga risultato (include navigazione sui commaSpot)
+  handleResultKeydown(event, currentIndex) {
+    const input = event.target
+
+    switch (event.key) {
+      case 'Backspace':
+        if (input.value === '') {
+          event.preventDefault()
+          // Nel risultato, backspace va a destra
+          if (currentIndex < this.resultTargets.length - 1) {
+            this.resultTargets[currentIndex + 1].focus()
+            this.resultTargets[currentIndex + 1].select()
+          }
+        }
+        break
+
+      case 'ArrowLeft':
+        event.preventDefault()
+        this.navigateResultRow(input, -1)
+        break
+
+      case 'ArrowRight':
+        event.preventDefault()
+        this.navigateResultRow(input, 1)
+        break
+
+      case 'ArrowUp':
+        event.preventDefault()
+        this.navigateVertical(input, -1)
+        break
+
+      case 'ArrowDown':
+        event.preventDefault()
+        this.navigateVertical(input, 1)
+        break
+    }
+  }
+
+  // Gestione keydown per commaSpot
+  handleCommaSpotKeydown(event, spot) {
+    switch (event.key) {
+      case 'ArrowLeft':
+        event.preventDefault()
+        this.navigateResultRow(spot, -1)
+        break
+
+      case 'ArrowRight':
+        event.preventDefault()
+        this.navigateResultRow(spot, 1)
+        break
+
+      case ' ':
+      case 'Enter':
+        // Spazio o Enter attiva/disattiva la virgola
+        event.preventDefault()
+        this.toggleComma({ currentTarget: spot })
+        break
+    }
+  }
+
+  // Naviga nella riga risultato includendo i commaSpot
+  navigateResultRow(currentElement, direction) {
+    const elements = this.getResultRowElements()
+    const currentIdx = elements.findIndex(el => el.element === currentElement)
+
+    if (currentIdx === -1) return
+
+    const targetIdx = currentIdx + direction
+    if (targetIdx >= 0 && targetIdx < elements.length) {
+      const target = elements[targetIdx]
+      target.element.focus()
+      if (target.type === 'result') {
+        target.element.select()
+      }
+    } else {
+      // Siamo al bordo della riga risultato, naviga alla riga successiva/precedente
+      this.navigateGlobal(currentElement, direction)
+    }
+  }
+
+  // Navigazione globale tra tutte le celle (cross-row)
+  // Usata quando si raggiunge il bordo di una riga
+  navigateGlobal(currentCell, direction) {
+    const currentIdx = this.allCellsOrdered.indexOf(currentCell)
+    if (currentIdx === -1) return
+
+    let targetIdx = currentIdx + direction
+
+    // Continua nella direzione finché non trovi una cella abilitata
+    while (targetIdx >= 0 && targetIdx < this.allCellsOrdered.length) {
+      const targetCell = this.allCellsOrdered[targetIdx]
+      if (!targetCell.disabled) {
+        targetCell.focus()
+        targetCell.select()
+        return
+      }
+      targetIdx += direction
+    }
+  }
+
   // Navigazione verticale usando la mappa colonne
+  // Salta le celle disabilitate (come lo 0 nell'ultima colonna dei riporti)
   navigateVertical(currentCell, direction) {
     let currentCol = null
     let currentRowInCol = null
@@ -214,11 +382,18 @@ export default class extends Controller {
     if (currentCol === null || currentRowInCol === null) return
 
     const columnCells = this.columnMap[currentCol]
-    const targetRow = currentRowInCol + direction
+    let targetRow = currentRowInCol + direction
 
-    if (targetRow >= 0 && targetRow < columnCells.length) {
-      columnCells[targetRow].focus()
-      columnCells[targetRow].select()
+    // Continua nella direzione finché non trovi una cella abilitata o esci dai limiti
+    while (targetRow >= 0 && targetRow < columnCells.length) {
+      const targetCell = columnCells[targetRow]
+      // Salta celle disabilitate
+      if (!targetCell.disabled) {
+        targetCell.focus()
+        targetCell.select()
+        return
+      }
+      targetRow += direction
     }
   }
 
@@ -236,32 +411,27 @@ export default class extends Controller {
     }
   }
 
-  handleCarryKeydown(event, currentIndex) {
+  handleCarryKeydown(event, currentIndex, type = 'carry') {
     const input = event.target
 
+    // Usa sempre navigazione globale per i carry
+    // perché devono poter passare alla riga successiva (risultato, moltiplicando, ecc.)
     switch (event.key) {
       case 'Backspace':
-        if (input.value === '' && currentIndex > 0) {
+        if (input.value === '') {
           event.preventDefault()
-          this.carryTargets[currentIndex - 1].focus()
-          this.carryTargets[currentIndex - 1].select()
+          this.navigateGlobal(input, -1)
         }
         break
 
       case 'ArrowLeft':
         event.preventDefault()
-        if (currentIndex > 0) {
-          this.carryTargets[currentIndex - 1].focus()
-          this.carryTargets[currentIndex - 1].select()
-        }
+        this.navigateGlobal(input, -1)
         break
 
       case 'ArrowRight':
         event.preventDefault()
-        if (currentIndex < this.carryTargets.length - 1) {
-          this.carryTargets[currentIndex + 1].focus()
-          this.carryTargets[currentIndex + 1].select()
-        }
+        this.navigateGlobal(input, 1)
         break
 
       case 'ArrowDown':
