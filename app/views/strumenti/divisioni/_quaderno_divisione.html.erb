@@ -19,14 +19,118 @@
   .div-cell-lg { font-size: 1.25em; }
   .div-cell-sm { font-size: 1em; }
   .div-cell[readonly] { cursor: default; }
+
+  /* Virgola renderizzata tra i quadretti */
+  .quaderno-comma-div {
+    position: absolute;
+    right: -0.35em;
+    bottom: 0.1em;
+    font-weight: bold;
+    font-size: 1.4em;
+    color: inherit;
+    z-index: 10;
+    pointer-events: none;
+  }
+  /* Virgola cliccabile (spostabile) nel dividendo/divisore */
+  .quaderno-comma-shift {
+    position: absolute;
+    right: -0.35em;
+    bottom: 0.1em;
+    font-weight: bold;
+    font-size: 1.4em;
+    color: #dc2626;
+    z-index: 10;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .quaderno-comma-shift:hover {
+    transform: scale(1.2);
+    color: #b91c1c;
+  }
+  .quaderno-comma-shift.shifted {
+    opacity: 0.3;
+    text-decoration: line-through;
+  }
+  /* Dark mode */
+  .dark .quaderno-comma-shift {
+    color: #f87171;
+  }
+  .dark .quaderno-comma-shift:hover {
+    color: #fca5a5;
+  }
+  /* Spot cliccabile per inserire la virgola nel quoziente */
+  .quaderno-comma-spot-div {
+    position: absolute;
+    right: -0.5em;
+    bottom: 0.3em;
+    width: 1em;
+    height: 1.2em;
+    border: none;
+    border-radius: 3px;
+    background: rgba(59, 130, 246, 0.15);
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.15s ease;
+  }
+  .quaderno-comma-spot-div:hover {
+    background: rgba(59, 130, 246, 0.35);
+    transform: scale(1.1);
+  }
+  .quaderno-comma-spot-div:focus {
+    outline: 2px solid rgba(59, 130, 246, 0.5);
+    outline-offset: 1px;
+  }
+  /* Stato attivo: virgola inserita */
+  .quaderno-comma-spot-div.active {
+    background: transparent;
+  }
+  .quaderno-comma-spot-div.active::after {
+    content: ",";
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.4em;
+    color: #1f2937;
+    top: -0.3em;
+    left: 0.15em;
+    pointer-events: none;
+  }
+  /* Dark mode */
+  .dark .quaderno-comma-spot-div.active::after {
+    color: #f3f4f6;
+  }
+  /* Stato corretto/errato dopo verifica */
+  .quaderno-comma-spot-div.correct {
+    background: rgba(34, 197, 94, 0.3);
+  }
+  .quaderno-comma-spot-div.correct::after {
+    color: #16a34a;
+  }
+  .quaderno-comma-spot-div.incorrect {
+    background: rgba(239, 68, 68, 0.3);
+  }
+  .quaderno-comma-spot-div.incorrect::after {
+    color: #dc2626;
+  }
+  .quaderno-comma-spot-div.missing {
+    background: rgba(234, 179, 8, 0.3);
+  }
 </style>
 
 <%
   cell = "2.5em"
 
-  # Colonne: sinistra (dividendo + 1 per −) | destra (max divisore/quoziente) + 1 colonna vuota
-  left_cols = divisione.dividend_length + 1
-  right_cols = [divisione.divisor_length, divisione.quotient_length].max
+  # Info decimali
+  has_decimals = divisione.has_decimals?
+  dividend_decimals = divisione.dividend_decimals
+  divisor_decimals = divisione.divisor_decimals
+  quotient_decimal_position = divisione.quotient_decimal_position
+
+  # Numero di celle extra per zeri manuali (configurabile nel modello)
+  extra_zeros = divisione.extra_zeros
+
+  # Colonne: sinistra (dividendo + extra_zeros + 1 per −) | destra (max divisore/quoziente) + 1 colonna vuota
+  left_cols = divisione.dividend_length + extra_zeros + 1
+  right_cols = [divisione.divisor_length, divisione.quotient_length + extra_zeros].max
   total_cols = left_cols + right_cols + 1  # +1 per colonna vuota a destra
 
   steps = divisione.division_steps
@@ -91,18 +195,26 @@
   rows << { type: :toolbar } if divisione.show_toolbar
 
   # Helper per calcolare il valore di una cella
-  def cell_value(row_data, col, left_cols, divisione)
+  def cell_value(row_data, col, left_cols, divisione, dividend_decimals, divisor_decimals, quotient_decimal_position, extra_zeros = 0)
     case row_data[:type]
     when :header, :footer, :toolbar
       { value: nil, type: :empty }
 
     when :dividend_divisor
       if col < left_cols
-        # Lato sinistro: dividendo (allineato a destra)
-        padding = left_cols - divisione.dividend_length
+        # Lato sinistro: dividendo (allineato a destra) + celle extra per zeri
+        padding = left_cols - divisione.dividend_length - extra_zeros
         digit_idx = col - padding
+
         if digit_idx >= 0 && digit_idx < divisione.dividend_length
-          { value: divisione.dividend_digits[digit_idx], type: :dividend }
+          # Cifra del dividendo
+          pos_from_right = divisione.dividend_length - 1 - digit_idx
+          show_comma = dividend_decimals > 0 && pos_from_right == dividend_decimals
+          { value: divisione.dividend_digits[digit_idx], type: :dividend, show_comma: show_comma, comma_position: dividend_decimals }
+        elsif digit_idx >= divisione.dividend_length && digit_idx < divisione.dividend_length + extra_zeros
+          # Cella extra per zero manuale (dopo il dividendo)
+          extra_idx = digit_idx - divisione.dividend_length
+          { value: nil, type: :extra_zero, extra_idx: extra_idx }
         else
           { value: nil, type: :empty }
         end
@@ -110,7 +222,10 @@
         # Lato destro: divisore
         right_col = col - left_cols
         if right_col < divisione.divisor_length
-          { value: divisione.divisor_digits[right_col], type: :divisor }
+          # Calcola se questa cifra ha la virgola dopo (posizione da destra)
+          pos_from_right = divisione.divisor_length - 1 - right_col
+          show_comma = divisor_decimals > 0 && pos_from_right == divisor_decimals
+          { value: divisione.divisor_digits[right_col], type: :divisor, show_comma: show_comma, comma_position: divisor_decimals }
         else
           { value: nil, type: :empty }
         end
@@ -120,8 +235,9 @@
       step = row_data[:step]
       product_str = step[:product].to_s
       # Il prodotto si allinea a destra con il partial_dividend che termina alla posizione step_index
-      padding = left_cols - divisione.dividend_length
-      product_end = padding + step[:step_index] + 1
+      # Il padding base è 1 (per il segno −)
+      base_padding = 1
+      product_end = base_padding + step[:step_index] + 1
       product_start = product_end - product_str.length
 
       if col < left_cols
@@ -140,7 +256,16 @@
         # Lato destro: quoziente
         right_col = col - left_cols
         if right_col < divisione.quotient_length
-          { value: divisione.quotient_digits[right_col], type: :quotient }
+          # Calcola posizione da destra per spot virgola
+          pos_from_right = divisione.quotient_length - 1 - right_col
+          # Lo spot virgola appare tra le cifre (non sull'ultima a destra)
+          can_have_comma_spot = pos_from_right > 0
+          # La posizione corretta della virgola
+          is_correct_comma_position = quotient_decimal_position > 0 && pos_from_right == quotient_decimal_position
+          { value: divisione.quotient_digits[right_col], type: :quotient,
+            can_have_comma_spot: can_have_comma_spot,
+            is_correct_comma_position: is_correct_comma_position,
+            pos_from_right: pos_from_right }
         else
           { value: nil, type: :empty }
         end
@@ -150,8 +275,9 @@
       step = row_data[:step]
       product_str = step[:product].to_s
       # Il prodotto si allinea a destra con il partial_dividend che termina alla posizione step_index
-      padding = left_cols - divisione.dividend_length
-      product_end = padding + step[:step_index] + 1
+      # Il padding base è 1 (per il segno −)
+      base_padding = 1
+      product_end = base_padding + step[:step_index] + 1
       product_start = product_end - product_str.length
 
       if col < left_cols
@@ -176,15 +302,16 @@
       bring_down_str = step[:bring_down] || ""
       remainder_with_next = bring_down_str.present? ? remainder_str + bring_down_str : remainder_str
       # Posizione: il resto si allinea a destra con la cifra abbassata (o step_index se non c'è bring_down)
-      # padding = left_cols - dividend_length
-      # La cifra abbassata è in posizione step_index + 1 (colonna padding + step_index + 1)
-      padding = left_cols - divisione.dividend_length
+      # Il padding base è 1 (per il segno −)
+      # La lunghezza totale a sinistra è dividend_length + extra_zeros + 1
+      # step_index va da 0 a (dividend_length + extra_zeros - 1)
+      base_padding = 1  # Solo lo spazio per il segno −
       if bring_down_str.present?
         # bring_down è alla posizione step_index + 1
-        remainder_end = padding + step[:step_index] + 2
+        remainder_end = base_padding + step[:step_index] + 2
       else
         # senza bring_down, il resto finisce alla posizione step_index
-        remainder_end = padding + step[:step_index] + 1
+        remainder_end = base_padding + step[:step_index] + 1
       end
       remainder_start = remainder_end - remainder_with_next.length
 
@@ -245,7 +372,7 @@
 
       <% total_cols.times do |col| %>
         <%
-          cell_data = cell_value(row_data, col, left_cols, divisione)
+          cell_data = cell_value(row_data, col, left_cols, divisione, dividend_decimals, divisor_decimals, quotient_decimal_position, extra_zeros)
           is_right_side = (col >= left_cols)
           is_first_right_col = (col == left_cols)
           is_last_col = (col == total_cols - 1)
@@ -285,11 +412,16 @@
                        when :remainder then "text-green-600 dark:text-green-400"
                        when :bringdown then "text-gray-500 dark:text-gray-400"
                        when :minus then "text-gray-500 dark:text-gray-400"
+                       when :extra_zero then "text-purple-600 dark:text-purple-400"
                        else "text-gray-800 dark:text-gray-100"
                        end
 
-          # Sfondo per celle risultato (quoziente)
-          bg_color = cell_data[:type] == :quotient ? "bg-gray-50 dark:bg-gray-800" : ""
+          # Sfondo per celle risultato (quoziente) o celle extra zero
+          bg_color = case cell_data[:type]
+                     when :quotient then "bg-gray-50 dark:bg-gray-800"
+                     when :extra_zero then "bg-purple-50 dark:bg-purple-900/20"
+                     else ""
+                     end
 
           # Determina se mostrare il valore
           show_value = case cell_data[:type]
@@ -297,6 +429,7 @@
                        when :quotient then divisione.show_solution
                        when :product, :remainder, :bringdown then divisione.show_steps
                        when :minus then true
+                       when :extra_zero then false  # Mai precompilato, sempre inserito dall'utente
                        else false
                        end
 
@@ -308,6 +441,7 @@
                    when :product then "product"
                    when :remainder then "remainder"
                    when :bringdown then "bringdown"
+                   when :extra_zero then "extraZero"
                    else nil
                    end
         %>
@@ -338,16 +472,45 @@
               </div>
             <% end %>
           <% else %>
-            <input type="text"
-                   class="<%= cell_class %> bg-transparent <%= text_color %>"
-                   data-row="<%= row_idx %>"
-                   data-col="<%= col %>"
-                   data-quaderno-division-target="<%= target || 'cell' %>"
-                   <% if cell_data[:step] %>data-step="<%= cell_data[:step] %>"<% end %>
-                   data-correct-answer="<%= cell_data[:value] || '' %>"
-                   maxlength="1"
-                   <% if cell_data[:readonly] %>readonly<% end %>
-                   <% if show_value && cell_data[:value] %>value="<%= cell_data[:value] %>"<% end %>>
+            <div class="relative w-full h-full">
+              <input type="text"
+                     class="<%= cell_class %> bg-transparent <%= text_color %>"
+                     data-row="<%= row_idx %>"
+                     data-col="<%= col %>"
+                     data-quaderno-division-target="<%= target || 'cell' %>"
+                     <% if cell_data[:step] %>data-step="<%= cell_data[:step] %>"<% end %>
+                     data-correct-answer="<%= cell_data[:value] || '' %>"
+                     maxlength="1"
+                     <% if cell_data[:readonly] %>readonly<% end %>
+                     <% if show_value && cell_data[:value] %>value="<%= cell_data[:value] %>"<% end %>>
+              <%# Virgola spostabile per dividendo/divisore %>
+              <% if cell_data[:show_comma] && divisione.show_dividend_divisor %>
+                <%
+                  # La virgola deve essere spostata se il divisore ha decimali
+                  # (per rendere il divisore intero, si spostano entrambe le virgole)
+                  should_shift = divisor_decimals > 0
+                %>
+                <button type="button"
+                        class="quaderno-comma-shift"
+                        data-quaderno-division-target="commaShift"
+                        data-comma-type="<%= cell_data[:type] %>"
+                        data-comma-position="<%= cell_data[:comma_position] %>"
+                        data-should-shift="<%= should_shift %>"
+                        data-action="click->quaderno-division#shiftComma"
+                        title="Clicca per spostare la virgola">,</button>
+              <% end %>
+              <%# Spot virgola per quoziente %>
+              <% if cell_data[:can_have_comma_spot] && cell_data[:type] == :quotient %>
+                <button type="button"
+                        class="quaderno-comma-spot-div"
+                        data-quaderno-division-target="commaSpot"
+                        data-correct-position="<%= cell_data[:is_correct_comma_position] %>"
+                        data-position="<%= cell_data[:pos_from_right] %>"
+                        data-action="click->quaderno-division#toggleComma"
+                        tabindex="0"
+                        title="Clicca per inserire la virgola"></button>
+              <% end %>
+            </div>
           <% end %>
         </div>
       <% end %>

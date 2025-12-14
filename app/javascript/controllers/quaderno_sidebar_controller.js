@@ -186,6 +186,7 @@ export default class extends Controller {
         break
       case 'divisione':
         resultInputs = this.contentTarget.querySelectorAll('input[data-quaderno-division-target="quotient"]')
+        commaSelector = '[data-quaderno-division-target="commaSpot"].active'
         break
       default:
         resultInputs = []
@@ -242,6 +243,7 @@ export default class extends Controller {
           break
         case 'divisione':
           resultInputs = item.querySelectorAll('input[data-quaderno-division-target="quotient"]')
+          commaSelector = '[data-quaderno-division-target="commaSpot"].active'
           break
         default:
           resultInputs = []

@@ -6,13 +6,20 @@ import JSConfetti from "js-confetti"
  * Gestisce la navigazione tra celle, verifica delle risposte e feedback visivo
  */
 export default class extends Controller {
-  static targets = ["dividend", "divisor", "quotient", "product", "remainder", "bringdown", "cell"]
+  static targets = ["dividend", "divisor", "quotient", "product", "remainder", "bringdown", "cell", "commaSpot", "commaShift", "extraZero"]
 
   connect() {
     this.jsConfetti = new JSConfetti()
 
     // Aggiungi event listener per la navigazione
     this.addNavigationListeners()
+
+    // Aggiungi listener per navigazione keyboard sui commaSpot
+    if (this.hasCommaSpotTarget) {
+      this.commaSpotTargets.forEach(spot => {
+        spot.addEventListener('keydown', (e) => this.handleCommaSpotKeydown(e, spot))
+      })
+    }
   }
 
   addNavigationListeners() {
@@ -92,6 +99,58 @@ export default class extends Controller {
     }
   }
 
+  // === Comma Actions ===
+
+  // Toggle virgola nel quoziente
+  toggleComma(event) {
+    const spot = event.currentTarget
+
+    // Se questo spot è già attivo, disattivalo
+    if (spot.classList.contains('active')) {
+      spot.classList.remove('active')
+      return
+    }
+
+    // Disattiva tutti gli altri spot (solo una virgola alla volta)
+    if (this.hasCommaSpotTarget) {
+      this.commaSpotTargets.forEach(s => {
+        s.classList.remove('active', 'correct', 'incorrect', 'missing')
+      })
+    }
+
+    // Attiva questo spot
+    spot.classList.add('active')
+  }
+
+  // Sposta/elimina virgola dal dividendo o divisore
+  shiftComma(event) {
+    const comma = event.currentTarget
+    // Toggle classe "shifted" per indicare che la virgola è stata spostata
+    comma.classList.toggle('shifted')
+  }
+
+  // Navigazione keyboard per commaSpot
+  handleCommaSpotKeydown(event, spot) {
+    switch (event.key) {
+      case ' ':
+      case 'Enter':
+        event.preventDefault()
+        this.toggleComma({ currentTarget: spot })
+        break
+      case 'ArrowLeft':
+      case 'ArrowRight':
+        // Naviga agli spot adiacenti
+        event.preventDefault()
+        const spots = this.commaSpotTargets
+        const idx = spots.indexOf(spot)
+        const nextIdx = event.key === 'ArrowRight' ? idx + 1 : idx - 1
+        if (nextIdx >= 0 && nextIdx < spots.length) {
+          spots[nextIdx].focus()
+        }
+        break
+    }
+  }
+
   // === Toolbar Actions ===
 
   clearGrid() {
@@ -105,6 +164,20 @@ export default class extends Controller {
                             'dark:bg-green-900/50', 'dark:bg-red-900/50', 'dark:bg-yellow-900/50')
       input.classList.add('bg-transparent')
     })
+
+    // Reset comma spots nel quoziente
+    if (this.hasCommaSpotTarget) {
+      this.commaSpotTargets.forEach(spot => {
+        spot.classList.remove('active', 'correct', 'incorrect', 'missing')
+      })
+    }
+
+    // Reset comma shift nel dividendo/divisore
+    if (this.hasCommaShiftTarget) {
+      this.commaShiftTargets.forEach(comma => {
+        comma.classList.remove('shifted')
+      })
+    }
   }
 
   showNumbers() {
@@ -174,6 +247,28 @@ export default class extends Controller {
         }
       })
     }
+
+    // Mostra la virgola nel quoziente se presente
+    if (this.hasCommaSpotTarget) {
+      // Trova lo spot con la posizione corretta e attivalo
+      this.commaSpotTargets.forEach(spot => {
+        spot.classList.remove('active')
+        if (spot.dataset.correctPosition === 'true') {
+          spot.classList.add('active')
+        }
+      })
+    }
+
+    // Mostra le virgole spostate nel dividendo/divisore
+    if (this.hasCommaShiftTarget) {
+      this.commaShiftTargets.forEach(comma => {
+        // Se la divisione ha decimali nel divisore, la virgola deve essere "spostata"
+        // (questo viene gestito dal backend che marca quali virgole devono essere shifted)
+        if (comma.dataset.shouldShift === 'true') {
+          comma.classList.add('shifted')
+        }
+      })
+    }
   }
 
   verifyAnswers() {
@@ -228,13 +323,65 @@ export default class extends Controller {
       }
     })
 
+    // Verifica posizione virgola nel quoziente
+    let commaCorrect = this.verifyCommaPosition()
+    if (!commaCorrect) {
+      hasErrors = true
+    }
+
     // Confetti se tutto corretto
-    if (correct === total && total > 0 && !hasErrors) {
+    if (correct === total && total > 0 && !hasErrors && commaCorrect) {
       this.jsConfetti.addConfetti({
         emojis: ['🎉', '✨', '🌟', '⭐', '💫', '➗'],
         emojiSize: 30,
         confettiNumber: 60
       })
+    }
+  }
+
+  // Verifica la posizione della virgola nel quoziente
+  verifyCommaPosition() {
+    if (!this.hasCommaSpotTarget) {
+      return true // Nessuna virgola da verificare
+    }
+
+    // Trova se c'è una posizione corretta per la virgola
+    const correctSpot = this.commaSpotTargets.find(spot => spot.dataset.correctPosition === 'true')
+
+    if (!correctSpot) {
+      // Nessuna virgola richiesta nel quoziente
+      // Verifica che nessuno spot sia attivo
+      const activeSpot = this.commaSpotTargets.find(spot => spot.classList.contains('active'))
+      if (activeSpot) {
+        activeSpot.classList.add('incorrect')
+        return false
+      }
+      return true
+    }
+
+    // C'è una posizione corretta - verifica che sia quella attiva
+    const activeSpot = this.commaSpotTargets.find(spot => spot.classList.contains('active'))
+
+    // Pulisci stati precedenti
+    this.commaSpotTargets.forEach(spot => {
+      spot.classList.remove('correct', 'incorrect', 'missing')
+    })
+
+    if (!activeSpot) {
+      // L'utente non ha messo la virgola ma doveva
+      correctSpot.classList.add('missing')
+      return false
+    }
+
+    if (activeSpot === correctSpot) {
+      // Posizione corretta
+      activeSpot.classList.add('correct')
+      return true
+    } else {
+      // Posizione sbagliata
+      activeSpot.classList.add('incorrect')
+      correctSpot.classList.add('missing')
+      return false
     }
   }
 }

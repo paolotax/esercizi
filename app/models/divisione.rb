@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+require "bigdecimal"
+
 # Modello per rappresentare una divisione in colonna (metodo italiano)
 # Supporta divisioni con resto e calcolo passo-passo
+# Supporta numeri decimali con virgola spostabile
 #
 # Layout divisione italiana:
 #   dividendo | divisore
@@ -12,16 +15,35 @@
 class Divisione
   attr_reader :dividend, :divisor, :quotient, :remainder,
               :show_dividend_divisor, :show_toolbar, :show_solution, :show_steps,
-              :title
+              :title, :raw_dividend, :raw_divisor,
+              :dividend_decimals, :divisor_decimals, :decimal_shift,
+              :extra_zeros
 
   def initialize(dividend:, divisor:, **options)
-    @dividend = dividend.to_i
-    @divisor = divisor.to_i
+    # Salva le stringhe originali con virgola
+    @raw_dividend = normalize_number_string(dividend)
+    @raw_divisor = normalize_number_string(divisor)
+
+    # Conta i decimali originali
+    @dividend_decimals = count_decimals(@raw_dividend)
+    @divisor_decimals = count_decimals(@raw_divisor)
+
+    # Calcola lo shift decimale (quante posizioni spostare la virgola)
+    # Per rendere il divisore intero, dobbiamo spostare entrambi dello stesso numero di posizioni
+    @decimal_shift = @divisor_decimals
+
+    # Per il calcolo interno, convertiamo a interi spostando la virgola
+    # Es: 12,5 : 2,5 diventa 125 : 25
+    @dividend = to_integer_shifted(@raw_dividend, @decimal_shift)
+    @divisor = to_integer_shifted(@raw_divisor, @decimal_shift)
 
     raise ArgumentError, "Il divisore non può essere zero" if @divisor.zero?
 
     @quotient = @dividend / @divisor
     @remainder = @dividend % @divisor
+
+    # Numero di zeri extra per continuare la divisione (configurabile)
+    @extra_zeros = options.fetch(:extra_zeros, 0)
 
     # Opzioni di visualizzazione
     @title = options[:title]
@@ -29,6 +51,52 @@ class Divisione
     @show_toolbar = options.fetch(:show_toolbar, true)
     @show_solution = options.fetch(:show_solution, false)
     @show_steps = options.fetch(:show_steps, false)
+  end
+
+  # Normalizza una stringa numerica: accetta virgola o punto come separatore
+  def normalize_number_string(value)
+    return value.to_s if value.is_a?(Integer)
+    str = value.to_s.strip
+    str.gsub(",", ".")
+  end
+
+  # Conta le cifre decimali di una stringa numerica
+  def count_decimals(str)
+    if str.include?(".")
+      str.split(".").last.length
+    else
+      0
+    end
+  end
+
+  # Converte un numero decimale in intero spostando la virgola
+  # Es: "12.5" con shift=1 diventa 125
+  # Es: "12.5" con shift=2 diventa 1250
+  def to_integer_shifted(str, shift)
+    decimals = count_decimals(str)
+    # Rimuovi il punto
+    digits_only = str.gsub(".", "")
+    # Se lo shift è maggiore dei decimali esistenti, aggiungi zeri
+    zeros_to_add = shift - decimals
+    if zeros_to_add > 0
+      digits_only += "0" * zeros_to_add
+    end
+    digits_only.to_i
+  end
+
+  # Verifica se l'operazione ha decimali
+  def has_decimals?
+    @dividend_decimals > 0 || @divisor_decimals > 0
+  end
+
+  # Posizione della virgola nel quoziente (da destra)
+  # Dipende da quanti decimali ha il dividendo dopo lo shift + gli zeri extra
+  def quotient_decimal_position
+    # Se il dividendo originale ha più decimali del divisore, il quoziente avrà decimali
+    extra_dividend_decimals = @dividend_decimals - @divisor_decimals
+    # Aggiungi gli zeri extra che abbiamo aggiunto al dividendo
+    base_decimals = extra_dividend_decimals > 0 ? extra_dividend_decimals : 0
+    base_decimals + @extra_zeros
   end
 
   # Numero di cifre del dividendo
@@ -41,24 +109,53 @@ class Divisione
     @divisor.to_s.length
   end
 
-  # Numero di cifre del quoziente
+  # Numero di cifre del quoziente (include extra zeros)
   def quotient_length
-    @quotient.to_s.length
+    extended_quotient.length
   end
 
-  # Cifre del dividendo come array
+  # Cifre del dividendo come array (interno, senza virgola)
   def dividend_digits
     @dividend.to_s.chars
   end
 
-  # Cifre del divisore come array
+  # Cifre del divisore come array (interno, senza virgola)
   def divisor_digits
     @divisor.to_s.chars
   end
 
-  # Cifre del quoziente come array
+  # Cifre del quoziente come array (include extra zeros)
   def quotient_digits
-    @quotient.to_s.chars
+    extended_quotient.chars
+  end
+
+  # Quoziente esteso calcolato con gli zeri extra
+  def extended_quotient
+    return @extended_quotient if @extended_quotient
+
+    extended_dividend = @dividend.to_s + ("0" * @extra_zeros)
+    result = ""
+    partial = 0
+
+    extended_dividend.each_char do |digit|
+      partial = partial * 10 + digit.to_i
+      q_digit = partial / @divisor
+      result += q_digit.to_s
+      partial = partial - (q_digit * @divisor)
+    end
+
+    # Rimuovi zeri iniziali (ma lascia almeno una cifra)
+    @extended_quotient = result.sub(/^0+(?=\d)/, "")
+  end
+
+  # Cifre originali del dividendo (con info posizione virgola)
+  def raw_dividend_digits
+    @raw_dividend.gsub(".", "").chars
+  end
+
+  # Cifre originali del divisore (con info posizione virgola)
+  def raw_divisor_digits
+    @raw_divisor.gsub(".", "").chars
   end
 
   # Calcola i passi della divisione in colonna
@@ -68,13 +165,16 @@ class Divisione
   #   - product: il prodotto (divisore × cifra quoziente)
   #   - remainder: il resto parziale
   #   - bring_down: la cifra abbassata (se presente)
+  #   - is_extra_zero: true se questa cifra è uno zero aggiunto
   def division_steps
     steps = []
     dividend_str = @dividend.to_s
+    # Aggiungi gli zeri extra al dividendo per continuare la divisione
+    extended_dividend = dividend_str + ("0" * @extra_zeros)
     partial_dividend = 0
     quotient_str = ""
 
-    dividend_str.each_char.with_index do |digit, idx|
+    extended_dividend.each_char.with_index do |digit, idx|
       # Abbassa la cifra
       partial_dividend = partial_dividend * 10 + digit.to_i
 
@@ -86,13 +186,18 @@ class Divisione
       product = q_digit * @divisor
       remainder = partial_dividend - product
 
+      # Determina la prossima cifra da abbassare
+      next_idx = idx + 1
+      bring_down = next_idx < extended_dividend.length ? extended_dividend[next_idx] : nil
+
       steps << {
         step_index: idx,
         partial_dividend: partial_dividend,
         quotient_digit: q_digit,
         product: product,
         remainder: remainder,
-        bring_down: idx < dividend_str.length - 1 ? dividend_str[idx + 1] : nil
+        bring_down: bring_down,
+        is_extra_zero: idx >= dividend_str.length
       }
 
       partial_dividend = remainder
@@ -119,7 +224,7 @@ class Divisione
     [ divisor_length, quotient_length ].max
   end
 
-  # Parsing di una stringa come "144 : 12" o "144/12"
+  # Parsing di una stringa come "144 : 12" o "144/12" o "12,5 : 2,5"
   def self.parse(operation_string)
     return nil if operation_string.blank?
 
@@ -128,10 +233,13 @@ class Divisione
 
     return nil if parts.length < 2
 
-    dividend = parts[0].to_i
-    divisor = parts[1].to_i
+    dividend = parts[0]
+    divisor = parts[1]
 
-    return nil if divisor.zero?
+    # Verifica che i numeri siano validi (possono avere virgola o punto)
+    return nil unless dividend.match?(/^\d+([.,]\d+)?$/)
+    return nil unless divisor.match?(/^\d+([.,]\d+)?$/)
+    return nil if divisor.gsub(/[.,]/, "").to_i.zero?
 
     new(dividend: dividend, divisor: divisor)
   end
