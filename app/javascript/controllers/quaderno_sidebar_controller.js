@@ -279,7 +279,17 @@ export default class extends Controller {
   updateTargetInput(targetInputId, result) {
     const targetInput = document.querySelector(`[data-operation-id="${targetInputId}"]`)
     if (targetInput) {
-      targetInput.value = result
+      // Normalizza il numero: rimuovi zeri finali dopo la virgola (259,0 -> 259, 32,940 -> 32,94)
+      let normalizedResult = result
+      if (normalizedResult.includes(',')) {
+        // Rimuovi zeri finali dopo la virgola
+        normalizedResult = normalizedResult.replace(/,?0+$/, '')
+        // Se rimane solo la virgola, rimuovila
+        if (normalizedResult.endsWith(',')) {
+          normalizedResult = normalizedResult.slice(0, -1)
+        }
+      }
+      targetInput.value = normalizedResult
       // Trigger evento input per eventuali listener (es. exercise-checker)
       targetInput.dispatchEvent(new Event('input', { bubbles: true }))
       targetInput.dispatchEvent(new Event('change', { bubbles: true }))
