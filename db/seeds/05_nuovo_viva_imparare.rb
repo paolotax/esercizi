@@ -203,7 +203,12 @@ nvi_matematica = nvi_volume4.discipline.create!(
   { numero: 242, titolo: "I Triangoli", slug: "nvi4_mat_p242", view_template: "nvi4_mat_p242", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 243, titolo: "I Parallelogrammi", slug: "nvi4_mat_p243", view_template: "nvi4_mat_p243", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 244, titolo: "I Trapezi", slug: "nvi4_mat_p244", view_template: "nvi4_mat_p244", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 245, titolo: "Il Perimetro", slug: "nvi4_mat_p245", view_template: "nvi4_mat_p245", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 245, titolo: "Il Perimetro", slug: "nvi4_mat_p245", view_template: "nvi4_mat_p245", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 246, titolo: "L'Area", slug: "nvi4_mat_p246", view_template: "nvi4_mat_p246", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 247, titolo: "Misure di Superficie", slug: "nvi4_mat_p247", view_template: "nvi4_mat_p247", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 248, titolo: "Perimetro e Area del Rettangolo", slug: "nvi4_mat_p248", view_template: "nvi4_mat_p248", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 249, titolo: "Perimetro e Area del Quadrato", slug: "nvi4_mat_p249", view_template: "nvi4_mat_p249", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 250, titolo: "Perimetro e Area del Parallelogramma", slug: "nvi4_mat_p250", view_template: "nvi4_mat_p250", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi_matematica.pagine.create!(pagina_data)
 end
