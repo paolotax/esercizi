@@ -43,12 +43,13 @@ export default class extends Controller {
 
     if (!grid) {
       this.columnMap = {}
+      this.allCellsOrdered = []
       return
     }
 
     // Raccogli tutte le celle input in ordine DOM
     const allCells = grid.querySelectorAll(
-      '[data-quaderno-subtraction-target="minuend"], [data-quaderno-subtraction-target="subtrahend"], [data-quaderno-subtraction-target="result"], [data-quaderno-subtraction-target="borrow"]'
+      '[data-quaderno-subtraction-target="minuend"], [data-quaderno-subtraction-target="subtrahend"], [data-quaderno-subtraction-target="result"], [data-quaderno-subtraction-target="borrow"], [data-quaderno-subtraction-target="comma"]'
     )
 
     // Mappa colonne: per ogni colonna, lista di celle dall'alto al basso
@@ -57,6 +58,9 @@ export default class extends Controller {
     // Calcola il numero di colonne dalla griglia CSS
     const gridStyle = window.getComputedStyle(grid)
     const cols = gridStyle.gridTemplateColumns.split(' ').length
+
+    // Array con tutte le celle e le loro posizioni per ordinamento
+    const cellsWithPositions = []
 
     // Organizza celle per posizione nella griglia
     allCells.forEach(cell => {
@@ -73,7 +77,14 @@ export default class extends Controller {
 
       // Aggiungi cella alla mappa colonne
       this.columnMap[col].push(cell)
+
+      // Salva per ordinamento globale
+      cellsWithPositions.push({ cell, gridIndex })
     })
+
+    // Crea lista ordinata di tutte le celle (riga per riga, da sinistra a destra)
+    cellsWithPositions.sort((a, b) => a.gridIndex - b.gridIndex)
+    this.allCellsOrdered = cellsWithPositions.map(item => item.cell)
   }
 
   // === Gestione Input Celle ===
@@ -149,6 +160,9 @@ export default class extends Controller {
         if (currentIndex > 0) {
           cells[currentIndex - 1].focus()
           cells[currentIndex - 1].select()
+        } else {
+          // Prima cella della riga, vai alla riga precedente
+          this.navigateGlobal(input, -1)
         }
         break
 
@@ -157,6 +171,9 @@ export default class extends Controller {
         if (currentIndex < cells.length - 1) {
           cells[currentIndex + 1].focus()
           cells[currentIndex + 1].select()
+        } else {
+          // Ultima cella della riga, vai alla riga successiva
+          this.navigateGlobal(input, 1)
         }
         break
 
@@ -169,6 +186,26 @@ export default class extends Controller {
         event.preventDefault()
         this.navigateVertical(input, 1)
         break
+    }
+  }
+
+  // Navigazione globale tra tutte le celle (cross-row)
+  // Usata quando si raggiunge il bordo di una riga
+  navigateGlobal(currentCell, direction) {
+    const currentIdx = this.allCellsOrdered.indexOf(currentCell)
+    if (currentIdx === -1) return
+
+    let targetIdx = currentIdx + direction
+
+    // Continua nella direzione finché non trovi una cella abilitata
+    while (targetIdx >= 0 && targetIdx < this.allCellsOrdered.length) {
+      const targetCell = this.allCellsOrdered[targetIdx]
+      if (!targetCell.disabled) {
+        targetCell.focus()
+        targetCell.select()
+        return
+      }
+      targetIdx += direction
     }
   }
 
@@ -189,11 +226,17 @@ export default class extends Controller {
     if (currentCol === null || currentRowInCol === null) return
 
     const columnCells = this.columnMap[currentCol]
-    const targetRow = currentRowInCol + direction
+    let targetRow = currentRowInCol + direction
 
-    if (targetRow >= 0 && targetRow < columnCells.length) {
-      columnCells[targetRow].focus()
-      columnCells[targetRow].select()
+    // Continua nella direzione finché non trovi una cella abilitata o esci dai limiti
+    while (targetRow >= 0 && targetRow < columnCells.length) {
+      const targetCell = columnCells[targetRow]
+      if (!targetCell.disabled) {
+        targetCell.focus()
+        targetCell.select()
+        return
+      }
+      targetRow += direction
     }
   }
 
@@ -203,10 +246,24 @@ export default class extends Controller {
     const value = event.target.value
 
     if (value.length === 1) {
-      // Dopo aver digitato, vai al minuendo nella stessa colonna
+      // Quando si inserisce un prestito, rendi molto sbiadito il numero del minuendo corrispondente
       if (currentIndex < this.minuendTargets.length) {
-        this.minuendTargets[currentIndex].focus()
-        this.minuendTargets[currentIndex].select()
+        const minuendInput = this.minuendTargets[currentIndex]
+        if (value !== '') {
+          // Aggiungi classe per rendere molto sbiadito
+          minuendInput.classList.add('text-gray-300', 'dark:text-gray-600')
+          minuendInput.classList.remove('text-gray-800', 'dark:text-gray-100')
+        }
+        // Vai al minuendo nella stessa colonna
+        minuendInput.focus()
+        minuendInput.select()
+      }
+    } else if (value === '') {
+      // Se il prestito viene cancellato, ripristina il colore originale del minuendo
+      if (currentIndex < this.minuendTargets.length) {
+        const minuendInput = this.minuendTargets[currentIndex]
+        minuendInput.classList.remove('text-gray-300', 'dark:text-gray-600')
+        minuendInput.classList.add('text-gray-800', 'dark:text-gray-100')
       }
     }
   }
@@ -216,27 +273,20 @@ export default class extends Controller {
 
     switch (event.key) {
       case 'Backspace':
-        if (input.value === '' && currentIndex > 0) {
+        if (input.value === '') {
           event.preventDefault()
-          this.borrowTargets[currentIndex - 1].focus()
-          this.borrowTargets[currentIndex - 1].select()
+          this.navigateGlobal(input, -1)
         }
         break
 
       case 'ArrowLeft':
         event.preventDefault()
-        if (currentIndex > 0) {
-          this.borrowTargets[currentIndex - 1].focus()
-          this.borrowTargets[currentIndex - 1].select()
-        }
+        this.navigateGlobal(input, -1)
         break
 
       case 'ArrowRight':
         event.preventDefault()
-        if (currentIndex < this.borrowTargets.length - 1) {
-          this.borrowTargets[currentIndex + 1].focus()
-          this.borrowTargets[currentIndex + 1].select()
-        }
+        this.navigateGlobal(input, 1)
         break
 
       case 'ArrowDown':
@@ -259,6 +309,12 @@ export default class extends Controller {
       input.value = ''
       input.classList.remove('bg-green-100', 'bg-red-100', 'bg-yellow-100', 'dark:bg-green-900/50', 'dark:bg-red-900/50', 'dark:bg-yellow-900/50')
       input.classList.add('bg-transparent')
+    })
+
+    // Ripristina i colori originali del minuendo (rimuovi effetto sbiadito)
+    this.minuendTargets.forEach(input => {
+      input.classList.remove('text-gray-300', 'dark:text-gray-600')
+      input.classList.add('text-gray-800', 'dark:text-gray-100')
     })
   }
 
@@ -294,12 +350,18 @@ export default class extends Controller {
   }
 
   showResult() {
-    // Mostra i prestiti
+    // Mostra i prestiti e sbiadisci il minuendo corrispondente
     if (this.hasBorrowTarget) {
-      this.borrowTargets.forEach(input => {
+      this.borrowTargets.forEach((input, index) => {
         const correctAnswer = input.getAttribute('data-correct-answer')
         if (correctAnswer) {
           input.value = correctAnswer
+          // Sbiadisci il minuendo corrispondente
+          if (index < this.minuendTargets.length) {
+            const minuendInput = this.minuendTargets[index]
+            minuendInput.classList.add('text-gray-300', 'dark:text-gray-600')
+            minuendInput.classList.remove('text-gray-800', 'dark:text-gray-100')
+          }
         }
       })
     }
@@ -375,6 +437,23 @@ export default class extends Controller {
         input.classList.add('bg-yellow-100', 'dark:bg-yellow-900/50')
       }
     })
+
+    // Sbiadisci il minuendo dove ci sono prestiti corretti
+    if (this.hasBorrowTarget) {
+      this.borrowTargets.forEach((borrowInput, index) => {
+        const correctAnswer = borrowInput.getAttribute('data-correct-answer')
+        const userAnswer = borrowInput.value.trim()
+
+        // Se c'è un prestito (corretto o inserito dall'utente), sbiadisci il minuendo
+        if (correctAnswer && correctAnswer !== '' && userAnswer !== '') {
+          if (index < this.minuendTargets.length) {
+            const minuendInput = this.minuendTargets[index]
+            minuendInput.classList.add('text-gray-300', 'dark:text-gray-600')
+            minuendInput.classList.remove('text-gray-800', 'dark:text-gray-100')
+          }
+        }
+      })
+    }
 
     // Lancia confetti se tutte le risposte sono corrette e non ci sono errori
     if (correct === total && total > 0 && !hasErrors) {

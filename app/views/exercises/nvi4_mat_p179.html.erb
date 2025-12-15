@@ -1,5 +1,5 @@
 <div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
-     data-controller="exercise-checker text-toggle font-controls"
+     data-controller="exercise-checker text-toggle font-controls quaderno-sidebar"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
@@ -70,43 +70,66 @@
       </div>
     </div>
 
-    <!-- Esercizio 2: Addizioni in colonna con griglia -->
+    <!-- Esercizio 2: Addizioni in colonna con sidebar -->
     <div>
       <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
         <%= numero_esercizio_badge(2) %>
         Esegui le addizioni in colonna e trascrivi i risultati.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
-        <div class="space-y-2">
-          <p class="text-gray-700 dark:text-gray-200"><span class="font-bold text-cyan-600 dark:text-cyan-400">a.</span> 906 + 3 524 = <input type="text" data-correct-answer="4430" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></p>
-          <p class="text-gray-700 dark:text-gray-200 ml-4">3 652 + 8 574 = <input type="text" data-correct-answer="12226" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></p>
-        </div>
-        <div class="space-y-2">
-          <p class="text-gray-700 dark:text-gray-200"><span class="font-bold text-cyan-600 dark:text-cyan-400">b.</span> 4 560 + 457 = <input type="text" data-correct-answer="5017" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></p>
-          <p class="text-gray-700 dark:text-gray-200 ml-4">8 297 + 125 + 703 = <input type="text" data-correct-answer="9125" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></p>
-        </div>
-        <div class="space-y-2">
-          <p class="text-gray-700 dark:text-gray-200"><span class="font-bold text-cyan-600 dark:text-cyan-400">c.</span> 782 + 4 625 + 1 066 = <input type="text" data-correct-answer="6473" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></p>
-          <p class="text-gray-700 dark:text-gray-200 ml-4">1 430 + 789 + 5 601 = <input type="text" data-correct-answer="7820" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"></p>
-        </div>
-      </div>
+      <%
+        es2_gruppi = [
+          { lettera: "a", operazioni: [
+            { op: "906+3524", answer: "4430" },
+            { op: "3652+8574", answer: "12226" }
+          ]},
+          { lettera: "b", operazioni: [
+            { op: "4560+457", answer: "5017" },
+            { op: "8297+125+703", answer: "9125" }
+          ]},
+          { lettera: "c", operazioni: [
+            { op: "782+4625+1066", answer: "6473" },
+            { op: "1430+789+5601", answer: "7820" }
+          ]}
+        ]
+      %>
 
-      <!-- Griglia quadrettata per operazioni in colonna -->
-      <div class="overflow-x-auto">
-        <div class="inline-block border border-cyan-400 dark:border-cyan-600">
-          <table class="border-collapse">
-            <tbody>
-              <% 12.times do %>
-                <tr>
-                  <% 24.times do %>
-                    <td class="w-6 h-6 border border-cyan-200 dark:border-cyan-700"></td>
-                  <% end %>
-                </tr>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <% es2_gruppi.each do |gruppo| %>
+          <%
+            operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+              { operation: item[:op], targetId: "es2-#{gruppo[:lettera]}-#{idx}" }
+            }
+          %>
+          <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <p class="text-gray-700 dark:text-gray-200 font-bold mb-2 flex items-center gap-2">
+              <%= gruppo[:lettera] %>.
+              <button type="button"
+                      data-action="click->quaderno-sidebar#openGroup"
+                      data-operations='<%= operations_data.to_json %>'
+                      data-type="addizione"
+                      data-group="<%= gruppo[:lettera] %>"
+                      class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
+                      title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </p>
+            <ul class="space-y-2">
+              <% gruppo[:operazioni].each_with_index do |item, idx| %>
+                <li class="flex items-center gap-2 flex-wrap">
+                  <span class="text-gray-700 dark:text-gray-200"><%= item[:op].gsub('+', ' + ') %> =</span>
+                  <input type="text"
+                         data-operation-id="es2-<%= gruppo[:lettera] %>-<%= idx %>"
+                         data-correct-answer="<%= item[:answer] %>"
+                         class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </li>
               <% end %>
-            </tbody>
-          </table>
-        </div>
+            </ul>
+          </div>
+        <% end %>
       </div>
     </div>
 
@@ -117,40 +140,65 @@
         Calcola in colonna sul quaderno.
       </p>
 
+      <%
+        es3_gruppi = [
+          { lettera: "a", operazioni: [
+            { op: "38565+25380", answer: "63945" },
+            { op: "4756+32580", answer: "37336" },
+            { op: "25360+1321", answer: "26681" },
+            { op: "2315+307640", answer: "309955" }
+          ]},
+          { lettera: "b", operazioni: [
+            { op: "24720+39", answer: "24759" },
+            { op: "54970+234", answer: "55204" },
+            { op: "318725+456893", answer: "775618" },
+            { op: "756432+35734", answer: "792166" }
+          ]},
+          { lettera: "c", operazioni: [
+            { op: "795743+187964", answer: "983707" },
+            { op: "1585+338976", answer: "340561" },
+            { op: "387+753654", answer: "754041" },
+            { op: "99243+325768", answer: "425011" }
+          ]}
+        ]
+      %>
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="space-y-2">
-          <p class="font-bold text-gray-700 dark:text-gray-200">a.</p>
-          <% [
-            "38 565 + 25 380 =",
-            "4 756 + 32 580 =",
-            "25 360 + 1 321 =",
-            "2 315 + 307 640 ="
-          ].each do |op| %>
-            <p class="text-gray-700 dark:text-gray-200"><%= op %></p>
-          <% end %>
-        </div>
-        <div class="space-y-2">
-          <p class="font-bold text-gray-700 dark:text-gray-200">b.</p>
-          <% [
-            "24 720 + 39 =",
-            "54 970 + 234 =",
-            "318 725 + 456 893 =",
-            "756 432 + 35 734 ="
-          ].each do |op| %>
-            <p class="text-gray-700 dark:text-gray-200"><%= op %></p>
-          <% end %>
-        </div>
-        <div class="space-y-2">
-          <p class="font-bold text-gray-700 dark:text-gray-200">c.</p>
-          <% [
-            "795 743 + 187 964 =",
-            "1 585 + 338 976 =",
-            "387 + 753 654 =",
-            "99 243 + 325 768 ="
-          ].each do |op| %>
-            <p class="text-gray-700 dark:text-gray-200"><%= op %></p>
-          <% end %>
-        </div>
+        <% es3_gruppi.each do |gruppo| %>
+          <%
+            operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+              { operation: item[:op], targetId: "es3-#{gruppo[:lettera]}-#{idx}" }
+            }
+          %>
+          <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <p class="text-gray-700 dark:text-gray-200 font-bold mb-2 flex items-center gap-2">
+              <%= gruppo[:lettera] %>.
+              <button type="button"
+                      data-action="click->quaderno-sidebar#openGroup"
+                      data-operations='<%= operations_data.to_json %>'
+                      data-type="addizione"
+                      data-group="<%= gruppo[:lettera] %>"
+                      class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
+                      title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </p>
+            <ul class="space-y-2">
+              <% gruppo[:operazioni].each_with_index do |item, idx| %>
+                <li class="flex items-center gap-2 flex-wrap">
+                  <span class="text-gray-700 dark:text-gray-200"><%= item[:op].gsub('+', ' + ') %> =</span>
+                  <input type="text"
+                         data-operation-id="es3-<%= gruppo[:lettera] %>-<%= idx %>"
+                         data-correct-answer="<%= item[:answer] %>"
+                         class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
       </div>
     </div>
 
@@ -198,6 +246,7 @@
       </div>
     </div>
 
+    <%= render 'shared/quaderno_sidebar' %>
     <%= render 'shared/exercise_controls' %>
   </div>
 </div>

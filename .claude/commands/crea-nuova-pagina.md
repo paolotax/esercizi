@@ -362,20 +362,58 @@ Per problemi da risolvere, quesiti:
 </div>
 ```
 
-### Regola breve (rosa chiaro, arrotondato)
-Per regole e definizioni brevi:
+### Box Note/Suggerimenti/Ricordati (bordo tratteggiato)
+Per note, suggerimenti, promemoria e "Ricordati che...":
 ```erb
-<div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
-  <p class="text-gray-700 dark:text-gray-200">Regola o definizione...</p>
+<div class="p-3 bg-white dark:bg-gray-800 border-3 border-dashed border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-500 w-fit">
+  <p class="text-gray-700 dark:text-gray-200">
+    Ricordati di mettere la virgola al quoziente quando abbassi la prima cifra decimale.
+  </p>
 </div>
 ```
 
-Variante per regole comportamento:
+**Layout titolo + nota allineati (sulla stessa riga):**
 ```erb
-<div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-xl w-fit">
-  <p class="text-gray-600 dark:text-gray-300">Regola comportamento...</p>
+<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+  <p class="font-bold text-gray-700 dark:text-gray-200">
+    <%= numero_esercizio_badge(1) %>
+    Calcola in colonna le divisioni...
+  </p>
+  <!-- Nota -->
+  <div class="p-3 bg-white dark:bg-gray-800 border-3 border-dashed border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-500 md:w-1/3 shrink-0">
+    <p class="text-gray-700 dark:text-gray-200">
+      Ricordati di mettere la virgola...
+    </p>
+  </div>
 </div>
 ```
+
+**Caratteristiche box Note/Suggerimenti:**
+- Sfondo bianco (`bg-white dark:bg-gray-800`)
+- Bordo tratteggiato 3px (`border-3 border-dashed`)
+- Colore bordo dal base_color della pagina
+- `w-fit` per adattarsi al contenuto, oppure `md:w-1/3` per larghezza fissa
+- `shrink-0` se in layout flex per non comprimersi
+
+### Box Regola/Teoria (sfondo celeste, arrotondato)
+Per regole matematiche e definizioni importanti:
+```erb
+<div class="self-start p-4 bg-custom-blue dark:bg-cyan-900 rounded-2xl">
+  <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-2">Titolo regola</p>
+  <p class="text-gray-700 dark:text-gray-200 mb-4">
+    Spiegazione della regola...
+  </p>
+  <div class="flex justify-center">
+    <%= image_tag "nvi4_mat/pXXX/immagine.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+  </div>
+</div>
+```
+
+**Caratteristiche box Regola:**
+- Sfondo celeste (`bg-custom-blue dark:bg-cyan-900`)
+- Bordi arrotondati (`rounded-2xl`)
+- `self-start` per non allungarsi in altezza dentro una griglia
+- Immagine centrata con `flex justify-center`
 
 ### Box teoria importante (bordo blu, arrotondato)
 Per concetti fondamentali con bordo:

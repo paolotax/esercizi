@@ -4,7 +4,8 @@
 
 | Pattern | Uso |
 |---------|-----|
-| `p-4 md:p-6 bg-custom-blue dark:bg-cyan-900 rounded-2xl` | Box Ricorda (celeste) |
+| `p-4 md:p-6 bg-custom-blue dark:bg-cyan-900 rounded-2xl` | Box Regola/Teoria (celeste) |
+| `p-3 bg-white dark:bg-gray-800 border-3 border-dashed border-base_color-400 dark:border-base_color-500 w-fit` | Box Note/Suggerimenti/Ricordati |
 | `p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl` | Box Esercizi |
 | `p-4 md:p-6 bg-gradient-to-b from-blue-100 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 rounded-2xl` | Box Gradiente |
 | `p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl` | Box rosa |
@@ -94,6 +95,48 @@
 | `bg-white` | `dark:bg-gray-700` | Celle tabella/sequence |
 | `bg-white` | `dark:bg-gray-900` | Sfondo pagina |
 | `hover:bg-gray-50` | `dark:hover:bg-gray-700` | Hover elementi |
+
+## Box Note/Suggerimenti/Ricordati (IMPORTANTE!)
+
+Per note, suggerimenti, promemoria e "Ricordati che...":
+
+```erb
+<!-- Box nota standalone -->
+<div class="p-3 bg-white dark:bg-gray-800 border-3 border-dashed border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-500 w-fit">
+  <p class="text-gray-700 dark:text-gray-200">
+    Ricordati di mettere la virgola al quoziente quando abbassi la prima cifra decimale.
+  </p>
+</div>
+```
+
+**Layout titolo + nota sulla stessa riga:**
+```erb
+<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+  <p class="font-bold text-gray-700 dark:text-gray-200">
+    <%= numero_esercizio_badge(1) %>
+    Calcola in colonna le divisioni...
+  </p>
+  <!-- Nota -->
+  <div class="p-3 bg-white dark:bg-gray-800 border-3 border-dashed border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-500 md:w-1/3 shrink-0">
+    <p class="text-gray-700 dark:text-gray-200">
+      Ricordati di mettere la virgola...
+    </p>
+  </div>
+</div>
+```
+
+**Caratteristiche:**
+- Sfondo bianco (`bg-white dark:bg-gray-800`)
+- Bordo tratteggiato 3px (`border-3 border-dashed`)
+- Colore bordo dal `base_color` della pagina
+- `w-fit` per adattarsi al contenuto, oppure `md:w-1/3` per larghezza fissa
+- `shrink-0` se in layout flex per non comprimersi
+
+**DIFFERENZA da Box Regola/Teoria:**
+- **Box Nota/Suggerimenti:** sfondo bianco, bordo tratteggiato → per promemoria, consigli
+- **Box Regola/Teoria:** sfondo celeste (`bg-custom-blue`), bordi arrotondati → per regole matematiche importanti
+
+---
 
 ## Box AllenaMente (IMPORTANTE!)
 

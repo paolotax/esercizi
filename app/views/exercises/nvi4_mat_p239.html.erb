@@ -1,0 +1,246 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Titolo -->
+    <h1 class="text-2xl md:text-3xl font-bold text-center text-cyan-500 dark:text-cyan-400">
+      TRASLAZIONE
+    </h1>
+
+    <!-- Box definizione -->
+    <div class="p-4 bg-custom-blue dark:bg-cyan-900 rounded-2xl">
+      <p class="text-gray-700 dark:text-gray-200">
+        Nella <span class="text-cyan-600 dark:text-cyan-400 font-bold">traslazione</span> tutti i punti di una figura si spostano secondo i comandi dati da una freccia (<span class="text-cyan-600 dark:text-cyan-400 font-bold">vettore</span>).
+      </p>
+    </div>
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500 space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= imparare_tutti_badge(1) %>
+        Osserva il disegno, completa e scegli.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Domande a sinistra -->
+        <div class="space-y-3">
+          <p class="text-gray-700 dark:text-gray-200">Il vettore indica:</p>
+          <ul class="space-y-3 ml-4">
+            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span class="font-bold text-cyan-600 dark:text-cyan-400">misura:</span>
+              <input type="text" class="w-16 px-2 py-1 border-2 border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-center"
+                     data-correct-answer="6">
+              <span>quadretti</span>
+            </li>
+            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span class="font-bold text-cyan-600 dark:text-cyan-400">verso:</span>
+              <label class="flex items-center gap-1">
+                <input type="checkbox" class="w-4 h-4 rounded border-cyan-400" data-correct-answer="true">
+                <span>destra</span>
+              </label>
+              <label class="flex items-center gap-1 ml-2">
+                <input type="checkbox" class="w-4 h-4 rounded border-cyan-400">
+                <span>sinistra</span>
+              </label>
+            </li>
+            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span class="font-bold text-cyan-600 dark:text-cyan-400">direzione:</span>
+              <label class="flex items-center gap-1">
+                <input type="checkbox" class="w-4 h-4 rounded border-cyan-400">
+                <span>verticale</span>
+              </label>
+              <label class="flex items-center gap-1 ml-2">
+                <input type="checkbox" class="w-4 h-4 rounded border-cyan-400" data-correct-answer="true">
+                <span>orizzontale</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Figura a destra -->
+        <div class="flex justify-center items-center">
+          <svg viewBox="0 0 200 100" class="w-full max-w-xs h-32">
+            <defs>
+              <pattern id="grid239a" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+              </pattern>
+              <marker id="arrowhead239" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#06b6d4"/>
+              </marker>
+            </defs>
+            <rect width="200" height="100" fill="url(#grid239a)"/>
+            <!-- Vettore -->
+            <line x1="20" y1="50" x2="80" y2="50" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrowhead239)"/>
+            <!-- Triangolo originale -->
+            <polygon points="30,30 50,10 50,30" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+            <!-- Quadrato originale -->
+            <rect x="30" y="40" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+            <!-- Triangolo traslato -->
+            <polygon points="90,30 110,10 110,30" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+            <!-- Quadrato traslato -->
+            <rect x="90" y="40" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(2) %> Trasla le figure date secondo le indicazioni.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Prima griglia - verso l'alto -->
+        <div class="border-2 border-cyan-400 dark:border-cyan-600 rounded-lg overflow-hidden">
+          <div class="bg-yellow-100 dark:bg-yellow-900/30 p-2 text-sm text-gray-700 dark:text-gray-200">
+            <ul class="space-y-0.5">
+              <li>• misura: 5 quadretti</li>
+              <li>• verso: l'alto</li>
+              <li>• direzione: verticale</li>
+            </ul>
+          </div>
+          <div class="p-2 bg-white dark:bg-gray-700">
+            <svg viewBox="0 0 300 200" class="w-full h-48">
+              <defs>
+                <pattern id="grid239b" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+                </pattern>
+                <marker id="arrowhead239b" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#06b6d4"/>
+                </marker>
+              </defs>
+              <rect width="300" height="200" fill="url(#grid239b)"/>
+              <!-- Vettore verso l'alto -->
+              <line x1="30" y1="180" x2="30" y2="130" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrowhead239b)"/>
+              <!-- Freccia/lettera L -->
+              <polyline points="60,160 60,140 80,140 80,130 60,130 60,110 50,110 50,160"
+                        fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+              <!-- Quadrato con buco -->
+              <path d="M 120,140 L 170,140 L 170,180 L 120,180 Z M 130,150 L 160,150 L 160,170 L 130,170 Z"
+                    fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+              <!-- Triangolo -->
+              <polygon points="200,180 230,140 260,180"
+                       fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Seconda griglia - verso sinistra -->
+        <div class="border-2 border-cyan-400 dark:border-cyan-600 rounded-lg overflow-hidden">
+          <div class="bg-yellow-100 dark:bg-yellow-900/30 p-2 text-sm text-gray-700 dark:text-gray-200">
+            <ul class="space-y-0.5">
+              <li>• misura: 9 quadretti</li>
+              <li>• verso: sinistra</li>
+              <li>• direzione: orizzontale</li>
+            </ul>
+          </div>
+          <div class="p-2 bg-white dark:bg-gray-700">
+            <svg viewBox="0 0 300 200" class="w-full h-48">
+              <defs>
+                <pattern id="grid239c" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+                </pattern>
+                <marker id="arrowhead239c" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                  <polygon points="10 0, 0 3.5, 10 7" fill="#06b6d4"/>
+                </marker>
+              </defs>
+              <rect width="300" height="200" fill="url(#grid239c)"/>
+              <!-- Vettore verso sinistra -->
+              <line x1="280" y1="180" x2="190" y2="180" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrowhead239c)"/>
+              <!-- Lettera M -->
+              <polyline points="200,30 200,100 220,70 240,100 240,30"
+                        fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(3) %> Indica con un vettore la traslazione di ogni coppia di figure.
+      </p>
+
+      <div class="border-2 border-cyan-400 dark:border-cyan-600 rounded-lg p-2 bg-white dark:bg-gray-700">
+        <svg viewBox="0 0 600 350" class="w-full h-64 md:h-80">
+          <defs>
+            <pattern id="grid239d" width="10" height="10" patternUnits="userSpaceOnUse">
+              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+            </pattern>
+          </defs>
+          <rect width="600" height="350" fill="url(#grid239d)"/>
+
+          <!-- Riga 1 -->
+          <!-- Coppia 1 - triangoli -->
+          <polygon points="30,50 50,20 70,50" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+          <polygon points="90,50 110,20 130,50" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+
+          <!-- Coppia 2 - S -->
+          <path d="M 180,20 L 210,20 L 210,35 L 180,35 L 180,50 L 210,50"
+                fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+          <path d="M 230,20 L 260,20 L 260,35 L 230,35 L 230,50 L 260,50"
+                fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+
+          <!-- Coppia 3 - frecce -->
+          <polygon points="320,40 340,20 340,30 370,30 370,50 340,50 340,60"
+                   fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+          <polygon points="400,40 420,20 420,30 450,30 450,50 420,50 420,60"
+                   fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+
+          <!-- Coppia 4 - triangoli -->
+          <polygon points="500,50 520,20 540,50" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+          <polygon points="500,80 520,110 540,80" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+
+          <!-- Riga 2 -->
+          <!-- Coppia 5 - frecce verso il basso -->
+          <polygon points="50,150 70,130 70,140 90,140 90,160 70,160 70,170"
+                   fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+          <polygon points="50,200 70,180 70,190 90,190 90,210 70,210 70,220"
+                   fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+
+          <!-- Coppia 6 - v/frecce -->
+          <polyline points="180,130 200,170 220,130" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+          <polyline points="180,200 200,240 220,200" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+
+          <!-- Coppia 7 - quadrati con buco -->
+          <path d="M 320,130 L 370,130 L 370,180 L 320,180 Z M 335,145 L 355,145 L 355,165 L 335,165 Z"
+                fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+          <path d="M 320,200 L 370,200 L 370,250 L 320,250 Z M 335,215 L 355,215 L 355,235 L 335,235 Z"
+                fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+
+          <!-- Coppia 8 - frecce orizzontali -->
+          <polygon points="460,140 480,120 480,130 510,130 510,150 480,150 480,160"
+                   fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+          <polygon points="460,210 480,190 480,200 510,200 510,220 480,220 480,230"
+                   fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+
+          <!-- Riga 3 -->
+          <!-- Coppia 9 - v -->
+          <polyline points="50,280 70,320 90,280" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+          <polyline points="120,280 140,320 160,280" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+
+          <!-- Coppia 10 - frecce -->
+          <polygon points="260,300 280,280 280,290 310,290 310,310 280,310 280,320"
+                   fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+          <polygon points="330,300 350,280 350,290 380,290 380,310 350,310 350,320"
+                   fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+
+          <!-- Coppia 11 - frecce -->
+          <polygon points="460,300 480,280 480,290 510,290 510,310 480,310 480,320"
+                   fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+          <polygon points="460,330 480,310 480,320 510,320 510,340 480,340 480,350"
+                   fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+        </svg>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

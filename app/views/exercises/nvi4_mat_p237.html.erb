@@ -1,0 +1,220 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Box Riepilogo Rette e Angoli -->
+    <div class="p-4 bg-custom-blue dark:bg-cyan-900 rounded-2xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Rette -->
+        <div class="p-3 bg-white dark:bg-gray-800 rounded-lg">
+          <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-3 text-center">Rette</p>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div>
+              <svg width="80" height="30" viewBox="0 0 80 30" class="mx-auto text-gray-700 dark:text-gray-300">
+                <line x1="5" y1="10" x2="75" y2="10" stroke="currentColor" stroke-width="2"/>
+                <line x1="5" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              <p class="font-bold text-gray-700 dark:text-gray-200">parallele</p>
+            </div>
+            <div>
+              <svg width="80" height="40" viewBox="0 0 80 40" class="mx-auto text-gray-700 dark:text-gray-300">
+                <line x1="5" y1="35" x2="75" y2="5" stroke="currentColor" stroke-width="2"/>
+                <line x1="5" y1="5" x2="75" y2="35" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              <p class="font-bold text-gray-700 dark:text-gray-200">incidenti</p>
+            </div>
+            <div>
+              <svg width="80" height="50" viewBox="0 0 80 50" class="mx-auto text-gray-700 dark:text-gray-300">
+                <line x1="5" y1="25" x2="75" y2="25" stroke="currentColor" stroke-width="2"/>
+                <line x1="40" y1="5" x2="40" y2="45" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              <p class="font-bold text-gray-700 dark:text-gray-200">perpendicolari</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angoli -->
+        <div class="p-3 bg-white dark:bg-gray-800 rounded-lg">
+          <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-3 text-center">Angoli</p>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div>
+              <svg width="60" height="50" viewBox="0 0 60 50" class="mx-auto text-gray-700 dark:text-gray-300">
+                <line x1="10" y1="40" x2="50" y2="40" stroke="currentColor" stroke-width="2"/>
+                <line x1="10" y1="40" x2="10" y2="10" stroke="currentColor" stroke-width="2"/>
+                <rect x="10" y="30" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              <p class="font-bold text-gray-700 dark:text-gray-200">retto</p>
+              <p class="text-gray-600 dark:text-gray-300">90°</p>
+            </div>
+            <div>
+              <svg width="60" height="50" viewBox="0 0 60 50" class="mx-auto text-gray-700 dark:text-gray-300">
+                <line x1="10" y1="40" x2="50" y2="40" stroke="currentColor" stroke-width="2"/>
+                <line x1="10" y1="40" x2="40" y2="15" stroke="currentColor" stroke-width="2"/>
+                <path d="M 22 40 A 12 12 0 0 1 22 32" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              <p class="font-bold text-gray-700 dark:text-gray-200">acuto</p>
+              <p class="text-gray-600 dark:text-gray-300">&lt; 90°</p>
+            </div>
+            <div>
+              <svg width="60" height="50" viewBox="0 0 60 50" class="mx-auto text-gray-700 dark:text-gray-300">
+                <line x1="5" y1="35" x2="55" y2="35" stroke="currentColor" stroke-width="2"/>
+                <line x1="25" y1="35" x2="45" y2="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M 38 35 A 13 13 0 0 1 37 26" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              <p class="font-bold text-gray-700 dark:text-gray-200">ottuso</p>
+              <p class="text-gray-600 dark:text-gray-300">&gt; 90° &lt; 180°</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500 space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= imparare_tutti_badge(1) %>
+        Osserva le coppie di rette e inserisci in tabella le lettere al posto giusto.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Immagine rette -->
+        <div class="flex justify-center">
+          <%= image_tag "nvi4_mat/p237/p237_01.jpg", class: "max-w-full dark:bg-white dark:rounded-lg dark:p-2", alt: "Coppie di rette" %>
+        </div>
+
+        <!-- Tabella classificazione -->
+        <div class="overflow-x-auto">
+          <table class="w-full border-2 border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr class="bg-custom-blue-light dark:bg-cyan-900/50">
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-gray-700 dark:text-gray-200 font-bold">parallele</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-gray-700 dark:text-gray-200 font-bold">incidenti</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-gray-700 dark:text-gray-200 font-bold">perpendicolari</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center">
+                  <input type="text" data-correct-answer="a, d" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center">
+                  <input type="text" data-correct-answer="b, c, h" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center">
+                  <input type="text" data-correct-answer="e, f, g" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(2) %> Misura con il goniometro e scrivi l'ampiezza dei seguenti angoli. Poi indica se si tratta di un angolo acuto <span class="px-1 border border-gray-400 dark:border-gray-500">A</span>, ottuso <span class="px-1 border border-gray-400 dark:border-gray-500">O</span> o retto <span class="px-1 border border-gray-400 dark:border-gray-500">R</span>.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Angolo 1 -->
+        <div class="text-center space-y-2">
+          <div class="h-28 flex items-center justify-center">
+            <svg width="120" height="80" viewBox="0 0 120 80" class="text-gray-700 dark:text-gray-300">
+              <line x1="10" y1="70" x2="110" y2="70" stroke="currentColor" stroke-width="2"/>
+              <line x1="30" y1="70" x2="90" y2="20" stroke="currentColor" stroke-width="2"/>
+              <path d="M 50 70 A 20 20 0 0 1 50 56" fill="none" stroke="#0891b2" stroke-width="2" stroke-dasharray="4"/>
+              <circle cx="30" cy="70" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">misura</span>
+            <input type="text" data-correct-answer="50°" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <input type="text" data-correct-answer="A" class="w-8 border-2 border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Angolo 2 -->
+        <div class="text-center space-y-2">
+          <div class="h-28 flex items-center justify-center">
+            <svg width="120" height="80" viewBox="0 0 120 80" class="text-gray-700 dark:text-gray-300">
+              <line x1="30" y1="70" x2="90" y2="70" stroke="currentColor" stroke-width="2"/>
+              <line x1="30" y1="70" x2="70" y2="15" stroke="currentColor" stroke-width="2"/>
+              <path d="M 50 70 A 20 20 0 0 1 52 52" fill="none" stroke="#0891b2" stroke-width="2" stroke-dasharray="4"/>
+              <circle cx="30" cy="70" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">misura</span>
+            <input type="text" data-correct-answer="65°" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <input type="text" data-correct-answer="A" class="w-8 border-2 border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Angolo 3 -->
+        <div class="text-center space-y-2">
+          <div class="h-28 flex items-center justify-center">
+            <svg width="120" height="80" viewBox="0 0 120 80" class="text-gray-700 dark:text-gray-300">
+              <line x1="20" y1="60" x2="100" y2="60" stroke="currentColor" stroke-width="2"/>
+              <line x1="50" y1="60" x2="80" y2="15" stroke="currentColor" stroke-width="2"/>
+              <path d="M 68 60 A 18 18 0 0 1 65 48" fill="none" stroke="#0891b2" stroke-width="2" stroke-dasharray="4"/>
+              <circle cx="50" cy="60" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">misura</span>
+            <input type="text" data-correct-answer="130°" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <input type="text" data-correct-answer="O" class="w-8 border-2 border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Angolo 4 -->
+        <div class="text-center space-y-2">
+          <div class="h-28 flex items-center justify-center">
+            <svg width="120" height="80" viewBox="0 0 120 80" class="text-gray-700 dark:text-gray-300">
+              <line x1="60" y1="70" x2="60" y2="10" stroke="currentColor" stroke-width="2"/>
+              <line x1="60" y1="70" x2="20" y2="25" stroke="currentColor" stroke-width="2"/>
+              <path d="M 60 50 A 20 20 0 0 0 45 58" fill="none" stroke="#0891b2" stroke-width="2" stroke-dasharray="4"/>
+              <circle cx="60" cy="70" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">misura</span>
+            <input type="text" data-correct-answer="45°" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <input type="text" data-correct-answer="A" class="w-8 border-2 border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizi 3 e 4 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Esercizio 3 -->
+      <div class="space-y-3">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          <%= numero_esercizio_badge(3) %> Disegna un angolo di 60°.
+        </p>
+        <div class="p-4 border-2 border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700">
+          <div class="h-32 bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2220%22%20height%3D%2220%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22none%22%20stroke%3D%22%23e5e7eb%22%20stroke-width%3D%221%22/%3E%3C/svg%3E')] dark:bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2220%22%20height%3D%2220%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22none%22%20stroke%3D%22%234b5563%22%20stroke-width%3D%221%22/%3E%3C/svg%3E')]"></div>
+        </div>
+      </div>
+
+      <!-- Esercizio 4 -->
+      <div class="space-y-3">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          <%= numero_esercizio_badge(4) %> Disegna un angolo di 125°.
+        </p>
+        <div class="p-4 border-2 border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700">
+          <div class="h-32 bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2220%22%20height%3D%2220%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22none%22%20stroke%3D%22%23e5e7eb%22%20stroke-width%3D%221%22/%3E%3C/svg%3E')] dark:bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2220%22%20height%3D%2220%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22none%22%20stroke%3D%22%234b5563%22%20stroke-width%3D%221%22/%3E%3C/svg%3E')]"></div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

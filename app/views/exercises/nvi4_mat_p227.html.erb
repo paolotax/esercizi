@@ -1,0 +1,230 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Istruzione generale e Box promemoria sulla stessa riga -->
+    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+      <p class="text-gray-700 dark:text-gray-200">
+        <span class="text-cyan-500">•</span> Risolvi sul quaderno i seguenti problemi.
+      </p>
+
+      <!-- Box promemoria -->
+      <div class="p-3 bg-white dark:bg-gray-800 border-3 border-dashed border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-500 md:w-1/3 shrink-0">
+        <p class="text-gray-700 dark:text-gray-200">
+          Ricorda: per risolvere la maggior parte di questi problemi devi eseguire delle equivalenze.
+        </p>
+      </div>
+    </div>
+
+    <!-- Esercizi IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500 space-y-6">
+
+      <!-- Esercizio 1 -->
+      <div class="space-y-2">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          <%= imparare_tutti_badge(1) %>
+          Il peso lordo dello zaino di Martina è di 7,6 kg. Se lo zaino vuoto pesa 1,8 kg, quanto pesa il contenuto dello zaino?
+        </p>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 dark:text-gray-200">Peso contenuto:</span>
+          <input type="text" data-correct-answer="5,8" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span class="text-gray-700 dark:text-gray-200">kg</span>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="space-y-2">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          <%= imparare_tutti_badge(2) %>
+          Per recintare il suo campo un contadino ha usato 36 m di rete. Se ha suddiviso la rete in parti da 1,8 m ciascuna, quanti pezzi ha usato?
+        </p>
+        <div class="flex items-center gap-2">
+          <span class="text-gray-700 dark:text-gray-200">Pezzi:</span>
+          <input type="text" data-correct-answer="20" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+      </div>
+    </div>
+
+    <!-- Problemi 3-15 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Colonna sinistra -->
+      <div class="space-y-4">
+        <!-- Problema 3 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(3) %> Un fornaio ha a disposizione 200 kg di farina. Quanti sacchetti contenenti 250 g di farina ciascuno può confezionare?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">Sacchetti:</span>
+            <input type="text" data-correct-answer="800" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Problema 4 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(4) %> In un barile ci sono 2,25 hℓ di aceto. Vengono travasati in bottiglie da 750 cℓ ciascuna. Quante bottiglie si possono riempire?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">Bottiglie:</span>
+            <input type="text" data-correct-answer="3" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Problema 5 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(5) %> Alice va a danza 4 giorni a settimana. Se da casa sua alla palestra ci sono 1,236 km, quanti chilometri percorre Alice in una settimana per andare e tornare dalla palestra? E quanti metri?
+          </p>
+          <div class="flex items-center gap-2 flex-wrap">
+            <input type="text" data-correct-answer="9,888" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">km =</span>
+            <input type="text" data-correct-answer="9888" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">m</span>
+          </div>
+        </div>
+
+        <!-- Problema 6 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(6) %> La piscina degli zii contiene 27,5 hℓ di acqua. Se in una giornata d'estate evaporano 13,8 ℓ, quanti ettolitri di acqua restano nella piscina?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">Restano:</span>
+            <input type="text" data-correct-answer="27,362" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">hℓ</span>
+          </div>
+        </div>
+
+        <!-- Problema 7 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(7) %> Servono 1,3 kg di farina per preparare una pagnotta. Se un fornaio dispone di 35,1 kg di farina, quante pagnotte può preparare?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">Pagnotte:</span>
+            <input type="text" data-correct-answer="27" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Problema 8 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(8) %> Una cisterna contiene 82,5 ℓ di acqua. Quante bottiglie da 0,75 ℓ si possono riempire con l'acqua contenuta nella cisterna?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">Bottiglie:</span>
+            <input type="text" data-correct-answer="110" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonna destra -->
+      <div class="space-y-4">
+        <!-- Problema 9 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(9) %> Laura apre un sacchetto di patatine dal peso netto di 175 g e ne mangia la metà. Quanti dag di patatine rimangono nel sacchetto?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">Rimangono:</span>
+            <input type="text" data-correct-answer="8,75" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">dag</span>
+          </div>
+        </div>
+
+        <!-- Problema 10 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(10) %> Per andare da casa a scuola Ilaria compie un percorso lungo 900 m. Durante il percorso ogni mattina si ferma a prendere la merenda dal fornaio, che dista 550,8 m dalla scuola. Quanto è distante il fornaio dalla casa di Ilaria?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">Distanza:</span>
+            <input type="text" data-correct-answer="349,2" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">m</span>
+          </div>
+        </div>
+
+        <!-- Problema 11 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(11) %> Prima di partire per le vacanze Giovanni controlla il serbatoio della sua auto. Se la sua capacità è di 60 ℓ ed è pieno per <%= render 'shared/frazione', num: 3, den: 4 %>, quanti litri di benzina contiene? Quanti ne può ancora contenere?
+          </p>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">Contiene:</span>
+            <input type="text" data-correct-answer="45" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">ℓ</span>
+            <span class="text-gray-700 dark:text-gray-200 mx-2">|</span>
+            <span class="text-gray-700 dark:text-gray-200">Mancano:</span>
+            <input type="text" data-correct-answer="15" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">ℓ</span>
+          </div>
+        </div>
+
+        <!-- Problema 12 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(12) %> Un camion pesa 5,5 Mg e trasporta 620 casse di frutta da 10,8 kg ciascuna. Qual è il peso lordo del camion in chilogrammi?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">Peso lordo:</span>
+            <input type="text" data-correct-answer="12196" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">kg</span>
+          </div>
+        </div>
+
+        <!-- Problema 13 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(13) %> Il signor Chen acquista per il suo ristorante 100 casse di vino. Ogni cassa contiene 18 bottiglie, ciascuna della capacità di 75 cℓ. Quanti litri di vino ha acquistato in tutto?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">Litri:</span>
+            <input type="text" data-correct-answer="1350" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">ℓ</span>
+          </div>
+        </div>
+
+        <!-- Problema 14 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(14) %> Laura compra al mercato 4 kg di patate, 15 dag di cipolle, 420 g di zucchine, 68 dag di carote e 12 hg di pomodori. Quanti chilogrammi pesa tutta la verdura?
+          </p>
+          <div class="flex items-center gap-2">
+            <span class="text-gray-700 dark:text-gray-200">Totale:</span>
+            <input type="text" data-correct-answer="7,5" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">kg</span>
+          </div>
+        </div>
+
+        <!-- Problema 15 -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(15) %> Un gruppo di amici misura la propria altezza. Michele è alto 1 m e 30 cm; Elena 1 m e 1 dm; Salim 1 m e 20 cm; Gloria 1,45 m. Chi è il più alto? Di quanti cm supera ciascuno degli amici?
+          </p>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">Il più alto:</span>
+            <input type="text" data-correct-answer="Gloria" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-gray-700 dark:text-gray-200">Supera Michele di</span>
+            <input type="text" data-correct-answer="15" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">cm, Elena di</span>
+            <input type="text" data-correct-answer="35" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">cm, Salim di</span>
+            <input type="text" data-correct-answer="25" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span class="text-gray-700 dark:text-gray-200">cm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,207 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Schema Costo unitario / Costo totale / Quantità -->
+    <div class="p-4 md:p-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Costo unitario × Quantità = Costo totale -->
+        <div class="flex flex-col items-center gap-2">
+          <div class="flex items-center gap-3">
+            <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center text-gray-700 dark:text-gray-200">Costo<br>unitario</div>
+            <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center text-gray-700 dark:text-gray-200">Quantità</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-cyan-500">↓</span>
+            <span class="text-cyan-600 dark:text-cyan-400 font-bold">×</span>
+            <span class="text-cyan-500">↓</span>
+          </div>
+          <div class="p-2 bg-cyan-100 dark:bg-cyan-900 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center font-bold text-cyan-600 dark:text-cyan-400">Costo<br>totale</div>
+        </div>
+
+        <!-- Costo totale : Quantità = Costo unitario -->
+        <div class="flex flex-col items-center gap-2">
+          <div class="flex items-center gap-3">
+            <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center text-gray-700 dark:text-gray-200">Costo<br>totale</div>
+            <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center text-gray-700 dark:text-gray-200">Quantità</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-cyan-500">↓</span>
+            <span class="text-cyan-600 dark:text-cyan-400 font-bold">:</span>
+            <span class="text-cyan-500">↓</span>
+          </div>
+          <div class="p-2 bg-cyan-100 dark:bg-cyan-900 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center font-bold text-cyan-600 dark:text-cyan-400">Costo<br>unitario</div>
+        </div>
+
+        <!-- Costo totale : Costo unitario = Quantità -->
+        <div class="flex flex-col items-center gap-2">
+          <div class="flex items-center gap-3">
+            <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center text-gray-700 dark:text-gray-200">Costo<br>totale</div>
+            <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center text-gray-700 dark:text-gray-200">Costo<br>unitario</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-cyan-500">↓</span>
+            <span class="text-cyan-600 dark:text-cyan-400 font-bold">:</span>
+            <span class="text-cyan-500">↓</span>
+          </div>
+          <div class="p-2 bg-cyan-100 dark:bg-cyan-900 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center font-bold text-cyan-600 dark:text-cyan-400">Quantità</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= imparare_tutti_badge(1) %>
+        Completa scrivendo l'operazione e il risultato. Segui l'esempio.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Problema 1: Esempio - Patate -->
+        <div class="space-y-3">
+          <div class="flex justify-center">
+            <%= image_tag "nvi4_mat/p230/output-1715932804230_199_434_144_92.png", class: "h-16 w-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+          </div>
+          <p class="text-gray-700 dark:text-gray-200">
+            Ho comprato 12 kg di patate a € 0,80 al kg. Quanto ho speso?
+          </p>
+          <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center">
+            <span class="font-bold text-cyan-600 dark:text-cyan-400">12 × 0,80 = 9,60</span>
+          </div>
+        </div>
+
+        <!-- Problema 2: Mele - divisione per quantità -->
+        <div class="space-y-3">
+          <div class="flex justify-center">
+            <%= image_tag "nvi4_mat/p230/output-1715932804230_482_443_148_77.png", class: "h-16 w-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+          </div>
+          <p class="text-gray-700 dark:text-gray-200">
+            Ho speso € 12 per comprare delle mele che costano € 1,50 al kg. Quanti kg di mele ho comprato?
+          </p>
+          <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center">
+            <input type="text" data-correct-answer="12 : 1,50 = 8" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Problema 3: Anguria - divisione per costo unitario -->
+        <div class="space-y-3">
+          <div class="flex justify-center">
+            <%= image_tag "nvi4_mat/p230/output-1715932804230_793_433_94_93.png", class: "h-16 w-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+          </div>
+          <p class="text-gray-700 dark:text-gray-200">
+            Ho comprato un'anguria di 6 kg, spendendo € 10,80. Quanto costa 1 kg di anguria?
+          </p>
+          <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center">
+            <input type="text" data-correct-answer="10,80 : 6 = 1,80" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Problema 4: Prosciutto - moltiplicazione -->
+        <div class="space-y-3">
+          <div class="flex justify-center">
+            <%= image_tag "nvi4_mat/p230/output-1715932804230_210_673_121_91.png", class: "h-16 w-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+          </div>
+          <p class="text-gray-700 dark:text-gray-200">
+            Il prezzo di vendita del prosciutto è di € 2,45 all'hg. Ne ho acquistati 7 hg. Quanto ho speso?
+          </p>
+          <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center">
+            <input type="text" data-correct-answer="7 × 2,45 = 17,15" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Problema 5: Olio - divisione per quantità -->
+        <div class="space-y-3">
+          <div class="flex justify-center">
+            <%= image_tag "nvi4_mat/p230/output-1715932804230_496_666_121_104.png", class: "h-16 w-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+          </div>
+          <p class="text-gray-700 dark:text-gray-200">
+            Ho speso € 81,60 per acquistare dell'olio che costa € 6,80 al litro. Quanti litri ne ho acquistati?
+          </p>
+          <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center">
+            <input type="text" data-correct-answer="81,60 : 6,80 = 12" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+
+        <!-- Problema 6: Pane - divisione per costo unitario -->
+        <div class="space-y-3">
+          <div class="flex justify-center">
+            <%= image_tag "nvi4_mat/p230/output-1715932804230_778_683_124_73.png", class: "h-16 w-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+          </div>
+          <p class="text-gray-700 dark:text-gray-200">
+            Ho comprato 7 filoni di pane da 1 kg, spendendo € 13,30. Quanto costa 1 kg di pane?
+          </p>
+          <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded text-center">
+            <input type="text" data-correct-answer="13,30 : 7 = 1,90" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Completa la tabella. Esegui i calcoli sul quaderno.
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="border-collapse border-2 border-cyan-400 dark:border-cyan-600 w-full">
+          <thead>
+            <tr>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-gray-800 dark:text-gray-200">Tipo di merce</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-gray-800 dark:text-gray-200">Costo unitario (€)</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-gray-800 dark:text-gray-200">Quantità</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-gray-800 dark:text-gray-200">Costo totale (€)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Quaderni: 1,15 × 45 = 51,75 -->
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">quaderni</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">1,15</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">45</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800">
+                <input type="text" data-correct-answer="51,75" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </td>
+            </tr>
+            <!-- Pennarelli: 43,20 : 36 = 1,20 -->
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">pennarelli</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800">
+                <input type="text" data-correct-answer="1,20" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">36</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">43,20</td>
+            </tr>
+            <!-- Matite: 9,60 : 0,20 = 48 -->
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">matite</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">0,20</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800">
+                <input type="text" data-correct-answer="48" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">9,60</td>
+            </tr>
+            <!-- Gomme: 11,50 : 10 = 1,15 -->
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">gomme</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800">
+                <input type="text" data-correct-answer="1,15" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">10</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">11,50</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

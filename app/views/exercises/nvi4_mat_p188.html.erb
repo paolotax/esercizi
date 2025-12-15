@@ -1,5 +1,5 @@
 <div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
-     data-controller="exercise-checker text-toggle font-controls"
+     data-controller="exercise-checker text-toggle font-controls quaderno-sidebar"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
@@ -80,19 +80,17 @@
       <!-- Con 2 cifre al moltiplicatore -->
       <div class="mb-6">
         <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-3">Con 2 cifre al moltiplicatore</p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="flex flex-wrap gap-4 justify-center">
           <% [
-            { op: "748 × 36", result: "26928" },
-            { op: "591 × 47", result: "27777" },
-            { op: "856 × 72", result: "61632" },
-            { op: "974 × 85", result: "82790" },
-            { op: "638 × 93", result: "59334" },
-            { op: "487 × 68", result: "33116" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
+            [748, 36],
+            [591, 47],
+            [856, 72],
+            [974, 85],
+            [638, 93],
+            [487, 68]
+          ].each do |multiplier, multiplicand| %>
+            <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
+                moltiplicazione: Moltiplicazione.new(multiplier: multiplier, multiplicand: multiplicand, show_multiplier_multiplicand: true, show_solution: false, show_toolbar: true) %>
           <% end %>
         </div>
       </div>
@@ -100,17 +98,15 @@
       <!-- Con 3 cifre al moltiplicatore -->
       <div class="mb-6">
         <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-3">Con 3 cifre al moltiplicatore</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-wrap gap-4 justify-center">
           <% [
-            { op: "527 × 348", result: "183396" },
-            { op: "614 × 275", result: "168850" },
-            { op: "836 × 469", result: "392084" },
-            { op: "759 × 586", result: "444774" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
+            [527, 348],
+            [614, 275],
+            [836, 469],
+            [759, 586]
+          ].each do |multiplier, multiplicand| %>
+            <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
+                moltiplicazione: Moltiplicazione.new(multiplier: multiplier, multiplicand: multiplicand, show_multiplier_multiplicand: true, show_solution: false, show_toolbar: true) %>
           <% end %>
         </div>
       </div>
@@ -118,17 +114,15 @@
       <!-- Con zeri intermedi -->
       <div>
         <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-3">Con zeri intermedi</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-wrap gap-4 justify-center">
           <% [
-            { op: "375 × 204", result: "76500" },
-            { op: "648 × 305", result: "197640" },
-            { op: "592 × 407", result: "240944" },
-            { op: "831 × 506", result: "420486" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
+            [375, 204],
+            [648, 305],
+            [592, 407],
+            [831, 506]
+          ].each do |multiplier, multiplicand| %>
+            <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
+                moltiplicazione: Moltiplicazione.new(multiplier: multiplier, multiplicand: multiplicand, show_multiplier_multiplicand: true, show_solution: false, show_toolbar: true) %>
           <% end %>
         </div>
       </div>
@@ -182,6 +176,7 @@
       </div>
     </div>
 
+    <%= render 'shared/quaderno_sidebar' %>
     <%= render 'shared/exercise_controls' %>
   </div>
 </div>

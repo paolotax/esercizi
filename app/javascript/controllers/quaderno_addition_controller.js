@@ -41,6 +41,7 @@ export default class extends Controller {
       this.allResultCells = [...this.resultTargets]
       this.cellsPerRow = this.inputTargets.length / 2
       this.columnMap = {}
+      this.allCellsOrdered = []
       return
     }
 
@@ -59,8 +60,10 @@ export default class extends Controller {
     const gridStyle = window.getComputedStyle(grid)
     const cols = gridStyle.gridTemplateColumns.split(' ').length
 
+    // Array con tutte le celle e le loro posizioni per ordinamento
+    const cellsWithPositions = []
+
     // Organizza celle per posizione nella griglia
-    let cellIndex = 0
     allCells.forEach(cell => {
       const targetType = cell.getAttribute('data-quaderno-addition-target')
 
@@ -78,6 +81,9 @@ export default class extends Controller {
       // Aggiungi cella alla mappa colonne
       this.columnMap[col].push(cell)
 
+      // Salva per ordinamento globale
+      cellsWithPositions.push({ cell, gridIndex })
+
       // Separa anche in addend/result cells per compatibilità
       if (targetType === 'result') {
         this.allResultCells.push(cell)
@@ -93,6 +99,10 @@ export default class extends Controller {
       }
       // carry cells sono già gestiti separatamente
     })
+
+    // Crea lista ordinata di tutte le celle (riga per riga, da sinistra a destra)
+    cellsWithPositions.sort((a, b) => a.gridIndex - b.gridIndex)
+    this.allCellsOrdered = cellsWithPositions.map(item => item.cell)
 
     // Calcola celle per riga
     const numAddends = 2
@@ -158,6 +168,9 @@ export default class extends Controller {
         if (currentIndex > 0) {
           cells[currentIndex - 1].focus()
           cells[currentIndex - 1].select()
+        } else {
+          // Prima cella della riga, vai alla riga precedente
+          this.navigateGlobal(input, -1)
         }
         break
 
@@ -166,6 +179,9 @@ export default class extends Controller {
         if (currentIndex < cells.length - 1) {
           cells[currentIndex + 1].focus()
           cells[currentIndex + 1].select()
+        } else {
+          // Ultima cella della riga, vai alla riga successiva
+          this.navigateGlobal(input, 1)
         }
         break
 
@@ -178,6 +194,26 @@ export default class extends Controller {
         event.preventDefault()
         this.navigateVertical(input, 1)
         break
+    }
+  }
+
+  // Navigazione globale tra tutte le celle (cross-row)
+  // Usata quando si raggiunge il bordo di una riga
+  navigateGlobal(currentCell, direction) {
+    const currentIdx = this.allCellsOrdered.indexOf(currentCell)
+    if (currentIdx === -1) return
+
+    let targetIdx = currentIdx + direction
+
+    // Continua nella direzione finché non trovi una cella abilitata
+    while (targetIdx >= 0 && targetIdx < this.allCellsOrdered.length) {
+      const targetCell = this.allCellsOrdered[targetIdx]
+      if (!targetCell.disabled) {
+        targetCell.focus()
+        targetCell.select()
+        return
+      }
+      targetIdx += direction
     }
   }
 
@@ -199,11 +235,17 @@ export default class extends Controller {
     if (currentCol === null || currentRowInCol === null) return
 
     const columnCells = this.columnMap[currentCol]
-    const targetRow = currentRowInCol + direction
+    let targetRow = currentRowInCol + direction
 
-    if (targetRow >= 0 && targetRow < columnCells.length) {
-      columnCells[targetRow].focus()
-      columnCells[targetRow].select()
+    // Continua nella direzione finché non trovi una cella abilitata o esci dai limiti
+    while (targetRow >= 0 && targetRow < columnCells.length) {
+      const targetCell = columnCells[targetRow]
+      if (!targetCell.disabled) {
+        targetCell.focus()
+        targetCell.select()
+        return
+      }
+      targetRow += direction
     }
   }
 
@@ -227,27 +269,20 @@ export default class extends Controller {
 
     switch (event.key) {
       case 'Backspace':
-        if (input.value === '' && currentIndex > 0) {
+        if (input.value === '') {
           event.preventDefault()
-          this.carryTargets[currentIndex - 1].focus()
-          this.carryTargets[currentIndex - 1].select()
+          this.navigateGlobal(input, -1)
         }
         break
 
       case 'ArrowLeft':
         event.preventDefault()
-        if (currentIndex > 0) {
-          this.carryTargets[currentIndex - 1].focus()
-          this.carryTargets[currentIndex - 1].select()
-        }
+        this.navigateGlobal(input, -1)
         break
 
       case 'ArrowRight':
         event.preventDefault()
-        if (currentIndex < this.carryTargets.length - 1) {
-          this.carryTargets[currentIndex + 1].focus()
-          this.carryTargets[currentIndex + 1].select()
-        }
+        this.navigateGlobal(input, 1)
         break
 
       case 'ArrowDown':

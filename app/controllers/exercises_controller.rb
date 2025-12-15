@@ -65,15 +65,15 @@ class ExercisesController < ApplicationController
 
     case type
     when "addizione"
-      numbers = parse_operation(operation, "+")
-      return render_error("Operazione non valida") unless numbers&.length == 2
-      addizione = Addizione.new(addends: numbers, show_toolbar: true)
+      numbers = parse_addends(operation)
+      return render_error("Operazione non valida") unless numbers&.length >= 2
+      addizione = Addizione.new(addends: numbers, show_toolbar: true, show_addends: true)
       render partial: "strumenti/addizioni/quaderno_addizione", locals: { addizione: addizione }
 
     when "sottrazione"
-      numbers = parse_operation(operation, "-")
+      numbers = parse_operation_strings(operation, "-")
       return render_error("Operazione non valida") unless numbers&.length == 2
-      sottrazione = Sottrazione.new(minuendo: numbers[0], sottraendo: numbers[1], show_toolbar: true)
+      sottrazione = Sottrazione.new(minuend: numbers[0], subtrahend: numbers[1], show_toolbar: true, show_minuend_subtrahend: true)
       render partial: "strumenti/sottrazioni/quaderno_sottrazione", locals: { sottrazione: sottrazione }
 
     when "moltiplicazione"
@@ -109,6 +109,14 @@ class ExercisesController < ApplicationController
     return nil unless operation.present?
     parts = operation.split(separator)
     return nil unless parts.length == 2
+    parts.map(&:strip)
+  end
+
+  # Parse addendi multipli (supporta 2 o più addendi)
+  def parse_addends(operation)
+    return nil unless operation.present?
+    parts = operation.split("+")
+    return nil unless parts.length >= 2
     parts.map(&:strip)
   end
 

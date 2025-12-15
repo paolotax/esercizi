@@ -595,6 +595,27 @@ export default class extends Controller {
       }
     }
 
+    // Check quaderno subtraction borrow styling (fade minuend where borrows exist)
+    const subtractionControllers = this.element.querySelectorAll("[data-controller*=\"quaderno-subtraction\"]")
+    subtractionControllers.forEach(subElement => {
+      const subController = this.application.getControllerForElementAndIdentifier(subElement, "quaderno-subtraction")
+      if (subController && subController.hasBorrowTarget && subController.borrowTargets) {
+        subController.borrowTargets.forEach((borrowInput, index) => {
+          const correctAnswer = borrowInput.getAttribute('data-correct-answer')
+          const userAnswer = borrowInput.value.trim()
+
+          // Se c'è un prestito (corretto o inserito dall'utente), sbiadisci il minuendo
+          if (correctAnswer && correctAnswer !== '' && userAnswer !== '') {
+            if (index < subController.minuendTargets.length) {
+              const minuendInput = subController.minuendTargets[index]
+              minuendInput.classList.add('text-gray-300', 'dark:text-gray-600')
+              minuendInput.classList.remove('text-gray-800', 'dark:text-gray-100')
+            }
+          }
+        })
+      }
+    })
+
     // Check quaderno multiplication comma positions
     const multiplicationControllers = this.element.querySelectorAll("[data-controller*=\"quaderno-multiplication\"]")
     if (multiplicationControllers.length > 0) {
@@ -1021,6 +1042,24 @@ export default class extends Controller {
       }
     })
 
+    // Show quaderno subtraction solutions (including borrows and faded minuend)
+    const subtractionControllers = this.element.querySelectorAll("[data-controller*=\"quaderno-subtraction\"]")
+    subtractionControllers.forEach(subElement => {
+      const subController = this.application.getControllerForElementAndIdentifier(subElement, "quaderno-subtraction")
+      if (subController && subController.showResult) {
+        subController.showResult()
+      }
+    })
+
+    // Show quaderno addition solutions
+    const additionControllers = this.element.querySelectorAll("[data-controller*=\"quaderno-addition\"]")
+    additionControllers.forEach(addElement => {
+      const addController = this.application.getControllerForElementAndIdentifier(addElement, "quaderno-addition")
+      if (addController && addController.showResult) {
+        addController.showResult()
+      }
+    })
+
     // Show flower matcher solutions if present
     const flowerMatcher = this.element.querySelector("[data-controller=\"flower-matcher\"]")
     if (flowerMatcher) {
@@ -1214,6 +1253,18 @@ export default class extends Controller {
       if (mulController && mulController.hasCommaSpotTarget) {
         mulController.commaSpotTargets.forEach(spot => {
           spot.classList.remove('active', 'correct', 'incorrect', 'missing')
+        })
+      }
+    })
+
+    // Reset quaderno subtraction minuend colors (remove faded effect)
+    const subtractionControllers = this.element.querySelectorAll("[data-controller*=\"quaderno-subtraction\"]")
+    subtractionControllers.forEach(subElement => {
+      const subController = this.application.getControllerForElementAndIdentifier(subElement, "quaderno-subtraction")
+      if (subController && subController.minuendTargets) {
+        subController.minuendTargets.forEach(input => {
+          input.classList.remove('text-gray-300', 'dark:text-gray-600')
+          input.classList.add('text-gray-800', 'dark:text-gray-100')
         })
       }
     })

@@ -183,7 +183,27 @@ nvi_matematica = nvi_volume4.discipline.create!(
   { numero: 222, titolo: "Misure di Lunghezza", slug: "nvi4_mat_p222", view_template: "nvi4_mat_p222", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 223, titolo: "Misure di Capacità", slug: "nvi4_mat_p223", view_template: "nvi4_mat_p223", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 224, titolo: "Misure di Massa", slug: "nvi4_mat_p224", view_template: "nvi4_mat_p224", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 225, titolo: "Tante Misure!", slug: "nvi4_mat_p225", view_template: "nvi4_mat_p225", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 225, titolo: "Tante Misure!", slug: "nvi4_mat_p225", view_template: "nvi4_mat_p225", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 226, titolo: "Peso Lordo, Peso Netto, Tara", slug: "nvi4_mat_p226", view_template: "nvi4_mat_p226", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 227, titolo: "Problemi con le Misure", slug: "nvi4_mat_p227", view_template: "nvi4_mat_p227", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 228, titolo: "L'Euro", slug: "nvi4_mat_p228", view_template: "nvi4_mat_p228", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 229, titolo: "Problemi con l'Euro", slug: "nvi4_mat_p229", view_template: "nvi4_mat_p229", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 230, titolo: "Costo Unitario e Costo Totale", slug: "nvi4_mat_p230", view_template: "nvi4_mat_p230", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 231, titolo: "Il Commercio", slug: "nvi4_mat_p231", view_template: "nvi4_mat_p231", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 232, titolo: "Problemi di Compravendita", slug: "nvi4_mat_p232", view_template: "nvi4_mat_p232", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 233, titolo: "Misure di Tempo", slug: "nvi4_mat_p233", view_template: "nvi4_mat_p233", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 234, titolo: "Misure", slug: "nvi4_mat_p234", view_template: "nvi4_mat_p234", sottotitolo: "ESERCIZI - RIPASSO", base_color: "cyan" },
+  { numero: 235, titolo: "Rette, Semirette e Segmenti", slug: "nvi4_mat_p235", view_template: "nvi4_mat_p235", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 236, titolo: "Angoli", slug: "nvi4_mat_p236", view_template: "nvi4_mat_p236", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 237, titolo: "Rette e Angoli", slug: "nvi4_mat_p237", view_template: "nvi4_mat_p237", sottotitolo: "ESERCIZI - RIPASSO", base_color: "cyan" },
+  { numero: 238, titolo: "Simmetria", slug: "nvi4_mat_p238", view_template: "nvi4_mat_p238", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 239, titolo: "Traslazione", slug: "nvi4_mat_p239", view_template: "nvi4_mat_p239", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 240, titolo: "Rotazione", slug: "nvi4_mat_p240", view_template: "nvi4_mat_p240", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 241, titolo: "Poligoni", slug: "nvi4_mat_p241", view_template: "nvi4_mat_p241", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 242, titolo: "I Triangoli", slug: "nvi4_mat_p242", view_template: "nvi4_mat_p242", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 243, titolo: "I Parallelogrammi", slug: "nvi4_mat_p243", view_template: "nvi4_mat_p243", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 244, titolo: "I Trapezi", slug: "nvi4_mat_p244", view_template: "nvi4_mat_p244", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 245, titolo: "Il Perimetro", slug: "nvi4_mat_p245", view_template: "nvi4_mat_p245", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi_matematica.pagine.create!(pagina_data)
 end

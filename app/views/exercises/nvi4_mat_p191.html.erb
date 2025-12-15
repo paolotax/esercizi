@@ -1,5 +1,5 @@
 <div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
-     data-controller="exercise-checker text-toggle font-controls"
+     data-controller="exercise-checker text-toggle font-controls quaderno-sidebar"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
@@ -14,40 +14,57 @@
         Calcola in colonna e trascrivi i risultati.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Parte a: Prendi due cifre -->
-        <div class="space-y-3">
-          <p class="font-bold text-gray-700 dark:text-gray-200">a. Prendi due cifre.</p>
-          <% [
-            { op: "2 291 : 19", q: "120", r: "11" },
-            { op: "2 990 : 13", q: "230", r: "0" },
-            { op: "6 895 : 63", q: "109", r: "28" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:q] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-              <span class="text-gray-700 dark:text-gray-200">resto</span>
-              <input type="text" data-correct-answer="<%= item[:r] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
-        </div>
+      <%
+        es1_gruppi = [
+          { lettera: "a", descrizione: "Prendi due cifre", operazioni: [
+            { op: "2291:19", answer: "120 resto 11" },
+            { op: "2990:13", answer: "230" },
+            { op: "6895:63", answer: "109 resto 28" }
+          ]},
+          { lettera: "b", descrizione: "Prendi tre cifre", operazioni: [
+            { op: "1158:35", answer: "33 resto 3" },
+            { op: "1239:25", answer: "49 resto 14" },
+            { op: "2789:34", answer: "82 resto 1" }
+          ]}
+        ]
+      %>
 
-        <!-- Parte b: Prendi tre cifre -->
-        <div class="space-y-3">
-          <p class="font-bold text-gray-700 dark:text-gray-200">b. Prendi tre cifre.</p>
-          <% [
-            { op: "1 158 : 35", q: "33", r: "3" },
-            { op: "1 239 : 25", q: "49", r: "14" },
-            { op: "2 789 : 34", q: "82", r: "1" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:q] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-              <span class="text-gray-700 dark:text-gray-200">resto</span>
-              <input type="text" data-correct-answer="<%= item[:r] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <% es1_gruppi.each do |gruppo| %>
+          <%
+            operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+              { operation: item[:op], targetId: "es1-#{gruppo[:lettera]}-#{idx}" }
+            }
+          %>
+          <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <p class="text-gray-700 dark:text-gray-200 font-bold mb-2 flex items-center gap-2">
+              <%= gruppo[:lettera] %>. <%= gruppo[:descrizione] %>
+              <button type="button"
+                      data-action="click->quaderno-sidebar#openGroup"
+                      data-operations='<%= operations_data.to_json %>'
+                      data-type="divisione"
+                      data-group="<%= gruppo[:lettera] %>"
+                      class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
+                      title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </p>
+            <ul class="space-y-2">
+              <% gruppo[:operazioni].each_with_index do |item, idx| %>
+                <li class="flex items-center gap-2 flex-wrap">
+                  <span class="text-gray-700 dark:text-gray-200"><%= item[:op].gsub(':', ' : ') %> =</span>
+                  <input type="text"
+                         data-operation-id="es1-<%= gruppo[:lettera] %>-<%= idx %>"
+                         data-correct-answer="<%= item[:answer] %>"
+                         class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
       </div>
 
       <!-- Immagine esplicativa -->
@@ -63,38 +80,59 @@
         Calcola in colonna sul quaderno e trascrivi i risultati. Poi fai la prova.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Parte a -->
-        <div class="space-y-3">
-          <p class="font-bold text-gray-700 dark:text-gray-200">a.</p>
-          <% [
-            { op: "3 962 : 14", result: "283" },
-            { op: "8 850 : 25", result: "354" },
-            { op: "1 725 : 82", result: "21 resto 3" },
-            { op: "1 768 : 34", result: "52" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:result] %>" class="flex-1 min-w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
-        </div>
+      <%
+        es2_gruppi = [
+          { lettera: "a", operazioni: [
+            { op: "3962:14", answer: "283" },
+            { op: "8850:25", answer: "354" },
+            { op: "1725:82", answer: "21 resto 3" },
+            { op: "1768:34", answer: "52" }
+          ]},
+          { lettera: "b", operazioni: [
+            { op: "14612:26", answer: "562" },
+            { op: "22855:35", answer: "653" },
+            { op: "89752:42", answer: "2137 resto 6" },
+            { op: "13923:39", answer: "357" }
+          ]}
+        ]
+      %>
 
-        <!-- Parte b -->
-        <div class="space-y-3">
-          <p class="font-bold text-gray-700 dark:text-gray-200">b.</p>
-          <% [
-            { op: "14 612 : 26", result: "562" },
-            { op: "22 855 : 35", result: "653" },
-            { op: "89 752 : 42", result: "2137 resto 6" },
-            { op: "13 923 : 39", result: "357" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:result] %>" class="flex-1 min-w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <% es2_gruppi.each do |gruppo| %>
+          <%
+            operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+              { operation: item[:op], targetId: "es2-#{gruppo[:lettera]}-#{idx}" }
+            }
+          %>
+          <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <p class="text-gray-700 dark:text-gray-200 font-bold mb-2 flex items-center gap-2">
+              <%= gruppo[:lettera] %>.
+              <button type="button"
+                      data-action="click->quaderno-sidebar#openGroup"
+                      data-operations='<%= operations_data.to_json %>'
+                      data-type="divisione"
+                      data-group="<%= gruppo[:lettera] %>"
+                      class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
+                      title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </p>
+            <ul class="space-y-2">
+              <% gruppo[:operazioni].each_with_index do |item, idx| %>
+                <li class="flex items-center gap-2 flex-wrap">
+                  <span class="text-gray-700 dark:text-gray-200"><%= item[:op].gsub(':', ' : ') %> =</span>
+                  <input type="text"
+                         data-operation-id="es2-<%= gruppo[:lettera] %>-<%= idx %>"
+                         data-correct-answer="<%= item[:answer] %>"
+                         class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
       </div>
     </div>
 
@@ -136,6 +174,7 @@
       </div>
     </div>
 
+    <%= render 'shared/quaderno_sidebar' %>
     <%= render 'shared/exercise_controls' %>
   </div>
 </div>

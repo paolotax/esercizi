@@ -1,0 +1,187 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Titolo -->
+    <h1 class="text-2xl md:text-3xl font-bold text-center text-cyan-500 dark:text-cyan-400">
+      I TRAPEZI
+    </h1>
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500 space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= imparare_tutti_badge(1) %>
+        Completa la definizione con le parole elencate:
+      </p>
+
+      <!-- Parole da usare -->
+      <div class="p-3 bg-cyan-50 dark:bg-cyan-900 rounded-lg text-center">
+        <p class="text-gray-700 dark:text-gray-200">
+          coppia • <span class="line-through">quadrilateri</span> • corto • maggiore • paralleli • minore
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="md:col-span-2 space-y-3">
+          <p class="text-gray-700 dark:text-gray-200">
+            I trapezi sono <span class="font-bold text-cyan-600 dark:text-cyan-400">quadrilateri</span> che hanno almeno una
+            <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" data-correct-answer="coppia">
+            di lati
+            <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" data-correct-answer="paralleli">.
+          </p>
+          <p class="text-gray-700 dark:text-gray-200">
+            I lati paralleli sono chiamati base
+            <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" data-correct-answer="maggiore">
+            (il lato più lungo) e base
+            <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" data-correct-answer="minore">
+            (il lato più
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" data-correct-answer="corto">)
+            del trapezio.
+          </p>
+        </div>
+        <div class="flex justify-center items-center">
+          <svg viewBox="0 0 150 100" class="w-full max-w-[200px] h-28">
+            <polygon points="30,20 120,20 140,80 10,80" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+            <!-- Base minore -->
+            <line x1="30" y1="20" x2="120" y2="20" stroke="#06b6d4" stroke-width="2"/>
+            <!-- Base maggiore -->
+            <line x1="10" y1="80" x2="140" y2="80" stroke="#ef4444" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(2) %> Classifica i trapezi rispetto ai lati e agli angoli: collegali al nome e alla giusta definizione. Misura i lati con la riga.
+      </p>
+
+      <div class="grid grid-cols-3 gap-4 items-center">
+        <!-- Colonna sinistra: nomi -->
+        <div class="space-y-8">
+          <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">
+            scaleno
+          </div>
+          <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">
+            rettangolo
+          </div>
+          <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">
+            isoscele
+          </div>
+        </div>
+
+        <!-- Colonna centrale: trapezi -->
+        <div class="flex flex-col items-center gap-6">
+          <!-- Trapezio rettangolo -->
+          <svg viewBox="0 0 120 80" class="w-full h-20">
+            <polygon points="10,20 80,20 80,60 10,60" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+            <polygon points="80,20 110,60 80,60" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+          </svg>
+          <!-- Trapezio scaleno -->
+          <svg viewBox="0 0 120 80" class="w-full h-20">
+            <polygon points="20,20 90,20 110,60 10,60" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+          </svg>
+          <!-- Trapezio isoscele -->
+          <svg viewBox="0 0 120 80" class="w-full h-20">
+            <polygon points="30,20 90,20 110,60 10,60" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+          </svg>
+        </div>
+
+        <!-- Colonna destra: definizioni -->
+        <div class="space-y-4">
+          <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">
+            un lato perpendicolare alle basi e due angoli retti
+          </div>
+          <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">
+            tutti i lati e tutti gli angoli diversi
+          </div>
+          <div class="p-2 border-2 border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">
+            i due lati obliqui congruenti; gli angoli sulle basi congruenti
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(3) %> In ogni trapezio ripassa la base maggiore di rosso, la base minore di blu, l'altezza in viola e le diagonali in arancione. Poi colora con la stessa tinta gli angoli uguali.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Trapezio 1 - isoscele -->
+        <div class="border-2 border-cyan-400 dark:border-cyan-600 rounded-lg p-3 bg-white dark:bg-gray-700">
+          <svg viewBox="0 0 120 100" class="w-full h-28">
+            <!-- Griglia -->
+            <defs>
+              <pattern id="grid244a" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+              </pattern>
+            </defs>
+            <rect width="120" height="100" fill="url(#grid244a)"/>
+            <!-- Trapezio -->
+            <polygon points="30,20 90,20 110,80 10,80" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+            <!-- Altezza tratteggiata -->
+            <line x1="60" y1="20" x2="60" y2="80" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,2" class="dark:stroke-gray-600"/>
+            <!-- Diagonali tratteggiate -->
+            <line x1="30" y1="20" x2="110" y2="80" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,2" class="dark:stroke-gray-600"/>
+            <line x1="90" y1="20" x2="10" y2="80" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,2" class="dark:stroke-gray-600"/>
+          </svg>
+        </div>
+        <!-- Trapezio 2 - scaleno alto -->
+        <div class="border-2 border-cyan-400 dark:border-cyan-600 rounded-lg p-3 bg-white dark:bg-gray-700">
+          <svg viewBox="0 0 120 100" class="w-full h-28">
+            <defs>
+              <pattern id="grid244b" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+              </pattern>
+            </defs>
+            <rect width="120" height="100" fill="url(#grid244b)"/>
+            <polygon points="40,10 80,10 100,90 10,90" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+            <line x1="60" y1="10" x2="60" y2="90" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,2" class="dark:stroke-gray-600"/>
+            <line x1="40" y1="10" x2="100" y2="90" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,2" class="dark:stroke-gray-600"/>
+            <line x1="80" y1="10" x2="10" y2="90" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,2" class="dark:stroke-gray-600"/>
+          </svg>
+        </div>
+        <!-- Trapezio 3 - scaleno inclinato -->
+        <div class="border-2 border-cyan-400 dark:border-cyan-600 rounded-lg p-3 bg-white dark:bg-gray-700">
+          <svg viewBox="0 0 120 100" class="w-full h-28">
+            <defs>
+              <pattern id="grid244c" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+              </pattern>
+            </defs>
+            <rect width="120" height="100" fill="url(#grid244c)"/>
+            <polygon points="20,30 70,30 100,80 10,80" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+            <line x1="45" y1="30" x2="45" y2="80" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,2" class="dark:stroke-gray-600"/>
+            <line x1="20" y1="30" x2="100" y2="80" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,2" class="dark:stroke-gray-600"/>
+            <line x1="70" y1="30" x2="10" y2="80" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,2" class="dark:stroke-gray-600"/>
+          </svg>
+        </div>
+        <!-- Trapezio 4 - rettangolo -->
+        <div class="border-2 border-cyan-400 dark:border-cyan-600 rounded-lg p-3 bg-white dark:bg-gray-700">
+          <svg viewBox="0 0 120 100" class="w-full h-28">
+            <defs>
+              <pattern id="grid244d" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+              </pattern>
+            </defs>
+            <rect width="120" height="100" fill="url(#grid244d)"/>
+            <polygon points="20,20 70,20 110,80 20,80" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+            <line x1="45" y1="20" x2="45" y2="80" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,2" class="dark:stroke-gray-600"/>
+            <line x1="20" y1="20" x2="110" y2="80" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,2" class="dark:stroke-gray-600"/>
+            <line x1="70" y1="20" x2="20" y2="80" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,2" class="dark:stroke-gray-600"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

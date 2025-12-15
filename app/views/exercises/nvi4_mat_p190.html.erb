@@ -1,5 +1,5 @@
 <div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
-     data-controller="exercise-checker text-toggle font-controls"
+     data-controller="exercise-checker text-toggle font-controls quaderno-sidebar"
      data-text-toggle-target="content"
      data-font-controls-target="content">
 
@@ -132,36 +132,22 @@
         Calcola in colonna.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="space-y-3">
-          <% [
-            { op: "864 : 4", result: "216" },
-            { op: "945 : 5", result: "189" },
-            { op: "756 : 6", result: "126" },
-            { op: "952 : 7", result: "136" },
-            { op: "936 : 8", result: "117" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
-        </div>
-
-        <div class="space-y-3">
-          <% [
-            { op: "729 : 9", result: "81" },
-            { op: "1 248 : 3", result: "416" },
-            { op: "2 576 : 4", result: "644" },
-            { op: "3 654 : 6", result: "609" },
-            { op: "4 935 : 5", result: "987" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
-        </div>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <% [
+          [864, 4],
+          [945, 5],
+          [756, 6],
+          [952, 7],
+          [936, 8],
+          [729, 9],
+          [1248, 3],
+          [2576, 4],
+          [3654, 6],
+          [4935, 5]
+        ].each do |dividend, divisor| %>
+          <%= render 'strumenti/divisioni/quaderno_divisione',
+              divisione: Divisione.new(dividend: dividend, divisor: divisor, show_dividend_divisor: true, show_solution: false, show_steps: false, show_toolbar: true) %>
+        <% end %>
       </div>
     </div>
 
@@ -172,40 +158,61 @@
         Calcola in colonna sul quaderno. Poi fai la prova.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Colonna a -->
-        <div class="space-y-3">
-          <p class="font-bold text-gray-700 dark:text-gray-200">a.</p>
-          <% [
-            { op: "648 : 4", result: "162" },
-            { op: "567 : 3", result: "189" },
-            { op: "1 332 : 6", result: "222" },
-            { op: "2 324 : 7", result: "332" },
-            { op: "7 488 : 9", result: "832" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
-        </div>
+      <%
+        es3_gruppi = [
+          { lettera: "a", operazioni: [
+            { op: "648:4", answer: "162" },
+            { op: "567:3", answer: "189" },
+            { op: "1332:6", answer: "222" },
+            { op: "2324:7", answer: "332" },
+            { op: "7488:9", answer: "832" }
+          ]},
+          { lettera: "b", operazioni: [
+            { op: "5076:3", answer: "1692" },
+            { op: "9870:7", answer: "1410" },
+            { op: "11781:9", answer: "1309" },
+            { op: "37609:8", answer: "4701 resto 1" },
+            { op: "54712:5", answer: "10942 resto 2" }
+          ]}
+        ]
+      %>
 
-        <!-- Colonna b -->
-        <div class="space-y-3">
-          <p class="font-bold text-gray-700 dark:text-gray-200">b.</p>
-          <% [
-            { op: "5 076 : 3", result: "1692" },
-            { op: "9 870 : 7", result: "1410" },
-            { op: "11 781 : 9", result: "1309" },
-            { op: "37 609 : 8", result: "4701 resto 1" },
-            { op: "54 712 : 5", result: "10942 resto 2" }
-          ].each do |item| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <% es3_gruppi.each do |gruppo| %>
+          <%
+            operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+              { operation: item[:op], targetId: "es3-#{gruppo[:lettera]}-#{idx}" }
+            }
+          %>
+          <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <p class="text-gray-700 dark:text-gray-200 font-bold mb-2 flex items-center gap-2">
+              <%= gruppo[:lettera] %>.
+              <button type="button"
+                      data-action="click->quaderno-sidebar#openGroup"
+                      data-operations='<%= operations_data.to_json %>'
+                      data-type="divisione"
+                      data-group="<%= gruppo[:lettera] %>"
+                      class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
+                      title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </p>
+            <ul class="space-y-2">
+              <% gruppo[:operazioni].each_with_index do |item, idx| %>
+                <li class="flex items-center gap-2 flex-wrap">
+                  <span class="text-gray-700 dark:text-gray-200"><%= item[:op].gsub(':', ' : ') %> =</span>
+                  <input type="text"
+                         data-operation-id="es3-<%= gruppo[:lettera] %>-<%= idx %>"
+                         data-correct-answer="<%= item[:answer] %>"
+                         class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
       </div>
 
       <!-- Box prova della divisione -->
@@ -226,6 +233,7 @@
       </div>
     </div>
 
+    <%= render 'shared/quaderno_sidebar' %>
     <%= render 'shared/exercise_controls' %>
   </div>
 </div>

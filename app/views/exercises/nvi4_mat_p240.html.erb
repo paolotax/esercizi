@@ -1,0 +1,314 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Titolo -->
+    <h1 class="text-2xl md:text-3xl font-bold text-center text-cyan-500 dark:text-cyan-400">
+      ROTAZIONE
+    </h1>
+
+    <!-- Box definizione con esempio -->
+    <div class="p-4 bg-custom-blue dark:bg-cyan-900 rounded-2xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="md:col-span-2 space-y-3 text-gray-700 dark:text-gray-200">
+          <p>
+            Nella <span class="text-cyan-600 dark:text-cyan-400 font-bold">rotazione</span> una figura si sposta compiendo un movimento che ricorda quello delle lancette dell'orologio che ruotano restando fisse in un punto.
+          </p>
+          <p>La rotazione ha:</p>
+          <ul class="space-y-1 ml-4">
+            <li>• un <span class="text-cyan-600 dark:text-cyan-400 font-bold">centro di rotazione</span> (O);</li>
+            <li>• un <span class="text-cyan-600 dark:text-cyan-400 font-bold">verso</span> (<span class="text-cyan-600 dark:text-cyan-400 font-bold">senso</span>) <span class="text-cyan-600 dark:text-cyan-400 font-bold">di rotazione</span> (orario o antiorario);</li>
+            <li>• un <span class="text-cyan-600 dark:text-cyan-400 font-bold">angolo di rotazione</span> che si misura in gradi (°).</li>
+          </ul>
+        </div>
+        <div class="flex justify-center items-center">
+          <svg viewBox="0 0 120 100" class="w-full max-w-[150px] h-28">
+            <!-- Freccia originale -->
+            <polygon points="20,30 40,10 40,20 70,20 70,40 40,40 40,50"
+                     fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+            <!-- Freccia ruotata -->
+            <polygon points="70,30 90,10 90,20 120,20 120,40 90,40 90,50"
+                     fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-400 dark:text-gray-500" stroke-dasharray="3,2"
+                     transform="rotate(90, 70, 30)"/>
+            <!-- Centro O -->
+            <circle cx="70" cy="30" r="3" fill="#06b6d4"/>
+            <text x="76" y="28" class="text-xs fill-cyan-600 dark:fill-cyan-400" font-weight="bold">O</text>
+            <!-- Arco di rotazione -->
+            <path d="M 55,15 A 20,20 0 0,1 85,45" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <!-- Indicazioni -->
+            <text x="90" y="60" class="text-[8px] fill-cyan-600 dark:fill-cyan-400">90°</text>
+            <text x="85" y="72" class="text-[8px] fill-cyan-600 dark:fill-cyan-400">antiorario</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(1) %> Per ogni figura scrivi l'angolo e il senso di rotazione.
+      </p>
+
+      <div class="border-2 border-cyan-400 dark:border-cyan-600 rounded-lg p-2 bg-white dark:bg-gray-700">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <!-- Figura 1 - Triangolo e pentagono -->
+          <div class="space-y-2">
+            <svg viewBox="0 0 150 120" class="w-full h-28">
+              <defs>
+                <pattern id="grid240a" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+                </pattern>
+              </defs>
+              <rect width="150" height="120" fill="url(#grid240a)"/>
+              <!-- Triangolo -->
+              <polygon points="30,90 50,50 70,90"
+                       fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+              <!-- Pentagono ruotato -->
+              <polygon points="80,70 95,50 115,55 115,80 95,90"
+                       fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+              <!-- Centro O -->
+              <circle cx="30" cy="90" r="3" fill="#06b6d4"/>
+              <text x="20" y="100" class="text-[10px] fill-cyan-600 dark:fill-cyan-400" font-weight="bold">O</text>
+              <!-- Arco -->
+              <path d="M 45,75 A 25,25 0 0,1 55,95" fill="none" stroke="#06b6d4" stroke-width="1" stroke-dasharray="3,2"/>
+            </svg>
+            <div class="bg-gray-100 dark:bg-gray-600 rounded p-2 text-sm space-y-1">
+              <div class="flex items-center gap-1">
+                <span class="text-gray-600 dark:text-gray-300">•</span>
+                <input type="text" class="w-12 px-1 py-0.5 border border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-center text-sm"
+                       data-correct-answer="90">
+                <span class="text-gray-600 dark:text-gray-300">°</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-gray-600 dark:text-gray-300">• senso</span>
+                <input type="text" class="flex-1 px-1 py-0.5 border border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm"
+                       data-correct-answer="orario">
+              </div>
+            </div>
+          </div>
+
+          <!-- Figura 2 - Quadrato -->
+          <div class="space-y-2">
+            <svg viewBox="0 0 150 120" class="w-full h-28">
+              <defs>
+                <pattern id="grid240b" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+                </pattern>
+              </defs>
+              <rect width="150" height="120" fill="url(#grid240b)"/>
+              <!-- Quadrato originale -->
+              <rect x="30" y="50" width="40" height="40"
+                    fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+              <!-- Quadrato ruotato -->
+              <rect x="80" y="50" width="40" height="40"
+                    fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+              <!-- Centro O -->
+              <circle cx="70" cy="90" r="3" fill="#06b6d4"/>
+              <text x="72" y="100" class="text-[10px] fill-cyan-600 dark:fill-cyan-400" font-weight="bold">O</text>
+            </svg>
+            <div class="bg-gray-100 dark:bg-gray-600 rounded p-2 text-sm space-y-1">
+              <div class="flex items-center gap-1">
+                <span class="text-gray-600 dark:text-gray-300">•</span>
+                <input type="text" class="w-12 px-1 py-0.5 border border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-center text-sm"
+                       data-correct-answer="180">
+                <span class="text-gray-600 dark:text-gray-300">°</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-gray-600 dark:text-gray-300">• senso</span>
+                <input type="text" class="flex-1 px-1 py-0.5 border border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm"
+                       data-correct-answer="orario">
+              </div>
+            </div>
+          </div>
+
+          <!-- Figura 3 - Freccia a T -->
+          <div class="space-y-2">
+            <svg viewBox="0 0 150 120" class="w-full h-28">
+              <defs>
+                <pattern id="grid240c" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+                </pattern>
+              </defs>
+              <rect width="150" height="120" fill="url(#grid240c)"/>
+              <!-- Freccia originale -->
+              <polygon points="40,30 60,10 60,20 80,20 80,40 60,40 60,50 40,50"
+                       fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+              <!-- Freccia ruotata -->
+              <polygon points="90,50 110,30 110,40 130,40 130,60 110,60 110,70 90,70"
+                       fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"
+                       transform="rotate(90, 110, 55)"/>
+              <!-- Centro O -->
+              <circle cx="110" cy="90" r="3" fill="#06b6d4"/>
+              <text x="115" y="95" class="text-[10px] fill-cyan-600 dark:fill-cyan-400" font-weight="bold">O</text>
+            </svg>
+            <div class="bg-gray-100 dark:bg-gray-600 rounded p-2 text-sm space-y-1">
+              <div class="flex items-center gap-1">
+                <span class="text-gray-600 dark:text-gray-300">•</span>
+                <input type="text" class="w-12 px-1 py-0.5 border border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-center text-sm"
+                       data-correct-answer="90">
+                <span class="text-gray-600 dark:text-gray-300">°</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-gray-600 dark:text-gray-300">• senso</span>
+                <input type="text" class="flex-1 px-1 py-0.5 border border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm"
+                       data-correct-answer="antiorario">
+              </div>
+            </div>
+          </div>
+
+          <!-- Figura 4 - Frecce verticali -->
+          <div class="space-y-2">
+            <svg viewBox="0 0 150 120" class="w-full h-28">
+              <defs>
+                <pattern id="grid240d" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+                </pattern>
+              </defs>
+              <rect width="150" height="120" fill="url(#grid240d)"/>
+              <!-- Freccia su -->
+              <polygon points="40,20 55,40 55,35 65,35 65,80 55,80 55,75 40,95 25,75 35,75 35,35 25,35"
+                       fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+              <!-- Freccia giù -->
+              <polygon points="110,20 125,40 125,35 135,35 135,80 125,80 125,75 110,95 95,75 105,75 105,35 95,35"
+                       fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"
+                       transform="rotate(180, 110, 57)"/>
+              <!-- Centro O -->
+              <circle cx="110" cy="95" r="3" fill="#06b6d4"/>
+              <text x="115" y="100" class="text-[10px] fill-cyan-600 dark:fill-cyan-400" font-weight="bold">O</text>
+            </svg>
+            <div class="bg-gray-100 dark:bg-gray-600 rounded p-2 text-sm space-y-1">
+              <div class="flex items-center gap-1">
+                <span class="text-gray-600 dark:text-gray-300">•</span>
+                <input type="text" class="w-12 px-1 py-0.5 border border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-center text-sm"
+                       data-correct-answer="180">
+                <span class="text-gray-600 dark:text-gray-300">°</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-gray-600 dark:text-gray-300">• senso</span>
+                <input type="text" class="flex-1 px-1 py-0.5 border border-cyan-400 dark:border-cyan-600 rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm"
+                       data-correct-answer="orario">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(2) %> Ruota le figure date secondo le indicazioni.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Figura 1 - Triangolo 90° antiorario -->
+        <div class="border-2 border-cyan-400 dark:border-cyan-600 rounded-lg overflow-hidden">
+          <div class="p-2 bg-white dark:bg-gray-700">
+            <svg viewBox="0 0 120 100" class="w-full h-24">
+              <defs>
+                <pattern id="grid240e" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+                </pattern>
+              </defs>
+              <rect width="120" height="100" fill="url(#grid240e)"/>
+              <!-- Triangolo -->
+              <polygon points="30,70 30,30 70,70"
+                       fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+              <!-- Centro O -->
+              <circle cx="30" cy="30" r="3" fill="#06b6d4"/>
+              <text x="15" y="28" class="text-[10px] fill-cyan-600 dark:fill-cyan-400" font-weight="bold">O</text>
+              <!-- Freccia rotazione -->
+              <path d="M 45,20 A 20,20 0 0,0 20,45" fill="none" stroke="#06b6d4" stroke-width="1.5"/>
+              <polygon points="20,45 15,38 25,40" fill="#06b6d4"/>
+            </svg>
+          </div>
+          <div class="bg-yellow-100 dark:bg-yellow-900/30 p-2 text-sm text-gray-700 dark:text-gray-200">
+            <p>• 90°</p>
+            <p>• senso antiorario</p>
+          </div>
+        </div>
+
+        <!-- Figura 2 - Freccia 180° orario -->
+        <div class="border-2 border-cyan-400 dark:border-cyan-600 rounded-lg overflow-hidden">
+          <div class="p-2 bg-white dark:bg-gray-700">
+            <svg viewBox="0 0 120 100" class="w-full h-24">
+              <defs>
+                <pattern id="grid240f" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+                </pattern>
+              </defs>
+              <rect width="120" height="100" fill="url(#grid240f)"/>
+              <!-- Freccia su -->
+              <polygon points="60,20 80,40 70,40 70,70 50,70 50,40 40,40"
+                       fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+              <!-- Centro O -->
+              <circle cx="40" cy="70" r="3" fill="#06b6d4"/>
+              <text x="28" y="75" class="text-[10px] fill-cyan-600 dark:fill-cyan-400" font-weight="bold">O</text>
+            </svg>
+          </div>
+          <div class="bg-yellow-100 dark:bg-yellow-900/30 p-2 text-sm text-gray-700 dark:text-gray-200">
+            <p>• 180°</p>
+            <p>• senso orario</p>
+          </div>
+        </div>
+
+        <!-- Figura 3 - Freccia 90° orario -->
+        <div class="border-2 border-cyan-400 dark:border-cyan-600 rounded-lg overflow-hidden">
+          <div class="p-2 bg-white dark:bg-gray-700">
+            <svg viewBox="0 0 120 100" class="w-full h-24">
+              <defs>
+                <pattern id="grid240g" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+                </pattern>
+              </defs>
+              <rect width="120" height="100" fill="url(#grid240g)"/>
+              <!-- Freccia destra -->
+              <polygon points="90,50 70,30 70,40 40,40 40,60 70,60 70,70"
+                       fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+              <!-- Centro O -->
+              <circle cx="70" cy="50" r="3" fill="#06b6d4"/>
+              <text x="72" y="45" class="text-[10px] fill-cyan-600 dark:fill-cyan-400" font-weight="bold">O</text>
+            </svg>
+          </div>
+          <div class="bg-yellow-100 dark:bg-yellow-900/30 p-2 text-sm text-gray-700 dark:text-gray-200">
+            <p>• 90°</p>
+            <p>• senso orario</p>
+          </div>
+        </div>
+
+        <!-- Figura 4 - Freccia 180° antiorario -->
+        <div class="border-2 border-cyan-400 dark:border-cyan-600 rounded-lg overflow-hidden">
+          <div class="p-2 bg-white dark:bg-gray-700">
+            <svg viewBox="0 0 120 100" class="w-full h-24">
+              <defs>
+                <pattern id="grid240h" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e5e7eb" stroke-width="0.5" class="dark:stroke-gray-600"/>
+                </pattern>
+              </defs>
+              <rect width="120" height="100" fill="url(#grid240h)"/>
+              <!-- Freccia su -->
+              <polygon points="60,20 80,40 70,40 70,70 50,70 50,40 40,40"
+                       fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-700 dark:text-gray-300"/>
+              <!-- Centro O -->
+              <circle cx="90" cy="50" r="3" fill="#06b6d4"/>
+              <text x="93" y="55" class="text-[10px] fill-cyan-600 dark:fill-cyan-400" font-weight="bold">O</text>
+              <!-- Freccia rotazione -->
+              <path d="M 75,35 A 20,20 0 0,0 75,65" fill="none" stroke="#06b6d4" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="bg-yellow-100 dark:bg-yellow-900/30 p-2 text-sm text-gray-700 dark:text-gray-200">
+            <p>• 180°</p>
+            <p>• senso antiorario</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

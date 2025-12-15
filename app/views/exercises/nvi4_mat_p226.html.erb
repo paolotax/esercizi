@@ -1,0 +1,252 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Teoria: Peso lordo, Peso netto, Tara -->
+    <div class="p-4 md:p-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <!-- Peso lordo -->
+        <div class="flex flex-col items-center gap-3">
+          <%= image_tag "nvi4_mat/p226/output-1715932804226_179_254_189_107.png", class: "h-24 w-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+          <div>
+            <p class="font-bold text-cyan-600 dark:text-cyan-400">Peso lordo</p>
+            <p class="text-gray-700 dark:text-gray-200">Peso netto + Tara</p>
+          </div>
+        </div>
+
+        <!-- Tara -->
+        <div class="flex flex-col items-center gap-3">
+          <%= image_tag "nvi4_mat/p226/output-1715932804226_441_214_213_168.png", class: "h-24 w-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+          <div>
+            <p class="font-bold text-cyan-600 dark:text-cyan-400">Tara</p>
+            <p class="text-gray-700 dark:text-gray-200">Peso lordo – Peso netto</p>
+          </div>
+        </div>
+
+        <!-- Peso netto -->
+        <div class="flex flex-col items-center gap-3">
+          <%= image_tag "nvi4_mat/p226/output-1715932804226_738_249_175_123.png", class: "h-24 w-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+          <div>
+            <p class="font-bold text-cyan-600 dark:text-cyan-400">Peso netto</p>
+            <p class="text-gray-700 dark:text-gray-200">Peso lordo – Tara</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizi 1 e 2 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500 space-y-6">
+
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Completa la tabella. Segui l'esempio.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="border-collapse border-2 border-cyan-400 dark:border-cyan-600 w-full">
+            <thead>
+              <tr>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-gray-800 dark:text-gray-200">Peso lordo</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-gray-800 dark:text-gray-200">Peso netto</th>
+                <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-gray-800 dark:text-gray-200">Tara</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Esempio -->
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 font-bold text-cyan-600 dark:text-cyan-400">270 g</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 font-bold text-cyan-600 dark:text-cyan-400">235 g</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 font-bold text-cyan-600 dark:text-cyan-400">35 g</td>
+              </tr>
+              <!-- Riga 2: Tara = 5 - 4,5 = 0,5 hg -->
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">5 hg</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">4,5 hg</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800">
+                  <input type="text" data-correct-answer="0,5 hg" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+              </tr>
+              <!-- Riga 3: Peso lordo = 36,80 + 11,20 = 48 kg -->
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800">
+                  <input type="text" data-correct-answer="48 kg" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">36,80 kg</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">11,20 kg</td>
+              </tr>
+              <!-- Riga 4: Peso netto = 80 - 15 = 65 g -->
+              <tr>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">80 g</td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800">
+                  <input type="text" data-correct-answer="65 g" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </td>
+                <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">15 g</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(2) %>
+        Completa la tabella. Fai attenzione: devi eseguire alcune equivalenze!
+      </p>
+
+      <div class="overflow-x-auto">
+        <table class="border-collapse border-2 border-cyan-400 dark:border-cyan-600 w-full">
+          <thead>
+            <tr>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-gray-800 dark:text-gray-200">Peso lordo</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-gray-800 dark:text-gray-200">Peso netto</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900 text-center font-bold text-gray-800 dark:text-gray-200">Tara</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Riga 1: 48,50 hg - 610 g = 48,50 hg - 6,10 hg = 42,40 hg -->
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">48,50 hg</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800">
+                <input type="text" data-correct-answer="42,40 hg" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">610 g</td>
+            </tr>
+            <!-- Riga 2: 565 dag + 315 dag = 880 dag = 88 hg -->
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800">
+                <input type="text" data-correct-answer="88 hg" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">565 dag</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">315 dag</td>
+            </tr>
+            <!-- Riga 3: 27 Mg - 1900 kg = 27000 kg - 1900 kg = 25100 kg = 25,1 Mg -->
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">27 Mg</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">1 900 kg</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800">
+                <input type="text" data-correct-answer="25,1 Mg" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </td>
+            </tr>
+            <!-- Riga 4: 776 g - 17,1 dag = 776 g - 171 g = 605 g -->
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">776 g</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800">
+                <input type="text" data-correct-answer="605 g" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 text-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">17,1 dag</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Risolvi i problemi sul quaderno.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Colonna sinistra -->
+        <div class="space-y-4">
+          <!-- Problema a -->
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold text-cyan-500">a.</span> Il peso netto di una confezione di pasta è 500 g e il peso lordo è 6,1 hg. Qual è la tara in grammi? E in ettogrammi?
+            </p>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200">Tara:</span>
+              <input type="text" data-correct-answer="110" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">g =</span>
+              <input type="text" data-correct-answer="1,1" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">hg</span>
+            </div>
+          </div>
+
+          <!-- Problema b -->
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold text-cyan-500">b.</span> Lorenzo vuole inviare al suo amico Justin, che abita in America, un libro che pesa 135 dag. La scatola che usa per la spedizione pesa 2,14 dag. Quale sarà il peso lordo del pacco?
+            </p>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200">Peso lordo:</span>
+              <input type="text" data-correct-answer="137,14" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">dag</span>
+            </div>
+          </div>
+
+          <!-- Problema c -->
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold text-cyan-500">c.</span> Il peso lordo di una cassetta di arance è di 26 kg. Se le arance vengono divise in 8 gruppi da 3 kg ciascuno, qual è il peso netto? Quanto pesa la cassetta vuota?
+            </p>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200">Peso netto:</span>
+              <input type="text" data-correct-answer="24" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">kg</span>
+              <span class="text-gray-700 dark:text-gray-200 mx-2">|</span>
+              <span class="text-gray-700 dark:text-gray-200">Tara:</span>
+              <input type="text" data-correct-answer="2" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">kg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonna destra -->
+        <div class="space-y-4">
+          <!-- Problema d -->
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold text-cyan-500">d.</span> Un camion vuoto pesa 2,75 Mg. Viene caricato con 16 sacchi di sabbia dal peso di 29 kg ciascuno. Quanto pesa ora il camion in megagrammi?
+            </p>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200">Peso lordo:</span>
+              <input type="text" data-correct-answer="3,214" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">Mg</span>
+            </div>
+          </div>
+
+          <!-- Problema e -->
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold text-cyan-500">e.</span> In un vaso che pesa 2,96 kg vengono messi 1 120 g di terra e 3 piantine da 45 g ciascuna. Quanto pesa ora il vaso complessivamente?
+            </p>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-700 dark:text-gray-200">Peso totale:</span>
+              <input type="text" data-correct-answer="4,215" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">kg</span>
+            </div>
+          </div>
+
+          <!-- Problema f -->
+          <div class="space-y-2">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold text-cyan-500">f.</span> Il papà acquista al supermercato 6 bottiglie di aranciata. Il peso lordo della confezione è 10,23 kg e il peso netto 813 dag. Qual è il peso delle 6 bottiglie vuote in decagrammi? E di una sola bottiglia?
+            </p>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-gray-700 dark:text-gray-200">6 bottiglie:</span>
+              <input type="text" data-correct-answer="210" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">dag</span>
+              <span class="text-gray-700 dark:text-gray-200 mx-2">|</span>
+              <span class="text-gray-700 dark:text-gray-200">1 bottiglia:</span>
+              <input type="text" data-correct-answer="35" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span class="text-gray-700 dark:text-gray-200">dag</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

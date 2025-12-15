@@ -214,6 +214,7 @@ class Sottrazione
   end
 
   # Calcola i prestiti per ogni colonna (da destra a sinistra)
+  # Gestisce correttamente i prestiti a catena (es. 100 - 1)
   def borrows
     total_cols = @max_integer_digits + @decimal_places
     borrows_array = Array.new(total_cols, "")
@@ -229,15 +230,33 @@ class Sottrazione
       # Se minuendo < sottraendo, serve un prestito
       if minuend_digit < subtrahend_digit && col_idx > 0
         borrowed_minuend[col_idx] += 10
-        borrowed_minuend[col_idx - 1] -= 1
-        borrows_array[col_idx - 1] = borrowed_minuend[col_idx - 1].to_s
+
+        # Cerca la prima colonna a sinistra che può prestare (valore > 0)
+        lender_col = col_idx - 1
+        while lender_col >= 0 && borrowed_minuend[lender_col] == 0
+          # Questa colonna è 0, deve prendere in prestito dalla precedente
+          borrowed_minuend[lender_col] = 9  # Prende 10 e presta 1, rimane 9
+          lender_col -= 1
+        end
+
+        # La colonna che presta effettivamente decrementa di 1
+        if lender_col >= 0
+          borrowed_minuend[lender_col] -= 1
+          borrows_array[lender_col] = borrowed_minuend[lender_col].to_s
+        end
+
+        # Aggiorna anche le colonne intermedie che hanno "prestato attraverso"
+        ((lender_col + 1)..(col_idx - 1)).each do |intermediate_col|
+          borrows_array[intermediate_col] = borrowed_minuend[intermediate_col].to_s
+        end
       end
     end
 
     borrows_array
   end
 
-  # Indica quali cifre del minuendo sono state barrate (hanno prestato)
+  # Indica quali cifre del minuendo sono state "usate" (hanno prestato o ricevuto)
+  # Restituisce true per le cifre che devono apparire sbiadite
   def crossed_out
     total_cols = @max_integer_digits + @decimal_places
     crossed_out_array = Array.new(total_cols, false)
@@ -252,8 +271,19 @@ class Sottrazione
 
       if minuend_digit < subtrahend_digit && col_idx > 0
         borrowed_minuend[col_idx] += 10
-        borrowed_minuend[col_idx - 1] -= 1
-        crossed_out_array[col_idx - 1] = true
+
+        # Cerca la prima colonna a sinistra che può prestare (valore > 0)
+        lender_col = col_idx - 1
+        while lender_col >= 0 && borrowed_minuend[lender_col] == 0
+          borrowed_minuend[lender_col] = 9
+          crossed_out_array[lender_col] = true  # Questa colonna ha "cambiato" il suo valore
+          lender_col -= 1
+        end
+
+        if lender_col >= 0
+          borrowed_minuend[lender_col] -= 1
+          crossed_out_array[lender_col] = true  # La colonna che presta
+        end
       end
     end
 

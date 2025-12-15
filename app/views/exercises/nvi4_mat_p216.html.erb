@@ -9,87 +9,88 @@
 
     <!-- Esercizio 1 -->
     <div>
-      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
-        <%= numero_esercizio_badge(1) %>
-        Calcola in colonna le divisioni con il <span class="font-bold text-cyan-600 dark:text-cyan-400">dividendo decimale</span>.
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <%
-            esercizio1_gruppi = [
-              { lettera: "a", operazioni: [
-                { dividend: "54,6", divisor: "8", answer: "6,825" },
-                { dividend: "36,44", divisor: "6", answer: "6,073" },
-                { dividend: "75,21", divisor: "3", answer: "25,07" },
-                { dividend: "1307,6", divisor: "4", answer: "326,9" }
-              ]},
-              { lettera: "b", operazioni: [
-                { dividend: "347,15", divisor: "25", answer: "13,886" },
-                { dividend: "874,8", divisor: "36", answer: "24,3" },
-                { dividend: "676,83", divisor: "42", answer: "16,115" },
-                { dividend: "469,11", divisor: "36", answer: "13,031" }
-              ]},
-              { lettera: "c", operazioni: [
-                { dividend: "64,825", divisor: "28", answer: "2,315" },
-                { dividend: "347,5", divisor: "26", answer: "13,365" },
-                { dividend: "490,88", divisor: "23", answer: "21,343" },
-                { dividend: "2947,8", divisor: "53", answer: "55,62" }
-              ]}
-            ]
-          %>
-
-          <% esercizio1_gruppi.each do |gruppo| %>
-            <%
-              operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
-                { operation: "#{item[:dividend]}:#{item[:divisor]}", targetId: "es1-#{gruppo[:lettera]}-#{idx}" }
-              }
-            %>
-            <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
-              <p class="text-gray-700 dark:text-gray-200 font-bold mb-2 flex items-center gap-2">
-                <%= gruppo[:lettera] %>.
-                <button type="button"
-                        data-action="click->quaderno-sidebar#openGroup"
-                        data-operations='<%= operations_data.to_json %>'
-                        data-type="divisione"
-                        data-group="<%= gruppo[:lettera] %>"
-                        class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
-                        title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                  </svg>
-                </button>
-              </p>
-              <ul class="space-y-2">
-                <% gruppo[:operazioni].each_with_index do |item, idx| %>
-                  <% op_id = "es1-#{gruppo[:lettera]}-#{idx}" %>
-                  <li class="flex items-center gap-1 flex-wrap">
-                    <span class="text-gray-700 dark:text-gray-200"><%= item[:dividend] %> : <%= item[:divisor] %> =</span>
-                    <input type="text"
-                           data-operation-id="<%= op_id %>"
-                           data-correct-answer="<%= item[:answer] %>"
-                           class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-        </div>
-
-        <!-- Regola -->
-        <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-lg">
+      <!-- Titolo e Nota sulla stessa riga -->
+      <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          <%= numero_esercizio_badge(1) %>
+          Calcola in colonna le divisioni con il <span class="font-bold text-cyan-600 dark:text-cyan-400">dividendo decimale</span>.
+        </p>
+        <!-- Nota -->
+        <div class="p-3 bg-white dark:bg-gray-800 border-3 border-dashed border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-500 md:w-1/3 shrink-0">
           <p class="text-gray-700 dark:text-gray-200">
             Ricordati di mettere la virgola al quoziente quando abbassi la prima cifra decimale.
           </p>
         </div>
       </div>
+
+      <%
+        esercizio1_gruppi = [
+          { lettera: "a", operazioni: [
+            { dividend: "54,6", divisor: "8", answer: "6,825" },
+            { dividend: "36,44", divisor: "6", answer: "6,073" },
+            { dividend: "75,21", divisor: "3", answer: "25,07" },
+            { dividend: "1307,6", divisor: "4", answer: "326,9" }
+          ]},
+          { lettera: "b", operazioni: [
+            { dividend: "347,15", divisor: "25", answer: "13,886" },
+            { dividend: "874,8", divisor: "36", answer: "24,3" },
+            { dividend: "676,83", divisor: "42", answer: "16,115" },
+            { dividend: "469,11", divisor: "36", answer: "13,031" }
+          ]},
+          { lettera: "c", operazioni: [
+            { dividend: "64,825", divisor: "28", answer: "2,315" },
+            { dividend: "347,5", divisor: "26", answer: "13,365" },
+            { dividend: "490,88", divisor: "23", answer: "21,343" },
+            { dividend: "2947,8", divisor: "53", answer: "55,62" }
+          ]}
+        ]
+      %>
+
+      <!-- Operazioni -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <% esercizio1_gruppi.each do |gruppo| %>
+          <%
+            operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+              { operation: "#{item[:dividend]}:#{item[:divisor]}", targetId: "es1-#{gruppo[:lettera]}-#{idx}" }
+            }
+          %>
+          <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <p class="text-gray-700 dark:text-gray-200 font-bold mb-2 flex items-center gap-2">
+              <%= gruppo[:lettera] %>.
+              <button type="button"
+                      data-action="click->quaderno-sidebar#openGroup"
+                      data-operations='<%= operations_data.to_json %>'
+                      data-type="divisione"
+                      data-group="<%= gruppo[:lettera] %>"
+                      class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
+                      title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </p>
+            <ul class="space-y-2">
+              <% gruppo[:operazioni].each_with_index do |item, idx| %>
+                <% op_id = "es1-#{gruppo[:lettera]}-#{idx}" %>
+                <li class="flex items-center gap-1 flex-wrap">
+                  <span class="text-gray-700 dark:text-gray-200 whitespace-nowrap"><%= item[:dividend] %> : <%= item[:divisor] %> =</span>
+                  <input type="text"
+                         data-operation-id="<%= op_id %>"
+                         data-correct-answer="<%= item[:answer] %>"
+                         class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
     </div>
 
-    <!-- Esercizio 2 IMPARARE TUTTI -->
-    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500">
+    <!-- Esercizio 2 -->
+    <div class="">
       <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
-        <%= imparare_tutti_badge(2) %>
+        <%= numero_esercizio_badge(2) %>
         Osserva il risultato della divisione con numeri interi e scrivi il risultato delle altre divisioni.
       </p>
 
@@ -145,42 +146,54 @@
     </div>
 
     <!-- Esercizio 3 -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
-        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
-          <%= numero_esercizio_badge(3) %>
-          Calcola in colonna le divisioni con il <span class="font-bold text-cyan-600 dark:text-cyan-400">divisore decimale</span>.
-        </p>
+    <div>
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+        <%= numero_esercizio_badge(3) %>
+        Calcola in colonna le divisioni con il <span class="font-bold text-cyan-600 dark:text-cyan-400">divisore decimale</span>.
+      </p>
 
-        <%
-          esercizio3_gruppi = [
-            { lettera: "a", operazioni: [
-              { dividend: "136", divisor: "0,6", answer: "226" },
-              { dividend: "465", divisor: "0,5", answer: "930" },
-              { dividend: "924", divisor: "5,2", answer: "177" },
-              { dividend: "469", divisor: "3,8", answer: "123" }
-            ]},
-            { lettera: "b", operazioni: [
-              { dividend: "948", divisor: "7,9", answer: "120" },
-              { dividend: "6329", divisor: "2,3", answer: "2752" },
-              { dividend: "6925", divisor: "0,67", answer: "10335" },
-              { dividend: "4763", divisor: "1,8", answer: "2646" }
-            ]},
-            { lettera: "c", operazioni: [
-              { dividend: "1396", divisor: "3,6", answer: "387" },
-              { dividend: "7004", divisor: "1,6", answer: "4377" },
-              { dividend: "498", divisor: "0,15", answer: "3320" },
-              { dividend: "997", divisor: "0,56", answer: "1780" }
-            ]},
-            { lettera: "d", operazioni: [
-              { dividend: "8953", divisor: "6,6", answer: "1356" },
-              { dividend: "21697", divisor: "4,8", answer: "4520" },
-              { dividend: "99784", divisor: "0,83", answer: "120224" },
-              { dividend: "5064", divisor: "1,6", answer: "3165" }
-            ]}
-          ]
-        %>
+      <%
+        esercizio3_gruppi = [
+          { lettera: "a", operazioni: [
+            { dividend: "136", divisor: "0,6", answer: "226" },
+            { dividend: "465", divisor: "0,5", answer: "930" },
+            { dividend: "924", divisor: "5,2", answer: "177" },
+            { dividend: "469", divisor: "3,8", answer: "123" }
+          ]},
+          { lettera: "b", operazioni: [
+            { dividend: "948", divisor: "7,9", answer: "120" },
+            { dividend: "6329", divisor: "2,3", answer: "2752" },
+            { dividend: "6925", divisor: "0,67", answer: "10335" },
+            { dividend: "4763", divisor: "1,8", answer: "2646" }
+          ]},
+          { lettera: "c", operazioni: [
+            { dividend: "1396", divisor: "3,6", answer: "387" },
+            { dividend: "7004", divisor: "1,6", answer: "4377" },
+            { dividend: "498", divisor: "0,15", answer: "3320" },
+            { dividend: "997", divisor: "0,56", answer: "1780" }
+          ]},
+          { lettera: "d", operazioni: [
+            { dividend: "8953", divisor: "6,6", answer: "1356" },
+            { dividend: "21697", divisor: "4,8", answer: "4520" },
+            { dividend: "99784", divisor: "0,83", answer: "120224" },
+            { dividend: "5064", divisor: "1,6", answer: "3165" }
+          ]}
+        ]
+      %>
 
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Regola divisioni con divisore decimale - a sinistra -->
+        <div class="self-start p-4 bg-custom-blue dark:bg-cyan-900 rounded-2xl">
+          <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-2">Divisioni con il divisore decimale</p>
+          <p class="text-gray-700 dark:text-gray-200 mb-4">
+            Trasforma il divisore in un numero intero moltiplicando per 10, 100 o 1 000 e moltiplica anche il dividendo per lo stesso numero.
+          </p>
+          <div class="flex justify-center">
+            <%= image_tag "nvi4_mat/p216/p216_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1" %>
+          </div>
+        </div>
+
+        <!-- Operazioni - a destra -->
         <div class="grid grid-cols-2 gap-4">
           <% esercizio3_gruppi.each do |gruppo| %>
             <%
@@ -220,98 +233,88 @@
           <% end %>
         </div>
       </div>
-
-      <!-- Regola divisioni con divisore decimale -->
-      <div class="p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl">
-        <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Divisioni con il divisore decimale</p>
-        <p class="text-gray-700 dark:text-gray-200 mb-4">
-          Trasforma il divisore in un numero intero moltiplicando per 10, 100 o 1 000 e moltiplica anche il dividendo per lo stesso numero.
-        </p>
-        <%= image_tag "nvi4_mat/p216/p216_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-1" %>
-      </div>
     </div>
 
     <!-- Esercizio 4 -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
-        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+    <div>
+      <!-- Titolo e Nota allineati -->
+      <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
           <%= numero_esercizio_badge(4) %>
           Calcola in colonna le divisioni con <span class="font-bold text-cyan-600 dark:text-cyan-400">dividendo</span> e <span class="font-bold text-cyan-600 dark:text-cyan-400">divisore decimali</span>.
         </p>
-
-        <%
-          esercizio4_gruppi = [
-            { lettera: "a", operazioni: [
-              { dividend: "57,63", divisor: "0,22", answer: "261,95" },
-              { dividend: "59,56", divisor: "4,3", answer: "13,85" },
-              { dividend: "89,4", divisor: "2,7", answer: "33,11" },
-              { dividend: "347,6", divisor: "0,35", answer: "993,14" },
-              { dividend: "27,6", divisor: "5,1", answer: "5,41" }
-            ]},
-            { lettera: "b", operazioni: [
-              { dividend: "57,09", divisor: "0,15", answer: "380,6" },
-              { dividend: "32,8", divisor: "0,12", answer: "273,33" },
-              { dividend: "57,63", divisor: "5,2", answer: "11,08" },
-              { dividend: "99,6", divisor: "8,3", answer: "12" },
-              { dividend: "4,576", divisor: "1,7", answer: "2,69" }
-            ]},
-            { lettera: "c", operazioni: [
-              { dividend: "343,2", divisor: "3,9", answer: "88" },
-              { dividend: "83,62", divisor: "2,4", answer: "34,84" },
-              { dividend: "97,32", divisor: "0,25", answer: "389,28" },
-              { dividend: "53,4", divisor: "0,48", answer: "111,25" },
-              { dividend: "394,6", divisor: "3,5", answer: "112,74" }
-            ]}
-          ]
-        %>
-
-        <div class="grid grid-cols-3 gap-4">
-          <% esercizio4_gruppi.each do |gruppo| %>
-            <%
-              operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
-                { operation: "#{item[:dividend]}:#{item[:divisor]}", targetId: "es4-#{gruppo[:lettera]}-#{idx}" }
-              }
-            %>
-            <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
-              <p class="text-gray-700 dark:text-gray-200 font-bold mb-2 flex items-center gap-2">
-                <%= gruppo[:lettera] %>.
-                <button type="button"
-                        data-action="click->quaderno-sidebar#openGroup"
-                        data-operations='<%= operations_data.to_json %>'
-                        data-type="divisione"
-                        data-group="<%= gruppo[:lettera] %>"
-                        class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
-                        title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                  </svg>
-                </button>
-              </p>
-              <ul class="space-y-2">
-                <% gruppo[:operazioni].each_with_index do |item, idx| %>
-                  <% op_id = "es4-#{gruppo[:lettera]}-#{idx}" %>
-                  <li class="flex items-center gap-1 flex-wrap">
-                    <span class="text-gray-700 dark:text-gray-200"><%= item[:dividend] %> : <%= item[:divisor] %> =</span>
-                    <input type="text"
-                           data-operation-id="<%= op_id %>"
-                           data-correct-answer="<%= item[:answer] %>"
-                           class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-        </div>
-      </div>
-
-      <!-- Nota -->
-      <div class="flex items-center">
-        <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-lg">
+        <!-- Nota -->
+        <div class="p-3 bg-white dark:bg-gray-800 border-3 border-dashed border-<%= @pagina.base_color %>-400 dark:border-<%= @pagina.base_color %>-500 md:w-1/3 shrink-0">
           <p class="text-gray-700 dark:text-gray-200">
             Non preoccuparti di rendere intero il dividendo, l'importante è che sia intero il divisore.
           </p>
         </div>
+      </div>
+
+      <%
+        esercizio4_gruppi = [
+          { lettera: "a", operazioni: [
+            { dividend: "57,63", divisor: "0,22", answer: "261,95" },
+            { dividend: "59,56", divisor: "4,3", answer: "13,85" },
+            { dividend: "89,4", divisor: "2,7", answer: "33,11" },
+            { dividend: "347,6", divisor: "0,35", answer: "993,14" },
+            { dividend: "27,6", divisor: "5,1", answer: "5,41" }
+          ]},
+          { lettera: "b", operazioni: [
+            { dividend: "57,09", divisor: "0,15", answer: "380,6" },
+            { dividend: "32,8", divisor: "0,12", answer: "273,33" },
+            { dividend: "57,63", divisor: "5,2", answer: "11,08" },
+            { dividend: "99,6", divisor: "8,3", answer: "12" },
+            { dividend: "4,576", divisor: "1,7", answer: "2,69" }
+          ]},
+          { lettera: "c", operazioni: [
+            { dividend: "343,2", divisor: "3,9", answer: "88" },
+            { dividend: "83,62", divisor: "2,4", answer: "34,84" },
+            { dividend: "97,32", divisor: "0,25", answer: "389,28" },
+            { dividend: "53,4", divisor: "0,48", answer: "111,25" },
+            { dividend: "394,6", divisor: "3,5", answer: "112,74" }
+          ]}
+        ]
+      %>
+
+      <!-- Operazioni -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <% esercizio4_gruppi.each do |gruppo| %>
+          <%
+            operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+              { operation: "#{item[:dividend]}:#{item[:divisor]}", targetId: "es4-#{gruppo[:lettera]}-#{idx}" }
+            }
+          %>
+          <div class="p-3 bg-cyan-50 dark:bg-cyan-900/30 rounded-lg">
+            <p class="text-gray-700 dark:text-gray-200 font-bold mb-2 flex items-center gap-2">
+              <%= gruppo[:lettera] %>.
+              <button type="button"
+                      data-action="click->quaderno-sidebar#openGroup"
+                      data-operations='<%= operations_data.to_json %>'
+                      data-type="divisione"
+                      data-group="<%= gruppo[:lettera] %>"
+                      class="p-1 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition print-hidden"
+                      title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </p>
+            <ul class="space-y-2">
+              <% gruppo[:operazioni].each_with_index do |item, idx| %>
+                <% op_id = "es4-#{gruppo[:lettera]}-#{idx}" %>
+                <li class="flex items-center gap-1 flex-wrap">
+                  <span class="text-gray-700 dark:text-gray-200"><%= item[:dividend] %> : <%= item[:divisor] %> =</span>
+                  <input type="text"
+                         data-operation-id="<%= op_id %>"
+                         data-correct-answer="<%= item[:answer] %>"
+                         class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
       </div>
     </div>
 

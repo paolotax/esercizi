@@ -170,46 +170,37 @@ export default class extends Controller {
 
   saveSingle() {
     // Estrae il risultato dal quaderno in base al tipo
-    let resultInputs
-    let commaSelector = null
+    let result = ''
 
     switch (this.operationType) {
       case 'addizione':
-        resultInputs = this.contentTarget.querySelectorAll('input[data-quaderno-addition-target="result"]')
+        result = this.extractResultWithComma(
+          this.contentTarget,
+          'input[data-quaderno-addition-target="result"]',
+          'input[data-quaderno-addition-target="comma"][data-row-type="result"]'
+        )
         break
       case 'sottrazione':
-        resultInputs = this.contentTarget.querySelectorAll('input[data-quaderno-subtraction-target="result"]')
+        result = this.extractResultWithComma(
+          this.contentTarget,
+          'input[data-quaderno-subtraction-target="result"]',
+          'input[data-quaderno-subtraction-target="comma"][data-row-type="result"]'
+        )
         break
       case 'moltiplicazione':
-        resultInputs = this.contentTarget.querySelectorAll('input[data-quaderno-multiplication-target="result"]')
-        commaSelector = '[data-quaderno-multiplication-target="commaSpot"].active'
+        result = this.extractResultWithCommaSpot(
+          this.contentTarget,
+          'input[data-quaderno-multiplication-target="result"]',
+          '[data-quaderno-multiplication-target="commaSpot"].active'
+        )
         break
       case 'divisione':
-        resultInputs = this.contentTarget.querySelectorAll('input[data-quaderno-division-target="quotient"]')
-        commaSelector = '[data-quaderno-division-target="commaSpot"].active'
+        result = this.extractResultWithCommaSpot(
+          this.contentTarget,
+          'input[data-quaderno-division-target="quotient"]',
+          '[data-quaderno-division-target="commaSpot"].active'
+        )
         break
-      default:
-        resultInputs = []
-    }
-
-    // Concatena i valori degli input del risultato
-    let result = ''
-    resultInputs.forEach(input => {
-      result += input.value || ''
-    })
-
-    // Trova la posizione della virgola (se presente)
-    if (commaSelector) {
-      const activeComma = this.contentTarget.querySelector(commaSelector)
-      if (activeComma) {
-        const decimalPlaces = parseInt(activeComma.dataset.position) || 0
-        if (decimalPlaces > 0 && result.length > decimalPlaces) {
-          // Inserisci la virgola nella posizione corretta
-          const integerPart = result.slice(0, result.length - decimalPlaces)
-          const decimalPart = result.slice(result.length - decimalPlaces)
-          result = integerPart + ',' + decimalPart
-        }
-      }
     }
 
     // Rimuovi spazi e zeri iniziali (celle vuote a sinistra)
@@ -221,51 +212,110 @@ export default class extends Controller {
     }
   }
 
+  // Estrae risultato includendo la virgola come input separato (addizione/sottrazione)
+  extractResultWithComma(container, resultSelector, commaSelector) {
+    const resultInputs = container.querySelectorAll(resultSelector)
+    const commaInput = container.querySelector(commaSelector)
+
+    // Trova la posizione della virgola nella griglia
+    let commaPosition = -1
+    if (commaInput) {
+      const grid = container.querySelector('.inline-grid')
+      if (grid) {
+        const allDivs = Array.from(grid.children)
+        const commaParent = commaInput.parentElement
+        const commaGridIndex = allDivs.indexOf(commaParent)
+
+        // Conta quanti input result ci sono prima della virgola
+        let countBefore = 0
+        resultInputs.forEach(input => {
+          const inputParent = input.parentElement
+          const inputGridIndex = allDivs.indexOf(inputParent)
+          if (inputGridIndex < commaGridIndex) {
+            countBefore++
+          }
+        })
+        commaPosition = countBefore
+      }
+    }
+
+    // Concatena i valori degli input del risultato
+    let result = ''
+    resultInputs.forEach((input, idx) => {
+      if (commaPosition !== -1 && idx === commaPosition) {
+        const commaValue = commaInput ? commaInput.value : ''
+        if (commaValue === ',') {
+          result += ','
+        }
+      }
+      result += input.value || ''
+    })
+
+    return result
+  }
+
+  // Estrae risultato con commaSpot cliccabile (moltiplicazione/divisione)
+  extractResultWithCommaSpot(container, resultSelector, commaSpotSelector) {
+    const resultInputs = container.querySelectorAll(resultSelector)
+
+    // Concatena i valori degli input del risultato
+    let result = ''
+    resultInputs.forEach(input => {
+      result += input.value || ''
+    })
+
+    // Trova la posizione della virgola (se presente)
+    const activeComma = container.querySelector(commaSpotSelector)
+    if (activeComma) {
+      const decimalPlaces = parseInt(activeComma.dataset.position) || 0
+      if (decimalPlaces > 0 && result.length > decimalPlaces) {
+        // Inserisci la virgola nella posizione corretta
+        const integerPart = result.slice(0, result.length - decimalPlaces)
+        const decimalPart = result.slice(result.length - decimalPlaces)
+        result = integerPart + ',' + decimalPart
+      }
+    }
+
+    return result
+  }
+
   saveGroup() {
     // Per ogni quaderno nel gruppo, estrai il risultato e salvalo
     const groupItems = this.contentTarget.querySelectorAll('.quaderno-group-item')
 
     groupItems.forEach(item => {
       const targetInputId = item.dataset.targetInput
-      let resultInputs
-      let commaSelector = null
+      let result = ''
 
       switch (this.operationType) {
         case 'addizione':
-          resultInputs = item.querySelectorAll('input[data-quaderno-addition-target="result"]')
+          result = this.extractResultWithComma(
+            item,
+            'input[data-quaderno-addition-target="result"]',
+            'input[data-quaderno-addition-target="comma"][data-row-type="result"]'
+          )
           break
         case 'sottrazione':
-          resultInputs = item.querySelectorAll('input[data-quaderno-subtraction-target="result"]')
+          result = this.extractResultWithComma(
+            item,
+            'input[data-quaderno-subtraction-target="result"]',
+            'input[data-quaderno-subtraction-target="comma"][data-row-type="result"]'
+          )
           break
         case 'moltiplicazione':
-          resultInputs = item.querySelectorAll('input[data-quaderno-multiplication-target="result"]')
-          commaSelector = '[data-quaderno-multiplication-target="commaSpot"].active'
+          result = this.extractResultWithCommaSpot(
+            item,
+            'input[data-quaderno-multiplication-target="result"]',
+            '[data-quaderno-multiplication-target="commaSpot"].active'
+          )
           break
         case 'divisione':
-          resultInputs = item.querySelectorAll('input[data-quaderno-division-target="quotient"]')
-          commaSelector = '[data-quaderno-division-target="commaSpot"].active'
+          result = this.extractResultWithCommaSpot(
+            item,
+            'input[data-quaderno-division-target="quotient"]',
+            '[data-quaderno-division-target="commaSpot"].active'
+          )
           break
-        default:
-          resultInputs = []
-      }
-
-      // Concatena i valori degli input del risultato
-      let result = ''
-      resultInputs.forEach(input => {
-        result += input.value || ''
-      })
-
-      // Trova la posizione della virgola (se presente)
-      if (commaSelector) {
-        const activeComma = item.querySelector(commaSelector)
-        if (activeComma) {
-          const decimalPlaces = parseInt(activeComma.dataset.position) || 0
-          if (decimalPlaces > 0 && result.length > decimalPlaces) {
-            const integerPart = result.slice(0, result.length - decimalPlaces)
-            const decimalPart = result.slice(result.length - decimalPlaces)
-            result = integerPart + ',' + decimalPart
-          }
-        }
       }
 
       // Rimuovi spazi e zeri iniziali
