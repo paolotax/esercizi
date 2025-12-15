@@ -178,7 +178,12 @@ nvi_matematica = nvi_volume4.discipline.create!(
   { numero: 217, titolo: "Moltiplicazioni e Divisioni con i Numeri Decimali", slug: "nvi4_mat_p217", view_template: "nvi4_mat_p217", sottotitolo: "RIPASSO", base_color: "cyan" },
   { numero: 218, titolo: "La Domanda e i Dati (1)", slug: "nvi4_mat_p218", view_template: "nvi4_mat_p218", sottotitolo: "ESERCIZI", base_color: "cyan" },
   { numero: 219, titolo: "La Domanda e i Dati (2)", slug: "nvi4_mat_p219", view_template: "nvi4_mat_p219", sottotitolo: "ESERCIZI", base_color: "cyan" },
-  { numero: 220, titolo: "La Domanda Nascosta", slug: "nvi4_mat_p220", view_template: "nvi4_mat_p220", sottotitolo: "ESERCIZI", base_color: "cyan" }
+  { numero: 220, titolo: "La Domanda Nascosta", slug: "nvi4_mat_p220", view_template: "nvi4_mat_p220", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 221, titolo: "Problemi", slug: "nvi4_mat_p221", view_template: "nvi4_mat_p221", sottotitolo: "ESERCIZI - RIPASSO", base_color: "cyan" },
+  { numero: 222, titolo: "Misure di Lunghezza", slug: "nvi4_mat_p222", view_template: "nvi4_mat_p222", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 223, titolo: "Misure di Capacità", slug: "nvi4_mat_p223", view_template: "nvi4_mat_p223", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 224, titolo: "Misure di Massa", slug: "nvi4_mat_p224", view_template: "nvi4_mat_p224", sottotitolo: "ESERCIZI", base_color: "cyan" },
+  { numero: 225, titolo: "Tante Misure!", slug: "nvi4_mat_p225", view_template: "nvi4_mat_p225", sottotitolo: "ESERCIZI", base_color: "cyan" }
 ].each do |pagina_data|
   nvi_matematica.pagine.create!(pagina_data)
 end
