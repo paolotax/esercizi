@@ -1,0 +1,261 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Box teoria probabilità -->
+    <div class="p-4 bg-custom-blue dark:bg-cyan-900 rounded-2xl">
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <%= image_tag "nvi4_mat/p262/p262_01.jpg", class: "max-w-[120px] h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Sacchetto con palline" %>
+        <div class="text-gray-700 dark:text-gray-200">
+          <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">Probabilità di estrarre una pallina nera:</p>
+          <div class="flex items-center gap-2">
+            <%= render 'shared/frazione', num: 5, den: 8 %>
+            <span class="text-cyan-500">→</span>
+            <span>casi favorevoli</span>
+          </div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="ml-8">casi possibili</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500 space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= imparare_tutti_badge(1) %>
+        Osserva il disegno e completa.
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-6 items-center">
+        <div class="flex-1 space-y-3">
+          <p class="text-gray-700 dark:text-gray-200">
+            <span class="text-cyan-500">•</span> Se con una pallina colpisco 1 birillo:
+          </p>
+          <div class="ml-4 space-y-2">
+            <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span>ci sono</span>
+              <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+              <span>su</span>
+              <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+              <span>probabilità che sia nero. Probabilità:</span>
+              <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            </div>
+            <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span>ci sono</span>
+              <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+              <span>su</span>
+              <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+              <span>probabilità che sia bianco. Probabilità:</span>
+              <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            </div>
+            <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span>È più probabile colpire un birillo</span>
+              <input type="text" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            </div>
+          </div>
+        </div>
+
+        <%= image_tag "nvi4_mat/p262/p262_02.jpg", class: "max-w-[150px] h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Birilli" %>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div class="space-y-4">
+      <div class="flex flex-col md:flex-row gap-4 items-start">
+        <div class="flex-1">
+          <p class="font-bold text-gray-700 dark:text-gray-200">
+            <%= numero_esercizio_badge(2) %>
+            Osserva le facce di questo dado e immagina di fare un lancio. Per ogni evento indica se è certo <span class="font-bold bg-cyan-100 dark:bg-cyan-800 px-1">C</span>, possibile <span class="font-bold bg-cyan-100 dark:bg-cyan-800 px-1">P</span>, impossibile <span class="font-bold bg-cyan-100 dark:bg-cyan-800 px-1">I</span>.
+          </p>
+        </div>
+        <%= image_tag "nvi4_mat/p262/p262_03.jpg", class: "max-w-[100px] h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Dado" %>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse border border-cyan-400 dark:border-cyan-600">
+          <thead>
+            <tr>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">EVENTO: esce...</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">... il numero 4</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">... il numero 7</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">... un numero dispari</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">... un numero da 1 a 6</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">... un numero maggiore di 0</th>
+              <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">... un numero a due cifre</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-bold">PROBABILITÀ</td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex justify-center gap-1">
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="text-gray-700">C</span>
+                  </label>
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                    <span class="text-gray-700">P</span>
+                  </label>
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                    <span class="text-gray-700">I</span>
+                  </label>
+                </div>
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex justify-center gap-1">
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev2" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">C</span>
+                  </label>
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev2" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">P</span>
+                  </label>
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev2" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">I</span>
+                  </label>
+                </div>
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex justify-center gap-1">
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev3" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">C</span>
+                  </label>
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev3" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">P</span>
+                  </label>
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev3" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">I</span>
+                  </label>
+                </div>
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex justify-center gap-1">
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev4" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">C</span>
+                  </label>
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev4" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">P</span>
+                  </label>
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev4" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">I</span>
+                  </label>
+                </div>
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex justify-center gap-1">
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev5" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">C</span>
+                  </label>
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev5" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">P</span>
+                  </label>
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev5" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">I</span>
+                  </label>
+                </div>
+              </td>
+              <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <div class="flex justify-center gap-1">
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev6" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">C</span>
+                  </label>
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev6" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">P</span>
+                  </label>
+                  <label class="relative flex items-center justify-center w-6 h-6 bg-white border border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                    <input type="radio" name="ev6" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="text-gray-700">I</span>
+                  </label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(3) %>
+        Immagina di pescare da questo barattolo. Per ciascun evento calcola la probabilità e completa la tabella.
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-6">
+        <%= image_tag "nvi4_mat/p262/output-1715932804262_120_1054_239_125.png", class: "max-w-[150px] h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Barattolo con palline" %>
+
+        <div class="flex-1 overflow-x-auto">
+          <table class="w-full border-collapse border border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200"></th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">Casi favorevoli</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">Casi possibili</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">Probabilità</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Pesco una pallina bianca</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">12</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Pesco una pallina azzurra</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Pesco una pallina grigia</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

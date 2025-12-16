@@ -1,0 +1,257 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500 space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= imparare_tutti_badge(1) %>
+        Osserva l'ideogramma relativo all'indagine "Materia preferita dagli alunni delle classi 4ª A e 4ª B". Poi rispondi alle domande.
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-6">
+        <!-- Tabella ideogramma -->
+        <div class="overflow-x-auto">
+          <table class="border-collapse border border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">Materie</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">Preferenze</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Matematica</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">👤👤👤👤👤👤👤👤👤👤</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Musica</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">👤👤👤👤👤👤👤👤</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Educazione fisica</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">👤👤👤👤👤👤👤👤👤</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Storia</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">👤👤👤👤👤👤👤</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Arte e immagine</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">👤👤👤👤👤👤👤👤👤👤👤</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Legenda e domande -->
+        <div class="flex-1 space-y-4">
+          <div class="flex gap-4 text-gray-700 dark:text-gray-200">
+            <p><span class="text-cyan-600">👤</span> = 1 maschio</p>
+            <p><span class="text-pink-500">👤</span> = 1 femmina</p>
+          </div>
+
+          <div class="space-y-2 text-gray-700 dark:text-gray-200">
+            <div class="flex items-center gap-2">
+              <span class="text-cyan-500">•</span>
+              <span>Quanti sono in tutto i maschi?</span>
+              <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-cyan-500">•</span>
+              <span>E le femmine?</span>
+              <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-cyan-500">•</span>
+              <span>C'è una materia che ha lo stesso numero di preferenze di maschi e femmine?</span>
+              <div class="flex gap-2">
+                <label class="relative flex items-center justify-center w-10 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                  <input type="radio" name="stesso_numero" class="absolute inset-0 opacity-0 cursor-pointer">
+                  <span class="text-gray-700">Sì</span>
+                </label>
+                <label class="relative flex items-center justify-center w-10 h-8 bg-white border-2 border-cyan-500 rounded cursor-pointer hover:bg-cyan-100">
+                  <input type="radio" name="stesso_numero" class="absolute inset-0 opacity-0 cursor-pointer">
+                  <span class="text-gray-700">NO</span>
+                </label>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-cyan-500">•</span>
+              <span>Se sì, quale?</span>
+              <input type="text" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-cyan-500">•</span>
+              <span>Quanti sono complessivamente gli alunni delle classi 4ª A e 4ª B?</span>
+              <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(2) %>
+        Rappresenta con un ideogramma i dati relativi all'indagine "Vendita di telefoni cellulari in un negozio dal lunedì al sabato".
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-6">
+        <!-- Tabella dati raccolti -->
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">
+            <span class="text-cyan-500">•</span> Usa questo simbolo: <span class="text-2xl">📱</span> = 3 cellulari
+          </p>
+
+          <table class="border-collapse border border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th colspan="2" class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200 font-bold">Dati raccolti</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Lunedì</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">3</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Martedì</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">6</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Mercoledì</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">9</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Giovedì</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">6</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Venerdì</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">12</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Sabato</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center text-gray-700 dark:text-gray-200">18</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Ideogramma da completare -->
+        <div class="flex-1 overflow-x-auto">
+          <table class="border-collapse border border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">Giorni</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">Telefoni cellulari</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-cyan-600 dark:text-cyan-400 font-bold">lunedì</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">📱</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(3) %>
+        Osserva l'ideogramma sulla produzione di automobili e rispondi alla domanda.
+      </p>
+
+      <div class="flex flex-col md:flex-row gap-6">
+        <!-- Tabella produzione automobili -->
+        <div class="overflow-x-auto">
+          <table class="border-collapse border border-cyan-400 dark:border-cyan-600">
+            <thead>
+              <tr>
+                <th colspan="2" class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200 font-bold">Produzione automobili</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Gennaio</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">🚗🚗🚗🚗</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Febbraio</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">🚗🚗</td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200">Marzo</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">🚗</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex-1 space-y-3">
+          <p class="text-gray-700 dark:text-gray-200">
+            <span class="text-2xl">🚗</span> = 1 500 automobili
+          </p>
+
+          <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+            <span class="text-cyan-500">•</span>
+            <span>Quante automobili sono state prodotte nei primi tre mesi dell'anno?</span>
+          </div>
+          <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white" placeholder="...">
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

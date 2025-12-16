@@ -1,0 +1,155 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(1) %>
+        Osserva la linea numerata e completa la tabella.
+      </p>
+
+      <!-- Linea numerata da 0 a 1 -->
+      <div class="space-y-4">
+        <div class="relative h-12">
+          <div class="absolute top-4 left-0 right-0 h-1 bg-cyan-400 dark:bg-cyan-600"></div>
+          <% (0..10).each do |i| %>
+            <div class="absolute top-2 h-4 w-0.5 bg-cyan-400 dark:bg-cyan-600" style="left: <%= i * 10 %>%"></div>
+            <span class="absolute top-8 text-xs text-gray-600 dark:text-gray-400 -translate-x-1/2" style="left: <%= i * 10 %>%">0,<%= i %></span>
+          <% end %>
+          <span class="absolute top-8 text-xs text-gray-600 dark:text-gray-400" style="left: 0%">0</span>
+          <span class="absolute top-8 text-xs text-gray-600 dark:text-gray-400" style="left: 100%">1</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="border-collapse border border-cyan-400 dark:border-cyan-600 text-center">
+            <thead>
+              <tr>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">Pedina</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">Posizione (frazione)</th>
+                <th class="p-2 border border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200">Posizione (decimale)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">A</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">B</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">C</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">D</td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+                <td class="p-2 border border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                  <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(2) %>
+        Calcola il valore delle frazioni.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-gray-700 dark:text-gray-200">
+        <div class="flex items-center gap-2">
+          <span>3/5 di 125 =</span>
+          <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-answer="75">
+        </div>
+        <div class="flex items-center gap-2">
+          <span>5/8 di 88 =</span>
+          <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-answer="55">
+        </div>
+        <div class="flex items-center gap-2">
+          <span>2/7 di 63 =</span>
+          <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-answer="18">
+        </div>
+        <div class="flex items-center gap-2">
+          <span>4/9 di 81 =</span>
+          <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-answer="36">
+        </div>
+        <div class="flex items-center gap-2">
+          <span>3/4 di 100 =</span>
+          <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-answer="75">
+        </div>
+        <div class="flex items-center gap-2">
+          <span>7/10 di 150 =</span>
+          <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-answer="105">
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(3) %>
+        Risolvi il problema.
+      </p>
+
+      <div class="p-3 bg-custom-blue-light dark:bg-cyan-900 text-gray-700 dark:text-gray-200 rounded">
+        <p>Una moto costa 5 400 €. Si paga in 2 rate: la prima è di 3/5 del totale, la seconda di 2/5.</p>
+        <p>A quanto ammonta ognuna delle due rate?</p>
+      </div>
+
+      <div class="space-y-3 text-gray-700 dark:text-gray-200">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>Prima rata (3/5):</span>
+          <input type="text" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white" placeholder="operazione" data-answer="5400:5×3,5400:5x3">
+          <span>=</span>
+          <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-answer="3240,3 240">
+          <span>€</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>Seconda rata (2/5):</span>
+          <input type="text" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white" placeholder="operazione" data-answer="5400:5×2,5400:5x2">
+          <span>=</span>
+          <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-answer="2160,2 160">
+          <span>€</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>Risposta: La prima rata è di</span>
+          <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-answer="3240,3 240">
+          <span>€, la seconda di</span>
+          <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-answer="2160,2 160">
+          <span>€.</span>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

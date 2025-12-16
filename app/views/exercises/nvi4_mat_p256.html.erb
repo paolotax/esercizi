@@ -1,0 +1,189 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Box formule perimetro -->
+    <div class="p-4 bg-custom-blue dark:bg-cyan-900 rounded-2xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Triangolo -->
+        <div class="space-y-1 text-gray-700 dark:text-gray-200">
+          <p class="font-bold text-cyan-600 dark:text-cyan-400">Triangolo</p>
+          <p><span class="text-cyan-600">equilatero</span> P = <span class="italic">ℓ</span> × 3</p>
+          <p><span class="text-cyan-600">isoscele</span> P = <span class="italic">ℓ</span><sub>1</sub> + (<span class="italic">ℓ</span><sub>2</sub> × 2)</p>
+          <p><span class="text-cyan-600">scaleno</span> P = <span class="italic">ℓ</span><sub>1</sub> + <span class="italic">ℓ</span><sub>2</sub> + <span class="italic">ℓ</span><sub>3</sub></p>
+        </div>
+
+        <!-- Rettangolo, Parallelogramma -->
+        <div class="space-y-2 text-gray-700 dark:text-gray-200">
+          <div>
+            <p class="font-bold text-cyan-600 dark:text-cyan-400">Rettangolo</p>
+            <p>P = (<span class="italic">ℓ</span><sub>1</sub> + <span class="italic">ℓ</span><sub>2</sub>) × 2</p>
+          </div>
+          <div>
+            <p class="font-bold text-cyan-600 dark:text-cyan-400">Parallelogramma</p>
+            <p>P = (<span class="italic">ℓ</span><sub>1</sub> + <span class="italic">ℓ</span><sub>2</sub>) × 2</p>
+          </div>
+        </div>
+
+        <!-- Quadrato, Rombo, Trapezio -->
+        <div class="space-y-2 text-gray-700 dark:text-gray-200">
+          <div class="flex gap-4">
+            <div>
+              <p class="font-bold text-cyan-600 dark:text-cyan-400">Quadrato</p>
+              <p>P = <span class="italic">ℓ</span> × 4</p>
+            </div>
+            <div>
+              <p class="font-bold text-cyan-600 dark:text-cyan-400">Rombo</p>
+              <p>P = <span class="italic">ℓ</span> × 4</p>
+            </div>
+          </div>
+          <div>
+            <p class="font-bold text-cyan-600 dark:text-cyan-400">Trapezio</p>
+            <p><span class="text-cyan-600">rettangolo e scaleno</span> P = B + b + <span class="italic">ℓ</span><sub>1</sub> + <span class="italic">ℓ</span><sub>2</sub></p>
+            <p><span class="text-cyan-600">isoscele</span> P = B + b + (<span class="italic">ℓ</span> × 2)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 1 IMPARARE TUTTI -->
+    <div class="p-5 bg-white dark:bg-gray-800 rounded-2xl border-3 border-yellow-400 dark:border-yellow-500 space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= imparare_tutti_badge(1) %>
+        Calcola il perimetro delle seguenti figure. Esegui i calcoli necessari sul quaderno.
+      </p>
+
+      <!-- Prima riga di figure -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Rettangolo -->
+        <div class="text-center space-y-2">
+          <%= image_tag "nvi4_mat/p256/p256_01.jpg", class: "max-w-full h-auto mx-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Rettangolo 34m x 20,5m" %>
+          <div class="flex items-center justify-center gap-1 text-gray-700 dark:text-gray-200">
+            <span>P =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>m</span>
+          </div>
+        </div>
+
+        <!-- Parallelogramma -->
+        <div class="text-center space-y-2">
+          <%= image_tag "nvi4_mat/p256/p256_02.jpg", class: "max-w-full h-auto mx-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Parallelogramma 22,5m" %>
+          <div class="flex items-center justify-center gap-1 text-gray-700 dark:text-gray-200">
+            <span>P =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>m</span>
+          </div>
+        </div>
+
+        <!-- Trapezio -->
+        <div class="text-center space-y-2">
+          <%= image_tag "nvi4_mat/p256/p256_03.jpg", class: "max-w-full h-auto mx-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Trapezio 20mm, 24mm, 35mm" %>
+          <div class="flex items-center justify-center gap-1 text-gray-700 dark:text-gray-200">
+            <span>P =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>mm</span>
+          </div>
+        </div>
+
+        <!-- Triangolo isoscele -->
+        <div class="text-center space-y-2">
+          <%= image_tag "nvi4_mat/p256/p256_04.jpg", class: "max-w-full h-auto mx-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Triangolo isoscele 3,2cm, 2cm" %>
+          <div class="flex items-center justify-center gap-1 text-gray-700 dark:text-gray-200">
+            <span>P =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>cm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seconda riga di figure -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <!-- Rombo -->
+        <div class="text-center space-y-2">
+          <%= image_tag "nvi4_mat/p256/p256_05.jpg", class: "max-w-full h-auto mx-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Rombo 30 dm" %>
+          <div class="flex items-center justify-center gap-1 text-gray-700 dark:text-gray-200">
+            <span>P =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>dm</span>
+          </div>
+        </div>
+
+        <!-- Trapezio rettangolo -->
+        <div class="text-center space-y-2">
+          <%= image_tag "nvi4_mat/p256/p256_06.jpg", class: "max-w-full h-auto mx-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Trapezio 20m, 22,4m, 30m, 43,5m" %>
+          <div class="flex items-center justify-center gap-1 text-gray-700 dark:text-gray-200">
+            <span>P =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>m</span>
+          </div>
+        </div>
+
+        <!-- Triangolo scaleno -->
+        <div class="text-center space-y-2">
+          <%= image_tag "nvi4_mat/p256/p256_07.jpg", class: "max-w-full h-auto mx-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Triangolo 20mm, 40mm, 51mm" %>
+          <div class="flex items-center justify-center gap-1 text-gray-700 dark:text-gray-200">
+            <span>P =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>mm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Terza riga di figure -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <!-- Quadrato -->
+        <div class="text-center space-y-2">
+          <%= image_tag "nvi4_mat/p256/p256_08.jpg", class: "max-w-full h-auto mx-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Quadrato 2,2 cm" %>
+          <div class="flex items-center justify-center gap-1 text-gray-700 dark:text-gray-200">
+            <span>P =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>cm</span>
+          </div>
+        </div>
+
+        <!-- Rettangolo piccolo -->
+        <div class="text-center space-y-2">
+          <%= image_tag "nvi4_mat/p256/p256_09.jpg", class: "max-w-full h-auto mx-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Rettangolo 20mm, 35mm" %>
+          <div class="flex items-center justify-center gap-1 text-gray-700 dark:text-gray-200">
+            <span>P =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>mm</span>
+          </div>
+        </div>
+
+        <!-- Trapezio isoscele -->
+        <div class="text-center space-y-2">
+          <%= image_tag "nvi4_mat/p256/p256_10.jpg", class: "max-w-full h-auto mx-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Trapezio 2dm, 1,6dm, 3,2dm, 4,7dm" %>
+          <div class="flex items-center justify-center gap-1 text-gray-700 dark:text-gray-200">
+            <span>P =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>dm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div class="space-y-3">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(2) %>
+        Calcola sul quaderno il perimetro delle seguenti figure.
+      </p>
+
+      <div class="space-y-2 text-gray-700 dark:text-gray-200">
+        <p><span class="font-bold text-cyan-600">a.</span> Un quadrato con il lato di 40 cm.</p>
+        <p><span class="font-bold text-cyan-600">b.</span> Un rettangolo con la base di 12,4 cm e l'altezza di 28,6 cm.</p>
+        <p><span class="font-bold text-cyan-600">c.</span> Un triangolo isoscele con la base di 28,2 cm e il lato obliquo di 42,7 cm.</p>
+        <p><span class="font-bold text-cyan-600">d.</span> Un parallelogramma con il lato di 16,3 cm e la base di 9,5 cm.</p>
+        <p><span class="font-bold text-cyan-600">e.</span> Un trapezio isoscele con la base minore di 32 cm, la base maggiore di 42 cm, il lato obliquo di 24 cm.</p>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

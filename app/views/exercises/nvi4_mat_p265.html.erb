@@ -1,0 +1,204 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(1) %>
+        Inserisci negli spazi vuoti, in ordine crescente, i numeri scritti nelle nuvolette.
+      </p>
+
+      <!-- Nuvolette con numeri -->
+      <div class="flex flex-wrap justify-center gap-2">
+        <% [7864, 7754, 7846, 7824, 8000, 7927, 7799].each do |num| %>
+          <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full border-2 border-gray-300 dark:border-gray-500 text-gray-700 dark:text-gray-200 font-bold"><%= number_with_delimiter(num, delimiter: ' ') %></span>
+        <% end %>
+      </div>
+
+      <!-- Spazi per ordine crescente -->
+      <div class="flex flex-wrap justify-center gap-2 items-center">
+        <input type="text" class="w-16 p-2 border-2 border-gray-300 dark:border-gray-500 rounded text-center font-bold bg-white dark:bg-gray-700 dark:text-white" data-correct-answer="7754" placeholder="...">
+        <input type="text" class="w-16 p-2 border-2 border-gray-300 dark:border-gray-500 rounded text-center font-bold bg-white dark:bg-gray-700 dark:text-white" data-correct-answer="7799" placeholder="...">
+        <span class="px-3 py-1 bg-cyan-100 dark:bg-cyan-800 rounded border-2 border-cyan-400 dark:border-cyan-600 text-cyan-700 dark:text-cyan-300 font-bold">7 824</span>
+        <input type="text" class="w-16 p-2 border-2 border-gray-300 dark:border-gray-500 rounded text-center font-bold bg-white dark:bg-gray-700 dark:text-white" data-correct-answer="7846" placeholder="...">
+        <input type="text" class="w-16 p-2 border-2 border-gray-300 dark:border-gray-500 rounded text-center font-bold bg-white dark:bg-gray-700 dark:text-white" data-correct-answer="7864" placeholder="...">
+        <input type="text" class="w-16 p-2 border-2 border-gray-300 dark:border-gray-500 rounded text-center font-bold bg-white dark:bg-gray-700 dark:text-white" data-correct-answer="7927" placeholder="...">
+        <input type="text" class="w-16 p-2 border-2 border-gray-300 dark:border-gray-500 rounded text-center font-bold bg-white dark:bg-gray-700 dark:text-white" data-correct-answer="8000" placeholder="...">
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(2) %>
+        Inserisci negli spazi vuoti, in ordine decrescente, i numeri scritti nelle nuvolette.
+      </p>
+
+      <!-- Nuvolette con numeri -->
+      <div class="flex flex-wrap justify-center gap-2">
+        <% [12658, 11897, 11981, 10047, 10147, 11147, 11127].each do |num| %>
+          <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full border-2 border-gray-300 dark:border-gray-500 text-gray-700 dark:text-gray-200 font-bold"><%= number_with_delimiter(num, delimiter: ' ') %></span>
+        <% end %>
+      </div>
+
+      <!-- Spazi per ordine decrescente -->
+      <div class="flex flex-wrap justify-center gap-2 items-center">
+        <input type="text" class="w-16 p-2 border-2 border-gray-300 dark:border-gray-500 rounded text-center font-bold bg-white dark:bg-gray-700 dark:text-white" data-correct-answer="12658" placeholder="...">
+        <input type="text" class="w-16 p-2 border-2 border-gray-300 dark:border-gray-500 rounded text-center font-bold bg-white dark:bg-gray-700 dark:text-white" data-correct-answer="11981" placeholder="...">
+        <input type="text" class="w-16 p-2 border-2 border-gray-300 dark:border-gray-500 rounded text-center font-bold bg-white dark:bg-gray-700 dark:text-white" data-correct-answer="11897" placeholder="...">
+        <input type="text" class="w-16 p-2 border-2 border-gray-300 dark:border-gray-500 rounded text-center font-bold bg-white dark:bg-gray-700 dark:text-white" data-correct-answer="11147" placeholder="...">
+        <input type="text" class="w-16 p-2 border-2 border-gray-300 dark:border-gray-500 rounded text-center font-bold bg-white dark:bg-gray-700 dark:text-white" data-correct-answer="11127" placeholder="...">
+        <span class="px-3 py-1 bg-cyan-100 dark:bg-cyan-800 rounded border-2 border-cyan-400 dark:border-cyan-600 text-cyan-700 dark:text-cyan-300 font-bold">10 147</span>
+        <input type="text" class="w-16 p-2 border-2 border-gray-300 dark:border-gray-500 rounded text-center font-bold bg-white dark:bg-gray-700 dark:text-white" data-correct-answer="10047" placeholder="...">
+      </div>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(3) %>
+        Scrivi il numero, le operazioni o il simbolo mancante.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-700 dark:text-gray-200">
+        <!-- Colonna 1 -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>3 675 ></span>
+            <span class="text-cyan-600 dark:text-cyan-400 font-bold">2 876</span>
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>3 263 ></span>
+            <span class="text-cyan-600 dark:text-cyan-400 font-bold">3 000 + 100 + 63</span>
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>2 581 ></span>
+            <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>< 9 871</span>
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>< 3 286</span>
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>3 469</span>
+            <input type="text" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>3 759</span>
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>=</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>550 : 10 =</span>
+            <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>+</span>
+            <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+          </div>
+        </div>
+
+        <!-- Colonna 2 -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>8 976 ></span>
+            <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>4 017</span>
+            <input type="text" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>4 071</span>
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>4 576 ></span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>+</span>
+            <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>5 871</span>
+            <input type="text" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>5 781</span>
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>4 097</span>
+            <input type="text" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>4 007</span>
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>9 871 ></span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>1</span>
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>7 845 <</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>−</span>
+            <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>5 600 + 32 =</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>−</span>
+            <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+          </div>
+        </div>
+
+        <!-- Colonna 3 -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>1 286 <</span>
+            <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>300 +</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>< 3 821</span>
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>4 700</span>
+            <input type="text" class="w-8 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>4 770</span>
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>56 × 100 ></span>
+            <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>9 807 ></span>
+            <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>3 002 <</span>
+            <input type="text" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>2</span>
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <span>4 444 < 444</span>
+            <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+          </div>
+          <div class="flex items-center gap-1 flex-wrap">
+            <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>+</span>
+            <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>=</span>
+            <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+            <span>−</span>
+            <input type="text" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

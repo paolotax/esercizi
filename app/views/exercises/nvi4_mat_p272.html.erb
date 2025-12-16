@@ -1,0 +1,62 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(1) %>
+        Individua tutti gli angoli interni presenti in questo pannello e segnali.
+      </p>
+
+      <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+        <span>Quanti sono? Sono</span>
+        <input type="text" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+      </div>
+
+      <!-- Immagine pannello con angoli -->
+      <div class="flex justify-center">
+        <div class="border-2 border-cyan-400 dark:border-cyan-600 p-2">
+          <svg viewBox="0 0 400 400" class="w-full max-w-md h-auto">
+            <!-- Rettangolo esterno -->
+            <rect x="10" y="10" width="380" height="380" fill="none" stroke="#22d3ee" stroke-width="2"/>
+            <!-- Triangolo in alto a sinistra -->
+            <polygon points="10,10 10,150 100,10" fill="none" stroke="#22d3ee" stroke-width="2"/>
+            <!-- Triangolo grande in alto -->
+            <polygon points="10,150 200,10 200,200" fill="none" stroke="#22d3ee" stroke-width="2"/>
+            <!-- Triangolo a destra -->
+            <polygon points="200,10 390,10 390,300 200,200" fill="none" stroke="#22d3ee" stroke-width="2"/>
+            <!-- Linea diagonale sinistra -->
+            <line x1="10" y1="150" x2="200" y2="390" stroke="#22d3ee" stroke-width="2"/>
+            <!-- Linea verticale centro -->
+            <line x1="200" y1="10" x2="200" y2="390" stroke="#22d3ee" stroke-width="2"/>
+            <!-- Triangolo in basso -->
+            <polygon points="200,200 390,300 200,390" fill="none" stroke="#22d3ee" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(2) %>
+        Misurali gli angoli che hai segnato con il goniometro e:
+      </p>
+
+      <ul class="list-disc pl-6 space-y-1 text-gray-700 dark:text-gray-200 marker:text-cyan-500">
+        <li>colora di verde gli angoli retti;</li>
+        <li>colora di rosso gli angoli piatti;</li>
+        <li>colora di giallo gli angoli maggiori di 90°;</li>
+        <li>colora di blu gli angoli minori di 90°.</li>
+      </ul>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

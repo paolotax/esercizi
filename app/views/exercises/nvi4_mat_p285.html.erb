@@ -1,0 +1,144 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Esercizio 1 -->
+    <div class="space-y-4">
+      <p class="font-bold text-gray-700 dark:text-gray-200">
+        <%= numero_esercizio_badge(1) %>
+        Cancella con una riga i poligoni che non hanno le proprietà indicate e al termine scoprirai di quale poligono si tratta. Osserva l'esempio.
+      </p>
+
+      <div class="space-y-4 text-gray-700 dark:text-gray-200">
+        <div class="flex items-start gap-2 flex-wrap">
+          <span class="font-bold">A.</span>
+          <span>È un quadrilatero. Cancella tutti i poligoni che non sono quadrilateri, come vedi nell'esempio che non è terminato. Potrebbe essere a - b - c - e - f -</span>
+          <input type="text" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white" placeholder="...">
+        </div>
+
+        <div class="flex items-start gap-2 flex-wrap">
+          <span class="font-bold">B.</span>
+          <span>È convesso. Potrebbe essere</span>
+          <input type="text" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white" placeholder="...">
+        </div>
+
+        <div class="flex items-start gap-2 flex-wrap">
+          <span class="font-bold">C.</span>
+          <span>Ha almeno una coppia di lati paralleli. Potrebbe essere</span>
+          <input type="text" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white" placeholder="...">
+        </div>
+
+        <div class="flex items-start gap-2 flex-wrap">
+          <span class="font-bold">D.</span>
+          <span>Ha tutti i lati congruenti. Potrebbe essere</span>
+          <input type="text" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white" placeholder="...">
+        </div>
+
+        <div class="flex items-start gap-2 flex-wrap">
+          <span class="font-bold">E.</span>
+          <span>I suoi angoli sono uguali a due a due. Allora è</span>
+          <input type="text" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 font-bold bg-transparent dark:text-white" placeholder="...">
+        </div>
+      </div>
+
+      <!-- Poligoni -->
+      <div class="grid grid-cols-3 md:grid-cols-4 gap-4 mt-6">
+        <!-- a - rettangolo -->
+        <div class="flex flex-col items-center gap-1">
+          <svg viewBox="0 0 100 60" class="w-24 h-16">
+            <rect x="10" y="10" width="80" height="40" fill="none" stroke="#22d3ee" stroke-width="2"/>
+          </svg>
+          <span class="text-gray-600 dark:text-gray-400">a</span>
+        </div>
+
+        <!-- b - triangolo -->
+        <div class="flex flex-col items-center gap-1">
+          <svg viewBox="0 0 100 60" class="w-24 h-16">
+            <polygon points="50,10 90,50 10,50" fill="none" stroke="#22d3ee" stroke-width="2"/>
+          </svg>
+          <span class="text-gray-600 dark:text-gray-400">b</span>
+        </div>
+
+        <!-- c - triangolo rettangolo -->
+        <div class="flex flex-col items-center gap-1">
+          <svg viewBox="0 0 100 60" class="w-24 h-16">
+            <polygon points="10,50 10,10 90,50" fill="none" stroke="#22d3ee" stroke-width="2"/>
+          </svg>
+          <span class="text-gray-600 dark:text-gray-400">c</span>
+        </div>
+
+        <!-- d - pentagono concavo -->
+        <div class="flex flex-col items-center gap-1">
+          <svg viewBox="0 0 100 70" class="w-24 h-16">
+            <polygon points="10,60 10,10 50,30 90,10 90,60" fill="none" stroke="#22d3ee" stroke-width="2"/>
+            <line x1="10" y1="35" x2="90" y2="35" stroke="#22d3ee" stroke-width="1" stroke-dasharray="3"/>
+          </svg>
+          <span class="text-gray-600 dark:text-gray-400">d</span>
+        </div>
+
+        <!-- e - pentagono -->
+        <div class="flex flex-col items-center gap-1">
+          <svg viewBox="0 0 100 60" class="w-24 h-16">
+            <polygon points="50,5 90,25 75,55 25,55 10,25" fill="none" stroke="#22d3ee" stroke-width="2"/>
+          </svg>
+          <span class="text-gray-600 dark:text-gray-400">e</span>
+        </div>
+
+        <!-- f - rettangolo piccolo -->
+        <div class="flex flex-col items-center gap-1">
+          <svg viewBox="0 0 100 60" class="w-24 h-16">
+            <rect x="20" y="15" width="60" height="30" fill="none" stroke="#22d3ee" stroke-width="2"/>
+          </svg>
+          <span class="text-gray-600 dark:text-gray-400">f</span>
+        </div>
+
+        <!-- g - quadrato -->
+        <div class="flex flex-col items-center gap-1">
+          <svg viewBox="0 0 100 60" class="w-24 h-16">
+            <rect x="25" y="5" width="50" height="50" fill="none" stroke="#22d3ee" stroke-width="2"/>
+          </svg>
+          <span class="text-gray-600 dark:text-gray-400">g</span>
+        </div>
+
+        <!-- h - trapezio -->
+        <div class="flex flex-col items-center gap-1">
+          <svg viewBox="0 0 100 60" class="w-24 h-16">
+            <polygon points="20,10 80,10 100,50 0,50" fill="none" stroke="#22d3ee" stroke-width="2"/>
+          </svg>
+          <span class="text-gray-600 dark:text-gray-400">h</span>
+        </div>
+
+        <!-- i - parallelogramma -->
+        <div class="flex flex-col items-center gap-1">
+          <svg viewBox="0 0 100 60" class="w-24 h-16">
+            <polygon points="25,10 90,10 75,50 10,50" fill="none" stroke="#22d3ee" stroke-width="2"/>
+          </svg>
+          <span class="text-gray-600 dark:text-gray-400">i</span>
+        </div>
+
+        <!-- l - esagono concavo -->
+        <div class="flex flex-col items-center gap-1">
+          <svg viewBox="0 0 100 70" class="w-24 h-16">
+            <polygon points="10,60 10,10 50,10 50,35 90,35 90,60" fill="none" stroke="#22d3ee" stroke-width="2"/>
+          </svg>
+          <span class="text-gray-600 dark:text-gray-400">l</span>
+        </div>
+
+        <!-- m - rombo -->
+        <div class="flex flex-col items-center gap-1">
+          <svg viewBox="0 0 100 60" class="w-24 h-16">
+            <polygon points="50,5 90,30 50,55 10,30" fill="none" stroke="#22d3ee" stroke-width="2"/>
+          </svg>
+          <span class="text-gray-600 dark:text-gray-400">m</span>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
