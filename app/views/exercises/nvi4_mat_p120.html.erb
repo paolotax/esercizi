@@ -1,0 +1,107 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Intestazione Laboratorio -->
+    <div class="p-4 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/30 rounded-2xl">
+      <p class="text-sm font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-2">Laboratorio</p>
+      <h2 class="text-2xl font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">DISEGNIAMO LE ALTEZZE DEL TRIANGOLO</h2>
+    </div>
+
+    <!-- Introduzione -->
+    <div class="text-gray-700 dark:text-gray-200">
+      <p>Per disegnare le altezze dei triangoli ti servono una riga e una squadra.</p>
+    </div>
+
+    <!-- Passo 1 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div class="text-gray-700 dark:text-gray-200">
+        <p>
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-<%= @pagina.base_color %>-500 text-white font-bold mr-2">1</span>
+          Scegli un lato come <span class="font-bold">base</span> (per esempio AB) e su quello appoggia la riga.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p120/p120_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Passo 1: appoggia la riga" %>
+      </div>
+    </div>
+
+    <!-- Passo 2 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div class="text-gray-700 dark:text-gray-200">
+        <p>
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-<%= @pagina.base_color %>-500 text-white font-bold mr-2">2</span>
+          Appoggia l'angolo retto della squadra sulla base. Fai scorrere la squadra fino a quando arriva al <span class="font-bold">vertice</span> (C) opposto alla base (AB).
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p120/p120_02.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Passo 2: posiziona la squadra" %>
+      </div>
+    </div>
+
+    <!-- Passo 3 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div class="text-gray-700 dark:text-gray-200">
+        <p>
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-<%= @pagina.base_color %>-500 text-white font-bold mr-2">3</span>
+          Traccia il segmento CH: esso rappresenta l'<span class="font-bold">altezza</span> relativa alla base AB. Procedi nello stesso modo per gli altri due lati.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p120/p120_03.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Passo 3: traccia l'altezza" %>
+      </div>
+    </div>
+
+    <!-- Esercizio -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-4">
+      <div class="text-gray-700 dark:text-gray-200 space-y-2">
+        <p class="font-bold">In ciascuno dei due triangoli traccia l'altezza relativa al lato arancione.</p>
+        <p class="font-bold">Se necessario, prolunga il lato.</p>
+        <p class="font-bold">Poi segna con una <span class="underline">X</span> il numero giusto per completare le frasi.</p>
+      </div>
+
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p120/p120_04.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Triangoli per esercizio" %>
+      </div>
+
+      <div class="space-y-3 text-gray-700 dark:text-gray-200">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>• Nel triangolo</span>
+          <div class="flex gap-2">
+            <label class="relative flex items-center justify-center w-8 h-8 bg-white dark:bg-gray-700 border-2 border-<%= @pagina.base_color %>-500 rounded-full cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-900 has-[:checked]:bg-pink-300 dark:has-[:checked]:bg-pink-700">
+              <input type="radio" name="triangolo1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+              <span class="text-gray-700 dark:text-gray-200">1</span>
+            </label>
+            <label class="relative flex items-center justify-center w-8 h-8 bg-white dark:bg-gray-700 border-2 border-<%= @pagina.base_color %>-500 rounded-full cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-900 has-[:checked]:bg-pink-300 dark:has-[:checked]:bg-pink-700">
+              <input type="radio" name="triangolo1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span class="text-gray-700 dark:text-gray-200">2</span>
+            </label>
+          </div>
+          <span>l'altezza coincide con un lato.</span>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>• Nel triangolo</span>
+          <div class="flex gap-2">
+            <label class="relative flex items-center justify-center w-8 h-8 bg-white dark:bg-gray-700 border-2 border-<%= @pagina.base_color %>-500 rounded-full cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-900 has-[:checked]:bg-pink-300 dark:has-[:checked]:bg-pink-700">
+              <input type="radio" name="triangolo2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+              <span class="text-gray-700 dark:text-gray-200">1</span>
+            </label>
+            <label class="relative flex items-center justify-center w-8 h-8 bg-white dark:bg-gray-700 border-2 border-<%= @pagina.base_color %>-500 rounded-full cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-900 has-[:checked]:bg-pink-300 dark:has-[:checked]:bg-pink-700">
+              <input type="radio" name="triangolo2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+              <span class="text-gray-700 dark:text-gray-200">2</span>
+            </label>
+          </div>
+          <span>l'altezza è esterna, "cade" sul prolungamento della base della figura.</span>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

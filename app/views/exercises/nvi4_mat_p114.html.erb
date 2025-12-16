@@ -1,0 +1,258 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-6">
+
+      <!-- Esercizio 1 IMPARARE TUTTI -->
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-2xl -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-6 border-3 border-blue-500">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= imparare_tutti_badge(1) %>
+          Collega ogni disegno alla sua definizione.
+        </p>
+
+        <div class="grid grid-cols-3 gap-4 text-center">
+          <div class="space-y-3">
+            <!-- Rette perpendicolari -->
+            <svg viewBox="0 0 120 100" class="w-full max-w-[120px] mx-auto h-auto">
+              <line x1="20" y1="80" x2="100" y2="80" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+              <line x1="60" y1="20" x2="60" y2="80" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+              <line x1="20" y1="80" x2="15" y2="75" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+              <line x1="100" y1="80" x2="105" y2="75" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+              <line x1="60" y1="20" x2="55" y2="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+              <rect x="52" y="72" width="8" height="8" fill="none" stroke="currentColor" stroke-width="1" class="text-gray-700 dark:text-gray-300"/>
+            </svg>
+            <p class="p-2 border-2 border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-200">Rette perpendicolari</p>
+          </div>
+          <div class="space-y-3">
+            <!-- Rette parallele (X) -->
+            <svg viewBox="0 0 120 100" class="w-full max-w-[120px] mx-auto h-auto">
+              <line x1="20" y1="20" x2="100" y2="80" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+              <line x1="100" y1="20" x2="20" y2="80" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+              <line x1="20" y1="20" x2="15" y2="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+              <line x1="100" y1="80" x2="105" y2="85" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+              <line x1="100" y1="20" x2="105" y2="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+              <line x1="20" y1="80" x2="15" y2="85" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+            </svg>
+            <p class="p-2 border-2 border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-200">Rette parallele</p>
+          </div>
+          <div class="space-y-3">
+            <!-- Rette incidenti -->
+            <svg viewBox="0 0 120 100" class="w-full max-w-[120px] mx-auto h-auto">
+              <line x1="20" y1="70" x2="100" y2="30" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+              <line x1="20" y1="30" x2="100" y2="70" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+              <line x1="20" y1="70" x2="15" y2="73" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+              <line x1="100" y1="30" x2="105" y2="27" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+              <line x1="20" y1="30" x2="15" y2="27" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+              <line x1="100" y1="70" x2="105" y2="73" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+            </svg>
+            <p class="p-2 border-2 border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-200">Rette incidenti</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout a due colonne -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Colonna sinistra -->
+        <div class="space-y-6">
+
+          <!-- Esercizio 2 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(2) %>
+              Leggi e disegna.
+            </p>
+            <ul class="list-disc pl-6 space-y-1 text-gray-700 dark:text-gray-200 marker:text-<%= @pagina.base_color %>-500 mb-4">
+              <li>Due rette incidenti non perpendicolari che passano per il punto A.</li>
+              <li>Due rette incidenti perpendicolari che passano per il punto B.</li>
+              <li>Due rette parallele che passano rispettivamente per i punti C e D.</li>
+            </ul>
+            <div class="flex justify-center">
+              <%= image_tag "nvi4_mat/p114/p114_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Griglia con punti A, B, C, D" %>
+            </div>
+          </div>
+
+          <!-- Esercizio 3 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(3) %>
+              In base all'ampiezza, scrivi sui puntini il nome di ciascuno degli angoli indicati.
+            </p>
+            <div class="grid grid-cols-3 gap-4">
+              <div class="text-center space-y-2">
+                <svg viewBox="0 0 100 80" class="w-full max-w-[100px] mx-auto h-auto">
+                  <line x1="10" y1="60" x2="90" y2="60" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <line x1="10" y1="60" x2="50" y2="15" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <path d="M 25 60 A 15 15 0 0 1 22 48" fill="none" stroke="#F59E0B" stroke-width="2"/>
+                </svg>
+                <input type="text" data-correct-answer="acuto" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+              </div>
+              <div class="text-center space-y-2">
+                <svg viewBox="0 0 100 80" class="w-full max-w-[100px] mx-auto h-auto">
+                  <line x1="10" y1="60" x2="90" y2="60" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <line x1="50" y1="60" x2="50" y2="10" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <path d="M 65 60 A 15 15 0 0 1 50 45" fill="none" stroke="#F59E0B" stroke-width="2"/>
+                  <rect x="50" y="45" width="10" height="10" fill="none" stroke="#F59E0B" stroke-width="1"/>
+                </svg>
+                <input type="text" data-correct-answer="retto" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+              </div>
+              <div class="text-center space-y-2">
+                <svg viewBox="0 0 100 80" class="w-full max-w-[100px] mx-auto h-auto">
+                  <line x1="10" y1="40" x2="90" y2="40" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <line x1="10" y1="40" x2="10" y2="70" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+                  <path d="M 25 40 A 15 15 0 0 0 10 55" fill="none" stroke="#F59E0B" stroke-width="2"/>
+                </svg>
+                <input type="text" data-correct-answer="piatto" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+              </div>
+            </div>
+          </div>
+
+          <!-- Esercizio 4 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(4) %>
+              Completa le frasi.
+            </p>
+            <ul class="space-y-3 text-gray-700 dark:text-gray-200">
+              <li class="flex items-center gap-2 flex-wrap">
+                <span class="text-<%= @pagina.base_color %>-500">&#8226;</span>
+                <span>Le semirette che formano l'angolo si chiamano</span>
+                <input type="text" data-correct-answer="lati" class="flex-1 min-w-[100px] border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+              </li>
+              <li class="flex items-center gap-2 flex-wrap">
+                <span class="text-<%= @pagina.base_color %>-500">&#8226;</span>
+                <span>Gli angoli si possono distinguere in</span>
+                <input type="text" data-correct-answer="convessi" class="flex-1 min-w-[100px] border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                <span>e concavi.</span>
+              </li>
+              <li class="flex items-center gap-2 flex-wrap">
+                <span class="text-<%= @pagina.base_color %>-500">&#8226;</span>
+                <span>L'ampiezza è la</span>
+                <input type="text" data-correct-answer="misura" class="flex-1 min-w-[100px] border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+                <span>dell'angolo.</span>
+              </li>
+              <li class="flex items-center gap-2 flex-wrap">
+                <span class="text-<%= @pagina.base_color %>-500">&#8226;</span>
+                <span>Il punto di origine dei lati dell'angolo si chiama</span>
+                <input type="text" data-correct-answer="vertice" class="flex-1 min-w-[100px] border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Colonna destra -->
+        <div class="space-y-6">
+
+          <!-- Esercizio 5 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(5) %>
+              Osserva gli angoli indicati e segna con una X solo quelli concavi.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+              <!-- 6 figure con angoli da identificare -->
+              <div class="relative">
+                <svg viewBox="0 0 100 80" class="w-full h-auto">
+                  <line x1="20" y1="60" x2="80" y2="60" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <line x1="20" y1="60" x2="50" y2="20" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <path d="M 35 60 A 15 15 0 0 1 32 48" fill="#FDE047" fill-opacity="0.5" stroke="#F59E0B" stroke-width="2"/>
+                </svg>
+                <label class="absolute top-0 right-0 w-6 h-6 border-2 border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 cursor-pointer flex items-center justify-center">
+                  <input type="checkbox" class="sr-only" data-correct-answer="false">
+                  <span class="hidden text-<%= @pagina.base_color %>-600 font-bold">X</span>
+                </label>
+              </div>
+              <div class="relative">
+                <svg viewBox="0 0 100 80" class="w-full h-auto">
+                  <line x1="20" y1="40" x2="80" y2="40" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <line x1="50" y1="40" x2="80" y2="70" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <path d="M 65 40 A 15 15 0 0 1 62 52" fill="#FDE047" fill-opacity="0.5" stroke="#F59E0B" stroke-width="2"/>
+                </svg>
+                <label class="absolute top-0 right-0 w-6 h-6 border-2 border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 cursor-pointer flex items-center justify-center">
+                  <input type="checkbox" class="sr-only" data-correct-answer="false">
+                  <span class="hidden text-<%= @pagina.base_color %>-600 font-bold">X</span>
+                </label>
+              </div>
+              <div class="relative">
+                <svg viewBox="0 0 100 80" class="w-full h-auto">
+                  <polygon points="20,60 50,20 80,60" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <path d="M 35 55 A 10 10 0 0 1 27 48" fill="#FDE047" fill-opacity="0.5" stroke="#F59E0B" stroke-width="2"/>
+                </svg>
+                <label class="absolute top-0 right-0 w-6 h-6 border-2 border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 cursor-pointer flex items-center justify-center">
+                  <input type="checkbox" class="sr-only" data-correct-answer="false">
+                  <span class="hidden text-<%= @pagina.base_color %>-600 font-bold">X</span>
+                </label>
+              </div>
+              <div class="relative">
+                <svg viewBox="0 0 100 80" class="w-full h-auto">
+                  <polygon points="20,70 20,20 70,20 70,50 40,50 40,70" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <path d="M 45 50 A 8 8 0 0 0 40 58" fill="#FDE047" fill-opacity="0.5" stroke="#F59E0B" stroke-width="2"/>
+                </svg>
+                <label class="absolute top-0 right-0 w-6 h-6 border-2 border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 cursor-pointer flex items-center justify-center">
+                  <input type="checkbox" class="sr-only" data-correct-answer="true">
+                  <span class="hidden text-<%= @pagina.base_color %>-600 font-bold">X</span>
+                </label>
+              </div>
+              <div class="relative">
+                <svg viewBox="0 0 100 80" class="w-full h-auto">
+                  <line x1="20" y1="20" x2="80" y2="60" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <line x1="20" y1="20" x2="80" y2="20" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <line x1="20" y1="20" x2="10" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3,3" class="text-gray-500"/>
+                  <path d="M 35 20 A 15 15 0 0 1 32 32" fill="#FDE047" fill-opacity="0.5" stroke="#F59E0B" stroke-width="2"/>
+                </svg>
+                <label class="absolute top-0 right-0 w-6 h-6 border-2 border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 cursor-pointer flex items-center justify-center">
+                  <input type="checkbox" class="sr-only" data-correct-answer="false">
+                  <span class="hidden text-<%= @pagina.base_color %>-600 font-bold">X</span>
+                </label>
+              </div>
+              <div class="relative">
+                <svg viewBox="0 0 100 80" class="w-full h-auto">
+                  <polygon points="20,60 50,20 80,60 50,40" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-700 dark:text-gray-300"/>
+                  <path d="M 55 42 A 8 8 0 0 0 50 50" fill="#FDE047" fill-opacity="0.5" stroke="#F59E0B" stroke-width="2"/>
+                </svg>
+                <label class="absolute top-0 right-0 w-6 h-6 border-2 border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 cursor-pointer flex items-center justify-center">
+                  <input type="checkbox" class="sr-only" data-correct-answer="true">
+                  <span class="hidden text-<%= @pagina.base_color %>-600 font-bold">X</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Esercizio 6 -->
+          <div>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(6) %>
+              Disegna gli angoli seguendo le indicazioni.
+            </p>
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <div class="border-2 border-cyan-400 dark:border-cyan-600 p-2 bg-white dark:bg-gray-800 aspect-[2/1]">
+                  <div class="w-full h-full" style="background-image: linear-gradient(#e5e7eb 1px, transparent 1px), linear-gradient(90deg, #e5e7eb 1px, transparent 1px); background-size: 20px 20px;"></div>
+                </div>
+                <p class="text-center text-gray-700 dark:text-gray-200 mt-1">un angolo convesso</p>
+              </div>
+              <div>
+                <div class="border-2 border-cyan-400 dark:border-cyan-600 p-2 bg-white dark:bg-gray-800 aspect-[2/1]">
+                  <div class="w-full h-full" style="background-image: linear-gradient(#e5e7eb 1px, transparent 1px), linear-gradient(90deg, #e5e7eb 1px, transparent 1px); background-size: 20px 20px;"></div>
+                </div>
+                <p class="text-center text-gray-700 dark:text-gray-200 mt-1">un angolo concavo</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

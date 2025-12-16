@@ -1,0 +1,145 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Teoria: La rotazione -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <p class="text-gray-700 dark:text-gray-200">
+          Osserva la bandiera. Ha subito uno spostamento dalla posizione A alla posizione B compiendo un movimento che si chiama <span class="font-bold">rotazione</span>.
+        </p>
+        <p class="text-gray-700 dark:text-gray-200">
+          Tale movimento ricorda quello delle lancette dell'orologio che ruotano rimanendo fisse in un punto (O).
+        </p>
+        <p class="text-gray-700 dark:text-gray-200">Le rotazioni hanno:</p>
+        <ul class="list-disc pl-6 space-y-1 text-gray-700 dark:text-gray-200 marker:text-<%= @pagina.base_color %>-500">
+          <li>un <span class="font-bold">centro di rotazione</span>, che è il punto intorno al quale ruota la figura;</li>
+          <li>un <span class="font-bold">verso di rotazione</span>, che può essere orario (come il movimento delle lancette dell'orologio) o antiorario (contrario a quello delle lancette);</li>
+          <li>un <span class="font-bold">angolo di rotazione</span>, ovvero l'ampiezza della rotazione, che si misura in gradi (°).</li>
+        </ul>
+        <p class="text-gray-700 dark:text-gray-200">
+          La bandiera ha compiuto una rotazione di <%= render 'shared/frazione', num: 1, den: 4 %> di giro (90°) intorno al punto O in senso orario.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p116/p116_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Rotazione della bandiera" %>
+      </div>
+    </div>
+
+    <!-- Confronta la figura -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> Confronta la figura nelle due posizioni e rispondi.
+        </p>
+
+        <div class="space-y-3">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-gray-700 dark:text-gray-200">Ha cambiato forma?</span>
+            <div class="flex gap-2">
+              <label class="relative flex items-center justify-center w-10 h-8 bg-white dark:bg-gray-700 border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-900 has-[:checked]:bg-pink-300 dark:has-[:checked]:bg-pink-700">
+                <input type="radio" name="vf1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                <span class="text-gray-700 dark:text-gray-200">Sì</span>
+              </label>
+              <label class="relative flex items-center justify-center w-10 h-8 bg-white dark:bg-gray-700 border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-900 has-[:checked]:bg-pink-300 dark:has-[:checked]:bg-pink-700">
+                <input type="radio" name="vf1" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                <span class="text-gray-700 dark:text-gray-200">No</span>
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-gray-700 dark:text-gray-200">Ha cambiato posizione?</span>
+            <div class="flex gap-2">
+              <label class="relative flex items-center justify-center w-10 h-8 bg-white dark:bg-gray-700 border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-900 has-[:checked]:bg-pink-300 dark:has-[:checked]:bg-pink-700">
+                <input type="radio" name="vf2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                <span class="text-gray-700 dark:text-gray-200">Sì</span>
+              </label>
+              <label class="relative flex items-center justify-center w-10 h-8 bg-white dark:bg-gray-700 border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-900 has-[:checked]:bg-pink-300 dark:has-[:checked]:bg-pink-700">
+                <input type="radio" name="vf2" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                <span class="text-gray-700 dark:text-gray-200">No</span>
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-gray-700 dark:text-gray-200">Ha cambiato dimensione?</span>
+            <div class="flex gap-2">
+              <label class="relative flex items-center justify-center w-10 h-8 bg-white dark:bg-gray-700 border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-900 has-[:checked]:bg-pink-300 dark:has-[:checked]:bg-pink-700">
+                <input type="radio" name="vf3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="false">
+                <span class="text-gray-700 dark:text-gray-200">Sì</span>
+              </label>
+              <label class="relative flex items-center justify-center w-10 h-8 bg-white dark:bg-gray-700 border-2 border-<%= @pagina.base_color %>-500 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-900 has-[:checked]:bg-pink-300 dark:has-[:checked]:bg-pink-700">
+                <input type="radio" name="vf3" class="absolute inset-0 opacity-0 cursor-pointer" data-correct-answer="true">
+                <span class="text-gray-700 dark:text-gray-200">No</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 bg-custom-blue dark:bg-cyan-900 rounded-2xl">
+        <p class="text-gray-700 dark:text-gray-200">
+          La simmetria, la traslazione e la rotazione si chiamano anche <span class="font-bold">movimenti rigidi</span>, perché non modificano né la forma né le dimensioni delle figure, ma solo la loro posizione.
+        </p>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+
+      <!-- Esercizio 1 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Per ciascuna di queste figure traccia l'asse di simmetria.
+        </p>
+        <div class="flex justify-center">
+          <%= image_tag "nvi4_mat/p116/output-1715932804116_84_784_500_140.png", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Figure per asse di simmetria" %>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div class="mb-8">
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Traccia il vettore che rappresenta la traslazione della figura.
+        </p>
+        <div class="flex justify-center">
+          <%= image_tag "nvi4_mat/p116/p116_02.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Traslazione della figura" %>
+        </div>
+      </div>
+
+      <!-- Esercizio 3 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Osserva la rotazione e completa la frase.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="flex justify-center">
+            <%= image_tag "nvi4_mat/p116/output-1715932804116_622_799_307_223.png", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Rotazione" %>
+          </div>
+          <div class="space-y-3 text-gray-700 dark:text-gray-200">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span>La rotazione è avvenuta in senso</span>
+              <input type="text" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-correct-answer="orario">
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span>e l'ampiezza di rotazione è di</span>
+              <input type="text" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-correct-answer="90°,90">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [240] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Definizione poligono -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="space-y-4">
+        <div class="p-4 bg-custom-blue dark:bg-cyan-900 rounded-2xl">
+          <p class="text-gray-700 dark:text-gray-200">
+            Un <span class="font-bold">poligono</span> è una parte di piano delimitata da una <span class="font-bold">linea spezzata semplice chiusa</span>.
+          </p>
+        </div>
+
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> Leggi, osserva la figura e scrivi i nomi al posto giusto.
+        </p>
+
+        <ul class="space-y-2 text-gray-700 dark:text-gray-200">
+          <li>– I <span class="font-bold">lati</span> sono i segmenti che formano il contorno del poligono.</li>
+          <li>– I <span class="font-bold">vertici</span> sono i punti in cui si incontrano due lati consecutivi.</li>
+          <li>– Gli <span class="font-bold">angoli interni</span> sono le parti di piano comprese tra due segmenti consecutivi.</li>
+          <li>– La <span class="font-bold">superficie interna</span> è la zona di piano racchiusa dai lati.</li>
+          <li>– Le <span class="font-bold">diagonali</span> sono i segmenti che uniscono due vertici non consecutivi.</li>
+        </ul>
+      </div>
+
+      <!-- Box classificazione linee -->
+      <div class="p-4 bg-white dark:bg-gray-800 rounded-2xl border-3 border-blue-800 dark:border-blue-600">
+        <p class="text-gray-700 dark:text-gray-200 mb-4">
+          <span class="text-<%= @pagina.base_color %>-500">▶</span> Ricordi la classificazione delle linee?
+        </p>
+        <div class="space-y-3">
+          <div class="flex items-center gap-4">
+            <%= image_tag "nvi4_mat/p117/output-1715932804117_657_254_158_87.png", class: "w-24 h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Linea spezzata semplice aperta" %>
+            <span class="text-gray-700 dark:text-gray-200">linea spezzata semplice aperta</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <%= image_tag "nvi4_mat/p117/output-1715932804117_664_343_153_81.png", class: "w-24 h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Linea spezzata incrociata aperta" %>
+            <span class="text-gray-700 dark:text-gray-200">linea spezzata incrociata aperta</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <%= image_tag "nvi4_mat/p117/output-1715932804117_658_427_158_84.png", class: "w-24 h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Linea spezzata incrociata chiusa" %>
+            <span class="text-gray-700 dark:text-gray-200">linea spezzata incrociata chiusa</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <%= image_tag "nvi4_mat/p117/output-1715932804117_650_514_146_80.png", class: "w-24 h-auto dark:bg-white dark:rounded-lg dark:p-1", alt: "Linea spezzata semplice chiusa" %>
+            <span class="text-gray-700 dark:text-gray-200">linea spezzata semplice chiusa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Figura poligono con input -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+      <div class="space-y-3">
+        <div class="p-3 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg">
+          <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-correct-answer="lati">
+        </div>
+        <div class="p-3 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg">
+          <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-correct-answer="diagonali">
+        </div>
+        <div class="p-3 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg">
+          <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-correct-answer="vertici">
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p117/p117_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Poligono con elementi" %>
+      </div>
+      <div class="space-y-3">
+        <div class="p-3 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg">
+          <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-correct-answer="angoli interni,angolo interno">
+        </div>
+        <div class="p-3 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg">
+          <input type="text" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="..." data-correct-answer="superficie interna">
+        </div>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Colora di verde solo i poligoni.
+        </p>
+        <div class="flex justify-center">
+          <%= image_tag "nvi4_mat/p117/p117_02.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Figure da colorare" %>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [241] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
