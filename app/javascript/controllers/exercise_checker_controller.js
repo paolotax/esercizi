@@ -518,7 +518,8 @@ export default class extends Controller {
         const isQuadernoInput = input.hasAttribute('data-quaderno-addition-target') ||
             input.hasAttribute('data-quaderno-subtraction-target') ||
             input.hasAttribute('data-quaderno-multiplication-target') ||
-            input.hasAttribute('data-quaderno-division-target')
+            input.hasAttribute('data-quaderno-division-target') ||
+            input.hasAttribute('data-quaderno-target')
 
         // For quaderno inputs: use simpler styling and handle empty cells correctly
         if (isQuadernoInput) {
@@ -961,7 +962,8 @@ export default class extends Controller {
       const isQuadernoInput = input.hasAttribute('data-quaderno-addition-target') ||
           input.hasAttribute('data-quaderno-subtraction-target') ||
           input.hasAttribute('data-quaderno-multiplication-target') ||
-          input.hasAttribute('data-quaderno-division-target')
+          input.hasAttribute('data-quaderno-division-target') ||
+          input.hasAttribute('data-quaderno-target')
 
       // For quaderno inputs: only fill non-empty values and use simpler styling
       if (isQuadernoInput) {
@@ -1057,6 +1059,15 @@ export default class extends Controller {
       const addController = this.application.getControllerForElementAndIdentifier(addElement, "quaderno-addition")
       if (addController && addController.showResult) {
         addController.showResult()
+      }
+    })
+
+    // Show unified quaderno controller solutions
+    const quadernoControllers = this.element.querySelectorAll("[data-controller=\"quaderno\"]")
+    quadernoControllers.forEach(quadernoElement => {
+      const quadernoController = this.application.getControllerForElementAndIdentifier(quadernoElement, "quaderno")
+      if (quadernoController && quadernoController.showResult) {
+        quadernoController.showResult()
       }
     })
 
@@ -1197,7 +1208,8 @@ export default class extends Controller {
       if (input.hasAttribute('data-quaderno-addition-target') ||
           input.hasAttribute('data-quaderno-subtraction-target') ||
           input.hasAttribute('data-quaderno-multiplication-target') ||
-          input.hasAttribute('data-quaderno-division-target')) {
+          input.hasAttribute('data-quaderno-division-target') ||
+          input.hasAttribute('data-quaderno-target')) {
         return
       }
 
@@ -1266,6 +1278,15 @@ export default class extends Controller {
           input.classList.remove('text-gray-300', 'dark:text-gray-600')
           input.classList.add('text-gray-800', 'dark:text-gray-100')
         })
+      }
+    })
+
+    // Reset unified quaderno controllers
+    const quadernoControllers = this.element.querySelectorAll("[data-controller=\"quaderno\"]")
+    quadernoControllers.forEach(quadernoElement => {
+      const quadernoController = this.application.getControllerForElementAndIdentifier(quadernoElement, "quaderno")
+      if (quadernoController && quadernoController.clearGrid) {
+        quadernoController.clearGrid()
       }
     })
 

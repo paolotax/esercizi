@@ -6,7 +6,7 @@ import JSConfetti from "js-confetti"
  * Gestisce addizione, sottrazione, moltiplicazione, divisione
  */
 export default class extends Controller {
-  static targets = ["input", "result", "carry", "commaSpot", "commaShift"]
+  static targets = ["input", "result", "carry", "step", "commaSpot", "commaShift"]
 
   connect() {
     this.jsConfetti = new JSConfetti()
@@ -352,6 +352,18 @@ export default class extends Controller {
     // Mostra gli input (operandi)
     if (this.hasInputTarget) {
       this.inputTargets.forEach(input => {
+        const correctAnswer = input.getAttribute('data-correct-answer')
+        if (correctAnswer) {
+          input.value = correctAnswer
+        }
+      })
+    }
+  }
+
+  showSteps() {
+    // Mostra gli step intermedi (prodotti, resti, numeri abbassati)
+    if (this.hasStepTarget) {
+      this.stepTargets.forEach(input => {
         const correctAnswer = input.getAttribute('data-correct-answer')
         if (correctAnswer) {
           input.value = correctAnswer

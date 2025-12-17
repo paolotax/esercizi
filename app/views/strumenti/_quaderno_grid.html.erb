@@ -16,6 +16,7 @@
   controller_name = grid[:controller] || "quaderno"
   title = grid[:title]
   show_toolbar = grid[:show_toolbar]
+  show_steps_button = grid[:show_steps_button] || false
   rows = grid[:rows]
 %>
 
@@ -62,7 +63,9 @@
             is_last_two_cols = (col >= columns - 2)
             # Bordo spesso su tutte le celle tranne margini (prima e ultime 2)
             is_in_data_area = !is_first_col && !is_last_two_cols
-            has_thick_top = row_has_thick_border && is_in_data_area
+            # Bordo spesso: dalla riga O dalla singola cella
+            cell_has_thick_border = cell[:thick_border_top]
+            has_thick_top = (row_has_thick_border && is_in_data_area) || cell_has_thick_border
 
             border_classes = ""
             border_classes += " border-r border-gray-300 dark:border-gray-600" unless is_last_col
@@ -71,7 +74,9 @@
             border_classes += " border-l-2 border-l-gray-700 dark:border-l-gray-300" if has_separator && col == has_separator
 
             bg_class = cell[:bg_class] || ""
-            bg_class = "bg-gray-50 dark:bg-gray-800" if is_result_row && is_in_data_area && bg_class.blank?
+            # Sfondo grigio per righe risultato o celle con target "result"
+            is_result_cell = cell[:target] == "result"
+            bg_class = "bg-gray-50 dark:bg-gray-800" if (is_result_row || is_result_cell) && is_in_data_area && bg_class.blank?
           %>
 
           <div class="<%= border_classes %> <%= bg_class %> relative" style="height: <%= row_height %>;">
@@ -153,7 +158,7 @@
 
       <% elsif row[:type] == :toolbar %>
         <%# Riga toolbar %>
-        <%= render "strumenti/quaderno_toolbar", total_cols: columns %>
+        <%= render "strumenti/quaderno_toolbar", total_cols: columns, show_steps_button: show_steps_button %>
       <% end %>
     <% end %>
 

@@ -4,12 +4,20 @@
 %>
 
 <%
+  # Parametro opzionale per mostrare il pulsante steps (solo divisione)
+  show_steps = local_assigns[:show_steps_button] || false
+
   toolbar_buttons = [
     { action: "clearGrid", color: "bg-gray-400/40 hover:bg-gray-400/70", icon: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16", title: "Cancella" },
     { action: "showNumbers", color: "bg-blue-400/40 hover:bg-blue-400/70", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", title: "Mostra Numeri" },
     { action: "showResult", color: "bg-green-400/40 hover:bg-green-400/70", icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z", title: "Mostra Risultato" },
     { action: "verifyAnswers", color: "bg-purple-400/40 hover:bg-purple-400/70", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4", title: "Verifica" }
   ]
+
+  # Inserisci pulsante steps dopo showNumbers se richiesto
+  if show_steps
+    toolbar_buttons.insert(2, { action: "showSteps", color: "bg-orange-400/40 hover:bg-orange-400/70", icon: "M13 5l7 7-7 7M5 5l7 7-7 7", title: "Mostra Passi" })
+  end
 %>
 
 <% total_cols.times do |i| %>
