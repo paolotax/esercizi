@@ -396,4 +396,218 @@ class Addizione
   def to_s
     @addends.join(" #{@operator} ")
   end
+
+  # Genera la matrice per il partial unificato _quaderno_grid
+  def to_grid_matrix
+    column_types = quaderno_column_types
+    total_cols = column_types.length + 2 # +2 per colonne vuote ai lati
+    cell_size = "2.5em"
+    carry_height = "1.5em"
+
+    rows = []
+
+    # Riga etichette o vuota sopra
+    rows << build_labels_row(column_types, total_cols, cell_size)
+
+    # Riga dei riporti
+    rows << build_carry_row(column_types, total_cols, carry_height) if @show_carry
+
+    # Righe degli addendi
+    @addends.each_with_index do |_, addend_idx|
+      rows << build_addend_row(addend_idx, column_types, total_cols, cell_size)
+    end
+
+    # Riga del risultato
+    rows << build_result_row(column_types, total_cols, cell_size)
+
+    # Riga vuota sotto
+    rows << { type: :empty, height: cell_size }
+
+    # Riga toolbar
+    rows << { type: :toolbar } if @show_toolbar
+
+    {
+      columns: total_cols,
+      cell_size: cell_size,
+      controller: "quaderno",
+      title: @title,
+      show_toolbar: @show_toolbar,
+      rows: rows
+    }
+  end
+
+  private
+
+  def build_labels_row(column_types, total_cols, cell_size)
+    cells = []
+
+    # Cella vuota sinistra
+    cells << { type: :empty }
+
+    if @show_labels
+      labels = quaderno_labels
+      label_colors = quaderno_label_colors
+      label_idx = 0
+
+      column_types.each do |col_type|
+        case col_type
+        when :sign
+          cells << { type: :empty }
+        when :comma
+          cells << { type: :label, value: ",", classes: "" }
+        else
+          cells << { type: :label, value: labels[label_idx], classes: label_colors[label_idx] }
+          label_idx += 1
+        end
+      end
+    else
+      column_types.length.times { cells << { type: :empty } }
+    end
+
+    # Cella vuota destra
+    cells << { type: :empty }
+
+    { type: :cells, height: cell_size, cells: cells }
+  end
+
+  def build_carry_row(column_types, total_cols, carry_height)
+    cells = []
+    carries = quaderno_carries
+    carry_counter = 0
+
+    # Cella vuota sinistra
+    cells << { type: :empty }
+
+    column_types.each do |col_type|
+      case col_type
+      when :sign
+        cells << { type: :empty }
+      when :comma
+        cells << { type: :empty }
+        carry_counter += 1
+      else
+        carry_value = carries[carry_counter] || ""
+        is_last_digit_col = has_decimals? ? (carry_counter == carries.length - 1) : (carry_counter == @max_integer_digits - 1)
+
+        cells << {
+          type: :digit,
+          value: carry_value.to_s,
+          target: "carry",
+          editable: true,
+          disabled: is_last_digit_col,
+          show_value: @show_solution && carry_value.present?,
+          classes: "text-blue-600 dark:text-blue-400",
+          bg_class: is_last_digit_col ? "" : "bg-blue-50 dark:bg-blue-900/30",
+          nav_direction: "ltr"
+        }
+        carry_counter += 1
+      end
+    end
+
+    # Cella vuota destra
+    cells << { type: :empty }
+
+    { type: :cells, height: carry_height, cells: cells }
+  end
+
+  def build_addend_row(addend_idx, column_types, total_cols, cell_size)
+    cells = []
+    digits = quaderno_addend_digits(addend_idx)
+    digit_counter = 0
+
+    # Cella vuota sinistra
+    cells << { type: :empty }
+
+    column_types.each do |col_type|
+      case col_type
+      when :sign
+        sign_value = if addend_idx == @addends.length - 1
+                       "="
+                     else
+                       @operator
+                     end
+        cells << {
+          type: :sign,
+          value: sign_value,
+          classes: "text-blue-600 dark:text-blue-400"
+        }
+      when :comma
+        cells << {
+          type: :digit,
+          value: ",",
+          target: "input",
+          editable: true,
+          show_value: show_addend?(addend_idx),
+          classes: "text-gray-700 dark:text-gray-300",
+          nav_direction: "ltr"
+        }
+        digit_counter += 1
+      else
+        digit = digits[digit_counter] || ""
+        digit = "" if digit == ","
+
+        cells << {
+          type: :digit,
+          value: digit,
+          target: "input",
+          editable: true,
+          show_value: show_addend?(addend_idx) && digit.present?,
+          classes: "text-gray-800 dark:text-gray-100",
+          nav_direction: "ltr"
+        }
+        digit_counter += 1
+      end
+    end
+
+    # Cella vuota destra
+    cells << { type: :empty }
+
+    { type: :cells, height: cell_size, cells: cells }
+  end
+
+  def build_result_row(column_types, total_cols, cell_size)
+    cells = []
+    result_digits_arr = quaderno_result_digits
+    result_counter = 0
+
+    # Cella vuota sinistra
+    cells << { type: :empty }
+
+    column_types.each do |col_type|
+      case col_type
+      when :sign
+        cells << { type: :empty }
+      when :comma
+        cells << {
+          type: :digit,
+          value: ",",
+          target: "result",
+          editable: true,
+          show_value: @show_solution,
+          classes: "text-gray-700 dark:text-gray-300",
+          nav_direction: "rtl"
+        }
+        result_counter += 1
+      else
+        digit = result_digits_arr[result_counter] || ""
+        digit = "" if digit == ","
+
+        cells << {
+          type: :digit,
+          value: digit,
+          target: "result",
+          editable: true,
+          show_value: @show_solution && digit.present?,
+          classes: "text-gray-800 dark:text-gray-100",
+          nav_direction: "rtl"
+        }
+        result_counter += 1
+      end
+    end
+
+    # Cella vuota destra
+    cells << { type: :empty }
+
+    { type: :result, height: cell_size, cells: cells, thick_border_top: true }
+  end
 end

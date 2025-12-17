@@ -279,4 +279,300 @@ class Divisione
   def to_partial_params
     { divisione: self }
   end
+
+  # Genera la matrice per il partial unificato _quaderno_grid
+  # La divisione italiana ha un layout particolare:
+  # - Colonna sinistra: dividendo sopra, passi intermedi sotto
+  # - Separatore verticale
+  # - Colonna destra: divisore sopra, quoziente sotto
+  def to_grid_matrix
+    left_cols = left_column_width
+    right_cols = right_column_width
+    separator_col = 1  # Colonna separatore verticale
+    total_cols = left_cols + separator_col + right_cols + 2 # +2 margini
+
+    cell_size = "2.5em"
+    steps = division_steps
+
+    rows = []
+
+    # Riga dividendo | divisore (con bordo sotto dividendo)
+    rows << build_dividend_divisor_row(left_cols, right_cols, total_cols, cell_size)
+
+    # Riga quoziente (sotto il divisore)
+    rows << build_quotient_row(left_cols, right_cols, total_cols, cell_size)
+
+    # Righe passi intermedi (prodotti, resti, abbassamenti)
+    steps.each_with_index do |step, step_idx|
+      # Riga prodotto (divisore × cifra quoziente)
+      rows << build_product_row(step, step_idx, left_cols, right_cols, total_cols, cell_size)
+
+      # Riga resto (con cifra abbassata se presente)
+      next_step_has_bring_down = step[:bring_down].present?
+      rows << build_remainder_row(step, step_idx, left_cols, right_cols, total_cols, cell_size, next_step_has_bring_down)
+    end
+
+    # Riga vuota sotto
+    rows << { type: :empty, height: cell_size }
+
+    # Riga toolbar
+    rows << { type: :toolbar } if @show_toolbar
+
+    {
+      columns: total_cols,
+      cell_size: cell_size,
+      controller: "quaderno",
+      title: @title,
+      show_toolbar: @show_toolbar,
+      separator_col: left_cols + 1,  # Posizione del separatore verticale
+      remainder: has_remainder? ? @remainder : nil,
+      rows: rows
+    }
+  end
+
+  private
+
+  def build_dividend_divisor_row(left_cols, right_cols, total_cols, cell_size)
+    cells = []
+    div_digits = raw_dividend_digits
+    divisor_digs = raw_divisor_digits
+
+    # Margine sinistro
+    cells << { type: :empty }
+
+    # Dividendo (allineato a destra nella colonna sinistra)
+    padding_left = left_cols - div_digits.length
+    padding_left.times { cells << { type: :empty } }
+
+    div_digits.each_with_index do |digit, idx|
+      pos_from_right = div_digits.length - 1 - idx
+      show_comma = @dividend_decimals > 0 && pos_from_right == @dividend_decimals - @decimal_shift
+
+      cell = {
+        type: :digit,
+        value: digit,
+        target: "input",
+        editable: true,
+        row: 0,
+        col: padding_left + idx,
+        show_value: @show_dividend_divisor,
+        classes: "text-gray-800 dark:text-gray-100",
+        nav_direction: "ltr"
+      }
+
+      # Virgola spostabile nel dividendo
+      if @dividend_decimals > 0 && pos_from_right == @dividend_decimals
+        cell[:comma_shift] = {
+          type: "dividend",
+          position: idx,
+          should_shift: @decimal_shift > 0
+        }
+      end
+
+      cells << cell
+    end
+
+    # Separatore verticale (bordo spesso a sinistra)
+    cells << { type: :empty }
+
+    # Divisore (allineato a sinistra nella colonna destra)
+    divisor_digs.each_with_index do |digit, idx|
+      pos_from_right = divisor_digs.length - 1 - idx
+      show_comma = @divisor_decimals > 0 && pos_from_right == @divisor_decimals
+
+      cell = {
+        type: :digit,
+        value: digit,
+        target: "input",
+        editable: true,
+        row: 0,
+        col: left_cols + 1 + idx,
+        show_value: @show_dividend_divisor,
+        classes: "text-gray-800 dark:text-gray-100",
+        nav_direction: "ltr"
+      }
+
+      # Virgola spostabile nel divisore
+      if show_comma
+        cell[:comma_shift] = {
+          type: "divisor",
+          position: idx,
+          should_shift: @decimal_shift > 0
+        }
+      end
+
+      cells << cell
+    end
+
+    # Padding destra divisore
+    padding_right = right_cols - divisor_digs.length
+    padding_right.times { cells << { type: :empty } }
+
+    # Margine destro
+    cells << { type: :empty }
+
+    { type: :cells, height: cell_size, cells: cells, separator_col: left_cols + 1 }
+  end
+
+  def build_quotient_row(left_cols, right_cols, total_cols, cell_size)
+    cells = []
+    quot_digits = quotient_digits
+    decimal_pos = quotient_decimal_position
+
+    # Margine sinistro + colonne vuote sinistra
+    cells << { type: :empty }
+    left_cols.times { cells << { type: :empty } }
+
+    # Separatore
+    cells << { type: :empty }
+
+    # Quoziente (allineato a sinistra nella colonna destra)
+    quot_digits.each_with_index do |digit, idx|
+      pos_from_right = quot_digits.length - 1 - idx
+      is_correct_comma_position = decimal_pos > 0 && pos_from_right == decimal_pos
+      can_have_comma_spot = decimal_pos > 0 && pos_from_right > 0 && pos_from_right < quot_digits.length
+
+      cell = {
+        type: :digit,
+        value: digit,
+        target: "result",
+        editable: true,
+        row: 1,
+        col: left_cols + 1 + idx,
+        show_value: @show_solution,
+        classes: "text-gray-800 dark:text-gray-100",
+        nav_direction: "ltr"
+      }
+
+      if can_have_comma_spot
+        cell[:comma_spot] = {
+          correct: is_correct_comma_position,
+          position: pos_from_right
+        }
+      end
+
+      cells << cell
+    end
+
+    # Padding destra quoziente
+    padding_right = right_cols - quot_digits.length
+    padding_right.times { cells << { type: :empty } }
+
+    # Margine destro
+    cells << { type: :empty }
+
+    { type: :cells, height: cell_size, cells: cells, thick_border_top: true, separator_col: left_cols + 1 }
+  end
+
+  def build_product_row(step, step_idx, left_cols, right_cols, total_cols, cell_size)
+    cells = []
+    product_str = step[:product].to_s
+    product_digits = product_str.chars
+
+    # Posizione del prodotto: allineato sotto il dividendo parziale
+    # Il prodotto va allineato a destra rispetto alla posizione corrente nel dividendo
+    align_position = step[:step_index]
+
+    # Margine sinistro
+    cells << { type: :empty }
+
+    # Celle vuote prima del prodotto
+    padding = align_position - product_digits.length + 1
+    padding = 0 if padding < 0
+    padding.times { cells << { type: :empty } }
+
+    # Segno meno
+    cells << {
+      type: :sign,
+      value: "-",
+      classes: "text-purple-600 dark:text-purple-400"
+    }
+
+    # Cifre del prodotto
+    product_digits.each_with_index do |digit, idx|
+      cells << {
+        type: :digit,
+        value: digit,
+        target: "input",
+        editable: true,
+        row: 2 + step_idx * 2,
+        col: padding + 1 + idx,
+        show_value: @show_steps,
+        classes: "text-gray-800 dark:text-gray-100",
+        nav_direction: "ltr"
+      }
+    end
+
+    # Celle vuote rimanenti a sinistra
+    remaining_left = left_cols - padding - 1 - product_digits.length
+    remaining_left.times { cells << { type: :empty } } if remaining_left > 0
+
+    # Separatore
+    cells << { type: :empty }
+
+    # Colonne destra vuote
+    right_cols.times { cells << { type: :empty } }
+
+    # Margine destro
+    cells << { type: :empty }
+
+    { type: :cells, height: cell_size, cells: cells, separator_col: left_cols + 1 }
+  end
+
+  def build_remainder_row(step, step_idx, left_cols, right_cols, total_cols, cell_size, has_bring_down)
+    cells = []
+    remainder_val = step[:remainder]
+    bring_down = step[:bring_down]
+
+    # Se c'è una cifra da abbassare, il resto si combina con essa
+    if has_bring_down
+      combined = remainder_val.to_s + bring_down.to_s
+    else
+      combined = remainder_val.to_s
+    end
+    combined_digits = combined.chars
+
+    # Posizione: allineato sotto il prodotto
+    align_position = step[:step_index] + (has_bring_down ? 1 : 0)
+
+    # Margine sinistro
+    cells << { type: :empty }
+
+    # Celle vuote prima del resto
+    padding = align_position - combined_digits.length + 1
+    padding = 0 if padding < 0
+    padding.times { cells << { type: :empty } }
+
+    # Cifre del resto (+ cifra abbassata se presente)
+    combined_digits.each_with_index do |digit, idx|
+      is_bring_down = has_bring_down && idx == combined_digits.length - 1
+
+      cells << {
+        type: :digit,
+        value: digit,
+        target: is_bring_down ? "input" : "result",
+        editable: true,
+        row: 3 + step_idx * 2,
+        col: padding + idx,
+        show_value: @show_steps,
+        classes: is_bring_down ? "text-blue-600 dark:text-blue-400" : "text-gray-800 dark:text-gray-100",
+        nav_direction: "ltr"
+      }
+    end
+
+    # Celle vuote rimanenti a sinistra
+    remaining_left = left_cols - padding - combined_digits.length
+    remaining_left.times { cells << { type: :empty } } if remaining_left > 0
+
+    # Separatore
+    cells << { type: :empty }
+
+    # Colonne destra vuote
+    right_cols.times { cells << { type: :empty } }
+
+    # Margine destro
+    cells << { type: :empty }
+
+    { type: :cells, height: cell_size, cells: cells, thick_border_top: true, separator_col: left_cols + 1 }
+  end
 end

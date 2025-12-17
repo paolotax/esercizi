@@ -328,4 +328,257 @@ class Sottrazione
   def to_s
     "#{@minuend} - #{@subtrahend}"
   end
+
+  # Genera la matrice per il partial unificato _quaderno_grid
+  def to_grid_matrix
+    column_types = quaderno_column_types
+    total_cols = column_types.length + 2 # +2 per colonne vuote ai lati
+    cell_size = "2.5em"
+    borrow_height = "1.5em"
+
+    rows = []
+
+    # Riga etichette o vuota sopra
+    rows << build_labels_row(column_types, total_cols, cell_size)
+
+    # Riga dei prestiti
+    rows << build_borrow_row(column_types, total_cols, borrow_height) if @show_borrow
+
+    # Riga del minuendo
+    rows << build_minuend_row(column_types, total_cols, cell_size)
+
+    # Riga del sottraendo
+    rows << build_subtrahend_row(column_types, total_cols, cell_size)
+
+    # Riga del risultato
+    rows << build_result_row(column_types, total_cols, cell_size)
+
+    # Riga vuota sotto
+    rows << { type: :empty, height: cell_size }
+
+    # Riga toolbar
+    rows << { type: :toolbar } if @show_toolbar
+
+    {
+      columns: total_cols,
+      cell_size: cell_size,
+      controller: "quaderno",
+      title: @title,
+      show_toolbar: @show_toolbar,
+      rows: rows
+    }
+  end
+
+  private
+
+  def build_labels_row(column_types, total_cols, cell_size)
+    cells = []
+
+    # Cella vuota sinistra
+    cells << { type: :empty }
+
+    if @show_labels
+      labels = quaderno_labels
+      label_colors = quaderno_label_colors
+      label_idx = 0
+
+      column_types.each do |col_type|
+        case col_type
+        when :sign
+          cells << { type: :empty }
+        when :comma
+          cells << { type: :label, value: ",", classes: "" }
+        else
+          cells << { type: :label, value: labels[label_idx], classes: label_colors[label_idx] }
+          label_idx += 1
+        end
+      end
+    else
+      column_types.length.times { cells << { type: :empty } }
+    end
+
+    # Cella vuota destra
+    cells << { type: :empty }
+
+    { type: :cells, height: cell_size, cells: cells }
+  end
+
+  def build_borrow_row(column_types, total_cols, borrow_height)
+    cells = []
+    borrows_arr = borrows
+    borrow_counter = 0
+
+    # Cella vuota sinistra
+    cells << { type: :empty }
+
+    column_types.each do |col_type|
+      case col_type
+      when :sign
+        cells << { type: :empty }
+      when :comma
+        cells << { type: :empty }
+      else
+        borrow_value = borrows_arr[borrow_counter] || ""
+        is_last_digit_col = has_decimals? ? (borrow_counter == borrows_arr.length - 1) : (borrow_counter == @max_integer_digits - 1)
+
+        cells << {
+          type: :digit,
+          value: borrow_value.to_s,
+          target: "carry",
+          editable: true,
+          disabled: is_last_digit_col,
+          show_value: @show_solution && borrow_value.present?,
+          classes: "text-red-600 dark:text-red-400",
+          bg_class: is_last_digit_col ? "" : "bg-red-50 dark:bg-red-900/30",
+          nav_direction: "ltr"
+        }
+        borrow_counter += 1
+      end
+    end
+
+    # Cella vuota destra
+    cells << { type: :empty }
+
+    { type: :cells, height: borrow_height, cells: cells }
+  end
+
+  def build_minuend_row(column_types, total_cols, cell_size)
+    cells = []
+    minuend_digs = minuend_digits
+    digit_counter = 0
+
+    # Cella vuota sinistra
+    cells << { type: :empty }
+
+    column_types.each do |col_type|
+      case col_type
+      when :sign
+        cells << {
+          type: :sign,
+          value: "-",
+          classes: "text-red-600 dark:text-red-400"
+        }
+      when :comma
+        cells << {
+          type: :digit,
+          value: ",",
+          target: "input",
+          editable: true,
+          show_value: @show_minuend_subtrahend,
+          classes: "text-gray-700 dark:text-gray-300",
+          nav_direction: "ltr"
+        }
+      else
+        digit = minuend_digs[digit_counter] || ""
+
+        cells << {
+          type: :digit,
+          value: digit,
+          target: "input",
+          editable: true,
+          show_value: @show_minuend_subtrahend && digit.present?,
+          classes: "text-gray-800 dark:text-gray-100",
+          nav_direction: "ltr"
+        }
+        digit_counter += 1
+      end
+    end
+
+    # Cella vuota destra
+    cells << { type: :empty }
+
+    { type: :cells, height: cell_size, cells: cells }
+  end
+
+  def build_subtrahend_row(column_types, total_cols, cell_size)
+    cells = []
+    subtrahend_digs = subtrahend_digits
+    digit_counter = 0
+
+    # Cella vuota sinistra
+    cells << { type: :empty }
+
+    column_types.each do |col_type|
+      case col_type
+      when :sign
+        cells << {
+          type: :sign,
+          value: "=",
+          classes: "text-red-600 dark:text-red-400"
+        }
+      when :comma
+        cells << {
+          type: :digit,
+          value: ",",
+          target: "input",
+          editable: true,
+          show_value: @show_minuend_subtrahend,
+          classes: "text-gray-700 dark:text-gray-300",
+          nav_direction: "ltr"
+        }
+      else
+        digit = subtrahend_digs[digit_counter] || ""
+
+        cells << {
+          type: :digit,
+          value: digit,
+          target: "input",
+          editable: true,
+          show_value: @show_minuend_subtrahend && digit.present?,
+          classes: "text-gray-800 dark:text-gray-100",
+          nav_direction: "ltr"
+        }
+        digit_counter += 1
+      end
+    end
+
+    # Cella vuota destra
+    cells << { type: :empty }
+
+    { type: :cells, height: cell_size, cells: cells }
+  end
+
+  def build_result_row(column_types, total_cols, cell_size)
+    cells = []
+    result_digs = result_digits
+    result_counter = 0
+
+    # Cella vuota sinistra
+    cells << { type: :empty }
+
+    column_types.each do |col_type|
+      case col_type
+      when :sign
+        cells << { type: :empty }
+      when :comma
+        cells << {
+          type: :digit,
+          value: ",",
+          target: "result",
+          editable: true,
+          show_value: @show_solution,
+          classes: "text-gray-700 dark:text-gray-300",
+          nav_direction: "rtl"
+        }
+      else
+        digit = result_digs[result_counter] || ""
+
+        cells << {
+          type: :digit,
+          value: digit,
+          target: "result",
+          editable: true,
+          show_value: @show_solution && digit.present?,
+          classes: "text-gray-800 dark:text-gray-100",
+          nav_direction: "rtl"
+        }
+        result_counter += 1
+      end
+    end
+
+    # Cella vuota destra
+    cells << { type: :empty }
+
+    { type: :result, height: cell_size, cells: cells, thick_border_top: true }
+  end
 end
