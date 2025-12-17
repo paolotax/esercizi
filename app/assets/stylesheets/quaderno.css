@@ -1,0 +1,417 @@
+/*
+ * Quaderno - Stili comuni per le griglie delle operazioni in colonna
+ *
+ * Questi stili sono usati da:
+ * - Addizioni (_quaderno_addizione.html.erb)
+ * - Sottrazioni (_quaderno_sottrazione.html.erb)
+ * - Moltiplicazioni (_quaderno_moltiplicazione.html.erb)
+ * - Divisioni (_quaderno_divisione.html.erb)
+ */
+
+/* ======================================
+   INPUT CELLE - Base
+   ====================================== */
+
+/* Input principale nelle celle cifre */
+.quaderno-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+/* Input piccolo per riporti/prestiti */
+.quaderno-input-small {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 0.875em;
+}
+
+/* Focus state (quando il campo non ha feedback colore) */
+.quaderno-input:focus:not(.quaderno-correct):not(.quaderno-error):not(.quaderno-missing),
+.quaderno-input-small:focus:not(.quaderno-correct):not(.quaderno-error):not(.quaderno-missing) {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+/* Input readonly (es. segno meno, segni operazione) */
+.quaderno-input[readonly],
+.quaderno-input-small[readonly] {
+  cursor: default;
+}
+
+
+/* ======================================
+   VIRGOLA STATICA
+   ====================================== */
+
+/* Virgola renderizzata tra i quadretti (non editabile) */
+.quaderno-comma {
+  position: absolute;
+  right: -0.35em;
+  bottom: 0.1em;
+  font-weight: bold;
+  font-size: 1.4em;
+  color: inherit;
+  z-index: 10;
+  pointer-events: none;
+}
+
+
+/* ======================================
+   VIRGOLA SPOT (cliccabile per inserire)
+   ====================================== */
+
+/* Spot cliccabile per inserire la virgola */
+.quaderno-comma-spot {
+  position: absolute;
+  right: -0.5em;
+  bottom: 0.3em;
+  width: 1em;
+  height: 1.2em;
+  border: none;
+  border-radius: 3px;
+  background: rgba(59, 130, 246, 0.15);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.15s ease;
+}
+
+.quaderno-comma-spot:hover {
+  background: rgba(59, 130, 246, 0.35);
+  transform: scale(1.1);
+}
+
+.quaderno-comma-spot:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 1px;
+}
+
+/* Stato attivo: virgola inserita */
+.quaderno-comma-spot.active {
+  background: transparent;
+}
+
+.quaderno-comma-spot.active::after {
+  content: ",";
+  position: absolute;
+  font-weight: bold;
+  font-size: 1.4em;
+  color: #1f2937;
+  top: -0.3em;
+  left: 0.15em;
+  pointer-events: none;
+}
+
+/* Dark mode */
+.dark .quaderno-comma-spot.active::after {
+  color: #f3f4f6;
+}
+
+/* Stato corretto dopo verifica */
+.quaderno-comma-spot.correct {
+  background: rgba(34, 197, 94, 0.3);
+}
+
+.quaderno-comma-spot.correct::after {
+  color: #16a34a;
+}
+
+/* Stato errato dopo verifica */
+.quaderno-comma-spot.incorrect {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+.quaderno-comma-spot.incorrect::after {
+  color: #dc2626;
+}
+
+/* Stato mancante (virgola richiesta ma non inserita) */
+.quaderno-comma-spot.missing {
+  background: rgba(234, 179, 8, 0.3);
+}
+
+
+/* ======================================
+   VIRGOLA SHIFT (spostabile)
+   Usata nelle divisioni per spostare la virgola
+   ====================================== */
+
+.quaderno-comma-shift {
+  position: absolute;
+  right: -0.35em;
+  bottom: 0.1em;
+  font-weight: bold;
+  font-size: 1.4em;
+  color: #dc2626;
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.quaderno-comma-shift:hover {
+  transform: scale(1.2);
+  color: #b91c1c;
+}
+
+/* Stato spostato (virgola barrata) */
+.quaderno-comma-shift.shifted {
+  opacity: 0.3;
+  text-decoration: line-through;
+}
+
+/* Dark mode */
+.dark .quaderno-comma-shift {
+  color: #f87171;
+}
+
+.dark .quaderno-comma-shift:hover {
+  color: #fca5a5;
+}
+
+
+/* ======================================
+   FEEDBACK COLORI - Per verifica risposte
+   ====================================== */
+
+/* Risposta corretta */
+.quaderno-correct {
+  background-color: rgb(220 252 231) !important; /* bg-green-100 */
+}
+
+.dark .quaderno-correct {
+  background-color: rgb(34 197 94 / 0.5) !important; /* dark:bg-green-900/50 */
+}
+
+/* Risposta errata */
+.quaderno-error {
+  background-color: rgb(254 226 226) !important; /* bg-red-100 */
+}
+
+.dark .quaderno-error {
+  background-color: rgb(239 68 68 / 0.5) !important; /* dark:bg-red-900/50 */
+}
+
+/* Campo vuoto (risposta mancante) */
+.quaderno-missing {
+  background-color: rgb(254 249 195) !important; /* bg-yellow-100 */
+}
+
+.dark .quaderno-missing {
+  background-color: rgb(234 179 8 / 0.5) !important; /* dark:bg-yellow-900/50 */
+}
+
+
+/* ======================================
+   COLORI TESTO PER TIPO OPERAZIONE
+   ====================================== */
+
+/* Addizione - Blu per riporti */
+.quaderno-carry-add {
+  color: #2563eb; /* text-blue-600 */
+}
+
+.dark .quaderno-carry-add {
+  color: #60a5fa; /* dark:text-blue-400 */
+}
+
+/* Sottrazione - Rosso per prestiti */
+.quaderno-carry-sub {
+  color: #dc2626; /* text-red-600 */
+}
+
+.dark .quaderno-carry-sub {
+  color: #f87171; /* dark:text-red-400 */
+}
+
+/* Moltiplicazione - Verde per riporti */
+.quaderno-carry-mul {
+  color: #16a34a; /* text-green-600 */
+}
+
+.dark .quaderno-carry-mul {
+  color: #4ade80; /* dark:text-green-400 */
+}
+
+/* Moltiplicazione - Arancio per riporti parziali */
+.quaderno-carry-partial {
+  color: #ea580c; /* text-orange-600 */
+}
+
+.dark .quaderno-carry-partial {
+  color: #fb923c; /* dark:text-orange-400 */
+}
+
+/* Divisione - Colori specifici */
+.quaderno-quotient {
+  color: #2563eb; /* text-blue-600 */
+}
+
+.dark .quaderno-quotient {
+  color: #60a5fa; /* dark:text-blue-400 */
+}
+
+.quaderno-product {
+  color: #dc2626; /* text-red-600 */
+}
+
+.dark .quaderno-product {
+  color: #f87171; /* dark:text-red-400 */
+}
+
+.quaderno-remainder {
+  color: #16a34a; /* text-green-600 */
+}
+
+.dark .quaderno-remainder {
+  color: #4ade80; /* dark:text-green-400 */
+}
+
+.quaderno-bringdown {
+  color: #6b7280; /* text-gray-500 */
+}
+
+.dark .quaderno-bringdown {
+  color: #9ca3af; /* dark:text-gray-400 */
+}
+
+
+/* ======================================
+   SFONDI CELLE SPECIALI
+   ====================================== */
+
+/* Sfondo celle riporto addizione */
+.quaderno-bg-carry-add {
+  background-color: rgb(239 246 255); /* bg-blue-50 */
+}
+
+.dark .quaderno-bg-carry-add {
+  background-color: rgb(30 58 138 / 0.3); /* dark:bg-blue-900/30 */
+}
+
+/* Sfondo celle prestito sottrazione */
+.quaderno-bg-carry-sub {
+  background-color: rgb(254 242 242); /* bg-red-50 */
+}
+
+.dark .quaderno-bg-carry-sub {
+  background-color: rgb(127 29 29 / 0.3); /* dark:bg-red-900/30 */
+}
+
+/* Sfondo celle riporto moltiplicazione */
+.quaderno-bg-carry-mul {
+  background-color: rgb(240 253 244); /* bg-green-50 */
+}
+
+.dark .quaderno-bg-carry-mul {
+  background-color: rgb(20 83 45 / 0.3); /* dark:bg-green-900/30 */
+}
+
+/* Sfondo celle riporto parziale moltiplicazione */
+.quaderno-bg-carry-partial {
+  background-color: rgb(255 247 237); /* bg-orange-50 */
+}
+
+.dark .quaderno-bg-carry-partial {
+  background-color: rgb(124 45 18 / 0.3); /* dark:bg-orange-900/30 */
+}
+
+/* Sfondo celle risultato */
+.quaderno-bg-result {
+  background-color: rgb(249 250 251); /* bg-gray-50 */
+}
+
+.dark .quaderno-bg-result {
+  background-color: rgb(31 41 55); /* dark:bg-gray-800 */
+}
+
+
+/* ======================================
+   TOOLBAR PULSANTI
+   ====================================== */
+
+/* Stile base pulsanti toolbar */
+.quaderno-btn {
+  width: 2.25rem; /* w-9 */
+  height: 2.25rem; /* h-9 */
+  border-radius: 9999px; /* rounded-full */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(255 255 255 / 0.8); /* text-white/80 */
+  transition: all 0.15s ease;
+}
+
+.quaderno-btn:hover {
+  color: rgb(255 255 255); /* hover:text-white */
+}
+
+/* Colori pulsanti */
+.quaderno-btn-clear {
+  background-color: rgb(156 163 175 / 0.4); /* bg-gray-400/40 */
+}
+
+.quaderno-btn-clear:hover {
+  background-color: rgb(156 163 175 / 0.7); /* hover:bg-gray-400/70 */
+}
+
+.quaderno-btn-numbers {
+  background-color: rgb(96 165 250 / 0.4); /* bg-blue-400/40 */
+}
+
+.quaderno-btn-numbers:hover {
+  background-color: rgb(96 165 250 / 0.7); /* hover:bg-blue-400/70 */
+}
+
+.quaderno-btn-steps {
+  background-color: rgb(251 146 60 / 0.4); /* bg-orange-400/40 */
+}
+
+.quaderno-btn-steps:hover {
+  background-color: rgb(251 146 60 / 0.7); /* hover:bg-orange-400/70 */
+}
+
+.quaderno-btn-result {
+  background-color: rgb(74 222 128 / 0.4); /* bg-green-400/40 */
+}
+
+.quaderno-btn-result:hover {
+  background-color: rgb(74 222 128 / 0.7); /* hover:bg-green-400/70 */
+}
+
+.quaderno-btn-verify {
+  background-color: rgb(192 132 252 / 0.4); /* bg-purple-400/40 */
+}
+
+.quaderno-btn-verify:hover {
+  background-color: rgb(192 132 252 / 0.7); /* hover:bg-purple-400/70 */
+}
+
+
+/* ======================================
+   PRINT STYLES
+   ====================================== */
+
+@media print {
+  .quaderno-btn,
+  .print-hidden {
+    display: none !important;
+  }
+
+  .quaderno-comma-spot {
+    display: none;
+  }
+
+  .quaderno-comma-spot.active {
+    display: block;
+    background: transparent;
+  }
+}

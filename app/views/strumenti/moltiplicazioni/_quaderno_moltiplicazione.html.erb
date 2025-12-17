@@ -10,96 +10,6 @@
     - operation_id: (opzionale) ID per i campi del form
 %>
 
-<style>
-  .quaderno-input-mul {
-    width: 100%;
-    height: 100%;
-    border: none;
-    outline: none;
-    text-align: center;
-    font-family: inherit;
-    font-weight: bold;
-    font-size: 1.25em;
-  }
-  .quaderno-input-carry-mul {
-    width: 100%;
-    height: 100%;
-    border: none;
-    outline: none;
-    text-align: center;
-    font-family: inherit;
-    font-weight: bold;
-    font-size: 0.875em;
-  }
-  /* Virgola renderizzata tra i quadretti */
-  .quaderno-comma {
-    position: absolute;
-    right: -0.35em;
-    bottom: 0.1em;
-    font-weight: bold;
-    font-size: 1.4em;
-    color: inherit;
-    z-index: 10;
-    pointer-events: none;
-  }
-  /* Spot cliccabile per inserire la virgola */
-  .quaderno-comma-spot {
-    position: absolute;
-    right: -0.5em;
-    bottom: 0.3em;
-    width: 1em;
-    height: 1.2em;
-    border: none;
-    border-radius: 3px;
-    background: rgba(59, 130, 246, 0.15);
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.15s ease;
-  }
-  .quaderno-comma-spot:hover {
-    background: rgba(59, 130, 246, 0.35);
-    transform: scale(1.1);
-  }
-  .quaderno-comma-spot:focus {
-    outline: 2px solid rgba(59, 130, 246, 0.5);
-    outline-offset: 1px;
-  }
-  /* Stato attivo: virgola inserita */
-  .quaderno-comma-spot.active {
-    background: transparent;
-  }
-  .quaderno-comma-spot.active::after {
-    content: ",";
-    position: absolute;
-    font-weight: bold;
-    font-size: 1.4em;
-    color: #1f2937;
-    top: -0.3em;
-    left: 0.15em;
-    pointer-events: none;
-  }
-  /* Dark mode */
-  .dark .quaderno-comma-spot.active::after {
-    color: #f3f4f6;
-  }
-  /* Stato corretto/errato dopo verifica */
-  .quaderno-comma-spot.correct {
-    background: rgba(34, 197, 94, 0.3);
-  }
-  .quaderno-comma-spot.correct::after {
-    color: #16a34a;
-  }
-  .quaderno-comma-spot.incorrect {
-    background: rgba(239, 68, 68, 0.3);
-  }
-  .quaderno-comma-spot.incorrect::after {
-    color: #dc2626;
-  }
-  .quaderno-comma-spot.missing {
-    background: rgba(234, 179, 8, 0.3);
-  }
-</style>
-
 <div class="inline-block" data-controller="quaderno-multiplication">
 
   <% if defined?(operation_title) && operation_title.present? %>
@@ -150,7 +60,7 @@
         <% carry_value = carry_data_idx >= 0 ? carries[carry_data_idx] : nil %>
         <% is_last = digit_idx == moltiplicazione.max_digits - 1 %>
         <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= is_last ? '' : 'bg-green-50 dark:bg-green-900/30' %>" style="height: <%= carry_height %>;">
-          <input type="text" class="quaderno-input-carry-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-green-600 dark:text-green-400"
+          <input type="text" class="quaderno-input-small bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-green-600 dark:text-green-400"
                  data-quaderno-multiplication-target="carry" <% unless is_last %>data-correct-answer="<%= carry_value.to_s %>"<% end %> maxlength="1"
                  <% if moltiplicazione.show_solution && carry_value.present? %>value="<%= carry_value %>"<% end %>
                  <% if is_last %>disabled<% end %>>
@@ -168,7 +78,7 @@
       <% pos_from_right = data_cols - 1 - idx %>
       <% show_comma = multiplicand_decimals > 0 && pos_from_right == multiplicand_decimals %>
       <div class="border-r border-b border-gray-300 dark:border-gray-600 relative" style="height: <%= cell_size %>;">
-        <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
+        <input type="text" class="quaderno-input bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
                data-quaderno-multiplication-target="multiplicand" data-correct-answer="<%= digit %>" maxlength="1"
                <% if moltiplicazione.show_multiplicand_multiplier && digit.present? %>value="<%= digit %>"<% end %>>
         <% if show_comma && moltiplicazione.show_multiplicand_multiplier %>
@@ -186,8 +96,8 @@
       <% pos_from_right = data_cols - 1 - idx %>
       <% show_comma = multiplier_decimals > 0 && pos_from_right == multiplier_decimals %>
       <div class="border-r border-b border-gray-300 dark:border-gray-600 relative" style="height: <%= cell_size %>;">
-        <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
-               data-quaderno-multiplication-target="multiplier" data-correct-answer="<%= digit %>" maxlength="1"
+        <input type="text" class="quaderno-input bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
+               data-quaderno-multiplication-target="multiplier" data-correct-answer="<%= digit %>" maxlength="1" inputmode="numeric"
                <% if moltiplicazione.show_multiplicand_multiplier && digit.present? %>value="<%= digit %>"<% end %>>
         <% if show_comma && moltiplicazione.show_multiplicand_multiplier %>
           <span class="quaderno-comma text-gray-800 dark:text-gray-100">,</span>
@@ -231,7 +141,7 @@
               <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= first_partial_top_border %>" style="height: <%= carry_height %>;"></div>
             <% else %>
               <div class="border-r border-b border-gray-300 dark:border-gray-600 bg-orange-50 dark:bg-orange-900/30 <%= first_partial_top_border %>" style="height: <%= carry_height %>;">
-                <input type="text" class="quaderno-input-carry-mul bg-transparent focus:bg-orange-100/20 dark:focus:bg-orange-500/20 text-orange-600 dark:text-orange-400"
+                <input type="text" class="quaderno-input-small bg-transparent focus:bg-orange-100/20 dark:focus:bg-orange-500/20 text-orange-600 dark:text-orange-400"
                        data-quaderno-multiplication-target="partialCarry"
                        <% if carry_value.present? %>data-correct-answer="<%= carry_value %>"<% end %>
                        maxlength="1"
@@ -259,7 +169,7 @@
             <div class="border-r border-b border-gray-300 dark:border-gray-600 flex items-center justify-center text-gray-400 dark:text-gray-500 <%= digit_row_top_border %>" style="height: <%= cell_size %>;">0</div>
           <% else %>
             <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= digit_row_top_border %>" style="height: <%= cell_size %>;">
-              <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
+              <input type="text" class="quaderno-input bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
                      data-quaderno-multiplication-target="partial" data-correct-answer="<%= digit %>" maxlength="1"
                      <% if moltiplicazione.show_partial_products && digit.present? %>value="<%= digit %>"<% end %>>
             </div>
@@ -276,7 +186,7 @@
       <% sum_carries.each_with_index do |carry, carry_idx| %>
         <% is_last = carry_idx == sum_carries.length - 1 %>
         <div class="border-r border-b border-gray-300 dark:border-gray-600 <%= is_last ? '' : 'bg-green-50 dark:bg-green-900/30' %>" style="height: <%= carry_height %>;">
-          <input type="text" class="quaderno-input-carry-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-green-600 dark:text-green-400"
+          <input type="text" class="quaderno-input-small bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-green-600 dark:text-green-400"
                  data-quaderno-multiplication-target="sumCarry" <% unless is_last %>data-correct-answer="<%= carry.to_s %>"<% end %> maxlength="1"
                  <% if moltiplicazione.show_solution && carry.present? %>value="<%= carry %>"<% end %>
                  <% if is_last %>disabled<% end %>>
@@ -294,8 +204,8 @@
       <% is_correct_comma_position = decimal_places > 0 && pos_from_right == decimal_places %>
       <% can_have_comma_spot = has_decimals && pos_from_right > 0 && pos_from_right < data_cols %>
       <div class="border-r border-b border-gray-300 dark:border-gray-600 border-t-2 border-t-gray-700 dark:border-t-gray-300 bg-gray-50 dark:bg-gray-800 relative" style="height: <%= cell_size %>;">
-        <input type="text" class="quaderno-input-mul bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
-               data-quaderno-multiplication-target="result" data-correct-answer="<%= digit %>" maxlength="1"
+        <input type="text" class="quaderno-input bg-transparent focus:bg-green-100/20 dark:focus:bg-green-500/20 text-gray-800 dark:text-gray-100"
+               data-quaderno-multiplication-target="result" data-correct-answer="<%= digit %>" maxlength="1" inputmode="numeric"
                <% if moltiplicazione.show_solution && digit.present? %>value="<%= digit %>"<% end %>>
         <% if can_have_comma_spot %>
           <%# Spot cliccabile per la virgola %>

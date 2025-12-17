@@ -7,115 +7,6 @@
     - operation_title / title: titolo opzionale
 %>
 
-<style>
-  .div-cell {
-    width: 100%; height: 100%;
-    border: none; outline: none;
-    text-align: center;
-    font-family: inherit;
-    font-weight: bold;
-  }
-  .div-cell:focus:not(.bg-green-100):not(.bg-red-100):not(.bg-yellow-100) { background: rgba(59, 130, 246, 0.2); }
-  .div-cell-lg { font-size: 1.25em; }
-  .div-cell-sm { font-size: 1em; }
-  .div-cell[readonly] { cursor: default; }
-
-  /* Virgola renderizzata tra i quadretti */
-  .quaderno-comma-div {
-    position: absolute;
-    right: -0.35em;
-    bottom: 0.1em;
-    font-weight: bold;
-    font-size: 1.4em;
-    color: inherit;
-    z-index: 10;
-    pointer-events: none;
-  }
-  /* Virgola cliccabile (spostabile) nel dividendo/divisore */
-  .quaderno-comma-shift {
-    position: absolute;
-    right: -0.35em;
-    bottom: 0.1em;
-    font-weight: bold;
-    font-size: 1.4em;
-    color: #dc2626;
-    z-index: 10;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-  .quaderno-comma-shift:hover {
-    transform: scale(1.2);
-    color: #b91c1c;
-  }
-  .quaderno-comma-shift.shifted {
-    opacity: 0.3;
-    text-decoration: line-through;
-  }
-  /* Dark mode */
-  .dark .quaderno-comma-shift {
-    color: #f87171;
-  }
-  .dark .quaderno-comma-shift:hover {
-    color: #fca5a5;
-  }
-  /* Spot cliccabile per inserire la virgola nel quoziente */
-  .quaderno-comma-spot-div {
-    position: absolute;
-    right: -0.5em;
-    bottom: 0.3em;
-    width: 1em;
-    height: 1.2em;
-    border: none;
-    border-radius: 3px;
-    background: rgba(59, 130, 246, 0.15);
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.15s ease;
-  }
-  .quaderno-comma-spot-div:hover {
-    background: rgba(59, 130, 246, 0.35);
-    transform: scale(1.1);
-  }
-  .quaderno-comma-spot-div:focus {
-    outline: 2px solid rgba(59, 130, 246, 0.5);
-    outline-offset: 1px;
-  }
-  /* Stato attivo: virgola inserita */
-  .quaderno-comma-spot-div.active {
-    background: transparent;
-  }
-  .quaderno-comma-spot-div.active::after {
-    content: ",";
-    position: absolute;
-    font-weight: bold;
-    font-size: 1.4em;
-    color: #1f2937;
-    top: -0.3em;
-    left: 0.15em;
-    pointer-events: none;
-  }
-  /* Dark mode */
-  .dark .quaderno-comma-spot-div.active::after {
-    color: #f3f4f6;
-  }
-  /* Stato corretto/errato dopo verifica */
-  .quaderno-comma-spot-div.correct {
-    background: rgba(34, 197, 94, 0.3);
-  }
-  .quaderno-comma-spot-div.correct::after {
-    color: #16a34a;
-  }
-  .quaderno-comma-spot-div.incorrect {
-    background: rgba(239, 68, 68, 0.3);
-  }
-  .quaderno-comma-spot-div.incorrect::after {
-    color: #dc2626;
-  }
-  .quaderno-comma-spot-div.missing {
-    background: rgba(234, 179, 8, 0.3);
-  }
-</style>
-
 <%
   cell = "2.5em"
 
@@ -360,7 +251,7 @@
 
         # Altezza cella (tutte uguali)
         row_height = cell
-        cell_class = "div-cell div-cell-lg"
+        cell_class = "quaderno-input"
 
         # Per la linea sopra il resto (sotto il prodotto)
         prev_row = row_idx > 0 ? rows[row_idx - 1] : nil
@@ -502,7 +393,7 @@
               <%# Spot virgola per quoziente %>
               <% if cell_data[:can_have_comma_spot] && cell_data[:type] == :quotient %>
                 <button type="button"
-                        class="quaderno-comma-spot-div"
+                        class="quaderno-comma-spot"
                         data-quaderno-division-target="commaSpot"
                         data-correct-position="<%= cell_data[:is_correct_comma_position] %>"
                         data-position="<%= cell_data[:pos_from_right] %>"
