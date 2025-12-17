@@ -59,6 +59,8 @@ Rails.application.routes.draw do
     get "moltiplicazioni/quaderno", to: "moltiplicazioni#quaderno", as: "moltiplicazioni_quaderno"
     post "moltiplicazioni/quaderno/generate", to: "moltiplicazioni#quaderno_generate", as: "moltiplicazioni_quaderno_generate"
     get "moltiplicazioni/examples", to: "moltiplicazioni#examples", as: "moltiplicazioni_examples"
+    get "divisioni/quaderno", to: "divisioni#quaderno", as: "divisioni_quaderno"
+    post "divisioni/quaderno/generate", to: "divisioni#quaderno_generate", as: "divisioni_quaderno_generate"
     get "le_rime", to: "le_rime#show", as: "le_rime"
     get "abaco", to: "abaco#show", as: "abaco"
     post "abaco/generate", to: "abaco#generate", as: "abaco_generate"
