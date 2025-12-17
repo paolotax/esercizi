@@ -1,0 +1,169 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Titolo sezione -->
+    <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 text-xl">CLASSIFICAZIONI</h2>
+
+    <!-- Introduzione -->
+    <div class="text-gray-700 dark:text-gray-200 space-y-2">
+      <p>Consideriamo alcuni poligoni:</p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li>12 sono triangoli;</li>
+        <li>12 sono rossi;</li>
+        <li>7 sono triangoli e rossi;</li>
+        <li>4 sono non triangoli e non rossi.</li>
+      </ul>
+    </div>
+
+    <!-- Spiegazione Eulero-Venn -->
+    <div class="text-gray-700 dark:text-gray-200">
+      <p>Possiamo rappresentare la situazione con il <span class="font-bold">diagramma di Eulero-Venn</span>. In questo diagramma l'insieme nel quale ci troviamo a operare si chiama <span class="font-bold">insieme universo</span> e si indica con <span class="font-bold">U</span>. Nell'esempio, l'insieme universo sono tutti i poligoni rappresentati.</p>
+    </div>
+
+    <!-- Diagramma di Eulero-Venn -->
+    <div class="space-y-2">
+      <h3 class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">DIAGRAMMA DI EULERO-VENN</h3>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p160/p160_01.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2 max-w-full", alt: "Diagramma di Eulero-Venn" %>
+      </div>
+    </div>
+
+    <!-- Box regola classificazione -->
+    <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl">
+      <p class="text-gray-700 dark:text-gray-200">
+        Quando si raggruppano degli oggetti in base a una o più caratteristiche si fa una <span class="font-bold">classificazione</span>.
+      </p>
+    </div>
+
+    <p class="text-gray-700 dark:text-gray-200">La situazione può essere rappresentata anche con altri diagrammi. Osserva e rispondi.</p>
+
+    <!-- Diagramma di Carroll -->
+    <div class="space-y-2">
+      <h3 class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">DIAGRAMMA DI CARROLL</h3>
+      <div class="overflow-x-auto">
+        <table class="border-2 border-cyan-400 dark:border-cyan-600">
+          <thead>
+            <tr>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700"></th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900/40 text-gray-800 dark:text-gray-200 font-bold text-center">ROSSI</th>
+              <th class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900/40 text-gray-800 dark:text-gray-200 font-bold text-center">NON ROSSI</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-700 dark:text-gray-200">
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900/40 text-center font-bold">TRIANGOLI</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                <%= image_tag "nvi4_mat/p160/output-1715932804160_223_643_116_65.png", class: "h-auto mx-auto dark:bg-white dark:rounded", alt: "Triangoli rossi" %>
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                <%= image_tag "nvi4_mat/p160/output-1715932804160_342_643_115_65.png", class: "h-auto mx-auto dark:bg-white dark:rounded", alt: "Triangoli non rossi" %>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-cyan-100 dark:bg-cyan-900/40 text-center font-bold">NON TRIANGOLI</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                <%= image_tag "nvi4_mat/p160/output-1715932804160_223_711_116_65.png", class: "h-auto mx-auto dark:bg-white dark:rounded", alt: "Non triangoli rossi" %>
+              </td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 text-center">
+                <%= image_tag "nvi4_mat/p160/output-1715932804160_343_711_116_65.png", class: "h-auto mx-auto dark:bg-white dark:rounded", alt: "Non triangoli non rossi" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Diagramma ad albero -->
+    <div class="space-y-2">
+      <h3 class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">DIAGRAMMA AD ALBERO</h3>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p160/p160_03.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2 max-w-full", alt: "Diagramma ad albero" %>
+      </div>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-6">
+
+      <!-- Domande sui diagrammi -->
+      <div class="space-y-3 text-gray-700 dark:text-gray-200">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>Quanti sono i poligoni in tutto?</span>
+          <input type="text" data-correct-answer="21" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>Quanti sono i triangoli?</span>
+          <input type="text" data-correct-answer="12" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="space-y-2">
+          <span>Ci sono non triangoli rossi?</span>
+          <div class="flex gap-4 pl-4">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="non_triangoli_rossi" value="si" class="w-5 h-5" data-correct-answer="true">
+              <span>Sì</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="non_triangoli_rossi" value="no" class="w-5 h-5">
+              <span>No</span>
+            </label>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>Quanti sono i non triangoli rossi?</span>
+          <input type="text" data-correct-answer="5" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+      </div>
+
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Osserva il diagramma di Eulero-Venn e completa i cartellini degli insiemi.
+        </p>
+
+        <div class="flex flex-col md:flex-row gap-6">
+          <div class="space-y-2 text-gray-700 dark:text-gray-200">
+            <div class="flex items-center gap-2">
+              <span class="font-bold">U =</span>
+              <input type="text" data-correct-answer="fiori" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold">B =</span>
+              <input type="text" data-correct-answer="fiori con foglie" class="w-40 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold">A =</span>
+              <input type="text" data-correct-answer="fiori gialli" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold">C =</span>
+              <input type="text" data-correct-answer="fiori gialli e con foglie" class="w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          </div>
+
+          <div class="shrink-0 flex justify-center">
+            <%= image_tag "nvi4_mat/p160/p160_04.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2 max-w-full", alt: "Diagramma fiori" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200">
+          <%= numero_esercizio_badge(2) %>
+          Rappresenta sul quaderno con il diagramma ad albero e il diagramma di Carroll la situazione dell'esercizio 1.
+        </p>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [261, 263] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

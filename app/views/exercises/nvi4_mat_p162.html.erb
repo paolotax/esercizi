@@ -1,0 +1,144 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Titolo sezione -->
+    <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 text-xl">IL CALCOLO DELLE PROBABILITÀ</h2>
+
+    <!-- Introduzione -->
+    <div class="text-gray-700 dark:text-gray-200">
+      <p>Il calcolo delle probabilità si occupa di quantificare la realizzabilità di un evento casuale, cioè di stabilire <span class="font-bold">quante possibilità ci sono che esso si verifichi</span>.</p>
+    </div>
+
+    <!-- Immagine caramelle -->
+    <div class="flex justify-center">
+      <%= image_tag "nvi4_mat/p162/output-1715932804162_670_191_284_312.png", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2 max-w-full", alt: "Sacchetto caramelle" %>
+    </div>
+
+    <!-- Esempio -->
+    <div class="text-gray-700 dark:text-gray-200 space-y-3">
+      <p class="font-bold">Facciamo un esempio.</p>
+      <p>Luca ha comprato un sacchetto di caramelle. Prima di prenderne una, Luca guarda il sacchetto. Vorrebbe una caramella al limone: se chiudesse gli occhi, quante probabilità avrebbe di pescare proprio una caramella al limone? Quale caramella è più probabile che Luca prenda?</p>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-4">
+
+      <p class="font-bold text-gray-700 dark:text-gray-200">Rispondiamo insieme. Completa.</p>
+
+      <div class="space-y-3 text-gray-700 dark:text-gray-200">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>– Quante sono tutte le caramelle del sacchetto?</span>
+          <input type="text" data-correct-answer="12" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span>Questo è il numero dei <span class="font-bold">casi possibili</span>.</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>– Quante sono le caramelle al limone?</span>
+          <input type="text" data-correct-answer="3" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span>Questo è il numero dei <span class="font-bold">casi favorevoli</span>.</span>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>– Le probabilità che accada l'evento "prendere una caramella al limone" sono 3 su 12, cioè</span>
+          <%= render 'shared/frazione', num: 3, den: 12 %>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span>– È più probabile prendere una caramella alla menta: infatti sono</span>
+          <input type="text" data-correct-answer="5" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          <span>casi favorevoli su 12 possibili:</span>
+          <%= render 'shared/frazione', num: 5, den: 12 %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Box regola -->
+    <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl">
+      <p class="text-gray-700 dark:text-gray-200">
+        La <span class="font-bold">probabilità</span> che un evento si verifichi dipende dal numero dei <span class="font-bold">casi favorevoli</span> rispetto a tutti i <span class="font-bold">casi possibili</span> e si esprime con una frazione.
+      </p>
+      <div class="flex justify-center mt-3">
+        <%= image_tag "nvi4_mat/p162/p162_03.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Formula probabilità" %>
+      </div>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-6">
+
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Lanciando due dadi si possono avere 36 combinazioni. Inserisci nella tabella tutti i risultati possibili; poi completa le frasi e rispondi.
+        </p>
+
+        <!-- Immagine tabella -->
+        <div class="flex justify-center mb-4">
+          <%= image_tag "nvi4_mat/p162/p162_04.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2 max-w-full", alt: "Tabella combinazioni dadi" %>
+        </div>
+
+        <div class="space-y-3 text-gray-700 dark:text-gray-200">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>5 si può ottenere con diverse combinazioni: 4 + 1,</span>
+            <input type="text" data-correct-answer="3 + 2" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>,</span>
+            <input type="text" data-correct-answer="2 + 3" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>,</span>
+            <input type="text" data-correct-answer="1 + 4" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>Quindi 5 ha</span>
+            <input type="text" data-correct-answer="4" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>possibilità su 36 di uscire.</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>2 si ottiene in un solo modo: 1 + 1, quindi 2 ha</span>
+            <input type="text" data-correct-answer="1" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>possibilità su 36 di uscire.</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>7 ha</span>
+            <input type="text" data-correct-answer="6" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>possibilità su</span>
+            <input type="text" data-correct-answer="36" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>di uscire.</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>Quale numero ha maggiore probabilità di uscire?</span>
+            <input type="text" data-correct-answer="7" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>Quali numeri hanno minore probabilità di uscire?</span>
+            <input type="text" data-correct-answer="2 e 12" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>È più probabile totalizzare 6 o 8?</span>
+            <input type="text" data-correct-answer="uguale" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-<%= @pagina.base_color %>-500">•</span>
+            <span>Quante probabilità si hanno di totalizzare 12?</span>
+            <input type="text" data-correct-answer="1" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>su</span>
+            <input type="text" data-correct-answer="36" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [262, 263] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

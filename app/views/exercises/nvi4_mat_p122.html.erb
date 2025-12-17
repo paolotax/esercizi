@@ -1,0 +1,108 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione -->
+    <div class="text-gray-700 dark:text-gray-200 space-y-2">
+      <p>Impara a disegnare un triangolo partendo dalla misura dei lati.</p>
+      <p>Ti servono una riga e un compasso.</p>
+      <p>Ecco come disegnare un triangolo ABC con i lati delle seguenti lunghezze:</p>
+      <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">AB = 4 cm &nbsp;&nbsp; BC = 2 cm &nbsp;&nbsp; AC = 3 cm</p>
+    </div>
+
+    <!-- Passo 1 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div class="text-gray-700 dark:text-gray-200">
+        <p>
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-<%= @pagina.base_color %>-500 text-white font-bold mr-2">1</span>
+          Con la riga traccia il primo lato AB del triangolo, lungo 4 cm.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p122/p122_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Passo 1: traccia il lato AB" %>
+      </div>
+    </div>
+
+    <!-- Passo 2 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div class="text-gray-700 dark:text-gray-200">
+        <p>
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-<%= @pagina.base_color %>-500 text-white font-bold mr-2">2</span>
+          Con il compasso individua il terzo punto (C).<br>
+          Apri il compasso con un'apertura di 3 cm, puntalo su A e traccia un archetto.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p122/p122_02.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Passo 2: traccia archetto da A" %>
+      </div>
+    </div>
+
+    <!-- Passo 3 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div class="text-gray-700 dark:text-gray-200">
+        <p>
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-<%= @pagina.base_color %>-500 text-white font-bold mr-2">3</span>
+          Apri il compasso con un'apertura di 2 cm e puntalo in B tracciando un altro archetto che incroci quello già tracciato.<br>
+          L'incrocio tra i due archetti è il punto C che si trova a 2 cm da B e a 3 cm da A.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p122/p122_03.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Passo 3: traccia archetto da B" %>
+      </div>
+    </div>
+
+    <!-- Passo 4 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div class="text-gray-700 dark:text-gray-200">
+        <p>
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-<%= @pagina.base_color %>-500 text-white font-bold mr-2">4</span>
+          Congiungi i punti e otterrai il triangolo ABC.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p122/p122_04.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Passo 4: triangolo ABC completato" %>
+      </div>
+    </div>
+
+    <!-- Esercizi -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-6">
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> Con l'aiuto di riga e compasso, disegna sul quaderno i seguenti triangoli.
+        </p>
+        <div class="space-y-2 text-gray-700 dark:text-gray-200 pl-4">
+          <p>Triangolo a, misure dei lati: <span class="text-<%= @pagina.base_color %>-500">→</span> AB = BC = AC = 4 cm</p>
+          <p>Triangolo b, misure dei lati: <span class="text-<%= @pagina.base_color %>-500">→</span> AB = 9 cm &nbsp;&nbsp; BC = 4 cm &nbsp;&nbsp; AC = 7 cm</p>
+          <p>Triangolo c, misure dei lati: <span class="text-<%= @pagina.base_color %>-500">→</span> AB = 6 cm &nbsp;&nbsp; BC = AC = 10 cm</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
+          <span class="text-<%= @pagina.base_color %>-500">•</span> Dai a ciascuno dei triangoli disegnati il nome corretto in base alla lunghezza dei lati.
+        </p>
+        <div class="space-y-3 text-gray-700 dark:text-gray-200 pl-4">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span>Triangolo a:</span>
+            <input type="text" data-correct-answer="equilatero" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span>Triangolo b:</span>
+            <input type="text" data-correct-answer="scaleno" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span>Triangolo c:</span>
+            <input type="text" data-correct-answer="isoscele" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

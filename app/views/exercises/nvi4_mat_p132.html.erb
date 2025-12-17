@@ -1,0 +1,156 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione metro quadrato -->
+    <div class="flex gap-4">
+      <div class="flex-1 text-gray-700 dark:text-gray-200">
+        <p>L'unità fondamentale per misurare la superficie è il <span class="font-bold">metro quadrato</span>, che corrisponde a un quadrato con il lato lungo un metro. Il suo simbolo è m². Il numero ² indica una misura che ha due dimensioni: la lunghezza e la larghezza.</p>
+      </div>
+      <div class="w-1/3 p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl h-fit">
+        <p class="text-gray-700 dark:text-gray-200">
+          La <span class="font-bold">misura della superficie</span> si chiama <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">area</span>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Domande sul decimetro quadrato con immagine a destra -->
+    <div class="flex gap-4">
+      <div class="w-1/2 space-y-4">
+        <div class="space-y-4 text-gray-700 dark:text-gray-200">
+          <p class="font-bold">Osserva il decimetro quadrato disegnato qui accanto, leggi e rispondi alle domande.</p>
+
+          <div>
+            <p>• Un centimetro quadrato si scrive <span class="font-bold">1 cm²</span>.</p>
+            <div class="flex items-center gap-2 mt-2">
+              <span>Quanti centimetri quadrati formano un decimetro quadrato?</span>
+              <input type="text" data-correct-answer="100" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          </div>
+
+          <div>
+            <p>• Un millimetro quadrato si scrive <span class="font-bold">1 mm²</span>.</p>
+            <div class="flex items-center gap-2 mt-2">
+              <span>Quanti millimetri quadrati formano un centimetro quadrato?</span>
+              <input type="text" data-correct-answer="100" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </div>
+          </div>
+        </div>
+
+        <!-- Box rosa multipli e sottomultipli -->
+        <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl">
+          <p class="text-gray-700 dark:text-gray-200">Ogni unità di <span class="font-bold">misura di superficie</span> è <span class="font-bold">100</span> volte più grande (<span class="font-bold">multiplo</span>) di quella precedente e <span class="font-bold">100</span> volte più piccola (<span class="font-bold">sottomultiplo</span>) di quella successiva.</p>
+          <p class="font-bold text-gray-700 dark:text-gray-200 mt-2">
+            1 m² = 100 dm² &nbsp;&nbsp; 1 dm² = 100 cm² &nbsp;&nbsp; 1 cm² = 100 mm²
+          </p>
+        </div>
+      </div>
+
+      <div class="w-1/2 flex justify-end items-start">
+        <%= image_tag "nvi4_mat/p132/p132_01.jpg", class: "max-w-full h-auto aspect-square object-contain dark:bg-white dark:rounded-lg dark:p-2", alt: "Decimetro quadrato" %>
+      </div>
+    </div>
+
+    <p class="text-gray-700 dark:text-gray-200">Il metro quadrato ha multipli e sottomultipli.</p>
+
+    <!-- Tabella multipli e sottomultipli -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-2 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/30 text-gray-700 dark:text-gray-200" colspan="3">MULTIPLI</th>
+            <th class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-2 bg-<%= @pagina.base_color %>-200 dark:bg-<%= @pagina.base_color %>-800/40 text-gray-700 dark:text-gray-200">UNITÀ FONDAMENTALE</th>
+            <th class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-2 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/30 text-gray-700 dark:text-gray-200" colspan="3">SOTTOMULTIPLI</th>
+          </tr>
+          <tr class="bg-white dark:bg-gray-800">
+            <th class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-gray-700 dark:text-gray-200">km²</th>
+            <th class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-gray-700 dark:text-gray-200">hm²</th>
+            <th class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-gray-700 dark:text-gray-200">dam²</th>
+            <th class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/20 text-gray-700 dark:text-gray-200">m²</th>
+            <th class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-gray-700 dark:text-gray-200">dm²</th>
+            <th class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-gray-700 dark:text-gray-200">cm²</th>
+            <th class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-gray-700 dark:text-gray-200">mm²</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center text-gray-600 dark:text-gray-300">
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1">chilometro<br>quadrato</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1">ettometro<br>quadrato</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1">decametro<br>quadrato</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/20">metro<br>quadrato</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1">decimetro<br>quadrato</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1">centimetro<br>quadrato</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1">millimetro<br>quadrato</td>
+          </tr>
+          <tr class="text-center text-gray-600 dark:text-gray-300">
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1">1 000 000 m²</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1">10 000 m²</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1">100 m²</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/20">1 m²</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1">0,01 m²</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1">0,0001 m²</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1">0,000001 m²</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tabella esempi d'uso -->
+    <p class="text-gray-700 dark:text-gray-200">Si usano per misurare:</p>
+
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse table-fixed">
+        <tbody>
+          <tr>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 p-0">
+              <%= image_tag "nvi4_mat/p132/output-1715932804132_114_975_111_82.png", class: "w-full h-auto dark:bg-white", alt: "km²" %>
+            </td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 p-0">
+              <%= image_tag "nvi4_mat/p132/output-1715932804132_229_975_111_83.png", class: "w-full h-auto dark:bg-white", alt: "hm²" %>
+            </td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 p-0">
+              <%= image_tag "nvi4_mat/p132/output-1715932804132_343_975_111_82.png", class: "w-full h-auto dark:bg-white", alt: "dam²" %>
+            </td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 p-0">
+              <%= image_tag "nvi4_mat/p132/p132_02.jpg", class: "w-full h-auto dark:bg-white", alt: "m²" %>
+            </td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 p-0">
+              <%= image_tag "nvi4_mat/p132/output-1715932804132_621_975_117_82.png", class: "w-full h-auto dark:bg-white", alt: "dm²" %>
+            </td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 p-0">
+              <%= image_tag "nvi4_mat/p132/output-1715932804132_741_975_118_82.png", class: "w-full h-auto dark:bg-white", alt: "cm²" %>
+            </td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 p-0">
+              <%= image_tag "nvi4_mat/p132/output-1715932804132_864_975_117_81.png", class: "w-full h-auto dark:bg-white", alt: "mm²" %>
+            </td>
+          </tr>
+          <tr class="bg-white dark:bg-gray-800">
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-center font-bold text-gray-700 dark:text-gray-200">km²</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-center font-bold text-gray-700 dark:text-gray-200">hm²</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-center font-bold text-gray-700 dark:text-gray-200">dam²</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-center font-bold text-gray-700 dark:text-gray-200">m²</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-center font-bold text-gray-700 dark:text-gray-200">dm²</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-center font-bold text-gray-700 dark:text-gray-200">cm²</td>
+            <td class="border-2 border-cyan-400 dark:border-cyan-600 px-2 py-1 text-center font-bold text-gray-700 dark:text-gray-200">mm²</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Esempi pratici -->
+    <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-2xl text-gray-700 dark:text-gray-200 space-y-1">
+      <p>• Con il <span class="font-bold">metro quadrato</span> si può misurare la superficie di stoffe, di muri, di pavimenti...</p>
+      <p>• Con il <span class="font-bold">decimetro quadrato</span> si può misurare la superficie di un libro, del banco...</p>
+      <p>• Con il <span class="font-bold">centimetro quadrato</span> si può misurare la superficie di una figurina, di un francobollo...</p>
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [247] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

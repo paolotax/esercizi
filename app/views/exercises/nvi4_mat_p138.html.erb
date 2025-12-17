@@ -1,0 +1,114 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione Perimetro del trapezio -->
+    <div class="space-y-4">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-4">Perimetro del trapezio</h2>
+
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1 text-gray-700 dark:text-gray-200 space-y-3">
+          <p>Per calcolare il <span class="font-bold">perimetro del trapezio</span> devi addizionare le misure dei suoi lati.</p>
+          <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">4,5 cm + 2 cm + 2,5 cm + 3 cm = 12 cm</p>
+
+          <!-- Box formula perimetro -->
+          <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Perimetro del trapezio</span><br>
+              <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">P = B + b + ℓ₁ + ℓ₂</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="shrink-0 flex items-start justify-center">
+          <%= image_tag "nvi4_mat/p138/p138_03.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Trapezio scaleno" %>
+        </div>
+      </div>
+
+      <!-- Trapezio isoscele -->
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1 text-gray-700 dark:text-gray-200 space-y-3">
+          <p>Se il <span class="font-bold">trapezio</span> è <span class="font-bold">isoscele</span> puoi semplificare la formula, poiché i lati obliqui sono congruenti.</p>
+
+          <!-- Box formula trapezio isoscele -->
+          <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Perimetro del trapezio isoscele</span><br>
+              <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">P = B + b + (ℓ × 2)</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="shrink-0 flex items-start justify-center">
+          <%= image_tag "nvi4_mat/p138/p138_04.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Trapezio isoscele" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sezione Area del trapezio -->
+    <div class="space-y-4">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-4">Area del trapezio</h2>
+
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1 text-gray-700 dark:text-gray-200 space-y-3">
+          <p>Per calcolare l'<span class="font-bold">area</span> di un qualsiasi <span class="font-bold">trapezio</span> osserva le figure.</p>
+
+          <p>Affianca al trapezio di cui vuoi calcolare l'area un trapezio congruente. Ottieni un rettangolo o un parallelogramma.</p>
+          <p>La sua base equivale alla somma delle basi del trapezio e la sua altezza è uguale a quella del trapezio.</p>
+          <p>La sua area equivale al doppio dell'area del trapezio. Dividendo per 2 troviamo l'area del trapezio.</p>
+
+          <div class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">
+            <p>[(3 cm + 2 cm) × 2 cm] : 2 =</p>
+            <p>[5 cm × 2 cm] : 2 =</p>
+            <p>10 cm² : 2 = 5 cm²</p>
+          </div>
+
+          <!-- Box formula area -->
+          <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Area del trapezio</span> <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">A = [(B + b) × h] : 2</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="shrink-0 flex items-start justify-center">
+          <%= image_tag "nvi4_mat/p138/p138_02.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Trapezio trasformato in parallelogramma" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-8">
+
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Disegna sul quaderno un trapezio rettangolo con la base maggiore di 6 cm, la base minore di 3 cm e l'altezza di 4 cm. Poi misura la lunghezza del lato obliquo e calcola perimetro e area.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 dark:text-gray-200">
+          <div class="flex items-center gap-2">
+            <span>P =</span>
+            <input type="text" data-correct-answer="18" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>cm</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span>A =</span>
+            <input type="text" data-correct-answer="18" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>cm²</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [252, 253] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

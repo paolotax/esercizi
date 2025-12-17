@@ -1,0 +1,66 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Immagine principale - diagrammi -->
+    <div class="flex justify-center">
+      <%= image_tag "nvi4_mat/p153/p153_01.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2 max-w-full", alt: "Tipi di diagrammi" %>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-8">
+
+      <!-- Esercizio 1 - Completa -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">Completa.</p>
+
+        <div class="space-y-4 text-gray-700 dark:text-gray-200">
+          <p><span class="text-<%= @pagina.base_color %>-500">•</span> I <span class="font-bold">DIAGRAMMI</span> si usano per raggruppare oggetti in base a una o più caratteristiche.</p>
+          <p>Ci sono tre tipi di diagramma:</p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>
+              <span>Il </span>
+              <input type="text" data-correct-answer="diagramma di Eulero-Venn" class="w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </li>
+            <li>Il <span class="font-bold">DIAGRAMMA DI CARROLL</span>.</li>
+            <li>
+              <span>Il </span>
+              <input type="text" data-correct-answer="diagramma ad albero" class="w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 - Osserva e scegli -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">Osserva e scegli.</p>
+
+        <div class="space-y-3 text-gray-700 dark:text-gray-200">
+          <p><span class="text-<%= @pagina.base_color %>-500">•</span> Quali oggetti sono raggruppati nei diagrammi di questa pagina?</p>
+          <div class="space-y-2 pl-4">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="oggetti" value="pantaloni" class="w-5 h-5">
+              <span>Pantaloni.</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="oggetti" value="scarpe" class="w-5 h-5">
+              <span>Scarpe.</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="oggetti" value="cappelli" class="w-5 h-5" data-correct-answer="true">
+              <span>Cappelli.</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

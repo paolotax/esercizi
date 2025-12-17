@@ -1,0 +1,156 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione -->
+    <div class="text-gray-700 dark:text-gray-200">
+      <p>Per visualizzare meglio i risultati dell'indagine di p. 154, possiamo rappresentare i dati raccolti con dei <span class="font-bold">grafici</span>.</p>
+    </div>
+
+    <!-- Sezione ISTOGRAMMA -->
+    <div class="space-y-4">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">ISTOGRAMMA</h2>
+
+      <p class="text-gray-700 dark:text-gray-200">L'istogramma è formato da rettangoli di uguale larghezza. Ogni rettangolo rappresenta un dato e la sua altezza varia in base alla frequenza con cui il dato si presenta nell'indagine.</p>
+
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p156/p156_01.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2 max-w-full", alt: "Istogramma generi libri preferiti" %>
+      </div>
+    </div>
+
+    <!-- Sezione IDEOGRAMMA -->
+    <div class="space-y-4">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">IDEOGRAMMA</h2>
+
+      <div class="overflow-x-auto">
+        <table class="border-2 border-cyan-400 dark:border-cyan-600">
+          <tbody class="text-gray-700 dark:text-gray-200">
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 font-bold">AVVENTURA</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <%= image_tag "nvi4_mat/p156/output-1715932804156_255_540_247_31.png", class: "h-auto dark:bg-white dark:rounded", alt: "12 libri" %>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 font-bold">FANTASY</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <%= image_tag "nvi4_mat/p156/output-1715932804156_255_575_155_30.png", class: "h-auto dark:bg-white dark:rounded", alt: "7 libri" %>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 font-bold">FANTASCIENZA</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <%= image_tag "nvi4_mat/p156/output-1715932804156_255_608_232_31.png", class: "h-auto dark:bg-white dark:rounded", alt: "11 libri" %>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 font-bold">GIALLI</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <%= image_tag "nvi4_mat/p156/output-1715932804156_255_642_136_31.png", class: "h-auto dark:bg-white dark:rounded", alt: "6 libri" %>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 font-bold">POESIE</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <%= image_tag "nvi4_mat/p156/output-1715932804156_254_676_102_31.png", class: "h-auto dark:bg-white dark:rounded", alt: "4 libri" %>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700 font-bold">FIABE</td>
+              <td class="p-2 border-2 border-cyan-400 dark:border-cyan-600 bg-white dark:bg-gray-700">
+                <%= image_tag "nvi4_mat/p156/output-1715932804156_254_710_212_30.png", class: "h-auto dark:bg-white dark:rounded", alt: "10 libri" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-gray-700 dark:text-gray-200">
+        <%= image_tag "nvi4_mat/p156/output-1715932804156_532_539_42_30.png", class: "inline h-auto dark:bg-white dark:rounded", alt: "simbolo libro" %> = 2 bambini
+      </p>
+
+      <p class="text-gray-700 dark:text-gray-200">L'ideogramma è un grafico che si realizza con dei disegni che riguardano l'argomento dell'indagine. In questo caso il disegno utilizzato è un libro.</p>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-8">
+
+      <!-- Esercizio osservazione grafici -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">Osserva l'istogramma e l'ideogramma, poi indica il numero di bambini che hanno scelto i diversi libri.</p>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-gray-700 dark:text-gray-200">
+          <div class="flex items-center gap-2">
+            <span>Avventura:</span>
+            <input type="text" data-correct-answer="12" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>Fantasy:</span>
+            <input type="text" data-correct-answer="7" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>Fantascienza:</span>
+            <input type="text" data-correct-answer="11" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>Gialli:</span>
+            <input type="text" data-correct-answer="6" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>Poesie:</span>
+            <input type="text" data-correct-answer="4" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2">
+            <span>Fiabe:</span>
+            <input type="text" data-correct-answer="10" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+
+      <!-- Domande sulla moda -->
+      <div class="space-y-4">
+        <p class="font-bold text-gray-700 dark:text-gray-200">Ora rispondi e completa la frase.</p>
+
+        <div class="space-y-3 text-gray-700 dark:text-gray-200">
+          <div class="flex flex-col gap-2">
+            <span>Qual è il libro (cioè il valore) che si presenta con <span class="font-bold">maggior frequenza</span>?</span>
+            <input type="text" data-correct-answer="avventura" class="w-40 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span>Quindi possiamo dire che la <span class="font-bold">moda</span> è</span>
+            <input type="text" data-correct-answer="avventura" class="w-40 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+          </div>
+        </div>
+      </div>
+
+      <!-- Box regola moda -->
+      <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+        <p class="text-gray-700 dark:text-gray-200">
+          Il valore che si presenta con maggiore frequenza si chiama <span class="font-bold">moda</span>.
+        </p>
+      </div>
+
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Fai un'intervista ai tuoi compagni di classe sul tipo di mezzo che utilizzano per venire a scuola. Poi realizza un ideogramma e trova la moda.
+        </p>
+
+        <div class="flex justify-center">
+          <%= image_tag "nvi4_mat/p156/p156_02.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Mezzi di trasporto" %>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [259, 260, 263] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

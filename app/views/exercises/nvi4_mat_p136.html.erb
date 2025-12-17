@@ -1,0 +1,132 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione Perimetro del parallelogramma -->
+    <div class="space-y-4">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-4">Perimetro del parallelogramma</h2>
+
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1 text-gray-700 dark:text-gray-200 space-y-3">
+          <p>Per calcolare il <span class="font-bold">perimetro del parallelogramma</span>:</p>
+
+          <ul class="list-disc pl-6 space-y-3">
+            <li>
+              <p>puoi addizionare le misure dei lati</p>
+              <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">5,5 cm + 4 cm + 5,5 cm + 4 cm = 19 cm</p>
+            </li>
+            <li>
+              <p>oppure, poiché i lati opposti sono congruenti, puoi addizionare i due lati consecutivi e moltiplicare il risultato per 2</p>
+              <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">(5,5 cm + 4 cm) × 2 = 9,5 cm × 2 = 19 cm</p>
+            </li>
+          </ul>
+
+          <!-- Box formula perimetro -->
+          <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Perimetro del parallelogramma</span><br>
+              <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">P = ℓ₁ + ℓ₂ + ℓ₃ + ℓ₄</span> oppure <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">P = (ℓ₁ + ℓ₂) × 2</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="shrink-0 flex items-start justify-center">
+          <%= image_tag "nvi4_mat/p136/p136_03.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Parallelogramma con lati 5,5 cm e 4 cm" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sezione Area del parallelogramma -->
+    <div class="space-y-4">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-4">Area del parallelogramma</h2>
+
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1 text-gray-700 dark:text-gray-200 space-y-3">
+          <p>Per calcolare l'<span class="font-bold">area del parallelogramma</span>, puoi trovare l'area del rettangolo a esso equiesteso.</p>
+          <p>Sposta il triangolo giallo come indica la freccia.</p>
+          <p>Ottieni un rettangolo equiesteso al parallelogramma, di uguale base e uguale altezza.</p>
+          <p>Trovando l'area di questo rettangolo, trovi anche quella del parallelogramma.</p>
+
+          <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">5,5 cm × 3 cm = 16,5 cm²</p>
+
+          <p>L'area del rettangolo HECD e del parallelogramma ABCD a esso equiesteso è di 16,5 cm².</p>
+
+          <!-- Box formula area -->
+          <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Area del parallelogramma</span> <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">A = b × h</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="shrink-0 flex items-start justify-center">
+          <%= image_tag "nvi4_mat/p136/p136_04.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Parallelogramma trasformato in rettangolo" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-8">
+
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Disegna sul quaderno un parallelogramma con la base lunga 9 cm e l'altezza lunga 5 cm. Calcola l'area.
+        </p>
+        <div class="text-gray-700 dark:text-gray-200">
+          <div class="flex items-center gap-2">
+            <span>A =</span>
+            <input type="text" data-correct-answer="45" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>cm²</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Calcola il perimetro di un parallelogramma con i lati che misurano 17,5 cm e 8 cm.
+        </p>
+        <div class="text-gray-700 dark:text-gray-200">
+          <div class="flex items-center gap-2">
+            <span>P =</span>
+            <input type="text" data-correct-answer="51" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>cm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 3 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(3) %>
+          Un parallelogramma ha i lati che misurano 5,5 cm e 2,5 cm e l'altezza che misura 2 cm. Calcola l'area e il perimetro del parallelogramma.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 dark:text-gray-200">
+          <div class="flex items-center gap-2">
+            <span>A =</span>
+            <input type="text" data-correct-answer="11" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>cm²</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span>P =</span>
+            <input type="text" data-correct-answer="16" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>cm</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [250] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

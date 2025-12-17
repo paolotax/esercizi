@@ -1,0 +1,163 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione Perimetro del quadrato -->
+    <div class="space-y-4">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-4">Perimetro del quadrato</h2>
+
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1 text-gray-700 dark:text-gray-200 space-y-3">
+          <p>Per calcolare il <span class="font-bold">perimetro del quadrato</span>:</p>
+
+          <ul class="list-disc pl-6 space-y-3">
+            <li>
+              <p>puoi addizionare le misure dei lati</p>
+              <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">5 cm + 5 cm + 5 cm + 5 cm = 20 cm</p>
+            </li>
+            <li>
+              <p>oppure, poiché i lati sono tutti congruenti, puoi moltiplicare la misura del lato per 4</p>
+              <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">5 cm × 4 = 20 cm</p>
+            </li>
+          </ul>
+
+          <!-- Box formula perimetro -->
+          <div class="p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Perimetro del quadrato</span><br>
+              <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">P = ℓ + ℓ + ℓ + ℓ</span> oppure <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">P = ℓ × 4</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="shrink-0 flex items-start justify-center">
+          <%= image_tag "nvi4_mat/p135/p135_02.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Quadrato con lato 5 cm" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sezione Area del quadrato -->
+    <div class="space-y-4">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-4">Area del quadrato</h2>
+
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1 text-gray-700 dark:text-gray-200 space-y-3">
+          <p>Per calcolare l'<span class="font-bold">area del quadrato</span>, puoi procedere come per il rettangolo.</p>
+          <p>Il quadrato, infatti, è un rettangolo con tutti i lati congruenti, perciò la base e l'altezza hanno la stessa misura, dunque la moltiplicazione ha i due fattori uguali.</p>
+
+          <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">5 cm × 5 cm = 25 cm²</p>
+
+          <!-- Box formula area -->
+          <div class="p-4 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Area del quadrato</span> <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">A = ℓ × ℓ</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="shrink-0 flex items-start justify-center">
+          <%= image_tag "nvi4_mat/p135/p135_03.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Quadrato con griglia per calcolo area" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-8">
+
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Disegna sul quaderno due quadrati, uno con il lato lungo 4 cm e l'altro con il lato di 7 cm. Poi calcola il perimetro e l'area di ciascuno.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 dark:text-gray-200">
+          <div class="space-y-2">
+            <p class="font-bold">Quadrato con lato 4 cm</p>
+            <div class="flex items-center gap-2">
+              <span>P =</span>
+              <input type="text" data-correct-answer="16" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span>cm</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span>A =</span>
+              <input type="text" data-correct-answer="16" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span>cm²</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <p class="font-bold">Quadrato con lato 7 cm</p>
+            <div class="flex items-center gap-2">
+              <span>P =</span>
+              <input type="text" data-correct-answer="28" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span>cm</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span>A =</span>
+              <input type="text" data-correct-answer="49" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+              <span>cm²</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Calcola l'area di un quadrato con il lato che misura 6 cm; poi disegna un rettangolo equiesteso al quadrato.
+        </p>
+        <div class="text-gray-700 dark:text-gray-200">
+          <div class="flex items-center gap-2">
+            <span>Area del quadrato =</span>
+            <input type="text" data-correct-answer="36" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>cm²</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AllenaMente -->
+      <div class="p-3 bg-white dark:bg-blue-900/40 rounded-2xl border-3 border-blue-400 dark:border-blue-600">
+        <div class="flex flex-col md:flex-row gap-4">
+          <div class="flex-1">
+            <p class="font-bold text-gray-800 dark:text-blue-300 mb-2">
+              <span class="bg-yellow-400 text-gray-800 px-2 py-1 rounded">AllenaMente!</span>
+            </p>
+
+            <div class="text-gray-700 dark:text-gray-200 space-y-3">
+              <p>Samuele ha sfidato Giorgia chiedendole di calcolare l'area di questo quadrato.</p>
+              <p>Rifletti anche tu: i lati del quadrato sono tutti uguali, quindi dal perimetro puoi ricavare la misura del lato.</p>
+
+              <div class="space-y-2 mt-4">
+                <div class="flex items-center gap-2">
+                  <span>lato del quadrato =</span>
+                  <input type="text" data-correct-answer="9" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span>cm</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span>area del quadrato =</span>
+                  <input type="text" data-correct-answer="81" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                  <span>cm²</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center justify-start shrink-0">
+            <%= image_tag "nvi4_mat/p135/output-1715932804135_761_930_187_183.png", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Quadrato con perimetro 36 cm" %>
+            <p class="font-bold text-gray-700 dark:text-gray-200 mt-2">P = 36 cm</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [249] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

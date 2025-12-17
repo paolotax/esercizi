@@ -1,0 +1,114 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione Perimetro del triangolo -->
+    <div class="space-y-4">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-4">Perimetro del triangolo</h2>
+
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1 text-gray-700 dark:text-gray-200 space-y-3">
+          <p>Per calcolare il <span class="font-bold">perimetro di un triangolo</span> devi addizionare le misure dei suoi lati.</p>
+          <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">5 cm + 4,3 cm + 2 cm = 11,3 cm</p>
+
+          <!-- Box formula perimetro -->
+          <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Perimetro del triangolo</span><br>
+              <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">P = ℓ₁ + ℓ₂ + ℓ₃</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="shrink-0 flex items-start justify-center">
+          <%= image_tag "nvi4_mat/p139/p139_04.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Triangolo scaleno" %>
+        </div>
+      </div>
+
+      <!-- Triangoli isoscele e equilatero -->
+      <div class="text-gray-700 dark:text-gray-200 space-y-3">
+        <p>Se il triangolo è <span class="font-bold">isoscele</span> o <span class="font-bold">equilatero</span> puoi sostituire alla somma dei lati congruenti una moltiplicazione.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Perimetro del triangolo isoscele</span><br>
+              <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">P = b + (ℓ × 2)</span>
+            </p>
+          </div>
+          <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Perimetro del triangolo equilatero</span><br>
+              <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">P = ℓ × 3</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sezione Area del triangolo -->
+    <div class="space-y-4">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-4">Area del triangolo</h2>
+
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1 text-gray-700 dark:text-gray-200 space-y-3">
+          <p>Per calcolare l'<span class="font-bold">area</span> di un qualsiasi <span class="font-bold">triangolo</span> osserva le figure.</p>
+
+          <p>Affianca al triangolo di cui vuoi calcolare l'area un triangolo congruente. Ottieni un rettangolo o un parallelogramma.</p>
+          <p>La sua base e la sua altezza coincidono con quelle del triangolo e la sua area equivale al doppio di quella del triangolo.</p>
+          <p>Dividendo per 2 troviamo l'area del triangolo.</p>
+
+          <div class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">
+            <p>(4 cm × 3 cm) : 2 =</p>
+            <p>12 cm² : 2 = 6 cm²</p>
+          </div>
+
+          <!-- Box formula area -->
+          <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Area del triangolo</span> <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">A = (b × h) : 2</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="shrink-0 flex items-start justify-center">
+          <%= image_tag "nvi4_mat/p139/p139_03.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Triangolo trasformato in parallelogramma" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-8">
+
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Disegna sul quaderno un triangolo isoscele con la base di 9 cm e l'altezza di 8 cm. Poi misura la lunghezza del lato obliquo e calcola perimetro e area.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 dark:text-gray-200">
+          <div class="flex items-center gap-2">
+            <span>P =</span>
+            <input type="text" data-correct-answer="27" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>cm</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span>A =</span>
+            <input type="text" data-correct-answer="36" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>cm²</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [252, 254, 255, 256, 257, 258] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

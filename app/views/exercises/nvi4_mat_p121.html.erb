@@ -1,0 +1,67 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Introduzione -->
+    <div class="text-gray-700 dark:text-gray-200">
+      <p>Ora che sappiamo tracciare le altezze dei triangoli, possiamo imparare a tracciare le altezze di qualsiasi poligono: il sistema è lo stesso e occorrono sempre riga e squadra.</p>
+    </div>
+
+    <!-- Passo 1 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div class="text-gray-700 dark:text-gray-200">
+        <p>
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-<%= @pagina.base_color %>-500 text-white font-bold mr-2">1</span>
+          Scegli un lato come <span class="font-bold">base</span> e appoggia la riga lungo il lato che hai scelto.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p121/p121_01.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Passo 1: appoggia la riga" %>
+      </div>
+    </div>
+
+    <!-- Passo 2 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div class="text-gray-700 dark:text-gray-200">
+        <p>
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-<%= @pagina.base_color %>-500 text-white font-bold mr-2">2</span>
+          Prendi la squadra e appoggia il suo angolo retto sulla base.<br>
+          Ora fai scorrere la squadra fino a quando incontra il <span class="font-bold">vertice</span> che si trova più distante dalla base che hai scelto.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p121/p121_02.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Passo 2: posiziona la squadra" %>
+      </div>
+    </div>
+
+    <!-- Passo 3 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <div class="text-gray-700 dark:text-gray-200">
+        <p>
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-<%= @pagina.base_color %>-500 text-white font-bold mr-2">3</span>
+          Traccia il segmento perpendicolare che unisce il vertice più distante al lato: questo segmento rappresenta l'<span class="font-bold">altezza</span> relativa al lato che hai scelto come base. Procedi nello stesso modo per gli altri lati.
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <%= image_tag "nvi4_mat/p121/p121_03.jpg", class: "max-w-full h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Passo 3: traccia l'altezza" %>
+      </div>
+    </div>
+
+    <!-- Box scoperte -->
+    <div class="p-4 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/30 rounded-2xl">
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">Abbiamo così fatto alcune scoperte:</p>
+      <ul class="list-disc pl-6 space-y-2 text-gray-700 dark:text-gray-200 marker:text-<%= @pagina.base_color %>-500">
+        <li>ogni poligono ha <span class="font-bold">tante altezze quanti</span> sono i suoi <span class="font-bold">lati</span>, i suoi <span class="font-bold">vertici</span> e i suoi <span class="font-bold">angoli</span>;</li>
+        <li>ogni altezza è <span class="font-bold">perpendicolare</span> a un lato;</li>
+        <li>l'altezza è la <span class="font-bold">distanza massima</span> tra il lato che consideri come base e il vertice più distante dal lato stesso.</li>
+      </ul>
+    </div>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

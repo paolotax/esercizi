@@ -1,0 +1,116 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Sezione Perimetro del rombo -->
+    <div class="space-y-4">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-4">Perimetro del rombo</h2>
+
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1 text-gray-700 dark:text-gray-200 space-y-3">
+          <p>Per calcolare il <span class="font-bold">perimetro del rombo</span>:</p>
+
+          <ul class="list-disc pl-6 space-y-3">
+            <li>
+              <p>puoi addizionare le misure dei lati</p>
+              <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">3 cm + 3 cm + 3 cm + 3 cm = 12 cm</p>
+            </li>
+            <li>
+              <p>oppure, poiché i lati sono tutti congruenti, puoi moltiplicare la misura del lato per 4</p>
+              <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">3 cm × 4 = 12 cm</p>
+            </li>
+          </ul>
+
+          <!-- Box formula perimetro -->
+          <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Perimetro del rombo</span><br>
+              <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">P = ℓ + ℓ + ℓ + ℓ</span> oppure <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">P = ℓ × 4</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="shrink-0 flex items-start justify-center">
+          <%= image_tag "nvi4_mat/p137/p137_01.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Rombo con lato 3 cm" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sezione Area del rombo -->
+    <div class="space-y-4">
+      <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 mb-4">Area del rombo</h2>
+
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex-1 text-gray-700 dark:text-gray-200 space-y-3">
+          <p>Per calcolare l'<span class="font-bold">area del rombo</span>, puoi trovare l'area di un rettangolo a esso equiesteso.</p>
+
+          <p>Disegna un rombo e traccia la diagonale maggiore (D) e la diagonale minore (d).</p>
+          <p>Ritaglia il rombo lungo le diagonali e i lati: ottieni 4 triangoli. Con i 4 triangoli puoi comporre un rettangolo che è equiesteso al rombo, perché è formato con le stesse parti del rombo. La lunghezza della sua base corrisponde alla diagonale maggiore del rombo e la lunghezza della sua altezza corrisponde a metà della diagonale minore.</p>
+          <p>Trovando l'area di questo rettangolo trovi anche l'area del rombo.</p>
+
+          <p class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">(5 cm × 3 cm) : 2 = 15 cm² : 2 = 7,5 cm²</p>
+
+          <!-- Box formula area -->
+          <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl w-fit">
+            <p class="text-gray-700 dark:text-gray-200">
+              <span class="font-bold">Area del rombo</span> <span class="font-bold text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400">A = (D × d) : 2</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="shrink-0 flex items-start justify-center">
+          <%= image_tag "nvi4_mat/p137/p137_02.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Rombo trasformato in rettangolo" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-8">
+
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Disegna sul quaderno un rombo con la diagonale maggiore di 8 cm, la diagonale minore di 4 cm e il lato di 4,5 cm. Calcola perimetro e area.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 dark:text-gray-200">
+          <div class="flex items-center gap-2">
+            <span>P =</span>
+            <input type="text" data-correct-answer="18" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>cm</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span>A =</span>
+            <input type="text" data-correct-answer="16" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>cm²</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(2) %>
+          Elena costruisce un aquilone a forma di rombo con le diagonali di 40 cm e 60 cm. Ha ritagliato la carta per costruirlo da un foglio rettangolare lungo 95 cm e largo 85 cm. Quanto misura la superficie della carta che non ha utilizzato?
+        </p>
+        <div class="text-gray-700 dark:text-gray-200">
+          <div class="flex items-center gap-2">
+            <span>Superficie non utilizzata =</span>
+            <input type="text" data-correct-answer="6875" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+            <span>cm²</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [251] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>

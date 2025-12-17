@@ -1,0 +1,167 @@
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
+
+  <div class="space-y-6">
+
+    <!-- Titolo sezione -->
+    <h2 class="font-bold italic text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 text-xl">EVENTI CASUALI</h2>
+
+    <!-- Introduzione -->
+    <div class="text-gray-700 dark:text-gray-200 space-y-3">
+      <p>Gli eventi casuali sono quelli legati al caso, come lanciare i dadi, estrarre una carta da un mazzo…</p>
+      <p>Prendi un dado a 6 facce e lancialo: puoi prevedere quale evento si verificherà?</p>
+    </div>
+
+    <!-- Container ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-6">
+
+      <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">Completa le frasi con certo, possibile e impossibile.</p>
+
+      <div class="space-y-3 text-gray-700 dark:text-gray-200">
+        <div class="flex flex-col md:flex-row md:items-center gap-2">
+          <span>– Uscirà il numero 7:</span>
+          <span>evento</span>
+          <input type="text" data-correct-answer="impossibile" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-2">
+          <span>– Uscirà un numero pari:</span>
+          <span>evento</span>
+          <input type="text" data-correct-answer="possibile" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-2">
+          <span>– Uscirà il numero 2:</span>
+          <span>evento</span>
+          <input type="text" data-correct-answer="possibile" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-2">
+          <span>– Uscirà un numero a due cifre:</span>
+          <span>evento</span>
+          <input type="text" data-correct-answer="impossibile" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-2">
+          <span>– Uscirà un numero maggiore di 0:</span>
+          <span>evento</span>
+          <input type="text" data-correct-answer="certo" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-2">
+          <span>– Uscirà un numero compreso tra 1 e 6:</span>
+          <span>evento</span>
+          <input type="text" data-correct-answer="certo" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-2">
+          <span>– Uscirà un numero dispari:</span>
+          <span>evento</span>
+          <input type="text" data-correct-answer="possibile" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-2">
+          <span>– Uscirà un numero minore di 10:</span>
+          <span>evento</span>
+          <input type="text" data-correct-answer="certo" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+        </div>
+      </div>
+    </div>
+
+    <p class="text-gray-700 dark:text-gray-200">Come vedi, la probabilità del verificarsi di un evento può cambiare parecchio; dal certo all'impossibile.</p>
+
+    <!-- Immagine scala probabilità -->
+    <div class="flex justify-center">
+      <%= image_tag "nvi4_mat/p161/output-1715932804161_663_189_345_194.png", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2 max-w-full", alt: "Scala probabilità" %>
+    </div>
+
+    <!-- Immagine dado -->
+    <div class="flex justify-center">
+      <%= image_tag "nvi4_mat/p161/p161_01.jpg", class: "h-auto dark:bg-white dark:rounded-lg dark:p-2 max-w-full", alt: "Dado" %>
+    </div>
+
+    <!-- Box regola -->
+    <div class="p-3 bg-pink-light dark:bg-pink-900/40 rounded-2xl">
+      <p class="text-gray-700 dark:text-gray-200">
+        Un evento si dice <span class="font-bold">possibile</span> quando può verificarsi.<br>
+        Un evento si dice <span class="font-bold">impossibile</span> quando non può verificarsi.<br>
+        Un evento si dice <span class="font-bold">certo</span> quando si verificherà sicuramente.
+      </p>
+    </div>
+
+    <!-- ESERCIZI -->
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-2xl space-y-8">
+
+      <!-- Esercizio 1 -->
+      <div>
+        <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+          <%= numero_esercizio_badge(1) %>
+          Colora le palline di ciascun gruppo in modo da rendere vere le scritte sotto.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          <div class="space-y-2">
+            <%= image_tag "nvi4_mat/p161/output-1715932804161_125_963_126_122.png", class: "h-24 mx-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Palline" %>
+            <p class="text-gray-700 dark:text-gray-200">È <span class="font-bold">impossibile</span> estrarre una pallina verde.</p>
+          </div>
+          <div class="space-y-2">
+            <%= image_tag "nvi4_mat/p161/output-1715932804161_125_963_126_122.png", class: "h-24 mx-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Palline" %>
+            <p class="text-gray-700 dark:text-gray-200">È <span class="font-bold">possibile</span> estrarre una pallina verde.</p>
+          </div>
+          <div class="space-y-2">
+            <%= image_tag "nvi4_mat/p161/output-1715932804161_125_963_126_122.png", class: "h-24 mx-auto dark:bg-white dark:rounded-lg dark:p-2", alt: "Palline" %>
+            <p class="text-gray-700 dark:text-gray-200">È <span class="font-bold">certo</span> estrarre una pallina verde.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esercizio 2 -->
+      <div>
+        <div class="flex flex-col md:flex-row gap-6">
+          <div class="flex-1">
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
+              <%= numero_esercizio_badge(2) %>
+              In un sacchetto ci sono i tre cartoncini raffigurati a fianco. Davide ne pesca a caso uno per volta e li sistema in base all'ordine di uscita formando numeri di tre cifre.
+            </p>
+            <p class="text-gray-700 dark:text-gray-200 mb-4">Indica per ciascun evento se è certo (C), possibile (P) o impossibile (I).<br>Davide formerà un numero...</p>
+
+            <div class="space-y-2 text-gray-700 dark:text-gray-200">
+              <div class="flex items-center gap-2">
+                <input type="text" data-correct-answer="P" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>pari.</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="text" data-correct-answer="C" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>a tre cifre.</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="text" data-correct-answer="I" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>minore di 10.</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="text" data-correct-answer="C" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>maggiore di 50.</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="text" data-correct-answer="I" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>minore di 100.</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="text" data-correct-answer="P" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
+                <span>con 4 decine.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="shrink-0 flex flex-row md:flex-col justify-center gap-2">
+            <div class="w-12 h-12 border-2 border-gray-400 dark:border-gray-500 flex items-center justify-center font-bold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700">2</div>
+            <div class="w-12 h-12 border-2 border-gray-400 dark:border-gray-500 flex items-center justify-center font-bold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700">4</div>
+            <div class="w-12 h-12 border-2 border-gray-400 dark:border-gray-500 flex items-center justify-center font-bold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700">7</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%= render 'shared/quaderno_link', pagine: [262, 263] %>
+
+    <%= render 'shared/exercise_controls' %>
+  </div>
+</div>
