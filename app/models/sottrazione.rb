@@ -407,9 +407,11 @@ class Sottrazione
     cells = []
     borrows_arr = borrows
     borrow_counter = 0
+    col_index = 0
 
     # Cella vuota sinistra
     cells << { type: :empty }
+    col_index += 1
 
     column_types.each do |col_type|
       case col_type
@@ -430,10 +432,12 @@ class Sottrazione
           show_value: @show_solution && borrow_value.present?,
           classes: "text-red-600 dark:text-red-400",
           bg_class: is_last_digit_col ? "" : "bg-red-50 dark:bg-red-900/30",
-          nav_direction: "ltr"
+          nav_direction: "ltr",
+          col: col_index
         }
         borrow_counter += 1
       end
+      col_index += 1
     end
 
     # Cella vuota destra
@@ -446,9 +450,11 @@ class Sottrazione
     cells = []
     minuend_digs = minuend_digits
     digit_counter = 0
+    col_index = 0
 
     # Cella vuota sinistra
     cells << { type: :empty }
+    col_index += 1
 
     column_types.each do |col_type|
       case col_type
@@ -478,10 +484,12 @@ class Sottrazione
           editable: true,
           show_value: @show_minuend_subtrahend && digit.present?,
           classes: "text-gray-800 dark:text-gray-100",
-          nav_direction: "ltr"
+          nav_direction: "ltr",
+          col: col_index
         }
         digit_counter += 1
       end
+      col_index += 1
     end
 
     # Cella vuota destra

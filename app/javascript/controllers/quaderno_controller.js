@@ -92,6 +92,12 @@ export default class extends Controller {
   handleCellInput(event, currentIndex) {
     const input = event.target
     const value = input.value
+    const target = input.dataset.quadernoTarget
+
+    // Gestione sbiadimento minuendo per sottrazione
+    if (target === 'carry') {
+      this.handleCarryFade(input, value)
+    }
 
     if (value.length === 1) {
       const navDirection = input.dataset.navDirection || 'ltr'
@@ -103,6 +109,36 @@ export default class extends Controller {
         // Left-to-right: vai alla cella successiva (a destra)
         this.navigateToNextEnabled(currentIndex, 1)
       }
+    }
+  }
+
+  // Sbiadisce/ripristina il minuendo quando si scrive un prestito (solo sottrazione)
+  handleCarryFade(carryInput, value) {
+    // Verifica se il carry ha classe text-red (prestito sottrazione)
+    if (!carryInput.classList.contains('text-red-600') &&
+        !carryInput.classList.contains('dark:text-red-400')) {
+      return // Non e' un prestito di sottrazione
+    }
+
+    // Trova l'input nella stessa colonna ma nella riga sotto (minuendo)
+    const col = carryInput.dataset.col
+    if (!col) return
+
+    // Cerca l'input con target "input" nella stessa colonna
+    const minuendInput = this.element.querySelector(
+      `input[data-quaderno-target="input"][data-col="${col}"]`
+    )
+
+    if (!minuendInput) return
+
+    if (value !== '') {
+      // Sbiadisci il minuendo
+      minuendInput.classList.add('text-gray-300', 'dark:text-gray-600')
+      minuendInput.classList.remove('text-gray-800', 'dark:text-gray-100')
+    } else {
+      // Ripristina il minuendo
+      minuendInput.classList.remove('text-gray-300', 'dark:text-gray-600')
+      minuendInput.classList.add('text-gray-800', 'dark:text-gray-100')
     }
   }
 
@@ -289,6 +325,12 @@ export default class extends Controller {
       input.classList.remove('bg-green-100', 'bg-red-100', 'bg-yellow-100',
                             'dark:bg-green-900/50', 'dark:bg-red-900/50', 'dark:bg-yellow-900/50')
       input.classList.add('bg-transparent')
+
+      // Ripristina colore testo per minuendo (sottrazione)
+      input.classList.remove('text-gray-300', 'dark:text-gray-600')
+      if (input.dataset.quadernoTarget === 'input') {
+        input.classList.add('text-gray-800', 'dark:text-gray-100')
+      }
     })
 
     // Pulisci commaSpot
@@ -325,6 +367,8 @@ export default class extends Controller {
         const correctAnswer = input.getAttribute('data-correct-answer')
         if (correctAnswer) {
           input.value = correctAnswer
+          // Sbiadisci minuendo per prestiti sottrazione
+          this.handleCarryFade(input, correctAnswer)
         }
       })
     }
