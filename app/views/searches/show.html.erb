@@ -1,0 +1,65 @@
+<div class="container mx-auto p-4 max-w-4xl">
+  <h1 class="text-2xl font-bold mb-6">Cerca</h1>
+
+  <%= form_with url: search_path, method: :get, class: "mb-8" do %>
+    <div class="flex gap-2">
+      <%= text_field_tag :q, @query,
+          placeholder: "Cerca pagine ed esercizi...",
+          class: "flex-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500",
+          autofocus: true %>
+      <%= submit_tag "Cerca", class: "bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg cursor-pointer" %>
+    </div>
+  <% end %>
+
+  <% if @query.present? %>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">
+      <%= @results&.size || 0 %> risultat<%= (@results&.size || 0) == 1 ? 'o' : 'i' %>
+      per "<strong><%= @query %></strong>"
+    </p>
+
+    <div class="space-y-3">
+      <% @results&.each do |result| %>
+        <% if result.searchable_type == "Pagina" && result.pagina %>
+          <%= link_to pagina_path(result.pagina.slug),
+              class: "block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-blue-300 transition" do %>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded">Pagina</span>
+            </div>
+            <h3 class="font-semibold text-lg"><%= raw result.highlighted_title %></h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-1"><%= raw result.highlighted_content %></p>
+            <p class="text-xs text-gray-400 dark:text-gray-500 mt-2">
+              <%= result.pagina.disciplina.volume.corso.nome %> &rsaquo;
+              <%= result.pagina.disciplina.volume.nome %> &rsaquo;
+              <%= result.pagina.disciplina.nome %> &rsaquo;
+              Pagina <%= result.pagina.numero %>
+            </p>
+          <% end %>
+        <% elsif result.searchable_type == "Esercizio" %>
+          <% esercizio = result.searchable %>
+          <%= link_to public_esercizio_path(esercizio.share_token),
+              class: "block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-green-300 transition" do %>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-0.5 rounded">Esercizio</span>
+              <% if esercizio.category.present? %>
+                <span class="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded"><%= esercizio.category %></span>
+              <% end %>
+            </div>
+            <h3 class="font-semibold text-lg"><%= raw result.highlighted_title %></h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-1"><%= raw result.highlighted_content %></p>
+            <% if esercizio.tags.present? %>
+              <div class="flex gap-1 mt-2">
+                <% esercizio.tags.each do |tag| %>
+                  <span class="text-xs bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-2 py-0.5 rounded"><%= tag %></span>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center text-gray-500 dark:text-gray-400 py-12">
+      <p>Inserisci un termine di ricerca per trovare pagine ed esercizi.</p>
+    </div>
+  <% end %>
+</div>

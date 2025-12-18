@@ -1,5 +1,6 @@
 class Esercizio < ApplicationRecord
   include Shareable
+  include Searchable
 
   # Serializzazione JSON per SQLite
   serialize :tags, coder: JSON, type: Array
@@ -90,6 +91,20 @@ class Esercizio < ApplicationRecord
 
   def operations
     content['operations'] || []
+  end
+
+  def search_record_attributes
+    {
+      pagina_id: nil,
+      disciplina_id: nil,
+      volume_id: nil,
+      title: title,
+      content: [
+        description,
+        category,
+        tags&.join(" ")
+      ].compact.join(" ")
+    }
   end
 
   private

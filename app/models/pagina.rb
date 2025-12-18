@@ -1,4 +1,6 @@
 class Pagina < ApplicationRecord
+  include Searchable
+
   # Associazioni
   belongs_to :disciplina
 
@@ -16,7 +18,29 @@ class Pagina < ApplicationRecord
   # Callbacks
   before_validation :genera_slug, if: -> { slug.blank? }
 
+  def search_record_attributes
+    {
+      pagina_id: id,
+      disciplina_id: disciplina_id,
+      volume_id: disciplina&.volume_id,
+      title: titolo,
+      content: build_search_content
+    }
+  end
+
   private
+
+  def build_search_content
+    parts = [
+      sottotitolo,
+      "Pagina #{numero}",
+      disciplina&.nome,
+      disciplina&.volume&.nome,
+      disciplina&.volume&.corso&.nome,
+      disciplina&.volume&.classe ? "Classe #{disciplina.volume.classe}" : nil
+    ]
+    parts.compact.join(" ")
+  end
 
   def genera_slug
     return unless disciplina && numero

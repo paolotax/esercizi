@@ -67,6 +67,9 @@ Rails.application.routes.draw do
     get "abaco/examples", to: "abaco#examples", as: "abaco_examples"
   end
 
+  # Ricerca
+  resource :search, only: :show
+
   # Defines the root path route ("/")
   root "volumi#index"
 end
