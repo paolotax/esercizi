@@ -4,7 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="auto-advance"
 export default class extends Controller {
   connect() {
-    console.log("Auto-advance controller connected")
 
     // Add event listeners to auto-advance to next input
     this.element.querySelectorAll('input[type="text"]').forEach((input, index, inputs) => {

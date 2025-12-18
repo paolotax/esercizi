@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["container", "hotspot", "info"]
 
   connect() {
-    console.log("Hotspot editor connected")
     this.dragging = null
     this.resizing = null
     this.startX = 0
@@ -261,7 +260,6 @@ export default class extends Controller {
 
     // Log in console
     const label = this.getHotspotLabel(this.resizing)
-    console.log(`{ label: "${label}", top: "${this.resizing.style.top}", left: "${this.resizing.style.left}", width: "${this.resizing.style.width}", height: "${this.resizing.style.height}" },`)
 
     // Cleanup
     document.removeEventListener('mousemove', this.boundMouseMove)
@@ -281,7 +279,6 @@ export default class extends Controller {
 
     // Log in console
     const label = this.getHotspotLabel(this.dragging)
-    console.log(`{ label: "${label}", top: "${this.dragging.style.top}", left: "${this.dragging.style.left}", width: "${this.dragging.style.width}", height: "${this.dragging.style.height}" },`)
 
     // Cleanup
     document.removeEventListener('mousemove', this.boundMouseMove)
@@ -377,7 +374,6 @@ export default class extends Controller {
           copyButton.classList.add('bg-white', 'text-blue-600')
         }, 2000)
       }
-      console.log('Copied to clipboard:\n' + code)
     }).catch(err => {
       console.error('Failed to copy:', err)
       alert('Errore durante la copia. Seleziona e copia manualmente.')

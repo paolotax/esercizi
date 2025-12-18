@@ -4,10 +4,8 @@ export default class extends Controller {
   static targets = ["dropZone", "propertiesForm"]
 
   connect() {
-    console.log("✅ Esercizio Builder Controller connected!")
     this.initializeDragAndDrop()
     this.esercizioId = this.dropZoneTarget.dataset.esercizioId
-    console.log("Esercizio ID:", this.esercizioId)
 
     // Reset delle variabili di stato
     this.draggedElement = null
@@ -16,7 +14,6 @@ export default class extends Controller {
   }
 
   initializeDragAndDrop() {
-    console.log("=== initializeDragAndDrop START ===")
 
     // Crea bound functions una volta sola (fuori dal loop)
     if (!this.boundDragStart) {
@@ -25,12 +22,10 @@ export default class extends Controller {
       this.boundDragOver = this.handleDragOver.bind(this)
       this.boundDrop = this.handleDrop.bind(this)
       this.boundDragLeave = this.handleDragLeave.bind(this)
-      console.log("Created bound functions")
     }
 
     // Inizializza drag per i generatori
     const generators = document.querySelectorAll('.operation-generator')
-    console.log(`Found ${generators.length} generators`)
 
     generators.forEach((generator, index) => {
       // Rimuovi eventuali listener precedenti
@@ -42,7 +37,6 @@ export default class extends Controller {
       generator.addEventListener('dragend', this.boundDragEnd)
 
       // Debug: verifica che draggable sia true e dataset sia presente
-      console.log(`Generator ${index + 1}:`, {
         type: generator.dataset.operationType,
         draggable: generator.draggable,
         hasDataset: !!generator.dataset.operationType,
@@ -120,15 +114,12 @@ export default class extends Controller {
   }
 
   handleDragStart(e) {
-    console.log("handleDragStart - event target:", e.target.tagName, e.target.className)
 
     // L'elemento che ha ricevuto l'evento potrebbe essere il generatore stesso
     // o un elemento figlio (come l'icona o il testo)
     const generator = e.currentTarget // Usa currentTarget invece di target
-    console.log("handleDragStart - generator found:", !!generator)
 
     const operationType = generator.dataset.operationType
-    console.log("handleDragStart - operationType:", operationType)
 
     if (!operationType) {
       console.error("handleDragStart - NO OPERATION TYPE FOUND!")
@@ -148,7 +139,6 @@ export default class extends Controller {
     // Aggiungi classe dragging al generator
     generator.classList.add('dragging')
 
-    console.log("handleDragStart - set successfully, currentDragType:", this.currentDragType, "isNewOperation:", this.isNewOperation)
   }
 
   handleOperationDragStart(e) {
@@ -156,7 +146,6 @@ export default class extends Controller {
     if (!operationItem) return
 
     const operationId = operationItem.dataset.operationId
-    console.log("handleOperationDragStart - operationId:", operationId)
 
     e.dataTransfer.effectAllowed = 'move'
     e.dataTransfer.setData('operationId', operationId)
@@ -219,7 +208,6 @@ export default class extends Controller {
     if (!targetOperation) return
     if (!this.draggedElement || this.draggedElement === targetOperation) return
 
-    console.log("handleOperationDrop - moving operation")
 
     const afterElement = this.getDragAfterElement(targetOperation, e.clientY)
 
@@ -330,9 +318,6 @@ export default class extends Controller {
   }
 
   async handleDrop(e) {
-    console.log("=== handleDrop START ===")
-    console.log("Target:", e.target.tagName, e.target.className)
-    console.log("Current state - isNewOperation:", this.isNewOperation, "currentDragType:", this.currentDragType, "draggedElement:", this.draggedElement)
 
     e.preventDefault()
     e.stopPropagation()
@@ -347,16 +332,13 @@ export default class extends Controller {
     // IMPORTANTE: Usa le variabili dell'istanza come fonte primaria
     // perché dataTransfer potrebbe non funzionare in tutti i browser
     if (this.isNewOperation === true && this.currentDragType) {
-      console.log("=> Adding NEW operation:", this.currentDragType)
 
       // Determina la posizione dove inserire l'operazione
       const position = this.getDropPosition(e)
-      console.log("Position calculated:", position)
 
       await this.addNewOperation(this.currentDragType, position)
 
     } else if (this.draggedElement && !this.isNewOperation) {
-      console.log("=> REORDERING existing operation")
 
       const targetOperation = e.target.closest('.operation-item')
 
@@ -370,20 +352,17 @@ export default class extends Controller {
           targetOperation.parentNode.insertBefore(this.draggedElement, targetOperation)
         }
 
-        console.log("Operation moved, saving order...")
         await this.saveOperationsOrder()
       } else if (!targetOperation) {
         // Drop su area vuota - sposta alla fine
         const operationsGrid = this.dropZoneTarget.querySelector('#operations-grid')
         if (operationsGrid) {
           operationsGrid.appendChild(this.draggedElement)
-          console.log("Operation moved to end, saving order...")
           await this.saveOperationsOrder()
         }
       }
     } else {
       console.warn("⚠️ Drop event but no valid operation detected")
-      console.log("Debug info:", {
         isNewOperation: this.isNewOperation,
         currentDragType: this.currentDragType,
         draggedElement: this.draggedElement,
@@ -392,7 +371,6 @@ export default class extends Controller {
     }
 
     // Reset delle variabili di drag alla fine
-    console.log("=== handleDrop END - Resetting state ===")
     this.draggedElement = null
     this.isNewOperation = false
     this.currentDragType = null

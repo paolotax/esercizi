@@ -3,7 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="crossword"
 export default class extends Controller {
   connect() {
-    console.log("Crossword controller connected")
 
     // Add event listeners to auto-advance to next input
     this.element.querySelectorAll('input[type="text"]').forEach((input, index, inputs) => {

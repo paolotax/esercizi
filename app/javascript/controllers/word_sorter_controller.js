@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["input", "word", "dropZone"]
 
   connect() {
-    console.log("Word sorter controller connected")
     this.setupDragAndDrop()
   }
 

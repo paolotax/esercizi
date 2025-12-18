@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["divider"]
 
   connect() {
-    console.log("Syntagm divider controller connected")
   }
 
   toggleDivider(event) {
@@ -106,7 +105,6 @@ export default class extends Controller {
       divider.classList.remove('bg-green-100', 'bg-red-100', 'border-green-300', 'border-red-300')
     })
 
-    console.log("Soluzioni sintagmi mostrate")
   }
 
   showNotification(message, type) {

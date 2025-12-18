@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["option"]
 
   connect() {
-    console.log("Clickable choice controller connected")
 
     // Add click listeners to all options
     this.optionTargets.forEach(option => {

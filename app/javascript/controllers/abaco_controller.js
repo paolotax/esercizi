@@ -19,7 +19,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("Abaco controller connected")
     this.confetti = new JSConfetti()
     this.updateDisplay()
   }

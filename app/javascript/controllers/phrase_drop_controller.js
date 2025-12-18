@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["phrase", "dropZone"]
 
   connect() {
-    console.log("Phrase drop controller connected")
     this.setupDragAndDrop()
   }
 

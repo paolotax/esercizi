@@ -6,7 +6,6 @@ export default class extends Controller {
   static targets = ["buttonContainer"]
 
   connect() {
-    console.log("Exercise checker controller connected")
   }
 
   selectAnswer(event) {
@@ -418,13 +417,11 @@ export default class extends Controller {
       let wordChoiceIncorrect = 0
       let wordChoiceEmpty = 0
 
-      console.log(`Found ${wordChoiceGroups.length} word-choice groups`)
 
       wordChoiceGroups.forEach(wordChoiceGroup => {
         const words = wordChoiceGroup.querySelectorAll("[data-word-choice-target=\"word\"]")
         const groups = new Map()
 
-        console.log(`  Found ${words.length} total words in this word-choice group`)
 
         // Group words by their group attribute
         words.forEach(word => {
@@ -435,13 +432,11 @@ export default class extends Controller {
           groups.get(groupName).push(word)
         })
 
-        console.log(`  Organized into ${groups.size} choice groups`)
 
         // Check each group
         groups.forEach((groupWords, groupName) => {
           const selectedWord = groupWords.find(w => w.classList.contains('bg-pink-200'))
 
-          console.log(`  Group ${groupName}: ${groupWords.length} words, selected word: ${selectedWord ? selectedWord.textContent.trim() : 'NONE'}`)
 
           // Remove previous styling (keep line-through from user selection)
           groupWords.forEach(w => {
@@ -768,8 +763,6 @@ export default class extends Controller {
     })
 
     // Show feedback
-    console.log(`Final feedback array before showing:`, feedback)
-    console.log(`Final allCorrect status: ${allCorrect}`)
     this.showFeedback(feedback, allCorrect)
   }
 

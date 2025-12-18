@@ -5,12 +5,10 @@ export default class extends Controller {
   static targets = ["card"]
 
   connect() {
-    console.log("Card selector controller connected")
   }
 
   select(event) {
     const clickedCard = event.currentTarget
-    console.log("Card clicked:", clickedCard)
 
     // Get the parent group
     const group = clickedCard.closest("[data-controller='card-selector']")

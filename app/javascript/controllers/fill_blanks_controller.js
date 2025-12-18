@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["input"]
 
   connect() {
-    console.log("Fill blanks controller connected")
   }
 
   checkAnswers(event) {
@@ -23,8 +22,6 @@ export default class extends Controller {
       const correctAnswer = (input.dataset.answer || input.dataset.correctAnswer || '').trim().toLowerCase()
       const userAnswer = input.value.trim().toLowerCase()
 
-      console.log("Checking input:", userAnswer, "vs", correctAnswer)
-      console.log("Classes before:", input.className)
 
       // Remove previous styling (including all backgrounds and borders)
       input.classList.remove("border-green-500", "border-red-500", "border-yellow-500",
@@ -34,7 +31,6 @@ export default class extends Controller {
                             "text-gray-900", "font-bold",
                             "border-transparent", "border-cyan-400", "text-black")
 
-      console.log("Classes after remove:", input.className)
 
       if (userAnswer === "") {
         emptyCount++
@@ -53,7 +49,6 @@ export default class extends Controller {
         setTimeout(() => input.classList.remove("animate-shake"), 500)
       }
 
-      console.log("Classes after add:", input.className)
     })
 
     this.showFeedback(allCorrect, correctCount, incorrectCount, emptyCount)

@@ -2,7 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    console.log("Properties panel controller connected")
 
     // Ascolta eventi globali per aprire il pannello
     document.addEventListener('open-properties', this.handleOpenEvent.bind(this))

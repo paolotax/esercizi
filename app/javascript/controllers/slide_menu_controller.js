@@ -3,7 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="slide-menu"
 export default class extends Controller {
   connect() {
-    console.log("Slide menu controller connected")
   }
 
   open(event) {

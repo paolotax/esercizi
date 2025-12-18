@@ -8,7 +8,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("Flower matcher controller connected")
     this.firstFlower = null
     this.lines = []
 

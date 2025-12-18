@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["fractionGroup", "input"]
 
   connect() {
-    console.log("Equivalent fractions controller connected")
   }
 
   checkAnswers(event) {

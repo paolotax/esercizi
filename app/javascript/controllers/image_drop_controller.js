@@ -6,7 +6,6 @@ export default class extends Controller {
   static targets = ["draggable", "dropZone"]
 
   connect() {
-    console.log("Image drop controller connected")
     this.setupDragAndDrop()
   }
 

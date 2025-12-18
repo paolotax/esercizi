@@ -77,7 +77,6 @@ export default class extends Controller {
       return
     }
 
-    console.log("Testo estratto:", text.substring(0, 100) + "...")
 
     // Store original text for mapping (without pauses)
     this.originalTextForMapping = text
@@ -101,7 +100,6 @@ export default class extends Controller {
     
     // Try to find an Italian voice
     const voices = this.synthesis.getVoices()
-    console.log("Voci disponibili:", voices.length)
     
     if (voices.length > 0) {
       const italianVoice = voices.find(voice => 
@@ -112,21 +110,17 @@ export default class extends Controller {
       
       if (italianVoice) {
         utterance.voice = italianVoice
-        console.log("Voce italiana trovata:", italianVoice.name)
       } else {
         // Try to use any available voice with Italian language
         const itVoices = voices.filter(v => v.lang.startsWith('it'))
         if (itVoices.length > 0) {
           utterance.voice = itVoices[0]
-          console.log("Voce italiana trovata:", itVoices[0].name)
         } else {
           utterance.lang = this.langValue
-          console.log("Usando lingua predefinita:", this.langValue)
         }
       }
     } else {
       utterance.lang = this.langValue
-      console.log("Nessuna voce disponibile, usando lingua predefinita")
     }
 
     // Expressive reading settings
@@ -143,7 +137,6 @@ export default class extends Controller {
 
     // Event handlers
     utterance.onstart = () => {
-      console.log("Lettura iniziata")
       this.isSpeaking = true
       this.currentWordIndex = 0
       this.startTime = Date.now()
@@ -168,14 +161,12 @@ export default class extends Controller {
           // This prevents conflicts with the timing-based highlighting
           if (Math.abs(wordIndex - this.currentWordIndex) > 2) {
             this.highlightWord(wordIndex)
-            console.log(`Boundary sync: charIndex=${charIndex}, wordIndex=${wordIndex}, correcting from ${this.currentWordIndex}`)
           }
         }
       }
     }
 
     utterance.onend = () => {
-      console.log("Lettura completata")
       this.isSpeaking = false
       this.currentUtterance = null
       this.stopFallbackHighlighting()
@@ -400,7 +391,6 @@ export default class extends Controller {
     this.wordSpans = Array.from(element.querySelectorAll('span.speech-word'))
     this.currentWordIndex = 0
     
-    console.log(`Preparato ${this.wordSpans.length} parole per evidenziazione`)
   }
 
   highlightWord(wordIndex) {

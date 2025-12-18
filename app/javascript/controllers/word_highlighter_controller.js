@@ -10,8 +10,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("Word highlighter controller connected")
-    console.log("Multi-color mode:", this.multiColorValue)
     this.selectedColorValue = ""
   }
 
@@ -48,7 +46,6 @@ export default class extends Controller {
 
     this.selectedColorValue = color
 
-    console.log("Selected color:", color)
   }
 
   // Toggle highlighting with color on click
@@ -81,7 +78,6 @@ export default class extends Controller {
     // Toggle: if already has the target color, remove it (unhighlight)
     if (currentColor === targetColor) {
       // Remove highlighting - word returns to default state
-      console.log(`Rimossa evidenziatura da "${wordElement.textContent.trim()}"`)
     } else {
       // Add new color
       const colorClasses = this.getColorClasses(targetColor)
@@ -93,7 +89,6 @@ export default class extends Controller {
         wordElement.classList.remove('animate-pulse')
       }, 300)
 
-      console.log(`Evidenziata "${wordElement.textContent.trim()}" con ${targetColor}`)
     }
   }
 
@@ -148,7 +143,6 @@ export default class extends Controller {
       this.selectedColorValue = ""
     }
 
-    console.log("Evidenziature cancellate")
   }
 
   showSolution() {
@@ -197,7 +191,6 @@ export default class extends Controller {
     this.element.appendChild(feedbackDiv)
     feedbackDiv.scrollIntoView({ behavior: "smooth", block: "center" })
 
-    console.log("Soluzione mostrata")
   }
 
   checkAnswers(event) {

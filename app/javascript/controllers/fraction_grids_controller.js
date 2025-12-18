@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["input", "cell", "feedback1", "feedback2", "feedback3"]
 
   connect() {
-    console.log("Fraction grids controller connected")
   }
 
   toggleCell(event) {

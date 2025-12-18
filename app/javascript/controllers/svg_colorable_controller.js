@@ -9,9 +9,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("SVG Colorable controller connected")
-    console.log("Active color:", this.colorValue)
-    console.log("Default color:", this.defaultColorValue)
   }
 
   toggleCell(event) {

@@ -10,7 +10,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("Sortable controller connected", this.modeValue)
     this.setupDragAndDrop()
     this.createHiddenInputs()
     this.shuffleItems()

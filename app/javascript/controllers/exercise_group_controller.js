@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["option", "checkbox", "checkmark"]
 
   connect() {
-    console.log("Exercise group controller connected")
   }
 
   toggleCheck(event) {
@@ -14,7 +13,6 @@ export default class extends Controller {
     const checkmark = option.querySelector("[data-exercise-group-target=\"checkmark\"]")
     const isCorrect = option.dataset.correct === "true"
 
-    console.log("toggleCheck called", {
       checkbox: checkbox,
       checkmark: checkmark,
       text: checkbox ? checkbox.textContent.trim() : 'no checkbox'
@@ -74,7 +72,6 @@ export default class extends Controller {
         // Determine color: check vowels first, then text, then default to blue
         let bgColor = vowelColorMap[text] || textColorMap[text] || 'bg-blue-300'
 
-        console.log("Adding color", {
           text: text,
           bgColor: bgColor,
           checkbox: checkbox

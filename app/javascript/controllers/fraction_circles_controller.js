@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["slice", "circle", "feedback"]
 
   connect() {
-    console.log("Fraction circles controller connected")
   }
 
   toggleSlice(event) {

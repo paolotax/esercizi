@@ -41,7 +41,6 @@ export default class extends Controller {
     
     this.selectedColorValue = color
     
-    console.log("Selected color:", color)
   }
 
   highlightRhyme(event) {
@@ -80,7 +79,6 @@ export default class extends Controller {
       wordElement.classList.remove('animate-pulse')
     }, 300)
     
-    console.log(`Parola "${wordElement.textContent.trim()}" colorata con ${this.selectedColorValue}`)
   }
 
   getColorClasses(color) {
@@ -161,7 +159,6 @@ export default class extends Controller {
       const words = groups[groupId]
       const colors = words.map(word => this.getColorFromElement(word)).filter(c => c !== null) // Get colors, filter null
       
-      console.log(`Gruppo ${groupId}:`, colors, `(${words.length} parole)`)
       
       if (colors.length === 0) {
         // No words colored in this group
@@ -176,13 +173,11 @@ export default class extends Controller {
         // All words have the same color - store the color for this group
         groupColors[groupId] = colors[0]
         groupStatus[groupId] = 'valid'
-        console.log(`  ✓ Gruppo ${groupId} valido con colore ${colors[0]}`)
       } else {
         // Words have different colors or not all colored - invalid
         incorrectGroups++
         allCorrect = false
         groupStatus[groupId] = 'invalid'
-        console.log(`  ✗ Gruppo ${groupId} invalido: ${colors.length}/${words.length} colorate, ${uniqueColors.size} colori diversi`)
         words.forEach(word => {
           if (this.getColorFromElement(word)) {
             word.classList.add('ring-2', 'ring-red-500', 'ring-offset-1')
@@ -194,7 +189,6 @@ export default class extends Controller {
     // Second pass: Check if different groups use the same color (which is incorrect)
     const processedGroups = new Set() // Track groups already processed for conflicts
     
-    console.log('Secondo passaggio - Verifica conflitti di colore:')
     Object.keys(groupColors).forEach(groupId => {
       if (processedGroups.has(groupId)) {
         return // Already processed
@@ -209,7 +203,6 @@ export default class extends Controller {
       
       if (conflictingGroups.length > 0) {
         // This group conflicts with another group - mark all conflicting groups as incorrect
-        console.log(`  ⚠️ Conflitto: gruppo ${groupId} e ${conflictingGroups.join(', ')} usano lo stesso colore ${groupColor}`)
         const allConflictingGroups = [groupId, ...conflictingGroups]
         allConflictingGroups.forEach(conflictGroupId => {
           processedGroups.add(conflictGroupId)
@@ -218,7 +211,6 @@ export default class extends Controller {
             // This group was valid, now it's invalid due to conflict
             incorrectGroups++
             groupStatus[conflictGroupId] = 'invalid'
-            console.log(`    → Gruppo ${conflictGroupId} marcato come invalido (conflitto)`)
           }
           
           const words = groups[conflictGroupId]
@@ -233,7 +225,6 @@ export default class extends Controller {
         // This group is valid and has no conflicts - mark as correct
         processedGroups.add(groupId)
         correctGroups++
-        console.log(`  ✓ Gruppo ${groupId} corretto con colore ${groupColor}`)
         const words = groups[groupId]
         words.forEach(word => {
           word.classList.add('ring-2', 'ring-green-500', 'ring-offset-1')
@@ -241,7 +232,6 @@ export default class extends Controller {
       }
     })
     
-    console.log(`Risultato finale: ${correctGroups} corrette, ${incorrectGroups} errate, ${uncoloredGroups} non colorate`)
 
     // Show feedback
     let message = ""

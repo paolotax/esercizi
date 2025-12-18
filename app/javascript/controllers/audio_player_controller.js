@@ -7,7 +7,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("Audio player controller connected for:", this.srcValue)
   }
 
   play() {

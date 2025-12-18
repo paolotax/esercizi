@@ -9,8 +9,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("Fraction coloring controller connected")
-    console.log(`Total parts: ${this.partsValue}, Parts to color: ${this.toColorValue}`)
     this.coloredCount = 0
   }
 
@@ -30,7 +28,6 @@ export default class extends Controller {
       this.coloredCount++
     }
 
-    console.log(`Colored parts: ${this.coloredCount}/${this.toColorValue}`)
   }
 
   checkAnswers() {

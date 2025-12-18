@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["word"]
 
   connect() {
-    console.log("Word selector controller connected")
   }
 
   selectWord(event) {

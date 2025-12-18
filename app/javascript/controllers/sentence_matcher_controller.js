@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["left", "right", "canvas"]
 
   connect() {
-    console.log("Sentence matcher controller connected")
     this.firstSentence = null
     this.lines = []
     this.setupCanvas()

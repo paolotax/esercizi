@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["numberButton", "feedback"]
 
   connect() {
-    console.log("Number line controller connected")
     this.selectedNumbers = new Set()
   }
 

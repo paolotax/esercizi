@@ -6,7 +6,6 @@ export default class extends Controller {
   static targets = ["input"]
 
   connect() {
-    console.log("Snake-advance controller connected")
 
     // Create a map of inputs by their correct answer (number value)
     this.inputMap = new Map()
