@@ -1,64 +1,74 @@
 <!-- Overlay per mobile -->
 <div id="sidebar-overlay"
-     class="print-hidden fixed inset-0 bg-black/50 z-40 hidden md:hidden"
+     class="print-hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden md:hidden"
      data-sidebar-target="overlay"
      data-action="click->sidebar#close"></div>
 
 <aside id="sidebar-nav"
-       class="print-hidden w-80 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-y-auto transition-all duration-300 fixed md:static inset-y-0 left-0 z-50 md:z-auto"
+       class="print-hidden w-80 bg-gradient-to-b from-white to-pastel-cream/30 dark:from-gray-800 dark:to-gray-900 border-r border-pastel-pink/30 dark:border-gray-700 overflow-y-auto transition-all duration-300 fixed md:static inset-y-0 left-0 z-50 md:z-auto"
        data-sidebar-target="sidebar"
        data-controller="sidebar-breadcrumb"
        data-turbo-permanent
        data-turbo-permanent-scroll>
 
-  <!-- Header -->
-  <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+  <!-- Header con logo e ricerca -->
+  <div class="p-4 border-b border-pastel-pink/20 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+    <!-- Logo -->
     <div class="flex items-center justify-center mb-4">
-      <!-- Home button -->
       <%= link_to root_path,
           data: { turbo_frame: "_top" },
-          class: "flex items-center justify-center hover:opacity-80 transition text-gray-800 dark:text-gray-100" do %>
-        <%= image_tag "giunti_scuola.svg", alt: "Giunti Scuola", class: "h-12 w-auto" %>
+          class: "flex items-center justify-center hover:scale-105 transition-transform duration-200" do %>
+        <%= image_tag "giunti_scuola.svg", alt: "Giunti Scuola", class: "h-12 w-auto drop-shadow-sm" %>
       <% end %>
     </div>
 
-    <!-- Campo Cerca -->
+    <!-- Campo Cerca stilizzato -->
     <%= form_with url: search_path, method: :get, data: { turbo_frame: "_top" }, class: "relative" do %>
-      <div class="relative">
-        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        <%= text_field_tag :q, nil,
-            placeholder: "Cerca...",
-            class: "w-full pl-9 pr-3 py-2 text-sm border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+      <div class="relative group">
+        <div class="absolute inset-0 bg-gradient-to-r from-pastel-sky to-pastel-pink rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
+        <div class="relative flex items-center">
+          <svg class="absolute left-4 w-5 h-5 text-pastel-coral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <%= text_field_tag :q, nil,
+              placeholder: "Cerca pagine...",
+              class: "w-full pl-12 pr-4 py-3 text-sm font-medium bg-white dark:bg-gray-700 border-2 border-pastel-pink/30 dark:border-gray-600 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pastel-sky focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500 shadow-sm" %>
+        </div>
       </div>
     <% end %>
   </div>
 
   <!-- Menu Content -->
   <nav class="p-4">
-    <!-- LIBRI DI TESTO -->
-    <div class="px-4 py-2 mb-3 bg-gray-50 dark:bg-gray-700 rounded-lg flex items-center justify-between gap-2">
-      <div class="flex items-center gap-2 flex-1 min-w-0 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 rounded transition px-2 py-1 -mx-2 -my-1"
+    <!-- LIBRI DI TESTO - Header sezione -->
+    <div class="mb-4">
+      <div class="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-pastel-sky/20 to-pastel-lavender/20 dark:from-indigo-900/30 dark:to-purple-900/30 rounded-2xl cursor-pointer hover:from-pastel-sky/30 hover:to-pastel-lavender/30 transition-all duration-200"
            data-action="click->sidebar-breadcrumb#goBack">
-        <!-- Bottone Indietro (nascosto se siamo a livello corsi) -->
+        <!-- Bottone Indietro -->
         <div data-sidebar-breadcrumb-target="backButton"
-             class="hidden flex-shrink-0 w-7 h-7 flex items-center justify-center text-gray-600 dark:text-gray-300">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+             class="hidden flex-shrink-0 w-8 h-8 flex items-center justify-center bg-white dark:bg-gray-700 rounded-xl shadow-sm text-pastel-coral dark:text-pink-400">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </div>
+
+        <!-- Icona libro -->
+        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-pastel-peach dark:bg-orange-900/50 rounded-xl">
+          <svg class="w-5 h-5 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
         </div>
 
         <!-- Titolo dinamico -->
         <h3 data-sidebar-breadcrumb-target="title"
-            class="text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wide truncate">
+            class="text-sm font-bold text-gray-700 dark:text-gray-200 uppercase tracking-wide truncate">
           Libri di Testo
         </h3>
       </div>
     </div>
 
-    <!-- Content Container (gestito da Stimulus) -->
-    <div data-sidebar-breadcrumb-target="content" class="space-y-2">
+    <!-- Content Container - GRIGLIA 2 COLONNE (gestito da Stimulus) -->
+    <div data-sidebar-breadcrumb-target="content" class="grid grid-cols-2 gap-3">
       <!-- Il contenuto verrà generato dinamicamente da JavaScript -->
     </div>
 
@@ -91,102 +101,103 @@
     </div>
 
     <!-- Sezione Strumenti -->
-    <div class="border-t border-gray-200 dark:border-gray-700 mt-6 pt-4">
-      <div class="px-4 py-2 mb-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-        <h3 class="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wide">Strumenti</h3>
+    <div class="border-t-2 border-dashed border-pastel-lavender/50 dark:border-gray-700 mt-6 pt-5">
+      <!-- Header Strumenti -->
+      <div class="flex items-center gap-2 px-3 py-2 mb-4 bg-gradient-to-r from-pastel-mint/20 to-pastel-aqua/20 dark:from-emerald-900/30 dark:to-cyan-900/30 rounded-2xl">
+        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-pastel-mint dark:bg-emerald-900/50 rounded-xl">
+          <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <h3 class="text-sm font-bold text-gray-700 dark:text-gray-200 uppercase tracking-wide">Strumenti</h3>
       </div>
-      <div class="space-y-1">
 
+      <!-- Griglia Strumenti 2 colonne -->
+      <div class="grid grid-cols-2 gap-3">
+        <!-- Abaco -->
         <%= link_to strumenti_abaco_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/30 transition group" do %>
-          <svg class="w-5 h-5 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-          </svg>
-          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Abaco</span>
+                    class: "flex flex-col items-center justify-center p-4 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl border-2 border-orange-200/50 dark:border-orange-800/30 hover:scale-105 hover:shadow-lg hover:border-orange-300 transition-all duration-200 group" do %>
+          <div class="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl shadow-md group-hover:shadow-lg transition-shadow mb-2">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <span class="text-xs font-bold text-orange-700 dark:text-orange-300 text-center">Abaco</span>
         <% end %>
 
-        <%= link_to strumenti_addizioni_path,
-                    data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/30 transition group" do %>
-          <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-          </svg>
-          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Addizioni in colonna</span>
-        <% end %>
-
+        <!-- Addizioni -->
         <%= link_to strumenti_addizioni_quaderno_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 pl-8 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/30 transition group" do %>
-          <svg class="w-4 h-4 text-green-500 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          <span class="text-sm text-gray-600 dark:text-gray-300">Quaderno Addizioni</span>
+                    class: "flex flex-col items-center justify-center p-4 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl border-2 border-green-200/50 dark:border-green-800/30 hover:scale-105 hover:shadow-lg hover:border-green-300 transition-all duration-200 group" do %>
+          <div class="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl shadow-md group-hover:shadow-lg transition-shadow mb-2">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+            </svg>
+          </div>
+          <span class="text-xs font-bold text-green-700 dark:text-green-300 text-center">Addizioni</span>
         <% end %>
 
-        <%= link_to strumenti_sottrazioni_path,
-                    data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-cyan-50 dark:hover:bg-cyan-900/30 transition group" do %>
-          <svg class="w-5 h-5 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
-          </svg>
-          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Sottrazioni in colonna</span>
-        <% end %>
-
+        <!-- Sottrazioni -->
         <%= link_to strumenti_sottrazioni_quaderno_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 pl-8 rounded-lg hover:bg-cyan-50 dark:hover:bg-cyan-900/30 transition group" do %>
-          <svg class="w-4 h-4 text-cyan-500 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          <span class="text-sm text-gray-600 dark:text-gray-300">Quaderno Sottrazioni</span>
+                    class: "flex flex-col items-center justify-center p-4 bg-gradient-to-br from-cyan-50 to-sky-50 dark:from-cyan-900/20 dark:to-sky-900/20 rounded-2xl border-2 border-cyan-200/50 dark:border-cyan-800/30 hover:scale-105 hover:shadow-lg hover:border-cyan-300 transition-all duration-200 group" do %>
+          <div class="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-cyan-400 to-sky-500 rounded-2xl shadow-md group-hover:shadow-lg transition-shadow mb-2">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+            </svg>
+          </div>
+          <span class="text-xs font-bold text-cyan-700 dark:text-cyan-300 text-center">Sottrazioni</span>
         <% end %>
 
-        <%= link_to strumenti_moltiplicazioni_path,
-                    data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition group" do %>
-          <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Moltiplicazioni in colonna</span>
-        <% end %>
-
+        <!-- Moltiplicazioni -->
         <%= link_to strumenti_moltiplicazioni_quaderno_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 pl-8 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition group" do %>
-          <svg class="w-4 h-4 text-purple-500 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          <span class="text-sm text-gray-600 dark:text-gray-300">Quaderno Moltiplicazioni</span>
+                    class: "flex flex-col items-center justify-center p-4 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 rounded-2xl border-2 border-purple-200/50 dark:border-purple-800/30 hover:scale-105 hover:shadow-lg hover:border-purple-300 transition-all duration-200 group" do %>
+          <div class="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-purple-400 to-violet-500 rounded-2xl shadow-md group-hover:shadow-lg transition-shadow mb-2">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
+          <span class="text-xs font-bold text-purple-700 dark:text-purple-300 text-center">Moltiplicazioni</span>
         <% end %>
 
+        <!-- Divisioni -->
         <%= link_to strumenti_divisioni_quaderno_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/30 transition group" do %>
-          <svg class="w-5 h-5 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6M12 3v3m0 12v3" />
-          </svg>
-          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Quaderno Divisioni</span>
+                    class: "flex flex-col items-center justify-center p-4 bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-2xl border-2 border-amber-200/50 dark:border-amber-800/30 hover:scale-105 hover:shadow-lg hover:border-amber-300 transition-all duration-200 group" do %>
+          <div class="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-amber-400 to-yellow-500 rounded-2xl shadow-md group-hover:shadow-lg transition-shadow mb-2">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4M12 4v2m0 12v2" />
+            </svg>
+          </div>
+          <span class="text-xs font-bold text-amber-700 dark:text-amber-300 text-center">Divisioni</span>
         <% end %>
 
+        <!-- Le Rime -->
         <%= link_to strumenti_le_rime_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition group" do %>
-          <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Le rime</span>
+                    class: "flex flex-col items-center justify-center p-4 bg-gradient-to-br from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20 rounded-2xl border-2 border-pink-200/50 dark:border-pink-800/30 hover:scale-105 hover:shadow-lg hover:border-pink-300 transition-all duration-200 group" do %>
+          <div class="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-pink-400 to-rose-500 rounded-2xl shadow-md group-hover:shadow-lg transition-shadow mb-2">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+            </svg>
+          </div>
+          <span class="text-xs font-bold text-pink-700 dark:text-pink-300 text-center">Le Rime</span>
         <% end %>
 
+        <!-- Dashboard (span 2 colonne) -->
         <%= link_to dashboard_esercizi_path,
                     data: { turbo_frame: "_top" },
-                    class: "flex items-center gap-2 p-3 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/30 transition group" do %>
-          <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          <span class="text-sm font-medium text-gray-700 dark:text-gray-200">Dashboard</span>
+                    class: "col-span-2 flex items-center justify-center gap-3 p-3 bg-gradient-to-r from-slate-50 to-gray-50 dark:from-slate-900/30 dark:to-gray-900/30 rounded-2xl border-2 border-slate-200/50 dark:border-slate-800/30 hover:scale-[1.02] hover:shadow-lg hover:border-slate-300 transition-all duration-200 group" do %>
+          <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-slate-400 to-gray-500 rounded-xl shadow-md group-hover:shadow-lg transition-shadow">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+            </svg>
+          </div>
+          <span class="text-sm font-bold text-slate-700 dark:text-slate-300">Dashboard Esercizi</span>
         <% end %>
-
       </div>
     </div>
   </nav>

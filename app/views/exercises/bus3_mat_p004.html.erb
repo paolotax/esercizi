@@ -1,29 +1,29 @@
-<div class="max-w-7xl mx-auto p-3 md:p-6"
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white dark:bg-gray-900 text-black dark:text-white transition-colors duration-300"
      data-controller="exercise-checker text-toggle font-controls"
      data-text-toggle-target="content"
      data-font-controls-target="content">
-  
+
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Esercizio 1: Completa il serpente -->
-  <div class="bg-white p-4 -mx-3 md:-mx-0 md:p-8 mb-8" data-controller="fill-blanks snake-advance">
+  <div class="bg-cyan-50 dark:bg-cyan-900/30 p-4 -mx-3 md:-mx-0 md:p-8 mb-8 rounded-lg" data-controller="fill-blanks snake-advance">
     <div class="flex items-center gap-3 mb-6">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         1
       </div>
-      <p class="text-gray-700">
-        <strong>Completa il serpente con i numeri da <span class="text-cyan-600">0</span> a <span class="text-cyan-600">99</span>.</strong> 
+      <p class="text-gray-700 dark:text-gray-200">
+        <strong>Completa il serpente con i numeri da <span class="text-cyan-600 dark:text-cyan-400">0</span> a <span class="text-cyan-600 dark:text-cyan-400">99</span>.</strong>
       </p>
     </div>
 
     <!-- Serpente interattivo con griglia di input -->
     <div class="flex justify-center">
-      <div class="relative w-full max-w-4xl">
+      <div class="relative w-full max-w-4xl bg-white rounded-2xl p-2">
         <!-- Immagine di sfondo -->
         <%= image_tag "bus3_mat/p004/p04_1.jpg",
             alt: "Serpente con numeri da 0 a 99 da completare",
-            class: "w-full h-auto" %>
+            class: "w-full h-auto rounded-xl" %>
 
         <!-- Griglia di input sovrapposta -->
         <div class="absolute inset-0 pt-[11.4%] pl-[5.0%] pr-[7.5%] pb-[3%]">
@@ -55,7 +55,7 @@
                          data-fill-blanks-target="input"
                          data-snake-advance-target="input"
                          data-correct-answer="<%= number %>"
-                         class="w-[60%] h-[60%] bg-white/60 hover:bg-white/80 focus:bg-white border border-transparent focus:border-cyan-400 rounded-full text-center font-bold text-[11px] md:transition-colors"
+                         class="w-[60%] h-[60%] bg-white/60 hover:bg-white/80 focus:bg-white dark:bg-gray-700/60 dark:hover:bg-gray-700/80 dark:focus:bg-gray-700 border border-transparent focus:border-cyan-400 dark:focus:border-cyan-500 rounded-full text-center font-bold dark:text-white md:transition-colors"
                          maxlength="<%= number < 10 ? '1' : '2' %>"
                          inputmode="numeric"
                          pattern="[0-9]*">

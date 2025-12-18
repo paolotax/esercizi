@@ -1,6 +1,6 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white"
+<div class="max-w-7xl mx-auto p-3 md:p-6 bg-white dark:bg-gray-900 text-black dark:text-white transition-colors duration-300"
      data-controller="exercise-checker page-viewer text-toggle font-controls"
      data-page-viewer-image-url-value="<%= asset_path('bus3_mat/p008/page.png') %>"
      data-text-toggle-target="content"
@@ -9,32 +9,34 @@
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Parte teorica: Da 99 a 100 -->
-  <div class="bg-[#C7EAFB] p-4 -mx-3 md:-mx-0 md:p-6 mb-8">
+  <div class="bg-cyan-100 dark:bg-cyan-900/40 p-4 -mx-3 md:-mx-0 md:p-6 mb-8 rounded-lg">
     <div class="flex items-center gap-3 mb-6">
       <div class="">🧠</div>
-      <p class="text-gray-700">
-        Ricordi che cosa succede sull'abaco se aggiungi <strong class="text-blue-600">1 u</strong> al numero 99?
+      <p class="text-gray-700 dark:text-gray-200">
+        Ricordi che cosa succede sull'abaco se aggiungi <strong class="text-blue-600 dark:text-blue-400">1 u</strong> al numero 99?
       </p>
     </div>
 
     <!-- Immagini abachi -->
     <div class="flex mb-6 overflow-scroll md:overflow-visible">
-      <%= image_tag "bus3_mat/p008/p08_1.jpg",
-          alt: "Abachi da 99 a 100",
-          class: "max-w-3xl mx-auto" %>
+      <div class="bg-white rounded-2xl p-2 mx-auto">
+        <%= image_tag "bus3_mat/p008/p08_1.jpg",
+            alt: "Abachi da 99 a 100",
+            class: "max-w-3xl rounded-xl" %>
+      </div>
     </div>
 
-    <div class="mx-auto max-w-xl bg-white p-4 rounded-xl border-3 border-cyan-400">
+    <div class="mx-auto max-w-xl bg-white dark:bg-gray-800 p-4 rounded-xl border-3 border-cyan-400 dark:border-cyan-500">
       <div class="flex items-start gap-3">
         <div class="">🤓</div>
         <div class="space-y-2">
-          <p class="text-gray-700">
-            <strong class="text-cyan-600">10 unità</strong> raggrupate formano <strong class="text-red-600">1 decina.</strong>
-            <span class="ml-4 font-bold"><span class="text-cyan-600">10 u</span> → <span class="text-red-600">1 da</span></span>
+          <p class="text-gray-700 dark:text-gray-200">
+            <strong class="text-cyan-600 dark:text-cyan-400">10 unità</strong> raggrupate formano <strong class="text-red-600 dark:text-red-400">1 decina.</strong>
+            <span class="ml-4 font-bold"><span class="text-cyan-600 dark:text-cyan-400">10 u</span> → <span class="text-red-600 dark:text-red-400">1 da</span></span>
           </p>
-          <p class="text-gray-700">
-            <strong class="text-red-600">10 decine</strong> raggrupate formano <strong class="text-green-600">1 centinaio.</strong>
-            <span class="ml-4 font-bold"><span class="text-red-600">10 da</span> → <span class="text-green-600">1 h</span></span>
+          <p class="text-gray-700 dark:text-gray-200">
+            <strong class="text-red-600 dark:text-red-400">10 decine</strong> raggrupate formano <strong class="text-green-600 dark:text-green-400">1 centinaio.</strong>
+            <span class="ml-4 font-bold"><span class="text-red-600 dark:text-red-400">10 da</span> → <span class="text-green-600 dark:text-green-400">1 h</span></span>
           </p>
         </div>
       </div>
@@ -47,8 +49,8 @@
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         1
       </div>
-      <p class="text-gray-700">
-        Scrivi il numero che manca per arrivare a <strong class="text-cyan-600">100</strong>.
+      <p class="text-gray-700 dark:text-gray-200">
+        Scrivi il numero che manca per arrivare a <strong class="text-cyan-600 dark:text-cyan-400">100</strong>.
       </p>
     </div>
 
@@ -66,9 +68,9 @@
       %>
         <div class="p-4 flex items-center justify-center gap-2">
           <span class="font-bold"><%= start %></span>
-          <span class="text-red-600">→</span>
+          <span class="text-red-600 dark:text-red-400">→</span>
           <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= answer %>"
-                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"
+                 class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
                  maxlength="2" inputmode="numeric">
         </div>
       <% end %>
@@ -81,7 +83,7 @@
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         2
       </div>
-      <p class="text-gray-700">
+      <p class="text-gray-700 dark:text-gray-200">
         Collega ogni scomposizione al numero corrispondente.
       </p>
     </div>
@@ -104,7 +106,7 @@
 
           top_decompositions.each_with_index do |dec, idx|
         %>
-          <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+          <div class="bg-cyan-100 dark:bg-cyan-900/40 border-3 border-cyan-400 dark:border-cyan-500 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 dark:hover:bg-cyan-800/40 transition"
                data-action="click->flower-matcher#selectFlower"
                data-flower-matcher-target="flower"
                data-flower-id="top-<%= idx %>"
@@ -135,7 +137,7 @@
 
           all_numbers.shuffle.each do |num|
         %>
-          <div class="bg-yellow-100 border-3 border-yellow-400 rounded-full px-5 py-3 cursor-pointer hover:bg-yellow-50 transition"
+          <div class="bg-yellow-100 dark:bg-yellow-900/40 border-3 border-yellow-400 dark:border-yellow-500 rounded-full px-5 py-3 cursor-pointer hover:bg-yellow-50 dark:hover:bg-yellow-800/40 transition"
                data-action="click->flower-matcher#selectFlower"
                data-flower-matcher-target="flower"
                data-flower-id="num-<%= num %>"
@@ -159,7 +161,7 @@
 
           bottom_decompositions.each_with_index do |dec, idx|
         %>
-          <div class="bg-cyan-100 border-3 border-cyan-400 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 transition"
+          <div class="bg-cyan-100 dark:bg-cyan-900/40 border-3 border-cyan-400 dark:border-cyan-500 rounded-lg px-4 py-3 cursor-pointer hover:bg-cyan-50 dark:hover:bg-cyan-800/40 transition"
                data-action="click->flower-matcher#selectFlower"
                data-flower-matcher-target="flower"
                data-flower-id="bottom-<%= idx %>"

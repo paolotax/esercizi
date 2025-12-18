@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_23_112725) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_18_112709) do
   create_table "corsi", force: :cascade do |t|
     t.string "codice", null: false
     t.datetime "created_at", null: false
@@ -91,6 +91,23 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_23_112725) do
     t.index ["slug"], name: "index_pagine_on_slug", unique: true
   end
 
+  create_table "search_records", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.integer "disciplina_id"
+    t.integer "pagina_id"
+    t.integer "searchable_id", null: false
+    t.string "searchable_type", null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.integer "volume_id"
+    t.index ["disciplina_id"], name: "index_search_records_on_disciplina_id"
+    t.index ["pagina_id"], name: "index_search_records_on_pagina_id"
+    t.index ["searchable_type", "searchable_id"], name: "index_search_records_on_searchable"
+    t.index ["searchable_type", "searchable_id"], name: "index_search_records_on_searchable_type_and_searchable_id", unique: true
+    t.index ["volume_id"], name: "index_search_records_on_volume_id"
+  end
+
   create_table "volumi", force: :cascade do |t|
     t.integer "classe"
     t.integer "corso_id", null: false
@@ -104,5 +121,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_23_112725) do
   add_foreign_key "discipline", "volumi"
   add_foreign_key "esercizio_attempts", "esercizi"
   add_foreign_key "pagine", "discipline"
+  add_foreign_key "search_records", "discipline"
+  add_foreign_key "search_records", "pagine"
+  add_foreign_key "search_records", "volumi"
   add_foreign_key "volumi", "corsi"
-end
+
+  # Virtual tables defined in this database.
+  # Note that virtual tables may not work with other database engines. Be careful if changing database.

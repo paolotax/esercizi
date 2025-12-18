@@ -1,9 +1,20 @@
+/* Font Nunito - giocoso e arrotondato */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* Font family */
+  --font-sans: 'Nunito', system-ui, sans-serif;
+
+  /* Animazioni */
   --animate-shake: shake 0.5s ease-in-out;
+  --animate-bounce-soft: bounce-soft 0.3s ease-out;
+  --animate-pop: pop 0.2s ease-out;
+
+  /* Colori esistenti */
   --color-sky-light: #C7EAFB;
   --color-custom-pink: #C657A0;
   --color-custom-blue: #C7EAFB;
@@ -17,12 +28,64 @@
   --color-pink-light: #EFD9E9;
   --color-yellow-light: #FFEECF;
   --color-custom-blue-light: #E0F2FE;
+
+  /* Nuovi colori pastello giocosi */
+  --color-pastel-sky: #87CEEB;
+  --color-pastel-pink: #FFB6C1;
+  --color-pastel-mint: #98FB98;
+  --color-pastel-peach: #FFDAB9;
+  --color-pastel-lavender: #E6E6FA;
+  --color-pastel-lemon: #FFFACD;
+  --color-pastel-coral: #FF7F7F;
+  --color-pastel-aqua: #7FDBFF;
+  --color-pastel-lilac: #DDA0DD;
+  --color-pastel-cream: #FFFDD0;
+
+  /* Sfondo principale chiaro */
+  --color-bg-playful: #FAFBFF;
+  --color-bg-playful-dark: #1a1b2e;
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
   20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+@keyframes bounce-soft {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Stili globali giocosi */
+html {
+  font-family: 'Nunito', system-ui, sans-serif;
+}
+
+/* Scrollbar colorata e giocosa */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f4ff;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #87CEEB, #FFB6C1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #7BC4E1, #FFA0B0);
 }
 
 /* Dark mode scrollbar */
