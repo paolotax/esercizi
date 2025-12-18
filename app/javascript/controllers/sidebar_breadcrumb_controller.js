@@ -35,10 +35,35 @@ export default class extends Controller {
         sessionStorage.removeItem('sidebar-scroll-temp')
       })
     }
+
+    // Listener per aggiornare evidenziazione pagina attiva dopo navigazione Turbo Frame
+    this.turboFrameLoadHandler = this.updateActivePageHighlight.bind(this)
+    document.addEventListener('turbo:frame-load', this.turboFrameLoadHandler)
   }
 
   disconnect() {
-    // Cleanup se necessario
+    // Cleanup listener
+    if (this.turboFrameLoadHandler) {
+      document.removeEventListener('turbo:frame-load', this.turboFrameLoadHandler)
+    }
+  }
+
+  updateActivePageHighlight(event) {
+    // Aggiorna il titolo nell'header se presente nel frame caricato
+    const frame = document.getElementById('main-content')
+    const titleMeta = frame?.querySelector('meta[data-turbo-title]')
+
+    if (titleMeta) {
+      const titleElement = document.getElementById('page-title')
+      if (titleElement) {
+        titleElement.textContent = titleMeta.content
+      }
+    }
+
+    // Ri-renderizza solo se siamo a livello pagine per aggiornare l'evidenziazione
+    if (this.navigationState.level === 'pagine') {
+      this.renderContent()
+    }
   }
 
   goBack(event) {
