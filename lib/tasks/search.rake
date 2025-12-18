@@ -60,9 +60,13 @@ namespace :search do
   end
 
   def build_metadata(pagina)
+    # Numero pagina ripetuto per aumentare il peso nella ricerca
+    numero_pagina = "pagina#{pagina.numero} pag#{pagina.numero} p#{pagina.numero}"
+
     parts = [
+      numero_pagina,
+      pagina.titolo,
       pagina.sottotitolo,
-      "Pagina #{pagina.numero}",
       pagina.disciplina&.nome,
       pagina.disciplina&.volume&.nome,
       pagina.disciplina&.volume&.corso&.nome,
