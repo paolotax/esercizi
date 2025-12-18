@@ -412,7 +412,7 @@ export default class extends Controller {
 
       return `
         <a href="${paginaPath}"
-           data-turbo-frame="_top"
+           data-turbo-frame="main-content"
            data-action="click->sidebar-breadcrumb#handlePaginaClick"
            class="flex flex-col items-center justify-center gap-1 p-3 rounded-2xl bg-white/80 dark:bg-gray-800/50 transition-all duration-200 text-center border-2 ${activeClasses}"
            style="border-color: ${badgeColor}30; ${isActive ? `--tw-ring-color: ${badgeColor};` : ''}">

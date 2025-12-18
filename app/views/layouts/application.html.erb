@@ -57,7 +57,9 @@
 
       <!-- Main Content -->
       <main class="flex-1 overflow-y-auto w-full md:w-auto">
-        <%= yield %>
+        <%= turbo_frame_tag "main-content", class: "block turbo-frame-fade", data: { turbo_action: "advance" } do %>
+          <%= yield %>
+        <% end %>
       </main>
     </div>
   </body>

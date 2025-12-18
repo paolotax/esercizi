@@ -1,4 +1,6 @@
 class PagineController < ApplicationController
+  layout -> { turbo_frame_request? ? "turbo_frame" : "application" }
+
   def show
     @pagina = Pagina.find_by!(slug: params[:slug])
 
