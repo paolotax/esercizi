@@ -13,6 +13,7 @@ export default class extends Controller {
       corsoNome: null,
       volumeId: null,
       volumeNome: null,
+      volumeClasse: null,
       disciplinaId: null,
       disciplinaNome: null
     }
@@ -65,6 +66,7 @@ export default class extends Controller {
       corsoNome: null,
       volumeId: null,
       volumeNome: null,
+      volumeClasse: null,
       disciplinaId: null,
       disciplinaNome: null
     }
@@ -83,6 +85,7 @@ export default class extends Controller {
       corsoNome: corsoNome,
       volumeId: null,
       volumeNome: null,
+      volumeClasse: null,
       disciplinaId: null,
       disciplinaNome: null
     }
@@ -94,10 +97,12 @@ export default class extends Controller {
     const button = event.currentTarget
     const volumeId = button.dataset.volumeId
     const volumeNome = button.dataset.volumeNome
+    const volumeClasse = button.dataset.volumeClasse
 
     this.navigationState.level = 'discipline'
     this.navigationState.volumeId = volumeId
     this.navigationState.volumeNome = volumeNome
+    this.navigationState.volumeClasse = volumeClasse
     this.navigationState.disciplinaId = null
     this.navigationState.disciplinaNome = null
 
@@ -126,6 +131,7 @@ export default class extends Controller {
       corsoNome: null,
       volumeId: null,
       volumeNome: null,
+      volumeClasse: null,
       disciplinaId: null,
       disciplinaNome: null
     }
@@ -138,6 +144,7 @@ export default class extends Controller {
     this.navigationState.level = 'volumi'
     this.navigationState.volumeId = null
     this.navigationState.volumeNome = null
+    this.navigationState.volumeClasse = null
     this.navigationState.disciplinaId = null
     this.navigationState.disciplinaNome = null
     this.saveState()
@@ -162,19 +169,30 @@ export default class extends Controller {
   updateTitle() {
     if (!this.hasTitleTarget) return
 
-    const { level, corsoNome, volumeNome, disciplinaNome } = this.navigationState
+    const { level, corsoNome, volumeNome, volumeClasse, disciplinaNome } = this.navigationState
 
     let title = 'Libri di Testo'
+    let subtitle = null
 
     if (level === 'volumi' && corsoNome) {
       title = corsoNome
     } else if (level === 'discipline' && volumeNome) {
       title = volumeNome
+      subtitle = volumeClasse ? `Classe ${volumeClasse}` : null
     } else if (level === 'pagine' && disciplinaNome) {
-      title = disciplinaNome
+      // Mostra titolo volume e sotto disciplina + classe
+      title = volumeNome
+      subtitle = disciplinaNome.toUpperCase() + (volumeClasse ? ` Classe ${volumeClasse}` : '')
     }
 
-    this.titleTarget.textContent = title
+    if (subtitle) {
+      this.titleTarget.innerHTML = `
+        <span class="block text-sm">${title}</span>
+        <span class="block text-xs font-medium text-gray-500 dark:text-gray-400">${subtitle}</span>
+      `
+    } else {
+      this.titleTarget.textContent = title
+    }
   }
 
   updateBackButton() {
@@ -275,7 +293,8 @@ export default class extends Controller {
         <button class="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl bg-gradient-to-br ${colors.bg} dark:from-gray-800/50 dark:to-gray-700/50 hover:scale-105 hover:shadow-lg transition-all duration-200 text-center border-2 ${colors.border} dark:border-gray-600"
                 data-action="click->sidebar-breadcrumb#selectVolume"
                 data-volume-id="${volumeId}"
-                data-volume-nome="${volumeNome}">
+                data-volume-nome="${volumeNome}"
+                data-volume-classe="${volumeClasse || ''}">
           <div class="w-12 h-12 ${colors.icon} rounded-2xl flex items-center justify-center shadow-md">
             <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
               <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm0 2h7v5h5v11H6V4z"/>
@@ -415,7 +434,12 @@ export default class extends Controller {
     const saved = localStorage.getItem('sidebar-navigation-state')
     if (saved) {
       try {
-        this.navigationState = JSON.parse(saved)
+        const parsed = JSON.parse(saved)
+        // Merge con lo stato di default per gestire nuove proprietà
+        this.navigationState = {
+          ...this.navigationState,
+          ...parsed
+        }
       } catch (e) {
         console.error('Failed to parse saved navigation state', e)
       }
