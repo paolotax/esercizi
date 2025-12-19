@@ -1,0 +1,90 @@
+<%# locals: (answer: nil, prefix: nil, suffix: nil, arrow: false, equals: false, unit: nil, width: nil, bullet: nil, color: "gray", inputmode: nil, maxlength: nil, segments: nil, flex: false) -%>
+<%
+  # Classi colore per bordo e bullet
+  color_classes = {
+    border: "border-#{color}-500 dark:border-#{color}-400",
+    text: "text-#{color}-600 dark:text-#{color}-400"
+  }
+
+  # Helper per generare input
+  render_input = ->(ans, w = nil, im = nil, ml = nil, is_flex = false) {
+    detected_im = im || (ans.to_s.match?(/^\d+$/) ? "numeric" : "text")
+    detected_ml = ml || (detected_im == "numeric" ? ans.to_s.length + 1 : ans.to_s.length + 5)
+    # Larghezza auto con padding: circa 0.6rem per carattere + padding
+    len = ans.to_s.length
+    input_w = if is_flex
+      "flex-1 min-w-0"
+    elsif w
+      w
+    else
+      case len
+        when 1 then "w-12"       # 1 char
+        when 2 then "w-14"       # 2 chars
+        when 3 then "w-16"       # 3 chars
+        when 4..6 then "w-24"    # 4-6 chars
+        when 7..10 then "w-32"   # 7-10 chars
+        when 11..15 then "w-44"  # 11-15 chars
+        when 16..20 then "w-52"  # 16-20 chars
+        else "w-64"              # 20+ chars
+      end
+    end
+
+    %(<input type="text"
+           data-fill-blanks-target="input"
+           data-correct-answer="#{ans}"
+           class="#{input_w} px-2 py-1 border-b-2 border-dotted #{color_classes[:border]} text-center font-bold bg-transparent dark:text-white focus:outline-none focus:border-solid"
+           maxlength="#{detected_ml}"
+           inputmode="#{detected_im}"
+           #{detected_im == "numeric" ? 'pattern="[0-9]*"' : ''}>).html_safe
+  }
+%>
+
+<div class="flex items-center gap-2 flex-wrap">
+  <% if bullet %>
+    <span class="<%= color_classes[:text] %> font-bold text-xl"><%= bullet %></span>
+  <% end %>
+
+  <% if segments %>
+    <%# Modalità segments: array di elementi misti %>
+    <% segments.each do |seg| %>
+      <% if seg.is_a?(Hash) && seg[:answer] %>
+        <%# È un input %>
+        <%= render_input.call(seg[:answer], seg[:width], seg[:inputmode], seg[:maxlength], seg[:flex] || flex) %>
+      <% elsif seg.is_a?(Hash) && seg[:html] %>
+        <%# È HTML raw (per formattazioni speciali) %>
+        <span><%= seg[:html].html_safe %></span>
+      <% elsif seg.is_a?(Hash) && seg[:text] %>
+        <%# È un testo %>
+        <span><%= seg[:text] %></span>
+      <% elsif seg.is_a?(String) %>
+        <%# Stringa semplice = testo %>
+        <span><%= seg %></span>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%# Modalità classica: prefix + input + suffix %>
+    <% if prefix %>
+      <span><%= prefix %></span>
+    <% end %>
+
+    <% if arrow %>
+      <span class="<%= color_classes[:text] %> font-bold">→</span>
+    <% end %>
+
+    <% if equals %>
+      <span class="font-bold">=</span>
+    <% end %>
+
+    <% if answer %>
+      <%= render_input.call(answer, width, inputmode, maxlength, flex) %>
+    <% end %>
+
+    <% if unit %>
+      <span class="font-bold"><%= unit %></span>
+    <% end %>
+
+    <% if suffix %>
+      <span><%= suffix %></span>
+    <% end %>
+  <% end %>
+</div>

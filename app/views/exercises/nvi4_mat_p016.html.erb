@@ -41,36 +41,15 @@
         Prova tu: leggi i seguenti numeri...
       </p>
 
-      <div class="space-y-2">
-        <div class="flex items-center gap-4 flex-wrap">
-          <span class="font-bold whitespace-nowrap">5 179</span>
-          <span class="text-gray-500 dark:text-gray-400">si legge</span>
-          <span>cinque</span>
-          <input type="text" data-correct-answer="mila" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <input type="text" data-correct-answer="centosettantanove" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-        </div>
-        <div class="flex items-center gap-4 flex-wrap">
-          <span class="font-bold whitespace-nowrap">18 362</span>
-          <span class="text-gray-500 dark:text-gray-400">si legge</span>
-          <span>diciotto</span>
-          <input type="text" data-correct-answer="mila" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <span>trecentosessantadue</span>
-        </div>
-        <div class="flex items-center gap-4 flex-wrap">
-          <span class="font-bold whitespace-nowrap">124 750</span>
-          <span class="text-gray-500 dark:text-gray-400">si legge</span>
-          <span>cento</span>
-          <input type="text" data-correct-answer="ventiquattromila" class="w-44 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <span>settecentocinquanta</span>
-        </div>
-        <div class="flex items-center gap-4 flex-wrap">
-          <span class="font-bold whitespace-nowrap">236 309</span>
-          <span class="text-gray-500 dark:text-gray-400">si legge</span>
-          <span>duecento</span>
-          <input type="text" data-correct-answer="trentaseimila" class="w-40 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <span>trecentonove</span>
-        </div>
-      </div>
+      <%= render 'shared/fill_list',
+          color: @pagina.base_color,
+          container_class: "space-y-2",
+          items: [
+            { segments: [{ html: "<span class='font-bold'>5 179</span>" }, { html: "<span class='text-gray-500 dark:text-gray-400'>si legge</span>" }, "cinque", { answer: "mila" }, { answer: "centosettantanove" }] },
+            { segments: [{ html: "<span class='font-bold'>18 362</span>" }, { html: "<span class='text-gray-500 dark:text-gray-400'>si legge</span>" }, "diciotto", { answer: "mila" }, "trecentosessantadue"] },
+            { segments: [{ html: "<span class='font-bold'>124 750</span>" }, { html: "<span class='text-gray-500 dark:text-gray-400'>si legge</span>" }, "cento", { answer: "ventiquattromila" }, "settecentocinquanta"] },
+            { segments: [{ html: "<span class='font-bold'>236 309</span>" }, { html: "<span class='text-gray-500 dark:text-gray-400'>si legge</span>" }, "duecento", { answer: "trentaseimila" }, "trecentonove"] }
+          ] %>
     </div>
 
     <!-- Scrivi questi altri numeri in cifre -->
@@ -80,32 +59,21 @@
         ... e scrivi questi altri numeri in cifre.
       </p>
 
-      <div class="space-y-2">
-        <div class="flex items-center gap-4 flex-wrap">
-          <span>duecentosedici<span class="font-bold text-<%= @pagina.base_color %>-600">MILA</span>settecentoventinove</span>
-          <span class="text-gray-500 dark:text-gray-400">si scrive</span>
-          <span class="font-bold text-<%= @pagina.base_color %>-600">216 729</span>
-        </div>
-        <div class="flex items-center gap-4 flex-wrap">
-          <span>otto<span class="font-bold text-<%= @pagina.base_color %>-600">MILA</span>novecentotrentasette</span>
-          <span class="text-gray-500 dark:text-gray-400">si scrive</span>
-          <input type="text" data-correct-answer="8" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <span>937</span>
-        </div>
-        <div class="flex items-center gap-4 flex-wrap">
-          <span>quarantacinque<span class="font-bold text-<%= @pagina.base_color %>-600">MILA</span>trecentonovantadue</span>
-          <span class="text-gray-500 dark:text-gray-400">si scrive</span>
-          <span>45</span>
-          <input type="text" data-correct-answer="392" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-        </div>
-        <div class="flex items-center gap-4 flex-wrap">
-          <span>trecentoventisette<span class="font-bold text-<%= @pagina.base_color %>-600">MILA</span>cinquecento</span>
-          <span class="text-gray-500 dark:text-gray-400">si scrive</span>
-          <span>3</span>
-          <input type="text" data-correct-answer="27" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <input type="text" data-correct-answer="500" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-        </div>
+      <!-- Esempio -->
+      <div class="flex items-center gap-4 flex-wrap">
+        <span>duecentosedici<span class="font-bold text-<%= @pagina.base_color %>-600">MILA</span>settecentoventinove</span>
+        <span class="text-gray-500 dark:text-gray-400">si scrive</span>
+        <span class="font-bold text-<%= @pagina.base_color %>-600">216 729</span>
       </div>
+
+      <%= render 'shared/fill_list',
+          color: @pagina.base_color,
+          container_class: "space-y-2",
+          items: [
+            { segments: [{ html: "otto<span class='font-bold text-#{@pagina.base_color}-600'>MILA</span>novecentotrentasette" }, "si scrive", { answer: "8" }, "937"] },
+            { segments: [{ html: "quarantacinque<span class='font-bold text-#{@pagina.base_color}-600'>MILA</span>trecentonovantadue" }, "si scrive", "45", { answer: "392" }] },
+            { segments: [{ html: "trecentoventisette<span class='font-bold text-#{@pagina.base_color}-600'>MILA</span>cinquecento" }, "si scrive", "3", { answer: "27" }, { answer: "500" }] }
+          ] %>
     </div>
 
     <!-- Container ESERCIZI -->
@@ -123,45 +91,26 @@
           Scrivi in lettere i seguenti numeri.
         </p>
 
-        <div class="space-y-3">
-          <!-- Esempio -->
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-bold whitespace-nowrap">965 234</span>
-            <span class="text-<%= @pagina.base_color %>-500">→</span>
-            <span class="font-bold text-<%= @pagina.base_color %>-600">novecentosessantacinquemiladuecentotrentaquattro</span>
-          </div>
-
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="whitespace-nowrap">365 870</span>
-            <span class="text-<%= @pagina.base_color %>-500">→</span>
-            <input type="text" data-correct-answer="trecentosessantacinquemilaottocentosettanta" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="whitespace-nowrap">3 400</span>
-            <span class="text-<%= @pagina.base_color %>-500">→</span>
-            <input type="text" data-correct-answer="tremilaquattrocento" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="whitespace-nowrap">904 567</span>
-            <span class="text-<%= @pagina.base_color %>-500">→</span>
-            <input type="text" data-correct-answer="novecentoquattromilacinquecentosessantasette" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="whitespace-nowrap">16 864</span>
-            <span class="text-<%= @pagina.base_color %>-500">→</span>
-            <input type="text" data-correct-answer="sedicimilaottocentosessantaquattro" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="whitespace-nowrap">300 570</span>
-            <span class="text-<%= @pagina.base_color %>-500">→</span>
-            <input type="text" data-correct-answer="trecentomilacinquecentosettanta" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="whitespace-nowrap">10 060</span>
-            <span class="text-<%= @pagina.base_color %>-500">→</span>
-            <input type="text" data-correct-answer="diecimilasessanta" class="flex-1 min-w-0 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
+        <!-- Esempio -->
+        <div class="flex items-center gap-2 flex-wrap mb-3">
+          <span class="font-bold whitespace-nowrap">965 234</span>
+          <span class="text-<%= @pagina.base_color %>-500">→</span>
+          <span class="font-bold text-<%= @pagina.base_color %>-600">novecentosessantacinquemiladuecentotrentaquattro</span>
         </div>
+
+        <%= render 'shared/fill_list',
+            color: @pagina.base_color,
+            arrow: true,
+            flex: true,
+            container_class: "space-y-3",
+            items: [
+              { prefix: "365 870", answer: "trecentosessantacinquemilaottocentosettanta" },
+              { prefix: "3 400", answer: "tremilaquattrocento" },
+              { prefix: "904 567", answer: "novecentoquattromilacinquecentosessantasette" },
+              { prefix: "16 864", answer: "sedicimilaottocentosessantaquattro" },
+              { prefix: "300 570", answer: "trecentomilacinquecentosettanta" },
+              { prefix: "10 060", answer: "diecimilasessanta" }
+            ] %>
       </div>
 
     </div>

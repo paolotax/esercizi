@@ -12,79 +12,37 @@
     <!-- Colonna sinistra -->
     <div class="space-y-8">
       <!-- Esercizio 1: Scrivi i numeri in lettere -->
-      <div class="bg-transparent p-4" data-controller="fill-blanks">
-        
+      <div class="bg-transparent p-4">
         <p class="text-gray-700 dark:text-gray-200 mb-4">
           <%= numero_esercizio_badge(1, colore: 'red-500') %>
           Scrivi i numeri in lettere.
         </p>
 
-        <div class="space-y-3">
-          <div class="flex items-center gap-3">
-            <span class="font-bold min-w-[60px]">856</span>
-            <span class="text-red-600 dark:text-red-400">→</span>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="ottocentocinquantasei"
-                   class="w-full px-3 py-2 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                   maxlength="25">
-          </div>
-
-          <div class="flex items-center gap-3">
-            <span class="font-bold min-w-[60px]">799</span>
-            <span class="text-red-600 dark:text-red-400">→</span>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="settecentonovantanove"
-                   class="w-full px-3 py-2 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                   maxlength="25">
-          </div>
-
-          <div class="flex items-center gap-3">
-            <span class="font-bold min-w-[60px]">317</span>
-            <span class="text-red-600 dark:text-red-400">→</span>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="trecentodiciassette"
-                   class="w-full px-3 py-2 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                   maxlength="25">
-          </div>
-        </div>
+        <%= render 'shared/fill_list',
+            color: "red",
+            arrow: true,
+            items: [
+              { prefix: "856", answer: "ottocentocinquantasei" },
+              { prefix: "799", answer: "settecentonovantanove" },
+              { prefix: "317", answer: "trecentodiciassette" }
+            ] %>
       </div>
 
       <!-- Esercizio 2: Scrivi i numeri in cifre -->
-      <div class="bg-transparent p-4" data-controller="fill-blanks">
-        
+      <div class="bg-transparent p-4">
         <p class="text-gray-700 dark:text-gray-200 mb-4">
           <%= numero_esercizio_badge(2, colore: 'red-500') %>
           Scrivi i numeri in cifre.
         </p>
 
-        <div class="space-y-3">
-          <div class="flex items-center justify-between flex-wrap gap-3">
-            <span>novecentosettantaquattro</span>
-            <span>
-              <span class="text-red-600 dark:text-red-400">→</span>
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="974"
-                    class="w-24 px-3 py-2 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                    maxlength="3" inputmode="numeric">
-            </span>
-          </div>
-
-          <div class="flex items-center justify-between flex-wrap gap-3">
-            <span>duecentodiciannove</span>
-            <div>
-              <span class="text-red-600 dark:text-red-400">→</span>
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="219"
-                    class="w-24 px-3 py-2 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                    maxlength="3" inputmode="numeric">
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between flex-wrap gap-3">
-            <span>seicentosessantatré</span>
-            <div>
-              <span class="text-red-600 dark:text-red-400">→</span>
-              <input type="text" data-fill-blanks-target="input" data-correct-answer="663"
-                    class="w-24 px-3 py-2 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                    maxlength="3" inputmode="numeric">
-            </div>
-          </div>
-        </div>
+        <%= render 'shared/fill_list',
+            color: "red",
+            arrow: true,
+            items: [
+              { prefix: "novecentosettantaquattro", answer: "974" },
+              { prefix: "duecentodiciannove", answer: "219" },
+              { prefix: "seicentosessantatré", answer: "663" }
+            ] %>
       </div>
 
       <!-- Esercizio 3: Collega ogni numero alla scomposizione giusta -->
@@ -218,81 +176,53 @@
     <!-- Colonna destra -->
     <div class="space-y-8">
       <!-- Esercizio 5: Completa con >, < o = -->
-      <div class="bg-transparent p-4" data-controller="fill-blanks auto-advance">
-        
+      <div class="bg-transparent p-4">
         <p class="text-gray-700 dark:text-gray-200 mb-4">
           <%= numero_esercizio_badge(5, colore: 'red-500') %>
           Completa con <strong>&gt;</strong>, <strong>&lt;</strong> o <strong>=</strong>.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <%
-            comparisons = [
-              { a: 152, b: 528, answer: "<" },
-              { a: 861, b: 618, answer: ">" },
-              { a: 548, b: 693, answer: "<" },
-              { a: 333, b: 259, answer: ">" },
-              { a: 669, b: 669, answer: "=" },
-              { a: 651, b: 615, answer: ">" },
-              { a: 999, b: 899, answer: ">" },
-              { a: 295, b: 299, answer: "<" },
-              { a: 426, b: 426, answer: "=" }
-            ]
-
-            comparisons.each do |comp|
-          %>
-            <div class="p-3 rounded-lg flex items-center justify-center gap-3">
-              <span class="font-bold min-w-[50px] text-center"><%= comp[:a] %></span>
-              <input type="text"
-                     data-fill-blanks-target="input"
-                     data-correct-answer="<%= comp[:answer] %>"
-                     class="w-12 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                     maxlength="1">
-              <span class="font-bold min-w-[50px] text-center"><%= comp[:b] %></span>
-            </div>
-          <% end %>
-        </div>
+        <%= render 'shared/fill_list',
+            color: "red",
+            container_class: "grid grid-cols-1 md:grid-cols-3 gap-3",
+            items: [
+              { prefix: "152", answer: "<", suffix: "528" },
+              { prefix: "861", answer: ">", suffix: "618" },
+              { prefix: "548", answer: "<", suffix: "693" },
+              { prefix: "333", answer: ">", suffix: "259" },
+              { prefix: "669", answer: "=", suffix: "669" },
+              { prefix: "651", answer: ">", suffix: "615" },
+              { prefix: "999", answer: ">", suffix: "899" },
+              { prefix: "295", answer: "<", suffix: "299" },
+              { prefix: "426", answer: "=", suffix: "426" }
+            ] %>
       </div>
 
       <!-- Esercizio 6: Completa -->
-      <div class="bg-transparent p-4" data-controller="fill-blanks auto-advance">
-        
+      <div class="bg-transparent p-4">
         <p class="text-gray-700 dark:text-gray-200 mb-4">
           <%= numero_esercizio_badge(6, colore: 'red-500') %>
           Completa.
         </p>
 
-        <div class="grid grid-cols-2 gap-3">
-          <%
-            conversions = [
-              { question: "5 h", answer: "50", unit: "da" },
-              { question: "600 u", answer: "6", unit: "h" },
-              { question: "3 da", answer: "30", unit: "u" },
-              { question: "90 da", answer: "900", unit: "u" },
-              { question: "500 u", answer: "5", unit: "h" },
-              { question: "4 h", answer: "400", unit: "u" },
-              { question: "700 u", answer: "70", unit: "da" },
-              { question: "60 da", answer: "6", unit: "h" },
-              { question: "11 da", answer: "110", unit: "u" },
-              { question: "9 h", answer: "90", unit: "da" },
-              { question: "870 u", answer: "87", unit: "da" },
-              { question: "1 h", answer: "10", unit: "da" }
-            ]
-
-            conversions.each do |conv|
-          %>
-            <div class="p-3 flex items-center justify-center gap-2">
-              <span class="font-bold"><%= conv[:question] %></span>
-              <span class="font-bold">=</span>
-              <input type="text"
-                     data-fill-blanks-target="input"
-                     data-correct-answer="<%= conv[:answer] %>"
-                     class="w-16 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                     maxlength="3" inputmode="numeric">
-              <span class="font-bold"><%= conv[:unit] %></span>
-            </div>
-          <% end %>
-        </div>
+        <%= render 'shared/fill_list',
+            color: "red",
+            equals: true,
+            container_class: "grid grid-cols-2 gap-3",
+            items: [
+              { prefix: "5 h", answer: "50", unit: "da" },
+              { prefix: "600 u", answer: "6", unit: "h" },
+              { prefix: "3 da", answer: "30", unit: "u" },
+              { prefix: "90 da", answer: "900", unit: "u" },
+              { prefix: "500 u", answer: "5", unit: "h" },
+              { prefix: "4 h", answer: "400", unit: "u" },
+              { prefix: "700 u", answer: "70", unit: "da" },
+              { prefix: "60 da", answer: "6", unit: "h" },
+              { prefix: "11 da", answer: "110", unit: "u" },
+              { prefix: "9 h", answer: "90", unit: "da" },
+              { prefix: "870 u", answer: "87", unit: "da" },
+              { prefix: "1 h", answer: "10", unit: "da" }
+            ] %>
       </div>
 
       <!-- Esercizio 7: In ogni gruppo colora il numero maggiore -->

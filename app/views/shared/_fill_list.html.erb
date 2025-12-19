@@ -1,0 +1,18 @@
+<%# locals: (items:, color: "gray", bullet: nil, arrow: false, equals: false, width: nil, unit: nil, flex: false, container_class: "space-y-2") -%>
+<%
+  defaults = {
+    color: color,
+    bullet: bullet,
+    arrow: arrow,
+    equals: equals,
+    width: width,
+    unit: unit,
+    flex: flex
+  }.compact
+%>
+
+<div data-controller="fill-blanks" class="<%= container_class %>">
+  <% items.each do |item| %>
+    <%= render 'shared/fill_item', **defaults.merge(item) %>
+  <% end %>
+</div>

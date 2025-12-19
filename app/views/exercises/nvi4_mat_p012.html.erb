@@ -90,18 +90,15 @@
           <div>
             <%= image_tag "nvi4_mat/p012/output-1715932804012_126_758_450_213.png", alt: "Pennarelli", class: "w-full max-w-md dark:bg-white dark:rounded-lg dark:p-2" %>
           </div>
-          <div class="p-4 space-y-3">
-            <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
-              <span>Ho formato</span>
-              <input type="text" data-correct-answer="2" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-              <span>gruppi di 10;</span>
-            </div>
-            <div class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
-              <span>restano</span>
-              <input type="text" data-correct-answer="3" class="w-12 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-              <span>pennarelli non raggruppati.</span>
-            </div>
-            <p class="text-gray-700 dark:text-gray-200">I pennarelli sono <span class="font-bold">23</span>.</p>
+          <div class="p-4 text-gray-700 dark:text-gray-200">
+            <%= render 'shared/fill_list',
+                color: "cyan",
+                container_class: "space-y-3",
+                items: [
+                  { segments: ["Ho formato", { answer: "2" }, "gruppi di 10;"] },
+                  { segments: ["restano", { answer: "3" }, "pennarelli non raggruppati."] }
+                ] %>
+            <p class="mt-3">I pennarelli sono <span class="font-bold">23</span>.</p>
           </div>
         </div>
       </div>

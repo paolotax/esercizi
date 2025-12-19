@@ -24,12 +24,17 @@ export default class extends Controller {
 
 
       // Remove previous styling (including all backgrounds and borders)
-      input.classList.remove("border-green-500", "border-red-500", "border-yellow-500",
-                            "bg-green-50", "bg-red-50", "bg-yellow-50",
+      // Remove all border color classes dynamically
+      const borderClasses = Array.from(input.classList).filter(cls =>
+        cls.match(/^border-(green|red|yellow|pink|cyan|blue|orange|gray|purple|indigo|teal)-[0-9]+$/) ||
+        cls.match(/^dark:border-/)
+      )
+      input.classList.remove(...borderClasses)
+      input.classList.remove("bg-green-50", "bg-red-50", "bg-yellow-50",
                             "bg-green-100", "bg-red-100", "bg-yellow-100",
                             "bg-white", "bg-white/60", "bg-white/80",
                             "text-gray-900", "font-bold",
-                            "border-transparent", "border-cyan-400", "text-black")
+                            "border-transparent", "border-dotted", "text-black")
 
 
       if (userAnswer === "") {
@@ -103,12 +108,17 @@ export default class extends Controller {
       const correctAnswer = (input.dataset.answer || input.dataset.correctAnswer || '').trim()
 
       // Remove previous styling (including all backgrounds and borders)
-      input.classList.remove("border-green-500", "border-red-500", "border-yellow-500",
-                            "bg-green-50", "bg-red-50", "bg-yellow-50",
+      // Remove all border color classes dynamically
+      const borderClasses = Array.from(input.classList).filter(cls =>
+        cls.match(/^border-(green|red|yellow|pink|cyan|blue|orange|gray|purple|indigo|teal)-[0-9]+$/) ||
+        cls.match(/^dark:border-/)
+      )
+      input.classList.remove(...borderClasses)
+      input.classList.remove("bg-green-50", "bg-red-50", "bg-yellow-50",
                             "bg-green-100", "bg-red-100", "bg-yellow-100",
                             "bg-white", "bg-white/60", "bg-white/80",
                             "text-gray-900", "font-bold",
-                            "border-transparent", "border-cyan-400")
+                            "border-transparent", "border-dotted")
 
       // Show correct answer
       input.value = correctAnswer
