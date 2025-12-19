@@ -50,18 +50,15 @@
             <span class="font-bold whitespace-nowrap">4 692</span>
             <span class="font-bold text-cyan-600">quattromilaseicentonovantadue</span>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="font-bold whitespace-nowrap">3 081</span>
-            <input type="text" data-correct-answer="tremilazeroottantuno" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="font-bold whitespace-nowrap">7 803</span>
-            <input type="text" data-correct-answer="settemilaottocentotre" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="font-bold whitespace-nowrap">9 201</span>
-            <input type="text" data-correct-answer="novemiladuecentouno" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" placeholder="...">
-          </div>
+          <%= render 'shared/fill_list',
+              color: "cyan",
+              flex: true,
+              container_class: "space-y-3",
+              items: [
+                { prefix: "3 081", answer: "tremilazeroottantuno" },
+                { prefix: "7 803", answer: "settemilaottocentotre" },
+                { prefix: "9 201", answer: "novemiladuecentouno" }
+              ] %>
         </div>
 
         <!-- Colonna destra: lettere -> numeri -->
@@ -71,44 +68,40 @@
             <span class="text-cyan-500">→</span>
             <span class="font-bold text-cyan-600 whitespace-nowrap">6 709</span>
           </div>
-          <div class="flex items-center gap-2">
-            <span>duemiladuecentosessanta</span>
-            <span class="text-cyan-500">→</span>
-            <input type="text" data-correct-answer="2260" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-          <div class="flex items-center gap-2">
-            <span>ottomilaottantasette</span>
-            <span class="text-cyan-500">→</span>
-            <input type="text" data-correct-answer="8087" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-          <div class="flex items-center gap-2">
-            <span>cinquemilanovecento</span>
-            <span class="text-cyan-500">→</span>
-            <input type="text" data-correct-answer="5900" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
+          <%= render 'shared/fill_list',
+              color: "cyan",
+              arrow: true,
+              container_class: "space-y-3",
+              items: [
+                { prefix: "duemiladuecentosessanta", answer: "2260", width: "w-16" },
+                { prefix: "ottomilaottantasette", answer: "8087", width: "w-16" },
+                { prefix: "cinquemilanovecento", answer: "5900", width: "w-16" }
+              ] %>
         </div>
       </div>
 
       <!-- Ordine decrescente -->
       <div class="mt-6">
         <p class="text-gray-600 dark:text-gray-400 mb-2">Ordine decrescente:</p>
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="font-bold text-cyan-600 whitespace-nowrap">9 201</span>
-          <span class="text-cyan-500">></span>
-          <input type="text" data-correct-answer="8087" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <span class="text-cyan-500">></span>
-          <input type="text" data-correct-answer="7803" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <span class="text-cyan-500">></span>
-          <input type="text" data-correct-answer="6709" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <span class="text-cyan-500">></span>
-          <input type="text" data-correct-answer="5900" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <span class="text-cyan-500">></span>
-          <input type="text" data-correct-answer="4692" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <span class="text-cyan-500">></span>
-          <input type="text" data-correct-answer="3081" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <span class="text-cyan-500">></span>
-          <input type="text" data-correct-answer="2260" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-        </div>
+        <%= render 'shared/fill_item',
+            color: "cyan",
+            segments: [
+              { html: "<span class='font-bold text-cyan-600 whitespace-nowrap'>9 201</span>" },
+              { html: "<span class='text-cyan-500'>></span>" },
+              { answer: "8087", width: "w-16" },
+              { html: "<span class='text-cyan-500'>></span>" },
+              { answer: "7803", width: "w-16" },
+              { html: "<span class='text-cyan-500'>></span>" },
+              { answer: "6709", width: "w-16" },
+              { html: "<span class='text-cyan-500'>></span>" },
+              { answer: "5900", width: "w-16" },
+              { html: "<span class='text-cyan-500'>></span>" },
+              { answer: "4692", width: "w-16" },
+              { html: "<span class='text-cyan-500'>></span>" },
+              { answer: "3081", width: "w-16" },
+              { html: "<span class='text-cyan-500'>></span>" },
+              { answer: "2260", width: "w-16" }
+            ] %>
       </div>
     </div>
 
@@ -156,24 +149,15 @@
           Calcola in colonna sul quaderno, poi trascrivi i risultati.
         </p>
 
-        <div class="space-y-3">
-          <div class="flex items-center gap-2">
-            <span>948 + 2 075 =</span>
-            <input type="text" data-correct-answer="3023" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-          <div class="flex items-center gap-2">
-            <span>6 315 – 1 206 =</span>
-            <input type="text" data-correct-answer="5109" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-          <div class="flex items-center gap-2">
-            <span>56 × 28 =</span>
-            <input type="text" data-correct-answer="1568" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-          <div class="flex items-center gap-2">
-            <span>4 767 : 7 =</span>
-            <input type="text" data-correct-answer="681" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-        </div>
+        <%= render 'shared/fill_list',
+            color: "cyan",
+            container_class: "space-y-3",
+            items: [
+              { prefix: "948 + 2 075 =", answer: "3023" },
+              { prefix: "6 315 – 1 206 =", answer: "5109" },
+              { prefix: "56 × 28 =", answer: "1568" },
+              { prefix: "4 767 : 7 =", answer: "681" }
+            ] %>
       </div>
     </div>
 
