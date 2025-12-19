@@ -15,7 +15,8 @@ export default class extends Controller {
     showU: { type: Boolean, default: false },
     max: { type: Number, default: 9 },
     editable: { type: Boolean, default: true },
-    correct: { type: Number, default: null }
+    correct: { type: Number, default: null },
+    mode: { type: String, default: "" } // "", "balls", "input"
   }
 
   connect() {
@@ -32,40 +33,54 @@ export default class extends Controller {
   // Click su una pallina specifica: setta il valore a index+1
   clickBallK(event) {
     if (!this.editableValue) return
+    // In mode "balls", le palline non sono cliccabili (l'utente deve solo scrivere il numero)
+    if (this.modeValue === "balls") return
 
     const index = parseInt(event.currentTarget.dataset.index)
     this.migliaiaValue = index + 1  // k = migliaia (thousands)
-    this.syncInputs()
+    // In mode "input", non sincronizzare input (l'utente deve cliccare le palline senza vedere aggiornamenti)
+    if (this.modeValue !== "input") {
+      this.syncInputs()
+    }
     this.updateDisplay()
     this.checkCorrectness()
   }
 
   clickBallH(event) {
     if (!this.editableValue) return
+    if (this.modeValue === "balls") return
 
     const index = parseInt(event.currentTarget.dataset.index)
     this.centinaiaValue = index + 1  // h = centinaia (hundreds)
-    this.syncInputs()
+    if (this.modeValue !== "input") {
+      this.syncInputs()
+    }
     this.updateDisplay()
     this.checkCorrectness()
   }
 
   clickBallDa(event) {
     if (!this.editableValue) return
+    if (this.modeValue === "balls") return
 
     const index = parseInt(event.currentTarget.dataset.index)
     this.decineValue = index + 1
-    this.syncInputs()
+    if (this.modeValue !== "input") {
+      this.syncInputs()
+    }
     this.updateDisplay()
     this.checkCorrectness()
   }
 
   clickBallU(event) {
     if (!this.editableValue) return
+    if (this.modeValue === "balls") return
 
     const index = parseInt(event.currentTarget.dataset.index)
     this.unitaValue = index + 1
-    this.syncInputs()
+    if (this.modeValue !== "input") {
+      this.syncInputs()
+    }
     this.updateDisplay()
     this.checkCorrectness()
   }
@@ -526,83 +541,115 @@ export default class extends Controller {
   // Update da input numerico
   updateFromInputK(event) {
     if (!this.editableValue) return
+    // In mode "input", gli input sono readonly (l'utente deve solo cliccare le palline)
+    if (this.modeValue === "input") return
 
     const input = event.target
     // Permetti solo numeri 0-9
     const cleanValue = input.value.replace(/[^0-9]/g, '')
 
     if (cleanValue === '') {
-      this.migliaiaValue = 0  // k = migliaia (thousands)
+      // In mode "balls", NON modificare i valori delle palline - solo validare l'input
+      if (this.modeValue !== "balls") {
+        this.migliaiaValue = 0
+      }
       input.value = ''
     } else {
       let value = parseInt(cleanValue)
       value = Math.min(Math.max(0, value), this.maxValue)
-      this.migliaiaValue = value
-      input.value = value.toString() // Mantieni "0" se digitato
+      // In mode "balls", NON modificare i valori delle palline
+      if (this.modeValue !== "balls") {
+        this.migliaiaValue = value
+      }
+      input.value = value.toString()
     }
 
-    this.updateDisplay()
+    // In mode "balls", non aggiornare display (le palline sono fisse)
+    if (this.modeValue !== "balls") {
+      this.updateDisplay()
+    }
     this.checkCorrectness()
   }
 
   updateFromInputH(event) {
     if (!this.editableValue) return
+    if (this.modeValue === "input") return
 
     const input = event.target
     // Permetti solo numeri 0-9
     const cleanValue = input.value.replace(/[^0-9]/g, '')
 
     if (cleanValue === '') {
-      this.centinaiaValue = 0  // h = centinaia (hundreds)
+      if (this.modeValue !== "balls") {
+        this.centinaiaValue = 0
+      }
       input.value = ''
     } else {
       let value = parseInt(cleanValue)
       value = Math.min(Math.max(0, value), this.maxValue)
-      this.centinaiaValue = value
-      input.value = value.toString() // Mantieni "0" se digitato
+      if (this.modeValue !== "balls") {
+        this.centinaiaValue = value
+      }
+      input.value = value.toString()
     }
 
-    this.updateDisplay()
+    if (this.modeValue !== "balls") {
+      this.updateDisplay()
+    }
     this.checkCorrectness()
   }
 
   updateFromInputDa(event) {
     if (!this.editableValue) return
+    if (this.modeValue === "input") return
 
     const input = event.target
     const cleanValue = input.value.replace(/[^0-9]/g, '')
 
     if (cleanValue === '') {
-      this.decineValue = 0
+      if (this.modeValue !== "balls") {
+        this.decineValue = 0
+      }
       input.value = ''
     } else {
       let value = parseInt(cleanValue)
       value = Math.min(Math.max(0, value), this.maxValue)
-      this.decineValue = value
-      input.value = value.toString() // Mantieni "0" se digitato
+      if (this.modeValue !== "balls") {
+        this.decineValue = value
+      }
+      input.value = value.toString()
     }
 
-    this.updateDisplay()
+    if (this.modeValue !== "balls") {
+      this.updateDisplay()
+    }
     this.checkCorrectness()
   }
 
   updateFromInputU(event) {
     if (!this.editableValue) return
+    if (this.modeValue === "input") return
 
     const input = event.target
     const cleanValue = input.value.replace(/[^0-9]/g, '')
 
     if (cleanValue === '') {
-      this.unitaValue = 0
+      if (this.modeValue !== "balls") {
+        this.unitaValue = 0
+      }
       input.value = ''
     } else {
       let value = parseInt(cleanValue)
       value = Math.min(Math.max(0, value), this.maxValue)
-      this.unitaValue = value
-      input.value = value.toString() // Mantieni "0" se digitato
+      if (this.modeValue !== "balls") {
+        this.unitaValue = value
+      }
+      input.value = value.toString()
     }
 
-    this.updateDisplay()
+    if (this.modeValue !== "balls") {
+      this.updateDisplay()
+    }
     this.checkCorrectness()
   }
 
@@ -679,11 +726,11 @@ export default class extends Controller {
     // Se non c'è correct_value, non c'è nulla da verificare
     if (this.correctValue === null) return
 
-    // Calcola il totale attuale basandosi sulle colonne visibili
-    const currentTotal = (this.showKValue ? this.migliaiaValue * 1000 : 0) +  // k = migliaia
-                         (this.showHValue ? this.centinaiaValue * 100 : 0) +   // h = centinaia
-                         (this.showDaValue ? this.decineValue * 10 : 0) +
-                         (this.showUValue ? this.unitaValue : 0)
+    // Calcola il totale attuale basandosi sulle colonne visibili (dalle palline/values interni)
+    const currentBallsTotal = (this.showKValue ? this.migliaiaValue * 1000 : 0) +  // k = migliaia
+                              (this.showHValue ? this.centinaiaValue * 100 : 0) +   // h = centinaia
+                              (this.showDaValue ? this.decineValue * 10 : 0) +
+                              (this.showUValue ? this.unitaValue : 0)
 
     // Calcola le cifre del valore corretto
     const correctK = Math.floor(this.correctValue / 1000) % 10  // k = migliaia
@@ -691,59 +738,100 @@ export default class extends Controller {
     const correctDa = Math.floor(this.correctValue / 10) % 10
     const correctU = this.correctValue % 10
 
-    // Determina quale colonna è la leftmost
-    const leftmost = this.showKValue ? 'k' :  // k = migliaia (leftmost)
-                    this.showHValue ? 'h' :    // h = centinaia
-                    this.showDaValue ? 'da' :
-                    this.showUValue ? 'u' : null
-
-    // Verifica che tutti gli input siano compilati correttamente
-    // La colonna leftmost può essere vuota se il suo valore corretto è 0
+    let isCorrect = false
     let allFieldsValid = true
 
+    // Logica di verifica basata sul mode
+    if (this.modeValue === "input") {
+      // MODE INPUT: verifica solo le palline (l'utente clicca le palline per rappresentare il numero)
+      // Le palline devono corrispondere al correct_value
+      isCorrect = currentBallsTotal === this.correctValue
+      allFieldsValid = true // Non verifichiamo gli input in questo mode
+    } else if (this.modeValue === "balls") {
+      // MODE BALLS: verifica solo gli input (l'utente vede le palline e deve inserire il numero)
+      // Gli input devono corrispondere al correct_value
 
-    if (this.showKValue && this.hasInputKTarget) {
-      if (correctK === 0) {
-        // Valore corretto è 0: accetta '' o '0'
-        allFieldsValid = allFieldsValid && (this.inputKTarget.value === '' || this.inputKTarget.value === '0')
-      } else {
-        // Valore corretto non è 0: deve essere compilato
-        allFieldsValid = allFieldsValid && this.inputKTarget.value !== ''
+      if (this.showKValue && this.hasInputKTarget) {
+        const inputVal = parseInt(this.inputKTarget.value) || 0
+        if (correctK === 0) {
+          allFieldsValid = allFieldsValid && (this.inputKTarget.value === '' || this.inputKTarget.value === '0')
+        } else {
+          allFieldsValid = allFieldsValid && this.inputKTarget.value !== ''
+        }
       }
+
+      if (this.showHValue && this.hasInputHTarget) {
+        const inputVal = parseInt(this.inputHTarget.value) || 0
+        if (correctH === 0) {
+          allFieldsValid = allFieldsValid && (this.inputHTarget.value === '' || this.inputHTarget.value === '0')
+        } else {
+          allFieldsValid = allFieldsValid && this.inputHTarget.value !== ''
+        }
+      }
+
+      if (this.showDaValue && this.hasInputDaTarget) {
+        if (correctDa === 0) {
+          allFieldsValid = allFieldsValid && (this.inputDaTarget.value === '' || this.inputDaTarget.value === '0')
+        } else {
+          allFieldsValid = allFieldsValid && this.inputDaTarget.value !== ''
+        }
+      }
+
+      if (this.showUValue && this.hasInputUTarget) {
+        if (correctU === 0) {
+          allFieldsValid = allFieldsValid && (this.inputUTarget.value === '' || this.inputUTarget.value === '0')
+        } else {
+          allFieldsValid = allFieldsValid && this.inputUTarget.value !== ''
+        }
+      }
+
+      // Calcola totale dagli input
+      const inputK = this.hasInputKTarget ? (parseInt(this.inputKTarget.value) || 0) : 0
+      const inputH = this.hasInputHTarget ? (parseInt(this.inputHTarget.value) || 0) : 0
+      const inputDa = this.hasInputDaTarget ? (parseInt(this.inputDaTarget.value) || 0) : 0
+      const inputU = this.hasInputUTarget ? (parseInt(this.inputUTarget.value) || 0) : 0
+      const inputTotal = inputK * 1000 + inputH * 100 + inputDa * 10 + inputU
+
+      isCorrect = allFieldsValid && inputTotal === this.correctValue
+    } else {
+      // MODE DEFAULT (sincronizzato): comportamento originale, verifica sia input che palline
+      if (this.showKValue && this.hasInputKTarget) {
+        if (correctK === 0) {
+          allFieldsValid = allFieldsValid && (this.inputKTarget.value === '' || this.inputKTarget.value === '0')
+        } else {
+          allFieldsValid = allFieldsValid && this.inputKTarget.value !== ''
+        }
+      }
+
+      if (this.showHValue && this.hasInputHTarget) {
+        if (correctH === 0) {
+          allFieldsValid = allFieldsValid && (this.inputHTarget.value === '' || this.inputHTarget.value === '0')
+        } else {
+          allFieldsValid = allFieldsValid && this.inputHTarget.value !== ''
+        }
+      }
+
+      if (this.showDaValue && this.hasInputDaTarget) {
+        if (correctDa === 0) {
+          allFieldsValid = allFieldsValid && (this.inputDaTarget.value === '' || this.inputDaTarget.value === '0')
+        } else {
+          allFieldsValid = allFieldsValid && this.inputDaTarget.value !== ''
+        }
+      }
+
+      if (this.showUValue && this.hasInputUTarget) {
+        if (correctU === 0) {
+          allFieldsValid = allFieldsValid && (this.inputUTarget.value === '' || this.inputUTarget.value === '0')
+        } else {
+          allFieldsValid = allFieldsValid && this.inputUTarget.value !== ''
+        }
+      }
+
+      isCorrect = allFieldsValid && currentBallsTotal === this.correctValue
     }
 
-    if (this.showHValue && this.hasInputHTarget) {
-      if (correctH === 0) {
-        // Valore corretto è 0: accetta '' o '0'
-        allFieldsValid = allFieldsValid && (this.inputHTarget.value === '' || this.inputHTarget.value === '0')
-      } else {
-        // Valore corretto non è 0: deve essere compilato
-        allFieldsValid = allFieldsValid && this.inputHTarget.value !== ''
-      }
-    }
-
-    if (this.showDaValue && this.hasInputDaTarget) {
-      if (correctDa === 0) {
-        // Valore corretto è 0: accetta '' o '0'
-        allFieldsValid = allFieldsValid && (this.inputDaTarget.value === '' || this.inputDaTarget.value === '0')
-      } else {
-        // Valore corretto non è 0: deve essere compilato
-        allFieldsValid = allFieldsValid && this.inputDaTarget.value !== ''
-      }
-    }
-
-    if (this.showUValue && this.hasInputUTarget) {
-      if (correctU === 0) {
-        // Valore corretto è 0: accetta '' o '0'
-        allFieldsValid = allFieldsValid && (this.inputUTarget.value === '' || this.inputUTarget.value === '0')
-      } else {
-        // Valore corretto non è 0: deve essere compilato
-        allFieldsValid = allFieldsValid && this.inputUTarget.value !== ''
-      }
-    }
-
-    // Corretto solo se: tutti i campi validi E valore corretto
-    if (allFieldsValid && currentTotal === this.correctValue) {
+    // Mostra feedback
+    if (isCorrect) {
       // Lancia confetti (solo la prima volta)
       if (!this.hasCorrectAnswer) {
         this.confetti.addConfetti({

@@ -1,69 +1,56 @@
 # frozen_string_literal: true
 
 # Modello per rappresentare un abaco con le sue configurazioni
+#
+# Parametri:
+#   columns:       Numero di colonne da mostrare (2, 3, o 4)
+#   k/h/da/u:      Valori iniziali delle palline (nil = vuoto, 0-9 = valore)
+#   editable:      Se l'abaco è modificabile (default: true)
+#   correct_value: Valore per la verifica (opzionale)
+#   mode:          Modalità esercizio:
+#                  - nil    = sincronizzato (palline e input insieme)
+#                  - :balls = conta palline (mostra palline, input vuoti)
+#                  - :input = rappresenta numero (mostra target, palline vuote)
+#   show_value:    Se mostrare il valore totale (default: false)
+#   max_per_column: Massimo palline per colonna (default: 9)
+#
 class Abaco
-  attr_reader :number, :migliaia, :centinaia, :decine, :unita,
-              :editable, :show_value, :correct_value, :disable_auto_zeros,
-              :max_per_column
+  attr_reader :columns, :migliaia, :centinaia, :decine, :unita,
+              :editable, :show_value, :correct_value, :max_per_column, :mode
 
-  def initialize(number:, **options)
-    @number = number
-    @correct_value = options[:correct_value] || number
+  def initialize(columns: 2, **options)
+    @columns = columns.to_i.clamp(2, 4)
     @max_per_column = options.fetch(:max_per_column, 9).to_i
-
-    # Estrai le cifre dal numero
-    k_digit = (number / 1000) % 10  # k = migliaia (thousands)
-    h_digit = (number / 100) % 10   # h = centinaia (hundreds)
-    da_digit = (number / 10) % 10   # da = decine (tens)
-    u_digit = number % 10           # u = unità (units)
-
-    # Controlla se ci sono parametri espliciti per le colonne
-    has_explicit_params = options.key?(:h) || options.key?(:k) || options.key?(:da) || options.key?(:u)
-
-    # Determina quali colonne mostrare in base al numero
-    show_migliaia = number >= 1000
-    show_centinaia = number >= 100
-    show_decine = number >= 10
-    show_unita = true # Sempre mostrata
-
-    # Se ci sono parametri espliciti, usa quelli; altrimenti tutto nil (da completare)
-    if has_explicit_params
-      # Mostra le colonne necessarie, usando i valori specificati o nil
-      @migliaia = options[:k] if show_migliaia    # k = migliaia (thousands)
-      @centinaia = options[:h] if show_centinaia  # h = centinaia (hundreds)
-      @decine = options[:da] if show_decine
-      @unita = options[:u] if show_unita
-    else
-      # Nessun parametro esplicito: mostra le colonne necessarie ma tutte vuote (nil)
-      @migliaia = nil if show_migliaia
-      @centinaia = nil if show_centinaia
-      @decine = nil if show_decine
-      @unita = nil if show_unita
-    end
-
     @editable = options.fetch(:editable, true)
     @show_value = options.fetch(:show_value, false)
-    @disable_auto_zeros = has_explicit_params
+    @correct_value = options[:correct_value]
+    @mode = options[:mode]
+
+    # Valori delle colonne (nil = vuoto)
+    @migliaia = options[:k] if @columns >= 4
+    @centinaia = options[:h] if @columns >= 3
+    @decine = options[:da] if @columns >= 2
+    @unita = options[:u]
   end
 
   # Metodi per verificare quali colonne mostrare
   def show_k?
-    defined?(@migliaia) ? true : false  # k = migliaia (thousands)
+    @columns >= 4
   end
 
   def show_h?
-    defined?(@centinaia) ? true : false  # h = centinaia (hundreds)
+    @columns >= 3
   end
 
   def show_da?
-    defined?(@decine) ? true : false
+    @columns >= 2
   end
 
   def show_u?
-    defined?(@unita) ? true : false
+    true # Sempre mostrata
   end
 
-  # Valori delle colonne (0 se nil)
+  # Valori delle palline (0 se nil)
   def migliaia_value
     @migliaia.to_i
   end
@@ -80,124 +67,109 @@ class Abaco
     @unita.to_i
   end
 
-  # Calcola i valori degli input secondo la logica degli zeri
+  # Valori degli input (dipende dal mode)
   def input_k
     return nil unless show_k?
-
-    if @disable_auto_zeros
-      # Modo esplicito: nil = vuoto, qualsiasi numero (anche 0) = mostra il numero
-      @migliaia.nil? ? "" : @migliaia.to_s
-    else
-      @migliaia.to_i > 0 ? @migliaia.to_s : ""
-    end
+    input_value_for(:k, @migliaia)
   end
 
   def input_h
     return nil unless show_h?
-
-    if @disable_auto_zeros
-      # Modo esplicito: nil = vuoto, qualsiasi numero (anche 0) = mostra il numero
-      @centinaia.nil? ? "" : @centinaia.to_s
-    else
-      @centinaia.to_i > 0 ? @centinaia.to_s : (show_k? && migliaia_value > 0 ? "0" : "")
-    end
+    input_value_for(:h, @centinaia)
   end
 
   def input_da
     return nil unless show_da?
-
-    if @disable_auto_zeros
-      # Modo esplicito: nil = vuoto, qualsiasi numero (anche 0) = mostra il numero
-      @decine.nil? ? "" : @decine.to_s
-    else
-      has_higher = (show_k? && migliaia_value > 0) || (show_h? && centinaia_value > 0)
-      @decine.to_i > 0 ? @decine.to_s : (has_higher ? "0" : "")
-    end
+    input_value_for(:da, @decine)
   end
 
   def input_u
     return nil unless show_u?
-
-    if @disable_auto_zeros
-      # Modo esplicito: nil = vuoto, qualsiasi numero (anche 0) = mostra il numero
-      @unita.nil? ? "" : @unita.to_s
-    else
-      has_higher = (show_k? && migliaia_value > 0) || (show_h? && centinaia_value > 0) || (show_da? && decine_value > 0)
-      @unita.to_i > 0 ? @unita.to_s : (has_higher ? "0" : "")
-    end
+    input_value_for(:u, @unita)
   end
 
-  # Valore totale
+  # Valore totale dalle palline
   def total_value
     migliaia_value * 1000 + centinaia_value * 100 + decine_value * 10 + unita_value
   end
 
-  # Parsing di una stringa come "125:k=1,da=nil,u=nil"
+  # Parametri da passare al partial
+  def to_partial_params
+    { abaco: self }
+  end
+
+  # Parsing di una stringa come "columns=3,h=3,da=8,u=6"
   def self.parse(line)
-    parts = line.strip.split(":", 2)
-    number_str = parts[0]
-    params_str = parts[1]
+    options = {}
 
-    return nil if number_str.blank?
+    line.strip.split(",").each do |param|
+      key, value = param.split("=", 2).map(&:strip)
+      next if key.blank?
 
-    number = number_str.to_i
-    return nil unless number.between?(0, 9999)
+      parsed_value = case value&.downcase
+      when "nil", "null", ""
+        nil
+      when "true"
+        true
+      when "false"
+        false
+      else
+        value.to_i
+      end
 
-    options = { number: number }
-
-    # Parse parametri se presenti
-    if params_str.present?
-      params_str.split(",").each do |param|
-        key, value = param.split("=", 2).map(&:strip)
-        next if key.blank?
-
-        parsed_value = case value&.downcase
-        when "nil", "null", ""
-          nil
-        when "true"
-          true
-        when "false"
-          false
-        else
-          value.to_i
-        end
-
-        case key.downcase
-        when "k", "migliaia"
-          options[:k] = parsed_value
-        when "h", "centinaia"
-          options[:h] = parsed_value
-        when "da", "decine"
-          options[:da] = parsed_value
-        when "u", "unita"
-          options[:u] = parsed_value
-        when "editable"
-          options[:editable] = parsed_value
-        when "show_value"
-          options[:show_value] = parsed_value
-        when "correct_value"
-          options[:correct_value] = parsed_value
-        end
+      case key.downcase
+      when "columns"
+        options[:columns] = parsed_value
+      when "k", "migliaia"
+        options[:k] = parsed_value
+      when "h", "centinaia"
+        options[:h] = parsed_value
+      when "da", "decine"
+        options[:da] = parsed_value
+      when "u", "unita"
+        options[:u] = parsed_value
+      when "editable"
+        options[:editable] = parsed_value
+      when "show_value"
+        options[:show_value] = parsed_value
+      when "correct_value"
+        options[:correct_value] = parsed_value
+      when "mode"
+        options[:mode] = value&.to_sym
+      when "max_per_column"
+        options[:max_per_column] = parsed_value
       end
     end
 
     new(**options)
   end
 
-  # Parsing di una stringa con più numeri separati da spazi/newline
-  def self.parse_multiple(numbers_string)
-    return [] if numbers_string.blank?
+  private
 
-    numbers_string
-      .split(/[\s\n]+/)
-      .map(&:strip)
-      .reject(&:blank?)
-      .map { |line| parse(line) }
-      .compact
+  def input_value_for(column, value)
+    case @mode
+    when :balls
+      # Mode balls: input vuoti (utente deve scrivere vedendo le palline)
+      ""
+    when :input
+      # Mode input: mostra il valore target da correct_value
+      return "" unless @correct_value
+      digit = digit_from_correct_value(column)
+      digit > 0 ? digit.to_s : ""
+    else
+      # Default: mostra il valore della pallina se presente
+      value.nil? ? "" : value.to_s
+    end
   end
 
-  # Parametri da passare al partial _abaco - semplicemente l'oggetto stesso
-  def to_partial_params
-    { abaco: self }
+  def digit_from_correct_value(column)
+    return 0 unless @correct_value
+    case column
+    when :k then (@correct_value / 1000) % 10
+    when :h then (@correct_value / 100) % 10
+    when :da then (@correct_value / 10) % 10
+    when :u then @correct_value % 10
+    else 0
+    end
   end
 end

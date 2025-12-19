@@ -55,7 +55,14 @@ class Strumenti::AbacoController < ApplicationController
     number = number_str.to_i
     return nil unless number.between?(0, 9999)
 
-    # Applica le opzioni globali
-    Abaco.new(number: number, **global_options)
+    # Determina quante colonne servono in base al numero
+    columns = case number
+              when 0..99 then 2
+              when 100..999 then 3
+              else 4
+              end
+
+    # Applica le opzioni globali - correct_value serve per la verifica
+    Abaco.new(columns: columns, correct_value: number, **global_options)
   end
 end

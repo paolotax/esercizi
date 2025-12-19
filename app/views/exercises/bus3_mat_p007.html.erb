@@ -10,7 +10,7 @@
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Box azzurro: Teoria + Esercizio 1 -->
-  <div class="bg-cyan-100 dark:bg-cyan-900/40 p-4 -mx-6 2xl:-mx-0 md:p-6 mb-8 rounded-lg">
+  <div class="bg-cyan-100 dark:bg-cyan-900/40 p-4 -mx-3 md:-mx-0 md:p-6 mb-8">
     <!-- Teoria: Sistema Posizionale -->
     <div class="mb-6">
       <p class="text-gray-700 dark:text-gray-200">
@@ -35,11 +35,10 @@
 
           <div class="flex flex-col gap-3 md:flex-row-reverse md:justify-between md:items-start">
 
-            <!-- Immagine abachi a destra -->
-            <div class="flex-shrink-0 mx-auto bg-white rounded-xl p-2">
-              <%= image_tag "bus3_mat/p007/p07_1.jpg",
-                  alt: "Abachi 36 e 63",
-                  class: "max-w-md rounded-lg" %>
+            <!-- Abachi 36 e 63 affiancati -->
+            <div class="flex-shrink-0 mx-auto flex gap-16">
+              <%= render 'strumenti/abaco/abaco', **Abaco.new(columns: 2, da: 3, u: 6, editable: false).to_partial_params %>
+              <%= render 'strumenti/abaco/abaco', **Abaco.new(columns: 2, da: 6, u: 3, editable: false).to_partial_params %>
             </div>
 
             <div class="flex flex-col gap-3 text-gray-700 dark:text-gray-200">
@@ -85,11 +84,9 @@
             se lo togli, cambia il valore del numero.
           </p>
 
-          <!-- Immagine abaco a destra -->
-          <div class="flex-shrink-0 bg-white rounded-xl p-2">
-            <%= image_tag "bus3_mat/p007/p07_2.jpg",
-                alt: "Abaco 50",
-                class: "max-w-xs rounded-lg" %>
+          <!-- Abaco 50 -->
+          <div class="flex-shrink-0">
+            <%= render 'strumenti/abaco/abaco', **Abaco.new(columns: 2, da: 5, u: 0, editable: false).to_partial_params %>
           </div>
 
 

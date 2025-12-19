@@ -5,6 +5,7 @@
   # - value: numero di palline da mostrare (0-9)
   # - max_per_column: numero massimo di palline (default: 9)
   # - editable: se true permette di modificare (default: true)
+  # - mode: modalità esercizio (nil = sincronizzato, :balls = focus input, :input = focus palline)
   # - input_value: valore da mostrare nell'input (stringa, può essere vuota o "0")
 
   label = local_assigns.fetch(:label)
@@ -12,10 +13,19 @@
   value = local_assigns.fetch(:value, 0)
   max_per_column = local_assigns.fetch(:max_per_column, 9)
   editable = local_assigns.fetch(:editable, true)
+  mode = local_assigns.fetch(:mode, nil)
   input_value = local_assigns.fetch(:input_value, '')
 
   # Capitalizza label per i data-targets (h -> H, k -> K, da -> Da, u -> U)
   label_capitalized = label == "da" ? "Da" : label.upcase
+
+  # Logica mode:
+  # - nil (default): comportamento sincronizzato, palline e input entrambi attivi
+  # - :balls: palline NON cliccabili + input editabile (utente scrive il numero vedendo le palline)
+  # - :input: palline cliccabili + input readonly (utente clicca palline per rappresentare numero)
+  balls_clickable = editable && mode != :balls
+  input_editable = editable && mode != :input
+  input_readonly = editable && mode == :input
 %>
 
 <!-- Colonna <%= label.upcase %> -->
@@ -31,10 +41,10 @@
 
     <!-- Palline (generate dinamicamente) -->
     <% max_per_column.times do |i| %>
-      <div class="w-6 h-6 rounded-full <%= i < value ? "bg-#{color}-500" : 'bg-transparent border-2 border-dashed border-orange-200' %> transition-all duration-200 relative z-10 <%= editable ? 'cursor-pointer hover:scale-110' : '' %>"
+      <div class="w-6 h-6 rounded-full <%= i < value ? "bg-#{color}-500" : 'bg-transparent border-2 border-dashed border-orange-200' %> transition-all duration-200 relative z-10 <%= balls_clickable ? 'cursor-pointer hover:scale-110' : '' %>"
            data-abaco-target="ball<%= label_capitalized %>"
            data-index="<%= i %>"
-           data-action="<%= editable ? "click->abaco#clickBall#{label_capitalized}" : '' %>"
+           data-action="<%= balls_clickable ? "click->abaco#clickBall#{label_capitalized}" : '' %>"
            style="margin-bottom: <%= i == 0 ? '0' : '3px' %>;"></div>
     <% end %>
   </div>
@@ -49,8 +59,8 @@
            value="<%= input_value %>"
            data-abaco-target="input<%= label_capitalized %>"
            data-action="input->abaco#updateFromInput<%= label_capitalized %>"
-           <%= editable ? '' : 'disabled' %>
-           class="text-2xl font-bold text-<%= color %>-600 dark:text-<%= color %>-400 text-center w-10 bg-transparent border-0 border-b-2 border-dotted border-<%= color %>-400 focus:border-<%= color %>-600 focus:outline-none <%= editable ? '' : 'opacity-50' %> [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+           <%= input_editable ? '' : (input_readonly ? 'readonly' : 'disabled') %>
+           class="text-2xl font-bold text-<%= color %>-600 dark:text-<%= color %>-400 text-center w-10 bg-transparent border-0 border-b-2 border-dotted border-<%= color %>-400 focus:border-<%= color %>-600 focus:outline-none <%= input_editable ? '' : 'opacity-50' %> [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
            placeholder="">
   </div>
 </div>

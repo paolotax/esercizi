@@ -1,91 +1,205 @@
 <!-- Esempi di utilizzo del componente Abaco -->
 
-<div class="space-y-12 px-2 md:px-8">
+<div class="space-y-6">
 
-  <!-- Esempio 1: Abaco vuoto modificabile -->
-  <div class="bg-gray-50 p-6 rounded-lg">
-    <h3 class="text-xl font-bold mb-4">1. Abaco vuoto (clicca per aggiungere palline)</h3>
-    <%= render 'strumenti/abaco/abaco', **Abaco.new(number: 10, u: nil, da: nil).to_partial_params %>
+  <!-- Sezione: Modalità Esercizio -->
+  <div class="mb-8">
+    <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+      <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+      </svg>
+      Modalità Esercizio
+    </h2>
   </div>
 
-  <div class="bg-gray-50 p-6 rounded-lg">
-    <%= render 'strumenti/abaco/abaco',
-          **Abaco.new(number: 305,
-                      h: 3,
-                      da: 0,
-                      u: 5,
-                      max_per_column: 9,
-                      editable: true,
-                      show_value: true,
-                      correct_value: 305).to_partial_params %>
-  </div>
-
-  <!-- Esempio 2: Abaco con valore iniziale -->
-  <div class="bg-gray-50 p-6 rounded-lg">
-    <h3 class="text-xl font-bold mb-4">2. Abaco con valore iniziale 50</h3>
-    <%= render 'strumenti/abaco/abaco', **Abaco.new(number: 50, da: 5, u: 0).to_partial_params %>
-  </div>
-
-  <!-- Esempio 3: Abaco con valore da verificare -->
-  <div class="bg-gray-50 p-6 rounded-lg">
-    <h3 class="text-xl font-bold mb-4">3. Abaco con verifica (forma il numero 36)</h3>
-    <p class="text-gray-700 mb-4">Clicca sulle colonne per formare il numero corretto e vedere il feedback!</p>
-    <%= render 'strumenti/abaco/abaco',
-          **Abaco.new(number: 100,
-                      h: nil,
-                      da: nil,
-                      u: nil,
-                      correct_value: 36).to_partial_params %>
-  </div>
-
-  <!-- Esempio 4: Abaco non modificabile (solo visualizzazione) -->
-  <div class="bg-gray-50 p-6 rounded-lg">
-    <h3 class="text-xl font-bold mb-4">4. Abaco di sola lettura (mostra 73)</h3>
-    <%= render 'strumenti/abaco/abaco', **Abaco.new(number: 73, da: 7, u: 3, editable: false).to_partial_params %>
-  </div>
-
-  <!-- Esempio 5: Abaco senza valore mostrato -->
-  <div class="bg-gray-50 p-6 rounded-lg">
-    <h3 class="text-xl font-bold mb-4">5. Abaco senza valore totale visualizzato</h3>
-    <%= render 'strumenti/abaco/abaco', **Abaco.new(number: 48, da: 4, u: 8, show_value: false).to_partial_params %>
-  </div>
-
-  <!-- Esempio 6: Due abachi affiancati per confronto -->
-  <div class="bg-gray-50 p-6 rounded-lg">
-    <h3 class="text-xl font-bold mb-4">6. Confronto tra due numeri (36 e 63)</h3>
-    <div class="flex gap-8 justify-center items-start flex-wrap">
-      <div class="text-center">
-        <p class="text-lg font-bold mb-4 text-cyan-600">36</p>
-        <%= render 'strumenti/abaco/abaco', **Abaco.new(number: 36, da: 3, u: 6, editable: false).to_partial_params %>
+  <!-- Esempio 1: Mode BALLS - Conta le palline e scrivi il numero -->
+  <div class="relative overflow-hidden bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-3xl border-2 border-amber-200/50 dark:border-amber-800/30 p-6">
+    <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-yellow-200/30 to-amber-300/20 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+    <div class="relative">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-amber-400 to-yellow-500 rounded-xl shadow-md text-white font-bold text-sm">1</div>
+        <div>
+          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Mode :balls - Conta le palline</h3>
+          <span class="text-xs px-2 py-1 bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 rounded-full">mode: :balls</span>
+        </div>
       </div>
-      <div class="text-center">
-        <p class="text-lg font-bold mb-4 text-cyan-600">63</p>
-        <%= render 'strumenti/abaco/abaco', **Abaco.new(number: 63, da: 6, u: 3, editable: false).to_partial_params %>
+      <p class="text-gray-600 dark:text-gray-400 mb-4">
+        Guarda le palline sull'abaco e scrivi il numero corrispondente nei campi input.
+      </p>
+      <div class="bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4 flex justify-center">
+        <%= render 'strumenti/abaco/abaco',
+              **Abaco.new(columns: 2,
+                          da: 4, u: 7,
+                          mode: :balls,
+                          correct_value: 47).to_partial_params %>
       </div>
     </div>
   </div>
 
-  <!-- Esempio 7: Esercizio guidato -->
-  <div class="bg-cyan-100 p-6 rounded-lg">
-    <h3 class="text-xl font-bold mb-4">7. Esercizio: Forma il numero 25</h3>
-    <p class="text-lg text-gray-700 mb-6">
-      Clicca sulle colonne dell'abaco per formare il numero <strong class="text-cyan-600">25</strong>
-    </p>
-    <%= render 'strumenti/abaco/abaco', **Abaco.new(number: 25, correct_value: 25).to_partial_params %>
+  <!-- Esempio 2: Mode INPUT - Rappresenta il numero con le palline -->
+  <div class="relative overflow-hidden bg-gradient-to-br from-cyan-50 to-sky-50 dark:from-cyan-900/20 dark:to-sky-900/20 rounded-3xl border-2 border-cyan-200/50 dark:border-cyan-800/30 p-6">
+    <div class="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-sky-200/30 to-cyan-300/20 rounded-full blur-2xl -translate-y-1/2 -translate-x-1/2"></div>
+    <div class="relative">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-cyan-400 to-sky-500 rounded-xl shadow-md text-white font-bold text-sm">2</div>
+        <div>
+          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Mode :input - Rappresenta il numero</h3>
+          <span class="text-xs px-2 py-1 bg-cyan-200 dark:bg-cyan-800 text-cyan-800 dark:text-cyan-200 rounded-full">mode: :input</span>
+        </div>
+      </div>
+      <p class="text-gray-600 dark:text-gray-400 mb-4">
+        Clicca sulle palline per rappresentare il numero <span class="font-bold text-cyan-600 dark:text-cyan-400">35</span> sull'abaco.
+      </p>
+      <div class="bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4 flex justify-center">
+        <%= render 'strumenti/abaco/abaco',
+              **Abaco.new(columns: 2,
+                          mode: :input,
+                          correct_value: 35).to_partial_params %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esempio 3: Mode default (sincronizzato) -->
+  <div class="relative overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-3xl border-2 border-green-200/50 dark:border-green-800/30 p-6">
+    <div class="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-emerald-200/30 to-green-300/20 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2"></div>
+    <div class="relative">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl shadow-md text-white font-bold text-sm">3</div>
+        <div>
+          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Mode default - Sincronizzato</h3>
+          <span class="text-xs px-2 py-1 bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 rounded-full">senza mode</span>
+        </div>
+      </div>
+      <p class="text-gray-600 dark:text-gray-400 mb-4">
+        Palline e input sono sincronizzati: clicca le palline o digita nei campi input per formare il numero 36.
+      </p>
+      <div class="bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4 flex justify-center">
+        <%= render 'strumenti/abaco/abaco',
+              **Abaco.new(columns: 3,
+                          show_value: true,
+                          correct_value: 36).to_partial_params %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sezione: Altri Esempi -->
+  <div class="mt-12 mb-8">
+    <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+      <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+      </svg>
+      Altri Esempi
+    </h2>
+  </div>
+
+  <!-- Esempio 4: Abaco non modificabile (solo visualizzazione) -->
+  <div class="relative overflow-hidden bg-gradient-to-br from-slate-50 to-gray-50 dark:from-slate-900/30 dark:to-gray-900/30 rounded-3xl border-2 border-slate-200/50 dark:border-slate-800/30 p-6">
+    <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-gray-200/30 to-slate-300/20 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+    <div class="relative">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-slate-400 to-gray-500 rounded-xl shadow-md text-white font-bold text-sm">4</div>
+        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Abaco di sola lettura (mostra 73)</h3>
+      </div>
+      <div class="bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4 flex justify-center">
+        <%= render 'strumenti/abaco/abaco', **Abaco.new(columns: 2, da: 7, u: 3, editable: false).to_partial_params %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esempio 5: Confronto tra due numeri -->
+  <div class="relative overflow-hidden bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 rounded-3xl border-2 border-indigo-200/50 dark:border-indigo-800/30 p-6">
+    <div class="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-blue-200/30 to-indigo-300/20 rounded-full blur-2xl -translate-y-1/2 -translate-x-1/2"></div>
+    <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-indigo-200/30 to-blue-300/20 rounded-full blur-2xl translate-y-1/2 translate-x-1/2"></div>
+    <div class="relative">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-indigo-400 to-blue-500 rounded-xl shadow-md text-white font-bold text-sm">5</div>
+        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Confronto tra due numeri (36 e 63)</h3>
+      </div>
+      <div class="flex gap-8 justify-center items-start flex-wrap">
+        <div class="text-center bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4">
+          <p class="text-lg font-bold mb-4 bg-gradient-to-r from-indigo-600 to-blue-600 dark:from-indigo-400 dark:to-blue-400 bg-clip-text text-transparent">36</p>
+          <%= render 'strumenti/abaco/abaco', **Abaco.new(columns: 2, da: 3, u: 6, editable: false).to_partial_params %>
+        </div>
+        <div class="text-center bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4">
+          <p class="text-lg font-bold mb-4 bg-gradient-to-r from-indigo-600 to-blue-600 dark:from-indigo-400 dark:to-blue-400 bg-clip-text text-transparent">63</p>
+          <%= render 'strumenti/abaco/abaco', **Abaco.new(columns: 2, da: 6, u: 3, editable: false).to_partial_params %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esempio 6: Abaco a 4 cifre con mode :balls -->
+  <div class="relative overflow-hidden bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 rounded-3xl border-2 border-purple-200/50 dark:border-purple-800/30 p-6">
+    <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-violet-200/30 to-purple-300/20 rounded-full blur-2xl translate-y-1/2 translate-x-1/2"></div>
+    <div class="relative">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-purple-400 to-violet-500 rounded-xl shadow-md text-white font-bold text-sm">6</div>
+        <div>
+          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Abaco 4 cifre - Conta le palline</h3>
+          <span class="text-xs px-2 py-1 bg-purple-200 dark:bg-purple-800 text-purple-800 dark:text-purple-200 rounded-full">mode: :balls</span>
+        </div>
+      </div>
+      <p class="text-gray-600 dark:text-gray-400 mb-4">
+        Conta le palline e scrivi il numero a 4 cifre.
+      </p>
+      <div class="bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4 flex justify-center">
+        <%= render 'strumenti/abaco/abaco',
+              **Abaco.new(columns: 4,
+                          k: 2, h: 5, da: 3, u: 6,
+                          mode: :balls,
+                          correct_value: 2536).to_partial_params %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Esempio 7: Abaco a 4 cifre con mode :input -->
+  <div class="relative overflow-hidden bg-gradient-to-br from-teal-50 to-emerald-50 dark:from-teal-900/20 dark:to-emerald-900/20 rounded-3xl border-2 border-teal-200/50 dark:border-teal-800/30 p-6">
+    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-emerald-200/30 to-teal-300/20 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+    <div class="relative">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-teal-400 to-emerald-500 rounded-xl shadow-md text-white font-bold text-sm">7</div>
+        <div>
+          <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Abaco 4 cifre - Rappresenta il numero</h3>
+          <span class="text-xs px-2 py-1 bg-teal-200 dark:bg-teal-800 text-teal-800 dark:text-teal-200 rounded-full">mode: :input</span>
+        </div>
+      </div>
+      <p class="text-gray-600 dark:text-gray-400 mb-4">
+        Clicca sulle palline per rappresentare il numero <span class="font-bold text-teal-600 dark:text-teal-400">1483</span>.
+      </p>
+      <div class="bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4 flex justify-center">
+        <%= render 'strumenti/abaco/abaco',
+              **Abaco.new(columns: 4,
+                          mode: :input,
+                          correct_value: 1483).to_partial_params %>
+      </div>
+    </div>
   </div>
 
 </div>
 
 <!-- Note sull'utilizzo -->
-<div class="bg-blue-50 border-l-4 border-blue-500 p-6 mt-8">
-  <h4 class="font-bold text-lg mb-2">Come usare il componente Abaco:</h4>
-  <pre class="bg-white p-4 rounded text-sm overflow-x-auto"><code>&lt;%= render 'abaco/abaco',
-  **Abaco.new(number: 53,
-              da: 5,              # Numero iniziale di palline nelle decine
-              u: 3,               # Numero iniziale di palline nelle unità
-              max_per_column: 9,  # Massimo numero di palline per colonna (default: 9)
-              editable: true,     # Se false, l'abaco è di sola lettura (default: true)
-              show_value: true,   # Se true mostra il valore numerico (default: false)
-              correct_value: 53   # Se impostato, verifica la correttezza (opzionale)
+<div class="relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-3xl border-2 border-blue-200/50 dark:border-blue-800/30 p-6 mt-8">
+  <div class="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-indigo-200/30 to-blue-300/20 rounded-full blur-2xl -translate-y-1/2 -translate-x-1/2"></div>
+  <div class="relative">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-blue-400 to-indigo-500 rounded-xl shadow-md">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+        </svg>
+      </div>
+      <h4 class="font-bold text-lg text-gray-800 dark:text-gray-200">Come usare il componente Abaco</h4>
+    </div>
+    <pre class="bg-white/70 dark:bg-gray-800/70 p-4 rounded-2xl text-sm overflow-x-auto border border-gray-100 dark:border-gray-700"><code class="text-gray-800 dark:text-gray-200">&lt;%= render 'strumenti/abaco/abaco',
+  **Abaco.new(
+    columns: 3,           # Colonne da mostrare (2, 3, o 4)
+    h: 3, da: 5, u: 6,    # Valori iniziali palline (nil = vuoto)
+    editable: true,       # Se modificabile (default: true)
+    show_value: false,    # Se mostrare il totale (default: false)
+    correct_value: 356,   # Valore per verifica (opzionale)
+    mode: :balls          # Modalità esercizio:
+                          #   nil    = sincronizzato (default)
+                          #   :balls = conta palline, scrivi numero
+                          #   :input = leggi numero, clicca palline
   ).to_partial_params %&gt;</code></pre>
+  </div>
 </div>
