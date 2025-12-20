@@ -188,30 +188,24 @@
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="space-y-3">
-          <% [
-            { text: "3 centinaia di migliaia", answer: "300000" },
-            { text: "23 unità di migliaia", answer: "23000" },
-            { text: "4 decine di migliaia", answer: "40000" }
-          ].each do |row| %>
-            <div class="flex items-center gap-2">
-              <span class="text-gray-700 dark:text-gray-200 flex-1"><%= row[:text] %></span>
-              <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
-        </div>
-        <div class="space-y-3">
-          <% [
-            { text: "67 decine di migliaia", answer: "670000" },
-            { text: "15 centinaia", answer: "1500" },
-            { text: "900 unità di migliaia", answer: "900000" }
-          ].each do |row| %>
-            <div class="flex items-center gap-2">
-              <span class="text-gray-700 dark:text-gray-200 flex-1"><%= row[:text] %></span>
-              <input type="text" data-correct-answer="<%= row[:answer] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
-        </div>
+        <%= render 'shared/fill_list',
+            color: "cyan",
+            arrow: true,
+            container_class: "space-y-3",
+            items: [
+              { prefix: "3 centinaia di migliaia", answer: "300000", width: "w-24" },
+              { prefix: "23 unità di migliaia", answer: "23000", width: "w-24" },
+              { prefix: "4 decine di migliaia", answer: "40000", width: "w-24" }
+            ] %>
+        <%= render 'shared/fill_list',
+            color: "cyan",
+            arrow: true,
+            container_class: "space-y-3",
+            items: [
+              { prefix: "67 decine di migliaia", answer: "670000", width: "w-24" },
+              { prefix: "15 centinaia", answer: "1500", width: "w-24" },
+              { prefix: "900 unità di migliaia", answer: "900000", width: "w-24" }
+            ] %>
       </div>
     </div>
 
@@ -226,14 +220,14 @@
         <!-- Prima domanda -->
         <div>
           <p class="text-gray-700 dark:text-gray-200 mb-2"><span class="text-cyan-500">•</span> Sei decine di migliaia, otto centinaia, tre decine.</p>
-          <div class="flex gap-4">
+          <div class="flex gap-4 flex-wrap">
             <% [
               { num: "6 830", answer: false },
               { num: "68 830", answer: false },
               { num: "60 830", answer: true }
             ].each_with_index do |opt, i| %>
-              <label class="flex items-center justify-center px-4 py-2 border-2 border-cyan-400 dark:border-cyan-600 rounded cursor-pointer hover:bg-cyan-50 dark:hover:bg-cyan-900 has-[:checked]:bg-cyan-200 dark:has-[:checked]:bg-cyan-800">
-                <input type="radio" name="es3_1" class="sr-only" data-correct-answer="<%= opt[:answer] %>">
+              <label class="relative flex items-center justify-center px-4 py-2 border-2 border-cyan-400 dark:border-cyan-600 rounded cursor-pointer hover:bg-cyan-50 dark:hover:bg-cyan-900 has-[:checked]:bg-cyan-200 dark:has-[:checked]:bg-cyan-800">
+                <input type="radio" name="es3_1" class="fixed -left-[9999px] opacity-0" tabindex="-1" data-correct-answer="<%= opt[:answer] %>">
                 <span class="font-bold text-gray-700 dark:text-gray-200 whitespace-nowrap"><%= opt[:num] %></span>
               </label>
             <% end %>
@@ -242,14 +236,14 @@
         <!-- Seconda domanda -->
         <div>
           <p class="text-gray-700 dark:text-gray-200 mb-2"><span class="text-cyan-500">•</span> Un centinaio di migliaia, nove decine, nove unità.</p>
-          <div class="flex gap-4">
+          <div class="flex gap-4 flex-wrap">
             <% [
               { num: "109 090", answer: false },
               { num: "100 099", answer: true },
               { num: "100 009", answer: false }
             ].each_with_index do |opt, i| %>
-              <label class="flex items-center justify-center px-4 py-2 border-2 border-cyan-400 dark:border-cyan-600 rounded cursor-pointer hover:bg-cyan-50 dark:hover:bg-cyan-900 has-[:checked]:bg-cyan-200 dark:has-[:checked]:bg-cyan-800">
-                <input type="radio" name="es3_2" class="sr-only" data-correct-answer="<%= opt[:answer] %>">
+              <label class="relative flex items-center justify-center px-4 py-2 border-2 border-cyan-400 dark:border-cyan-600 rounded cursor-pointer hover:bg-cyan-50 dark:hover:bg-cyan-900 has-[:checked]:bg-cyan-200 dark:has-[:checked]:bg-cyan-800">
+                <input type="radio" name="es3_2" class="fixed -left-[9999px] opacity-0" tabindex="-1" data-correct-answer="<%= opt[:answer] %>">
                 <span class="font-bold text-gray-700 dark:text-gray-200 whitespace-nowrap"><%= opt[:num] %></span>
               </label>
             <% end %>
@@ -299,33 +293,35 @@
     <div>
       <p class="font-bold text-gray-700 dark:text-gray-200 mb-4">
         <%= numero_esercizio_badge(5) %>
-        Ordina dal minore al maggiore.
+        Trascina i numeri per ordinarli dal minore al maggiore.
       </p>
 
-      <div class="space-y-6">
-        <!-- Prima serie -->
-        <div>
-          <p class="text-gray-700 dark:text-gray-200 mb-2">
-            73 367 <span class="text-cyan-500">•</span> 70 652 <span class="text-cyan-500">•</span> 8 649 <span class="text-cyan-500">•</span> 123 000
-          </p>
-          <div class="flex flex-wrap items-center gap-2">
-            <% 4.times do |i| %>
-              <input type="text" data-correct-answer="<%= ["8649", "70652", "73367", "123000"][i] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-              <% if i < 3 %><span class="text-cyan-500">&lt;</span><% end %>
-            <% end %>
-          </div>
-        </div>
-        <!-- Seconda serie -->
-        <div>
-          <p class="text-gray-700 dark:text-gray-200 mb-2">
-            5 861 <span class="text-cyan-500">•</span> 179 000 <span class="text-cyan-500">•</span> 6 250 <span class="text-cyan-500">•</span> 237 000
-          </p>
-          <div class="flex flex-wrap items-center gap-2">
-            <% 4.times do |i| %>
-              <input type="text" data-correct-answer="<%= ["5861", "6250", "179000", "237000"][i] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-              <% if i < 3 %><span class="text-cyan-500">&lt;</span><% end %>
-            <% end %>
-          </div>
+      <div data-controller="sortable" data-sortable-mode-value="numeric-asc">
+        <div class="flex flex-wrap gap-2" data-sortable-target="container">
+          <span class="px-3 py-2 bg-transparent border-2 border-cyan-400 dark:border-cyan-600 rounded cursor-grab font-bold text-gray-700 dark:text-white"
+                data-sortable-target="item"
+                data-sortable-value="73367">73 367</span>
+          <span class="px-3 py-2 bg-transparent border-2 border-cyan-400 dark:border-cyan-600 rounded cursor-grab font-bold text-gray-700 dark:text-white"
+                data-sortable-target="item"
+                data-sortable-value="70652">70 652</span>
+          <span class="px-3 py-2 bg-transparent border-2 border-cyan-400 dark:border-cyan-600 rounded cursor-grab font-bold text-gray-700 dark:text-white"
+                data-sortable-target="item"
+                data-sortable-value="8649">8 649</span>
+          <span class="px-3 py-2 bg-transparent border-2 border-cyan-400 dark:border-cyan-600 rounded cursor-grab font-bold text-gray-700 dark:text-white"
+                data-sortable-target="item"
+                data-sortable-value="123000">123 000</span>
+          <span class="px-3 py-2 bg-transparent border-2 border-cyan-400 dark:border-cyan-600 rounded cursor-grab font-bold text-gray-700 dark:text-white"
+                data-sortable-target="item"
+                data-sortable-value="5861">5 861</span>
+          <span class="px-3 py-2 bg-transparent border-2 border-cyan-400 dark:border-cyan-600 rounded cursor-grab font-bold text-gray-700 dark:text-white"
+                data-sortable-target="item"
+                data-sortable-value="179000">179 000</span>
+          <span class="px-3 py-2 bg-transparent border-2 border-cyan-400 dark:border-cyan-600 rounded cursor-grab font-bold text-gray-700 dark:text-white"
+                data-sortable-target="item"
+                data-sortable-value="6250">6 250</span>
+          <span class="px-3 py-2 bg-transparent border-2 border-cyan-400 dark:border-cyan-600 rounded cursor-grab font-bold text-gray-700 dark:text-white"
+                data-sortable-target="item"
+                data-sortable-value="237000">237 000</span>
         </div>
       </div>
     </div>

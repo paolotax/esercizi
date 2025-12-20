@@ -318,26 +318,30 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <% [
-          { op: "64 + 37", result: "101" },
-          { op: "127 + 47", result: "174" },
-          { op: "315 + 38", result: "353" }
-        ].each do |item| %>
-          <div class="flex items-center gap-2">
-            <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-            <input type="text" data-correct-answer="<%= item[:result] %>" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-        <% end %>
-        <% [
-          { op: "98 + 45", result: "143" },
-          { op: "346 + 27", result: "373" },
-          { op: "253 + 29", result: "282" }
-        ].each do |item| %>
-          <div class="flex items-center gap-2">
-            <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-            <input type="text" data-correct-answer="<%= item[:result] %>" class="min-w-0 flex-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-        <% end %>
+        <div>
+          <%= render 'shared/fill_list',
+              color: "cyan",
+              equals: true,
+              flex: true,
+              container_class: "space-y-3",
+              items: [
+                { prefix: "64 + 37", answer: "101" },
+                { prefix: "127 + 47", answer: "174" },
+                { prefix: "315 + 38", answer: "353" }
+              ] %>
+        </div>
+        <div>
+          <%= render 'shared/fill_list',
+              color: "cyan",
+              equals: true,
+              flex: true,
+              container_class: "space-y-3",
+              items: [
+                { prefix: "98 + 45", answer: "143" },
+                { prefix: "346 + 27", answer: "373" },
+                { prefix: "253 + 29", answer: "282" }
+              ] %>
+        </div>
       </div>
     </div>
 
@@ -348,19 +352,16 @@
         Calcola a mente. Poi spiega a voce le strategie che hai usato.
       </p>
 
-      <div class="space-y-3">
-        <% [
-          { op: "6 034 + 111", result: "6145" },
-          { op: "5 037 + 20", result: "5057" },
-          { op: "1 721 + 18", result: "1739" },
-          { op: "93 615 + 999", result: "94614" }
-        ].each do |item| %>
-          <div class="flex items-center gap-2">
-            <span class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</span>
-            <input type="text" data-correct-answer="<%= item[:result] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-        <% end %>
-      </div>
+      <%= render 'shared/fill_list',
+          color: "cyan",
+          equals: true,
+          container_class: "space-y-3",
+          items: [
+            { prefix: "6 034 + 111", answer: "6145", width: "w-24" },
+            { prefix: "5 037 + 20", answer: "5057", width: "w-24" },
+            { prefix: "1 721 + 18", answer: "1739", width: "w-24" },
+            { prefix: "93 615 + 999", answer: "94614", width: "w-24" }
+          ] %>
     </div>
 
     <%= render 'shared/exercise_controls' %>

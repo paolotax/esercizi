@@ -16,33 +16,31 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Colonna sinistra -->
-        <div class="space-y-3">
-          <% [
-            { op: "350 – 140", result: "210", choices: ["622", "1300", "7043", "210"] },
-            { op: "856 – 234", result: "622", choices: ["622", "1300", "7043", "210"] },
-            { op: "8 588 – 1 545", result: "7043", choices: ["622", "1300", "7043", "210"] },
-            { op: "5 500 – 4 200", result: "1300", choices: ["622", "1300", "7043", "210"] }
-          ].each do |item| %>
-            <div class="flex items-center gap-3 flex-wrap">
-              <span class="font-bold text-gray-700 dark:text-gray-200 w-32"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
+        <div>
+          <%= render 'shared/fill_list',
+              color: "cyan",
+              equals: true,
+              container_class: "space-y-3",
+              items: [
+                { prefix: "350 – 140", answer: "210", width: "w-20" },
+                { prefix: "856 – 234", answer: "622", width: "w-20" },
+                { prefix: "8 588 – 1 545", answer: "7043", width: "w-20" },
+                { prefix: "5 500 – 4 200", answer: "1300", width: "w-20" }
+              ] %>
         </div>
 
         <!-- Colonna destra -->
-        <div class="space-y-3">
-          <% [
-            { op: "6 667 – 523", result: "6144" },
-            { op: "7 645 – 4 300", result: "3345" },
-            { op: "8 619 – 1 505", result: "7114" },
-            { op: "3 550 – 1 400", result: "2150" }
-          ].each do |item| %>
-            <div class="flex items-center gap-3 flex-wrap">
-              <span class="font-bold text-gray-700 dark:text-gray-200 w-32"><%= item[:op] %> =</span>
-              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-20 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
+        <div>
+          <%= render 'shared/fill_list',
+              color: "cyan",
+              equals: true,
+              container_class: "space-y-3",
+              items: [
+                { prefix: "6 667 – 523", answer: "6144", width: "w-20" },
+                { prefix: "7 645 – 4 300", answer: "3345", width: "w-20" },
+                { prefix: "8 619 – 1 505", answer: "7114", width: "w-20" },
+                { prefix: "3 550 – 1 400", answer: "2150", width: "w-20" }
+              ] %>
         </div>
       </div>
     </div>

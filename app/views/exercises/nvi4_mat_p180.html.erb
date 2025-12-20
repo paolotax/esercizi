@@ -25,21 +25,16 @@
             <span class="font-bold text-cyan-600 dark:text-cyan-400">159</span>
           </div>
 
-          <% [
-            { op: "53 + 245", commutativa: "245+53", result: "298" },
-            { op: "516 + 73", commutativa: "73+516", result: "589" },
-            { op: "425 + 54", commutativa: "54+425", result: "479" },
-            { op: "73 + 124", commutativa: "124+73", result: "197" },
-            { op: "80 + 410", commutativa: "410+80", result: "490" }
-          ].each do |row| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= row[:op] %></span>
-              <span class="text-gray-700 dark:text-gray-200">=</span>
-              <input type="text" data-correct-answer="<%= row[:commutativa] %>" class="w-24 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-              <span class="text-gray-700 dark:text-gray-200">=</span>
-              <input type="text" data-correct-answer="<%= row[:result] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: ["53 + 245 =", { answer: "245+53", width: "w-24" }, "=", { answer: "298", width: "w-16" }] %>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: ["516 + 73 =", { answer: "73+516", width: "w-24" }, "=", { answer: "589", width: "w-16" }] %>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: ["425 + 54 =", { answer: "54+425", width: "w-24" }, "=", { answer: "479", width: "w-16" }] %>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: ["73 + 124 =", { answer: "124+73", width: "w-24" }, "=", { answer: "197", width: "w-16" }] %>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: ["80 + 410 =", { answer: "410+80", width: "w-24" }, "=", { answer: "490", width: "w-16" }] %>
         </div>
 
         <!-- Box proprietà commutativa -->
@@ -72,22 +67,14 @@
             <span class="font-bold text-cyan-600 dark:text-cyan-400">1 040</span>
           </div>
 
-          <% [
-            { op: "15 + 23 + 17", sum1: "32", sum2: "23", result: "55" },
-            { op: "25 + 35 + 44", sum1: "60", sum2: "44", result: "104" },
-            { op: "600 + 1 370 + 30", sum1: "630", sum2: "1370", result: "2000" },
-            { op: "160 + 40 + 220", sum1: "200", sum2: "220", result: "420" }
-          ].each do |row| %>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-gray-700 dark:text-gray-200"><%= row[:op] %></span>
-              <span class="text-gray-700 dark:text-gray-200">=</span>
-              <input type="text" data-correct-answer="<%= row[:sum1] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-              <span class="text-gray-700 dark:text-gray-200">+</span>
-              <input type="text" data-correct-answer="<%= row[:sum2] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-              <span class="text-gray-700 dark:text-gray-200">=</span>
-              <input type="text" data-correct-answer="<%= row[:result] %>" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          <% end %>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: ["15 + 23 + 17 =", { answer: "32", width: "w-16" }, "+", { answer: "23", width: "w-16" }, "=", { answer: "55", width: "w-16" }] %>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: ["25 + 35 + 44 =", { answer: "60", width: "w-16" }, "+", { answer: "44", width: "w-16" }, "=", { answer: "104", width: "w-16" }] %>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: ["600 + 1 370 + 30 =", { answer: "630", width: "w-16" }, "+", { answer: "1370", width: "w-16" }, "=", { answer: "2000", width: "w-16" }] %>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: ["160 + 40 + 220 =", { answer: "200", width: "w-16" }, "+", { answer: "220", width: "w-16" }, "=", { answer: "420", width: "w-16" }] %>
         </div>
 
         <!-- Box proprietà associativa -->
@@ -130,45 +117,43 @@
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <% [
-          { op: "46 + 11 + 24 + 29", sum1: "70", sum2: "40", result: "110", is_example: true },
-          { op: "65 + 43 + 35 + 27", sum1: "100", sum2: "70", result: "170", is_example: false },
-          { op: "32 + 20 + 58 + 50", sum1: "90", sum2: "70", result: "160", is_example: false }
-        ].each do |item| %>
-          <div class="space-y-2">
-            <p class="font-bold text-gray-700 dark:text-gray-200"><%= item[:op] %> =</p>
-            <% if item[:is_example] %>
-              <p class="text-cyan-600 dark:text-cyan-400 font-bold"><%= item[:sum1] %> + <%= item[:sum2] %> = <%= item[:result] %></p>
-            <% else %>
-              <div class="flex items-center gap-2">
-                <input type="text" data-correct-answer="<%= item[:sum1] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-                <span class="text-gray-700 dark:text-gray-200">+</span>
-                <input type="text" data-correct-answer="<%= item[:sum2] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-                <span class="text-gray-700 dark:text-gray-200">=</span>
-                <input type="text" data-correct-answer="<%= item[:result] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-              </div>
-            <% end %>
-          </div>
-        <% end %>
+        <!-- Esempio -->
+        <div class="space-y-2">
+          <p class="font-bold text-gray-700 dark:text-gray-200">46 + 11 + 24 + 29 =</p>
+          <p class="text-cyan-600 dark:text-cyan-400 font-bold">70 + 40 = 110</p>
+        </div>
+
+        <div class="space-y-2">
+          <p class="font-bold text-gray-700 dark:text-gray-200">65 + 43 + 35 + 27 =</p>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: [{ answer: "100", width: "w-14" }, "+", { answer: "70", width: "w-14" }, "=", { answer: "170", width: "w-14" }] %>
+        </div>
+
+        <div class="space-y-2">
+          <p class="font-bold text-gray-700 dark:text-gray-200">32 + 20 + 58 + 50 =</p>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: [{ answer: "90", width: "w-14" }, "+", { answer: "70", width: "w-14" }, "=", { answer: "160", width: "w-14" }] %>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-        <% [
-          { op: "79 + 55 + 21 + 45", sum1: "100", sum2: "100", result: "200" },
-          { op: "73 + 18 + 53 + 22", sum1: "126", sum2: "40", result: "166" },
-          { op: "70 + 56 + 30 + 84", sum1: "100", sum2: "140", result: "240" }
-        ].each do |item| %>
-          <div class="space-y-2">
-            <p class="text-gray-700 dark:text-gray-200"><%= item[:op] %> =</p>
-            <div class="flex items-center gap-2">
-              <input type="text" data-correct-answer="<%= item[:sum1] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-              <span class="text-gray-700 dark:text-gray-200">+</span>
-              <input type="text" data-correct-answer="<%= item[:sum2] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-              <span class="text-gray-700 dark:text-gray-200">=</span>
-              <input type="text" data-correct-answer="<%= item[:result] %>" class="w-14 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            </div>
-          </div>
-        <% end %>
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">79 + 55 + 21 + 45 =</p>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: [{ answer: "100", width: "w-14" }, "+", { answer: "100", width: "w-14" }, "=", { answer: "200", width: "w-14" }] %>
+        </div>
+
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">73 + 18 + 53 + 22 =</p>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: [{ answer: "126", width: "w-14" }, "+", { answer: "40", width: "w-14" }, "=", { answer: "166", width: "w-14" }] %>
+        </div>
+
+        <div class="space-y-2">
+          <p class="text-gray-700 dark:text-gray-200">70 + 56 + 30 + 84 =</p>
+          <%= render 'shared/fill_item', color: "cyan",
+              segments: [{ answer: "100", width: "w-14" }, "+", { answer: "140", width: "w-14" }, "=", { answer: "240", width: "w-14" }] %>
+        </div>
       </div>
     </div>
 
@@ -181,36 +166,16 @@
 
       <div class="space-y-4">
         <!-- Prima operazione -->
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-cyan-500">•</span>
-          <span class="text-gray-700 dark:text-gray-200">85 + 15 + 100 = (85 + 15) + 100 = 100 + 100 =</span>
-          <input type="text" data-correct-answer="200" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <span class="text-gray-700 dark:text-gray-200 ml-4">Proprietà</span>
-          <input type="text" data-correct-answer="associativa" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-        </div>
+        <%= render 'shared/fill_item', color: "cyan", bullet: "•",
+            segments: ["85 + 15 + 100 = (85 + 15) + 100 = 100 + 100 =", { answer: "200", width: "w-16" }, "Proprietà", { answer: "associativa", width: "w-48" }] %>
 
         <!-- Seconda operazione -->
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-cyan-500">•</span>
-          <span class="text-gray-700 dark:text-gray-200">21 + 138 = 138 + 21 =</span>
-          <input type="text" data-correct-answer="159" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          <span class="text-gray-700 dark:text-gray-200 ml-4">Proprietà</span>
-          <input type="text" data-correct-answer="commutativa" class="w-32 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-        </div>
+        <%= render 'shared/fill_item', color: "cyan", bullet: "•",
+            segments: ["21 + 138 = 138 + 21 =", { answer: "159", width: "w-16" }, "Proprietà", { answer: "commutativa", width: "w-48" }] %>
 
         <!-- Terza operazione -->
-        <div class="space-y-2">
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="text-cyan-500">•</span>
-            <span class="text-gray-700 dark:text-gray-200">151 + 84 + 116 + 29 = (151 + 29) + (84 + 116) =</span>
-          </div>
-          <div class="flex flex-wrap items-center gap-2 ml-4">
-            <span class="text-gray-700 dark:text-gray-200">180 + 200 =</span>
-            <input type="text" data-correct-answer="380" class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-            <span class="text-gray-700 dark:text-gray-200 ml-4">Proprietà</span>
-            <input type="text" data-correct-answer="commutativa e associativa" class="w-48 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div>
-        </div>
+        <%= render 'shared/fill_item', color: "cyan", bullet: "•",
+            segments: ["151 + 84 + 116 + 29 = (151 + 29) + (84 + 116) = 180 + 200 =", { answer: "380", width: "w-16" }, "Proprietà", { answer: "commutativa e associativa", width: "w-full" }] %>
       </div>
     </div>
 

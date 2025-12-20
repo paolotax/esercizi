@@ -344,14 +344,15 @@ export default class extends Controller {
 
       // Remove previous feedback styling but keep border-2
       item.classList.remove('border-green-500', 'border-red-500', 'bg-green-50', 'bg-red-50',
-                           'border-cyan-400', 'border-blue-500', 'bg-blue-50', 'bg-transparent')
+                           'border-cyan-400', 'border-blue-500', 'bg-blue-50', 'bg-transparent',
+                           'dark:bg-green-900/30', 'dark:bg-red-900/30', 'dark:border-green-400', 'dark:border-red-400')
 
       if (isCorrect) {
         correctCount++
-        item.classList.add('border-green-500', 'bg-green-50')
+        item.classList.add('border-green-500', 'dark:border-green-400', 'bg-green-50', 'dark:bg-green-900/30')
       } else {
         incorrectCount++
-        item.classList.add('border-red-500', 'bg-red-50')
+        item.classList.add('border-red-500', 'dark:border-red-400', 'bg-red-50', 'dark:bg-red-900/30')
         // Shake animation
         item.classList.add('animate-shake')
         setTimeout(() => item.classList.remove('animate-shake'), 500)
@@ -382,8 +383,9 @@ export default class extends Controller {
     sortedItems.forEach(item => {
       container.appendChild(item)
       // Style as correct - remove other borders, add green
-      item.classList.remove('border-cyan-400', 'border-red-500', 'bg-red-50', 'border-blue-500', 'bg-blue-50', 'bg-transparent')
-      item.classList.add('border-green-500', 'bg-green-50')
+      item.classList.remove('border-cyan-400', 'border-red-500', 'bg-red-50', 'border-blue-500', 'bg-blue-50', 'bg-transparent',
+                           'dark:border-cyan-600', 'dark:border-red-400', 'dark:bg-red-900/30', 'dark:bg-transparent')
+      item.classList.add('border-green-500', 'dark:border-green-400', 'bg-green-50', 'dark:bg-green-900/30')
     })
 
     this.updateHiddenInputs()
@@ -393,8 +395,9 @@ export default class extends Controller {
   restoreOriginalStyle() {
     this.itemTargets.forEach(item => {
       item.classList.remove('border-green-500', 'border-red-500', 'bg-green-50', 'bg-red-50',
-                           'border-blue-500', 'bg-blue-50')
-      item.classList.add('border-cyan-400', 'bg-transparent')
+                           'border-blue-500', 'bg-blue-50',
+                           'dark:border-green-400', 'dark:border-red-400', 'dark:bg-green-900/30', 'dark:bg-red-900/30')
+      item.classList.add('border-cyan-400', 'dark:border-cyan-600', 'bg-transparent', 'dark:bg-transparent')
     })
   }
 }
