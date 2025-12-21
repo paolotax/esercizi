@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto bg-white p-3 md:p-6"
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
      data-controller="exercise-checker text-toggle font-controls flower-matcher"
      data-text-toggle-target="content"
      data-font-controls-target="content">
@@ -7,36 +7,36 @@
 
   <div class="space-y-6">
     <!-- Sezione ESERCIZI -->
-    <div class="p-4 md:p-6 bg-orange-100 rounded-lg">
+    <div class="p-4 md:p-6 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
 
       <div class="grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-pink-400">
         <!-- COLONNA SINISTRA -->
         <div class="p-4 space-y-6">
           <!-- Exercise 1: Sul quaderno -->
           <div>
-            <p class="font-bold text-gray-700 mb-3">
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
               <%= numero_esercizio_badge(1) %>
               Scrivi i numeri sul quaderno come somma di valori, somma di addendi e somma di prodotti.
             </p>
             <div class="ml-10">
-              <p class="text-cyan-500 font-bold">
-                2 834 657 <span class="text-pink-600">&#8226;</span>
-                82 372 630 <span class="text-pink-600">&#8226;</span>
+              <p class="text-cyan-500 dark:text-cyan-400 font-bold">
+                2 834 657 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
+                82 372 630 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
                 3 645 732 198
               </p>
-              <p class="text-cyan-500 font-bold">
-                483 200 574 120 <span class="text-pink-600">&#8226;</span>
+              <p class="text-cyan-500 dark:text-cyan-400 font-bold">
+                483 200 574 120 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
                 24 734 700 371
               </p>
-              <p class="text-pink-500 italic mt-2">→ vedi p. seguente</p>
+              <p class="text-pink-500 dark:text-pink-400 italic mt-2">→ vedi p. seguente</p>
             </div>
           </div>
 
           <!-- Exercise 2: Collegamenti potenze -->
           <div>
-            <p class="font-bold text-gray-700 mb-3">
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
               <%= numero_esercizio_badge(2) %>
-              Collega ogni potenza al suo risultato. <span class="text-cyan-500">Attenzione: per due potenze c'è lo stesso risultato.</span>
+              Collega ogni potenza al suo risultato. <span class="text-cyan-500 dark:text-cyan-400">Attenzione: per due potenze c'è lo stesso risultato.</span>
             </p>
             <div class="ml-10 relative">
               <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-30" data-flower-matcher-target="canvas"></svg>
@@ -51,7 +51,7 @@
                   { id: "pow-4-2", pair: "p16", label: "4<sup>2</sup>" },
                   { id: "pow-1-8", pair: "p1", label: "1<sup>9</sup>" }
                 ].each do |item| %>
-                  <div class="px-3 py-2 bg-custom-blue-light rounded-lg text-center font-bold cursor-pointer hover:bg-cyan-200 transition"
+                  <div class="px-3 py-2 bg-custom-blue-light dark:bg-cyan-900/50 rounded-lg text-center font-bold cursor-pointer hover:bg-cyan-200 dark:hover:bg-cyan-800 transition"
                        data-action="click->flower-matcher#selectFlower"
                        data-flower-matcher-target="flower"
                        data-flower-id="<%= item[:id] %>"
@@ -68,7 +68,7 @@
                   { id: "res-1", pair: "p1", label: "1" },
                   { id: "res-16", pair: "p16", label: "16" }
                 ].each do |item| %>
-                  <div class="px-3 py-2 bg-pink-100 rounded-lg text-center font-bold cursor-pointer hover:bg-pink-200 transition"
+                  <div class="px-3 py-2 bg-pink-100 dark:bg-pink-900/50 rounded-lg text-center font-bold cursor-pointer hover:bg-pink-200 dark:hover:bg-pink-800 transition"
                        data-action="click->flower-matcher#selectFlower"
                        data-flower-matcher-target="flower"
                        data-flower-id="<%= item[:id] %>"
@@ -97,7 +97,7 @@
 
           <!-- Exercise 3: Vero o Falso -->
           <div>
-            <p class="font-bold text-gray-700 mb-3">
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
               <%= numero_esercizio_badge(3) %>
               Vero o falso? Indica con una X.
             </p>
@@ -115,15 +115,15 @@
                 { text: "3⁵ = 243", v: true }
               ].each_with_index do |item, idx| %>
                 <div class="flex items-center justify-between">
-                  <span class="font-bold text-gray-800"><%= item[:text].html_safe %></span>
+                  <span class="font-bold text-gray-800 dark:text-gray-200"><%= item[:text].html_safe %></span>
                   <div class="flex gap-2">
                     <label class="cursor-pointer flex items-center gap-1">
                       <input type="radio" name="vf3_<%= idx %>" data-correct-answer="<%= item[:v] %>">
-                      <span class="font-semibold">V</span>
+                      <span class="font-semibold dark:text-gray-200">V</span>
                     </label>
                     <label class="cursor-pointer flex items-center gap-1">
                       <input type="radio" name="vf3_<%= idx %>" data-correct-answer="<%= !item[:v] %>">
-                      <span class="font-semibold">F</span>
+                      <span class="font-semibold dark:text-gray-200">F</span>
                     </label>
                   </div>
                 </div>
@@ -133,46 +133,40 @@
 
           <!-- Exercise 4: Polinomio numerico -->
           <div>
-            <p class="font-bold text-gray-700 mb-3">
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
               <%= numero_esercizio_badge(4) %>
               Scrivi i numeri sul quaderno come polinomio numerico.
             </p>
             <div class="ml-10">
-              <p class="text-cyan-500 font-bold">
-                63 253 <span class="text-pink-600">&#8226;</span>
-                832 904 368 <span class="text-pink-600">&#8226;</span>
+              <p class="text-cyan-500 dark:text-cyan-400 font-bold">
+                63 253 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
+                832 904 368 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
                 3 729 456
               </p>
-              <p class="text-cyan-500 font-bold">
-                27 349 900 473 <span class="text-pink-600">&#8226;</span>
-                273 480 <span class="text-pink-600">&#8226;</span>
+              <p class="text-cyan-500 dark:text-cyan-400 font-bold">
+                27 349 900 473 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
+                273 480 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
                 17 238 004
               </p>
-              <p class="text-pink-500 italic mt-2">→ vedi p. seguente</p>
+              <p class="text-pink-500 dark:text-pink-400 italic mt-2">→ vedi p. seguente</p>
             </div>
           </div>
 
           <!-- Exercise 5: Decimali in cifre -->
           <div>
-            <p class="font-bold text-gray-700 mb-3">
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
               <%= numero_esercizio_badge(5) %>
               Scrivi in cifre i seguenti numeri decimali.
             </p>
             <div class="space-y-2 ml-10">
-              <% [
-                { text: "trenta e otto decimi", answer: "30,8" },
-                { text: "quarantaquattro centesimi", answer: "0,44" },
-                { text: "due e ventisei centesimi", answer: "2,26" },
-                { text: "centosessantadue millesimi", answer: "0,162" },
-                { text: "uno e cinque centesimi", answer: "1,05" },
-                { text: "nove millesimi", answer: "0,009" }
-              ].each do |item| %>
-                <div class="flex items-center gap-2">
-                  <span class="text-gray-700 flex-1"><%= item[:text] %></span>
-                  <span class="text-pink-600">→</span>
-                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="w-20 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </div>
-              <% end %>
+              <%= render 'shared/fill_list', container_class: "contents", items: [
+                { prefix: "trenta e otto decimi", arrow: true, answer: "30,8" },
+                { prefix: "quarantaquattro centesimi", arrow: true, answer: "0,44" },
+                { prefix: "due e ventisei centesimi", arrow: true, answer: "2,26" },
+                { prefix: "centosessantadue millesimi", arrow: true, answer: "0,162" },
+                { prefix: "uno e cinque centesimi", arrow: true, answer: "1,05" },
+                { prefix: "nove millesimi", arrow: true, answer: "0,009" }
+              ] %>
             </div>
           </div>
         </div>
@@ -181,93 +175,82 @@
         <div class="p-4 space-y-6">
           <!-- Exercise 6: Scomposizione -->
           <div>
-            <p class="font-bold text-gray-700 mb-3">
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
               <%= numero_esercizio_badge(6) %>
               Scomponi i numeri decimali come nell'esempio.
             </p>
             <div class="space-y-2 ml-10">
               <div class="flex items-center gap-2">
-                <span class="font-bold text-cyan-500">13,26</span> =
-                <span class="text-pink-600 font-bold">1 da, 3 u, 2 d, 6 c</span>
+                <span class="font-bold text-cyan-500 dark:text-cyan-400">13,26</span> <span class="dark:text-gray-200">=</span>
+                <span class="text-pink-600 dark:text-pink-400 font-bold">1 da, 3 u, 2 d, 6 c</span>
               </div>
-              <% [
-                { num: "40,157", answer: "4 da, 1 d, 5 c, 7 m" },
-                { num: "0,945", answer: "9 d, 4 c, 5 m" },
-                { num: "81,03", answer: "8 da, 1 u, 3 c" },
-                { num: "27,108", answer: "2 da, 7 u, 1 d, 8 m" },
-                { num: "106,92", answer: "1 h, 6 u, 9 d, 2 c" }
-              ].each do |item| %>
-                <div class="flex items-center gap-2">
-                  <span class="font-bold text-cyan-500"><%= item[:num] %></span> =
-                  <input type="text" data-correct-answer="<%= item[:answer] %>" class="flex-1 border-b-2 border-dotted border-gray-400 font-bold bg-transparent">
-                </div>
-              <% end %>
+              <%= render 'shared/fill_list', container_class: "contents", items: [
+                { prefix: "40,157", equals: true, answer: "4 da, 1 d, 5 c, 7 m" },
+                { prefix: "0,945", equals: true, answer: "9 d, 4 c, 5 m" },
+                { prefix: "81,03", equals: true, answer: "8 da, 1 u, 3 c" },
+                { prefix: "27,108", equals: true, answer: "2 da, 7 u, 1 d, 8 m" },
+                { prefix: "106,92", equals: true, answer: "1 h, 6 u, 9 d, 2 c" }
+              ] %>
             </div>
           </div>
 
           <!-- Exercise 7: Composizione -->
           <div>
-            <p class="font-bold text-gray-700 mb-3">
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
               <%= numero_esercizio_badge(7) %>
               Componi i seguenti numeri decimali.
             </p>
             <div class="space-y-2 ml-10">
-              <% [
-                { dec: "7 da, 8 u, 1 d, 4 c", num: "78,14" },
-                { dec: "6 u, 5 c, 4 m", num: "6,054" },
-                { dec: "2 da, 9 d, 3 m", num: "20,903" },
-                { dec: "3 da, 8 d, 9 c, 2 m", num: "30,892" },
-                { dec: "3 h, 5 u, 1 c, 6 m", num: "305,016" },
-                { dec: "4 u, 7 c, 1 m", num: "4,071" }
-              ].each do |item| %>
-                <div class="flex items-center gap-2">
-                  <span class="text-gray-700"><%= item[:dec] %></span>
-                  <span class="text-pink-600">=</span>
-                  <input type="text" data-correct-answer="<%= item[:num] %>" class="w-24 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </div>
-              <% end %>
+              <%= render 'shared/fill_list', container_class: "contents", items: [
+                { prefix: "7 da, 8 u, 1 d, 4 c", equals: true, answer: "78,14" },
+                { prefix: "6 u, 5 c, 4 m", equals: true, answer: "6,054" },
+                { prefix: "2 da, 9 d, 3 m", equals: true, answer: "20,903" },
+                { prefix: "3 da, 8 d, 9 c, 2 m", equals: true, answer: "30,892" },
+                { prefix: "3 h, 5 u, 1 c, 6 m", equals: true, answer: "305,016" },
+                { prefix: "4 u, 7 c, 1 m", equals: true, answer: "4,071" }
+              ] %>
             </div>
           </div>
 
           <!-- Exercise 8: Ordine decrescente -->
           <div>
-            <p class="font-bold text-gray-700 mb-3">
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
               <%= numero_esercizio_badge(8) %>
               Scrivi i numeri in ordine decrescente.
             </p>
             <div class="ml-10">
-              <p class="text-gray-600 mb-2">
-                6,5 <span class="text-pink-600">&#8226;</span>
-                6,005 <span class="text-pink-600">&#8226;</span>
-                0,65 <span class="text-pink-600">&#8226;</span>
-                6,05 <span class="text-pink-600">&#8226;</span>
+              <p class="text-gray-600 dark:text-gray-300 mb-2">
+                6,5 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
+                6,005 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
+                0,65 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
+                6,05 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
                 5,6
               </p>
-              <input type="text" data-correct-answer="6,5, 6,05, 6,005, 5,6, 0,65" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent py-2" placeholder="Scrivi i numeri separati da virgola...">
+              <input type="text" data-correct-answer="6,5, 6,05, 6,005, 5,6, 0,65" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white py-2" placeholder="Scrivi i numeri separati da virgola...">
             </div>
           </div>
 
           <!-- Exercise 9: Ordine crescente -->
           <div>
-            <p class="font-bold text-gray-700 mb-3">
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
               <%= numero_esercizio_badge(9) %>
               Scrivi i numeri in ordine crescente.
             </p>
             <div class="ml-10">
-              <p class="text-gray-600 mb-2">
-                1,07 <span class="text-pink-600">&#8226;</span>
-                10,7 <span class="text-pink-600">&#8226;</span>
-                0,17 <span class="text-pink-600">&#8226;</span>
-                1,7 <span class="text-pink-600">&#8226;</span>
+              <p class="text-gray-600 dark:text-gray-300 mb-2">
+                1,07 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
+                10,7 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
+                0,17 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
+                1,7 <span class="text-pink-600 dark:text-pink-400">&#8226;</span>
                 107
               </p>
-              <input type="text" data-correct-answer="0,17, 1,07, 1,7, 10,7, 107" class="w-full border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent py-2" placeholder="Scrivi i numeri separati da virgola...">
+              <input type="text" data-correct-answer="0,17, 1,07, 1,7, 10,7, 107" class="w-full border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white py-2" placeholder="Scrivi i numeri separati da virgola...">
             </div>
           </div>
 
           <!-- Exercise 10: Confronto numeri relativi -->
           <div>
-            <p class="font-bold text-gray-700 mb-3">
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
               <%= numero_esercizio_badge(10) %>
               Confronta i numeri e inserisci i segni &lt; oppure &gt;.
             </p>
@@ -281,9 +264,9 @@
                 { a: "– 17", b: "0", sign: "<", a_color: "red", b_color: "gray" }
               ].each do |item| %>
                 <div class="flex items-center justify-center gap-2">
-                  <span class="font-bold text-<%= item[:a_color] %>-600"><%= item[:a] %></span>
-                  <input type="text" data-correct-answer="<%= item[:sign] %>" class="w-10 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent" maxlength="1">
-                  <span class="font-bold text-<%= item[:b_color] %>-600"><%= item[:b] %></span>
+                  <span class="font-bold text-<%= item[:a_color] %>-600 dark:text-<%= item[:a_color] %>-400"><%= item[:a] %></span>
+                  <input type="text" data-correct-answer="<%= item[:sign] %>" class="w-10 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white" maxlength="1">
+                  <span class="font-bold text-<%= item[:b_color] %>-600 dark:text-<%= item[:b_color] %>-400"><%= item[:b] %></span>
                 </div>
               <% end %>
             </div>
@@ -291,22 +274,17 @@
 
           <!-- Exercise 11: Operazioni -->
           <div>
-            <p class="font-bold text-gray-700 mb-3">
+            <p class="font-bold text-gray-700 dark:text-gray-200 mb-3">
               <%= numero_esercizio_badge(11) %>
               Esegui le operazioni.
             </p>
             <div class="grid grid-cols-2 gap-2 ml-10">
-              <% [
-                { op: "– 7 – 15", result: "–22" },
-                { op: "– 6 + 20", result: "+14" },
-                { op: "+ 10 – 22", result: "–12" },
-                { op: "+ 5 – 7", result: "–2" }
-              ].each do |item| %>
-                <div class="flex items-center gap-2">
-                  <span class="text-gray-800"><%= item[:op] %> =</span>
-                  <input type="text" data-correct-answer="<%= item[:result] %>" class="w-16 border-b-2 border-dotted border-gray-400 text-center font-bold bg-transparent">
-                </div>
-              <% end %>
+              <%= render 'shared/fill_list', container_class: "contents", items: [
+                { prefix: "– 7 – 15 =", answer: "–22" },
+                { prefix: "– 6 + 20 =", answer: "+14" },
+                { prefix: "+ 10 – 22 =", answer: "–12" },
+                { prefix: "+ 5 – 7 =", answer: "–2" }
+              ] %>
             </div>
           </div>
         </div>
