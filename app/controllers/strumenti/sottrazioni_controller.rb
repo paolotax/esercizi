@@ -29,20 +29,39 @@ class Strumenti::SottrazioniController < ApplicationController
     render :quaderno
   end
 
+  def quaderno_preview
+    @options = parse_options
+    esempio_operands = @options[:example_type] == "interi" ? [ 487, 258 ] : [ "12,34", "5,67" ]
+    @esempio_sottrazione = Sottrazione.new(
+      minuend: esempio_operands[0],
+      subtrahend: esempio_operands[1],
+      title: @options[:title],
+      show_minuend_subtrahend: @options[:show_minuend_subtrahend],
+      show_toolbar: @options[:show_toolbar],
+      show_labels: @options[:show_labels],
+      show_solution: @options[:show_solution],
+      show_borrow: @options[:show_borrow]
+    )
+  end
+
   private
 
   def default_options
     {
-      show_minuend_subtrahend: false,
+      title: nil,
+      example_type: "decimali",
+      show_minuend_subtrahend: true,
       show_toolbar: true,
       show_borrow: true,
-      show_solution: false,
-      show_labels: false
+      show_solution: true,
+      show_labels: true
     }
   end
 
   def parse_options
     {
+      title: params[:title].presence,
+      example_type: params[:example_type].presence || "decimali",
       show_minuend_subtrahend: params[:show_minuend_subtrahend] == "true",
       show_toolbar: params[:show_toolbar] == "true",
       show_borrow: params[:show_borrow] == "true",

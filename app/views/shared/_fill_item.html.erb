@@ -1,4 +1,4 @@
-<%# locals: (answer: nil, prefix: nil, suffix: nil, arrow: false, equals: false, unit: nil, width: nil, bullet: nil, color: "gray", inputmode: nil, maxlength: nil, segments: nil, flex: false) -%>
+<%# locals: (answer: nil, prefix: nil, suffix: nil, arrow: false, equals: false, unit: nil, width: nil, bullet: nil, color: "gray", inputmode: nil, maxlength: nil, segments: nil, flex: false, container_class: nil) -%>
 <%
   # Classi colore per bordo e bullet
   color_classes = {
@@ -39,7 +39,7 @@
   }
 %>
 
-<div class="flex items-center gap-2 flex-wrap">
+<div class="<%= container_class ? "#{container_class} flex items-center gap-2 flex-wrap" : 'flex items-center gap-2 flex-wrap' %>">
   <% if bullet %>
     <span class="<%= color_classes[:text] %> font-bold text-xl"><%= bullet %></span>
   <% end %>

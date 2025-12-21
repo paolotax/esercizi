@@ -12,18 +12,83 @@
   <!-- Layout a 2 colonne -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 print:hidden items-start">
 
-    <!-- Colonna Sinistra: Esempio -->
-    <div class="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 rounded-lg shadow-lg p-8">
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Esempio con Decimali</h2>
-      <p class="text-gray-700 dark:text-gray-300 text-lg mb-6">
-        Prova a calcolare questa divisione con numeri decimali!
-      </p>
-      <div class="flex justify-center">
-        <%= render "strumenti/quaderno_grid",
-                   grid: Divisione.new(dividend: "12,5", divisor: "2,5",
-                                         show_dividend_divisor: true,
-                                         show_toolbar: true,
-                                         show_solution: true).to_grid_matrix %>
+    <!-- Colonna Sinistra: Esempio con Opzioni -->
+    <div class="rounded-lg shadow-lg p-8 transition-all duration-500
+                <%= @options[:example_type] == 'interi' ? 'bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30' : 'bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30' %>">
+
+      <%= turbo_frame_tag "esempio-preview" do %>
+        <div class="transition-all duration-300 ease-in-out">
+          <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+            <%= @options[:example_type] == 'interi' ? 'Esempio con Numeri Interi' : 'Esempio con Decimali' %>
+          </h2>
+          <p class="text-gray-700 dark:text-gray-300 text-lg mb-6">
+            <%= @options[:example_type] == 'interi' ? 'Prova a calcolare questa divisione con numeri interi!' : 'Prova a calcolare questa divisione con numeri decimali!' %>
+          </p>
+          <div class="flex justify-center">
+            <% esempio_operands = @options[:example_type] == 'interi' ? [144, 12] : ["12,5", "2,5"] %>
+            <%= render "strumenti/quaderno_grid",
+                       grid: Divisione.new(dividend: esempio_operands[0],
+                                             divisor: esempio_operands[1],
+                                             title: @options[:title],
+                                             show_dividend_divisor: @options[:show_dividend_divisor],
+                                             show_toolbar: @options[:show_toolbar],
+                                             show_solution: @options[:show_solution],
+                                             show_steps: @options[:show_steps]).to_grid_matrix %>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Opzioni Preview (aggiornano l'esempio in tempo reale) -->
+      <div class="mt-6 p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+        <p class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">Opzioni:</p>
+        <%= form_with url: strumenti_divisioni_quaderno_preview_path, method: :get,
+                      data: { turbo_frame: "esempio-preview" },
+                      id: "preview-options-form" do |pf| %>
+
+          <!-- Toggle Decimali/Interi -->
+          <div class="mb-4 flex items-center justify-center gap-3">
+            <span class="text-sm font-medium <%= @options[:example_type] != 'interi' ? 'text-amber-600 dark:text-amber-400' : 'text-gray-400 dark:text-gray-500' %>">Decimali</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <%= pf.check_box :example_type,
+                               { checked: @options[:example_type] == 'interi',
+                                 class: "sr-only peer",
+                                 onchange: "this.form.requestSubmit()" },
+                               "interi", "decimali" %>
+              <div class="w-11 h-6 bg-amber-500 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-amber-300 dark:peer-focus:ring-amber-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+            </label>
+            <span class="text-sm font-medium <%= @options[:example_type] == 'interi' ? 'text-green-600 dark:text-green-400' : 'text-gray-400 dark:text-gray-500' %>">Interi</span>
+          </div>
+
+          <div class="mb-3">
+            <%= pf.text_field :title,
+                              value: @options[:title],
+                              placeholder: "Titolo (opzionale)",
+                              class: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-amber-500 focus:outline-none text-sm bg-white dark:bg-gray-700 dark:text-white",
+                              onchange: "this.form.requestSubmit()" %>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= pf.check_box :show_dividend_divisor, { checked: @options[:show_dividend_divisor], class: "w-4 h-4 text-amber-600 rounded focus:ring-amber-500", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra operandi</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= pf.check_box :show_solution, { checked: @options[:show_solution], class: "w-4 h-4 text-amber-600 rounded focus:ring-amber-500", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra risultato</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= pf.check_box :show_steps, { checked: @options[:show_steps], class: "w-4 h-4 text-amber-600 rounded focus:ring-amber-500", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra passaggi</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= pf.check_box :show_toolbar, { checked: @options[:show_toolbar], class: "w-4 h-4 text-amber-600 rounded focus:ring-amber-500", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra barra strumenti</span>
+            </label>
+          </div>
+        <% end %>
       </div>
     </div>
 
@@ -41,30 +106,12 @@
                           class: "w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-amber-500 focus:outline-none font-mono text-sm bg-white dark:bg-gray-700 dark:text-white" %>
         </div>
 
-        <!-- Opzioni -->
-        <div class="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-          <p class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">Opzioni:</p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <label class="flex items-center gap-2 cursor-pointer">
-              <%= f.check_box :show_toolbar, { checked: @options[:show_toolbar] != false, class: "w-4 h-4 text-amber-600 rounded focus:ring-amber-500" }, "true", "false" %>
-              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra barra strumenti</span>
-            </label>
-
-            <label class="flex items-center gap-2 cursor-pointer">
-              <%= f.check_box :show_steps, { checked: @options[:show_steps] == true, class: "w-4 h-4 text-amber-600 rounded focus:ring-amber-500" }, "true", "false" %>
-              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra passaggi</span>
-            </label>
-
-            <label class="flex items-center gap-2 cursor-pointer">
-              <%= f.check_box :show_dividend_divisor, { checked: @options[:show_dividend_divisor] == true, class: "w-4 h-4 text-amber-600 rounded focus:ring-amber-500" }, "true", "false" %>
-              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra dividendo e divisore</span>
-            </label>
-
-            <label class="flex items-center gap-2 cursor-pointer">
-              <%= f.check_box :show_solution, { checked: @options[:show_solution] == true, class: "w-4 h-4 text-amber-600 rounded focus:ring-amber-500" }, "true", "false" %>
-              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra risultato</span>
-            </label>
-          </div>
+        <!-- Hidden fields per il generatore -->
+        <div class="hidden">
+          <%= f.hidden_field :show_toolbar, value: @options[:show_toolbar], id: "gen_show_toolbar" %>
+          <%= f.hidden_field :show_steps, value: @options[:show_steps], id: "gen_show_steps" %>
+          <%= f.hidden_field :show_dividend_divisor, value: @options[:show_dividend_divisor], id: "gen_show_dividend_divisor" %>
+          <%= f.hidden_field :show_solution, value: @options[:show_solution], id: "gen_show_solution" %>
         </div>
 
         <div class="flex gap-4">
@@ -90,17 +137,6 @@
 
   </div>
   <!-- Fine Layout a 2 colonne -->
-
-  <!-- Esempio con numeri interi -->
-  <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 rounded-lg shadow-lg p-8 mb-8 print:hidden">
-    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Esempio con Numeri Interi</h2>
-    <div class="flex justify-center">
-      <%= render "strumenti/quaderno_grid",
-                 grid: Divisione.new(dividend: 144, divisor: 12,
-                                       show_dividend_divisor: true,
-                                       show_toolbar: true).to_grid_matrix %>
-    </div>
-  </div>
 
   <!-- Divisioni Generate -->
   <% if @divisions && @divisions.any? %>

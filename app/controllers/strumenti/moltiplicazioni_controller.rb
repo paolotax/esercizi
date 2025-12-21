@@ -35,6 +35,22 @@ module Strumenti
       render :quaderno
     end
 
+    def quaderno_preview
+      @options = parse_quaderno_options
+      esempio_operands = @options[:example_type] == "interi" ? [ 123, 45 ] : [ "12,3", "4,5" ]
+      @esempio_moltiplicazione = Moltiplicazione.new(
+        multiplicand: esempio_operands[0],
+        multiplier: esempio_operands[1],
+        title: @options[:title],
+        show_multiplicand_multiplier: @options[:show_multiplicand_multiplier],
+        show_toolbar: @options[:show_toolbar],
+        show_labels: @options[:show_labels],
+        show_solution: @options[:show_solution],
+        show_partial_products: @options[:show_partial_products],
+        show_carry: @options[:show_carry]
+      )
+    end
+
     private
 
     def default_options
@@ -48,11 +64,14 @@ module Strumenti
 
     def default_quaderno_options
       {
-        show_multiplicand_multiplier: false,
+        title: nil,
+        example_type: "decimali",
+        show_multiplicand_multiplier: true,
         show_toolbar: true,
-        show_partial_products: false,
-        show_solution: false,
-        show_labels: false
+        show_partial_products: true,
+        show_solution: true,
+        show_labels: true,
+        show_carry: true
       }
     end
 
@@ -67,11 +86,14 @@ module Strumenti
 
     def parse_quaderno_options
       {
+        title: params[:title].presence,
+        example_type: params[:example_type].presence || "decimali",
         show_multiplicand_multiplier: params[:show_multiplicand_multiplier] == "true",
         show_toolbar: params[:show_toolbar] == "true",
         show_partial_products: params[:show_partial_products] == "true",
         show_solution: params[:show_solution] == "true",
-        show_labels: params[:show_labels] == "true"
+        show_labels: params[:show_labels] == "true",
+        show_carry: params[:show_carry] == "true"
       }
     end
 

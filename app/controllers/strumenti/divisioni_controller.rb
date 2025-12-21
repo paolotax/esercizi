@@ -16,19 +16,37 @@ module Strumenti
       render :quaderno
     end
 
+    def quaderno_preview
+      @options = parse_quaderno_options
+      esempio_operands = @options[:example_type] == "interi" ? [ 144, 12 ] : [ "12,5", "2,5" ]
+      @esempio_divisione = Divisione.new(
+        dividend: esempio_operands[0],
+        divisor: esempio_operands[1],
+        title: @options[:title],
+        show_dividend_divisor: @options[:show_dividend_divisor],
+        show_toolbar: @options[:show_toolbar],
+        show_solution: @options[:show_solution],
+        show_steps: @options[:show_steps]
+      )
+    end
+
     private
 
     def default_quaderno_options
       {
-        show_dividend_divisor: false,
+        title: nil,
+        example_type: "decimali",
+        show_dividend_divisor: true,
         show_toolbar: true,
-        show_solution: false,
-        show_steps: false
+        show_solution: true,
+        show_steps: true
       }
     end
 
     def parse_quaderno_options
       {
+        title: params[:title].presence,
+        example_type: params[:example_type].presence || "decimali",
         show_dividend_divisor: params[:show_dividend_divisor] == "true",
         show_toolbar: params[:show_toolbar] == "true",
         show_solution: params[:show_solution] == "true",

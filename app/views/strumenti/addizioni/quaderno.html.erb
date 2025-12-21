@@ -12,20 +12,88 @@
   <!-- Layout a 2 colonne -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 print:hidden items-start">
 
-    <!-- Colonna Sinistra: Esempio -->
-    <div class="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/30 rounded-lg shadow-lg p-8">
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Esempio con Decimali</h2>
-      <p class="text-gray-700 dark:text-gray-300 text-lg mb-6">
-        Prova a calcolare questa addizione con numeri decimali!
-      </p>
-      <div class="flex justify-center">
-        <%= render "strumenti/quaderno_grid",
-                   grid: Addizione.new(addends: ["12,34", "5,67"],
-                                         show_addends: true,
-                                         show_toolbar: true,
-                                         show_labels: true,
-                                         show_solution: true,
-                                         show_carry: true).to_grid_matrix %>
+    <!-- Colonna Sinistra: Esempio con Opzioni -->
+    <div class="rounded-lg shadow-lg p-8 transition-all duration-500
+                <%= @options[:example_type] == 'interi' ? 'bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30' : 'bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/30' %>">
+
+      <%= turbo_frame_tag "esempio-preview" do %>
+        <div class="transition-all duration-300 ease-in-out">
+          <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+            <%= @options[:example_type] == 'interi' ? 'Esempio con Numeri Interi' : 'Esempio con Decimali' %>
+          </h2>
+          <p class="text-gray-700 dark:text-gray-300 text-lg mb-6">
+            <%= @options[:example_type] == 'interi' ? 'Prova a calcolare questa addizione con numeri interi!' : 'Prova a calcolare questa addizione con numeri decimali!' %>
+          </p>
+          <div class="flex justify-center">
+            <% esempio_addends = @options[:example_type] == 'interi' ? [234, 567] : ["12,34", "5,67"] %>
+            <%= render "strumenti/quaderno_grid",
+                       grid: Addizione.new(addends: esempio_addends,
+                                             title: @options[:title],
+                                             show_addends: @options[:show_addends],
+                                             show_toolbar: @options[:show_toolbar],
+                                             show_labels: @options[:show_labels],
+                                             show_solution: @options[:show_solution],
+                                             show_carry: @options[:show_carry]).to_grid_matrix %>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Opzioni Preview (aggiornano l'esempio in tempo reale) -->
+      <div class="mt-6 p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+        <p class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">Opzioni:</p>
+        <%= form_with url: strumenti_addizioni_quaderno_preview_path, method: :get,
+                      data: { turbo_frame: "esempio-preview" },
+                      id: "preview-options-form" do |pf| %>
+
+          <!-- Toggle Decimali/Interi -->
+          <div class="mb-4 flex items-center justify-center gap-3">
+            <span class="text-sm font-medium <%= @options[:example_type] != 'interi' ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400 dark:text-gray-500' %>">Decimali</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <%= pf.check_box :example_type,
+                               { checked: @options[:example_type] == 'interi',
+                                 class: "sr-only peer",
+                                 onchange: "this.form.requestSubmit()" },
+                               "interi", "decimali" %>
+              <div class="w-11 h-6 bg-blue-500 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+            </label>
+            <span class="text-sm font-medium <%= @options[:example_type] == 'interi' ? 'text-green-600 dark:text-green-400' : 'text-gray-400 dark:text-gray-500' %>">Interi</span>
+          </div>
+
+          <div class="mb-3">
+            <%= pf.text_field :title,
+                              value: @options[:title],
+                              placeholder: "Titolo (opzionale)",
+                              class: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none text-sm bg-white dark:bg-gray-700 dark:text-white",
+                              onchange: "this.form.requestSubmit()" %>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= pf.check_box :show_addends, { checked: @options[:show_addends], class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra addendi</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= pf.check_box :show_solution, { checked: @options[:show_solution], class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra risultato</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= pf.check_box :show_carry, { checked: @options[:show_carry], class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra riporti</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= pf.check_box :show_labels, { checked: @options[:show_labels], class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra etichette</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer sm:col-span-2">
+              <%= pf.check_box :show_toolbar, { checked: @options[:show_toolbar], class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra barra strumenti</span>
+            </label>
+          </div>
+        <% end %>
       </div>
     </div>
 
@@ -43,35 +111,13 @@
                           class: "w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-blue-500 focus:outline-none font-mono text-sm bg-white dark:bg-gray-700 dark:text-white" %>
         </div>
 
-        <!-- Opzioni -->
-        <div class="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-          <p class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">Opzioni:</p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <label class="flex items-center gap-2 cursor-pointer">
-              <%= f.check_box :show_toolbar, { checked: @options[:show_toolbar] != false, class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500" }, "true", "false" %>
-              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra barra strumenti</span>
-            </label>
-
-            <label class="flex items-center gap-2 cursor-pointer">
-              <%= f.check_box :show_carry, { checked: @options[:show_carry] != false, class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500" }, "true", "false" %>
-              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra celle riporti</span>
-            </label>
-
-            <label class="flex items-center gap-2 cursor-pointer">
-              <%= f.check_box :show_addends, { checked: @options[:show_addends] == true, class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500" }, "true", "false" %>
-              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra addendi</span>
-            </label>
-
-            <label class="flex items-center gap-2 cursor-pointer">
-              <%= f.check_box :show_solution, { checked: @options[:show_solution] == true, class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500" }, "true", "false" %>
-              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra risultato</span>
-            </label>
-
-            <label class="flex items-center gap-2 cursor-pointer">
-              <%= f.check_box :show_labels, { checked: @options[:show_labels] == true, class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500" }, "true", "false" %>
-              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra etichette</span>
-            </label>
-          </div>
+        <!-- Hidden fields per il generatore (copia le opzioni correnti) -->
+        <div class="hidden">
+          <%= f.hidden_field :show_toolbar, value: @options[:show_toolbar], id: "gen_show_toolbar" %>
+          <%= f.hidden_field :show_carry, value: @options[:show_carry], id: "gen_show_carry" %>
+          <%= f.hidden_field :show_addends, value: @options[:show_addends], id: "gen_show_addends" %>
+          <%= f.hidden_field :show_solution, value: @options[:show_solution], id: "gen_show_solution" %>
+          <%= f.hidden_field :show_labels, value: @options[:show_labels], id: "gen_show_labels" %>
         </div>
 
         <div class="flex gap-4">
@@ -97,18 +143,6 @@
 
   </div>
   <!-- Fine Layout a 2 colonne -->
-
-  <!-- Esempio con numeri interi -->
-  <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 rounded-lg shadow-lg p-8 mb-8 print:hidden">
-    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Esempio con Numeri Interi</h2>
-    <div class="flex justify-center">
-      <%= render "strumenti/quaderno_grid",
-                 grid: Addizione.new(addends: [234, 567],
-                                       show_addends: true,
-                                       show_toolbar: true,
-                                       show_carry: true).to_grid_matrix %>
-    </div>
-  </div>
 
   <!-- Addizioni Generate -->
   <% if @addizioni && @addizioni.any? %>

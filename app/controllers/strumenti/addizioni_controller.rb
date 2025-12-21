@@ -29,20 +29,38 @@ class Strumenti::AddizioniController < ApplicationController
     render :quaderno
   end
 
+  def quaderno_preview
+    @options = parse_options
+    esempio_addends = @options[:example_type] == "interi" ? [ 234, 567 ] : [ "12,34", "5,67" ]
+    @esempio_addizione = Addizione.new(
+      addends: esempio_addends,
+      title: @options[:title],
+      show_addends: @options[:show_addends],
+      show_toolbar: @options[:show_toolbar],
+      show_labels: @options[:show_labels],
+      show_solution: @options[:show_solution],
+      show_carry: @options[:show_carry]
+    )
+  end
+
   private
 
   def default_options
     {
-      show_addends: false,
+      title: nil,
+      example_type: "decimali",
+      show_addends: true,
       show_toolbar: true,
       show_carry: true,
-      show_solution: false,
-      show_labels: false
+      show_solution: true,
+      show_labels: true
     }
   end
 
   def parse_options
     {
+      title: params[:title].presence,
+      example_type: params[:example_type].presence || "decimali",
       show_addends: params[:show_addends] == "true",
       show_toolbar: params[:show_toolbar] == "true",
       show_carry: params[:show_carry] == "true",
