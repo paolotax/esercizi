@@ -151,7 +151,7 @@ class Moltiplicazione
     else
       result_str = product.to_s
       padding = max_digits - result_str.length
-      ([""] * padding) + result_str.chars
+      ([ "" ] * padding) + result_str.chars
     end
   end
 
@@ -162,7 +162,7 @@ class Moltiplicazione
     digits_only = raw_str.gsub(".", "")
     total_digits = max_digits
     padding = total_digits - digits_only.length
-    ([""] * padding) + digits_only.chars
+    ([ "" ] * padding) + digits_only.chars
   end
 
   # Posizione della virgola per un numero specifico (da destra, 0-indexed)
@@ -219,13 +219,13 @@ class Moltiplicazione
       digits = partial_str.chars
       cols_for_digits = max_digits - zeros
       padding = cols_for_digits - digits.length
-      padded_digits = ([""] * padding) + digits
+      padded_digits = ([ "" ] * padding) + digits
 
       # Calcola i riporti per questo prodotto parziale
       carries = calculate_partial_carries(digit)
       # Padding dei carries per allinearli alla griglia (stessa lunghezza delle cifre - 1)
       carries_length = cols_for_digits - 1
-      padded_carries = ([""] * (carries_length - carries.length)) + carries.map { |c| c || "" }
+      padded_carries = ([ "" ] * (carries_length - carries.length)) + carries.map { |c| c || "" }
 
       {
         digits: padded_digits,

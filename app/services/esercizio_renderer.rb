@@ -46,13 +46,13 @@ class EsercizioRenderer
     if config["operation_text"].present?
       # Parsa il testo per estrarre i numeri
       numbers = config["operation_text"].scan(/\d+/).map(&:to_i)
-      addends = numbers.any? ? numbers : [0, 0]  # Default a 0 se non ci sono numeri
+      addends = numbers.any? ? numbers : [ 0, 0 ]  # Default a 0 se non ci sono numeri
     elsif config["values"].present? && config["values"].any?
       # Usa i valori salvati
       addends = config["values"]
     else
       # Non generare numeri casuali - usa valori vuoti di default
-      addends = [0, 0]
+      addends = [ 0, 0 ]
     end
 
     # Crea oggetto Addizione con opzioni corrette
@@ -79,7 +79,7 @@ class EsercizioRenderer
         locals: {
           addizione: addizione,
           operation_title: operation_title,
-          operation_id: operation['id']
+          operation_id: operation["id"]
         }
       )
     else
@@ -146,7 +146,7 @@ class EsercizioRenderer
         locals: {
           sottrazione: sottrazione,
           operation_title: operation_title,
-          operation_id: operation['id']
+          operation_id: operation["id"]
         }
       )
     else
@@ -210,7 +210,7 @@ class EsercizioRenderer
         locals: {
           moltiplicazione: moltiplicazione,
           operation_title: operation_title,
-          operation_id: operation['id']
+          operation_id: operation["id"]
         }
       )
     else
@@ -265,7 +265,7 @@ class EsercizioRenderer
         locals: {
           abaco: abaco,
           operation_title: operation_title,
-          operation_id: operation['id']
+          operation_id: operation["id"]
         }
       )
     else

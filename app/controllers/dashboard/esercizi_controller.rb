@@ -1,7 +1,7 @@
 class Dashboard::EserciziController < ApplicationController
   require_teacher
 
-  before_action :set_esercizio, only: [:show, :edit, :update, :destroy, :duplicate, :preview, :export_pdf]
+  before_action :set_esercizio, only: [ :show, :edit, :update, :destroy, :duplicate, :preview, :export_pdf ]
 
   def index
     @esercizi = Esercizio.includes(:esercizio_attempts)
@@ -10,13 +10,13 @@ class Dashboard::EserciziController < ApplicationController
     @esercizi = @esercizi.with_tag(params[:tag]) if params[:tag].present?
 
     @esercizi = case params[:status]
-                when 'published'
+    when "published"
                   @esercizi.published
-                when 'draft'
+    when "draft"
                   @esercizi.draft
-                else
+    else
                   @esercizi
-                end
+    end
 
     @esercizi = @esercizi.order(created_at: :desc)
     @pagy, @esercizi = pagy(@esercizi, items: 12)
@@ -32,7 +32,7 @@ class Dashboard::EserciziController < ApplicationController
 
     if @esercizio.save
       redirect_to edit_dashboard_esercizio_path(@esercizio),
-                  notice: 'Esercizio creato con successo. Ora puoi aggiungere le operazioni.'
+                  notice: "Esercizio creato con successo. Ora puoi aggiungere le operazioni."
     else
       @templates = EsercizioTemplate.all.order(:category, :name)
       render :new, status: :unprocessable_entity
@@ -46,7 +46,7 @@ class Dashboard::EserciziController < ApplicationController
   def update
     if @esercizio.update(esercizio_params)
       respond_to do |format|
-        format.html { redirect_to dashboard_esercizio_path(@esercizio), notice: 'Esercizio aggiornato con successo.' }
+        format.html { redirect_to dashboard_esercizio_path(@esercizio), notice: "Esercizio aggiornato con successo." }
         format.json { render json: @esercizio }
       end
     else
@@ -66,7 +66,7 @@ class Dashboard::EserciziController < ApplicationController
 
   def destroy
     @esercizio.destroy
-    redirect_to dashboard_esercizi_path, notice: 'Esercizio eliminato con successo.'
+    redirect_to dashboard_esercizi_path, notice: "Esercizio eliminato con successo."
   end
 
   # Azioni custom
@@ -80,28 +80,28 @@ class Dashboard::EserciziController < ApplicationController
 
     if new_esercizio.save
       redirect_to edit_dashboard_esercizio_path(new_esercizio),
-                  notice: 'Esercizio duplicato con successo.'
+                  notice: "Esercizio duplicato con successo."
     else
       redirect_to dashboard_esercizi_path,
-                  alert: 'Errore durante la duplicazione dell\'esercizio.'
+                  alert: "Errore durante la duplicazione dell'esercizio."
     end
   end
 
   def preview
-    render layout: 'preview'
+    render layout: "preview"
   end
 
   def export_pdf
     # TODO: Implementare generazione PDF
     redirect_to dashboard_esercizio_path(@esercizio),
-                alert: 'Funzionalità PDF in fase di sviluppo.'
+                alert: "Funzionalità PDF in fase di sviluppo."
   end
 
   # Mostra le proprietà di un'operazione
   def operation_properties
     @esercizio = Esercizio.find(params[:id])
     operation_id = params[:operation_id]
-    operation = @esercizio.operations.find { |op| op['id'] == operation_id }
+    operation = @esercizio.operations.find { |op| op["id"] == operation_id }
 
     if operation
       respond_to do |format|
@@ -122,18 +122,28 @@ class Dashboard::EserciziController < ApplicationController
     operation_id = params[:operation_id]
 
     operations = @esercizio.operations
-    operation_index = operations.find_index { |op| op['id'] == operation_id }
+    operation_index = operations.find_index { |op| op["id"] == operation_id }
 
     if operation_index
-      # Permetti tutti i parametri config e convertili in hash
-      config_params = params[:config].permit! if params[:config]
+      # Permetti solo i parametri config specifici
+      permitted_config_keys = %w[
+        operation_text title values
+        show_toolbar show_carry show_addends show_solution
+        show_borrow allow_borrow allow_negative
+        show_partial_products show_grid
+        show_thousands show_hundreds show_value editable disable_auto_zeros
+        columns correct_value mode max_per_column
+        first_operand second_operand result operation_type
+        num_digits difficulty time_limit
+      ]
+      config_params = params[:config].permit(*permitted_config_keys) if params[:config]
       config = config_params ? config_params.to_h : {}
 
       # Gestisci i checkbox - se non sono presenti nei parametri, sono false
-      boolean_fields = ['show_toolbar', 'show_carry', 'show_addends', 'show_solution',
-                       'show_borrow', 'allow_borrow', 'allow_negative',
-                       'show_partial_products', 'show_grid',
-                       'show_thousands', 'show_hundreds', 'show_value', 'editable', 'disable_auto_zeros']
+      boolean_fields = [ "show_toolbar", "show_carry", "show_addends", "show_solution",
+                       "show_borrow", "allow_borrow", "allow_negative",
+                       "show_partial_products", "show_grid",
+                       "show_thousands", "show_hundreds", "show_value", "editable", "disable_auto_zeros" ]
 
       boolean_fields.each do |field|
         # Se il campo esiste nei parametri, è true (perché i checkbox inviano solo se checked)
@@ -142,9 +152,9 @@ class Dashboard::EserciziController < ApplicationController
       end
 
       # Controlla se ci sono operazioni multiple nella textarea
-      if config['operation_text'].present?
-        operation_type = operations[operation_index]['type']
-        multiple_operations = parse_multiple_operations(config['operation_text'], operation_type)
+      if config["operation_text"].present?
+        operation_type = operations[operation_index]["type"]
+        multiple_operations = parse_multiple_operations(config["operation_text"], operation_type)
 
         if multiple_operations && multiple_operations.size > 1
           # Rimuovi l'operazione corrente
@@ -153,22 +163,22 @@ class Dashboard::EserciziController < ApplicationController
           # Aggiungi le nuove operazioni multiple
           multiple_operations.each do |op_text|
             new_config = config.dup
-            new_config['operation_text'] = op_text.strip
+            new_config["operation_text"] = op_text.strip
             parsed_values = parse_operation_text(op_text.strip, operation_type)
-            new_config['values'] = parsed_values['values'] if parsed_values && parsed_values['values']
+            new_config["values"] = parsed_values["values"] if parsed_values && parsed_values["values"]
             # Mantieni il titolo se presente
-            new_config['title'] = config['title'] if config['title'].present?
+            new_config["title"] = config["title"] if config["title"].present?
 
             new_operation = {
-              'id' => SecureRandom.uuid,
-              'type' => operation_type,
-              'config' => new_config,
-              'position' => operations.size
+              "id" => SecureRandom.uuid,
+              "type" => operation_type,
+              "config" => new_config,
+              "position" => operations.size
             }
             operations << new_operation
           end
 
-          @esercizio.content['operations'] = operations
+          @esercizio.content["operations"] = operations
           @esercizio.content_will_change!
 
           if @esercizio.save
@@ -178,27 +188,27 @@ class Dashboard::EserciziController < ApplicationController
           end
         else
           # Operazione singola - comportamento normale
-          parsed_values = parse_operation_text(config['operation_text'], operation_type)
+          parsed_values = parse_operation_text(config["operation_text"], operation_type)
           config.merge!(parsed_values) if parsed_values
         end
       end
 
       # Mantieni la config esistente e aggiorna con i nuovi valori
-      existing_config = operations[operation_index]['config'] || {}
-      operations[operation_index]['config'] = existing_config.merge(config)
-      @esercizio.content['operations'] = operations
+      existing_config = operations[operation_index]["config"] || {}
+      operations[operation_index]["config"] = existing_config.merge(config)
+      @esercizio.content["operations"] = operations
       @esercizio.content_will_change!
 
       if @esercizio.save
         redirect_to edit_dashboard_esercizio_path(@esercizio),
-                    notice: 'Operazione aggiornata con successo.'
+                    notice: "Operazione aggiornata con successo."
       else
         redirect_to edit_dashboard_esercizio_path(@esercizio),
-                    alert: 'Errore nell\'aggiornamento dell\'operazione.'
+                    alert: "Errore nell'aggiornamento dell'operazione."
       end
     else
       redirect_to edit_dashboard_esercizio_path(@esercizio),
-                  alert: 'Operazione non trovata.'
+                  alert: "Operazione non trovata."
     end
   end
 
@@ -211,7 +221,7 @@ class Dashboard::EserciziController < ApplicationController
     if @esercizio.add_operation(params[:operation_type], params[:config] || {}, position)
       # Renderizza HTML per le operazioni invece di JSON
       html = render_to_string(
-        partial: 'dashboard/esercizi/operations_list',
+        partial: "dashboard/esercizi/operations_list",
         locals: { esercizio: @esercizio }
       )
       render json: { success: true, operations: @esercizio.operations, html: html }
@@ -242,12 +252,12 @@ class Dashboard::EserciziController < ApplicationController
     if params[:operation_ids].present?
       operations = @esercizio.operations
       reordered = params[:operation_ids].map.with_index do |id, index|
-        op = operations.find { |o| o['id'] == id }
-        op['position'] = index if op
+        op = operations.find { |o| o["id"] == id }
+        op["position"] = index if op
         op
       end.compact
 
-      @esercizio.content['operations'] = reordered
+      @esercizio.content["operations"] = reordered
 
       if @esercizio.save
         render json: { success: true, operations: @esercizio.operations }
@@ -255,7 +265,7 @@ class Dashboard::EserciziController < ApplicationController
         render json: { success: false, errors: @esercizio.errors }
       end
     else
-      render json: { success: false, error: 'No operation IDs provided' }
+      render json: { success: false, error: "No operation IDs provided" }
     end
   end
 
@@ -280,9 +290,9 @@ class Dashboard::EserciziController < ApplicationController
 
     # Poi controlla se ci sono virgole che potrebbero essere separatori
     # (solo se non ci sono già operazioni multiple e non ci sono operatori)
-    if operations.size == 1 && !operations[0].include?('+') && !operations[0].include?('-') && !operations[0].include?('×') && !operations[0].include?('x')
+    if operations.size == 1 && !operations[0].include?("+") && !operations[0].include?("-") && !operations[0].include?("×") && !operations[0].include?("x")
       # Prova a dividere per virgola
-      operations = operations[0].split(',')
+      operations = operations[0].split(",")
                                 .map(&:strip)
                                 .reject(&:empty?)
     end
@@ -296,32 +306,32 @@ class Dashboard::EserciziController < ApplicationController
 
   def parse_operation_text(text, type)
     case type
-    when 'addizione', 'sottrazione'
+    when "addizione", "sottrazione"
       # Estrai i numeri dall'operazione (es. "234 + 567" o "500 - 123")
       numbers = text.scan(/\d+/).map(&:to_i)
       if numbers.any?
         {
-          'values' => numbers,
-          'operation_text' => text.strip
+          "values" => numbers,
+          "operation_text" => text.strip
         }
       end
-    when 'moltiplicazione'
+    when "moltiplicazione"
       # Estrai i due fattori (es. "12 x 5" o "12 × 5")
       numbers = text.scan(/\d+/).map(&:to_i)
       if numbers.size >= 2
         {
-          'multiplicand' => numbers[0],
-          'multiplier' => numbers[1],
-          'operation_text' => text.strip
+          "multiplicand" => numbers[0],
+          "multiplier" => numbers[1],
+          "operation_text" => text.strip
         }
       end
-    when 'abaco'
+    when "abaco"
       # Estrai il numero per l'abaco
       number = text.scan(/\d+/).first&.to_i
       if number
         {
-          'value' => number,
-          'operation_text' => text.strip
+          "value" => number,
+          "operation_text" => text.strip
         }
       end
     end

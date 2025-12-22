@@ -13,6 +13,6 @@ class CreateEsercizioAttempts < ActiveRecord::Migration[8.1]
     end
 
     add_index :esercizio_attempts, :student_identifier
-    add_index :esercizio_attempts, [:esercizio_id, :student_identifier]
+    add_index :esercizio_attempts, [ :esercizio_id, :student_identifier ]
   end
 end

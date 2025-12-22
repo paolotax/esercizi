@@ -523,9 +523,9 @@ class Addizione
       when :sign
         sign_value = if addend_idx == @addends.length - 1
                        "="
-                     else
+        else
                        @operator
-                     end
+        end
         cells << {
           type: :sign,
           value: sign_value,

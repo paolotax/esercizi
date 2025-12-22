@@ -54,7 +54,7 @@ class Search::Record < ApplicationRecord
     end
 
     def remove_from_fts(id)
-      connection.execute("DELETE FROM search_records_fts WHERE rowid = #{id}")
+      connection.execute(sanitize_sql_array([ "DELETE FROM search_records_fts WHERE rowid = ?", id.to_i ]))
     end
 
     def sanitize_query(query)

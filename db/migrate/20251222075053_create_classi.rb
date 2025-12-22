@@ -9,6 +9,6 @@ class CreateClassi < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :classi, [:account_id, :name, :anno_scolastico], unique: true
+    add_index :classi, [ :account_id, :name, :anno_scolastico ], unique: true
   end
 end

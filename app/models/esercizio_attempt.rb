@@ -69,17 +69,17 @@ class EsercizioAttempt < ApplicationRecord
     seconds = total_seconds % 60
 
     if hours > 0
-      format('%d:%02d:%02d', hours, minutes, seconds)
+      format("%d:%02d:%02d", hours, minutes, seconds)
     else
-      format('%d:%02d', minutes, seconds)
+      format("%d:%02d", minutes, seconds)
     end
   end
 
   def success_rate
-    return 0 unless results.present? && results['operations'].present?
+    return 0 unless results.present? && results["operations"].present?
 
-    total = results['operations'].count
-    correct = results['operations'].count { |op| op['correct'] == true }
+    total = results["operations"].count
+    correct = results["operations"].count { |op| op["correct"] == true }
 
     return 0 if total == 0
     ((correct.to_f / total) * 100).round(1)
@@ -89,8 +89,8 @@ class EsercizioAttempt < ApplicationRecord
     # Restituisce il nome dell'utente se presente, altrimenti dal results o identifier
     if user.present?
       user.name
-    elsif results.is_a?(Hash) && results['student_name'].present?
-      results['student_name']
+    elsif results.is_a?(Hash) && results["student_name"].present?
+      results["student_name"]
     else
       student_identifier
     end
@@ -107,10 +107,10 @@ class EsercizioAttempt < ApplicationRecord
   end
 
   def calculate_score(results_data)
-    return 0 unless results_data['operations'].present?
+    return 0 unless results_data["operations"].present?
 
-    total = results_data['operations'].count
-    correct = results_data['operations'].count { |op| op['correct'] == true }
+    total = results_data["operations"].count
+    correct = results_data["operations"].count { |op| op["correct"] == true }
 
     return 0 if total == 0
     ((correct.to_f / total) * 100).round(2)

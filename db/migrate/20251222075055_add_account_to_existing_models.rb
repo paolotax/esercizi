@@ -15,8 +15,8 @@ class AddAccountToExistingModels < ActiveRecord::Migration[8.1]
     add_reference :esercizi, :creator, foreign_key: { to_table: :users }
 
     # Create indexes for tenant queries
-    add_index :corsi, [:account_id, :created_at]
-    add_index :esercizi, [:account_id, :created_at]
-    add_index :esercizio_attempts, [:account_id, :user_id]
+    add_index :corsi, [ :account_id, :created_at ]
+    add_index :esercizi, [ :account_id, :created_at ]
+    add_index :esercizio_attempts, [ :account_id, :user_id ]
   end
 end

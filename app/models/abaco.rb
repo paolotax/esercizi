@@ -171,9 +171,9 @@ class Abaco
       # Se value è nil ma c'è correct_value, usa quello
       actual_value = if value.nil? && @correct_value
                        digit_from_correct_value(column)
-                     else
+      else
                        value.to_i
-                     end
+      end
       actual_value > 0 ? actual_value.to_s : ""
     end
   end

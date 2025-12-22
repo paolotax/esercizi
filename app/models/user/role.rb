@@ -5,7 +5,7 @@ module User::Role
     enum :role, %i[owner teacher student].index_by(&:itself), scopes: false
 
     scope :owners, -> { where(active: true, role: :owner) }
-    scope :teachers, -> { where(active: true, role: [:owner, :teacher]) }
+    scope :teachers, -> { where(active: true, role: [ :owner, :teacher ]) }
     scope :students, -> { where(active: true, role: :student) }
   end
 

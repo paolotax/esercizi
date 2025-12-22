@@ -24,12 +24,12 @@ class EsercizioTemplate < ApplicationRecord
 
   # Categorie predefinite per i template
   CATEGORIES = [
-    'Base',
-    'Intermedio',
-    'Avanzato',
-    'Verifica',
-    'Esercitazione',
-    'Compiti'
+    "Base",
+    "Intermedio",
+    "Avanzato",
+    "Verifica",
+    "Esercitazione",
+    "Compiti"
   ].freeze
 
   def self.categories

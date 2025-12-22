@@ -103,13 +103,13 @@ class Strumenti::AbacoController < Strumenti::BaseController
     # Usa le colonne forzate se specificate, altrimenti determina in base al numero
     columns = if global_options[:columns].present?
                 global_options[:columns]
-              else
+    else
                 case number
                 when 0..99 then 2
                 when 100..999 then 3
                 else 4
                 end
-              end
+    end
 
     # Rimuovi :columns e :example_value dalle opzioni prima di passarle ad Abaco
     abaco_options = global_options.except(:columns, :example_value)

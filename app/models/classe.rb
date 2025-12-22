@@ -6,7 +6,7 @@ class Classe < ApplicationRecord
   has_many :students, through: :memberships, source: :user
 
   validates :name, presence: true
-  validates :name, uniqueness: { scope: [:account_id, :anno_scolastico] }
+  validates :name, uniqueness: { scope: [ :account_id, :anno_scolastico ] }
 
   scope :current_year, -> { where(anno_scolastico: current_anno_scolastico) }
 

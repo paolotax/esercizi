@@ -1,6 +1,6 @@
 class SignupsController < ApplicationController
   disallow_account_scope
-  allow_unauthenticated_access only: [:new, :create]
+  allow_unauthenticated_access only: [ :new, :create ]
 
   layout "public"
 

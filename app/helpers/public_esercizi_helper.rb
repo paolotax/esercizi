@@ -1,42 +1,42 @@
 module PublicEserciziHelper
   def render_operation_display(operation)
-    config = operation['config'] || {}
+    config = operation["config"] || {}
 
-    case operation['type']
-    when 'addizione'
-      if config['operation_text'].present?
-        config['operation_text']
-      elsif config['values'].present?
-        config['values'].join(' + ')
+    case operation["type"]
+    when "addizione"
+      if config["operation_text"].present?
+        config["operation_text"]
+      elsif config["values"].present?
+        config["values"].join(" + ")
       else
-        'Addizione'
+        "Addizione"
       end
-    when 'sottrazione'
-      if config['operation_text'].present?
-        config['operation_text']
-      elsif config['values'].present?
-        config['values'].join(' - ')
+    when "sottrazione"
+      if config["operation_text"].present?
+        config["operation_text"]
+      elsif config["values"].present?
+        config["values"].join(" - ")
       else
-        'Sottrazione'
+        "Sottrazione"
       end
-    when 'moltiplicazione'
-      if config['operation_text'].present?
-        config['operation_text']
-      elsif config['multiplicand'].present? && config['multiplier'].present?
+    when "moltiplicazione"
+      if config["operation_text"].present?
+        config["operation_text"]
+      elsif config["multiplicand"].present? && config["multiplier"].present?
         "#{config['multiplicand']} × #{config['multiplier']}"
       else
-        'Moltiplicazione'
+        "Moltiplicazione"
       end
-    when 'abaco'
-      if config['value'].present?
+    when "abaco"
+      if config["value"].present?
         "Rappresenta il numero #{config['value']}"
-      elsif config['correct_value'].present?
+      elsif config["correct_value"].present?
         "Rappresenta il numero #{config['correct_value']}"
       else
-        'Abaco'
+        "Abaco"
       end
     else
-      operation['type'].capitalize
+      operation["type"].capitalize
     end
   end
 end

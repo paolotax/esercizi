@@ -1,5 +1,5 @@
 # Pagy Configuration
-require 'pagy/extras/overflow'
+require "pagy/extras/overflow"
 
 # Set default items per page
 Pagy::DEFAULT[:items] = 12

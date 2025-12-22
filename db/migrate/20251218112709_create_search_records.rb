@@ -11,7 +11,7 @@ class CreateSearchRecords < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :search_records, [:searchable_type, :searchable_id], unique: true
+    add_index :search_records, [ :searchable_type, :searchable_id ], unique: true
 
     # Tabella virtuale FTS5
     execute <<-SQL

@@ -24,7 +24,7 @@ class Esercizio < ApplicationRecord
   before_create :generate_share_token
 
   # Scopes
-  scope :published, -> { where.not(published_at: nil).where('published_at <= ?', Time.current) }
+  scope :published, -> { where.not(published_at: nil).where("published_at <= ?", Time.current) }
   scope :draft, -> { where(published_at: nil) }
   scope :by_category, ->(category) { where(category: category) if category.present? }
   scope :by_difficulty, ->(difficulty) { where(difficulty: difficulty) if difficulty.present? }
@@ -56,20 +56,20 @@ class Esercizio < ApplicationRecord
   def add_operation(type, config, position = nil)
     ensure_content_structure
     new_operation = {
-      'id' => SecureRandom.uuid,
-      'type' => type,
-      'config' => config,
-      'position' => position || self.content['operations'].size
+      "id" => SecureRandom.uuid,
+      "type" => type,
+      "config" => config,
+      "position" => position || self.content["operations"].size
     }
 
     # Se è stata specificata una posizione, inserisci l'operazione in quella posizione
-    if position && position < self.content['operations'].size
-      self.content['operations'].insert(position, new_operation)
+    if position && position < self.content["operations"].size
+      self.content["operations"].insert(position, new_operation)
       # Riordina le posizioni delle operazioni successive
       reorder_operations
     else
       # Altrimenti aggiungila alla fine
-      self.content['operations'] << new_operation
+      self.content["operations"] << new_operation
     end
 
     self.content_will_change! # Forza Rails a riconoscere il cambiamento
@@ -78,20 +78,20 @@ class Esercizio < ApplicationRecord
 
   def remove_operation(operation_id)
     ensure_content_structure
-    self.content['operations'].reject! { |op| op['id'] == operation_id }
+    self.content["operations"].reject! { |op| op["id"] == operation_id }
     reorder_operations
     self.content_will_change! # Forza Rails a riconoscere il cambiamento
     save
   end
 
   def reorder_operations
-    self.content['operations'].each_with_index do |op, index|
-      op['position'] = index
+    self.content["operations"].each_with_index do |op, index|
+      op["position"] = index
     end
   end
 
   def operations
-    content['operations'] || []
+    content["operations"] || []
   end
 
   def search_record_attributes
@@ -112,12 +112,12 @@ class Esercizio < ApplicationRecord
 
   def ensure_defaults
     self.tags ||= []
-    self.content ||= { 'operations' => [] }
+    self.content ||= { "operations" => [] }
   end
 
   def ensure_content_structure
     self.content ||= {}
-    self.content['operations'] ||= []
+    self.content["operations"] ||= []
   end
 
   def generate_slug

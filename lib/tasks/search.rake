@@ -53,7 +53,7 @@ namespace :search do
     # Aggiungi i metadati contestuali
     metadata = build_metadata(pagina)
 
-    [text, metadata].compact.join(" ")
+    [ text, metadata ].compact.join(" ")
   rescue => e
     Rails.logger.warn "Errore estrazione HTML per pagina #{pagina.id}: #{e.message}"
     nil

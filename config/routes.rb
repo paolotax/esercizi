@@ -12,14 +12,14 @@ Rails.application.routes.draw do
   # ============================================
   # Auth routes (no account scope)
   # ============================================
-  resource :session, only: [:new, :create, :destroy] do
+  resource :session, only: [ :new, :create, :destroy ] do
     scope module: :sessions do
-      resource :magic_link, only: [:show, :update]
+      resource :magic_link, only: [ :show, :update ]
       resource :menu, only: :show
     end
   end
 
-  resource :signup, only: [:new, :create]
+  resource :signup, only: [ :new, :create ]
   get "join/:code", to: "join_codes#new", as: :join
   post "join/:code", to: "join_codes#create"
 
@@ -72,9 +72,9 @@ Rails.application.routes.draw do
   # ============================================
 
   # Navigation routes for books hierarchy
-  resources :corsi, only: [:index, :show]
-  resources :volumi, only: [:index, :show]
-  resources :discipline, only: [:show]
+  resources :corsi, only: [ :index, :show ]
+  resources :volumi, only: [ :index, :show ]
+  resources :discipline, only: [ :show ]
 
   # Dynamic page routing by slug
   get "pagine/:slug", to: "pagine#show", as: "pagina"
@@ -100,18 +100,18 @@ Rails.application.routes.draw do
 
     # Classi management (teacher only)
     resources :classi do
-      resources :students, only: [:index, :create, :destroy], controller: "classi/students"
+      resources :students, only: [ :index, :create, :destroy ], controller: "classi/students"
     end
 
     # Attempts overview (teacher only)
-    resources :attempts, only: [:index, :show]
+    resources :attempts, only: [ :index, :show ]
   end
 
   # Account management (owner only)
   namespace :account do
-    resource :settings, only: [:show, :update]
-    resources :users, only: [:index, :show, :edit, :update, :destroy]
-    resources :join_codes, only: [:index, :show, :update]
+    resource :settings, only: [ :show, :update ]
+    resources :users, only: [ :index, :show, :edit, :update, :destroy ]
+    resources :join_codes, only: [ :index, :show, :update ]
   end
 
   # Defines the root path route ("/")

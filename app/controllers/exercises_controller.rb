@@ -25,7 +25,7 @@ class ExercisesController < ApplicationController
           next nil unless parts.length == 2
           {
             type: "subtraction",
-            operands: [parts[0].to_i, parts[1].to_i],
+            operands: [ parts[0].to_i, parts[1].to_i ],
             show_borrow: show_borrow,
             show_carry: show_carry,
             show_operands: show_operands
@@ -35,7 +35,7 @@ class ExercisesController < ApplicationController
           next nil unless parts.length == 2
           {
             type: "multiplication",
-            operands: [parts[0].to_i, parts[1].to_i],
+            operands: [ parts[0].to_i, parts[1].to_i ],
             show_operands: show_operands
           }
         elsif op.include?("+")
@@ -43,7 +43,7 @@ class ExercisesController < ApplicationController
           next nil unless parts.length == 2
           {
             type: "addition",
-            operands: [parts[0].to_i, parts[1].to_i],
+            operands: [ parts[0].to_i, parts[1].to_i ],
             show_carry: show_carry,
             show_borrow: show_borrow,
             show_operands: show_operands
