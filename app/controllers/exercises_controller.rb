@@ -79,8 +79,8 @@ class ExercisesController < ApplicationController
     when "moltiplicazione"
       numbers = parse_operation_strings(operation, /[x×*]/i)
       return render_error("Operazione non valida") unless numbers&.length == 2
-      show_partial_carries = params[:show_partial_carries] == "true"
-      moltiplicazione = Moltiplicazione.new(multiplicand: numbers[0], multiplier: numbers[1], show_toolbar: true, show_partial_carries: show_partial_carries)
+      show_carry = params[:show_partial_carries] == "true"
+      moltiplicazione = Moltiplicazione.new(multiplicand: numbers[0], multiplier: numbers[1], show_toolbar: true, show_carry: show_carry)
       render partial: "strumenti/moltiplicazioni/quaderno_moltiplicazione", locals: { moltiplicazione: moltiplicazione }
 
     when "divisione"

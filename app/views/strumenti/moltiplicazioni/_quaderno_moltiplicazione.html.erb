@@ -122,7 +122,7 @@
 
         <% first_partial_top_border = p_idx == 0 ? 'border-t-2 border-t-gray-700 dark:border-t-gray-300' : '' %>
 
-        <% if moltiplicazione.show_partial_carries %>
+        <% if moltiplicazione.show_carry %>
           <%# Riga riporti per questo prodotto parziale (opzionale) %>
           <%# Prima cella (vuota) - bordo sottile %>
           <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= carry_height %>;"></div>
@@ -160,7 +160,7 @@
           <div class="border-r border-b border-gray-300 dark:border-gray-600" style="height: <%= cell_size %>;"></div>
         <% end %>
         <%# Bordo spesso sulla riga cifre solo se non ci sono i riporti %>
-        <% digit_row_top_border = moltiplicazione.show_partial_carries ? '' : first_partial_top_border %>
+        <% digit_row_top_border = moltiplicazione.show_carry ? '' : first_partial_top_border %>
         <% data_cols.times do |digit_idx| %>
           <% digit = partial[:digits][digit_idx] %>
           <% col_from_right = data_cols - 1 - digit_idx %>
