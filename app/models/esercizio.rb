@@ -10,7 +10,8 @@ class Esercizio < ApplicationRecord
   after_initialize :ensure_defaults
 
   # Associazioni
-  # belongs_to :user, optional: true # Decommentare se hai un sistema di utenti
+  belongs_to :account, optional: true
+  belongs_to :creator, class_name: "User", optional: true
   has_many :esercizio_attempts, dependent: :destroy
 
   # Validazioni

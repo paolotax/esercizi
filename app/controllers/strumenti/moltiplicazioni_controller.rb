@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Strumenti
-  class MoltiplicazioniController < ApplicationController
+  class MoltiplicazioniController < BaseController
     def show
       @multiplications = []
       @options = default_options

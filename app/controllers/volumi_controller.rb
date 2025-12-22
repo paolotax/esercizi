@@ -1,4 +1,6 @@
 class VolumiController < ApplicationController
+  allow_any_account_scope
+
   def index
     @volumi = Volume.all.includes(:corso, discipline: :pagine)
   end

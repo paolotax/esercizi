@@ -1,5 +1,6 @@
 class Disciplina < ApplicationRecord
   # Associazioni
+  belongs_to :account, optional: true
   belongs_to :volume
   has_many :pagine, dependent: :destroy
 

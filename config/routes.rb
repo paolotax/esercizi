@@ -9,42 +9,30 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  # Navigation routes for books hierarchy
-  resources :corsi, only: [ :index, :show ]
-  resources :volumi, only: [ :index, :show ]
-  resources :discipline, only: [ :show ]
-
-  # Dynamic page routing by slug
-  get "pagine/:slug", to: "pagine#show", as: "pagina"
-
-  # API endpoint for dynamic column operations grid (addizioni, sottrazioni, miste, con prova)
-  get "exercises/column_operations_grid", to: "exercises#column_operations_grid", as: "column_operations_grid"
-  # API endpoint for quaderno grid (single operation for sidebar)
-  get "exercises/quaderno_grid", to: "exercises#quaderno_grid", as: "quaderno_grid"
-
-  # Dashboard per costruzione esercizi
-  namespace :dashboard do
-    resources :esercizi do
-      member do
-        post :duplicate
-        get :preview
-        get :export_pdf
-        post :add_operation
-        delete :remove_operation
-        patch :reorder_operations
-        get :operation_properties
-        patch :update_operation
-      end
+  # ============================================
+  # Auth routes (no account scope)
+  # ============================================
+  resource :session, only: [:new, :create, :destroy] do
+    scope module: :sessions do
+      resource :magic_link, only: [:show, :update]
+      resource :menu, only: :show
     end
-    resources :esercizio_templates
   end
 
-  # Area pubblica per esercizi condivisi
-  get 'e/:share_token', to: 'public_esercizi#show', as: :public_esercizio
-  post 'e/:share_token/attempt', to: 'public_esercizi#attempt', as: :public_esercizio_attempt
-  get 'e/:share_token/results/:attempt_id', to: 'public_esercizi#results', as: :public_esercizio_results
+  resource :signup, only: [:new, :create]
+  get "join/:code", to: "join_codes#new", as: :join
+  post "join/:code", to: "join_codes#create"
 
-  # Strumenti
+  # ============================================
+  # Public routes (no auth required)
+  # ============================================
+
+  # Area pubblica per esercizi condivisi
+  get "e/:share_token", to: "public_esercizi#show", as: :public_esercizio
+  post "e/:share_token/attempt", to: "public_esercizi#attempt", as: :public_esercizio_attempt
+  get "e/:share_token/results/:attempt_id", to: "public_esercizi#results", as: :public_esercizio_results
+
+  # Strumenti (public tools)
   namespace :strumenti do
     get "addizioni", to: "addizioni#show", as: "addizioni"
     post "addizioni/generate", to: "addizioni#generate", as: "addizioni_generate"
@@ -71,8 +59,57 @@ Rails.application.routes.draw do
     get "abaco/examples", to: "abaco#examples", as: "abaco_examples"
   end
 
+  # API endpoint for dynamic column operations grid (addizioni, sottrazioni, miste, con prova)
+  get "exercises/column_operations_grid", to: "exercises#column_operations_grid", as: "column_operations_grid"
+  # API endpoint for quaderno grid (single operation for sidebar)
+  get "exercises/quaderno_grid", to: "exercises#quaderno_grid", as: "quaderno_grid"
+
+  # ============================================
+  # Authenticated routes (within account scope)
+  # ============================================
+
+  # Navigation routes for books hierarchy
+  resources :corsi, only: [:index, :show]
+  resources :volumi, only: [:index, :show]
+  resources :discipline, only: [:show]
+
+  # Dynamic page routing by slug
+  get "pagine/:slug", to: "pagine#show", as: "pagina"
+
   # Ricerca
   resource :search, only: :show
+
+  # Dashboard per costruzione esercizi (teacher only)
+  namespace :dashboard do
+    resources :esercizi do
+      member do
+        post :duplicate
+        get :preview
+        get :export_pdf
+        post :add_operation
+        delete :remove_operation
+        patch :reorder_operations
+        get :operation_properties
+        patch :update_operation
+      end
+    end
+    resources :esercizio_templates
+
+    # Classi management (teacher only)
+    resources :classi do
+      resources :students, only: [:index, :create, :destroy], controller: "classi/students"
+    end
+
+    # Attempts overview (teacher only)
+    resources :attempts, only: [:index, :show]
+  end
+
+  # Account management (owner only)
+  namespace :account do
+    resource :settings, only: [:show, :update]
+    resources :users, only: [:index, :show, :edit, :update, :destroy]
+    resources :join_codes, only: [:index, :show, :update]
+  end
 
   # Defines the root path route ("/")
   root "volumi#index"

@@ -1,4 +1,6 @@
 class PagineController < ApplicationController
+  allow_any_account_scope
+
   def show
     @pagina = Pagina.find_by!(slug: params[:slug])
 

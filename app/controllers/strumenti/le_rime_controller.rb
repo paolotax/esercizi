@@ -1,4 +1,4 @@
-class Strumenti::LeRimeController < ApplicationController
+class Strumenti::LeRimeController < Strumenti::BaseController
   def show
     @poesia = params[:poesia] || ""
     @rhyme_groups = parse_poesia_and_detect_rhymes(@poesia) if @poesia.present?

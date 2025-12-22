@@ -3,7 +3,9 @@ class EsercizioAttempt < ApplicationRecord
   serialize :results, coder: JSON, type: Hash
 
   # Associazioni
+  belongs_to :account, optional: true
   belongs_to :esercizio
+  belongs_to :user, optional: true
 
   # Validazioni
   validates :student_identifier, presence: true
@@ -84,12 +86,18 @@ class EsercizioAttempt < ApplicationRecord
   end
 
   def student_display_name
-    # Restituisce il nome dello studente se fornito, altrimenti l'identifier
-    if results.is_a?(Hash) && results['student_name'].present?
+    # Restituisce il nome dell'utente se presente, altrimenti dal results o identifier
+    if user.present?
+      user.name
+    elsif results.is_a?(Hash) && results['student_name'].present?
       results['student_name']
     else
       student_identifier
     end
+  end
+
+  def anonymous?
+    user_id.nil?
   end
 
   private

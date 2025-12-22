@@ -1,4 +1,6 @@
 class Dashboard::EserciziController < ApplicationController
+  require_teacher
+
   before_action :set_esercizio, only: [:show, :edit, :update, :destroy, :duplicate, :preview, :export_pdf]
 
   def index

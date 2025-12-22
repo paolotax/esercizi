@@ -1,0 +1,18 @@
+class Identity < ApplicationRecord
+  include Joinable
+
+  has_many :magic_links, dependent: :destroy
+  has_many :sessions, dependent: :destroy
+  has_many :users, dependent: :nullify
+  has_many :accounts, through: :users
+
+  validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  normalizes :email_address, with: ->(value) { value.strip.downcase.presence }
+
+  def send_magic_link(**attributes)
+    attributes[:purpose] = attributes.delete(:for) if attributes.key?(:for)
+    magic_links.create!(attributes).tap do |magic_link|
+      MagicLinkMailer.sign_in_instructions(magic_link).deliver_later
+    end
+  end
+end

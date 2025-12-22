@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Strumenti
-  class DivisioniController < ApplicationController
+  class DivisioniController < BaseController
     def quaderno
       @divisions = []
       @options = default_quaderno_options

@@ -1,0 +1,38 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        Unisciti a <%= @join_code.account.name %>
+      </h2>
+      <p class="mt-2 text-center text-sm text-gray-600">
+        Inserisci la tua email per unirti come <strong><%= @join_code.role %></strong>
+      </p>
+    </div>
+
+    <% if flash[:alert] %>
+      <div class="rounded-md bg-red-50 p-4">
+        <p class="text-sm text-red-700"><%= flash[:alert] %></p>
+      </div>
+    <% end %>
+
+    <%= form_with url: join_path(@join_code.code), method: :post, class: "mt-8 space-y-6" do |form| %>
+      <div>
+        <%= form.label :email_address, "Email", class: "block text-sm font-medium text-gray-700" %>
+        <div class="mt-1">
+          <%= form.email_field :email_address,
+              required: true,
+              autofocus: true,
+              autocomplete: "email",
+              value: Current.identity&.email_address,
+              placeholder: "tu@esempio.com",
+              class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+        </div>
+      </div>
+
+      <div>
+        <%= form.submit "Unisciti",
+            class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer" %>
+      </div>
+    <% end %>
+  </div>
+</div>

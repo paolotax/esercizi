@@ -1,4 +1,6 @@
 class CorsiController < ApplicationController
+  allow_any_account_scope
+
   def index
     @corsi = Corso.all.includes(:volumi)
   end

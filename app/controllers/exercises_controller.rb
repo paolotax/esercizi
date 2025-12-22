@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ExercisesController < ApplicationController
+  allow_any_account_scope
+
   # GET /exercises/column_operations_grid
   # Endpoint unificato per qualsiasi tipo di operazione (addizioni, sottrazioni, moltiplicazioni, miste)
   # Supporta anche la prova (sottrazione + addizione per verificare)

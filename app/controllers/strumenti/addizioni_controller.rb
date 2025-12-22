@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Strumenti::AddizioniController < ApplicationController
+class Strumenti::AddizioniController < Strumenti::BaseController
   def show
     @addizioni = []
     @options = default_options

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Strumenti::SottrazioniController < ApplicationController
+class Strumenti::SottrazioniController < Strumenti::BaseController
   def show
     @sottrazioni = []
     @options = default_options

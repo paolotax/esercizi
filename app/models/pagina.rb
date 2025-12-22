@@ -2,6 +2,7 @@ class Pagina < ApplicationRecord
   include Searchable
 
   # Associazioni
+  belongs_to :account, optional: true
   belongs_to :disciplina
 
   # Validazioni

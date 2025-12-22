@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Strumenti::AbacoController < ApplicationController
+class Strumenti::AbacoController < Strumenti::BaseController
   def show
     @abachi = []
     @options = default_options

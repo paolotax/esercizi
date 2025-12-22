@@ -1,4 +1,7 @@
 class PublicEserciziController < ApplicationController
+  disallow_account_scope
+  allow_unauthenticated_access
+
   before_action :set_esercizio_by_token, only: [:show, :attempt]
   before_action :set_attempt, only: [:results]
   layout 'public'

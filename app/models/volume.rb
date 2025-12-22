@@ -1,5 +1,6 @@
 class Volume < ApplicationRecord
   # Associazioni
+  belongs_to :account, optional: true
   belongs_to :corso
   has_many :discipline, dependent: :destroy
 

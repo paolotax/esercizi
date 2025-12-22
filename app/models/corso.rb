@@ -1,5 +1,6 @@
 class Corso < ApplicationRecord
   # Associazioni
+  belongs_to :account, optional: true
   has_many :volumi, dependent: :destroy
 
   # Validazioni

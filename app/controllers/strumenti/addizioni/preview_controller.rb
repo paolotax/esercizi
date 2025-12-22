@@ -1,4 +1,4 @@
-class Strumenti::Addizioni::PreviewController < ApplicationController
+class Strumenti::Addizioni::PreviewController < Strumenti::BaseController
   def create
     @options = parse_options
     @addizioni = parse_addizioni_with_options(@operations, @options) if @operations.present?
