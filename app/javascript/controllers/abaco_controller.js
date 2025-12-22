@@ -830,6 +830,9 @@ export default class extends Controller {
       isCorrect = allFieldsValid && currentBallsTotal === this.correctValue
     }
 
+    // Applica stili visivi agli input (bordi verdi/rossi)
+    this.applyInputFeedbackStyles(isCorrect, allFieldsValid)
+
     // Mostra feedback
     if (isCorrect) {
       // Lancia confetti (solo la prima volta)
@@ -872,6 +875,59 @@ export default class extends Controller {
         }
       }
     }
+
+    // Restituisce il risultato per uso esterno (exercise_checker)
+    return { isCorrect, allFieldsValid }
+  }
+
+  // Applica stili visivi agli input (ring verdi/rossi/gialli sul contenitore)
+  applyInputFeedbackStyles(isCorrect, allFieldsValid) {
+    const inputs = []
+    if (this.hasInputKTarget) inputs.push(this.inputKTarget)
+    if (this.hasInputHTarget) inputs.push(this.inputHTarget)
+    if (this.hasInputDaTarget) inputs.push(this.inputDaTarget)
+    if (this.hasInputUTarget) inputs.push(this.inputUTarget)
+
+    // Applica stili al contenitore dell'input (il div padre con border-3)
+    inputs.forEach(input => {
+      const container = input.closest('div')
+      if (!container) return
+
+      // Rimuovi stili precedenti dal contenitore
+      container.classList.remove(
+        'ring-4', 'ring-green-500', 'ring-red-500', 'ring-yellow-500',
+        'bg-green-100', 'bg-red-100', 'bg-yellow-100',
+        'dark:bg-green-900/50', 'dark:bg-red-900/50', 'dark:bg-yellow-900/50'
+      )
+
+      // Applica nuovi stili
+      if (isCorrect) {
+        container.classList.add('ring-4', 'ring-green-500', 'bg-green-100', 'dark:bg-green-900/50')
+      } else if (allFieldsValid) {
+        // Tutti compilati ma sbagliato
+        container.classList.add('ring-4', 'ring-red-500', 'bg-red-100', 'dark:bg-red-900/50')
+      }
+    })
+  }
+
+  // Rimuovi stili di feedback dagli input
+  clearInputFeedbackStyles() {
+    const inputs = []
+    if (this.hasInputKTarget) inputs.push(this.inputKTarget)
+    if (this.hasInputHTarget) inputs.push(this.inputHTarget)
+    if (this.hasInputDaTarget) inputs.push(this.inputDaTarget)
+    if (this.hasInputUTarget) inputs.push(this.inputUTarget)
+
+    inputs.forEach(input => {
+      const container = input.closest('div')
+      if (!container) return
+
+      container.classList.remove(
+        'ring-4', 'ring-green-500', 'ring-red-500', 'ring-yellow-500',
+        'bg-green-100', 'bg-red-100', 'bg-yellow-100',
+        'dark:bg-green-900/50', 'dark:bg-red-900/50', 'dark:bg-yellow-900/50'
+      )
+    })
   }
 
   // Metodo pubblico per impostare un valore dall'esterno

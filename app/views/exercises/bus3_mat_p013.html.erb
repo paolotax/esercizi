@@ -8,80 +8,37 @@
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <!-- Esercizio 9: Scrivi il numero in cifre e in lettere -->
+  <!-- Esercizio 9: Conta le palline e scrivi il numero in lettere -->
   <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks auto-advance">
-    <div class="flex items-start gap-3 mb-6">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-        9
-      </div>
-      <p class="text-gray-700 dark:text-gray-200">
-        Scrivi il numero in cifre e in lettere.
-      </p>
-    </div>
-
-    <!-- Immagine abachi -->
-    <div class="flex justify-center mb-6">
-      <div class="bg-white rounded-xl p-2">
-        <%= image_tag "bus3_mat/p013/p13_1.jpg",
-            alt: "Abachi con numeri da scrivere",
-            class: "max-w-4xl w-full rounded-lg" %>
-      </div>
-    </div>
+    
+    <p class="text-gray-700 dark:text-gray-200">
+      <%= numero_esercizio_badge(9, colore: 'red-500') %>
+      Conta le palline e scrivi il numero in cifre e in lettere.
+    </p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- Abaco 1: 170 -->
-      <div class="bg-white dark:bg-gray-800 border-3 border-cyan-400 dark:border-cyan-500 rounded-lg p-4">
-        <div class="space-y-3">
-          <div class="flex items-center gap-2">
-            <span class="font-bold text-gray-700 dark:text-gray-200">In cifre:</span>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="170"
-                   class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                   maxlength="3" inputmode="numeric">
+      <% [280, 407, 632].each_with_index do |numero, index| %>
+        <%
+          # Calcola il nome in lettere per ciascun numero
+          nomi_lettere = {
+            280 => "duecentottanta",
+            407 => "quattrocentosette",
+            632 => "seicentotrentadue"
+          }
+        %>
+        <div class="flex flex-col items-center">
+          <div class="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl p-4 mb-4">
+            <%= render 'strumenti/abaco/abaco',
+                       abaco: Abaco.new(columns: 3, correct_value: numero, mode: :balls, editable: true, show_value: false) %>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="font-bold text-gray-700 dark:text-gray-200">In lettere:</span>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="centosettanta"
-                   class="flex-1 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                   maxlength="20">
-          </div>
-        </div>
-      </div>
-
-      <!-- Abaco 2: 35 -->
-      <div class="bg-white dark:bg-gray-800 border-3 border-cyan-400 dark:border-cyan-500 rounded-lg p-4">
-        <div class="space-y-3">
-          <div class="flex items-center gap-2">
-            <span class="font-bold text-gray-700 dark:text-gray-200">In cifre:</span>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="35"
-                   class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                   maxlength="2" inputmode="numeric">
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="font-bold text-gray-700 dark:text-gray-200">In lettere:</span>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="trentacinque"
-                   class="flex-1 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                   maxlength="20">
-          </div>
-        </div>
-      </div>
-
-      <!-- Abaco 3: 425 -->
-      <div class="bg-white dark:bg-gray-800 border-3 border-cyan-400 dark:border-cyan-500 rounded-lg p-4">
-        <div class="space-y-3">
-          <div class="flex items-center gap-2">
-            <span class="font-bold text-gray-700 dark:text-gray-200">In cifre:</span>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="425"
-                   class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-                   maxlength="3" inputmode="numeric">
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="font-bold text-gray-700 dark:text-gray-200">In lettere:</span>
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="quattrocentoventicinque"
-                   class="flex-1 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
+          <div class="w-full">
+            <label class="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-2 text-center">In lettere:</label>
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="<%= nomi_lettere[numero] %>"
+                   class="w-full px-3 py-2 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
                    maxlength="25">
           </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 
@@ -130,15 +87,12 @@
       transform: translate(-50%, -50%) rotate(-45deg);
     }
   </style>
+
   <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="exercise-checker">
-    <div class="flex items-start gap-3 mb-6">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-        10
-      </div>
-      <p class="text-gray-700 dark:text-gray-200">
-        Indica con una <strong class="text-red-600 dark:text-red-400">X</strong> il numero in cifre.
-      </p>
-    </div>
+    <p class="text-gray-700 dark:text-gray-200">
+      <%= numero_esercizio_badge(10, colore: 'red-500') %>
+      Indica con una <strong class="text-red-600 dark:text-red-400">X</strong> il numero in cifre.
+    </p>
 
     <div class="space-y-4">
       <!-- duecentonove -->
@@ -194,55 +148,84 @@
     </div>
   </div>
 
-  <!-- Esercizio 11: Completa con un numero adatto -->
+  <!-- Esercizio 11: Completa con il numero adatto -->
   <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="fill-blanks">
-    <div class="flex items-start gap-3 mb-6">
-      <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-        11
-      </div>
-      <p class="text-gray-700 dark:text-gray-200">
-        Completa con un numero adatto.
-      </p>
-    </div>
+    <p class="text-gray-700 dark:text-gray-200">
+      <%= numero_esercizio_badge(11, colore: 'red-500') %>
+      Completa con il numero adatto.
+    </p>
 
-    <div class="space-y-4">
-      <div class="flex flex-wrap items-center gap-3">
-        <span class="font-bold">342</span>
-        <span class="text-blue-600 dark:text-blue-400">></span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="^(3[0-3][0-9]|[12][0-9]{2}|[1-9]?[0-9])$" data-validation="regex"
-               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-               maxlength="3" inputmode="numeric">
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="^(20[2-9]|2[1-9][0-9]|[3-9][0-9]{2})$" data-validation="regex"
-               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-               maxlength="3" inputmode="numeric">
-        <span class="text-blue-600 dark:text-blue-400">></span>
-        <span class="font-bold">201</span>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+      <!-- 342 > ___ (201 corretto, 450 sbagliato) -->
+      <div class="flex items-center gap-3">
+        <span class="font-bold text-xl">342</span>
+        <span class="text-blue-600 dark:text-blue-400 text-xl font-bold">&gt;</span>
+        <select data-fill-blanks-target="input" data-correct-answer="201"
+                class="px-3 py-1 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-center font-bold text-xl bg-white dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">...</option>
+          <option value="450">450</option>
+          <option value="201">201</option>
+        </select>
       </div>
 
-      <div class="flex flex-wrap items-center gap-3">
-        <span class="font-bold">842</span>
-        <span class="text-blue-600 dark:text-blue-400">&lt;</span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="^(8[5-9][0-9]|[9][0-9]{2})$" data-validation="regex"
-               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-               maxlength="3" inputmode="numeric">
-        <span class="font-bold">549</span>
-        <span class="text-blue-600 dark:text-blue-400">></span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="^([1-4][0-9]{2}|5[0-3][0-9]|54[0-8])$" data-validation="regex"
-               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-               maxlength="3" inputmode="numeric">
+      <!-- ___ < 842 (549 corretto, 900 sbagliato) -->
+      <div class="flex items-center gap-3">
+        <select data-fill-blanks-target="input" data-correct-answer="549"
+                class="px-3 py-1 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-center font-bold text-xl bg-white dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">...</option>
+          <option value="549">549</option>
+          <option value="900">900</option>
+        </select>
+        <span class="text-blue-600 dark:text-blue-400 text-xl font-bold">&lt;</span>
+        <span class="font-bold text-xl">842</span>
       </div>
 
-      <div class="flex flex-wrap items-center gap-3">
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="^(1[4-9][0-9]|[2-9][0-9]{2})$" data-validation="regex"
-               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-               maxlength="3" inputmode="numeric">
-        <span class="text-blue-600 dark:text-blue-400">></span>
-        <span class="font-bold">131</span>
-        <span class="font-bold">723</span>
-        <span class="text-blue-600 dark:text-blue-400">></span>
-        <input type="text" data-fill-blanks-target="input" data-correct-answer="^([1-6][0-9]{2}|7[01][0-9]|72[0-2])$" data-validation="regex"
-               class="w-20 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white"
-               maxlength="3" inputmode="numeric">
+      <!-- 723 > ___ (131 corretto, 800 sbagliato) -->
+      <div class="flex items-center gap-3">
+        <span class="font-bold text-xl">723</span>
+        <span class="text-blue-600 dark:text-blue-400 text-xl font-bold">&gt;</span>
+        <select data-fill-blanks-target="input" data-correct-answer="131"
+                class="px-3 py-1 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-center font-bold text-xl bg-white dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">...</option>
+          <option value="800">800</option>
+          <option value="131">131</option>
+        </select>
+      </div>
+
+      <!-- ___ < 652 (256 corretto, 718 sbagliato) -->
+      <div class="flex items-center gap-3">
+        <select data-fill-blanks-target="input" data-correct-answer="256"
+                class="px-3 py-1 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-center font-bold text-xl bg-white dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">...</option>
+          <option value="718">718</option>
+          <option value="256">256</option>
+        </select>
+        <span class="text-blue-600 dark:text-blue-400 text-xl font-bold">&lt;</span>
+        <span class="font-bold text-xl">652</span>
+      </div>
+
+      <!-- 489 > ___ (398 corretto, 512 sbagliato) -->
+      <div class="flex items-center gap-3">
+        <span class="font-bold text-xl">489</span>
+        <span class="text-blue-600 dark:text-blue-400 text-xl font-bold">&gt;</span>
+        <select data-fill-blanks-target="input" data-correct-answer="398"
+                class="px-3 py-1 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-center font-bold text-xl bg-white dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">...</option>
+          <option value="512">512</option>
+          <option value="398">398</option>
+        </select>
+      </div>
+
+      <!-- ___ < 971 (917 corretto, 985 sbagliato) -->
+      <div class="flex items-center gap-3">
+        <select data-fill-blanks-target="input" data-correct-answer="917"
+                class="px-3 py-1 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-center font-bold text-xl bg-white dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">...</option>
+          <option value="985">985</option>
+          <option value="917">917</option>
+        </select>
+        <span class="text-blue-600 dark:text-blue-400 text-xl font-bold">&lt;</span>
+        <span class="font-bold text-xl">971</span>
       </div>
     </div>
   </div>
@@ -357,7 +340,7 @@
       <div class="space-y-6">
         <!-- Orizzontali -->
         <div>
-          <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-3">Orizzontali</h3>
+          <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-3">→ Orizzontali</h3>
           <div class="space-y-2">
             <div class="flex gap-2">
               <span class="font-bold text-blue-600 dark:text-blue-400 min-w-[20px]">2.</span>
@@ -376,7 +359,7 @@
 
         <!-- Verticali -->
         <div>
-          <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-3">Verticali</h3>
+          <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-3">↓ Verticali</h3>
           <div class="space-y-2">
             <div class="flex gap-2">
               <span class="font-bold text-red-600 dark:text-red-400 min-w-[20px]">1.</span>
@@ -394,94 +377,105 @@
         </div>
       </div>
 
-      <!-- Griglia crucinumero -->
+      <!-- Griglia crucinumero 5x5
+           Struttura (4→ inizia in riga 3):
+                c0  c1  c2  c3  c4
+           r0:  ■   ■   ■   4   ■     1↓=461 inizia
+           r1:  ■   ■   3   6   5     2→=365
+           r2:  ■   2   0   1   ■     3→=201
+           r3:  8   1   9   ■   ■     4→=819 (quarta riga!)
+           r4:  ■   7   ■   ■   ■     3↓=217 finisce
+
+           Intersezioni: 1↓(4,6,1) 2↓(3,0,9) 3↓(2,1,7)
+      -->
       <div class="flex justify-center items-start">
-        <div class="inline-grid grid-cols-5 gap-0 border-4 border-cyan-400 dark:border-cyan-500 rounded-lg overflow-hidden" style="grid-template-rows: repeat(5, 1fr);">
-          <!-- Riga 1 -->
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
-          <div class="w-16 h-16 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
+        <div class="inline-grid grid-cols-5 gap-0 border-4 border-cyan-400 dark:border-cyan-500 rounded-lg overflow-hidden">
+          <!-- Riga 0: ■ ■ ■ 1↓ ■ -->
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
             <input type="text" data-fill-blanks-target="input" data-correct-answer="4"
-                   class="w-full h-full text-center font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
+                   class="w-full h-full text-center text-xl font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
                    maxlength="1" inputmode="numeric">
-            <span class="absolute top-0 left-0.5 text-[10px] font-bold text-red-600 dark:text-red-400">1</span>
+            <span class="absolute top-0.5 left-1 text-[10px] font-bold text-cyan-600 dark:text-cyan-400">1</span>
           </div>
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
 
-          <!-- Riga 2 -->
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
-          <div class="w-16 h-16 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
-                   class="w-full h-full text-center font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
-                   maxlength="1" inputmode="numeric">
-          </div>
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
-
-          <!-- Riga 3 -->
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
-          <div class="w-16 h-16 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
+          <!-- Riga 1: ■ ■ 2→ X X (365) -->
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
             <input type="text" data-fill-blanks-target="input" data-correct-answer="3"
-                   class="w-full h-full text-center font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
+                   class="w-full h-full text-center text-xl font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
                    maxlength="1" inputmode="numeric">
-            <span class="absolute top-0 left-0.5 text-[10px] font-bold text-blue-600 dark:text-blue-400">2</span>
+            <span class="absolute top-0.5 left-1 text-[10px] font-bold text-cyan-600 dark:text-cyan-400">2</span>
           </div>
-          <div class="w-16 h-16 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
+          <div class="w-12 h-12 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
             <input type="text" data-fill-blanks-target="input" data-correct-answer="6"
-                   class="w-full h-full text-center font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
-                   maxlength="1" inputmode="numeric">
-            <span class="absolute top-0 left-0.5 text-[10px] font-bold text-red-600 dark:text-red-400">3</span>
-          </div>
-          <div class="w-16 h-16 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
-                   class="w-full h-full text-center font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
+                   class="w-full h-full text-center text-xl font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
                    maxlength="1" inputmode="numeric">
           </div>
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="5"
+                   class="w-full h-full text-center text-xl font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
+                   maxlength="1" inputmode="numeric">
+          </div>
 
-          <!-- Riga 4 -->
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
-          <div class="w-16 h-16 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
+          <!-- Riga 2: ■ 3→ X X ■ (201) -->
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="2"
+                   class="w-full h-full text-center text-xl font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
+                   maxlength="1" inputmode="numeric">
+            <span class="absolute top-0.5 left-1 text-[10px] font-bold text-cyan-600 dark:text-cyan-400">3</span>
+          </div>
+          <div class="w-12 h-12 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
             <input type="text" data-fill-blanks-target="input" data-correct-answer="0"
-                   class="w-full h-full text-center font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
+                   class="w-full h-full text-center text-xl font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
                    maxlength="1" inputmode="numeric">
           </div>
-          <div class="w-16 h-16 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
+          <div class="w-12 h-12 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
             <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
-                   class="w-full h-full text-center font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
+                   class="w-full h-full text-center text-xl font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
                    maxlength="1" inputmode="numeric">
           </div>
-          <div class="w-16 h-16 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
-            <input type="text" data-fill-blanks-target="input" data-correct-answer="7"
-                   class="w-full h-full text-center font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
-                   maxlength="1" inputmode="numeric">
-          </div>
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
 
-          <!-- Riga 5 -->
-          <div class="w-16 h-16 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
+          <!-- Riga 3: 4→ X X ■ ■ (819) -->
+          <div class="w-12 h-12 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
             <input type="text" data-fill-blanks-target="input" data-correct-answer="8"
-                   class="w-full h-full text-center font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
+                   class="w-full h-full text-center text-xl font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
                    maxlength="1" inputmode="numeric">
-            <span class="absolute top-0 left-0.5 text-[10px] font-bold text-blue-600 dark:text-blue-400">4</span>
+            <span class="absolute top-0.5 left-1 text-[10px] font-bold text-cyan-600 dark:text-cyan-400">4</span>
           </div>
-          <div class="w-16 h-16 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
+          <div class="w-12 h-12 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
             <input type="text" data-fill-blanks-target="input" data-correct-answer="1"
-                   class="w-full h-full text-center font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
+                   class="w-full h-full text-center text-xl font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
                    maxlength="1" inputmode="numeric">
           </div>
-          <div class="w-16 h-16 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
+          <div class="w-12 h-12 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
             <input type="text" data-fill-blanks-target="input" data-correct-answer="9"
-                   class="w-full h-full text-center font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
+                   class="w-full h-full text-center text-xl font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
                    maxlength="1" inputmode="numeric">
           </div>
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
-          <div class="w-16 h-16 bg-blue-200 dark:bg-blue-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+
+          <!-- Riga 4: ■ X ■ ■ ■ (3↓ finisce con 7) -->
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-white dark:bg-gray-800 border border-cyan-300 dark:border-cyan-600 relative">
+            <input type="text" data-fill-blanks-target="input" data-correct-answer="7"
+                   class="w-full h-full text-center text-xl font-bold border-0 bg-transparent dark:text-white focus:bg-yellow-50 dark:focus:bg-yellow-900/30"
+                   maxlength="1" inputmode="numeric">
+          </div>
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
+          <div class="w-12 h-12 bg-cyan-200 dark:bg-cyan-900/50 border border-cyan-300 dark:border-cyan-600"></div>
         </div>
       </div>
     </div>
+
   </div>
 
   <!-- Quaderno link allineato a destra -->

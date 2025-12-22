@@ -7,7 +7,7 @@
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Box azzurro: Teoria + Esercizio 1 -->
-  <div class="bg-cyan-100 dark:bg-cyan-900/40 p-4 -mx-3 md:-mx-0 md:p-6 mb-8">
+  <div class="bg-custom-blue dark:bg-cyan-900/40 p-4 -mx-3 md:-mx-0 md:p-6 mb-8">
     <!-- Teoria -->
     <div class="mb-6">
       <p class="text-gray-700 dark:text-gray-200">
@@ -37,7 +37,7 @@
           <div class="flex flex-col gap-3 md:flex-row-reverse md:justify-between md:items-start">
 
             <!-- Immagine biglie a destra -->
-            <div class="flex-shrink-0 bg-white rounded-xl p-2">
+            <div class="flex-shrink-0 bg-transparent dark:bg-white rounded-xl p-2">
               <%= image_tag "bus3_mat/p006/output-1743504902006_670_342_312_183.png",
                   alt: "Biglie da raggruppare",
                   class: "max-w-md rounded-lg" %>
@@ -57,7 +57,6 @@
                       class="w-16 px-3 py-2 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white inline-block ml-2"
                       maxlength="1" inputmode="numeric">
               </div>
-
               <p class="text-gray-700 dark:text-gray-200 mb-4">Puoi rappresentare le biglie anche così:</p>
             </div>
           </div>        
@@ -66,12 +65,10 @@
 
 
       <!-- Spiegazione visiva -->
-      <div class="mt-8">
-        
-
+      <div class="mt-8 flex flex-col md:flex-row gap-4 items-center justify-between">
         <div class="flex items-center gap-4 flex-wrap">
           <div class="text-center">
-            <div class="bg-white rounded-lg p-1 mb-2 inline-block">
+            <div class="bg-transparent dark:bg-white rounded-lg p-1 mb-2 inline-block">
               <%= image_tag "bus3_mat/p006/output-1743504902006_136_556_215_48.png", class: "rounded" %>
             </div>
             <p class="font-bold">1 <span class="text-red-600 dark:text-red-400">decina</span> → 1 <span class="text-red-600 dark:text-red-400">da</span></p>
@@ -80,7 +77,7 @@
           <span class="font-bold">+</span>
 
           <div class="text-center">
-            <div class="bg-white rounded-lg p-1 mb-2 inline-block">
+            <div class="bg-transparent dark:bg-white rounded-lg p-1 mb-2 inline-block">
               <%= image_tag "bus3_mat/p006/output-1743504902006_446_555_86_45.png", class: "rounded" %>
             </div>
             <p class="font-bold">2 <span class="text-cyan-600 dark:text-cyan-400">unità</span> → 2 <span class="text-cyan-600 dark:text-cyan-400">u</span></p>
@@ -89,6 +86,11 @@
           <span class="font-bold">=</span>
           <span class="font-bold text-cyan-600 dark:text-cyan-400">12</span>
         </div>
+
+
+        <%= render 'strumenti/abaco/abaco',
+            abaco: Abaco.new(columns: 2, correct_value: 12, editable: false) %>
+ 
       </div>
     </div>
     
@@ -112,7 +114,7 @@
         <!-- Prima griglia -->
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mr-20">
 
-          <div class="bg-white rounded-xl p-2">
+          <div class="bg-transparent dark:bg-white rounded-xl p-2">
             <%= image_tag "bus3_mat/p006/output-1743504902006_99_877_180_137.png", class: "w-auto h-auto rounded-lg" %>
           </div>
 
@@ -139,7 +141,7 @@
 
         <!-- Seconda griglia -->
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mr-20">
-          <div class="bg-white rounded-xl p-2">
+          <div class="bg-transparent dark:bg-white rounded-xl p-2">
             <%= image_tag "bus3_mat/p006/output-1743504902006_97_1025_225_138.png", class: "w-auto h-auto rounded-lg" %>
           </div>
           <div class="flex items-center gap-2">
@@ -166,60 +168,24 @@
     </div>
 
     <!-- Esercizio 3: Scrivi il numero (abachi) -->
-    <div class="bg-transparent p-4 md:p-8" data-controller="fill-blanks auto-advance">
+    <div class="bg-transparent p-4 md:p-8">
       <div class="flex items-start gap-3 mb-6">
         <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
           3
         </div>
         <p class="text-gray-700 dark:text-gray-200">
-          Scrivi il numero.
+          Conta le palline e scrivi il numero.
         </p>
       </div>
 
-      <!-- Immagine abachi -->
-      <div class="relative" data-hotspot-editor-target="container">
-
-        <div class="mb-4 bg-white rounded-2xl p-2 max-w-lg mx-auto">
-          <%= image_tag "bus3_mat/p006/p06_2.jpg",
-              alt: "Abachi con numeri",
-              class: "w-full rounded-xl" %>
-        </div>
-
-        <!-- Input overlay per i 6 abachi -->
-        <div class="absolute inset-0">
-          <%
-          # Definizione posizioni input per pagina 21
-          # TODO: Aggiungere le posizioni degli input
-          inputs_p21 = [
-            # Esempi da personalizzare:
-            
-            { label: "5", top: "83%", left: "6.04402%", width: "5%", height: "3.5%", answer: "5" },
-            { label: "2", top: "83%", left: "19.8512%", width: "5%", height: "3.5%", answer: "2" },
-            { label: "6", top: "83%", left: "39.2689%", width: "5%", height: "3.5%", answer: "6" },
-            { label: "7", top: "83%", left: "53.873%", width: "5%", height: "3.5%", answer: "7" },
-            { label: "7", top: "83%", left: "72.9472%", width: "5%", height: "3.5%", answer: "7" },
-            { label: "0", top: "83%", left: "87.0230%", width: "5%", height: "3.5%", answer: "0" },
-
-          ]
-          %>
-
-          <% inputs_p21.each do |input| %>
-            <div class="absolute"
-                style="top: <%= input[:top] %>; left: <%= input[:left] %>; width: <%= input[:width] %>; height: <%= input[:height] %>;"
-                data-hotspot-editor-target="hotspot"
-                data-auto-advance-target="input"
-                data-action="mousedown->hotspot-editor#startDrag">
-              <input type="text"
-                    data-fill-blanks-target="input"
-                    data-correct-answer="<%= input[:answer] %>"
-                    class="w-full h-full py-2 bg-white/60 hover:bg-white/80 focus:bg-white dark:bg-gray-700/60 dark:hover:bg-gray-700/80 dark:focus:bg-gray-700 border-2 text-black dark:text-white border-transparent hover:border-purple-500 focus:border-purple-600 dark:hover:border-purple-400 dark:focus:border-purple-400 rounded text-center font-bold transition-colors"
-                    maxlength="<%= input[:answer].to_s.length %>"
-                    inputmode="<%= input[:answer].to_s.match?(/^\d+$/) ? 'numeric' : 'text' %>"
-                    pattern="<%= input[:answer].to_s.match?(/^\d+$/) ? '[0-9]*' : '[A-Za-z ]*' %>"
-                    aria-label="<%= input[:label] %>">
-            </div>
-          <% end %>
-        </div>
+      <!-- Abachi interattivi in modalità balls -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <% [52, 67, 70].each do |numero| %>
+          <div class="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl p-4">
+            <%= render 'strumenti/abaco/abaco',
+                       abaco: Abaco.new(columns: 2, correct_value: numero, mode: :balls, editable: true, show_value: false) %>
+          </div>
+        <% end %>
       </div>
     </div>
 

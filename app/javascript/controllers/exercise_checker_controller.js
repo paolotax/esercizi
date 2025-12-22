@@ -46,6 +46,80 @@ export default class extends Controller {
     let allCorrect = true
     let feedback = []
 
+    // Check abaco exercises
+    const abacoControllers = this.element.querySelectorAll("[data-controller*=\"abaco\"]")
+    if (abacoControllers.length > 0) {
+      let abacoCorrect = 0
+      let abacoIncorrect = 0
+      let abacoIncomplete = 0
+
+      abacoControllers.forEach(abacoElement => {
+        const abacoController = this.application.getControllerForElementAndIdentifier(abacoElement, "abaco")
+        if (abacoController && abacoController.correctValue !== null) {
+          const targetValue = abacoController.correctValue
+
+          // Usa il risultato di checkCorrectness per determinare correttezza
+          const result = abacoController.checkCorrectness()
+
+          if (result) {
+            if (result.isCorrect) {
+              abacoCorrect++
+            } else if (result.allFieldsValid) {
+              // Tutti compilati ma sbagliato
+              abacoIncorrect++
+              allCorrect = false
+            } else {
+              // Campi incompleti
+              abacoIncomplete++
+              allCorrect = false
+            }
+          } else {
+            // Fallback: calcola manualmente se checkCorrectness non ritorna risultato
+            if (abacoController.modeValue === "balls") {
+              let inputTotal = 0
+              if (abacoController.hasInputKTarget) {
+                inputTotal += (parseInt(abacoController.inputKTarget.value) || 0) * 1000
+              }
+              if (abacoController.hasInputHTarget) {
+                inputTotal += (parseInt(abacoController.inputHTarget.value) || 0) * 100
+              }
+              if (abacoController.hasInputDaTarget) {
+                inputTotal += (parseInt(abacoController.inputDaTarget.value) || 0) * 10
+              }
+              if (abacoController.hasInputUTarget) {
+                inputTotal += (parseInt(abacoController.inputUTarget.value) || 0)
+              }
+
+              if (inputTotal === targetValue) {
+                abacoCorrect++
+              } else {
+                abacoIncorrect++
+                allCorrect = false
+              }
+            } else {
+              const currentValue = abacoController.getValue()
+              if (currentValue === targetValue) {
+                abacoCorrect++
+              } else {
+                abacoIncorrect++
+                allCorrect = false
+              }
+            }
+          }
+        }
+      })
+
+      if (abacoCorrect > 0) {
+        feedback.push(`Abachi corretti: ${abacoCorrect} ✅`)
+      }
+      if (abacoIncorrect > 0) {
+        feedback.push(`Abachi errati: ${abacoIncorrect} ❌`)
+      }
+      if (abacoIncomplete > 0) {
+        feedback.push(`Abachi da completare: ${abacoIncomplete} ⚠️`)
+      }
+    }
+
     // Check flower matching exercise first
     if (flowerMatcher) {
       const flowerController = this.application.getControllerForElementAndIdentifier(flowerMatcher, "flower-matcher")
@@ -1061,6 +1135,45 @@ export default class extends Controller {
       const quadernoController = this.application.getControllerForElementAndIdentifier(quadernoElement, "quaderno")
       if (quadernoController && quadernoController.showResult) {
         quadernoController.showResult()
+      }
+    })
+
+    // Show abaco solutions
+    const abacoControllers = this.element.querySelectorAll("[data-controller*=\"abaco\"]")
+    abacoControllers.forEach(abacoElement => {
+      const abacoController = this.application.getControllerForElementAndIdentifier(abacoElement, "abaco")
+      if (abacoController && abacoController.correctValue !== null) {
+        const correctValue = abacoController.correctValue
+
+        // Calculate digits
+        const k = Math.floor(correctValue / 1000) % 10
+        const h = Math.floor(correctValue / 100) % 10
+        const da = Math.floor(correctValue / 10) % 10
+        const u = correctValue % 10
+
+        // Set ball values
+        abacoController.migliaiaValue = k
+        abacoController.centinaiaValue = h
+        abacoController.decineValue = da
+        abacoController.unitaValue = u
+
+        // Sync inputs
+        if (abacoController.hasInputKTarget) {
+          abacoController.inputKTarget.value = k > 0 ? k.toString() : ''
+        }
+        if (abacoController.hasInputHTarget) {
+          abacoController.inputHTarget.value = h > 0 || k > 0 ? h.toString() : ''
+        }
+        if (abacoController.hasInputDaTarget) {
+          abacoController.inputDaTarget.value = da > 0 || h > 0 || k > 0 ? da.toString() : ''
+        }
+        if (abacoController.hasInputUTarget) {
+          abacoController.inputUTarget.value = u.toString()
+        }
+
+        // Update display and show correct feedback
+        abacoController.updateDisplay()
+        abacoController.checkCorrectness()
       }
     })
 
