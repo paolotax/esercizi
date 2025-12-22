@@ -1,0 +1,195 @@
+<% content_for :titolo, "Quaderno Abaco - Strumenti" %>
+
+<div class="max-w-6xl mx-auto px-2 md:px-6 py-8">
+  <!-- Header -->
+  <div class="bg-white dark:bg-gray-800 print:hidden rounded-lg shadow-lg p-8 mb-8">
+    <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">Quaderno Abaco</h1>
+    <p class="text-gray-600 dark:text-gray-300 text-lg mt-2">
+      Genera esercizi con l'abaco per imparare il sistema posizionale. Supporta numeri da 0 a 9999.
+    </p>
+  </div>
+
+  <!-- Layout a 2 colonne -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 print:hidden items-start">
+
+    <!-- Colonna Sinistra: Esempio con Opzioni -->
+    <div class="rounded-lg shadow-lg p-8 transition-all duration-500 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/30 dark:to-amber-900/30">
+
+      <%= turbo_frame_tag "esempio-preview" do %>
+        <div class="transition-all duration-300 ease-in-out">
+          <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+            Esempio Abaco
+          </h2>
+          <p class="text-gray-700 dark:text-gray-300 text-lg mb-6">
+            <% case @options[:mode] %>
+            <% when :balls %>
+              Conta le palline e scrivi il numero!
+            <% when :input %>
+              Rappresenta il numero con le palline!
+            <% else %>
+              Prova a usare l'abaco in modo libero!
+            <% end %>
+          </p>
+          <div class="flex justify-center bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4">
+            <% esempio_abaco = Abaco.new(
+                 columns: @options[:columns],
+                 correct_value: @options[:example_value],
+                 editable: @options[:editable],
+                 show_value: @options[:show_value],
+                 mode: @options[:mode]
+               ) %>
+            <%= render 'strumenti/abaco/abaco', **esempio_abaco.to_partial_params %>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Opzioni Preview (aggiornano l'esempio in tempo reale) -->
+      <div class="mt-6 p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+        <p class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">Opzioni:</p>
+        <%= form_with url: strumenti_abaco_quaderno_preview_path, method: :get,
+                      data: { turbo_frame: "esempio-preview" },
+                      id: "preview-options-form" do |pf| %>
+
+          <!-- Numero da rappresentare -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Numero da rappresentare:</label>
+            <%= pf.number_field :example_value,
+                                value: @options[:example_value],
+                                min: 0,
+                                max: 9999,
+                                placeholder: "0-9999",
+                                class: "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-orange-500 focus:outline-none text-sm bg-white dark:bg-gray-700 dark:text-white",
+                                onchange: "this.form.requestSubmit()" %>
+          </div>
+
+          <!-- Numero colonne -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Numero di colonne:</label>
+            <div class="flex gap-2">
+              <% [2, 3, 4].each do |cols| %>
+                <label class="flex-1 cursor-pointer">
+                  <%= pf.radio_button :columns, cols,
+                      checked: @options[:columns] == cols,
+                      class: "sr-only peer",
+                      onchange: "this.form.requestSubmit()" %>
+                  <div class="text-center py-2 px-4 rounded-lg border-2 peer-checked:border-orange-500 peer-checked:bg-orange-100 dark:peer-checked:bg-orange-900/50 border-gray-200 dark:border-gray-600 hover:border-orange-300 transition-colors">
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300"><%= cols %></span>
+                  </div>
+                </label>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Modalita -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Modalita esercizio:</label>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <%= pf.radio_button :mode, "",
+                    checked: @options[:mode].nil?,
+                    class: "w-4 h-4 text-orange-600 focus:ring-orange-500",
+                    onchange: "this.form.requestSubmit()" %>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Libero (palline e input sincronizzati)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <%= pf.radio_button :mode, "balls",
+                    checked: @options[:mode] == :balls,
+                    class: "w-4 h-4 text-orange-600 focus:ring-orange-500",
+                    onchange: "this.form.requestSubmit()" %>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Conta palline (scrivi vedendo le palline)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <%= pf.radio_button :mode, "input",
+                    checked: @options[:mode] == :input,
+                    class: "w-4 h-4 text-orange-600 focus:ring-orange-500",
+                    onchange: "this.form.requestSubmit()" %>
+                <span class="text-sm text-gray-700 dark:text-gray-300">Rappresenta numero (palline vuote, mostra target)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Altre opzioni -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= pf.check_box :editable, { checked: @options[:editable], class: "w-4 h-4 text-orange-600 rounded focus:ring-orange-500", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300">Campi modificabili</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= pf.check_box :show_value, { checked: @options[:show_value], class: "w-4 h-4 text-orange-600 rounded focus:ring-orange-500", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra valore totale</span>
+            </label>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Generatore -->
+    <div class="bg-white dark:bg-gray-800 print:hidden rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Generatore</h2>
+
+      <%= form_with url: strumenti_abaco_quaderno_generate_path, method: :post, local: true,
+                    data: { turbo: false } do |f| %>
+        <div class="mb-4">
+          <%= f.text_area :numbers,
+                          value: @numbers,
+                          placeholder: "Inserisci i numeri qui...\nEsempio: 125 573 1234\nOppure uno per riga:\n45\n128\n2567",
+                          rows: 4,
+                          class: "w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-orange-500 focus:outline-none font-mono text-sm bg-white dark:bg-gray-700 dark:text-white" %>
+        </div>
+
+        <!-- Hidden fields per il generatore (copia le opzioni correnti) -->
+        <div class="hidden">
+          <%= f.hidden_field :columns, value: @options[:columns], id: "gen_columns" %>
+          <%= f.hidden_field :editable, value: @options[:editable], id: "gen_editable" %>
+          <%= f.hidden_field :show_value, value: @options[:show_value], id: "gen_show_value" %>
+          <%= f.hidden_field :mode, value: @options[:mode], id: "gen_mode" %>
+        </div>
+
+        <div class="flex gap-4">
+          <%= f.submit "Genera",
+                      class: "bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105 cursor-pointer" %>
+
+          <% if @numbers.present? %>
+            <%= link_to "Cancella", strumenti_abaco_quaderno_path,
+                        class: "bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @numbers.present? && @abachi.blank? %>
+        <div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 mt-4">
+          <p class="text-yellow-900 dark:text-yellow-200 text-sm">
+            <strong>Attenzione:</strong> Non sono stati trovati numeri validi.
+            Inserisci numeri da 0 a 9999, separati da spazi o su righe diverse.
+          </p>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+  <!-- Fine Layout a 2 colonne -->
+
+  <!-- Abachi Generati -->
+  <% if @abachi && @abachi.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-8 print:gap-12">
+      <% @abachi.each_with_index do |abaco, index| %>
+        <div class="flex flex-col items-center print:break-inside-avoid bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-6">
+            <% if abaco.mode == :balls %>
+              Conta le palline e scrivi il numero
+            <% elsif abaco.mode == :input %>
+              Rappresenta il numero <span class="text-orange-600 dark:text-orange-400"><%= abaco.correct_value %></span>
+            <% else %>
+              Esercizio <%= index + 1 %>: Forma il numero <span class="text-orange-600 dark:text-orange-400"><%= abaco.correct_value %></span>
+            <% end %>
+          </h3>
+
+          <div class="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl p-4">
+            <%= render 'strumenti/abaco/abaco', **abaco.to_partial_params %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -51,19 +51,29 @@ class Abaco
   end
 
   # Valori delle palline (0 se nil)
+  # In modalità :balls o nil con correct_value, le palline mostrano il correct_value
+  # In modalità :input, le palline restano vuote (utente deve formarle)
   def migliaia_value
+    return 0 if @mode == :input
+    return digit_from_correct_value(:k) if @correct_value && @migliaia.nil?
     @migliaia.to_i
   end
 
   def centinaia_value
+    return 0 if @mode == :input
+    return digit_from_correct_value(:h) if @correct_value && @centinaia.nil?
     @centinaia.to_i
   end
 
   def decine_value
+    return 0 if @mode == :input
+    return digit_from_correct_value(:da) if @correct_value && @decine.nil?
     @decine.to_i
   end
 
   def unita_value
+    return 0 if @mode == :input
+    return digit_from_correct_value(:u) if @correct_value && @unita.nil?
     @unita.to_i
   end
 
@@ -157,8 +167,14 @@ class Abaco
       digit = digit_from_correct_value(column)
       digit > 0 ? digit.to_s : ""
     else
-      # Default: mostra il valore della pallina se presente
-      value.nil? ? "" : value.to_s
+      # Default (libero): mostra il valore della pallina sincronizzato
+      # Se value è nil ma c'è correct_value, usa quello
+      actual_value = if value.nil? && @correct_value
+                       digit_from_correct_value(column)
+                     else
+                       value.to_i
+                     end
+      actual_value > 0 ? actual_value.to_s : ""
     end
   end
 

@@ -57,6 +57,9 @@ Rails.application.routes.draw do
     get "abaco", to: "abaco#show", as: "abaco"
     post "abaco/generate", to: "abaco#generate", as: "abaco_generate"
     get "abaco/examples", to: "abaco#examples", as: "abaco_examples"
+    get "abaco/quaderno", to: "abaco#quaderno", as: "abaco_quaderno"
+    get "abaco/quaderno/preview", to: "abaco#quaderno_preview", as: "abaco_quaderno_preview"
+    post "abaco/quaderno/generate", to: "abaco#quaderno_generate", as: "abaco_quaderno_generate"
   end
 
   # API endpoint for dynamic column operations grid (addizioni, sottrazioni, miste, con prova)
