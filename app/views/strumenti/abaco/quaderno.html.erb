@@ -31,9 +31,17 @@
             <% end %>
           </p>
           <div class="flex justify-center bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4">
-            <% esempio_abaco = Abaco.new(
+            <% # In modalità libera (mode nil), non passare correct_value per disabilitare la validazione
+               # ma passa i valori k/h/da/u per mostrare le palline
+               esempio_correct_value = @options[:mode].present? ? @options[:example_value] : nil
+               ev = @options[:example_value].to_i
+               esempio_abaco = Abaco.new(
                  columns: @options[:columns],
-                 correct_value: @options[:example_value],
+                 k: (ev / 1000) % 10,
+                 h: (ev / 100) % 10,
+                 da: (ev / 10) % 10,
+                 u: ev % 10,
+                 correct_value: esempio_correct_value,
                  editable: @options[:editable],
                  show_value: @options[:show_value],
                  mode: @options[:mode]

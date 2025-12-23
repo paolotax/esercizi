@@ -888,9 +888,31 @@ export default class extends Controller {
     if (this.hasInputDaTarget) inputs.push(this.inputDaTarget)
     if (this.hasInputUTarget) inputs.push(this.inputUTarget)
 
-    // Applica stili al contenitore dell'input (il div padre con border-3)
+    // In mode "input", mostrare solo feedback positivo (verde), mai rosso
+    // L'utente sta costruendo il numero - mostriamo solo quando è corretto
+    if (this.modeValue === "input" && !isCorrect) {
+      // Rimuovi eventuali stili precedenti ma non applicare rosso
+      inputs.forEach(input => {
+        const container = input.parentElement?.classList.contains('border-3')
+          ? input.parentElement
+          : input.closest('.border-3') || input.closest('div')?.parentElement
+        if (container) {
+          container.classList.remove(
+            'ring-4', 'ring-green-500', 'ring-red-500', 'ring-yellow-500',
+            'bg-green-100', 'bg-red-100', 'bg-yellow-100',
+            'dark:bg-green-900/50', 'dark:bg-red-900/50', 'dark:bg-yellow-900/50'
+          )
+        }
+      })
+      return
+    }
+
+    // Applica stili al contenitore dell'input (il div padre con border-3, non il div della label)
     inputs.forEach(input => {
-      const container = input.closest('div')
+      // Trova il container con border-3 (salta il div della label che è il closest immediato)
+      const container = input.parentElement?.classList.contains('border-3')
+        ? input.parentElement
+        : input.closest('.border-3') || input.closest('div')?.parentElement
       if (!container) return
 
       // Rimuovi stili precedenti dal contenitore
@@ -919,7 +941,10 @@ export default class extends Controller {
     if (this.hasInputUTarget) inputs.push(this.inputUTarget)
 
     inputs.forEach(input => {
-      const container = input.closest('div')
+      // Trova il container con border-3 (salta il div della label che è il closest immediato)
+      const container = input.parentElement?.classList.contains('border-3')
+        ? input.parentElement
+        : input.closest('.border-3') || input.closest('div')?.parentElement
       if (!container) return
 
       container.classList.remove(
