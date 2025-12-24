@@ -32,34 +32,25 @@ Rails.application.routes.draw do
   post "e/:share_token/attempt", to: "public_esercizi#attempt", as: :public_esercizio_attempt
   get "e/:share_token/results/:attempt_id", to: "public_esercizi#results", as: :public_esercizio_results
 
-  # Strumenti (public tools)
+  # Strumenti (public tools) - RESTful resources
   namespace :strumenti do
-    get "addizioni", to: "addizioni#show", as: "addizioni"
-    post "addizioni/generate", to: "addizioni#generate", as: "addizioni_generate"
-    get "addizioni/quaderno", to: "addizioni#quaderno", as: "addizioni_quaderno"
-    get "addizioni/quaderno/preview", to: "addizioni#quaderno_preview", as: "addizioni_quaderno_preview"
-    post "addizioni/quaderno/generate", to: "addizioni#quaderno_generate", as: "addizioni_quaderno_generate"
-    get "sottrazioni", to: "sottrazioni#show", as: "sottrazioni"
-    post "sottrazioni/generate", to: "sottrazioni#generate", as: "sottrazioni_generate"
-    get "sottrazioni/quaderno", to: "sottrazioni#quaderno", as: "sottrazioni_quaderno"
-    get "sottrazioni/quaderno/preview", to: "sottrazioni#quaderno_preview", as: "sottrazioni_quaderno_preview"
-    post "sottrazioni/quaderno/generate", to: "sottrazioni#quaderno_generate", as: "sottrazioni_quaderno_generate"
-    get "moltiplicazioni", to: "moltiplicazioni#show", as: "moltiplicazioni"
-    post "moltiplicazioni/generate", to: "moltiplicazioni#generate", as: "moltiplicazioni_generate"
-    get "moltiplicazioni/quaderno", to: "moltiplicazioni#quaderno", as: "moltiplicazioni_quaderno"
-    get "moltiplicazioni/quaderno/preview", to: "moltiplicazioni#quaderno_preview", as: "moltiplicazioni_quaderno_preview"
-    post "moltiplicazioni/quaderno/generate", to: "moltiplicazioni#quaderno_generate", as: "moltiplicazioni_quaderno_generate"
-    get "moltiplicazioni/examples", to: "moltiplicazioni#examples", as: "moltiplicazioni_examples"
-    get "divisioni/quaderno", to: "divisioni#quaderno", as: "divisioni_quaderno"
-    get "divisioni/quaderno/preview", to: "divisioni#quaderno_preview", as: "divisioni_quaderno_preview"
-    post "divisioni/quaderno/generate", to: "divisioni#quaderno_generate", as: "divisioni_quaderno_generate"
+    resource :addizioni, only: [:show, :create], controller: "addizioni" do
+      get :preview, on: :collection
+    end
+    resource :sottrazioni, only: [:show, :create], controller: "sottrazioni" do
+      get :preview, on: :collection
+    end
+    resource :moltiplicazioni, only: [:show, :create], controller: "moltiplicazioni" do
+      get :preview, on: :collection
+    end
+    resource :divisioni, only: [:show, :create], controller: "divisioni" do
+      get :preview, on: :collection
+    end
+    resource :abaco, only: [:show, :create], controller: "abaco" do
+      get :preview, on: :collection
+      get :examples, on: :collection
+    end
     get "le_rime", to: "le_rime#show", as: "le_rime"
-    get "abaco", to: "abaco#show", as: "abaco"
-    post "abaco/generate", to: "abaco#generate", as: "abaco_generate"
-    get "abaco/examples", to: "abaco#examples", as: "abaco_examples"
-    get "abaco/quaderno", to: "abaco#quaderno", as: "abaco_quaderno"
-    get "abaco/quaderno/preview", to: "abaco#quaderno_preview", as: "abaco_quaderno_preview"
-    post "abaco/quaderno/generate", to: "abaco#quaderno_generate", as: "abaco_quaderno_generate"
   end
 
   # API endpoint for dynamic column operations grid (addizioni, sottrazioni, miste, con prova)

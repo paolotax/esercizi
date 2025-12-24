@@ -6,30 +6,16 @@ class Strumenti::SottrazioniController < Strumenti::BaseController
     @options = default_options
   end
 
-  def generate
-    @operations = params[:operations] || ""
-    @options = parse_options.merge(grid_style: :column)
-    @sottrazioni = Sottrazione.build_renderers(@operations, **@options) if @operations.present?
-    render :show
+  def preview
+    @options = parse_options
   end
 
-  def quaderno
-    @sottrazioni = []
-    @options = default_options
-  end
-
-  def quaderno_generate
+  def create
     @operations = params[:operations] || ""
     @options = parse_options
     renderer_options = @options.merge(grid_style: @options[:grid_style]&.to_sym || :quaderno)
     @sottrazioni = Sottrazione.build_renderers(@operations, **renderer_options) if @operations.present?
-    render :quaderno
-  end
-
-  def quaderno_preview
-    @options = parse_options
-    esempio_string = @options[:example_type] == "interi" ? "487 - 258" : "12,34 - 5,67"
-    @esempio_sottrazione = Sottrazione.build_renderer(esempio_string, **@options.except(:example_type))
+    render :show
   end
 
   private

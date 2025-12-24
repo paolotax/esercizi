@@ -6,7 +6,18 @@ class Strumenti::AbacoController < Strumenti::BaseController
     @options = default_options
   end
 
-  def generate
+  def preview
+    @options = parse_options
+    @esempio_abaco = Abaco::Renderer.new(
+      columns: @options[:columns],
+      correct_value: @options[:example_value],
+      editable: @options[:editable],
+      show_value: @options[:show_value],
+      mode: @options[:mode]
+    )
+  end
+
+  def create
     @numbers = params[:numbers] || ""
     @options = parse_options
     @abachi = build_abachi_from_numbers(@numbers, @options) if @numbers.present?
@@ -17,39 +28,9 @@ class Strumenti::AbacoController < Strumenti::BaseController
     # View con esempi di utilizzo dell'abaco
   end
 
-  def quaderno
-    @abachi = []
-    @options = default_quaderno_options
-  end
-
-  def quaderno_generate
-    @numbers = params[:numbers] || ""
-    @options = parse_quaderno_options
-    @abachi = build_abachi_from_numbers(@numbers, @options) if @numbers.present?
-    render :quaderno
-  end
-
-  def quaderno_preview
-    @options = parse_quaderno_options
-    @esempio_abaco = Abaco::Renderer.new(
-      columns: @options[:columns],
-      correct_value: @options[:example_value],
-      editable: @options[:editable],
-      show_value: @options[:show_value],
-      mode: @options[:mode]
-    )
-  end
-
   private
 
   def default_options
-    {
-      editable: true,
-      show_value: false
-    }
-  end
-
-  def default_quaderno_options
     {
       columns: 4,
       editable: true,
@@ -60,13 +41,6 @@ class Strumenti::AbacoController < Strumenti::BaseController
   end
 
   def parse_options
-    {
-      editable: params[:editable] == "true",
-      show_value: params[:show_value] == "true"
-    }
-  end
-
-  def parse_quaderno_options
     {
       columns: (params[:columns].presence || 4).to_i.clamp(2, 4),
       editable: params[:editable] != "false",

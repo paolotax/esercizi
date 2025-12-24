@@ -2,27 +2,25 @@
 
 module Strumenti
   class DivisioniController < BaseController
-    def quaderno
+    def show
       @divisions = []
-      @options = default_quaderno_options
+      @options = default_options
     end
 
-    def quaderno_generate
+    def preview
+      @options = parse_options
+    end
+
+    def create
       @divisions_string = params[:divisions]
-      @options = parse_quaderno_options
+      @options = parse_options
       @divisions = Divisione.build_renderers(@divisions_string, **@options.except(:example_type)) if @divisions_string.present?
-      render :quaderno
-    end
-
-    def quaderno_preview
-      @options = parse_quaderno_options
-      esempio_string = @options[:example_type] == "interi" ? "144:12" : "12,5:2,5"
-      @esempio_divisione = Divisione.build_renderer(esempio_string, **@options.except(:example_type))
+      render :show
     end
 
     private
 
-    def default_quaderno_options
+    def default_options
       {
         title: nil,
         example_type: "decimali",
@@ -33,7 +31,7 @@ module Strumenti
       }
     end
 
-    def parse_quaderno_options
+    def parse_options
       {
         title: params[:title].presence,
         example_type: params[:example_type].presence || "decimali",

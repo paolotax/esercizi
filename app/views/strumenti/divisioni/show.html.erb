@@ -1,11 +1,11 @@
-<% content_for :titolo, "Quaderno Divisioni - Strumenti" %>
+<% content_for :titolo, "Divisioni in Colonna - Strumenti" %>
 
 <div class="max-w-6xl mx-auto px-2 md:px-6 py-8">
   <!-- Header -->
   <div class="bg-white dark:bg-gray-800 print:hidden rounded-lg shadow-lg p-8 mb-8">
-    <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">Quaderno Divisioni</h1>
+    <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">Divisioni in Colonna</h1>
     <p class="text-gray-600 dark:text-gray-300 text-lg mt-2">
-      Divisioni in colonna stile quaderno a quadretti (metodo italiano). Supporta numeri decimali con virgola.
+      Divisioni in colonna (metodo italiano). Supporta numeri decimali con virgola.
     </p>
   </div>
 
@@ -26,7 +26,7 @@
           </p>
           <div class="flex justify-center">
             <% esempio_operands = @options[:example_type] == 'interi' ? [144, 12] : ["12,5", "2,5"] %>
-            <%= render "strumenti/quaderno_grid",
+            <%= render "strumenti/addizione_grid",
                        grid: Divisione::Renderer.new(dividend: esempio_operands[0],
                                              divisor: esempio_operands[1],
                                              title: @options[:title],
@@ -41,7 +41,7 @@
       <!-- Opzioni Preview (aggiornano l'esempio in tempo reale) -->
       <div class="mt-6 p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg">
         <p class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">Opzioni:</p>
-        <%= form_with url: strumenti_divisioni_quaderno_preview_path, method: :get,
+        <%= form_with url: preview_strumenti_divisioni_path, method: :get,
                       data: { turbo_frame: "esempio-preview" },
                       id: "preview-options-form" do |pf| %>
 
@@ -96,7 +96,7 @@
     <div class="bg-white dark:bg-gray-800 print:hidden rounded-lg shadow-lg p-8">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Generatore</h2>
 
-      <%= form_with url: strumenti_divisioni_quaderno_generate_path, method: :post, local: true,
+      <%= form_with url: strumenti_divisioni_path, method: :post, local: true,
                     data: { turbo: false } do |f| %>
         <div class="mb-4">
           <%= f.text_area :divisions,
@@ -119,7 +119,7 @@
                       class: "bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105 cursor-pointer" %>
 
           <% if @divisions_string.present? %>
-            <%= link_to "Cancella", strumenti_divisioni_quaderno_path,
+            <%= link_to "Cancella", strumenti_divisioni_path,
                         class: "bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition transform hover:scale-105" %>
           <% end %>
         </div>
@@ -149,7 +149,7 @@
             </h3>
           <% end %>
 
-          <%= render "strumenti/quaderno_grid", grid: divisione.to_grid_matrix %>
+          <%= render "strumenti/addizione_grid", grid: divisione.to_grid_matrix %>
         </div>
       <% end %>
     </div>

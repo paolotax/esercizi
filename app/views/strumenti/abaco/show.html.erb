@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <%= link_to strumenti_abaco_examples_path,
+      <%= link_to examples_strumenti_abaco_path,
           data: { turbo_frame: "main-content" },
           class: "group inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200" do %>
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -39,32 +39,58 @@
     </div>
   </div>
 
-  <!-- Layout a 2 colonne -->
+  <!-- Layout a 2 colonne: Esempio a sinistra, Opzioni a destra -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 print:hidden items-start">
 
-    <!-- Colonna Sinistra: Abaco Libero -->
+    <!-- Colonna Sinistra: Esempio Abaco -->
     <div class="relative overflow-hidden bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-3xl border-2 border-amber-200/50 dark:border-amber-800/30 p-6 md:p-8">
       <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-yellow-200/40 to-amber-300/30 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
 
       <div class="relative">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-amber-400 to-yellow-500 rounded-xl shadow-md">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+        <%= turbo_frame_tag "esempio-preview" do %>
+          <div class="transition-all duration-300 ease-in-out">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-amber-400 to-yellow-500 rounded-xl shadow-md">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">Esempio Abaco</h2>
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 mb-6">
+              <% case @options[:mode] %>
+              <% when :balls %>
+                Conta le palline e scrivi il numero!
+              <% when :input %>
+                Rappresenta il numero con le palline!
+              <% else %>
+                Prova a usare l'abaco in modo libero!
+              <% end %>
+            </p>
+            <div class="flex justify-center bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4">
+              <% # In modalità libera (mode nil), non passare correct_value per disabilitare la validazione
+                 # ma passa i valori k/h/da/u per mostrare le palline
+                 esempio_correct_value = @options[:mode].present? ? @options[:example_value] : nil
+                 ev = @options[:example_value].to_i
+                 esempio_abaco = Abaco::Renderer.new(
+                   columns: @options[:columns],
+                   k: (ev / 1000) % 10,
+                   h: (ev / 100) % 10,
+                   da: (ev / 10) % 10,
+                   u: ev % 10,
+                   correct_value: esempio_correct_value,
+                   editable: @options[:editable],
+                   show_value: @options[:show_value],
+                   mode: @options[:mode]
+                 ) %>
+              <%= render 'strumenti/abaco/abaco', **esempio_abaco.to_partial_params %>
+            </div>
           </div>
-          <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">Abaco Libero</h2>
-        </div>
-        <p class="text-gray-600 dark:text-gray-400 mb-6">
-          Clicca sulle colonne per formare qualsiasi numero. Le palline si aggiungono dal basso verso l'alto.
-        </p>
-        <div class="flex justify-center bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4">
-          <%= render 'strumenti/abaco/abaco', **Abaco::Renderer.new(columns: 4, show_value: true).to_partial_params %>
-        </div>
+        <% end %>
       </div>
     </div>
 
-    <!-- Generatore -->
+    <!-- Colonna Destra: Opzioni -->
     <div class="relative overflow-hidden bg-gradient-to-br from-slate-50 to-gray-50 dark:from-slate-900/30 dark:to-gray-900/30 rounded-3xl border-2 border-slate-200/50 dark:border-slate-800/30 p-6 md:p-8">
       <div class="absolute bottom-0 right-0 w-28 h-28 bg-gradient-to-tl from-slate-200/40 to-gray-300/30 rounded-full blur-2xl translate-y-1/2 translate-x-1/2"></div>
 
@@ -72,36 +98,124 @@
         <div class="flex items-center gap-3 mb-4">
           <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-slate-400 to-gray-500 rounded-xl shadow-md">
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </div>
-          <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">Generatore di Abachi</h2>
+          <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">Opzioni</h2>
         </div>
 
-        <%= form_with url: strumenti_abaco_generate_path, method: :post, local: true,
-                      data: { turbo: false } do |f| %>
+        <%= form_with url: preview_strumenti_abaco_path, method: :get,
+                      data: { turbo_frame: "esempio-preview" },
+                      id: "preview-options-form" do |pf| %>
+
+          <!-- Numero da rappresentare -->
           <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Numero da rappresentare:</label>
+            <%= pf.number_field :example_value,
+                                value: @options[:example_value],
+                                min: 0,
+                                max: 9999,
+                                placeholder: "0-9999",
+                                class: "w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-xl focus:border-orange-400 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-900/50 focus:outline-none text-sm dark:text-white transition-all",
+                                onchange: "this.form.requestSubmit()" %>
+          </div>
+
+          <!-- Numero colonne -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Numero di colonne:</label>
+            <div class="flex gap-2">
+              <% [2, 3, 4].each do |cols| %>
+                <label class="flex-1 cursor-pointer">
+                  <%= pf.radio_button :columns, cols,
+                      checked: @options[:columns] == cols,
+                      class: "sr-only peer",
+                      onchange: "this.form.requestSubmit()" %>
+                  <div class="text-center py-2 px-4 rounded-xl border-2 peer-checked:border-orange-500 peer-checked:bg-orange-100 dark:peer-checked:bg-orange-900/50 border-gray-200 dark:border-gray-600 hover:border-orange-300 transition-colors">
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300"><%= cols %></span>
+                  </div>
+                </label>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Modalita -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Modalità esercizio:</label>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <%= pf.radio_button :mode, "",
+                    checked: @options[:mode].nil?,
+                    class: "w-4 h-4 text-orange-600 focus:ring-orange-500",
+                    onchange: "this.form.requestSubmit()" %>
+                <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">Libero (palline e input sincronizzati)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <%= pf.radio_button :mode, "balls",
+                    checked: @options[:mode] == :balls,
+                    class: "w-4 h-4 text-orange-600 focus:ring-orange-500",
+                    onchange: "this.form.requestSubmit()" %>
+                <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">Conta palline (scrivi vedendo le palline)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer group">
+                <%= pf.radio_button :mode, "input",
+                    checked: @options[:mode] == :input,
+                    class: "w-4 h-4 text-orange-600 focus:ring-orange-500",
+                    onchange: "this.form.requestSubmit()" %>
+                <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">Rappresenta numero (palline vuote, mostra target)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Altre opzioni -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <%= pf.check_box :editable, { checked: @options[:editable], class: "w-5 h-5 text-orange-500 rounded-lg border-2 border-gray-300 focus:ring-orange-400 focus:ring-offset-0", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">Campi modificabili</span>
+            </label>
+
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <%= pf.check_box :show_value, { checked: @options[:show_value], class: "w-5 h-5 text-orange-500 rounded-lg border-2 border-gray-300 focus:ring-orange-400 focus:ring-offset-0", onchange: "this.form.requestSubmit()" }, "true", "false" %>
+              <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">Mostra valore totale</span>
+            </label>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Generatore (sotto, a tutta larghezza) -->
+  <div class="relative overflow-hidden bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-3xl border-2 border-orange-200/50 dark:border-orange-800/30 p-6 md:p-8 mb-8 print:hidden">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-200/30 to-amber-300/20 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+
+    <div class="relative">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl shadow-md">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">Generatore di Abachi</h2>
+      </div>
+
+      <%= form_with url: strumenti_abaco_path, method: :post, local: true,
+                    data: { turbo: false } do |f| %>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-end">
+          <div class="lg:col-span-2">
             <%= f.text_area :numbers,
                             value: @numbers,
-                            placeholder: "Inserisci i numeri qui...\nEsempio: 125 573 1234",
-                            rows: 4,
+                            placeholder: "Inserisci i numeri qui... Esempio: 125 573 1234 (separati da spazi o su righe diverse)",
+                            rows: 2,
                             class: "w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-2xl focus:border-orange-400 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-900/50 focus:outline-none font-mono text-sm dark:text-white transition-all" %>
           </div>
 
-          <!-- Opzioni -->
-          <div class="mb-6 p-4 bg-white/70 dark:bg-gray-800/70 rounded-2xl border border-gray-100 dark:border-gray-700">
-            <p class="text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">Opzioni:</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <label class="flex items-center gap-3 cursor-pointer group">
-                <%= f.check_box :editable, { checked: @options[:editable] != false, class: "w-5 h-5 text-orange-500 rounded-lg border-2 border-gray-300 focus:ring-orange-400 focus:ring-offset-0" }, "true", "false" %>
-                <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">Campi modificabili</span>
-              </label>
-
-              <label class="flex items-center gap-3 cursor-pointer group">
-                <%= f.check_box :show_value, { checked: @options[:show_value] == true, class: "w-5 h-5 text-orange-500 rounded-lg border-2 border-gray-300 focus:ring-orange-400 focus:ring-offset-0" }, "true", "false" %>
-                <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">Mostra valore numerico</span>
-              </label>
-            </div>
+          <!-- Hidden fields per il generatore (copia le opzioni correnti) -->
+          <div class="hidden">
+            <%= f.hidden_field :columns, value: @options[:columns], id: "gen_columns" %>
+            <%= f.hidden_field :editable, value: @options[:editable], id: "gen_editable" %>
+            <%= f.hidden_field :show_value, value: @options[:show_value], id: "gen_show_value" %>
+            <%= f.hidden_field :mode, value: @options[:mode], id: "gen_mode" %>
           </div>
 
           <div class="flex flex-wrap gap-3">
@@ -118,37 +232,42 @@
               <% end %>
             <% end %>
           </div>
-        <% end %>
+        </div>
+      <% end %>
 
-        <% if @numbers.present? && @abachi.blank? %>
-          <div class="mt-4 p-4 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 border-2 border-yellow-200/50 dark:border-yellow-800/30 rounded-2xl">
-            <div class="flex items-start gap-3">
-              <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-yellow-400 rounded-xl">
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-              </div>
-              <p class="text-yellow-800 dark:text-yellow-200 text-sm">
-                <strong>Attenzione:</strong> Non sono stati trovati numeri validi. Inserisci numeri da 0 a 9999.
-              </p>
+      <% if @numbers.present? && @abachi.blank? %>
+        <div class="mt-4 p-4 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 border-2 border-yellow-200/50 dark:border-yellow-800/30 rounded-2xl">
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-yellow-400 rounded-xl">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
             </div>
+            <p class="text-yellow-800 dark:text-yellow-200 text-sm">
+              <strong>Attenzione:</strong> Non sono stati trovati numeri validi. Inserisci numeri da 0 a 9999.
+            </p>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
-
   </div>
 
   <!-- Abachi Generati -->
   <% if @abachi && @abachi.any? %>
     <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-6 print:gap-12">
-      <% @abachi.each do |abaco| %>
+      <% @abachi.each_with_index do |abaco, index| %>
         <div class="relative overflow-hidden bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-3xl border-2 border-orange-200/50 dark:border-orange-800/30 p-6 print:break-inside-avoid">
           <div class="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-orange-200/30 to-amber-300/20 rounded-full blur-2xl -translate-y-1/2 -translate-x-1/2"></div>
 
           <div class="relative text-center">
             <h3 class="text-lg font-bold text-gray-700 dark:text-gray-200 mb-4">
-              Forma il numero <span class="text-orange-600 dark:text-orange-400"><%= abaco.correct_value %></span>
+              <% if abaco.mode == :balls %>
+                Conta le palline e scrivi il numero
+              <% elsif abaco.mode == :input %>
+                Rappresenta il numero <span class="text-orange-600 dark:text-orange-400"><%= abaco.correct_value %></span>
+              <% else %>
+                Esercizio <%= index + 1 %>: Forma il numero <span class="text-orange-600 dark:text-orange-400"><%= abaco.correct_value %></span>
+              <% end %>
             </h3>
             <div class="bg-white/50 dark:bg-gray-800/50 rounded-2xl p-4">
               <%= render 'strumenti/abaco/abaco', **abaco.to_partial_params %>
