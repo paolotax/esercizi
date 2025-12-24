@@ -5,6 +5,11 @@ class Moltiplicazione < ApplicationRecord
 
   self.table_name = "moltiplicazioni"
 
+  # Accessors per il campo JSON data
+  store_accessor :data, :multiplicand, :multiplier, :title,
+                 :show_exercise, :show_multiplicand_multiplier, :show_solution,
+                 :show_toolbar, :show_partial_products, :show_carry, :show_labels
+
   # Parse: estrae moltiplicando e moltiplicatore da stringa (es: "45x12" o "4,5x1,2")
   def self.parse(operation_string)
     return nil if operation_string.blank?

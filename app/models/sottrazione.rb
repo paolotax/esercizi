@@ -4,8 +4,17 @@ require "bigdecimal"
 
 class Sottrazione < ApplicationRecord
   include Questionable
+  include SottrazioneCalculation
 
   self.table_name = "sottrazioni"
+
+  # Accessors per il campo JSON data
+  store_accessor :data, :minuend, :subtrahend, :title,
+                 :show_exercise, :show_minuend_subtrahend, :show_solution,
+                 :show_toolbar, :show_borrow, :show_labels
+
+  # Reset dei calcoli quando cambiano i dati
+  after_save :reset_calculations!
 
   # Parse: estrae minuendo e sottraendo da stringa (es: "500 - 234")
   def self.parse(operation_string)

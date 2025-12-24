@@ -5,6 +5,10 @@ class Abaco < ApplicationRecord
 
   self.table_name = "abachi"
 
+  # Accessors per il campo JSON data
+  store_accessor :data, :columns, :k, :h, :da, :u,
+                 :editable, :show_value, :correct_value, :mode, :max_per_column
+
   # Parse: estrae configurazione abaco da stringa (es: "columns=3,h=3,da=8,u=6")
   def self.parse(config_string)
     return nil if config_string.blank?

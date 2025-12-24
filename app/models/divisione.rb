@@ -5,6 +5,11 @@ class Divisione < ApplicationRecord
 
   self.table_name = "divisioni"
 
+  # Accessors per il campo JSON data
+  store_accessor :data, :dividend, :divisor, :title,
+                 :show_exercise, :show_dividend_divisor, :show_solution,
+                 :show_toolbar, :show_steps
+
   # Parse: estrae dividendo e divisore da stringa (es: "144:12" o "14,4:1,2")
   def self.parse(operation_string)
     return nil if operation_string.blank?
