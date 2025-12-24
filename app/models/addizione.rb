@@ -5,18 +5,52 @@ class Addizione < ApplicationRecord
 
   self.table_name = "addizioni"
 
+  # Parse: estrae addendi e operatore da stringa (es: "234 + 567")
+  def self.parse(operation_string)
+    return nil if operation_string.blank?
+
+    parts = operation_string.gsub(/\s+/, "").split(/([+\-=])/)
+
+    numbers = []
+    operator = "+"
+
+    parts.each do |part|
+      if part.match?(/^\d+([.,]\d+)?$/)
+        numbers << part.gsub(",", ".")
+      elsif part.match?(/^[+\-]$/)
+        operator = part
+      end
+    end
+
+    return nil if numbers.empty?
+
+    { addends: numbers, operator: operator }
+  end
+
+  # Parse multiple: estrae da stringhe separate da ; o \n
+  def self.parse_multiple(operations_string)
+    return [] if operations_string.blank?
+
+    operations_string
+      .split(/[;\n]/)
+      .map(&:strip)
+      .reject(&:blank?)
+      .map { |op| parse(op) }
+      .compact
+  end
+
   # Factory: crea un Renderer da stringa operazione
   def self.build_renderer(operation_string, **options)
-    parsed = Renderer.parse(operation_string)
+    parsed = parse(operation_string)
     return nil unless parsed
 
-    Renderer.new(addends: parsed.addends, operator: parsed.operator, **options)
+    Renderer.new(addends: parsed[:addends], operator: parsed[:operator], **options)
   end
 
   # Factory: crea più Renderer da stringhe separate da ; o \n
   def self.build_renderers(operations_string, **options)
-    Renderer.parse_multiple(operations_string).filter_map do |parsed|
-      Renderer.new(addends: parsed.addends, operator: parsed.operator, **options)
+    parse_multiple(operations_string).filter_map do |parsed|
+      Renderer.new(addends: parsed[:addends], operator: parsed[:operator], **options)
     end
   end
 

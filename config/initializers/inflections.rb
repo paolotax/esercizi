@@ -38,4 +38,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   # Math operations (DelegatedType)
   inflect.irregular "addizione", "addizioni"
   inflect.irregular "sottrazione", "sottrazioni"
+  inflect.irregular "moltiplicazione", "moltiplicazioni"
+  inflect.irregular "divisione", "divisioni"
+  inflect.irregular "abaco", "abachi"
 end

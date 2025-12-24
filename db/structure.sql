@@ -164,7 +164,13 @@ CREATE INDEX "index_questions_on_questionable_type_and_questionable_id" ON "ques
 CREATE INDEX "index_questions_on_esercizio_id_and_position" ON "questions" ("esercizio_id", "position") /*application='Esercizi'*/;
 CREATE TABLE IF NOT EXISTS "addizioni" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json DEFAULT '{}' NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
 CREATE TABLE IF NOT EXISTS "sottrazioni" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json DEFAULT '{}' NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
+CREATE TABLE IF NOT EXISTS "moltiplicazioni" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
+CREATE TABLE IF NOT EXISTS "divisioni" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
+CREATE TABLE IF NOT EXISTS "abachi" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
 INSERT INTO "schema_migrations" (version) VALUES
+('20251224124359'),
+('20251224124358'),
+('20251224124357'),
 ('20251224103740'),
 ('20251224103643'),
 ('20251224103613'),

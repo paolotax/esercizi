@@ -195,44 +195,6 @@ class Addizione
     end
   end
 
-  # Parsing di una stringa come "234 + 1234" o "12,34 + 5,67"
-  def self.parse(operation_string)
-    return nil if operation_string.blank?
-
-    # Rimuovi spazi e split per operatori
-    parts = operation_string.gsub(/\s+/, "").split(/([+\-=])/)
-
-    # Estrai numeri e operatore (supporta decimali con virgola o punto)
-    numbers = []
-    operator = "+"
-
-    parts.each do |part|
-      if part.match?(/^\d+([.,]\d+)?$/)
-        # Mantieni come stringa per preservare i decimali
-        numbers << part
-      elsif part.match?(/^[+\-]$/)
-        operator = part
-      end
-    end
-
-    return nil if numbers.empty?
-
-    new(addends: numbers, operator: operator)
-  end
-
-  # Parsing di più operazioni separate da punto e virgola o newline
-  # NOTA: la virgola NON è più un separatore perché usata per i decimali (es: 12,34)
-  def self.parse_multiple(operations_string)
-    return [] if operations_string.blank?
-
-    operations_string
-      .split(/[;\n]/)
-      .map(&:strip)
-      .reject(&:blank?)
-      .map { |op| parse(op) }
-      .compact
-  end
-
   # Calcola il risultato dell'operazione
   def calculate_result
     case @operator

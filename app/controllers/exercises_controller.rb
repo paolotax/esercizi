@@ -82,14 +82,14 @@ class ExercisesController < ApplicationController
       numbers = parse_operation_strings(operation, /[x×*]/i)
       return render_error("Operazione non valida") unless numbers&.length == 2
       show_carry = params[:show_partial_carries] == "true"
-      moltiplicazione = Moltiplicazione.new(multiplicand: numbers[0], multiplier: numbers[1], show_toolbar: true, show_carry: show_carry)
+      moltiplicazione = Moltiplicazione::Renderer.new(multiplicand: numbers[0], multiplier: numbers[1], show_toolbar: true, show_carry: show_carry)
       render partial: "strumenti/moltiplicazioni/quaderno_moltiplicazione", locals: { moltiplicazione: moltiplicazione }
 
     when "divisione"
       numbers = parse_operation_strings(operation, /[÷:\/]/)
       return render_error("Operazione non valida") unless numbers&.length == 2
       extra_zeros = (params[:extra_zeros] || 1).to_i  # Default 1 zero extra per continuare la divisione
-      divisione = Divisione.new(dividend: numbers[0], divisor: numbers[1], show_toolbar: true, extra_zeros: extra_zeros)
+      divisione = Divisione::Renderer.new(dividend: numbers[0], divisor: numbers[1], show_toolbar: true, extra_zeros: extra_zeros)
       render partial: "strumenti/divisioni/quaderno_divisione", locals: { divisione: divisione }
 
     else

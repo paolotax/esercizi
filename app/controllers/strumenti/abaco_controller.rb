@@ -9,9 +9,7 @@ class Strumenti::AbacoController < Strumenti::BaseController
   def generate
     @numbers = params[:numbers] || ""
     @options = parse_options
-
-    @abachi = parse_abachi_with_options(@numbers, @options) if @numbers.present?
-
+    @abachi = build_abachi_from_numbers(@numbers, @options) if @numbers.present?
     render :show
   end
 
@@ -27,15 +25,13 @@ class Strumenti::AbacoController < Strumenti::BaseController
   def quaderno_generate
     @numbers = params[:numbers] || ""
     @options = parse_quaderno_options
-
-    @abachi = parse_abachi_with_options(@numbers, @options) if @numbers.present?
-
+    @abachi = build_abachi_from_numbers(@numbers, @options) if @numbers.present?
     render :quaderno
   end
 
   def quaderno_preview
     @options = parse_quaderno_options
-    @esempio_abaco = Abaco.new(
+    @esempio_abaco = Abaco::Renderer.new(
       columns: @options[:columns],
       correct_value: @options[:example_value],
       editable: @options[:editable],
@@ -80,18 +76,18 @@ class Strumenti::AbacoController < Strumenti::BaseController
     }
   end
 
-  def parse_abachi_with_options(numbers_string, options)
+  def build_abachi_from_numbers(numbers_string, options)
     return [] if numbers_string.blank?
 
     numbers_string
       .split(/[\s\n]+/)
       .map(&:strip)
       .reject(&:blank?)
-      .map { |line| parse_single_abaco(line, options) }
+      .map { |line| build_single_abaco(line, options) }
       .compact
   end
 
-  def parse_single_abaco(line, global_options)
+  def build_single_abaco(line, global_options)
     # Parse il numero (ignora eventuali parametri inline)
     parts = line.strip.split(":", 2)
     number_str = parts[0]
@@ -115,6 +111,6 @@ class Strumenti::AbacoController < Strumenti::BaseController
     abaco_options = global_options.except(:columns, :example_value)
 
     # Applica le opzioni globali - correct_value serve per la verifica
-    Abaco.new(columns: columns, correct_value: number, **abaco_options)
+    Abaco::Renderer.new(columns: columns, correct_value: number, **abaco_options)
   end
 end

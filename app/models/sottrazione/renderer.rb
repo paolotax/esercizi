@@ -131,34 +131,6 @@ class Sottrazione
     colors
   end
 
-  # Parsing di una stringa come "487 - 258" o "12,34 - 5,67"
-  def self.parse(operation_string)
-    return nil if operation_string.blank?
-
-    # Rimuovi spazi e split per operatore meno
-    parts = operation_string.gsub(/\s+/, "").split(/[-=]/)
-
-    # Estrai i due numeri (supporta decimali con virgola o punto)
-    numbers = parts.map { |p| p if p.match?(/^\d+([.,]\d+)?$/) }.compact
-
-    return nil if numbers.length < 2
-
-    new(minuend: numbers[0], subtrahend: numbers[1])
-  end
-
-  # Parsing di più operazioni separate da punto e virgola o newline
-  # NOTA: la virgola NON è più un separatore perché usata per i decimali
-  def self.parse_multiple(operations_string)
-    return [] if operations_string.blank?
-
-    operations_string
-      .split(/[;\n]/)
-      .map(&:strip)
-      .reject(&:blank?)
-      .map { |op| parse(op) }
-      .compact
-  end
-
   # Calcola il risultato della sottrazione
   def calculate_result
     @minuend - @subtrahend
