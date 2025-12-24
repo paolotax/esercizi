@@ -147,7 +147,27 @@ CREATE INDEX "index_esercizi_on_creator_id" ON "esercizi" ("creator_id") /*appli
 CREATE INDEX "index_corsi_on_account_id_and_created_at" ON "corsi" ("account_id", "created_at") /*application='Esercizi'*/;
 CREATE INDEX "index_esercizi_on_account_id_and_created_at" ON "esercizi" ("account_id", "created_at") /*application='Esercizi'*/;
 CREATE INDEX "index_esercizio_attempts_on_account_id_and_user_id" ON "esercizio_attempts" ("account_id", "user_id") /*application='Esercizi'*/;
+CREATE TABLE IF NOT EXISTS "questions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "esercizio_id" integer NOT NULL, "account_id" integer, "creator_id" integer, "questionable_type" varchar NOT NULL, "questionable_id" integer NOT NULL, "position" integer DEFAULT 0, "difficulty" integer, "points" integer, "time_limit" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_a4b5fc738e"
+FOREIGN KEY ("esercizio_id")
+  REFERENCES "esercizi" ("id")
+, CONSTRAINT "fk_rails_9da5b1c028"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+, CONSTRAINT "fk_rails_21f8d26270"
+FOREIGN KEY ("creator_id")
+  REFERENCES "users" ("id")
+);
+CREATE INDEX "index_questions_on_esercizio_id" ON "questions" ("esercizio_id") /*application='Esercizi'*/;
+CREATE INDEX "index_questions_on_account_id" ON "questions" ("account_id") /*application='Esercizi'*/;
+CREATE INDEX "index_questions_on_creator_id" ON "questions" ("creator_id") /*application='Esercizi'*/;
+CREATE INDEX "index_questions_on_questionable_type_and_questionable_id" ON "questions" ("questionable_type", "questionable_id") /*application='Esercizi'*/;
+CREATE INDEX "index_questions_on_esercizio_id_and_position" ON "questions" ("esercizio_id", "position") /*application='Esercizi'*/;
+CREATE TABLE IF NOT EXISTS "addizioni" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json DEFAULT '{}' NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
+CREATE TABLE IF NOT EXISTS "sottrazioni" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json DEFAULT '{}' NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
 INSERT INTO "schema_migrations" (version) VALUES
+('20251224103740'),
+('20251224103643'),
+('20251224103613'),
 ('20251222075055'),
 ('20251222075054'),
 ('20251222075053'),

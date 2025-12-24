@@ -4,7 +4,6 @@ class Esercizio < ApplicationRecord
 
   # Serializzazione JSON per SQLite
   serialize :tags, coder: JSON, type: Array
-  serialize :content, coder: JSON, type: Hash
 
   # Callbacks per inizializzare i campi JSON
   after_initialize :ensure_defaults
@@ -13,6 +12,7 @@ class Esercizio < ApplicationRecord
   belongs_to :account, optional: true
   belongs_to :creator, class_name: "User", optional: true
   has_many :esercizio_attempts, dependent: :destroy
+  has_many :questions, -> { ordered }, dependent: :destroy
 
   # Validazioni
   validates :title, presence: true
@@ -52,48 +52,6 @@ class Esercizio < ApplicationRecord
     increment!(:views_count)
   end
 
-  # Gestione contenuto JSON
-  def add_operation(type, config, position = nil)
-    ensure_content_structure
-    new_operation = {
-      "id" => SecureRandom.uuid,
-      "type" => type,
-      "config" => config,
-      "position" => position || self.content["operations"].size
-    }
-
-    # Se è stata specificata una posizione, inserisci l'operazione in quella posizione
-    if position && position < self.content["operations"].size
-      self.content["operations"].insert(position, new_operation)
-      # Riordina le posizioni delle operazioni successive
-      reorder_operations
-    else
-      # Altrimenti aggiungila alla fine
-      self.content["operations"] << new_operation
-    end
-
-    self.content_will_change! # Forza Rails a riconoscere il cambiamento
-    save
-  end
-
-  def remove_operation(operation_id)
-    ensure_content_structure
-    self.content["operations"].reject! { |op| op["id"] == operation_id }
-    reorder_operations
-    self.content_will_change! # Forza Rails a riconoscere il cambiamento
-    save
-  end
-
-  def reorder_operations
-    self.content["operations"].each_with_index do |op, index|
-      op["position"] = index
-    end
-  end
-
-  def operations
-    content["operations"] || []
-  end
-
   def search_record_attributes
     {
       pagina_id: nil,
@@ -112,12 +70,6 @@ class Esercizio < ApplicationRecord
 
   def ensure_defaults
     self.tags ||= []
-    self.content ||= { "operations" => [] }
-  end
-
-  def ensure_content_structure
-    self.content ||= {}
-    self.content["operations"] ||= []
   end
 
   def generate_slug
