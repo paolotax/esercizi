@@ -30,10 +30,10 @@
   <% end %>
 
   <% if is_column_style %>
-    <%# Stile column: bordo arancione, segni fuori (rimuovi margini e colonna segni) %>
+    <%# Stile column: bordo arancione (divisione ha solo 2 margini, niente colonna segni) %>
     <div class="flex items-start justify-center gap-2">
       <div class="inline-grid border-4 border-orange-400 rounded-lg bg-white dark:bg-gray-800"
-           style="grid-template-columns: repeat(<%= columns - 3 %>, <%= cell_size %>);">
+           style="grid-template-columns: repeat(<%= columns - 2 %>, <%= cell_size %>);">
   <% else %>
     <%# Stile quaderno: quadretti %>
     <div class="inline-grid border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900"
@@ -80,10 +80,10 @@
             is_last_two_cols = (col >= columns - 2)
             is_sign_col = (col == columns - 2) # penultima colonna = segni
 
-            # Column style: skip prima colonna (margine), colonna segni e ultima (margine)
-            # I segni vengono raccolti separatamente e mostrati fuori dal box
+            # Column style per divisioni: skip solo margini (prima e ultima colonna)
+            # Le divisioni non hanno colonna segni come le altre operazioni
             if is_column_style
-              next if is_first_col || is_last_col || is_sign_col
+              next if is_first_col || is_last_col
             end
 
             # Bordo spesso su tutte le celle tranne margini (prima e ultime 2)
@@ -94,9 +94,9 @@
 
             border_classes = ""
             if is_column_style
-              # Column style: solo separatori verticali interni, bordo top spesso per risultato
-              # L'ultima colonna visibile (quella prima dei segni) non ha bordo destro
-              is_last_visible_col = (col == columns - 3) # col prima dei segni
+              # Column style per divisioni: solo separatori verticali interni
+              # L'ultima colonna visibile (penultima, prima del margine destro) non ha bordo destro
+              is_last_visible_col = (col == columns - 2)
               border_classes += " border-r border-gray-300 dark:border-gray-600" unless is_last_visible_col
               border_classes += " border-b-2 border-gray-300 dark:border-gray-600" if is_labels_row
               border_classes += " border-t-4 border-gray-500 dark:border-gray-400" if is_result_row
@@ -202,29 +202,6 @@
 
   <% if is_column_style %>
     </div><%# Fine grid interno per column style %>
-    <%# Column style: colonna segni fuori dal box %>
-    <%
-      # Raccogli segni o spazi vuoti per ogni riga (per allineamento)
-      all_signs = []
-      rows.each do |row|
-        next if row[:type] == :empty || row[:type] == :toolbar
-        row_height = row[:height] || cell_size
-        sign_cell = row[:cells]&.find { |c| c[:type] == :sign }
-        if sign_cell
-          all_signs << { value: sign_cell[:value], classes: sign_cell[:classes], height: row_height }
-        else
-          all_signs << { value: "", classes: "", height: row_height }
-        end
-      end
-    %>
-    <div class="flex flex-col">
-      <% all_signs.each do |sign| %>
-        <div class="font-bold flex items-center justify-center <%= sign[:classes] %>"
-             style="height: <%= sign[:height] %>; width: <%= cell_size %>;">
-          <%= sign[:value] %>
-        </div>
-      <% end %>
-    </div>
   </div><%# Fine flex container per column style %>
   <% else %>
   </div><%# Fine quaderno grid %>
@@ -237,11 +214,5 @@
     </div>
   <% end %>
 
-  <%# Resto finale per divisione %>
-  <% if grid[:remainder].present? %>
-    <div class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-      Resto: <span class="font-bold text-orange-600 dark:text-orange-400"><%= grid[:remainder] %></span>
-    </div>
-  <% end %>
 
 </div>
