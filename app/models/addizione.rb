@@ -48,6 +48,22 @@ class Addizione < ApplicationRecord
       .compact
   end
 
+  # Factory: crea un record DB da stringa operazione
+  # Es: Addizione.from_string("12 + 13") oppure Addizione.from_string("12 + 13", title: "Esercizio 1")
+  def self.from_string(operation_string, **options)
+    parsed = parse(operation_string)
+    return nil unless parsed
+
+    create(addends: parsed[:addends], operator: parsed[:operator], **options)
+  end
+
+  # Factory: crea più record DB da stringhe separate da ; o \n
+  def self.from_strings(operations_string, **options)
+    parse_multiple(operations_string).filter_map do |parsed|
+      create(addends: parsed[:addends], operator: parsed[:operator], **options)
+    end
+  end
+
   # Factory: crea un Renderer da stringa operazione
   def self.build_renderer(operation_string, **options)
     parsed = parse(operation_string)

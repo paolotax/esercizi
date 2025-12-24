@@ -47,6 +47,26 @@ class Sottrazione < ApplicationRecord
     minuend - subtrahend
   end
 
+  # Factory: crea un record DB da stringa operazione
+  # Es: Sottrazione.from_string("500 - 234") oppure Sottrazione.from_string("500 - 234", title: "Esercizio 1")
+  # Ritorna nil se il risultato sarebbe negativo
+  def self.from_string(operation_string, **options)
+    parsed = parse(operation_string)
+    return nil unless parsed
+    return nil if calculate_result(parsed).negative?
+
+    create(minuend: parsed[:minuend], subtrahend: parsed[:subtrahend], **options)
+  end
+
+  # Factory: crea più record DB da stringhe separate da ; o \n
+  # Ignora sottrazioni con risultato negativo
+  def self.from_strings(operations_string, **options)
+    parse_multiple(operations_string).filter_map do |parsed|
+      next if calculate_result(parsed).negative?
+      create(minuend: parsed[:minuend], subtrahend: parsed[:subtrahend], **options)
+    end
+  end
+
   # Factory: crea un Renderer da stringa operazione
   # Ritorna nil se il risultato sarebbe negativo
   def self.build_renderer(operation_string, **options)
