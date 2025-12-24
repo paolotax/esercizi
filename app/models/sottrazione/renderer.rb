@@ -11,7 +11,7 @@ class Sottrazione
     include SottrazioneCalculation
 
     attr_accessor :minuend, :subtrahend
-    attr_reader :title, :show_exercise, :show_minuend_subtrahend, :show_solution, :show_toolbar, :show_borrow, :show_labels
+    attr_reader :title, :show_exercise, :show_minuend_subtrahend, :show_solution, :show_toolbar, :show_borrow, :show_labels, :grid_style
 
     def initialize(minuend:, subtrahend:, **options)
       @minuend = minuend
@@ -25,6 +25,7 @@ class Sottrazione
       @show_toolbar = options.fetch(:show_toolbar, false)
       @show_borrow = options.fetch(:show_borrow, true)
       @show_labels = options.fetch(:show_labels, false)
+      @grid_style = options.fetch(:grid_style, :quaderno) # :quaderno o :column
     end
 
     # Tipi di colonna per il layout quaderno: :digit, :comma, :sign
@@ -150,6 +151,7 @@ class Sottrazione
         controller: "quaderno",
         title: @title,
         show_toolbar: @show_toolbar,
+        style: @grid_style,
         rows: rows
       }
     end

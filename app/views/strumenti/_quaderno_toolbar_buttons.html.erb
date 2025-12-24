@@ -1,0 +1,29 @@
+<%#
+  Pulsanti toolbar per quaderno operazioni (standalone, fuori dalla griglia)
+%>
+
+<%
+  show_steps = local_assigns[:show_steps_button] || false
+
+  toolbar_buttons = [
+    { action: "clearGrid", color: "bg-gray-500 hover:bg-gray-600", icon: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16", title: "Cancella" },
+    { action: "showNumbers", color: "bg-blue-500 hover:bg-blue-600", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", title: "Mostra Numeri" },
+    { action: "showResult", color: "bg-green-500 hover:bg-green-600", icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z", title: "Mostra Risultato" },
+    { action: "verifyAnswers", color: "bg-purple-500 hover:bg-purple-600", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4", title: "Verifica" }
+  ]
+
+  if show_steps
+    toolbar_buttons.insert(2, { action: "showSteps", color: "bg-orange-500 hover:bg-orange-600", icon: "M13 5l7 7-7 7M5 5l7 7-7 7", title: "Mostra Passi" })
+  end
+%>
+
+<% toolbar_buttons.each do |btn| %>
+  <button type="button"
+          data-action="click->quaderno#<%= btn[:action] %>"
+          class="w-12 h-12 rounded-full flex items-center justify-center <%= btn[:color] %> text-white shadow-lg hover:shadow-xl transition-all transform hover:scale-110"
+          title="<%= btn[:title] %>">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="<%= btn[:icon] %>" />
+    </svg>
+  </button>
+<% end %>

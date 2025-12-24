@@ -19,11 +19,13 @@
         Prova a calcolare un'addizione interattiva. Usa i pulsanti per aiutarti!
       </p>
       <div class="flex justify-center">
-        <%= render partial: "strumenti/addizioni/column_addition",
-                   locals: Addizione.new(addends: [234, 567],
-                                         show_addends: true,
-                                         show_toolbar: true,
-                                         show_carry: true).to_partial_params %>
+        <%= render "strumenti/quaderno_grid",
+                   grid: Addizione::Renderer.new(addends: [234, 567],
+                                                  show_addends: true,
+                                                  show_toolbar: true,
+                                                  show_carry: true,
+                                                  show_labels: true,
+                                                  grid_style: :column).to_grid_matrix %>
       </div>
     </div>
 
@@ -64,6 +66,11 @@
               <%= f.check_box :show_solution, { checked: @options[:show_solution] == true, class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500" }, "true", "false" %>
               <span class="text-sm text-gray-700">Mostra risultato</span>
             </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <%= f.check_box :show_labels, { checked: @options[:show_labels] != false, class: "w-4 h-4 text-blue-600 rounded focus:ring-blue-500" }, "true", "false" %>
+              <span class="text-sm text-gray-700">Mostra etichette (u, da, h)</span>
+            </label>
           </div>
         </div>
 
@@ -102,7 +109,7 @@
             </h3>
           <% end %>
 
-          <%= render partial: "strumenti/addizioni/column_addition", locals: addizione.to_partial_params %>
+          <%= render "strumenti/quaderno_grid", grid: addizione.to_grid_matrix %>
         </div>
       <% end %>
     </div>

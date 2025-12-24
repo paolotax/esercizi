@@ -12,7 +12,7 @@ class Addizione
 
     attr_accessor :addends, :operator
     attr_reader :title, :show_exercise, :show_addends, :show_solution, :show_toolbar, :show_carry,
-                :show_addend_indices, :show_labels
+                :show_addend_indices, :show_labels, :grid_style
 
     def initialize(addends:, operator: "+", **options)
       @addends = Array(addends)
@@ -27,6 +27,7 @@ class Addizione
       @show_carry = options.fetch(:show_carry, true)
       @show_addend_indices = options[:show_addend_indices]
       @show_labels = options.fetch(:show_labels, false)
+      @grid_style = options.fetch(:grid_style, :quaderno) # :quaderno o :column
     end
 
     # Alias per compatibilità con vecchio codice
@@ -272,6 +273,7 @@ class Addizione
         controller: "quaderno",
         title: @title,
         show_toolbar: @show_toolbar,
+        style: @grid_style,
         rows: rows
       }
     end
