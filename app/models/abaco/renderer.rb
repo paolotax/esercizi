@@ -120,16 +120,17 @@ class Abaco
       # Mode input: mostra il valore target da correct_value
       return "" unless @correct_value
       digit = digit_from_correct_value(column)
-      digit > 0 ? digit.to_s : ""
+      digit.to_s
     else
       # Default (libero): mostra il valore della pallina sincronizzato
       # Se value è nil ma c'è correct_value, usa quello
-      actual_value = if value.nil? && @correct_value
-                       digit_from_correct_value(column)
+      if value.nil? && @correct_value
+        digit_from_correct_value(column).to_s
+      elsif value.nil?
+        ""
       else
-                       value.to_i
+        value.to_i.to_s
       end
-      actual_value > 0 ? actual_value.to_s : ""
     end
   end
 
