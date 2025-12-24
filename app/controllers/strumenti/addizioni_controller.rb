@@ -9,9 +9,7 @@ class Strumenti::AddizioniController < Strumenti::BaseController
   def generate
     @operations = params[:operations] || ""
     @options = parse_options
-
-    @addizioni = parse_addizioni_with_options(@operations, @options) if @operations.present?
-
+    @addizioni = Addizione.build_renderers(@operations, **@options) if @operations.present?
     render :show
   end
 
@@ -23,24 +21,14 @@ class Strumenti::AddizioniController < Strumenti::BaseController
   def quaderno_generate
     @operations = params[:operations] || ""
     @options = parse_options
-
-    @addizioni = parse_addizioni_with_options(@operations, @options) if @operations.present?
-
+    @addizioni = Addizione.build_renderers(@operations, **@options) if @operations.present?
     render :quaderno
   end
 
   def quaderno_preview
     @options = parse_options
-    esempio_addends = @options[:example_type] == "interi" ? [ 234, 567 ] : [ "12,34", "5,67" ]
-    @esempio_addizione = Addizione.new(
-      addends: esempio_addends,
-      title: @options[:title],
-      show_addends: @options[:show_addends],
-      show_toolbar: @options[:show_toolbar],
-      show_labels: @options[:show_labels],
-      show_solution: @options[:show_solution],
-      show_carry: @options[:show_carry]
-    )
+    esempio_string = @options[:example_type] == "interi" ? "234 + 567" : "12,34 + 5,67"
+    @esempio_addizione = Addizione.build_renderer(esempio_string, **@options.except(:example_type))
   end
 
   private
@@ -67,17 +55,5 @@ class Strumenti::AddizioniController < Strumenti::BaseController
       show_solution: params[:show_solution] == "true",
       show_labels: params[:show_labels] == "true"
     }
-  end
-
-  def parse_addizioni_with_options(operations_string, options)
-    return [] if operations_string.blank?
-
-    Addizione.parse_multiple(operations_string).map do |addizione|
-      Addizione.new(
-        addends: addizione.addends,
-        operator: addizione.operator,
-        **options
-      )
-    end
   end
 end

@@ -69,13 +69,13 @@ class ExercisesController < ApplicationController
     when "addizione"
       numbers = parse_addends(operation)
       return render_error("Operazione non valida") unless numbers&.length >= 2
-      addizione = Addizione.new(addends: numbers, show_toolbar: true, show_addends: true)
+      addizione = Addizione::Renderer.new(addends: numbers, show_toolbar: true, show_addends: true)
       render partial: "strumenti/addizioni/quaderno_addizione", locals: { addizione: addizione }
 
     when "sottrazione"
       numbers = parse_operation_strings(operation, "-")
       return render_error("Operazione non valida") unless numbers&.length == 2
-      sottrazione = Sottrazione.new(minuend: numbers[0], subtrahend: numbers[1], show_toolbar: true, show_minuend_subtrahend: true)
+      sottrazione = Sottrazione::Renderer.new(minuend: numbers[0], subtrahend: numbers[1], show_toolbar: true, show_minuend_subtrahend: true)
       render partial: "strumenti/sottrazioni/quaderno_sottrazione", locals: { sottrazione: sottrazione }
 
     when "moltiplicazione"

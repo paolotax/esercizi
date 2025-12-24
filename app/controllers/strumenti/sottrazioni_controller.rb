@@ -9,9 +9,7 @@ class Strumenti::SottrazioniController < Strumenti::BaseController
   def generate
     @operations = params[:operations] || ""
     @options = parse_options
-
-    @sottrazioni = parse_sottrazioni_with_options(@operations, @options) if @operations.present?
-
+    @sottrazioni = Sottrazione.build_renderers(@operations, **@options) if @operations.present?
     render :show
   end
 
@@ -23,25 +21,14 @@ class Strumenti::SottrazioniController < Strumenti::BaseController
   def quaderno_generate
     @operations = params[:operations] || ""
     @options = parse_options
-
-    @sottrazioni = parse_sottrazioni_with_options(@operations, @options) if @operations.present?
-
+    @sottrazioni = Sottrazione.build_renderers(@operations, **@options) if @operations.present?
     render :quaderno
   end
 
   def quaderno_preview
     @options = parse_options
-    esempio_operands = @options[:example_type] == "interi" ? [ 487, 258 ] : [ "12,34", "5,67" ]
-    @esempio_sottrazione = Sottrazione.new(
-      minuend: esempio_operands[0],
-      subtrahend: esempio_operands[1],
-      title: @options[:title],
-      show_minuend_subtrahend: @options[:show_minuend_subtrahend],
-      show_toolbar: @options[:show_toolbar],
-      show_labels: @options[:show_labels],
-      show_solution: @options[:show_solution],
-      show_borrow: @options[:show_borrow]
-    )
+    esempio_string = @options[:example_type] == "interi" ? "487 - 258" : "12,34 - 5,67"
+    @esempio_sottrazione = Sottrazione.build_renderer(esempio_string, **@options.except(:example_type))
   end
 
   private
@@ -68,17 +55,5 @@ class Strumenti::SottrazioniController < Strumenti::BaseController
       show_solution: params[:show_solution] == "true",
       show_labels: params[:show_labels] == "true"
     }
-  end
-
-  def parse_sottrazioni_with_options(operations_string, options)
-    return [] if operations_string.blank?
-
-    Sottrazione.parse_multiple(operations_string).map do |sottrazione|
-      Sottrazione.new(
-        minuend: sottrazione.minuend,
-        subtrahend: sottrazione.subtrahend,
-        **options
-      )
-    end
   end
 end
