@@ -34,4 +34,8 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular "corso", "corsi"
   inflect.irregular "volume", "volumi"
   inflect.irregular "disciplina", "discipline"
+
+  # Math operations (DelegatedType)
+  inflect.irregular "addizione", "addizioni"
+  inflect.irregular "sottrazione", "sottrazioni"
 end
