@@ -24,7 +24,7 @@
       <h3 class="text-lg font-bold mb-2">1. Moltiplicazione semplice (23 × 4)</h3>
       <p class="text-sm text-gray-600 mb-4">Moltiplicatore a 1 cifra.</p>
       <%= render 'strumenti/moltiplicazioni/column_multiplication',
-            **Moltiplicazione.new(multiplicand: 23, multiplier: 4).to_partial_params %>
+            **Moltiplicazione::Renderer.new(multiplicand: 23, multiplier: 4).to_partial_params %>
     </div>
 
     <!-- Esempio 2: Con moltiplicatore a 2 cifre -->
@@ -32,7 +32,7 @@
       <h3 class="text-lg font-bold mb-2">2. Moltiplicatore a 2 cifre (56 × 12)</h3>
       <p class="text-sm text-gray-600 mb-4">Con prodotti parziali da completare.</p>
       <%= render 'strumenti/moltiplicazioni/column_multiplication',
-            **Moltiplicazione.new(multiplicand: 56, multiplier: 12).to_partial_params %>
+            **Moltiplicazione::Renderer.new(multiplicand: 56, multiplier: 12).to_partial_params %>
     </div>
 
     <!-- Esempio 3: Con prodotti parziali già compilati -->
@@ -40,7 +40,7 @@
       <h3 class="text-lg font-bold mb-2">3. Prodotti parziali compilati (156 × 34)</h3>
       <p class="text-sm text-gray-600 mb-4">Manca solo il risultato finale.</p>
       <%= render 'strumenti/moltiplicazioni/column_multiplication',
-            **Moltiplicazione.new(multiplicand: 156, multiplier: 34, show_partial_products: true).to_partial_params %>
+            **Moltiplicazione::Renderer.new(multiplicand: 156, multiplier: 34, show_partial_products: true).to_partial_params %>
     </div>
 
     <!-- Esempio 4: Senza toolbar -->
@@ -48,7 +48,7 @@
       <h3 class="text-lg font-bold mb-2">4. Senza barra strumenti (48 × 15)</h3>
       <p class="text-sm text-gray-600 mb-4">Nasconde i pulsanti.</p>
       <%= render 'strumenti/moltiplicazioni/column_multiplication',
-            **Moltiplicazione.new(multiplicand: 48, multiplier: 15, show_toolbar: false).to_partial_params %>
+            **Moltiplicazione::Renderer.new(multiplicand: 48, multiplier: 15, show_toolbar: false).to_partial_params %>
     </div>
 
     <!-- Esempio 5: Con soluzione -->
@@ -56,7 +56,7 @@
       <h3 class="text-lg font-bold mb-2">5. Con soluzione completa (78 × 23)</h3>
       <p class="text-sm text-gray-600 mb-4">Tutto compilato.</p>
       <%= render 'strumenti/moltiplicazioni/column_multiplication',
-            **Moltiplicazione.new(multiplicand: 78, multiplier: 23, show_exercise: true).to_partial_params %>
+            **Moltiplicazione::Renderer.new(multiplicand: 78, multiplier: 23, show_exercise: true).to_partial_params %>
     </div>
 
     <!-- Esempio 6: Non modificabile -->
@@ -64,7 +64,7 @@
       <h3 class="text-lg font-bold mb-2">6. Non modificabile (42 × 17)</h3>
       <p class="text-sm text-gray-600 mb-4">Campi disabilitati.</p>
       <%= render 'strumenti/moltiplicazioni/column_multiplication',
-            **Moltiplicazione.new(multiplicand: 42, multiplier: 17, editable: false, show_toolbar: false).to_partial_params %>
+            **Moltiplicazione::Renderer.new(multiplicand: 42, multiplier: 17, editable: false, show_toolbar: false).to_partial_params %>
     </div>
 
   </div>
@@ -73,7 +73,7 @@
   <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mt-8">
     <h4 class="font-bold text-lg mb-2">Come usare il componente Moltiplicazione:</h4>
     <pre class="bg-white p-4 rounded text-sm overflow-x-auto"><code>&lt;%= render 'strumenti/moltiplicazioni/column_multiplication',
-  **Moltiplicazione.new(
+  **Moltiplicazione::Renderer.new(
     multiplicand: 25,                      # Moltiplicando
     multiplier: 12,                        # Moltiplicatore
     show_toolbar: true,                    # Mostra barra strumenti (default: true)

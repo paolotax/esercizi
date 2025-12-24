@@ -186,7 +186,7 @@ class EsercizioRenderer
     end
 
     # Crea oggetto Moltiplicazione corretto
-    moltiplicazione = Moltiplicazione.new(
+    moltiplicazione = Moltiplicazione::Renderer.new(
       multiplicand: multiplicand,
       multiplier: multiplier,
       show_multiplicand_multiplier: config["show_addends"] != false,
@@ -245,7 +245,7 @@ class EsercizioRenderer
     end
 
     # Crea oggetto Abaco con parametri corretti
-    abaco = Abaco.new(
+    abaco = Abaco::Renderer.new(
       number: value,
       editable: config["editable"] != false,
       show_value: config["show_value"] == true,
