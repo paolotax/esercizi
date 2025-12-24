@@ -6,16 +6,20 @@ class Sottrazione < ApplicationRecord
   self.table_name = "sottrazioni"
 
   # Factory: crea un Renderer da stringa operazione
+  # Ritorna nil se il risultato sarebbe negativo
   def self.build_renderer(operation_string, **options)
     parsed = Renderer.parse(operation_string)
     return nil unless parsed
+    return nil if parsed.result.negative?
 
     Renderer.new(minuend: parsed.minuend, subtrahend: parsed.subtrahend, **options)
   end
 
   # Factory: crea più Renderer da stringhe separate da ; o \n
+  # Ignora sottrazioni con risultato negativo
   def self.build_renderers(operations_string, **options)
     Renderer.parse_multiple(operations_string).filter_map do |parsed|
+      next if parsed.result.negative?
       Renderer.new(minuend: parsed.minuend, subtrahend: parsed.subtrahend, **options)
     end
   end
