@@ -4,7 +4,7 @@ require "bigdecimal"
 
 class Sottrazione < ApplicationRecord
   include Questionable
-  include SottrazioneCalculation
+  include Sottrazione::Calculation
 
   self.table_name = "sottrazioni"
 

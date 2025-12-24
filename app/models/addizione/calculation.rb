@@ -4,7 +4,7 @@ require "bigdecimal"
 
 # Logica di calcolo per addizioni
 # Può essere usato sia dal model AR che dal Renderer
-module AddizioneCalculation
+module Addizione::Calculation
   extend ActiveSupport::Concern
 
   # Normalizza una stringa numerica: accetta virgola o punto come separatore
@@ -44,7 +44,7 @@ module AddizioneCalculation
   # Calcola il numero massimo di cifre intere
   def max_integer_digits
     @max_integer_digits ||= begin
-      all_numbers = parsed_addends + [result]
+      all_numbers = parsed_addends + [ result ]
       all_numbers.map { |n| n.abs.to_i.to_s.length }.max
     end
   end
@@ -57,13 +57,13 @@ module AddizioneCalculation
   # Calcola il risultato dell'operazione
   def result
     @result ||= case current_operator
-                when "+"
+    when "+"
                   parsed_addends.sum
-                when "-"
+    when "-"
                   parsed_addends[0] - parsed_addends[1..-1].sum
-                else
+    else
                   parsed_addends.sum
-                end
+    end
   end
 
   # Operatore corrente (default +)
@@ -77,7 +77,7 @@ module AddizioneCalculation
     @addends_digits ||= parsed_addends.map do |num|
       num_str = num.to_s
       padding = max_digits - num_str.length
-      ([""] * padding) + num_str.chars
+      ([ "" ] * padding) + num_str.chars
     end
   end
 
@@ -86,7 +86,7 @@ module AddizioneCalculation
     @result_digits ||= begin
       result_str = result.to_s
       result_padding = max_digits - result_str.length
-      ([""] * result_padding) + result_str.chars
+      ([ "" ] * result_padding) + result_str.chars
     end
   end
 

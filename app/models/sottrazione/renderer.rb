@@ -8,7 +8,7 @@ class Sottrazione
   #
   # Usa SottrazioneCalculation per la logica di calcolo (condivisa con il model AR)
   class Renderer
-    include SottrazioneCalculation
+    include Sottrazione::Calculation
 
     attr_accessor :minuend, :subtrahend
     attr_reader :title, :show_exercise, :show_minuend_subtrahend, :show_solution, :show_toolbar, :show_borrow, :show_labels, :grid_style

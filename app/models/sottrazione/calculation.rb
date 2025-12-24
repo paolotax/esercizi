@@ -4,7 +4,7 @@ require "bigdecimal"
 
 # Logica di calcolo per sottrazioni
 # Può essere usato sia dal model AR che dal Renderer
-module SottrazioneCalculation
+module Sottrazione::Calculation
   extend ActiveSupport::Concern
 
   # Normalizza una stringa numerica: accetta virgola o punto come separatore
@@ -41,7 +41,7 @@ module SottrazioneCalculation
 
   # Calcola il numero massimo di cifre decimali
   def decimal_places
-    @decimal_places ||= [raw_minuend, raw_subtrahend].map do |str|
+    @decimal_places ||= [ raw_minuend, raw_subtrahend ].map do |str|
       str.include?(".") ? str.split(".").last.length : 0
     end.max
   end
@@ -54,7 +54,7 @@ module SottrazioneCalculation
   # Calcola il numero massimo di cifre intere
   def max_integer_digits
     @max_integer_digits ||= begin
-      all_numbers = [parsed_minuend, parsed_subtrahend, result]
+      all_numbers = [ parsed_minuend, parsed_subtrahend, result ]
       all_numbers.map { |n| n.abs.to_i.to_s.length }.max
     end
   end
@@ -88,7 +88,7 @@ module SottrazioneCalculation
       else
         result_str = result.to_s
         result_padding = max_integer_digits - result_str.length
-        ([""] * result_padding) + result_str.chars
+        ([ "" ] * result_padding) + result_str.chars
       end
     end
   end
@@ -106,18 +106,18 @@ module SottrazioneCalculation
       # Padding parte intera a sinistra
       int_digits = int_part.chars
       int_padding = max_integer_digits - int_digits.length
-      int_cells = ([""] * int_padding) + int_digits
+      int_cells = ([ "" ] * int_padding) + int_digits
 
       # Padding parte decimale a destra
       dec_digits = dec_part.chars
       dec_padding = decimal_places - dec_digits.length
-      dec_cells = dec_digits + (["0"] * dec_padding)
+      dec_cells = dec_digits + ([ "0" ] * dec_padding)
 
       int_cells + dec_cells
     else
       num_str = raw_str.to_s
       padding = max_integer_digits - num_str.length
-      ([""] * padding) + num_str.chars
+      ([ "" ] * padding) + num_str.chars
     end
   end
 

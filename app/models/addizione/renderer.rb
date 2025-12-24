@@ -8,7 +8,7 @@ class Addizione
   #
   # Usa AddizioneCalculation per la logica di calcolo (condivisa con il model AR)
   class Renderer
-    include AddizioneCalculation
+    include Addizione::Calculation
 
     attr_accessor :addends, :operator
     attr_reader :title, :show_exercise, :show_addends, :show_solution, :show_toolbar, :show_carry,
@@ -69,19 +69,19 @@ class Addizione
 
         int_digits = int_part.chars
         int_padding = max_integer_digits - int_digits.length
-        int_cells = ([""] * int_padding) + int_digits
+        int_cells = ([ "" ] * int_padding) + int_digits
 
-        comma_cell = [","]
+        comma_cell = [ "," ]
 
         dec_digits = dec_part.chars
         dec_padding = decimal_places - dec_digits.length
-        dec_cells = dec_digits + (["0"] * dec_padding)
+        dec_cells = dec_digits + ([ "0" ] * dec_padding)
 
         int_cells + comma_cell + dec_cells
       else
         num_str = num.to_s
         padding = max_integer_digits - num_str.length
-        ([""] * padding) + num_str.chars
+        ([ "" ] * padding) + num_str.chars
       end
     end
 
@@ -93,16 +93,16 @@ class Addizione
 
         int_digits = int_part.chars
         int_padding = max_integer_digits - int_digits.length
-        int_cells = ([""] * int_padding) + int_digits
+        int_cells = ([ "" ] * int_padding) + int_digits
 
-        comma_cell = [","]
+        comma_cell = [ "," ]
         dec_cells = dec_part.chars
 
         int_cells + comma_cell + dec_cells
       else
         result_str = result.to_s
         result_padding = max_integer_digits - result_str.length
-        ([""] * result_padding) + result_str.chars
+        ([ "" ] * result_padding) + result_str.chars
       end
     end
 

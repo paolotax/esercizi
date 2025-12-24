@@ -1,0 +1,248 @@
+<%#
+  Partial per quaderno sottrazioni
+
+  Riceve: grid (hash da to_grid_matrix)
+    - columns: numero colonne
+    - cell_size: dimensione celle (default "2.5em")
+    - controller: nome controller Stimulus (default "quaderno")
+    - title: titolo opzionale
+    - show_toolbar: se mostrare la toolbar
+    - rows: array di righe
+    - style: :quaderno (default, quadretti) o :column (bordo rosso, segni fuori)
+%>
+
+<%
+  columns = grid[:columns]
+  cell_size = grid[:cell_size] || "2.5em"
+  controller_name = grid[:controller] || "quaderno"
+  title = grid[:title]
+  show_toolbar = grid[:show_toolbar]
+  show_steps_button = grid[:show_steps_button] || false
+  rows = grid[:rows]
+  grid_style = grid[:style]&.to_sym || :quaderno
+  is_column_style = grid_style == :column
+%>
+
+<div class="inline-block" data-controller="<%= controller_name %>">
+
+  <% if title.present? %>
+    <div class="font-mono font-bold mb-4 text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded inline-block"><%= title %></div>
+  <% end %>
+
+  <% if is_column_style %>
+    <%# Stile column: bordo rosso, segni fuori (rimuovi margini e colonna segni) %>
+    <div class="flex items-start justify-center gap-2">
+      <div class="inline-grid border-4 border-red-400 rounded-lg bg-white dark:bg-gray-800"
+           style="grid-template-columns: repeat(<%= columns - 3 %>, <%= cell_size %>);">
+  <% else %>
+    <%# Stile quaderno: quadretti %>
+    <div class="inline-grid border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900"
+         style="grid-template-columns: repeat(<%= columns %>, <%= cell_size %>);">
+  <% end %>
+
+    <% rows.each_with_index do |row, row_idx| %>
+      <%
+        row_height = row[:height] || cell_size
+        is_last_row = (row_idx == rows.length - 1)
+        next_row = rows[row_idx + 1] if row_idx < rows.length - 1
+        next_is_toolbar = next_row && next_row[:type] == :toolbar
+      %>
+
+      <% if row[:type] == :empty %>
+        <%# Riga vuota %>
+        <% if is_column_style %>
+          <%# Column style: skip margini %>
+        <% else %>
+          <% columns.times do |col| %>
+            <%
+              is_last_col = (col == columns - 1)
+              border_classes = ""
+              border_classes += " border-r border-gray-300 dark:border-gray-600" unless is_last_col
+              border_classes += " border-b border-gray-300 dark:border-gray-600" unless is_last_row || next_is_toolbar
+            %>
+            <div class="<%= border_classes %>" style="height: <%= row_height %>;"></div>
+          <% end %>
+        <% end %>
+
+      <% elsif row[:type] == :cells || row[:type] == :result || row[:type] == :separator %>
+        <%# Riga con celle %>
+        <%
+          has_separator = row[:separator_col]
+          is_result_row = row[:type] == :result
+          row_has_thick_border = row[:thick_border_top] || is_result_row
+          # Riga labels: la prima riga con celle che contiene :label
+          is_labels_row = row[:cells]&.any? { |c| c[:type] == :label }
+        %>
+        <% row[:cells].each_with_index do |cell, col| %>
+          <%
+            is_last_col = (col == columns - 1)
+            is_first_col = (col == 0)
+            is_last_two_cols = (col >= columns - 2)
+            is_sign_col = (col == columns - 2) # penultima colonna = segni
+
+            # Column style: skip prima colonna (margine), colonna segni e ultima (margine)
+            # I segni vengono raccolti separatamente e mostrati fuori dal box
+            if is_column_style
+              next if is_first_col || is_last_col || is_sign_col
+            end
+
+            # Bordo spesso su tutte le celle tranne margini (prima e ultime 2)
+            is_in_data_area = !is_first_col && !is_last_two_cols
+            # Bordo spesso: dalla riga O dalla singola cella
+            cell_has_thick_border = cell[:thick_border_top]
+            has_thick_top = (row_has_thick_border && is_in_data_area) || cell_has_thick_border
+
+            border_classes = ""
+            if is_column_style
+              # Column style: solo separatori verticali interni, bordo top spesso per risultato
+              # L'ultima colonna visibile (quella prima dei segni) non ha bordo destro
+              is_last_visible_col = (col == columns - 3) # col prima dei segni
+              border_classes += " border-r border-gray-300 dark:border-gray-600" unless is_last_visible_col
+              border_classes += " border-b-2 border-gray-300 dark:border-gray-600" if is_labels_row
+              border_classes += " border-t-4 border-gray-500 dark:border-gray-400" if is_result_row
+            else
+              border_classes += " border-r border-gray-300 dark:border-gray-600" unless is_last_col
+              border_classes += " border-b border-gray-300 dark:border-gray-600" unless is_last_row || next_is_toolbar
+              border_classes += " border-t-2 border-t-gray-700 dark:border-t-gray-300" if has_thick_top
+            end
+            border_classes += " border-l-2 border-l-gray-700 dark:border-l-gray-300" if has_separator && col == has_separator
+
+            bg_class = cell[:bg_class] || ""
+            # Sfondo grigio per righe risultato o celle con target "result"
+            is_result_cell = cell[:target] == "result"
+            bg_class = "bg-gray-50 dark:bg-gray-800" if (is_result_row || is_result_cell) && is_in_data_area && bg_class.blank? && !is_column_style
+          %>
+
+          <div class="<%= border_classes %> <%= bg_class %> relative" style="height: <%= row_height %>;">
+            <% if cell[:type] == :empty %>
+              <%# Cella vuota %>
+
+            <% elsif cell[:editable] %>
+              <%# Input editabile %>
+              <%
+                is_carry = cell[:target] == "carry"
+                input_classes = is_carry ? "quaderno-input quaderno-input-carry" : "quaderno-input"
+              %>
+              <input type="text"
+                     class="<%= input_classes %> bg-transparent focus:bg-blue-100/20 dark:focus:bg-blue-500/20 <%= cell[:classes] %>"
+                     data-<%= controller_name %>-target="<%= cell[:target] %>"
+                     <% if cell[:row] %>data-row="<%= cell[:row] %>"<% end %>
+                     <% if cell[:col] %>data-col="<%= cell[:col] %>"<% end %>
+                     data-correct-answer="<%= cell[:value] || '' %>"
+                     data-nav-direction="<%= cell[:nav_direction] || 'ltr' %>"
+                     maxlength="1"
+                     inputmode="numeric"
+                     <% if cell[:disabled] %>disabled<% end %>
+                     <% if cell[:show_value] && cell[:value].present? %>value="<%= cell[:value] %>"<% end %>>
+
+              <%# Comma spot (per virgola cliccabile) %>
+              <% if cell[:comma_spot] %>
+                <button type="button"
+                        class="quaderno-comma-spot"
+                        data-<%= controller_name %>-target="commaSpot"
+                        data-correct-position="<%= cell[:comma_spot][:correct] %>"
+                        data-position="<%= cell[:comma_spot][:position] %>"
+                        data-action="click-><%= controller_name %>#toggleComma"
+                        title="Clicca per inserire la virgola"></button>
+              <% end %>
+
+              <%# Comma shift (per virgola spostabile dividendo/divisore) %>
+              <% if cell[:comma_shift] %>
+                <button type="button"
+                        class="quaderno-comma-shift"
+                        data-<%= controller_name %>-target="commaShift"
+                        data-comma-type="<%= cell[:comma_shift][:type] %>"
+                        data-comma-position="<%= cell[:comma_shift][:position] %>"
+                        data-should-shift="<%= cell[:comma_shift][:should_shift] %>"
+                        data-action="click-><%= controller_name %>#shiftComma"
+                        title="Clicca per spostare la virgola">,</button>
+              <% end %>
+
+              <%# Virgola statica (mostrata tra celle) %>
+              <% if cell[:show_comma] %>
+                <span class="quaderno-comma text-gray-800 dark:text-gray-100">,</span>
+              <% end %>
+
+            <% elsif cell[:type] == :sign %>
+              <%# Segno operazione (non editabile) %>
+              <div class="w-full h-full flex items-center justify-center <%= cell[:classes] %> font-bold">
+                <%= cell[:value] %>
+              </div>
+
+            <% elsif cell[:type] == :label %>
+              <%# Etichetta colonna %>
+              <div class="w-full h-full flex items-center justify-center font-bold <%= cell[:classes] %>">
+                <%= cell[:value] %>
+              </div>
+
+            <% elsif cell[:type] == :static %>
+              <%# Testo statico (es. zero placeholder nei prodotti parziali) %>
+              <div class="w-full h-full flex items-center justify-center <%= cell[:classes] %>">
+                <%= cell[:value] %>
+              </div>
+
+            <% else %>
+              <%# Fallback: mostra valore se presente %>
+              <% if cell[:value].present? %>
+                <div class="w-full h-full flex items-center justify-center"><%= cell[:value] %></div>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+
+      <% elsif row[:type] == :toolbar %>
+        <%# Riga toolbar %>
+        <% if is_column_style %>
+          <%# Column style: toolbar fuori dal grid %>
+        <% else %>
+          <%= render "strumenti/quaderno_toolbar", total_cols: columns, show_steps_button: show_steps_button %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    </div><%# Fine grid interno %>
+
+    <% if is_column_style %>
+      <%# Column style: colonna segni fuori dal box %>
+      <%
+        # Raccogli segni o spazi vuoti per ogni riga (per allineamento)
+        all_signs = []
+        rows.each do |row|
+          next if row[:type] == :empty || row[:type] == :toolbar
+          row_height = row[:height] || cell_size
+          sign_cell = row[:cells]&.find { |c| c[:type] == :sign }
+          if sign_cell
+            all_signs << { value: sign_cell[:value], classes: sign_cell[:classes], height: row_height }
+          else
+            all_signs << { value: "", classes: "", height: row_height }
+          end
+        end
+      %>
+      <div class="flex flex-col">
+        <% all_signs.each do |sign| %>
+          <div class="font-bold flex items-center justify-center <%= sign[:classes] %>"
+               style="height: <%= sign[:height] %>; width: <%= cell_size %>;">
+            <%= sign[:value] %>
+          </div>
+        <% end %>
+      </div>
+    </div><%# Fine flex container per column style %>
+  <% else %>
+  </div><%# Fine quaderno grid %>
+  <% end %>
+
+  <%# Toolbar per column style (fuori dal grid) %>
+  <% if is_column_style && show_toolbar %>
+    <div class="flex justify-center gap-4 mt-6 print:hidden">
+      <%= render "strumenti/quaderno_toolbar_buttons" %>
+    </div>
+  <% end %>
+
+  <%# Resto finale per divisione %>
+  <% if grid[:remainder].present? %>
+    <div class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+      Resto: <span class="font-bold text-orange-600 dark:text-orange-400"><%= grid[:remainder] %></span>
+    </div>
+  <% end %>
+
+</div>
