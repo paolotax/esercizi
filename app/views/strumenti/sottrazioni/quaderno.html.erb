@@ -34,7 +34,8 @@
                                                show_toolbar: @options[:show_toolbar],
                                                show_labels: @options[:show_labels],
                                                show_solution: @options[:show_solution],
-                                               show_borrow: @options[:show_borrow]).to_grid_matrix %>
+                                               show_borrow: @options[:show_borrow],
+                                               grid_style: @options[:grid_style]&.to_sym || :quaderno).to_grid_matrix %>
           </div>
         </div>
       <% end %>
@@ -46,18 +47,35 @@
                       data: { turbo_frame: "esempio-preview" },
                       id: "preview-options-form" do |pf| %>
 
-          <!-- Toggle Decimali/Interi -->
-          <div class="mb-4 flex items-center justify-center gap-3">
-            <span class="text-sm font-medium <%= @options[:example_type] != 'interi' ? 'text-cyan-600 dark:text-cyan-400' : 'text-gray-400 dark:text-gray-500' %>">Decimali</span>
-            <label class="relative inline-flex items-center cursor-pointer">
-              <%= pf.check_box :example_type,
-                               { checked: @options[:example_type] == 'interi',
-                                 class: "sr-only peer",
-                                 onchange: "this.form.requestSubmit()" },
-                               "interi", "decimali" %>
-              <div class="w-11 h-6 bg-cyan-500 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-cyan-300 dark:peer-focus:ring-cyan-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
-            </label>
-            <span class="text-sm font-medium <%= @options[:example_type] == 'interi' ? 'text-green-600 dark:text-green-400' : 'text-gray-400 dark:text-gray-500' %>">Interi</span>
+          <!-- Toggle Decimali/Interi e Stile -->
+          <div class="mb-4 flex items-center justify-between">
+            <!-- Toggle Decimali/Interi -->
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium <%= @options[:example_type] != 'interi' ? 'text-cyan-600 dark:text-cyan-400' : 'text-gray-400 dark:text-gray-500' %>">Decimali</span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <%= pf.check_box :example_type,
+                                 { checked: @options[:example_type] == 'interi',
+                                   class: "sr-only peer",
+                                   onchange: "this.form.requestSubmit()" },
+                                 "interi", "decimali" %>
+                <div class="w-11 h-6 bg-cyan-500 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-cyan-300 dark:peer-focus:ring-cyan-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+              </label>
+              <span class="text-sm font-medium <%= @options[:example_type] == 'interi' ? 'text-green-600 dark:text-green-400' : 'text-gray-400 dark:text-gray-500' %>">Interi</span>
+            </div>
+
+            <!-- Toggle Stile Quaderno/Colonna -->
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium <%= @options[:grid_style] != 'column' ? 'text-gray-600 dark:text-gray-300' : 'text-gray-400 dark:text-gray-500' %>">Quaderno</span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <%= pf.check_box :grid_style,
+                                 { checked: @options[:grid_style] == 'column',
+                                   class: "sr-only peer",
+                                   onchange: "this.form.requestSubmit()" },
+                                 "column", "quaderno" %>
+                <div class="w-11 h-6 bg-gray-400 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-cyan-300 dark:peer-focus:ring-cyan-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
+              </label>
+              <span class="text-sm font-medium <%= @options[:grid_style] == 'column' ? 'text-cyan-600 dark:text-cyan-400' : 'text-gray-400 dark:text-gray-500' %>">Colonna</span>
+            </div>
           </div>
 
           <div class="mb-3">
@@ -119,6 +137,7 @@
           <%= f.hidden_field :show_minuend_subtrahend, value: @options[:show_minuend_subtrahend], id: "gen_show_minuend_subtrahend" %>
           <%= f.hidden_field :show_solution, value: @options[:show_solution], id: "gen_show_solution" %>
           <%= f.hidden_field :show_labels, value: @options[:show_labels], id: "gen_show_labels" %>
+          <%= f.hidden_field :grid_style, value: @options[:grid_style], id: "gen_grid_style" %>
         </div>
 
         <div class="flex gap-4">

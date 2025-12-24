@@ -9,7 +9,7 @@ class Moltiplicazione
     attr_reader :multiplicand, :multiplier, :show_multiplicand_multiplier, :show_toolbar,
                 :show_partial_products, :show_carry, :editable, :show_exercise, :show_solution, :show_labels,
                 :decimal_places, :multiplicand_decimals, :multiplier_decimals,
-                :max_integer_digits, :raw_multiplicand, :raw_multiplier
+                :max_integer_digits, :raw_multiplicand, :raw_multiplier, :grid_style
 
   def initialize(multiplicand:, multiplier:, **options)
     @raw_multiplicand = normalize_number_string(multiplicand)
@@ -29,6 +29,7 @@ class Moltiplicazione
     @show_exercise = options.fetch(:show_exercise, false)
     @show_solution = options.fetch(:show_solution, false)
     @show_labels = options.fetch(:show_labels, false)
+    @grid_style = options.fetch(:grid_style, :quaderno) # :quaderno o :column
   end
 
   # Normalizza una stringa numerica: accetta virgola o punto come separatore
@@ -442,6 +443,7 @@ class Moltiplicazione
       controller: "quaderno",
       title: nil,
       show_toolbar: @show_toolbar,
+      style: @grid_style,
       rows: rows
     }
   end

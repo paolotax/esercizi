@@ -8,7 +8,7 @@ class Strumenti::SottrazioniController < Strumenti::BaseController
 
   def generate
     @operations = params[:operations] || ""
-    @options = parse_options
+    @options = parse_options.merge(grid_style: :column)
     @sottrazioni = Sottrazione.build_renderers(@operations, **@options) if @operations.present?
     render :show
   end
@@ -21,7 +21,8 @@ class Strumenti::SottrazioniController < Strumenti::BaseController
   def quaderno_generate
     @operations = params[:operations] || ""
     @options = parse_options
-    @sottrazioni = Sottrazione.build_renderers(@operations, **@options) if @operations.present?
+    renderer_options = @options.merge(grid_style: @options[:grid_style]&.to_sym || :quaderno)
+    @sottrazioni = Sottrazione.build_renderers(@operations, **renderer_options) if @operations.present?
     render :quaderno
   end
 
@@ -37,6 +38,7 @@ class Strumenti::SottrazioniController < Strumenti::BaseController
     {
       title: nil,
       example_type: "decimali",
+      grid_style: "quaderno",
       show_minuend_subtrahend: true,
       show_toolbar: true,
       show_borrow: true,
@@ -49,6 +51,7 @@ class Strumenti::SottrazioniController < Strumenti::BaseController
     {
       title: params[:title].presence,
       example_type: params[:example_type].presence || "decimali",
+      grid_style: params[:grid_style].presence || "quaderno",
       show_minuend_subtrahend: params[:show_minuend_subtrahend] == "true",
       show_toolbar: params[:show_toolbar] == "true",
       show_borrow: params[:show_borrow] == "true",
