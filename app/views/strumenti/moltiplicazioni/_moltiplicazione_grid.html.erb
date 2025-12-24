@@ -200,33 +200,32 @@
       <% end %>
     <% end %>
 
-    </div><%# Fine grid interno %>
-
-    <% if is_column_style %>
-      <%# Column style: colonna segni fuori dal box %>
-      <%
-        # Raccogli segni o spazi vuoti per ogni riga (per allineamento)
-        all_signs = []
-        rows.each do |row|
-          next if row[:type] == :empty || row[:type] == :toolbar
-          row_height = row[:height] || cell_size
-          sign_cell = row[:cells]&.find { |c| c[:type] == :sign }
-          if sign_cell
-            all_signs << { value: sign_cell[:value], classes: sign_cell[:classes], height: row_height }
-          else
-            all_signs << { value: "", classes: "", height: row_height }
-          end
+  <% if is_column_style %>
+    </div><%# Fine grid interno per column style %>
+    <%# Column style: colonna segni fuori dal box %>
+    <%
+      # Raccogli segni o spazi vuoti per ogni riga (per allineamento)
+      all_signs = []
+      rows.each do |row|
+        next if row[:type] == :empty || row[:type] == :toolbar
+        row_height = row[:height] || cell_size
+        sign_cell = row[:cells]&.find { |c| c[:type] == :sign }
+        if sign_cell
+          all_signs << { value: sign_cell[:value], classes: sign_cell[:classes], height: row_height }
+        else
+          all_signs << { value: "", classes: "", height: row_height }
         end
-      %>
-      <div class="flex flex-col">
-        <% all_signs.each do |sign| %>
-          <div class="font-bold flex items-center justify-center <%= sign[:classes] %>"
-               style="height: <%= sign[:height] %>; width: <%= cell_size %>;">
-            <%= sign[:value] %>
-          </div>
-        <% end %>
-      </div>
-    </div><%# Fine flex container per column style %>
+      end
+    %>
+    <div class="flex flex-col">
+      <% all_signs.each do |sign| %>
+        <div class="font-bold flex items-center justify-center <%= sign[:classes] %>"
+             style="height: <%= sign[:height] %>; width: <%= cell_size %>;">
+          <%= sign[:value] %>
+        </div>
+      <% end %>
+    </div>
+  </div><%# Fine flex container per column style %>
   <% else %>
   </div><%# Fine quaderno grid %>
   <% end %>
