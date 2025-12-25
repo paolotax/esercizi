@@ -47,40 +47,16 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
       <!-- Prima coppia: 862 - 184 -->
       <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
-        <!-- Sottrazione -->
-        <%= render "strumenti/addizione_grid",
-                   grid: Sottrazione::Renderer.new(minuend: 862, subtrahend: 184,
-                                           show_minuend_subtrahend: true,
-                                           show_toolbar: false,
-                                           show_borrow: true).to_grid_matrix %>
-
+        <%= sottrazione_grid 862, 184, show_operands: true, show_borrow: true, style: :column %>
         <div class="font-bold text-cyan-600 dark:text-cyan-400 rotate-90 md:rotate-0">→</div>
-
-        <!-- Addizione per la prova -->
-        <%= render "strumenti/addizione_grid",
-                   grid: Addizione::Renderer.new(addends: [184, 678],
-                                         show_exercise: true,
-                                         show_toolbar: false,
-                                         show_carry: true).to_grid_matrix %>
+        <%= addizione_grid [184, 678], show_carry: true, style: :column %>
       </div>
 
       <!-- Seconda coppia: 536 - 275 -->
       <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
-        <!-- Sottrazione -->
-        <%= render "strumenti/addizione_grid",
-                   grid: Sottrazione::Renderer.new(minuend: 536, subtrahend: 275,
-                                           show_minuend_subtrahend: true,
-                                           show_toolbar: false,
-                                           show_borrow: true).to_grid_matrix %>
-
+        <%= sottrazione_grid 536, 275, show_operands: true, show_borrow: true, style: :column %>
         <div class="font-bold text-cyan-600 dark:text-cyan-400 rotate-90 md:rotate-0">→</div>
-
-        <!-- Addizione per la prova -->
-        <%= render "strumenti/addizione_grid",
-                   grid: Addizione::Renderer.new(addends: [275, 261],
-                                         show_exercise: true,
-                                         show_toolbar: false,
-                                         show_carry: true).to_grid_matrix %>
+        <%= addizione_grid [275, 261], show_carry: true, style: :column %>
       </div>
     </div>
   </div>
@@ -90,35 +66,57 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
 
       <!-- Esercizio 3 -->
-      <div data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
-        
+      <div data-controller="operation-viewer">
+
         <p class="text-gray-700 dark:text-gray-200 mb-4">
           <%= numero_esercizio_badge(3, colore: 'red-500') %>
           Calcola in colonna sul quaderno e fai la prova.
         </p>
 
-        <button class="bg-cyan-50 dark:bg-cyan-900/30 p-4 rounded-lg hover:bg-cyan-100 dark:hover:bg-cyan-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-cyan-400 w-full"
-                data-action="click->column-modal#openGroup"
-                data-group="ex3"
-                data-operations="714-354,681-159,576-328,487-188"
-                data-show-borrow="true"
-                data-show-carry="true"
-                data-with-proof="true"
-                data-column-modal-target="groupButton">
-          <div class="grid grid-cols-2 gap-4 text-gray-700 dark:text-gray-200" data-column-modal-target="operationsList" data-group="ex3">
-            <div class="space-y-3">
-              <div class="operation-item" data-index="0">714 - 354 =</div>
-              <div class="operation-item" data-index="1">681 - 159 =</div>
-            </div>
-            <div class="space-y-3">
-              <div class="operation-item" data-index="2">576 - 328 =</div>
-              <div class="operation-item" data-index="3">487 - 188 =</div>
-            </div>
-          </div>
-        </button>
+        <%
+          es3_operazioni = [
+            { op: "714-354", answer: "360" },
+            { op: "681-159", answer: "522" },
+            { op: "576-328", answer: "248" },
+            { op: "487-188", answer: "299" }
+          ]
+          es3_operations_data = es3_operazioni.each_with_index.map { |item, idx|
+            { operation: item[:op], targetId: "es3-#{idx}" }
+          }
+        %>
+
+        <div class="bg-cyan-50 dark:bg-cyan-900/30 p-4 rounded-lg border-2 border-transparent hover:border-cyan-400 transition">
+          <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-3 flex items-center gap-2">
+            <button type="button"
+                    data-action="click->operation-viewer#openGroup"
+                    data-operations='<%= es3_operations_data.to_json %>'
+                    data-type="sottrazione"
+                    data-layout="column"
+                    data-display="modal"
+                    data-group="es3"
+                    class="p-1 text-gray-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition print-hidden"
+                    title="Apri nella calcolatrice">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </button>
+          </p>
+          <ul class="grid grid-cols-2 gap-4">
+            <% es3_operazioni.each_with_index do |item, idx| %>
+              <li class="flex items-center gap-2 flex-wrap dark:text-white">
+                <span><%= item[:op].gsub('-', ' - ') %> =</span>
+                <input type="text"
+                       data-operation-id="es3-<%= idx %>"
+                       data-correct-answer="<%= item[:answer] %>"
+                       class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent">
+              </li>
+            <% end %>
+          </ul>
+        </div>
 
         <!-- Modal -->
-        <%= render 'shared/column_modal', title: "Sottrazioni con prova", color: "red", show_save: true %>
+        <%= render 'shared/operation_viewer', display: :modal, title: "Sottrazioni in colonna", color: "cyan" %>
       </div>
 
       <!-- Esercizio 5 -->
@@ -220,57 +218,76 @@
   </div>
 
   <!-- Esercizio 4: Due colonne -->
-  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
-    
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="operation-viewer">
+
     <p class="text-gray-700 dark:text-gray-200 mb-4">
       <%= numero_esercizio_badge(4, colore: 'red-500') %>
       Calcola in colonna sul quaderno e fai la prova.
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-      <!-- Colonna a -->
-      <button class="bg-orange-50 dark:bg-orange-900/30 p-4 rounded-lg hover:bg-orange-100 dark:hover:bg-orange-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-orange-400"
-              data-action="click->column-modal#openGroup"
-              data-group="a"
-              data-operations="5298-4182,3698-2354,1268-1204,2369-658,6574-2684,2641-1592"
-              data-show-borrow="true"
-              data-show-carry="true"
-              data-with-proof="true"
-              data-column-modal-target="groupButton">
-        <div class="font-bold text-orange-600 mb-3">a.</div>
-        <div class="space-y-2 text-gray-700 dark:text-gray-200" data-column-modal-target="operationsList" data-group="a">
-          <div class="operation-item" data-index="0">5298 - 4182 =</div>
-          <div class="operation-item" data-index="1">3698 - 2354 =</div>
-          <div class="operation-item" data-index="2">1268 - 1204 =</div>
-          <div class="operation-item" data-index="3">2369 - 658 =</div>
-          <div class="operation-item" data-index="4">6574 - 2684 =</div>
-          <div class="operation-item" data-index="5">2641 - 1592 =</div>
-        </div>
-      </button>
+    <%
+      es4_gruppi = [
+        { lettera: "a", colore: "orange", operazioni: [
+          { op: "5298-4182", answer: "1116" },
+          { op: "3698-2354", answer: "1344" },
+          { op: "1268-1204", answer: "64" },
+          { op: "2369-658", answer: "1711" },
+          { op: "6574-2684", answer: "3890" },
+          { op: "2641-1592", answer: "1049" }
+        ]},
+        { lettera: "b", colore: "blue", operazioni: [
+          { op: "1269-1108", answer: "161" },
+          { op: "2821-1312", answer: "1509" },
+          { op: "2408-2157", answer: "251" },
+          { op: "8965-3265", answer: "5700" },
+          { op: "8985-715", answer: "8270" },
+          { op: "4930-2614", answer: "2316" }
+        ]}
+      ]
+    %>
 
-      <!-- Colonna b -->
-      <button class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-blue-400"
-              data-action="click->column-modal#openGroup"
-              data-group="b"
-              data-operations="1269-1108,2821-1312,2408-2157,8965-3265,8985-715,4930-2614"
-              data-show-borrow="true"
-              data-show-carry="true"
-              data-with-proof="true"
-              data-column-modal-target="groupButton">
-        <div class="font-bold text-orange-600 mb-3">b.</div>
-        <div class="space-y-2 text-gray-700 dark:text-gray-200" data-column-modal-target="operationsList" data-group="b">
-          <div class="operation-item" data-index="0">1269 - 1108 =</div>
-          <div class="operation-item" data-index="1">2821 - 1312 =</div>
-          <div class="operation-item" data-index="2">2408 - 2157 =</div>
-          <div class="operation-item" data-index="3">8965 - 3265 =</div>
-          <div class="operation-item" data-index="4">8985 - 715 =</div>
-          <div class="operation-item" data-index="5">4930 - 2614 =</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+      <% es4_gruppi.each do |gruppo| %>
+        <%
+          operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+            { operation: item[:op], targetId: "es4-#{gruppo[:lettera]}-#{idx}" }
+          }
+        %>
+        <div class="bg-<%= gruppo[:colore] %>-50 dark:bg-<%= gruppo[:colore] %>-900/30 p-4 rounded-lg border-2 border-transparent hover:border-<%= gruppo[:colore] %>-400 transition">
+          <p class="font-bold text-<%= gruppo[:colore] %>-600 dark:text-<%= gruppo[:colore] %>-400 mb-3 flex items-center gap-2">
+            <%= gruppo[:lettera] %>.
+            <button type="button"
+                    data-action="click->operation-viewer#openGroup"
+                    data-operations='<%= operations_data.to_json %>'
+                    data-type="sottrazione"
+                    data-layout="column"
+                    data-display="modal"
+                    data-group="<%= gruppo[:lettera] %>"
+                    class="p-1 text-gray-400 hover:text-<%= gruppo[:colore] %>-600 dark:hover:text-<%= gruppo[:colore] %>-400 transition print-hidden"
+                    title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </button>
+          </p>
+          <ul class="space-y-2">
+            <% gruppo[:operazioni].each_with_index do |item, idx| %>
+              <li class="flex items-center gap-2 flex-wrap dark:text-white">
+                <span><%= item[:op].gsub('-', ' - ') %> =</span>
+                <input type="text"
+                       data-operation-id="es4-<%= gruppo[:lettera] %>-<%= idx %>"
+                       data-correct-answer="<%= item[:answer] %>"
+                       class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent">
+              </li>
+            <% end %>
+          </ul>
         </div>
-      </button>
+      <% end %>
     </div>
 
     <!-- Modal -->
-    <%= render 'shared/column_modal', title: "Sottrazioni con prova", color: "red", show_save: true %>
+    <%= render 'shared/operation_viewer', display: :modal, title: "Sottrazioni in colonna", color: "cyan" %>
   </div>
 
   <!-- Footer con controlli -->

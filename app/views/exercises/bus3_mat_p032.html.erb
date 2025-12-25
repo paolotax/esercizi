@@ -29,13 +29,7 @@
               <span class="text-blue-600 dark:text-blue-400 font-bold">unità</span> sono 17 e puoi sottrarre.
             </p>
           </div>
-          <%= render partial: "strumenti/sottrazioni/column_subtraction",
-                     locals: Sottrazione.new(minuend: 487, subtrahend: 258,
-                                             show_exercise: false,
-                                             show_minuend_subtrahend: true,
-                                             show_solution: false,
-                                             show_toolbar: false,
-                                             show_borrow: true).to_partial_params %>
+          <%= sottrazione_grid 487, 258, show_operands: true, show_borrow: true, style: :column %>
         </div>
 
         <!-- Passo 2: Sottrai le decine -->
@@ -48,13 +42,7 @@
               Attenzione: le decine non sono 8, ma 7.
             </p>
           </div>
-          <%= render partial: "strumenti/sottrazioni/column_subtraction",
-                     locals: Sottrazione.new(minuend: 487, subtrahend: 258,
-                                             show_exercise: false,
-                                             show_minuend_subtrahend: true,
-                                             show_solution: false,
-                                             show_toolbar: false,
-                                             show_borrow: true).to_partial_params %>
+          <%= sottrazione_grid 487, 258, show_operands: true, show_borrow: true, style: :column %>
         </div>
 
         <!-- Passo 3: Sottrai le centinaia -->
@@ -64,13 +52,7 @@
               Sottrai le <span class="text-green-600 dark:text-green-400 font-bold">centinaia</span>.
             </p>
           </div>
-          <%= render partial: "strumenti/sottrazioni/column_subtraction",
-                     locals: Sottrazione.new(minuend: 487, subtrahend: 258,
-                                             show_exercise: false,
-                                             show_minuend_subtrahend: true,
-                                             show_solution: true,
-                                             show_toolbar: false,
-                                             show_borrow: true).to_partial_params %>
+          <%= sottrazione_grid 487, 258, show_operands: true, show_solution: true, show_borrow: true, style: :column %>
         </div>
 
       </div>
@@ -86,33 +68,14 @@
       </div>
 
       <div class="flex flex-wrap gap-8 justify-center items-start">
-
-        <%= render partial: "strumenti/sottrazioni/column_subtraction",
-                   locals: Sottrazione.new(minuend: 526, subtrahend: 364,
-                                           title: "526 - 364 =",
-                                           show_minuend_subtrahend: true,
-                                           show_toolbar: false,
-                                           show_borrow: true).to_partial_params %>
-
-        <%= render partial: "strumenti/sottrazioni/column_subtraction",
-                   locals: Sottrazione.new(minuend: 618, subtrahend: 240,
-                                           title: "618 - 240 =",
-                                           show_exercise: true,
-                                           show_toolbar: false,
-                                           show_borrow: true).to_partial_params %>
-
-        <%= render partial: "strumenti/sottrazioni/column_subtraction",
-                   locals: Sottrazione.new(minuend: 448, subtrahend: 369,
-                                           title: "448 - 369 =",
-                                           show_exercise: false,
-                                           show_toolbar: false,
-                                           show_borrow: true).to_partial_params %>
-
+        <%= sottrazione_grid 526, 364, title: "526 - 364 =", show_operands: true, show_borrow: true, style: :column %>
+        <%= sottrazione_grid 618, 240, title: "618 - 240 =", show_borrow: true, style: :column %>
+        <%= sottrazione_grid 448, 369, title: "448 - 369 =", show_borrow: true, style: :column %>
       </div>
     </div>
 
     <!-- Exercise 3: Calcola in colonna sul quaderno (con modal) -->
-    <div class="p-6 mb-6" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
+    <div class="p-6 mb-6" data-controller="operation-viewer">
       <div class="flex items-center gap-3 mb-6">
         <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
           3
@@ -120,74 +83,77 @@
         <h2 class="dark:text-white">Calcola in colonna sul quaderno.</h2>
       </div>
 
+      <%
+        es3_gruppi = [
+          { lettera: "a", colore: "orange", operazioni: [
+            { op: "61-35", answer: "26" },
+            { op: "54-28", answer: "26" },
+            { op: "96-47", answer: "49" },
+            { op: "87-39", answer: "48" }
+          ]},
+          { lettera: "b", colore: "blue", operazioni: [
+            { op: "237-156", answer: "81" },
+            { op: "324-205", answer: "119" },
+            { op: "475-308", answer: "167" },
+            { op: "618-240", answer: "378" }
+          ]},
+          { lettera: "c", colore: "green", operazioni: [
+            { op: "327-250", answer: "77" },
+            { op: "283-165", answer: "118" },
+            { op: "729-547", answer: "182" },
+            { op: "743-275", answer: "468" }
+          ]},
+          { lettera: "d", colore: "purple", operazioni: [
+            { op: "334-287", answer: "47" },
+            { op: "686-148", answer: "538" },
+            { op: "227-169", answer: "58" },
+            { op: "542-386", answer: "156" }
+          ]}
+        ]
+      %>
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Column a -->
-        <button class="bg-orange-50 dark:bg-orange-900/30 p-4 rounded-lg hover:bg-orange-100 dark:hover:bg-orange-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-orange-400"
-                data-action="click->column-modal#openGroup"
-                data-group="a"
-                data-operations="61-35,54-28,96-47,87-39"
-                data-show-borrow="true"
-                data-column-modal-target="groupButton">
-          <div class="font-bold text-red-500 mb-3">a.</div>
-          <div class="space-y-2 dark:text-gray-200" data-column-modal-target="operationsList" data-group="a">
-            <div class="operation-item" data-index="0">61 - 35 =</div>
-            <div class="operation-item" data-index="1">54 - 28 =</div>
-            <div class="operation-item" data-index="2">96 - 47 =</div>
-            <div class="operation-item" data-index="3">87 - 39 =</div>
+        <% es3_gruppi.each do |gruppo| %>
+          <%
+            operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+              { operation: item[:op], targetId: "es3-#{gruppo[:lettera]}-#{idx}" }
+            }
+          %>
+          <div class="bg-<%= gruppo[:colore] %>-50 dark:bg-<%= gruppo[:colore] %>-900/30 p-4 rounded-lg border-2 border-transparent hover:border-<%= gruppo[:colore] %>-400 transition">
+            <p class="font-bold text-<%= gruppo[:colore] %>-600 dark:text-<%= gruppo[:colore] %>-400 mb-3 flex items-center gap-2">
+              <%= gruppo[:lettera] %>.
+              <button type="button"
+                      data-action="click->operation-viewer#openGroup"
+                      data-operations='<%= operations_data.to_json %>'
+                      data-type="sottrazione"
+                      data-layout="column"
+                      data-display="modal"
+                      data-group="<%= gruppo[:lettera] %>"
+                      class="p-1 text-gray-400 hover:text-<%= gruppo[:colore] %>-600 dark:hover:text-<%= gruppo[:colore] %>-400 transition print-hidden"
+                      title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </p>
+            <ul class="space-y-2">
+              <% gruppo[:operazioni].each_with_index do |item, idx| %>
+                <li class="flex items-center gap-2 flex-wrap dark:text-white">
+                  <span><%= item[:op].gsub('-', ' - ') %> =</span>
+                  <input type="text"
+                         data-operation-id="es3-<%= gruppo[:lettera] %>-<%= idx %>"
+                         data-correct-answer="<%= item[:answer] %>"
+                         class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent">
+                </li>
+              <% end %>
+            </ul>
           </div>
-        </button>
-
-        <!-- Column b -->
-        <button class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-blue-400"
-                data-action="click->column-modal#openGroup"
-                data-group="b"
-                data-operations="237-156,324-205,475-308,618-240"
-                data-show-borrow="true"
-                data-column-modal-target="groupButton">
-          <div class="font-bold text-red-500 mb-3">b.</div>
-          <div class="space-y-2 dark:text-gray-200" data-column-modal-target="operationsList" data-group="b">
-            <div class="operation-item" data-index="0">237 - 156 =</div>
-            <div class="operation-item" data-index="1">324 - 205 =</div>
-            <div class="operation-item" data-index="2">475 - 308 =</div>
-            <div class="operation-item" data-index="3">618 - 240 =</div>
-          </div>
-        </button>
-
-        <!-- Column c -->
-        <button class="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-green-400"
-                data-action="click->column-modal#openGroup"
-                data-group="c"
-                data-operations="327-250,283-165,729-547,743-275"
-                data-show-borrow="true"
-                data-column-modal-target="groupButton">
-          <div class="font-bold text-red-500 mb-3">c.</div>
-          <div class="space-y-2 dark:text-gray-200" data-column-modal-target="operationsList" data-group="c">
-            <div class="operation-item" data-index="0">327 - 250 =</div>
-            <div class="operation-item" data-index="1">283 - 165 =</div>
-            <div class="operation-item" data-index="2">729 - 547 =</div>
-            <div class="operation-item" data-index="3">743 - 275 =</div>
-          </div>
-        </button>
-
-        <!-- Column d -->
-        <button class="bg-purple-50 dark:bg-purple-900/30 p-4 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-purple-400"
-                data-action="click->column-modal#openGroup"
-                data-group="d"
-                data-operations="334-287,686-148,227-169,542-386"
-                data-show-borrow="true"
-                data-column-modal-target="groupButton">
-          <div class="font-bold text-red-500 mb-3">d.</div>
-          <div class="space-y-2 dark:text-gray-200" data-column-modal-target="operationsList" data-group="d">
-            <div class="operation-item" data-index="0">334 - 287 =</div>
-            <div class="operation-item" data-index="1">686 - 148 =</div>
-            <div class="operation-item" data-index="2">227 - 169 =</div>
-            <div class="operation-item" data-index="3">542 - 386 =</div>
-          </div>
-        </button>
+        <% end %>
       </div>
 
       <!-- Modal -->
-      <%= render 'shared/column_modal', title: "Gruppo di operazioni", color: "red", show_save: true %>
+      <%= render 'shared/operation_viewer', display: :modal, title: "Sottrazioni in colonna", color: "cyan" %>
     </div>
 
     <!-- Exercise Controls -->

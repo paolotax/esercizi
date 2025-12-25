@@ -70,7 +70,7 @@
   </div>
 
   <!-- Esercizio 1: Calcola in colonna (con modal) -->
-  <div class="p-4 md:p-8 mb-8" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
+  <div class="p-4 md:p-8 mb-8" data-controller="operation-viewer">
     <div class="flex items-center gap-3 mb-6">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         1
@@ -80,61 +80,74 @@
       </p>
     </div>
 
+    <%
+      es1_gruppi = [
+        { lettera: "a", colore: "orange", titolo: "Senza cambio", operazioni: [
+          { op: "122x4", answer: "488" },
+          { op: "221x3", answer: "663" },
+          { op: "110x6", answer: "660" },
+          { op: "324x2", answer: "648" },
+          { op: "320x3", answer: "960" },
+          { op: "201x4", answer: "804" }
+        ]},
+        { lettera: "b", colore: "blue", titolo: "Con un cambio", operazioni: [
+          { op: "126x3", answer: "378" },
+          { op: "104x8", answer: "832" },
+          { op: "145x2", answer: "290" },
+          { op: "136x2", answer: "272" },
+          { op: "180x2", answer: "360" },
+          { op: "190x4", answer: "760" }
+        ]},
+        { lettera: "c", colore: "green", titolo: "Con più cambi", operazioni: [
+          { op: "123x5", answer: "615" },
+          { op: "124x7", answer: "868" },
+          { op: "146x4", answer: "584" }
+        ]}
+      ]
+    %>
+
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-      <!-- Column a: Senza cambio -->
-      <button class="bg-orange-50 dark:bg-orange-900/30 p-4 rounded-lg hover:bg-orange-100 dark:hover:bg-orange-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-orange-400"
-              data-action="click->column-modal#openGroup"
-              data-group="a"
-              data-operations="122×4,221×3,110×6,324×2,320×3,201×4"
-              data-show-carry="true"
-              data-column-modal-target="groupButton">
-        <div class="mb-3"><strong class="text-orange-500">a.</strong> Senza cambio</div>
-        <div class="space-y-2" data-column-modal-target="operationsList" data-group="a">
-          <div class="operation-item" data-index="0">122 × 4 =</div>
-          <div class="operation-item" data-index="1">221 × 3 =</div>
-          <div class="operation-item" data-index="2">110 × 6 =</div>
-          <div class="operation-item" data-index="3">324 × 2 =</div>
-          <div class="operation-item" data-index="4">320 × 3 =</div>
-          <div class="operation-item" data-index="5">201 × 4 =</div>
+      <% es1_gruppi.each do |gruppo| %>
+        <%
+          operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+            { operation: item[:op], targetId: "es1-#{gruppo[:lettera]}-#{idx}" }
+          }
+        %>
+        <div class="bg-<%= gruppo[:colore] %>-50 dark:bg-<%= gruppo[:colore] %>-900/30 p-4 rounded-lg border-2 border-transparent hover:border-<%= gruppo[:colore] %>-400 transition">
+          <p class="font-bold text-<%= gruppo[:colore] %>-600 dark:text-<%= gruppo[:colore] %>-400 mb-3 flex items-center gap-2">
+            <%= gruppo[:lettera] %>. <%= gruppo[:titolo] %>
+            <button type="button"
+                    data-action="click->operation-viewer#openGroup"
+                    data-operations='<%= operations_data.to_json %>'
+                    data-type="moltiplicazione"
+                    data-layout="column"
+                    data-display="modal"
+                    data-group="<%= gruppo[:lettera] %>"
+                    class="p-1 text-gray-400 hover:text-<%= gruppo[:colore] %>-600 dark:hover:text-<%= gruppo[:colore] %>-400 transition print-hidden"
+                    title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </button>
+          </p>
+          <ul class="space-y-2">
+            <% gruppo[:operazioni].each_with_index do |item, idx| %>
+              <li class="flex items-center gap-2 flex-wrap dark:text-white">
+                <span><%= item[:op].gsub('x', ' × ') %> =</span>
+                <input type="text"
+                       data-operation-id="es1-<%= gruppo[:lettera] %>-<%= idx %>"
+                       data-correct-answer="<%= item[:answer] %>"
+                       class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent">
+              </li>
+            <% end %>
+          </ul>
         </div>
-      </button>
-
-      <!-- Column b: Con un cambio -->
-      <button class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-blue-400"
-              data-action="click->column-modal#openGroup"
-              data-group="b"
-              data-operations="126×3,104×8,145×2,136×2,180×2,190×4"
-              data-show-carry="true"
-              data-column-modal-target="groupButton">
-        <div class="mb-3"><strong class="text-blue-500">b.</strong> Con un cambio</div>
-        <div class="space-y-2" data-column-modal-target="operationsList" data-group="b">
-          <div class="operation-item" data-index="0">126 × 3 =</div>
-          <div class="operation-item" data-index="1">104 × 8 =</div>
-          <div class="operation-item" data-index="2">145 × 2 =</div>
-          <div class="operation-item" data-index="3">136 × 2 =</div>
-          <div class="operation-item" data-index="4">180 × 2 =</div>
-          <div class="operation-item" data-index="5">190 × 4 =</div>
-        </div>
-      </button>
-
-      <!-- Column c: Con più cambi -->
-      <button class="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-green-400"
-              data-action="click->column-modal#openGroup"
-              data-group="c"
-              data-operations="123×5,124×7,146×4"
-              data-show-carry="true"
-              data-column-modal-target="groupButton">
-        <div class="mb-3"><strong class="text-purple-500">c.</strong> Con più cambi</div>
-        <div class="space-y-2" data-column-modal-target="operationsList" data-group="c">
-          <div class="operation-item" data-index="0">123 × 5 =</div>
-          <div class="operation-item" data-index="1">124 × 7 =</div>
-          <div class="operation-item" data-index="2">146 × 4 =</div>
-        </div>
-      </button>
+      <% end %>
     </div>
 
     <!-- Modal -->
-    <%= render 'shared/column_modal', title: "Calcola in colonna", color: "green", show_save: true %>
+    <%= render 'shared/operation_viewer', display: :modal, title: "Moltiplicazioni in colonna", color: "green" %>
 
     <div class="mt-6 text-right">
       <span class="text-gray-600 dark:text-gray-400">Quaderno →</span> <%= link_to "p. 150", pagina_path("bus3_mat_p150"), class: "text-cyan-600 dark:text-cyan-400 font-bold hover:underline" %>

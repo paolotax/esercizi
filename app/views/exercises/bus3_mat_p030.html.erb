@@ -236,7 +236,7 @@
   </div>
 
   <!-- Esercizio 3: Sul quaderno -->
-  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="operation-viewer">
     <div class="flex items-start gap-3 mb-6">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         3
@@ -246,46 +246,67 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <!-- Gruppo a -->
-      <button class="bg-orange-50 dark:bg-orange-900/30 p-4 rounded-lg hover:bg-orange-100 dark:hover:bg-orange-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-orange-400"
-              data-action="click->column-modal#openGroup"
-              data-group="a"
-              data-operations="96-53,39-15,54-31,369-36,78-54"
-              data-show-borrow="false"
-              data-show-operands="false"
-              data-column-modal-target="groupButton">
-        <div class="font-bold text-orange-600 mb-3">a.</div>
-        <div class="grid grid-cols-2 gap-2 text-gray-700 dark:text-gray-200" data-column-modal-target="operationsList" data-group="a">
-          <div class="operation-item" data-index="0">96 - 53 =</div>
-          <div class="operation-item" data-index="1">39 - 15 =</div>
-          <div class="operation-item" data-index="2">54 - 31 =</div>
-          <div class="operation-item" data-index="3">369 - 36 =</div>
-          <div class="operation-item" data-index="4">78 - 54 =</div>
-        </div>
-      </button>
+    <%
+      es3_gruppi = [
+        { lettera: "a", colore: "orange", operazioni: [
+          { op: "96-53", answer: "43" },
+          { op: "39-15", answer: "24" },
+          { op: "54-31", answer: "23" },
+          { op: "369-36", answer: "333" },
+          { op: "78-54", answer: "24" }
+        ]},
+        { lettera: "b", colore: "blue", operazioni: [
+          { op: "47-11", answer: "36" },
+          { op: "58-34", answer: "24" },
+          { op: "99-66", answer: "33" },
+          { op: "158-38", answer: "120" },
+          { op: "223-13", answer: "210" }
+        ]}
+      ]
+    %>
 
-      <!-- Gruppo b -->
-      <button class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-blue-400"
-              data-action="click->column-modal#openGroup"
-              data-group="b"
-              data-operations="47-11,58-34,99-66,158-38,223-13"
-              data-show-borrow="false"
-              data-show-operands="false"
-              data-column-modal-target="groupButton">
-        <div class="font-bold text-orange-600 mb-3">b.</div>
-        <div class="grid grid-cols-2 gap-2 text-gray-700 dark:text-gray-200" data-column-modal-target="operationsList" data-group="b">
-          <div class="operation-item" data-index="0">47 - 11 =</div>
-          <div class="operation-item" data-index="1">58 - 34 =</div>
-          <div class="operation-item" data-index="2">99 - 66 =</div>
-          <div class="operation-item" data-index="3">158 - 38 =</div>
-          <div class="operation-item" data-index="4">223 - 13 =</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <% es3_gruppi.each do |gruppo| %>
+        <%
+          operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+            { operation: item[:op], targetId: "es3-#{gruppo[:lettera]}-#{idx}" }
+          }
+        %>
+        <div class="bg-<%= gruppo[:colore] %>-50 dark:bg-<%= gruppo[:colore] %>-900/30 p-4 rounded-lg border-2 border-transparent hover:border-<%= gruppo[:colore] %>-400 transition">
+          <p class="font-bold text-<%= gruppo[:colore] %>-600 dark:text-<%= gruppo[:colore] %>-400 mb-3 flex items-center gap-2">
+            <%= gruppo[:lettera] %>.
+            <button type="button"
+                    data-action="click->operation-viewer#openGroup"
+                    data-operations='<%= operations_data.to_json %>'
+                    data-type="sottrazione"
+                    data-layout="column"
+                    data-display="modal"
+                    data-group="<%= gruppo[:lettera] %>"
+                    class="p-1 text-gray-400 hover:text-<%= gruppo[:colore] %>-600 dark:hover:text-<%= gruppo[:colore] %>-400 transition print-hidden"
+                    title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </button>
+          </p>
+          <ul class="space-y-2">
+            <% gruppo[:operazioni].each_with_index do |item, idx| %>
+              <li class="flex items-center gap-2 flex-wrap dark:text-white">
+                <span><%= item[:op].gsub('-', ' - ') %> =</span>
+                <input type="text"
+                       data-operation-id="es3-<%= gruppo[:lettera] %>-<%= idx %>"
+                       data-correct-answer="<%= item[:answer] %>"
+                       class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent">
+              </li>
+            <% end %>
+          </ul>
         </div>
-      </button>
+      <% end %>
     </div>
 
     <!-- Modal -->
-    <%= render 'shared/column_modal', title: "Sottrazioni in colonna", color: "cyan", show_save: true %>
+    <%= render 'shared/operation_viewer', display: :modal, title: "Sottrazioni in colonna", color: "cyan" %>
   </div>
 
   <!-- Quaderno link allineato a destra -->

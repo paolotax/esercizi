@@ -1,0 +1,15 @@
+<%#
+  Partial per renderizzare multiple griglie di operazioni
+
+  Parametri:
+  - grids: array di hash con :type, :grid, :partial
+  - layout: :quaderno o :column
+%>
+
+<div class="flex flex-col items-center gap-4">
+  <% grids.each_with_index do |item, idx| %>
+    <div class="quaderno-group-item" data-operation-index="<%= idx %>">
+      <%= render partial: item[:partial], locals: { grid: item[:grid] } %>
+    </div>
+  <% end %>
+</div>

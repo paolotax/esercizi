@@ -31,13 +31,7 @@
               <span class="text-red-600 dark:text-red-400 font-bold">decine</span>.
             </p>
           </div>
-          <%= render partial: "strumenti/addizioni/column_addition",
-                     locals: Addizione.new(addends: [146, 177],
-                                           show_exercise: false,
-                                           show_addends: true,
-                                           show_solution: false,
-                                           show_toolbar: false,
-                                           show_carry: true).to_partial_params %>
+          <%= addizione_grid [146, 177], show_addends: true, show_carry: true, style: :column %>
         </div>
 
         <!-- Passo 2: Somma le decine -->
@@ -52,13 +46,7 @@
               <span class="text-green-600 dark:text-green-400 font-bold">centinaia</span>.
             </p>
           </div>
-          <%= render partial: "strumenti/addizioni/column_addition",
-                     locals: Addizione.new(addends: [146, 177],
-                                           show_exercise: false,
-                                           show_addends: true,
-                                           show_solution: false,
-                                           show_toolbar: false,
-                                           show_carry: true).to_partial_params %>
+          <%= addizione_grid [146, 177], show_addends: true, show_carry: true, style: :column %>
         </div>
 
         <!-- Passo 3: Somma le centinaia -->
@@ -68,13 +56,7 @@
               Somma le <span class="text-green-600 dark:text-green-400 font-bold">centinaia</span>: 1 + 1 + 1 = 3.
             </p>
           </div>
-          <%= render partial: "strumenti/addizioni/column_addition",
-                     locals: Addizione.new(addends: [146, 177],
-                                           show_exercise: false,
-                                           show_addends: true,
-                                           show_solution: true,
-                                           show_toolbar: false,
-                                           show_carry: true).to_partial_params %>
+          <%= addizione_grid [146, 177], show_addends: true, show_solution: true, show_carry: true, style: :column %>
         </div>
 
       </div>
@@ -90,33 +72,14 @@
       </div>
 
       <div class="flex flex-wrap gap-8 justify-center items-start">
-        
-        <%= render partial: "strumenti/addizioni/column_addition",
-                   locals: Addizione.new(addends: [205, 348],
-                                         title: "205 + 348 =",
-                                         show_addends: true,
-                                         show_toolbar: false,
-                                         show_carry: true).to_partial_params %>
-
-        <%= render partial: "strumenti/addizioni/column_addition",
-                   locals: Addizione.new(addends: [738, 56],
-                                         title: "738 + 56 =",
-                                         show_exercise: true,
-                                         show_toolbar: false,
-                                         show_carry: true).to_partial_params %>
-
-        <%= render partial: "strumenti/addizioni/column_addition",
-                   locals: Addizione.new(addends: [81, 250],
-                                         title: "81 + 250 =",
-                                         show_exercise: false,
-                                         show_toolbar: false,
-                                         show_carry: true).to_partial_params %>
-
+        <%= addizione_grid [205, 348], title: "205 + 348 =", show_addends: true, show_carry: true, style: :column %>
+        <%= addizione_grid [738, 56], title: "738 + 56 =", show_addends: true, show_carry: true, style: :column %>
+        <%= addizione_grid [81, 250], title: "81 + 250 =", show_carry: true, style: :column %>
       </div>
     </div>
 
     <!-- Exercise 3: Calcola in colonna sul quaderno (con modal) -->
-    <div class="bg-white dark:bg-gray-800 p-6 mb-6 rounded-lg" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
+    <div class="bg-white dark:bg-gray-800 p-6 mb-6 rounded-lg" data-controller="operation-viewer">
       <div class="flex items-start gap-3 mb-6">
         <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
           3
@@ -124,70 +87,73 @@
         <h2 class="font-bold text-gray-800 dark:text-gray-200">Calcola in colonna sul quaderno, oppure clicca sulle operazioni e svolgile nella griglia.</h2>
       </div>
 
+      <%
+        es3_gruppi = [
+          { lettera: "a", colore: "blue", operazioni: [
+            { op: "58+23", answer: "81" },
+            { op: "67+35", answer: "102" },
+            { op: "58+19", answer: "77" }
+          ]},
+          { lettera: "b", colore: "green", operazioni: [
+            { op: "296+14", answer: "310" },
+            { op: "718+89", answer: "807" },
+            { op: "246+29", answer: "275" }
+          ]},
+          { lettera: "c", colore: "purple", operazioni: [
+            { op: "53+117", answer: "170" },
+            { op: "87+228", answer: "315" },
+            { op: "89+718", answer: "807" }
+          ]},
+          { lettera: "d", colore: "pink", operazioni: [
+            { op: "189+363", answer: "552" },
+            { op: "436+257", answer: "693" },
+            { op: "640+365", answer: "1005" }
+          ]}
+        ]
+      %>
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Column a -->
-        <button class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-blue-400"
-                data-action="click->column-modal#openGroup"
-                data-group="a"
-                data-operations="58+23,67+35,58+19"
-                data-show-carry="true"
-                data-column-modal-target="groupButton">
-          <div class="font-bold text-red-500 dark:text-red-400 mb-3">a.</div>
-          <div class="space-y-2 dark:text-white" data-column-modal-target="operationsList" data-group="a">
-            <div class="operation-item" data-index="0">58 + 23 =</div>
-            <div class="operation-item" data-index="1">67 + 35 =</div>
-            <div class="operation-item" data-index="2">58 + 19 =</div>
+        <% es3_gruppi.each do |gruppo| %>
+          <%
+            operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+              { operation: item[:op], targetId: "es3-#{gruppo[:lettera]}-#{idx}" }
+            }
+          %>
+          <div class="bg-<%= gruppo[:colore] %>-50 dark:bg-<%= gruppo[:colore] %>-900/30 p-4 rounded-lg border-2 border-transparent hover:border-<%= gruppo[:colore] %>-400 transition">
+            <p class="font-bold text-red-500 dark:text-red-400 mb-3 flex items-center gap-2">
+              <%= gruppo[:lettera] %>.
+              <button type="button"
+                      data-action="click->operation-viewer#openGroup"
+                      data-operations='<%= operations_data.to_json %>'
+                      data-type="addizione"
+                      data-layout="column"
+                      data-display="modal"
+                      data-group="<%= gruppo[:lettera] %>"
+                      class="p-1 text-gray-400 hover:text-<%= gruppo[:colore] %>-600 dark:hover:text-<%= gruppo[:colore] %>-400 transition print-hidden"
+                      title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </p>
+            <ul class="space-y-2">
+              <% gruppo[:operazioni].each_with_index do |item, idx| %>
+                <li class="flex items-center gap-2 flex-wrap dark:text-white">
+                  <span><%= item[:op].gsub('+', ' + ') %> =</span>
+                  <input type="text"
+                         data-operation-id="es3-<%= gruppo[:lettera] %>-<%= idx %>"
+                         data-correct-answer="<%= item[:answer] %>"
+                         class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent">
+                </li>
+              <% end %>
+            </ul>
           </div>
-        </button>
-
-        <!-- Column b -->
-        <button class="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-green-400"
-                data-action="click->column-modal#openGroup"
-                data-group="b"
-                data-operations="296+14,718+89,246+29"
-                data-show-carry="true"
-                data-column-modal-target="groupButton">
-          <div class="font-bold text-red-500 dark:text-red-400 mb-3">b.</div>
-          <div class="space-y-2 dark:text-white" data-column-modal-target="operationsList" data-group="b">
-            <div class="operation-item" data-index="0">296 + 14 =</div>
-            <div class="operation-item" data-index="1">718 + 89 =</div>
-            <div class="operation-item" data-index="2">246 + 29 =</div>
-          </div>
-        </button>
-
-        <!-- Column c -->
-        <button class="bg-purple-50 dark:bg-purple-900/30 p-4 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-purple-400"
-                data-action="click->column-modal#openGroup"
-                data-group="c"
-                data-operations="53+117,87+228,89+718"
-                data-show-carry="true"
-                data-column-modal-target="groupButton">
-          <div class="font-bold text-red-500 dark:text-red-400 mb-3">c.</div>
-          <div class="space-y-2 dark:text-white" data-column-modal-target="operationsList" data-group="c">
-            <div class="operation-item" data-index="0">53 + 117 =</div>
-            <div class="operation-item" data-index="1">87 + 228 =</div>
-            <div class="operation-item" data-index="2">89 + 718 =</div>
-          </div>
-        </button>
-
-        <!-- Column d -->
-        <button class="bg-pink-50 dark:bg-pink-900/30 p-4 rounded-lg hover:bg-pink-100 dark:hover:bg-pink-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-pink-400"
-                data-action="click->column-modal#openGroup"
-                data-group="d"
-                data-operations="189+363,436+257,640+365"
-                data-show-carry="true"
-                data-column-modal-target="groupButton">
-          <div class="font-bold text-red-500 dark:text-red-400 mb-3">d.</div>
-          <div class="space-y-2 dark:text-white" data-column-modal-target="operationsList" data-group="d">
-            <div class="operation-item" data-index="0">189 + 363 =</div>
-            <div class="operation-item" data-index="1">436 + 257 =</div>
-            <div class="operation-item" data-index="2">640 + 365 =</div>
-          </div>
-        </button>
+        <% end %>
       </div>
 
       <!-- Modal -->
-      <%= render 'shared/column_modal', title: "Gruppo di operazioni", color: "blue", show_save: true %>
+      <%= render 'shared/operation_viewer', display: :modal, title: "Addizioni in colonna", color: "blue" %>
     </div>
 
     <!-- Exercise Controls -->

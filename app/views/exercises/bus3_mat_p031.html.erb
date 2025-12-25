@@ -75,34 +75,14 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- 169 - 54 -->
-      <%= render partial: "strumenti/sottrazioni/column_subtraction",
-                 locals: Sottrazione.new(minuend: 169, subtrahend: 54,
-                                         title: "169 - 54 =",
-                                         show_minuend_subtrahend: true,
-                                         show_toolbar: false,
-                                         show_borrow: true).to_partial_params %>
-
-      <!-- 587 - 570 -->
-      <%= render partial: "strumenti/sottrazioni/column_subtraction",
-                 locals: Sottrazione.new(minuend: 587, subtrahend: 570,
-                                         title: "587 - 570 =",
-                                         show_exercise: true,
-                                         show_toolbar: false,
-                                         show_borrow: true).to_partial_params %>
-
-      <!-- 489 - 387 -->
-      <%= render partial: "strumenti/sottrazioni/column_subtraction",
-                 locals: Sottrazione.new(minuend: 489, subtrahend: 387,
-                                         title: "489 - 387 =",
-                                         show_exercise: true,
-                                         show_toolbar: false,
-                                         show_borrow: true).to_partial_params %>
+      <%= sottrazione_grid 169, 54, title: "169 - 54 =", show_operands: true, show_borrow: true, style: :column %>
+      <%= sottrazione_grid 587, 570, title: "587 - 570 =", show_borrow: true, style: :column %>
+      <%= sottrazione_grid 489, 387, title: "489 - 387 =", show_borrow: true, style: :column %>
     </div>
   </div>
 
   <!-- Esercizio 3: Sul quaderno -->
-  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="column-modal" data-action="keydown@window->column-modal#handleEscape">
+  <div class="bg-transparent p-4 md:p-8 mb-8" data-controller="operation-viewer">
     <div class="flex items-start gap-3 mb-6">
       <div class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
         3
@@ -112,78 +92,81 @@
       </p>
     </div>
 
+    <%
+      es3_gruppi = [
+        { lettera: "a", colore: "orange", operazioni: [
+          { op: "386-162", answer: "224" },
+          { op: "295-133", answer: "162" },
+          { op: "248-136", answer: "112" },
+          { op: "427-215", answer: "212" },
+          { op: "469-348", answer: "121" }
+        ]},
+        { lettera: "b", colore: "blue", operazioni: [
+          { op: "582-340", answer: "242" },
+          { op: "748-526", answer: "222" },
+          { op: "144-23", answer: "121" },
+          { op: "489-251", answer: "238" },
+          { op: "785-425", answer: "360" }
+        ]},
+        { lettera: "c", colore: "green", operazioni: [
+          { op: "864-753", answer: "111" },
+          { op: "624-502", answer: "122" },
+          { op: "767-245", answer: "522" },
+          { op: "673-153", answer: "520" },
+          { op: "931-621", answer: "310" }
+        ]},
+        { lettera: "d", colore: "purple", operazioni: [
+          { op: "1788-427", answer: "1361" },
+          { op: "2363-1052", answer: "1311" },
+          { op: "1957-626", answer: "1331" },
+          { op: "2438-1121", answer: "1317" },
+          { op: "3518-1413", answer: "2105" }
+        ]}
+      ]
+    %>
+
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6">
-      <!-- Colonna a -->
-      <button class="bg-orange-50 dark:bg-orange-900/30 p-4 rounded-lg hover:bg-orange-100 dark:hover:bg-orange-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-orange-400"
-              data-action="click->column-modal#openGroup"
-              data-group="a"
-              data-operations="386-162,295-133,248-136,427-215,469-348"
-              data-show-borrow="true"
-              data-column-modal-target="groupButton">
-        <div class="font-bold text-orange-600 mb-3">a.</div>
-        <div class="space-y-2 text-gray-700 dark:text-gray-200" data-column-modal-target="operationsList" data-group="a">
-          <div class="operation-item" data-index="0">386 - 162 =</div>
-          <div class="operation-item" data-index="1">295 - 133 =</div>
-          <div class="operation-item" data-index="2">248 - 136 =</div>
-          <div class="operation-item" data-index="3">427 - 215 =</div>
-          <div class="operation-item" data-index="4">469 - 348 =</div>
+      <% es3_gruppi.each do |gruppo| %>
+        <%
+          operations_data = gruppo[:operazioni].each_with_index.map { |item, idx|
+            { operation: item[:op], targetId: "es3-#{gruppo[:lettera]}-#{idx}" }
+          }
+        %>
+        <div class="bg-<%= gruppo[:colore] %>-50 dark:bg-<%= gruppo[:colore] %>-900/30 p-4 rounded-lg border-2 border-transparent hover:border-<%= gruppo[:colore] %>-400 transition">
+          <p class="font-bold text-<%= gruppo[:colore] %>-600 dark:text-<%= gruppo[:colore] %>-400 mb-3 flex items-center gap-2">
+            <%= gruppo[:lettera] %>.
+            <button type="button"
+                    data-action="click->operation-viewer#openGroup"
+                    data-operations='<%= operations_data.to_json %>'
+                    data-type="sottrazione"
+                    data-layout="column"
+                    data-display="modal"
+                    data-group="<%= gruppo[:lettera] %>"
+                    class="p-1 text-gray-400 hover:text-<%= gruppo[:colore] %>-600 dark:hover:text-<%= gruppo[:colore] %>-400 transition print-hidden"
+                    title="Apri gruppo <%= gruppo[:lettera] %> nella calcolatrice">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </button>
+          </p>
+          <ul class="space-y-2">
+            <% gruppo[:operazioni].each_with_index do |item, idx| %>
+              <li class="flex items-center gap-2 flex-wrap dark:text-white">
+                <span><%= item[:op].gsub('-', ' - ') %> =</span>
+                <input type="text"
+                       data-operation-id="es3-<%= gruppo[:lettera] %>-<%= idx %>"
+                       data-correct-answer="<%= item[:answer] %>"
+                       class="w-16 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent">
+              </li>
+            <% end %>
+          </ul>
         </div>
-      </button>
-
-      <!-- Colonna b -->
-      <button class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-blue-400"
-              data-action="click->column-modal#openGroup"
-              data-group="b"
-              data-operations="582-340,748-526,144-23,489-251,785-425"
-              data-show-borrow="true"
-              data-column-modal-target="groupButton">
-        <div class="font-bold text-orange-600 mb-3">b.</div>
-        <div class="space-y-2 text-gray-700 dark:text-gray-200" data-column-modal-target="operationsList" data-group="b">
-          <div class="operation-item" data-index="0">582 - 340 =</div>
-          <div class="operation-item" data-index="1">748 - 526 =</div>
-          <div class="operation-item" data-index="2">144 - 23 =</div>
-          <div class="operation-item" data-index="3">489 - 251 =</div>
-          <div class="operation-item" data-index="4">785 - 425 =</div>
-        </div>
-      </button>
-
-      <!-- Colonna c -->
-      <button class="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-green-400"
-              data-action="click->column-modal#openGroup"
-              data-group="c"
-              data-operations="864-753,624-502,767-245,673-153,931-621"
-              data-show-borrow="true"
-              data-column-modal-target="groupButton">
-        <div class="font-bold text-orange-600 mb-3">c.</div>
-        <div class="space-y-2 text-gray-700 dark:text-gray-200" data-column-modal-target="operationsList" data-group="c">
-          <div class="operation-item" data-index="0">864 - 753 =</div>
-          <div class="operation-item" data-index="1">624 - 502 =</div>
-          <div class="operation-item" data-index="2">767 - 245 =</div>
-          <div class="operation-item" data-index="3">673 - 153 =</div>
-          <div class="operation-item" data-index="4">931 - 621 =</div>
-        </div>
-      </button>
-
-      <!-- Colonna d -->
-      <button class="bg-purple-50 dark:bg-purple-900/30 p-4 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900/50 transition cursor-pointer text-left border-2 border-transparent hover:border-purple-400"
-              data-action="click->column-modal#openGroup"
-              data-group="d"
-              data-operations="1788-427,2363-1052,1957-626,2438-1121,3518-1413"
-              data-show-borrow="true"
-              data-column-modal-target="groupButton">
-        <div class="font-bold text-orange-600 mb-3">d.</div>
-        <div class="space-y-2 text-gray-700 dark:text-gray-200" data-column-modal-target="operationsList" data-group="d">
-          <div class="operation-item" data-index="0">1788 - 427 =</div>
-          <div class="operation-item" data-index="1">2363 - 1052 =</div>
-          <div class="operation-item" data-index="2">1957 - 626 =</div>
-          <div class="operation-item" data-index="3">2438 - 1121 =</div>
-          <div class="operation-item" data-index="4">3518 - 1413 =</div>
-        </div>
-      </button>
+      <% end %>
     </div>
 
     <!-- Modal -->
-    <%= render 'shared/column_modal', title: "Gruppo di operazioni", color: "red", show_save: true %>
+    <%= render 'shared/operation_viewer', display: :modal, title: "Sottrazioni in colonna", color: "cyan" %>
   </div>
 
   <!-- Quaderno link allineato a destra -->

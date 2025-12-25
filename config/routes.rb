@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   get "exercises/column_operations_grid", to: "exercises#column_operations_grid", as: "column_operations_grid"
   # API endpoint for quaderno grid (single operation for sidebar)
   get "exercises/quaderno_grid", to: "exercises#quaderno_grid", as: "quaderno_grid"
+  # Unified API endpoint for operation grids (supports all types and layouts)
+  get "exercises/operation_grid", to: "exercises#operation_grid", as: "operation_grid"
 
   # ============================================
   # Authenticated routes (within account scope)
