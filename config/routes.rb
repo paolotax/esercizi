@@ -53,8 +53,6 @@ Rails.application.routes.draw do
     get "le_rime", to: "le_rime#show", as: "le_rime"
   end
 
-  # API endpoint for dynamic column operations grid (addizioni, sottrazioni, miste, con prova)
-  get "exercises/column_operations_grid", to: "exercises#column_operations_grid", as: "column_operations_grid"
   # API endpoint for quaderno grid (single operation for sidebar)
   get "exercises/quaderno_grid", to: "exercises#quaderno_grid", as: "quaderno_grid"
   # Unified API endpoint for operation grids (supports all types and layouts)
