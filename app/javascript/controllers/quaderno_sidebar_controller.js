@@ -176,29 +176,29 @@ export default class extends Controller {
       case 'addizione':
         result = this.extractResultWithComma(
           this.contentTarget,
-          'input[data-quaderno-addition-target="result"]',
-          'input[data-quaderno-addition-target="comma"][data-row-type="result"]'
+          'input[data-quaderno-target="result"]',
+          'input[data-quaderno-target="comma"][data-row-type="result"]'
         )
         break
       case 'sottrazione':
         result = this.extractResultWithComma(
           this.contentTarget,
-          'input[data-quaderno-subtraction-target="result"]',
-          'input[data-quaderno-subtraction-target="comma"][data-row-type="result"]'
+          'input[data-quaderno-target="result"]',
+          'input[data-quaderno-target="comma"][data-row-type="result"]'
         )
         break
       case 'moltiplicazione':
         result = this.extractResultWithCommaSpot(
           this.contentTarget,
-          'input[data-quaderno-multiplication-target="result"]',
-          '[data-quaderno-multiplication-target="commaSpot"].active'
+          'input[data-quaderno-target="result"]',
+          '[data-quaderno-target="commaSpot"].active'
         )
         break
       case 'divisione':
         result = this.extractResultWithCommaSpot(
           this.contentTarget,
-          'input[data-quaderno-division-target="quotient"]',
-          '[data-quaderno-division-target="commaSpot"].active'
+          'input[data-quaderno-target="quotient"]',
+          '[data-quaderno-target="commaSpot"].active'
         )
         break
     }
@@ -291,29 +291,29 @@ export default class extends Controller {
         case 'addizione':
           result = this.extractResultWithComma(
             item,
-            'input[data-quaderno-addition-target="result"]',
-            'input[data-quaderno-addition-target="comma"][data-row-type="result"]'
+            'input[data-quaderno-target="result"]',
+            'input[data-quaderno-target="comma"][data-row-type="result"]'
           )
           break
         case 'sottrazione':
           result = this.extractResultWithComma(
             item,
-            'input[data-quaderno-subtraction-target="result"]',
-            'input[data-quaderno-subtraction-target="comma"][data-row-type="result"]'
+            'input[data-quaderno-target="result"]',
+            'input[data-quaderno-target="comma"][data-row-type="result"]'
           )
           break
         case 'moltiplicazione':
           result = this.extractResultWithCommaSpot(
             item,
-            'input[data-quaderno-multiplication-target="result"]',
-            '[data-quaderno-multiplication-target="commaSpot"].active'
+            'input[data-quaderno-target="result"]',
+            '[data-quaderno-target="commaSpot"].active'
           )
           break
         case 'divisione':
           result = this.extractResultWithCommaSpot(
             item,
-            'input[data-quaderno-division-target="quotient"]',
-            '[data-quaderno-division-target="commaSpot"].active'
+            'input[data-quaderno-target="quotient"]',
+            '[data-quaderno-target="commaSpot"].active'
           )
           break
       }

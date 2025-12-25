@@ -70,27 +70,31 @@ class ExercisesController < ApplicationController
       numbers = parse_addends(operation)
       return render_error("Operazione non valida") unless numbers&.length >= 2
       addizione = Addizione::Renderer.new(addends: numbers, show_toolbar: true, show_addends: true)
-      render partial: "strumenti/addizioni/quaderno_addizione", locals: { addizione: addizione }
+      grid = addizione.to_grid_matrix
+      render partial: "strumenti/addizioni/addizione_grid", locals: { grid: grid }
 
     when "sottrazione"
       numbers = parse_operation_strings(operation, "-")
       return render_error("Operazione non valida") unless numbers&.length == 2
       sottrazione = Sottrazione::Renderer.new(minuend: numbers[0], subtrahend: numbers[1], show_toolbar: true, show_minuend_subtrahend: true)
-      render partial: "strumenti/sottrazioni/quaderno_sottrazione", locals: { sottrazione: sottrazione }
+      grid = sottrazione.to_grid_matrix
+      render partial: "strumenti/sottrazioni/sottrazione_grid", locals: { grid: grid }
 
     when "moltiplicazione"
       numbers = parse_operation_strings(operation, /[x×*]/i)
       return render_error("Operazione non valida") unless numbers&.length == 2
       show_carry = params[:show_partial_carries] == "true"
       moltiplicazione = Moltiplicazione::Renderer.new(multiplicand: numbers[0], multiplier: numbers[1], show_toolbar: true, show_carry: show_carry)
-      render partial: "strumenti/moltiplicazioni/quaderno_moltiplicazione", locals: { moltiplicazione: moltiplicazione }
+      grid = moltiplicazione.to_grid_matrix
+      render partial: "strumenti/moltiplicazioni/moltiplicazione_grid", locals: { grid: grid }
 
     when "divisione"
       numbers = parse_operation_strings(operation, /[÷:\/]/)
       return render_error("Operazione non valida") unless numbers&.length == 2
       extra_zeros = (params[:extra_zeros] || 1).to_i  # Default 1 zero extra per continuare la divisione
       divisione = Divisione::Renderer.new(dividend: numbers[0], divisor: numbers[1], show_toolbar: true, extra_zeros: extra_zeros)
-      render partial: "strumenti/divisioni/quaderno_divisione", locals: { divisione: divisione }
+      grid = divisione.to_grid_matrix
+      render partial: "strumenti/divisioni/divisione_grid", locals: { grid: grid }
 
     else
       render_error("Tipo di operazione non supportato")

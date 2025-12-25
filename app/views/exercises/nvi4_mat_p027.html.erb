@@ -34,17 +34,15 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Senza cambio -->
-          <div>
+          <div class="flex flex-col items-center">
             <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2 text-center">Senza cambio</p>
-            <%= render 'strumenti/addizioni/column_addition',
-                addizione: Addizione.new(addends: [456, 23], show_addends: true, show_solution: true, show_carry: false, show_toolbar: false) %>
+            <%= addizione_grid [456, 23], show_addends: true, show_solution: true, show_carry: false, show_toolbar: false %>
           </div>
 
           <!-- Con il cambio -->
-          <div>
+          <div class="flex flex-col items-center">
             <p class="font-bold text-<%= @pagina.base_color %>-600 mb-2 text-center">Con il cambio</p>
-            <%= render 'strumenti/addizioni/column_addition',
-                addizione: Addizione.new(addends: [157, 228], show_addends: true, show_solution: true, show_carry: true, show_toolbar: false) %>
+            <%= addizione_grid [157, 228], show_addends: true, show_solution: true, show_carry: true, show_toolbar: false %>
           </div>
 
           <!-- AllenaMente -->
@@ -56,8 +54,7 @@
               Thomas ha eseguito questa addizione. Dove ha sbagliato?<br>
               Spiega a voce perché.
             </p>
-            <%= render 'strumenti/addizioni/column_addition',
-                addizione: Addizione.new(addends: [139, 26], show_addends: true, show_solution: true, show_carry: true, show_toolbar: false) %>
+            <%= addizione_grid [139, 26], show_addends: true, show_solution: true, show_carry: true, show_toolbar: false %>
           </div>
         </div>
       </div>
