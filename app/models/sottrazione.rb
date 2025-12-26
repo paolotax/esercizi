@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "bigdecimal"
-
 class Sottrazione < ApplicationRecord
   include Questionable
   include Sottrazione::Calculation

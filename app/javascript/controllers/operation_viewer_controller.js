@@ -138,7 +138,7 @@ export default class extends Controller {
         htmlParts.push(`<div class="quaderno-group-item mb-4" data-target-input="${op.targetId}" data-operation-index="${htmlParts.length}">${html}</div>`)
       }
 
-      this.contentTarget.innerHTML = `<div class="flex flex-col items-center gap-2">${htmlParts.join('')}</div>`
+      this.contentTarget.innerHTML = htmlParts.join('')
 
       // Ripristina risultati salvati
       this.restoreSavedResults()
