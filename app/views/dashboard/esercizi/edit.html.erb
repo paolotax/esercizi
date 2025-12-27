@@ -1,254 +1,253 @@
-<style>
-  /* Stili per drag & drop */
-  .operation-item.dragging {
-    opacity: 0.5;
-    cursor: move;
-  }
+<%= content_for :head do %>
+  <style>
+    @keyframes slide-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .question-item {
+      animation: slide-in 0.3s ease-out;
+    }
+  </style>
+<% end %>
 
-  .operation-item.drag-over-top {
-    border-top: 4px solid #3B82F6;
-    padding-top: 12px;
-  }
-
-  .operation-item.drag-over-bottom {
-    border-bottom: 4px solid #3B82F6;
-    padding-bottom: 12px;
-  }
-
-  .drag-over {
-    background-color: #EFF6FF;
-  }
-</style>
-
-<div class="container-fluid px-4 py-6" data-controller="esercizio-builder" data-esercizio-id="<%= @esercizio.id %>">
-  <!-- Header -->
-  <div class="flex justify-between items-center mb-6 bg-white p-4 rounded-lg shadow">
-    <div class="flex items-center gap-4">
-      <h1 class="text-2xl font-bold text-gray-900">
-        <%= @esercizio.title %>
-      </h1>
-      <% if @esercizio.published? %>
-        <span class="px-3 py-1 text-sm font-medium text-green-800 bg-green-100 rounded">
-          Pubblicato
-        </span>
-      <% else %>
-        <span class="px-3 py-1 text-sm font-medium text-gray-600 bg-gray-100 rounded">
-          Bozza
-        </span>
-      <% end %>
-    </div>
-
-    <div class="flex items-center gap-3">
-      <%= link_to preview_dashboard_esercizio_path(@esercizio),
-                  target: "_blank",
-                  class: "px-4 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition" do %>
-        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-        </svg>
-        Anteprima
-      <% end %>
-
-      <% if @esercizio.draft? %>
-        <%= button_to "Pubblica",
-                      dashboard_esercizio_path(@esercizio),
-                      method: :patch,
-                      params: { esercizio: { published_at: Time.current } },
-                      class: "px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 transition" %>
-      <% end %>
-
-      <%= link_to dashboard_esercizio_path(@esercizio),
-                  class: "px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition" do %>
-        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-        </svg>
-        Salva e Esci
-      <% end %>
-    </div>
-  </div>
-
-  <div class="grid grid-cols-12 gap-6">
-    <!-- Sidebar Sinistra: Generatori Disponibili -->
-    <div class="col-span-2">
-      <div class="bg-white rounded-lg shadow sticky top-6">
-        <div class="p-4 border-b">
-          <h3 class="font-semibold text-gray-900">Operazioni</h3>
-        </div>
-        <div class="p-4 space-y-2">
-          <!-- Addizione -->
-          <div class="operation-generator bg-blue-50 border-2 border-blue-200 rounded-lg p-3 cursor-move hover:shadow-md transition"
-               data-operation-type="addizione"
-               draggable="true">
-            <div class="flex-shrink-0 md:flex items-center gap-2 pointer-events-none">
-              <svg class="flex-shrink-0 w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-              </svg>
-              <span class="hidden md:block font-medium text-blue-900">Addizione</span>
-            </div>
-          </div>
-
-          <!-- Sottrazione -->
-          <div class="operation-generator bg-red-50 border-2 border-red-200 rounded-lg p-3 cursor-move hover:shadow-md transition"
-               data-operation-type="sottrazione"
-               draggable="true">
-            <div class="flex-shrink-0 md:flex items-center gap-2 pointer-events-none">
-              <svg class="flex-shrink-0 w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
-              </svg>
-              <span class="hidden md:block font-medium text-red-900">Sottrazione</span>
-            </div>
-          </div>
-
-          <!-- Moltiplicazione -->
-          <div class="operation-generator bg-green-50 border-2 border-green-200 rounded-lg p-3 cursor-move hover:shadow-md transition"
-               data-operation-type="moltiplicazione"
-               draggable="true">
-            <div class="flex-shrink-0 md:flex items-center gap-2 pointer-events-none">
-              <svg class="flex-shrink-0 w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-              <span class="hidden md:block font-medium text-green-900 truncate">Moltiplicazione</span>
-            </div>
-          </div>
-
-          <!-- Abaco -->
-          <div class="operation-generator bg-purple-50 border-2 border-purple-200 rounded-lg p-3 cursor-move hover:shadow-md transition"
-               data-operation-type="abaco"
-               draggable="true">
-            <div class="flex-shrink-0 md:flex items-center gap-2 pointer-events-none">
-              <svg class="flex-shrink-0 w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-              </svg>
-              <span class="hidden md:block font-medium text-purple-900">Abaco</span>
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+  <!-- Header sticky -->
+  <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <%= link_to dashboard_esercizi_path, class: "p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition" do %>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+          <% end %>
+          <div>
+            <h1 class="text-xl font-black text-gray-900 dark:text-white truncate max-w-md">
+              <%= @esercizio.title %>
+            </h1>
+            <div class="flex items-center gap-2 text-sm">
+              <span class="px-2 py-0.5 text-xs font-bold rounded-full <%= @esercizio.published? ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300' : 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300' %>">
+                <%= @esercizio.published? ? 'Pubblicato' : 'Bozza' %>
+              </span>
+              <span class="text-gray-500 dark:text-gray-400">
+                <%= @esercizio.questions.count %> domande
+              </span>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Area Centrale: Canvas per Drag & Drop -->
-    <div class="col-span-8">
-      <div class="bg-white rounded-lg shadow min-h-[600px]">
-        <div class="p-4 border-b flex justify-between items-center">
-          <h3 class="font-semibold text-gray-900">Area di Lavoro</h3>
-          <div class="flex gap-2">
-            <button class="px-3 py-1 text-sm text-gray-600 bg-gray-100 rounded hover:bg-gray-200"
-                    data-action="click->esercizio-builder#clearAll">
-              Svuota Tutto
-            </button>
-            <button class="px-3 py-1 text-sm text-blue-600 bg-blue-100 rounded hover:bg-blue-200"
-                    data-action="click->esercizio-builder#saveLayout">
-              Salva Layout
-            </button>
-          </div>
-        </div>
+        <div class="flex items-center gap-2">
+          <%= link_to preview_dashboard_esercizio_path(@esercizio), target: "_blank",
+              class: "px-4 py-2 text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 font-semibold rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition flex items-center gap-2" do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <span class="hidden sm:inline">Anteprima</span>
+          <% end %>
 
-        <!-- Drop Zone -->
-        <div id="operations-container"
-             class="p-6 min-h-[500px]"
-             data-esercizio-builder-target="dropZone"
-             data-esercizio-id="<%= @esercizio.id %>">
-
-          <% if @esercizio.operations.any? %>
-            <!-- Renderizza operazioni esistenti -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="operations-grid">
-              <% @esercizio.operations.each do |operation| %>
-                <%= render 'operation_card', operation: operation %>
-              <% end %>
-            </div>
-          <% else %>
-            <!-- Empty State -->
-            <div id="empty-state" class="flex flex-col items-center justify-center h-[400px] text-gray-400 border-2 border-dashed border-gray-300 rounded-lg">
-              <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-              </svg>
-              <p class="text-lg font-medium mb-2">Trascina qui le operazioni</p>
-              <p class="text-sm">Seleziona un generatore dalla barra laterale e trascinalo in quest'area</p>
-            </div>
+          <%= link_to dashboard_esercizio_path(@esercizio),
+              class: "px-4 py-2 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition" do %>
+            Vai all'esercizio
           <% end %>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Sidebar Destra: Proprietà -->
-    <div class="col-span-2">
-      <div class="bg-white rounded-lg shadow sticky top-6">
-        <div class="p-4 border-b">
-          <h3 class="font-semibold text-gray-900">Proprietà</h3>
-        </div>
-
-        <!-- Form Proprietà Esercizio -->
-        <%= form_with model: @esercizio, url: dashboard_esercizio_path(@esercizio), method: :patch, local: false, data: { 'esercizio-builder-target': 'propertiesForm' } do |form| %>
-          <div class="p-4 space-y-4">
-            <div>
-              <%= form.label :title, "Titolo", class: "block text-sm font-medium text-gray-700 mb-1" %>
-              <%= form.text_field :title, class: "w-full px-3 py-2 border border-gray-300 rounded-md text-sm" %>
-            </div>
-
-            <div>
-              <%= form.label :category, "Categoria", class: "block text-sm font-medium text-gray-700 mb-1" %>
-              <%= form.select :category,
-                  options_for_select([
-                    ['Matematica', 'matematica'],
-                    ['Italiano', 'italiano'],
-                    ['Geometria', 'geometria']
-                  ], @esercizio.category),
-                  {},
-                  class: "w-full px-3 py-2 border border-gray-300 rounded-md text-sm" %>
-            </div>
-
-            <div>
-              <%= form.label :difficulty, "Difficoltà", class: "block text-sm font-medium text-gray-700 mb-1" %>
-              <%= form.select :difficulty,
-                  options_for_select([
-                    ['Facile', 'facile'],
-                    ['Medio', 'medio'],
-                    ['Difficile', 'difficile']
-                  ], @esercizio.difficulty),
-                  {},
-                  class: "w-full px-3 py-2 border border-gray-300 rounded-md text-sm" %>
-            </div>
-
-            <div>
-              <%= form.submit "Aggiorna Proprietà", class: "w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition text-sm" %>
-            </div>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Colonna principale - Domande -->
+      <div class="lg:col-span-2 space-y-6">
+        <!-- Card Domande -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+          <div class="bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-4 flex items-center justify-between">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Domande (<%= @esercizio.questions.count %>)
+            </h2>
           </div>
-        <% end %>
 
-        <!-- Pannello Configurazione Operazione (nascosto di default) -->
-        <div id="operation-config-panel" class="hidden border-t">
-          <div class="p-4">
-            <h4 class="font-medium text-gray-900 mb-3">Configura Operazione</h4>
-            <div id="operation-config-form">
-              <!-- Il contenuto verrà generato dinamicamente -->
+          <div id="questions-list" class="divide-y divide-gray-200 dark:divide-gray-700">
+            <% if @esercizio.questions.any? %>
+              <% @esercizio.questions.order(:position).each do |question| %>
+                <%= render "dashboard/questions/question", question: question, esercizio: @esercizio %>
+              <% end %>
+            <% else %>
+              <div class="p-12 text-center" id="empty-questions">
+                <div class="w-20 h-20 bg-gray-100 dark:bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <p class="text-lg font-medium text-gray-900 dark:text-white mb-1">Nessuna domanda</p>
+                <p class="text-gray-500 dark:text-gray-400">Aggiungi domande usando i pulsanti qui sotto</p>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Pulsanti aggiungi domanda -->
+          <div class="p-4 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700">
+            <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Aggiungi domanda:</p>
+            <div class="flex flex-wrap gap-2">
+              <%= button_to dashboard_esercizio_questions_path(@esercizio),
+                  method: :post,
+                  params: { questionable_type: "Addizione", data: { addends: ["0", "0"] } },
+                  class: "inline-flex items-center gap-2 px-4 py-2.5 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 rounded-xl hover:bg-blue-100 dark:hover:bg-blue-900/50 transition text-sm font-semibold" do %>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Addizione
+              <% end %>
+
+              <%= button_to dashboard_esercizio_questions_path(@esercizio),
+                  method: :post,
+                  params: { questionable_type: "Sottrazione", data: { minuend: "0", subtrahend: "0" } },
+                  class: "inline-flex items-center gap-2 px-4 py-2.5 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800 rounded-xl hover:bg-red-100 dark:hover:bg-red-900/50 transition text-sm font-semibold" do %>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                </svg>
+                Sottrazione
+              <% end %>
+
+              <%= button_to dashboard_esercizio_questions_path(@esercizio),
+                  method: :post,
+                  params: { questionable_type: "Moltiplicazione", data: { multiplicand: "0", multiplier: "0" } },
+                  class: "inline-flex items-center gap-2 px-4 py-2.5 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800 rounded-xl hover:bg-green-100 dark:hover:bg-green-900/50 transition text-sm font-semibold" do %>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Moltiplicazione
+              <% end %>
+
+              <%= button_to dashboard_esercizio_questions_path(@esercizio),
+                  method: :post,
+                  params: { questionable_type: "Divisione", data: { dividend: "0", divisor: "1" } },
+                  class: "inline-flex items-center gap-2 px-4 py-2.5 bg-orange-50 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800 rounded-xl hover:bg-orange-100 dark:hover:bg-orange-900/50 transition text-sm font-semibold" do %>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Divisione
+              <% end %>
+
+              <%= button_to dashboard_esercizio_questions_path(@esercizio),
+                  method: :post,
+                  params: { questionable_type: "Abaco", data: { value: 0 } },
+                  class: "inline-flex items-center gap-2 px-4 py-2.5 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 rounded-xl hover:bg-purple-100 dark:hover:bg-purple-900/50 transition text-sm font-semibold" do %>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                Abaco
+              <% end %>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Sidebar - Info Esercizio -->
+      <div class="space-y-6">
+        <!-- Form modifica info -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+          <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+            <h3 class="font-bold text-gray-900 dark:text-white">Informazioni</h3>
+          </div>
+
+          <%= form_with model: @esercizio, url: dashboard_esercizio_path(@esercizio), method: :patch, class: "p-6 space-y-4" do |form| %>
+            <div>
+              <%= form.label :title, "Titolo", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+              <%= form.text_field :title,
+                  class: "w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" %>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <%= form.label :category, "Categoria", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+                <%= form.select :category,
+                    options_for_select([['Matematica', 'matematica'], ['Italiano', 'italiano'], ['Geometria', 'geometria']], @esercizio.category),
+                    { include_blank: "Seleziona..." },
+                    class: "w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-sm" %>
+              </div>
+
+              <div>
+                <%= form.label :difficulty, "Difficoltà", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+                <%= form.select :difficulty,
+                    options_for_select([['Facile', 'facile'], ['Medio', 'medio'], ['Difficile', 'difficile']], @esercizio.difficulty),
+                    { include_blank: "Seleziona..." },
+                    class: "w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-sm" %>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <%= form.submit "Salva modifiche",
+                  class: "w-full px-4 py-2.5 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition cursor-pointer" %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Azioni -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 space-y-3">
+          <h3 class="font-bold text-gray-900 dark:text-white mb-4">Azioni</h3>
+
+          <% if @esercizio.published? %>
+            <%= button_to unpublish_dashboard_esercizio_path(@esercizio), method: :patch,
+                class: "w-full px-4 py-2.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 font-semibold rounded-xl hover:bg-amber-200 dark:hover:bg-amber-900/50 transition flex items-center justify-center gap-2" do %>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+              </svg>
+              Ritira pubblicazione
+            <% end %>
+          <% else %>
+            <%= button_to publish_dashboard_esercizio_path(@esercizio), method: :patch,
+                class: "w-full px-4 py-2.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 font-semibold rounded-xl hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition flex items-center justify-center gap-2" do %>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Pubblica esercizio
+            <% end %>
+          <% end %>
+
+          <%= button_to duplicate_dashboard_esercizio_path(@esercizio), method: :post,
+              class: "w-full px-4 py-2.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition flex items-center justify-center gap-2" do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+            Duplica esercizio
+          <% end %>
+
+          <%= button_to dashboard_esercizio_path(@esercizio), method: :delete,
+              class: "w-full px-4 py-2.5 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold rounded-xl hover:bg-red-100 dark:hover:bg-red-900/30 transition flex items-center justify-center gap-2",
+              data: { turbo_confirm: "Sei sicuro di voler eliminare questo esercizio? L'azione è irreversibile." } do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+            Elimina esercizio
+          <% end %>
+        </div>
+
+        <!-- Link pubblico -->
+        <% if @esercizio.published? && @esercizio.share_token.present? %>
+          <div class="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border border-emerald-200 dark:border-emerald-800 rounded-2xl p-6">
+            <h3 class="font-bold text-emerald-800 dark:text-emerald-300 mb-3 flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+              </svg>
+              Link pubblico
+            </h3>
+            <div class="flex gap-2">
+              <input type="text" readonly value="<%= public_esercizio_url(share_token: @esercizio.share_token) %>"
+                     id="share-link"
+                     class="flex-1 px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-emerald-200 dark:border-emerald-700 rounded-xl text-gray-900 dark:text-gray-100"
+                     onclick="this.select()">
+              <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('share-link').value); this.textContent='Copiato!'; setTimeout(() => this.textContent='Copia', 2000)"
+                      class="px-4 py-2 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition">
+                Copia
+              </button>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
-
-<style>
-  /* Stili per il drag & drop */
-  .dragging {
-    opacity: 0.5;
-  }
-
-  .drag-over {
-    background-color: #EBF8FF;
-    border-color: #3182CE;
-  }
-
-  .operation-item {
-    transition: transform 0.2s;
-  }
-
-  .operation-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-</style>
-
-<!-- Pannello laterale proprietà -->
-<%= render 'operation_properties_panel' %>

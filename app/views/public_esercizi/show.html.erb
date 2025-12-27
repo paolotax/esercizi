@@ -1,19 +1,19 @@
 <% content_for :title, @esercizio.title %>
 <% content_for :page_title, @esercizio.title %>
 
-<div class="min-h-screen">
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Descrizione esercizio -->
     <% if @esercizio.description.present? %>
-      <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+      <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 dark:border-blue-600 p-4 mb-6 rounded-r-lg">
         <div class="flex">
           <div class="flex-shrink-0">
-            <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            <svg class="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           </div>
           <div class="ml-3">
-            <p class="text-sm text-blue-700">
+            <p class="text-sm text-blue-700 dark:text-blue-300">
               <%= @esercizio.description %>
             </p>
           </div>
@@ -22,24 +22,24 @@
     <% end %>
 
     <!-- Info bar -->
-    <div class="bg-white shadow-sm rounded-lg px-4 py-3 mb-6">
+    <div class="bg-white dark:bg-gray-800 shadow-sm rounded-xl px-4 py-3 mb-6">
       <div class="flex items-center justify-between text-sm">
         <div class="flex items-center space-x-4">
-          <span class="text-gray-500">
-            <strong><%= @esercizio.operations.count %></strong> operazioni
+          <span class="text-gray-500 dark:text-gray-400">
+            <strong class="text-gray-900 dark:text-white"><%= @esercizio.questions.count %></strong> domande
           </span>
           <% if @esercizio.category.present? %>
-            <span class="text-gray-500">
-              Categoria: <strong><%= @esercizio.category.capitalize %></strong>
+            <span class="text-gray-500 dark:text-gray-400">
+              Categoria: <strong class="text-gray-900 dark:text-white"><%= @esercizio.category.capitalize %></strong>
             </span>
           <% end %>
           <% if @esercizio.difficulty.present? %>
-            <span class="text-gray-500">
-              Difficoltà: <strong><%= @esercizio.difficulty.capitalize %></strong>
+            <span class="text-gray-500 dark:text-gray-400">
+              Difficoltà: <strong class="text-gray-900 dark:text-white"><%= @esercizio.difficulty.capitalize %></strong>
             </span>
           <% end %>
         </div>
-        <div id="timer" class="text-gray-600 font-mono">
+        <div id="timer" class="text-gray-600 dark:text-gray-400 font-mono bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-lg">
           <span id="minutes">00</span>:<span id="seconds">00</span>
         </div>
       </div>
@@ -49,46 +49,74 @@
     <%= form_with url: public_esercizio_attempt_path(share_token: @esercizio.share_token),
                   local: true, id: "exercise-form", data: { turbo: false } do |form| %>
 
-      <!-- Griglia delle operazioni -->
+      <!-- Griglia delle domande -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <% @esercizio.operations.each_with_index do |operation, index| %>
-          <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <!-- Numero operazione -->
+        <% @esercizio.questions.order(:position).each_with_index do |question, index| %>
+          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
+            <!-- Numero e tipo -->
             <div class="flex justify-between items-center mb-4">
-              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-                Esercizio <%= index + 1 %>
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-bold">
+                <%= index + 1 %>
               </span>
-              <span class="text-sm text-gray-500 capitalize">
-                <%= operation['type'] %>
+
+              <% type = question.questionable_type.downcase %>
+              <% colors = { "addizione" => "blue", "sottrazione" => "red", "moltiplicazione" => "green", "divisione" => "orange", "abaco" => "purple" } %>
+              <% color = colors[type] || "gray" %>
+
+              <span class="px-3 py-1 text-xs font-bold rounded-full bg-<%= color %>-100 dark:bg-<%= color %>-900/30 text-<%= color %>-700 dark:text-<%= color %>-300">
+                <%= question.questionable_type %>
               </span>
             </div>
 
-            <!-- Contenuto operazione con input per risposta -->
-            <div class="operation-content" data-operation-id="<%= operation['id'] %>">
-              <%= EsercizioRenderer.new(@esercizio, self).render_operation(operation).html_safe %>
+            <!-- Contenuto domanda con griglia -->
+            <div class="py-4">
+              <%= question_grid(question, show_addends: true, show_minuend_subtrahend: true, show_multiplicand_multiplier: true, show_dividend_divisor: true) %>
+            </div>
+
+            <!-- Input per risposta -->
+            <div class="mt-4">
+              <% if type == "abaco" %>
+                <input type="number"
+                       name="results[<%= question.id %>][total]"
+                       placeholder="Inserisci il valore"
+                       class="w-full px-4 py-3 text-center text-xl border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                       required>
+              <% else %>
+                <% result_digits = 4 %>
+                <div class="flex justify-center gap-2">
+                  <% result_digits.times do |digit_idx| %>
+                    <input type="text"
+                           name="results[<%= question.id %>][result][<%= digit_idx %>]"
+                           maxlength="1"
+                           pattern="[0-9]"
+                           class="w-12 h-14 text-center text-2xl font-bold border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                           oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value && this.nextElementSibling) this.nextElementSibling.focus();">
+                  <% end %>
+                </div>
+              <% end %>
             </div>
           </div>
         <% end %>
       </div>
 
       <!-- Sezione per identificazione studente e submit -->
-      <div class="bg-white shadow rounded-lg px-6 py-4">
-        <div class="flex items-center justify-between">
+      <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl px-6 py-6">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div class="flex items-center space-x-4">
-            <label for="student_name" class="text-sm font-medium text-gray-700">
+            <label for="student_name" class="text-sm font-medium text-gray-700 dark:text-gray-300">
               Nome (opzionale):
             </label>
             <input type="text"
                    id="student_name"
                    name="student_name"
-                   class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                   class="px-4 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
                    placeholder="Il tuo nome">
           </div>
 
           <button type="submit"
-                  class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <svg class="mr-2 -ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 0016 0zm-6-3a2 2 0 114 0 2 2 0 01-4 0zm-2-9a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0z" clip-rule="evenodd" />
+                  class="inline-flex items-center px-8 py-3 border border-transparent text-base font-bold rounded-xl shadow-lg text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition">
+            <svg class="mr-2 -ml-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             Consegna Esercizio
           </button>

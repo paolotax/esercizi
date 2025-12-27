@@ -131,7 +131,7 @@ CREATE INDEX "index_esercizio_attempts_on_esercizio_id" ON "esercizio_attempts" 
 CREATE INDEX "index_esercizio_attempts_on_student_identifier" ON "esercizio_attempts" ("student_identifier") /*application='Esercizi'*/;
 CREATE INDEX "index_esercizio_attempts_on_account_id" ON "esercizio_attempts" ("account_id") /*application='Esercizi'*/;
 CREATE INDEX "index_esercizio_attempts_on_user_id" ON "esercizio_attempts" ("user_id") /*application='Esercizi'*/;
-CREATE TABLE IF NOT EXISTS "esercizi" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "category" varchar, "content" text DEFAULT '{}', "created_at" datetime(6) NOT NULL, "description" text, "difficulty" varchar, "published_at" datetime(6), "share_token" varchar, "slug" varchar NOT NULL, "tags" text DEFAULT '[]', "title" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, "views_count" integer DEFAULT 0, "account_id" integer, "creator_id" integer, CONSTRAINT "fk_rails_caa2d9fc3f"
+CREATE TABLE IF NOT EXISTS "esercizi" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "category" varchar, "content" text DEFAULT '{}', "created_at" datetime(6) NOT NULL, "description" text, "difficulty" varchar, "published_at" datetime(6), "share_token" varchar, "slug" varchar NOT NULL, "tags" text DEFAULT '[]', "title" varchar NOT NULL, "updated_at" datetime(6) NOT NULL, "views_count" integer DEFAULT 0, "account_id" integer, "creator_id" integer, "status" integer DEFAULT 0 NOT NULL /*application='Esercizi'*/, CONSTRAINT "fk_rails_caa2d9fc3f"
 FOREIGN KEY ("account_id")
   REFERENCES "accounts" ("id")
 , CONSTRAINT "fk_rails_462a2e5db2"
@@ -164,10 +164,21 @@ CREATE INDEX "index_questions_on_questionable_type_and_questionable_id" ON "ques
 CREATE INDEX "index_questions_on_esercizio_id_and_position" ON "questions" ("esercizio_id", "position") /*application='Esercizi'*/;
 CREATE TABLE IF NOT EXISTS "addizioni" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json DEFAULT '{}' NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
 CREATE TABLE IF NOT EXISTS "sottrazioni" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json DEFAULT '{}' NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
-CREATE TABLE IF NOT EXISTS "moltiplicazioni" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
-CREATE TABLE IF NOT EXISTS "divisioni" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
-CREATE TABLE IF NOT EXISTS "abachi" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
+CREATE TABLE IF NOT EXISTS "moltiplicazioni" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json DEFAULT '{}' NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
+CREATE TABLE IF NOT EXISTS "divisioni" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json DEFAULT '{}' NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
+CREATE TABLE IF NOT EXISTS "abachi" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "data" json DEFAULT '{}' NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
+CREATE TABLE IF NOT EXISTS "shares" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "shareable_type" varchar NOT NULL, "shareable_id" integer NOT NULL, "recipient_type" varchar NOT NULL, "recipient_id" bigint NOT NULL, "permission" integer DEFAULT 0 NOT NULL, "granted_by_id" integer, "expires_at" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_f3a47c41a4"
+FOREIGN KEY ("granted_by_id")
+  REFERENCES "users" ("id")
+);
+CREATE INDEX "index_shares_on_shareable" ON "shares" ("shareable_type", "shareable_id") /*application='Esercizi'*/;
+CREATE INDEX "index_shares_on_granted_by_id" ON "shares" ("granted_by_id") /*application='Esercizi'*/;
+CREATE INDEX "index_shares_on_recipient_type_and_recipient_id" ON "shares" ("recipient_type", "recipient_id") /*application='Esercizi'*/;
+CREATE UNIQUE INDEX "index_shares_unique" ON "shares" ("shareable_type", "shareable_id", "recipient_type", "recipient_id") /*application='Esercizi'*/;
+CREATE INDEX "index_esercizi_on_status" ON "esercizi" ("status") /*application='Esercizi'*/;
 INSERT INTO "schema_migrations" (version) VALUES
+('20251227093855'),
+('20251227093831'),
 ('20251224124359'),
 ('20251224124358'),
 ('20251224124357'),

@@ -79,13 +79,13 @@ Rails.application.routes.draw do
       member do
         post :duplicate
         get :preview
-        get :export_pdf
-        post :add_operation
-        delete :remove_operation
-        patch :reorder_operations
-        get :operation_properties
-        patch :update_operation
+        post :publish
+        post :unpublish
       end
+      resources :questions, only: [:create, :edit, :update, :destroy] do
+        post :reorder, on: :collection
+      end
+      resources :shares, only: [:index, :create, :destroy]
     end
     resources :esercizio_templates
 

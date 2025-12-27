@@ -1,29 +1,29 @@
-<div class="min-h-screen bg-gray-50">
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900">
   <!-- Header Preview -->
-  <div class="bg-white shadow-sm border-b">
+  <div class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center py-4">
         <div>
-          <h1 class="text-2xl font-bold text-gray-900"><%= @esercizio.title %></h1>
-          <p class="text-sm text-gray-600 mt-1">
+          <h1 class="text-2xl font-bold text-gray-900 dark:text-white"><%= @esercizio.title %></h1>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
             Anteprima Esercizio •
-            <%= @esercizio.operations.count %> operazioni •
+            <%= @esercizio.questions.count %> domande •
             <%= @esercizio.category&.capitalize || 'Senza categoria' %>
           </p>
         </div>
         <div class="flex space-x-2">
           <%= link_to edit_dashboard_esercizio_path(@esercizio),
-                      class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-            <svg class="mr-2 -ml-1 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                      class: "inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition" do %>
+            <svg class="mr-2 -ml-1 h-5 w-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
             </svg>
             Modifica
           <% end %>
 
           <button onclick="window.close()"
-                  class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-            <svg class="mr-2 -ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  class="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 transition">
+            <svg class="mr-2 -ml-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
             Chiudi Anteprima
           </button>
@@ -34,13 +34,13 @@
 
   <!-- Info Bar -->
   <% if @esercizio.description.present? %>
-    <div class="bg-blue-50 border-b border-blue-200">
+    <div class="bg-blue-50 dark:bg-blue-900/20 border-b border-blue-200 dark:border-blue-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div class="flex items-center">
-          <svg class="h-5 w-5 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+          <svg class="h-5 w-5 text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          <p class="text-sm text-blue-800"><%= @esercizio.description %></p>
+          <p class="text-sm text-blue-800 dark:text-blue-300"><%= @esercizio.description %></p>
         </div>
       </div>
     </div>
@@ -48,24 +48,29 @@
 
   <!-- Main Content -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <% if @esercizio.operations.any? %>
-      <!-- Render delle operazioni -->
+    <% if @esercizio.questions.any? %>
+      <!-- Render delle domande -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <% @esercizio.operations.each_with_index do |operation, index| %>
-          <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <!-- Numero operazione -->
+        <% @esercizio.questions.order(:position).each_with_index do |question, index| %>
+          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
+            <!-- Numero e tipo -->
             <div class="flex justify-between items-center mb-4">
-              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                #<%= index + 1 %>
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-sm font-bold">
+                <%= index + 1 %>
               </span>
-              <span class="text-sm text-gray-500 capitalize">
-                <%= operation['type'] %>
+
+              <% type = question.questionable_type.downcase %>
+              <% colors = { "addizione" => "blue", "sottrazione" => "red", "moltiplicazione" => "green", "divisione" => "orange", "abaco" => "purple" } %>
+              <% color = colors[type] || "gray" %>
+
+              <span class="px-2.5 py-1 text-xs font-bold rounded-full bg-<%= color %>-100 dark:bg-<%= color %>-900/30 text-<%= color %>-700 dark:text-<%= color %>-300">
+                <%= question.questionable_type %>
               </span>
             </div>
 
-            <!-- Contenuto operazione -->
-            <div class="operation-content">
-              <%= EsercizioRenderer.new(@esercizio, self).render_operation(operation).html_safe %>
+            <!-- Contenuto domanda con griglia -->
+            <div class="py-4">
+              <%= question_grid(question, show_addends: true, show_minuend_subtrahend: true, show_multiplicand_multiplier: true, show_dividend_divisor: true) %>
             </div>
           </div>
         <% end %>
@@ -73,48 +78,46 @@
     <% else %>
       <!-- Empty State -->
       <div class="text-center py-12">
-        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-        <h3 class="mt-2 text-sm font-medium text-gray-900">Nessuna operazione</h3>
-        <p class="mt-1 text-sm text-gray-500">L'esercizio non contiene ancora operazioni.</p>
+        <div class="w-20 h-20 bg-gray-100 dark:bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 dark:text-white">Nessuna domanda</h3>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">L'esercizio non contiene ancora domande.</p>
         <div class="mt-6">
-          <%= link_to "Aggiungi Operazioni", edit_dashboard_esercizio_path(@esercizio),
-                      class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+          <%= link_to edit_dashboard_esercizio_path(@esercizio),
+                      class: "inline-flex items-center px-6 py-3 border border-transparent shadow-lg text-sm font-bold rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 transition" do %>
+            <svg class="mr-2 -ml-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            Aggiungi Domande
+          <% end %>
         </div>
       </div>
     <% end %>
   </div>
 
   <!-- Footer con link condivisione -->
-  <div class="bg-gray-100 border-t mt-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-          <span class="text-sm text-gray-600">Link condivisione:</span>
-          <code class="px-2 py-1 bg-white rounded border border-gray-300 text-sm">
-            <%= public_esercizio_url(share_token: @esercizio.share_token) %>
-          </code>
+  <% if @esercizio.share_token.present? %>
+    <div class="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center space-x-4">
+            <span class="text-sm text-gray-600 dark:text-gray-400">Link condivisione:</span>
+            <code class="px-3 py-1.5 bg-white dark:bg-gray-700 rounded-lg border border-gray-300 dark:border-gray-600 text-sm text-gray-900 dark:text-gray-100">
+              <%= public_esercizio_url(share_token: @esercizio.share_token) %>
+            </code>
+          </div>
+          <button onclick="navigator.clipboard.writeText('<%= public_esercizio_url(share_token: @esercizio.share_token) %>'); this.textContent='Copiato!'; setTimeout(() => this.innerHTML='<svg class=\'mr-1.5 -ml-0.5 h-4 w-4 inline\' fill=\'none\' stroke=\'currentColor\' viewBox=\'0 0 24 24\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z\'></path></svg>Copia Link', 2000)"
+                  class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-xl text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition">
+            <svg class="mr-1.5 -ml-0.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+            Copia Link
+          </button>
         </div>
-        <button onclick="copyToClipboard('<%= public_esercizio_url(share_token: @esercizio.share_token) %>')"
-                class="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          <svg class="mr-1 -ml-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-            <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-          </svg>
-          Copia Link
-        </button>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
-
-<script>
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(function() {
-    alert('Link copiato negli appunti!');
-  }, function(err) {
-    console.error('Errore nella copia: ', err);
-  });
-}
-</script>

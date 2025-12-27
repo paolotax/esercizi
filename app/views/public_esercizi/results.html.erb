@@ -1,15 +1,15 @@
 <% content_for :title, "Risultati - #{@esercizio.title}" %>
 <% content_for :page_title, "Risultati Esercizio" %>
 
-<div class="min-h-screen">
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Card dei risultati -->
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-2xl overflow-hidden">
       <!-- Header con punteggio -->
-      <div class="bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-8 text-white">
+      <div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 px-6 py-10 text-white">
         <div class="text-center">
-          <h2 class="text-2xl font-bold mb-2">Esercizio Completato!</h2>
-          <div class="text-6xl font-bold mb-2">
+          <h2 class="text-2xl font-bold mb-3">Esercizio Completato!</h2>
+          <div class="text-7xl font-black mb-3">
             <%= @attempt.score || 0 %>%
           </div>
           <p class="text-lg opacity-90">
@@ -19,31 +19,31 @@
       </div>
 
       <!-- Dettagli -->
-      <div class="px-6 py-6">
+      <div class="px-6 py-8">
         <!-- Statistiche -->
-        <div class="grid grid-cols-3 gap-4 mb-6">
-          <div class="text-center">
-            <div class="text-2xl font-bold text-gray-900">
-              <%= @esercizio.operations.count %>
+        <div class="grid grid-cols-3 gap-4 mb-8">
+          <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+            <div class="text-3xl font-black text-gray-900 dark:text-white">
+              <%= @esercizio.questions.count %>
             </div>
-            <div class="text-sm text-gray-600">
-              Esercizi Totali
+            <div class="text-sm text-gray-600 dark:text-gray-400">
+              Domande Totali
             </div>
           </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-green-600">
-              <% correct_count = @attempt.results['operations']&.count { |op| op['correct'] } || 0 %>
+          <div class="text-center p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl">
+            <div class="text-3xl font-black text-emerald-600 dark:text-emerald-400">
+              <% correct_count = @attempt.results['questions']&.count { |q| q['correct'] } || 0 %>
               <%= correct_count %>
             </div>
-            <div class="text-sm text-gray-600">
+            <div class="text-sm text-gray-600 dark:text-gray-400">
               Risposte Corrette
             </div>
           </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-gray-900">
+          <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+            <div class="text-3xl font-black text-gray-900 dark:text-white">
               <%= @attempt.formatted_duration || "0:00" %>
             </div>
-            <div class="text-sm text-gray-600">
+            <div class="text-sm text-gray-600 dark:text-gray-400">
               Tempo Impiegato
             </div>
           </div>
@@ -51,78 +51,92 @@
 
         <!-- Informazioni studente -->
         <% if @attempt.student_display_name.present? %>
-          <div class="border-t pt-4 mb-4">
-            <p class="text-sm text-gray-600">
-              <strong>Studente:</strong> <%= @attempt.student_display_name %>
+          <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mb-6">
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              <strong class="text-gray-900 dark:text-white">Studente:</strong> <%= @attempt.student_display_name %>
             </p>
-            <p class="text-sm text-gray-600">
-              <strong>Data:</strong> <%= @attempt.completed_at.strftime("%d/%m/%Y alle %H:%M") %>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              <strong class="text-gray-900 dark:text-white">Data:</strong> <%= @attempt.completed_at&.strftime("%d/%m/%Y alle %H:%M") %>
             </p>
           </div>
         <% end %>
 
         <!-- Messaggio motivazionale -->
-        <div class="bg-gray-50 rounded-lg p-4 mb-6">
+        <div class="rounded-xl p-5 mb-8 <%= @attempt.score && @attempt.score >= 80 ? 'bg-emerald-50 dark:bg-emerald-900/20' : @attempt.score && @attempt.score >= 60 ? 'bg-amber-50 dark:bg-amber-900/20' : 'bg-blue-50 dark:bg-blue-900/20' %>">
           <% if @attempt.score && @attempt.score >= 80 %>
-            <p class="text-green-700 font-semibold">
-              🎉 Ottimo lavoro! Hai completato l'esercizio con successo!
+            <p class="text-emerald-700 dark:text-emerald-300 font-bold text-lg text-center">
+              Ottimo lavoro! Hai completato l'esercizio con successo!
             </p>
           <% elsif @attempt.score && @attempt.score >= 60 %>
-            <p class="text-yellow-700 font-semibold">
-              👍 Buon lavoro! Continua così per migliorare ancora!
+            <p class="text-amber-700 dark:text-amber-300 font-bold text-lg text-center">
+              Buon lavoro! Continua così per migliorare ancora!
             </p>
           <% else %>
-            <p class="text-blue-700 font-semibold">
-              💪 Non arrenderti! Ogni esercizio ti aiuta a migliorare!
+            <p class="text-blue-700 dark:text-blue-300 font-bold text-lg text-center">
+              Non arrenderti! Ogni esercizio ti aiuta a migliorare!
             </p>
           <% end %>
         </div>
 
-        <!-- Dettaglio Operazioni -->
-        <% if @attempt.results['operations'].present? %>
-          <div class="border-t pt-6 mb-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Dettaglio Operazioni</h3>
+        <!-- Dettaglio Domande -->
+        <% if @attempt.results['questions'].present? %>
+          <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Dettaglio Risposte</h3>
             <div class="space-y-3">
-              <% @attempt.results['operations'].each_with_index do |op, index| %>
-                <div class="flex items-center justify-between p-4 rounded-lg <%= op['correct'] ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200' %>">
-                  <!-- Numero operazione e tipo -->
+              <% @attempt.results['questions'].each_with_index do |q, index| %>
+                <div class="flex items-center justify-between p-4 rounded-xl <%= q['correct'] ? 'bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800' : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800' %>">
+                  <!-- Numero e tipo -->
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
-                      <div class="w-8 h-8 rounded-full <%= op['correct'] ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' %> flex items-center justify-center font-bold text-sm">
+                      <div class="w-10 h-10 rounded-xl <%= q['correct'] ? 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300' : 'bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300' %> flex items-center justify-center font-bold">
                         <%= index + 1 %>
                       </div>
                     </div>
                     <div>
-                      <div class="font-medium text-gray-900">
-                        <%= render_operation_display(op) %>
+                      <div class="font-semibold text-gray-900 dark:text-white">
+                        <% type = q['type'] %>
+                        <% data = q['data'] || {} %>
+                        <% case type %>
+                        <% when "addizione" %>
+                          <%= (data['addends'] || []).join(" + ") %> = <%= q['correct_answer'] %>
+                        <% when "sottrazione" %>
+                          <%= data['minuend'] %> − <%= data['subtrahend'] %> = <%= q['correct_answer'] %>
+                        <% when "moltiplicazione" %>
+                          <%= data['multiplicand'] %> × <%= data['multiplier'] %> = <%= q['correct_answer'] %>
+                        <% when "divisione" %>
+                          <%= data['dividend'] %> ÷ <%= data['divisor'] %> = <%= q['correct_answer'] %>
+                        <% when "abaco" %>
+                          Valore: <%= q['correct_answer'] %>
+                        <% else %>
+                          Risposta: <%= q['correct_answer'] %>
+                        <% end %>
                       </div>
-                      <div class="text-sm text-gray-600">
-                        <%= op['type'].capitalize %>
+                      <div class="text-sm text-gray-600 dark:text-gray-400 capitalize">
+                        <%= type %>
                       </div>
                     </div>
                   </div>
 
                   <!-- Risultato -->
-                  <div class="text-right">
-                    <div class="text-sm text-gray-600">
-                      Risposta corretta: <span class="font-semibold text-gray-900"><%= op['correct_answer'] %></span>
+                  <div class="text-right flex items-center gap-4">
+                    <div>
+                      <div class="text-sm <%= q['correct'] ? 'text-emerald-700 dark:text-emerald-300' : 'text-red-700 dark:text-red-300' %>">
+                        Tua risposta: <span class="font-bold"><%= q['user_answer'].present? ? q['user_answer'] : '(vuoto)' %></span>
+                      </div>
                     </div>
-                    <div class="text-sm <%= op['correct'] ? 'text-green-700' : 'text-red-700' %>">
-                      Tua risposta: <span class="font-semibold"><%= op['user_answer'].present? ? op['user_answer'] : '(non risposto)' %></span>
-                    </div>
-                  </div>
 
-                  <!-- Icona check/cross -->
-                  <div class="flex-shrink-0 ml-4">
-                    <% if op['correct'] %>
-                      <svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                      </svg>
-                    <% else %>
-                      <svg class="h-6 w-6 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                      </svg>
-                    <% end %>
+                    <!-- Icona check/cross -->
+                    <div class="flex-shrink-0">
+                      <% if q['correct'] %>
+                        <svg class="h-8 w-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                      <% else %>
+                        <svg class="h-8 w-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               <% end %>
@@ -131,19 +145,19 @@
         <% end %>
 
         <!-- Azioni -->
-        <div class="flex justify-center space-x-4">
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
           <%= link_to public_esercizio_path(share_token: @esercizio.share_token),
-                      class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-            <svg class="mr-2 -ml-1 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z" clip-rule="evenodd" />
+                      class: "inline-flex items-center justify-center px-6 py-3 border-2 border-gray-300 dark:border-gray-600 shadow-sm text-base font-semibold rounded-xl text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition" do %>
+            <svg class="mr-2 -ml-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
             </svg>
             Riprova Esercizio
           <% end %>
 
           <button onclick="window.print()"
-                  class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <svg class="mr-2 -ml-1 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z" clip-rule="evenodd" />
+                  class="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-300 dark:border-gray-600 shadow-sm text-base font-semibold rounded-xl text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition">
+            <svg class="mr-2 -ml-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
             </svg>
             Stampa Risultati
           </button>
@@ -152,11 +166,11 @@
     </div>
 
     <!-- Info aggiuntive -->
-    <div class="mt-6 text-center text-sm text-gray-500">
+    <div class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
       <p>
-        Esercizio: <strong><%= @esercizio.title %></strong>
+        Esercizio: <strong class="text-gray-900 dark:text-white"><%= @esercizio.title %></strong>
         <% if @esercizio.category.present? %>
-          • Categoria: <strong><%= @esercizio.category.capitalize %></strong>
+          • Categoria: <strong class="text-gray-900 dark:text-white"><%= @esercizio.category.capitalize %></strong>
         <% end %>
       </p>
     </div>

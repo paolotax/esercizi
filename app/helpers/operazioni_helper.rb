@@ -143,6 +143,112 @@ module OperazioniHelper
   alias_method :mul_grid, :moltiplicazione_grid
   alias_method :div_grid, :divisione_grid
 
+  # Renderizza una Question usando il renderer appropriato per il suo questionable type
+  #
+  # @param question [Question] Una Question con delegated_type :questionable
+  # @param options [Hash] Opzioni per il renderer (sovrascrivono quelle del model)
+  # @return [String] HTML renderizzato della griglia
+  #
+  # @example Uso base
+  #   <%= question_grid(@question) %>
+  #
+  # @example Con opzioni
+  #   <%= question_grid(@question, show_solution: true, show_labels: true) %>
+  #
+  def question_grid(question, **options)
+    questionable = question.questionable
+    return "" if questionable.blank?
+
+    case questionable
+    when Addizione
+      data = questionable.data.with_indifferent_access
+      addizione_grid(
+        data[:addends] || [],
+        show_addends: options.fetch(:show_addends, data[:show_addends]),
+        show_solution: options.fetch(:show_solution, data[:show_solution]),
+        show_carry: options.fetch(:show_carry, data[:show_carry]),
+        show_toolbar: options.fetch(:show_toolbar, data[:show_toolbar]),
+        show_labels: options.fetch(:show_labels, data[:show_labels]),
+        style: options.fetch(:style, :quaderno),
+        title: options[:title] || data[:title]
+      )
+    when Sottrazione
+      data = questionable.data.with_indifferent_access
+      sottrazione_grid(
+        data[:minuend],
+        data[:subtrahend],
+        show_minuend_subtrahend: options.fetch(:show_minuend_subtrahend, data[:show_minuend_subtrahend]),
+        show_solution: options.fetch(:show_solution, data[:show_solution]),
+        show_borrow: options.fetch(:show_borrow, data[:show_borrow]),
+        show_toolbar: options.fetch(:show_toolbar, data[:show_toolbar]),
+        show_labels: options.fetch(:show_labels, data[:show_labels]),
+        style: options.fetch(:style, :quaderno),
+        title: options[:title] || data[:title]
+      )
+    when Moltiplicazione
+      data = questionable.data.with_indifferent_access
+      moltiplicazione_grid(
+        data[:multiplicand],
+        data[:multiplier],
+        show_multiplicand_multiplier: options.fetch(:show_multiplicand_multiplier, data[:show_multiplicand_multiplier]),
+        show_solution: options.fetch(:show_solution, data[:show_solution]),
+        show_partial_products: options.fetch(:show_partial_products, data[:show_partial_products]),
+        show_carry: options.fetch(:show_carry, data[:show_carry]),
+        show_toolbar: options.fetch(:show_toolbar, data[:show_toolbar]),
+        show_labels: options.fetch(:show_labels, data[:show_labels]),
+        style: options.fetch(:style, :quaderno),
+        title: options[:title] || data[:title]
+      )
+    when Divisione
+      data = questionable.data.with_indifferent_access
+      divisione_grid(
+        data[:dividend],
+        data[:divisor],
+        show_dividend_divisor: options.fetch(:show_dividend_divisor, data[:show_dividend_divisor]),
+        show_solution: options.fetch(:show_solution, data[:show_solution]),
+        show_steps: options.fetch(:show_steps, data[:show_steps]),
+        show_toolbar: options.fetch(:show_toolbar, data[:show_toolbar]),
+        style: options.fetch(:style, :quaderno),
+        title: options[:title] || data[:title]
+      )
+    when Abaco
+      data = questionable.data.with_indifferent_access
+      render "strumenti/abachi/abaco_grid", abaco: questionable.to_renderer.to_grid_data
+    else
+      ""
+    end
+  end
+
+  # Mostra una rappresentazione testuale semplice di una Question
+  #
+  # @param question [Question] Una Question con delegated_type :questionable
+  # @return [String] Rappresentazione testuale dell'operazione
+  #
+  # @example
+  #   <%= question_display(@question) %> # => "152 + 235 = ?"
+  #
+  def question_display(question)
+    questionable = question.questionable
+    return "" if questionable.blank?
+
+    data = questionable.data.with_indifferent_access rescue {}
+
+    case questionable
+    when Addizione
+      (data[:addends] || []).join(" + ") + " = ?"
+    when Sottrazione
+      "#{data[:minuend]} − #{data[:subtrahend]} = ?"
+    when Moltiplicazione
+      "#{data[:multiplicand]} × #{data[:multiplier]} = ?"
+    when Divisione
+      "#{data[:dividend]} ÷ #{data[:divisor]} = ?"
+    when Abaco
+      "Valore: #{data[:correct_value] || data[:value] || '?'}"
+    else
+      questionable.class.name
+    end
+  end
+
   private
 
   # Converte input in array di addendi

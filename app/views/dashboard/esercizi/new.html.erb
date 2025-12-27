@@ -1,158 +1,120 @@
-<div class="container mx-auto px-4 py-8">
-  <div class="max-w-6xl mx-auto">
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-900">Crea Nuovo Esercizio</h1>
-      <%= link_to dashboard_esercizi_path,
-                  class: "text-gray-600 hover:text-gray-900 transition" do %>
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      <% end %>
-    </div>
+<%= content_for :head do %>
+  <style>
+    @keyframes slide-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .question-item {
+      animation: slide-in 0.3s ease-out;
+    }
+    .question-type-btn {
+      transition: all 0.2s ease;
+    }
+    .question-type-btn:hover {
+      transform: translateY(-2px);
+    }
+    .question-type-btn.selected {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+    }
+  </style>
+<% end %>
 
-    <%= form_with model: @esercizio, url: dashboard_esercizi_path, local: true do |form| %>
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Main Form -->
-        <div class="lg:col-span-2">
-          <div class="bg-white rounded-lg shadow p-6">
-            <h2 class="text-xl font-semibold mb-4">Informazioni Base</h2>
-
-            <!-- Titolo -->
-            <div class="mb-4">
-              <%= form.label :title, "Titolo", class: "block text-sm font-medium text-gray-700 mb-2" %>
-              <%= form.text_field :title,
-                  placeholder: "Es. Addizioni entro il 20",
-                  required: true,
-                  class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" %>
-            </div>
-
-            <!-- Descrizione -->
-            <div class="mb-4">
-              <%= form.label :description, "Descrizione", class: "block text-sm font-medium text-gray-700 mb-2" %>
-              <%= form.text_area :description,
-                  rows: 3,
-                  placeholder: "Descrivi brevemente l'esercizio...",
-                  class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" %>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-              <!-- Categoria -->
-              <div class="mb-4">
-                <%= form.label :category, "Categoria", class: "block text-sm font-medium text-gray-700 mb-2" %>
-                <%= form.select :category,
-                    options_for_select([
-                      ['Seleziona categoria', ''],
-                      ['Matematica', 'matematica'],
-                      ['Italiano', 'italiano'],
-                      ['Geometria', 'geometria']
-                    ]),
-                    {},
-                    class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" %>
-              </div>
-
-              <!-- Difficoltà -->
-              <div class="mb-4">
-                <%= form.label :difficulty, "Difficoltà", class: "block text-sm font-medium text-gray-700 mb-2" %>
-                <%= form.select :difficulty,
-                    options_for_select([
-                      ['Seleziona difficoltà', ''],
-                      ['Facile', 'facile'],
-                      ['Medio', 'medio'],
-                      ['Difficile', 'difficile']
-                    ]),
-                    {},
-                    class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" %>
-              </div>
-            </div>
-
-            <!-- Tags -->
-            <div class="mb-4">
-              <%= form.label :tags, "Tags (separati da virgola)", class: "block text-sm font-medium text-gray-700 mb-2" %>
-              <%= form.text_field :tags,
-                  placeholder: "Es. prima elementare, addizioni, calcolo mentale",
-                  class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" %>
-            </div>
+<div class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+  <!-- Header compatto -->
+  <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <%= link_to dashboard_esercizi_path, class: "p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition" do %>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+          <% end %>
+          <div>
+            <h1 class="text-2xl font-black text-gray-900 dark:text-white">Nuovo Esercizio</h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Crea un esercizio con domande di matematica</p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <!-- Sidebar con Template -->
-        <div class="lg:col-span-1">
-          <div class="bg-white rounded-lg shadow p-6">
-            <h2 class="text-xl font-semibold mb-4">Template Disponibili</h2>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <%= form_with model: @esercizio, url: dashboard_esercizi_path, class: "space-y-8", data: { controller: "esercizio-form", turbo: false } do |form| %>
 
-            <% if @templates.any? %>
-              <div class="space-y-2">
-                <% @templates.group_by(&:category).each do |category, templates| %>
-                  <div class="mb-4">
-                    <h3 class="text-sm font-medium text-gray-500 uppercase mb-2">
-                      <%= category %>
-                    </h3>
-                    <% templates.each do |template| %>
-                      <div class="p-3 border rounded hover:bg-gray-50 cursor-pointer template-item"
-                           data-template-id="<%= template.id %>"
-                           data-template-config='<%= template.default_config.to_json %>'>
-                        <div class="flex justify-between items-start">
-                          <div>
-                            <p class="font-medium"><%= template.name %></p>
-                            <% if template.description.present? %>
-                              <p class="text-sm text-gray-500"><%= template.description %></p>
-                            <% end %>
-                          </div>
-                          <button type="button"
-                                  class="use-template text-blue-600 hover:text-blue-800 text-sm"
-                                  data-template-id="<%= template.id %>">
-                            Usa
-                          </button>
-                        </div>
-                      </div>
-                    <% end %>
-                  </div>
-                <% end %>
-              </div>
-            <% else %>
-              <p class="text-gray-500 text-sm">Nessun template disponibile</p>
-            <% end %>
+      <!-- Sezione Info Base -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+        <div class="bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-4">
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+            Informazioni Esercizio
+          </h2>
+        </div>
+
+        <div class="p-6 space-y-6">
+          <!-- Titolo -->
+          <div>
+            <%= form.label :title, "Titolo *", class: "block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2" %>
+            <%= form.text_field :title,
+                placeholder: "Es: Addizioni entro il 100",
+                required: true,
+                autofocus: true,
+                class: "w-full px-4 py-3 text-lg border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition placeholder-gray-400" %>
           </div>
 
-          <!-- Azioni -->
-          <div class="bg-white rounded-lg shadow p-6 mt-6">
-            <h2 class="text-xl font-semibold mb-4">Azioni</h2>
+          <!-- Descrizione -->
+          <div>
+            <%= form.label :description, "Descrizione (opzionale)", class: "block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2" %>
+            <%= form.text_area :description,
+                rows: 2,
+                placeholder: "Breve descrizione dell'esercizio...",
+                class: "w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition placeholder-gray-400 resize-none" %>
+          </div>
 
-            <div class="space-y-3">
-              <%= form.submit "Crea e Configura Operazioni",
-                  class: "w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" %>
-
-              <%= link_to "Annulla", dashboard_esercizi_path,
-                  class: "w-full block text-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition" %>
+          <!-- Categoria e Difficoltà -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <%= form.label :category, "Categoria", class: "block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2" %>
+              <%= form.select :category,
+                  options_for_select([
+                    ['Matematica', 'matematica'],
+                    ['Italiano', 'italiano'],
+                    ['Geometria', 'geometria']
+                  ]),
+                  { include_blank: "Seleziona categoria..." },
+                  class: "w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" %>
             </div>
 
-            <div class="mt-4 p-3 bg-blue-50 rounded-lg">
-              <p class="text-sm text-blue-800">
-                <strong>Suggerimento:</strong> Dopo aver creato l'esercizio, potrai aggiungere le operazioni utilizzando il builder drag & drop.
-              </p>
+            <div>
+              <%= form.label :difficulty, "Difficoltà", class: "block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2" %>
+              <%= form.select :difficulty,
+                  options_for_select([
+                    ['Facile', 'facile'],
+                    ['Medio', 'medio'],
+                    ['Difficile', 'difficile']
+                  ]),
+                  { include_blank: "Seleziona difficoltà..." },
+                  class: "w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition" %>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Azioni -->
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4">
+        <%= link_to "Annulla", dashboard_esercizi_path,
+            class: "w-full sm:w-auto text-center px-6 py-3 text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 font-semibold rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition" %>
+
+        <%= form.submit "Crea Esercizio",
+            class: "w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-indigo-500/25 hover:scale-[1.02] transition-all duration-200 cursor-pointer" %>
+      </div>
+
+      <p class="text-center text-sm text-gray-500 dark:text-gray-400">
+        Dopo la creazione potrai aggiungere le domande nella pagina di modifica.
+      </p>
     <% end %>
   </div>
 </div>
-
-<script>
-  // Script temporaneo per gestire i template (sarà sostituito da Stimulus)
-  document.addEventListener('DOMContentLoaded', function() {
-    const templateButtons = document.querySelectorAll('.use-template');
-
-    templateButtons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
-        const templateItem = this.closest('.template-item');
-        const config = JSON.parse(templateItem.dataset.templateConfig);
-
-        // Qui potresti pre-compilare alcuni campi del form in base al template
-        alert('Template selezionato! Questa funzionalità sarà completata con il builder.');
-      });
-    });
-  });
-</script>

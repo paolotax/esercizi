@@ -1,0 +1,7 @@
+<%= turbo_stream.append "questions-list" do %>
+  <%= render "dashboard/questions/question", question: @question, esercizio: @esercizio %>
+<% end %>
+
+<%= turbo_stream.remove "empty-questions" %>
+
+<%= turbo_stream.update "questions-count", @esercizio.questions.count %>
