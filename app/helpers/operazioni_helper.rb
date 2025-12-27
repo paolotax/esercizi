@@ -30,11 +30,14 @@ module OperazioniHelper
   # @option options [Boolean] :show_toolbar Mostra la toolbar (default: false)
   # @option options [Boolean] :show_labels Mostra le etichette u/da/h/k (default: false)
   # @option options [Symbol] :style :quaderno o :column (default: :quaderno)
+  # @option options [Symbol] :grid_style Alias per :style
   # @option options [String] :title Titolo opzionale
   #
   def addizione_grid(addends_or_string, **options)
     addends = parse_addends(addends_or_string)
     return "" if addends.blank?
+
+    grid_style = options[:grid_style] || options.fetch(:style, :quaderno)
 
     renderer = Addizione::Renderer.new(
       addends: addends,
@@ -43,7 +46,7 @@ module OperazioniHelper
       show_carry: options.fetch(:show_carry, false),
       show_toolbar: options.fetch(:show_toolbar, false),
       show_labels: options.fetch(:show_labels, false),
-      grid_style: options.fetch(:style, :quaderno),
+      grid_style: grid_style,
       title: options[:title]
     )
 
@@ -61,9 +64,12 @@ module OperazioniHelper
   # @option options [Boolean] :show_toolbar Mostra la toolbar (default: false)
   # @option options [Boolean] :show_labels Mostra le etichette u/da/h/k (default: false)
   # @option options [Symbol] :style :quaderno o :column (default: :quaderno)
+  # @option options [Symbol] :grid_style Alias per :style
   # @option options [String] :title Titolo opzionale
   #
   def sottrazione_grid(minuend, subtrahend, **options)
+    grid_style = options[:grid_style] || options.fetch(:style, :quaderno)
+
     renderer = Sottrazione::Renderer.new(
       minuend: minuend,
       subtrahend: subtrahend,
@@ -72,7 +78,7 @@ module OperazioniHelper
       show_borrow: options.fetch(:show_borrow, false),
       show_toolbar: options.fetch(:show_toolbar, false),
       show_labels: options.fetch(:show_labels, false),
-      grid_style: options.fetch(:style, :quaderno),
+      grid_style: grid_style,
       title: options[:title]
     )
 
@@ -91,9 +97,12 @@ module OperazioniHelper
   # @option options [Boolean] :show_toolbar Mostra la toolbar (default: false)
   # @option options [Boolean] :show_labels Mostra le etichette (default: false)
   # @option options [Symbol] :style :quaderno o :column (default: :quaderno)
+  # @option options [Symbol] :grid_style Alias per :style
   # @option options [String] :title Titolo opzionale
   #
   def moltiplicazione_grid(multiplicand, multiplier, **options)
+    grid_style = options[:grid_style] || options.fetch(:style, :quaderno)
+
     renderer = Moltiplicazione::Renderer.new(
       multiplicand: multiplicand,
       multiplier: multiplier,
@@ -103,7 +112,7 @@ module OperazioniHelper
       show_carry: options.fetch(:show_carry, false),
       show_toolbar: options.fetch(:show_toolbar, false),
       show_labels: options.fetch(:show_labels, false),
-      grid_style: options.fetch(:style, :quaderno),
+      grid_style: grid_style,
       title: options[:title]
     )
 
@@ -120,9 +129,12 @@ module OperazioniHelper
   # @option options [Boolean] :show_steps Mostra i passaggi (default: false)
   # @option options [Boolean] :show_toolbar Mostra la toolbar (default: false)
   # @option options [Symbol] :style :quaderno o :column (default: :quaderno)
+  # @option options [Symbol] :grid_style Alias per :style
   # @option options [String] :title Titolo opzionale
   #
   def divisione_grid(dividend, divisor, **options)
+    grid_style = options[:grid_style] || options.fetch(:style, :quaderno)
+
     renderer = Divisione::Renderer.new(
       dividend: dividend,
       divisor: divisor,
@@ -130,7 +142,7 @@ module OperazioniHelper
       show_solution: options.fetch(:show_solution, false),
       show_steps: options.fetch(:show_steps, false),
       show_toolbar: options.fetch(:show_toolbar, false),
-      grid_style: options.fetch(:style, :quaderno),
+      grid_style: grid_style,
       title: options[:title]
     )
 
