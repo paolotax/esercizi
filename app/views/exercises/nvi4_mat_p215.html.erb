@@ -87,24 +87,15 @@
         Calcola in colonna.
       </p>
 
-      <%
-        es3_operazioni = [
-          { op1: "49,7", op2: "8,6" },
-          { op1: "1,89", op2: "74" },
-          { op1: "56,7", op2: "3,9" },
-          { op1: "4,75", op2: "8,7" },
-          { op1: "3,79", op2: "45" },
-          { op1: "5,72", op2: "2,6" },
-          { op1: "263", op2: "5,8" },
-          { op1: "29,7", op2: "3,6" }
-        ]
-      %>
-
       <div class="flex flex-wrap gap-4 justify-center">
-        <% es3_operazioni.each do |item| %>
-          <% moltiplicazione = Moltiplicazione::Renderer.new(multiplicand: item[:op1], multiplier: item[:op2], show_toolbar: true, show_factors: true) %>
-          <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione', moltiplicazione: moltiplicazione %>
-        <% end %>
+        <%= moltiplicazione_grid "49,7", "8,6", show_multiplicand_multiplier: true, show_toolbar: false %>
+        <%= moltiplicazione_grid "1,89", "74", show_multiplicand_multiplier: true, show_toolbar: false %>
+        <%= moltiplicazione_grid "56,7", "3,9", show_multiplicand_multiplier: true, show_toolbar: false %>
+        <%= moltiplicazione_grid "4,75", "8,7", show_multiplicand_multiplier: true, show_toolbar: false %>
+        <%= moltiplicazione_grid "3,79", "45", show_multiplicand_multiplier: true, show_toolbar: false %>
+        <%= moltiplicazione_grid "5,72", "2,6", show_multiplicand_multiplier: true, show_toolbar: false %>
+        <%= moltiplicazione_grid "263", "5,8", show_multiplicand_multiplier: true, show_toolbar: false %>
+        <%= moltiplicazione_grid "29,7", "3,6", show_multiplicand_multiplier: true, show_toolbar: false %>
       </div>
     </div>
 

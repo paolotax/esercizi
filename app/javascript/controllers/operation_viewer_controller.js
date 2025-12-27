@@ -135,7 +135,7 @@ export default class extends Controller {
         }
 
         const html = await response.text()
-        htmlParts.push(`<div class="quaderno-group-item mb-4" data-target-input="${op.targetId}" data-operation-index="${htmlParts.length}">${html}</div>`)
+        htmlParts.push(`<div class="quaderno-group-item" data-target-input="${op.targetId}" data-operation-index="${htmlParts.length}">${html}</div>`)
       }
 
       this.contentTarget.innerHTML = htmlParts.join('')

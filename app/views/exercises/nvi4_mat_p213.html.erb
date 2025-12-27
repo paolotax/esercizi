@@ -26,37 +26,22 @@
         Esegui le operazioni in colonna.
       </p>
 
-      <%
-        addizioni = [
-          { op1: "2,905", op2: "78,300" },
-          { op1: "13,600", op2: "44,189" },
-          { op1: "35,78", op2: "9,12" },
-          { op1: "9,60", op2: "46,07" }
-        ]
-        sottrazioni = [
-          { op1: "75,509", op2: "27,372" },
-          { op1: "84,600", op2: "44,128" },
-          { op1: "49,310", op2: "36,207" },
-          { op1: "78,040", op2: "13,561" }
-        ]
-      %>
-
       <!-- Addizioni - 4 quaderni in riga -->
       <p class="text-gray-700 dark:text-gray-200 font-bold mb-3">Addizioni</p>
       <div class="flex flex-wrap gap-4 justify-center mb-6">
-        <% addizioni.each do |item| %>
-          <% addizione = Addizione.new(addends: [item[:op1], item[:op2]], show_toolbar: true, show_addends: true) %>
-          <%= render 'strumenti/addizioni/quaderno_addizione', addizione: addizione %>
-        <% end %>
+        <%= addizione_grid ["2,905", "78,300"], show_addends: true %>
+        <%= addizione_grid ["13,600", "44,189"], show_addends: true %>
+        <%= addizione_grid ["35,78", "9,12"], show_addends: true %>
+        <%= addizione_grid ["9,60", "46,07"], show_addends: true %>
       </div>
 
       <!-- Sottrazioni - 4 quaderni in riga -->
       <p class="text-gray-700 dark:text-gray-200 font-bold mb-3">Sottrazioni</p>
       <div class="flex flex-wrap gap-4 justify-center">
-        <% sottrazioni.each do |item| %>
-          <% sottrazione = Sottrazione.new(minuend: item[:op1], subtrahend: item[:op2], show_toolbar: true, show_minuend_subtrahend: true) %>
-          <%= render 'strumenti/sottrazioni/quaderno_sottrazione', sottrazione: sottrazione %>
-        <% end %>
+        <%= sottrazione_grid "75,509", "27,372", show_minuend_subtrahend: true %>
+        <%= sottrazione_grid "84,600", "44,128", show_minuend_subtrahend: true %>
+        <%= sottrazione_grid "49,310", "36,207", show_minuend_subtrahend: true %>
+        <%= sottrazione_grid "78,040", "13,561", show_minuend_subtrahend: true %>
       </div>
     </div>
 

@@ -17,37 +17,16 @@
       <div class="w-full mx-auto">
         <!-- Addizioni e sottrazioni -->
         <div class="flex flex-col md:flex-row flex-wrap items-center md:items-start justify-start">
-          <%# <div class="flex items-center gap-2 flex-wrap">
-            <span class="text-gray-700 dark:text-gray-200">178 021 + 82 466 =</span>
-            <input type="text" data-correct-answer="260487" class="w-28 border-b-2 border-dotted border-gray-400 dark:border-gray-500 text-center font-bold bg-transparent dark:text-white">
-          </div> %>
-
-          <%= render 'strumenti/addizioni/quaderno_addizione',
-              addizione: Addizione.new(addends: [178021, 82466], show_addends: true, show_solution: false, show_carry: true, show_toolbar: true) %>
-
-          <%= render 'strumenti/addizioni/quaderno_addizione',
-              addizione: Addizione.new(addends: [305119, 160204], show_addends: true, show_solution: false, show_carry: true, show_toolbar: true) %>
-
-          <%= render 'strumenti/sottrazioni/quaderno_sottrazione',
-              sottrazione: Sottrazione.new(minuend: 523821, subtrahend: 38331, show_minuend_subtrahend: true, show_solution: false, show_borrow: true, show_toolbar: true) %>
-
-          <%= render 'strumenti/sottrazioni/quaderno_sottrazione',
-              sottrazione: Sottrazione.new(minuend: 478632, subtrahend: 270518, show_minuend_subtrahend: true, show_solution: false, show_borrow: true, show_toolbar: true) %>
-
-
+          <%= addizione_grid [178021, 82466], show_addends: true, show_carry: true %>
+          <%= addizione_grid [305119, 160204], show_addends: true, show_carry: true %>
+          <%= sottrazione_grid 523821, 38331, show_minuend_subtrahend: true, show_borrow: true %>
+          <%= sottrazione_grid 478632, 270518, show_minuend_subtrahend: true, show_borrow: true %>
 
           <!-- Moltiplicazioni e divisioni -->
-          <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
-              moltiplicazione: Moltiplicazione::Renderer.new(multiplier: 1.13, multiplicand: 15.7, show_multiplier_multiplicand: true, show_solution: false, show_toolbar: true) %>
-
-          <%= render 'strumenti/moltiplicazioni/quaderno_moltiplicazione',
-              moltiplicazione: Moltiplicazione::Renderer.new(multiplier: 11.21, multiplicand: 116.8, show_multiplier_multiplicand: true, show_solution: false, show_toolbar: true) %>
-
-          <%= render 'strumenti/divisioni/quaderno_divisione',
-              divisione: Divisione::Renderer.new(dividend: 5520, divisor: 46, show_dividend_divisor: true, show_solution: false, show_steps: false, show_toolbar: true) %>
-
-          <%= render 'strumenti/divisioni/quaderno_divisione',
-              divisione: Divisione::Renderer.new(dividend: 17234, divisor: 16, show_dividend_divisor: true, show_solution: false, show_steps: false, show_toolbar: true) %>
+          <%= moltiplicazione_grid "1,13", "15,7", show_multiplicand_multiplier: true %>
+          <%= moltiplicazione_grid "11,21", "116,8", show_multiplicand_multiplier: true %>
+          <%= divisione_grid 5520, 46, show_dividend_divisor: true %>
+          <%= divisione_grid 17234, 16, show_dividend_divisor: true %>
         </div>
       </div>
     </div>
