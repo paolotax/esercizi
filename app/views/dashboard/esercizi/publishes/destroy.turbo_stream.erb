@@ -1,4 +1,28 @@
-<%= turbo_stream.replace "flash" do %>
+<%# Aggiorna il badge di stato %>
+<%= turbo_stream.update "status-badge" do %>
+  <span id="status-badge" class="px-2 py-0.5 text-xs font-bold rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">
+    Bozza
+  </span>
+<% end %>
+
+<%# Aggiorna il pulsante pubblica/ritira %>
+<%= turbo_stream.update "publish-action" do %>
+  <%= button_to dashboard_esercizio_publish_path(@esercizio), method: :post,
+      class: "w-full px-4 py-2.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 font-semibold rounded-xl hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition flex items-center justify-center gap-2" do %>
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    Pubblica esercizio
+  <% end %>
+<% end %>
+
+<%# Nascondi il link pubblico %>
+<%= turbo_stream.update "share-link-section" do %>
+  <%# Vuoto quando non pubblicato %>
+<% end %>
+
+<%# Flash message %>
+<%= turbo_stream.update "flash" do %>
   <div id="flash">
     <div class="fixed top-4 right-4 z-50 animate-fade-in">
       <div class="bg-amber-500 text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-3"
