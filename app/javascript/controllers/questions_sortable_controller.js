@@ -71,6 +71,9 @@ export default class extends Controller {
     const items = this.element.querySelectorAll('[data-sortable-id]')
     const ids = Array.from(items).map(item => item.dataset.sortableId)
 
+    // Aggiorna i numeri delle posizioni visualizzate
+    this.updatePositionNumbers()
+
     try {
       const response = await fetch(this.urlValue, {
         method: 'POST',
@@ -87,5 +90,15 @@ export default class extends Controller {
     } catch (error) {
       console.error('Error saving order:', error)
     }
+  }
+
+  updatePositionNumbers() {
+    const items = this.element.querySelectorAll('[data-sortable-id]')
+    items.forEach((item, index) => {
+      const handle = item.querySelector('[data-sortable-handle]')
+      if (handle) {
+        handle.textContent = index + 1
+      }
+    })
   }
 }

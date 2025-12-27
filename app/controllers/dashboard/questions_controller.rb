@@ -50,10 +50,11 @@ class Dashboard::QuestionsController < ApplicationController
   end
 
   def destroy
+    @question_id = @question.id
     @question.destroy
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@question) }
+      format.turbo_stream
       format.html { redirect_to edit_dashboard_esercizio_path(@esercizio), notice: "Domanda eliminata." }
     end
   end

@@ -1,9 +1,9 @@
 <%# locals: (question:, esercizio:) %>
 <%= turbo_frame_tag dom_id(question) do %>
-  <div class="p-4 bg-indigo-50 dark:bg-indigo-900/20 border-l-4 border-indigo-500">
+  <div class="p-4 bg-orange-50 dark:bg-orange-900/20 border-l-4 border-orange-500">
     <%= form_with model: question, url: dashboard_esercizio_question_path(esercizio, question), method: :patch, class: "space-y-4" do |form| %>
       <div class="flex items-center justify-between">
-        <h4 class="font-medium text-gray-900 dark:text-white">Modifica <%= question.questionable_type %></h4>
+        <h4 class="font-display font-bold text-gray-900 dark:text-white">Modifica <%= question.questionable_type %></h4>
         <%= link_to edit_dashboard_esercizio_path(esercizio),
             class: "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200",
             data: { turbo_frame: "_top" } do %>
@@ -20,72 +20,72 @@
       <% when "addizione" %>
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Primo addendo</label>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Primo addendo</label>
             <input type="text" name="data[addends][]" value="<%= data[:addends]&.first %>"
-                   class="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                   class="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-2xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-300 focus:border-transparent transition">
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Secondo addendo</label>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Secondo addendo</label>
             <input type="text" name="data[addends][]" value="<%= data[:addends]&.second %>"
-                   class="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                   class="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-2xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-300 focus:border-transparent transition">
           </div>
         </div>
 
       <% when "sottrazione" %>
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Minuendo</label>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Minuendo</label>
             <input type="text" name="data[minuend]" value="<%= data[:minuend] %>"
-                   class="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                   class="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-2xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-300 focus:border-transparent transition">
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sottraendo</label>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Sottraendo</label>
             <input type="text" name="data[subtrahend]" value="<%= data[:subtrahend] %>"
-                   class="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                   class="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-2xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-300 focus:border-transparent transition">
           </div>
         </div>
 
       <% when "moltiplicazione" %>
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Moltiplicando</label>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Moltiplicando</label>
             <input type="text" name="data[multiplicand]" value="<%= data[:multiplicand] %>"
-                   class="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                   class="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-2xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-300 focus:border-transparent transition">
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Moltiplicatore</label>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Moltiplicatore</label>
             <input type="text" name="data[multiplier]" value="<%= data[:multiplier] %>"
-                   class="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                   class="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-2xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-300 focus:border-transparent transition">
           </div>
         </div>
 
       <% when "divisione" %>
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Dividendo</label>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Dividendo</label>
             <input type="text" name="data[dividend]" value="<%= data[:dividend] %>"
-                   class="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                   class="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-2xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-300 focus:border-transparent transition">
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Divisore</label>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Divisore</label>
             <input type="text" name="data[divisor]" value="<%= data[:divisor] %>"
-                   class="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                   class="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-2xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-300 focus:border-transparent transition">
           </div>
         </div>
 
       <% when "abaco" %>
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Valore</label>
+          <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Valore</label>
           <input type="number" name="data[value]" value="<%= data[:value] %>"
-                 class="w-full px-3 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                 class="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-2xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-300 focus:border-transparent transition">
         </div>
       <% end %>
 
       <div class="flex justify-end gap-2">
         <%= link_to "Annulla", edit_dashboard_esercizio_path(esercizio),
-            class: "px-4 py-2 text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition font-medium",
+            class: "px-4 py-2 text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-600 transition font-semibold",
             data: { turbo_frame: "_top" } %>
-        <%= form.submit "Salva", class: "px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition cursor-pointer font-medium" %>
+        <%= form.submit "Salva", class: "px-4 py-2 bg-orange-500 text-white rounded-2xl hover:bg-orange-600 transition cursor-pointer font-semibold" %>
       </div>
     <% end %>
   </div>

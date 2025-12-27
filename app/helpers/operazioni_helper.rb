@@ -252,8 +252,7 @@ module OperazioniHelper
         title: options[:title] || data[:title]
       )
     when Abaco
-      data = questionable.data.with_indifferent_access
-      render "strumenti/abachi/abaco_grid", abaco: questionable.to_renderer.to_grid_data
+      render "strumenti/abachi/abaco_grid", abaco: questionable.to_renderer
     else
       ""
     end

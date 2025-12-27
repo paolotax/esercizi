@@ -1,22 +1,11 @@
-<%= content_for :head do %>
-  <style>
-    .stat-card {
-      transition: all 0.3s ease;
-    }
-    .stat-card:hover {
-      transform: translateY(-2px);
-    }
-  </style>
-<% end %>
-
-<div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+<div class="min-h-screen bg-gradient-to-b from-orange-50/50 to-white dark:from-gray-900 dark:to-gray-800">
   <!-- Header Hero -->
-  <div class="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900">
-    <div class="absolute inset-0 opacity-20">
+  <div class="relative bg-gradient-to-br from-orange-100 via-rose-100 to-pink-100 dark:from-orange-900/30 dark:via-rose-900/30 dark:to-pink-900/30">
+    <div class="absolute inset-0 opacity-30">
       <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="1" fill="white" opacity="0.5"/>
+            <circle cx="2" cy="2" r="1" fill="currentColor" class="text-orange-300" opacity="0.5"/>
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#dots)" />
@@ -26,7 +15,7 @@
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <!-- Breadcrumb -->
       <nav class="mb-4">
-        <%= link_to dashboard_esercizi_path, class: "inline-flex items-center gap-2 text-indigo-200 hover:text-white transition" do %>
+        <%= link_to dashboard_esercizi_path, class: "inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition" do %>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
           </svg>
@@ -37,15 +26,15 @@
       <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
         <div class="flex-1">
           <div class="flex items-center gap-3 mb-2">
-            <h1 class="text-3xl md:text-4xl font-black text-white">
+            <h1 class="text-3xl md:text-4xl font-display font-bold text-gray-800 dark:text-white">
               <%= @esercizio.title %>
             </h1>
-            <span class="px-3 py-1 text-sm font-bold rounded-full <%= @esercizio.published? ? 'bg-emerald-400/20 text-emerald-100' : 'bg-amber-400/20 text-amber-100' %>">
+            <span class="px-3 py-1 text-sm font-bold rounded-full <%= @esercizio.published? ? 'bg-emerald-200 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300' : 'bg-amber-200 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300' %>">
               <%= @esercizio.published? ? 'Pubblicato' : 'Bozza' %>
             </span>
           </div>
 
-          <div class="flex flex-wrap items-center gap-4 text-indigo-100">
+          <div class="flex flex-wrap items-center gap-4 text-gray-600 dark:text-gray-300">
             <span class="flex items-center gap-1">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -73,7 +62,7 @@
         <!-- Actions -->
         <div class="flex flex-wrap gap-3">
           <%= link_to edit_dashboard_esercizio_path(@esercizio),
-              class: "inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur text-white font-semibold rounded-xl hover:bg-white/20 transition" do %>
+              class: "inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition" do %>
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
             </svg>
@@ -81,7 +70,7 @@
           <% end %>
 
           <%= link_to preview_dashboard_esercizio_path(@esercizio), target: "_blank",
-              class: "inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur text-white font-semibold rounded-xl hover:bg-white/20 transition" do %>
+              class: "inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition" do %>
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -90,7 +79,7 @@
           <% end %>
 
           <%= button_to duplicate_dashboard_esercizio_path(@esercizio), method: :post,
-              class: "inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur text-white font-semibold rounded-xl hover:bg-white/20 transition" do %>
+              class: "inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition" do %>
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
             </svg>
@@ -125,30 +114,30 @@
       <div class="lg:col-span-2 space-y-6">
         <!-- Descrizione -->
         <% if @esercizio.description.present? %>
-          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Descrizione</h3>
+          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+            <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-3">Descrizione</h3>
             <p class="text-gray-600 dark:text-gray-400"><%= @esercizio.description %></p>
           </div>
         <% end %>
 
         <!-- Domande -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
-          <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
+            <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white">
               Domande (<%= @esercizio.questions.count %>)
             </h3>
             <%= link_to edit_dashboard_esercizio_path(@esercizio),
-                class: "text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 font-medium text-sm" do %>
+                class: "text-orange-600 dark:text-orange-400 hover:text-orange-700 font-medium text-sm" do %>
               Gestisci domande
             <% end %>
           </div>
 
           <% if @esercizio.questions.any? %>
-            <div class="divide-y divide-gray-200 dark:divide-gray-700">
+            <div class="divide-y divide-gray-100 dark:divide-gray-700">
               <% @esercizio.questions.order(:position).each_with_index do |question, index| %>
                 <div class="p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
                   <div class="flex items-center gap-4">
-                    <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-sm font-bold rounded-lg">
+                    <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-sm font-bold rounded-lg">
                       <%= index + 1 %>
                     </span>
 
@@ -181,14 +170,14 @@
             </div>
           <% else %>
             <div class="p-12 text-center">
-              <div class="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
               </div>
               <p class="text-gray-500 dark:text-gray-400 mb-4">Nessuna domanda aggiunta</p>
               <%= link_to edit_dashboard_esercizio_path(@esercizio),
-                  class: "inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition" do %>
+                  class: "inline-flex items-center gap-2 px-4 py-2 bg-orange-500 text-white font-semibold rounded-xl hover:bg-orange-600 transition" do %>
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                 </svg>
@@ -200,9 +189,9 @@
 
         <!-- Tentativi recenti -->
         <% if @attempts && @attempts.any? %>
-          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-              <h3 class="text-lg font-bold text-gray-900 dark:text-white">Ultimi Tentativi</h3>
+          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+              <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white">Ultimi Tentativi</h3>
             </div>
 
             <div class="overflow-x-auto">
@@ -215,7 +204,7 @@
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Tempo</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                   <% @attempts.each do |attempt| %>
                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50">
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
@@ -228,8 +217,8 @@
                         <% score = attempt.score rescue nil %>
                         <% if score %>
                           <span class="px-2.5 py-1 text-sm font-bold rounded-full <%= score >= 70 ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300' : score >= 50 ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300' %>">
-                            <%= score %>%
-                          </span>
+                              <%= score %>%
+                            </span>
                         <% else %>
                           <span class="text-gray-400">-</span>
                         <% end %>
@@ -250,9 +239,9 @@
       <div class="space-y-6">
         <!-- Link Condivisione -->
         <% if @esercizio.share_token.present? %>
-          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-              <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+            <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
               </svg>
               Condivisione
@@ -268,7 +257,7 @@
                          class="flex-1 px-3 py-2 text-sm bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-600 dark:text-gray-400"
                          onclick="this.select()">
                   <button onclick="navigator.clipboard.writeText(document.getElementById('share-link').value); this.querySelector('span').textContent='Copiato!'; setTimeout(() => this.querySelector('span').textContent='Copia', 2000)"
-                          class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition">
+                          class="px-4 py-2 bg-orange-500 text-white font-semibold rounded-xl hover:bg-orange-600 transition">
                     <span>Copia</span>
                   </button>
                 </div>
@@ -283,30 +272,30 @@
         <% end %>
 
         <!-- Statistiche -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Statistiche</h3>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+          <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-4">Statistiche</h3>
 
           <div class="space-y-4">
-            <div class="stat-card p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl">
-              <div class="text-2xl font-black text-indigo-600 dark:text-indigo-400"><%= @esercizio.questions.count %></div>
+            <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+              <div class="text-2xl font-display font-bold text-blue-600 dark:text-blue-400"><%= @esercizio.questions.count %></div>
               <div class="text-sm text-gray-600 dark:text-gray-400">Domande</div>
             </div>
 
-            <div class="stat-card p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl">
-              <div class="text-2xl font-black text-purple-600 dark:text-purple-400"><%= @esercizio.views_count %></div>
+            <div class="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-xl">
+              <div class="text-2xl font-display font-bold text-purple-600 dark:text-purple-400"><%= @esercizio.views_count %></div>
               <div class="text-sm text-gray-600 dark:text-gray-400">Visualizzazioni</div>
             </div>
 
-            <div class="stat-card p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-xl">
-              <div class="text-2xl font-black text-emerald-600 dark:text-emerald-400"><%= @esercizio.esercizio_attempts.count %></div>
+            <div class="p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl">
+              <div class="text-2xl font-display font-bold text-emerald-600 dark:text-emerald-400"><%= @esercizio.esercizio_attempts.count %></div>
               <div class="text-sm text-gray-600 dark:text-gray-400">Tentativi totali</div>
             </div>
           </div>
         </div>
 
         <!-- Dettagli -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
-          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Dettagli</h3>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+          <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-4">Dettagli</h3>
 
           <dl class="space-y-3 text-sm">
             <div class="flex justify-between">
@@ -319,7 +308,7 @@
             </div>
             <% if @esercizio.difficulty.present? %>
               <div class="flex justify-between">
-                <dt class="text-gray-500 dark:text-gray-400">Difficoltà</dt>
+                <dt class="text-gray-500 dark:text-gray-400">Difficolta</dt>
                 <dd class="text-gray-900 dark:text-white"><%= @esercizio.difficulty.capitalize %></dd>
               </div>
             <% end %>

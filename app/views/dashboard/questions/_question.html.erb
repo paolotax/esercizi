@@ -1,16 +1,18 @@
 <%# locals: (question:, esercizio:) %>
 <%= turbo_frame_tag dom_id(question) do %>
-  <div class="question-item p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition group"
+  <div class="question-item p-4 hover:bg-orange-50 dark:hover:bg-gray-700/50 transition group"
        data-sortable-id="<%= question.id %>"
        id="<%= dom_id(question) %>">
     <div class="flex items-center justify-between gap-4">
       <div class="flex items-center gap-4 flex-1 min-w-0">
-        <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-sm font-bold rounded-lg">
+        <span data-sortable-handle
+              class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-sm font-bold rounded-xl cursor-grab active:cursor-grabbing hover:bg-orange-200 dark:hover:bg-orange-800/50 transition"
+              title="Trascina per riordinare">
           <%= question.position.to_i + 1 %>
         </span>
 
         <% type = question.questionable_type.downcase %>
-        <% colors = { "addizione" => "blue", "sottrazione" => "red", "moltiplicazione" => "green", "divisione" => "orange", "abaco" => "purple" } %>
+        <% colors = { "addizione" => "sky", "sottrazione" => "rose", "moltiplicazione" => "emerald", "divisione" => "amber", "abaco" => "purple" } %>
         <% color = colors[type] || "gray" %>
 
         <span class="px-2.5 py-1 text-xs font-bold rounded-full bg-<%= color %>-100 dark:bg-<%= color %>-900/30 text-<%= color %>-700 dark:text-<%= color %>-300">
@@ -36,7 +38,7 @@
 
       <div class="flex items-center gap-1">
         <%= link_to edit_dashboard_esercizio_question_path(esercizio, question),
-            class: "flex-shrink-0 p-2 text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg transition",
+            class: "flex-shrink-0 p-2 text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 rounded-xl transition",
             data: { turbo_frame: dom_id(question) } do %>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
@@ -45,7 +47,7 @@
 
         <%= button_to dashboard_esercizio_question_path(esercizio, question),
             method: :delete,
-            class: "flex-shrink-0 p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition",
+            class: "flex-shrink-0 p-2 text-gray-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-xl transition",
             data: { turbo_confirm: "Eliminare questa domanda?" } do %>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
