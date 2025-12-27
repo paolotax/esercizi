@@ -38,16 +38,23 @@ module OperazioniHelper
     return "" if addends.blank?
 
     grid_style = options[:grid_style] || options.fetch(:style, :quaderno)
+    show_addends = options.fetch(:show_addends, false)
+
+    # Se non c'è titolo e show_addends è false, genera titolo dall'operazione
+    title = options[:title]
+    if title.blank? && !show_addends
+      title = addends.join(" + ") + " ="
+    end
 
     renderer = Addizione::Renderer.new(
       addends: addends,
-      show_addends: options.fetch(:show_addends, false),
+      show_addends: show_addends,
       show_solution: options.fetch(:show_solution, false),
       show_carry: options.fetch(:show_carry, false),
       show_toolbar: options.fetch(:show_toolbar, false),
       show_labels: options.fetch(:show_labels, false),
       grid_style: grid_style,
-      title: options[:title]
+      title: title
     )
 
     render "strumenti/addizioni/addizione_grid", grid: renderer.to_grid_matrix
@@ -69,17 +76,24 @@ module OperazioniHelper
   #
   def sottrazione_grid(minuend, subtrahend, **options)
     grid_style = options[:grid_style] || options.fetch(:style, :quaderno)
+    show_minuend_subtrahend = options.fetch(:show_minuend_subtrahend, false)
+
+    # Se non c'è titolo e show_minuend_subtrahend è false, genera titolo dall'operazione
+    title = options[:title]
+    if title.blank? && !show_minuend_subtrahend
+      title = "#{minuend} − #{subtrahend} ="
+    end
 
     renderer = Sottrazione::Renderer.new(
       minuend: minuend,
       subtrahend: subtrahend,
-      show_minuend_subtrahend: options.fetch(:show_minuend_subtrahend, false),
+      show_minuend_subtrahend: show_minuend_subtrahend,
       show_solution: options.fetch(:show_solution, false),
       show_borrow: options.fetch(:show_borrow, false),
       show_toolbar: options.fetch(:show_toolbar, false),
       show_labels: options.fetch(:show_labels, false),
       grid_style: grid_style,
-      title: options[:title]
+      title: title
     )
 
     render "strumenti/sottrazioni/sottrazione_grid", grid: renderer.to_grid_matrix
@@ -102,18 +116,25 @@ module OperazioniHelper
   #
   def moltiplicazione_grid(multiplicand, multiplier, **options)
     grid_style = options[:grid_style] || options.fetch(:style, :quaderno)
+    show_multiplicand_multiplier = options.fetch(:show_multiplicand_multiplier, false)
+
+    # Se non c'è titolo e show_multiplicand_multiplier è false, genera titolo dall'operazione
+    title = options[:title]
+    if title.blank? && !show_multiplicand_multiplier
+      title = "#{multiplicand} × #{multiplier} ="
+    end
 
     renderer = Moltiplicazione::Renderer.new(
       multiplicand: multiplicand,
       multiplier: multiplier,
-      show_multiplicand_multiplier: options.fetch(:show_multiplicand_multiplier, false),
+      show_multiplicand_multiplier: show_multiplicand_multiplier,
       show_solution: options.fetch(:show_solution, false),
       show_partial_products: options.fetch(:show_partial_products, false),
       show_carry: options.fetch(:show_carry, false),
       show_toolbar: options.fetch(:show_toolbar, false),
       show_labels: options.fetch(:show_labels, false),
       grid_style: grid_style,
-      title: options[:title]
+      title: title
     )
 
     render "strumenti/moltiplicazioni/moltiplicazione_grid", grid: renderer.to_grid_matrix
@@ -134,16 +155,23 @@ module OperazioniHelper
   #
   def divisione_grid(dividend, divisor, **options)
     grid_style = options[:grid_style] || options.fetch(:style, :quaderno)
+    show_dividend_divisor = options.fetch(:show_dividend_divisor, false)
+
+    # Se non c'è titolo e show_dividend_divisor è false, genera titolo dall'operazione
+    title = options[:title]
+    if title.blank? && !show_dividend_divisor
+      title = "#{dividend} : #{divisor} ="
+    end
 
     renderer = Divisione::Renderer.new(
       dividend: dividend,
       divisor: divisor,
-      show_dividend_divisor: options.fetch(:show_dividend_divisor, false),
+      show_dividend_divisor: show_dividend_divisor,
       show_solution: options.fetch(:show_solution, false),
       show_steps: options.fetch(:show_steps, false),
       show_toolbar: options.fetch(:show_toolbar, false),
       grid_style: grid_style,
-      title: options[:title]
+      title: title
     )
 
     render "strumenti/divisioni/divisione_grid", grid: renderer.to_grid_matrix
