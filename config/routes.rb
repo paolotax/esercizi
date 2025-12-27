@@ -76,11 +76,12 @@ Rails.application.routes.draw do
   # Dashboard per costruzione esercizi (teacher only)
   namespace :dashboard do
     resources :esercizi do
+      # Publish/Unpublish come risorsa RESTful (pattern Fizzy)
+      resource :publish, only: [:create, :destroy], controller: "esercizi/publishes"
+
       member do
         post :duplicate
         get :preview
-        post :publish
-        post :unpublish
       end
       resources :questions, only: [:create, :edit, :update, :destroy] do
         post :reorder, on: :collection

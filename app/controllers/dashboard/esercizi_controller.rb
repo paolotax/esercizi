@@ -3,7 +3,7 @@
 class Dashboard::EserciziController < ApplicationController
   require_teacher
 
-  before_action :set_esercizio, only: [:show, :edit, :update, :destroy, :duplicate, :preview, :publish, :unpublish]
+  before_action :set_esercizio, only: [:show, :edit, :update, :destroy, :duplicate, :preview]
 
   def index
     @esercizi = current_scope.includes(:questions, :esercizio_attempts)
@@ -99,22 +99,6 @@ class Dashboard::EserciziController < ApplicationController
 
   def preview
     render layout: "preview"
-  end
-
-  def publish
-    @esercizio.publish!
-    respond_to do |format|
-      format.html { redirect_to dashboard_esercizio_path(@esercizio), notice: "Esercizio pubblicato." }
-      format.turbo_stream
-    end
-  end
-
-  def unpublish
-    @esercizio.unpublish!
-    respond_to do |format|
-      format.html { redirect_to dashboard_esercizio_path(@esercizio), notice: "Esercizio ritirato." }
-      format.turbo_stream
-    end
   end
 
   private

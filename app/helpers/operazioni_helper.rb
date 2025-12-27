@@ -252,7 +252,7 @@ module OperazioniHelper
         title: options[:title] || data[:title]
       )
     when Abaco
-      render "strumenti/abachi/abaco_grid", abaco: questionable.to_renderer
+      render "strumenti/abaco/abaco", abaco: questionable.to_renderer
     else
       ""
     end
