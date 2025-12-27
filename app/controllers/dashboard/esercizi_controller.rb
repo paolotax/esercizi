@@ -3,7 +3,7 @@
 class Dashboard::EserciziController < ApplicationController
   require_teacher
 
-  before_action :set_esercizio, only: [:show, :edit, :update, :destroy, :duplicate, :preview]
+  before_action :set_esercizio, only: [:show, :edit, :update, :destroy, :duplicate]
 
   def index
     @esercizi = current_scope.includes(:questions, :esercizio_attempts)
@@ -95,10 +95,6 @@ class Dashboard::EserciziController < ApplicationController
     else
       redirect_to dashboard_esercizi_path, alert: "Errore nella duplicazione."
     end
-  end
-
-  def preview
-    render layout: "preview"
   end
 
   private
