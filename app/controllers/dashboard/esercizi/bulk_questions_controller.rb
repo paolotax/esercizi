@@ -14,12 +14,14 @@ class Dashboard::Esercizi::BulkQuestionsController < ApplicationController
       return
     end
 
-    options = build_options
+    generic_options = build_options
 
     created_count = 0
     parsed.each do |op|
       klass = op[:type].constantize
-      questionable = klass.create!(data: op[:data].merge(options))
+      # Normalizza opzioni generiche in specifiche per questo tipo
+      specific_options = klass.normalize_options(generic_options)
+      questionable = klass.create!(data: op[:data].merge(specific_options))
       @esercizio.questions.create!(
         questionable: questionable,
         position: @esercizio.questions.count,
@@ -41,8 +43,13 @@ class Dashboard::Esercizi::BulkQuestionsController < ApplicationController
 
   def build_options
     {
+      show_operands: params.dig(:options, :show_operands) == "1",
+      show_solution: params.dig(:options, :show_solution) == "1",
       show_toolbar: params.dig(:options, :show_toolbar) == "1",
-      show_solution: params.dig(:options, :show_solution) == "1"
+      show_labels: params.dig(:options, :show_labels) == "1",
+      show_carry: params.dig(:options, :show_carry) == "1",
+      show_steps: params.dig(:options, :show_steps) == "1",
+      layout: params.dig(:options, :layout).presence || "quaderno"
     }
   end
 end

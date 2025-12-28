@@ -2,6 +2,7 @@
 
 class Moltiplicazione < ApplicationRecord
   include Questionable
+  include GenericOptions
 
   self.table_name = "moltiplicazioni"
 

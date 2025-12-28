@@ -2,6 +2,7 @@
 
 class Divisione < ApplicationRecord
   include Questionable
+  include GenericOptions
 
   self.table_name = "divisioni"
 

@@ -81,6 +81,85 @@
         </div>
       <% end %>
 
+      <% unless type == "abaco" %>
+        <!-- Layout -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Layout</label>
+          <select name="data[grid_style]"
+                  class="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-2xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-300 focus:border-transparent transition text-sm">
+            <option value="quaderno" <%= 'selected' if data[:grid_style].to_s != 'column' %>>Quaderno</option>
+            <option value="column" <%= 'selected' if data[:grid_style].to_s == 'column' %>>Colonna</option>
+          </select>
+        </div>
+
+        <!-- Opzioni di visualizzazione -->
+        <div class="space-y-2">
+          <p class="text-sm font-semibold text-gray-700 dark:text-gray-300">Opzioni visualizzazione</p>
+
+          <% # Determina i nomi corretti delle opzioni per ogni tipo %>
+          <% show_operands_key = case type
+               when "addizione" then :show_addends
+               when "sottrazione" then :show_minuend_subtrahend
+               when "moltiplicazione" then :show_multiplicand_multiplier
+               when "divisione" then :show_dividend_divisor
+             end %>
+          <% show_carry_key = type == "sottrazione" ? :show_borrow : :show_carry %>
+          <% show_steps_key = type == "moltiplicazione" ? :show_partial_products : :show_steps %>
+
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="hidden" name="data[<%= show_operands_key %>]" value="false">
+            <input type="checkbox" name="data[<%= show_operands_key %>]" value="true"
+                   <%= 'checked' if data[show_operands_key] == true || data[show_operands_key] == "true" %>
+                   class="w-4 h-4 text-orange-500 rounded focus:ring-orange-300 dark:bg-gray-700 dark:border-gray-600">
+            <span class="text-sm text-gray-700 dark:text-gray-300">Mostra operandi</span>
+          </label>
+
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="hidden" name="data[show_solution]" value="false">
+            <input type="checkbox" name="data[show_solution]" value="true"
+                   <%= 'checked' if data[:show_solution] == true || data[:show_solution] == "true" %>
+                   class="w-4 h-4 text-orange-500 rounded focus:ring-orange-300 dark:bg-gray-700 dark:border-gray-600">
+            <span class="text-sm text-gray-700 dark:text-gray-300">Mostra risultato</span>
+          </label>
+
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="hidden" name="data[show_toolbar]" value="false">
+            <input type="checkbox" name="data[show_toolbar]" value="true"
+                   <%= 'checked' if data[:show_toolbar] == true || data[:show_toolbar] == "true" %>
+                   class="w-4 h-4 text-orange-500 rounded focus:ring-orange-300 dark:bg-gray-700 dark:border-gray-600">
+            <span class="text-sm text-gray-700 dark:text-gray-300">Mostra barra strumenti</span>
+          </label>
+
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="hidden" name="data[show_labels]" value="false">
+            <input type="checkbox" name="data[show_labels]" value="true"
+                   <%= 'checked' if data[:show_labels] == true || data[:show_labels] == "true" %>
+                   class="w-4 h-4 text-orange-500 rounded focus:ring-orange-300 dark:bg-gray-700 dark:border-gray-600">
+            <span class="text-sm text-gray-700 dark:text-gray-300">Mostra etichette (u, da, h...)</span>
+          </label>
+
+          <% if %w[addizione sottrazione moltiplicazione].include?(type) %>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="hidden" name="data[<%= show_carry_key %>]" value="false">
+              <input type="checkbox" name="data[<%= show_carry_key %>]" value="true"
+                     <%= 'checked' if data[show_carry_key] == true || data[show_carry_key] == "true" %>
+                     class="w-4 h-4 text-orange-500 rounded focus:ring-orange-300 dark:bg-gray-700 dark:border-gray-600">
+              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra riporti/prestiti</span>
+            </label>
+          <% end %>
+
+          <% if %w[moltiplicazione divisione].include?(type) %>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="hidden" name="data[<%= show_steps_key %>]" value="false">
+              <input type="checkbox" name="data[<%= show_steps_key %>]" value="true"
+                     <%= 'checked' if data[show_steps_key] == true || data[show_steps_key] == "true" %>
+                     class="w-4 h-4 text-orange-500 rounded focus:ring-orange-300 dark:bg-gray-700 dark:border-gray-600">
+              <span class="text-sm text-gray-700 dark:text-gray-300">Mostra passaggi</span>
+            </label>
+          <% end %>
+        </div>
+      <% end %>
+
       <div class="flex justify-end gap-2">
         <%= link_to "Annulla", edit_dashboard_esercizio_path(esercizio),
             class: "px-4 py-2 text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-600 transition font-semibold",

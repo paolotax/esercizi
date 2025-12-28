@@ -2,6 +2,7 @@
 
 class Addizione < ApplicationRecord
   include Questionable
+  include GenericOptions
   include Addizione::Calculation
 
   self.table_name = "addizioni"

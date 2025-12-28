@@ -2,6 +2,7 @@
 
 class Sottrazione < ApplicationRecord
   include Questionable
+  include GenericOptions
   include Sottrazione::Calculation
 
   self.table_name = "sottrazioni"
