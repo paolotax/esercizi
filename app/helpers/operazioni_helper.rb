@@ -204,12 +204,12 @@ module OperazioniHelper
       data = questionable.data.with_indifferent_access
       addizione_grid(
         data[:addends] || [],
-        show_addends: options.fetch(:show_addends, data[:show_addends]),
-        show_solution: options.fetch(:show_solution, data[:show_solution]),
-        show_carry: options.fetch(:show_carry, data[:show_carry]),
-        show_toolbar: options.fetch(:show_toolbar, data[:show_toolbar]),
-        show_labels: options.fetch(:show_labels, data[:show_labels]),
-        style: options.fetch(:style, :quaderno),
+        show_addends: to_bool(options.fetch(:show_addends, data[:show_addends])),
+        show_solution: to_bool(options.fetch(:show_solution, data[:show_solution])),
+        show_carry: to_bool(options.fetch(:show_carry, data[:show_carry])),
+        show_toolbar: to_bool(options.fetch(:show_toolbar, data[:show_toolbar])),
+        show_labels: to_bool(options.fetch(:show_labels, data[:show_labels])),
+        style: data[:grid_style] || options.fetch(:style, :quaderno),
         title: options[:title] || data[:title]
       )
     when Sottrazione
@@ -217,12 +217,12 @@ module OperazioniHelper
       sottrazione_grid(
         data[:minuend],
         data[:subtrahend],
-        show_minuend_subtrahend: options.fetch(:show_minuend_subtrahend, data[:show_minuend_subtrahend]),
-        show_solution: options.fetch(:show_solution, data[:show_solution]),
-        show_borrow: options.fetch(:show_borrow, data[:show_borrow]),
-        show_toolbar: options.fetch(:show_toolbar, data[:show_toolbar]),
-        show_labels: options.fetch(:show_labels, data[:show_labels]),
-        style: options.fetch(:style, :quaderno),
+        show_minuend_subtrahend: to_bool(options.fetch(:show_minuend_subtrahend, data[:show_minuend_subtrahend])),
+        show_solution: to_bool(options.fetch(:show_solution, data[:show_solution])),
+        show_borrow: to_bool(options.fetch(:show_borrow, data[:show_borrow])),
+        show_toolbar: to_bool(options.fetch(:show_toolbar, data[:show_toolbar])),
+        show_labels: to_bool(options.fetch(:show_labels, data[:show_labels])),
+        style: data[:grid_style] || options.fetch(:style, :quaderno),
         title: options[:title] || data[:title]
       )
     when Moltiplicazione
@@ -230,13 +230,13 @@ module OperazioniHelper
       moltiplicazione_grid(
         data[:multiplicand],
         data[:multiplier],
-        show_multiplicand_multiplier: options.fetch(:show_multiplicand_multiplier, data[:show_multiplicand_multiplier]),
-        show_solution: options.fetch(:show_solution, data[:show_solution]),
-        show_partial_products: options.fetch(:show_partial_products, data[:show_partial_products]),
-        show_carry: options.fetch(:show_carry, data[:show_carry]),
-        show_toolbar: options.fetch(:show_toolbar, data[:show_toolbar]),
-        show_labels: options.fetch(:show_labels, data[:show_labels]),
-        style: options.fetch(:style, :quaderno),
+        show_multiplicand_multiplier: to_bool(options.fetch(:show_multiplicand_multiplier, data[:show_multiplicand_multiplier])),
+        show_solution: to_bool(options.fetch(:show_solution, data[:show_solution])),
+        show_partial_products: to_bool(options.fetch(:show_partial_products, data[:show_partial_products])),
+        show_carry: to_bool(options.fetch(:show_carry, data[:show_carry])),
+        show_toolbar: to_bool(options.fetch(:show_toolbar, data[:show_toolbar])),
+        show_labels: to_bool(options.fetch(:show_labels, data[:show_labels])),
+        style: data[:grid_style] || options.fetch(:style, :quaderno),
         title: options[:title] || data[:title]
       )
     when Divisione
@@ -244,11 +244,11 @@ module OperazioniHelper
       divisione_grid(
         data[:dividend],
         data[:divisor],
-        show_dividend_divisor: options.fetch(:show_dividend_divisor, data[:show_dividend_divisor]),
-        show_solution: options.fetch(:show_solution, data[:show_solution]),
-        show_steps: options.fetch(:show_steps, data[:show_steps]),
-        show_toolbar: options.fetch(:show_toolbar, data[:show_toolbar]),
-        style: options.fetch(:style, :quaderno),
+        show_dividend_divisor: to_bool(options.fetch(:show_dividend_divisor, data[:show_dividend_divisor])),
+        show_solution: to_bool(options.fetch(:show_solution, data[:show_solution])),
+        show_steps: to_bool(options.fetch(:show_steps, data[:show_steps])),
+        show_toolbar: to_bool(options.fetch(:show_toolbar, data[:show_toolbar])),
+        style: data[:grid_style] || options.fetch(:style, :quaderno),
         title: options[:title] || data[:title]
       )
     when Abaco
@@ -289,6 +289,16 @@ module OperazioniHelper
   end
 
   private
+
+  # Converte un valore in booleano
+  # Gestisce stringhe "true"/"false", booleani, nil
+  def to_bool(value)
+    return false if value.nil?
+    return value if value.is_a?(TrueClass) || value.is_a?(FalseClass)
+    return true if value == "true" || value == "1"
+    return false if value == "false" || value == "0"
+    !!value
+  end
 
   # Converte input in array di addendi
   def parse_addends(addends_or_string)
