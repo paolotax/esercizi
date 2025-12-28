@@ -5,7 +5,7 @@ class Question < ApplicationRecord
   belongs_to :account, optional: true
   belongs_to :creator, class_name: "User", optional: true
 
-  delegated_type :questionable, types: %w[Addizione Sottrazione Moltiplicazione Divisione Abaco]
+  delegated_type :questionable, types: %w[Addizione Sottrazione Moltiplicazione Divisione Abaco], dependent: :destroy
 
   scope :ordered, -> { order(:position) }
 end
