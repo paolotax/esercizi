@@ -79,6 +79,7 @@ Rails.application.routes.draw do
       # Risorse RESTful (pattern Fizzy)
       resource :publish, only: [:create, :destroy], controller: "esercizi/publishes"
       resource :preview, only: [:show], controller: "esercizi/previews"
+      resource :bulk_questions, only: [:create], controller: "esercizi/bulk_questions"
 
       member do
         post :duplicate
