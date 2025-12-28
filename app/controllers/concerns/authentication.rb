@@ -4,9 +4,12 @@ module Authentication
   included do
     before_action :require_account
     before_action :require_authentication
-    after_action :ensure_development_magic_link_not_leaked
     helper_method :authenticated?
     helper_method :email_address_pending_authentication
+
+    etag { Current.identity.id if authenticated? }
+
+    include Authentication::ViaMagicLink, LoginHelper
   end
 
   class_methods do
@@ -60,7 +63,7 @@ module Authentication
         session[:return_to_after_authenticating] = request.url
       end
 
-      redirect_to new_session_path(script_name: nil)
+      redirect_to_login_url
     end
 
     def after_authentication_url
@@ -97,24 +100,5 @@ module Authentication
     def terminate_session
       Current.session.destroy
       cookies.delete(:session_token)
-    end
-
-    def ensure_development_magic_link_not_leaked
-      unless Rails.env.development?
-        raise "Leaking magic link via flash in #{Rails.env}?" if flash[:magic_link_code].present?
-      end
-    end
-
-    def email_address_pending_authentication
-      session[:email_address_pending_authentication]
-    end
-
-    def redirect_to_session_magic_link(magic_link, return_to: nil)
-      if Rails.env.development?
-        flash[:magic_link_code] = magic_link&.code
-      end
-      session[:email_address_pending_authentication] = magic_link.identity.email_address if magic_link
-      session[:return_to_after_authenticating] = return_to if return_to
-      redirect_to session_magic_link_path(script_name: nil)
     end
 end

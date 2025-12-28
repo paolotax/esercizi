@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # ============================================
   resource :session, only: [ :new, :create, :destroy ] do
     scope module: :sessions do
-      resource :magic_link, only: [ :show, :update ]
+      resource :magic_link, only: [ :show, :create ]
       resource :menu, only: :show
     end
   end
