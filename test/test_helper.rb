@@ -15,12 +15,13 @@ module ActiveSupport
 end
 
 module AuthenticationTestHelper
-  # Simula login impostando il cookie di sessione
+  # Simula login impostando il cookie di sessione (per integration tests)
   def sign_in_as(session)
-    cookies[:session_token] = session.signed_id
+    # Integration tests need signed cookies
+    cookies.signed[:session_token] = session.signed_id
   end
 
-  # Imposta Current per i test
+  # Imposta Current per i test (per unit tests)
   def set_current(account:, user:)
     Current.account = account
     Current.user = user
