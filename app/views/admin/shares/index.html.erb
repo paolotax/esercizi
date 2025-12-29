@@ -1,0 +1,74 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Gestione Accessi</h1>
+    <%= link_to "Nuovo Accesso", new_admin_share_path, class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg" %>
+  </div>
+
+  <% if @shares.any? %>
+    <div class="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
+      <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <thead class="bg-gray-50 dark:bg-gray-700">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Risorsa</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Destinatario</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Permesso</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Scadenza</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Azioni</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+          <% @shares.each do |share| %>
+            <tr class="<%= share.expired? ? 'opacity-50' : '' %>">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  <%= share.shareable_type %>
+                </div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">
+                  <%= share.shareable&.respond_to?(:nome) ? share.shareable.nome : share.shareable_id %>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900 dark:text-gray-100">
+                  <% if share.recipient.is_a?(User) %>
+                    <%= share.recipient.name %>
+                  <% elsif share.recipient.is_a?(Account) %>
+                    Account: <%= share.recipient.name %>
+                  <% end %>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs font-medium rounded-full
+                  <%= case share.permission
+                      when 'view' then 'bg-gray-100 text-gray-800 dark:bg-gray-600 dark:text-gray-200'
+                      when 'edit' then 'bg-blue-100 text-blue-800 dark:bg-blue-600 dark:text-blue-200'
+                      when 'admin' then 'bg-purple-100 text-purple-800 dark:bg-purple-600 dark:text-purple-200'
+                      end %>">
+                  <%= share.permission %>
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                <% if share.expires_at %>
+                  <%= share.expires_at.strftime("%d/%m/%Y") %>
+                  <% if share.expired? %>
+                    <span class="text-red-500">(scaduto)</span>
+                  <% end %>
+                <% else %>
+                  -
+                <% end %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <%= button_to "Revoca", admin_share_path(share), method: :delete,
+                    class: "text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300",
+                    data: { turbo_confirm: "Sei sicuro di voler revocare questo accesso?" } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-8 text-center">
+      <p class="text-gray-500 dark:text-gray-400">Nessun accesso configurato</p>
+    </div>
+  <% end %>
+</div>

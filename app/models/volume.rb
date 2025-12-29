@@ -1,4 +1,6 @@
 class Volume < ApplicationRecord
+  include Accessible
+
   # Associazioni
   belongs_to :account, optional: true
   belongs_to :corso
@@ -10,4 +12,25 @@ class Volume < ApplicationRecord
 
   # Scopes
   default_scope { order(:posizione, :classe) }
+
+  scope :accessible_by, ->(user) {
+    return all if user.admin?
+
+    user_recipients = [user, user.account]
+
+    volume_ids = Share.active.where(shareable_type: "Volume", recipient: user_recipients).select(:shareable_id)
+    corso_ids = Share.active.where(shareable_type: "Corso", recipient: user_recipients).select(:shareable_id)
+
+    where(id: volume_ids)
+      .or(where(corso_id: corso_ids))
+  }
+
+  def accessible_by?(user)
+    return false unless user
+    return true if user.admin?
+    return true if shared_with?(user)
+    return true if corso.shared_with?(user)
+
+    false
+  end
 end

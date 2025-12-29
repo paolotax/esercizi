@@ -100,6 +100,11 @@ Rails.application.routes.draw do
     resources :attempts, only: [ :index, :show ]
   end
 
+  # Admin management (admin only)
+  namespace :admin do
+    resources :shares, only: [:index, :new, :create, :destroy]
+  end
+
   # Account management (owner only)
   namespace :account do
     resource :settings, only: [ :show, :update ]

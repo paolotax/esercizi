@@ -1,5 +1,6 @@
 class Pagina < ApplicationRecord
   include Searchable
+  include Accessible
 
   # Associazioni
   belongs_to :account, optional: true
@@ -12,12 +13,39 @@ class Pagina < ApplicationRecord
   # Scopes
   default_scope { order(:posizione, :numero) }
 
+  scope :accessible_by, ->(user) {
+    return all if user.admin?
+
+    user_recipients = [user, user.account]
+
+    pagina_ids = Share.active.where(shareable_type: "Pagina", recipient: user_recipients).select(:shareable_id)
+    disciplina_ids = Share.active.where(shareable_type: "Disciplina", recipient: user_recipients).select(:shareable_id)
+    volume_ids = Share.active.where(shareable_type: "Volume", recipient: user_recipients).select(:shareable_id)
+    corso_ids = Share.active.where(shareable_type: "Corso", recipient: user_recipients).select(:shareable_id)
+
+    where(id: pagina_ids)
+      .or(where(disciplina_id: disciplina_ids))
+      .or(where(disciplina_id: Disciplina.where(volume_id: volume_ids)))
+      .or(where(disciplina_id: Disciplina.where(volume_id: Volume.where(corso_id: corso_ids))))
+  }
+
   # Delegazioni
   delegate :volume, to: :disciplina
   delegate :corso, to: :disciplina
 
   # Callbacks
   before_validation :genera_slug, if: -> { slug.blank? }
+
+  def accessible_by?(user)
+    return false unless user
+    return true if user.admin?
+    return true if shared_with?(user)
+    return true if disciplina.shared_with?(user)
+    return true if disciplina.volume.shared_with?(user)
+    return true if disciplina.volume.corso.shared_with?(user)
+
+    false
+  end
 
   def search_record_attributes
     {

@@ -1,0 +1,123 @@
+<div class="container mx-auto px-4 py-8 max-w-2xl">
+  <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Nuovo Accesso</h1>
+
+  <%= form_with model: [:admin, @share], class: "bg-white dark:bg-gray-800 shadow rounded-lg p-6 space-y-6" do |f| %>
+    <% if @share.errors.any? %>
+      <div class="bg-red-50 dark:bg-red-900/50 border border-red-200 dark:border-red-800 rounded-lg p-4">
+        <ul class="list-disc list-inside text-red-600 dark:text-red-400 text-sm">
+          <% @share.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tipo Risorsa</label>
+      <%= f.select :shareable_type, [["Corso", "Corso"], ["Volume", "Volume"], ["Disciplina", "Disciplina"], ["Pagina", "Pagina"]],
+          { prompt: "Seleziona tipo..." },
+          { class: "w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100",
+            data: { action: "change->admin-shares#updateResources" } } %>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Risorsa</label>
+      <%= f.select :shareable_id, [],
+          { prompt: "Seleziona risorsa..." },
+          { class: "w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100",
+            id: "shareable_id_select" } %>
+
+      <div id="resource_options" class="hidden">
+        <div id="corso_options">
+          <% @corsi.each do |corso| %>
+            <option value="<%= corso.id %>"><%= corso.nome %></option>
+          <% end %>
+        </div>
+        <div id="volume_options">
+          <% @volumi.each do |volume| %>
+            <option value="<%= volume.id %>"><%= volume.corso.nome %> - <%= volume.nome %></option>
+          <% end %>
+        </div>
+        <div id="disciplina_options">
+          <% @discipline.each do |disciplina| %>
+            <option value="<%= disciplina.id %>"><%= disciplina.volume.corso.nome %> - <%= disciplina.volume.nome %> - <%= disciplina.nome %></option>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tipo Destinatario</label>
+      <%= f.select :recipient_type, [["Utente", "User"], ["Account", "Account"]],
+          { prompt: "Seleziona tipo..." },
+          { class: "w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100",
+            data: { action: "change->admin-shares#updateRecipients" } } %>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Destinatario</label>
+      <%= f.select :recipient_id, [],
+          { prompt: "Seleziona destinatario..." },
+          { class: "w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100",
+            id: "recipient_id_select" } %>
+
+      <div id="recipient_options" class="hidden">
+        <div id="user_options">
+          <% @users.each do |user| %>
+            <option value="<%= user.id %>"><%= user.name %> (<%= user.account.name %>)</option>
+          <% end %>
+        </div>
+        <div id="account_options">
+          <% @accounts.each do |account| %>
+            <option value="<%= account.id %>"><%= account.name %></option>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Permesso</label>
+      <%= f.select :permission, [["Visualizza", "view"], ["Modifica", "edit"], ["Amministra", "admin"]],
+          {},
+          { class: "w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100" } %>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Scadenza (opzionale)</label>
+      <%= f.date_field :expires_at,
+          class: "w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100" %>
+    </div>
+
+    <div class="flex justify-end space-x-4 pt-4">
+      <%= link_to "Annulla", admin_shares_path, class: "px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100" %>
+      <%= f.submit "Assegna Accesso", class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg cursor-pointer" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const shareableTypeSelect = document.querySelector('[name="share[shareable_type]"]');
+  const shareableIdSelect = document.getElementById('shareable_id_select');
+  const recipientTypeSelect = document.querySelector('[name="share[recipient_type]"]');
+  const recipientIdSelect = document.getElementById('recipient_id_select');
+
+  shareableTypeSelect.addEventListener('change', function() {
+    const type = this.value.toLowerCase();
+    const options = document.getElementById(type + '_options');
+    shareableIdSelect.innerHTML = '<option value="">Seleziona risorsa...</option>';
+    if (options) {
+      shareableIdSelect.innerHTML += options.innerHTML;
+    }
+  });
+
+  recipientTypeSelect.addEventListener('change', function() {
+    const type = this.value.toLowerCase();
+    const options = document.getElementById(type + '_options');
+    recipientIdSelect.innerHTML = '<option value="">Seleziona destinatario...</option>';
+    if (options) {
+      recipientIdSelect.innerHTML += options.innerHTML;
+    }
+  });
+});
+</script>
