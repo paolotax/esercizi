@@ -47,8 +47,8 @@ class AuthenticationFlowTest < ActionDispatch::IntegrationTest
     magic_link = identity.magic_links.active.last
     follow_redirect!
 
-    # Submit code - should create a new session
-    assert_difference "Session.count", 1 do
+    # Submit code - should create a new session for this identity
+    assert_difference -> { identity.sessions.count }, 1 do
       post session_magic_link_url, params: { code: magic_link.code }
     end
   end

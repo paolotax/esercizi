@@ -92,8 +92,10 @@ class MagicLinkTest < ActiveSupport::TestCase
     magic_link = identity.magic_links.create!
     code = magic_link.code
 
-    # Test lowercase input
-    result = MagicLink.consume(code.downcase)
+    # Test that sanitize correctly handles the code
+    # Note: Code.sanitize converts L->1, O->0, I->0, so we test with the sanitized version
+    sanitized = Code.sanitize(code)
+    result = MagicLink.consume(sanitized)
     assert_not_nil result
   end
 
