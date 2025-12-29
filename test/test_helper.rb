@@ -13,3 +13,20 @@ module ActiveSupport
     # Add more helper methods to be used by all tests here...
   end
 end
+
+module AuthenticationTestHelper
+  # Simula login impostando il cookie di sessione
+  def sign_in_as(session)
+    cookies[:session_token] = session.signed_id
+  end
+
+  # Imposta Current per i test
+  def set_current(account:, user:)
+    Current.account = account
+    Current.user = user
+  end
+end
+
+class ActionDispatch::IntegrationTest
+  include AuthenticationTestHelper
+end

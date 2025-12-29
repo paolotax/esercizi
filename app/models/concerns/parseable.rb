@@ -126,6 +126,6 @@ module Parseable
 
   # Istanza: converte record DB in Renderer
   def to_renderer
-    Renderer.new(**data.symbolize_keys)
+    self.class::Renderer.new(**data.symbolize_keys)
   end
 end
