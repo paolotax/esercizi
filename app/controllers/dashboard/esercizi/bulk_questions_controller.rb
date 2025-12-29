@@ -6,33 +6,19 @@ class Dashboard::Esercizi::BulkQuestionsController < ApplicationController
 
   # POST /dashboard/esercizi/:esercizio_id/bulk_questions
   def create
-    parsed = OperationParser.parse_all(params[:operations_text])
+    result = Parseable.create_all_from_text(
+      params[:operations_text],
+      esercizio: @esercizio,
+      options: build_options
+    )
 
-    if parsed.empty?
+    if result[:count].zero?
       redirect_to edit_dashboard_esercizio_path(@esercizio),
                   alert: "Nessuna operazione valida trovata"
-      return
+    else
+      notice = "#{result[:count]} #{result[:count] == 1 ? 'operazione aggiunta' : 'operazioni aggiunte'}"
+      redirect_to edit_dashboard_esercizio_path(@esercizio), notice: notice
     end
-
-    generic_options = build_options
-
-    created_count = 0
-    parsed.each do |op|
-      klass = op[:type].constantize
-      # Normalizza opzioni generiche in specifiche per questo tipo
-      specific_options = klass.normalize_options(generic_options)
-      questionable = klass.create!(data: op[:data].merge(specific_options))
-      @esercizio.questions.create!(
-        questionable: questionable,
-        position: @esercizio.questions.count,
-        account: Current.account,
-        creator: Current.user
-      )
-      created_count += 1
-    end
-
-    redirect_to edit_dashboard_esercizio_path(@esercizio),
-                notice: "#{created_count} #{created_count == 1 ? 'operazione aggiunta' : 'operazioni aggiunte'}"
   end
 
   private
