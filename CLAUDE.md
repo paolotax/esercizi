@@ -1,26 +1,89 @@
-# Esercizi Rails Development with ClaudeOnRails
+# CLAUDE.md
 
-This project uses ClaudeOnRails to create an intelligent swarm of AI agents specialized in different aspects of Rails development.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-- **Application**: Esercizi
-- **Rails Version**: 8.1.0
-- **Ruby Version**: 3.2.2
-- **Tailwind CSS**: 4.x (via tailwindcss-rails)
-- **Type**: Full-stack Rails application
-- **Test Framework**: Minitest
+**Esercizi** is an Italian educational platform for interactive exercises (math, grammar, etc.) organized in a textbook-like structure. Multi-tenant SaaS with account-scoped data.
 
-## IMPORTANTE: Tailwind CSS 4
+- Rails 8.1, Ruby 3.2.2, SQLite, Tailwind CSS 4, Stimulus, Turbo
+- Deployed via Kamal to esercizi.paolotax.it
 
-Questo progetto usa **Tailwind CSS 4**. NON usare il vecchio `tailwind.config.js`.
+## Commands
 
-- Colori custom: definire in `@theme` in `app/assets/tailwind/application.css`
-- Animazioni: usare `--animate-*` in `@theme` + `@keyframes` standard
-- Content detection: automatica (non serve configurare)
-- Plugin forms/typography/aspect-ratio: built-in
+```bash
+# Development
+bin/rails server                    # Start server
+bin/rails tailwindcss:build         # Build Tailwind CSS
+bin/rails tailwindcss:watch         # Watch Tailwind changes
 
-Esempio:
+# Testing
+bin/rails test                      # Run all tests
+bin/rails test test/models/         # Run model tests only
+bin/rails test test/models/user_test.rb:15  # Single test by line
+
+# Code quality
+bin/rubocop                         # Ruby linting
+bin/brakeman                        # Security scanning
+
+# Deployment
+bin/kamal deploy                    # Deploy to production
+bin/kamal console                   # Rails console on server
+bin/kamal shell                     # SSH into container
+```
+
+## Architecture
+
+### Content Hierarchy
+```
+Corso → Volume → Disciplina → Pagina
+```
+- **Corso**: Course (e.g., "Classe 3")
+- **Volume**: Book within a course
+- **Disciplina**: Subject (matematica, grammatica)
+- **Pagina**: Individual page with exercises, uses `slug` for routing (e.g., `nvi4_mat_p012`)
+
+### Multi-Tenant Auth System
+- `Current` thread-local stores: `account`, `identity`, `user`, `session`
+- `Identity` = email-based login (passwordless via MagicLink)
+- `User` = account-scoped profile with role (student/teacher/owner)
+- One identity can have users in multiple accounts
+- Authentication: `Authentication` concern with `ViaMagicLink`
+- Authorization: `Authorization` concern, `User::Admin` for admin checks
+
+### Access Control (Shareable Resources)
+- `Shareable` concern: generates share tokens for public URLs
+- `Accessible` concern: manages share permissions (user or account recipients)
+- 4-level inheritance: Corso → Volume → Disciplina → Pagina
+- Admin emails configured in credentials
+
+### Exercise Page Templates
+Pages live in `app/views/exercises/{slug}.html.erb` (e.g., `nvi4_mat_p012.html.erb`).
+
+Template naming convention:
+- `bus3_mat_*` = Classe 3 matematica
+- `nvi4_mat_*` = Classe 4 matematica
+- `nvl5_gram_*` = Classe 5 grammatica
+
+### Stimulus Controllers
+50+ exercise controllers in `app/javascript/controllers/`:
+- `page_viewer_controller.js` - Main page navigation
+- `fill_blanks_controller.js` - Fill-in exercises
+- `exercise_checker_controller.js` - Answer validation
+- `quaderno_*_controller.js` - Math operations (add/sub/mul/div)
+- `abaco_controller.js` - Abacus tool
+- `word_*_controller.js` - Word exercises (sorter, selector, highlighter)
+
+### Math Operation Models
+`app/models/` has specialized models with `Renderer` classes:
+- `Addizione`, `Sottrazione`, `Moltiplicazione`, `Divisione`
+- Each has `Renderer` for HTML generation and `Calculation` for logic
+
+## Tailwind CSS 4
+
+**DO NOT use `tailwind.config.js`** - Tailwind 4 uses CSS-based configuration.
+
+Custom theme in `app/assets/tailwind/application.css`:
 ```css
 @import "tailwindcss";
 
@@ -29,81 +92,27 @@ Esempio:
   --color-custom-pink: #C657A0;
 }
 
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-  20%, 40%, 60%, 80% { transform: translateX(10px); }
-}
+@keyframes shake { /* ... */ }
 ```
 
-## How to Use
+## Key Patterns
 
-Simply describe what you want to build or fix, and the swarm will automatically coordinate the implementation:
+### Controller Concerns
+- `Authentication`: Session management, magic links
+- `Authorization`: Role-based access (`require_teacher`, `require_owner`)
 
-```bash
-# Start the swarm
-claude-swarm orchestrate
+### View Helpers
+- `ExercisesHelper`: Exercise rendering utilities
+- `OperazioniHelper`: Math operation display
 
-# Then just describe your task
-claude "Add user authentication with email confirmation"
-claude "Optimize the dashboard queries that are running slowly"
-claude "Create an API endpoint for mobile app integration"
-```
+### Dashboard (Teacher Area)
+`/dashboard/esercizi` - CRUD for custom exercises with:
+- Questions management
+- Sharing system
+- Publishing workflow
 
-## Swarm Architecture
+## Important Notes
 
-The following specialized agents work together to implement your requests:
-
-- **Architect**: Coordinates all development and makes high-level decisions
-- **Models**: Handles ActiveRecord models, migrations, and database design
-- **Controllers**: Manages request handling, routing, and controller logic
-- **Views**: Creates and maintains views, layouts, and partials
-- **Stimulus**: Implements interactive features with Stimulus controllers
-- **Services**: Extracts business logic into service objects
-- **Jobs**: Handles background processing and async tasks
-- **Tests**: Ensures comprehensive test coverage with Minitest
-- **DevOps**: Manages deployment and production configurations
-
-## Project Conventions
-
-### Code Style
-- Follow Rails conventions and best practices
-- Use RuboCop for Ruby style enforcement
-- Prefer clarity over cleverness
-- Write self-documenting code
-
-### Testing
-- Minitest for all tests
-- Fixtures or factories for test data
-- Integration tests for user flows
-- Unit tests for models and services
-
-### Git Workflow
-- Feature branches for new work
-- Descriptive commit messages
-- PR reviews before merging
-- Keep main branch deployable
-- **IMPORTANTE**: Chiedere sempre conferma prima di fare commit, a meno che l'utente non dica "committatutto"
-
-## Custom Patterns
-
-- crea nuove pagine usa il prompt PROMPT_NUOVA_PAGINA.md
-- per gli header di pagina usa il template in TODO_HEADER_PAGES.md 
-
-
-
-```yaml
-# Example: Custom service object pattern
-Services:
-  Pattern: Command pattern with Result objects
-  Location: app/services/
-  Naming: VerbNoun (e.g., CreateOrder, SendEmail)
-  Testing: Unit tests with mocked dependencies
-```
-
-## Notes
-
-- This configuration was generated by ClaudeOnRails
-- Customize agent prompts in `.claude-on-rails/prompts/`
-- Update this file with project-specific conventions
-- The swarm learns from your codebase patterns
+- **Git commits**: Always ask for confirmation before committing unless user says "committatutto"
+- **Page creation**: Use skill `crea-nuova-pagina` for new exercise pages
+- **Dark mode**: Use skill `revisione-dark-mode` for dark mode updates
