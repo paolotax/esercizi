@@ -57,7 +57,7 @@ module OperazioniHelper
       title: title
     )
 
-    render "strumenti/addizioni/addizione_grid", grid: renderer.to_grid_matrix
+    render "strumenti/quaderno_grid", grid: renderer.to_grid_matrix
   end
 
   # Renderizza una griglia sottrazione
@@ -96,7 +96,7 @@ module OperazioniHelper
       title: title
     )
 
-    render "strumenti/sottrazioni/sottrazione_grid", grid: renderer.to_grid_matrix
+    render "strumenti/quaderno_grid", grid: renderer.to_grid_matrix
   end
 
   # Renderizza una griglia moltiplicazione
@@ -137,7 +137,7 @@ module OperazioniHelper
       title: title
     )
 
-    render "strumenti/moltiplicazioni/moltiplicazione_grid", grid: renderer.to_grid_matrix
+    render "strumenti/quaderno_grid", grid: renderer.to_grid_matrix
   end
 
   # Renderizza una griglia divisione
@@ -174,7 +174,7 @@ module OperazioniHelper
       title: title
     )
 
-    render "strumenti/divisioni/divisione_grid", grid: renderer.to_grid_matrix
+    render "strumenti/quaderno_grid", grid: renderer.to_grid_matrix
   end
 
   # Alias più corti per uso rapido
