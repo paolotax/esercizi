@@ -152,6 +152,8 @@ class Sottrazione
         title: @title,
         show_toolbar: @show_toolbar,
         style: @grid_style,
+        operation_type: :sottrazione,
+        border_color: "red",
         rows: rows
       }
     end

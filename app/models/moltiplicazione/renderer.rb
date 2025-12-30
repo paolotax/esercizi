@@ -444,6 +444,8 @@ class Moltiplicazione
       title: nil,
       show_toolbar: @show_toolbar,
       style: @grid_style,
+      operation_type: :moltiplicazione,
+      border_color: "green",
       rows: rows
     }
   end

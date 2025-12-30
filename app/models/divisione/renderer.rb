@@ -317,6 +317,8 @@ class Divisione
       show_steps_button: true,  # Solo divisione ha il pulsante "Mostra Passi"
       separator_col: left_cols,  # Posizione del separatore verticale (prima colonna destra)
       remainder: has_remainder? ? @remainder : nil,
+      operation_type: :divisione,
+      border_color: "orange",
       rows: rows
     }
   end

@@ -274,6 +274,8 @@ class Addizione
         title: @title,
         show_toolbar: @show_toolbar,
         style: @grid_style,
+        operation_type: :addizione,
+        border_color: "blue",
         rows: rows
       }
     end
