@@ -2,7 +2,7 @@
 
 module Admin
   class SharesController < BaseController
-    before_action :set_share, only: [:destroy]
+    before_action :set_share, only: [ :destroy ]
 
     def index
       @shares = Share.includes(:shareable, :recipient)

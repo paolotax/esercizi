@@ -13,7 +13,7 @@ class Divisione < ApplicationRecord
                  :show_toolbar, :show_steps
 
   # DSL Parseable
-  parseable operator: /[\/÷:]/, fields: [:dividend, :divisor]
+  parseable operator: /[\/÷:]/, fields: [ :dividend, :divisor ]
 
   # Override: divisore non può essere zero
   def self.valid_operation?(parsed)

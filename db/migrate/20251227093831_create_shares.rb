@@ -18,8 +18,8 @@ class CreateShares < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :shares, [:recipient_type, :recipient_id]
-    add_index :shares, [:shareable_type, :shareable_id, :recipient_type, :recipient_id],
+    add_index :shares, [ :recipient_type, :recipient_id ]
+    add_index :shares, [ :shareable_type, :shareable_id, :recipient_type, :recipient_id ],
               unique: true, name: "index_shares_unique"
   end
 end

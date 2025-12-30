@@ -88,7 +88,7 @@ class AuthenticationFlowTest < ActionDispatch::IntegrationTest
   test "signup flow creates identity and sends magic link" do
     new_email = "newuser_#{SecureRandom.hex(4)}@example.com"
 
-    assert_difference ["Identity.count", "MagicLink.count"], 1 do
+    assert_difference [ "Identity.count", "MagicLink.count" ], 1 do
       assert_enqueued_emails 1 do
         post session_url, params: { email_address: new_email }
       end

@@ -6,7 +6,7 @@ class ParseableTest < ActiveSupport::TestCase
   setup do
     # Forza il caricamento di tutti i model Parseable
     # (Rails li carica lazily, quindi dobbiamo referenziarli)
-    [Addizione, Sottrazione, Moltiplicazione, Divisione]
+    [ Addizione, Sottrazione, Moltiplicazione, Divisione ]
   end
 
   test "registers types automatically when included" do

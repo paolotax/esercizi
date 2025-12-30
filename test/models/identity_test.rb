@@ -17,7 +17,7 @@ class IdentityTest < ActiveSupport::TestCase
   end
 
   test "email address must have valid format" do
-    invalid_emails = ["invalid", "@example.com", "test@"]
+    invalid_emails = [ "invalid", "@example.com", "test@" ]
     invalid_emails.each do |email|
       identity = Identity.new(email_address: email)
       assert_not identity.valid?, "#{email} should be invalid"
@@ -25,7 +25,7 @@ class IdentityTest < ActiveSupport::TestCase
   end
 
   test "valid email addresses are accepted" do
-    valid_emails = ["test@example.com", "user@domain.org", "name+tag@gmail.com"]
+    valid_emails = [ "test@example.com", "user@domain.org", "name+tag@gmail.com" ]
     valid_emails.each do |email|
       identity = Identity.new(email_address: email)
       identity.valid?

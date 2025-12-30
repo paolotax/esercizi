@@ -9,41 +9,41 @@ class AddizioneTest < ActiveSupport::TestCase
   end
 
   test "field_names is addends" do
-    assert_equal [:addends], Addizione.field_names
+    assert_equal [ :addends ], Addizione.field_names
   end
 
   # parse con 2 addendi
   test "parse with two addends returns hash" do
     result = Addizione.parse("12+34")
-    assert_equal({ addends: ["12", "34"] }, result)
+    assert_equal({ addends: [ "12", "34" ] }, result)
   end
 
   # parse con N addendi
   test "parse with three addends returns array" do
     result = Addizione.parse("12+34+56")
-    assert_equal({ addends: ["12", "34", "56"] }, result)
+    assert_equal({ addends: [ "12", "34", "56" ] }, result)
   end
 
   test "parse with four addends returns array" do
     result = Addizione.parse("1+2+3+4")
-    assert_equal({ addends: ["1", "2", "3", "4"] }, result)
+    assert_equal({ addends: [ "1", "2", "3", "4" ] }, result)
   end
 
   # parse con spazi
   test "parse ignores spaces" do
     result = Addizione.parse("12 + 34")
-    assert_equal({ addends: ["12", "34"] }, result)
+    assert_equal({ addends: [ "12", "34" ] }, result)
   end
 
   # parse con numeri decimali
   test "parse converts comma to dot in decimals" do
     result = Addizione.parse("12,5+34,7")
-    assert_equal({ addends: ["12.5", "34.7"] }, result)
+    assert_equal({ addends: [ "12.5", "34.7" ] }, result)
   end
 
   test "parse handles dot decimals" do
     result = Addizione.parse("12.5+34.7")
-    assert_equal({ addends: ["12.5", "34.7"] }, result)
+    assert_equal({ addends: [ "12.5", "34.7" ] }, result)
   end
 
   # parse con input invalido
@@ -71,8 +71,8 @@ class AddizioneTest < ActiveSupport::TestCase
   test "parse_multiple splits by semicolon" do
     result = Addizione.parse_multiple("12+34;56+78")
     assert_equal 2, result.size
-    assert_equal({ addends: ["12", "34"] }, result[0])
-    assert_equal({ addends: ["56", "78"] }, result[1])
+    assert_equal({ addends: [ "12", "34" ] }, result[0])
+    assert_equal({ addends: [ "56", "78" ] }, result[1])
   end
 
   test "parse_multiple splits by newline" do
@@ -125,7 +125,7 @@ class AddizioneTest < ActiveSupport::TestCase
     record = Addizione.from_string("12+34")
     assert_not_nil record
     assert record.persisted?
-    assert_equal ["12", "34"], record.addends
+    assert_equal [ "12", "34" ], record.addends
   end
 
   test "from_string with invalid input returns nil" do
@@ -141,7 +141,7 @@ class AddizioneTest < ActiveSupport::TestCase
 
   # to_renderer
   test "to_renderer converts record to renderer" do
-    record = Addizione.create!(data: { addends: ["12", "34"] })
+    record = Addizione.create!(data: { addends: [ "12", "34" ] })
     renderer = record.to_renderer
     assert_instance_of Addizione::Renderer, renderer
   end

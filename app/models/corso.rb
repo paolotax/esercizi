@@ -15,7 +15,7 @@ class Corso < ApplicationRecord
   scope :accessible_by, ->(user) {
     return all if user.admin?
 
-    user_recipients = [user, user.account]
+    user_recipients = [ user, user.account ]
     corso_ids = Share.active.where(shareable_type: "Corso", recipient: user_recipients).select(:shareable_id)
 
     where(id: corso_ids)

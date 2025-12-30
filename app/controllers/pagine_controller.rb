@@ -4,7 +4,6 @@ class PagineController < ApplicationController
   before_action :authorize_pagina!
 
   def show
-
     # Set the page title for the header: Volume - Disciplina
     parts = []
     parts << @pagina.volume.nome if @pagina.volume

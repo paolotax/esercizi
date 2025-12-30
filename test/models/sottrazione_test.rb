@@ -9,7 +9,7 @@ class SottrazioneTest < ActiveSupport::TestCase
   end
 
   test "field_names are minuend and subtrahend" do
-    assert_equal [:minuend, :subtrahend], Sottrazione.field_names
+    assert_equal [ :minuend, :subtrahend ], Sottrazione.field_names
   end
 
   # parse valido

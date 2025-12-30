@@ -4,7 +4,7 @@ class Dashboard::QuestionsController < ApplicationController
   require_teacher
 
   before_action :set_esercizio
-  before_action :set_question, only: [:edit, :update, :destroy]
+  before_action :set_question, only: [ :edit, :update, :destroy ]
 
   def create
     @question = @esercizio.questions.build(question_params)
@@ -85,8 +85,13 @@ class Dashboard::QuestionsController < ApplicationController
     params[:data]&.to_unsafe_h || {}
   end
 
+  ALLOWED_QUESTIONABLE_TYPES = %w[Addizione Sottrazione Moltiplicazione Divisione Abaco].freeze
+
   def build_questionable
     type = params[:questionable_type] || params.dig(:question, :questionable_type)
+    unless ALLOWED_QUESTIONABLE_TYPES.include?(type)
+      raise ArgumentError, "Invalid questionable type: #{type}"
+    end
     data = params[:data]&.to_unsafe_h || {}
     type.constantize.create!(data: data)
   end

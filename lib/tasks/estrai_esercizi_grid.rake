@@ -2,7 +2,7 @@
 
 namespace :esercizi do
   desc "Estrae esercizi con helper grid da pagine ERB e crea record Esercizio con Question"
-  task :estrai_grid, [:prefix, :dry_run] => :environment do |_t, args|
+  task :estrai_grid, [ :prefix, :dry_run ] => :environment do |_t, args|
     prefix = args[:prefix] || "nvi4_mat"
     dry_run = args[:dry_run] == "dry_run"
 
@@ -116,7 +116,7 @@ class EserciziGridExtractor
       badge_positions << Regexp.last_match.begin(0)
     end
 
-    return [content] if badge_positions.empty?
+    return [ content ] if badge_positions.empty?
 
     # Dividi il contenuto in blocchi basati sulle posizioni dei badge
     blocks = []
@@ -209,7 +209,7 @@ class EserciziGridExtractor
     title = data[:title]
     description = "Esercizio #{data[:numero]} - #{data[:page_slug]}"
     category = data[:category]
-    tags = [data[:page_slug], "grid", category]
+    tags = [ data[:page_slug], "grid", category ]
     operations = data[:operations]
 
     if @dry_run

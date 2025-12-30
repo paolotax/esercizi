@@ -13,5 +13,5 @@ class Moltiplicazione < ApplicationRecord
                  :show_toolbar, :show_partial_products, :show_carry, :show_labels
 
   # DSL Parseable
-  parseable operator: /[x*×]/i, fields: [:multiplicand, :multiplier]
+  parseable operator: /[x*×]/i, fields: [ :multiplicand, :multiplier ]
 end

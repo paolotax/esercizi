@@ -12,7 +12,7 @@ class MoltiplicazioneTest < ActiveSupport::TestCase
   end
 
   test "field_names are multiplicand and multiplier" do
-    assert_equal [:multiplicand, :multiplier], Moltiplicazione.field_names
+    assert_equal [ :multiplicand, :multiplier ], Moltiplicazione.field_names
   end
 
   # parse con x

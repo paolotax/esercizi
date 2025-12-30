@@ -17,7 +17,7 @@ class Sottrazione < ApplicationRecord
   after_save :reset_calculations!
 
   # DSL Parseable
-  parseable operator: /[-]/, fields: [:minuend, :subtrahend]
+  parseable operator: /[-]/, fields: [ :minuend, :subtrahend ]
 
   # Override: risultato non può essere negativo
   def self.valid_operation?(parsed)

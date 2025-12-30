@@ -16,7 +16,7 @@ class Volume < ApplicationRecord
   scope :accessible_by, ->(user) {
     return all if user.admin?
 
-    user_recipients = [user, user.account]
+    user_recipients = [ user, user.account ]
 
     volume_ids = Share.active.where(shareable_type: "Volume", recipient: user_recipients).select(:shareable_id)
     corso_ids = Share.active.where(shareable_type: "Corso", recipient: user_recipients).select(:shareable_id)

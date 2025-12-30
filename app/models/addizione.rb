@@ -17,7 +17,7 @@ class Addizione < ApplicationRecord
   after_save :reset_calculations!
 
   # DSL Parseable
-  parseable operator: /[+]/, fields: [:addends]
+  parseable operator: /[+]/, fields: [ :addends ]
 
   # Override: Addizione supporta N addendi
   def self.parse_result(parts)

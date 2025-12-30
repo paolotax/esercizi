@@ -13,7 +13,7 @@ module User::Admin
     def admin_emails
       # In test environment, include test admin email
       emails = Rails.application.credentials.admin_emails || []
-      emails += ["admin@example.com"] if Rails.env.test?
+      emails += [ "admin@example.com" ] if Rails.env.test?
       emails
     end
   end

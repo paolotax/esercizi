@@ -34,19 +34,19 @@ Rails.application.routes.draw do
 
   # Strumenti (public tools) - RESTful resources
   namespace :strumenti do
-    resource :addizioni, only: [:show, :create], controller: "addizioni" do
+    resource :addizioni, only: [ :show, :create ], controller: "addizioni" do
       get :preview, on: :collection
     end
-    resource :sottrazioni, only: [:show, :create], controller: "sottrazioni" do
+    resource :sottrazioni, only: [ :show, :create ], controller: "sottrazioni" do
       get :preview, on: :collection
     end
-    resource :moltiplicazioni, only: [:show, :create], controller: "moltiplicazioni" do
+    resource :moltiplicazioni, only: [ :show, :create ], controller: "moltiplicazioni" do
       get :preview, on: :collection
     end
-    resource :divisioni, only: [:show, :create], controller: "divisioni" do
+    resource :divisioni, only: [ :show, :create ], controller: "divisioni" do
       get :preview, on: :collection
     end
-    resource :abaco, only: [:show, :create], controller: "abaco" do
+    resource :abaco, only: [ :show, :create ], controller: "abaco" do
       get :preview, on: :collection
       get :examples, on: :collection
     end
@@ -77,17 +77,17 @@ Rails.application.routes.draw do
   namespace :dashboard do
     resources :esercizi do
       # Risorse RESTful (pattern Fizzy)
-      resource :publish, only: [:create, :destroy], controller: "esercizi/publishes"
-      resource :preview, only: [:show], controller: "esercizi/previews"
-      resource :bulk_questions, only: [:create], controller: "esercizi/bulk_questions"
+      resource :publish, only: [ :create, :destroy ], controller: "esercizi/publishes"
+      resource :preview, only: [ :show ], controller: "esercizi/previews"
+      resource :bulk_questions, only: [ :create ], controller: "esercizi/bulk_questions"
 
       member do
         post :duplicate
       end
-      resources :questions, only: [:create, :edit, :update, :destroy] do
+      resources :questions, only: [ :create, :edit, :update, :destroy ] do
         post :reorder, on: :collection
       end
-      resources :shares, only: [:index, :create, :destroy]
+      resources :shares, only: [ :index, :create, :destroy ]
     end
     resources :esercizio_templates
 
@@ -102,7 +102,7 @@ Rails.application.routes.draw do
 
   # Admin management (admin only)
   namespace :admin do
-    resources :shares, only: [:index, :new, :create, :destroy]
+    resources :shares, only: [ :index, :new, :create, :destroy ]
   end
 
   # Account management (owner only)

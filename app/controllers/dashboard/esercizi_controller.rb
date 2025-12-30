@@ -3,7 +3,7 @@
 class Dashboard::EserciziController < ApplicationController
   require_teacher
 
-  before_action :set_esercizio, only: [:show, :edit, :update, :destroy, :duplicate]
+  before_action :set_esercizio, only: [ :show, :edit, :update, :destroy, :duplicate ]
 
   def index
     @esercizi = current_scope.includes(:questions, :esercizio_attempts)
@@ -13,11 +13,11 @@ class Dashboard::EserciziController < ApplicationController
     @esercizi = @esercizi.with_tag(params[:tag]) if params[:tag].present?
 
     @esercizi = case params[:status]
-                when "published" then @esercizi.published
-                when "draft" then @esercizi.drafts
-                when "shared" then @esercizi.where(status: :shared)
-                else @esercizi
-                end
+    when "published" then @esercizi.published
+    when "draft" then @esercizi.drafts
+    when "shared" then @esercizi.where(status: :shared)
+    else @esercizi
+    end
 
     @esercizi = @esercizi.order(created_at: :desc)
     @pagy, @esercizi = pagy(@esercizi, items: 12)

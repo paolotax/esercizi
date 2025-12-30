@@ -309,7 +309,7 @@ module OperazioniHelper
       # Parse stringa tipo "12 + 34 + 56"
       addends_or_string.split(/\s*\+\s*/).map(&:strip).reject(&:blank?)
     else
-      [addends_or_string]
+      [ addends_or_string ]
     end
   end
 end

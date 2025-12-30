@@ -4,7 +4,7 @@ class Dashboard::SharesController < ApplicationController
   require_teacher
 
   before_action :set_esercizio
-  before_action :set_share, only: [:destroy]
+  before_action :set_share, only: [ :destroy ]
 
   def index
     @shares = @esercizio.shares.includes(:granted_by)

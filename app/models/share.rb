@@ -10,7 +10,7 @@ class Share < ApplicationRecord
 
   validates :recipient_type, :recipient_id, presence: true
   validates :shareable_id, uniqueness: {
-    scope: [:shareable_type, :recipient_type, :recipient_id],
+    scope: [ :shareable_type, :recipient_type, :recipient_id ],
     message: "già condiviso con questo destinatario"
   }
 

@@ -8,7 +8,7 @@ module Publishable
 
     scope :drafts, -> { where(status: :draft) }
     scope :published, -> { where(status: :published) }
-    scope :shared_or_published, -> { where(status: [:shared, :published]) }
+    scope :shared_or_published, -> { where(status: [ :shared, :published ]) }
 
     scope :visible_to, ->(user) {
       return published if user.nil?
@@ -48,8 +48,8 @@ module Publishable
   def editable_by?(user)
     return false if user.nil?
     return true if creator_id == user.id
-    return true if respond_to?(:shares) && shares.exists?(recipient_type: "User", recipient_id: user.id, permission: [:edit, :admin])
-    return true if respond_to?(:shares) && user.account_id && shares.exists?(recipient_type: "Account", recipient_id: user.account_id, permission: [:edit, :admin])
+    return true if respond_to?(:shares) && shares.exists?(recipient_type: "User", recipient_id: user.id, permission: [ :edit, :admin ])
+    return true if respond_to?(:shares) && user.account_id && shares.exists?(recipient_type: "Account", recipient_id: user.account_id, permission: [ :edit, :admin ])
     false
   end
 end

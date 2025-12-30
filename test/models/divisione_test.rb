@@ -11,7 +11,7 @@ class DivisioneTest < ActiveSupport::TestCase
   end
 
   test "field_names are dividend and divisor" do
-    assert_equal [:dividend, :divisor], Divisione.field_names
+    assert_equal [ :dividend, :divisor ], Divisione.field_names
   end
 
   # parse con :
