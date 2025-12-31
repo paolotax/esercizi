@@ -137,7 +137,7 @@
             <% elsif cell[:editable] %>
               <%# Input editabile %>
               <%
-                is_carry = cell[:target] == "carry"
+                is_carry = cell[:target] == "carry" || cell[:is_carry]
                 input_classes = is_carry ? "quaderno-input quaderno-input-carry" : "quaderno-input"
               %>
               <input type="text"
@@ -159,6 +159,7 @@
                         data-<%= controller_name %>-target="commaSpot"
                         data-correct-position="<%= cell[:comma_spot][:correct] %>"
                         data-position="<%= cell[:comma_spot][:position] %>"
+                        data-comma-group="<%= cell[:comma_spot][:group] || 'result' %>"
                         data-action="click-><%= controller_name %>#toggleComma"
                         title="Clicca per inserire la virgola"></button>
               <% end %>

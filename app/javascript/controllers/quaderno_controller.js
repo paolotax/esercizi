@@ -271,6 +271,7 @@ export default class extends Controller {
 
   toggleComma(event) {
     const spot = event.currentTarget
+    const group = spot.dataset.commaGroup || 'result'
 
     // Se questo spot e' gia' attivo, disattivalo
     if (spot.classList.contains('active')) {
@@ -278,10 +279,12 @@ export default class extends Controller {
       return
     }
 
-    // Disattiva tutti gli altri spot (solo una virgola alla volta)
+    // Disattiva solo gli spot dello stesso gruppo (ogni riga ha la sua virgola)
     if (this.hasCommaSpotTarget) {
       this.commaSpotTargets.forEach(s => {
-        s.classList.remove('active', 'correct', 'incorrect', 'missing')
+        if ((s.dataset.commaGroup || 'result') === group) {
+          s.classList.remove('active', 'correct', 'incorrect', 'missing')
+        }
       })
     }
 
@@ -355,6 +358,16 @@ export default class extends Controller {
         const correctAnswer = input.getAttribute('data-correct-answer')
         if (correctAnswer) {
           input.value = correctAnswer
+        }
+      })
+    }
+
+    // Mostra le virgole degli operandi (gruppi diversi da 'result')
+    if (this.hasCommaSpotTarget) {
+      this.commaSpotTargets.forEach(spot => {
+        const group = spot.dataset.commaGroup || 'result'
+        if (group !== 'result' && spot.dataset.correctPosition === 'true') {
+          spot.classList.add('active')
         }
       })
     }
@@ -482,38 +495,50 @@ export default class extends Controller {
       return true
     }
 
-    const correctSpot = this.commaSpotTargets.find(spot => spot.dataset.correctPosition === 'true')
-
-    if (!correctSpot) {
-      // Nessuna virgola richiesta
-      const activeSpot = this.commaSpotTargets.find(spot => spot.classList.contains('active'))
-      if (activeSpot) {
-        activeSpot.classList.add('incorrect')
-        return false
-      }
-      return true
-    }
-
-    // C'e' una posizione corretta
-    const activeSpot = this.commaSpotTargets.find(spot => spot.classList.contains('active'))
-
-    // Pulisci stati precedenti
+    // Raggruppa gli spot per gruppo
+    const groups = {}
     this.commaSpotTargets.forEach(spot => {
-      spot.classList.remove('correct', 'incorrect', 'missing')
+      const group = spot.dataset.commaGroup || 'result'
+      if (!groups[group]) {
+        groups[group] = []
+      }
+      groups[group].push(spot)
     })
 
-    if (!activeSpot) {
-      correctSpot.classList.add('missing')
-      return false
+    let allCorrect = true
+
+    // Verifica ogni gruppo separatamente
+    for (const [group, spots] of Object.entries(groups)) {
+      const correctSpot = spots.find(spot => spot.dataset.correctPosition === 'true')
+      const activeSpot = spots.find(spot => spot.classList.contains('active'))
+
+      // Pulisci stati precedenti per questo gruppo
+      spots.forEach(spot => {
+        spot.classList.remove('correct', 'incorrect', 'missing')
+      })
+
+      if (!correctSpot) {
+        // Nessuna virgola richiesta per questo gruppo
+        if (activeSpot) {
+          activeSpot.classList.add('incorrect')
+          allCorrect = false
+        }
+        continue
+      }
+
+      // C'e' una posizione corretta per questo gruppo
+      if (!activeSpot) {
+        correctSpot.classList.add('missing')
+        allCorrect = false
+      } else if (activeSpot === correctSpot) {
+        activeSpot.classList.add('correct')
+      } else {
+        activeSpot.classList.add('incorrect')
+        correctSpot.classList.add('missing')
+        allCorrect = false
+      }
     }
 
-    if (activeSpot === correctSpot) {
-      activeSpot.classList.add('correct')
-      return true
-    } else {
-      activeSpot.classList.add('incorrect')
-      correctSpot.classList.add('missing')
-      return false
-    }
+    return allCorrect
   }
 }

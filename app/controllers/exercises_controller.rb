@@ -57,32 +57,32 @@ class ExercisesController < ApplicationController
     when "addizione"
       numbers = parse_addends(operation)
       return render_error("Operazione non valida") unless numbers&.length >= 2
-      addizione = Addizione::Renderer.new(addends: numbers, show_toolbar: true, show_addends: true)
+      addizione = Addizione.new(addends: numbers, show_toolbar: true, show_addends: true)
       grid = addizione.to_grid_matrix
-      render partial: "strumenti/addizioni/addizione_grid", locals: { grid: grid }
+      render partial: "strumenti/quaderno_grid", locals: { grid: grid }
 
     when "sottrazione"
       numbers = parse_operation_strings(operation, "-")
       return render_error("Operazione non valida") unless numbers&.length == 2
-      sottrazione = Sottrazione::Renderer.new(minuend: numbers[0], subtrahend: numbers[1], show_toolbar: true, show_minuend_subtrahend: true)
+      sottrazione = Sottrazione.new(minuend: numbers[0], subtrahend: numbers[1], show_toolbar: true, show_minuend_subtrahend: true)
       grid = sottrazione.to_grid_matrix
-      render partial: "strumenti/sottrazioni/sottrazione_grid", locals: { grid: grid }
+      render partial: "strumenti/quaderno_grid", locals: { grid: grid }
 
     when "moltiplicazione"
       numbers = parse_operation_strings(operation, /[x×*]/i)
       return render_error("Operazione non valida") unless numbers&.length == 2
       show_carry = params[:show_partial_carries] == "true"
-      moltiplicazione = Moltiplicazione::Renderer.new(multiplicand: numbers[0], multiplier: numbers[1], show_toolbar: true, show_carry: show_carry)
+      moltiplicazione = Moltiplicazione.new(multiplicand: numbers[0], multiplier: numbers[1], show_toolbar: true, show_carry: show_carry)
       grid = moltiplicazione.to_grid_matrix
-      render partial: "strumenti/moltiplicazioni/moltiplicazione_grid", locals: { grid: grid }
+      render partial: "strumenti/quaderno_grid", locals: { grid: grid }
 
     when "divisione"
       numbers = parse_operation_strings(operation, /[÷:\/]/)
       return render_error("Operazione non valida") unless numbers&.length == 2
       extra_zeros = (params[:extra_zeros] || 1).to_i  # Default 1 zero extra per continuare la divisione
-      divisione = Divisione::Renderer.new(dividend: numbers[0], divisor: numbers[1], show_toolbar: true, extra_zeros: extra_zeros)
+      divisione = Divisione.new(dividend: numbers[0], divisor: numbers[1], show_toolbar: true, extra_zeros: extra_zeros)
       grid = divisione.to_grid_matrix
-      render partial: "strumenti/divisioni/divisione_grid", locals: { grid: grid }
+      render partial: "strumenti/quaderno_grid", locals: { grid: grid }
 
     else
       render_error("Tipo di operazione non supportato")
@@ -139,19 +139,19 @@ class ExercisesController < ApplicationController
     when "addizione"
       numbers = parse_addends(operation)
       return nil unless numbers&.length >= 2
-      renderer = Addizione::Renderer.new(
+      renderer = Addizione.new(
         addends: numbers,
         show_toolbar: show_toolbar,
         show_addends: show_operands,
         show_carry: show_carry,
         grid_style: grid_style
       )
-      { type: "addizione", grid: renderer.to_grid_matrix, partial: "strumenti/addizioni/addizione_grid" }
+      { type: "addizione", grid: renderer.to_grid_matrix, partial: "strumenti/quaderno_grid" }
 
     when "sottrazione"
       numbers = parse_operation_strings(operation, "-")
       return nil unless numbers&.length == 2
-      renderer = Sottrazione::Renderer.new(
+      renderer = Sottrazione.new(
         minuend: numbers[0],
         subtrahend: numbers[1],
         show_toolbar: show_toolbar,
@@ -159,12 +159,12 @@ class ExercisesController < ApplicationController
         show_borrow: show_borrow,
         grid_style: grid_style
       )
-      { type: "sottrazione", grid: renderer.to_grid_matrix, partial: "strumenti/sottrazioni/sottrazione_grid" }
+      { type: "sottrazione", grid: renderer.to_grid_matrix, partial: "strumenti/quaderno_grid" }
 
     when "moltiplicazione"
       numbers = parse_operation_strings(operation, /[x×*]/i)
       return nil unless numbers&.length == 2
-      renderer = Moltiplicazione::Renderer.new(
+      renderer = Moltiplicazione.new(
         multiplicand: numbers[0],
         multiplier: numbers[1],
         show_toolbar: show_toolbar,
@@ -172,19 +172,19 @@ class ExercisesController < ApplicationController
         show_carry: show_carry,
         grid_style: grid_style
       )
-      { type: "moltiplicazione", grid: renderer.to_grid_matrix, partial: "strumenti/moltiplicazioni/moltiplicazione_grid" }
+      { type: "moltiplicazione", grid: renderer.to_grid_matrix, partial: "strumenti/quaderno_grid" }
 
     when "divisione"
       numbers = parse_operation_strings(operation, /[÷:\/]/)
       return nil unless numbers&.length == 2
-      renderer = Divisione::Renderer.new(
+      renderer = Divisione.new(
         dividend: numbers[0],
         divisor: numbers[1],
         show_toolbar: show_toolbar,
         show_dividend_divisor: show_operands,
         grid_style: grid_style
       )
-      { type: "divisione", grid: renderer.to_grid_matrix, partial: "strumenti/divisioni/divisione_grid" }
+      { type: "divisione", grid: renderer.to_grid_matrix, partial: "strumenti/quaderno_grid" }
 
     else
       nil

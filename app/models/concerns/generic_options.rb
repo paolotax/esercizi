@@ -19,23 +19,27 @@ module GenericOptions
     "Addizione" => {
       show_operands: :show_addends,
       show_carry: :show_carry,
-      layout: :grid_style
+      layout: :grid_style_value,
+      grid_style: :grid_style_value
     },
     "Sottrazione" => {
       show_operands: :show_minuend_subtrahend,
       show_carry: :show_borrow,
-      layout: :grid_style
+      layout: :grid_style_value,
+      grid_style: :grid_style_value
     },
     "Moltiplicazione" => {
       show_operands: :show_multiplicand_multiplier,
       show_carry: :show_carry,
       show_steps: :show_partial_products,
-      layout: :grid_style
+      layout: :grid_style_value,
+      grid_style: :grid_style_value
     },
     "Divisione" => {
       show_operands: :show_dividend_divisor,
       show_steps: :show_steps,
-      layout: :grid_style
+      layout: :grid_style_value,
+      grid_style: :grid_style_value
     }
   }.freeze
 
