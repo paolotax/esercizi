@@ -1,0 +1,24 @@
+<nav class="nav"
+    data-controller="dialog"
+    data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside">
+
+  <%# Trigger Button %>
+  <button class="nav__trigger"
+          data-controller="hotkey"
+          data-action="click->dialog#toggle keydown.j@document->hotkey#click"
+          type="button">
+    <%= image_tag "giunti_scuola.svg", alt: "Esercizi", class: "h-6 w-auto" %>
+    <span class="font-bold text-gray-800 dark:text-white">Esercizi</span>
+    <kbd class="kbd hide-on-touch">J</kbd>
+  </button>
+
+  <%# Dialog Menu %>
+  <dialog class="nav__menu popup popup--animated"
+          data-controller="filter navigable-list nav-section-expander"
+          data-dialog-target="dialog"
+          data-action="keydown->navigable-list#navigate filter:changed->navigable-list#reset filter:changed->nav-section-expander#showWhileFiltering"
+          data-navigable-list-focus-on-selection-value="false"
+          data-navigable-list-actionable-items-value="true">
+    <%= render "shared/nav_menu/jump" %>
+  </dialog>
+</nav>

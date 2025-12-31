@@ -1,0 +1,214 @@
+/* Popup styles for nav menu dropdown */
+
+.popup {
+  --panel-border-radius: 0.5em;
+  --panel-padding: 1rem;
+  --popup-icon-size: 24px;
+  --popup-item-padding-inline: 0.4rem;
+  --popup-display: flex;
+
+  /* Hidden by default - browser handles dialog[open] */
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.5rem;
+  max-block-size: 70dvh;
+  max-inline-size: min(55ch, calc(100vw - var(--panel-padding)));
+  min-inline-size: min(25ch, calc(100vw - var(--panel-padding)));
+  overflow: auto;
+  z-index: 9999;
+  background: white;
+  border-radius: var(--panel-border-radius);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+}
+
+.dark .popup {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+.popup[open] {
+  display: var(--popup-display);
+}
+
+.popup.orient-left {
+  inset-inline: auto 0;
+  transform: translateX(0);
+}
+
+.popup.orient-right {
+  inset-inline: 0 auto;
+  transform: translateX(0);
+}
+
+.popup form {
+  display: contents;
+}
+
+.popup__footer {
+  border-block-start: 1px solid #e5e7eb;
+  margin-block-start: var(--popup-item-padding-inline);
+  padding: var(--popup-item-padding-inline) var(--popup-item-padding-inline) 0;
+  text-align: center;
+}
+
+.dark .popup__footer {
+  border-color: #374151;
+}
+
+.popup__title {
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Hide lists when all the items within are hidden */
+.popup__section:not(:has(.popup__list)),
+.popup__section:not(:has(.popup__list > *)),
+.popup__section:has(.popup__item[hidden]):not(:has(.popup__item:not([hidden]))) {
+  display: none;
+}
+
+.popup__section-title {
+  background: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  inset-block-start: 0;
+  list-style: none;
+  padding: 0.75ch 0.5rem;
+  position: sticky;
+  text-transform: uppercase;
+  z-index: 1;
+  color: #6b7280;
+}
+
+.dark .popup__section-title {
+  background: #1f2937;
+  color: #9ca3af;
+}
+
+.popup__section-title:is(summary) {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5ch;
+}
+
+.popup__section-title::-webkit-details-marker {
+  display: none;
+}
+
+.popup__section-title .icon--caret-down {
+  font-size: 1ch;
+  margin-inline-start: -0.5ch;
+  transition: rotate 150ms ease-out;
+}
+
+.popup__section:not([open]) .popup__section-title .icon--caret-down {
+  rotate: -90deg;
+}
+
+.popup__list {
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  list-style: none;
+  margin: 0;
+  max-inline-size: 100%;
+  padding: 0;
+  row-gap: 1px;
+}
+
+details .popup__list {
+  margin-inline-start: 0.75ch;
+}
+
+.popup__item {
+  align-items: center;
+  background: transparent;
+  border-radius: 0.3em;
+  display: flex;
+  inline-size: 100%;
+  max-inline-size: 100%;
+}
+
+@media (any-hover: hover) {
+  .popup__item:hover {
+    background: #f3f4f6;
+  }
+
+  .dark .popup__item:hover {
+    background: #374151;
+  }
+}
+
+.popup__item[aria-selected] {
+  background-color: #dbeafe;
+}
+
+.dark .popup__item[aria-selected] {
+  background-color: #1e3a5f;
+}
+
+@media (any-hover: hover) {
+  .popup__item[aria-selected]:hover {
+    background-color: #dbeafe;
+  }
+
+  .dark .popup__item[aria-selected]:hover {
+    background-color: #1e3a5f;
+  }
+}
+
+/* The actionable thing with padding within popup__item */
+.popup__btn {
+  border-radius: 0.3em;
+  border: none;
+  background: transparent;
+  flex: 1 1 auto;
+  font-weight: 500;
+  justify-content: start;
+  inline-size: 100%;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  padding: 0.5rem var(--popup-item-padding-inline);
+  text-align: start;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.popup__icon {
+  --icon-size: 1em;
+  inline-size: var(--popup-icon-size);
+  margin-inline-start: var(--popup-item-padding-inline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Animated popup */
+.popup--animated {
+  opacity: 0;
+  transform: scale(0.95);
+  transform-origin: top left;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.popup--animated[open] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@starting-style {
+  .popup--animated[open] {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}

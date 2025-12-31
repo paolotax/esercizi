@@ -1,0 +1,18 @@
+<%= form_with url: search_path, method: :get, class: "bar__form",
+      data: { bar_target: "form", turbo_frame: "bar_content" } do |form| %>
+  <%= form.label :q, "Cerca in Esercizi", class: "font-bold whitespace-nowrap" %>
+  <%= text_field_tag :q, params[:q],
+        class: "bar__search-input",
+        type: "search",
+        placeholder: "Trova pagine, strumenti...",
+        autocomplete: "off",
+        autofocus: true,
+        data: {
+          bar_target: "searchInput",
+          action: "keydown.enter->bar#showModalAndSubmit:prevent keydown.esc->bar#reset"
+        } %>
+  <button type="button" class="bar__reset" data-action="bar#clearInput">
+    <span class="sr-only">Chiudi ricerca</span>
+    &times;
+  </button>
+<% end %>

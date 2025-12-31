@@ -1,0 +1,27 @@
+<div class="bar"
+     data-controller="bar"
+     data-bar-dialog-outlet="#bar-modal"
+     data-bar-search-url-value="<%= search_path %>">
+
+  <div class="bar__placeholder" data-bar-target="buttonsContainer">
+    <button class="bar__search-btn"
+            data-controller="hotkey"
+            data-action="bar#search keydown.k@document->hotkey#click"
+            type="button">
+      <span>Cerca</span>
+      <kbd class="hide-on-touch">K</kbd>
+    </button>
+  </div>
+
+  <div class="bar__input" data-bar-target="search" hidden>
+    <%= render "shared/bar/search_form" %>
+  </div>
+
+  <dialog id="bar-modal" class="bar__modal"
+          data-controller="dialog"
+          data-dialog-target="dialog"
+          data-dialog-modal-value="true"
+          data-action="keydown.esc@document->bar#reset:stop">
+    <%= turbo_frame_tag "bar_content", data: { bar_target: "turboFrame" } %>
+  </dialog>
+</div>

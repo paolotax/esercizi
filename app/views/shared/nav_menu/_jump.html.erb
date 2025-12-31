@@ -1,0 +1,29 @@
+<div class="nav__header">
+  <%= jump_field_tag %>
+</div>
+
+<div class="nav__scroll-container">
+  <%# Hotkeys %>
+  <div class="nav__hotkeys">
+    <%= nav_hotkey_link "Home", root_path, 1, "home" %>
+    <%= nav_hotkey_link "Strumenti", strumenti_abaco_path, 2, "tools" %>
+    <% if Current.user&.teacher? %>
+      <%= nav_hotkey_link "Dashboard", dashboard_esercizi_path, 3, "dashboard" %>
+    <% end %>
+  </div>
+
+  <%# Sezioni %>
+  <%= render "shared/nav_menu/libri" %>
+  <%= render "shared/nav_menu/strumenti" %>
+  <% if Current.user %>
+    <%= render "shared/nav_menu/settings" %>
+  <% end %>
+
+  <div class="nav__blank-slate">
+    Nessun risultato
+  </div>
+</div>
+
+<footer class="nav__footer">
+  <strong>Esercizi</strong> - Giunti Scuola
+</footer>

@@ -2,7 +2,7 @@
 <html>
   <%= render "layouts/shared/head" %>
 
-  <body class="print text-gray-800 dark:text-white bg-playful dark:bg-playful-dark h-screen flex flex-col transition-colors duration-300" data-controller="sidebar">
+  <body class="print text-gray-800 dark:text-white bg-playful dark:bg-playful-dark min-h-screen flex flex-col transition-colors duration-300">
 
     <div id="flash"></div>
 
@@ -10,16 +10,21 @@
 
     <%= render "shared/header" %>
 
-    <div class="flex flex-1 overflow-hidden relative">
-      <!-- Sidebar -->
-      <%= render "shared/sidebar" %>
+    <!-- Main Content (no sidebar) -->
+    <main class="flex-1 overflow-y-auto pb-16">
+      <%= turbo_frame_tag "main-content", class: "block turbo-frame-fade", data: { turbo_action: "advance" } do %>
+        <%= yield %>
+      <% end %>
+    </main>
 
-      <!-- Main Content -->
-      <main class="flex-1 overflow-y-auto w-full md:w-auto">
-        <%= turbo_frame_tag "main-content", class: "block turbo-frame-fade", data: { turbo_action: "advance" } do %>
-          <%= yield %>
-        <% end %>
-      </main>
+    <!-- Bottom Bar (stile Fizzy) -->
+    <footer class="print-hidden">
+      <%= render "shared/bar" %>
+    </footer>
+
+    <!-- Sidebar nascosta (mantenuta per compatibilita) -->
+    <div class="hidden" data-controller="sidebar">
+      <%= render "shared/sidebar" %>
     </div>
   </body>
 </html>
