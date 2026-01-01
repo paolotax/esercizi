@@ -63,6 +63,7 @@
         is_last_row = (row_idx == rows.length - 1)
         next_row = rows[row_idx + 1] if row_idx < rows.length - 1
         next_is_toolbar = next_row && next_row[:type] == :toolbar
+        row_has_thick_border_bottom = row[:thick_border_bottom]
       %>
 
       <% if row[:type] == :empty %>
@@ -116,8 +117,9 @@
               # Calcola ultima colonna visibile in base al tipo
               is_last_visible_col = is_divisione ? (col == columns - 2) : (col == columns - 3)
               border_classes += " border-r border-gray-300 dark:border-gray-600" unless is_last_visible_col
-              border_classes += " border-b-2 border-gray-300 dark:border-gray-600" if is_labels_row
-              border_classes += " border-t-4 border-gray-500 dark:border-gray-400" if is_result_row
+              border_classes += " border-b-2 border-b-gray-300 dark:border-b-gray-600" if is_labels_row
+              border_classes += " border-b-4 border-b-gray-500 dark:border-b-gray-400" if row_has_thick_border_bottom && is_in_data_area
+              border_classes += " border-t-4 border-t-gray-500 dark:border-t-gray-400" if is_result_row
             else
               border_classes += " border-r border-gray-300 dark:border-gray-600" unless is_last_col
               border_classes += " border-b border-gray-300 dark:border-gray-600" unless is_last_row || next_is_toolbar
@@ -252,7 +254,7 @@
   <%# Toolbar per column style (fuori dal grid) %>
   <% if is_column_style && show_toolbar %>
     <div class="flex justify-center gap-4 mt-6 print:hidden">
-      <%= render "strumenti/quaderno_toolbar_buttons" %>
+      <%= render "strumenti/quaderno_toolbar_buttons", show_steps_button: show_steps_button %>
     </div>
   <% end %>
 

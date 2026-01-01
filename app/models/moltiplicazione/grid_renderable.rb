@@ -346,6 +346,7 @@ module Moltiplicazione::GridRenderable
   def build_multiplier_row(data_cols, total_cols, cell_size)
     cells = []
     digits = quaderno_multiplier_digits
+    has_partials = multiplier_length > 1
 
     cells << { type: :empty }
 
@@ -384,7 +385,7 @@ module Moltiplicazione::GridRenderable
     }
     cells << { type: :empty }
 
-    { type: :cells, height: cell_size, cells: cells }
+    { type: :cells, height: cell_size, cells: cells, thick_border_bottom: has_partials }
   end
 
   def build_partial_carry_row(partial, data_cols, total_cols, carry_height, p_idx)
