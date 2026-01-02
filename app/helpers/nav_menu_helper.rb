@@ -135,3 +135,33 @@ module NavMenuHelper
     tag.span(icons[name]&.html_safe || "", class: "popup__icon")
   end
 end
+
+# ============================================
+# Fizzy
+# ============================================
+
+def filter_place_menu_item(path, label, icon, new_window: false, current: false, turbo: true)
+  link_to_params = {}
+  link_to_params.merge!({ target: "_blank" }) if new_window
+  link_to_params.merge!({ data: { turbo: false } }) unless turbo
+
+  tag.li class: "popup__item", id: "filter-place-#{label.parameterize}", data: { filter_target: "item", navigable_list_target: "item" }, aria: { checked: current } do
+    concat icon_tag(icon, class: "popup__icon")
+    concat(link_to(path, link_to_params.merge(class: "popup__btn btn"), data: { turbo: turbo }) do
+      concat tag.span(label, class: "overflow-ellipsis")
+      concat icon_tag("check", class: "checked flex-item-justify-end", "aria-hidden": true)
+    end)
+  end
+end
+
+def my_menu_user_item(user)
+  my_menu_item("person", user) do
+    link_to(tag.span(user.name, class: "overflow-ellipsis"), user, class: "popup__btn btn")
+  end
+end
+
+def my_menu_item(item, record)
+  tag.li(class: "popup__item", data: { filter_target: "item", navigable_list_target: "item", id: "filter-#{item}-#{record.id}" }) do
+    icon_tag(item, class: "popup__icon") + yield
+  end
+end

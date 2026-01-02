@@ -1,5 +1,6 @@
 class Account < ApplicationRecord
-  has_many :join_codes, class_name: "Account::JoinCode", dependent: :destroy
+  has_one :join_code
+
   has_many :users, dependent: :destroy
   has_many :corsi, dependent: :destroy
   has_many :volumi, dependent: :destroy
