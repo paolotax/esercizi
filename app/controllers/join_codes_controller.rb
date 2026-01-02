@@ -1,5 +1,4 @@
 class JoinCodesController < ApplicationController
-  disallow_account_scope
   allow_unauthenticated_access
   rate_limit to: 10, within: 3.minutes, only: :create, with: -> { head :too_many_requests }
 
@@ -20,13 +19,15 @@ class JoinCodesController < ApplicationController
 
     user = User.active.find_by!(account: @join_code.account, identity: identity)
 
-    if identity == Current.identity
+    if identity == Current.identity && user.verified?
       redirect_to root_url(script_name: @join_code.account.slug)
+    elsif identity == Current.identity
+      redirect_to new_users_verification_url(script_name: @join_code.account.slug)
     else
       terminate_session if Current.identity
       redirect_to_session_magic_link(
         identity.send_magic_link,
-        return_to: root_url(script_name: @join_code.account.slug)
+        return_to: new_users_verification_url(script_name: @join_code.account.slug)
       )
     end
   rescue ActiveRecord::RecordInvalid => e
@@ -40,7 +41,7 @@ class JoinCodesController < ApplicationController
     end
 
     def set_join_code
-      @join_code = Account::JoinCode.find_by(code: params[:code])
+      @join_code = Account::JoinCode.find_by(code: params[:code], account: Current.account)
     end
 
     def ensure_join_code_is_valid

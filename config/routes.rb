@@ -1,17 +1,19 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root "volumi#index"
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  namespace :account do
+    resource :join_code
+    resource :settings
+  end
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  # Account management (owner only)
+  namespace :account do
+    resource :settings, only: [ :show, :update ]
+    resources :users, only: [ :index, :show, :edit, :update, :destroy ]
+    resources :join_codes, only: [ :index, :show, :update ]
+  end
 
-  # ============================================
-  # Auth routes (no account scope)
-  # ============================================
+
   resource :session, only: [ :new, :create, :destroy ] do
     scope module: :sessions do
       resource :magic_link, only: [ :show, :create ]
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
   end
 
   resource :signup, only: [ :new, :create ]
+
   get "join/:code", to: "join_codes#new", as: :join
   post "join/:code", to: "join_codes#create"
 
@@ -105,13 +108,27 @@ Rails.application.routes.draw do
     resources :shares, only: [ :index, :new, :create, :destroy ]
   end
 
-  # Account management (owner only)
-  namespace :account do
-    resource :settings, only: [ :show, :update ]
-    resources :users, only: [ :index, :show, :edit, :update, :destroy ]
-    resources :join_codes, only: [ :index, :show, :update ]
+  resources :users do
+    scope module: :users do
+      resource :avatar
+      resource :role
+      resource :events
+
+      resources :push_subscriptions
+
+      resources :email_addresses, param: :token do
+        resource :confirmation, module: :email_addresses
+      end
+    end
   end
 
-  # Defines the root path route ("/")
-  root "volumi#index"
+  namespace :users do
+    resources :verifications, only: [ :new, :create ]
+  end
+
+
+  # PWA routes
+  get "up", to: "rails/health#show", as: :rails_health_check
+  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  get "service-worker" => "pwa#service_worker"
 end
