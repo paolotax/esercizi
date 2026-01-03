@@ -1,70 +1,82 @@
-<% @page_title = "Add people" %>
+<% @page_title = "Invita persone" %>
 
-<% content_for :header do %>
-  <div class="header__actions header__actions--start">
-    <%= back_link_to "Account Settings", account_settings_path, "keydown.left@document->hotkey#click keydown.esc@document->hotkey#click" %>
-  </div>
-<% end %>
+<div class="min-h-screen flex items-start justify-center bg-cream dark:bg-gray-900 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-lg w-full space-y-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-gray-900/10 p-8 md:p-10 fade-in-up card-lift" style="view-transition-name: <%= dom_id(@join_code) %>">
+    <header class="text-center">
+      <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white"><%= @page_title %></h2>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Condividi il link qui sotto per invitare persone a questo account</p>
+    </header>
 
-<div class="panel panel--wide shadow center flex flex-column gap" style="view-transition-name: <%= dom_id(@join_code) %>">
-  <header>
-    <h2 class="txt-large margin-none font-weight-black"><%= @page_title %></h2>
-    <p class="txt-medium margin-none">Share the link below to invite people to this account</p>
-  </header>
+    <% url = join_url(code: @join_code.code, script_name: Current.account.slug) %>
+    <div class="flex items-center gap-2">
+      <input type="text"
+             class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+             value="<%= url %>"
+             readonly>
 
-  <% url = join_url(code: @join_code.code, script_name: Current.account.slug) %>
-  <div class="flex align-center gap-half">
-    <input type="text" class="input flex-item-grow" value="<%= url %>" readonly>
-
-    <% if Current.user.admin? %>
-      <%= button_to account_join_code_path, method: :delete, class: "btn btn--circle txt-small", data: {
-            turbo_confirm: "Are you sure you want to generate a new link? The previous code will stop working." } do %>
-        <%= icon_tag "refresh" %>
-        <span class="for-screen-reader">Generate a new code</span>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="center flex flex-wrap justify-center align-center gap">
-    <%= tag.button class: "btn btn--link", data: {
-          controller: "copy-to-clipboard", action: "copy-to-clipboard#copy",
-          copy_to_clipboard_success_class: "btn--success", copy_to_clipboard_content_value: url } do %>
-      <%= icon_tag "copy-paste" %>
-      <span class="txt-nowrap">Copy invite link</span>
-    <% end %>
-
-    <div data-controller="dialog" data-dialog-modal-value="true" class="flex-inline">
-      <%= tag.button class: "btn", data: { action: "dialog#open" } do %>
-        <%= icon_tag "qr-code" %>
-        <span>Get QR code</span>
-      <% end %>
-
-      <dialog class="dialog panel shadow" data-dialog-target="dialog">
-        <p class="margin-none-block-start"><strong>Scan this code with the camera on your mobile device</strong></p>
-
-        <%#= qr_code_image(url) %>
-
-        <form method="dialog" class="margin-block-start flex justify-center">
-          <button class="btn">
-            <span>Done</span>
-          </button>
-        </form>
-      </dialog>
-    </div>
-  </div>
-
-  <footer class="txt-small">
-    <hr class="separator--horizontal full-width margin-block" style="--border-color: var(--color-ink-lighter)">
-
-    <p class="margin-none <%= "txt-negative" if !@join_code.active? %>">
-      This code has been used <%= @join_code.usage_count %>/<%= @join_code.usage_limit %> times
-      (<%= @join_code.active? ? @join_code.usage_limit - @join_code.usage_count : "none" %> remaining)
-
-      <% if Current.user.admin? %>
-        <%= link_to edit_account_join_code_path, class: @join_code.active? ? "txt-link" : "txt-negative txt-underline" do %>
-          <span>Change limit</span>
+      <% if Current.user&.admin? %>
+        <%= button_to account_join_code_path, method: :delete,
+              class: "p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors",
+              data: { turbo_confirm: "Sei sicuro di voler generare un nuovo link? Il codice precedente smetterà di funzionare." } do %>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          <span class="sr-only">Genera nuovo codice</span>
         <% end %>
       <% end %>
-    </p>
-  </footer>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-3">
+      <%= tag.button class: "inline-flex items-center gap-2 px-4 py-2 bg-coral hover:bg-coral-dark text-white text-sm font-medium rounded-xl transition-colors cursor-pointer btn-press",
+            data: {
+              controller: "copy-to-clipboard",
+              action: "copy-to-clipboard#copy",
+              copy_to_clipboard_success_class: "bg-green-600",
+              copy_to_clipboard_content_value: url
+            } do %>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+        </svg>
+        <span class="whitespace-nowrap">Copia link</span>
+      <% end %>
+
+      <div data-controller="dialog" data-dialog-modal-value="true" class="inline-flex">
+        <%= tag.button class: "inline-flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 text-sm font-medium rounded-lg transition-colors cursor-pointer",
+              data: { action: "dialog#open" } do %>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+          </svg>
+          <span>QR Code</span>
+        <% end %>
+
+        <dialog class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" data-dialog-target="dialog">
+          <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-2xl p-6 max-w-sm w-full text-center">
+            <p class="font-semibold text-gray-900 dark:text-white mb-4">Scansiona questo codice con la fotocamera del tuo dispositivo</p>
+
+            <%#= qr_code_image(url) %>
+
+            <form method="dialog" class="mt-6">
+              <button class="px-6 py-2 bg-coral hover:bg-coral-dark text-white font-medium rounded-xl transition-colors btn-press">
+                <span>Chiudi</span>
+              </button>
+            </form>
+          </div>
+        </dialog>
+      </div>
+    </div>
+
+    <footer class="text-sm border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
+      <p class="text-center <%= @join_code.active? ? 'text-gray-600 dark:text-gray-400' : 'text-red-600 dark:text-red-400' %>">
+        Questo codice è stato usato <%= @join_code.usage_count %>/<%= @join_code.usage_limit %> volte
+        (<%= @join_code.active? ? "#{@join_code.usage_limit - @join_code.usage_count} rimanenti" : "nessuno" %>)
+
+        <% if Current.user&.admin? %>
+          <%= link_to edit_account_join_code_path,
+                class: "ml-2 #{@join_code.active? ? 'text-coral dark:text-coral hover:text-coral-dark' : 'text-red-600 dark:text-red-400 underline'}" do %>
+            <span>Modifica limite</span>
+          <% end %>
+        <% end %>
+      </p>
+    </footer>
+  </div>
 </div>

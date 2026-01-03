@@ -1,62 +1,61 @@
 <% @page_title = @user.name %>
-<% me_or_you = Current.user == @user ? "me" : @user&.name %>
 
-<div class="profile-layout">
-  <section class="panel shadow txt-align-center" style="--panel-size: 45ch;">
-    <div class="flex flex-column gap position-relative">
-      <% if Current.user == @user %>
-        <%= link_to edit_user_path(@user), class: "user-edit-link btn", data: { controller: "tooltip" } do %>
-          <%= icon_tag "pencil" %>
-          <span class="for-screen-reader">Edit profile</span>
-        <% end %>
+<div class="min-h-screen flex items-start justify-center bg-cream dark:bg-gray-900 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-gray-900/10 p-8 md:p-10 text-center relative fade-in-up card-lift">
+    <% if Current.user == @user %>
+      <%= link_to edit_user_path(@user),
+            class: "absolute top-4 right-4 p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors",
+            data: { controller: "tooltip" } do %>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+        </svg>
+        <span class="sr-only">Modifica profilo</span>
       <% end %>
+    <% end %>
 
-      <div class="avatar txt-xx-large center fill-white btn--circle hide-focus-ring">
-        <%= image_tag user_avatar_path(@user), alt: "Profile avatar for #{@user.name}" %>
+    <div class="flex flex-col items-center gap-4">
+      <div class="w-24 h-24 rounded-full bg-white dark:bg-gray-700 shadow-lg overflow-hidden ring-4 ring-coral/30 dark:ring-coral/20">
+        <%= image_tag user_avatar_path(@user), alt: "Avatar di #{@user.name}", class: "w-full h-full object-cover" %>
       </div>
 
-      <div class="flex flex-column gap-half margin-block-end">
-        <h1 class="txt-x-large margin-none"><%= @user.name %></h1>
-        <div class="txt-medium">
+      <div class="space-y-2">
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white"><%= @user.name %></h1>
+        <div class="text-sm text-gray-600 dark:text-gray-400">
           <% if !@user.active? %>
-            <%= @user.name %> is no longer on this account
+            <span class="inline-flex items-center gap-1.5 text-red-600 dark:text-red-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+              </svg>
+              <%= @user.name %> non è più in questo account
+            </span>
           <% elsif !@user.verified? %>
-            Unverified
-            <div class="txt-small txt-tinted">A sign-in code has been sent to this email address, but the user has not yet logged in to confirm their identity.</div>
+            <span class="inline-flex items-center gap-1.5 text-amber-600 dark:text-amber-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+              Non verificato
+            </span>
+            <p class="mt-2 text-xs text-gray-500 dark:text-gray-500">
+              Un codice di accesso è stato inviato a questo indirizzo email, ma l'utente non ha ancora effettuato l'accesso per confermare la propria identità.
+            </p>
           <% else %>
-            <%= mail_to @user.identity.email_address %>
+            <%= mail_to @user.identity.email_address, class: "text-coral dark:text-coral hover:underline" %>
           <% end %>
         </div>
       </div>
-
-      <% if @user.verified? %>
-        <div class="flex-inline center justify-center flex-wrap gap">
-          <%#= link_to "Which cards are assigned to #{me_or_you}?",
-                cards_path(assignee_ids: [ @user.id ], sorted_by: "newest"), class: "btn btn--link", data: { turbo_frame: "_top" } %>
-          <%#= link_to "Which cards were added by #{me_or_you}?",
-                cards_path(creator_ids: [ @user.id ], sorted_by: "newest"), class: "btn btn--link", data: { turbo_frame: "_top" } %>
-        </div>
-      <% end %>
-
-      <% if Current.user == @user %>
-        <hr class="separator--horizontal full-width flex-item-grow margin-block-start-double" style="--border-color: var(--color-ink-light);" aria-hidden="true">
-
-        <%= button_to session_url(script_name: nil), method: :delete, class: "btn txt-x-small center", data: { turbo: false } do %>
-          <span>Sign out of Fizzy on this device</span>
-        <% end %>
-      <% end %>
     </div>
-  </section>
 
-  <% if Current.user == @user %>
-    <section class="panel shadow" style="--panel-size: 45ch;">
-      <%#= render "users/theme" %>
-      <%#= render "users/transfer", user: @user %>
-      <%#= render "users/access_tokens" %>
-    </section>
-  <% end %>
+    <% if Current.user == @user %>
+      <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mt-6">
+        <%= button_to session_url(script_name: nil), method: :delete,
+              class: "inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors cursor-pointer",
+              data: { turbo: false } do %>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+          </svg>
+          <span>Esci da questo dispositivo</span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%# if @user.verified? %>
-  <%#= turbo_frame_tag "user_events", src: user_events_path(@user) %>
-<%# end %>

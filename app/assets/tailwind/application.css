@@ -13,6 +13,16 @@
   --animate-shake: shake 0.5s ease-in-out;
   --animate-bounce-soft: bounce-soft 0.3s ease-out;
   --animate-pop: pop 0.2s ease-out;
+  --animate-fade-in-up: fadeInUp 0.6s ease-out forwards;
+
+  /* Colori glassmorphism (Sessions style) */
+  --color-coral: #E07A5F;
+  --color-coral-dark: #C96A52;
+  --color-sage: #81B29A;
+  --color-navy: #3D405B;
+  --color-gold: #F2CC8F;
+  --color-cream: #FFF8F0;
+  --color-cream-dark: #F5EBE0;
 
   /* Colori esistenti */
   --color-sky-light: #C7EAFB;
@@ -62,6 +72,54 @@
   0% { transform: scale(0.95); opacity: 0.8; }
   100% { transform: scale(1); opacity: 1; }
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glassmorphism utility classes */
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.card-lift {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+}
+
+.btn-press {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.btn-press:active {
+  transform: scale(0.98);
+}
+
+.input-glow:focus {
+  box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.3);
+}
+
+.dark .input-glow:focus {
+  box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.2);
+}
+
+/* Animation delays for staggered effects */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
 
 /* Stili globali giocosi */
 html {

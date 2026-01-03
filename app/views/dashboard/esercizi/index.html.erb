@@ -1,17 +1,6 @@
-<%= content_for :head do %>
-  <style>
-    .card-hover:hover {
-      transform: translateY(-4px);
-    }
-    .card-hover {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-  </style>
-<% end %>
-
-<div class="min-h-screen bg-gradient-to-b from-orange-50/50 to-white dark:from-gray-900 dark:to-gray-800">
+<div class="min-h-screen bg-gradient-to-b from-cream to-white dark:from-gray-900 dark:to-gray-800">
   <!-- Header luminoso -->
-  <div class="relative overflow-hidden bg-gradient-to-br from-orange-100 via-rose-100 to-pink-100 dark:from-orange-900/30 dark:via-rose-900/30 dark:to-pink-900/30">
+  <div class="relative overflow-hidden bg-gradient-to-br from-coral/20 via-rose-100 to-gold/30 dark:from-coral/10 dark:via-rose-900/30 dark:to-gold/10 backdrop-blur-sm">
     <div class="absolute inset-0 opacity-30">
       <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -35,8 +24,8 @@
         </div>
 
         <%= link_to new_dashboard_esercizio_path,
-            class: "group inline-flex items-center gap-3 px-6 py-3 bg-white dark:bg-gray-800 text-orange-600 dark:text-orange-400 font-bold rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 border border-orange-200 dark:border-orange-800" do %>
-          <span class="flex items-center justify-center w-9 h-9 bg-orange-100 dark:bg-orange-900/50 rounded-xl group-hover:rotate-90 transition-transform duration-300">
+            class: "btn-press group inline-flex items-center gap-3 px-6 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl text-coral dark:text-coral font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-coral/30 dark:border-coral/20" do %>
+          <span class="flex items-center justify-center w-9 h-9 bg-coral/20 dark:bg-coral/30 rounded-xl group-hover:rotate-90 transition-transform duration-300">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
             </svg>
@@ -47,19 +36,19 @@
 
       <!-- Stats rapide -->
       <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl p-4 border border-orange-200/50 dark:border-gray-700">
+        <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl p-4 border border-coral/20 dark:border-gray-700">
           <div class="text-2xl font-display font-bold text-gray-800 dark:text-white"><%= @esercizi.total_count rescue @esercizi.count %></div>
           <div class="text-sm text-gray-500 dark:text-gray-400">Totale esercizi</div>
         </div>
-        <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl p-4 border border-orange-200/50 dark:border-gray-700">
+        <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl p-4 border border-coral/20 dark:border-gray-700">
           <div class="text-2xl font-display font-bold text-gray-800 dark:text-white"><%= @esercizi.select(&:published?).count rescue 0 %></div>
           <div class="text-sm text-gray-500 dark:text-gray-400">Pubblicati</div>
         </div>
-        <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl p-4 border border-orange-200/50 dark:border-gray-700">
+        <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl p-4 border border-coral/20 dark:border-gray-700">
           <div class="text-2xl font-display font-bold text-gray-800 dark:text-white"><%= @esercizi.sum { |e| e.questions.count rescue 0 } %></div>
           <div class="text-sm text-gray-500 dark:text-gray-400">Domande totali</div>
         </div>
-        <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl p-4 border border-orange-200/50 dark:border-gray-700">
+        <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl p-4 border border-coral/20 dark:border-gray-700">
           <div class="text-2xl font-display font-bold text-gray-800 dark:text-white"><%= @esercizi.sum { |e| e.views_count.to_i } %></div>
           <div class="text-sm text-gray-500 dark:text-gray-400">Visualizzazioni</div>
         </div>
@@ -74,7 +63,7 @@
         <div class="flex-1 min-w-[200px]">
           <%= text_field_tag :search, params[:search],
               placeholder: "Cerca esercizi...",
-              class: "w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-2 focus:ring-orange-300 focus:border-transparent transition text-gray-900 dark:text-gray-100" %>
+              class: "input-glow w-full px-4 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border-2 border-gray-200 dark:border-gray-600 rounded-2xl focus:outline-none focus:border-transparent transition text-gray-900 dark:text-gray-100" %>
         </div>
 
         <%= select_tag :category,
@@ -85,7 +74,7 @@
               ['Geometria', 'geometria']
             ], params[:category]),
             onchange: "this.form.submit()",
-            class: "px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-2 focus:ring-orange-300 text-gray-900 dark:text-gray-100" %>
+            class: "px-4 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border-2 border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-coral/30 text-gray-900 dark:text-gray-100" %>
 
         <%= select_tag :status,
             options_for_select([
@@ -94,7 +83,7 @@
               ['Bozze', 'draft']
             ], params[:status]),
             onchange: "this.form.submit()",
-            class: "px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-2 focus:ring-orange-300 text-gray-900 dark:text-gray-100" %>
+            class: "px-4 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border-2 border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-coral/30 text-gray-900 dark:text-gray-100" %>
       <% end %>
     </div>
 
@@ -102,8 +91,8 @@
     <% if @esercizi.any? %>
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         <% @esercizi.each do |esercizio| %>
-          <div class="card-hover group">
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md hover:border-orange-300 dark:hover:border-orange-700 transition-all">
+          <div class="card-lift group">
+            <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-lg shadow-gray-900/5 border border-gray-200/50 dark:border-gray-700/50 overflow-hidden hover:shadow-xl hover:border-coral/30 dark:hover:border-coral/20 transition-all">
               <!-- Card Header colorato -->
               <div class="relative h-20 bg-gradient-to-br <%= esercizio.published? ? 'from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30' : 'from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30' %> p-4">
                 <div class="absolute top-3 right-3">
@@ -134,7 +123,7 @@
                 <!-- Stats inline -->
                 <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
                   <span class="flex items-center gap-1">
-                    <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 text-coral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     <%= esercizio.questions.count %> domande
@@ -240,7 +229,7 @@
           Inizia creando il tuo primo esercizio con domande di matematica.
         </p>
         <%= link_to new_dashboard_esercizio_path,
-            class: "inline-flex items-center gap-3 px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105" do %>
+            class: "btn-press inline-flex items-center gap-3 px-8 py-4 bg-coral hover:bg-coral-dark text-white font-bold text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105" do %>
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
           </svg>
