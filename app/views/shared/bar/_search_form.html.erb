@@ -1,8 +1,8 @@
-<%= form_with url: search_path, method: :get, class: "bar__form",
+<%= form_with url: search_path, method: :get, class: "bar__form flex items-center gap-2 w-full",
       data: { bar_target: "form", turbo_frame: "bar_content" } do |form| %>
-  <%= form.label :q, "Cerca in Esercizi", class: "font-bold whitespace-nowrap" %>
+  <%= form.label :q, "Cerca in Esercizi", class: "font-semibold text-xs uppercase whitespace-nowrap" %>
   <%= text_field_tag :q, params[:q],
-        class: "bar__search-input",
+        class: "bar__search-input flex-1 bg-transparent border-none border-b-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-white text-base py-1 outline-none transition-colors duration-150 focus:border-blue-500 dark:focus:border-blue-400 placeholder:text-gray-400",
         type: "search",
         placeholder: "Trova pagine, strumenti...",
         autocomplete: "off",
@@ -11,7 +11,7 @@
           bar_target: "searchInput",
           action: "keydown.enter->bar#showModalAndSubmit:prevent keydown.esc->bar#reset"
         } %>
-  <button type="button" class="bar__reset" data-action="bar#clearInput">
+  <button type="button" class="bar__reset bg-transparent border-none text-gray-400 cursor-pointer text-xl p-1 transition-colors duration-150 hover:text-white" data-action="bar#clearInput">
     <span class="sr-only">Chiudi ricerca</span>
     &times;
   </button>
