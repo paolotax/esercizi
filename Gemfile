@@ -40,3 +40,4 @@ end
 
 gem "pagy", "~> 6.0"
 gem "geared_pagination", "~> 1.2"
+gem "rqrcode"

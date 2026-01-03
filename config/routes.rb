@@ -127,6 +127,8 @@ Rails.application.routes.draw do
   end
 
 
+  resources :qr_codes, only: :show
+
   # PWA routes
   get "up", to: "rails/health#show", as: :rails_health_check
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
