@@ -13,11 +13,6 @@ export default class extends Controller {
     const checkmark = option.querySelector("[data-exercise-group-target=\"checkmark\"]")
     const isCorrect = option.dataset.correct === "true"
 
-      checkbox: checkbox,
-      checkmark: checkmark,
-      text: checkbox ? checkbox.textContent.trim() : 'no checkbox'
-    })
-
     // Get all options in this group to deselect others (single selection behavior)
     const group = option.closest("[data-controller=\"exercise-group\"]")
     const allOptions = group.querySelectorAll("[data-exercise-group-target=\"option\"]")
@@ -71,11 +66,6 @@ export default class extends Controller {
 
         // Determine color: check vowels first, then text, then default to blue
         let bgColor = vowelColorMap[text] || textColorMap[text] || 'bg-blue-300'
-
-          text: text,
-          bgColor: bgColor,
-          checkbox: checkbox
-        })
 
         checkbox.classList.remove("bg-white") // Remove white background
         checkbox.classList.add(bgColor)
