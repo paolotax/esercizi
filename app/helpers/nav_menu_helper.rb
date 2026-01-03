@@ -6,7 +6,7 @@ module NavMenuHelper
       type: "search",
       role: "combobox",
       placeholder: "Cerca pagine, volumi, strumenti...",
-      class: "nav__input",
+      class: "nav__input w-full py-2 px-3 border border-gray-200 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 dark:text-white outline-none transition-colors duration-150 focus:border-blue-500 placeholder:text-gray-400",
       autofocus: true,
       autocomplete: "off",
       data: {
@@ -18,7 +18,7 @@ module NavMenuHelper
   end
 
   def nav_hotkey_link(title, path, key, icon_name)
-    link_to path, class: "nav__hotkey-btn popup__item",
+    link_to path, class: "nav__hotkey-btn popup__item content-center aspect-[5/3] bg-gray-100 dark:bg-gray-700 rounded-lg basis-[calc((100%-16px)/3)] flex-col text-sm leading-none justify-center overflow-hidden relative text-center no-underline flex items-center gap-1 py-6 px-10 border-none cursor-pointer transition-colors duration-150 hover:bg-gray-200 dark:hover:bg-gray-600",
       data: {
         filter_target: "item",
         navigable_list_target: "item",
@@ -28,13 +28,13 @@ module NavMenuHelper
       safe_join([
         nav_icon(icon_name),
         tag.span(title),
-        tag.kbd(key, class: "hide-on-touch")
+        tag.kbd(key, class: "hide-on-touch absolute top-2 right-2 text-[0.65em] opacity-50 bg-transparent")
       ])
     end
   end
 
   def collapsible_nav_section(title, nested: false, &block)
-    css_class = nested ? "nav__section popup__section nav__section--nested" : "nav__section popup__section"
+    css_class = nested ? "nav__section popup__section nav__section--nested border-t border-gray-200 dark:border-gray-700 text-sm" : "nav__section popup__section border-t border-gray-200 dark:border-gray-700 text-sm"
 
     tag.details class: css_class,
       data: {
@@ -44,29 +44,29 @@ module NavMenuHelper
       },
       open: true do
       safe_join([
-        tag.summary(class: "popup__section-title") do
+        tag.summary(class: "popup__section-title bg-white dark:bg-gray-800 text-xs font-semibold sticky top-0 py-2 px-2 uppercase z-10 text-gray-500 dark:text-gray-400 flex items-center gap-1 cursor-pointer list-none") do
           safe_join([
             nav_icon("caret-down"),
             title
           ])
         end,
-        tag.ul(class: "popup__list") { capture(&block) }
+        tag.ul(class: "popup__list flex flex-col w-full list-none m-0 p-0 gap-px ml-3") { capture(&block) }
       ])
     end
   end
 
   def nav_menu_link(path, label, icon_name, method: :get)
-    tag.li class: "popup__item",
+    tag.li class: "popup__item flex items-center bg-transparent rounded w-full hover:bg-gray-100 dark:hover:bg-gray-700 aria-selected:bg-blue-100 dark:aria-selected:bg-blue-900/50",
       data: { filter_target: "item", navigable_list_target: "item" } do
       if method == :delete
-        button_to path, method: :delete, class: "popup__btn" do
+        button_to path, method: :delete, class: "popup__btn rounded border-none bg-transparent flex-1 font-medium justify-start w-full min-w-0 py-2 px-1 text-left no-underline flex items-center gap-2 cursor-pointer" do
           safe_join([
             nav_icon(icon_name),
             tag.span(label, class: "overflow-ellipsis")
           ])
         end
       else
-        link_to path, class: "popup__btn" do
+        link_to path, class: "popup__btn rounded border-none bg-transparent flex-1 font-medium justify-start w-full min-w-0 py-2 px-1 text-left no-underline flex items-center gap-2 cursor-pointer" do
           safe_join([
             nav_icon(icon_name),
             tag.span(label, class: "overflow-ellipsis")
@@ -77,9 +77,9 @@ module NavMenuHelper
   end
 
   def nav_menu_volume_item(volume)
-    tag.li class: "popup__item",
+    tag.li class: "popup__item flex items-center bg-transparent rounded w-full hover:bg-gray-100 dark:hover:bg-gray-700 aria-selected:bg-blue-100 dark:aria-selected:bg-blue-900/50",
       data: { filter_target: "item", navigable_list_target: "item" } do
-      link_to volume_path(volume), class: "popup__btn" do
+      link_to volume_path(volume), class: "popup__btn rounded border-none bg-transparent flex-1 font-medium justify-start w-full min-w-0 py-2 px-1 text-left no-underline flex items-center gap-2 cursor-pointer" do
         safe_join([
           nav_icon("book"),
           tag.span(volume.nome, class: "overflow-ellipsis")
@@ -89,9 +89,9 @@ module NavMenuHelper
   end
 
   def nav_menu_disciplina_item(disciplina)
-    tag.li class: "popup__item",
+    tag.li class: "popup__item flex items-center bg-transparent rounded w-full hover:bg-gray-100 dark:hover:bg-gray-700 aria-selected:bg-blue-100 dark:aria-selected:bg-blue-900/50",
       data: { filter_target: "item", navigable_list_target: "item" } do
-      link_to disciplina_path(disciplina), class: "popup__btn" do
+      link_to disciplina_path(disciplina), class: "popup__btn rounded border-none bg-transparent flex-1 font-medium justify-start w-full min-w-0 py-2 px-1 text-left no-underline flex items-center gap-2 cursor-pointer" do
         safe_join([
           nav_icon("folder"),
           tag.span(disciplina.nome, class: "overflow-ellipsis")
@@ -101,9 +101,9 @@ module NavMenuHelper
   end
 
   def nav_menu_pagina_item(pagina)
-    tag.li class: "popup__item",
+    tag.li class: "popup__item flex items-center bg-transparent rounded w-full hover:bg-gray-100 dark:hover:bg-gray-700 aria-selected:bg-blue-100 dark:aria-selected:bg-blue-900/50",
       data: { filter_target: "item", navigable_list_target: "item" } do
-      link_to pagina_path(pagina.slug), class: "popup__btn" do
+      link_to pagina_path(pagina.slug), class: "popup__btn rounded border-none bg-transparent flex-1 font-medium justify-start w-full min-w-0 py-2 px-1 text-left no-underline flex items-center gap-2 cursor-pointer" do
         safe_join([
           nav_icon("page"),
           tag.span("p#{pagina.numero} - #{pagina.titolo.presence || 'Senza titolo'}", class: "overflow-ellipsis")
@@ -132,7 +132,7 @@ module NavMenuHelper
       "user" => '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>'
     }
 
-    tag.span(icons[name]&.html_safe || "", class: "popup__icon")
+    tag.span(icons[name]&.html_safe || "", class: "popup__icon w-6 flex items-center justify-center shrink-0 ml-1")
   end
 end
 
@@ -145,9 +145,9 @@ def filter_place_menu_item(path, label, icon, new_window: false, current: false,
   link_to_params.merge!({ target: "_blank" }) if new_window
   link_to_params.merge!({ data: { turbo: false } }) unless turbo
 
-  tag.li class: "popup__item", id: "filter-place-#{label.parameterize}", data: { filter_target: "item", navigable_list_target: "item" }, aria: { checked: current } do
-    concat icon_tag(icon, class: "popup__icon")
-    concat(link_to(path, link_to_params.merge(class: "popup__btn btn"), data: { turbo: turbo }) do
+  tag.li class: "popup__item flex items-center bg-transparent rounded w-full hover:bg-gray-100 dark:hover:bg-gray-700 aria-selected:bg-blue-100 dark:aria-selected:bg-blue-900/50", id: "filter-place-#{label.parameterize}", data: { filter_target: "item", navigable_list_target: "item" }, aria: { checked: current } do
+    concat icon_tag(icon, class: "popup__icon w-6 flex items-center justify-center shrink-0 ml-1")
+    concat(link_to(path, link_to_params.merge(class: "popup__btn btn rounded border-none bg-transparent flex-1 font-medium justify-start w-full min-w-0 py-2 px-1 text-left no-underline flex items-center gap-2 cursor-pointer"), data: { turbo: turbo }) do
       concat tag.span(label, class: "overflow-ellipsis")
       concat icon_tag("check", class: "checked flex-item-justify-end", "aria-hidden": true)
     end)
@@ -156,12 +156,12 @@ end
 
 def my_menu_user_item(user)
   my_menu_item("person", user) do
-    link_to(tag.span(user.name, class: "overflow-ellipsis"), user, class: "popup__btn btn")
+    link_to(tag.span(user.name, class: "overflow-ellipsis"), user, class: "popup__btn btn rounded border-none bg-transparent flex-1 font-medium justify-start w-full min-w-0 py-2 px-1 text-left no-underline flex items-center gap-2 cursor-pointer")
   end
 end
 
 def my_menu_item(item, record)
-  tag.li(class: "popup__item", data: { filter_target: "item", navigable_list_target: "item", id: "filter-#{item}-#{record.id}" }) do
-    icon_tag(item, class: "popup__icon") + yield
+  tag.li(class: "popup__item flex items-center bg-transparent rounded w-full hover:bg-gray-100 dark:hover:bg-gray-700 aria-selected:bg-blue-100 dark:aria-selected:bg-blue-900/50", data: { filter_target: "item", navigable_list_target: "item", id: "filter-#{item}-#{record.id}" }) do
+    icon_tag(item, class: "popup__icon w-6 flex items-center justify-center shrink-0 ml-1") + yield
   end
 end

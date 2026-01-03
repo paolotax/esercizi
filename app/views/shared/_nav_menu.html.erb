@@ -1,19 +1,30 @@
-<nav class="nav"
+<nav class="nav relative"
     data-controller="dialog"
     data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside">
 
   <%# Trigger Button %>
-  <button class="nav__trigger"
+  <button class="nav__trigger bg-white dark:bg-gray-700 border border-transparent rounded-lg py-1 pr-4 pl-2 font-semibold inline-flex items-center gap-2 cursor-pointer transition-all duration-150 hover:brightness-95 dark:hover:brightness-110 dark:text-white"
           data-controller="hotkey"
           data-action="click->dialog#toggle keydown.j@document->hotkey#click"
           type="button">
-    <%= image_tag "giunti_scuola.svg", alt: "Esercizi", class: "h-6 w-auto" %>
+    <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20" stroke="#F78930" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6.5 2H20V22H6.5C5.83696 22 5.20107 21.7366 4.73223 21.2678C4.26339 20.7989 4 20.163 4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2Z" stroke="#0095DA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M8 7H16M8 11H14" stroke="#C657A0" stroke-width="2" stroke-linecap="round"/>
+    </svg>
     <span class="font-bold text-gray-800 dark:text-white">Esercizi</span>
-    <kbd class="kbd hide-on-touch">J</kbd>
+    <kbd class="kbd hide-on-touch bg-gray-100 dark:bg-gray-600 rounded text-[0.65em] py-0.5 px-1.5 ml-2">J</kbd>
   </button>
 
   <%# Dialog Menu %>
-  <dialog class="nav__menu popup popup--animated"
+  <dialog class="nav__menu popup popup--animated
+                 hidden open:grid absolute top-full left-0 mt-2
+                 max-h-[70dvh] min-w-[min(32ch,calc(100vw-1rem))] max-w-[min(55ch,calc(100vw-1rem))]
+                 overflow-hidden z-[9999]
+                 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-xl
+                 grid-rows-[auto_1fr_auto] gap-0.5 p-5 pb-0
+                 opacity-0 scale-95 origin-top-left transition-all duration-200
+                 open:opacity-100 open:scale-100"
           data-controller="filter navigable-list nav-section-expander"
           data-dialog-target="dialog"
           data-action="keydown->navigable-list#navigate filter:changed->navigable-list#reset filter:changed->nav-section-expander#showWhileFiltering"

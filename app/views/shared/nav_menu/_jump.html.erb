@@ -1,10 +1,10 @@
-<div class="nav__header">
+<div class="nav__header flex justify-center pb-2">
   <%= jump_field_tag %>
 </div>
 
-<div class="nav__scroll-container">
+<div class="nav__scroll-container flex flex-col gap-0.5 -mx-5 overflow-auto pb-0.5 px-5">
   <%# Hotkeys %>
-  <div class="nav__hotkeys">
+  <div class="nav__hotkeys flex flex-wrap gap-2 w-full justify-center my-4 mx-auto p-0 list-none">
     <%= nav_hotkey_link "Home", root_path, 1, "home" %>
     <%= nav_hotkey_link "Strumenti", strumenti_abaco_path, 2, "tools" %>
     <% if Current.user&.teacher? || Current.user&.owner? %>
@@ -21,11 +21,11 @@
     <%= render "shared/nav_menu/accounts", accounts: Current.identity.accounts %>
   <% end %>
 
-  <div class="nav__blank-slate">
+  <div class="nav__blank-slate text-sm my-8 mx-auto text-center text-gray-500">
     Nessun risultato
   </div>
 </div>
 
-<footer class="nav__footer">
+<footer class="nav__footer bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 text-xs leading-relaxed -mt-0.5 p-4 text-center z-10 text-gray-500 dark:text-gray-400">
   <strong>Esercizi</strong> - Giunti Scuola
 </footer>
