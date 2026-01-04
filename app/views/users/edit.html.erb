@@ -3,6 +3,7 @@
 <div class="min-h-screen flex items-start justify-center bg-cream dark:bg-gray-900 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-gray-900/10 p-8 md:p-10 text-center relative fade-in-up card-lift">
     <%= link_to user_path(@user),
+          data: { controller: "hotkey", action: "keydown.left@document->hotkey#click keydown.esc@document->hotkey#click" },
           class: "absolute top-4 left-4 p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors" do %>
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
@@ -47,7 +48,7 @@
                 placeholder: "Il tuo nome",
                 autofocus: true,
                 required: true,
-                data: { "1p-ignore": true } %>
+                data: { "1p-ignore": true, action: "keydown.esc->form#cancel" } %>
         </div>
 
         <div>
@@ -82,7 +83,8 @@
         </button>
 
         <%= link_to "Annulla", user_path(@user),
-              class: "text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors" %>
+              class: "text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors",
+              data: { form_target: "cancel" } %>
       </div>
     <% end %>
 
