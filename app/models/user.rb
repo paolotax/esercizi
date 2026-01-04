@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  include Role, Named, Avatar, Admin
+  include Role, Named, Avatar, Admin, EmailAddressChangeable
 
   belongs_to :account
   belongs_to :identity, optional: true

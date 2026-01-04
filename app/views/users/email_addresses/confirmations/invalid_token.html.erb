@@ -1,0 +1,26 @@
+<% @page_title = "Link scaduto" %>
+
+<div class="min-h-screen flex items-start justify-center bg-cream dark:bg-gray-900 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-gray-900/10 p-8 md:p-10 text-center fade-in-up card-lift">
+    <div class="w-16 h-16 mx-auto bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
+      <svg class="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+    </div>
+
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+      <%= @page_title %>
+    </h1>
+
+    <p class="text-gray-600 dark:text-gray-400">
+      Il link di conferma email non è più valido—scadono dopo 30 minuti. Dovrai riprovare.
+    </p>
+
+    <%= link_to "Cambia il mio indirizzo email", new_user_email_address_path(user_id: @user),
+          class: "inline-block w-full px-6 py-3 bg-coral hover:bg-coral-dark text-white font-semibold rounded-xl transition-colors btn-press" %>
+
+    <p class="text-sm text-gray-500 dark:text-gray-400">
+      Se hai bisogno di aiuto, <%= mail_to "supporto@esercizi.paolotax.it", "inviaci un'email", class: "text-coral hover:text-coral-dark" %> e ti aiuteremo.
+    </p>
+  </div>
+</div>
