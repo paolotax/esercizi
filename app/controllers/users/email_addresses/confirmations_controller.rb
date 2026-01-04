@@ -12,7 +12,7 @@ class Users::EmailAddresses::ConfirmationsController < ApplicationController
       terminate_session if Current.session
       start_new_session_for @user.identity
 
-      redirect_to edit_user_url(id: @user)
+      redirect_to edit_user_url(script_name: @user.account.slug, id: @user)
     else
       render :invalid_token, status: :unprocessable_entity
     end
