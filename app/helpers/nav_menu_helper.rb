@@ -6,7 +6,7 @@ module NavMenuHelper
       type: "search",
       role: "combobox",
       placeholder: "Cerca pagine, volumi, strumenti...",
-      class: "nav__input w-full py-2 px-3 border border-gray-200 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 dark:text-white outline-none transition-colors duration-150 focus:border-blue-500 placeholder:text-gray-400",
+      class: "nav__input w-full py-2 px-3 border border-gray-200 dark:border-gray-600 rounded-lg text-base bg-white dark:bg-gray-700 dark:text-white outline-none transition-colors duration-150 focus:border-blue-500 placeholder:text-gray-400",
       autofocus: true,
       autocomplete: "off",
       data: {
