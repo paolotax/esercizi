@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-  include Role
-  include Admin
+  include Role, Named, Avatar, Admin
 
   belongs_to :account
   belongs_to :identity, optional: true
