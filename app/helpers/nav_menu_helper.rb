@@ -18,7 +18,7 @@ module NavMenuHelper
   end
 
   def nav_hotkey_link(title, path, key, icon_name)
-    link_to path, class: "nav__hotkey-btn popup__item content-center aspect-[5/3] bg-gray-100 dark:bg-gray-700 rounded-lg basis-[calc((100%-16px)/3)] flex-col text-sm leading-none justify-center overflow-hidden relative text-center no-underline flex items-center gap-1 py-6 px-10 border-none cursor-pointer transition-colors duration-150 hover:bg-gray-200 dark:hover:bg-gray-600",
+    link_to path, class: "nav__hotkey-btn popup__item content-center aspect-[5/3] bg-gray-100 dark:bg-gray-700 rounded-lg basis-[calc((100%-16px)/3)] flex-col text-sm leading-none justify-center overflow-hidden relative text-center no-underline flex items-center gap-1 py-3 px-4 border-none cursor-pointer transition-colors duration-150 hover:bg-gray-200 dark:hover:bg-gray-600",
       data: {
         filter_target: "item",
         navigable_list_target: "item",
