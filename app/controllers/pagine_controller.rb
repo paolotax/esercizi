@@ -32,6 +32,8 @@ class PagineController < ApplicationController
   end
 
   def pagina_accessible?
+    return true if @pagina.public?
+
     # Admin check via identity (works without account scope)
     if Current.identity && admin_identity?
       return true
