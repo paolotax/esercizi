@@ -2,21 +2,8 @@
   <% discipline_accessibili = Disciplina.accessible_by(Current.user).includes(volume: :corso) %>
   <% if discipline_accessibili.any? %>
     <%= collapsible_nav_section "I miei libri" do %>
-      <% discipline_accessibili.group_by { |d| d.volume.corso }.each do |corso, discipline_corso| %>
-        <%= collapsible_nav_section corso.nome, nested: true do %>
-          <% discipline_corso.group_by(&:volume).each do |volume, discipline_volume| %>
-            <% if discipline_volume.count > 1 %>
-              <%= collapsible_nav_section "Classe #{volume.classe} - #{volume.nome}", nested: true do %>
-                <% discipline_volume.each do |disciplina| %>
-                  <%= filter_place_menu_item disciplina_path(disciplina), disciplina.nome, "book" %>
-                <% end %>
-              <% end %>
-            <% else %>
-              <% disciplina = discipline_volume.first %>
-              <%= filter_place_menu_item disciplina_path(disciplina), "Classe #{volume.classe} - #{disciplina.nome}", "book" %>
-            <% end %>
-          <% end %>
-        <% end %>
+      <% discipline_accessibili.each do |disciplina| %>
+        <%= filter_place_menu_item disciplina_path(disciplina), "#{disciplina.volume.nome} - #{disciplina.nome}", "book" %>
       <% end %>
     <% end %>
   <% end %>
