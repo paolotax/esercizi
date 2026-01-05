@@ -15,4 +15,14 @@ class ApplicationController < ActionController::Base
   def turbo_frame_request?
     request.headers["Turbo-Frame"].present?
   end
+
+  # Helper per verificare se l'utente è admin
+  helper_method :admin?
+
+  def admin?
+    return false unless Current.identity
+
+    admin_emails = Rails.application.credentials.admin_emails || []
+    admin_emails.include?(Current.identity.email_address)
+  end
 end

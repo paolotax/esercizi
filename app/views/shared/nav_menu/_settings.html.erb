@@ -1,6 +1,9 @@
 <%= collapsible_nav_section "Impostazioni" do %>
   <%= filter_place_menu_item account_settings_path, "Impostazioni account", "settings" %>
   <%= filter_place_menu_item user_path(Current.user), "Il mio profilo", "person" %>
+  <% if Current.user&.owner? %>
+    <%= filter_place_menu_item account_shares_path, "Gestisci accessi", "share" %>
+  <% end %>
   <%#= filter_place_menu_item notifications_path, "All notifications", "bell" %>
   <%#= filter_place_menu_item notifications_settings_path, "Notification Settings", "settings" %>
 

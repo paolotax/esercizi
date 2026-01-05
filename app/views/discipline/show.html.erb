@@ -6,7 +6,18 @@
 
 
 <div class="max-w-7xl mx-auto p-6">
-  <h1 class="text-4xl font-bold mb-2" style="<%= "color: #{@disciplina.colore};" if @disciplina.colore.present? %>"><%= @disciplina.nome %></h1>
+  <div class="flex items-center justify-between mb-2">
+    <h1 class="text-4xl font-bold" style="<%= "color: #{@disciplina.colore};" if @disciplina.colore.present? %>"><%= @disciplina.nome %></h1>
+    <% if admin? %>
+      <%= link_to new_admin_share_path(shareable_type: "Disciplina", shareable_id: @disciplina.id),
+          class: "inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition" do %>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+        </svg>
+        Condividi
+      <% end %>
+    <% end %>
+  </div>
   <p class="text-xl text-gray-600 mb-8"><%= @disciplina.volume.nome %> - <%= @disciplina.volume.corso.nome %></p>
 
   <h2 class="text-2xl font-bold text-gray-800 mb-6">Pagine</h2>
