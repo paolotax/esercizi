@@ -1,88 +1,86 @@
 # frozen_string_literal: true
 
-module Account
-  class SharesController < ApplicationController
-    before_action :require_owner
+class Account::SharesController < ApplicationController
+  before_action :require_owner
 
-    def index
-      @shares = Share.where(granted_by: Current.user)
-                     .where(recipient_type: "User")
-                     .where(recipient_id: Current.account.users.select(:id))
-                     .includes(:shareable, :recipient)
-                     .order(created_at: :desc)
+  def index
+    @shares = Share.where(granted_by: Current.user)
+                   .where(recipient_type: "User")
+                   .where(recipient_id: Current.account.users.select(:id))
+                   .includes(:shareable, :recipient)
+                   .order(created_at: :desc)
+  end
+
+  def new
+    @share = Share.new
+    @available_resources = available_resources
+    @users = Current.account.users.active.where.not(id: Current.user.id)
+  end
+
+  def create
+    @share = Share.new(share_params)
+    @share.granted_by = Current.user
+    @share.permission = :view
+
+    unless resource_accessible_to_account?(@share.shareable)
+      return redirect_to account_shares_path, alert: "Non puoi condividere questa risorsa"
     end
 
-    def new
-      @share = Share.new
+    unless valid_recipient?(@share.recipient)
+      return redirect_to account_shares_path, alert: "Destinatario non valido"
+    end
+
+    if @share.save
+      redirect_to account_shares_path, notice: "Accesso assegnato"
+    else
       @available_resources = available_resources
       @users = Current.account.users.active.where.not(id: Current.user.id)
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @share = Share.find(params[:id])
+
+    unless @share.granted_by == Current.user
+      return redirect_to account_shares_path, alert: "Non puoi rimuovere questa condivisione"
     end
 
-    def create
-      @share = Share.new(share_params)
-      @share.granted_by = Current.user
-      @share.permission = :view
+    @share.destroy
+    redirect_to account_shares_path, notice: "Accesso revocato"
+  end
 
-      unless resource_accessible_to_account?(@share.shareable)
-        return redirect_to account_shares_path, alert: "Non puoi condividere questa risorsa"
-      end
+  private
 
-      unless valid_recipient?(@share.recipient)
-        return redirect_to account_shares_path, alert: "Destinatario non valido"
-      end
+  def require_owner
+    redirect_to root_path, alert: "Accesso riservato" unless Current.user&.owner?
+  end
 
-      if @share.save
-        redirect_to account_shares_path, notice: "Accesso assegnato"
-      else
-        @available_resources = available_resources
-        @users = Current.account.users.active.where.not(id: Current.user.id)
-        render :new, status: :unprocessable_entity
-      end
-    end
+  def share_params
+    params.require(:share).permit(
+      :shareable_type, :shareable_id,
+      :recipient_id
+    ).merge(recipient_type: "User")
+  end
 
-    def destroy
-      @share = Share.find(params[:id])
+  def available_resources
+    {
+      corsi: Corso.accessible_by(Current.user),
+      volumi: Volume.accessible_by(Current.user),
+      discipline: Disciplina.accessible_by(Current.user),
+      pagine: Pagina.accessible_by(Current.user)
+    }
+  end
 
-      unless @share.granted_by == Current.user
-        return redirect_to account_shares_path, alert: "Non puoi rimuovere questa condivisione"
-      end
+  def resource_accessible_to_account?(resource)
+    return false unless resource
 
-      @share.destroy
-      redirect_to account_shares_path, notice: "Accesso revocato"
-    end
+    resource.accessible_by?(Current.user)
+  end
 
-    private
+  def valid_recipient?(recipient)
+    return false unless recipient.is_a?(User)
 
-    def require_owner
-      redirect_to root_path, alert: "Accesso riservato" unless Current.user&.owner?
-    end
-
-    def share_params
-      params.require(:share).permit(
-        :shareable_type, :shareable_id,
-        :recipient_id
-      ).merge(recipient_type: "User")
-    end
-
-    def available_resources
-      {
-        corsi: Corso.accessible_by(Current.user),
-        volumi: Volume.accessible_by(Current.user),
-        discipline: Disciplina.accessible_by(Current.user),
-        pagine: Pagina.accessible_by(Current.user)
-      }
-    end
-
-    def resource_accessible_to_account?(resource)
-      return false unless resource
-
-      resource.accessible_by?(Current.user)
-    end
-
-    def valid_recipient?(recipient)
-      return false unless recipient.is_a?(User)
-
-      recipient.account == Current.account && recipient != Current.user
-    end
+    recipient.account == Current.account && recipient != Current.user
   end
 end
