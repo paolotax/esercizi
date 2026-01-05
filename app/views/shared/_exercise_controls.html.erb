@@ -81,31 +81,47 @@
   colors = button_colors[color] || button_colors['orange']
 %>
 
-<div class="print-hidden mt-8 mb-4" data-exercise-checker-target="buttonContainer">
-  <!-- All buttons on same line -->
-  <div class="flex flex-wrap gap-4 justify-between items-center">
-    <!-- Previous Page Button -->
-    <div class="flex-shrink-0">
-      <% if prev_page %>
-        <%= link_to pagina_path(prev_page.slug),
-            data: { turbo_frame: "_top" },
-            class: "flex items-center justify-center #{colors[:primary]} text-white rounded-full shadow-lg transition transform hover:scale-105 w-12 h-12 sm:w-14 sm:h-14" do %>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        <% end %>
-      <% else %>
-        <div class="flex items-center justify-center bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-full cursor-not-allowed opacity-50 w-12 h-12 sm:w-14 sm:h-14">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </div>
-      <% end %>
+<%# Page navigation buttons in footer bar %>
+<% content_for :footer do %>
+  <% if prev_page %>
+    <%= link_to pagina_path(prev_page.slug),
+        data: { turbo_frame: "_top", controller: "hotkey", action: "keydown.left@document->hotkey#click" },
+        class: "absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center #{colors[:primary]} text-white rounded-full shadow-lg transition transform hover:scale-105 w-10 h-10",
+        title: "Pagina precedente" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    <% end %>
+  <% else %>
+    <div class="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-full cursor-not-allowed opacity-50 w-10 h-10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
     </div>
+  <% end %>
 
-    <% if show_exercise_buttons %>
-      <!-- Center control buttons -->
-      <div class="flex flex-wrap gap-3 md:gap-4 justify-center items-center flex-1">
+  <% if next_page %>
+    <%= link_to pagina_path(next_page.slug),
+        data: { turbo_frame: "_top", controller: "hotkey", action: "keydown.right@document->hotkey#click" },
+        class: "absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center #{colors[:primary]} text-white rounded-full shadow-lg transition transform hover:scale-105 w-10 h-10",
+        title: "Pagina successiva" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    <% end %>
+  <% else %>
+    <div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-full cursor-not-allowed opacity-50 w-10 h-10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="print-hidden mt-8 mb-4" data-exercise-checker-target="buttonContainer">
+  <% if show_exercise_buttons %>
+    <!-- Center control buttons -->
+    <div class="flex flex-wrap gap-3 md:gap-4 justify-center items-center">
 
         <!-- Reset Button -->
         <button class="border-2 <%= colors[:outline] %> bg-white dark:bg-gray-800 rounded-full shadow-lg transition transform hover:scale-105 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14"
@@ -174,28 +190,6 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
           </svg>
         </button>
-      </div>
-    <% end %>
-    
-    <!-- Next Page Button -->
-    <div class="flex-shrink-0">
-      <% if next_page %>
-        <%= link_to pagina_path(next_page.slug),
-            data: { turbo_frame: "_top" },
-            class: "flex items-center justify-center #{colors[:primary]} text-white rounded-full shadow-lg transition transform hover:scale-105 w-12 h-12 sm:w-14 sm:h-14" do %>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        <% end %>
-      <% else %>
-        <div class="flex items-center justify-center bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-full cursor-not-allowed opacity-50 w-12 h-12 sm:w-14 sm:h-14">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </div>
-      <% end %>
     </div>
-  </div>
+  <% end %>
 </div>
-
-
