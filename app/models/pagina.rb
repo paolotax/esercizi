@@ -12,9 +12,13 @@ class Pagina < ApplicationRecord
 
   # Scopes
   default_scope { order(:posizione, :numero) }
+  scope :pubbliche, -> { where(public: true) }
 
   scope :accessible_by, ->(user) {
-    return all if user.admin?
+    public_pages = where(public: true)
+
+    return all if user&.admin?
+    return public_pages if user.nil?
 
     user_recipients = [ user, user.account ]
 
@@ -27,6 +31,7 @@ class Pagina < ApplicationRecord
       .or(where(disciplina_id: disciplina_ids))
       .or(where(disciplina_id: Disciplina.where(volume_id: volume_ids)))
       .or(where(disciplina_id: Disciplina.where(volume_id: Volume.where(corso_id: corso_ids))))
+      .or(public_pages)
   }
 
   # Delegazioni
@@ -37,6 +42,7 @@ class Pagina < ApplicationRecord
   before_validation :genera_slug, if: -> { slug.blank? }
 
   def accessible_by?(user)
+    return true if public?
     return false unless user
     return true if user.admin?
     return true if shared_with?(user)
