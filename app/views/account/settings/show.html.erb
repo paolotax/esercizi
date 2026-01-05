@@ -1,0 +1,85 @@
+<% @page_title = "Impostazioni account" %>
+
+<div class="h-full flex items-start justify-center dark:bg-gray-900 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-gray-900/10 p-8 md:p-10 fade-in-up card-lift">
+    <header class="text-center">
+      <h1 class="text-2xl font-extrabold text-gray-900 dark:text-white"><%= @page_title %></h1>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Gestisci le impostazioni del tuo account</p>
+    </header>
+
+    <%= form_with model: @account, url: account_settings_path, method: :patch, class: "space-y-6", data: { controller: "form" } do |form| %>
+      <div>
+        <label for="account_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 text-left mb-1">Nome account</label>
+        <% if Current.user&.owner? %>
+          <%= form.text_field :name,
+                class: "w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-coral focus:border-transparent transition-all",
+                placeholder: "Nome della scuola o organizzazione",
+                autofocus: true,
+                required: true,
+                data: { "1p-ignore": true, action: "keydown.esc->form#cancel" } %>
+        <% else %>
+          <%= form.text_field :name,
+                class: "w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed",
+                readonly: true,
+                disabled: true %>
+        <% end %>
+      </div>
+
+      <% if @account.errors.any? %>
+        <div class="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl text-left">
+          <p class="text-sm font-medium text-red-800 dark:text-red-200">Le modifiche non possono essere salvate:</p>
+          <ul class="mt-2 text-sm text-red-700 dark:text-red-300 list-disc list-inside">
+            <% @account.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if Current.user&.owner? %>
+        <div class="flex flex-col gap-3 pt-4">
+          <button type="submit" class="w-full px-6 py-3 bg-coral hover:bg-coral-dark text-white font-semibold rounded-xl transition-colors btn-press" data-form-target="submit">
+            Salva modifiche
+          </button>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Membri</h2>
+
+      <div class="space-y-3">
+        <% @users.each do |user| %>
+          <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-700/50">
+            <div class="w-10 h-10 rounded-full bg-white dark:bg-gray-600 shadow overflow-hidden flex-shrink-0">
+              <%= image_tag user_avatar_path(user), alt: user.name, class: "w-full h-full object-cover" %>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 dark:text-white truncate"><%= user.name %></p>
+              <p class="text-xs text-gray-500 dark:text-gray-400 truncate"><%= user.identity.email_address %></p>
+            </div>
+            <span class="px-2 py-1 text-xs font-medium rounded-full
+              <%= case user.role
+                  when 'owner' then 'bg-coral/20 text-coral dark:bg-coral/30'
+                  when 'teacher' then 'bg-sage/20 text-sage dark:bg-sage/30'
+                  else 'bg-gray-200 text-gray-600 dark:bg-gray-600 dark:text-gray-300'
+                  end %>">
+              <%= user.role.capitalize %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+
+      <% if Current.user&.owner? %>
+        <div class="mt-4">
+          <%= link_to account_join_code_path, class: "inline-flex items-center gap-2 text-sm text-coral dark:text-coral hover:text-coral-dark transition-colors" do %>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+            </svg>
+            <span>Invita nuovi membri</span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

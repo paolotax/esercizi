@@ -1,5 +1,5 @@
 class Account::SettingsController < ApplicationController
-  before_action :ensure_admin, only: :update
+  before_action :ensure_owner, only: :update
   before_action :set_account
 
   def show

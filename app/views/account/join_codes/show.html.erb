@@ -14,7 +14,7 @@
              value="<%= url %>"
              readonly>
 
-      <% if Current.user&.admin? %>
+      <% if Current.user&.owner? %>
         <%= button_to account_join_code_path, method: :delete,
               class: "p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors",
               data: { turbo_confirm: "Sei sicuro di voler generare un nuovo link? Il codice precedente smetterà di funzionare." } do %>
@@ -70,7 +70,7 @@
         Questo codice è stato usato <%= @join_code.usage_count %>/<%= @join_code.usage_limit %> volte
         (<%= @join_code.active? ? "#{@join_code.usage_limit - @join_code.usage_count} rimanenti" : "nessuno" %>)
 
-        <% if Current.user&.admin? %>
+        <% if Current.user&.owner? %>
           <%= link_to edit_account_join_code_path,
                 class: "ml-2 #{@join_code.active? ? 'text-coral dark:text-coral hover:text-coral-dark' : 'text-red-600 dark:text-red-400 underline'}" do %>
             <span>Modifica limite</span>
