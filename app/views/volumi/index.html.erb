@@ -1,5 +1,17 @@
 <% content_for :titolo, "Libri di Testo" %>
 
+<% unless Current.user %>
+  <div class="bg-orange-50 dark:bg-orange-900/20 border-b border-orange-200 dark:border-orange-800/30">
+    <div class="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
+      <span class="text-sm text-orange-700 dark:text-orange-300">
+        Accedi per vedere i tuoi libri
+      </span>
+      <%= link_to "Accedi", new_session_path,
+          class: "inline-flex items-center px-4 py-1.5 bg-orange-500 hover:bg-orange-600 text-white font-semibold text-sm rounded-lg transition" %>
+    </div>
+  </div>
+<% end %>
+
 <!-- Hero Section -->
 <div class="bg-gradient-to-br from-white/80 to-orange-50/50 dark:from-gray-800/80 dark:to-gray-900/50 border-b border-orange-100 dark:border-gray-700">
   <div class="max-w-5xl mx-auto px-6 py-12 md:py-16">
