@@ -14,7 +14,9 @@ class Volume < ApplicationRecord
   default_scope { order(:posizione, :classe) }
 
   scope :accessible_by, ->(user) {
-    return all if user.admin?
+    return all if user&.admin?
+
+    return with_public_pages if user.nil?
 
     user_recipients = [ user, user.account ]
 
@@ -23,6 +25,12 @@ class Volume < ApplicationRecord
 
     where(id: volume_ids)
       .or(where(corso_id: corso_ids))
+  }
+
+  scope :with_public_pages, -> {
+    joins(discipline: :pagine)
+      .where(pagine: { public: true })
+      .distinct
   }
 
   def accessible_by?(user)
