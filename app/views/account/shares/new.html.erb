@@ -1,0 +1,64 @@
+<% content_for :titolo, "Nuovo Accesso" %>
+
+<div class="max-w-2xl mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Assegna Accesso</h1>
+
+  <%= form_with model: @share, url: account_shares_path, class: "space-y-6" do |f| %>
+    <% if @share.errors.any? %>
+      <div class="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg p-4">
+        <ul class="list-disc list-inside text-red-600 dark:text-red-400 text-sm">
+          <% @share.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tipo Risorsa</label>
+      <%= f.select :shareable_type,
+          [["Corso", "Corso"], ["Volume", "Volume"], ["Disciplina", "Disciplina"], ["Pagina", "Pagina"]],
+          { prompt: "Seleziona tipo..." },
+          class: "w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white",
+          data: { controller: "resource-select", action: "change->resource-select#typeChanged" } %>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Risorsa</label>
+      <%= f.select :shareable_id,
+          options_for_select([]),
+          { prompt: "Prima seleziona il tipo..." },
+          class: "w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white",
+          data: { resource_select_target: "resourceSelect" } %>
+
+      <!-- Hidden data for JS -->
+      <script type="application/json" data-resource-select-target="corso">
+        <%= raw @available_resources[:corsi].map { |c| { id: c.id, name: c.nome } }.to_json %>
+      </script>
+      <script type="application/json" data-resource-select-target="volume">
+        <%= raw @available_resources[:volumi].map { |v| { id: v.id, name: "#{v.corso.nome} - #{v.nome}" } }.to_json %>
+      </script>
+      <script type="application/json" data-resource-select-target="disciplina">
+        <%= raw @available_resources[:discipline].map { |d| { id: d.id, name: "#{d.volume.nome} - #{d.nome}" } }.to_json %>
+      </script>
+      <script type="application/json" data-resource-select-target="pagina">
+        <%= raw @available_resources[:pagine].limit(100).map { |p| { id: p.id, name: "#{p.disciplina.nome} - p.#{p.numero}" } }.to_json %>
+      </script>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Utente</label>
+      <%= f.select :recipient_id,
+          @users.map { |u| [u.name, u.id] },
+          { prompt: "Seleziona utente..." },
+          class: "w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white" %>
+    </div>
+
+    <div class="flex gap-4">
+      <%= f.submit "Assegna Accesso",
+          class: "px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition cursor-pointer" %>
+      <%= link_to "Annulla", account_shares_path,
+          class: "px-6 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-lg transition" %>
+    </div>
+  <% end %>
+</div>

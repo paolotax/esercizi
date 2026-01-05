@@ -1,0 +1,50 @@
+<% content_for :titolo, "Gestisci Accessi" %>
+
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Gestisci Accessi</h1>
+    <%= link_to "Nuovo accesso", new_account_share_path,
+        class: "inline-flex items-center px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition" %>
+  </div>
+
+  <% if @shares.any? %>
+    <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <table class="w-full">
+        <thead class="bg-gray-50 dark:bg-gray-700">
+          <tr>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Risorsa</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Utente</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Data</th>
+            <th class="px-4 py-3 text-right text-sm font-semibold text-gray-600 dark:text-gray-300">Azioni</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+          <% @shares.each do |share| %>
+            <tr>
+              <td class="px-4 py-3 text-gray-800 dark:text-gray-200">
+                <span class="text-xs text-gray-500 dark:text-gray-400"><%= share.shareable_type %></span><br>
+                <%= share.shareable&.respond_to?(:nome) ? share.shareable.nome : share.shareable&.titolo %>
+              </td>
+              <td class="px-4 py-3 text-gray-800 dark:text-gray-200">
+                <%= share.recipient&.name %>
+              </td>
+              <td class="px-4 py-3 text-gray-500 dark:text-gray-400 text-sm">
+                <%= l share.created_at, format: :short %>
+              </td>
+              <td class="px-4 py-3 text-right">
+                <%= button_to "Revoca", account_share_path(share),
+                    method: :delete,
+                    class: "text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 text-sm font-medium",
+                    data: { turbo_confirm: "Sei sicuro di voler revocare questo accesso?" } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-xl">
+      <p class="text-gray-500 dark:text-gray-400">Nessun accesso condiviso con gli utenti del tuo account.</p>
+    </div>
+  <% end %>
+</div>
