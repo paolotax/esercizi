@@ -14,7 +14,9 @@ class Disciplina < ApplicationRecord
   default_scope { order(:nome) }
 
   scope :accessible_by, ->(user) {
-    return all if user.admin?
+    return all if user&.admin?
+
+    return with_public_pages if user.nil?
 
     user_recipients = [ user, user.account ]
 
@@ -25,6 +27,12 @@ class Disciplina < ApplicationRecord
     where(id: disciplina_ids)
       .or(where(volume_id: volume_ids))
       .or(where(volume_id: Volume.where(corso_id: corso_ids)))
+  }
+
+  scope :with_public_pages, -> {
+    joins(:pagine)
+      .where(pagine: { public: true })
+      .distinct
   }
 
   # Delegazioni
