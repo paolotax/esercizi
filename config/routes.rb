@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :account do
     resource :join_code
     resource :settings
+    resources :shares, only: [ :index, :new, :create, :destroy ]
   end
 
   # Account management (owner only)
