@@ -1,5 +1,14 @@
 <%= collapsible_nav_section "Impostazioni" do %>
-  <%#= nav_menu_link edit_identity_path, "Profilo", "user" %>
-  <%= nav_menu_link session_url(script_name: nil), "Esci", "logout", method: :delete %>
+  <%= filter_place_menu_item account_settings_path, "Account", "settings" %>
+  <%= filter_place_menu_item user_path(Current.user), "Il mio profilo", "person" %>
+  <%#= filter_place_menu_item notifications_path, "All notifications", "bell" %>
+  <%#= filter_place_menu_item notifications_settings_path, "Notification Settings", "settings" %>
+
+  <%= tag.li class: "popup__item flex items-center bg-transparent rounded w-full hover:bg-gray-100 dark:hover:bg-gray-700 aria-selected:bg-blue-100 dark:aria-selected:bg-blue-900/50", data: { filter_target: "item", navigable_list_target: "item" } do %>
+    <%= icon_tag "logout", class: "popup__icon" %>
+    <%= button_to session_url(script_name: nil), method: :delete, class: "popup__btn  rounded border-none bg-transparent flex-1 font-medium justify-start w-full min-w-0 py-2 px-1 text-left no-underline flex items-center gap-2 cursor-pointer", data: { turbo: false } do %>
+      <span>Esci</span>
+    <% end %>
+  <% end %>
 
 <% end %>

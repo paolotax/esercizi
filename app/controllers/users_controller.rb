@@ -7,11 +7,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @no_scroll = true
   end
 
   def edit
-    @no_scroll = true
   end
 
   def update
