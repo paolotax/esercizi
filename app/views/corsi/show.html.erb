@@ -1,10 +1,10 @@
 <% content_for :titolo, @corso.nome %>
 
-<div class="max-w-7xl mx-auto p-6">
-  <div class="mb-6">
-    <%= link_to "← Tutti i corsi", corsi_path, class: "text-blue-500 hover:text-blue-700" %>
-  </div>
+<% content_for :header do %>
+  <%= back_link_to "Tutti i corsi", corsi_path, "keydown.left@document->hotkey#click keydown.esc@document->hotkey#click" %>
+<% end %>
 
+<div class="max-w-7xl mx-auto p-6">
   <h1 class="text-4xl font-bold text-blue-600 mb-4"><%= @corso.nome %></h1>
   <% if @corso.descrizione.present? %>
     <p class="text-xl text-gray-600 mb-8"><%= @corso.descrizione %></p>

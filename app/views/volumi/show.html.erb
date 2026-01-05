@@ -1,18 +1,12 @@
 <% content_for :titolo, @volume.nome %>
 
+<% content_for :header do %>
+  <%= back_link_to "#{@volume.corso.nome}", corso_path(@volume.corso, script_name: Current.account.slug), "keydown.left@document->hotkey#click keydown.esc@document->hotkey#click" %>
+<% end %>
+
 <!-- Header with breadcrumb -->
 <div class="bg-gradient-to-br from-white/80 to-blue-50/50 dark:from-gray-800/80 dark:to-gray-900/50 border-b border-blue-100 dark:border-gray-700">
   <div class="max-w-5xl mx-auto px-6 py-8">
-    <!-- Breadcrumb -->
-    <%= link_to corso_path(@volume.corso),
-        class: "inline-flex items-center gap-2 text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors mb-4",
-        data: { turbo_frame: "main-content" } do %>
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-      </svg>
-      <%= @volume.corso.nome %>
-    <% end %>
-
     <div class="flex items-start gap-6">
       <!-- Volume icon -->
       <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center shadow-xl flex-shrink-0">

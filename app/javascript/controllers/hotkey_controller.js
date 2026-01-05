@@ -15,6 +15,13 @@ export default class extends Controller {
     }
   }
 
+  goBack(event) {
+    if (!this.#shouldIgnore(event)) {
+      event.preventDefault()
+      history.back()
+    }
+  }
+
   #shouldIgnore(event) {
     return event.defaultPrevented || event.target.closest("input, textarea")
   }

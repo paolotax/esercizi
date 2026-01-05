@@ -1,10 +1,11 @@
 <% content_for :titolo, @disciplina.nome %>
 
-<div class="max-w-7xl mx-auto p-6">
-  <div class="mb-6">
-    <%= link_to "← #{@disciplina.volume.nome}", volume_path(@disciplina.volume), class: "text-blue-500 hover:text-blue-700" %>
-  </div>
+<% content_for :header do %>
+  <%= back_link_to "#{@disciplina.volume.nome}", volume_path(@disciplina.volume), "keydown.left@document->hotkey#click keydown.esc@document->hotkey#click" %>
+<% end %>
 
+
+<div class="max-w-7xl mx-auto p-6">
   <h1 class="text-4xl font-bold mb-2" style="<%= "color: #{@disciplina.colore};" if @disciplina.colore.present? %>"><%= @disciplina.nome %></h1>
   <p class="text-xl text-gray-600 mb-8"><%= @disciplina.volume.nome %> - <%= @disciplina.volume.corso.nome %></p>
 
