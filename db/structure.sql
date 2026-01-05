@@ -106,7 +106,7 @@ FOREIGN KEY ("account_id")
 );
 CREATE INDEX "index_discipline_on_volume_id" ON "discipline" ("volume_id") /*application='Esercizi'*/;
 CREATE INDEX "index_discipline_on_account_id" ON "discipline" ("account_id") /*application='Esercizi'*/;
-CREATE TABLE IF NOT EXISTS "pagine" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "base_color" varchar, "created_at" datetime(6) NOT NULL, "disciplina_id" integer NOT NULL, "numero" integer NOT NULL, "posizione" integer DEFAULT 0, "slug" varchar NOT NULL, "sottotitolo" varchar, "titolo" varchar, "updated_at" datetime(6) NOT NULL, "view_template" varchar, "account_id" integer, CONSTRAINT "fk_rails_b785608fe0"
+CREATE TABLE IF NOT EXISTS "pagine" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "base_color" varchar, "created_at" datetime(6) NOT NULL, "disciplina_id" integer NOT NULL, "numero" integer NOT NULL, "posizione" integer DEFAULT 0, "slug" varchar NOT NULL, "sottotitolo" varchar, "titolo" varchar, "updated_at" datetime(6) NOT NULL, "view_template" varchar, "account_id" integer, "public" boolean DEFAULT FALSE NOT NULL /*application='Esercizi'*/, CONSTRAINT "fk_rails_b785608fe0"
 FOREIGN KEY ("disciplina_id")
   REFERENCES "discipline" ("id")
 , CONSTRAINT "fk_rails_b829e8ea4f"
@@ -191,7 +191,9 @@ FOREIGN KEY ("blob_id")
 CREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest") /*application='Esercizi'*/;
 CREATE TABLE IF NOT EXISTS "action_text_rich_texts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "body" text, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
 CREATE UNIQUE INDEX "index_action_text_rich_texts_uniqueness" ON "action_text_rich_texts" ("record_type", "record_id", "name") /*application='Esercizi'*/;
+CREATE INDEX "index_pagine_on_public" ON "pagine" ("public") /*application='Esercizi'*/;
 INSERT INTO "schema_migrations" (version) VALUES
+('20260105174558'),
 ('20260103202213'),
 ('20260103202157'),
 ('20251227093855'),
