@@ -1,18 +1,19 @@
-<%= collapsible_nav_section "Libri" do %>
-  <% Corso.includes(volumi: { discipline: :pagine }).order(:nome).each do |corso| %>
-    <%= collapsible_nav_section corso.nome, nested: true do %>
-      <% corso.volumi.order(:classe, :nome).each do |volume| %>
-        <%= collapsible_nav_section "#{volume.classe} - #{volume.nome}", nested: true do %>
-          <% volume.discipline.order(:nome).each do |disciplina| %>
-            <%= collapsible_nav_section disciplina.nome, nested: true do %>
-              <% disciplina.pagine.order(:posizione, :numero).limit(20).each do |pagina| %>
-                <%= nav_menu_pagina_item(pagina) %>
+<% if Current.user %>
+  <% discipline_accessibili = Disciplina.accessible_by(Current.user).includes(volume: :corso) %>
+  <% if discipline_accessibili.any? %>
+    <%= collapsible_nav_section "I miei libri" do %>
+      <% discipline_accessibili.group_by { |d| d.volume.corso }.each do |corso, discipline_corso| %>
+        <%= collapsible_nav_section corso.nome, nested: true do %>
+          <% discipline_corso.group_by(&:volume).each do |volume, discipline_volume| %>
+            <% if discipline_volume.count > 1 %>
+              <%= collapsible_nav_section "Classe #{volume.classe} - #{volume.nome}", nested: true do %>
+                <% discipline_volume.each do |disciplina| %>
+                  <%= filter_place_menu_item disciplina_path(disciplina), disciplina.nome, "book" %>
+                <% end %>
               <% end %>
-              <% if disciplina.pagine.count > 20 %>
-                <li class="popup__item flex items-center bg-transparent rounded w-full text-sm text-gray-500 dark:text-gray-400 px-2 py-1">
-                  ... e altre <%= disciplina.pagine.count - 20 %> pagine
-                </li>
-              <% end %>
+            <% else %>
+              <% disciplina = discipline_volume.first %>
+              <%= filter_place_menu_item disciplina_path(disciplina), "Classe #{volume.classe} - #{disciplina.nome}", "book" %>
             <% end %>
           <% end %>
         <% end %>
