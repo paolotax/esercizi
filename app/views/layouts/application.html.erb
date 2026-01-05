@@ -2,7 +2,7 @@
 <html>
   <%= render "layouts/shared/head" %>
 
-  <body class="print text-gray-800 dark:text-white bg-playful dark:bg-playful-dark min-h-screen flex flex-col transition-colors duration-300">
+  <body class="print text-gray-800 dark:text-white bg-playful dark:bg-playful-dark min-h-screen grid grid-rows-[auto_1fr_auto] transition-colors duration-300">
     <!-- Header -->
     <header class="relative sticky top-0 z-50 w-full px-4 py-2 <%= @header_class %>" id="header">
       <%= render "layouts/shared/background_header" %>
@@ -18,7 +18,7 @@
     <%#= render "shared/header" %>
 
     <!-- Main Content (no sidebar) -->
-    <main class="flex-1 overflow-y-auto pb-16">
+    <main class="pb-16">
       <%= turbo_frame_tag "main-content", class: "block turbo-frame-fade", data: { turbo_action: "advance" } do %>
         <%= yield %>
       <% end %>
