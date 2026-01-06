@@ -28,7 +28,7 @@ module NavMenuHelper
       safe_join([
         nav_icon(icon_name),
         tag.span(title),
-        tag.kbd(key, class: "hide-on-touch absolute top-2 right-2 text-[0.65em] opacity-50 bg-transparent")
+        tag.kbd(key, class: "hide-on-touch absolute top-2 right-2")
       ])
     end
   end
