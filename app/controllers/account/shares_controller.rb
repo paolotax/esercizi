@@ -4,10 +4,13 @@ class Account::SharesController < ApplicationController
   before_action :require_owner
 
   def index
-    @shares = Share.where(granted_by: Current.user)
-                   .where(recipient_type: "User")
-                   .where(recipient_id: Current.account.users.select(:id))
-                   .includes(:shareable, :recipient)
+    # Share all'account (dall'admin) + share a utenti dell'account (dall'owner)
+    account_shares = Share.where(recipient_type: "Account", recipient_id: Current.account.id)
+    user_shares = Share.where(recipient_type: "User", recipient_id: Current.account.users.select(:id))
+
+    @shares = Share.where(id: account_shares.select(:id))
+                   .or(Share.where(id: user_shares.select(:id)))
+                   .includes(:shareable, :recipient, :granted_by)
                    .order(created_at: :desc)
   end
 

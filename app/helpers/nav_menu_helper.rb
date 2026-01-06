@@ -114,10 +114,10 @@ module NavMenuHelper
 
   def nav_icon(name, size: :default)
     size_class = case size
-                 when :small then "text-xs"
-                 when :large then "text-xl"
-                 else "text-base"
-                 end
+    when :small then "text-xs"
+    when :large then "text-xl"
+    else "text-base"
+    end
 
     icon_tag(name, class: "popup__icon #{size_class} w-6 flex items-center justify-center shrink-0 ml-1")
   end
@@ -136,7 +136,7 @@ def filter_place_menu_item(path, label, icon, new_window: false, current: false,
     concat icon_tag(icon, class: "popup__icon w-6 flex items-center justify-center shrink-0 ml-1")
     concat(link_to(path, link_to_params.merge(class: "popup__btn btn rounded border-none bg-transparent flex-1 font-medium justify-start w-full min-w-0 py-2 px-1 text-left no-underline flex items-center gap-2 cursor-pointer"), data: { turbo: turbo }) do
       concat tag.span(label, class: "overflow-ellipsis")
-      concat icon_tag("check", class: "checked flex-item-justify-end", "aria-hidden": true)
+      # concat icon_tag("check", class: "checked flex-item-justify-end", "aria-hidden": true)
     end)
   end
 end
