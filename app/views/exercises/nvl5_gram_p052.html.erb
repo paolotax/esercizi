@@ -1,24 +1,27 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Introduction -->
-  <div class="bg-white p-4 md:p-6 pb-8">
-    <p class="text-base md:text-lg text-gray-700 mb-3">
+  <div class="p-4 md:p-6 pb-8">
+    <p class="text-base md:text-lg text-gray-700 dark:text-gray-200 mb-3">
       <span class="text-<%= @pagina.base_color %>-500">•</span> Gli aggettivi qualificativi aggiungono una qualità al nome e possono essere:
     </p>
-    <div class="space-y-2 text-base md:text-lg text-gray-700 ml-6">
+    <div class="space-y-2 text-base md:text-lg text-gray-700 dark:text-gray-200 ml-6">
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>grado positivo</strong> → Il libro è interessante.</p>
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>comparativo</strong> → più/meno/quanto interessante.</p>
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>superlativo</strong> → interessantissimo, molto interessante, il più interessante tra…</p>
     </div>
-    <p class="text-base md:text-lg text-gray-700 mt-3 italic ml-6">
+    <p class="text-base md:text-lg text-gray-700 dark:text-gray-200 mt-3 italic ml-6">
       Questo libro è interessante. Anzi, è interessantissimo.
     </p>
   </div>
 
   <!-- Exercise 1: Identify adjective degrees -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Sottolinea gli aggettivi qualificativi nelle frasi e indica il loro grado.
@@ -38,13 +41,13 @@
         <div class="rounded-lg p-3 flex items-center justify-between gap-4">
           <div class="flex items-center gap-2">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
-            <span class="text-gray-700"><%= sentence[:text] %></span>
+            <span class="text-gray-700 dark:text-gray-200"><%= sentence[:text] %></span>
           </div>
           <% if index == 0 %>
-            <span class="font-semibold text-<%= @pagina.base_color %>-700 text-right"><%= sentence[:degree] %></span>
+            <span class="font-semibold text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-400 text-right"><%= sentence[:degree] %></span>
           <% else %>
             <input type="text"
-                   class="w-48 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                   class="w-48 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                    data-fill-blanks-target="input"
                    data-answer="<%= sentence[:degree] %>"
                    data-correct-answer="<%= sentence[:degree] %>"
@@ -56,13 +59,13 @@
   </div>
 
   <!-- Exercise 2: Superlativo relativo vs assoluto -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+  <div class="p-4 md:p-6 pb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Clicca sui superlativi relativi<span class="inline-block w-5 h-5 bg-blue-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span> e sui superlativi assoluti<span class="inline-block w-5 h-5 bg-violet-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="violet" data-action="click->word-highlighter#selectColor"></span>.
     </h2>
 
-    <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 text-base md:text-lg text-gray-700 leading-relaxed space-y-2 cursor-pointer">
+    <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 text-base md:text-lg text-gray-700 dark:text-gray-200 leading-relaxed space-y-2 cursor-pointer">
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> Questo è <span class="transition" data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">il film più divertente</span> che abbia mai visto.</p>
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> Durante la passeggiata nel bosco abbiamo visto degli alberi <span class="transition" data-word-highlighter-target="word" data-correct="violet" data-action="click->word-highlighter#toggleHighlight">altissimi</span>.</p>
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> La torta della nonna è <span class="transition" data-word-highlighter-target="word" data-correct="violet" data-action="click->word-highlighter#toggleHighlight">buonissima</span>.</p>
@@ -73,7 +76,7 @@
   </div>
 
   <!-- Exercise 3: Write forms -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Scrivi le forme indicate.
@@ -92,12 +95,12 @@
         <div class="rounded-lg p-3 flex items-center justify-between gap-4">
           <div class="flex items-center gap-2">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
-            <span class="font-semibold text-gray-700"><%= item[:word] %></span>
-            <span class="text-gray-600">(<%= item[:form] %>)</span>
+            <span class="font-semibold text-gray-700 dark:text-gray-200"><%= item[:word] %></span>
+            <span class="text-gray-600 dark:text-gray-400">(<%= item[:form] %>)</span>
             <span class="text-<%= @pagina.base_color %>-500">→</span>
           </div>
           <input type="text"
-                 class="w-48 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 class="w-48 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:answer] %>"
                  data-correct-answer="<%= item[:answer] %>"
@@ -108,7 +111,7 @@
   </div>
 
   <!-- Exercise 4: Complete with adjectives -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
       Completa con aggettivi al grado richiesto.
@@ -117,49 +120,49 @@
     <div class="space-y-3 text-base md:text-lg">
       <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
         <span class="text-<%= @pagina.base_color %>-500">•</span>
-        <span class="text-gray-700">Cristian è</span>
-        <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700" data-fill-blanks-target="input" data-correct-answer="il più alto">
-        <span class="text-gray-600 text-sm">(superlativo relativo)</span>
-        <span class="text-gray-700">tra i compagni di basket.</span>
+        <span class="text-gray-700 dark:text-gray-200">Cristian è</span>
+        <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700" data-fill-blanks-target="input" data-correct-answer="il più alto">
+        <span class="text-gray-600 dark:text-gray-400 text-sm">(superlativo relativo)</span>
+        <span class="text-gray-700 dark:text-gray-200">tra i compagni di basket.</span>
       </div>
       <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
         <span class="text-<%= @pagina.base_color %>-500">•</span>
-        <span class="text-gray-700">Ho comprato un</span>
-        <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700" data-fill-blanks-target="input" data-correct-answer="bellissimo">
-        <span class="text-gray-600 text-sm">(superlativo assoluto)</span>
-        <span class="text-gray-700">libro di poesie.</span>
+        <span class="text-gray-700 dark:text-gray-200">Ho comprato un</span>
+        <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700" data-fill-blanks-target="input" data-correct-answer="bellissimo">
+        <span class="text-gray-600 dark:text-gray-400 text-sm">(superlativo assoluto)</span>
+        <span class="text-gray-700 dark:text-gray-200">libro di poesie.</span>
       </div>
       <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
         <span class="text-<%= @pagina.base_color %>-500">•</span>
-        <span class="text-gray-700">Le scarpe da ginnastica di Alice sono</span>
-        <input type="text" class="w-24 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700" data-fill-blanks-target="input" data-correct-answer="rosse">
-        <span class="text-gray-600 text-sm">(positivo)</span>
+        <span class="text-gray-700 dark:text-gray-200">Le scarpe da ginnastica di Alice sono</span>
+        <input type="text" class="w-24 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700" data-fill-blanks-target="input" data-correct-answer="rosse">
+        <span class="text-gray-600 dark:text-gray-400 text-sm">(positivo)</span>
       </div>
       <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
         <span class="text-<%= @pagina.base_color %>-500">•</span>
-        <span class="text-gray-700">La campanella della scuola è</span>
-        <input type="text" class="w-36 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700" data-fill-blanks-target="input" data-correct-answer="rumorosissima">
-        <span class="text-gray-600 text-sm">(superlativo assoluto)</span>
+        <span class="text-gray-700 dark:text-gray-200">La campanella della scuola è</span>
+        <input type="text" class="w-36 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700" data-fill-blanks-target="input" data-correct-answer="rumorosissima">
+        <span class="text-gray-600 dark:text-gray-400 text-sm">(superlativo assoluto)</span>
       </div>
       <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
         <span class="text-<%= @pagina.base_color %>-500">•</span>
-        <span class="text-gray-700">Simonetta è</span>
-        <input type="text" class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700" data-fill-blanks-target="input" data-correct-answer="più alta">
-        <span class="text-gray-600 text-sm">(comparativo di maggioranza)</span>
-        <span class="text-gray-700">di Paolo.</span>
+        <span class="text-gray-700 dark:text-gray-200">Simonetta è</span>
+        <input type="text" class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700" data-fill-blanks-target="input" data-correct-answer="più alta">
+        <span class="text-gray-600 dark:text-gray-400 text-sm">(comparativo di maggioranza)</span>
+        <span class="text-gray-700 dark:text-gray-200">di Paolo.</span>
       </div>
       <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
         <span class="text-<%= @pagina.base_color %>-500">•</span>
-        <span class="text-gray-700">Il Po è</span>
-        <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700" data-fill-blanks-target="input" data-correct-answer="il più lungo">
-        <span class="text-gray-600 text-sm">(superlativo relativo)</span>
-        <span class="text-gray-700">dei fiumi d'Italia.</span>
+        <span class="text-gray-700 dark:text-gray-200">Il Po è</span>
+        <input type="text" class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700" data-fill-blanks-target="input" data-correct-answer="il più lungo">
+        <span class="text-gray-600 dark:text-gray-400 text-sm">(superlativo relativo)</span>
+        <span class="text-gray-700 dark:text-gray-200">dei fiumi d'Italia.</span>
       </div>
     </div>
   </div>
 
-  <div class="text-right text-sm text-gray-500 mb-6">
-    Esercizi pp. <%= link_to "154", pagina_path("nvl5_gram_p154"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "155", pagina_path("nvl5_gram_p155"), class: "text-gray-600 hover:text-gray-800 underline" %> e <%= link_to "163", pagina_path("nvl5_gram_p163"), class: "text-gray-600 hover:text-gray-800 underline" %>
+  <div class="text-right text-sm text-gray-500 dark:text-gray-400 mb-6">
+    Esercizi pp. <%= link_to "154", pagina_path("nvl5_gram_p154"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>, <%= link_to "155", pagina_path("nvl5_gram_p155"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %> e <%= link_to "163", pagina_path("nvl5_gram_p163"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>
   </div>
 
   <%= render 'shared/exercise_controls' %>

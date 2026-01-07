@@ -1,13 +1,16 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Introduction -->
-  <div class="bg-white p-4 md:p-6 pb-8">
-    <p class="text-base md:text-lg text-gray-700 font-semibold mb-3">
+  <div class="p-4 md:p-6 pb-8">
+    <p class="text-base md:text-lg text-gray-700 dark:text-gray-200 font-semibold mb-3">
       <span class="text-<%= @pagina.base_color %>-500">•</span> In base alla struttura, i nomi possono essere:
     </p>
-    <div class="space-y-2 text-base md:text-lg text-gray-700 ml-6">
+    <div class="space-y-2 text-base md:text-lg text-gray-700 dark:text-gray-200 ml-6">
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>primitivi</strong> → musica, gatto, libro</p>
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>derivati</strong> → musicista, libreria</p>
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>alterati</strong> → gattino (diminutivo), gattuccio (vezzeggiativo), gattone (accrescitivo), gattaccio (dispregiativo)</p>
@@ -16,7 +19,7 @@
   </div>
 
   <!-- Exercise 1: Primitivi vs Derivati -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+  <div class="p-4 md:p-6 pb-8" data-controller="exercise-group">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Colora di blu i nomi primitivi, di viola i nomi derivati.
@@ -32,15 +35,15 @@
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-base md:text-lg">
       <% nouns_structure.each do |noun| %>
-        <div class="<%= noun[:type] == 'primitivo' ? 'bg-blue-50' : 'bg-purple-50' %> rounded-lg p-2 text-center">
-          <span class="text-gray-700 font-semibold"><%= noun[:word] %></span>
+        <div class="<%= noun[:type] == 'primitivo' ? 'bg-blue-50 dark:bg-blue-900/30' : 'bg-purple-50 dark:bg-purple-900/30' %> rounded-lg p-2 text-center">
+          <span class="text-gray-700 dark:text-gray-200 font-semibold"><%= noun[:word] %></span>
         </div>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 2: Tipi di alterati -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+  <div class="p-4 md:p-6 pb-8" data-controller="exercise-group">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Per ogni nome alterato indica se è vezzeggiativo (V), diminutivo (D), dispregiativo (DS) o accrescitivo (A).
@@ -56,7 +59,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-base md:text-lg">
       <% alterati.each_with_index do |noun, index| %>
         <div class="rounded-lg p-3 flex items-center justify-between gap-4">
-          <span class="font-semibold text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= noun[:word] %></span>
+          <span class="font-semibold text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= noun[:word] %></span>
           <div class="flex gap-2">
             <% ["V", "D", "DS", "A"].each do |opt| %>
               <label class="flex items-center gap-1 cursor-pointer">
@@ -71,17 +74,17 @@
   </div>
 
   <!-- Exercise 3: Form compound nouns -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Collega le parole e forma i nomi composti.
     </h2>
 
-    <div class="mb-4 bg-<%= @pagina.base_color %>-50 rounded-lg p-3">
-      <p class="text-base md:text-lg text-gray-700">
+    <div class="mb-4 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-3">
+      <p class="text-base md:text-lg text-gray-700 dark:text-gray-200">
         <span class="text-<%= @pagina.base_color %>-500">•</span> Prima parte: sciogli - lungo - dopo - salva - arco - alto
       </p>
-      <p class="text-base md:text-lg text-gray-700">
+      <p class="text-base md:text-lg text-gray-700 dark:text-gray-200">
         <span class="text-<%= @pagina.base_color %>-500">•</span> Seconda parte: gente - lingua - piano - mare - scuola - baleno
       </p>
     </div>
@@ -100,13 +103,13 @@
         <div class="rounded-lg p-3 flex items-center justify-between gap-4">
           <div class="flex items-center gap-2">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
-            <span class="text-gray-700"><%= compound[:part1] %></span>
+            <span class="text-gray-700 dark:text-gray-200"><%= compound[:part1] %></span>
             <span class="text-<%= @pagina.base_color %>-500 font-bold">+</span>
-            <span class="text-gray-700"><%= compound[:part2] %></span>
+            <span class="text-gray-700 dark:text-gray-200"><%= compound[:part2] %></span>
             <span class="text-<%= @pagina.base_color %>-500">→</span>
           </div>
           <input type="text"
-                 class="w-40 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 class="w-40 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= compound[:compound] %>"
                  data-correct-answer="<%= compound[:compound] %>"
@@ -116,8 +119,8 @@
     </div>
   </div>
 
-  <div class="text-right text-sm text-gray-500 mb-6">
-    Esercizi pp. <%= link_to "149", pagina_path("nvl5_gram_p149"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "150", pagina_path("nvl5_gram_p150"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "151", pagina_path("nvl5_gram_p151"), class: "text-gray-600 hover:text-gray-800 underline" %> e <%= link_to "153", pagina_path("nvl5_gram_p153"), class: "text-gray-600 hover:text-gray-800 underline" %>
+  <div class="text-right text-sm text-gray-500 dark:text-gray-400 mb-6">
+    Esercizi pp. <%= link_to "149", pagina_path("nvl5_gram_p149"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>, <%= link_to "150", pagina_path("nvl5_gram_p150"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>, <%= link_to "151", pagina_path("nvl5_gram_p151"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %> e <%= link_to "153", pagina_path("nvl5_gram_p153"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>
   </div>
 
   <%= render 'shared/exercise_controls' %>

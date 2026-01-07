@@ -1,46 +1,49 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Info Box with Illustration -->
-  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
+  <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 p-4 md:p-6 pb-8 rounded-lg">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center mb-4">
-      <div>
+      <div class="dark:bg-white rounded-xl p-1 inline-block">
         <%= image_tag "nvl5_gram/p056/p056_01.jpg", alt: "Illustrazione possessivi", class: "w-full rounded-lg" %>
       </div>
       <div>
-        <p class="text-base md:text-lg text-gray-700 mb-3">
+        <p class="text-base md:text-lg text-gray-700 dark:text-gray-200 mb-3">
           <span class="text-<%= @pagina.base_color %>-500">•</span> I <strong>possessivi</strong> indicano a chi appartiene ciò di cui si parla.
         </p>
-        <div class="space-y-2 text-base md:text-lg text-gray-700 ml-6">
-          <p><span class="text-red-500">•</span> Gli <strong class="text-red-600">aggettivi possessivi</strong> accompagnano il nome → La <strong>mia</strong> maglietta è verde.</p>
-          <p><span class="text-blue-500">•</span> I <strong class="text-blue-600">pronomi possessivi</strong> sostituiscono il nome → La <strong>mia</strong> (maglietta) è bianca.</p>
+        <div class="space-y-2 text-base md:text-lg text-gray-700 dark:text-gray-200 ml-6">
+          <p><span class="text-red-500">•</span> Gli <strong class="text-red-600 dark:text-red-400">aggettivi possessivi</strong> accompagnano il nome → La <strong>mia</strong> maglietta è verde.</p>
+          <p><span class="text-blue-500">•</span> I <strong class="text-blue-600 dark:text-blue-400">pronomi possessivi</strong> sostituiscono il nome → La <strong>mia</strong> (maglietta) è bianca.</p>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Exercise 1: IMPARARE TUTTI - Underline possessives -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+  <div class="p-4 md:p-6 pb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Clicca sugli aggettivi possessivi<span class="inline-block w-5 h-5 bg-red-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span> e sui pronomi possessivi<span class="inline-block w-5 h-5 bg-blue-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span>.
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base md:text-lg cursor-pointer">
-      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 space-y-3">
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Il <span class="transition" data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">mio</span> astuccio è sul banco, il <span class="transition" data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">tuo</span> è ancora nello zaino.</p>
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Dove sono i <span class="transition" data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">vostri</span> libri? Questi sono i <span class="transition" data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">nostri</span>.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 space-y-3">
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> Il <span class="transition" data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">mio</span> astuccio è sul banco, il <span class="transition" data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">tuo</span> è ancora nello zaino.</p>
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> Dove sono i <span class="transition" data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">vostri</span> libri? Questi sono i <span class="transition" data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">nostri</span>.</p>
       </div>
-      <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 space-y-3">
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Il cane grosso è di Pablo, il <span class="transition" data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">mio</span> è quello piccolo.</p>
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Farò il <span class="transition" data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">mio</span> dovere se lui farà il <span class="transition" data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">suo</span>.</p>
+      <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 space-y-3">
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> Il cane grosso è di Pablo, il <span class="transition" data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">mio</span> è quello piccolo.</p>
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> Farò il <span class="transition" data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight">mio</span> dovere se lui farà il <span class="transition" data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight">suo</span>.</p>
       </div>
     </div>
   </div>
 
   <!-- Exercise 2: Volgi al plurale -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Volgi al plurale.
@@ -60,11 +63,11 @@
         <div class="rounded-lg p-3 flex items-center justify-between gap-4">
           <div class="flex items-center gap-2">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
-            <span class="text-gray-700 font-semibold"><%= item[:singular] %></span>
+            <span class="text-gray-700 dark:text-gray-200 font-semibold"><%= item[:singular] %></span>
             <span class="text-<%= @pagina.base_color %>-500">→</span>
           </div>
           <input type="text"
-                 class="w-40 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 class="w-40 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:plural] %>"
                  data-correct-answer="<%= item[:plural] %>">
@@ -74,7 +77,7 @@
   </div>
 
   <!-- Exercise 3: Sottolinea il pronome e indica il nome -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Sottolinea il pronome possessivo e scrivi il nome che sostituisce.
@@ -90,11 +93,11 @@
       <% pronoun_sentences.each do |item| %>
         <div class="rounded-lg p-3">
           <div class="flex flex-col md:flex-row md:items-center gap-3">
-            <p class="text-gray-700 flex-1"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= raw item[:sentence] %></p>
+            <p class="text-gray-700 dark:text-gray-200 flex-1"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= raw item[:sentence] %></p>
             <div class="flex items-center gap-2">
-              <span class="text-gray-500">Nome:</span>
+              <span class="text-gray-500 dark:text-gray-400">Nome:</span>
               <input type="text"
-                     class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                     class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                      data-fill-blanks-target="input"
                      data-answer="<%= item[:answer] %>"
                      data-correct-answer="<%= item[:answer] %>">
@@ -106,15 +109,15 @@
   </div>
 
   <!-- Exercise 4: Sottolinea la forma corretta -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="multiple-choice">
+  <div class="p-4 md:p-6 pb-8" data-controller="multiple-choice">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
       Sottolinea la forma corretta.
     </h2>
 
-    <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 mb-4">
-      <p class="text-base md:text-lg text-gray-700">
-        <span class="text-<%= @pagina.base_color %>-500">•</span> Sono aggettivi e pronomi possessivi anche <strong class="text-red-600">altrui</strong> e <strong class="text-red-600">proprio</strong>.
+    <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 mb-4">
+      <p class="text-base md:text-lg text-gray-700 dark:text-gray-200">
+        <span class="text-<%= @pagina.base_color %>-500">•</span> Sono aggettivi e pronomi possessivi anche <strong class="text-red-600 dark:text-red-400">altrui</strong> e <strong class="text-red-600 dark:text-red-400">proprio</strong>.
       </p>
     </div>
 
@@ -127,7 +130,7 @@
     <div class="space-y-3 text-base md:text-lg">
       <% correct_forms.each_with_index do |item, index| %>
         <div class="rounded-lg p-3">
-          <p class="text-gray-700">
+          <p class="text-gray-700 dark:text-gray-200">
             <span class="text-<%= @pagina.base_color %>-500">•</span> <%= item[:text] %>
             <% item[:options].each do |option| %>
               <label class="inline-flex items-center gap-2 mx-2 cursor-pointer">
@@ -142,8 +145,8 @@
     </div>
   </div>
 
-  <div class="text-right text-sm text-gray-500 mb-6">
-    Esercizi p. <%= link_to "158", pagina_path("nvl5_gram_p158"), class: "text-gray-600 hover:text-gray-800 underline" %>
+  <div class="text-right text-sm text-gray-500 dark:text-gray-400 mb-6">
+    Esercizi p. <%= link_to "158", pagina_path("nvl5_gram_p158"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>
   </div>
 
   <%= render 'shared/exercise_controls' %>
