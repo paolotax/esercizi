@@ -1,0 +1,104 @@
+#!/bin/bash
+#
+# Rimuove tutte le classi Tailwind di dimensione testo dai file HTML ERB
+# per permettere al controller Stimulus font-controls di gestire la dimensione.
+#
+# Uso:
+#   bin/remove_text_size_classes <pattern>
+#
+# Esempi:
+#   bin/remove_text_size_classes "nvl5_gram_p0*"     # pagine 001-099
+#   bin/remove_text_size_classes "nvl5_gram_p1*"     # pagine 100-199
+#   bin/remove_text_size_classes "nvi4_mat_p*"       # tutte le pagine nvi4_mat
+#   bin/remove_text_size_classes "bus3_mat_p0*"      # pagine bus3_mat 001-099
+#
+# Classi rimosse:
+#   text-xs, text-sm, text-base, text-lg, text-xl, text-2xl, text-3xl, text-4xl, text-5xl
+#   e varianti responsive: sm:text-*, md:text-*, lg:text-*, xl:text-*
+#
+# Classi preservate:
+#   text-gray-*, text-white, text-black, text-red-*, text-blue-*, ecc. (colori)
+#
+
+set -e
+
+if [ -z "$1" ]; then
+  echo "Uso: $0 <pattern>"
+  echo "Esempio: $0 'nvl5_gram_p0*'"
+  exit 1
+fi
+
+PATTERN="$1"
+DIR="app/views/exercises"
+
+# Trova i file che matchano il pattern
+files=$(find "$DIR" -name "${PATTERN}.html.erb" -type f 2>/dev/null | sort)
+
+if [ -z "$files" ]; then
+  echo "Nessun file trovato con pattern: ${PATTERN}.html.erb in $DIR"
+  exit 1
+fi
+
+# Conta occorrenze prima
+echo "=== Conteggio occorrenze PRIMA ==="
+total_before=0
+for file in $files; do
+  count=$(grep -c -E "(sm:|md:|lg:|xl:)?text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)" "$file" 2>/dev/null || echo 0)
+  total_before=$((total_before + count))
+done
+echo "Totale classi text-size trovate: $total_before"
+echo ""
+
+if [ "$total_before" -eq 0 ]; then
+  echo "Nessuna classe text-size da rimuovere."
+  exit 0
+fi
+
+# Rimuovi le classi
+echo "=== Rimozione classi text-size ==="
+processed=0
+for file in $files; do
+  # Pattern 1: rimuove con spazio prima (la maggior parte dei casi)
+  sed -i -E 's/ (sm:|md:|lg:|xl:)?text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)//g' "$file"
+
+  # Pattern 2: class="text-size ..." -> class="..."
+  sed -i -E 's/class="(sm:|md:|lg:|xl:)?text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl) /class="/g' "$file"
+
+  # Pattern 3: ... text-size" -> ..."
+  sed -i -E 's/ (sm:|md:|lg:|xl:)?text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)"/"/g' "$file"
+
+  # Pattern 4: class="text-size" (unica classe) -> class=""
+  sed -i -E 's/class="(sm:|md:|lg:|xl:)?text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)"/class=""/g' "$file"
+
+  # Pulisce spazi doppi
+  sed -i -E 's/class=" /class="/g' "$file"
+
+  processed=$((processed + 1))
+done
+echo "File processati: $processed"
+echo ""
+
+# Conta occorrenze dopo
+echo "=== Conteggio occorrenze DOPO ==="
+total_after=0
+for file in $files; do
+  count=$(grep -c -E "(sm:|md:|lg:|xl:)?text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)" "$file" 2>/dev/null || echo 0)
+  if [ "$count" -gt 0 ]; then
+    echo "ATTENZIONE: $file ha ancora $count occorrenze"
+    total_after=$((total_after + count))
+  fi
+done
+
+if [ "$total_after" -eq 0 ]; then
+  echo "Tutte le classi text-size rimosse con successo!"
+else
+  echo "Rimangono $total_after occorrenze da verificare manualmente."
+fi
+
+echo ""
+echo "=== Riepilogo ==="
+echo "File processati: $processed"
+echo "Classi rimosse: $((total_before - total_after))"
+echo ""
+echo "Per verificare le modifiche: git diff $DIR/${PATTERN}.html.erb"
+echo "Per committare: git add $DIR/${PATTERN}.html.erb && git commit -m 'fix: remove text-size classes from ${PATTERN}'"
