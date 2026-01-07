@@ -1,9 +1,12 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 5: Defective nouns in sentences -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">5</span>
       Scegli tra i nomi difettivi (paraggi - burro - stoviglie - riso - forbici - morbillo) quello adatto a ciascuna frase; indica se è solo singolare (SS) o solo plurale (SP).
@@ -23,15 +26,15 @@
         <div class="rounded-lg p-3">
           <div class="flex flex-wrap items-center gap-2 mb-2">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
-            <span class="text-gray-700"><%= sentence[:text] %></span>
+            <span class="text-gray-700 dark:text-gray-200"><%= sentence[:text] %></span>
             <input type="text"
-                   class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                   class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                    data-fill-blanks-target="input"
                    data-answer="<%= sentence[:answer] %>"
                    data-correct-answer="<%= sentence[:answer] %>"
                    maxlength="30">
             <% if sentence[:suffix] %>
-              <span class="text-gray-600 text-sm"><%= sentence[:suffix] %></span>
+              <span class="text-gray-600 dark:text-gray-400 text-sm"><%= sentence[:suffix] %></span>
             <% end %>
           </div>
           <div class="flex gap-4 ml-6">
@@ -50,7 +53,7 @@
   </div>
 
   <!-- Exercise 6: Sovrabbondanti -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="exercise-group">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">6</span>
       Collega ciascun plurale dei nomi sovrabbondanti al suo uso corretto.
@@ -70,13 +73,13 @@
         <div class="rounded-lg p-3">
           <div class="font-bold text-<%= @pagina.base_color %>-700 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= noun[:singular] %></div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 ml-6">
-            <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-2">
+            <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-2">
               <span class="font-semibold"><%= noun[:plural1] %></span>
-              <span class="text-gray-600"> (<%= noun[:meaning1] %>)</span>
+              <span class="text-gray-600 dark:text-gray-400"> (<%= noun[:meaning1] %>)</span>
             </div>
-            <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-2">
+            <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-2">
               <span class="font-semibold"><%= noun[:plural2] %></span>
-              <span class="text-gray-600"> (<%= noun[:meaning2] %>)</span>
+              <span class="text-gray-600 dark:text-gray-400"> (<%= noun[:meaning2] %>)</span>
             </div>
           </div>
         </div>
@@ -85,7 +88,7 @@
   </div>
 
   <!-- Exercise 7: Complete sentences with correct plural -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="exercise-group">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">7</span>
       Completa ogni frase con il plurale corretto.
@@ -103,7 +106,7 @@
         <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
           <span class="text-<%= @pagina.base_color %>-500">•</span>
           <% if sentence[:text].present? %>
-            <span class="text-gray-700"><%= sentence[:text] %></span>
+            <span class="text-gray-700 dark:text-gray-200"><%= sentence[:text] %></span>
           <% end %>
           <select class="border-2 border-<%= @pagina.base_color %>-300 rounded-lg px-3 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500"
                   data-correct-answer="<%= sentence[:answer] %>">
@@ -112,13 +115,13 @@
               <option value="<%= option %>"><%= option %></option>
             <% end %>
           </select>
-          <span class="text-gray-700"><%= sentence[:continuation] %></span>
+          <span class="text-gray-700 dark:text-gray-200"><%= sentence[:continuation] %></span>
         </div>
       <% end %>
     </div>
   </div>
 
-  <div class="text-right text-sm text-gray-500 mb-6">
+  <div class="text-right text-sm text-gray-500 dark:text-gray-400 mb-6">
     Esercizi pp. <%= link_to "146", pagina_path("nvl5_gram_p146"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "147", pagina_path("nvl5_gram_p147"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "148", pagina_path("nvl5_gram_p148"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "153", pagina_path("nvl5_gram_p153"), class: "text-gray-600 hover:text-gray-800 underline" %>
   </div>
 

@@ -1,16 +1,19 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Introduction -->
-  <div class="bg-white p-4 md:p-6 pb-8">
-    <p class="text-base md:text-lg text-gray-700 font-semibold">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8">
+    <p class="text-base md:text-lg text-gray-700 dark:text-gray-200 font-semibold">
       <span class="text-<%= @pagina.base_color %>-500">•</span> La morfologia studia la struttura delle parole e le regole per formarne di nuove.
     </p>
   </div>
 
   <!-- Exercise 1: Complete with articles -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Completa con l'articolo determinativo corretto (il, la, i, le):
@@ -30,10 +33,10 @@
         <div class="rounded-lg p-3 flex items-center justify-between gap-4">
           <div class="flex items-center gap-4">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
-            <span class="text-gray-700 font-semibold"><%= exercise[:word] %></span>
+            <span class="text-gray-700 dark:text-gray-200 font-semibold"><%= exercise[:word] %></span>
           </div>
           <input type="text"
-                 class="w-16 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 class="w-16 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= exercise[:article] %>"
                  data-correct-answer="<%= exercise[:article] %>"
@@ -44,7 +47,7 @@
   </div>
 
   <!-- Exercise 2: Match definitions -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Collega ogni parola alla sua definizione.
@@ -65,7 +68,7 @@
             <span class="text-<%= @pagina.base_color %>-500">→</span>
           </div>
           <input type="text"
-                 class="flex-1 max-w-xs border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 class="flex-1 max-w-xs border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:definition] %>"
                  data-correct-answer="<%= item[:definition] %>"
@@ -74,11 +77,11 @@
       <% end %>
     </div>
 
-    <div class="mt-4 bg-<%= @pagina.base_color %>-50 rounded-lg p-3">
+    <div class="mt-4 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-3">
       <div class="flex flex-wrap items-center justify-between gap-4 text-base md:text-lg">
-        <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Il nome da cui derivano tutte queste parole è</span>
+        <span class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> Il nome da cui derivano tutte queste parole è</span>
         <input type="text"
-               class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+               class="w-32 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                data-fill-blanks-target="input"
                data-answer="materasso"
                data-correct-answer="materasso"
@@ -88,8 +91,8 @@
   </div>
 
   <!-- CLIL Section -->
-  <div class="bg-white p-4 md:p-6 pb-8">
-    <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8">
+    <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4">
       <p class="text-sm md:text-base font-bold text-<%= @pagina.base_color %>-700 mb-3">
         CLIL - Leggi e scopri
       </p>
@@ -104,7 +107,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-base md:text-lg">
         <% clil_terms.each do |term| %>
           <div class="flex items-center justify-between gap-4">
-            <span class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= term[:italian] %></span>
+            <span class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= term[:italian] %></span>
             <span class="text-<%= @pagina.base_color %>-700 font-semibold">→ <%= term[:english] %></span>
           </div>
         <% end %>

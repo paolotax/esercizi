@@ -1,9 +1,12 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 3: Match figurative meanings -->
-  <div class="bg-white p-4 md:p-6 pb-8">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Collega ogni significato figurato al corrispondente significato proprio.
@@ -21,11 +24,11 @@
         <div class="rounded-lg p-3 flex items-center justify-between gap-4">
           <div class="flex items-center gap-4">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
-            <span class="text-gray-700 font-semibold"><%= item[:expression] %></span>
+            <span class="text-gray-700 dark:text-gray-200 font-semibold"><%= item[:expression] %></span>
             <span class="text-<%= @pagina.base_color %>-500">→</span>
           </div>
           <input type="text"
-                 class="flex-1 max-w-xs border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 class="flex-1 max-w-xs border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  maxlength="60">
         </div>
       <% end %>
@@ -33,21 +36,21 @@
   </div>
 
   <!-- Exercise 4: Write sentences -->
-  <div class="bg-white p-4 md:p-6 pb-8">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
       Scrivi sul quaderno una frase per ciascuna espressione figurata dell'esercizio 3.
     </h2>
 
-    <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-3">
-      <p class="text-base md:text-lg text-gray-700 italic">
+    <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-3">
+      <p class="text-base md:text-lg text-gray-700 dark:text-gray-200 italic">
         <span class="text-<%= @pagina.base_color %>-500">•</span> Esempio: Marco voleva il mio pallone e mi ha preso per la gola offrendo un cioccolatino.
       </p>
     </div>
   </div>
 
   <!-- Exercise 5: Write comparisons and metaphors -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">5</span>
       Scrivi una frase per ogni gruppo di parole: prima un paragone, poi la metafora.
@@ -80,15 +83,15 @@
     <div class="space-y-5">
       <% word_groups.each_with_index do |group, index| %>
         <div class="rounded-lg p-3">
-          <p class="text-base md:text-lg text-gray-700 font-semibold mb-3"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= group[:words] %></p>
+          <p class="text-base md:text-lg text-gray-700 dark:text-gray-200 font-semibold mb-3"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= group[:words] %></p>
           <div class="space-y-3 ml-6">
             <div class="flex flex-wrap items-center gap-2">
-              <span class="text-gray-700">Paragone:</span>
+              <span class="text-gray-700 dark:text-gray-200">Paragone:</span>
               <% if group[:is_example] %>
-                <span class="text-gray-700 italic"><%= group[:comparison_example] %></span>
+                <span class="text-gray-700 dark:text-gray-200 italic"><%= group[:comparison_example] %></span>
               <% else %>
                 <input type="text"
-                       class="flex-1 min-w-[250px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                       class="flex-1 min-w-[250px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                        data-fill-blanks-target="input"
                        data-answer="<%= group[:comparison_answer] %>"
                        data-correct-answer="<%= group[:comparison_answer] %>"
@@ -96,12 +99,12 @@
               <% end %>
             </div>
             <div class="flex flex-wrap items-center gap-2">
-              <span class="text-gray-700">Metafora:</span>
+              <span class="text-gray-700 dark:text-gray-200">Metafora:</span>
               <% if group[:is_example] %>
-                <span class="text-gray-700 italic"><%= group[:metaphor_example] %></span>
+                <span class="text-gray-700 dark:text-gray-200 italic"><%= group[:metaphor_example] %></span>
               <% else %>
                 <input type="text"
-                       class="flex-1 min-w-[250px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                       class="flex-1 min-w-[250px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                        data-fill-blanks-target="input"
                        data-answer="<%= group[:metaphor_answer] %>"
                        data-correct-answer="<%= group[:metaphor_answer] %>"
@@ -115,7 +118,7 @@
   </div>
 
   <!-- Exercise 6: Transform metaphors into comparisons -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">6</span>
       Trasforma le metafore in paragoni.
@@ -144,14 +147,14 @@
     <div class="space-y-4 text-base md:text-lg">
       <% transformations.each_with_index do |item, index| %>
         <div class="rounded-lg p-3">
-          <p class="text-gray-700 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= item[:metaphor] %></p>
+          <p class="text-gray-700 dark:text-gray-200 mb-2"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= item[:metaphor] %></p>
           <div class="flex flex-wrap items-center gap-2 ml-6">
             <span class="text-<%= @pagina.base_color %>-500">→</span>
             <% if item[:is_example] %>
-              <span class="text-gray-700 italic"><%= item[:comparison] %></span>
+              <span class="text-gray-700 dark:text-gray-200 italic"><%= item[:comparison] %></span>
             <% else %>
               <input type="text"
-                     class="flex-1 min-w-[250px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                     class="flex-1 min-w-[250px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                      data-fill-blanks-target="input"
                      data-answer="<%= item[:comparison] %>"
                      data-correct-answer="<%= item[:comparison] %>"
@@ -163,7 +166,7 @@
     </div>
   </div>
 
-  <div class="text-right text-sm text-gray-500 mb-6">
+  <div class="text-right text-sm text-gray-500 dark:text-gray-400 mb-6">
     Esercizi p. <%= link_to "143", pagina_path("nvl5_gram_p143"), class: "text-gray-600 hover:text-gray-800 underline" %>
   </div>
 

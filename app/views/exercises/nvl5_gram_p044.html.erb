@@ -1,13 +1,16 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Introduction -->
-  <div class="bg-white p-4 md:p-6 pb-8">
-    <p class="text-base md:text-lg text-gray-700 font-semibold mb-3">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8">
+    <p class="text-base md:text-lg text-gray-700 dark:text-gray-200 font-semibold mb-3">
       <span class="text-<%= @pagina.base_color %>-500">•</span> A seconda del numero, i nomi si distinguono in:
     </p>
-    <div class="space-y-2 text-base md:text-lg text-gray-700 ml-6">
+    <div class="space-y-2 text-base md:text-lg text-gray-700 dark:text-gray-200 ml-6">
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>singolari</strong> → pianeta, casa, paese, negozio</p>
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>plurali</strong> → pianeti, case, paesi, negozi</p>
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>invariabili</strong> → la città / le città</p>
@@ -17,7 +20,7 @@
   </div>
 
   <!-- Exercise 1: Nomi senza plurale -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="exercise-group">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Colora i nomi che non hanno il plurale.
@@ -35,16 +38,16 @@
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-base md:text-lg">
       <% no_plural.each do |noun| %>
-        <label class="flex items-center gap-2 rounded-lg p-2 cursor-pointer hover:bg-<%= @pagina.base_color %>-50 transition">
+        <label class="flex items-center gap-2 rounded-lg p-2 cursor-pointer hover:bg-<%= @pagina.base_color %>-50 dark:hover:bg-<%= @pagina.base_color %>-900/30 transition">
           <input type="checkbox" value="<%= noun[:word] %>" data-correct-answer="<%= noun[:has_plural] ? 'unchecked' : 'checked' %>" class="w-4 h-4">
-          <span class="text-gray-700"><%= noun[:word] %></span>
+          <span class="text-gray-700 dark:text-gray-200"><%= noun[:word] %></span>
         </label>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 2: Nomi senza singolare -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="exercise-group">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="exercise-group">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Colora i nomi che non hanno il singolare.
@@ -61,16 +64,16 @@
 
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-base md:text-lg">
       <% no_singular.each do |noun| %>
-        <label class="flex items-center gap-2 rounded-lg p-2 cursor-pointer hover:bg-<%= @pagina.base_color %>-50 transition">
+        <label class="flex items-center gap-2 rounded-lg p-2 cursor-pointer hover:bg-<%= @pagina.base_color %>-50 dark:hover:bg-<%= @pagina.base_color %>-900/30 transition">
           <input type="checkbox" value="<%= noun[:word] %>" data-correct-answer="<%= noun[:has_singular] ? 'unchecked' : 'checked' %>" class="w-4 h-4">
-          <span class="text-gray-700"><%= noun[:word] %></span>
+          <span class="text-gray-700 dark:text-gray-200"><%= noun[:word] %></span>
         </label>
       <% end %>
     </div>
   </div>
 
   <!-- Exercise 3: Write sentences with defective nouns (singular only) -->
-  <div class="bg-white p-4 md:p-6 pb-8">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Scegli due nomi difettivi dall'esercizio 1 e scrivi una frase per ognuno.
@@ -78,16 +81,16 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <div class="rounded-lg p-3">
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> 1. .................................................................</p>
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> 1. .................................................................</p>
       </div>
       <div class="rounded-lg p-3">
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> 2. .................................................................</p>
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> 2. .................................................................</p>
       </div>
     </div>
   </div>
 
   <!-- Exercise 4: Write sentences with defective nouns (plural only) -->
-  <div class="bg-white p-4 md:p-6 pb-8">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
       Scegli due nomi difettivi dall'esercizio 2 e scrivi una frase per ognuno.
@@ -95,15 +98,15 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <div class="rounded-lg p-3">
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> 1. .................................................................</p>
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> 1. .................................................................</p>
       </div>
       <div class="rounded-lg p-3">
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> 2. .................................................................</p>
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> 2. .................................................................</p>
       </div>
     </div>
   </div>
 
-  <div class="text-right text-sm text-gray-500 mb-6">
+  <div class="text-right text-sm text-gray-500 dark:text-gray-400 mb-6">
     Esercizi pp. <%= link_to "146", pagina_path("nvl5_gram_p146"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "147", pagina_path("nvl5_gram_p147"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "148", pagina_path("nvl5_gram_p148"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "153", pagina_path("nvl5_gram_p153"), class: "text-gray-600 hover:text-gray-800 underline" %>
   </div>
 
