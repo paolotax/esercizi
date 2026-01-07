@@ -19,16 +19,16 @@ cai_metodo = cai_volume1.discipline.create!(
 )
 
 [
-  { numero: 8, titolo: "Uguali o Diversi?", slug: "pag008", view_template: "pag008" },
-  { numero: 10, titolo: "Come Inizia?", slug: "pag010", view_template: "pag010" },
-  { numero: 10, titolo: "Come Inizia? (bis)", slug: "pag010gen", view_template: "pag010gen" },
-  { numero: 22, titolo: "Lettera A - Scrivo", slug: "pag022", view_template: "pag022" },
-  { numero: 23, titolo: "Lettera A - Leggo", slug: "pag023", view_template: "pag023" },
-  { numero: 41, titolo: "Lettera O - Leggo", slug: "pag041", view_template: "pag041" },
-  { numero: 43, titolo: "Lettera U - Scopro il suono", slug: "pag043", view_template: "pag043" },
-  { numero: 50, titolo: "Esercizio pagina 50", slug: "pag050", view_template: "pag050" },
-  { numero: 51, titolo: "Esercizio pagina 51", slug: "pag051", view_template: "pag051" },
-  { numero: 167, titolo: "Esercizio pagina 167", slug: "pag167", view_template: "pag167" }
+  { numero: 8, titolo: "Uguali o Diversi?", slug: "ci1_sta_p008", view_template: "ci1_sta_p008" },
+  { numero: 10, titolo: "Come Inizia?", slug: "ci1_sta_p010", view_template: "ci1_sta_p010" },
+  { numero: 10, titolo: "Come Inizia? (bis)", slug: "ci1_sta_p010gen", view_template: "ci1_sta_p010gen" },
+  { numero: 22, titolo: "Lettera A - Scrivo", slug: "ci1_sta_p022", view_template: "ci1_sta_p022" },
+  { numero: 23, titolo: "Lettera A - Leggo", slug: "ci1_sta_p023", view_template: "ci1_sta_p023" },
+  { numero: 41, titolo: "Lettera O - Leggo", slug: "ci1_sta_p041", view_template: "ci1_sta_p041" },
+  { numero: 43, titolo: "Lettera U - Scopro il suono", slug: "ci1_sta_p043", view_template: "ci1_sta_p043" },
+  { numero: 50, titolo: "Esercizio pagina 50", slug: "ci1_sta_p050", view_template: "ci1_sta_p050" },
+  { numero: 51, titolo: "Esercizio pagina 51", slug: "ci1_sta_p051", view_template: "ci1_sta_p051" },
+  { numero: 167, titolo: "Esercizio pagina 167", slug: "ci1_sta_p167", view_template: "ci1_sta_p167" }
 ].each do |pagina_data|
   cai_metodo.pagine.create!(pagina_data)
 end
