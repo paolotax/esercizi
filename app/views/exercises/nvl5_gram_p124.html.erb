@@ -1,21 +1,24 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Introduzione teorica -->
-  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
-    <p class="text-gray-700 font-semibold mb-4">Le <strong class="underline text-blue-600">frasi secondarie</strong> possono essere:</p>
+  <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 p-4 md:p-6 pb-8 rounded-lg">
+    <p class="text-gray-700 dark:text-gray-200 font-semibold mb-4">Le <strong class="underline text-blue-600">frasi secondarie</strong> possono essere:</p>
 
     <!-- Coordinate -->
-    <div class="bg-yellow-50 rounded-lg p-4 mb-4">
-      <p class="text-gray-700 mb-2">
+    <div class="bg-yellow-50 dark:bg-yellow-900/30 rounded-lg p-4 mb-4">
+      <p class="text-gray-700 dark:text-gray-200 mb-2">
         <span class="text-<%= @pagina.base_color %>-500">•</span> <strong class="underline text-green-600">coordinate →</strong> frasi collegate tra loro ma ognuna con significato autonomo.<br>
         Le coordinate sono collegate da <strong>segni di punteggiatura</strong> o da <strong>congiunzioni</strong> (e, o, ma, oppure, infatti...).
       </p>
       <div class="flex items-center justify-center mt-4">
         <div class="text-center">
-          <div class="border border-green-400 rounded-lg px-6 py-3 bg-green-50">
-            <span class="text-gray-700">Dormo <strong class="underline">e sogno</strong>.</span>
+          <div class="border border-green-400 dark:border-green-500 rounded-lg px-6 py-3 bg-green-50 dark:bg-green-900/30">
+            <span class="text-gray-700 dark:text-gray-200">Dormo <strong class="underline">e sogno</strong>.</span>
           </div>
           <div class="mt-2">↓</div>
           <div class="font-bold text-green-600"><strong class="underline">coordinata</strong></div>
@@ -24,14 +27,14 @@
     </div>
 
     <!-- Subordinate -->
-    <div class="bg-purple-50 rounded-lg p-4">
-      <p class="text-gray-700 mb-2">
+    <div class="bg-purple-50 dark:bg-purple-900/30 rounded-lg p-4">
+      <p class="text-gray-700 dark:text-gray-200 mb-2">
         <span class="text-<%= @pagina.base_color %>-500">•</span> <strong class="underline text-purple-600">subordinate →</strong> frasi che dipendono da un'altra frase e che, da sole, non hanno significato. La subordinata è legata alla principale da <strong>preposizioni</strong> (per, a, di...), <strong>congiunzioni</strong> (quando, perché, sebbene...) o <strong>pronomi relativi</strong> (che, il quale...).
       </p>
       <div class="flex items-center justify-center mt-4">
         <div class="text-center">
-          <div class="border border-purple-400 rounded-lg px-6 py-3 bg-purple-50">
-            <span class="text-gray-700">Mangio le polpette <strong class="underline">che ha preparato la zia</strong>.</span>
+          <div class="border border-purple-400 dark:border-purple-500 rounded-lg px-6 py-3 bg-purple-50 dark:bg-purple-900/30">
+            <span class="text-gray-700 dark:text-gray-200">Mangio le polpette <strong class="underline">che ha preparato la zia</strong>.</span>
           </div>
           <div class="mt-2">↓</div>
           <div class="font-bold text-purple-600"><strong class="underline">subordinata</strong></div>
@@ -41,7 +44,7 @@
   </div>
 
   <!-- Esercizio 1 - IMPARARE TUTTI -->
-  <div class="bg-<%= @pagina.base_color %>-100 p-4 md:p-6 pb-8 rounded-lg" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
+  <div class="bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 p-4 md:p-6 pb-8 rounded-lg" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
@@ -49,29 +52,29 @@
     </h2>
 
     <ul class="space-y-3 cursor-pointer">
-      <li class="bg-white rounded-lg p-4">
+      <li class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <span class="text-<%= @pagina.base_color %>-500">•</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Samuele si è stufato</span> <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">di aspettare l'autobus</span>.
       </li>
-      <li class="bg-white rounded-lg p-4">
+      <li class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <span class="text-<%= @pagina.base_color %>-500">•</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Il mio gattino fa le fusa</span> <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">quando lo accarezzo</span>.
       </li>
-      <li class="bg-white rounded-lg p-4">
+      <li class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <span class="text-<%= @pagina.base_color %>-500">•</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">I bambini giocavano</span> e <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">saltavano nella stanza</span>.
       </li>
-      <li class="bg-white rounded-lg p-4">
+      <li class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <span class="text-<%= @pagina.base_color %>-500">•</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Prendo sempre il caffè</span> <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">dopo aver pranzato</span>.
       </li>
-      <li class="bg-white rounded-lg p-4">
+      <li class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <span class="text-<%= @pagina.base_color %>-500">•</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Mangio la pasta</span> ma <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">preferisco la pizza</span>.
       </li>
-      <li class="bg-white rounded-lg p-4">
+      <li class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <span class="text-<%= @pagina.base_color %>-500">•</span> <span data-word-highlighter-target="word" data-correct="red" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Lia indossa la collana</span> <span data-word-highlighter-target="word" data-correct="purple" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">che le hai regalato</span>.
       </li>
     </ul>
   </div>
 
   <!-- Esercizio 2 - Completa le frasi principali -->
-  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg" data-controller="fill-blanks">
+  <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 p-4 md:p-6 pb-8 rounded-lg" data-controller="fill-blanks">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Completa le <em class="underline text-red-600">frasi principali</em> con una <strong class="underline text-green-600">coordinata</strong> e una <strong class="underline text-purple-600">subordinata</strong>.
@@ -79,66 +82,66 @@
 
     <div class="space-y-6">
       <!-- Frase 1 -->
-      <div class="bg-white rounded-lg p-4">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <div class="flex items-center gap-3 mb-2">
-          <span class="text-gray-600">•</span>
-          <span class="font-semibold text-gray-700 border border-red-300 rounded px-3 py-1 bg-red-50">Il mio cane abbaia</span>
+          <span class="text-gray-600 dark:text-gray-400">•</span>
+          <span class="font-semibold text-gray-700 dark:text-gray-200 border border-red-300 dark:border-red-500 rounded px-3 py-1 bg-red-50 dark:bg-red-900/30">Il mio cane abbaia</span>
         </div>
         <div class="ml-8 space-y-2">
           <div class="flex items-center gap-2">
             <span class="text-purple-600">→</span>
             <span class="text-purple-600 font-semibold">perché</span>
-            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 px-2 py-1 focus:outline-none bg-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 dark:border-<%= @pagina.base_color %>-400 px-2 py-1 focus:outline-none bg-transparent dark:text-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
           </div>
           <div class="flex items-center gap-2">
             <span class="text-green-600">→</span>
             <span class="text-green-600 font-semibold">e</span>
-            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 px-2 py-1 focus:outline-none bg-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 dark:border-<%= @pagina.base_color %>-400 px-2 py-1 focus:outline-none bg-transparent dark:text-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
           </div>
         </div>
-        <p class="text-gray-500 mt-2 italic ml-8">Risposte libere</p>
+        <p class="text-gray-500 dark:text-gray-400 mt-2 italic ml-8">Risposte libere</p>
       </div>
 
       <!-- Frase 2 -->
-      <div class="bg-white rounded-lg p-4">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <div class="flex items-center gap-3 mb-2">
-          <span class="text-gray-600">•</span>
-          <span class="font-semibold text-gray-700 border border-red-300 rounded px-3 py-1 bg-red-50">Ho preso l'ombrello</span>
+          <span class="text-gray-600 dark:text-gray-400">•</span>
+          <span class="font-semibold text-gray-700 dark:text-gray-200 border border-red-300 dark:border-red-500 rounded px-3 py-1 bg-red-50 dark:bg-red-900/30">Ho preso l'ombrello</span>
         </div>
         <div class="ml-8 space-y-2">
           <div class="flex items-center gap-2">
             <span class="text-green-600">→</span>
             <span class="text-green-600 font-semibold">ma</span>
-            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 px-2 py-1 focus:outline-none bg-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 dark:border-<%= @pagina.base_color %>-400 px-2 py-1 focus:outline-none bg-transparent dark:text-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
           </div>
           <div class="flex items-center gap-2">
             <span class="text-purple-600">→</span>
             <span class="text-purple-600 font-semibold">che</span>
-            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 px-2 py-1 focus:outline-none bg-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 dark:border-<%= @pagina.base_color %>-400 px-2 py-1 focus:outline-none bg-transparent dark:text-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
           </div>
         </div>
-        <p class="text-gray-500 mt-2 italic ml-8">Risposte libere</p>
+        <p class="text-gray-500 dark:text-gray-400 mt-2 italic ml-8">Risposte libere</p>
       </div>
 
       <!-- Frase 3 -->
-      <div class="bg-white rounded-lg p-4">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <div class="flex items-center gap-3 mb-2">
-          <span class="text-gray-600">•</span>
-          <span class="font-semibold text-gray-700 border border-red-300 rounded px-3 py-1 bg-red-50">Mi ha detto una bugia</span>
+          <span class="text-gray-600 dark:text-gray-400">•</span>
+          <span class="font-semibold text-gray-700 dark:text-gray-200 border border-red-300 dark:border-red-500 rounded px-3 py-1 bg-red-50 dark:bg-red-900/30">Mi ha detto una bugia</span>
         </div>
         <div class="ml-8 space-y-2">
           <div class="flex items-center gap-2">
             <span class="text-green-600">→</span>
             <span class="text-green-600 font-semibold">però</span>
-            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 px-2 py-1 focus:outline-none bg-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 dark:border-<%= @pagina.base_color %>-400 px-2 py-1 focus:outline-none bg-transparent dark:text-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
           </div>
           <div class="flex items-center gap-2">
             <span class="text-purple-600">→</span>
             <span class="text-purple-600 font-semibold">affinché</span>
-            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 px-2 py-1 focus:outline-none bg-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
+            <input type="text" class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 dark:border-<%= @pagina.base_color %>-400 px-2 py-1 focus:outline-none bg-transparent dark:text-white" data-fill-blanks-target="input" data-correct-answer="libera" placeholder="...">
           </div>
         </div>
-        <p class="text-gray-500 mt-2 italic ml-8">Risposte libere</p>
+        <p class="text-gray-500 dark:text-gray-400 mt-2 italic ml-8">Risposte libere</p>
       </div>
     </div>
   </div>

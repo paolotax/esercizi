@@ -1,11 +1,14 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Introduzione teorica -->
-  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
-    <p class="text-gray-700 mb-4">In un periodo:</p>
-    <ul class="space-y-2 text-gray-700">
+  <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 p-4 md:p-6 pb-8 rounded-lg">
+    <p class="text-gray-700 dark:text-gray-200 mb-4">In un periodo:</p>
+    <ul class="space-y-2 text-gray-700 dark:text-gray-200">
       <li><span class="text-<%= @pagina.base_color %>-500">•</span> la <em class="underline font-bold text-red-600">frase principale</em> è quella più importante: ha sempre un senso compiuto, anche da sola;</li>
       <li><span class="text-<%= @pagina.base_color %>-500">•</span> le <strong class="underline text-blue-600">frasi secondarie</strong> sono quelle che si dispongono intorno alla principale.</li>
     </ul>
@@ -13,19 +16,19 @@
     <!-- Esempi visivi -->
     <div class="mt-6 space-y-6">
       <!-- Esempio 1 -->
-      <div class="bg-white rounded-lg p-6">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-6">
         <div class="flex items-center justify-center gap-8 flex-wrap mb-4">
           <div class="text-center">
             <div class="font-bold text-red-600 mb-2"><em class="underline">frase principale</em></div>
             <div class="">↓</div>
-            <div class="border border-red-400 rounded-lg px-6 py-3 bg-red-50">
+            <div class="border border-red-400 dark:border-red-500 rounded-lg px-6 py-3 bg-red-50 dark:bg-red-900/30">
               Il papà mi loderà
             </div>
           </div>
           <div class="text-center">
             <div class="font-bold text-blue-600 mb-2"><strong class="underline">frase secondaria</strong></div>
             <div class="">↓</div>
-            <div class="border border-blue-400 rounded-lg px-6 py-3 bg-blue-50">
+            <div class="border border-blue-400 dark:border-blue-500 rounded-lg px-6 py-3 bg-blue-50 dark:bg-blue-900/30">
               perché ho aggiustato la bicicletta.
             </div>
           </div>
@@ -33,19 +36,19 @@
       </div>
 
       <!-- Esempio 2 -->
-      <div class="bg-white rounded-lg p-6">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-6">
         <div class="flex items-center justify-center gap-8 flex-wrap">
           <div class="text-center">
             <div class="font-bold text-red-600 mb-2"><em class="underline">frase principale</em></div>
             <div class="">↓</div>
-            <div class="border border-red-400 rounded-lg px-6 py-3 bg-red-50">
+            <div class="border border-red-400 dark:border-red-500 rounded-lg px-6 py-3 bg-red-50 dark:bg-red-900/30">
               Ho comprato la felpa
             </div>
           </div>
           <div class="text-center">
             <div class="font-bold text-blue-600 mb-2"><strong class="underline">frase secondaria</strong></div>
             <div class="">↓</div>
-            <div class="border border-blue-400 rounded-lg px-6 py-3 bg-blue-50">
+            <div class="border border-blue-400 dark:border-blue-500 rounded-lg px-6 py-3 bg-blue-50 dark:bg-blue-900/30">
               che desideravo da tempo.
             </div>
           </div>
@@ -55,7 +58,7 @@
   </div>
 
   <!-- Esercizio 1 - IMPARARE TUTTI: Colora la frase principale -->
-  <div class="bg-<%= @pagina.base_color %>-100 p-4 md:p-6 pb-8 rounded-lg" data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
+  <div class="bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 p-4 md:p-6 pb-8 rounded-lg" data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
@@ -69,88 +72,88 @@
 
     <div class="space-y-4 cursor-pointer">
       <!-- Periodo 1 -->
-      <div class="bg-white rounded-lg p-4 flex gap-3 flex-wrap">
-        <div class="flex-1 border border-gray-300 rounded px-4 py-2">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 flex gap-3 flex-wrap">
+        <div class="flex-1 border border-gray-300 dark:border-gray-600 rounded px-4 py-2">
           <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Antonella aveva fretta di tornare a casa</span>
         </div>
-        <div class="flex-1 border border-gray-300 rounded px-4 py-2">
+        <div class="flex-1 border border-gray-300 dark:border-gray-600 rounded px-4 py-2">
           <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">perché la mamma la stava aspettando.</span>
         </div>
       </div>
 
       <!-- Periodo 2 -->
-      <div class="bg-white rounded-lg p-4 flex gap-3 flex-wrap">
-        <div class="flex-1 border border-gray-300 rounded px-4 py-2">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 flex gap-3 flex-wrap">
+        <div class="flex-1 border border-gray-300 dark:border-gray-600 rounded px-4 py-2">
           <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">La sera il nonno si siede in poltrona</span>
         </div>
-        <div class="flex-1 border border-gray-300 rounded px-4 py-2">
+        <div class="flex-1 border border-gray-300 dark:border-gray-600 rounded px-4 py-2">
           <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">e guarda la TV.</span>
         </div>
       </div>
 
       <!-- Periodo 3 -->
-      <div class="bg-white rounded-lg p-4 flex gap-3 flex-wrap">
-        <div class="flex-1 border border-gray-300 rounded px-4 py-2">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 flex gap-3 flex-wrap">
+        <div class="flex-1 border border-gray-300 dark:border-gray-600 rounded px-4 py-2">
           <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Per farla contenta</span>
         </div>
-        <div class="flex-1 border border-gray-300 rounded px-4 py-2">
+        <div class="flex-1 border border-gray-300 dark:border-gray-600 rounded px-4 py-2">
           <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">ho prestato a Miriam la mia sciarpa.</span>
         </div>
       </div>
 
       <!-- Periodo 4 -->
-      <div class="bg-white rounded-lg p-4 flex gap-3 flex-wrap">
-        <div class="flex-1 border border-gray-300 rounded px-4 py-2">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 flex gap-3 flex-wrap">
+        <div class="flex-1 border border-gray-300 dark:border-gray-600 rounded px-4 py-2">
           <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Ho letto un articolo sul giornale</span>
         </div>
-        <div class="flex-1 border border-gray-300 rounded px-4 py-2">
+        <div class="flex-1 border border-gray-300 dark:border-gray-600 rounded px-4 py-2">
           <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">che parlava dello smog.</span>
         </div>
       </div>
 
       <!-- Periodo 5 -->
-      <div class="bg-white rounded-lg p-4 flex gap-3 flex-wrap">
-        <div class="flex-1 border border-gray-300 rounded px-4 py-2">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 flex gap-3 flex-wrap">
+        <div class="flex-1 border border-gray-300 dark:border-gray-600 rounded px-4 py-2">
           <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Nonostante sia un brontolone</span>
         </div>
-        <div class="flex-1 border border-gray-300 rounded px-4 py-2">
+        <div class="flex-1 border border-gray-300 dark:border-gray-600 rounded px-4 py-2">
           <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">zio Riccardo è simpatico.</span>
         </div>
       </div>
     </div>
 
-    <div class="mt-4 bg-white rounded-lg p-4">
-      <p class="text-gray-600 italic flex items-center gap-2">
-        <span class="inline-block w-6 h-6 bg-red-200 rounded"></span>
+    <div class="mt-4 bg-white dark:bg-gray-800 rounded-lg p-4">
+      <p class="text-gray-600 dark:text-gray-400 italic flex items-center gap-2">
+        <span class="inline-block w-6 h-6 bg-red-200 dark:bg-red-900/50 rounded"></span>
         Clicca sulla frase principale per colorarla di rosso
       </p>
     </div>
   </div>
 
   <!-- Esercizio 2 - Sottolinea la frase principale -->
-  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg" data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
+  <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 p-4 md:p-6 pb-8 rounded-lg" data-controller="word-highlighter" data-word-highlighter-multi-color-value="false">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Sottolinea la <em class="underline text-red-600">frase principale</em><span class="inline-block w-6 h-6 bg-red-300 rounded ml-2 align-middle cursor-pointer" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span>.
     </h2>
 
     <ul class="space-y-3 cursor-pointer">
-      <li class="bg-white rounded-lg p-4">
+      <li class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Ti racconto una storia</span> <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">che ti piacerà molto.</span>
       </li>
-      <li class="bg-white rounded-lg p-4">
+      <li class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Ho i brividi</span> <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">perché fa freddo.</span>
       </li>
-      <li class="bg-white rounded-lg p-4">
+      <li class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Quando arriverà febbraio</span> <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">andrò in settimana bianca</span>.
       </li>
-      <li class="bg-white rounded-lg p-4">
+      <li class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Ti ho telefonato</span> <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">ma non mi hai risposto.</span>
       </li>
-      <li class="bg-white rounded-lg p-4">
+      <li class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Se non arriverà in tempo,</span> <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">partirò da sola</span>.
       </li>
-      <li class="bg-white rounded-lg p-4">
+      <li class="bg-white dark:bg-gray-800 rounded-lg p-4">
         <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">Tom non parla bene l'italiano</span> <span data-word-highlighter-target="word" data-correct="false" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">ma lo capisce.</span>
       </li>
     </ul>
