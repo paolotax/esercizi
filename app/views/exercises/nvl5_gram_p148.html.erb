@@ -1,16 +1,19 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 1: Defective nouns -->
-  <div class="mb-6 bg-<%= @pagina.base_color %>-100 rounded-lg p-4 md:p-6" data-controller="word-highlighter fill-blanks" data-word-highlighter-multi-color-value="false">
-    <h2 class="font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center flex-wrap gap-2">
+  <div class="mb-6 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 rounded-lg p-4 md:p-6" data-controller="word-highlighter fill-blanks" data-word-highlighter-multi-color-value="false">
+    <h2 class="font-bold text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-300 mb-4 flex items-center flex-wrap gap-2">
       <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">1</span>
       <span class="bg-yellow-400 text-<%= @pagina.base_color %>-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
-      <span>Sottolinea i <span class="text-<%= @pagina.base_color %>-600 font-bold">nomi difettivi<span class="inline-block w-6 h-6 bg-yellow-300 rounded ml-1 align-middle cursor-pointer" data-word-highlighter-target="colorBox" data-color="yellow" data-action="click->word-highlighter#selectColor"></span></span>, poi scrivili al posto giusto nella tabella.</span>
+      <span>Sottolinea i <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 font-bold">nomi difettivi<span class="inline-block w-6 h-6 bg-yellow-300 rounded ml-1 align-middle cursor-pointer" data-word-highlighter-target="colorBox" data-color="yellow" data-action="click->word-highlighter#selectColor"></span></span>, poi scrivili al posto giusto nella tabella.</span>
     </h2>
 
-    <div class="bg-white rounded-lg px-4 py-4 mb-4 text-gray-700 leading-relaxed">
+    <div class="bg-white dark:bg-gray-800 rounded-lg px-4 py-4 mb-4 text-gray-700 dark:text-gray-200 leading-relaxed">
       <p>
         <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">sangue</span> • giochi • strade • festa • <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">nozze</span> • <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">burro</span> • dita • <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">fame</span> • <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">miele</span> • corse • <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">grandine</span> • piede • <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">pepe</span> • mirtillo • torre • <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">sete</span> • <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">congratulazioni</span> • <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">stoviglie</span> • finestre • <span data-word-highlighter-target="word" data-correct="true" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">ferie</span>
       </p>
@@ -19,27 +22,27 @@
     <div class="overflow-x-auto mb-4">
       <table class="w-full">
         <thead>
-          <tr class="bg-<%= @pagina.base_color %>-200">
-            <th class="border border-gray-300 px-4 py-3 text-<%= @pagina.base_color %>-700 font-bold">Hanno solo il singolare</th>
-            <th class="border border-gray-300 px-4 py-3 text-<%= @pagina.base_color %>-700 font-bold">Hanno solo il plurale</th>
+          <tr class="bg-<%= @pagina.base_color %>-200 dark:bg-<%= @pagina.base_color %>-800">
+            <th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-300 font-bold">Hanno solo il singolare</th>
+            <th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-300 font-bold">Hanno solo il plurale</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="border border-gray-300 px-4 py-3 bg-white align-top">
-              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="sangue"><br>
-              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="burro"><br>
-              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="fame"><br>
-              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="miele"><br>
-              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="grandine"><br>
-              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="pepe"><br>
-              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500" data-fill-blanks-target="input" data-answer="sete">
+            <td class="border border-gray-300 dark:border-gray-600 px-4 py-3 bg-white dark:bg-gray-800 align-top">
+              <input type="text" class="w-full bg-transparent dark:text-white border-b border-dotted border-gray-400 dark:border-gray-500 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="sangue"><br>
+              <input type="text" class="w-full bg-transparent dark:text-white border-b border-dotted border-gray-400 dark:border-gray-500 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="burro"><br>
+              <input type="text" class="w-full bg-transparent dark:text-white border-b border-dotted border-gray-400 dark:border-gray-500 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="fame"><br>
+              <input type="text" class="w-full bg-transparent dark:text-white border-b border-dotted border-gray-400 dark:border-gray-500 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="miele"><br>
+              <input type="text" class="w-full bg-transparent dark:text-white border-b border-dotted border-gray-400 dark:border-gray-500 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="grandine"><br>
+              <input type="text" class="w-full bg-transparent dark:text-white border-b border-dotted border-gray-400 dark:border-gray-500 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="pepe"><br>
+              <input type="text" class="w-full bg-transparent dark:text-white border-b border-dotted border-gray-400 dark:border-gray-500 focus:outline-none focus:border-<%= @pagina.base_color %>-500" data-fill-blanks-target="input" data-answer="sete">
             </td>
-            <td class="border border-gray-300 px-4 py-3 bg-<%= @pagina.base_color %>-50 align-top">
-              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="nozze"><br>
-              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="congratulazioni"><br>
-              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="stoviglie"><br>
-              <input type="text" class="w-full bg-transparent border-b border-dotted border-gray-400 focus:outline-none focus:border-<%= @pagina.base_color %>-500" data-fill-blanks-target="input" data-answer="ferie">
+            <td class="border border-gray-300 dark:border-gray-600 px-4 py-3 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 align-top">
+              <input type="text" class="w-full bg-transparent dark:text-white border-b border-dotted border-gray-400 dark:border-gray-500 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="nozze"><br>
+              <input type="text" class="w-full bg-transparent dark:text-white border-b border-dotted border-gray-400 dark:border-gray-500 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="congratulazioni"><br>
+              <input type="text" class="w-full bg-transparent dark:text-white border-b border-dotted border-gray-400 dark:border-gray-500 focus:outline-none focus:border-<%= @pagina.base_color %>-500 mb-2" data-fill-blanks-target="input" data-answer="stoviglie"><br>
+              <input type="text" class="w-full bg-transparent dark:text-white border-b border-dotted border-gray-400 dark:border-gray-500 focus:outline-none focus:border-<%= @pagina.base_color %>-500" data-fill-blanks-target="input" data-answer="ferie">
             </td>
           </tr>
         </tbody>
@@ -48,10 +51,10 @@
   </div>
 
   <!-- Exercise 2: Overabundant plurals -->
-  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="word-choice">
-    <h2 class="font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center gap-2">
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 md:p-6" data-controller="word-choice">
+    <h2 class="font-bold text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-300 mb-4 flex items-center gap-2">
       <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">2</span>
-      <span>Cancella in ciascuna frase il <span class="text-<%= @pagina.base_color %>-600 font-bold">plurale sovrabbondante</span> non corretto.</span>
+      <span>Cancella in ciascuna frase il <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 font-bold">plurale sovrabbondante</span> non corretto.</span>
     </h2>
 
     <% sentences = [
@@ -64,18 +67,18 @@
 
     <div class="space-y-4">
       <% sentences.each do |sentence| %>
-        <div class="bg-white rounded-lg px-4 py-3">
-          <p class="text-gray-700">
+        <div class="bg-white dark:bg-gray-800 rounded-lg px-4 py-3">
+          <p class="text-gray-700 dark:text-gray-200">
             • <%= sentence[:text] %>
             <% sentence[:options].each do |option| %>
-              <span class="inline-block mx-1 px-2 py-1 border border-gray-300 rounded cursor-pointer transition-all hover:bg-<%= @pagina.base_color %>-50"
+              <span class="inline-block mx-1 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded cursor-pointer transition-all hover:bg-<%= @pagina.base_color %>-50 dark:hover:bg-<%= @pagina.base_color %>-900/30"
                     data-word-choice-target="word"
                     data-correct="<%= option == sentence[:correct] %>"
                     data-action="click->word-choice#toggle">
                 <strong><%= option %></strong>
               </span>
               <% if option != sentence[:options].last %>
-                <span class="text-<%= @pagina.base_color %>-500 font-bold">/</span>
+                <span class="text-<%= @pagina.base_color %>-500 dark:text-<%= @pagina.base_color %>-400 font-bold">/</span>
               <% end %>
             <% end %>
             <%= sentence[:suffix] if sentence[:suffix] %>
@@ -89,10 +92,10 @@
   </div>
 
   <!-- Exercise 3: Invariable nouns -->
-  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="fill-blanks word-highlighter" data-word-highlighter-multi-color-value="false">
-    <h2 class="font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center gap-2">
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 md:p-6" data-controller="fill-blanks word-highlighter" data-word-highlighter-multi-color-value="false">
+    <h2 class="font-bold text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-300 mb-4 flex items-center gap-2">
       <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">3</span>
-      <span>Volgi al <span class="text-<%= @pagina.base_color %>-600 font-bold">plurale</span> solo i nomi che cambiano passando al plurale e sottolinea i nomi che restano: sono <span class="text-<%= @pagina.base_color %>-600 font-bold">nomi invariabili<span class="inline-block w-6 h-6 bg-<%= @pagina.base_color %>-300 rounded ml-1 align-middle cursor-pointer" data-word-highlighter-target="colorBox" data-color="<%= @pagina.base_color %>" data-action="click->word-highlighter#selectColor"></span></span>.</span>
+      <span>Volgi al <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 font-bold">plurale</span> solo i nomi che cambiano passando al plurale e sottolinea i nomi che restano: sono <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 font-bold">nomi invariabili<span class="inline-block w-6 h-6 bg-<%= @pagina.base_color %>-300 dark:bg-<%= @pagina.base_color %>-600 rounded ml-1 align-middle cursor-pointer" data-word-highlighter-target="colorBox" data-color="<%= @pagina.base_color %>" data-action="click->word-highlighter#selectColor"></span></span>.</span>
     </h2>
 
     <% nouns = [
@@ -116,8 +119,8 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <% nouns.each do |item| %>
-        <div class="flex items-center gap-3 bg-white rounded-lg p-3">
-          <span class="text-gray-700 font-semibold"
+        <div class="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-lg p-3">
+          <span class="text-gray-700 dark:text-gray-200 font-semibold"
                 <% if item[:invariable] %>
                 data-word-highlighter-target="word"
                 data-correct="true"
@@ -125,7 +128,7 @@
                 <% end %>>• <%= item[:singular] %></span>
           <span class="text-gray-400">→</span>
           <input type="text"
-                 class="border-b-2 border-dotted border-gray-400 bg-transparent px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-grow"
+                 class="border-b-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-grow"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:plural] %>"
                  data-correct-answer="<%= item[:plural] %>">

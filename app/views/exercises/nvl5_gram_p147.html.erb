@@ -1,13 +1,16 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 1: Plurals -->
-  <div class="mb-6 bg-<%= @pagina.base_color %>-100 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center flex-wrap gap-2">
+  <div class="mb-6 bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="font-bold text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-300 mb-4 flex items-center flex-wrap gap-2">
       <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">1</span>
       <span class="bg-yellow-400 text-<%= @pagina.base_color %>-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
-      <span>Volgi al <span class="text-<%= @pagina.base_color %>-600 font-bold">plurale</span> i seguenti nomi. Se hai dubbi, aiutati con il dizionario.</span>
+      <span>Volgi al <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 font-bold">plurale</span> i seguenti nomi. Se hai dubbi, aiutati con il dizionario.</span>
     </h2>
 
     <% plurals = [
@@ -33,12 +36,12 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <% plurals.each do |item| %>
-        <div class="flex items-center gap-3 bg-white rounded-lg p-3">
-          <span class="text-<%= @pagina.base_color %>-600 font-bold">•</span>
-          <span class="text-gray-700 font-semibold w-24"><%= item[:word] %></span>
+        <div class="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-lg p-3">
+          <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 font-bold">•</span>
+          <span class="text-gray-700 dark:text-gray-200 font-semibold w-24"><%= item[:word] %></span>
           <span class="text-gray-400">→</span>
           <input type="text"
-                 class="border-b-2 border-dotted border-gray-400 bg-transparent px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-grow"
+                 class="border-b-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-grow"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:plural] %>"
                  data-correct-answer="<%= item[:plural] %>">
@@ -48,10 +51,10 @@
   </div>
 
   <!-- Exercise 2: Singulars -->
-  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
-    <h2 class="font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center gap-2">
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 md:p-6" data-controller="fill-blanks">
+    <h2 class="font-bold text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-300 mb-4 flex items-center gap-2">
       <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">2</span>
-      <span>Volgi al <span class="text-<%= @pagina.base_color %>-600 font-bold">singolare</span> i seguenti nomi.</span>
+      <span>Volgi al <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 font-bold">singolare</span> i seguenti nomi.</span>
     </h2>
 
     <% singulars = [
@@ -74,12 +77,12 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <% singulars.each do |item| %>
-        <div class="flex items-center gap-3 bg-white rounded-lg p-3">
-          <span class="text-<%= @pagina.base_color %>-600 font-bold">•</span>
-          <span class="text-gray-700 font-semibold w-28"><%= item[:plural] %></span>
+        <div class="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-lg p-3">
+          <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 font-bold">•</span>
+          <span class="text-gray-700 dark:text-gray-200 font-semibold w-28"><%= item[:plural] %></span>
           <span class="text-gray-400">→</span>
           <input type="text"
-                 class="border-b-2 border-dotted border-gray-400 bg-transparent px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-grow"
+                 class="border-b-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white px-2 py-1 focus:outline-none focus:border-<%= @pagina.base_color %>-500 flex-grow"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:singular] %>"
                  data-correct-answer="<%= item[:singular] %>">
@@ -89,10 +92,10 @@
   </div>
 
   <!-- Exercise 3: Promiscuous gender animals -->
-  <div class="mb-6 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 md:p-6" data-controller="card-selector">
-    <h2 class="font-bold text-<%= @pagina.base_color %>-700 mb-4 flex items-center gap-2">
+  <div class="mb-6 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 md:p-6" data-controller="card-selector">
+    <h2 class="font-bold text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-300 mb-4 flex items-center gap-2">
       <span class="bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center font-bold">3</span>
-      <span>Colora i nomi di animale di <span class="text-<%= @pagina.base_color %>-600 font-bold">genere promiscuo</span> ai quali è necessario aggiungere "maschio" o "femmina" per distinguere il genere.</span>
+      <span>Colora i nomi di animale di <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 font-bold">genere promiscuo</span> ai quali è necessario aggiungere "maschio" o "femmina" per distinguere il genere.</span>
     </h2>
 
     <% animals = [
@@ -113,11 +116,11 @@
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
       <% animals.each do |animal| %>
         <div class="relative">
-          <div class="border border-gray-300 rounded-lg px-4 py-3 text-center cursor-pointer transition-all hover:bg-<%= @pagina.base_color %>-50 bg-white"
+          <div class="border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 text-center cursor-pointer transition-all hover:bg-<%= @pagina.base_color %>-50 dark:hover:bg-<%= @pagina.base_color %>-900/30 bg-white dark:bg-gray-800"
                data-card-selector-target="card"
                data-correct="<%= animal[:promiscuous] %>"
                data-action="click->card-selector#toggle">
-            <span class="font-semibold text-gray-700"><%= animal[:name] %></span>
+            <span class="font-semibold text-gray-700 dark:text-gray-200"><%= animal[:name] %></span>
           </div>
         </div>
       <% end %>
