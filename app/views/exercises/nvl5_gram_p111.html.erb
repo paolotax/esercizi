@@ -1,12 +1,15 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Info Box -->
-  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
+  <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 p-4 md:p-6 pb-8 rounded-lg">
     <div class="flex flex-col lg:flex-row gap-6 items-start">
       <div class="flex-1">
-        <ul class="space-y-3 text-gray-700">
+        <ul class="space-y-3 text-gray-700 dark:text-gray-200">
           <li class="flex items-start gap-2">
             <span class="text-<%= @pagina.base_color %>-500 font-bold">•</span>
             <span>I <strong>complementi di tempo</strong> sono complementi indiretti;</span>
@@ -20,8 +23,8 @@
             <div>
               <span>rispondono alle domande: <strong>quando?</strong> / <strong>per quanto tempo?</strong> / <strong>da quanto tempo?</strong> / <strong>tra quanto tempo?</strong></span>
               <div class="mt-2 space-y-1 italic">
-                <div>→ Mi sono svegliata (<em>quando?</em>) <strong class="text-purple-600">alle sei</strong>.</div>
-                <div>→ Non vedevo l'alba (<em>da quanto tempo?</em>) <strong class="text-purple-600">da molti anni</strong>.</div>
+                <div>→ Mi sono svegliata (<em>quando?</em>) <strong class="text-purple-600 dark:text-purple-400">alle sei</strong>.</div>
+                <div>→ Non vedevo l'alba (<em>da quanto tempo?</em>) <strong class="text-purple-600 dark:text-purple-400">da molti anni</strong>.</div>
               </div>
             </div>
           </li>
@@ -29,12 +32,12 @@
       </div>
       <!-- Diario -->
       <div class="flex-shrink-0">
-        <div class="bg-white border-2 border-<%= @pagina.base_color %>-300 rounded-lg p-4 shadow-lg transform rotate-2">
-          <div class="text-<%= @pagina.base_color %>-600 italic mb-2">Caro diario,</div>
-          <div class="text-gray-700 italic">
+        <div class="bg-white dark:bg-gray-800 border-2 border-<%= @pagina.base_color %>-300 dark:border-<%= @pagina.base_color %>-600 rounded-lg p-4 shadow-lg transform rotate-2">
+          <div class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 italic mb-2">Caro diario,</div>
+          <div class="text-gray-700 dark:text-gray-200 italic">
             questa mattina mi sono<br>
-            svegliata <span class="text-<%= @pagina.base_color %>-600 font-bold">alle sei</span>... Non<br>
-            vedevo l'alba <span class="text-<%= @pagina.base_color %>-600 font-bold">da molti anni</span>!
+            svegliata <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 font-bold">alle sei</span>... Non<br>
+            vedevo l'alba <span class="text-<%= @pagina.base_color %>-600 dark:text-<%= @pagina.base_color %>-400 font-bold">da molti anni</span>!
           </div>
         </div>
       </div>
@@ -42,7 +45,7 @@
   </div>
 
   <!-- Exercise 1: IMPARARE TUTTI -->
-  <div class="bg-<%= @pagina.base_color %>-100 p-4 md:p-6 pb-8 rounded-lg">
+  <div class="bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 p-4 md:p-6 pb-8 rounded-lg">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
@@ -51,15 +54,15 @@
 
     <div class="space-y-3">
       <!-- Esempio -->
-      <div class="bg-white rounded-lg p-4 border-2 border-green-400">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 border-2 border-green-400">
         <div class="flex items-start gap-2">
           <span class="text-<%= @pagina.base_color %>-500">•</span>
           <div class="flex-1">
             <div class="mb-2" data-controller="word-highlighter">
-              <span class="bg-purple-200 px-1 rounded">Ogni estate</span>
+              <span class="bg-purple-200 dark:bg-purple-900/50 px-1 rounded">Ogni estate</span>
               <strong>/</strong> affitto <strong>/</strong> una casa <strong>/</strong> al mare.
             </div>
-            <div class="text-green-600 font-bold">Quando?</div>
+            <div class="text-green-600 dark:text-green-400 font-bold">Quando?</div>
           </div>
         </div>
       </div>
@@ -71,7 +74,7 @@
       ] %>
 
       <% frases_tempo.each do |frase| %>
-        <div class="bg-white rounded-lg p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-4">
           <div class="flex items-start gap-2">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
             <div class="flex-1">
@@ -79,7 +82,7 @@
                 <% words = frase[:text].split(/\s+/) %>
                 <% words.each_with_index do |word, i| %>
                   <% if frase[:complement].split(/\s+/).include?(word) %>
-                    <span class="transition cursor-pointer hover:bg-purple-100 px-1 rounded"
+                    <span class="transition cursor-pointer hover:bg-purple-100 dark:hover:bg-purple-900/30 px-1 rounded"
                           data-word-highlighter-target="word"
                           data-correct="true"
                           data-action="click->word-highlighter#toggleHighlight"><%= word %></span>
@@ -91,7 +94,7 @@
               </div>
               <div data-controller="fill-blanks">
                 <input type="text"
-                       class="w-full md:w-96 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white px-2 focus:outline-none"
+                       class="w-full md:w-96 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white px-2 focus:outline-none"
                        data-fill-blanks-target="input"
                        data-correct-answer="<%= frase[:answer] %>">
               </div>
@@ -103,7 +106,7 @@
   </div>
 
   <!-- Exercise 2 -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Completa le frasi con un complemento di tempo adatto.
@@ -116,14 +119,14 @@
         "frequenterò la prima media.",
         "faccio colazione."
       ].each do |fine_frase| %>
-        <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4">
           <div class="flex flex-wrap items-center gap-2">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
             <input type="text"
-                   class="w-48 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white px-2 focus:outline-none"
+                   class="w-48 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white px-2 focus:outline-none"
                    data-fill-blanks-target="input"
                    data-correct-answer="libera">
-            <span class="text-gray-700"><%= fine_frase %></span>
+            <span class="text-gray-700 dark:text-gray-200"><%= fine_frase %></span>
           </div>
         </div>
       <% end %>
@@ -131,7 +134,7 @@
   </div>
 
   <!-- Exercise 3 -->
-  <div class="bg-white p-4 md:p-6 pb-8">
+  <div class="p-4 md:p-6 pb-8">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Indica con una X la frase in cui il sintagma evidenziato è un complemento di tempo.
@@ -144,9 +147,9 @@
         { text: "Questa sera Michele mangia", highlight: "a casa", is_tempo: false },
         { text: "Ci vediamo", highlight: "alle sei", extra: "ai giardinetti.", is_tempo: true }
       ].each do |item| %>
-        <label class="flex items-center gap-3 bg-<%= @pagina.base_color %>-50 rounded-lg p-4 cursor-pointer hover:bg-<%= @pagina.base_color %>-100">
+        <label class="flex items-center gap-3 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-900/40">
           <span class="text-<%= @pagina.base_color %>-500">•</span>
-          <span class="flex-1 text-gray-700">
+          <span class="flex-1 text-gray-700 dark:text-gray-200">
             <%= item[:text] %> <strong><%= item[:highlight] %></strong><%= item[:extra] if item[:extra] %>
           </span>
           <input type="checkbox"
@@ -158,8 +161,8 @@
   </div>
 
   <!-- Reference -->
-  <div class="text-right text-gray-500 mb-6">
-    Esercizi p. <%= link_to "185", pagina_path("nvl5_gram_p185"), class: "text-gray-600 hover:text-gray-800 underline" %> e <%= link_to "187", pagina_path("nvl5_gram_p187"), class: "text-gray-600 hover:text-gray-800 underline" %>
+  <div class="text-right text-gray-500 dark:text-gray-400 mb-6">
+    Esercizi p. <%= link_to "185", pagina_path("nvl5_gram_p185"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %> e <%= link_to "187", pagina_path("nvl5_gram_p187"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>
   </div>
 
   <%= render 'shared/exercise_controls' %>

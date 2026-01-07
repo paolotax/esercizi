@@ -1,12 +1,15 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Info Box -->
-  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
+  <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 p-4 md:p-6 pb-8 rounded-lg">
     <div class="flex flex-col lg:flex-row gap-6 items-start">
       <div class="flex-1">
-        <ul class="space-y-3 text-gray-700">
+        <ul class="space-y-3 text-gray-700 dark:text-gray-200">
           <li class="flex items-start gap-2">
             <span class="text-<%= @pagina.base_color %>-500 font-bold">•</span>
             <span>I <strong>complementi di luogo</strong> sono complementi indiretti;</span>
@@ -20,8 +23,8 @@
             <div>
               <span>rispondono alle domande: <strong>dove?</strong> / <strong>da dove?</strong> / <strong>per dove?</strong> / <strong>attraverso dove?</strong> / <strong>verso dove?</strong></span>
               <div class="mt-2 space-y-1 italic">
-                <div>→ Veniamo (<em>da dove?</em>) <strong class="text-purple-600">dalla città</strong>.</div>
-                <div>→ Stiamo andando (<em>dove?</em>) <strong class="text-blue-600">nel bosco</strong>.</div>
+                <div>→ Veniamo (<em>da dove?</em>) <strong class="text-purple-600 dark:text-purple-400">dalla città</strong>.</div>
+                <div>→ Stiamo andando (<em>dove?</em>) <strong class="text-blue-600 dark:text-blue-400">nel bosco</strong>.</div>
               </div>
             </div>
           </li>
@@ -34,7 +37,7 @@
   </div>
 
   <!-- Exercise 1: IMPARARE TUTTI -->
-  <div class="bg-<%= @pagina.base_color %>-100 p-4 md:p-6 pb-8 rounded-lg" data-controller="word-highlighter">
+  <div class="bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 p-4 md:p-6 pb-8 rounded-lg" data-controller="word-highlighter">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
@@ -43,16 +46,16 @@
 
     <div class="space-y-3">
       <!-- Esempio -->
-      <div class="bg-white rounded-lg p-4 border-2 border-green-400">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 border-2 border-green-400">
         <div class="flex items-start gap-2">
           <span class="text-<%= @pagina.base_color %>-500">•</span>
           <div class="flex-1">
             <div class="mb-2">
               Molte persone <strong>/</strong>
-              <span class="bg-blue-200 px-1 rounded">in America</span>
+              <span class="bg-blue-200 dark:bg-blue-900/50 px-1 rounded">in America</span>
               <strong>/</strong> amano <strong>/</strong> la pizza.
             </div>
-            <div class="text-green-600 font-bold">Dove?</div>
+            <div class="text-green-600 dark:text-green-400 font-bold">Dove?</div>
           </div>
         </div>
       </div>
@@ -66,7 +69,7 @@
       ] %>
 
       <% frases.each_with_index do |frase, index| %>
-        <div class="bg-white rounded-lg p-4" data-controller="fill-blanks">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-4" data-controller="fill-blanks">
           <div class="flex items-start gap-2">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
             <div class="flex-1">
@@ -74,7 +77,7 @@
                 <% parts = frase[:text].split(/\s+/) %>
                 <% parts.each_with_index do |word, i| %>
                   <% if [frase[:complement]].flatten.any? { |c| frase[:text].include?(c) && c.include?(word) } %>
-                    <span class="transition cursor-pointer hover:bg-blue-100 px-1 rounded"
+                    <span class="transition cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/30 px-1 rounded"
                           data-word-highlighter-target="word"
                           data-correct="true"
                           data-action="click->word-highlighter#toggleHighlight"><%= word %></span>
@@ -85,7 +88,7 @@
                 <% end %>
               </div>
               <input type="text"
-                     class="w-full md:w-64 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white px-2 focus:outline-none"
+                     class="w-full md:w-64 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white px-2 focus:outline-none"
                      data-fill-blanks-target="input"
                      data-correct-answer="<%= [frase[:answer]].flatten.first %>">
             </div>
@@ -96,7 +99,7 @@
   </div>
 
   <!-- Exercise 2 -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Completa le frasi con un complemento di luogo adatto.
@@ -111,15 +114,15 @@
         "Mia madre lavora",
         "Zia Irene sta"
       ].each do |inizio| %>
-        <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4">
           <div class="flex flex-wrap items-center gap-2">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
-            <span class="text-gray-700"><%= inizio %></span>
+            <span class="text-gray-700 dark:text-gray-200"><%= inizio %></span>
             <input type="text"
-                   class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white px-2 focus:outline-none"
+                   class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white px-2 focus:outline-none"
                    data-fill-blanks-target="input"
                    data-correct-answer="libera">
-            <span class="text-gray-700">.</span>
+            <span class="text-gray-700 dark:text-gray-200">.</span>
           </div>
         </div>
       <% end %>
@@ -127,7 +130,7 @@
   </div>
 
   <!-- Exercise 3 -->
-  <div class="bg-white p-4 md:p-6 pb-8">
+  <div class="p-4 md:p-6 pb-8">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Scrivi sul quaderno una frase per ogni coppia di parole usando il verbo come predicato e il sostantivo in un complemento di luogo.
@@ -139,19 +142,19 @@
         ["raggiungere", "stazione"],
         ["vivere", "Italia"]
       ].each do |verbo, sostantivo| %>
-        <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 flex gap-3">
-          <div class="bg-white px-4 py-2 rounded font-semibold text-<%= @pagina.base_color %>-700">
+        <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 flex gap-3">
+          <div class="bg-white dark:bg-gray-800 px-4 py-2 rounded font-semibold text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-300">
             <%= verbo %>
           </div>
-          <div class="bg-white px-4 py-2 rounded font-semibold text-<%= @pagina.base_color %>-700">
+          <div class="bg-white dark:bg-gray-800 px-4 py-2 rounded font-semibold text-<%= @pagina.base_color %>-700 dark:text-<%= @pagina.base_color %>-300">
             <%= sostantivo %>
           </div>
         </div>
       <% end %>
     </div>
 
-    <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
-      <p class="text-gray-600 italic">
+    <div class="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg">
+      <p class="text-gray-600 dark:text-gray-400 italic">
         Suggerimento: Ricorda di usare le preposizioni corrette (in, a, da, per, verso, attraverso)
         per formare il complemento di luogo.
       </p>
@@ -159,8 +162,8 @@
   </div>
 
   <!-- Reference -->
-  <div class="text-right text-gray-500 mb-6">
-    Esercizi p. <%= link_to "185", pagina_path("nvl5_gram_p185"), class: "text-gray-600 hover:text-gray-800 underline" %> e <%= link_to "187", pagina_path("nvl5_gram_p187"), class: "text-gray-600 hover:text-gray-800 underline" %>
+  <div class="text-right text-gray-500 dark:text-gray-400 mb-6">
+    Esercizi p. <%= link_to "185", pagina_path("nvl5_gram_p185"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %> e <%= link_to "187", pagina_path("nvl5_gram_p187"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>
   </div>
 
   <%= render 'shared/exercise_controls' %>

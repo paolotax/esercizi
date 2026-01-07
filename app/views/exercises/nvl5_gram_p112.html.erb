@@ -1,17 +1,20 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Illustrazione -->
   <div class="mb-6 relative">
-    <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+    <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4">
       <%= image_tag "nvl5_gram/p112/p112_01.jpg", class: "w-full rounded-lg", alt: "Cucina con chef" %>
     </div>
   </div>
 
   <!-- Info Box -->
-  <div class="bg-<%= @pagina.base_color %>-50 p-4 md:p-6 pb-8 rounded-lg">
-    <ul class="space-y-3 text-gray-700">
+  <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 p-4 md:p-6 pb-8 rounded-lg">
+    <ul class="space-y-3 text-gray-700 dark:text-gray-200">
       <li class="flex items-start gap-2">
         <span class="text-<%= @pagina.base_color %>-500 font-bold">•</span>
         <span>Il <strong>complemento di mezzo</strong> è un complemento indiretto;</span>
@@ -25,7 +28,7 @@
         <div>
           <span>risponde alle domande: <strong>per mezzo di chi?</strong> / <strong>per mezzo di che cosa?</strong> / <strong>con che cosa?</strong></span>
           <div class="mt-2 italic">
-            → Bisogna montare l'impasto (<em>con che cosa?</em>) <strong class="text-purple-600">con la frusta elettrica</strong>.
+            → Bisogna montare l'impasto (<em>con che cosa?</em>) <strong class="text-purple-600 dark:text-purple-400">con la frusta elettrica</strong>.
           </div>
         </div>
       </li>
@@ -33,7 +36,7 @@
   </div>
 
   <!-- Exercise 1: IMPARARE TUTTI -->
-  <div class="bg-<%= @pagina.base_color %>-100 p-4 md:p-6 pb-8 rounded-lg">
+  <div class="bg-<%= @pagina.base_color %>-100 dark:bg-<%= @pagina.base_color %>-900/40 p-4 md:p-6 pb-8 rounded-lg">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       <span class="bg-yellow-400 text-blue-900 px-3 py-1 rounded-lg font-bold">IMPARARE TUTTI</span>
@@ -49,14 +52,14 @@
       ] %>
 
       <% frases_mezzo.each do |frase| %>
-        <div class="bg-white rounded-lg p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-4">
           <div class="flex items-center gap-2">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
             <div data-controller="word-highlighter">
               <% words = frase[:text].split(/\s+/) %>
               <% words.each_with_index do |word, i| %>
                 <% if frase[:complement].split(/\s+/).include?(word) %>
-                  <span class="transition cursor-pointer hover:bg-purple-100 px-1 rounded"
+                  <span class="transition cursor-pointer hover:bg-purple-100 dark:hover:bg-purple-900/30 px-1 rounded"
                         data-word-highlighter-target="word"
                         data-correct="true"
                         data-action="click->word-highlighter#toggleHighlight"><%= word %></span>
@@ -73,7 +76,7 @@
   </div>
 
   <!-- Exercise 2 -->
-  <div class="bg-white p-4 md:p-6 pb-8">
+  <div class="p-4 md:p-6 pb-8">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Sottolinea il sintagma che corrisponde a un complemento di mezzo.
@@ -86,19 +89,19 @@
         { text: "Scrivete", option1: "con precisione", option2: "con la biro blu", correct: 2 },
         { text: "Ci muoveremo", option1: "in gruppo", option2: "in bicicletta", correct: 2 }
       ].each do |item| %>
-        <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4">
           <div class="flex items-center gap-2">
             <span class="text-<%= @pagina.base_color %>-500">•</span>
-            <span class="text-gray-700"><%= item[:text] %></span>
+            <span class="text-gray-700 dark:text-gray-200"><%= item[:text] %></span>
             <div class="flex gap-4 ml-2" data-controller="word-highlighter">
-              <span class="cursor-pointer px-2 py-1 border-b-2 border-gray-300 hover:bg-blue-100 transition"
+              <span class="cursor-pointer px-2 py-1 border-b-2 border-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition"
                     data-word-highlighter-target="word"
                     data-correct="<%= item[:correct] == 1 ? 'true' : 'false' %>"
                     data-action="click->word-highlighter#toggleHighlight">
                 <strong><%= item[:option1] %></strong>
               </span>
               <span>/</span>
-              <span class="cursor-pointer px-2 py-1 border-b-2 border-gray-300 hover:bg-blue-100 transition"
+              <span class="cursor-pointer px-2 py-1 border-b-2 border-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition"
                     data-word-highlighter-target="word"
                     data-correct="<%= item[:correct] == 2 ? 'true' : 'false' %>"
                     data-action="click->word-highlighter#toggleHighlight">
@@ -112,14 +115,14 @@
   </div>
 
   <!-- Exercise 3 -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Esegui l'analisi logica della seguente frase. Il soggetto è sottinteso.
     </h2>
 
-    <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4 mb-4">
-      <p class="font-semibold text-gray-700">
+    <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 mb-4">
+      <p class="font-semibold text-gray-700 dark:text-gray-200">
         <span class="text-<%= @pagina.base_color %>-500">•</span> Oggi sono andata a casa di Giovanni con il pullman.
       </p>
     </div>
@@ -132,11 +135,11 @@
         { parte: "di Giovanni", analisi: "complemento di specificazione" },
         { parte: "con il pullman", analisi: "complemento di mezzo" }
       ].each do |item| %>
-        <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
+        <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4">
           <div class="flex flex-wrap items-center gap-2">
-            <span class="font-semibold text-gray-700 w-32"><%= item[:parte] %> =</span>
+            <span class="font-semibold text-gray-700 dark:text-gray-200 w-32"><%= item[:parte] %> =</span>
             <input type="text"
-                   class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white px-2 focus:outline-none"
+                   class="flex-1 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-transparent dark:text-white px-2 focus:outline-none"
                    data-fill-blanks-target="input"
                    data-correct-answer="<%= item[:analisi] %>">
           </div>
@@ -146,8 +149,8 @@
   </div>
 
   <!-- Reference -->
-  <div class="text-right text-gray-500 mb-6">
-    Esercizi pp. <%= link_to "186", pagina_path("nvl5_gram_p186"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "187", pagina_path("nvl5_gram_p187"), class: "text-gray-600 hover:text-gray-800 underline" %>
+  <div class="text-right text-gray-500 dark:text-gray-400 mb-6">
+    Esercizi pp. <%= link_to "186", pagina_path("nvl5_gram_p186"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>, <%= link_to "187", pagina_path("nvl5_gram_p187"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>
   </div>
 
   <%= render 'shared/exercise_controls' %>
