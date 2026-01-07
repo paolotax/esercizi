@@ -19,10 +19,10 @@ nvl_grammatica = nvl_volume4.discipline.create!(
 )
 
 [
-  { numero: 8, titolo: "La lettera C", slug: "nvl4_gr_p008", view_template: "nvl4_gr_p008", sottotitolo: "ORTOGRAFIA", base_color: "pink" },
-  { numero: 9, titolo: "La lettera C - CE/CIE", slug: "nvl4_gr_p009", view_template: "nvl4_gr_p009", sottotitolo: "ORTOGRAFIA", base_color: "pink" },
-  { numero: 14, titolo: "Il gruppo GL", slug: "nvl4_gr_p014", view_template: "nvl4_gr_p014", sottotitolo: "ORTOGRAFIA", base_color: "pink" },
-  { numero: 15, titolo: "GN o NI?", slug: "nvl4_gr_p015", view_template: "nvl4_gr_p015", sottotitolo: "ORTOGRAFIA", base_color: "pink" }
+  { numero: 8, titolo: "La lettera C", slug: "nvl4_gram_p008", view_template: "nvl4_gram_p008", sottotitolo: "ORTOGRAFIA", base_color: "pink" },
+  { numero: 9, titolo: "La lettera C - CE/CIE", slug: "nvl4_gram_p009", view_template: "nvl4_gram_p009", sottotitolo: "ORTOGRAFIA", base_color: "pink" },
+  { numero: 14, titolo: "Il gruppo GL", slug: "nvl4_gram_p014", view_template: "nvl4_gram_p014", sottotitolo: "ORTOGRAFIA", base_color: "pink" },
+  { numero: 15, titolo: "GN o NI?", slug: "nvl4_gram_p015", view_template: "nvl4_gram_p015", sottotitolo: "ORTOGRAFIA", base_color: "pink" }
 ].each do |pagina_data|
   nvl_grammatica.pagine.create!(pagina_data)
 end
