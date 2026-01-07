@@ -1,6 +1,14 @@
 <%= javascript_tag nonce: true do %>
-  const theme = localStorage.getItem("theme")
-  if (theme && theme !== "auto") {
-    document.documentElement.dataset.theme = theme
-  }
+  // Applica dark mode PRIMA del rendering per evitare flash bianco
+  (function() {
+    const darkMode = localStorage.getItem('darkMode')
+    if (darkMode === 'true' || (!darkMode && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    }
+
+    const theme = localStorage.getItem("theme")
+    if (theme && theme !== "auto") {
+      document.documentElement.dataset.theme = theme
+    }
+  })()
 <% end %>

@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import { Turbo } from "@hotwired/turbo-rails"
 
 // Gestisce la navigazione tra pagine tramite swipe su dispositivi touch
 export default class extends Controller {
@@ -15,6 +16,11 @@ export default class extends Controller {
     this.currentX = 0
     this.isHorizontalSwipe = null
     this.isSwiping = false
+
+    // Reset stili (per quando si arriva via Turbo da uno swipe)
+    this.element.style.transform = ''
+    this.element.style.opacity = ''
+    this.element.style.transition = ''
 
     // Bind touch events
     this.handleTouchStart = this.handleTouchStart.bind(this)
@@ -110,11 +116,11 @@ export default class extends Controller {
   animateAndNavigate(direction, url) {
     const offset = direction === 'left' ? -window.innerWidth : window.innerWidth
     this.element.style.transform = `translateX(${offset}px)`
-    this.element.style.opacity = '0.5'
+    this.element.style.opacity = '0'
 
-    // Naviga dopo l'animazione
+    // Usa Turbo per navigazione fluida (evita flash bianco)
     setTimeout(() => {
-      window.location.href = url
+      Turbo.visit(url)
     }, 150)
   }
 
