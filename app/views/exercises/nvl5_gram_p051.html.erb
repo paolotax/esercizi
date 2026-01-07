@@ -7,7 +7,7 @@
 
   <!-- Exercise 3: Classify noun structure -->
   <div class="p-4 md:p-6 pb-8" data-controller="multiple-choice">
-    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+    <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Classifica i nomi scrivendo D (derivato), A (alterato) o C (composto).
     </h2>
@@ -35,7 +35,7 @@
       { word: "regalone", type: "A" }
     ] %>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 text-base md:text-lg">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
       <% noun_classification.each_with_index do |noun, index| %>
         <div class="rounded-lg p-3">
           <div class="flex items-center justify-between mb-2">
@@ -45,15 +45,15 @@
           <div class="flex gap-2 justify-end">
             <label class="flex items-center gap-1 cursor-pointer">
               <input type="radio" name="classification<%= index %>" value="D" data-multiple-choice-target="answer" data-correct-answer="<%= noun[:type] == 'D' ? 'true' : 'false' %>" class="w-4 h-4">
-              <span class="text-xs">D</span>
+              <span class="">D</span>
             </label>
             <label class="flex items-center gap-1 cursor-pointer">
               <input type="radio" name="classification<%= index %>" value="A" data-multiple-choice-target="answer" data-correct-answer="<%= noun[:type] == 'A' ? 'true' : 'false' %>" class="w-4 h-4">
-              <span class="text-xs">A</span>
+              <span class="">A</span>
             </label>
             <label class="flex items-center gap-1 cursor-pointer">
               <input type="radio" name="classification<%= index %>" value="C" data-multiple-choice-target="answer" data-correct-answer="<%= noun[:type] == 'C' ? 'true' : 'false' %>" class="w-4 h-4">
-              <span class="text-xs">C</span>
+              <span class="">C</span>
             </label>
           </div>
         </div>
@@ -63,12 +63,12 @@
 
   <!-- Exercise 4: Identify articles in text -->
   <div class="p-4 md:p-6 pb-8" data-controller="word-highlighter" data-word-highlighter-multi-color-value="true">
-    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+    <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
       Sottolinea in blu<span class="inline-block w-5 h-5 bg-blue-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span> gli articoli determinativi, in rosso<span class="inline-block w-5 h-5 bg-red-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="red" data-action="click->word-highlighter#selectColor"></span> gli indeterminativi. Poi cerchia<span class="inline-block w-5 h-5 bg-green-300 rounded-full ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span> gli articoli partitivi.
     </h2>
 
-    <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 text-base md:text-lg text-gray-700 dark:text-gray-200 leading-relaxed">
+    <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-4 text-gray-700 dark:text-gray-200 leading-relaxed">
       <div class="mb-4 cursor-pointer">
         <p class="mb-2">
           Ieri pomeriggio ho accompagnato
@@ -110,18 +110,18 @@
 
   <!-- Le mie competenze section -->
   <div class="bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 p-4 md:p-6 pb-8 rounded-lg">
-    <div class="mb-3 inline-block bg-<%= @pagina.base_color %>-500 text-white px-4 py-2 rounded-full text-sm md:text-base font-bold">
+    <div class="mb-3 inline-block bg-<%= @pagina.base_color %>-500 text-white px-4 py-2 rounded-full font-bold">
       Le mie competenze
     </div>
 
     <!-- Exercise 5: Count nouns -->
     <div class="mb-6" data-controller="word-highlighter multiple-choice" data-word-highlighter-multi-color-value="true">
-      <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <h2 class="font-bold mb-4 flex items-center gap-2">
         <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">5</span>
         Sottolinea<span class="inline-block w-5 h-5 bg-blue-300 rounded ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="blue" data-action="click->word-highlighter#selectColor"></span> tutti i nomi, poi cerchia<span class="inline-block w-5 h-5 bg-green-300 rounded-full ml-1 cursor-pointer" data-word-highlighter-target="colorBox" data-color="green" data-action="click->word-highlighter#selectColor"></span> i nomi collettivi. Infine rispondi.
       </h2>
 
-      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 mb-4 text-base md:text-lg text-gray-700 dark:text-gray-200 leading-relaxed cursor-pointer">
+      <div class="bg-white dark:bg-gray-800 rounded-lg p-4 mb-4 text-gray-700 dark:text-gray-200 leading-relaxed cursor-pointer">
         <p>
           "La <span data-word-highlighter-target="word" data-correct="green" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">folla</span> di <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">formiche</span> ascoltava attenta.
           L'<span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">ape</span> disse che avrebbe parlato anche agli <span data-word-highlighter-target="word" data-correct="blue" data-action="click->word-highlighter#toggleHighlight" class="px-1 rounded">uccelli</span>,
@@ -135,7 +135,7 @@
 
       <div class="space-y-3">
         <div class="bg-white dark:bg-gray-800 rounded-lg p-3">
-          <p class="text-base md:text-lg mb-2">Quanti nomi hai trovato?</p>
+          <p class="mb-2">Quanti nomi hai trovato?</p>
           <div class="flex gap-3">
             <label class="flex items-center gap-2 cursor-pointer">
               <input type="radio" name="count_nouns" value="10" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
@@ -157,7 +157,7 @@
         </div>
 
         <div class="bg-white dark:bg-gray-800 rounded-lg p-3">
-          <p class="text-base md:text-lg mb-2">Quanti nomi collettivi hai trovato?</p>
+          <p class="mb-2">Quanti nomi collettivi hai trovato?</p>
           <div class="flex gap-3">
             <label class="flex items-center gap-2 cursor-pointer">
               <input type="radio" name="count_collective" value="3" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5">
@@ -182,12 +182,12 @@
 
     <!-- Exercise 6: Identify partitive article -->
     <div data-controller="multiple-choice">
-      <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+      <h2 class="font-bold mb-4 flex items-center gap-2">
         <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">6</span>
         In quale di queste frasi c'è un articolo partitivo?
       </h2>
 
-      <div class="space-y-3 text-base md:text-lg">
+      <div class="space-y-3">
         <label class="flex items-start gap-3 bg-white dark:bg-gray-800 rounded-lg p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition">
           <input type="radio" name="partitive_sentence" value="1" data-multiple-choice-target="answer" data-correct-answer="false" class="w-5 h-5 mt-1">
           <span class="text-gray-700 dark:text-gray-200">I petali si sono rovinati a causa del vento.</span>

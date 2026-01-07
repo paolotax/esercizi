@@ -7,10 +7,10 @@
 
   <!-- Introduction -->
   <div class="p-4 md:p-6 pb-8">
-    <p class="text-base md:text-lg text-gray-700 dark:text-gray-200 font-semibold mb-3">
+    <p class="text-gray-700 dark:text-gray-200 font-semibold mb-3">
       <span class="text-<%= @pagina.base_color %>-500">•</span> In base alla struttura, i nomi possono essere:
     </p>
-    <div class="space-y-2 text-base md:text-lg text-gray-700 dark:text-gray-200 ml-6">
+    <div class="space-y-2 text-gray-700 dark:text-gray-200 ml-6">
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>primitivi</strong> → musica, gatto, libro</p>
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>derivati</strong> → musicista, libreria</p>
       <p><span class="text-<%= @pagina.base_color %>-500">•</span> <strong>alterati</strong> → gattino (diminutivo), gattuccio (vezzeggiativo), gattone (accrescitivo), gattaccio (dispregiativo)</p>
@@ -20,7 +20,7 @@
 
   <!-- Exercise 1: Primitivi vs Derivati -->
   <div class="p-4 md:p-6 pb-8" data-controller="exercise-group">
-    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+    <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">1</span>
       Colora di blu i nomi primitivi, di viola i nomi derivati.
     </h2>
@@ -33,7 +33,7 @@
       { word: "collana", type: "derivato" }, { word: "barca", type: "primitivo" }
     ] %>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-base md:text-lg">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
       <% nouns_structure.each do |noun| %>
         <div class="<%= noun[:type] == 'primitivo' ? 'bg-blue-50 dark:bg-blue-900/30' : 'bg-purple-50 dark:bg-purple-900/30' %> rounded-lg p-2 text-center">
           <span class="text-gray-700 dark:text-gray-200 font-semibold"><%= noun[:word] %></span>
@@ -44,7 +44,7 @@
 
   <!-- Exercise 2: Tipi di alterati -->
   <div class="p-4 md:p-6 pb-8" data-controller="exercise-group">
-    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+    <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">2</span>
       Per ogni nome alterato indica se è vezzeggiativo (V), diminutivo (D), dispregiativo (DS) o accrescitivo (A).
     </h2>
@@ -56,7 +56,7 @@
       { word: "bauletto", type: "D" }, { word: "leprotto", type: "V" }, { word: "postaccio", type: "DS" }
     ] %>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-base md:text-lg">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
       <% alterati.each_with_index do |noun, index| %>
         <div class="rounded-lg p-3 flex items-center justify-between gap-4">
           <span class="font-semibold text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> <%= noun[:word] %></span>
@@ -64,7 +64,7 @@
             <% ["V", "D", "DS", "A"].each do |opt| %>
               <label class="flex items-center gap-1 cursor-pointer">
                 <input type="radio" name="alterato<%= index %>" value="<%= opt %>" data-correct-answer="<%= noun[:type] %>" class="w-4 h-4">
-                <span class="text-xs"><%= opt %></span>
+                <span class=""><%= opt %></span>
               </label>
             <% end %>
           </div>
@@ -75,16 +75,16 @@
 
   <!-- Exercise 3: Form compound nouns -->
   <div class="p-4 md:p-6 pb-8" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+    <h2 class="font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Collega le parole e forma i nomi composti.
     </h2>
 
     <div class="mb-4 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 rounded-lg p-3">
-      <p class="text-base md:text-lg text-gray-700 dark:text-gray-200">
+      <p class="text-gray-700 dark:text-gray-200">
         <span class="text-<%= @pagina.base_color %>-500">•</span> Prima parte: sciogli - lungo - dopo - salva - arco - alto
       </p>
-      <p class="text-base md:text-lg text-gray-700 dark:text-gray-200">
+      <p class="text-gray-700 dark:text-gray-200">
         <span class="text-<%= @pagina.base_color %>-500">•</span> Seconda parte: gente - lingua - piano - mare - scuola - baleno
       </p>
     </div>
@@ -98,7 +98,7 @@
       { part1: "alto", part2: "piano", compound: "altopiano" }
     ] %>
 
-    <div class="space-y-3 text-base md:text-lg">
+    <div class="space-y-3">
       <% compounds.each do |compound| %>
         <div class="rounded-lg p-3 flex items-center justify-between gap-4">
           <div class="flex items-center gap-2">
@@ -119,7 +119,7 @@
     </div>
   </div>
 
-  <div class="text-right text-sm text-gray-500 dark:text-gray-400 mb-6">
+  <div class="text-right text-gray-500 dark:text-gray-400 mb-6">
     Esercizi pp. <%= link_to "149", pagina_path("nvl5_gram_p149"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>, <%= link_to "150", pagina_path("nvl5_gram_p150"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>, <%= link_to "151", pagina_path("nvl5_gram_p151"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %> e <%= link_to "153", pagina_path("nvl5_gram_p153"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>
   </div>
 
