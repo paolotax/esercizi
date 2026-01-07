@@ -1,16 +1,20 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-<%= @pagina.base_color %>-100 rounded-3xl shadow-xl" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
+  <div class="space-y-6">
+
   <!-- Exercise 5 -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">5</span>
       Dividi in sillabe le parole.
     </h2>
 
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base md:text-lg">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base md:text-lg text-gray-800 dark:text-gray-200">
       <% syllables = {
         "cappellino" => "cap/pel/li/no",
         "acquedotto" => "ac/que/dot/to",
@@ -20,11 +24,11 @@
 
       <% syllables.each do |word, answer| %>
         <div class="rounded-lg p-4 flex items-center justify-between gap-3">
-          <span class="text-<%= @pagina.base_color %>-500">•</span> 
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
           <%= word %>
           <span class="text-<%= @pagina.base_color %>-500"> →</span>
           <input type="text"
-                 class="w-full border-b-2 border-<%= @pagina.base_color %>-500 border-dotted bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 class="w-full border-b-2 border-<%= @pagina.base_color %>-500 border-dotted bg-transparent dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= answer %>"
                  data-correct-answer="<%= answer %>"
@@ -35,28 +39,28 @@
   </div>
 
   <!-- Exercise 6 -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">6</span>
-      Inserisci l’H solo quando serve.
+      Inserisci l'H solo quando serve.
     </h2>
 
-    <div class="space-y-4 text-base md:text-lg leading-relaxed">
+    <div class="space-y-4 text-base md:text-lg leading-relaxed text-gray-800 dark:text-gray-200">
       <% sentences_h = [
         ["Elisa è andata ", { answer: "a" }, " Roma perché ", { answer: "ha" }, " vinto un premio."],
-        ["Su Marte c’è l’acqua: l’", { answer: "hanno" }, " detto alla televisione l’", { answer: "hanno" }, " scorso."],
-        ["", { answer: "Ho" }, " preso i pomodori: vuoi che faccia un sugo ", { answer: "o" }, " l’insalata?"],
-        ["Chi ", { answer: "ha" }, " vinto il festival l’", { answer: "hanno" }, " scorso?"],
+        ["Su Marte c'è l'acqua: l'", { answer: "hanno" }, " detto alla televisione l'", { answer: "hanno" }, " scorso."],
+        ["", { answer: "Ho" }, " preso i pomodori: vuoi che faccia un sugo ", { answer: "o" }, " l'insalata?"],
+        ["Chi ", { answer: "ha" }, " vinto il festival l'", { answer: "hanno" }, " scorso?"],
         ["", { answer: "Oh" }, "! Ma che cosa ", { answer: "hai" }, " combinato?"]
       ] %>
 
       <% sentences_h.each do |sentence| %>
         <p class="rounded-lg p-3 flex flex-wrap items-center gap-1">
-          <span class="text-<%= @pagina.base_color %>-500">•</span> 
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
           <% sentence.each do |part| %>
             <% if part.is_a?(Hash) %>
               <input type="text"
-                     class="border-b-2 border-<%= @pagina.base_color %>-500 border-dotted bg-white w-16 md:w-20 text-center focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                     class="border-b-2 border-<%= @pagina.base_color %>-500 border-dotted bg-transparent dark:text-white w-16 md:w-20 text-center focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                      data-fill-blanks-target="input"
                      data-answer="<%= part[:answer] %>"
                      data-correct-answer="<%= part[:answer] %>"
@@ -71,30 +75,30 @@
   </div>
 
   <!-- Exercise 7 -->
-  <div class="bg-white p-4 md:p-6 pb-8">
-    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-4 md:p-6 pb-8">
+    <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">7</span>
       Completa con la forma corretta.
     </h2>
-    
-    <div class="space-y-4 text-base md:text-lg" data-controller="word-choice">
+
+    <div class="space-y-4 text-base md:text-lg text-gray-800 dark:text-gray-200" data-controller="word-choice">
       <% forms = [
-        { parts: ["Siamo in ritardo di ", ["mezzora", "mezz’ora"], " …"], correct: ["mezz’ora"] },
-        { parts: ["", ["Qual’è", "Qual è"], " ", ["un", "un’"], " aiuola adatta al nostro giardino?"], correct: ["Qual è", "un’"] },
-        { parts: ["Auguri di ", ["buon", "buon’"], " onomastico! Oggi è ", ["san", "santo"], " Lorenzo."], correct: ["buon", "san"] }
+        { parts: ["Siamo in ritardo di ", ["mezzora", "mezz'ora"], " …"], correct: ["mezz'ora"] },
+        { parts: ["", ["Qual'è", "Qual è"], " ", ["un", "un'"], " aiuola adatta al nostro giardino?"], correct: ["Qual è", "un'"] },
+        { parts: ["Auguri di ", ["buon", "buon'"], " onomastico! Oggi è ", ["san", "santo"], " Lorenzo."], correct: ["buon", "san"] }
       ] %>
 
       <% forms.each_with_index do |row, idx| %>
         <div class="p-3 rounded-lg leading-relaxed">
           <% group_counter = 0 %>
-                      <span class="text-<%= @pagina.base_color %>-500">•</span> 
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
 
           <% row[:parts].each do |part| %>
             <% if part.is_a?(Array) %>
               <% group_id = "f#{idx}_g#{group_counter}" %>
               <% correct_item = row[:correct][group_counter] %>
               <% part.each_with_index do |option, option_idx| %>
-                <span class="px-1 py-0.5 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 transition"
+                <span class="px-1 py-0.5 rounded cursor-pointer hover:bg-<%= @pagina.base_color %>-100 dark:hover:bg-<%= @pagina.base_color %>-900/30 transition"
                       data-word-choice-target="word"
                       data-group="<%= group_id %>"
                       data-correct="<%= option == correct_item %>"
@@ -111,27 +115,27 @@
   </div>
 
   <!-- Exercise 8 -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
-    <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-4 md:p-6 pb-8" data-controller="fill-blanks">
+    <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">8</span>
-      Metti l’accento dove serve.
+      Metti l'accento dove serve.
     </h2>
 
     <% accents = [
       ["Il re si ", { answer: "è" }, " svegliato da poco e ora sta facendo colazione di ", { answer: "là" }, ", nel suo studio."],
       ["Chi non ", { answer: "dà" }, " fiducia a nessuno, non ", { answer: "può" }, " pretendere di ottenerla per ", { answer: "sé" }, " dagli altri."],
-      ["", { answer: "Dò" }, " il mio posto a sedere a quell’uomo che viene da molto lontano."],
+      ["", { answer: "Dò" }, " il mio posto a sedere a quell'uomo che viene da molto lontano."],
       ["Sei ", { answer: "già" }, " stata qui? Il locale ", { answer: "è" }, " molto alla moda e ha un ascensore che ti porta su in terrazza."]
     ] %>
 
-    <div class="space-y-4 text-base md:text-lg">
+    <div class="space-y-4 text-base md:text-lg text-gray-800 dark:text-gray-200">
       <% accents.each do |sentence| %>
         <p class="rounded-lg p-3 flex flex-wrap items-center gap-1 leading-relaxed">
-          <span class="text-<%= @pagina.base_color %>-500">•</span> 
+          <span class="text-<%= @pagina.base_color %>-500">•</span>
           <% sentence.each do |piece| %>
             <% if piece.is_a?(Hash) %>
               <input type="text"
-                     class="border-b-2 border-<%= @pagina.base_color %>-500 border-dotted bg-white w-14 md:w-16 text-center focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                     class="border-b-2 border-<%= @pagina.base_color %>-500 border-dotted bg-transparent dark:text-white w-14 md:w-16 text-center focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                      data-fill-blanks-target="input"
                      data-answer="<%= piece[:answer] %>"
                      data-correct-answer="<%= piece[:answer] %>"
@@ -146,41 +150,41 @@
   </div>
 
 
-  <div class="bg-white md:p-6 pb-6">
+  <div class="bg-white dark:bg-gray-800 rounded-lg md:p-6 pb-6">
     <h3 class="text-lg md:text-xl font-bold flex items-center rounded-t-lg">
       <span class="rounded-t-full px-8 py-2 flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white inline-flex items-center justify-center">Le mie competenze</span>
     </h3>
-    <hr class=" -mt-1 border-<%= @pagina.base_color %>-500 border-2">
+    <hr class="-mt-1 border-<%= @pagina.base_color %>-500 dark:border-<%= @pagina.base_color %>-600 border-2">
   </div>
 
   <!--Esercizio 9 -->
-  <div class="bg-white p-4 md:p-6 pb-8">
-    <h3 class="text-lg md:text-xl font-bold mb-8 flex items-center gap-2">
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-4 md:p-6 pb-8">
+    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-8 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">9</span>
       Quale frase è scritta correttamente?
     </h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
       <% phrases = [
-        { text: "È un bravuomo, ma non ha nessun’amico.", correct: false },
-        { text: "È un brav’uomo, ma non ha nessun’amico.", correct: false },
+        { text: "È un bravuomo, ma non ha nessun'amico.", correct: false },
+        { text: "È un brav'uomo, ma non ha nessun'amico.", correct: false },
         { text: "È un brav uomo, ma non ha nessun amico.", correct: false },
-        { text: "È un brav’uomo, ma non ha nessun amico.", correct: true }
+        { text: "È un brav'uomo, ma non ha nessun amico.", correct: true }
       ] %>
       <% phrases.each_with_index do |phrase, idx| %>
-        <label class="flex items-center gap-3 bg-<%= @pagina.base_color %>-50 border-2 border-<%= @pagina.base_color %>-200 rounded-lg px-3 py-2 shadow-sm hover:border-<%= @pagina.base_color %>-400 transition">
+        <label class="flex items-center gap-3 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 border-2 border-<%= @pagina.base_color %>-200 dark:border-<%= @pagina.base_color %>-700 rounded-lg px-3 py-2 hover:border-<%= @pagina.base_color %>-400 dark:hover:border-<%= @pagina.base_color %>-500 transition">
           <input type="radio"
                   name="q9"
                   class="w-5 h-5 text-<%= @pagina.base_color %>-600 focus:ring-<%= @pagina.base_color %>-500"
                   data-correct-answer="<%= phrase[:correct] %>">
-          <span class="text-gray-800"><%= phrase[:text] %></span>
+          <span class="text-gray-800 dark:text-gray-200"><%= phrase[:text] %></span>
         </label>
       <% end %>
     </div>
   </div>
 
   <!-- Esercizio 10 -->
-  <div class="bg-white p-4 md:p-6 pb-8">
-    <h3 class="text-lg md:text-xl font-bold mb-8 flex items-center gap-2">
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-4 md:p-6 pb-8">
+    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-8 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">10</span>
       Qual è il plurale corretto della frase?
     </h3>
@@ -194,19 +198,19 @@
       ] %>
 
       <% plural_options.each_with_index do |option, idx| %>
-        <label class="flex items-center gap-3 bg-<%= @pagina.base_color %>-50 border-2 border-<%= @pagina.base_color %>-200 rounded-lg px-3 py-2 shadow-sm hover:border-<%= @pagina.base_color %>-400 transition">
+        <label class="flex items-center gap-3 bg-<%= @pagina.base_color %>-50 dark:bg-<%= @pagina.base_color %>-900/30 border-2 border-<%= @pagina.base_color %>-200 dark:border-<%= @pagina.base_color %>-700 rounded-lg px-3 py-2 hover:border-<%= @pagina.base_color %>-400 dark:hover:border-<%= @pagina.base_color %>-500 transition">
           <input type="radio"
                   name="q10"
                   class="w-5 h-5 text-<%= @pagina.base_color %>-600 focus:ring-<%= @pagina.base_color %>-500"
                   data-correct-answer="<%= option[:correct] %>">
-          <span class="text-gray-800"><%= option[:text] %></span>
+          <span class="text-gray-800 dark:text-gray-200"><%= option[:text] %></span>
         </label>
       <% end %>
     </div>
   </div>
 
-
   <!-- Exercise Controls -->
   <%= render 'shared/exercise_controls' %>
+  </div><!-- chiude space-y-6 -->
 </div>
 

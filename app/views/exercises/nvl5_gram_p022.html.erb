@@ -1,20 +1,24 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-<%= @pagina.base_color %>-100" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
-  <div class="bg-white p-4 md:p-6 pb-8">
-    <p class="text-sm md:text-base text-gray-600 mb-4">
+  <div class="space-y-6">
+
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-4 md:p-6 pb-8">
+    <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 mb-4">
       <span class="text-<%= @pagina.base_color %>-500">•</span> Osserva l'immagine del supermercato e tocca i cartellini per ascoltare la parola corretta.
     </p>
 
     <!-- Interactive Image -->
-    <div class="relative rounded-lg overflow-hidden"
+    <div class="relative rounded-lg overflow-hidden dark:bg-white"
          data-controller="hotspot-editor"
          data-hotspot-editor-target="container">
     <%= image_tag "nvl5_gram/p022/p022_01.jpg",
         alt: "Supermercato con cartellini: frigorifero, cartello del reparto, lampadario, scaffale, flaconi, espositore, caporeparto, cassa, scatole, cliente, cestino, bilancia, cassetta, borse, banco, carrello e corsia",
-        class: "w-full h-full object-cover select-none pointer-events-none" %>
+        class: "w-full h-full object-cover select-none pointer-events-none rounded-lg" %>
 
     <div class="absolute inset-0">
       <% hotspots = [
@@ -59,5 +63,6 @@
 
   <!-- Exercise Controls -->
   <%= render 'shared/exercise_controls' %>
+  </div><!-- chiude space-y-6 -->
 </div>
 

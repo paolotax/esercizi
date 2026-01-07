@@ -1,10 +1,15 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white rounded-lg shadow-lg" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
+  <div class="space-y-6">
+
   <!-- Exercise 4: Circle correct alternative -->
-  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-gray-800 mb-4">
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">
       <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">4</span>
       Cerchia l'alternativa corretta.
     </h2>
@@ -34,10 +39,10 @@
       %>
 
       <% sentences.each_with_index do |sentence, sentence_idx| %>
-          
+
         <div class="px-3 py-1 rounded-lg">
           <p class="text-base md:text-lg leading-relaxed inline">
-            <span class="text-cyan-700 font-bold text-2xl mr-2">•</span>
+            <span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span>
             <% sentence[:parts].each_with_index do |part, part_idx| %>
               <% if part.is_a?(Array) %>
                 <%
@@ -46,7 +51,7 @@
                   group_counter += 1
                 %>
                 <% part.each_with_index do |word, word_idx| %>
-                  <span class="px-1 py-0.5 rounded cursor-pointer hover:bg-pink-100 transition"
+                  <span class="px-1 py-0.5 rounded cursor-pointer hover:bg-pink-100 dark:hover:bg-pink-900/30 transition"
                         data-word-choice-target="word"
                         data-group="<%= current_group %>"
                         data-correct="<%= word == correct_word %>"
@@ -64,93 +69,93 @@
   </div>
 
   <!-- Exercise 5: Complete sentences -->
-  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-gray-800 mb-4">
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">
       <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">5</span>
-      Completa le frasi con <span class="font-bold text-cyan-700">LO</span> / <span class="font-bold text-cyan-700">L'HO</span>, <span class="font-bold text-cyan-700">L'HAI</span>, <span class="font-bold text-cyan-700">LA</span> / <span class="font-bold text-cyan-700">L'HA</span>, <span class="font-bold text-cyan-700">L'ANNO</span> / <span class="font-bold text-cyan-700">L'HANNO</span>.
+      Completa le frasi con <span class="font-bold text-cyan-700 dark:text-cyan-400">LO</span> / <span class="font-bold text-cyan-700 dark:text-cyan-400">L'HO</span>, <span class="font-bold text-cyan-700 dark:text-cyan-400">L'HAI</span>, <span class="font-bold text-cyan-700 dark:text-cyan-400">LA</span> / <span class="font-bold text-cyan-700 dark:text-cyan-400">L'HA</span>, <span class="font-bold text-cyan-700 dark:text-cyan-400">L'ANNO</span> / <span class="font-bold text-cyan-700 dark:text-cyan-400">L'HANNO</span>.
     </h2>
 
     <div class="sm:ml-7 space-y-0" data-controller="fill-blanks">
       <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
-        <span><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> Ormai <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
+        <span><span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span> Ormai <input type="text"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="l'hanno"
                data-correct-answer="l'hanno"
-               maxlength="7"> visto tutti!</span class="whitespace-nowrap"></span>
+               maxlength="7"> visto tutti!</span>
       </div>
 
       <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
-        <span><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> Non trovo il libro: <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700 inline"
+        <span><span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span> Non trovo il libro: <input type="text"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="l'hai"
                data-correct-answer="l'hai"
                maxlength="5"> preso tu o <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700 inline"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="l'ha"
                data-correct-answer="l'ha"
-               maxlength="4" class="whitespace-nowrap"> spostato la tua compagna di banco?</span></span>
+               maxlength="4"> spostato la tua compagna di banco?</span>
       </div>
 
       <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
-        <span><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> Te <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700 inline"
+        <span><span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span> Te <input type="text"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="l'ha"
                data-correct-answer="l'ha"
                maxlength="4"> detto <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700 inline"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="la"
                data-correct-answer="la"
                maxlength="2"> mamma che <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="l'anno"
                data-correct-answer="l'anno"
-               maxlength="6"> prossimo ci trasferiremo?</span class="whitespace-nowrap"></span>
+               maxlength="6"> prossimo ci trasferiremo?</span>
       </div>
 
       <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
-        <span><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> Gli zii verranno a Roma: ce <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
+        <span><span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span> Gli zii verranno a Roma: ce <input type="text"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="l'hanno"
                data-correct-answer="l'hanno"
-               maxlength="7"> scritto!</span class="whitespace-nowrap"></span>
+               maxlength="7"> scritto!</span>
       </div>
 
       <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
-        <span><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700 inline"
+        <span><span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span> <input type="text"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="Lo"
                data-correct-answer="Lo"
                maxlength="2"> sai che non <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700 inline"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-16 md:w-20 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="l'ho"
                data-correct-answer="l'ho"
                maxlength="4"> fatto apposta, è inutile che te <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700 inline"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-12 md:w-16 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="la"
                data-correct-answer="la"
-               maxlength="2"> prendi.</span class="whitespace-nowrap"></span>
+               maxlength="2"> prendi.</span>
       </div>
     </div>
   </div>
 
   <!-- Exercise 6: Write sentences with word pairs -->
-  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-gray-800 mb-4">
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">
       <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">6</span>
       Scrivi una frase utilizzando la coppia di parole indicata, come nell'esempio.
     </h2>
 
-    <div class="sm:ml-7 space-y-0">
+    <div class="sm:ml-7 space-y-3">
       <% word_pairs = [
         {words: 'LO • L\'HO', border_color: 'yellow', example: 'Ho preparato lo zaino e l\'ho messo in macchina.'},
         {words: 'LA • L\'HA', border_color: 'purple', example: nil},
@@ -160,16 +165,16 @@
 
       <% word_pairs.each do |pair| %>
         <div class="flex <%= pair[:example] ? 'items-center' : 'items-start' %> gap-3">
-          <div class="bg-white border-4 <%= case pair[:border_color]
-            when 'yellow' then 'border-yellow-500'
-            when 'purple' then 'border-purple-500'
-            when 'orange' then 'border-orange-500'
-            when 'green' then 'border-green-500'
-            end %> text-black px-4 py-2 rounded-lg font-bold flex-shrink-0"><%= pair[:words] %></div>
+          <div class="bg-white dark:bg-gray-700 border-4 <%= case pair[:border_color]
+            when 'yellow' then 'border-yellow-500 dark:border-yellow-400'
+            when 'purple' then 'border-purple-500 dark:border-purple-400'
+            when 'orange' then 'border-orange-500 dark:border-orange-400'
+            when 'green' then 'border-green-500 dark:border-green-400'
+            end %> text-black dark:text-white px-4 py-2 rounded-lg font-bold flex-shrink-0"><%= pair[:words] %></div>
           <% if pair[:example] %>
-            <div class="flex-1 text-base md:text-lg text-cyan-700"><%= pair[:example] %></div>
+            <div class="flex-1 text-base md:text-lg text-cyan-700 dark:text-cyan-400"><%= pair[:example] %></div>
           <% else %>
-            <textarea class="flex-1 border-2 border-dotted border-gray-400 rounded-lg p-3 focus:outline-none text-base md:text-lg"
+            <textarea class="flex-1 border-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white rounded-lg p-3 focus:outline-none text-base md:text-lg"
                       rows="2"
                       placeholder="Scrivi una frase con <%= pair[:words] %>..."></textarea>
           <% end %>
@@ -179,74 +184,74 @@
   </div>
 
   <!-- Exercise 7: Complete with GLIELO/GLIEL'HO etc -->
-  <div class="mb-6 md:mb-8 bg-white rounded-lg p-4 md:p-6">
-    <h2 class="text-lg md:text-xl font-bold text-gray-800 mb-4">
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-4 md:p-6">
+    <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">
       <span class="bg-pink-600 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center mr-2">7</span>
-      Completa le frasi con <span class="font-bold text-cyan-700">GLIELO</span> / <span class="font-bold text-cyan-700">GLIEL'HO</span>, <span class="font-bold text-cyan-700">GLIELA</span> / <span class="font-bold text-cyan-700">GLIEL'HA</span>, <span class="font-bold text-cyan-700">GLIEL'HAI</span>, <span class="font-bold text-cyan-700">GLIEL'HANNO</span>.
+      Completa le frasi con <span class="font-bold text-cyan-700 dark:text-cyan-400">GLIELO</span> / <span class="font-bold text-cyan-700 dark:text-cyan-400">GLIEL'HO</span>, <span class="font-bold text-cyan-700 dark:text-cyan-400">GLIELA</span> / <span class="font-bold text-cyan-700 dark:text-cyan-400">GLIEL'HA</span>, <span class="font-bold text-cyan-700 dark:text-cyan-400">GLIEL'HAI</span>, <span class="font-bold text-cyan-700 dark:text-cyan-400">GLIEL'HANNO</span>.
     </h2>
 
     <div class="sm:ml-7 space-y-0" data-controller="fill-blanks">
-      <div class="px-2 py-0 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
-        <span><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> Questo ombrello è di Davide, <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
+      <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span><span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span> Questo ombrello è di Davide, <input type="text"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="glielo"
                data-correct-answer="glielo"
-               maxlength="7"> restituirò domani.</span class="whitespace-nowrap"></span >
+               maxlength="7"> restituirò domani.</span>
       </div>
 
       <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
-        <span><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> Vuoi che <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
+        <span><span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span> Vuoi che <input type="text"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-20 md:w-24 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="gliela"
                data-correct-answer="gliela"
-               maxlength="7"> porti io la frutta?</span class="whitespace-nowrap"></span>
+               maxlength="7"> porti io la frutta?</span>
       </div>
 
       <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
-        <span><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> Mario ha saputo del disguido, <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-24 md:w-28 text-center focus:outline-none focus:border-pink-700 inline"
+        <span><span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span> Mario ha saputo del disguido, <input type="text"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-24 md:w-28 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="gliel'ha"
                data-correct-answer="gliel'ha"
-               maxlength="8"> detto Luca.</span></span>
+               maxlength="8"> detto Luca.</span>
       </div>
 
       <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
-        <span><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> Questo pallone è nuovo: <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-28 md:w-32 text-center focus:outline-none focus:border-pink-700 inline"
+        <span><span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span> Questo pallone è nuovo: <input type="text"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-28 md:w-32 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="gliel'hanno"
                data-correct-answer="gliel'hanno"
-               maxlength="11"> comperato i suoi genitori.</span class="whitespace-nowrap"></span>
+               maxlength="11"> comperato i suoi genitori.</span>
       </div>
 
       <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
-        <span><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> – <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-24 md:w-28 text-center focus:outline-none focus:border-pink-700 inline"
+        <span><span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span> – <input type="text"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-24 md:w-28 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="Gliel'hai"
                data-correct-answer="Gliel'hai"
-               maxlength="9"> precisato che non ci sarò alla festa?</span class="whitespace-nowrap"></span>
+               maxlength="9"> precisato che non ci sarò alla festa?</span>
       </div>
 
       <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
-        <span><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> – No, non <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-24 md:w-28 text-center focus:outline-none focus:border-pink-700 inline"
+        <span><span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span> – No, non <input type="text"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-24 md:w-28 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="gliel'ho"
                data-correct-answer="gliel'ho"
-               maxlength="8"> ancora comunicato.</span class="whitespace-nowrap"></span>
+               maxlength="8"> ancora comunicato.</span>
       </div>
 
-      <div class="px-3a py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
-        <span><span class="text-cyan-700 font-bold text-2xl mr-2">•</span> Mio fratello è capriccioso e qualche volta <input type="text"
-               class="border-b-3 border-pink-500 bg-white w-24 md:w-28 text-center focus:outline-none focus:border-pink-700 inline"
+      <div class="px-3 py-1 rounded-lg flex flex-wrap items-center gap-1 text-base md:text-lg">
+        <span><span class="text-cyan-700 dark:text-cyan-400 font-bold text-2xl mr-2">•</span> Mio fratello è capriccioso e qualche volta <input type="text"
+               class="border-b-3 border-pink-500 dark:border-pink-400 bg-transparent dark:text-white w-24 md:w-28 text-center focus:outline-none focus:border-pink-700 inline"
                data-fill-blanks-target="input"
                data-answer="glielo"
                data-correct-answer="glielo"
-               maxlength="7"> faccio notare.</span class="whitespace-nowrap"></span>
+               maxlength="7"> faccio notare.</span>
       </div>
     </div>
   </div>
@@ -255,22 +260,23 @@
   <%
     base_color = @pagina&.base_color || "blue"
     color_map = {
-      "purple" => "text-purple-700 hover:text-purple-900",
-      "blue" => "text-blue-700 hover:text-blue-900",
-      "cyan" => "text-cyan-700 hover:text-cyan-900",
-      "green" => "text-green-700 hover:text-green-900",
-      "orange" => "text-orange-700 hover:text-orange-900",
-      "red" => "text-red-700 hover:text-red-900",
-      "pink" => "text-pink-700 hover:text-pink-900"
+      "purple" => "text-purple-700 dark:text-purple-400 hover:text-purple-900 dark:hover:text-purple-300",
+      "blue" => "text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300",
+      "cyan" => "text-cyan-700 dark:text-cyan-400 hover:text-cyan-900 dark:hover:text-cyan-300",
+      "green" => "text-green-700 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300",
+      "orange" => "text-orange-700 dark:text-orange-400 hover:text-orange-900 dark:hover:text-orange-300",
+      "red" => "text-red-700 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300",
+      "pink" => "text-pink-700 dark:text-pink-400 hover:text-pink-900 dark:hover:text-pink-300"
     }
-    link_color = color_map[base_color] || "text-blue-700 hover:text-blue-900"
+    link_color = color_map[base_color] || "text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300"
   %>
-  <div class="mb-6 text-right font-bold">
+  <div class="text-right font-bold">
     <p class="text-lg md:text-xl <%= link_color %>">
       Esercizi pp. <%= link_to "136", pagina_path("nvl5_gram_p136"), class: "#{link_color} underline" %>-<%= link_to "137", pagina_path("nvl5_gram_p137"), class: "#{link_color} underline" %>
     </p>
   </div>
 
   <!-- Exercise Controls -->
-  <%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl5_gr_p011' %>
+  <%= render 'shared/exercise_controls' %>
+  </div><!-- chiude space-y-6 -->
 </div>
