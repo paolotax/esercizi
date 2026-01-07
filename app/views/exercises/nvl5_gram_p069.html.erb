@@ -1,9 +1,12 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-white" data-controller="exercise-checker">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Exercise 3: Transform simple to compound -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">3</span>
       Trasforma ogni tempo semplice nel corrispondente tempo composto, come nell'esempio.
@@ -11,7 +14,7 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> suonano → <strong class="text-green-700">hanno suonato</strong></p>
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> suonano → <strong class="text-green-700 dark:text-green-400">hanno suonato</strong></p>
       </div>
 
       <% transforms = [
@@ -23,9 +26,9 @@
       <% transforms.each do |item| %>
         <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
           <span class="text-<%= @pagina.base_color %>-500">•</span>
-          <span class="text-gray-700"><%= item[:simple] %> →</span>
+          <span class="text-gray-700 dark:text-gray-200"><%= item[:simple] %> →</span>
           <input type="text"
-                 class="flex-1 min-w-[150px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 class="flex-1 min-w-[150px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:compound] %>"
                  data-correct-answer="<%= item[:compound] %>">
@@ -35,7 +38,7 @@
   </div>
 
   <!-- Exercise 4: Transform compound to simple -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">4</span>
       Trasforma ogni tempo composto nel corrispondente tempo semplice.
@@ -52,9 +55,9 @@
       <% reverse_transforms.each do |item| %>
         <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
           <span class="text-<%= @pagina.base_color %>-500">•</span>
-          <span class="text-gray-700"><%= item[:compound] %> →</span>
+          <span class="text-gray-700 dark:text-gray-200"><%= item[:compound] %> →</span>
           <input type="text"
-                 class="flex-1 min-w-[150px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 class="flex-1 min-w-[150px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:simple] %>"
                  data-correct-answer="<%= item[:simple] %>">
@@ -64,7 +67,7 @@
   </div>
 
   <!-- Exercise 5: Highlight correct form -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="multiple-choice">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="multiple-choice">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">5</span>
       Evidenzia la forma verbale corretta.
@@ -72,7 +75,7 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <div class="rounded-lg p-3">
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> Ieri la nonna mi
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> Ieri la nonna mi
           <label class="inline-flex items-center gap-1 mx-1 cursor-pointer"><input type="radio" name="ex5_1" value="fece" class="w-4 h-4"><span class="font-semibold">fece</span></label> /
           <label class="inline-flex items-center gap-1 mx-1 cursor-pointer"><input type="radio" name="ex5_1" value="ha fatto" class="w-4 h-4"><span class="font-semibold">ha fatto</span></label>
           una sorpresa.
@@ -80,7 +83,7 @@
       </div>
 
       <div class="rounded-lg p-3">
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> L'anno scorso
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> L'anno scorso
           <label class="inline-flex items-center gap-1 mx-1 cursor-pointer"><input type="radio" name="ex5_2" value="feci" class="w-4 h-4"><span class="font-semibold">feci</span></label> /
           <label class="inline-flex items-center gap-1 mx-1 cursor-pointer"><input type="radio" name="ex5_2" value="ho fatto" class="w-4 h-4"><span class="font-semibold">ho fatto</span></label>
           una gita al lago.
@@ -88,7 +91,7 @@
       </div>
 
       <div class="rounded-lg p-3">
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span>
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span>
           <label class="inline-flex items-center gap-1 mx-1 cursor-pointer"><input type="radio" name="ex5_3" value="Uscirò" class="w-4 h-4"><span class="font-semibold">Uscirò</span></label> /
           <label class="inline-flex items-center gap-1 mx-1 cursor-pointer"><input type="radio" name="ex5_3" value="Sarò uscito" class="w-4 h-4"><span class="font-semibold">Sarò uscito</span></label>
           quando
@@ -99,7 +102,7 @@
       </div>
 
       <div class="rounded-lg p-3">
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span>
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span>
           <label class="inline-flex items-center gap-1 mx-1 cursor-pointer"><input type="radio" name="ex5_5" value="Camminavo" class="w-4 h-4"><span class="font-semibold">Camminavo</span></label> /
           <label class="inline-flex items-center gap-1 mx-1 cursor-pointer"><input type="radio" name="ex5_5" value="Camminai" class="w-4 h-4"><span class="font-semibold">Camminai</span></label>
           sulla spiaggia quando
@@ -112,7 +115,7 @@
   </div>
 
   <!-- Exercise 6: Indicate time and person -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">6</span>
       Per ogni voce verbale indica il tempo e la persona, come nell'esempio.
@@ -120,7 +123,7 @@
 
     <div class="space-y-3 text-base md:text-lg">
       <div class="bg-<%= @pagina.base_color %>-50 rounded-lg p-4">
-        <p class="text-gray-700"><span class="text-<%= @pagina.base_color %>-500">•</span> ho scoperto → <strong class="text-green-700">passato prossimo, 1ª pers. sing.</strong></p>
+        <p class="text-gray-700 dark:text-gray-200"><span class="text-<%= @pagina.base_color %>-500">•</span> ho scoperto → <strong class="text-green-700 dark:text-green-400">passato prossimo, 1ª pers. sing.</strong></p>
       </div>
 
       <% verb_analysis = [
@@ -136,9 +139,9 @@
       <% verb_analysis.each do |item| %>
         <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
           <span class="text-<%= @pagina.base_color %>-500">•</span>
-          <span class="text-gray-700"><%= item[:verb] %> →</span>
+          <span class="text-gray-700 dark:text-gray-200"><%= item[:verb] %> →</span>
           <input type="text"
-                 class="flex-1 min-w-[250px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
+                 class="flex-1 min-w-[250px] border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 dark:text-white text-right px-2 focus:outline-none focus:border-<%= @pagina.base_color %>-700"
                  data-fill-blanks-target="input"
                  data-answer="<%= item[:answer] %>"
                  data-correct-answer="<%= item[:answer] %>">
@@ -148,7 +151,7 @@
   </div>
 
   <!-- Exercise 7: Conjugate with correct tense -->
-  <div class="bg-white p-4 md:p-6 pb-8" data-controller="fill-blanks">
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 pb-8" data-controller="fill-blanks">
     <h2 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
       <span class="flex-shrink-0 bg-<%= @pagina.base_color %>-500 text-white rounded-full w-8 h-8 md:w-10 md:h-10 inline-flex items-center justify-center">7</span>
       Completa coniugando il verbo tra parentesi al tempo adatto.
@@ -157,38 +160,38 @@
     <div class="space-y-3 text-base md:text-lg">
       <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
         <span class="text-<%= @pagina.base_color %>-500">•</span>
-        <span class="text-gray-700">Mario ieri (andare)</span>
-        <input type="text" class="w-24 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="andò" data-correct-answer="andò">
-        <span class="text-gray-700">in piscina e (fare)</span>
-        <input type="text" class="w-24 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="fece" data-correct-answer="fece">
-        <span class="text-gray-700">dieci vasche.</span>
+        <span class="text-gray-700 dark:text-gray-200">Mario ieri (andare)</span>
+        <input type="text" class="w-24 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 dark:text-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="andò" data-correct-answer="andò">
+        <span class="text-gray-700 dark:text-gray-200">in piscina e (fare)</span>
+        <input type="text" class="w-24 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 dark:text-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="fece" data-correct-answer="fece">
+        <span class="text-gray-700 dark:text-gray-200">dieci vasche.</span>
       </div>
 
       <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
         <span class="text-<%= @pagina.base_color %>-500">•</span>
-        <span class="text-gray-700">Quando ero più piccola (leggere)</span>
-        <input type="text" class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="leggevo" data-correct-answer="leggevo">
-        <span class="text-gray-700">sempre i libri di favole.</span>
+        <span class="text-gray-700 dark:text-gray-200">Quando ero più piccola (leggere)</span>
+        <input type="text" class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 dark:text-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="leggevo" data-correct-answer="leggevo">
+        <span class="text-gray-700 dark:text-gray-200">sempre i libri di favole.</span>
       </div>
 
       <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
         <span class="text-<%= @pagina.base_color %>-500">•</span>
-        <span class="text-gray-700">Mi domando se domani voi (venire)</span>
-        <input type="text" class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="verrete" data-correct-answer="verrete">
-        <span class="text-gray-700">a trovarmi oppure no.</span>
+        <span class="text-gray-700 dark:text-gray-200">Mi domando se domani voi (venire)</span>
+        <input type="text" class="w-28 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 dark:text-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="verrete" data-correct-answer="verrete">
+        <span class="text-gray-700 dark:text-gray-200">a trovarmi oppure no.</span>
       </div>
 
       <div class="rounded-lg p-3 flex flex-wrap items-center gap-2">
         <span class="text-<%= @pagina.base_color %>-500">•</span>
-        <span class="text-gray-700">Quando Ludovica (finire)</span>
-        <input type="text" class="w-24 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="finì" data-correct-answer="finì">
-        <span class="text-gray-700">il disegno, ripose le matite nell'astuccio.</span>
+        <span class="text-gray-700 dark:text-gray-200">Quando Ludovica (finire)</span>
+        <input type="text" class="w-24 border-b-2 border-dotted border-<%= @pagina.base_color %>-500 bg-white dark:bg-gray-700 dark:text-white text-right px-2 focus:outline-none" data-fill-blanks-target="input" data-answer="finì" data-correct-answer="finì">
+        <span class="text-gray-700 dark:text-gray-200">il disegno, ripose le matite nell'astuccio.</span>
       </div>
     </div>
   </div>
 
-  <div class="text-right text-sm text-gray-500 mb-6">
-    Esercizi pp. <%= link_to "164", pagina_path("nvl5_gram_p164"), class: "text-gray-600 hover:text-gray-800 underline" %>, <%= link_to "165", pagina_path("nvl5_gram_p165"), class: "text-gray-600 hover:text-gray-800 underline" %> e <%= link_to "169", pagina_path("nvl5_gram_p169"), class: "text-gray-600 hover:text-gray-800 underline" %>
+  <div class="text-right text-sm text-gray-500 dark:text-gray-400 mb-6">
+    Esercizi pp. <%= link_to "164", pagina_path("nvl5_gram_p164"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>, <%= link_to "165", pagina_path("nvl5_gram_p165"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %> e <%= link_to "169", pagina_path("nvl5_gram_p169"), class: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 underline" %>
   </div>
 
   <%= render 'shared/exercise_controls' %>
