@@ -43,7 +43,7 @@ fi
 echo "=== Conteggio occorrenze PRIMA ==="
 total_before=0
 for file in $files; do
-  count=$(grep -c -E "(sm:|md:|lg:|xl:)?text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)" "$file" 2>/dev/null || echo 0)
+  count=$(grep -E "(sm:|md:|lg:|xl:)?text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)" "$file" 2>/dev/null | wc -l)
   total_before=$((total_before + count))
 done
 echo "Totale classi text-size trovate: $total_before"
@@ -82,7 +82,7 @@ echo ""
 echo "=== Conteggio occorrenze DOPO ==="
 total_after=0
 for file in $files; do
-  count=$(grep -c -E "(sm:|md:|lg:|xl:)?text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)" "$file" 2>/dev/null || echo 0)
+  count=$(grep -E "(sm:|md:|lg:|xl:)?text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)" "$file" 2>/dev/null | wc -l)
   if [ "$count" -gt 0 ]; then
     echo "ATTENZIONE: $file ha ancora $count occorrenze"
     total_after=$((total_after + count))
