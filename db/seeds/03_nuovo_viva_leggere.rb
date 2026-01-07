@@ -19,10 +19,10 @@ nvl_grammatica = nvl_volume4.discipline.create!(
 )
 
 [
-  { numero: 8, titolo: "La lettera C", slug: "nvl_4_gr_pag008", view_template: "nvl_4_gr_pag008" },
-  { numero: 9, titolo: "La lettera C - CE/CIE", slug: "nvl_4_gr_pag009", view_template: "nvl_4_gr_pag009" },
-  { numero: 14, titolo: "Il gruppo GL", slug: "nvl_4_gr_pag014", view_template: "nvl_4_gr_pag014" },
-  { numero: 15, titolo: "GN o NI?", slug: "nvl_4_gr_pag015", view_template: "nvl_4_gr_pag015" }
+  { numero: 8, titolo: "La lettera C", slug: "nvl4_gr_p008", view_template: "nvl4_gr_p008" },
+  { numero: 9, titolo: "La lettera C - CE/CIE", slug: "nvl4_gr_p009", view_template: "nvl4_gr_p009" },
+  { numero: 14, titolo: "Il gruppo GL", slug: "nvl4_gr_p014", view_template: "nvl4_gr_p014" },
+  { numero: 15, titolo: "GN o NI?", slug: "nvl4_gr_p015", view_template: "nvl4_gr_p015" }
 ].each do |pagina_data|
   nvl_grammatica.pagine.create!(pagina_data)
 end
