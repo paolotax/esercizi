@@ -1,16 +1,18 @@
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-pink-50 via-white to-red-50 rounded-3xl shadow-xl">
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
-  <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <div class="mb-6">
-    <p class="text-sm md:text-base text-pink-700">
+    <p class="text-sm md:text-base text-pink-700 dark:text-pink-400">
       Osserva l'immagine della biblioteca e tocca i cartellini per ascoltare la parola corretta.
     </p>
   </div>
 
   <!-- Interactive Image -->
-  <div class="relative rounded-2xl overflow-hidden border-4 border-pink-200 shadow-2xl"
+  <div class="relative rounded-2xl overflow-hidden border-4 border-pink-200 dark:border-pink-700 shadow-2xl"
        data-controller="hotspot-editor"
        data-hotspot-editor-target="container">
     <%= image_tag "nvl5_gram/p004/p04_01.jpg",
@@ -18,7 +20,7 @@
         class: "w-full h-full object-cover select-none pointer-events-none" %>
 
     <div class="absolute inset-0">
-      <% hotspots = [       
+      <% hotspots = [
         { label: "Finestra", top: "12.9943%", left: "8.29499%", width: "10%", height: "3.5%" },
         { label: "Manifesto", top: "12.2655%", left: "34.1465%", width: "10.5%", height: "3.5%" },
         { label: "Scala", top: "41.74%", left: "12.2866%", width: "7%", height: "3.5%" },
@@ -51,8 +53,5 @@
     </div>
   </div>
 
-  <!-- Exercise Controls -->
-  <div class="mt-6">
-    <%= render 'shared/exercise_controls', color: 'pink', show_exercise_buttons: false %>
-  </div>
+  <%= render 'shared/exercise_controls' %>
 </div>

@@ -1,11 +1,17 @@
-<div class="max-w-4xl mx-auto p-8" data-controller="exercise-checker">
-  <%#= render 'shared/page_header', pagina: @pagina %>
+<div class="max-w-4xl mx-auto bg-white dark:bg-gray-900 text-black dark:text-white p-3 md:p-6 transition-colors duration-300"
+     data-controller="exercise-checker text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
+
+  <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Copertina del libro - Immagine originale -->
-  <div class="flex items-center justify-center bg-white rounded-lg shadow-xl p-4">
-    <%= image_tag "nvl5_gram/p001/page.png", class: "w-full h-auto rounded-lg", alt: "Copertina GRAMMATICA 5" %>
+  <div class="flex items-center justify-center bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4">
+    <div class="dark:bg-white rounded-xl p-1">
+      <%= image_tag "nvl5_gram/p001/page.png", class: "w-full h-auto rounded-lg", alt: "Copertina GRAMMATICA 5" %>
+    </div>
   </div>
 
   <!-- Exercise Controls -->
-  <%= render 'shared/exercise_controls', color: @pagina.base_color || 'orange', show_exercise_buttons: false %>
+  <%= render 'shared/exercise_controls' %>
 </div>
