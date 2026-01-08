@@ -1,18 +1,18 @@
 ---
 name: revisione-dark-mode
-description: Revisiona pagine nvl5_gram al pattern nvi5_mat (dark mode, controller, layout)
+description: Revisiona pagine bus3_mat al pattern nvi5_mat (dark mode, controller, layout)
 ---
 
-# Skill: Revisione Dark Mode nvl5_gram
+# Skill: Revisione Dark Mode bus3_mat
 
-Aggiorna le pagine `exercises/nvl5_gram_pXXX.html.erb` al pattern di `nvi5_mat` con supporto dark mode completo.
+Aggiorna le pagine `exercises/bus3_mat_pXXX.html.erb` al pattern di `nvi5_mat` con supporto dark mode completo.
 
 ---
 
 ## Quando Usare
 
 Usa questa skill per:
-- Aggiornare pagine nvl5_gram (189 pagine, da p001 a p191)
+- Aggiornare pagine bus3_mat (107 pagine, da p086 a p192)
 - Aggiungere dark mode e controller Stimulus mancanti
 - Uniformare al pattern nvi5_mat
 
@@ -30,7 +30,7 @@ Usa questa skill per:
 5. **Dopo 10 pagine: FERMARSI e chiedere conferma all'utente**
 
 ### Pagine da saltare:
-- `nvl5_gram_p002.html.erb` - È una pagina indice speciale con layout doppia pagina
+- Nessuna pagina da saltare in questo range
 
 ---
 
@@ -77,7 +77,7 @@ E chiuderlo prima di exercise_controls.
 
 ```erb
 <%# PRIMA %>
-<%= render 'shared/exercise_controls', color: 'pink', current_page: 'nvl5_gram_pXXX' %>
+<%= render 'shared/exercise_controls', color: 'pink', current_page: 'bus3_mat_pXXX' %>
 
 <%# DOPO %>
 <%= render 'shared/exercise_controls' %>
@@ -161,8 +161,8 @@ Wrappare le immagini in un container con sfondo bianco per dark mode:
 ## Target Pagine
 
 ```
-nvl5_gram_p001.html.erb → nvl5_gram_p191.html.erb
-Totale: 189 file
+bus3_mat_p086.html.erb → bus3_mat_p192.html.erb
+Totale: 107 file
 Batch: 10 pagine alla volta
 ```
 
