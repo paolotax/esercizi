@@ -1,19 +1,22 @@
 <% content_for :titolo, "#{@pagina.titolo} - #{@pagina.numero}" %>
 
-<div class="max-w-6xl mx-auto p-3 md:p-8 bg-gradient-to-br from-cyan-50 via-white to-cyan-50 rounded-3xl shadow-xl">
+<div class="max-w-6xl mx-auto p-3 md:p-6 bg-white dark:bg-gray-900 text-black dark:text-white transition-colors duration-300"
+     data-controller="text-toggle font-controls"
+     data-text-toggle-target="content"
+     data-font-controls-target="content">
 
   <!-- Header -->
   <%= render 'shared/page_header', pagina: @pagina %>
 
   <!-- Istruzioni -->
   <div class="mb-6">
-    <p class="text-cyan-700 mb-2">
+    <p class="text-cyan-700 dark:text-cyan-400 mb-2">
       <strong>Cerca le parole nello schema della pagina accanto e cancellale con una riga.</strong>
     </p>
   </div>
 
   <!-- Immagine principale con bambini in biblioteca -->
-  <div class="relative rounded-2xl overflow-hidden border-4 border-cyan-200 shadow-2xl mb-8">
+  <div class="relative rounded-2xl overflow-hidden border-4 border-cyan-200 dark:border-cyan-700 mb-8">
     <%= image_tag "bus3_mat/p120/p120_01.jpg",
         alt: "Bambini in biblioteca con lista parole delle misure",
         class: "w-full h-full object-cover" %>
@@ -21,7 +24,7 @@
 
   <!-- Seconda istruzione -->
   <div class="mb-6">
-    <p class="text-cyan-700">
+    <p class="text-cyan-700 dark:text-cyan-400">
       <strong>Scrivi in ordine le lettere rimaste: scoprirai i nomi di alcune unità di misura del passato.</strong>
     </p>
   </div>
@@ -29,22 +32,22 @@
   <!-- Unità di misura del passato -->
   <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
     <div class="text-center">
-      <p class="font-bold text-cyan-600 mb-2">BRACCIO</p>
+      <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">BRACCIO</p>
       <%= image_tag "bus3_mat/p120/output-1743504902120_171_1034_146_115.png", alt: "Braccio", class: "mx-auto max-h-24 rounded border" %>
     </div>
     <div class="text-center">
-      <p class="font-bold text-cyan-600 mb-2">PIEDE</p>
+      <p class="font-bold text-cyan-600 dark:text-cyan-400 mb-2">PIEDE</p>
       <%= image_tag "bus3_mat/p120/output-1743504902120_475_1041_136_108.png", alt: "Piede", class: "mx-auto max-h-24 rounded border" %>
     </div>
     <div class="text-center" data-controller="fill-blanks">
       <p class="mb-2"><input type="text" data-fill-blanks-target="input" data-correct-answer="SPANNA"
-             class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 text-center font-bold"></p>
+             class="w-24 px-2 py-1 border-b-2 border-dotted border-gray-400 dark:border-gray-500 bg-transparent dark:text-white text-center font-bold"></p>
       <%= image_tag "bus3_mat/p120/output-1743504902120_774_1012_152_139.png", alt: "Mano aperta", class: "mx-auto max-h-24 rounded border" %>
     </div>
   </div>
 
   <!-- Exercise Controls -->
   <div class="mt-6">
-    <%= render 'shared/exercise_controls', show_exercise_buttons: false %>
+    <%= render 'shared/exercise_controls' %>
   </div>
 </div>
