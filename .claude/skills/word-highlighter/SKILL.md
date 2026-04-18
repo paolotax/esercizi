@@ -1,3 +1,8 @@
+---
+name: tax-word-highlighter
+description: Trasforma esercizi "Cerchia/Sottolinea/Colora" in esercizi interattivi con word-highlighter multi-colore
+---
+
 # Skill: Word Highlighter
 
 Trasforma esercizi "Cerchia/Sottolinea/Colora" in esercizi interattivi con word-highlighter multi-colore.

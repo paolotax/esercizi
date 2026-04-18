@@ -1,5 +1,5 @@
 ---
-name: revisione-dark-mode
+name: tax-revisione-dark-mode
 description: Revisiona pagine bus3_mat al pattern nvi5_mat (dark mode, controller, layout)
 ---
 

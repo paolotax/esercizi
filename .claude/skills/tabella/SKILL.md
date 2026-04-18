@@ -1,3 +1,8 @@
+---
+name: tax-tabella
+description: Trasforma qualsiasi tabella HTML nel layout standard del progetto
+---
+
 # Skill: Tabella Standard
 
 Trasforma qualsiasi tabella HTML nel layout standard del progetto.

@@ -1,3 +1,8 @@
+---
+name: tax-hotspot
+description: Crea e gestisce hotspot overlay su immagini per esercizi interattivi
+---
+
 # Skill: Hotspot Editor
 
 Crea e gestisce hotspot overlay su immagini per esercizi interattivi.

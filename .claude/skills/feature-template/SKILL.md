@@ -1,4 +1,7 @@
-# Context Level 3
+---
+name: feature-template
+description: Template per documentare nuove feature prima dello sviluppo
+---
 
 # Feature Specification Template
 
